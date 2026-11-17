@@ -50,8 +50,7 @@
         "lb1-technische-informatik/2-2-boolescheoperatoren",
         "lb1-technische-informatik/2-3-formaleschreibweise",
         "lb1-technische-informatik/2-4-implikationundaequivalenz",
-        "lb1-technische-informatik/2-6-tautologieundwiderspruch",
-        "lb1-technische-informatik/2-8-kanonischenormalformen"
+        "lb1-technische-informatik/2-6-kanonischenormalformen"
        ]
       },
       {
@@ -64,7 +63,6 @@
        "text": "Boolesche Algebra: Vereinfachung",
        "themen": [
         "lb1-technische-informatik/2-5-gesetzeaussagenlogik",
-        "lb1-technische-informatik/2-7-normalformen",
         "lb1-technische-informatik/3-4-kv-diagramme"
        ]
       }

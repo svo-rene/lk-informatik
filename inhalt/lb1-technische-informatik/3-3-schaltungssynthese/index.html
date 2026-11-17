@@ -128,7 +128,7 @@
         <p><strong>3. Vereinfachung der Funktion</strong></p>
         <p>Die resultierende boolesche Funktion wird vereinfacht, um die Anzahl der benötigten logischen Gatter zu minimieren. Dies erleichtert die spätere Umsetzung und reduziert die Komplexität der Schaltung.</p>
         <p><code>f = C ∧ ((¬A ∧ B) ∨ (A ∧ ¬B) ∨ (A ∧ B)) = C ∧ (A ∨ B) = (A ∧ C) ∨ (B ∧ C)</code></p>
-        <p>(C ausklammern; die drei Terme in der Klammer sind die KDNF von A ∨ B aus 2.8; zum Schluss Distributivgesetz.)</p>
+        <p>(C ausklammern; die drei Terme in der Klammer sind die KDNF von A ∨ B aus 2.6; zum Schluss Distributivgesetz.)</p>
         <p><strong>4. Implementierung der Schaltung</strong></p>
         <p>Die vereinfachte logische Gleichung wird schließlich in eine tatsächliche Schaltung umgesetzt, die mit logischen Gattern (AND, OR, NOT usw.) realisiert wird. Hierbei kann die Funktionalität noch einmal getestet werden. Die abgebildete Schaltung setzt f = (A ∧ C) ∨ (B ∧ C) um; mit f = (A ∨ B) ∧ C käme man sogar mit zwei Gattern aus.</p>
         <figure>

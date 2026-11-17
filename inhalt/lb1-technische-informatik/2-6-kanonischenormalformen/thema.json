@@ -1,6 +1,6 @@
 {
-  "nr": "2.7",
-  "titel": "Normalformen",
+  "nr": "2.6",
+  "titel": "Kanonische Normalformen",
   "seiten": [
     {
       "datei": "index.html",
@@ -16,9 +16,9 @@
     }
   ],
   "kann": {
-    "Boolesche Algebra: Vereinfachung": [
-      "Ich kann KNF und DNF unterscheiden und Beispiele angeben.",
-      "Ich kann einen Term mit dem Umformungsalgorithmus in KNF oder DNF bringen."
+    "Boolesche Algebra: Wahrheitstabellen": [
+      "Ich kann Minterm und Maxterm erklären.",
+      "Ich kann aus einer Wahrheitstabelle die KDNF (Zeilen mit 1) und die KKNF (Zeilen mit 0) aufstellen."
     ]
   }
 }
