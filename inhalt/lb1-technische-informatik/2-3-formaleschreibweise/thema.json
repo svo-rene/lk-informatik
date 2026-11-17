@@ -17,11 +17,11 @@
   ],
   "kann": {
     "Boolesche Algebra: NOT, AND, OR": [
-      "Ich kann Aussagen in die formale Schreibweise mit ∧, ∨ und ¬ übersetzen und umgekehrt.",
-      "Ich kann beim Auswerten eines Terms die Bindungsstärke beachten (¬ vor ∧ vor ∨)."
+      "Ich kann Aussagen als booleschen Term formal aufschreiben und Terme in Worte fassen.",
+      "Ich kann einen Term unter Beachtung der Bindungsstärke auswerten."
     ],
     "Boolesche Algebra: Wahrheitstabellen": [
-      "Ich kann für einen Term mit bis zu vier Variablen eine Wahrheitstabelle erstellen (2ⁿ Zeilen)."
+      "Ich kann für jeden booleschen Term eine vollständige Wahrheitstabelle erstellen."
     ]
   }
 }

@@ -17,11 +17,11 @@
   ],
   "kann": {
     "Boolesche Algebra: Gesetze inkl. De Morgan": [
-      "Ich kann die Gesetze der Aussagenlogik benennen, besonders das Distributivgesetz und die De-Morgan-Regeln.",
-      "Ich kann ein Gesetz mit einer Wahrheitstabelle nachweisen."
+      "Ich kann die Gesetze der booleschen Algebra, besonders die De-Morgan-Regeln, anwenden.",
+      "Ich kann prüfen, ob zwei Terme gleichwertig sind (z. B. mit einer Wahrheitstabelle)."
     ],
     "Boolesche Algebra: Vereinfachung": [
-      "Ich kann einen Term mit den Gesetzen schrittweise vereinfachen und zu jedem Schritt das Gesetz angeben."
+      "Ich kann einen Term mit den Gesetzen vereinfachen und jeden Schritt begründen."
     ]
   }
 }

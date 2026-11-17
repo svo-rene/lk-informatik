@@ -227,14 +227,14 @@
                     </table>
                 </div>
                 <div class="aufgabe"><p><span class="anr">2.4</span>Vereinfachen Sie den Term ¬(A ∧ B) ∨ (A ∧ ¬B) korrekt und geben Sie zu jedem Schritt das Gesetz an. <span class="niveau">AFB II</span></p></div>
-                <div class="aufgabe"><p><span class="anr">2.5</span>Eine Funktion f(A, B, C) ist nur für die Belegungen A = 0, B = 1, C = 0 und A = 1, B = 1, C = 0 falsch, sonst wahr. Geben Sie die kanonische konjunktive Normalform (KKNF) von f an. <span class="niveau">AFB I</span></p></div>
-                <div class="aufgabe zusatz"><p><span class="anr">Zusatz</span>Vereinfachen Sie die KKNF aus 2.5 so weit wie möglich.</p></div>
+                <div class="aufgabe"><p><span class="anr">2.5</span>Eine Funktion f(A, B, C) ist nur für die Belegungen A = 0, B = 1, C = 0 und A = 1, B = 1, C = 0 falsch, sonst wahr. Stellen Sie eine boolesche Funktion für f auf. <span class="niveau">AFB II</span></p></div>
+                <div class="aufgabe zusatz"><p><span class="anr">Zusatz</span>Vereinfachen Sie Ihre Funktion aus 2.5 so weit wie möglich.</p></div>
 
                 <div class="hilfen">
                     <p class="hilfen-titel">Hilfekarten</p>
                     <button type="button" class="hilfe-btn" aria-controls="H3" aria-expanded="false">H3 · Implikation (2.1)</button>
                     <button type="button" class="hilfe-btn" aria-controls="H4" aria-expanded="false">H4 · Fehlersuche (2.3, 2.4)</button>
-                    <button type="button" class="hilfe-btn" aria-controls="H5" aria-expanded="false">H5 · KKNF (2.5)</button>
+                    <button type="button" class="hilfe-btn" aria-controls="H5" aria-expanded="false">H5 · Funktion aus der Tabelle (2.5)</button>
                     <div class="hilfekarte hinweis" id="H3" hidden>
                         <p><strong>H3 Implikation</strong></p>
                         <p>A → B ist nur falsch, wenn A wahr und B falsch ist. Was folgt daraus für den Fall „B wahr“?</p>
@@ -247,8 +247,8 @@
                         </ul>
                     </div>
                     <div class="hilfekarte hinweis" id="H5" hidden>
-                        <p><strong>H5 KKNF</strong></p>
-                        <p>Für jede Zeile mit f = 0 entsteht ein Maxterm. Variablen mit dem Wert 1 werden darin negiert.</p>
+                        <p><strong>H5 Funktion aus der Tabelle</strong></p>
+                        <p>Aus jeder Wahrheitstabelle lässt sich eine Funktion ablesen. Ein Weg: Jede Zeile mit f = 1 liefert einen UND-Term (KDNF). Hier gibt es aber nur zwei Zeilen mit f = 0 – überlege, ob es kürzer geht, wenn du beschreibst, wann f falsch ist, und das Ganze negierst oder die KKNF nutzt.</p>
                     </div>
                 </div>
             </article>
@@ -297,7 +297,7 @@
                 <div class="aufgabe"><p><span class="anr">4.2</span>Geben Sie an, welche aus der Aussagenlogik bekannte Verknüpfung die Schaltung realisiert. Prüfen Sie Ihre Antwort anschließend in LogicSim. <span class="niveau">AFB I</span></p></div>
                 <div class="aufgabe"><p><span class="anr">4.3</span>Entwickeln Sie in LogicSim eine Schaltung, die prüft, ob zwei zweistellige Binärzahlen A<sub>1</sub>A<sub>0</sub> und B<sub>1</sub>B<sub>0</sub> gleich sind. Verwenden Sie den Baustein aus Abbildung 1 mehrfach. <span class="niveau">AFB III</span></p></div>
                 <div class="aufgabe"><p><span class="anr">4.4</span>Erläutern Sie, wie sich Ihre Schaltung aus 4.3 für vierstellige Zahlen erweitern lässt und wie viele Bausteine dann nötig sind. <span class="niveau">AFB II</span></p></div>
-                <div class="aufgabe zusatz"><p><span class="anr">Zusatz</span>(KV-Diagramm) Die Funktion g(A, B, C) ist genau für die Belegungen 000, 001, 010, 011 und 111 wahr. Vereinfachen Sie g mithilfe eines KV-Diagramms.</p></div>
+                <div class="aufgabe zusatz"><p><span class="anr">Zusatz</span>Die Funktion g(A, B, C) ist genau für die Belegungen 000, 001, 010, 011 und 111 wahr. Stellen Sie g möglichst einfach dar. Wählen Sie das Verfahren selbst (z. B. Gesetze der booleschen Algebra oder KV-Diagramm).</p></div>
 
                 <div class="hilfen">
                     <p class="hilfen-titel">Hilfekarten</p>
@@ -481,13 +481,13 @@
                 { nr: 7, text: "zu einem Term oder einer Beschreibung eine vollständige Wahrheitstabelle erstellen.", st: [2, 4, 6], opal: "2.3" },
                 { nr: 8, text: "mit einer Wahrheitstabelle nachweisen, dass zwei Terme äquivalent sind.", st: [2], opal: "2.5" },
                 { nr: 9, text: "die Gesetze der Aussagenlogik anwenden und eine Umformung auf Fehler prüfen.", st: [2, 6], opal: "2.5" },
-                { nr: 10, text: "KDNF und KKNF aufstellen.", st: [2, 6], opal: "2.6" },
+                { nr: 10, text: "aus jeder Wahrheitstabelle eine boolesche Funktion aufstellen (z. B. als KDNF).", st: [2, 6], opal: "2.6" },
                 { gruppe: "3 Schaltnetze" },
                 { nr: 11, text: "aus einer Schaltung die boolesche Funktion ermitteln.", st: [4], opal: "3.2" },
                 { nr: 12, text: "eine Schaltnetzsynthese in LogicSim durchführen und testen.", st: [3, 6], opal: "3.3" },
                 { nr: 13, text: "Aufbau und Funktion von Halb- und Volladdierer erklären.", st: [3], opal: "3.6, 3.7" },
                 { nr: 14, text: "Standardschaltnetze kennen und aus Bausteinen größere Schaltungen zusammensetzen.", st: [4], opal: "3.5" },
-                { nr: 15, text: "Funktionen mit einem KV-Diagramm vereinfachen (Zusatz).", st: [4], opal: "3.4" },
+                { nr: 15, text: "eine boolesche Funktion vereinfachen, mit den Gesetzen oder einem anderen Verfahren (z. B. KV-Diagramm).", st: [4, 6], opal: "2.5, 3.4" },
                 { nr: 16, text: "eine vorgeschlagene Schaltung mit den Anforderungen vergleichen und ein Schaltnetz um einen Eingang erweitern.", st: [6], opal: "3.2, 3.3" },
                 { nr: 17, text: "begründen, warum vereinfachte Schaltungen in der Praxis Vorteile haben.", st: [6], opal: "2.5, 3.4" },
                 { gruppe: "4 Rechnerarchitektur" },

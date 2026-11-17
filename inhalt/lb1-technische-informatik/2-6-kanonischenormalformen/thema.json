@@ -17,8 +17,7 @@
   ],
   "kann": {
     "Boolesche Algebra: Wahrheitstabellen": [
-      "Ich kann Minterm und Maxterm erklären.",
-      "Ich kann aus einer Wahrheitstabelle die KDNF (Zeilen mit 1) und die KKNF (Zeilen mit 0) aufstellen."
+      "Ich kann aus jeder Wahrheitstabelle eine boolesche Funktion aufstellen (z. B. als KDNF aus den Zeilen mit 1)."
     ]
   }
 }

@@ -17,8 +17,7 @@
   ],
   "kann": {
     "Standardschaltnetze Halb- und Volladdierer": [
-      "Ich kann die Wahrheitstabelle des Halbaddierers aufstellen.",
-      "Ich kann S = A ⊕ B und C = A ∧ B herleiten und den Halbaddierer als Schaltung aufbauen."
+      "Ich kann Aufbau und Funktion des Halbaddierers erklären: Wahrheitstabelle, Funktion und Schaltung."
     ]
   }
 }

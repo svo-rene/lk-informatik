@@ -17,8 +17,8 @@
   ],
   "kann": {
     "Prozessoren": [
-      "Ich kann mit Taktfrequenz und Takten pro Befehl die Laufzeit eines Programms berechnen.",
-      "Ich kann erklären, welche Kennzahlen (Takt, Kerne, Cache) die Leistung eines Prozessors bestimmen und wo ihre Grenzen liegen."
+      "Ich kann Kennzahlen aktueller Prozessoren (z. B. Takt, Kerne, Cache) erklären und ihre Wirkung auf die Leistung beurteilen.",
+      "Ich kann Werbeaussagen zu Prozessoren mit diesen Kennzahlen kritisch prüfen."
     ]
   }
 }

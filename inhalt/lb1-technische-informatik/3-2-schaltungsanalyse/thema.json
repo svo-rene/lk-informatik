@@ -17,8 +17,8 @@
   ],
   "kann": {
     "Schaltnetz-Analyse": [
-      "Ich kann zu einer gegebenen Schaltung die Wahrheitstabelle mit allen Zwischenergebnissen erstellen.",
-      "Ich kann aus einer Schaltung die boolesche Funktion aufstellen und, wenn möglich, vereinfachen."
+      "Ich kann zu einer gegebenen Schaltung die Wahrheitstabelle und die boolesche Funktion ermitteln.",
+      "Ich kann das Verhalten einer Schaltung in Worten beschreiben."
     ]
   }
 }

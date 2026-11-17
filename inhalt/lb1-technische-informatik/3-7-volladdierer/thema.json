@@ -17,9 +17,8 @@
   ],
   "kann": {
     "Standardschaltnetze Halb- und Volladdierer": [
-      "Ich kann die Wahrheitstabelle des Volladdierers mit Übertragseingang aufstellen.",
-      "Ich kann den Volladdierer als Schaltung aufbauen, auch aus zwei Halbaddierern und einem ODER-Gatter.",
-      "Ich kann erklären, wie mehrere Volladdierer mehrstellige Binärzahlen addieren."
+      "Ich kann Aufbau und Funktion des Volladdierers erklären: Wahrheitstabelle, Funktion und Schaltung.",
+      "Ich kann erklären, wie aus Volladdierern ein Addierer für mehrstellige Binärzahlen entsteht."
     ]
   }
 }

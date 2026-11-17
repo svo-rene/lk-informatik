@@ -17,12 +17,12 @@
   ],
   "kann": {
     "Prozessoren": [
-      "Ich kann die Bauteile der Von-Neumann-Architektur und ihre Aufgaben nennen.",
-      "Ich kann den Von-Neumann-Zyklus beschreiben.",
-      "Ich kann den Von-Neumann-Flaschenhals erklären und die Architektur mit der Harvard-Architektur vergleichen."
+      "Ich kann die Bestandteile eines Rechners und ihr Zusammenwirken beschreiben (z. B. nach dem Von-Neumann-Modell).",
+      "Ich kann erklären, wie ein Prozessor ein Programm abarbeitet.",
+      "Ich kann ein Architekturmodell auf aktuelle Hardware übertragen und Engpässe sowie Gegenmaßnahmen erklären."
     ],
     "Arten von Speichersystemen": [
-      "Ich kann die Speicherhierarchie vom Register bis zur Cloud beschreiben (Größe, Geschwindigkeit, Kosten)."
+      "Ich kann Speicher nach Geschwindigkeit, Größe und Kosten einordnen und begründen, warum ein Rechner mehrere Speicherarten kombiniert."
     ]
   }
 }

@@ -17,9 +17,8 @@
   ],
   "kann": {
     "rechnerinterne Zahlenformate: Festkommazahlen": [
-      "Ich kann eine Dezimalzahl mit Nachkommastellen in eine binäre Festkommazahl umrechnen.",
-      "Ich kann eine binäre Festkommazahl zurück ins Dezimalsystem rechnen.",
-      "Ich kann erklären, warum z. B. 0,1 nicht exakt gespeichert werden kann, und den entstehenden Fehler berechnen."
+      "Ich kann Zahlen mit Nachkommastellen als binäre Festkommazahl darstellen und zurückrechnen.",
+      "Ich kann begründen, welche Zahlen exakt darstellbar sind, und die Folgen von Rundungsfehlern einschätzen."
     ]
   }
 }

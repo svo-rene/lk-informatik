@@ -17,10 +17,10 @@
   ],
   "kann": {
     "Boolesche Algebra: NOT, AND, OR": [
-      "Ich kann Implikation und Äquivalenz erklären und mit den Grundoperatoren ausdrücken (A → B = ¬A ∨ B)."
+      "Ich kann Wenn-dann- und Genau-dann-Aussagen mit NOT, AND und OR ausdrücken."
     ],
     "Boolesche Algebra: Wahrheitstabellen": [
-      "Ich kann die Wahrheitstabellen von Implikation und Äquivalenz angeben und damit Wenn-dann-Aussagen prüfen."
+      "Ich kann Wenn-dann-Aussagen mit einer Wahrheitstabelle prüfen."
     ]
   }
 }

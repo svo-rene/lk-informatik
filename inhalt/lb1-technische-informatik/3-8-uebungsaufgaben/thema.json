@@ -13,10 +13,10 @@
   ],
   "kann": {
     "Schaltnetz-Analyse": [
-      "Ich kann eine unbekannte Schaltung analysieren und ihr einen Anwendungsfall zuordnen."
+      "Ich kann eine unbekannte Schaltung analysieren und ihre Funktion in Worten beschreiben."
     ],
     "Schaltnetz-Synthese": [
-      "Ich kann eine Problemstellung selbstständig umsetzen: Wahrheitstabelle, Funktion, Vereinfachung, Schaltung, Test."
+      "Ich kann eine Problemstellung selbstständig als Schaltung umsetzen und testen."
     ]
   }
 }

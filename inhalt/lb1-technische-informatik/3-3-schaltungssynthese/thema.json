@@ -17,8 +17,8 @@
   ],
   "kann": {
     "Schaltnetz-Synthese": [
-      "Ich kann aus einer booleschen Funktion eine Schaltung aufbauen (von innen nach außen).",
-      "Ich kann aus einer Problemstellung über Wahrheitstabelle und KDNF eine Schaltung entwickeln und testen."
+      "Ich kann zu einer booleschen Funktion eine Schaltung entwerfen.",
+      "Ich kann eine Problemstellung als Wahrheitstabelle und Funktion beschreiben, als Schaltung umsetzen und die Schaltung testen."
     ]
   }
 }

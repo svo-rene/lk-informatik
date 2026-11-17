@@ -18,9 +18,9 @@
   "kann": {
     "Zeichenkodierung": [
       "Ich kann erklären, was eine Zeichenkodierung festlegt.",
-      "Ich kann mit den Ankerwerten (A = 65, a = 97, 0 = 48, Leerzeichen = 32) Zeichen in ASCII-Codes umrechnen und zurück.",
+      "Ich kann Zeichen mit einer Kodierung (z. B. ASCII) in Zahlen umwandeln und zurück.",
       "Ich kann ASCII und Unicode vergleichen.",
-      "Ich kann begründen, warum ein Bitmuster erst durch eine Vereinbarung (Datentyp, Dateiformat, Kodierung) eine Bedeutung bekommt."
+      "Ich kann begründen, warum ein Bitmuster erst durch eine Vereinbarung eine Bedeutung bekommt."
     ]
   }
 }

@@ -17,9 +17,9 @@
   ],
   "kann": {
     "Schaltnetz-Analyse": [
-      "Ich kann die Gatter UND, ODER, NICHT, XOR, NAND und NOR mit Schaltzeichen und Wahrheitstabelle angeben.",
-      "Ich kann einen booleschen Term als Schaltung aufbauen und mit einer Wahrheitstabelle testen.",
-      "Ich kann erklären, was funktionale Vollständigkeit bedeutet."
+      "Ich kann die Grundgatter mit Schaltzeichen und Wahrheitstabelle angeben.",
+      "Ich kann einen booleschen Term als Schaltung darstellen und umgekehrt.",
+      "Ich kann begründen, dass sich jede boolesche Funktion mit NOT, AND und OR als Schaltung bauen lässt."
     ]
   }
 }

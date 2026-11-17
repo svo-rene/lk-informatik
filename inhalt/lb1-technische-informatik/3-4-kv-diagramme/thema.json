@@ -17,11 +17,10 @@
   ],
   "kann": {
     "Boolesche Algebra: Vereinfachung": [
-      "Ich kann eine Funktion mit zwei bis vier Variablen in ein KV-Diagramm eintragen.",
-      "Ich kann nach den Regeln möglichst große Gruppen bilden, auch über den Rand, und die vereinfachte Funktion ablesen."
+      "Ich kann eine boolesche Funktion vereinfachen – mit den Gesetzen der booleschen Algebra oder einem anderen Verfahren (z. B. KV-Diagramm)."
     ],
     "Schaltnetz-Synthese": [
-      "Ich kann eine mit dem KV-Diagramm vereinfachte Funktion als kleinere Schaltung umsetzen."
+      "Ich kann begründen, warum man eine Funktion vereinfacht, bevor man die Schaltung baut."
     ]
   }
 }
