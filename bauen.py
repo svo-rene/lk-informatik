@@ -11,6 +11,7 @@ Aufbau von inhalt/:
     <lernbereich>/<thema>/uebungen.html, vertiefung.html, weitere Zusatzseiten
     <lernbereich>/img, vid, material, notebooks   Dateien, verlinkt als ../img/… usw.
 """
+import hashlib
 import html
 import json
 import re
@@ -186,9 +187,95 @@ def bereichseite(kurs, bereiche, b):
         for t in k["themen_meta"]:
             marken = "".join(f'<span class="marke-klein m-{"zusatz" if s.get("zusatz") else s["datei"][:-5]}">{e(s["titel"])}</span>'
                              for s in t["seiten"][1:])
-            teile.append(f'<li><a href="{t["slug"]}/index.html"><span class="t-nr">{e(t["nr"])}</span> {e(t["titel"])}</a>{marken}</li>')
+            schl = " ".join(p["schluessel"] for p in LEHRPLAN_JE_THEMA.get(f'{b["slug"]}/{t["slug"]}', []))
+            stand = f' data-ziele="{schl}"' if schl else ""
+            teile.append(f'<li{stand}><a href="{t["slug"]}/index.html"><span class="t-nr">{e(t["nr"])}</span> {e(t["titel"])}</a>{marken}</li>')
         teile.append("</ul>")
+    teile.append(lehrplan_uebersicht(b))
     return geruest(kurs, bereiche, root, f'{b["nr"]} {b["titel"]}', "\n".join(teile), aktiv_bereich=b)
+
+
+# ---------------------------------------------------------------------------
+# Lehrplan (linke Spalte) als Checkliste „Das kann ich jetzt“, Zuordnung in inhalt/lehrplan.json
+LEHRPLAN = []            # Punkte: lb, lb_titel, ziel, text, themen, schluessel
+LEHRPLAN_JE_THEMA = {}   # "bereich/thema" -> Punkte
+THEMEN = {}              # "bereich/thema" -> (bereich, thema)
+
+
+def lehrplan_laden(bereiche):
+    LEHRPLAN.clear(); LEHRPLAN_JE_THEMA.clear(); THEMEN.clear()
+    for b in bereiche:
+        for k in b["kapitel"]:
+            for t in k["themen_meta"]:
+                THEMEN[f'{b["slug"]}/{t["slug"]}'] = (b, t)
+    p = os.path.join(INHALT, "lehrplan.json")
+    if not os.path.isfile(p):
+        return
+    daten = lies_json(p)
+    anzeigen = daten.get("anzeigen")  # nur diese Lehrplan-Lernbereiche zeigen (Probelauf)
+    for lb in daten["lernbereiche"]:
+        if anzeigen is not None and lb["lb"] not in anzeigen:
+            continue
+        for z in lb["ziele"]:
+            for i in z["inhalte"]:
+                roh = f'{lb["lb"]}|{z["ziel"]}|{i["text"] or ""}'
+                punkt = {"lb": lb["lb"], "lb_titel": lb["titel"], "ziel": z["ziel"], "text": i["text"],
+                         "themen": [t for t in i["themen"] if t in THEMEN],
+                         "schluessel": "lp" + hashlib.md5(roh.encode("utf-8")).hexdigest()[:10]}
+                LEHRPLAN.append(punkt)
+                for t in punkt["themen"]:
+                    LEHRPLAN_JE_THEMA.setdefault(t, []).append(punkt)
+
+
+def lehrplan_liste(punkte, links_von=None):
+    """Punkte nach Lehrplan-Lernziel gruppiert; links_von = Bereich, dessen Themen verlinkt werden."""
+    gruppen = []
+    for p in punkte:
+        if gruppen and gruppen[-1][0] == (p["lb"], p["ziel"]):
+            gruppen[-1][1].append(p)
+        else:
+            gruppen.append(((p["lb"], p["ziel"]), [p]))
+    teile = []
+    for (lb, ziel), ps in gruppen:
+        ohne_inhalt = len(ps) == 1 and not ps[0]["text"]
+        if not ohne_inhalt:
+            teile.append(f'<p class="ziel-titel"><span>LB {e(lb)}</span> {e(ziel)}</p>')
+        punkte_html = []
+        for p in ps:
+            text = e(ziel) if ohne_inhalt else e(p["text"])
+            if ohne_inhalt:
+                text = f'<span class="ziel-lb">LB {e(lb)}</span> {text}'
+            links = ""
+            if links_von is not None:
+                eigene = [THEMEN[t][1] for t in p["themen"] if THEMEN[t][0] is links_von]
+                links = "".join(f' <a class="ziel-thema" href="{t["slug"]}/index.html">{e(t["nr"])}</a>' for t in eigene)
+            punkte_html.append(f'<li><label><input type="checkbox" data-ziel="{p["schluessel"]}"><span>{text}</span></label>{links}</li>')
+        teile.append(f'<ul class="ziele-liste">{"".join(punkte_html)}</ul>')
+    return "".join(teile)
+
+
+def ziele_html(b, t):
+    punkte = LEHRPLAN_JE_THEMA.get(f'{b["slug"]}/{t["slug"]}', [])
+    if not punkte:
+        return ""
+    return f"""<section class="ziele" aria-labelledby="das-kann-ich">
+<h2 id="das-kann-ich">Das kann ich jetzt</h2>
+<p class="ziele-hinweis">Das verlangt der Lehrplan zu diesem Thema. Hake einen Punkt ab, wenn er in deinem Hefter zusammengefasst ist und du ihn <strong>ohne Hilfe</strong> erklären oder anwenden kannst. Die Haken speichert nur dein Browser.</p>
+{lehrplan_liste(punkte)}
+<p class="ziele-stand" aria-live="polite"></p>
+</section>"""
+
+
+def lehrplan_uebersicht(b):
+    punkte = [p for p in LEHRPLAN if any(THEMEN[t][0] is b for t in p["themen"])]
+    if not punkte:
+        return ""
+    return f"""<section class="ziele" aria-labelledby="lehrplan">
+<h2 id="lehrplan">Das verlangt der Lehrplan</h2>
+<p class="ziele-hinweis">Alle verbindlichen Lernziele, zu denen es in diesem Lernbereich Themen gibt. Die Nummern führen zu den Themen. Haken, die du bei einem Thema setzt, erscheinen auch hier.</p>
+{lehrplan_liste(punkte, links_von=b)}
+<p class="ziele-stand" aria-live="polite"></p>
+</section>"""
 
 
 def rechnung_html(text):
@@ -287,6 +374,7 @@ def themenseite(kurs, bereiche, b, t, seite, vorher, nachher):
 <div class="seiteninhalt{" immer-hell" if seite.get("zusatz") else ""}">
 {roh}
 </div>
+{ziele_html(b, t) if seite["datei"] == "index.html" else ""}
 {weiter}
 {nav}"""
     titel = themenname(t) + ("" if seite["datei"] == "index.html" else " – " + seite["titel"])
@@ -329,6 +417,7 @@ def impressumseite(kurs, bereiche):
 # ---------------------------------------------------------------------------
 def bauen():
     kurs, bereiche = laden()
+    lehrplan_laden(bereiche)
     if os.path.isdir(SITE):
         def schreibbar(fn, pfad, _):  # git legt schreibgeschützte Dateien an
             os.chmod(pfad, 0o666)

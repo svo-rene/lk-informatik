@@ -521,3 +521,62 @@ pre .token.deleted { color: #ff5370 !important; }
     .no-print { display: none !important; }
     pre, pre[class*=language-] { background: #f6f8fa !important; color: #111 !important; border-color: #ddd; }
 }
+
+/* Lernziele „Das kann ich jetzt“ */
+.ziele {
+    margin: 2.2rem 0 1.5rem;
+    padding: 1.1em 1.3em 0.9em;
+    border: 1px solid var(--hinweis-linie);
+    border-radius: var(--radius);
+    background: var(--hinweis-bg);
+}
+.ziele h2 { margin: 0 0 0.3em; font-size: 1.2rem; color: var(--hinweis); }
+.ziele .ziele-hinweis { margin: 0 0 0.7em; font-size: 0.92rem; color: var(--text-2); }
+.ziele-liste { list-style: none; margin: 0; padding: 0; }
+.ziele-liste li { margin: 0; padding: 0; border-top: 1px solid var(--hinweis-linie); }
+.ziele-liste li:first-child { border-top: 0; }
+.ziele-liste label { display: flex; gap: 0.7em; align-items: flex-start; padding: 0.55em 0; cursor: pointer; }
+.ziele-liste input { width: 1.15em; height: 1.15em; margin: 0.15em 0 0; flex: none; accent-color: var(--hinweis); cursor: pointer; }
+.ziele-liste input:checked + span { color: var(--text-2); }
+.ziele .ziele-stand { margin: 0.5em 0 0; font-size: 0.88rem; font-weight: 600; color: var(--hinweis); }
+.ziele-chip {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.1em 0.55em;
+    border-radius: 999px;
+    border: 1px solid var(--linie-stark);
+    color: var(--text-2);
+    white-space: nowrap;
+}
+.ziele-chip.fertig { border-color: var(--hinweis-linie); background: var(--hinweis-bg); color: var(--hinweis); }
+.ziele .ziel-titel { margin: 0.9em 0 0.1em; font-size: 0.85rem; font-weight: 600; color: var(--text-2); }
+.ziele .ziel-titel:first-of-type { margin-top: 0.3em; }
+.ziel-titel span, .ziel-lb {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.05em 0.45em;
+    margin-right: 0.35em;
+    border-radius: 6px;
+    background: var(--bg);
+    border: 1px solid var(--hinweis-linie);
+    color: var(--hinweis);
+    vertical-align: 0.1em;
+}
+.ziele-liste + .ziele-liste { margin-top: 0.2em; }
+.ziele-liste li { display: flex; align-items: flex-start; gap: 0.6em; }
+.ziele-liste li label { flex: 1; }
+.ziel-thema {
+    flex: none;
+    align-self: center;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.1em 0.5em;
+    border-radius: 999px;
+    border: 1px solid var(--linie-stark);
+    color: var(--akzent-text);
+    background: var(--bg);
+}
+.ziel-thema:hover { border-color: var(--akzent); }

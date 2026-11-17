@@ -1,0 +1,1206 @@
+{
+ "quelle": "Lehrplan Gymnasium Informatik Sachsen 2022, Jahrgangsstufen 11/12 Leistungskurs, linke Spalte (verbindliche Lernziele und Lerninhalte)",
+ "anzeigen": [
+  "1"
+ ],
+ "lernbereiche": [
+  {
+   "lb": "1",
+   "titel": "Technische Informatik",
+   "ziele": [
+    {
+     "ziel": "Kennen theoretischer Grundlagen",
+     "inhalte": [
+      {
+       "text": "Binär- und Hexadezimalsystem",
+       "themen": [
+        "lb1-technische-informatik/1-1-zahlenformate"
+       ]
+      },
+      {
+       "text": "rechnerinterne Zahlenformate: Zweierkomplement",
+       "themen": [
+        "lb1-technische-informatik/1-2-zweierkomplement"
+       ]
+      },
+      {
+       "text": "rechnerinterne Zahlenformate: Festkommazahlen",
+       "themen": [
+        "lb1-technische-informatik/1-3-festkommazahlen"
+       ]
+      },
+      {
+       "text": "Zeichenkodierung",
+       "themen": [
+        "lb1-technische-informatik/1-4-zeichenkodierung"
+       ]
+      },
+      {
+       "text": "Boolesche Algebra: NOT, AND, OR",
+       "themen": [
+        "lb1-technische-informatik/2-1-booleschealgebra",
+        "lb1-technische-informatik/2-2-boolescheoperatoren",
+        "lb1-technische-informatik/2-3-formaleschreibweise",
+        "lb1-technische-informatik/2-4-implikationundaequivalenz"
+       ]
+      },
+      {
+       "text": "Boolesche Algebra: Wahrheitstabellen",
+       "themen": [
+        "lb1-technische-informatik/2-2-boolescheoperatoren",
+        "lb1-technische-informatik/2-4-implikationundaequivalenz",
+        "lb1-technische-informatik/2-6-tautologieundwiderspruch",
+        "lb1-technische-informatik/2-8-kanonischenormalformen"
+       ]
+      },
+      {
+       "text": "Boolesche Algebra: Gesetze inkl. De Morgan",
+       "themen": [
+        "lb1-technische-informatik/2-5-gesetzeaussagenlogik"
+       ]
+      },
+      {
+       "text": "Boolesche Algebra: Vereinfachung",
+       "themen": [
+        "lb1-technische-informatik/2-5-gesetzeaussagenlogik",
+        "lb1-technische-informatik/2-7-normalformen",
+        "lb1-technische-informatik/3-4-kv-diagramme"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Übertragen der theoretischen Grundlagen auf die Umsetzung in Schaltnetzen",
+     "inhalte": [
+      {
+       "text": "Schaltnetz-Analyse",
+       "themen": [
+        "lb1-technische-informatik/3-1-technischeumsetzung",
+        "lb1-technische-informatik/3-2-schaltungsanalyse",
+        "lb1-technische-informatik/3-8-uebungsaufgaben"
+       ]
+      },
+      {
+       "text": "Schaltnetz-Synthese",
+       "themen": [
+        "lb1-technische-informatik/3-3-schaltungssynthese",
+        "lb1-technische-informatik/3-4-kv-diagramme",
+        "lb1-technische-informatik/3-8-uebungsaufgaben"
+       ]
+      },
+      {
+       "text": "Standardschaltnetze Halb- und Volladdierer",
+       "themen": [
+        "lb1-technische-informatik/3-5-standardschaltnetze",
+        "lb1-technische-informatik/3-6-halbaddierer",
+        "lb1-technische-informatik/3-7-volladdierer",
+        "lb1-technische-informatik/3-8-uebungsaufgaben"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Einblick gewinnen in die Herstellung von Mikrochips",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb1-technische-informatik/5-2-hardware-life"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Übertragen der Kenntnisse zur Rechnerarchitektur auf aktuelle Hardware",
+     "inhalte": [
+      {
+       "text": "Prozessoren",
+       "themen": [
+        "lb1-technische-informatik/4-1-neumann",
+        "lb1-technische-informatik/4-2-prozessor"
+       ]
+      },
+      {
+       "text": "Arten von Speichersystemen",
+       "themen": [
+        "lb1-technische-informatik/4-1-neumann",
+        "lb1-technische-informatik/4-3-speichersysteme"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beurteilen der Einsatzmöglichkeiten von Systemsoftware",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb1-technische-informatik/5-1-systemsoftware"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Einblick gewinnen in die nachhaltige Nutzung von Hardware",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb1-technische-informatik/5-2-hardware-life"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "lb": "2",
+   "titel": "Datenstrukturen und Algorithmen",
+   "ziele": [
+    {
+     "ziel": "Kennen von komplexen Datenstrukturen",
+     "inhalte": [
+      {
+       "text": "Baum",
+       "themen": [
+        "lb3-datenstrukturen/3-4-baum",
+        "lb3-datenstrukturen/3-5-bin-baum"
+       ]
+      },
+      {
+       "text": "Graph",
+       "themen": [
+        "lb3-datenstrukturen/3-7-graph",
+        "lb3-datenstrukturen/3-8-graph-code"
+       ]
+      },
+      {
+       "text": "Liste",
+       "themen": [
+        "lb3-datenstrukturen/3-0-1-einfuegen",
+        "lb3-datenstrukturen/3-1-linkedlists"
+       ]
+      },
+      {
+       "text": "Stapel und Schlange",
+       "themen": [
+        "lb3-datenstrukturen/3-2-queue",
+        "lb3-datenstrukturen/3-3-stack"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen von strukturierten und dynamischen Datentypen",
+     "inhalte": [
+      {
+       "text": "Feld",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-1-4-array"
+       ]
+      },
+      {
+       "text": "Datei",
+       "themen": [
+        "lb9-datenmanagement/3-3-einlesen",
+        "lb9-datenmanagement/3-6-schreiben"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beherrschen der Implementierung komplexer Datenstrukturen sowie strukturierter und dynamischer Datentypen",
+     "inhalte": [
+      {
+       "text": "Werteparameter",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-1-6-parameter"
+       ]
+      },
+      {
+       "text": "Referenzparameter",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-1-6-parameter"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beherrschen der Arbeit mit Unterprogrammen",
+     "inhalte": [
+      {
+       "text": "Struktur von Unterprogrammen",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-1-5-unterprogramme",
+        "lb2-programmieren-algorithmen/2-1-7-global-var"
+       ]
+      },
+      {
+       "text": "Verwendung von Parametern",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-1-5-unterprogramme",
+        "lb2-programmieren-algorithmen/2-1-6-parameter"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen algorithmischer Problemlösestrategien",
+     "inhalte": [
+      {
+       "text": "Divide-and-Conquer",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-2-8-divide-and-conquer",
+        "lb2-programmieren-algorithmen/2-2-9-effiziente-sortieralgorithmen",
+        "lb2-programmieren-algorithmen/2-2-9b-quicksort"
+       ]
+      },
+      {
+       "text": "Backtracking",
+       "themen": [
+        "lb3-datenstrukturen/3-6b-backtracking-baum",
+        "lb3-datenstrukturen/3-10-backtracking"
+       ]
+      },
+      {
+       "text": "Traversierung",
+       "themen": [
+        "lb3-datenstrukturen/3-6-traversierung"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Anwenden der Problemlösestrategien auf die Implementierung",
+     "inhalte": [
+      {
+       "text": "Rekursion und Iteration",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-2-7-rekursion"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "lb": "3",
+   "titel": "Komplexität von Algorithmen und Berechenbarkeit",
+   "ziele": [
+    {
+     "ziel": "Kennen des erweiterten Algorithmusbegriffes",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb2-programmieren-algorithmen/2-1-2-algorithmus"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beurteilen der Effizienz und Komplexität von Algorithmen",
+     "inhalte": [
+      {
+       "text": "Komplexitätsklassen",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-2-1-algorithmen-komplexitaet",
+        "lb2-programmieren-algorithmen/2-2-4-komplexitaetsklassen"
+       ]
+      },
+      {
+       "text": "Nachweis der Komplexität",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-2-2-bubblesort",
+        "lb2-programmieren-algorithmen/2-2-3-einfuehrung-komplexitaet",
+        "lb2-programmieren-algorithmen/2-2-5-weitere-sortieralgorithmen",
+        "lb2-programmieren-algorithmen/2-2-9-effiziente-sortieralgorithmen",
+        "lb2-programmieren-algorithmen/2-2-9b-quicksort"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen von Grenzen der Berechenbarkeit",
+     "inhalte": [
+      {
+       "text": "algorithmische Unlösbarkeit",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-2-10-berechenbarkeit"
+       ]
+      },
+      {
+       "text": "P-Probleme",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-2-10-berechenbarkeit"
+       ]
+      },
+      {
+       "text": "NP-Probleme",
+       "themen": [
+        "lb2-programmieren-algorithmen/2-2-10-berechenbarkeit"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beurteilen von Entscheidungsproblemen",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb2-programmieren-algorithmen/2-2-10-berechenbarkeit"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "lb": "4",
+   "titel": "Programmierparadigmen",
+   "ziele": [
+    {
+     "ziel": "Kennen von Programmierparadigmen",
+     "inhalte": [
+      {
+       "text": "imperativ",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-1-programmierparadigmen"
+       ]
+      },
+      {
+       "text": "objektorientiert",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-1-programmierparadigmen"
+       ]
+      },
+      {
+       "text": "funktional",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-1-programmierparadigmen"
+       ]
+      },
+      {
+       "text": "logisch",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-1-programmierparadigmen"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen der Klassifizierung von Programmiersprachen",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-0-klassifizierung"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen von Begriffen der objektorientierten Programmierung",
+     "inhalte": [
+      {
+       "text": "Klasse und Objekt",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-2-objektorientierung",
+        "lb4-oop-softwareentwicklung/4-3-klassen"
+       ]
+      },
+      {
+       "text": "Attribut und Attributwert",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-2-objektorientierung",
+        "lb4-oop-softwareentwicklung/4-4-attribute"
+       ]
+      },
+      {
+       "text": "Methode",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-5-methoden"
+       ]
+      },
+      {
+       "text": "Aggregation und Assoziation",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-8-beziehungen",
+        "lb4-oop-softwareentwicklung/4-9-multiplizitaeten"
+       ]
+      },
+      {
+       "text": "Vererbung",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-10-vererbung"
+       ]
+      },
+      {
+       "text": "Polymorphie",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-11-polymorphie"
+       ]
+      },
+      {
+       "text": "Kapselung",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-6-kapselung"
+       ]
+      },
+      {
+       "text": "Botschaft und Ereignis",
+       "themen": [
+        "lb4-oop-softwareentwicklung/4-11-polymorphie"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Gestalten einer Problemlösung mittels objektorientierten Paradigmas",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb4-oop-softwareentwicklung/5-5-projektauftrag",
+        "lb4-oop-softwareentwicklung/5-6-projektleitfaden"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "lb": "5",
+   "titel": "Softwareentwicklung",
+   "ziele": [
+    {
+     "ziel": "Einblick gewinnen in die Grundlagen der Softwarearchitektur",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb4-oop-softwareentwicklung/5-1-vom-programm-zum-projekt"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen von Ansätzen der Softwareentwicklung",
+     "inhalte": [
+      {
+       "text": "klassische Softwareentwicklung",
+       "themen": [
+        "lb4-oop-softwareentwicklung/5-2-vorgehensmodelle"
+       ]
+      },
+      {
+       "text": "agile Softwareentwicklung",
+       "themen": [
+        "lb4-oop-softwareentwicklung/5-2-vorgehensmodelle"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen des Konzepts der Versionsverwaltung bei der Softwareentwicklung",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb2-programmieren-algorithmen/2-1-8-git-einstieg",
+        "lb3-datenstrukturen/3-0-2-git-im-kurs",
+        "lb4-oop-softwareentwicklung/5-4-git-im-team",
+        "lb10-ki-projektmanagement/10-3-versionsverwaltung-git"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Anwenden von Methoden der agilen Softwareentwicklung",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb4-oop-softwareentwicklung/5-2-vorgehensmodelle",
+        "lb4-oop-softwareentwicklung/5-6-projektleitfaden"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "lb": "6",
+   "titel": "Sprachen und Automaten",
+   "ziele": [
+    {
+     "ziel": "Kennen des Aufbaus von Sprachen",
+     "inhalte": [
+      {
+       "text": "Syntax",
+       "themen": [
+        "lb6-sprachen-automaten/6-2-formale-sprache"
+       ]
+      },
+      {
+       "text": "Semantik",
+       "themen": [
+        "lb6-sprachen-automaten/6-2-formale-sprache"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beherrschen des Umgangs mit Grammatiken",
+     "inhalte": [
+      {
+       "text": "Backus-Naur-Form",
+       "themen": [
+        "lb6-sprachen-automaten/6-5-bnf"
+       ]
+      },
+      {
+       "text": "Ableiten von Wörtern",
+       "themen": [
+        "lb6-sprachen-automaten/6-3-grammatik",
+        "lb6-sprachen-automaten/6-4-woerter-ableiten"
+       ]
+      },
+      {
+       "text": "Chomsky-Hierarchie",
+       "themen": [
+        "lb6-sprachen-automaten/6-6-chomsky"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen der Klassifizierung von Automaten",
+     "inhalte": [
+      {
+       "text": "Unterscheidung von Automatentypen",
+       "themen": [
+        "lb6-sprachen-automaten/6-9-dea-nea",
+        "lb6-sprachen-automaten/6-13-grenzen-automaten"
+       ]
+      },
+      {
+       "text": "Entwurf endlicher Automaten",
+       "themen": [
+        "lb6-sprachen-automaten/6-7-dea",
+        "lb6-sprachen-automaten/6-8-fangzustand",
+        "lb6-sprachen-automaten/6-10-potenzmengenkonstruktion"
+       ]
+      },
+      {
+       "text": "Prüfen und Ableiten von Wörtern",
+       "themen": [
+        "lb6-sprachen-automaten/6-7-dea",
+        "lb6-sprachen-automaten/6-9-dea-nea"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Übertragen der Kenntnisse auf die wechselseitige Überführung zwischen Grammatiken und Automaten bei regulären Sprachen",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb6-sprachen-automaten/6-11-grammatik-automat",
+        "lb6-sprachen-automaten/6-12-epsilon-regeln"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Übertragen der Kenntnisse zur Syntax und Semantik auf die Übersetzung formaler Sprachen",
+     "inhalte": [
+      {
+       "text": "Funktionsprinzipien von Compiler und Interpreter",
+       "themen": [
+        "lb6-sprachen-automaten/6-14-compiler"
+       ]
+      },
+      {
+       "text": "Übersetzungsprozess",
+       "themen": [
+        "lb6-sprachen-automaten/6-14-compiler"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Einblick gewinnen in Chancen und Risiken automatischer Sprachverarbeitung",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb6-sprachen-automaten/6-1-spracherkennung"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "lb": "7",
+   "titel": "Rechnernetze",
+   "ziele": [
+    {
+     "ziel": "Kennen des Aufbaus von Rechnernetzen",
+     "inhalte": [
+      {
+       "text": "physische und logische Topologien",
+       "themen": [
+        "lb7-rechnernetze/7-1-topologien"
+       ]
+      },
+      {
+       "text": "Übertragungsmedien",
+       "themen": [
+        "lb7-rechnernetze/7-1-topologien"
+       ]
+      },
+      {
+       "text": "zentrale und dezentrale Netzwerkdienste",
+       "themen": [
+        "lb7-rechnernetze/7-2-vermittlung-dienste"
+       ]
+      },
+      {
+       "text": "Vermittlungsverfahren",
+       "themen": [
+        "lb7-rechnernetze/7-2-vermittlung-dienste"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Übertragen der Kenntnisse zum Aufbau von Rechnernetzen auf die Modellierung von Netzwerken",
+     "inhalte": [
+      {
+       "text": "Adressierung und Routing mittels Internetprotokoll",
+       "themen": [
+        "lb7-rechnernetze/7-5-ip-adressierung-routing",
+        "lb7-rechnernetze/7-13-filius-gateway",
+        "lb7-rechnernetze/7-14-filius-routingtabelle"
+       ]
+      },
+      {
+       "text": "Adressvergabe",
+       "themen": [
+        "lb7-rechnernetze/7-7-dhcp",
+        "lb7-rechnernetze/7-15-filius-dhcp"
+       ]
+      },
+      {
+       "text": "Netzwerksegmentierung",
+       "themen": [
+        "lb7-rechnernetze/7-6-subnetting-cidr"
+       ]
+      },
+      {
+       "text": "Namensauflösung",
+       "themen": [
+        "lb7-rechnernetze/7-8-dns",
+        "lb7-rechnernetze/7-16-filius-dns-web"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Übertragen der Kenntnisse zur Sicherheit von Informationen auf die Umsetzung in Rechnernetzen",
+     "inhalte": [
+      {
+       "text": "Identifizierung und Authentifizierung",
+       "themen": [
+        "lb8-informationssicherheit/7-12-authentifizierung",
+        "lb8-informationssicherheit/8-14-authentifizierung"
+       ]
+      },
+      {
+       "text": "Transportwegverschlüsselung",
+       "themen": [
+        "lb8-informationssicherheit/7-11-tls-vpn"
+       ]
+      },
+      {
+       "text": "Zertifikate",
+       "themen": [
+        "lb8-informationssicherheit/7-11-tls-vpn",
+        "lb8-informationssicherheit/8-13-digitale-signatur"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Anwenden der Kenntnisse über Netzwerke auf die praktische Realisierung eines Netzwerkes",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb7-rechnernetze/7-13-filius-gateway",
+        "lb7-rechnernetze/7-14-filius-routingtabelle",
+        "lb7-rechnernetze/7-15-filius-dhcp",
+        "lb7-rechnernetze/7-16-filius-dns-web",
+        "lb7-rechnernetze/7-17-aufgabenstellung"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "lb": "8",
+   "titel": "Informationssicherheit",
+   "ziele": [
+    {
+     "ziel": "Kennen von Anforderungen an die Informationssicherheit",
+     "inhalte": [
+      {
+       "text": "Vertraulichkeit",
+       "themen": [
+        "lb8-informationssicherheit/8-1-sicherheitsziele"
+       ]
+      },
+      {
+       "text": "Integrität",
+       "themen": [
+        "lb8-informationssicherheit/8-1-sicherheitsziele"
+       ]
+      },
+      {
+       "text": "Authentizität",
+       "themen": [
+        "lb8-informationssicherheit/8-1-sicherheitsziele"
+       ]
+      },
+      {
+       "text": "Verbindlichkeit",
+       "themen": [
+        "lb8-informationssicherheit/8-1-sicherheitsziele"
+       ]
+      },
+      {
+       "text": "Verfügbarkeit",
+       "themen": [
+        "lb8-informationssicherheit/8-1-sicherheitsziele"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beurteilen symmetrischer und asymmetrischer Verfahren zur Gewährleistung der Vertraulichkeit von Informationen",
+     "inhalte": [
+      {
+       "text": "Grundprinzipien",
+       "themen": [
+        "lb8-informationssicherheit/8-2-uebersicht-kryptologie",
+        "lb8-informationssicherheit/8-3-symmetrische-verfahren",
+        "lb8-informationssicherheit/8-8-asymmetrische-verfahren",
+        "lb8-informationssicherheit/8-11-hybride-verfahren"
+       ]
+      },
+      {
+       "text": "Einsatzgebiete",
+       "themen": [
+        "lb8-informationssicherheit/8-7-aes",
+        "lb8-informationssicherheit/8-9-rsa",
+        "lb8-informationssicherheit/8-10-diffie-hellman",
+        "lb8-informationssicherheit/8-11-hybride-verfahren"
+       ]
+      },
+      {
+       "text": "Sicherheit",
+       "themen": [
+        "lb8-informationssicherheit/8-5-one-time-pad",
+        "lb8-informationssicherheit/8-7-aes",
+        "lb8-informationssicherheit/8-9-rsa",
+        "lb8-informationssicherheit/8-11-hybride-verfahren"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen von Verfahren zur Gewährleistung der Integrität, Verbindlichkeit und Authentizität von Informationen",
+     "inhalte": [
+      {
+       "text": "One-Way-Hash-Funktion",
+       "themen": [
+        "lb8-informationssicherheit/8-12-hashfunktionen"
+       ]
+      },
+      {
+       "text": "digitale Signaturen",
+       "themen": [
+        "lb8-informationssicherheit/8-13-digitale-signatur"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beherrschen einer Maßnahme zur Gewährleistung der Verfügbarkeit von Informationen",
+     "inhalte": [
+      {
+       "text": "Datensicherung",
+       "themen": [
+        "lb8-informationssicherheit/8-15-datensicherung-raid"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen von Verfahren der Kryptoanalyse",
+     "inhalte": [
+      {
+       "text": "Brute-Force-Methode",
+       "themen": [
+        "lb8-informationssicherheit/8-3-symmetrische-verfahren",
+        "lb8-informationssicherheit/8-6-kryptoanalyse"
+       ]
+      },
+      {
+       "text": "Häufigkeitsanalyse",
+       "themen": [
+        "lb8-informationssicherheit/8-4-kasiski-test",
+        "lb8-informationssicherheit/8-6-kryptoanalyse"
+       ]
+      },
+      {
+       "text": "Social Engineering",
+       "themen": [
+        "lb8-informationssicherheit/8-6-kryptoanalyse"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Sich positionieren zu Fragen der Informationssicherheit und zum Datenschutz",
+     "inhalte": [
+      {
+       "text": "kryptographische und nichtkryptographische Verfahren",
+       "themen": [
+        "lb8-informationssicherheit/8-2-uebersicht-kryptologie"
+       ]
+      },
+      {
+       "text": "Prinzipien des Datenschutzes",
+       "themen": [
+        "lb8-informationssicherheit/8-1-sicherheitsziele",
+        "lb9-datenmanagement/3-13-datenmanagement-vertiefung"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "lb": "9",
+   "titel": "Datenmanagement",
+   "ziele": [
+    {
+     "ziel": "Kennen von Problemstellungen des Datenmanagements in verschiedenen Bereichen",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb9-datenmanagement/1-1-datenbanken",
+        "lb9-datenmanagement/3-13-datenmanagement-vertiefung"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen von Phasen des Datenmanagements",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb9-datenmanagement/3-1-data-life-cycle",
+        "lb9-datenmanagement/3-9-data-life-cycle-csv"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beurteilen von Datenquellen hinsichtlich Bias und Verlässlichkeit",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb9-datenmanagement/3-13-datenmanagement-vertiefung",
+        "lb9-datenmanagement/3-14-iug"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen der Möglichkeiten zur Erstellung einer Datenbasis",
+     "inhalte": [
+      {
+       "text": "zielgerichtete Datenerfassung",
+       "themen": [
+        "lb9-datenmanagement/3-9-data-life-cycle-csv"
+       ]
+      },
+      {
+       "text": "Datenextraktion",
+       "themen": [
+        "lb9-datenmanagement/3-3-einlesen",
+        "lb9-datenmanagement/3-11-api"
+       ]
+      },
+      {
+       "text": "Datenbereinigung",
+       "themen": [
+        "lb9-datenmanagement/3-5-bereinigen"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen von Datenbankmodellen",
+     "inhalte": [
+      {
+       "text": "Anwendungsbereiche",
+       "themen": [
+        "lb9-datenmanagement/2-2-nosql-db",
+        "lb9-datenmanagement/2-3-key-value-db"
+       ]
+      },
+      {
+       "text": "Einordnung in CAP-Theorem",
+       "themen": [
+        "lb9-datenmanagement/2-1-cap",
+        "lb9-datenmanagement/2-2-nosql-db"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Anwenden des relationalen Datenmodells",
+     "inhalte": [
+      {
+       "text": "Entity-Relationship-Modell",
+       "themen": [
+        "lb9-datenmanagement/1-10-erm",
+        "lb9-datenmanagement/1-12-uebung-modellierung",
+        "lb9-datenmanagement/1-18-komplette-uebung"
+       ]
+      },
+      {
+       "text": "Relationenmodell",
+       "themen": [
+        "lb9-datenmanagement/1-2-relationale-db",
+        "lb9-datenmanagement/1-11-relationenmodell",
+        "lb9-datenmanagement/1-12-uebung-modellierung",
+        "lb9-datenmanagement/1-18-komplette-uebung"
+       ]
+      },
+      {
+       "text": "Normalisierungen",
+       "themen": [
+        "lb9-datenmanagement/1-13-normalisierung",
+        "lb9-datenmanagement/1-14-erste-normalform",
+        "lb9-datenmanagement/1-15-zweite-normalform",
+        "lb9-datenmanagement/1-16-dritte-normalform",
+        "lb9-datenmanagement/1-17-uebung-normalformen",
+        "lb9-datenmanagement/1-18-komplette-uebung"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beherrschen der Umsetzung von Datenmodellen zur elektronischen Datenverwaltung mit einem relationalen Datenbanksystem",
+     "inhalte": [
+      {
+       "text": "Auswertung verknüpfter Daten mit SQL",
+       "themen": [
+        "lb9-datenmanagement/1-3-sql-select",
+        "lb9-datenmanagement/1-4-sql-where",
+        "lb9-datenmanagement/1-5-sql-aggregation",
+        "lb9-datenmanagement/1-6-sql-joins",
+        "lb9-datenmanagement/1-8-crud",
+        "lb9-datenmanagement/1-9-sql-uebung",
+        "lb9-datenmanagement/1-19-subselects",
+        "lb9-datenmanagement/1-20-sql-uebung",
+        "lb9-datenmanagement/3-7-csv-in-dbbrowser"
+       ]
+      },
+      {
+       "text": "Visualisierung von Daten",
+       "themen": [
+        "lb9-datenmanagement/3-8-visualisieren"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Kennen von Möglichkeiten zum Datenaustausch über standardisierte Datenformate",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb9-datenmanagement/3-3-einlesen",
+        "lb9-datenmanagement/3-6-schreiben",
+        "lb9-datenmanagement/3-10-json",
+        "lb9-datenmanagement/3-11-api"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Sich positionieren zur Erfassung, Verarbeitung und dauerhaften Speicherung verschiedener Daten im gesellschaftlichen Kontext",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb9-datenmanagement/3-1-data-life-cycle",
+        "lb9-datenmanagement/3-14-iug"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "lb": "10",
+   "titel": "Künstliche Intelligenz",
+   "ziele": [
+    {
+     "ziel": "Kennen von Grundlagen Künstlicher Intelligenz",
+     "inhalte": [
+      {
+       "text": "Begriffsbestimmung Künstliche Intelligenz",
+       "themen": [
+        "lb10-ki-projektmanagement/11-1-begriff-ki"
+       ]
+      },
+      {
+       "text": "Überblick zu den Teilbereichen",
+       "themen": [
+        "lb10-ki-projektmanagement/11-1-begriff-ki",
+        "lb10-ki-projektmanagement/11-2-wissens-datenbasierte-ki"
+       ]
+      },
+      {
+       "text": "Symbolische KI: Anwendung, Logik",
+       "themen": [
+        "lb10-ki-projektmanagement/11-2-wissens-datenbasierte-ki"
+       ]
+      },
+      {
+       "text": "Maschinelles Lernen: überwacht, unüberwacht, bestärkend",
+       "themen": [
+        "lb10-ki-projektmanagement/11-2-wissens-datenbasierte-ki",
+        "lb10-ki-projektmanagement/11-4-lineare-regression",
+        "lb10-ki-projektmanagement/11-5-entscheidungsbaum",
+        "lb10-ki-projektmanagement/11-6-k-naechster-nachbar",
+        "lb10-ki-projektmanagement/11-7-k-means",
+        "lb10-ki-projektmanagement/11-8-neuronale-netze",
+        "lb10-ki-projektmanagement/11-9-genetische-algorithmen"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Anwenden von Verfahren des Maschinellen Lernens zum Generieren einer Künstlichen Intelligenz",
+     "inhalte": [
+      {
+       "text": "Sammeln und Aufbereiten der Daten",
+       "themen": [
+        "lb10-ki-projektmanagement/11-3-ki-modelle-optimieren",
+        "lb10-ki-projektmanagement/10-4-tutorial-jupyter",
+        "lb10-ki-projektmanagement/10-5-ki-projektmanagement"
+       ]
+      },
+      {
+       "text": "Auswahl eines Algorithmus",
+       "themen": [
+        "lb10-ki-projektmanagement/10-4-tutorial-jupyter",
+        "lb10-ki-projektmanagement/10-5-ki-projektmanagement"
+       ]
+      },
+      {
+       "text": "Test und Anpassung",
+       "themen": [
+        "lb10-ki-projektmanagement/11-3-ki-modelle-optimieren",
+        "lb10-ki-projektmanagement/10-4-tutorial-jupyter",
+        "lb10-ki-projektmanagement/10-5-ki-projektmanagement"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Sich positionieren zur Nachvollziehbarkeit, Erklärbarkeit, Zuverlässigkeit und Bias von Künstlicher Intelligenz",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb10-ki-projektmanagement/11-0-kickstart-sprachmodelle",
+        "lb10-ki-projektmanagement/11-8-neuronale-netze",
+        "lb10-ki-projektmanagement/11-10-generative-ki",
+        "lb10-ki-projektmanagement/11-11-ki-und-gesellschaft"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Beurteilen der gesellschaftlichen Auswirkungen durch Anwendungen der Künstlichen Intelligenz",
+     "inhalte": [
+      {
+       "text": null,
+       "themen": [
+        "lb10-ki-projektmanagement/11-11-ki-und-gesellschaft"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "lb": "11",
+   "titel": "Informatisches Projekt",
+   "ziele": [
+    {
+     "ziel": "Kennen der Grundlagen des Projektmanagements",
+     "inhalte": [
+      {
+       "text": "Arbeitstechniken des Projektmanagements",
+       "themen": [
+        "lb10-ki-projektmanagement/10-1-grundlagen"
+       ]
+      },
+      {
+       "text": "Vergleich des klassischen und agilen Projektmanagements",
+       "themen": [
+        "lb10-ki-projektmanagement/10-2-klassisch-vs-agil"
+       ]
+      }
+     ]
+    },
+    {
+     "ziel": "Gestalten eines Projektes",
+     "inhalte": [
+      {
+       "text": "Zerlegung in Teilaufgaben",
+       "themen": [
+        "lb10-ki-projektmanagement/10-5-ki-projektmanagement",
+        "lb10-ki-projektmanagement/10-6-ki-projekt-dokumentation"
+       ]
+      },
+      {
+       "text": "Ablaufplanung",
+       "themen": [
+        "lb10-ki-projektmanagement/10-5-ki-projektmanagement",
+        "lb10-ki-projektmanagement/10-6-ki-projekt-dokumentation"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -264,3 +264,37 @@
         })(bloecke[i]);
     }
 })();
+
+/* Lernziele „Das kann ich jetzt“: Haken nur im Browser (localStorage), Stand auch auf der Lernbereichsseite */
+(function () {
+    function lies(k) { try { return localStorage.getItem("ziel:" + k) === "1"; } catch (e) { return false; } }
+    function schreib(k, an) {
+        try { if (an) localStorage.setItem("ziel:" + k, "1"); else localStorage.removeItem("ziel:" + k); } catch (e) { /* privat */ }
+    }
+    document.querySelectorAll(".ziele").forEach(function (box) {
+        var haken = box.querySelectorAll("input[data-ziel]");
+        var stand = box.querySelector(".ziele-stand");
+        function zeigen() {
+            var n = 0;
+            haken.forEach(function (h) { if (h.checked) n++; });
+            box.classList.toggle("fertig", n === haken.length);
+            stand.textContent = n === haken.length ? "Alles abgehakt – stark!" : n + " von " + haken.length + " abgehakt";
+        }
+        haken.forEach(function (h) {
+            h.checked = lies(h.dataset.ziel);
+            h.addEventListener("change", function () { schreib(h.dataset.ziel, h.checked); zeigen(); });
+        });
+        zeigen();
+    });
+    document.querySelectorAll("li[data-ziele]").forEach(function (li) {
+        var keys = li.dataset.ziele.split(" ");
+        var n = 0;
+        keys.forEach(function (k) { if (lies(k)) n++; });
+        if (!n) return;
+        var chip = document.createElement("span");
+        chip.className = "ziele-chip" + (n === keys.length ? " fertig" : "");
+        chip.title = "Lernziele abgehakt";
+        chip.textContent = (n === keys.length ? "✓ " : "") + n + "/" + keys.length;
+        li.appendChild(chip);
+    });
+})();
