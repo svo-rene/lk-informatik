@@ -4,7 +4,7 @@
         <details>
             <summary>Aufgabe 3.5.5: Fehler finden – vier Muster, die zu viel oder das Falsche tun <span class="niveau">AFB III</span></summary>
             <p>In einem Bereinigungsskript stehen diese vier Zeilen. Jede enthält einen Fehler.</p>
-            <pre><code class="language-python">import re
+            <pre class="ausfuehrbar"><code class="language-python">import re
 print(bool(re.search(r"\d{2}:\d{2}", "125:309")))       # soll eine Uhrzeit HH:MM erkennen
 print(bool(re.fullmatch(r"\d+.\d+", "12x5")))           # soll eine Dezimalzahl erkennen
 print(re.sub(r"\d", "", "0351 / 123-45 67"))            # soll nur die Ziffern übrig lassen

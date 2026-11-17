@@ -107,7 +107,7 @@
                     </table>
                 </li>
                 <li><strong>Was:</strong> Das Netz in Python nachbauen und mit allen vier Eingaben testen. – <em>warum:</em> So lässt sich die Handrechnung automatisch prüfen; dieselbe Funktion <code>perzeptron</code> wird dreimal mit verschiedenen Gewichten verwendet.
-<pre><code class="language-python">def perzeptron(eingaben, gewichte, schwelle):
+<pre class="ausfuehrbar"><code class="language-python">def perzeptron(eingaben, gewichte, schwelle):
     summe = 0
     for i in range(len(eingaben)):
         summe = summe + eingaben[i] * gewichte[i]

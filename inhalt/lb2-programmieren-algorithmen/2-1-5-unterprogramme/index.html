@@ -29,7 +29,7 @@ ergebnis = quadrat(4)   # der Rückgabewert 16 kann weiterverwendet werden</code
 
 <p>Sie werden ebenfalls mit <code>def</code> definiert, enthalten jedoch keine <code>return</code>-Anweisung mit Wert. Streng genommen gibt jede Python-Funktion ohne <code>return</code> automatisch den Wert <code>None</code> zurück.</p>
 
-<pre><code class="language-python">def gruesse(name):
+<pre class="ausfuehrbar"><code class="language-python">def gruesse(name):
     print("Hallo,", name)
 
 gruesse("Lina")        # Ausgabe: Hallo, Lina
@@ -39,7 +39,7 @@ x = gruesse("Tom")     # Ausgabe: Hallo, Tom – x hat den Wert None</code></pre
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> Für einen Austausch mit einer Partnerschule in den USA soll eine Temperaturtabelle von Grad Celsius in Grad Fahrenheit entstehen. Die Umrechnung lautet F = C · 9 / 5 + 32.</p>
-            <pre><code class="language-python">def celsius_in_fahrenheit(c):          # Funktion: liefert einen Wert
+            <pre class="ausfuehrbar"><code class="language-python">def celsius_in_fahrenheit(c):          # Funktion: liefert einen Wert
     return c * 9 / 5 + 32
 
 def drucke_tabelle(von, bis, schritt): # Prozedur: bewirkt eine Ausgabe
@@ -75,7 +75,7 @@ drucke_tabelle(-20, 40, 20)</code></pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Funktionen rufen andere Funktionen auf. Gesucht sind alle Primzahlen bis zu einer Grenze.</p>
-            <pre><code class="language-python">def ist_teiler(t, n):
+            <pre class="ausfuehrbar"><code class="language-python">def ist_teiler(t, n):
     return n % t == 0
 
 def ist_primzahl(n):
@@ -120,7 +120,7 @@ print(primzahlen_bis(20))   # [2, 3, 5, 7, 11, 13, 17, 19]</code></pre>
 
 <p>Einige grundlegende Funktionen wie <code>print</code> oder <code>len</code> sind als eingebaute Funktionen (built-ins) immer verfügbar. Viele weitere Funktionen stehen in <strong>Modulen</strong>: entweder in Modulen der mitgelieferten Standardbibliothek wie <code>random</code> oder <code>math</code> oder in zusätzlich installierten Paketen wie <code>matplotlib</code>. Mit der folgenden Syntax importierst du ein Modul, um auf die enthaltenen Funktionen zugreifen zu können:</p>
 
-<pre><code class="language-python"># Zugriff auf alle enthaltenen Funktionen über den Modulnamen
+<pre class="ausfuehrbar"><code class="language-python"># Zugriff auf alle enthaltenen Funktionen über den Modulnamen
 import math
 print(math.sqrt(16))      # Aufruf über die Punktnotation
 

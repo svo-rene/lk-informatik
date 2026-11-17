@@ -18,50 +18,6 @@
 
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Ein Wert, der fehlt <span class="niveau">AFB I</span></summary>
-                <p>Suche die 40 in [2, 5, 8, 12, 16, 23, 38]. Notiere für jeden Aufruf <code>links</code>, <code>rechts</code> und <code>mitte</code>. Woran erkennt die Funktion, dass die 40 fehlt?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>(0, 6, mitte 3: 12) → (4, 6, mitte 5: 23) → (6, 6, mitte 6: 38) → (7, 6): <code>links &gt; rechts</code>, der Bereich ist leer, der Basisfall gibt −1 zurück. 4 Aufrufe, 3 Vergleichsrunden.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Vier Millionen Einträge <span class="niveau">AFB I</span></summary>
-                <p>Eine sortierte Liste hat 4 000 000 Einträge, der gesuchte Wert kommt nicht vor. Wie viele Vergleiche braucht die lineare Suche, wie viele Runden die binäre Suche höchstens?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Linear: 4 000 000 Vergleiche. Binär: Zwei Millionen brauchen 21 Runden, die doppelte Menge nur eine mehr – also 22 Runden (log<sub>2</sub> 4 000 000 ≈ 21,9, abgerundet 21, plus 1).</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 5: Drei Zahlen teilen <span class="niveau">AFB I</span></summary>
-                <p>Wie teilt <code>maximum</code> die Liste [8, 2, 5]? Welche Teillisten entstehen insgesamt, und wie viele Vergleiche finden beim Kombinieren statt?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>mitte</code> = 3 // 2 = 1 → [8] und [2, 5]; [2, 5] wird in [2] und [5] geteilt. Kombinieren: 2 &gt; 5? Nein → 5; dann 8 &gt; 5? Ja → 8. Zwei Vergleiche, also n − 1.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-2-2-8-1">
-            <details>
-                <summary>Aufgabe 2.2.8.1: Binäre Suche von Hand <span class="niveau">AFB I</span></summary>
-                <p>Führe die binäre Suche nach 16 und nach 9 in der Liste [2, 5, 8, 12, 16, 23, 38] von Hand durch. Notiere jeweils <code>links</code>, <code>rechts</code> und <code>mitte</code>.</p>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-2-2-8-2">
-            <details>
-                <summary>Aufgabe 2.2.8.2: Drei Schritte erkennen <span class="niveau">AFB II</span></summary>
-                <p>Benenne im Beispiel <code>maximum(liste)</code> die Schritte Teilen, Herrschen und Kombinieren. Zeichne den Aufrufbaum für <code>maximum([7, 3, 19, 4])</code>.</p>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-2-2-8-3">
             <details>
                 <summary>Aufgabe 2.2.8.3: Schnelles Potenzieren <span class="niveau">AFB III</span></summary>

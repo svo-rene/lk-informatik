@@ -538,14 +538,14 @@ Alle Programme laufen in Thonny oder im JupyterLite der Schule.</code></pre>
             <p><strong>Ausgangssituation:</strong> Mia schreibt ein Programm, das Temperaturen von Grad Celsius in Grad Fahrenheit umrechnet (F = C · 9/5 + 32). Sie legt es in drei Commits in ihrem Repository <code>informatik-11</code> ab.</p>
             <ol>
                 <li><strong>Erste Fassung hochladen.</strong> Mia wählt „Datei hinzufügen“ → „Datei hochladen“, zieht <code>temperatur.py</code> in das Feld, schreibt in die erste Zeile des Kastens „Änderungen committen“ die Nachricht „Umrechnung Celsius in Fahrenheit (erste Fassung)“, lässt „Direkt in den Branch ‚main‘ einchecken“ ausgewählt und klickt „Änderungen committen“. <em>Warum gleich committen?</em> Ab jetzt gibt es einen Stand, zu dem sie jederzeit zurückkehren kann.
-                    <pre><code class="language-python">def celsius_in_fahrenheit(c):
+                    <pre class="ausfuehrbar"><code class="language-python">def celsius_in_fahrenheit(c):
     return c * 5 / 9 + 32
 
 print(celsius_in_fahrenheit(100))</code></pre>
                 </li>
                 <li><strong>Testen und Fehler beheben.</strong> Der Test mit 100 °C liefert <code>87.55555555555556</code> statt 212. Der Bruch ist vertauscht. Mia öffnet die Datei, klickt auf den Stift, korrigiert die Zeile im Web-Editor, prüft unter „Vorschau der Änderungen“ und committet mit „Fehler behoben: Faktor 9/5 statt 5/9“. <em>Warum ein eigener Commit?</em> Die Korrektur ist ein Anliegen für sich und in der Historie sofort auffindbar.</li>
                 <li><strong>Erweitern.</strong> Mia ergänzt in Thonny eine Umrechnungstabelle, testet sie dort und lädt <code>temperatur.py</code> mit demselben Namen erneut hoch. Commit-Nachricht: „Tabelle von −20 °C bis 40 °C ergänzt“. Die Datei lautet jetzt:
-                    <pre><code class="language-python">def celsius_in_fahrenheit(c):
+                    <pre class="ausfuehrbar"><code class="language-python">def celsius_in_fahrenheit(c):
     return c * 9 / 5 + 32
 
 print(celsius_in_fahrenheit(100))
@@ -591,7 +591,7 @@ for c in range(-20, 41, 10):
             <p><strong>Ausgangssituation:</strong> Jonas will zeigen, wie viel schnellere Sortierverfahren wirklich bringen. Er verbessert sein Programm <code>sortierexperiment.py</code> in vier Schritten: Bubblesort → Bubblesort mit vorzeitigem Abbruch → Insertionsort → Mergesort. Jede Version wird ein eigener Commit, die gemessenen Laufzeiten für n = 2000 und 2n = 4000 schreibt er in die Commit-Nachricht. So zeigt die Historie Algorithmus und Laufzeit gemeinsam. Die Zeitangaben sind <strong>Beispielwerte</strong> eines Schulrechners; auf deinem Rechner sind sie anders, die Faktoren aber ähnlich.</p>
             <ol>
                 <li><strong>Version 1 anlegen und messen.</strong> Die Funktion heißt in allen Versionen <code>sortiere(liste)</code> und sortiert die übergebene Liste selbst. Der Messteil bleibt in allen Versionen gleich. <em>Warum?</em> Nur dann misst jeder Commit dasselbe, und der Diff zeigt allein die Änderung am Algorithmus.
-                    <pre><code class="language-python">import random
+                    <pre class="ausfuehrbar"><code class="language-python">import random
 import time
 
 def sortiere(liste):

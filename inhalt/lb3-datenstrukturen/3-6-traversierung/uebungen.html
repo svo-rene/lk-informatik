@@ -20,63 +20,6 @@
 
 <div class="aufgabe">
             <details>
-                <summary>Kurz geprüft 3: Aufrufe zählen <span class="niveau">AFB II</span></summary>
-                <p>Wie oft wird <code>in_order</code> insgesamt aufgerufen, wenn du <code>in_order(klein)</code> für den Baum B mit den Kindern A und C startest? Wie viele davon bekommen <code>None</code>?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>7-mal: je ein Aufruf für B, A und C und vier Aufrufe mit <code>None</code> – links und rechts von A sowie links und rechts von C. Allgemein bekommt jeder Knoten zwei Aufrufe für seine Kinder, auch wenn sie fehlen.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Die Schlange führen <span class="niveau">AFB I</span></summary>
-                <p>Führe <code>level_order</code> für den Baum aus Kurz geprüft 1 (D mit den Kindern B und F, A links unter B) von Hand aus. Wie sehen <code>schlange</code> und <code>ergebnis</code> aus, nachdem die ersten zwei Knoten entnommen wurden?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Schlange von vorn nach hinten. Start: D. D entnehmen: <code>ergebnis = [D]</code>, Schlange: B, F. B entnehmen: <code>ergebnis = [D, B]</code>, B stellt A und <code>None</code> hinten an, also Schlange: F, A, <code>None</code>.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-6-1">
-            <details>
-                <summary>Aufgabe 3.6.1: Baumtraversierung <span class="niveau">AFB I</span></summary>
-                <p>Gegeben ist folgender binärer Baum:</p>
-                <pre><code>       10
-      /  \
-     5    15
-    / \     \
-   3   7     20</code></pre>
-                <ol>
-                    <li>Führe eine Pre-Order-Traversierung dieses Baums durch.</li>
-                    <li>Führe eine In-Order-Traversierung dieses Baums durch.</li>
-                    <li>Führe eine Post-Order-Traversierung dieses Baums durch.</li>
-                </ol>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Aufgabe 3.6.2: Suche in einem binären Suchbaum <span class="niveau">AFB I–II</span></summary>
-                <p>Gegeben ist der folgende binäre Suchbaum:</p>
-                <pre><code>        8
-       /  \
-      3    10
-     / \     \
-    1   6     14
-       / \    /
-      4   7  13</code></pre>
-                <ol>
-                    <li>Suche nach der Zahl 6 im Baum und beschreibe den Suchvorgang.</li>
-                    <li>Suche nach der Zahl 9 im Baum und beschreibe, was passiert, wenn das Element nicht gefunden wird.</li>
-                    <li>Die binäre Suche kann in einem Suchbaum oder in einer sortierten Liste umgesetzt werden. Beschreibe die binäre Suche und erkläre, warum sich die Suche im binären Suchbaum und in der Liste stark ähneln. <a href="https://www.inf-schule.de/algorithmen/standardalgorithmen/suchen/binsuche" target="_blank">https://www.inf-schule.de/algorithmen/standardalgorithmen/suchen/binsuche</a></li>
-                    <li>Bestimme die Komplexitätsklasse der Suche in binären Suchbäumen.</li>
-                </ol>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
                 <summary>Aufgabe 3.6.3: Hinzufügen und Löschen von Knoten <span class="niveau">AFB II</span></summary>
                 <p><a href="https://www.inf-schule.de/algorithmen/standardalgorithmen/suchbaeume/binaerbaum/andere" target="_blank">https://www.inf-schule.de/algorithmen/standardalgorithmen/suchbaeume/binaerbaum/andere</a></p>
                 <p>Betrachte den folgenden binären Suchbaum:</p>

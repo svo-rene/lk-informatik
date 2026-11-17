@@ -104,6 +104,16 @@
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Zusammenführen von Hand <span class="niveau">AFB I</span></summary>
+                <p>Führe [1, 6] und [2, 3, 9] zusammen. In welcher Reihenfolge werden die Zahlen übernommen, und wie viele Vergleiche sind nötig?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>1 ≤ 2 → 1; 6 ≤ 2? nein → 2; 6 ≤ 3? nein → 3; 6 ≤ 9 → 6. Jetzt ist die linke Liste leer, die 9 wird ohne Vergleich angehängt: [1, 2, 3, 6, 9] nach 4 Vergleichen (höchstens 2 + 3 − 1 = 4).</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-2">Schritt 2: merge in Python</h2>
 
 <p>Die Funktion <code>merge</code> setzt das Zusammenführen mit zwei Zeigern <code>i</code> und <code>j</code> um. Darin stecken drei Python-Bausteine, die im Video an kleinen Beispielen in der Kommandozeile gezeigt werden: die Mehrfachzuweisung <code>i = j = 0</code>, eine <code>while</code>-Bedingung mit <code>and</code> und der Rest einer Liste mit <code>links[i:]</code>, der mit <code>extend</code> angehängt wird.</p>
@@ -112,6 +122,16 @@
             <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-2_merge_code_vorschau.png" src="../vid/2-2-9-2_merge_code.mp4"></video><a href="../vid/2-2-9-2_merge_code.mp4">Video ansehen</a></div>
             <figcaption>Video 2: merge in Python (ca. 2 min)</figcaption>
         </figure>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Slicing und extend <span class="niveau">AFB I</span></summary>
+                <p>Was liefern <code>[4, 7, 9][1:]</code> und <code>[4, 7, 9][3:]</code>? Wie sieht <code>a</code> nach <code>a = [1]</code> und <code>a.extend([5, 6])</code> aus?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[7, 9]</code> (ab Position 1) und <code>[]</code> (ab Position 3 gibt es nichts mehr). Danach ist <code>a</code> = <code>[1, 5, 6]</code>.</p>
+                </details>
+            </details>
+        </div>
 
 <h2 id="schritt-3">Schritt 3: merge Schritt für Schritt</h2>
 
@@ -127,6 +147,16 @@
 <p>Hier läuft <code>merge</code> Zeile für Zeile. Rechts siehst du <code>i</code>, <code>j</code> und <code>ergebnis</code>. Gib danach <code>2, 4</code> und <code>1, 9</code> ein und vergleiche mit deiner Lösung von Kurz geprüft 3.</p>
 
 <div class="sortierlabor" data-verfahren="mergeteil" data-links="3, 8" data-rechts="2, 5" data-fein="ja"></div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Zeiger verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Verfolge <code>merge([2, 4], [1, 9])</code>. Welche Werte haben <code>i</code> und <code>j</code>, wenn die <code>while</code>-Schleife endet? Was hängen die beiden <code>extend</code>-Zeilen an?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>2 &lt;= 1? nein → 1, <code>j</code> = 1; 2 &lt;= 9 → 2, <code>i</code> = 1; 4 &lt;= 9 → 4, <code>i</code> = 2. Jetzt ist <code>i &lt; 2</code> falsch: Die Schleife endet mit <code>i</code> = 2 und <code>j</code> = 1. <code>links[2:]</code> ist leer, <code>rechts[1:]</code> hängt die 9 an. Ergebnis: [1, 2, 4, 9].</p>
+                </details>
+            </details>
+        </div>
 
 <h2 id="schritt-4">Schritt 4: Mergesort – Teilen und Zusammenführen</h2>
 
@@ -146,6 +176,16 @@
 <p class="tipp">Gib eine Liste mit 16 Zahlen ein oder nimm die Zahlen deines Kartensatzes. Zähle die Ebenen. Wie viele Ebenen wären es bei 32 Zahlen?</p>
 
 <p>Die vollständige Rechnung mit allen merge-Schritten steht in Beispiel 2 (Schritt 5).</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Teilen <span class="niveau">AFB I</span></summary>
+                <p>Wie wird die Liste [6, 2, 5, 1, 4] geteilt (<code>mitte = len(liste) // 2</code>)? Notiere alle Teillisten bis zum Basisfall.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>mitte</code> = 5 // 2 = 2: [6, 2] und [5, 1, 4]. Dann [6] und [2] sowie [5] und [1, 4] (3 // 2 = 1). Zum Schluss [1] und [4].</p>
+                </details>
+            </details>
+        </div>
 
 <p>Danach: Aufgabe 2.2.9.1 – Mergesort von Hand.</p>
 
@@ -194,7 +234,7 @@ Zusammenführen:
                [38]   [27, 43]            [3, 9]    [10, 82]
                [27, 38, 43]               [3, 9, 10, 82]
                [3, 9, 10, 27, 38, 43, 82]</code></pre>
-            <pre><code class="language-python">def merge(links, rechts):
+            <pre class="ausfuehrbar"><code class="language-python">def merge(links, rechts):
     ergebnis = []
     i = j = 0
     while i &lt; len(links) and j &lt; len(rechts):
@@ -268,6 +308,16 @@ for n in [10000, 20000, 40000, 80000]:
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Neue Liste und Aufrufe <span class="niveau">AFB I</span></summary>
+                <p>Nach <code>zahlen = [4, 2]</code> wird <code>mergesort(zahlen)</code> aufgerufen. Welchen Wert hat <code>zahlen</code> danach? Wie oft wird <code>mergesort</code> dabei insgesamt aufgerufen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>zahlen</code> ist weiterhin <code>[4, 2]</code>, denn die sortierte Liste <code>[2, 4]</code> ist eine neue Liste, die nur zurückgegeben wird. Aufrufe: einmal mit [4, 2], dann je einmal mit [4] und [2] (Basisfälle), also 3.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 2.2.9.2 – Mergesort erarbeiten, implementieren und testen.</p>
 
 <h2>Wettrennen: Mergesort gegen die einfachen Verfahren</h2>
@@ -315,22 +365,26 @@ for n in [10000, 20000, 40000, 80000]:
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-9-1">
             <details>
-                <summary>Kurz geprüft 1: Zusammenführen von Hand <span class="niveau">AFB I</span></summary>
-                <p>Führe [1, 6] und [2, 3, 9] zusammen. In welcher Reihenfolge werden die Zahlen übernommen, und wie viele Vergleiche sind nötig?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>1 ≤ 2 → 1; 6 ≤ 2? nein → 2; 6 ≤ 3? nein → 3; 6 ≤ 9 → 6. Jetzt ist die linke Liste leer, die 9 wird ohne Vergleich angehängt: [1, 2, 3, 6, 9] nach 4 Vergleichen (höchstens 2 + 3 − 1 = 4).</p>
-                </details>
+                <summary>Aufgabe 2.2.9.1: Mergesort von Hand <span class="niveau">AFB II</span></summary>
+                <p>Sortiere [5, 1, 7, 2, 8, 6, 3, 4] mit Mergesort von Hand. Notiere alle Teillisten und zähle die Vergleiche beim Zusammenführen.</p>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-9-2">
             <details>
-                <summary>Kurz geprüft 2: Slicing und extend <span class="niveau">AFB I</span></summary>
-                <p>Was liefern <code>[4, 7, 9][1:]</code> und <code>[4, 7, 9][3:]</code>? Wie sieht <code>a</code> nach <code>a = [1]</code> und <code>a.extend([5, 6])</code> aus?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>[7, 9]</code> (ab Position 1) und <code>[]</code> (ab Position 3 gibt es nichts mehr). Danach ist <code>a</code> = <code>[1, 5, 6]</code>.</p>
-                </details>
+                <summary>Aufgabe 2.2.9.2: Mergesort erarbeiten <span class="niveau">AFB I–II</span></summary>
+                <ul>
+                    <li>Recherchiere, was das Prinzip <strong>Divide and Conquer</strong> bedeutet, und halte es in eigenen Worten schriftlich fest.</li>
+                    <li>Erarbeite dir den Algorithmus <strong>Mergesort</strong> mithilfe der Seite <a href="https://www.happycoders.eu/de/algorithmen/mergesort/" target="_blank">https://www.happycoders.eu/de/algorithmen/mergesort/</a>:
+                        <ul>
+                            <li>Wie funktioniert Mergesort Schritt für Schritt?</li>
+                            <li>Warum ist die Zeitkomplexität O(n · log n)?</li>
+                            <li>Wie lässt sich Mergesort in Python umsetzen?</li>
+                        </ul>
+                    </li>
+                    <li>Implementiere Mergesort in Python und teste deinen Code mit verschiedenen Datensätzen (leer, ein Element, sortiert, absteigend, mit doppelten Werten).</li>
+                </ul>
             </details>
         </div>

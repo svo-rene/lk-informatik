@@ -96,7 +96,7 @@ STORE R1, summe
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Die Summe aller geraden Zahlen einer Liste – imperativ und deklarativ</summary>
             <p><strong>Ausgangssituation:</strong> Aus der Liste <code>[3, 8, 5, 12, 7, 4]</code> sollen alle geraden Zahlen addiert werden. Dasselbe Problem wird dreimal gelöst: imperativ in Python, funktional in Python und als SQL-Abfrage. Anschließend ordnen wir jede Lösung in die Paradigmen-Hierarchie ein.</p>
-            <pre><code class="language-python">zahlen = [3, 8, 5, 12, 7, 4]
+            <pre class="ausfuehrbar"><code class="language-python">zahlen = [3, 8, 5, 12, 7, 4]
 
 # imperativ: Schritt für Schritt den Zustand (summe) verändern
 summe = 0
@@ -179,7 +179,7 @@ SELECT SUM(wert) FROM zahlen WHERE wert % 2 = 0;</code></pre>
             <details>
                 <summary>Aufgabe 4.0.2: Imperativ oder deklarativ? <span class="niveau">AFB II</span></summary>
                 <p>Das folgende Programm sucht das Maximum einer Liste.</p>
-                <pre><code class="language-python">werte = [4, 17, 9, 23, 5]
+                <pre class="ausfuehrbar"><code class="language-python">werte = [4, 17, 9, 23, 5]
 maximum = werte[0]
 for w in werte:
     if w &gt; maximum:

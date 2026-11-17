@@ -32,62 +32,6 @@
             </details>
         </div>
 
-<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Tauschen und zählen <span class="niveau">AFB I</span></summary>
-                <p>Die Liste ist <code>liste = [7, 3]</code> und <code>j = 0</code>. Was steht nach den drei Tausch-Zeilen in <code>liste</code> und in <code>temp</code>? Und wie viele Zahlen liefert <code>range(8 - 1 - 3)</code>?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>temp = 7</code>, dann <code>liste = [3, 3]</code>, dann <code>liste = [3, 7]</code> – die Werte sind vertauscht, in <code>temp</code> steht noch 7. <code>range(4)</code> liefert 0, 1, 2, 3, also 4 Zahlen: Bei 8 Elementen werden im Durchlauf 3 nur noch 4 Paare verglichen.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Variablen verfolgen <span class="niveau">AFB I</span></summary>
-                <p>Welche Werte nimmt <code>j</code> im Durchlauf 0 an, wenn die Liste 5 Elemente hat? Welchen Wert hat <code>getauscht</code> nach dem ersten Durchlauf für [1, 2, 3, 4, 5], und was passiert dann?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>j</code> läuft durch <code>range(5 - 1 - 0)</code>, also 0, 1, 2, 3. Bei [1, 2, 3, 4, 5] wird nie getauscht: <code>getauscht</code> bleibt <code>False</code>, und <code>break</code> beendet das Sortieren nach dem ersten Durchlauf.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 5: Vergleiche abschätzen <span class="niveau">AFB I</span></summary>
-                <p>Eine Liste hat 20 Elemente. Wie viele Vergleiche braucht Bubblesort im schlechtesten Fall, wie viele im besten Fall?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Schlechtester Fall: 20 · 19 / 2 = 190 Vergleiche. Bester Fall (schon sortiert): ein Durchlauf mit 19 Vergleichen, dann Abbruch.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-2-2-2-1">
-            <details>
-                <summary>Aufgabe 2.2.2.1: Bubblesort selbst ausprobieren <span class="niveau">AFB I–II</span></summary>
-                <ol>
-                    <li>Notiere den Pseudocode in deinen eigenen Worten so, dass er für dich gut verständlich ist.</li>
-                    <li>Implementiere den Algorithmus in Python.</li>
-                    <li>Teste ihn zunächst mit einer kurzen Liste (z.&nbsp;B. <code>[5, 2, 9, 3, 4, 6]</code>).</li>
-                    <li>Erzeuge danach eigene Listen mit Zufallszahlen und prüfe, ob dein Algorithmus sie richtig sortiert.</li>
-                    <li>Vergleiche mit deinem eigenen Verfahren aus Aufgabe 2.2.1.1: Was ist gleich, was ist anders? Welches braucht für <code>[8, 7, 6, 5, 4, 3, 2, 1]</code> weniger Vergleiche?</li>
-                </ol>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-2-2-2-2">
-            <details>
-                <summary>Aufgabe 2.2.2.2: Vergleiche zählen <span class="niveau">AFB II–III</span></summary>
-                <ol>
-                    <li>Gib die Anzahl der Vergleiche und Vertauschungen an, die Bubblesort (mit Abbruch) für die Listen [1, 2, 3, 4, 5] und [5, 4, 3, 2, 1] benötigt.</li>
-                    <li>Erweitere dein Programm um Zähler für Vergleiche und Vertauschungen und überprüfe deine Werte.</li>
-                    <li>Begründe, warum sich bei doppelter Listenlänge die Anzahl der Vergleiche im schlechtesten Fall etwa vervierfacht.</li>
-                </ol>
-            </details>
-        </div>
-
 <h2 id="zum-ueben">Zum Üben zu Hause</h2>
 
 <div class="aufgabe">

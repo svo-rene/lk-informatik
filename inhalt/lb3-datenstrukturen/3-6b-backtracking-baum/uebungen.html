@@ -1,51 +1,5 @@
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Einen Punkt, den es nicht gibt <span class="niveau">AFB II</span></summary>
-                <p>Das ganze Wegenetz aus Abb. 1 ist eingefügt (10 Knoten). Was passiert bei <code>netz.einfuegen("Turm", "Aussicht", 5)</code>? Wie oft wird <code>__finde</code> dabei aufgerufen? Und wie oft bei <code>netz.einfuegen("Uferweg", "Badestelle", 5)</code>?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>„Turm“ gibt es nicht: Jeder Teilbaum meldet <code>None</code>, am Ende auch die Wurzel. <code>einfuegen</code> gibt <code>Turm gibt es nicht.</code> aus und fügt nichts ein. <code>__finde</code> wird für jeden der 10 Knoten einmal aufgerufen. Beim Uferweg: Parkplatz, Waldweg, Schlucht, Felsentor (alles <code>None</code>), dann Uferweg – Treffer nach 5 Aufrufen. Mühle, Bergpfad und die übrigen Knoten werden gar nicht mehr angesehen.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Die vergessene Rücknahme <span class="niveau">AFB II</span></summary>
-                <p>In <code>__tour</code> fehlt die Zeile <code>weg.pop()</code>. Was liefert <code>netz.tour(40)</code> jetzt? Ist die Ausgabe eine Tour, die man gehen kann?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>['Parkplatz', 'Waldweg', 'Schlucht', 'Uferweg', 'Mühle', 'Bootssteg']</code>. Die Suche selbst läuft genauso und findet den Bootssteg. Aber Waldweg und Schlucht bleiben nach der Sackgasse im Weg stehen. Diese „Tour“ kann man nicht gehen: Von der Schlucht führt kein Weg zum Uferweg. Erst die Rücknahme macht aus dem Inhalt von <code>weg</code> wieder den Weg von der Wurzel zum aktuellen Punkt.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-6b-1">
-            <details>
-                <summary>Aufgabe 3.6b.1: Eine Tour von Hand verfolgen <span class="niveau">AFB I–II</span></summary>
-                <ol>
-                    <li>Verfolge <code>netz.tour(55)</code> für das Wegenetz aus Abb. 1 in einer Tabelle wie in Beispiel 1 (Aufruf, Punkt, <code>zeit</code>, Aktion, <code>weg</code>). Markiere jede Rücknahme. Gib das Ergebnis und die Anzahl der Aufrufe an.</li>
-                    <li>Die Wege am Parkplatz werden in der Reihenfolge Bergpfad, Uferweg, Waldweg eingefügt, alles andere bleibt gleich. Gib an, welche Tour <code>netz.tour(55)</code> jetzt liefert, und begründe, warum sich das Ergebnis ändert.</li>
-                    <li>Gib einen Wert für <code>limit</code> an, bei dem <code>tour</code> den Gipfel liefert, obwohl die Wege wieder in der Reihenfolge aus Abb. 1 eingefügt sind – oder begründe, dass es keinen gibt.</li>
-                </ol>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-6b-2">
-            <details>
-                <summary>Aufgabe 3.6b.2: Die Klasse Baum ausbauen <span class="niveau">AFB II</span></summary>
-                <p class="git-datei"><strong>Datei:</strong> <code>2_baeume/wanderwege.py</code> – weiterführen<br><strong>Commits:</strong> nach Teil 1: <code>3.6b.2 Teil 1: anzahl_ziele ergänzt</code> · nach Teil 2: <code>3.6b.2 Teil 2: ausgeben eingerückt</code> · nach Teil 3: <code>3.6b.2 Teil 3: Tests ok</code></p>
-                <p>Ergänze die Klasse <code>Baum</code> nach dem Muster „öffentliche Methode ohne Knoten, private Hilfsmethode mit Knoten“.</p>
-                <ol>
-                    <li><code>anzahl_ziele()</code> liefert die Anzahl der Blätter, also der Ziele im Wegenetz.</li>
-                    <li><code>ausgeben()</code> gibt das Wegenetz eingerückt aus, je Ebene vier Leerzeichen mehr, mit den Minuten in Klammern, z.&nbsp;B.<br><code>Parkplatz (0)</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;Waldweg (15)</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schlucht (20)</code></li>
-                    <li>Teste beide Methoden mit dem Wegenetz aus Abb. 1 und mit einem Baum, der nur aus dem Parkplatz besteht. Trage Eingabe, erwartete und tatsächliche Ausgabe in eine Tabelle ein.</li>
-                    <li>Begründe, warum <code>anzahl_ziele</code> keinen Parameter <code>knoten</code> hat, die Hilfsmethode aber schon.</li>
-                </ol>
-                <p class="tipp">Die Hilfsmethode für <code>ausgeben</code> bekommt die aktuelle Tiefe als zweiten Parameter.</p>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-3-6b-3">
             <details>
                 <summary>Aufgabe 3.6b.3: Alle Touren – und die längste <span class="niveau">AFB II–III</span></summary>

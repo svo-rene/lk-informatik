@@ -46,6 +46,16 @@
 
 <div class="sortierlabor" data-verfahren="insertion" data-liste="5, 2, 9, 3, 4, 6" data-vorhersage="ja" data-code="nein"></div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Eine Zahl einfügen <span class="niveau">AFB I</span></summary>
+                <p>Bei der Liste 2, 6, 8, 9, 5, 1 sind die ersten vier Zahlen schon sortiert. Jetzt wird die 5 eingefügt. Wie sieht die Liste danach aus? Wie viele Vergleiche und Vertauschungen braucht dieses Einfügen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>9 &gt; 5 tauschen, 8 &gt; 5 tauschen, 6 &gt; 5 tauschen, 2 &gt; 5? Nein → Stopp. Danach: 2, 5, 6, 8, 9, 1. Das sind 4 Vergleiche und 3 Vertauschungen.</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-2">Schritt 2: Insertionsort in Python</h2>
 
 <p>Im Programm wird aus der Regel eine <code>for</code>-Schleife über die einzufügenden Zahlen und eine <code>while</code>-Schleife, die die Zahl nach links wandern lässt. Neu ist <code>range(1, len(liste))</code>: Die Schleife beginnt erst bei Position 1. Achte im Video auf die zwei Wege, auf denen die <code>while</code>-Schleife endet.</p>
@@ -57,7 +67,7 @@
 
 <p>Zum Nachlesen der Code aus dem Video. Er entspricht <code>insertion_sort_nach_name</code> aus Beispiel 2 (Schritt 5), nur ohne Zähler und für einfache Zahlen:</p>
 
-<pre><code class="language-python">def insertion_sort(liste):
+<pre class="ausfuehrbar"><code class="language-python">def insertion_sort(liste):
     for i in range(1, len(liste)):
         j = i
         while j &gt; 0:
@@ -71,6 +81,16 @@
     return liste
 
 print(insertion_sort([5, 2, 9, 3, 4, 6]))   # [2, 3, 4, 5, 6, 9]</code></pre>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Schleifen lesen <span class="niveau">AFB I</span></summary>
+                <p>Welche Werte durchläuft <code>i</code> bei einer Liste mit 4 Elementen? Nenne die beiden Fälle, in denen die <code>while</code>-Schleife endet.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>range(1, 4)</code> liefert 1, 2, 3. Die <code>while</code>-Schleife endet, wenn <code>j</code> den Wert 0 erreicht (die Zahl steht ganz vorn), oder mit <code>break</code>, wenn der linke Nachbar nicht größer ist.</p>
+                </details>
+            </details>
+        </div>
 
 <h2 id="schritt-3">Schritt 3: Insertionsort Schritt für Schritt</h2>
 
@@ -111,6 +131,16 @@ print(insertion_sort([5, 2, 9, 3, 4, 6]))   # [2, 3, 4, 5, 6, 9]</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Variablen verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Verfolge <code>insertion_sort([2, 3, 1])</code>. Welchen Wert hat <code>j</code>, wenn für <code>i</code> = 1 die <code>while</code>-Schleife verlassen wird, und welchen für <code>i</code> = 2? Wie viele Vergleiche sind es insgesamt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>i</code> = 1: 2 &gt; 3 ist falsch → <code>break</code> mit <code>j</code> = 1. <code>i</code> = 2: 3 &gt; 1 tauschen (2, 1, 3), 2 &gt; 1 tauschen (1, 2, 3), dann ist <code>j</code> = 0 und die Schleife endet. Insgesamt 3 Vergleiche und 2 Vertauschungen.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 2.2.5.1 – Insertionsort von Hand und in Python.</p>
 
 <h2 id="schritt-4">Schritt 4: Selectionsort – die Idee</h2>
@@ -146,6 +176,16 @@ print(insertion_sort([5, 2, 9, 3, 4, 6]))   # [2, 3, 4, 5, 6, 9]</code></pre>
 
 <div class="sortierlabor" data-verfahren="selection" data-liste="5, 2, 9, 3, 4, 6" data-vorhersage="ja" data-code="nein"></div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Auswählen von Hand <span class="niveau">AFB I</span></summary>
+                <p>Sortiere 7, 3, 5, 1 mit Selectionsort. Notiere die Liste nach jedem Schritt. Wie viele Vertauschungen und wie viele Vergleiche sind nötig?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Schritt 1: Minimum 1 ↔ 7 → 1, 3, 5, 7. Schritt 2: Minimum 3 steht schon vorn → kein Tausch. Schritt 3: Minimum 5 steht schon vorn → kein Tausch. Nur 1 Vertauschung, aber trotzdem 3 + 2 + 1 = 6 Vergleiche.</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-5">Schritt 5: Selectionsort in Python</h2>
 
 <p>Selectionsort braucht zwei Schleifen: Die äußere geht mit <code>i</code> die Stellen des unsortierten Teils durch, die innere sucht mit <code>j</code> das Minimum rechts davon. Neu ist <code>range(i + 1, n)</code>, eine Schleife, die direkt rechts von <code>i</code> beginnt. Im zweiten Teil des Videos läuft das Programm mit [5, 1, 4]. Achte darauf, dass sich <code>min_pos</code> nur die Position merkt und erst nach der Suche getauscht wird.</p>
@@ -157,7 +197,7 @@ print(insertion_sort([5, 2, 9, 3, 4, 6]))   # [2, 3, 4, 5, 6, 9]</code></pre>
 
 <p>Zum Nachlesen der Code aus dem Video. Er entspricht <code>selection_sort_nach_name</code> aus Beispiel 2, nur ohne Zähler und für einfache Zahlen:</p>
 
-<pre><code class="language-python">def selection_sort(liste):
+<pre class="ausfuehrbar"><code class="language-python">def selection_sort(liste):
     n = len(liste)
     for i in range(n - 1):
         min_pos = i
@@ -178,6 +218,16 @@ print(selection_sort([5, 2, 9, 3, 4, 6]))   # [2, 3, 4, 5, 6, 9]</code></pre>
 
 <div class="sortierlabor" data-verfahren="selection" data-auswahl="selection,insertion" data-liste="5, 2, 9, 3, 4, 6"></div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Suchen und tauschen <span class="niveau">AFB I</span></summary>
+                <p>Welche Werte durchläuft <code>j</code> für <code>i</code> = 2 bei einer Liste mit 6 Elementen? Wie oft wird bei <code>selection_sort([1, 2, 3])</code> getauscht, und warum?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>range(3, 6)</code> liefert 3, 4, 5. Bei [1, 2, 3] wird nie getauscht: Das Minimum steht jedes Mal schon vorn, also ist <code>min_pos == i</code> und die Bedingung <code>min_pos != i</code> ist falsch.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 2.2.5.2 – Selectionsort von Hand und in Python.</p>
 
 <h3>Zum Nachlesen: Beide Verfahren im Vergleich – Stabilität</h3>
@@ -186,7 +236,7 @@ print(selection_sort([5, 2, 9, 3, 4, 6]))   # [2, 3, 4, 5, 6, 9]</code></pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Sortieren nach mehreren Kriterien. Insertionsort ist <em>stabil</em>: Gleiche Schlüssel behalten ihre ursprüngliche Reihenfolge. Sortiert man eine Schülerliste erst nach Vorname und danach stabil nach Nachname, stehen Personen mit gleichem Nachnamen alphabetisch nach Vornamen. Selectionsort ist dagegen <em>nicht</em> stabil. Das zeigt ein direkter Vergleich an der Liste Weber Anna, Weber Tom, Arndt Ole, die schon nach Vornamen geordnet ist und nun nach Nachnamen sortiert wird.</p>
-            <pre><code class="language-python">def insertion_sort_nach_name(liste):
+            <pre class="ausfuehrbar"><code class="language-python">def insertion_sort_nach_name(liste):
     vergleiche = 0
     tausche = 0
     for i in range(1, len(liste)):
@@ -315,22 +365,26 @@ print(selection_sort_nach_name(b), b)
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-5-1">
             <details>
-                <summary>Kurz geprüft 1: Eine Zahl einfügen <span class="niveau">AFB I</span></summary>
-                <p>Bei der Liste 2, 6, 8, 9, 5, 1 sind die ersten vier Zahlen schon sortiert. Jetzt wird die 5 eingefügt. Wie sieht die Liste danach aus? Wie viele Vergleiche und Vertauschungen braucht dieses Einfügen?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>9 &gt; 5 tauschen, 8 &gt; 5 tauschen, 6 &gt; 5 tauschen, 2 &gt; 5? Nein → Stopp. Danach: 2, 5, 6, 8, 9, 1. Das sind 4 Vergleiche und 3 Vertauschungen.</p>
-                </details>
+                <summary>Aufgabe 2.2.5.1: Insertionsort <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Sortiere das Array <code>zahlen = [4, 2, 9, 3, 7]</code> mit Insertionsort in deinem Hefter.</li>
+                    <li>Implementiere die Prozedur <code>insertion_sort()</code> und lass sie eine zufällige Liste von Zahlen sortieren.</li>
+                    <li>Begründe anhand des Aufbaus von <code>insertion_sort()</code>, zu welcher Komplexitätsklasse dieser Algorithmus gehört.</li>
+                    <li>Zusatz: Füge die Prozedur in Teil 4 des Messlabors ein, mit Vergleichen über <code>kommt_vor</code> (Notebook von Seite 2.2.3: <a href="../notebooks/2-2-3_einfuehrung_komplexitaet.ipynb" download>2-2-3_einfuehrung_komplexitaet.ipynb</a>), und vergleiche sie im Diagramm mit Bubblesort. Begründe mithilfe des Diagramms, zu welcher Komplexitätsklasse der Algorithmus gehört.</li>
+                </ol>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-5-2">
             <details>
-                <summary>Kurz geprüft 2: Schleifen lesen <span class="niveau">AFB I</span></summary>
-                <p>Welche Werte durchläuft <code>i</code> bei einer Liste mit 4 Elementen? Nenne die beiden Fälle, in denen die <code>while</code>-Schleife endet.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>range(1, 4)</code> liefert 1, 2, 3. Die <code>while</code>-Schleife endet, wenn <code>j</code> den Wert 0 erreicht (die Zahl steht ganz vorn), oder mit <code>break</code>, wenn der linke Nachbar nicht größer ist.</p>
-                </details>
+                <summary>Aufgabe 2.2.5.2: Selectionsort <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Sortiere das Array <code>zahlen = [4, 2, 9, 3, 7]</code> mit Selectionsort in deinem Hefter.</li>
+                    <li>Implementiere die Prozedur <code>selection_sort()</code> und lass sie eine zufällige Liste von Zahlen sortieren.</li>
+                    <li>Begründe anhand des Aufbaus von <code>selection_sort()</code>, zu welcher Komplexitätsklasse dieser Algorithmus gehört.</li>
+                    <li>Zusatz: Füge die Prozedur in Teil 4 des Messlabors ein, mit Vergleichen über <code>kommt_vor</code> (Notebook von Seite 2.2.3: <a href="../notebooks/2-2-3_einfuehrung_komplexitaet.ipynb" download>2-2-3_einfuehrung_komplexitaet.ipynb</a>), miss die Laufzeiten und begründe mithilfe des Diagramms die Komplexitätsklasse.</li>
+                </ol>
             </details>
         </div>

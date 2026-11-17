@@ -18,44 +18,6 @@
 
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Abfragen vorhersagen <span class="niveau">AFB I</span></summary>
-                <p>Was liefern diese Eingaben für das Dictionary <code>netz</code> aus Beispiel 2? Überlege erst, dann probiere es in Thonny aus.</p>
-                <pre><code class="language-python">netz["Altmarkt"]["Postplatz"]
-list(netz["Pieschen"])
-"Pieschen" in netz["Neustadt"]
-netz["Neustadt"]["Pieschen"]</code></pre>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>5</code> · <code>['Albertplatz']</code> · <code>False</code> (keine Kante von Neustadt nach Pieschen) · <code>KeyError: 'Pieschen'</code>, weil Neustadt keinen Schlüssel „Pieschen“ hat.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Die Schleifen lesen <span class="niveau">AFB I</span></summary>
-                <p>Gegeben sind <code>g = {"A": {"B": 2}, "B": {"A": 2}, "C": {}}</code> und <code>namen = list(g)</code>. Welche Liste <code>zeile</code> entsteht in der inneren Schleife für <code>a = "A"</code>? Welche Matrix entsteht insgesamt?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>[0, 2, 0]</code> – die Zeile von A. Die ganze Matrix: <code>[[0, 2, 0], [2, 0, 0], [0, 0, 0]]</code>. C hat keine Kanten, deshalb ist seine Zeile (und Spalte) überall 0.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-7-1">
-            <details>
-                <summary>Aufgabe 3.7.1: Begriffe anwenden <span class="niveau">AFB I</span></summary>
-                <p>Betrachte den Graphen im komplexeren Beispiel. Gib die Nachbarn von Postplatz an, einen Weg von Pieschen nach Altmarkt und dessen Länge sowie einen Zyklus.</p>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-7-2">
-            <details>
-                <summary>Aufgabe 3.7.2: Adjazenzmatrix aufstellen <span class="niveau">AFB II</span></summary>
-                <p>Ein gerichteter Graph hat die Knoten A, B, C, D und die Kanten A→B, A→C, B→C, C→A und C→D. Stelle die Adjazenzmatrix und die Adjazenzliste auf. Begründe, warum die Matrix nicht symmetrisch ist, und gib an, von welchem Knoten aus man alle anderen erreichen kann.</p>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-3-7-3">
             <details>
                 <summary>Aufgabe 3.7.3: Matrix oder Liste? <span class="niveau">AFB III</span></summary>
@@ -72,7 +34,7 @@ netz["Neustadt"]["Pieschen"]</code></pre>
                 <summary>PRIMM 3.7: Was zählt <code>raetsel</code>? <span class="niveau">AFB I–II</span></summary>
                 <p class="git-datei"><strong>Dateien:</strong> <a href="../material/primm_3-7_raetsel.py" download>primm_3-7_raetsel.py</a> und <a href="../material/primm_3-7_fehler.py" download>primm_3-7_fehler.py</a> in <code>3_graphen/</code> speichern – erst nach Schritt 1 öffnen.</p>
                 <p><strong>1 Vorhersagen</strong> (Papier, ohne Rechner): Was gibt das Programm aus? Zeichne dazu den gerichteten Graphen.</p>
-                <pre><code class="language-python">graph = {&quot;A&quot;: [&quot;B&quot;, &quot;C&quot;], &quot;B&quot;: [&quot;C&quot;], &quot;C&quot;: [&quot;A&quot;], &quot;D&quot;: [&quot;C&quot;]}
+                <pre class="ausfuehrbar"><code class="language-python">graph = {&quot;A&quot;: [&quot;B&quot;, &quot;C&quot;], &quot;B&quot;: [&quot;C&quot;], &quot;C&quot;: [&quot;A&quot;], &quot;D&quot;: [&quot;C&quot;]}
 
 
 def raetsel(graph):

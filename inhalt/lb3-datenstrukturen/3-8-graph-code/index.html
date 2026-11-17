@@ -28,6 +28,16 @@
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>3_graphen/graph.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>Graph</code> und die Methode <code>add_edge</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>g = Graph(5)</code> · <code>g.add_edge(0, 1)</code>. Danach committen, z.&nbsp;B. <code>3.8 Schritt 1: Graph, add_edge angelegt</code>.</p>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Nachbarlisten vorhersagen <span class="niveau">AFB I</span></summary>
+                <p>Was steht in <code>g.graph</code> nach <code>g = Graph(3)</code>, <code>g.add_edge(0, 2)</code> und <code>g.add_edge(2, 1)</code>? Warum wäre <code>[[]] * 3</code> statt der Komprehension keine gute Idee? (Probiere es aus: <code>a = [[]] * 3</code>, <code>a[0].append(1)</code>, <code>a</code>.)</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[[2], [2], [0, 1]]</code>. <code>[[]] * 3</code> enthält dreimal <em>dieselbe</em> Liste: Nach <code>a[0].append(1)</code> ist <code>a</code> gleich <code>[[1], [1], [1]]</code>. Die Komprehension erzeugt für jeden Knoten eine eigene Liste.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Zum Nachlesen: Matrix und Liste im Vergleich.</p>
 
 <h3>Darstellungen im Vergleich</h3>
@@ -96,7 +106,17 @@
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-8-1">Aufgabe 3.8.1</a> – Breitensuche von Hand im Beispielgraphen.</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Breitensuche an einem Viereck <span class="niveau">AFB I</span></summary>
+                <p>Ein Graph hat die Nachbarlisten 0: [1, 3] · 1: [0, 2] · 2: [1, 3] · 3: [0, 2]. Führe die Breitensuche ab 0 von Hand aus: Notiere nach jedem Entnehmen die Schlange. In welcher Reihenfolge werden die Knoten besucht?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>0 entnommen → Schlange [1, 3]; 1 entnommen → [3, 2]; 3 entnommen → [2] (0 und 2 sind schon entdeckt); 2 entnommen → []. Reihenfolge: 0, 1, 3, 2.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-8-1">Aufgabe 3.8.1</a> – Breitensuche von Hand im Beispielgraphen.</p>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: Die Methode bfs in Thonny →</a></p>
 
@@ -159,7 +179,22 @@ g.add_edge(2, 4)
 g.add_edge(1, 4)
 print(g.bfs(0))   # [0, 1, 2, 4] – Knoten 3 ist nicht erreichbar</code></pre>
 
-<p>Danach: <a href="uebungen.html#a-3-8-2">Aufgabe 3.8.2</a> – dieselbe Klasse mit einem Dictionary und Städtenamen.</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Die Queue vorhersagen <span class="niveau">AFB I</span></summary>
+                <p>Was gibt dieses Programmstück aus? Welches Element steht danach vorn, welches hinten?</p>
+                <pre><code class="language-python">q = Queue()
+q.enqueue(5)
+q.enqueue(7)
+q.enqueue(9)
+print(q.dequeue(), q.peek())</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>5 7</code> – die 5 kam zuerst und wird mit <code>dequeue</code> vorn entnommen. Danach steht die 7 vorn; <code>peek</code> zeigt sie, ohne sie zu entfernen. Hinten (zuletzt mit <code>enqueue</code> angestellt) steht die 9.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-8-2">Aufgabe 3.8.2</a> – dieselbe Klasse mit einem Dictionary und Städtenamen.</p>
 
 <p><a href="#schritt-4">Weiter mit Schritt 4: bfs Schritt für Schritt →</a></p>
 
@@ -171,6 +206,16 @@ print(g.bfs(0))   # [0, 1, 2, 4] – Knoten 3 ist nicht erreichbar</code></pre>
             <div class="lp-video"><video controls preload="none" poster="../vid/3-8-4_bfs_schritte_vorschau.png" src="../vid/3-8-4_bfs_schritte.mp4"></video><a href="../vid/3-8-4_bfs_schritte.mp4">Video ansehen</a></div>
             <figcaption>Video 4: <code>bfs</code> Schritt für Schritt (ca. 1,5 min)</figcaption>
         </figure>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Zu spät markiert <span class="niveau">AFB II</span></summary>
+                <p>Jemand setzt <code>visited[...] = True</code> erst direkt nach <code>current = queue.dequeue()</code> (für <code>current</code>) und nicht mehr beim Einreihen der Nachbarn. Was passiert dann bei <code>g.bfs(0)</code> im Beispielgraphen? Verfolge die Schlange zwei, drei Runden lang.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Knoten kommen mehrfach in die Schlange: Nach 0 ist sie <code>[1, 2]</code>, nach 1 schon <code>[2, 2, 4]</code>, weil 2 noch nicht markiert ist. Die Reihenfolge wird <code>[0, 1, 2, 2, 4, 4, 4]</code> – Knoten werden mehrfach besucht. Wer beim Einreihen markiert, stellt jeden Knoten nur einmal an.</p>
+                </details>
+            </details>
+        </div>
 
 <p>Danach: <a href="uebungen.html#a-3-8-3">Aufgabe 3.8.3</a> – eine rekursive Tiefensuche im Vergleich.</p>
 
@@ -259,6 +304,16 @@ print(kuerzester_weg(g, 0, 4))   # [0, 1, 4]</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Was kostet <code>pop(0)</code> im Stern? <span class="niveau">AFB II</span></summary>
+                <p>Ein Graph hat 10&nbsp;001 Knoten: Knoten 0 ist mit allen anderen verbunden, sonst gibt es keine Kanten. Wie viele Elemente rücken bei <code>bfs_liste(0)</code> insgesamt nach? Und bei <code>bfs</code> mit der <code>Queue</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nach Knoten 0 stehen 10&nbsp;000 Knoten in der Schlange. Jedes <code>pop(0)</code> lässt die übrigen nachrücken: 9&nbsp;999 + 9&nbsp;998 + … + 1 + 0 = 9&nbsp;999 · 10&nbsp;000 / 2, also rund 50 Millionen Verschiebungen – O(Knoten²). Mit der <code>Queue</code> rückt nichts nach: 10&nbsp;001-mal <code>dequeue</code> in O(1), dazu 20&nbsp;000 Nachbar-Einträge – O(Knoten + Kanten).</p>
+                </details>
+            </details>
+        </div>
+
 <div class="praxisbezug">
             <details>
                 <summary>Praxisbezug: Breitensuche im Alltag und im Beruf</summary>
@@ -279,22 +334,17 @@ print(kuerzester_weg(g, 0, 4))   # [0, 1, 4]</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-8-1">
             <details>
-                <summary>Kurz geprüft 1: Nachbarlisten vorhersagen <span class="niveau">AFB I</span></summary>
-                <p>Was steht in <code>g.graph</code> nach <code>g = Graph(3)</code>, <code>g.add_edge(0, 2)</code> und <code>g.add_edge(2, 1)</code>? Warum wäre <code>[[]] * 3</code> statt der Komprehension keine gute Idee? (Probiere es aus: <code>a = [[]] * 3</code>, <code>a[0].append(1)</code>, <code>a</code>.)</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>[[2], [2], [0, 1]]</code>. <code>[[]] * 3</code> enthält dreimal <em>dieselbe</em> Liste: Nach <code>a[0].append(1)</code> ist <code>a</code> gleich <code>[[1], [1], [1]]</code>. Die Komprehension erzeugt für jeden Knoten eine eigene Liste.</p>
-                </details>
+                <summary>Aufgabe 3.8.1: Breitensuche von Hand <span class="niveau">AFB I</span></summary>
+                <p>Ergänze im Beispielgraphen die Kante 3–4. Führe <code>bfs(3)</code> von Hand aus und notiere nach jedem Schritt den Inhalt der Schlange.</p>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-8-2">
             <details>
-                <summary>Kurz geprüft 2: Breitensuche an einem Viereck <span class="niveau">AFB I</span></summary>
-                <p>Ein Graph hat die Nachbarlisten 0: [1, 3] · 1: [0, 2] · 2: [1, 3] · 3: [0, 2]. Führe die Breitensuche ab 0 von Hand aus: Notiere nach jedem Entnehmen die Schlange. In welcher Reihenfolge werden die Knoten besucht?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>0 entnommen → Schlange [1, 3]; 1 entnommen → [3, 2]; 3 entnommen → [2] (0 und 2 sind schon entdeckt); 2 entnommen → []. Reihenfolge: 0, 1, 3, 2.</p>
-                </details>
+                <summary>Aufgabe 3.8.2: Graph mit Namen <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/namens_graph.py</code> – neu anlegen; Vorlage ist deine Klasse aus <code>graph.py</code><br><strong>Commits:</strong> wenn es läuft: <code>3.8.2: Graph mit Dictionary und Namen, bfs ab Dresden</code></p>
+                <p>Schreibe die Klasse so um, dass sie ein Dictionary verwendet und die Knoten Namen tragen (z.&nbsp;B. Städte). Teste mit Dresden–Leipzig, Dresden–Chemnitz, Chemnitz–Zwickau, Leipzig–Halle und führe eine Breitensuche ab Dresden durch.</p>
             </details>
         </div>

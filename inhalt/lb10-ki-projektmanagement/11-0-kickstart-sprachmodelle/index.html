@@ -71,7 +71,7 @@ solange das Modell nicht das Ende-Token wählt:
             </ol>
             <p><strong>Ergebnis:</strong> „informatikerin“ → <code>informat | iker | in</code> → IDs <code>[0, 2, 5]</code>, also 3 Tokens für 14 Buchstaben.</p>
             <p><strong>Kontrolle:</strong> Hängt man die Tokens wieder aneinander, entsteht genau das Ausgangswort. Zum Vergleich: Das Wort „spielerin“ kommt im Vokabular kaum vor und wird zu <code>s | p | i | e | l | er | in</code>, also 7 Tokens für 9 Buchstaben.</p>
-            <pre><code class="language-python">vokabular = ["informat", "inform", "iker", "ik", "er", "in", "atik", "ung"]
+            <pre class="ausfuehrbar"><code class="language-python">vokabular = ["informat", "inform", "iker", "ik", "er", "in", "atik", "ung"]
 for buchstabe in "abcdefghijklmnopqrstuvwxyzäöüß":
     vokabular.append(buchstabe)        # IDs 8 bis 37
 
@@ -140,7 +140,7 @@ print(tokenisiere("c3po", vokabular))             # ['c', '&lt;unbekannt&gt;', '
             </ol>
             <p><strong>Ergebnis:</strong> „Katze“ ist „Hund“ deutlich ähnlicher (0,985) als „Auto“ (0,311).</p>
             <p><strong>Kontrolle:</strong> cos(Hund, Hund) = 1,01 / (1,005 · 1,005) = 1, wie es für identische Vektoren sein muss. In echten Modellen haben die einzelnen Zahlen keine einfache Bedeutung wie „ist ein Tier“; nur die Richtung im hochdimensionalen Raum zählt.</p>
-            <pre><code class="language-python">import math
+            <pre class="ausfuehrbar"><code class="language-python">import math
 
 def kosinus(a, b):
     skalar = 0
@@ -227,7 +227,7 @@ print(round(kosinus(hund, hund), 3))    # 1.0</code></pre>
             </table>
             <p><strong>Ergebnis:</strong> Greedy wählt in allen drei Fällen „Dresden“. Mit Sampling erscheint „Dresden“ bei T = 0,5 in etwa 94 von 100 Durchläufen, bei T = 2 nur noch in etwa 50 von 100; in etwa 11 von 100 Durchläufen steht dann sogar „Die Landeshauptstadt von Sachsen ist schön“.</p>
             <p><strong>Kontrolle:</strong> Jede Spalte ergibt (bis auf Rundung) 1. Die beiden Verluste unterscheiden sich um 1,804 − 0,304 = 1,5, genau den Abstand der Logits von Dresden und Leipzig. Das muss so sein, weil −ln p<sub>i</sub> = −z<sub>i</sub> + ln(Summe) gilt und die Summe für beide gleich ist.</p>
-            <pre><code class="language-python">import math
+            <pre class="ausfuehrbar"><code class="language-python">import math
 import random
 
 def softmax(logits, temperatur=1.0):

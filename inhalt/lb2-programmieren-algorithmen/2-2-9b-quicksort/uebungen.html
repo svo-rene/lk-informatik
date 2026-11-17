@@ -1,60 +1,6 @@
 <script src="../sortierlabor.js" defer></script>
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Der schlechteste Fall <span class="niveau">AFB II</span></summary>
-                <p>Eine Liste ist <em>absteigend</em> sortiert, z.&nbsp;B. [8, 7, 6, 5, 4, 3, 2, 1], Pivot ist die letzte Zahl. Ist das auch ein schlechter Fall? Wie viele Vergleiche sind es? Prüfe deine Vermutung im Labor.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Ja. Das letzte Element ist jetzt immer das <em>kleinste</em>: <code>kleiner</code> ist leer, <code>groesser</code> enthält alle übrigen. Wieder wird jeder Aufruf nur um eins kleiner: 8 + 7 + … + 2 = 35 Vergleiche, n Ebenen, O(n²).</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Einmal partitionieren <span class="niveau">AFB II</span></summary>
-                <p>Partitioniere [7, 2, 9, 4, 1, 5] (links = 0, rechts = 5) von Hand. Wie sieht die Liste danach aus, welchen Wert gibt <code>partitioniere</code> zurück, und wie oft wird wirklich getauscht (zwei verschiedene Plätze)?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Pivot 5, grenze = 0. j = 0: 7 &lt; 5 nein. j = 1: 2 &lt; 5 ja → tausche 0 und 1: [2, 7, 9, 4, 1, 5], grenze = 1. j = 2: 9 nein. j = 3: 4 ja → tausche 1 und 3: [2, 4, 9, 7, 1, 5], grenze = 2. j = 4: 1 ja → tausche 2 und 4: [2, 4, 1, 7, 9, 5], grenze = 3. Zum Schluss Pivot an Platz 3: [2, 4, 1, 5, 9, 7]. Rückgabe 3, 4 echte Vertauschungen, 5 Vergleiche.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 5: Wer gewinnt wann? <span class="niveau">AFB II</span></summary>
-                <p>Lass das Wettrennen mit n = 40 einmal „zufällig“ und einmal „schon sortiert“ laufen. Welches Verfahren gewinnt jeweils, und welches fällt bei „schon sortiert“ zurück? Erkläre beides.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Zufällig: Mergesort und Quicksort liegen weit vorn, die drei einfachen Verfahren brauchen ein Vielfaches an Vergleichen. Schon sortiert: Bubblesort und Insertionsort gewinnen mit n − 1 = 39 Vergleichen (ein Durchlauf, nie getauscht), Mergesort bleibt gut, Quicksort mit der letzten Zahl als Pivot fällt mit 40 · 39 / 2 = 780 Vergleichen auf das Niveau von Selectionsort zurück – das Pivot ist immer das größte Element.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-2-2-9b-1">
-            <details>
-                <summary>Aufgabe 2.2.9b.1: Quicksort mit den Karten <span class="niveau">AFB II</span></summary>
-                <p>Spielt die Station Quicksort (Kasten „Mit den Karten“ oben) mit 8 Karten.</p>
-                <ol>
-                    <li>Sortiert gut gemischte Karten und führt eine Strichliste der Vergleiche, getrennt nach Aufrufen. Zeichnet den Baum der Aufrufe auf (wie im Labor).</li>
-                    <li>Legt die Karten aufsteigend sortiert hin und spielt noch einmal. Vergleicht Strichliste und Baum mit Teil 1.</li>
-                    <li>Überlegt euch eine Regel für die Wahl des Pivots, die mit verdeckten Karten funktioniert und den Fall aus Teil 2 vermeidet. Probiert sie aus.</li>
-                </ol>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-2-2-9b-2">
-            <details>
-                <summary>Aufgabe 2.2.9b.2: Quicksort programmieren und testen <span class="niveau">AFB I–II</span></summary>
-                <ol>
-                    <li>Schreibe die Funktion <code>quicksort(liste)</code> aus Schritt 2 – möglichst ohne abzuschreiben: erst den Basisfall, dann das Aufteilen, dann den rekursiven Teil.</li>
-                    <li>Teste mit allen Testfällen aus Beispiel 1 (Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe) und mit 100 Zufallslisten, deren Ergebnis du mit <code>sorted()</code> vergleichst.</li>
-                    <li>Baue eine globale Zählvariable ein oder gib die Zahl der Vergleiche aus. Vergleiche für n = 8 mit dem Labor.</li>
-                    <li>Ändere die Pivotwahl auf das mittlere Element (<code>liste[len(liste) // 2]</code>) und zähle für eine sortierte Liste mit 100 Zahlen beide Varianten.</li>
-                </ol>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-2-2-9b-3">
             <details>
                 <summary>Aufgabe 2.2.9b.3: Partitionieren von Hand und im Code <span class="niveau">AFB II</span></summary>

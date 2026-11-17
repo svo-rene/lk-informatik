@@ -48,7 +48,7 @@ Adjazenzliste (in der Reihenfolge, in der die Kanten eingefügt werden):
 3: [2, 4]
 4: [3, 2]</code></pre>
 
-        <pre><code class="language-python">class Graph:
+        <pre class="ausfuehrbar"><code class="language-python">class Graph:
     def __init__(self, size):
         self.size = size
         self.graph = []
@@ -96,6 +96,30 @@ else:
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Zweimal zurück <span class="niveau">AFB I</span></summary>
+                <p>Ein Graph hat die Nachbarlisten 0: [1, 3] · 1: [0, 2] · 2: [1] · 3: [0]. Gesucht ist ein Weg von 0 nach 3; die Nachbarn werden in der Reihenfolge der Liste probiert und Knoten im Pfad übersprungen. Notiere die Pfade, die nacheinander entstehen. Wo wird zurückgegangen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>[0] → [0, 1] → [0, 1, 2]. Von 2 aus ist nur 1 erreichbar, und die ist schon im Pfad: Sackgasse, zurück zu 1. Auch 1 hat keine weitere Möglichkeit: zurück zu 0. Dann [0, 3] – Ziel. Zurückgegangen wird also zweimal.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Neue Liste oder dieselbe? <span class="niveau">AFB I</span></summary>
+                <p>Was gibt <code>print(a, path)</code> aus? Überlege erst, dann probiere es in Thonny aus. Warum verwendet <code>find_path</code> <code>path = path + [start]</code> und nicht <code>path.append(start)</code>?</p>
+                <pre class="ausfuehrbar"><code class="language-python">path = [0]
+a = path + [1]
+path.append(5)
+print(a, path)</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[0, 1] [0, 5]</code> – <code>+</code> erzeugt eine neue Liste, <code>append</code> ändert die vorhandene. Mit <code>append</code> würden alle Aufrufe dieselbe Liste verändern: Nach einer Sackgasse stünde der Knoten noch im Pfad des Aufrufers.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 3.10.1 – alle Aufrufe von <code>find_path(0, 4)</code> notieren.</p>
 
 <h2 id="schritt-2">Schritt 2: Belegungsprobleme – der Baum entsteht beim Suchen</h2>
@@ -132,7 +156,7 @@ else:
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Klausurtermine planen</summary>
             <p><strong>Ausgangssituation:</strong> Fünf Kurse sollen ihre Klausur in derselben Woche schreiben, zur Verfügung stehen nur Montag, Dienstag und Mittwoch. Zwei Kurse, die gemeinsame Schülerinnen oder Schüler haben, stehen „in Konflikt“ und dürfen nicht am selben Tag schreiben. Mathematik (Ma) schreiben alle, außerdem gibt es Konflikte zwischen Physik (Ph) und Deutsch (De), Informatik (Inf) und Englisch (En) sowie Deutsch und Englisch. Das ist ein Belegungsproblem: Die <strong>Plätze</strong> sind die Kurse, die <strong>Kandidaten</strong> die Tage, die <strong>Regel</strong> lautet „kein Konfliktkurs am selben Tag“. Als Graph betrachtet: Kurse sind Knoten, Konflikte sind Kanten, und benachbarte Knoten brauchen verschiedene „Farben“.</p>
-            <pre><code class="language-python">KONFLIKTE = {
+            <pre class="ausfuehrbar"><code class="language-python">KONFLIKTE = {
     "Ma":  ["Ph", "Inf", "De", "En"],
     "Ph":  ["Ma", "De"],
     "Inf": ["Ma", "En"],
@@ -200,6 +224,16 @@ print(plan)
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Wenn es keine Lösung gibt <span class="niveau">AFB II</span></summary>
+                <p>Drei Kurse X, Y und Z stehen paarweise in Konflikt, es gibt nur die Termine Mo und Di. <code>plane</code> wird mit der Reihenfolge X, Y, Z aufgerufen. Verfolge den Ablauf: Was gibt <code>plane</code> zurück, und wie oft wird es insgesamt aufgerufen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Aufruf 1: X Mo. Aufruf 2: Y Mo verboten, Y Di. Aufruf 3: Z – Mo und Di verboten, <code>False</code>. Y hat keinen weiteren Tag: Rücknahme, <code>False</code>. X wird zurückgenommen und bekommt Di. Aufruf 4: Y Mo. Aufruf 5: Z – Mo und Di verboten, <code>False</code>; Y Di ist verboten, also <code>False</code>; X hat keinen Tag mehr. Ergebnis: <code>False</code> nach 5 Aufrufen – drei paarweise verbundene Kurse brauchen drei Tage.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 3.10.2 – das N-Damen-Problem nach demselben Muster.</p>
 
 <div class="praxisbezug">
@@ -232,26 +266,29 @@ print(plan)
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-10-1">
             <details>
-                <summary>Kurz geprüft 1: Zweimal zurück <span class="niveau">AFB I</span></summary>
-                <p>Ein Graph hat die Nachbarlisten 0: [1, 3] · 1: [0, 2] · 2: [1] · 3: [0]. Gesucht ist ein Weg von 0 nach 3; die Nachbarn werden in der Reihenfolge der Liste probiert und Knoten im Pfad übersprungen. Notiere die Pfade, die nacheinander entstehen. Wo wird zurückgegangen?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>[0] → [0, 1] → [0, 1, 2]. Von 2 aus ist nur 1 erreichbar, und die ist schon im Pfad: Sackgasse, zurück zu 1. Auch 1 hat keine weitere Möglichkeit: zurück zu 0. Dann [0, 3] – Ziel. Zurückgegangen wird also zweimal.</p>
-                </details>
+                <summary>Aufgabe 3.10.1: Wegsuche nachvollziehen <span class="niveau">AFB I–II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/wegsuche.py</code> – weiterführen<br><strong>Commits:</strong> nach Teil 3: <code>3.10.1 Teil 3: alle Wege von 0 nach 4, kürzester bestimmt</code></p>
+                <ol>
+                    <li>Zeichne den Graphen und notiere alle Aufrufe von <code>find_path(0, 4)</code> mit dem jeweiligen Pfad. Markiere die Stelle, an der zurückgegangen wird.</li>
+                    <li>Gib an, welchen Weg <code>find_path(1, 3)</code> liefert.</li>
+                    <li>Ändere das Programm so, dass <strong>alle</strong> Wege von 0 nach 4 ausgegeben werden, und bestimme daraus den kürzesten.</li>
+                </ol>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-10-2">
             <details>
-                <summary>Kurz geprüft 2: Neue Liste oder dieselbe? <span class="niveau">AFB I</span></summary>
-                <p>Was gibt <code>print(a, path)</code> aus? Überlege erst, dann probiere es in Thonny aus. Warum verwendet <code>find_path</code> <code>path = path + [start]</code> und nicht <code>path.append(start)</code>?</p>
-                <pre><code class="language-python">path = [0]
-a = path + [1]
-path.append(5)
-print(a, path)</code></pre>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>[0, 1] [0, 5]</code> – <code>+</code> erzeugt eine neue Liste, <code>append</code> ändert die vorhandene. Mit <code>append</code> würden alle Aufrufe dieselbe Liste verändern: Nach einer Sackgasse stünde der Knoten noch im Pfad des Aufrufers.</p>
-                </details>
+                <summary>Aufgabe 3.10.2: Das N-Damen-Problem <span class="niveau">AFB II–III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/n_damen.py</code> – neu anlegen<br><strong>Commits:</strong> nach Teil 3: <code>3.10.2 Teil 3: dame_moeglich und setze_damen</code> · nach Teil 4: <code>3.10.2 Teil 4: Aufrufe für N = 3, 4, 6, 8 gezählt</code></p>
+                <p>Auf einem N×N-Schachbrett sollen N Damen so stehen, dass sich keine zwei bedrohen. Eine Dame bedroht alle Felder in ihrer Zeile, Spalte und in beiden Diagonalen.</p>
+                <ol>
+                    <li>Löse das Problem für N = 4 auf Papier und zeichne den Suchbaum bis zur ersten Lösung.</li>
+                    <li>Speichere den Zustand als Liste <code>spalten</code>, bei der <code>spalten[z]</code> die Spalte der Dame in Zeile z angibt. Begründe, warum diese Darstellung die Zeilenregel automatisch erfüllt.</li>
+                    <li>Implementiere <code>dame_moeglich(spalten, zeile, spalte)</code> und <code>setze_damen(spalten, zeile, n)</code>.</li>
+                    <li>Teste für N = 3, 4, 6 und 8. Zähle jeweils die rekursiven Aufrufe.</li>
+                    <li>Vergleiche mit einem Programm, das alle 8<sup>8</sup> Belegungen mit einer Dame pro Zeile durchprobiert.</li>
+                </ol>
             </details>
         </div>

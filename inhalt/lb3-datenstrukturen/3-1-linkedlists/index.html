@@ -35,6 +35,16 @@
             <figcaption>Video 1: Was ist eine verkettete Liste? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
         </figure>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Kästchen und Pfeile <span class="niveau">AFB I</span></summary>
+                <p>Eine verkettete Liste enthält die Werte 7, 4 und 9 in dieser Reihenfolge. Zeichne sie als Kästchen mit Pfeilen. Worauf zeigt <code>head</code>? Was steht im <code>next</code>-Feld des Knotens mit der 9?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>head</code> → [7|•] → [4|•] → [9|None]. <code>head</code> zeigt auf den Knoten mit der 7, im <code>next</code>-Feld des Knotens mit der 9 steht <code>None</code>, weil er der letzte ist.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-2">Weiter mit Schritt 2: Die Klasse Node →</a></p>
 
 <h2 id="schritt-2">Schritt 2: Die Klasse <code>Node</code></h2>
@@ -59,7 +69,7 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Eine Liste mit drei Knoten „von Hand“ verketten</summary>
             <p><strong>Ausgangssituation:</strong> Die Werte 1, 2 und 3 sollen so gespeichert werden, dass man vom ersten Wert aus alle anderen erreicht – wie bei der Schnitzeljagd. Es gibt noch keine Listen-Klasse, sondern nur die Knoten-Klasse <code>Node</code>.</p>
-            <pre><code class="language-python">class Node:
+            <pre class="ausfuehrbar"><code class="language-python">class Node:
     def __init__(self, data):
         self.data = data
         self.next = None      # Verweis auf den nächsten Knoten
@@ -100,6 +110,16 @@ node1 → [1|•] → [2|•] → [3|None] ← node3</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Pfeilen folgen <span class="niveau">AFB I</span></summary>
+                <p>In Thonny wird eingegeben: <code>a = Node("x")</code>, <code>b = Node("y")</code>, <code>b.next = a</code>. Was geben <code>print(b.next.data)</code> und <code>print(a.next)</code> aus? Was passiert bei <code>print(a.next.data)</code>? Überlege erst, dann probiere es aus.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>b.next.data</code> ist <code>x</code>, denn <code>b.next</code> zeigt auf den Knoten <code>a</code>. <code>a.next</code> ist <code>None</code>. <code>a.next.data</code> löst einen <code>AttributeError</code> aus, weil <code>None</code> kein Attribut <code>data</code> hat.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-3">Weiter mit Schritt 3: Anhängen mit append →</a></p>
 
 <h2 id="schritt-3">Schritt 3: Anhängen mit <code>append</code></h2>
@@ -112,6 +132,16 @@ node1 → [1|•] → [2|•] → [3|None] ← node3</code></pre>
         </figure>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Klasse <code>LinkedList</code> und die Methode <code>append</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>liste = LinkedList()</code> · <code>liste.append(1)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 3: LinkedList, append ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Wie weit läuft current? <span class="niveau">AFB I</span></summary>
+                <p>Eine Liste hat 5 Knoten. Wie oft wird beim nächsten <code>append</code> die Zeile <code>current = current.next</code> ausgeführt? Und warum braucht <code>append</code> den Fall <code>if self.head is None</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>4-mal: <code>current</code> startet beim 1. Knoten und muss bis zum 5. weiterlaufen. Bei einer leeren Liste gibt es keinen letzten Knoten – <code>current</code> wäre <code>None</code> und <code>current.next</code> würde einen <code>AttributeError</code> auslösen. Deshalb wird der neue Knoten dann direkt zum <code>head</code>.</p>
+                </details>
+            </details>
+        </div>
 
 <p><a href="#schritt-4">Weiter mit Schritt 4: Durchlaufen und Suchen →</a></p>
 
@@ -126,7 +156,17 @@ node1 → [1|•] → [2|•] → [3|None] ← node3</code></pre>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Methode <code>display</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>liste.display()</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 4: display ergänzt</code>.</p>
 
-<p>Danach: <a href="uebungen.html#a-3-1-1">Aufgabe 3.1.1</a> – eine fehlerhafte Ausgabemethode, die genau gegen diese Regel verstößt.</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Zwei Schleifen im Vergleich <span class="niveau">AFB I</span></summary>
+                <p>In <code>display</code> lautet die Schleife <code>while current is not None</code>, in <code>append</code> dagegen <code>while current.next is not None</code>. Erkläre den Unterschied in einem Satz.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>display</code> muss jeden Knoten verarbeiten, auch den letzten – also läuft <code>current</code> bis hinter das Ende (<code>None</code>). <code>append</code> muss <em>auf</em> dem letzten Knoten stehen bleiben, um dort anzuhängen.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-1-1">Aufgabe 3.1.1</a> – eine fehlerhafte Ausgabemethode, die genau gegen diese Regel verstößt.</p>
 
 <p><a href="#schritt-5">Weiter mit Schritt 5: Einfügen am Anfang →</a></p>
 
@@ -141,6 +181,16 @@ node1 → [1|•] → [2|•] → [3|None] ← node3</code></pre>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Methode <code>insert_at_start</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>liste.insert_at_start(0)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 5: insert_at_start ergänzt</code>.</p>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Vertauschte Zeilen <span class="niveau">AFB II</span></summary>
+                <p>Ein Mitschüler schreibt in <code>insert_at_start</code> zuerst <code>self.head = neu</code> und danach <code>neu.next = self.head</code>. Zeichne, was mit der Liste 1 → 2 passiert, wenn er <code>insert_at_start(0)</code> aufruft.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nach <code>self.head = neu</code> zeigt <code>head</code> auf den neuen Knoten 0. Dann setzt <code>neu.next = self.head</code> den Verweis von 0 auf … 0 selbst. Die Knoten 1 und 2 sind nicht mehr erreichbar, und <code>display</code> würde endlos 0 ausgeben.</p>
+                </details>
+            </details>
+        </div>
+
 <div class="hinweis">
             <details>
                 <summary>Hinweis: Verweise selbst umhängen</summary>
@@ -148,7 +198,7 @@ node1 → [1|•] → [2|•] → [3|None] ← node3</code></pre>
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-1-2">Aufgabe 3.1.2</a> – eigene Methoden zum Durchlaufen und Einfügen.</p>
+<p>Danach: <a href="#a-3-1-2">Aufgabe 3.1.2</a> – eigene Methoden zum Durchlaufen und Einfügen.</p>
 
 <p><a href="#schritt-6">Weiter mit Schritt 6: Löschen →</a></p>
 
@@ -162,6 +212,16 @@ node1 → [1|•] → [2|•] → [3|None] ← node3</code></pre>
         </figure>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Methode <code>delete</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>liste.delete(2)</code> · <code>liste.delete(0)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 6: delete ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 6: Wo steht current? <span class="niveau">AFB I</span></summary>
+                <p>Die Liste ist 4 → 8 → 15. Auf welchem Knoten steht <code>current</code>, wenn <code>delete(15)</code> den Verweis umsetzt? Welcher Verweis ändert sich, und worauf zeigt er danach?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>current</code> steht auf dem Knoten 8, denn <code>current.next.data</code> ist dort 15. Das <code>next</code> von 8 zeigt danach auf <code>current.next.next</code>, also auf <code>None</code> – die 8 ist jetzt der letzte Knoten.</p>
+                </details>
+            </details>
+        </div>
 
 <div class="hinweis">
             <details>
@@ -308,22 +368,29 @@ delete(2):            current = [1|•], current.next ist der Knoten mit 2
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-1-1">
             <details>
-                <summary>Kurz geprüft 1: Kästchen und Pfeile <span class="niveau">AFB I</span></summary>
-                <p>Eine verkettete Liste enthält die Werte 7, 4 und 9 in dieser Reihenfolge. Zeichne sie als Kästchen mit Pfeilen. Worauf zeigt <code>head</code>? Was steht im <code>next</code>-Feld des Knotens mit der 9?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>head</code> → [7|•] → [4|•] → [9|None]. <code>head</code> zeigt auf den Knoten mit der 7, im <code>next</code>-Feld des Knotens mit der 9 steht <code>None</code>, weil er der letzte ist.</p>
-                </details>
+                <summary>Aufgabe 3.1.1: Fehler finden <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/verkettete_liste.py</code> – weiterführen; füge die Methode zum Ausprobieren in deine Klasse <code>LinkedList</code> ein (<code>nextNode</code> heißt bei dir <code>next</code>)<br><strong>Commits:</strong> <code>3.1.1: fehlerhaftes print_ll zum Testen eingefügt</code> · nach der Korrektur: <code>3.1.1: print_ll korrigiert und getestet</code></p>
+                <p>Eine frühere Version der Ausgabemethode sah so aus:</p>
+                <pre><code class="language-python">def print_ll(self):
+    ll_str = ""
+    while self.head:
+        ll_str = ll_str + self.head.data + "---&gt;"
+        self.head = self.head.nextNode
+    print(ll_str)</code></pre>
+                <p>Erkläre, was nach einem Aufruf von <code>print_ll()</code> mit der Liste passiert, und korrigiere die Methode.</p>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-1-2">
             <details>
-                <summary>Kurz geprüft 2: Pfeilen folgen <span class="niveau">AFB I</span></summary>
-                <p>In Thonny wird eingegeben: <code>a = Node("x")</code>, <code>b = Node("y")</code>, <code>b.next = a</code>. Was geben <code>print(b.next.data)</code> und <code>print(a.next)</code> aus? Was passiert bei <code>print(a.next.data)</code>? Überlege erst, dann probiere es aus.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>b.next.data</code> ist <code>x</code>, denn <code>b.next</code> zeigt auf den Knoten <code>a</code>. <code>a.next</code> ist <code>None</code>. <code>a.next.data</code> löst einen <code>AttributeError</code> aus, weil <code>None</code> kein Attribut <code>data</code> hat.</p>
-                </details>
+                <summary>Aufgabe 3.1.2: Liste erweitern <span class="niveau">AFB II–III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/verkettete_liste.py</code> – weiterführen; Testfälle in <code>1_listen/test_verkettete_liste.py</code><br><strong>Commits:</strong> nach Teil 1: <code>3.1.2 Teil 1: laenge und enthaelt ergänzt, Tests ok</code> · nach Teil 2: <code>3.1.2 Teil 2: insert_after ergänzt, Tests ok</code> · nur wenn du Teil 3 programmierst: <code>3.1.2 Teil 3: append in O(1), alle Tests weiter ok</code></p>
+                <ol>
+                    <li>Ergänze die Methoden <code>laenge()</code> und <code>enthaelt(data)</code>.</li>
+                    <li>Ergänze <code>insert_after(ziel, data)</code>, die einen neuen Knoten hinter dem ersten Knoten mit dem Wert <code>ziel</code> einfügt.</li>
+                    <li>Das Anhängen mit <code>append</code> liegt in O(n). Schlage eine Änderung der Klasse vor, mit der es in O(1) gelingt, und beurteile den Nachteil.</li>
+                </ol>
             </details>
         </div>

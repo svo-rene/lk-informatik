@@ -19,41 +19,6 @@
         </details>
     </div>
 
-<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
-
-<div class="aufgabe">
-        <details>
-            <summary>Kurz geprüft 3: Die Lampe übersetzen <span class="niveau">AFB I–II</span></summary>
-            <p>Ein Klassendiagramm <code>Lampe</code> hat die Attribute <code>ort: string</code> und <code>an: bool</code> sowie die Methoden <code>Lampe(ort: string)</code> und <code>schalten(): void</code>. Gib die Kopfzeilen der Klasse und der beiden Methoden in Python an. Was muss in <code>__init__</code> mit dem Attribut <code>an</code> geschehen?</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p><code>class Lampe:</code>, <code>def __init__(self, ort):</code> und <code>def schalten(self):</code>. <code>schalten</code> braucht kein <code>return</code> (<code>void</code>). Da <code>an</code> kein Parameter des Konstruktors ist, bekommt es in <code>__init__</code> einen festen Startwert, z.&nbsp;B. <code>self.an = False</code>.</p>
-            </details>
-        </details>
-    </div>
-
-<div class="aufgabe" id="a-4-3-1">
-        <details>
-            <summary>Aufgabe 4.3.1: Klasse oder Objekt? <span class="niveau">AFB I</span></summary>
-            <p>Entscheide jeweils, ob eher eine Klasse oder ein Objekt beschrieben wird: (a) Auto, (b) der rote VW mit dem Kennzeichen DD-IN 2026, (c) Schüler, (d) Lea aus dem Informatik-LK, (e) Buch „1984“ in der Schulbibliothek mit der Signatur B-117.</p>
-        </details>
-    </div>
-
-<div class="aufgabe" id="a-4-3-2">
-        <details>
-            <summary>Aufgabe 4.3.2: Baue eine eigene Klasse <span class="niveau">AFB II</span></summary>
-            <p>Überlege dir eine eigene Klasse, z.&nbsp;B. <code>Auto</code>, <code>Buch</code>, <code>Spieler</code> oder etwas aus deinem Alltag.</p>
-            <ul>
-                <li>Welche Attribute soll deine Klasse haben?</li>
-                <li>Welche Methoden könnte sie besitzen?</li>
-            </ul>
-            <ol>
-                <li>Erstelle ein Klassendiagramm in GoodNotes oder auf <a href="https://app.diagrams.net/" target="_blank">draw.io</a>.</li>
-                <li>Schreib die Klasse in Python und erzeuge ein bis zwei Objekte davon.</li>
-                <li>Lass eine Methode aufrufen und beobachte die Ausgabe. Zeichne zu einem Objekt das Objektdiagramm.</li>
-            </ol>
-        </details>
-    </div>
-
 <h2 id="zum-ueben">Zum Üben zu Hause</h2>
 
 <div class="aufgabe" id="a-4-3-3">
@@ -84,7 +49,7 @@
         <details>
             <summary>Aufgabe 4.3.4: Zwischen UML und Code übersetzen <span class="niveau">AFB II</span></summary>
             <p><strong>a) Code → UML:</strong> Die Mensa verwaltet ihre Gerichte mit dieser Klasse (Preise in Cent):</p>
-            <pre><code class="language-python">class Gericht:
+            <pre class="ausfuehrbar"><code class="language-python">class Gericht:
     def __init__(self, name, preis, vegetarisch):
         self.name = name
         self.preis = preis

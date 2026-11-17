@@ -20,7 +20,7 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> Variablen aus <code>if</code> und <code>for</code> gelten auch danach</p>
-            <pre><code class="language-python">for i in range(3):
+            <pre class="ausfuehrbar"><code class="language-python">for i in range(3):
     quadrat = i * i
 if quadrat &gt; 0:
     meldung = "positiv"
@@ -47,7 +47,7 @@ print(i, quadrat, meldung)   # 2 4 positiv – kein eigener Gültigkeitsbereich<
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> lokale, globale und mit <code>global</code> gekennzeichnete Variablen</p>
-            <pre><code class="language-python">global_var_1 = 5
+            <pre class="ausfuehrbar"><code class="language-python">global_var_1 = 5
 global_var_2 = 10
 
 def irgendeine_funktion():

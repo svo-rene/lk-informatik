@@ -190,7 +190,7 @@
                 <li><strong>Dynamik</strong> – Eine neue Nummer 7032 kommt einfach in Fach 2; nichts muss umsortiert werden. Eine sortierte Liste
                     mit binärer Suche wäre zwar auch schnell beim Suchen, müsste aber bei jedem Einfügen Elemente verschieben.</li>
             </ol>
-            <pre><code class="language-python">faecher = [[] for _ in range(10)]
+            <pre class="ausfuehrbar"><code class="language-python">faecher = [[] for _ in range(10)]
 for nr in [1013, 2027, 3550, 4021, 5117, 6048]:
     faecher[nr % 10].append(nr)
 print(faecher)
@@ -277,7 +277,7 @@ with open('temperatur_sensor.csv', newline='', encoding='utf-8') as datei:
                     vielen Rechnern dauern ungefähr gleich lang.</li>
             </ol>
             <p>Dasselbe Verfahren auf einem Rechner simuliert:</p>
-            <pre><code class="language-python">dokumente = ["Daten sind wertvoll", "Daten schützen Daten", "Schutz ist wertvoll"]
+            <pre class="ausfuehrbar"><code class="language-python">dokumente = ["Daten sind wertvoll", "Daten schützen Daten", "Schutz ist wertvoll"]
 
 def map_phase(text):
     return [(wort, 1) for wort in text.lower().split()]

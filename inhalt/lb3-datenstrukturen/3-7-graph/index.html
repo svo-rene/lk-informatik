@@ -51,7 +51,17 @@
 
 <p><strong>Zyklus:</strong> ein Weg, der am selben Knoten beginnt und endet und dabei keinen anderen Knoten mehrfach besucht.</p>
 
-<p>Danach: <a href="uebungen.html#a-3-7-1">Aufgabe 3.7.1</a> – dieselben Begriffe am Straßenbahnnetz (der Graph steht in Beispiel 2 in <a href="#schritt-3">Schritt 3</a>).</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Begriffe an einem kleinen Graphen <span class="niveau">AFB I</span></summary>
+                <p>Ein ungerichteter Graph hat die Kanten A–B, B–C, C–A und C–D. Zeichne ihn. Nenne die Nachbarn von C, einen Weg von A nach D mit der Länge 2 und einen Zyklus. Ist der Graph ein Baum?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nachbarn von C: A, B und D. Weg der Länge 2: A – C – D. Zyklus: A – B – C – A. Kein Baum, denn ein Baum hat keine Zyklen.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-7-1">Aufgabe 3.7.1</a> – dieselben Begriffe am Straßenbahnnetz (der Graph steht in Beispiel 2 in <a href="#schritt-3">Schritt 3</a>).</p>
 
 <p><a href="#schritt-2">Weiter mit Schritt 2: Adjazenzmatrix und Adjazenzliste →</a></p>
 
@@ -83,7 +93,17 @@
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-7-2">Aufgabe 3.7.2</a> – Matrix und Liste eines gerichteten Graphen, und <a href="uebungen.html#a-3-7-3">Aufgabe 3.7.3</a> – Matrix oder Liste für ein großes Straßennetz?</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Matrix und Liste aufstellen <span class="niveau">AFB I</span></summary>
+                <p>Ein ungerichteter Graph hat die Knoten 1, 2, 3, 4 und die Kanten 1–2, 1–3 und 3–4. Wie viele Einsen stehen in seiner Adjazenzmatrix? Gib die Adjazenzliste an.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>6 Einsen: 3 Kanten, jede steht zweimal in der Matrix (Zeile i, Spalte j und Zeile j, Spalte i). Adjazenzliste: 1: [2, 3] · 2: [1] · 3: [1, 4] · 4: [3].</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-7-2">Aufgabe 3.7.2</a> – Matrix und Liste eines gerichteten Graphen, und <a href="uebungen.html#a-3-7-3">Aufgabe 3.7.3</a> – Matrix oder Liste für ein großes Straßennetz?</p>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: Das Straßenbahnnetz in Python →</a></p>
 
@@ -108,7 +128,7 @@
        7               3
        |               |
    Altmarkt ----5---- Postplatz</code></pre>
-            <pre><code class="language-python">netz = {
+            <pre class="ausfuehrbar"><code class="language-python">netz = {
     "Neustadt":    {"Albertplatz": 4, "Altmarkt": 7},
     "Albertplatz": {"Neustadt": 4, "Pieschen": 6, "Postplatz": 3},
     "Pieschen":    {"Albertplatz": 6},
@@ -148,6 +168,20 @@ Postplatz [0, 3, 0, 5, 0]</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Abfragen vorhersagen <span class="niveau">AFB I</span></summary>
+                <p>Was liefern diese Eingaben für das Dictionary <code>netz</code> aus Beispiel 2? Überlege erst, dann probiere es in Thonny aus.</p>
+                <pre><code class="language-python">netz["Altmarkt"]["Postplatz"]
+list(netz["Pieschen"])
+"Pieschen" in netz["Neustadt"]
+netz["Neustadt"]["Pieschen"]</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>5</code> · <code>['Albertplatz']</code> · <code>False</code> (keine Kante von Neustadt nach Pieschen) · <code>KeyError: 'Pieschen'</code>, weil Neustadt keinen Schlüssel „Pieschen“ hat.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-4">Weiter mit Schritt 4: Vom Dictionary zur Matrix →</a></p>
 
 <h2 id="schritt-4">Schritt 4: Vom Dictionary zur Matrix</h2>
@@ -160,6 +194,16 @@ Postplatz [0, 3, 0, 5, 0]</code></pre>
         </figure>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>3_graphen/strassenbahn.py</code> den Code aus dem Video. Starte mit F5 und vergleiche die Ausgabe mit dem Video. Danach committen, z.&nbsp;B. <code>3.7 Schritt 4: Code aus dem Video ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Die Schleifen lesen <span class="niveau">AFB I</span></summary>
+                <p>Gegeben sind <code>g = {"A": {"B": 2}, "B": {"A": 2}, "C": {}}</code> und <code>namen = list(g)</code>. Welche Liste <code>zeile</code> entsteht in der inneren Schleife für <code>a = "A"</code>? Welche Matrix entsteht insgesamt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[0, 2, 0]</code> – die Zeile von A. Die ganze Matrix: <code>[[0, 2, 0], [2, 0, 0], [0, 0, 0]]</code>. C hat keine Kanten, deshalb ist seine Zeile (und Spalte) überall 0.</p>
+                </details>
+            </details>
+        </div>
 
 <p>Danach: <a href="uebungen.html#a-3-7-4">Aufgabe 3.7.4</a> – Wer folgt wem? Speichere einen gerichteten Graphen in Python.</p>
 
@@ -195,22 +239,16 @@ Postplatz [0, 3, 0, 5, 0]</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-7-1">
             <details>
-                <summary>Kurz geprüft 1: Begriffe an einem kleinen Graphen <span class="niveau">AFB I</span></summary>
-                <p>Ein ungerichteter Graph hat die Kanten A–B, B–C, C–A und C–D. Zeichne ihn. Nenne die Nachbarn von C, einen Weg von A nach D mit der Länge 2 und einen Zyklus. Ist der Graph ein Baum?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Nachbarn von C: A, B und D. Weg der Länge 2: A – C – D. Zyklus: A – B – C – A. Kein Baum, denn ein Baum hat keine Zyklen.</p>
-                </details>
+                <summary>Aufgabe 3.7.1: Begriffe anwenden <span class="niveau">AFB I</span></summary>
+                <p>Betrachte den Graphen im komplexeren Beispiel. Gib die Nachbarn von Postplatz an, einen Weg von Pieschen nach Altmarkt und dessen Länge sowie einen Zyklus.</p>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-7-2">
             <details>
-                <summary>Kurz geprüft 2: Matrix und Liste aufstellen <span class="niveau">AFB I</span></summary>
-                <p>Ein ungerichteter Graph hat die Knoten 1, 2, 3, 4 und die Kanten 1–2, 1–3 und 3–4. Wie viele Einsen stehen in seiner Adjazenzmatrix? Gib die Adjazenzliste an.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>6 Einsen: 3 Kanten, jede steht zweimal in der Matrix (Zeile i, Spalte j und Zeile j, Spalte i). Adjazenzliste: 1: [2, 3] · 2: [1] · 3: [1, 4] · 4: [3].</p>
-                </details>
+                <summary>Aufgabe 3.7.2: Adjazenzmatrix aufstellen <span class="niveau">AFB II</span></summary>
+                <p>Ein gerichteter Graph hat die Knoten A, B, C, D und die Kanten A→B, A→C, B→C, C→A und C→D. Stelle die Adjazenzmatrix und die Adjazenzliste auf. Begründe, warum die Matrix nicht symmetrisch ist, und gib an, von welchem Knoten aus man alle anderen erreichen kann.</p>
             </details>
         </div>

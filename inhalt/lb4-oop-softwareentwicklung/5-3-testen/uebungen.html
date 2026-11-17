@@ -1,59 +1,5 @@
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Was liefert die Hilfsfunktion? <span class="niveau">AFB I</span></summary>
-                <p>Was liefern <code>wirft_value_error(ist_unterpunktet, 0)</code> und <code>wirft_value_error(ist_unterpunktet, 99)</code>? Welchen Wert hat <code>argumente</code> jeweils innerhalb der Hilfsfunktion?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Bei 0 gibt es keinen Fehler (0 Punkte sind gültig), also <code>False</code>; <code>argumente</code> ist das Tupel <code>(0,)</code>. Bei 99 löst <code>ist_unterpunktet</code> einen <code>ValueError</code> aus, <code>except</code> fängt ihn ab, Ergebnis <code>True</code>; <code>argumente</code> ist <code>(99,)</code>.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Richtige Antwort, falscher Zustand <span class="niveau">AFB II</span></summary>
-                <p>Mit der <em>fehlerhaften</em> Klasse <code>Aufzug</code> aus Beispiel 2 wird ausgeführt: <code>a = Aufzug()</code>, dann <code>a.einsteigen(250)</code>, <code>a.einsteigen(250)</code>, <code>a.einsteigen(200)</code>. Was liefert der dritte Aufruf, und welche Werte haben danach <code>a.last()</code> und <code>a.personen()</code>? Was ergäbe sich mit der korrigierten Methode?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Fehlerhaft: Der dritte Aufruf liefert <code>False</code> (700 ≥ 630) – das ist richtig. Trotzdem sind <code>a.last()</code> = 700 und <code>a.personen()</code> = 3, weil vor der Prüfung erhöht wurde. Korrigiert: ebenfalls <code>False</code>, aber <code>a.last()</code> = 500 und <code>a.personen()</code> = 2. Nur ein Test, der auch den Zustand prüft, sieht den Unterschied.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-5-3-1">
-            <details>
-                <summary>Aufgabe 5.3.1: Äquivalenzklassen und Grenzwerte – der Lesewettbewerb <span class="niveau">AFB I–II</span></summary>
-                <p>Beim Lesewettbewerb der Unterstufe gibt es für jedes gelesene Buch Punkte nach seiner Seitenzahl: unter 100 Seiten 1 Punkt, 100 bis 299 Seiten 2 Punkte, ab 300 Seiten 3 Punkte. Seitenzahlen unter 1 oder über 2000 sind Tippfehler (<code>ValueError</code>). Die Funktion heißt <code>lesepunkte(seiten: int) -&gt; int</code>.</p>
-                <ol type="a">
-                    <li>Gib alle Äquivalenzklassen an, kennzeichne gültige und ungültige und nenne je einen Vertreter.</li>
-                    <li>Gib alle Werte an, die bei der Grenzwertanalyse getestet werden, jeweils mit erwartetem Ergebnis.</li>
-                    <li>Begründe, warum die Vertreter aus a) allein nicht ausreichen.</li>
-                </ol>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-5-3-2">
-            <details>
-                <summary>Aufgabe 5.3.2: Eine Testdatei schreiben und den Fehler finden <span class="niveau">AFB II</span></summary>
-                <p>So hat ein Mitschüler <code>lesepunkte</code> aus Aufgabe 5.3.1 programmiert:</p>
-                <pre><code class="language-python"># lesepunkte.py
-def lesepunkte(seiten: int) -&gt; int:
-    if seiten &lt; 1 or seiten &gt;= 2000:
-        raise ValueError("Seitenzahl ungültig")
-    if seiten &lt;= 100:
-        return 1
-    elif seiten &lt; 300:
-        return 2
-    return 3</code></pre>
-                <ol>
-                    <li>Speichere das Modul in Thonny und lege daneben <code>test_lesepunkte.py</code> an: eine Testfunktion für die Vertreter, eine für die gültigen Grenzwerte, eine für die ungültigen Grenzwerte (mit <code>wirft_value_error</code>) und den Testrunner. Alle Meldungen im Muster „erwartet …, tatsächlich …“.</li>
-                    <li>Führe die Tests aus und notiere die Ausgabe.</li>
-                    <li>Korrigiere das Modul, bis alle Tests bestehen. Notiere, wie viele Fehler es gab und durch welchen Test du jeden gefunden hast.</li>
-                </ol>
-                <p class="tipp">Wenn du in einer Testfunktion mehrere Grenzwerte in einer Schleife prüfst und einer davon einen <code>ValueError</code> auslöst, bricht der Test mit einer Fehlermeldung ab. Fange das mit <code>try</code>/<code>except ValueError</code> ab und setze dann <code>ergebnis = "ValueError"</code>.</p>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-5-3-3">
             <details>
                 <summary>Aufgabe 5.3.3: Eine Klasse testen – die Stempelkarte <span class="niveau">AFB II–III</span></summary>

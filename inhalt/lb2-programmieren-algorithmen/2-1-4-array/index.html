@@ -17,7 +17,7 @@
 
 <p>In Python werden Arrays bzw. Listen so erstellt:</p>
 
-<pre><code class="language-python">mein_array0 = []                 # erzeugt ein leeres Array ohne Werte
+<pre class="ausfuehrbar"><code class="language-python">mein_array0 = []                 # erzeugt ein leeres Array ohne Werte
 mein_array1 = [1, 2, 3, 4, 5]
 
 print(mein_array1[3])            # gibt den Wert 4 aus
@@ -31,13 +31,13 @@ print(mein_array1[-1])           # negativer Index: letztes Element, hier 5</cod
 
 <h3>1. for-Schleife</h3>
 
-<pre><code class="language-python">mein_array = [1, 2, 3, 4, 5]
+<pre class="ausfuehrbar"><code class="language-python">mein_array = [1, 2, 3, 4, 5]
 for element in mein_array:
     print(element)</code></pre>
 
 <h3>2. while-Schleife</h3>
 
-<pre><code class="language-python">mein_array = [1, 2, 3, 4, 5]
+<pre class="ausfuehrbar"><code class="language-python">mein_array = [1, 2, 3, 4, 5]
 i = 0
 while i &lt; len(mein_array):
     print(mein_array[i])
@@ -47,7 +47,7 @@ while i &lt; len(mein_array):
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> In einer Liste stehen Noten. Gezählt werden soll, wie oft die Note 1 vorkommt.</p>
-            <pre><code class="language-python">def zaehle_einsen(noten):
+            <pre class="ausfuehrbar"><code class="language-python">def zaehle_einsen(noten):
     anzahl = 0
     for i in range(len(noten)):      # i läuft über alle Indizes 0 … len - 1
         if noten[i] == 1:
@@ -89,7 +89,7 @@ print(zaehle_einsen([2, 1, 3, 1, 4]))   # 2</code></pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Wochentemperaturen auswerten – Summe, Maximum und Position in einem Durchlauf</p>
-            <pre><code class="language-python">temperaturen = [12.5, 15.0, 9.5, 18.0, 16.5]
+            <pre class="ausfuehrbar"><code class="language-python">temperaturen = [12.5, 15.0, 9.5, 18.0, 16.5]
 summe = 0
 max_index = 0
 for i in range(len(temperaturen)):
@@ -168,7 +168,7 @@ letzter = meine_werte.pop()  # entfernt das letzte Element und gibt es zurück (
             </details>
         </div>
 
-<pre><code class="language-python"># Schreiben: Modus "w" legt die Datei neu an (ein vorhandener Inhalt wird überschrieben)
+<pre class="ausfuehrbar"><code class="language-python"># Schreiben: Modus "w" legt die Datei neu an (ein vorhandener Inhalt wird überschrieben)
 with open("temperaturen.csv", "w", encoding="utf-8") as datei:
     datei.write("tag;temperatur\n")          # Kopfzeile, \n beendet die Zeile
     datei.write("Mo;12.5\n")
@@ -189,7 +189,7 @@ print(werte)                                 # [12.5, 15.0]</code></pre>
             <details>
                 <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Eine Lehrkraft exportiert Klausurpunkte aus einer Tabellenkalkulation als <code>punkte.csv</code>. Die Datei enthält einen Tippfehler („abc“) und am Ende eine Leerzeile. Das Programm soll gültige Zeilen einlesen, ungültige melden, den Durchschnitt ausgeben und eine Datei <code>auswertung.csv</code> mit der Spalte „bestanden“ (ab 5 Punkten) schreiben.</p>
-            <pre><code class="language-python"># Testdatei anlegen – so sähe der Export aus
+            <pre class="ausfuehrbar"><code class="language-python"># Testdatei anlegen – so sähe der Export aus
 with open("punkte.csv", "w", encoding="utf-8") as datei:
     datei.write("name;punkte\nAnna;12\nBen;4\nLea;abc\nTom;9\n\n")
 

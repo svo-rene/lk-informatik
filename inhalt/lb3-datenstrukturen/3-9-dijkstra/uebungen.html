@@ -1,49 +1,5 @@
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Den kleinsten offenen Knoten finden <span class="niveau">AFB I</span></summary>
-                <p>Was geben die beiden <code>print</code>-Anweisungen aus? Überlege erst, dann probiere es in Thonny aus.</p>
-                <pre><code class="language-python">dist = {"A": 0, "B": 3, "C": 2, "D": 8}
-fertig = ["A"]
-u = None
-for k in dist:
-    if k not in fertig:
-        if u is None or dist[k] &lt; dist[u]:
-            u = k
-print(u)
-print(float("inf") + 1 &gt; 1000000)</code></pre>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>C</code> – A ist schon fertig und wird übersprungen; unter B (3), C (2) und D (8) hat C die kleinste Distanz. <code>u is None</code> sorgt dafür, dass der erste offene Knoten genommen wird. <code>True</code> – unendlich plus 1 bleibt unendlich und ist größer als jede Zahl.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Wie oft wird gesucht? <span class="niveau">AFB II</span></summary>
-                <p>Beim Aufruf <code>dijkstra(graph, "A", dist, vorgaenger)</code> aus Beispiel 2: Wie oft wird die <code>while</code>-Schleife durchlaufen, und wie viele Knoten sieht die Suche nach dem kleinsten offenen Knoten jedes Mal an? Was folgt daraus für die Laufzeit bei n Knoten?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Die <code>while</code>-Schleife läuft 5-mal, einmal für jeden Knoten. Die Suche geht jedes Mal mit <code>for k in graph</code> alle 5 Knoten durch, zusammen also 5 · 5 = 25 Schritte. Bei n Knoten sind es n · n Schritte – diese Fassung liegt in O(n²). Das passt zur Messreihe in Aufgabe 3.9.5.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-9-1">
-            <details>
-                <summary>Aufgabe 3.9.1: Dijkstra von Hand <span class="niveau">AFB I</span></summary>
-                <p>Ein ungerichteter Graph hat die Kanten S–A (7), S–B (3), A–B (2), A–Z (1), B–Z (8). Bestimme mit dem Dijkstra-Algorithmus in einer Tabelle die kürzesten Distanzen von S aus und den kürzesten Weg nach Z.</p>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-9-2">
-            <details>
-                <summary>Aufgabe 3.9.2: Weg rekonstruieren <span class="niveau">AFB II</span></summary>
-                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/dijkstra.py</code> – weiterführen<br><strong>Commits:</strong> wenn es läuft: <code>3.9.2: weg(vorgaenger, ziel) ergänzt, Weg nach E stimmt</code></p>
-                <p>Die Funktion <code>dijkstra</code> liefert neben den Distanzen ein Dictionary <code>vorgaenger</code>. Schreibe eine Funktion <code>weg(vorgaenger, ziel)</code>, die daraus den Weg vom Start zum Ziel als Liste zurückgibt, und teste sie für E im komplexeren Beispiel.</p>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-3-9-3">
             <details>
                 <summary>Aufgabe 3.9.3: Verfahren beurteilen <span class="niveau">AFB III</span></summary>

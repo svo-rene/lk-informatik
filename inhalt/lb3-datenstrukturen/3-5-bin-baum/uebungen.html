@@ -1,39 +1,5 @@
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Suchwege <span class="niveau">AFB I</span></summary>
-                <p>Gib für den Baum aus Beispiel 1 an, mit welchen Knoten <code>suchen</code> bei <code>b.suchen(10)</code> und bei <code>b.suchen(2)</code> nacheinander aufgerufen wird, und was jeweils zurückgegeben wird.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>suchen(10)</code>: Aufruf mit 8 (10 &gt; 8 → rechts), dann mit 10 – gefunden, <code>True</code>. <code>suchen(2)</code>: 8 (2 &lt; 8 → links), 3 (2 &lt; 3 → links), 1 (2 &gt; 1 → rechts, aber rechts von 1 ist kein Kind) – <code>False</code>, ohne weiteren Aufruf. Das Ergebnis wird über alle wartenden Aufrufe nach oben zurückgegeben.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Sortiert und entartet <span class="niveau">AFB I</span></summary>
-                <p>Gib die In-Order-Reihenfolge deines Baums aus Kurz geprüft 2 an. Wie hoch wird ein Suchbaum, in den man 1, 2, 3, 4 in dieser Reihenfolge einfügt?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>In-Order: 2, 4, 5, 8 – aufsteigend sortiert. Bei 1, 2, 3, 4 hängt jeder Wert rechts am vorigen: eine Kette mit 4 Knoten und der Höhe 3.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-5-1">
-            <details>
-                <summary>Aufgabe 3.5.1: Suchbaum aufbauen <span class="niveau">AFB I</span></summary>
-                <p>Füge die Werte 15, 8, 20, 3, 11, 17, 25, 9 in dieser Reihenfolge in einen leeren binären Suchbaum ein. Zeichne den Baum, gib den kleinsten und den größten Wert an und notiere die In-Order-Reihenfolge.</p>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-5-2">
-            <details>
-                <summary>Aufgabe 3.5.2: Suchbaum-Eigenschaft prüfen <span class="niveau">AFB II</span></summary>
-                <p>Eine Mitschülerin prüft die Suchbaum-Eigenschaft so: „Für jeden Knoten ist <code>links.wert &lt; wert &lt; rechts.wert</code>.“ Zeige an einem Beispiel, dass diese Prüfung nicht ausreicht, und beschreibe eine korrekte Prüfung.</p>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-3-5-3">
             <details>
                 <summary>Aufgabe 3.5.3: Leserverwaltung mit einem Suchbaum <span class="niveau">AFB II–III</span></summary>

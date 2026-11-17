@@ -47,13 +47,23 @@
 
 <div class="sortierlabor" data-verfahren="quick" data-liste="4, 7, 2, 6, 1, 5" data-vorhersage="ja" data-code="nein"></div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Einmal aufteilen <span class="niveau">AFB I</span></summary>
+                <p>Teile [6, 3, 9, 1, 8, 4] mit dem Pivot 4 (die letzte Zahl) auf. Wie sehen <code>kleiner</code>, <code>gleich</code> und <code>groesser</code> aus? Auf welchem Platz (Index) steht die 4 in der sortierten Liste?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>kleiner</code> = [3, 1], <code>gleich</code> = [4], <code>groesser</code> = [6, 9, 8]. Links von der 4 stehen genau 2 Zahlen, also steht sie in der sortierten Liste auf Platz 2 – das steht schon nach dem ersten Aufteilen fest.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 2.2.9b.1 – Quicksort mit den Karten.</p>
 
 <h2 id="schritt-2">Schritt 2: Quicksort in Python</h2>
 
 <p>Die einfachste Fassung baut beim Aufteilen drei neue Listen und hängt die sortierten Teile am Ende aneinander. Das ist fast wörtlich die Idee aus Schritt 1:</p>
 
-<pre><code class="language-python">def quicksort(liste):
+<pre class="ausfuehrbar"><code class="language-python">def quicksort(liste):
     if len(liste) &lt;= 1:
         return liste
     pivot = liste[len(liste) - 1]       # letzte Zahl als Pivot
@@ -91,6 +101,16 @@ print(zahlen)   # [1, 2, 4, 5, 6, 7]</code></pre>
 
 <div class="sortierlabor" data-verfahren="quick" data-liste="4, 7, 2, 6, 1, 5"></div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Aufrufe zählen <span class="niveau">AFB I</span></summary>
+                <p>Wie oft wird <code>quicksort</code> beim Sortieren von [4, 7, 2, 6, 1, 5] insgesamt aufgerufen? Welche Aufrufe sind Basisfälle? Kontrolliere im Labor.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>9 Aufrufe: [4, 7, 2, 6, 1, 5] → [4, 2, 1] und [7, 6]; [4, 2, 1] → [] und [4, 2]; [4, 2] → [] und [4]; [7, 6] → [] und [7]. Basisfälle sind die drei leeren Listen und [4] und [7], also 5. Verglichen wird 6 + 3 + 2 + 2 = 13-mal (jede Zahl einmal mit dem Pivot ihres Aufrufs, das Pivot auch mit sich selbst).</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 2.2.9b.2 – Quicksort selbst programmieren und testen.</p>
 
 <h2 id="schritt-3">Schritt 3: Die Schwachstelle – ein schlechtes Pivot</h2>
@@ -112,6 +132,16 @@ print(zahlen)   # [1, 2, 4, 5, 6, 7]</code></pre>
 
 <p>Deshalb nimmt man in der Praxis nicht blind das erste oder letzte Element, sondern das <strong>mittlere</strong>, ein <strong>zufälliges</strong> oder den <strong>Median aus drei</strong> Elementen (erstes, mittleres, letztes). Ganz ausschließen lässt sich der schlechteste Fall damit nicht, aber er wird extrem unwahrscheinlich.</p>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Der schlechteste Fall <span class="niveau">AFB II</span></summary>
+                <p>Eine Liste ist <em>absteigend</em> sortiert, z.&nbsp;B. [8, 7, 6, 5, 4, 3, 2, 1], Pivot ist die letzte Zahl. Ist das auch ein schlechter Fall? Wie viele Vergleiche sind es? Prüfe deine Vermutung im Labor.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Ja. Das letzte Element ist jetzt immer das <em>kleinste</em>: <code>kleiner</code> ist leer, <code>groesser</code> enthält alle übrigen. Wieder wird jeder Aufruf nur um eins kleiner: 8 + 7 + … + 2 = 35 Vergleiche, n Ebenen, O(n²).</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-4">Schritt 4: Quicksort ohne zusätzliche Listen (in place)</h2>
 
 <p>Die Fassung aus Schritt 2 baut bei jedem Aufruf drei neue Listen – das kostet Speicher, genau wie bei Mergesort. Der eigentliche Vorteil von Quicksort ist, dass das Aufteilen auch <strong>in derselben Liste</strong> geht, nur durch Tauschen. Das heißt <strong>Partitionieren</strong>. Statt Teillisten bekommt <code>quicksort</code> zwei Grenzen <code>links</code> und <code>rechts</code>: Sortiert wird nur der Bereich dazwischen.</p>
@@ -125,7 +155,7 @@ print(zahlen)   # [1, 2, 4, 5, 6, 7]</code></pre>
             <li>Dann werden die Bereiche links und rechts von <code>p</code> genauso sortiert.</li>
         </ol>
 
-<pre><code class="language-python">def tausche(liste, a, b):
+<pre class="ausfuehrbar"><code class="language-python">def tausche(liste, a, b):
     temp = liste[a]
     liste[a] = liste[b]
     liste[b] = temp
@@ -158,6 +188,16 @@ print(zahlen)   # [1, 2, 3, 5, 6, 7, 8, 9]</code></pre>
 
 <div class="sortierlabor" data-verfahren="quickinplace" data-liste="5, 8, 2, 9, 1, 7, 3, 6" data-vorhersage="ja"></div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Einmal partitionieren <span class="niveau">AFB II</span></summary>
+                <p>Partitioniere [7, 2, 9, 4, 1, 5] (links = 0, rechts = 5) von Hand. Wie sieht die Liste danach aus, welchen Wert gibt <code>partitioniere</code> zurück, und wie oft wird wirklich getauscht (zwei verschiedene Plätze)?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Pivot 5, grenze = 0. j = 0: 7 &lt; 5 nein. j = 1: 2 &lt; 5 ja → tausche 0 und 1: [2, 7, 9, 4, 1, 5], grenze = 1. j = 2: 9 nein. j = 3: 4 ja → tausche 1 und 3: [2, 4, 9, 7, 1, 5], grenze = 2. j = 4: 1 ja → tausche 2 und 4: [2, 4, 1, 7, 9, 5], grenze = 3. Zum Schluss Pivot an Platz 3: [2, 4, 1, 5, 9, 7]. Rückgabe 3, 4 echte Vertauschungen, 5 Vergleiche.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 2.2.9b.3 – Partitionieren von Hand und im Code.</p>
 
 <h2 id="schritt-5">Schritt 5: Mergesort und Quicksort im Vergleich</h2>
@@ -177,6 +217,16 @@ print(zahlen)   # [1, 2, 3, 5, 6, 7, 8, 9]</code></pre>
 <p>Im Wettrennen siehst du beide im Vergleich mit den einfachen Verfahren. Stell die Startreihenfolge auf „schon sortiert“ und beobachte Quicksort. Mit dem Knopf unten zählt das Labor die Vergleiche bis n = 512.</p>
 
 <div class="sortierlabor" data-verfahren="rennen"></div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Wer gewinnt wann? <span class="niveau">AFB II</span></summary>
+                <p>Lass das Wettrennen mit n = 40 einmal „zufällig“ und einmal „schon sortiert“ laufen. Welches Verfahren gewinnt jeweils, und welches fällt bei „schon sortiert“ zurück? Erkläre beides.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Zufällig: Mergesort und Quicksort liegen weit vorn, die drei einfachen Verfahren brauchen ein Vielfaches an Vergleichen. Schon sortiert: Bubblesort und Insertionsort gewinnen mit n − 1 = 39 Vergleichen (ein Durchlauf, nie getauscht), Mergesort bleibt gut, Quicksort mit der letzten Zahl als Pivot fällt mit 40 · 39 / 2 = 780 Vergleichen auf das Niveau von Selectionsort zurück – das Pivot ist immer das größte Element.</p>
+                </details>
+            </details>
+        </div>
 
 <h3>Zum Nachlesen</h3>
 
@@ -291,22 +341,26 @@ print(zahlen)   # [1, 2, 3, 5, 6, 7, 8, 9]</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-9b-1">
             <details>
-                <summary>Kurz geprüft 1: Einmal aufteilen <span class="niveau">AFB I</span></summary>
-                <p>Teile [6, 3, 9, 1, 8, 4] mit dem Pivot 4 (die letzte Zahl) auf. Wie sehen <code>kleiner</code>, <code>gleich</code> und <code>groesser</code> aus? Auf welchem Platz (Index) steht die 4 in der sortierten Liste?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>kleiner</code> = [3, 1], <code>gleich</code> = [4], <code>groesser</code> = [6, 9, 8]. Links von der 4 stehen genau 2 Zahlen, also steht sie in der sortierten Liste auf Platz 2 – das steht schon nach dem ersten Aufteilen fest.</p>
-                </details>
+                <summary>Aufgabe 2.2.9b.1: Quicksort mit den Karten <span class="niveau">AFB II</span></summary>
+                <p>Spielt die Station Quicksort (Kasten „Mit den Karten“ oben) mit 8 Karten.</p>
+                <ol>
+                    <li>Sortiert gut gemischte Karten und führt eine Strichliste der Vergleiche, getrennt nach Aufrufen. Zeichnet den Baum der Aufrufe auf (wie im Labor).</li>
+                    <li>Legt die Karten aufsteigend sortiert hin und spielt noch einmal. Vergleicht Strichliste und Baum mit Teil 1.</li>
+                    <li>Überlegt euch eine Regel für die Wahl des Pivots, die mit verdeckten Karten funktioniert und den Fall aus Teil 2 vermeidet. Probiert sie aus.</li>
+                </ol>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-9b-2">
             <details>
-                <summary>Kurz geprüft 2: Aufrufe zählen <span class="niveau">AFB I</span></summary>
-                <p>Wie oft wird <code>quicksort</code> beim Sortieren von [4, 7, 2, 6, 1, 5] insgesamt aufgerufen? Welche Aufrufe sind Basisfälle? Kontrolliere im Labor.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>9 Aufrufe: [4, 7, 2, 6, 1, 5] → [4, 2, 1] und [7, 6]; [4, 2, 1] → [] und [4, 2]; [4, 2] → [] und [4]; [7, 6] → [] und [7]. Basisfälle sind die drei leeren Listen und [4] und [7], also 5. Verglichen wird 6 + 3 + 2 + 2 = 13-mal (jede Zahl einmal mit dem Pivot ihres Aufrufs, das Pivot auch mit sich selbst).</p>
-                </details>
+                <summary>Aufgabe 2.2.9b.2: Quicksort programmieren und testen <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Schreibe die Funktion <code>quicksort(liste)</code> aus Schritt 2 – möglichst ohne abzuschreiben: erst den Basisfall, dann das Aufteilen, dann den rekursiven Teil.</li>
+                    <li>Teste mit allen Testfällen aus Beispiel 1 (Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe) und mit 100 Zufallslisten, deren Ergebnis du mit <code>sorted()</code> vergleichst.</li>
+                    <li>Baue eine globale Zählvariable ein oder gib die Zahl der Vergleiche aus. Vergleiche für n = 8 mit dem Labor.</li>
+                    <li>Ändere die Pivotwahl auf das mittlere Element (<code>liste[len(liste) // 2]</code>) und zähle für eine sortierte Liste mit 100 Zahlen beide Varianten.</li>
+                </ol>
             </details>
         </div>

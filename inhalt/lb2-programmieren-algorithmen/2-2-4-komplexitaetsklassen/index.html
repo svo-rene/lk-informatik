@@ -80,6 +80,16 @@
             <figcaption>Abb. 1: Diagramm Komplexitätsklassen</figcaption>
         </figure>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Doppelt so lange Liste <span class="niveau">AFB I</span></summary>
+                <p>Eine Liste wird von 500 auf 1000 Elemente verlängert. Wie ändert sich der Aufwand für den Zugriff <code>liste[250]</code>? Wie viele Vergleiche braucht die lineare Suche nach einem Wert, der nicht in der Liste steht, vorher und nachher?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Der Zugriff <code>liste[250]</code> bleibt ein Schritt (O(1)). Die lineare Suche braucht vorher 500, nachher 1000 Vergleiche – doppelt so viele (O(n)).</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-2">Schritt 2: O(log n) – immer halbieren</h2>
 
 <p>Die binäre Suche funktioniert nur in einer <strong>sortierten</strong> Liste: Sie vergleicht mit dem mittleren Element und sucht dann nur noch in einer Hälfte weiter. Im Video sucht sie die 16 in einer Liste mit 16 Zahlen. Achte darauf, wie schnell der Suchbereich schrumpft, und auf die Faustregel 2<sup>10</sup> = 1024 ≈ 1000.</p>
@@ -88,6 +98,16 @@
             <div class="lp-video"><video controls preload="none" poster="../vid/2-2-4-2_logarithmisch_vorschau.png" src="../vid/2-2-4-2_logarithmisch.mp4"></video><a href="../vid/2-2-4-2_logarithmisch.mp4">Video ansehen</a></div>
             <figcaption>Video 2: O(log n) – immer halbieren (ca. 1 min)</figcaption>
         </figure>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Wie oft halbieren? <span class="niveau">AFB I</span></summary>
+                <p>Wie oft muss man 4096 halbieren, bis nur noch 1 übrig ist? Wie oft bei 4 194 304 = 2<sup>22</sup>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>4096 = 2<sup>12</sup>, also 12-mal. Bei 2<sup>22</sup> sind es 22 Halbierungen – obwohl die Zahl etwa tausendmal so groß ist, braucht man nur 10 Schritte mehr.</p>
+                </details>
+            </details>
+        </div>
 
 <h2 id="schritt-3">Schritt 3: O(n log n) gegen O(n²)</h2>
 
@@ -118,6 +138,16 @@
             <figcaption>Abb. 2: Diagramm Komplexitätsklassen ohne n² und 2<sup>n</sup></figcaption>
         </figure>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Der Fall n = 100 <span class="niveau">AFB I</span></summary>
+                <p>Schätze für n = 100 die Schrittzahlen n · log<sub>2</sub> n und n² sowie ihr Verhältnis ab. Tipp: 2<sup>6</sup> = 64 und 2<sup>7</sup> = 128.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>log<sub>2</sub> 100 liegt zwischen 6 und 7 (genauer ≈ 6,6). Also n · log<sub>2</sub> n ≈ 100 · 6,6 ≈ 660 und n² = 10 000. Das Verhältnis ist etwa 15 – es liegt zwischen den Werten 3 (n = 10) und 100 (n = 1000).</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 2.2.4.1 – Laufzeiten hochrechnen.</p>
 
 <h2 id="schritt-4">Schritt 4: Schrittzahlen mit Python berechnen</h2>
@@ -142,7 +172,7 @@
             </table>
             <ol>
                 <li><strong>Schritte berechnen:</strong> Die Tabelle lässt sich mit Python erzeugen:
-                    <pre><code class="language-python">import math
+                    <pre class="ausfuehrbar"><code class="language-python">import math
 
 for n in [20, 60]:
     print(n, round(n * math.log2(n)), n**2, float(2**n), float(math.factorial(n)))
@@ -159,6 +189,16 @@ for n in [20, 60]:
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Was gibt Python aus? <span class="niveau">AFB I</span></summary>
+                <p>Was liefern <code>math.factorial(5)</code>, <code>round(8 * math.log2(8))</code> und <code>float(2**60)</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>120</code> (1 · 2 · 3 · 4 · 5), <code>24</code> (log<sub>2</sub> 8 = 3, also 8 · 3) und <code>1.152921504606847e+18</code>, also ≈ 1,15 · 10<sup>18</sup>.</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-5">Schritt 5: Exponentiell – wann wird es unmöglich?</h2>
 
 <p>Brute-Force-Verfahren probieren alle Möglichkeiten durch: alle Teilmengen (2<sup>n</sup>) oder alle Reihenfolgen (n!). Im Video rechnest du die Schrittzahlen in Zeit um (Punkte 2 bis 4 von Beispiel 2). Achte darauf, was ein einziger zusätzlicher Gegenstand bewirkt und warum ein schnellerer Rechner hier kaum hilft.</p>
@@ -167,6 +207,16 @@ for n in [20, 60]:
             <div class="lp-video"><video controls preload="none" poster="../vid/2-2-4-5_exponentiell_vorschau.png" src="../vid/2-2-4-5_exponentiell.mp4"></video><a href="../vid/2-2-4-5_exponentiell.mp4">Video ansehen</a></div>
             <figcaption>Video 5: Exponentiell – wann wird es unmöglich? (ca. 1 min)</figcaption>
         </figure>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Zehn Gegenstände mehr <span class="niveau">AFB I–II</span></summary>
+                <p>Ein Brute-Force-Verfahren prüft alle 2<sup>n</sup> Teilmengen und braucht für n = 30 Gegenstände 1 Sekunde. Wie lange braucht es ungefähr für n = 40 und für n = 50?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>+10 Gegenstände bedeuten · 2<sup>10</sup> = 1024. n = 40: etwa 1024 s ≈ 17 min. n = 50: etwa 1024 · 1024 s ≈ 1 050 000 s ≈ 12 Tage.</p>
+                </details>
+            </details>
+        </div>
 
 <p>Danach: Aufgabe 2.2.4.2 – Klassen zuordnen.</p>
 
@@ -230,22 +280,27 @@ for n in [20, 60]:
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-4-1">
             <details>
-                <summary>Kurz geprüft 1: Doppelt so lange Liste <span class="niveau">AFB I</span></summary>
-                <p>Eine Liste wird von 500 auf 1000 Elemente verlängert. Wie ändert sich der Aufwand für den Zugriff <code>liste[250]</code>? Wie viele Vergleiche braucht die lineare Suche nach einem Wert, der nicht in der Liste steht, vorher und nachher?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Der Zugriff <code>liste[250]</code> bleibt ein Schritt (O(1)). Die lineare Suche braucht vorher 500, nachher 1000 Vergleiche – doppelt so viele (O(n)).</p>
-                </details>
+                <summary>Aufgabe 2.2.4.1: Laufzeiten hochrechnen <span class="niveau">AFB II–III</span></summary>
+                <p>Auf einem Schulrechner wurden für Insertionsort mit zufälligen Zahlen folgende Laufzeiten gemessen:</p>
+                <table>
+                    <tr><th>Anzahl n</th><td>2 000</td><td>4 000</td><td>8 000</td><td>16 000</td></tr>
+                    <tr><th>Laufzeit in s</th><td>0,21</td><td>0,83</td><td>3,35</td><td>13,4</td></tr>
+                </table>
+                <ol>
+                    <li>Bestimme aus dem Faktor bei Verdopplung von n die Komplexitätsklasse.</li>
+                    <li>Berechne, wie viele Zahlen das Programm in höchstens 60 Sekunden sortieren kann.</li>
+                    <li>Mergesort brauchte für n = 16 000 nur 0,05 s. Schätze für beide Verfahren die Laufzeit für eine Million Zahlen ab.</li>
+                    <li>Setze dich mit der Verlässlichkeit deiner Abschätzungen auseinander. Nenne mindestens zwei Einflüsse.</li>
+                    <li>Miss mit deinem Programm aus dem Notebook zu Seite 2.2.3 (<a href="../notebooks/2-2-3_einfuehrung_komplexitaet.ipynb" download>2-2-3_einfuehrung_komplexitaet.ipynb</a>) eine eigene Messreihe und vergleiche.</li>
+                </ol>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-4-2">
             <details>
-                <summary>Kurz geprüft 2: Wie oft halbieren? <span class="niveau">AFB I</span></summary>
-                <p>Wie oft muss man 4096 halbieren, bis nur noch 1 übrig ist? Wie oft bei 4 194 304 = 2<sup>22</sup>?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>4096 = 2<sup>12</sup>, also 12-mal. Bei 2<sup>22</sup> sind es 22 Halbierungen – obwohl die Zahl etwa tausendmal so groß ist, braucht man nur 10 Schritte mehr.</p>
-                </details>
+                <summary>Aufgabe 2.2.4.2: Klassen zuordnen <span class="niveau">AFB I–II</span></summary>
+                <p>Ordne jeweils eine Komplexitätsklasse zu und begründe kurz: (a) das größte Element einer unsortierten Liste finden, (b) in einem sortierten Array mit 1 Million Einträgen einen Namen suchen, (c) prüfen, ob eine Liste zwei gleiche Elemente enthält, indem jedes Paar verglichen wird, (d) alle möglichen Passwörter aus n Bits durchprobieren.</p>
             </details>
         </div>

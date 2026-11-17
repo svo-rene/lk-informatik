@@ -36,7 +36,7 @@
                 <tr><td>Hund(name: string)<br>bellen(): void</td></tr>
             </tbody>
         </table>
-        <pre><code class="language-python">class Hund:
+        <pre class="ausfuehrbar"><code class="language-python">class Hund:
     def __init__(self, name):
         self.name = name
 
@@ -66,6 +66,16 @@ luna.bellen()   # Ausgabe: Luna bellt!</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Wer ist <code>self</code>? <span class="niveau">AFB I</span></summary>
+            <p>Nach <code>bello = Hund("Bello")</code> wird <code>Hund.bellen(bello)</code> aufgerufen. Was wird ausgegeben, und auf welches Objekt zeigt <code>self</code> dabei? Wie schreibt man denselben Aufruf in der üblichen Kurzform?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Ausgabe: <code>Bello bellt!</code>. <code>self</code> zeigt auf dasselbe Objekt wie <code>bello</code>. Die Kurzform ist <code>bello.bellen()</code> – dort setzt Python das Objekt vor dem Punkt automatisch als <code>self</code> ein.</p>
+            </details>
+        </details>
+    </div>
+
 <p><a href="#schritt-2">Weiter mit Schritt 2: Methoden mit Parametern →</a></p>
 
 <h2 id="schritt-2">Schritt 2: Methoden mit Parametern</h2>
@@ -79,7 +89,7 @@ luna.bellen()   # Ausgabe: Luna bellt!</code></pre>
 
 <h3>Zum Nachlesen: der Rechner</h3>
 
-<pre><code class="language-python">class Rechner:
+<pre class="ausfuehrbar"><code class="language-python">class Rechner:
     def __init__(self, name):
         self.name = name
 
@@ -98,6 +108,16 @@ print(ergebnis)  # Ausgabe: 8</code></pre>
     </figure>
 
 <p>In UML-Diagrammen werden Methoden mit ihren Parametern und dem Rückgabetyp angegeben, z.&nbsp;B. <code>+ addiere(x: int, y: int): int</code>.</p>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Werte verteilen <span class="niveau">AFB I</span></summary>
+            <p>Nach <code>r2 = Rechner("Schul-TR")</code> wird <code>r2.addiere(7, -2)</code> aufgerufen. Welche Werte haben <code>self</code>, <code>x</code> und <code>y</code>, und was wird zurückgegeben? Was passiert bei <code>r2.addiere(1, 2, 3)</code>?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>self</code> ist <code>r2</code>, <code>x = 7</code>, <code>y = -2</code>; zurückgegeben wird <code>5</code>. Bei drei Argumenten meldet Python <code>TypeError: Rechner.addiere() takes 3 positional arguments but 4 were given</code> – <code>self</code> wird mitgezählt, weil Python es automatisch übergibt.</p>
+            </details>
+        </details>
+    </div>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: Methoden ändern den Zustand →</a></p>
 
@@ -125,7 +145,7 @@ print(ergebnis)  # Ausgabe: 8</code></pre>
                 <tr><td>Spieler(name: string, punkte: int)<br>punkte_erhoehen(wert: int): void<br>zeige_info(): void</td></tr>
             </tbody>
         </table>
-        <pre><code class="language-python">class Spieler:
+        <pre class="ausfuehrbar"><code class="language-python">class Spieler:
     def __init__(self, name, punkte):
         self.name = name
         self.punkte = punkte
@@ -173,7 +193,17 @@ None</code></pre>
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-4-5-1">Aufgabe 4.5.1</a> – Methoden unterscheiden, und <a href="uebungen.html#a-4-5-2">Aufgabe 4.5.2</a> – Auto mit Tankanzeige.</p>
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 3: Was kommt zurück? <span class="niveau">AFB I</span></summary>
+            <p>Was gibt dieses Programmstück aus? <code>s2 = Spieler("Tom", 4)</code>, dann <code>a = s2.punkte_erhoehen(6)</code> und <code>print(a, s2.punkte)</code></p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Ausgabe: <code>None 10</code>. Die Methode hat den Zustand verändert (aus 4 werden 10 Punkte), liefert aber ohne <code>return</code> den Wert <code>None</code>.</p>
+            </details>
+        </details>
+    </div>
+
+<p>Danach: <a href="#a-4-5-1">Aufgabe 4.5.1</a> – Methoden unterscheiden, und <a href="#a-4-5-2">Aufgabe 4.5.2</a> – Auto mit Tankanzeige.</p>
 
 <div class="praxisbezug">
         <details>
@@ -208,22 +238,27 @@ None</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-5-1">
         <details>
-            <summary>Kurz geprüft 1: Wer ist <code>self</code>? <span class="niveau">AFB I</span></summary>
-            <p>Nach <code>bello = Hund("Bello")</code> wird <code>Hund.bellen(bello)</code> aufgerufen. Was wird ausgegeben, und auf welches Objekt zeigt <code>self</code> dabei? Wie schreibt man denselben Aufruf in der üblichen Kurzform?</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p>Ausgabe: <code>Bello bellt!</code>. <code>self</code> zeigt auf dasselbe Objekt wie <code>bello</code>. Die Kurzform ist <code>bello.bellen()</code> – dort setzt Python das Objekt vor dem Punkt automatisch als <code>self</code> ein.</p>
-            </details>
+            <summary>Aufgabe 4.5.1: Methoden unterscheiden <span class="niveau">AFB I</span></summary>
+            <p>Gib für die Klasse <code>Spieler</code> an, welche Methoden verändernd und welche sondierend sind. Ergänze eine sondierende Methode <code>hat_gewonnen(ziel)</code>, die <code>True</code> zurückgibt, wenn der Spieler mindestens <code>ziel</code> Punkte hat.</p>
         </details>
     </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-5-2">
         <details>
-            <summary>Kurz geprüft 2: Werte verteilen <span class="niveau">AFB I</span></summary>
-            <p>Nach <code>r2 = Rechner("Schul-TR")</code> wird <code>r2.addiere(7, -2)</code> aufgerufen. Welche Werte haben <code>self</code>, <code>x</code> und <code>y</code>, und was wird zurückgegeben? Was passiert bei <code>r2.addiere(1, 2, 3)</code>?</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p><code>self</code> ist <code>r2</code>, <code>x = 7</code>, <code>y = -2</code>; zurückgegeben wird <code>5</code>. Bei drei Argumenten meldet Python <code>TypeError: Rechner.addiere() takes 3 positional arguments but 4 were given</code> – <code>self</code> wird mitgezählt, weil Python es automatisch übergibt.</p>
-            </details>
+            <summary>Aufgabe 4.5.2: Auto mit Tankanzeige <span class="niveau">AFB II–III</span></summary>
+            <p>Erstelle eine Klasse <code>Auto</code> mit den Attributen:</p>
+            <ul>
+                <li><code>marke</code> (z.&nbsp;B. „VW“)</li>
+                <li><code>tankinhalt</code> (z.&nbsp;B. 45.0 Liter)</li>
+            </ul>
+            <p>Schreibe folgende Methoden:</p>
+            <ul>
+                <li><code>tanken(menge: float)</code> → erhöht den Tankinhalt</li>
+                <li><code>zeige_tankinhalt()</code> → zeigt den aktuellen Tankstand</li>
+                <li><code>fahren(weite: int)</code> → fährt eine bestimmte Anzahl an Kilometern und verbraucht dabei (vereinfacht) einen Liter pro Kilometer</li>
+            </ul>
+            <p>Erzeuge Autos und simuliere Tankvorgänge und Fahrten. Hast du an alles gedacht? Verbessere dein Programm.</p>
         </details>
     </div>

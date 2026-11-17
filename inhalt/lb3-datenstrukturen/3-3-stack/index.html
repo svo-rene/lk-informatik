@@ -65,6 +65,16 @@ Hilf mir beim Selbstlösen, nicht mit fertigen Lösungen:
             <figcaption>Video 1: Was ist ein Stack? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
         </figure>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Die Zurück-Taste <span class="niveau">AFB I</span></summary>
+                <p>Du öffnest im Browser nacheinander die Seiten A, B und C. Der Browser legt dabei jede verlassene Seite auf einen Stapel. Dann drückst du zweimal „Zurück“. Auf welcher Seite bist du, und was liegt danach noch auf dem Stapel?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Beim Öffnen von B wird A aufgelegt, beim Öffnen von C wird B aufgelegt: Stapel A, B (B oben). Das erste „Zurück“ nimmt B herunter, das zweite A. Du bist auf Seite A, der Stapel ist leer.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-2">Weiter mit Schritt 2: Die Klasse ListenStack →</a></p>
 
 <h2 id="schritt-2">Schritt 2: Die Klasse <code>ListenStack</code></h2>
@@ -95,7 +105,7 @@ Hilf mir beim Selbstlösen, nicht mit fertigen Lösungen:
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Bücherstapel als gekapselte Klasse</summary>
             <p><strong>Ausgangssituation:</strong> push(A), push(B), push(C), pop() → C, push(D), pop() → D, pop() → B. Auf dem Stapel liegt danach nur noch A.</p>
             <p>Diesen Ablauf setzen wir mit einer Klasse <code>ListenStack</code> um. Sie speichert die Bücher in einer Python-Liste, deren <strong>Ende</strong> die Oberseite des Stapels ist. Die Liste ist das private Attribut <code>__daten</code>; benutzt wird der Stapel nur über <code>push</code>, <code>pop</code>, <code>peek</code> und <code>is_empty</code>.</p>
-            <pre><code class="language-python">class ListenStack:
+            <pre class="ausfuehrbar"><code class="language-python">class ListenStack:
     def __init__(self):
         self.__daten = []              # privat; oben = letztes Element
 
@@ -160,7 +170,17 @@ print(buecher.peek())   # A</code></pre>
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-3-1">Aufgabe 3.3.1</a> – LIFO an einer Folge von Operationen nachvollziehen.</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Welches Ende ist oben? <span class="niveau">AFB I</span></summary>
+                <p>Was liefert <code>[4, 7, 9][-1]</code>? Und warum benutzt <code>ListenStack.pop</code> den Befehl <code>self.__daten.pop()</code> und nicht <code>self.__daten.pop(0)</code>? Nenne zwei Gründe.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[4, 7, 9][-1]</code> ist 9, das letzte Element. <code>pop(0)</code> würde erstens das <em>unterste</em> Element entnehmen – das wäre kein Stapel mehr. Zweitens müssten dabei alle übrigen Elemente nachrücken: O(n) statt O(1).</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-3-1">Aufgabe 3.3.1</a> – LIFO an einer Folge von Operationen nachvollziehen.</p>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: Stack mit Knoten →</a></p>
 
@@ -183,6 +203,16 @@ print(buecher.peek())   # A</code></pre>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>1_listen/stack_knoten.py</code> an und tippe den Code aus dem Video ab: die Klassen <code>Node</code> und <code>Stack</code> und die Methoden <code>is_empty</code>, <code>push</code>, <code>pop</code>, <code>top</code> und <code>peek</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>k = Node(&quot;A&quot;)</code> · <code>k2 = Node(&quot;B&quot;, k)</code>. Danach committen, z.&nbsp;B. <code>3.3 Schritt 3: Node, Stack, is_empty angelegt</code>.</p>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Knoten zeichnen <span class="niveau">AFB I</span></summary>
+                <p>In Thonny wird eingegeben: <code>s = Stack()</code>, <code>s.push(1)</code>, <code>s.push(2)</code>, <code>s.push(3)</code>. Zeichne die Knoten mit <code>__head</code>. Was liefert danach <code>s.pop()</code>, und worauf zeigt <code>__head</code> dann?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>__head</code> → [3|•] → [2|•] → [1|None]: Der zuletzt aufgelegte Knoten ist der erste. <code>s.pop()</code> liefert 3, danach zeigt <code>__head</code> auf den Knoten mit der 2.</p>
+                </details>
+            </details>
+        </div>
+
 <div class="hinweis">
             <details>
                 <summary>Hinweis: push in der Zeiger-Werkstatt</summary>
@@ -190,7 +220,7 @@ print(buecher.peek())   # A</code></pre>
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-3-2">Aufgabe 3.3.2</a> – Text umkehren und Rückgängig-Funktion mit der Klasse <code>Stack</code>.</p>
+<p>Danach: <a href="#a-3-3-2">Aufgabe 3.3.2</a> – Text umkehren und Rückgängig-Funktion mit der Klasse <code>Stack</code>.</p>
 
 <p><a href="#schritt-4">Weiter mit Schritt 4: Klammern prüfen →</a></p>
 
@@ -205,6 +235,16 @@ print(buecher.peek())   # A</code></pre>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/stack_knoten.py</code> den Code aus dem Video: die Funktion <code>klammern_ok</code>. Starte mit F5 und vergleiche die Ausgabe mit dem Video. Danach committen, z.&nbsp;B. <code>3.3 Schritt 4: klammern_ok ergänzt</code>.</p>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Den Stapel verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Verfolge <code>klammern_ok("[(x)]")</code> mit Papier: Wie sieht der Stapel nach jedem Zeichen aus, und was gibt die Funktion zurück?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[</code>: Stapel [ · <code>(</code>: Stapel [, ( (oben) · <code>x</code>: übersprungen · <code>)</code>: <code>pop</code> liefert (, passt, Stapel [ · <code>]</code>: <code>pop</code> liefert [, passt, Stapel leer. Am Ende ist der Stapel leer: <code>True</code>.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-5">Weiter mit Schritt 5: Wann ist eine Klammerung falsch? →</a></p>
 
 <h2 id="schritt-5">Schritt 5: Wann ist eine Klammerung falsch?</h2>
@@ -216,6 +256,16 @@ print(buecher.peek())   # A</code></pre>
             <figcaption>Video 5: Wann ist eine Klammerung falsch? (ca. 1,5 min)</figcaption>
         </figure>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Drei Fehlerarten <span class="niveau">AFB I</span></summary>
+                <p>Alle drei Aufrufe liefern <code>False</code>: <code>klammern_ok("(]")</code>, <code>klammern_ok(")(")</code>, <code>klammern_ok("([]")</code>. Gib für jeden an, bei welchem Zeichen bzw. an welcher Stelle der Funktion das <code>False</code> entsteht.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>"(]"</code>: bei <code>]</code> liefert <code>pop</code> die <code>(</code>, erwartet wird <code>[</code> – passt nicht. <code>")("</code>: schon beim ersten Zeichen ist der Stapel leer, <code>s.is_empty()</code> ist <code>True</code>. <code>"([]"</code>: <code>[</code> und <code>]</code> passen, aber am Ende liegt noch <code>(</code> auf dem Stapel – <code>return s.is_empty()</code> liefert <code>False</code>.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: <a href="uebungen.html#a-3-3-3">Aufgabe 3.3.3</a> – entscheiden, wann ein Stapel und wann eine Schlange passt.</p>
 
 <h2 id="zusammen">Alles zusammen: Stapel mit Knoten und Klammerprüfung</h2>
@@ -226,7 +276,7 @@ print(buecher.peek())   # A</code></pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Stapel mit verketteter Liste und Anwendung „Klammern prüfen“</summary>
             <p><strong>Ausgangssituation:</strong> Ein Editor soll prüfen, ob in einem Ausdruck alle Klammern <code>( )</code>, <code>[ ]</code> und <code>{ }</code> korrekt geschachtelt sind. Jede schließende Klammer muss zur zuletzt geöffneten, noch offenen Klammer passen – das ist genau das LIFO-Prinzip. Der Stapel wird diesmal mit Knoten gebaut. Das private Attribut <code>__head</code> zeigt auf den obersten Knoten.</p>
-            <pre><code class="language-python">class Node:
+            <pre class="ausfuehrbar"><code class="language-python">class Node:
     def __init__(self, data, next_node=None):
         self.data = data
         self.next = next_node
@@ -329,22 +379,20 @@ Ende      is_empty() ist True                   → return True</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-3-1">
             <details>
-                <summary>Kurz geprüft 1: Die Zurück-Taste <span class="niveau">AFB I</span></summary>
-                <p>Du öffnest im Browser nacheinander die Seiten A, B und C. Der Browser legt dabei jede verlassene Seite auf einen Stapel. Dann drückst du zweimal „Zurück“. Auf welcher Seite bist du, und was liegt danach noch auf dem Stapel?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Beim Öffnen von B wird A aufgelegt, beim Öffnen von C wird B aufgelegt: Stapel A, B (B oben). Das erste „Zurück“ nimmt B herunter, das zweite A. Du bist auf Seite A, der Stapel ist leer.</p>
-                </details>
+                <summary>Aufgabe 3.3.1: LIFO nachvollziehen <span class="niveau">AFB I</span></summary>
+                <p>Ein leerer Stapel erhält die Operationen push(4), push(7), push(2), pop(), push(9), top(), pop(), pop(). Gib nach jeder Operation den Inhalt (oben rechts) und die Rückgabewerte an.</p>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-3-2">
             <details>
-                <summary>Kurz geprüft 2: Welches Ende ist oben? <span class="niveau">AFB I</span></summary>
-                <p>Was liefert <code>[4, 7, 9][-1]</code>? Und warum benutzt <code>ListenStack.pop</code> den Befehl <code>self.__daten.pop()</code> und nicht <code>self.__daten.pop(0)</code>? Nenne zwei Gründe.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>[4, 7, 9][-1]</code> ist 9, das letzte Element. <code>pop(0)</code> würde erstens das <em>unterste</em> Element entnehmen – das wäre kein Stapel mehr. Zweitens müssten dabei alle übrigen Elemente nachrücken: O(n) statt O(1).</p>
-                </details>
+                <summary>Aufgabe 3.3.2: Text umkehren und Undo <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/umkehren_undo.py</code> – neu anlegen; die Klasse <code>Stack</code> holst du mit <code>from stack_knoten import Stack</code><br><strong>Commits:</strong> nach Teil 1: <code>3.3.2 Teil 1: umkehren(text) mit Stack</code> · nach Teil 2: <code>3.3.2 Teil 2: Undo-Simulation, Text wieder „Hallo“</code></p>
+                <ol>
+                    <li>Schreibe mit der Klasse <code>Stack</code> eine Funktion <code>umkehren(text)</code>, die einen Text rückwärts zurückgibt.</li>
+                    <li>Simuliere einen einfachen Texteditor: Die Eingaben „Hallo“, „ “, „Welt“ werden an einen Text angehängt und jeweils auf einen Undo-Stack gelegt. Zweimal „Rückgängig“ soll den Text wieder auf „Hallo“ setzen.</li>
+                </ol>
             </details>
         </div>

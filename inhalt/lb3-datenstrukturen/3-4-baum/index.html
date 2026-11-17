@@ -63,7 +63,24 @@
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-4-1">Aufgabe 3.4.1</a> – die Begriffe an einem weiteren Baum, und <a href="uebungen.html#a-3-4-2">Aufgabe 3.4.2</a> – Baum oder nicht?</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Begriffe an einem kleinen Baum <span class="niveau">AFB I</span></summary>
+                <pre><code>      R
+     / \
+    S   T
+    |
+    U
+   / \
+  V   W</code></pre>
+                <p>Gib die Blätter und die Geschwister von S an. Bestimme die Tiefe von V, die Höhe des Baums und die Anzahl der Ebenen.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Blätter: T, V, W. Geschwister von S: T (gleicher Elternknoten R). Tiefe von V: 3 (Kanten R–S, S–U, U–V). Höhe: 3, denn der längste Weg R–S–U–V hat 3 Kanten. Also 4 Ebenen.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-4-1">Aufgabe 3.4.1</a> – die Begriffe an einem weiteren Baum, und <a href="#a-3-4-2">Aufgabe 3.4.2</a> – Baum oder nicht?</p>
 
 <p><a href="#schritt-2">Weiter mit Schritt 2: Die Klasse Knoten →</a></p>
 
@@ -78,6 +95,16 @@
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>2_baeume/baum.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>Knoten</code> und die Methode <code>kind_hinzufuegen</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>a = Knoten(&quot;A&quot;)</code> · <code>b = a.kind_hinzufuegen(Knoten(&quot;B&quot;))</code>. Danach committen, z.&nbsp;B. <code>3.4 Schritt 2: Knoten, kind_hinzufuegen angelegt</code>.</p>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Über die Kinderlisten wandern <span class="niveau">AFB I</span></summary>
+                <p>Der Baum aus dem Video (Beispiel 1) ist aufgebaut. Was liefern <code>len(b.kinder)</code>, <code>len(a.kinder[1].kinder)</code> und <code>a.kinder[0].kinder[1].wert</code>? Überlege erst, dann probiere es in Thonny aus.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>len(b.kinder)</code> ist 2 (E und F). <code>a.kinder[1]</code> ist C, ein Blatt – also 0. <code>a.kinder[0]</code> ist B, dessen zweites Kind (Index 1) ist F: Ausgabe <code>'F'</code>.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-3">Weiter mit Schritt 3: Rekursion – die Höhe berechnen →</a></p>
 
 <h2 id="schritt-3">Schritt 3: Rekursion – die Höhe berechnen</h2>
@@ -90,6 +117,16 @@
         </figure>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/baum.py</code> den Code aus dem Video: die Funktion <code>hoehe</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>hoehe(a)</code>. Danach committen, z.&nbsp;B. <code>3.4 Schritt 3: hoehe ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Die Regel anwenden <span class="niveau">AFB I</span></summary>
+                <p>Ein Knoten X hat drei Kinder. Ihre Teilbäume haben die Höhen 2, 0 und 4. Wie hoch ist der Teilbaum mit der Wurzel X? Was liefert <code>hoehe</code> für einen Knoten ohne Kinder – und was würde ohne die Zeile <code>if not knoten.kinder</code> bei einem Blatt passieren?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>1 + 4 = 5, denn die größte Höhe der Kinder ist 4. Für einen Knoten ohne Kinder liefert <code>hoehe</code> 0. Ohne die Abbruchbedingung liefe die Schleife bei einem Blatt gar nicht, <code>groesste</code> bliebe 0 und das Ergebnis wäre 1 + 0 = 1 – jedes Blatt hätte die Höhe 1, alle Höhen wären um 1 zu groß.</p>
+                </details>
+            </details>
+        </div>
 
 <p><a href="#schritt-4">Weiter mit Schritt 4: Der Aufrufstapel →</a></p>
 
@@ -107,7 +144,7 @@
 <div class="beispiel klappbar">
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> allgemeiner Baum in Python mit rekursiver Höhenberechnung</summary>
-            <pre><code class="language-python">class Knoten:
+            <pre class="ausfuehrbar"><code class="language-python">class Knoten:
     def __init__(self, wert):
         self.wert = wert
         self.kinder = []            # beliebig viele Kinder
@@ -164,6 +201,16 @@ print(anzahl_blaetter(a))  # 4</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Den Aufrufstapel selbst führen <span class="niveau">AFB II</span></summary>
+                <p>Verfolge <code>hoehe(b)</code> für den Baum aus Beispiel 1 auf Papier. Welche Aufrufe entstehen in welcher Reihenfolge, und was gibt jeder zurück? Wie viele Aufrufe sind höchstens gleichzeitig offen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>hoehe(B)</code> startet und ruft <code>hoehe(E)</code> auf → 0 (Blatt). Dann <code>hoehe(F)</code> → 0 (Blatt). Danach rechnet <code>hoehe(B)</code>: Die größte Höhe der Kinder ist 0, also 1 + 0 = 1. Höchstens 2 Aufrufe sind gleichzeitig offen: <code>hoehe(B)</code> und eines seiner Kinder.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-5">Weiter mit Schritt 5: Blätter zählen →</a></p>
 
 <h2 id="schritt-5">Schritt 5: Blätter zählen – dasselbe Muster noch einmal</h2>
@@ -176,6 +223,16 @@ print(anzahl_blaetter(a))  # 4</code></pre>
         </figure>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/baum.py</code> den Code aus dem Video: die Funktion <code>anzahl_blaetter</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>anzahl_blaetter(a)</code> · <code>anzahl_blaetter(Knoten(&quot;X&quot;))</code>. Danach committen, z.&nbsp;B. <code>3.4 Schritt 5: anzahl_blaetter ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Was ändert sich? <span class="niveau">AFB I</span></summary>
+                <p>Was liefert <code>anzahl_blaetter(b)</code> für den Baum aus Beispiel 1? Was würde <code>anzahl_blaetter(a)</code> liefern, wenn in der Abbruchbedingung <code>return 0</code> statt <code>return 1</code> stünde?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>anzahl_blaetter(b)</code> ist 2 (E und F). Mit <code>return 0</code> liefert jedes Blatt 0, und jede Summe aus Nullen ist wieder 0 – das Ergebnis wäre immer 0.</p>
+                </details>
+            </details>
+        </div>
 
 <p>Danach: <a href="uebungen.html#a-3-4-3">Aufgabe 3.4.3</a> – eigene rekursive Baumfunktionen nach demselben Muster.</p>
 
@@ -226,29 +283,23 @@ print(anzahl_blaetter(a))  # 4</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-4-1">
             <details>
-                <summary>Kurz geprüft 1: Begriffe an einem kleinen Baum <span class="niveau">AFB I</span></summary>
-                <pre><code>      R
-     / \
-    S   T
-    |
-    U
-   / \
-  V   W</code></pre>
-                <p>Gib die Blätter und die Geschwister von S an. Bestimme die Tiefe von V, die Höhe des Baums und die Anzahl der Ebenen.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Blätter: T, V, W. Geschwister von S: T (gleicher Elternknoten R). Tiefe von V: 3 (Kanten R–S, S–U, U–V). Höhe: 3, denn der längste Weg R–S–U–V hat 3 Kanten. Also 4 Ebenen.</p>
-                </details>
+                <summary>Aufgabe 3.4.1: Begriffe anwenden <span class="niveau">AFB I</span></summary>
+                <pre><code>            Schule
+          /   |    \
+     Mathe  Info   Sport
+             / \
+          LK    GK
+          |
+        Kurs11</code></pre>
+                <p>Bestimme Wurzel, Blätter, die Geschwister von Info, die Tiefe von LK, die Höhe des Baums und die Anzahl der Ebenen.</p>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-4-2">
             <details>
-                <summary>Kurz geprüft 2: Über die Kinderlisten wandern <span class="niveau">AFB I</span></summary>
-                <p>Der Baum aus dem Video (Beispiel 1) ist aufgebaut. Was liefern <code>len(b.kinder)</code>, <code>len(a.kinder[1].kinder)</code> und <code>a.kinder[0].kinder[1].wert</code>? Überlege erst, dann probiere es in Thonny aus.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>len(b.kinder)</code> ist 2 (E und F). <code>a.kinder[1]</code> ist C, ein Blatt – also 0. <code>a.kinder[0]</code> ist B, dessen zweites Kind (Index 1) ist F: Ausgabe <code>'F'</code>.</p>
-                </details>
+                <summary>Aufgabe 3.4.2: Baum oder nicht? <span class="niveau">AFB II</span></summary>
+                <p>Entscheide und begründe, ob es sich um einen Baum handelt: (a) die Ordnerstruktur eines USB-Sticks, (b) das Straßennetz von Dresden, (c) ein Stammbaum, der nur die Mütter einträgt (jede Person hat höchstens eine eingetragene Mutter), (d) ein Freundeskreis in einem sozialen Netzwerk.</p>
             </details>
         </div>

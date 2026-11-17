@@ -40,7 +40,7 @@ WHERE description = 'Info LK > alles';</code></pre>
         Die funktionale Programmierung setzt Programme aus Funktionen zusammen, die für dieselbe Eingabe immer dieselbe Ausgabe liefern und keinen veränderbaren Zustand nutzen.
     </p>
 
-<pre><code class="language-python">zahlen = [1, 2, 3, 4, 5]
+<pre class="ausfuehrbar"><code class="language-python">zahlen = [1, 2, 3, 4, 5]
 quadrate = list(map(lambda x: x * x, zahlen))
 print(quadrate)            # [1, 4, 9, 16, 25]
 
@@ -78,7 +78,7 @@ kann_fliegen(X) :- vogel(X), X \= pinguin.
         Hier bildest du Dinge der realen Welt nach: Ein Hund hat einen Namen und eine Rasse – und kann bellen.
     </p>
 
-<pre><code class="language-python">class Hund:
+<pre class="ausfuehrbar"><code class="language-python">class Hund:
     def __init__(self, name, rasse):
         self.name = name
         self.rasse = rasse
@@ -95,7 +95,7 @@ mein_hund.bellen()         # Bello (Rasse: Dackel) bellt!</code></pre>
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Summe von 1 bis 10</summary>
         <p><strong>Ausgangssituation:</strong> Summe von 1 bis 10 – imperativ mit Schleife (<code>s = 0; for i in range(1, 11): s += i</code>) oder funktional mit <code>sum(range(1, 11))</code>. Beide liefern 55.</p>
-        <pre><code class="language-python"># imperativ
+        <pre class="ausfuehrbar"><code class="language-python"># imperativ
 s = 0
 for i in range(1, 11):
     s += i
@@ -126,7 +126,7 @@ print(sum(range(1, 11)))    # 55</code></pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Dieselbe Aufgabe „Namen aller volljährigen Personen, alphabetisch“ in vier Paradigmen</summary>
         <p><strong>Ausgangssituation:</strong> Gegeben sind drei Personen mit Name und Alter: Mia (17), Ben (19), Ala (21). Gesucht sind die Namen aller Volljährigen in alphabetischer Reihenfolge. Dasselbe Problem wird imperativ, funktional, objektorientiert, logisch (Prolog) und zum Vergleich in SQL gelöst.</p>
-        <pre><code class="language-python">personen = [("Mia", 17), ("Ben", 19), ("Ala", 21)]
+        <pre class="ausfuehrbar"><code class="language-python">personen = [("Mia", 17), ("Ben", 19), ("Ala", 21)]
 
 # imperativ
 ergebnis = []

@@ -1,29 +1,5 @@
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-    <details>
-        <summary>Kurz geprüft 3: Die Suche verfolgen <span class="niveau">AFB I</span></summary>
-        <p>Zu <code>Tier</code> und <code>Hund</code> von oben kommt <code>class Dackel(Hund): pass</code>. In welchen Klassen sucht Python bei <code>Dackel().sprich()</code> nach <code>sprich</code>, und was wird ausgegeben?</p>
-        <details class="loesung-details"><summary>Lösung zeigen</summary>
-        <p>Zuerst in <code>Dackel</code> – dort steht nichts. Dann in <code>Hund</code> – dort wird <code>sprich</code> gefunden, die Suche hört auf. Ausgabe: <code>Der Hund bellt.</code> <code>Tier.sprich</code> wird nicht erreicht.</p>
-        </details>
-    </details>
-</div>
-
-<div class="aufgabe" id="a-4-10-1">
-    <details>
-        <summary>Aufgabe 4.10.1: UML-Diagramm Musikinstrumente <span class="niveau">AFB II</span></summary>
-        <p>Zeichne ein UML-Diagramm mit folgenden Klassen: <code>Musikinstrument</code> (Oberklasse), <code>Gitarre</code>, <code>Klavier</code>, <code>Schlagzeug</code> (Unterklassen). Gib je ein bis zwei Attribute und eine Methode an.</p>
-    </details>
-</div>
-
-<div class="aufgabe" id="a-4-10-2">
-    <details>
-        <summary>Aufgabe 4.10.2: Unterklasse bilden <span class="niveau">AFB I</span></summary>
-        <p>Erstelle eine Klasse <code>Mitarbeiter</code> mit dem Attribut <code>name</code>. Leite eine Klasse <code>Manager</code> ab, die zusätzlich das Attribut <code>abteilung</code> besitzt.</p>
-    </details>
-</div>
-
 <div class="aufgabe" id="a-4-10-3">
     <details>
         <summary>Aufgabe 4.10.3: Initialisierung beschreiben <span class="niveau">AFB II</span></summary>
@@ -49,7 +25,7 @@ spatz = Vogel("Spatz", 25)</code></pre>
     <details>
         <summary>Aufgabe 4.10.4: Code analysieren <span class="niveau">AFB II</span></summary>
         <p>Analysiere den folgenden Code und beschreibe das Verhalten:</p>
-        <pre><code class="language-python">class Smartphone:
+        <pre class="ausfuehrbar"><code class="language-python">class Smartphone:
     def info(self):
         print("Ich bin ein elektronisches Gerät.")
 

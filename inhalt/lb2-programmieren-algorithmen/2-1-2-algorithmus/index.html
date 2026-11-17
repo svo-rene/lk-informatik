@@ -19,7 +19,7 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> Der Algorithmus „Addiere die Zahlen von 1 bis n“ soll auf alle sechs Eigenschaften geprüft werden.</p>
-            <pre><code class="language-python">def summe_bis(n):
+            <pre class="ausfuehrbar"><code class="language-python">def summe_bis(n):
     s = 0
     for i in range(1, n + 1):
         s = s + i
@@ -53,7 +53,7 @@ print(summe_bis(4))     # 10</code></pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Die Anweisung „Solange x ≠ 1: Ist x gerade, halbiere x, sonst setze x = 3x + 1“ erzeugt die Collatz-Folge. Gezählt werden soll, nach wie vielen Schritten x den Wert 1 erreicht.</p>
-            <pre><code class="language-python">def collatz_schritte(x):
+            <pre class="ausfuehrbar"><code class="language-python">def collatz_schritte(x):
     if not isinstance(x, int) or x &lt; 1:   # Vorbedingung: ganze Zahl ab 1
         return None
     schritte = 0
@@ -97,7 +97,7 @@ print(collatz_schritte(6))   # 8</code></pre>
 <div class="beispiel klappbar">
             <details>
                 <summary>Beispiel: alle vier Grundstrukturen in einem kurzen Programm</summary>
-            <pre><code class="language-python">def bewertung(punkte):            # Unterprogramm
+            <pre class="ausfuehrbar"><code class="language-python">def bewertung(punkte):            # Unterprogramm
     if punkte &gt;= 50:              # Verzweigung
         return "bestanden"
     else:

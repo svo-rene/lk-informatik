@@ -18,43 +18,6 @@
 
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe" id="a-3-10-1">
-            <details>
-                <summary>Aufgabe 3.10.1: Wegsuche nachvollziehen <span class="niveau">AFB I–II</span></summary>
-                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/wegsuche.py</code> – weiterführen<br><strong>Commits:</strong> nach Teil 3: <code>3.10.1 Teil 3: alle Wege von 0 nach 4, kürzester bestimmt</code></p>
-                <ol>
-                    <li>Zeichne den Graphen und notiere alle Aufrufe von <code>find_path(0, 4)</code> mit dem jeweiligen Pfad. Markiere die Stelle, an der zurückgegangen wird.</li>
-                    <li>Gib an, welchen Weg <code>find_path(1, 3)</code> liefert.</li>
-                    <li>Ändere das Programm so, dass <strong>alle</strong> Wege von 0 nach 4 ausgegeben werden, und bestimme daraus den kürzesten.</li>
-                </ol>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Wenn es keine Lösung gibt <span class="niveau">AFB II</span></summary>
-                <p>Drei Kurse X, Y und Z stehen paarweise in Konflikt, es gibt nur die Termine Mo und Di. <code>plane</code> wird mit der Reihenfolge X, Y, Z aufgerufen. Verfolge den Ablauf: Was gibt <code>plane</code> zurück, und wie oft wird es insgesamt aufgerufen?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Aufruf 1: X Mo. Aufruf 2: Y Mo verboten, Y Di. Aufruf 3: Z – Mo und Di verboten, <code>False</code>. Y hat keinen weiteren Tag: Rücknahme, <code>False</code>. X wird zurückgenommen und bekommt Di. Aufruf 4: Y Mo. Aufruf 5: Z – Mo und Di verboten, <code>False</code>; Y Di ist verboten, also <code>False</code>; X hat keinen Tag mehr. Ergebnis: <code>False</code> nach 5 Aufrufen – drei paarweise verbundene Kurse brauchen drei Tage.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-10-2">
-            <details>
-                <summary>Aufgabe 3.10.2: Das N-Damen-Problem <span class="niveau">AFB II–III</span></summary>
-                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/n_damen.py</code> – neu anlegen<br><strong>Commits:</strong> nach Teil 3: <code>3.10.2 Teil 3: dame_moeglich und setze_damen</code> · nach Teil 4: <code>3.10.2 Teil 4: Aufrufe für N = 3, 4, 6, 8 gezählt</code></p>
-                <p>Auf einem N×N-Schachbrett sollen N Damen so stehen, dass sich keine zwei bedrohen. Eine Dame bedroht alle Felder in ihrer Zeile, Spalte und in beiden Diagonalen.</p>
-                <ol>
-                    <li>Löse das Problem für N = 4 auf Papier und zeichne den Suchbaum bis zur ersten Lösung.</li>
-                    <li>Speichere den Zustand als Liste <code>spalten</code>, bei der <code>spalten[z]</code> die Spalte der Dame in Zeile z angibt. Begründe, warum diese Darstellung die Zeilenregel automatisch erfüllt.</li>
-                    <li>Implementiere <code>dame_moeglich(spalten, zeile, spalte)</code> und <code>setze_damen(spalten, zeile, n)</code>.</li>
-                    <li>Teste für N = 3, 4, 6 und 8. Zähle jeweils die rekursiven Aufrufe.</li>
-                    <li>Vergleiche mit einem Programm, das alle 8<sup>8</sup> Belegungen mit einer Dame pro Zeile durchprobiert.</li>
-                </ol>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-3-10-3">
             <details>
                 <summary>Aufgabe 3.10.3: Sudoku <span class="niveau">AFB II–III</span></summary>
@@ -136,7 +99,7 @@ def zeige(feld):
                 <summary>PRIMM 3.10: Was erzeugt <code>raetsel</code>? <span class="niveau">AFB I–II</span></summary>
                 <p class="git-datei"><strong>Dateien:</strong> <a href="../material/primm_3-10_raetsel.py" download>primm_3-10_raetsel.py</a> und <a href="../material/primm_3-10_fehler.py" download>primm_3-10_fehler.py</a> in <code>3_graphen/</code> speichern – erst nach Schritt 1 öffnen.</p>
                 <p><strong>1 Vorhersagen</strong> (Papier, ohne Rechner): Welche Zeilen gibt das Programm aus, und welche Zahl steht am Ende? Zeichne dazu den Suchbaum.</p>
-                <pre><code class="language-python">def raetsel(n, folge):
+                <pre class="ausfuehrbar"><code class="language-python">def raetsel(n, folge):
     if len(folge) == n:
         print(folge)
         return 1

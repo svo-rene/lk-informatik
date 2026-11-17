@@ -1,115 +1,10 @@
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Kein Sieger ohne Stimmen <span class="niveau">AFB I–II</span></summary>
-                <p>Nach <code>w = Wahl(["Ella", "Jonas"])</code> wird ohne eine einzige Stimme <code>print(w.gewinner())</code> aufgerufen. Was wird ausgegeben? Begründe mit dem Code von <code>gewinner()</code>. Und warum steht die Meldung „ungültige Stimme“ nicht in der Klasse <code>Wahl</code>?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Ausgabe <code>None</code>: <code>hoechste</code> ist 0, beide Namen haben 0 Stimmen, also enthält <code>beste</code> zwei Namen – das ist ein Gleichstand. Die Meldung ist Darstellung und gehört nicht ins Model. Das Model gibt nur <code>False</code> zurück; was angezeigt wird, entscheidet der Controller bzw. die View. So lässt sich die Klasse ohne Konsole benutzen und prüfen.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Pfeile für den Notenrechner <span class="niveau">AFB I–II</span></summary>
-                <p>Ein Team baut drei Module: <code>notenrechner.py</code> mit der Klasse <code>Notenrechner</code> (berechnet Durchschnitte), <code>tabelle.py</code> (gibt die Noten als Tabelle aus) und <code>main.py</code> (liest die Noten ein). Ordne jedes Modul Model, View oder Controller zu und gib alle Pfeile „A importiert B“ an. Welches Modul importiert nichts?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Model: <code>notenrechner.py</code>, View: <code>tabelle.py</code>, Controller: <code>main.py</code>. Pfeile: <code>main.py</code> → <code>notenrechner.py</code>, <code>main.py</code> → <code>tabelle.py</code>, <code>tabelle.py</code> → <code>notenrechner.py</code> (für den Typhinweis bzw. die Methodenaufrufe). Das Model <code>notenrechner.py</code> importiert nichts.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-5-1-1">
-            <details>
-                <summary>Aufgabe 5.1.1: Programmeinstieg verstehen <span class="niveau">AFB I–II</span></summary>
-                <p>Die Datei <code>werkzeug.py</code> enthält <code>print("A")</code> und darunter <code>if __name__ == "__main__": print("B")</code>. Die Datei <code>main.py</code> enthält <code>import werkzeug</code> und darunter <code>print("C")</code>. Gib die Ausgabe an, wenn (a) <code>werkzeug.py</code> und (b) <code>main.py</code> gestartet wird. Begründe.</p>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-5-1-2">
-            <details>
-                <summary>Aufgabe 5.1.2: Wer importiert wen? – Pausenverkauf der Schülerfirma <span class="niveau">AFB II</span></summary>
-                <p>Die Schülerfirma verkauft in der Hofpause Brezeln und Äpfel. Ein Mitglied hat das Programm schon auf vier Module verteilt:</p>
-                <pre><code class="language-python"># artikel.py
-class Artikel:
-    def __init__(self, name: str, preis_cent: int):
-        self.name = name
-        self.__preis_cent = preis_cent
-
-    def get_preis(self) -&gt; int:
-        return self.__preis_cent</code></pre>
-                <pre><code class="language-python"># lager.py
-from artikel import Artikel
-
-class Lager:
-    def __init__(self):
-        self.__artikel: dict[str, Artikel] = {}
-        self.__bestand: dict[str, int] = {}
-        self.__kasse_cent = 0
-
-    def einlagern(self, artikel: Artikel, anzahl: int) -&gt; None:
-        self.__artikel[artikel.name] = artikel
-        self.__bestand[artikel.name] = self.__bestand.get(artikel.name, 0) + anzahl
-
-    def anzahl(self, name: str) -&gt; int:
-        return self.__bestand.get(name, 0)
-
-    def get_kasse(self) -&gt; int:
-        return self.__kasse_cent
-
-    def verkaufen(self, name: str) -&gt; None:
-        if self.anzahl(name) &gt; 0:
-            self.__bestand[name] -= 1
-            self.__kasse_cent += self.__artikel[name].get_preis()
-        else:
-            print(f"{name} ist ausverkauft!")
-
-    def nachbestellen(self) -&gt; None:
-        for name in self.__bestand:
-            if self.__bestand[name] == 0:
-                menge = int(input(f"Wie viele {name} nachbestellen? "))
-                self.__bestand[name] = menge
-
-l = Lager()
-print("Lager-Test:", l.anzahl("Brezel"))</code></pre>
-                <pre><code class="language-python"># anzeige.py
-from lager import Lager
-
-def zeige_bestand(lager: Lager, namen: list[str]) -&gt; None:
-    for name in namen:
-        print(f"{name}: {lager.anzahl(name)} Stück")
-    print(f"Kasse: {lager.get_kasse() / 100:.2f} €")</code></pre>
-                <pre><code class="language-python"># main.py
-from artikel import Artikel
-from lager import Lager
-from anzeige import zeige_bestand
-
-def main() -&gt; None:
-    lager = Lager()
-    lager.einlagern(Artikel("Brezel", 80), 2)
-    lager.einlagern(Artikel("Apfel", 50), 1)
-    lager.verkaufen("Apfel")
-    lager.verkaufen("Apfel")
-    lager.verkaufen("Brezel")
-    zeige_bestand(lager, ["Brezel", "Apfel"])
-
-if __name__ == "__main__":
-    main()</code></pre>
-                <ol type="a">
-                    <li>Zeichne ein Diagramm, in dem jedes Modul ein Kasten ist und ein Pfeil von A nach B bedeutet „A importiert B“. Ordne jedes Modul Model, View oder Controller zu.</li>
-                    <li>Gib die vollständige Ausgabe beim Start von <code>main.py</code> an. Erkläre, woher die erste Zeile kommt.</li>
-                    <li>Finde drei Stellen, an denen gegen MVC oder gegen den kontrollierten Programmeinstieg verstoßen wird, und gib jeweils eine Verbesserung an.</li>
-                    <li>Schreibe <code>verkaufen</code> so um, dass das Model nichts mehr ausgibt, und passe <code>main.py</code> an, sodass die Meldung „Apfel ist ausverkauft!“ weiterhin erscheint.</li>
-                </ol>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-5-1-3">
             <details>
                 <summary>Aufgabe 5.1.3: Ein Programm in Module zerlegen – Weitsprung beim Sportfest <span class="niveau">AFB II–III</span></summary>
                 <p>Beim Sportfest werden die Weitsprung-Ergebnisse bisher mit diesem Programm ausgewertet. Jede Person hat drei Versuche. Weiten unter 0&nbsp;m oder über 10&nbsp;m sind Tippfehler und zählen nicht.</p>
-                <pre><code class="language-python"># weitsprung.py – alles in einer Datei
+                <pre class="ausfuehrbar"><code class="language-python"># weitsprung.py – alles in einer Datei
 class Springer:
     def __init__(self, name: str):
         self.name = name
@@ -155,7 +50,7 @@ for s in teilnehmer:
             <details>
                 <summary>Aufgabe 5.1.4: Ergebnis prüfen – in welcher Reihenfolge wird geladen? <span class="niveau">AFB II</span></summary>
                 <p>Für ein kleines Malprogramm gibt es drei Dateien im selben Ordner:</p>
-                <pre><code class="language-python"># farben.py
+                <pre class="ausfuehrbar"><code class="language-python"># farben.py
 print("farben geladen")
 GRUEN = "grün"
 

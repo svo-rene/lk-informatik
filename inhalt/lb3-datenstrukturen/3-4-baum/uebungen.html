@@ -18,57 +18,6 @@
 
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Die Regel anwenden <span class="niveau">AFB I</span></summary>
-                <p>Ein Knoten X hat drei Kinder. Ihre Teilbäume haben die Höhen 2, 0 und 4. Wie hoch ist der Teilbaum mit der Wurzel X? Was liefert <code>hoehe</code> für einen Knoten ohne Kinder – und was würde ohne die Zeile <code>if not knoten.kinder</code> bei einem Blatt passieren?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>1 + 4 = 5, denn die größte Höhe der Kinder ist 4. Für einen Knoten ohne Kinder liefert <code>hoehe</code> 0. Ohne die Abbruchbedingung liefe die Schleife bei einem Blatt gar nicht, <code>groesste</code> bliebe 0 und das Ergebnis wäre 1 + 0 = 1 – jedes Blatt hätte die Höhe 1, alle Höhen wären um 1 zu groß.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Den Aufrufstapel selbst führen <span class="niveau">AFB II</span></summary>
-                <p>Verfolge <code>hoehe(b)</code> für den Baum aus Beispiel 1 auf Papier. Welche Aufrufe entstehen in welcher Reihenfolge, und was gibt jeder zurück? Wie viele Aufrufe sind höchstens gleichzeitig offen?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>hoehe(B)</code> startet und ruft <code>hoehe(E)</code> auf → 0 (Blatt). Dann <code>hoehe(F)</code> → 0 (Blatt). Danach rechnet <code>hoehe(B)</code>: Die größte Höhe der Kinder ist 0, also 1 + 0 = 1. Höchstens 2 Aufrufe sind gleichzeitig offen: <code>hoehe(B)</code> und eines seiner Kinder.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 5: Was ändert sich? <span class="niveau">AFB I</span></summary>
-                <p>Was liefert <code>anzahl_blaetter(b)</code> für den Baum aus Beispiel 1? Was würde <code>anzahl_blaetter(a)</code> liefern, wenn in der Abbruchbedingung <code>return 0</code> statt <code>return 1</code> stünde?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>anzahl_blaetter(b)</code> ist 2 (E und F). Mit <code>return 0</code> liefert jedes Blatt 0, und jede Summe aus Nullen ist wieder 0 – das Ergebnis wäre immer 0.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-4-1">
-            <details>
-                <summary>Aufgabe 3.4.1: Begriffe anwenden <span class="niveau">AFB I</span></summary>
-                <pre><code>            Schule
-          /   |    \
-     Mathe  Info   Sport
-             / \
-          LK    GK
-          |
-        Kurs11</code></pre>
-                <p>Bestimme Wurzel, Blätter, die Geschwister von Info, die Tiefe von LK, die Höhe des Baums und die Anzahl der Ebenen.</p>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-4-2">
-            <details>
-                <summary>Aufgabe 3.4.2: Baum oder nicht? <span class="niveau">AFB II</span></summary>
-                <p>Entscheide und begründe, ob es sich um einen Baum handelt: (a) die Ordnerstruktur eines USB-Sticks, (b) das Straßennetz von Dresden, (c) ein Stammbaum, der nur die Mütter einträgt (jede Person hat höchstens eine eingetragene Mutter), (d) ein Freundeskreis in einem sozialen Netzwerk.</p>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-3-4-3">
             <details>
                 <summary>Aufgabe 3.4.3: Rekursive Baumfunktionen <span class="niveau">AFB II–III</span></summary>

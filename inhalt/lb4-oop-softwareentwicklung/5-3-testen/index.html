@@ -38,7 +38,17 @@
 
 <p>Fehler stecken besonders oft an den <strong>Rändern</strong> der Klassen: <code>&lt;</code> statt <code>&lt;=</code>, <code>range(1, n)</code> statt <code>range(1, n + 1)</code>. Deshalb testet man an jeder Grenze den Wert <strong>direkt davor</strong> und <strong>direkt dahinter</strong> (bei ganzen Zahlen also den letzten Wert der einen und den ersten Wert der nächsten Klasse).</p>
 
-<p>Danach: <a href="uebungen.html#a-5-3-1">Aufgabe 5.3.1</a> – Äquivalenzklassen und Grenzwerte beim Lesewettbewerb.</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Das Extraleben <span class="niveau">AFB I</span></summary>
+                <p>In einem Spiel gibt es ab 1000 Punkten ein Extraleben. Punkte sind ganze Zahlen ab 0; negative Werte sind ungültig (<code>ValueError</code>). Nenne die Äquivalenzklassen mit je einem Vertreter und alle Grenzwerte, die du testen würdest.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Drei Klassen: ungültig unter 0 (z.&nbsp;B. −5 → <code>ValueError</code>), gültig 0 bis 999 (z.&nbsp;B. 400 → kein Extraleben), gültig ab 1000 (z.&nbsp;B. 3000 → Extraleben). Grenzwerte: −1 | 0 und 999 | 1000. Eine obere Grenze gibt es laut Spezifikation nicht.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-5-3-1">Aufgabe 5.3.1</a> – Äquivalenzklassen und Grenzwerte beim Lesewettbewerb.</p>
 
 <p><a href="#schritt-2">Weiter mit Schritt 2: Tests mit <code>assert</code> in einer Testdatei →</a></p>
 
@@ -112,6 +122,16 @@ if __name__ == "__main__":
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Wer hat den Fehler – Modul oder Test? <span class="niveau">AFB II</span></summary>
+                <p>Das Modul <code>kurshalbjahr.py</code> ist schon korrigiert (<code>return punkte &lt; 5</code>). Jemand ergänzt in der Testdatei die Zeile <code>assert ist_unterpunktet(4) == False, "4 Punkte: erwartet False"</code>. Was gibt Python aus? Wo steckt der Fehler, und was fehlt außerdem an der Meldung?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Python bricht ab mit <code>AssertionError: 4 Punkte: erwartet False</code>. Der Fehler steckt im Test: Laut Spezifikation sind 4 Punkte unterpunktet, erwartet ist also <code>True</code>. Der Meldung fehlt außerdem das „tatsächlich …“ – mit <code>f"…, tatsächlich {ergebnis}"</code> hätte man sofort gesehen, dass das Modul <code>True</code> liefert.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-3">Weiter mit Schritt 3: Einen <code>ValueError</code> erwarten →</a></p>
 
 <h2 id="schritt-3">Schritt 3: Einen <code>ValueError</code> erwarten</h2>
@@ -138,6 +158,16 @@ if __name__ == "__main__":
 assert wirft_value_error(ist_unterpunktet, 16), "16 Punkte: erwartet ValueError"</code></pre>
 
 <p><code>*argumente</code> sammelt alle weiteren Argumente ein und reicht sie an die Funktion weiter. Du kannst auch eine Methode übergeben, z.&nbsp;B. <code>wirft_value_error(Aufzug().einsteigen, 0)</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Was liefert die Hilfsfunktion? <span class="niveau">AFB I</span></summary>
+                <p>Was liefern <code>wirft_value_error(ist_unterpunktet, 0)</code> und <code>wirft_value_error(ist_unterpunktet, 99)</code>? Welchen Wert hat <code>argumente</code> jeweils innerhalb der Hilfsfunktion?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Bei 0 gibt es keinen Fehler (0 Punkte sind gültig), also <code>False</code>; <code>argumente</code> ist das Tupel <code>(0,)</code>. Bei 99 löst <code>ist_unterpunktet</code> einen <code>ValueError</code> aus, <code>except</code> fängt ihn ab, Ergebnis <code>True</code>; <code>argumente</code> ist <code>(99,)</code>.</p>
+                </details>
+            </details>
+        </div>
 
 <p><a href="#schritt-4">Weiter mit Schritt 4: Alle Tests auf einmal →</a></p>
 
@@ -308,7 +338,17 @@ ok      test_unmoegliches_gewicht
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-5-3-2">Aufgabe 5.3.2</a> – eine Testdatei schreiben und den Fehler finden, und <a href="uebungen.html#a-5-3-3">Aufgabe 5.3.3</a> – die Stempelkarte testen.</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Richtige Antwort, falscher Zustand <span class="niveau">AFB II</span></summary>
+                <p>Mit der <em>fehlerhaften</em> Klasse <code>Aufzug</code> aus Beispiel 2 wird ausgeführt: <code>a = Aufzug()</code>, dann <code>a.einsteigen(250)</code>, <code>a.einsteigen(250)</code>, <code>a.einsteigen(200)</code>. Was liefert der dritte Aufruf, und welche Werte haben danach <code>a.last()</code> und <code>a.personen()</code>? Was ergäbe sich mit der korrigierten Methode?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Fehlerhaft: Der dritte Aufruf liefert <code>False</code> (700 ≥ 630) – das ist richtig. Trotzdem sind <code>a.last()</code> = 700 und <code>a.personen()</code> = 3, weil vor der Prüfung erhöht wurde. Korrigiert: ebenfalls <code>False</code>, aber <code>a.last()</code> = 500 und <code>a.personen()</code> = 2. Nur ein Test, der auch den Zustand prüft, sieht den Unterschied.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-5-3-2">Aufgabe 5.3.2</a> – eine Testdatei schreiben und den Fehler finden, und <a href="uebungen.html#a-5-3-3">Aufgabe 5.3.3</a> – die Stempelkarte testen.</p>
 
 <div class="praxisbezug">
             <details>
@@ -337,22 +377,36 @@ ok      test_unmoegliches_gewicht
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-5-3-1">
             <details>
-                <summary>Kurz geprüft 1: Das Extraleben <span class="niveau">AFB I</span></summary>
-                <p>In einem Spiel gibt es ab 1000 Punkten ein Extraleben. Punkte sind ganze Zahlen ab 0; negative Werte sind ungültig (<code>ValueError</code>). Nenne die Äquivalenzklassen mit je einem Vertreter und alle Grenzwerte, die du testen würdest.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Drei Klassen: ungültig unter 0 (z.&nbsp;B. −5 → <code>ValueError</code>), gültig 0 bis 999 (z.&nbsp;B. 400 → kein Extraleben), gültig ab 1000 (z.&nbsp;B. 3000 → Extraleben). Grenzwerte: −1 | 0 und 999 | 1000. Eine obere Grenze gibt es laut Spezifikation nicht.</p>
-                </details>
+                <summary>Aufgabe 5.3.1: Äquivalenzklassen und Grenzwerte – der Lesewettbewerb <span class="niveau">AFB I–II</span></summary>
+                <p>Beim Lesewettbewerb der Unterstufe gibt es für jedes gelesene Buch Punkte nach seiner Seitenzahl: unter 100 Seiten 1 Punkt, 100 bis 299 Seiten 2 Punkte, ab 300 Seiten 3 Punkte. Seitenzahlen unter 1 oder über 2000 sind Tippfehler (<code>ValueError</code>). Die Funktion heißt <code>lesepunkte(seiten: int) -&gt; int</code>.</p>
+                <ol type="a">
+                    <li>Gib alle Äquivalenzklassen an, kennzeichne gültige und ungültige und nenne je einen Vertreter.</li>
+                    <li>Gib alle Werte an, die bei der Grenzwertanalyse getestet werden, jeweils mit erwartetem Ergebnis.</li>
+                    <li>Begründe, warum die Vertreter aus a) allein nicht ausreichen.</li>
+                </ol>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-5-3-2">
             <details>
-                <summary>Kurz geprüft 2: Wer hat den Fehler – Modul oder Test? <span class="niveau">AFB II</span></summary>
-                <p>Das Modul <code>kurshalbjahr.py</code> ist schon korrigiert (<code>return punkte &lt; 5</code>). Jemand ergänzt in der Testdatei die Zeile <code>assert ist_unterpunktet(4) == False, "4 Punkte: erwartet False"</code>. Was gibt Python aus? Wo steckt der Fehler, und was fehlt außerdem an der Meldung?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Python bricht ab mit <code>AssertionError: 4 Punkte: erwartet False</code>. Der Fehler steckt im Test: Laut Spezifikation sind 4 Punkte unterpunktet, erwartet ist also <code>True</code>. Der Meldung fehlt außerdem das „tatsächlich …“ – mit <code>f"…, tatsächlich {ergebnis}"</code> hätte man sofort gesehen, dass das Modul <code>True</code> liefert.</p>
-                </details>
+                <summary>Aufgabe 5.3.2: Eine Testdatei schreiben und den Fehler finden <span class="niveau">AFB II</span></summary>
+                <p>So hat ein Mitschüler <code>lesepunkte</code> aus Aufgabe 5.3.1 programmiert:</p>
+                <pre><code class="language-python"># lesepunkte.py
+def lesepunkte(seiten: int) -&gt; int:
+    if seiten &lt; 1 or seiten &gt;= 2000:
+        raise ValueError("Seitenzahl ungültig")
+    if seiten &lt;= 100:
+        return 1
+    elif seiten &lt; 300:
+        return 2
+    return 3</code></pre>
+                <ol>
+                    <li>Speichere das Modul in Thonny und lege daneben <code>test_lesepunkte.py</code> an: eine Testfunktion für die Vertreter, eine für die gültigen Grenzwerte, eine für die ungültigen Grenzwerte (mit <code>wirft_value_error</code>) und den Testrunner. Alle Meldungen im Muster „erwartet …, tatsächlich …“.</li>
+                    <li>Führe die Tests aus und notiere die Ausgabe.</li>
+                    <li>Korrigiere das Modul, bis alle Tests bestehen. Notiere, wie viele Fehler es gab und durch welchen Test du jeden gefunden hast.</li>
+                </ol>
+                <p class="tipp">Wenn du in einer Testfunktion mehrere Grenzwerte in einer Schleife prüfst und einer davon einen <code>ValueError</code> auslöst, bricht der Test mit einer Fehlermeldung ab. Fange das mit <code>try</code>/<code>except ValueError</code> ab und setze dann <code>ergebnis = "ValueError"</code>.</p>
             </details>
         </div>

@@ -25,6 +25,16 @@
             <figcaption>Video 1: Suchen durch Halbieren (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
         </figure>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Wo schaust du hin? <span class="niveau">AFB I</span></summary>
+                <p>Du suchst die 17 in der sortierten Liste 1, 4, 6, 9, 13, 17, 20. Welche Zahlen schaust du nacheinander an, und welche fallen nach dem ersten Vergleich weg?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Zuerst die Mitte (Index 3): 9. Weil 17 &gt; 9, fallen 1, 4, 6 und 9 weg. Im Rest 13, 17, 20 ist die Mitte die 17 – gefunden nach 2 Vergleichen.</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-2">Schritt 2: Die binäre Suche in Python</h2>
 
 <p>Im Programm wird der Suchbereich durch die zwei Indizes <code>links</code> und <code>rechts</code> beschrieben. Die Funktion ruft sich für die passende Hälfte selbst auf – sie ist also rekursiv, mit dem leeren Bereich als Basisfall. Drei Python-Bausteine werden im Video kurz erklärt: Standardwerte für Parameter (<code>links=0, rechts=None</code>), der Test <code>rechts is None</code> und die Ganzzahldivision <code>//</code>.</p>
@@ -33,6 +43,16 @@
             <div class="lp-video"><video controls preload="none" poster="../vid/2-2-8-2_code_vorschau.png" src="../vid/2-2-8-2_code.mp4"></video><a href="../vid/2-2-8-2_code.mp4">Video ansehen</a></div>
             <figcaption>Video 2: Die binäre Suche in Python (ca. 1,5 min)</figcaption>
         </figure>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Ganzzahldivision und Standardwerte <span class="niveau">AFB I</span></summary>
+                <p>Was ergeben <code>9 // 2</code> und <code>(3 + 8) // 2</code>? Welche Werte haben <code>links</code> und <code>rechts</code> beim Aufruf <code>binaere_suche([4, 8, 15], 8)</code>, nachdem die ersten beiden Zeilen ausgeführt sind?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>9 // 2</code> ist 4, <code>(3 + 8) // 2</code> ist 5. <code>links</code> ist 0 (Standardwert), <code>rechts</code> war <code>None</code> und wird auf <code>len(liste) - 1</code> = 2 gesetzt.</p>
+                </details>
+            </details>
+        </div>
 
 <h2 id="schritt-3">Schritt 3: Die binäre Suche Schritt für Schritt</h2>
 
@@ -49,7 +69,7 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> binäre Suche in einer sortierten Liste (nur eine Hälfte wird weiter untersucht)</p>
-            <pre><code class="language-python">def binaere_suche(liste, gesucht, links=0, rechts=None):
+            <pre class="ausfuehrbar"><code class="language-python">def binaere_suche(liste, gesucht, links=0, rechts=None):
     if rechts is None:
         rechts = len(liste) - 1
     if links &gt; rechts:                  # Basisfall: Bereich leer
@@ -88,6 +108,16 @@ print(binaere_suche([2, 5, 8, 12, 16, 23, 38], 23))   # 5</code></pre>
                     <tr><td><code>([1, 2, 3], "a")</code></td><td><code>TypeError</code></td><td>falscher Typ: <code>"a" &lt; 2</code> ist nicht definiert</td></tr>
                 </tbody>
             </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Ein Wert, der fehlt <span class="niveau">AFB I</span></summary>
+                <p>Suche die 40 in [2, 5, 8, 12, 16, 23, 38]. Notiere für jeden Aufruf <code>links</code>, <code>rechts</code> und <code>mitte</code>. Woran erkennt die Funktion, dass die 40 fehlt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>(0, 6, mitte 3: 12) → (4, 6, mitte 5: 23) → (6, 6, mitte 6: 38) → (7, 6): <code>links &gt; rechts</code>, der Bereich ist leer, der Basisfall gibt −1 zurück. 4 Aufrufe, 3 Vergleichsrunden.</p>
+                </details>
             </details>
         </div>
 
@@ -167,6 +197,16 @@ for n in [1_000_000, 2_000_000]:
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Vier Millionen Einträge <span class="niveau">AFB I</span></summary>
+                <p>Eine sortierte Liste hat 4 000 000 Einträge, der gesuchte Wert kommt nicht vor. Wie viele Vergleiche braucht die lineare Suche, wie viele Runden die binäre Suche höchstens?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Linear: 4 000 000 Vergleiche. Binär: Zwei Millionen brauchen 21 Runden, die doppelte Menge nur eine mehr – also 22 Runden (log<sub>2</sub> 4 000 000 ≈ 21,9, abgerundet 21, plus 1).</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-5">Schritt 5: Teilen, herrschen, kombinieren – das Maximum</h2>
 
 <p>Bei der binären Suche fällt nach dem Teilen eine Hälfte weg. Beim Maximum einer Liste werden <strong>beide</strong> Hälften gebraucht – hier siehst du alle drei Schritte von Divide and Conquer. Kurz erklärt wird das Slicing (<code>liste[:mitte]</code>, <code>liste[mitte:]</code>). Achte im Aufrufbaum darauf, wie die Ergebnisse von unten nach oben kombiniert werden.</p>
@@ -182,7 +222,7 @@ for n in [1_000_000, 2_000_000]:
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Maximum einer Liste mit allen drei Schritten</p>
-            <pre><code class="language-python">def maximum(liste):
+            <pre class="ausfuehrbar"><code class="language-python">def maximum(liste):
     if len(liste) == 1:                 # Basisfall
         return liste[0]
     mitte = len(liste) // 2
@@ -213,6 +253,16 @@ print(maximum([7, 3, 19, 4, 11]))       # 19</code></pre>
                     <tr><td><code>["b", "a"]</code></td><td><code>'b'</code></td><td>Texte: alphabetisch größter</td></tr>
                 </tbody>
             </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Drei Zahlen teilen <span class="niveau">AFB I</span></summary>
+                <p>Wie teilt <code>maximum</code> die Liste [8, 2, 5]? Welche Teillisten entstehen insgesamt, und wie viele Vergleiche finden beim Kombinieren statt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>mitte</code> = 3 // 2 = 1 → [8] und [2, 5]; [2, 5] wird in [2] und [5] geteilt. Kombinieren: 2 &gt; 5? Nein → 5; dann 8 &gt; 5? Ja → 8. Zwei Vergleiche, also n − 1.</p>
+                </details>
             </details>
         </div>
 
@@ -277,22 +327,16 @@ print(maximum([7, 3, 19, 4, 11]))       # 19</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-8-1">
             <details>
-                <summary>Kurz geprüft 1: Wo schaust du hin? <span class="niveau">AFB I</span></summary>
-                <p>Du suchst die 17 in der sortierten Liste 1, 4, 6, 9, 13, 17, 20. Welche Zahlen schaust du nacheinander an, und welche fallen nach dem ersten Vergleich weg?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Zuerst die Mitte (Index 3): 9. Weil 17 &gt; 9, fallen 1, 4, 6 und 9 weg. Im Rest 13, 17, 20 ist die Mitte die 17 – gefunden nach 2 Vergleichen.</p>
-                </details>
+                <summary>Aufgabe 2.2.8.1: Binäre Suche von Hand <span class="niveau">AFB I</span></summary>
+                <p>Führe die binäre Suche nach 16 und nach 9 in der Liste [2, 5, 8, 12, 16, 23, 38] von Hand durch. Notiere jeweils <code>links</code>, <code>rechts</code> und <code>mitte</code>.</p>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-8-2">
             <details>
-                <summary>Kurz geprüft 2: Ganzzahldivision und Standardwerte <span class="niveau">AFB I</span></summary>
-                <p>Was ergeben <code>9 // 2</code> und <code>(3 + 8) // 2</code>? Welche Werte haben <code>links</code> und <code>rechts</code> beim Aufruf <code>binaere_suche([4, 8, 15], 8)</code>, nachdem die ersten beiden Zeilen ausgeführt sind?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>9 // 2</code> ist 4, <code>(3 + 8) // 2</code> ist 5. <code>links</code> ist 0 (Standardwert), <code>rechts</code> war <code>None</code> und wird auf <code>len(liste) - 1</code> = 2 gesetzt.</p>
-                </details>
+                <summary>Aufgabe 2.2.8.2: Drei Schritte erkennen <span class="niveau">AFB II</span></summary>
+                <p>Benenne im Beispiel <code>maximum(liste)</code> die Schritte Teilen, Herrschen und Kombinieren. Zeichne den Aufrufbaum für <code>maximum([7, 3, 19, 4])</code>.</p>
             </details>
         </div>

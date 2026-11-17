@@ -1,46 +1,5 @@
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-    <details>
-        <summary>Kurz geprüft 3: Kim kommt dazu <span class="niveau">AFB I</span></summary>
-        <p>Nach dem Beispielprogramm folgen <code>kim = Lehrkraft("Kim Berg", info)</code>, dann <code>kim.unterrichtet(physik)</code> und <code>kim.unterrichtet(mathe)</code>. Was liefern die beiden Aufrufe? Welche Namen stehen danach in <code>info.lehrkraefte</code>, <code>physik.lehrkraefte</code> und <code>mathe.lehrkraefte</code>?</p>
-        <details class="loesung-details"><summary>Lösung zeigen</summary>
-        <p><code>kim.unterrichtet(physik)</code> liefert <code>True</code> (Kim hat danach 2 Fächer). <code>kim.unterrichtet(mathe)</code> gibt die Meldung „Kim Berg darf höchstens 2 Fächer unterrichten.“ aus und liefert <code>False</code>. Informatik: Lisa Müller, Kim Berg. Physik: Tom Schneider, Kim Berg. Mathematik unverändert: Lisa Müller, Tom Schneider.</p>
-        </details>
-    </details>
-</div>
-
-<div class="aufgabe" id="a-4-9-1">
-    <details>
-        <summary>Aufgabe 4.9.1: Beziehung mit Multiplizitäten <span class="niveau">AFB II</span></summary>
-        <p>Erstelle ein UML-Diagramm für folgendes Szenario:</p>
-        <ul>
-            <li>Ein <code>Spieler</code> besitzt mehrere <code>Waffen</code>.</li>
-            <li>Jede <code>Waffe</code> gehört genau einem <code>Spieler</code>.</li>
-        </ul>
-        <p>Zeichne ein Klassendiagramm mit korrekten Multiplizitäten und implementiere die Klassen in Python mit Typisierung.</p>
-    </details>
-</div>
-
-<div class="aufgabe" id="a-4-9-2">
-    <details>
-        <summary>Aufgabe 4.9.2: Multiplizitäten erkennen <span class="niveau">AFB I–II</span></summary>
-        <p>Betrachte folgenden Codeausschnitt:</p>
-        <pre><code class="language-python">class Kurs:
-    def __init__(self, thema: str):
-        self.thema: str = thema
-        self.teilnehmer: list[Schueler] = []
-
-class Schueler:
-    def __init__(self, name: str):
-        self.name: str = name</code></pre>
-        <ul>
-            <li>Welche Multiplizitäten ergeben sich?</li>
-            <li>Wie würdest du das in UML notieren?</li>
-        </ul>
-    </details>
-</div>
-
 <div class="aufgabe" id="a-4-9-3">
     <details>
         <summary>Aufgabe 4.9.3: Grenzen durchsetzen <span class="niveau">AFB III</span></summary>

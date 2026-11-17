@@ -12,7 +12,7 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> neue Zuweisung – das Original bleibt gleich</p>
-            <pre><code class="language-python">def verdopple(zahl):
+            <pre class="ausfuehrbar"><code class="language-python">def verdopple(zahl):
     zahl = zahl * 2       # zahl zeigt jetzt auf ein neues int-Objekt
     return zahl
 
@@ -55,7 +55,7 @@ verdopple   zahl ──────► [int 10]</code></pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Verändern und neu Zuweisen einer Liste im Vergleich</p>
-            <pre><code class="language-python">def aendere_liste(liste):
+            <pre class="ausfuehrbar"><code class="language-python">def aendere_liste(liste):
     liste.append(42)      # verändert das gemeinsame Objekt
 
 def ersetze_liste(liste):
@@ -77,7 +77,7 @@ aendere_liste   liste  ──┘</code></pre>
 ersetze_liste   liste  ──► [list 0, 0, 0]     (verschwindet nach dem Aufruf)</code></pre>
                 </li>
                 <li><strong>Falle <code>+=</code>:</strong> Bei Listen verändert <code>liste += [7]</code> das vorhandene Objekt (wie <code>extend</code>). <code>liste = liste + [7]</code> erzeugt dagegen eine neue Liste.
-                    <pre><code class="language-python">def anhaengen_a(liste):
+                    <pre class="ausfuehrbar"><code class="language-python">def anhaengen_a(liste):
     liste += [7]              # verändert das gemeinsame Objekt
 
 def anhaengen_b(liste):

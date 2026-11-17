@@ -225,7 +225,7 @@ with open('auswertung.json', 'w', encoding='utf-8') as datei:
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Vom JSON-Text zum Dictionary und zurück</summary>
             <p><strong>Ausgangssituation:</strong> Eine Kurswahl-App schickt den Datensatz einer Schülerin als JSON-Text. Er soll gelesen,
                um einen Kurs ergänzt und wieder als JSON ausgegeben werden.</p>
-            <pre><code class="language-python">import json
+            <pre class="ausfuehrbar"><code class="language-python">import json
 
 text = '{"name": "Lina", "klasse": "12", "kurse": ["Informatik", "Mathe"], "volljaehrig": true, "handy": null}'
 daten = json.loads(text)

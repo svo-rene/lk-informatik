@@ -23,6 +23,16 @@
             <figcaption>Video 1: Was ist Rekursion? (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
         </figure>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Puppen zählen <span class="niveau">AFB I</span></summary>
+                <p>Eine Matroschka enthält eine kleinere Puppe, diese wieder eine kleinere und so weiter. Die kleinste Puppe lässt sich nicht öffnen. Beschreibe, wie du die Anzahl der Puppen rekursiv bestimmst: Was ist der Basisfall, was der rekursive Fall?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Basisfall: Die Puppe lässt sich nicht öffnen – Anzahl 1. Rekursiver Fall: Puppe öffnen, die Puppen in der inneren Puppe (nach derselben Regel) zählen und 1 addieren.</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-2">Schritt 2: Die Summe mit einer Schleife (Iteration)</h2>
 
 <p>Iteration ist ein wiederholter Prozess, bei dem eine Aufgabe Schritt für Schritt wiederholt wird, bis eine bestimmte Bedingung erfüllt ist. Das geschieht mit Schleifen, zum Beispiel einer <code>for</code>- oder einer <code>while</code>-Schleife. Im Video verfolgst du <code>sum_iteration(3)</code> in einer Tabelle. Kurz erklärt wird <code>range(n + 1)</code>.</p>
@@ -34,7 +44,7 @@
 
 <p>Zum Nachlesen – Beispiel in Python: die Summe von 0 bis n mit Iteration berechnen</p>
 
-<pre><code class="language-python">def sum_iteration(n):
+<pre class="ausfuehrbar"><code class="language-python">def sum_iteration(n):
     result = 0
     for i in range(n + 1):
         result = result + i
@@ -43,6 +53,16 @@
 n = 5
 print("Summe von 0 bis", n, "mit Iteration:", sum_iteration(n))
 # Ausgabe: Summe von 0 bis 5 mit Iteration: 15</code></pre>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Die Schleife verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Welche Zahlen liefert <code>range(4 + 1)</code>? Welchen Wert hat <code>result</code> nach jedem Schleifendurchlauf von <code>sum_iteration(4)</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>range(5)</code> liefert 0, 1, 2, 3, 4. <code>result</code> ist nacheinander 0, 1, 3, 6, 10 – Rückgabe 10.</p>
+                </details>
+            </details>
+        </div>
 
 <h2 id="schritt-3">Schritt 3: Die Summe rekursiv</h2>
 
@@ -55,7 +75,7 @@ print("Summe von 0 bis", n, "mit Iteration:", sum_iteration(n))
 
 <p>Zum Nachlesen – Beispiel in Python: die Summe von 0 bis n mit Rekursion berechnen</p>
 
-<pre><code class="language-python">def sum_recursion(n):
+<pre class="ausfuehrbar"><code class="language-python">def sum_recursion(n):
     # Abbruchbedingung
     if n == 0:
         return 0
@@ -68,6 +88,16 @@ print("Summe von 0 bis", n, "mit Rekursion:", sum_recursion(n))
 # Ausgabe: Summe von 0 bis 5 mit Rekursion: 15</code></pre>
 
 <p>In diesem Beispiel ist die Abbruchbedingung erreicht, wenn <code>n</code> gleich 0 ist. Ist <code>n</code> größer als 0, ruft sich die Funktion selbst mit <code>n − 1</code> auf und addiert <code>n</code> zum Ergebnis dieses Aufrufs.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Basisfall und Rekursionsschritt <span class="niveau">AFB I</span></summary>
+                <p>Schreibe die Kette der Aufrufe für <code>sum_recursion(4)</code> auf. Was ist das Ergebnis? Welcher Aufruf ruft sich nicht mehr selbst auf?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>sum_recursion(4)</code> = 4 + <code>sum_recursion(3)</code> = 4 + 3 + <code>sum_recursion(2)</code> = … = 4 + 3 + 2 + 1 + <code>sum_recursion(0)</code> = 10. <code>sum_recursion(0)</code> ist der Basisfall und gibt direkt 0 zurück.</p>
+                </details>
+            </details>
+        </div>
 
 <h2 id="schritt-4">Schritt 4: Rekursion Schritt für Schritt – der Aufrufstapel</h2>
 
@@ -124,6 +154,16 @@ Ergebnis: 6</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Wie hoch wird der Stapel? <span class="niveau">AFB I</span></summary>
+                <p>Wie viele Aufrufe liegen bei <code>sum_recursion(5)</code> höchstens gleichzeitig auf dem Aufrufstapel? Welcher Aufruf wird als erster fertig, welcher als letzter?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>6 Aufrufe (n = 5, 4, 3, 2, 1, 0). Als erster wird <code>sum_recursion(0)</code> fertig, als letzter <code>sum_recursion(5)</code> – er wurde zuerst aufgerufen und wartet am längsten.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 2.2.7.1 – Summe, Fakultät und Fibonacci iterativ und rekursiv implementieren.</p>
 
 <h2 id="schritt-5">Schritt 5: Wenn die Rekursion nicht endet</h2>
@@ -141,7 +181,7 @@ Ergebnis: 6</code></pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> rekursives Durchsuchen einer verschachtelten Liste (wie Ordner mit Unterordnern)</p>
-            <pre><code class="language-python">def zaehle_dateien(ordner):
+            <pre class="ausfuehrbar"><code class="language-python">def zaehle_dateien(ordner):
     anzahl = 0
     for eintrag in ordner:
         if isinstance(eintrag, list):      # Unterordner
@@ -204,6 +244,20 @@ print(zaehle_dateien_iterativ(tief))     # 0 – kein RecursionError</code></pre
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Endet das? <span class="niveau">AFB II</span></summary>
+                <pre><code class="language-python">def schritte(n):
+    if n == 0:
+        return 0
+    return 1 + schritte(n - 2)</code></pre>
+                <p>Für welche Werte von <code>n</code> liefert <code>schritte(n)</code> ein Ergebnis, für welche gibt es einen <code>RecursionError</code>? Wie lässt sich die Funktion absichern?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nur für gerade n ≥ 0 wird 0 genau getroffen (z.&nbsp;B. 6, 4, 2, 0 → Ergebnis 3). Bei ungeraden oder negativen n springt <code>n</code> an 0 vorbei (z.&nbsp;B. 3, 1, −1, −3, …) – <code>RecursionError</code>. Absichern mit <code>if n &lt;= 0:</code> als Basisfall.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: Aufgabe 2.2.7.2 – Rekursion von Hand verfolgen. Zum Üben zu Hause passt besonders Aufgabe 2.2.7.5 (drei kaputte Rekursionen).</p>
 
 <div class="praxisbezug">
@@ -234,22 +288,26 @@ print(zaehle_dateien_iterativ(tief))     # 0 – kein RecursionError</code></pre
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-7-1">
             <details>
-                <summary>Kurz geprüft 1: Puppen zählen <span class="niveau">AFB I</span></summary>
-                <p>Eine Matroschka enthält eine kleinere Puppe, diese wieder eine kleinere und so weiter. Die kleinste Puppe lässt sich nicht öffnen. Beschreibe, wie du die Anzahl der Puppen rekursiv bestimmst: Was ist der Basisfall, was der rekursive Fall?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Basisfall: Die Puppe lässt sich nicht öffnen – Anzahl 1. Rekursiver Fall: Puppe öffnen, die Puppen in der inneren Puppe (nach derselben Regel) zählen und 1 addieren.</p>
-                </details>
+                <summary>Aufgabe 2.2.7.1: Iterativ und rekursiv implementieren <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Implementiere die Berechnung der Summe der Zahlen von 0 bis zur Eingabe n jeweils einmal als iterativen und als rekursiven Algorithmus.</li>
+                    <li>Implementiere die Berechnung der Fakultät n! jeweils einmal als iterativen und als rekursiven Algorithmus.</li>
+                    <li>Implementiere die Berechnung der Fibonacci-Folge von 0 bis zur Eingabe n als rekursiven Algorithmus.</li>
+                </ol>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-7-2">
             <details>
-                <summary>Kurz geprüft 2: Die Schleife verfolgen <span class="niveau">AFB I</span></summary>
-                <p>Welche Zahlen liefert <code>range(4 + 1)</code>? Welchen Wert hat <code>result</code> nach jedem Schleifendurchlauf von <code>sum_iteration(4)</code>?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>range(5)</code> liefert 0, 1, 2, 3, 4. <code>result</code> ist nacheinander 0, 1, 3, 6, 10 – Rückgabe 10.</p>
-                </details>
+                <summary>Aufgabe 2.2.7.2: Rekursion von Hand <span class="niveau">AFB II–III</span></summary>
+                <ol>
+                    <li>Gegeben ist die Funktion <code>f(n) = 2 · f(n−1) − 1</code> mit <code>f(0) = 3</code>. Benenne Abbruchbedingung und rekursiven Aufruf.</li>
+                    <li>Skizziere für <code>f(3)</code> den rekursiven Abstieg mit allen offenen Aufrufen und den Aufstieg mit den zurückgegebenen Werten.</li>
+                    <li>Schreibe <code>f</code> iterativ.</li>
+                    <li>Der ggT zweier Zahlen lässt sich rekursiv berechnen: <code>ggT(a, b) = a</code>, falls <code>b = 0</code>, sonst <code>ggT(b, a mod b)</code>. Skizziere den Ablauf für <code>ggT(84, 36)</code>. Beschreibe, was beim Aufstieg anders ist als bei <code>f</code>.</li>
+                    <li>Zähle, wie oft die rekursive Fibonacci-Funktion aus Aufgabe 2.2.7.1 beim Aufruf <code>fib(5)</code> insgesamt aufgerufen wird. Beurteile, ob die rekursive Lösung für große n geeignet ist.</li>
+                </ol>
             </details>
         </div>

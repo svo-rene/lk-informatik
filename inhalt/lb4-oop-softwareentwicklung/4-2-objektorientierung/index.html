@@ -45,6 +45,16 @@
         <figcaption>Abb. 1: Objektdiagramm des Objekts „Luna“ der Klasse „Hund“</figcaption>
     </figure>
 
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Eine Trinkflasche als Objekt <span class="niveau">AFB I</span></summary>
+            <p>Pauls Trinkflasche ist blau, fasst 0,75&nbsp;l und enthält gerade 0,4&nbsp;l Wasser. Gib das Objektdiagramm an (Kopf und Attribute mit Werten).</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Kopf (unterstrichen): <code>flasche : Trinkflasche</code>. Attribute: <code>farbe = "blau"</code>, <code>volumen = 0.75</code>, <code>fuellstand = 0.4</code>. Methoden wie <code>trinken()</code> oder <code>auffuellen()</code> stehen nicht im Objektdiagramm. Paul kann als Attribut <code>besitzer = "Paul"</code> vorkommen oder als eigenes Objekt modelliert werden.</p>
+            </details>
+        </details>
+    </div>
+
 <p><a href="#schritt-2">Weiter mit Schritt 2: Zustand und Verhalten →</a></p>
 
 <h2 id="schritt-2">Schritt 2: Zustand und Verhalten</h2>
@@ -100,7 +110,17 @@
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-4-2-1">Aufgabe 4.2.1</a> – Attribut oder Methode?</p>
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Die Flurlampe <span class="niveau">AFB I</span></summary>
+            <p>Für das Objekt <code>lampe1 : Lampe</code> gibt es: helligkeit, einschalten, farbe, dimmen(prozent). Was davon sind Attribute, was Methoden? Welches Attribut ändert die Botschaft <code>lampe1.dimmen(50)</code>, welches bleibt gleich?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Attribute: helligkeit, farbe. Methoden: <code>einschalten()</code>, <code>dimmen(prozent)</code>. <code>lampe1.dimmen(50)</code> ändert die helligkeit (auf 50&nbsp;%), die farbe bleibt gleich. Das Objekt bleibt dasselbe, nur sein Zustand ändert sich.</p>
+            </details>
+        </details>
+    </div>
+
+<p>Danach: <a href="#a-4-2-1">Aufgabe 4.2.1</a> – Attribut oder Methode?</p>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: Objekte schicken sich Botschaften →</a></p>
 
@@ -165,7 +185,17 @@ Objekt handy (Smartphone): benachrichtigungen = []
         </details>
     </div>
 
-<p>Danach: <a href="uebungen.html#a-4-2-2">Aufgabe 4.2.2</a> – Denk in Objekten.</p>
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 3: Ein anderer Tag <span class="niveau">AFB I</span></summary>
+            <p>Am nächsten Tag steht die Uhr auf schritte = 9 300, der Rekord ist inzwischen rekord = 12 481, die Liste des Handys ist leer. Die Uhr zählt einen Schritt. Welche Botschaften werden verschickt, und welche Werte haben danach schritte, rekord und benachrichtigungen?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Nur <code>uhr.schritt_zaehlen()</code>: schritte wird 9 301. Die Prüfung 9 301 &gt; 12 481 ist falsch, also bleibt rekord = 12 481 und es wird <em>keine</em> Botschaft an das Handy geschickt; benachrichtigungen bleibt <code>[]</code>.</p>
+            </details>
+        </details>
+    </div>
+
+<p>Danach: <a href="#a-4-2-2">Aufgabe 4.2.2</a> – Denk in Objekten.</p>
 
 <div class="praxisbezug">
         <details>
@@ -199,22 +229,23 @@ Objekt handy (Smartphone): benachrichtigungen = []
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-2-1">
         <details>
-            <summary>Kurz geprüft 1: Eine Trinkflasche als Objekt <span class="niveau">AFB I</span></summary>
-            <p>Pauls Trinkflasche ist blau, fasst 0,75&nbsp;l und enthält gerade 0,4&nbsp;l Wasser. Gib das Objektdiagramm an (Kopf und Attribute mit Werten).</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p>Kopf (unterstrichen): <code>flasche : Trinkflasche</code>. Attribute: <code>farbe = "blau"</code>, <code>volumen = 0.75</code>, <code>fuellstand = 0.4</code>. Methoden wie <code>trinken()</code> oder <code>auffuellen()</code> stehen nicht im Objektdiagramm. Paul kann als Attribut <code>besitzer = "Paul"</code> vorkommen oder als eigenes Objekt modelliert werden.</p>
-            </details>
+            <summary>Aufgabe 4.2.1: Attribut oder Methode? <span class="niveau">AFB I</span></summary>
+            <p>Ordne für ein Objekt „Smartphone“ zu: Akkustand, anrufen, Hersteller, Foto aufnehmen, Speicherplatz, lauter stellen, Lautstärke.</p>
         </details>
     </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-2-2">
         <details>
-            <summary>Kurz geprüft 2: Die Flurlampe <span class="niveau">AFB I</span></summary>
-            <p>Für das Objekt <code>lampe1 : Lampe</code> gibt es: helligkeit, einschalten, farbe, dimmen(prozent). Was davon sind Attribute, was Methoden? Welches Attribut ändert die Botschaft <code>lampe1.dimmen(50)</code>, welches bleibt gleich?</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p>Attribute: helligkeit, farbe. Methoden: <code>einschalten()</code>, <code>dimmen(prozent)</code>. <code>lampe1.dimmen(50)</code> ändert die helligkeit (auf 50&nbsp;%), die farbe bleibt gleich. Das Objekt bleibt dasselbe, nur sein Zustand ändert sich.</p>
-            </details>
+            <summary>Aufgabe 4.2.2: Denk in Objekten <span class="niveau">AFB II</span></summary>
+            <p>Suche dir ein System aus deinem Alltag aus (z.&nbsp;B. Schule, Fahrrad, Smartwatch). Überlege:</p>
+            <ul>
+                <li>Welche Objekte gibt es?</li>
+                <li>Was sind deren Attribute?</li>
+                <li>Welche Methoden könnten sie haben?</li>
+                <li>Welche Objekte schicken sich Botschaften?</li>
+            </ul>
+            <p>Zeichne für zwei Objekte ein Objektdiagramm oder schreibe eine Liste.</p>
         </details>
     </div>

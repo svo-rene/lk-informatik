@@ -36,7 +36,7 @@
                 <tr><td>Hund(name: string, rasse: string)</td></tr>
             </tbody>
         </table>
-        <pre><code class="language-python">class Hund:
+        <pre class="ausfuehrbar"><code class="language-python">class Hund:
     def __init__(self, name, rasse):
         self.name = name
         self.rasse = rasse
@@ -75,7 +75,7 @@ print(balu.name)   # Balu</code></pre>
 
 <p>Der Konstruktor <code>__init__</code> sorgt dafür, dass bei jeder Objekterzeugung die Startwerte gesetzt werden. Dort legst du fest, welche Werte ein Objekt bekommt.</p>
 
-<pre><code class="language-python">class Buch:
+<pre class="ausfuehrbar"><code class="language-python">class Buch:
     def __init__(self, titel, autor):
         self.titel = titel
         self.autor = autor
@@ -83,13 +83,23 @@ print(balu.name)   # Balu</code></pre>
 buch1 = Buch("1984", "George Orwell")
 print(buch1.titel)  # Ausgabe: 1984</code></pre>
 
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Ein zweites Buch <span class="niveau">AFB I</span></summary>
+            <p>Mit der Klasse <code>Buch</code> von oben wird <code>b2 = Buch("Momo", "Michael Ende")</code> erzeugt. Was geben <code>print(b2.autor)</code> und <code>print(b2.seiten)</code> aus?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>print(b2.autor)</code> gibt <code>Michael Ende</code> aus. <code>print(b2.seiten)</code> bricht mit <code>AttributeError: 'Buch' object has no attribute 'seiten'</code> ab, denn der Konstruktor legt nur <code>titel</code> und <code>autor</code> an.</p>
+            </details>
+        </details>
+    </div>
+
 <p><a href="#schritt-2">Weiter mit Schritt 2: Klassenattribute →</a></p>
 
 <h2 id="schritt-2">Schritt 2: Klassenattribute</h2>
 
 <p>Ein Klassenattribut gehört <em>nicht</em> zu einem einzelnen Objekt, sondern zur Klasse selbst – und damit zu <strong>allen Objekten gemeinsam</strong>.</p>
 
-<pre><code class="language-python">class Auto:
+<pre class="ausfuehrbar"><code class="language-python">class Auto:
     anzahl_autos = 0  # Klassenattribut
 
     def __init__(self, marke):
@@ -147,7 +157,7 @@ print(Auto.anzahl_autos)  # Ausgabe: 2</code></pre>
                 <tr><td>Produkt(name: string, netto: float)<br>brutto(): float</td></tr>
             </tbody>
         </table>
-        <pre><code class="language-python">class Produkt:
+        <pre class="ausfuehrbar"><code class="language-python">class Produkt:
     mwst = 0.19                      # Klassenattribut
 
     def __init__(self, name, netto):
@@ -194,7 +204,17 @@ print(Produkt.mwst)                  # 0.16 – das Klassenattribut ist unverän
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-4-4-1">Aufgabe 4.4.1</a> – Spieler-Statistik, <a href="uebungen.html#a-4-4-2">Aufgabe 4.4.2</a> – Bücher mit Steuer und <a href="uebungen.html#a-4-4-3">Aufgabe 4.4.3</a> – Ausgaben vorhersagen.</p>
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Drei Autos <span class="niveau">AFB II</span></summary>
+            <p>Mit der Klasse <code>Auto</code> von oben werden <code>x = Auto("Opel")</code>, <code>y = Auto("Fiat")</code> und <code>z = Auto("Kia")</code> erzeugt. Danach wird <code>y.anzahl_autos = 10</code> ausgeführt. Was gibt <code>print(Auto.anzahl_autos, x.anzahl_autos, y.anzahl_autos, z.anzahl_autos)</code> aus?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>3 3 10 3</code>. Der Konstruktor hat das Klassenattribut dreimal erhöht. <code>y.anzahl_autos = 10</code> legt nur in <code>y</code> ein eigenes Instanzattribut an; <code>x</code> und <code>z</code> finden kein eigenes und lesen weiter den Wert 3 aus der Klasse.</p>
+            </details>
+        </details>
+    </div>
+
+<p>Danach: <a href="#a-4-4-1">Aufgabe 4.4.1</a> – Spieler-Statistik, <a href="#a-4-4-2">Aufgabe 4.4.2</a> – Bücher mit Steuer und <a href="uebungen.html#a-4-4-3">Aufgabe 4.4.3</a> – Ausgaben vorhersagen.</p>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: Zwei Namen, ein Objekt →</a></p>
 
@@ -206,6 +226,23 @@ print(Produkt.mwst)                  # 0.16 – das Klassenattribut ist unverän
         <div class="lp-video"><video controls preload="none" poster="../vid/4-4-3_aliasing_vorschau.png" src="../vid/4-4-3_aliasing.mp4"></video><a href="../vid/4-4-3_aliasing.mp4">Video ansehen</a></div>
         <figcaption>Video 3: Zwei Namen, ein Objekt (ca. 1,5 min)</figcaption>
     </figure>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 3: Liste mit zwei Namen <span class="niveau">AFB I–II</span></summary>
+            <p>Was geben die letzten drei Zeilen aus?</p>
+            <pre class="ausfuehrbar"><code class="language-python">a = [5]
+b = a
+b.append(7)
+c = [5, 7]
+print(a)
+print(a is b)
+print(a is c)</code></pre>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>[5, 7]</code>, <code>True</code>, <code>False</code>. <code>a</code> und <code>b</code> sind zwei Namen für dieselbe Liste, deshalb sieht man die 7 auch über <code>a</code>. <code>c</code> hat zwar dieselben Werte, ist aber eine eigene, neue Liste.</p>
+            </details>
+        </details>
+    </div>
 
 <p>Danach: <a href="vertiefung.html#a-4-4-5">Aufgabe 4.4.5</a> – Fehler finden: die geteilte Warteliste.</p>
 
@@ -254,22 +291,27 @@ print(Produkt.mwst)                  # 0.16 – das Klassenattribut ist unverän
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-4-1">
         <details>
-            <summary>Kurz geprüft 1: Ein zweites Buch <span class="niveau">AFB I</span></summary>
-            <p>Mit der Klasse <code>Buch</code> von oben wird <code>b2 = Buch("Momo", "Michael Ende")</code> erzeugt. Was geben <code>print(b2.autor)</code> und <code>print(b2.seiten)</code> aus?</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p><code>print(b2.autor)</code> gibt <code>Michael Ende</code> aus. <code>print(b2.seiten)</code> bricht mit <code>AttributeError: 'Buch' object has no attribute 'seiten'</code> ab, denn der Konstruktor legt nur <code>titel</code> und <code>autor</code> an.</p>
-            </details>
+            <summary>Aufgabe 4.4.1: Spieler-Statistik <span class="niveau">AFB I</span></summary>
+            <p>Erstelle eine Klasse <code>Spieler</code> mit den Attributen:</p>
+            <ul>
+                <li><code>name</code> (Instanzattribut)</li>
+                <li><code>anzahl_spieler</code> (Klassenattribut)</li>
+            </ul>
+            <p>Der Konstruktor soll <code>anzahl_spieler</code> bei jedem neuen Objekt um 1 erhöhen. Erzeuge drei Objekte und gib am Ende die Gesamtzahl aus.</p>
         </details>
     </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-4-2">
         <details>
-            <summary>Kurz geprüft 2: Drei Autos <span class="niveau">AFB II</span></summary>
-            <p>Mit der Klasse <code>Auto</code> von oben werden <code>x = Auto("Opel")</code>, <code>y = Auto("Fiat")</code> und <code>z = Auto("Kia")</code> erzeugt. Danach wird <code>y.anzahl_autos = 10</code> ausgeführt. Was gibt <code>print(Auto.anzahl_autos, x.anzahl_autos, y.anzahl_autos, z.anzahl_autos)</code> aus?</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p><code>3 3 10 3</code>. Der Konstruktor hat das Klassenattribut dreimal erhöht. <code>y.anzahl_autos = 10</code> legt nur in <code>y</code> ein eigenes Instanzattribut an; <code>x</code> und <code>z</code> finden kein eigenes und lesen weiter den Wert 3 aus der Klasse.</p>
-            </details>
+            <summary>Aufgabe 4.4.2: Bücher mit Steuer <span class="niveau">AFB II</span></summary>
+            <p>Erstelle eine Klasse <code>Buch</code> mit:</p>
+            <ul>
+                <li><code>titel</code> und <code>preis_netto</code> als Instanzattributen</li>
+                <li><code>mwst</code> (Mehrwertsteuer) als Klassenattribut – z.&nbsp;B. 7&nbsp;%</li>
+            </ul>
+            <p>➤ Erzeuge mindestens zwei Bücher und gib für jedes den Titel und den Bruttopreis aus.<br>
+            ➤ Ändere danach den Mehrwertsteuersatz und zeige, wie sich das auf die Ausgabe des Preises auswirkt.</p>
         </details>
     </div>

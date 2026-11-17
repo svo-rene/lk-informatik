@@ -32,7 +32,17 @@
     <figcaption>Video 1: Gleiche Botschaft, anderes Verhalten (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
 </figure>
 
-<p>Danach: <a href="uebungen.html#a-4-11-1">Aufgabe 4.11.1</a> – Medien abspielen.</p>
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 1: Wer antwortet? <span class="niveau">AFB I</span></summary>
+        <p>Was geben <code>d = Discord()</code> und dann <code>d.sende_nachricht()</code> aus, und in welcher Klasse findet Python die Methode? Was gibt <code>m = Messenger()</code> und <code>m.sende_nachricht()</code> aus?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p><code>Discord postet die Nachricht in einen Channel.</code> – Python findet <code>sende_nachricht</code> schon in <code>Discord</code>. Ein Objekt der Oberklasse selbst benutzt die Fassung von <code>Messenger</code>: <code>Nachricht wird gesendet ...</code></p>
+        </details>
+    </details>
+</div>
+
+<p>Danach: <a href="#a-4-11-1">Aufgabe 4.11.1</a> – Medien abspielen.</p>
 
 <p><a href="#schritt-2">Weiter mit Schritt 2: Eine Schleife über verschiedene Objekte →</a></p>
 
@@ -59,7 +69,7 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Messenger-Apps</summary>
     <p><strong>Ausgangssituation:</strong> Ein Programm soll über mehrere Messenger dieselbe Nachricht verschicken. Jeder Messenger verschickt anders.</p>
-    <pre><code class="language-python">class Messenger:
+    <pre class="ausfuehrbar"><code class="language-python">class Messenger:
     def sende_nachricht(self):
         print("Nachricht wird gesendet ...")
 
@@ -100,7 +110,17 @@ for app in apps:
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-4-11-2">Aufgabe 4.11.2</a> – Erweiterbar programmieren, dann <a href="uebungen.html#a-4-11-3">Aufgabe 4.11.3</a> – Code analysieren.</p>
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 2: Eine Schleife, drei Objekte <span class="niveau">AFB I</span></summary>
+        <p>Zu den Klassen aus Beispiel 1 kommt <code>class Threema(Messenger): pass</code>. Was gibt die Schleife <code>for app in [Signal(), Threema(), Signal()]:</code> mit <code>app.sende_nachricht()</code> aus? Und was ergibt <code>isinstance(Threema(), Messenger)</code>?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>Drei Zeilen: <code>Signal sendet eine verschlüsselte Nachricht.</code>, <code>Nachricht wird gesendet ...</code> (Threema überschreibt nichts, Python findet die Methode erst in <code>Messenger</code>) und noch einmal <code>Signal sendet eine verschlüsselte Nachricht.</code> <code>isinstance(Threema(), Messenger)</code> ergibt <code>True</code>.</p>
+        </details>
+    </details>
+</div>
+
+<p>Danach: <a href="#a-4-11-2">Aufgabe 4.11.2</a> – Erweiterbar programmieren, dann <a href="uebungen.html#a-4-11-3">Aufgabe 4.11.3</a> – Code analysieren.</p>
 
 <h2>Alles zusammen: Beispiel 2</h2>
 
@@ -133,7 +153,7 @@ for app in apps:
         <polygon points="280,80 270,95 290,95" fill="#ffffff" stroke="#222222"/>
     </svg>
     <p style="text-align: center;"><em>Abb. 1: Rechteck und Kreis überschreiben flaeche() der Oberklasse Form</em></p>
-    <pre><code class="language-python">import math
+    <pre class="ausfuehrbar"><code class="language-python">import math
 
 class Form:
     def flaeche(self) -&gt; float:
@@ -228,22 +248,16 @@ print(round(sum(f.flaeche() for f in formen), 2))   # 19.14
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-11-1">
     <details>
-        <summary>Kurz geprüft 1: Wer antwortet? <span class="niveau">AFB I</span></summary>
-        <p>Was geben <code>d = Discord()</code> und dann <code>d.sende_nachricht()</code> aus, und in welcher Klasse findet Python die Methode? Was gibt <code>m = Messenger()</code> und <code>m.sende_nachricht()</code> aus?</p>
-        <details class="loesung-details"><summary>Lösung zeigen</summary>
-        <p><code>Discord postet die Nachricht in einen Channel.</code> – Python findet <code>sende_nachricht</code> schon in <code>Discord</code>. Ein Objekt der Oberklasse selbst benutzt die Fassung von <code>Messenger</code>: <code>Nachricht wird gesendet ...</code></p>
-        </details>
+        <summary>Aufgabe 4.11.1: Medien abspielen <span class="niveau">AFB I</span></summary>
+        <p>Erstelle die Klassen <code>YouTube</code>, <code>TikTok</code> und <code>Spotify</code>. Alle sollen eine Methode <code>spiele_medien()</code> besitzen, die jeweils etwas anderes ausgibt. Lege Objekte der Klassen an und rufe die Methode für die Objekte auf.</p>
     </details>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-11-2">
     <details>
-        <summary>Kurz geprüft 2: Eine Schleife, drei Objekte <span class="niveau">AFB I</span></summary>
-        <p>Zu den Klassen aus Beispiel 1 kommt <code>class Threema(Messenger): pass</code>. Was gibt die Schleife <code>for app in [Signal(), Threema(), Signal()]:</code> mit <code>app.sende_nachricht()</code> aus? Und was ergibt <code>isinstance(Threema(), Messenger)</code>?</p>
-        <details class="loesung-details"><summary>Lösung zeigen</summary>
-        <p>Drei Zeilen: <code>Signal sendet eine verschlüsselte Nachricht.</code>, <code>Nachricht wird gesendet ...</code> (Threema überschreibt nichts, Python findet die Methode erst in <code>Messenger</code>) und noch einmal <code>Signal sendet eine verschlüsselte Nachricht.</code> <code>isinstance(Threema(), Messenger)</code> ergibt <code>True</code>.</p>
-        </details>
+        <summary>Aufgabe 4.11.2: Erweiterbar programmieren <span class="niveau">AFB II</span></summary>
+        <p>Schreibe eine Funktion <code>starte_apps(liste)</code>, die für jedes Objekt in der Liste eine gemeinsame Methode aufruft. Ergänze anschließend eine weitere App-Klasse, ohne die Funktion zu verändern.</p>
     </details>
 </div>

@@ -180,7 +180,7 @@ temperatur_statistik(messwerte)</code></pre>
         </details>
     </div>
 
-<pre><code class="language-python">import re
+<pre class="ausfuehrbar"><code class="language-python">import re
 
 muster = r"^\d{5}$"  # genau 5 Ziffern
 text = "01067"
@@ -198,7 +198,7 @@ else:
         bereinigen:
     </p>
 
-<pre><code class="language-python">import re
+<pre class="ausfuehrbar"><code class="language-python">import re
 
 adresse = "Schillerplatz 3, 01309 Dresden"
 treffer = re.search(r"\d{5}", adresse)          # erste Folge aus genau 5 Ziffern
@@ -235,7 +235,7 @@ print(re.sub(r"\D", "", telefon))               # 03511234567</code></pre>
                 <code>3,0</code>: ein stiller Fehler mit vertauschtem Vorzeichen.</li>
             <li><strong>Treffer umwandeln</strong> – Komma durch Punkt ersetzen, dann <code>float()</code>.</li>
         </ol>
-        <pre><code class="language-python">import re
+        <pre class="ausfuehrbar"><code class="language-python">import re
 
 rohwerte = ["21,5 °C", " 22.1C", "23°C", "N/A", "-3,0 °C", "ca. 19"]
 muster = r"-?\d+([.,]\d+)?"
@@ -262,7 +262,7 @@ print(bereinigt)</code></pre>
            <code>"3.5.2025"</code>, <code>" 03.05.25"</code>, <code>"2025-05-03"</code>, <code>"5/3/2025"</code>, <code>"5.13.2025"</code>.
            Alle Angaben sollen in das Format JJJJ-MM-TT (ISO 8601) gebracht werden, das sich richtig sortieren lässt. Was sich nicht
            sicher deuten lässt, wird <code>None</code> und später von Hand geprüft.</p>
-        <pre><code class="language-python">import re
+        <pre class="ausfuehrbar"><code class="language-python">import re
 
 def datum_iso(text):
     text = text.strip()                                    # Leerzeichen am Rand entfernen

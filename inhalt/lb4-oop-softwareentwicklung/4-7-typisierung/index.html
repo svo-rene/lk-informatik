@@ -81,7 +81,17 @@
 
 <p><code>int | float</code> bedeutet: Der Wert kann entweder eine ganze Zahl oder eine Kommazahl sein. <code>-&gt; None</code> kennzeichnet eine Prozedur ohne Rückgabewert.</p>
 
-<p>Danach: <a href="uebungen.html#a-4-7-1">Aufgabe 4.7.1</a> – Typen ergänzen, <a href="uebungen.html#a-4-7-2">Aufgabe 4.7.2</a> – Klasse Buch typisieren und <a href="uebungen.html#a-4-7-3">Aufgabe 4.7.3</a> – Klasse Rechner.</p>
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 1: Einen Funktionskopf lesen <span class="niveau">AFB I</span></summary>
+        <p>Was verrät dir der Kopf <code>def mittelwert(werte: list[float]) -&gt; float | None:</code>? Was soll übergeben werden, und was kann zurückkommen? In welchem Fall ist <code>None</code> als Rückgabe vermutlich gedacht?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>Übergeben wird eine Liste von Kommazahlen. Zurück kommt eine Kommazahl – oder <code>None</code>. <code>None</code> ist vermutlich für eine leere Liste gedacht, denn dort gibt es keinen Mittelwert (man würde sonst durch 0 teilen).</p>
+        </details>
+    </details>
+</div>
+
+<p>Danach: <a href="#a-4-7-1">Aufgabe 4.7.1</a> – Typen ergänzen, <a href="#a-4-7-2">Aufgabe 4.7.2</a> – Klasse Buch typisieren und <a href="uebungen.html#a-4-7-3">Aufgabe 4.7.3</a> – Klasse Rechner.</p>
 
 <p><a href="#schritt-2">Weiter mit Schritt 2: Was Python prüft – und was nicht →</a></p>
 
@@ -172,6 +182,16 @@ print(lk.bester())      # ('Ben', 14.0)</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 2: Fehler oder nicht? <span class="niveau">AFB I</span></summary>
+        <p>Was passiert beim Ausführen von <code>finde_index("a", "Banane")</code> und von <code>Schueler("Tom", "11")</code>? Gibt Python eine Fehlermeldung aus?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>Keine Fehlermeldung. <code>finde_index("a", "Banane")</code> liefert <code>1</code> – <code>in</code> und <code>index</code> arbeiten auch mit einem Text, gefunden wird der Buchstabe a an Position 1. <code>Schueler("Tom", "11")</code> legt ein Objekt an, dessen Attribut <code>klasse</code> der Text <code>"11"</code> ist. Beides widerspricht den Typhinweisen, aber Python prüft sie nicht; erst ein Prüfwerkzeug wie <code>mypy</code> würde es melden.</p>
+        </details>
+    </details>
+</div>
+
 <p>Danach: <a href="uebungen.html#a-4-7-4">Aufgabe 4.7.4</a> – Notenliste. Zum Vertiefen passt <a href="vertiefung.html#a-4-7-6">Aufgabe 4.7.6</a> – Typangaben, die lügen.</p>
 
 <div class="praxisbezug">
@@ -200,22 +220,30 @@ print(lk.bester())      # ('Ben', 14.0)</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-7-1">
     <details>
-        <summary>Kurz geprüft 1: Einen Funktionskopf lesen <span class="niveau">AFB I</span></summary>
-        <p>Was verrät dir der Kopf <code>def mittelwert(werte: list[float]) -&gt; float | None:</code>? Was soll übergeben werden, und was kann zurückkommen? In welchem Fall ist <code>None</code> als Rückgabe vermutlich gedacht?</p>
-        <details class="loesung-details"><summary>Lösung zeigen</summary>
-        <p>Übergeben wird eine Liste von Kommazahlen. Zurück kommt eine Kommazahl – oder <code>None</code>. <code>None</code> ist vermutlich für eine leere Liste gedacht, denn dort gibt es keinen Mittelwert (man würde sonst durch 0 teilen).</p>
-        </details>
+        <summary>Aufgabe 4.7.1: Typen ergänzen <span class="niveau">AFB I</span></summary>
+        <p>Ergänze sinnvolle Typen für Parameter und Rückgabewerte:</p>
+        <pre><code class="language-python">def mittlere_laenge(worte):
+    gesamt = sum(len(w) for w in worte)
+    return gesamt / len(worte)
+
+def erste_ziffer(text):
+    for zeichen in text:
+        if zeichen.isdigit():
+            return int(zeichen)
+    return None</code></pre>
     </details>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-7-2">
     <details>
-        <summary>Kurz geprüft 2: Fehler oder nicht? <span class="niveau">AFB I</span></summary>
-        <p>Was passiert beim Ausführen von <code>finde_index("a", "Banane")</code> und von <code>Schueler("Tom", "11")</code>? Gibt Python eine Fehlermeldung aus?</p>
-        <details class="loesung-details"><summary>Lösung zeigen</summary>
-        <p>Keine Fehlermeldung. <code>finde_index("a", "Banane")</code> liefert <code>1</code> – <code>in</code> und <code>index</code> arbeiten auch mit einem Text, gefunden wird der Buchstabe a an Position 1. <code>Schueler("Tom", "11")</code> legt ein Objekt an, dessen Attribut <code>klasse</code> der Text <code>"11"</code> ist. Beides widerspricht den Typhinweisen, aber Python prüft sie nicht; erst ein Prüfwerkzeug wie <code>mypy</code> würde es melden.</p>
-        </details>
+        <summary>Aufgabe 4.7.2: Klasse Buch typisieren <span class="niveau">AFB I–II</span></summary>
+        <p>Vervollständige die Klasse <code>Buch</code> mit sinnvollen Typangaben. Das Erscheinungsjahr kann leer bleiben (z.&nbsp;B. wenn es unbekannt ist).</p>
+        <pre><code class="language-python">class Buch:
+    def __init__(self, titel, autor, erscheinungsjahr):
+        self.titel = titel
+        self.autor = autor
+        self.erscheinungsjahr = erscheinungsjahr</code></pre>
     </details>
 </div>

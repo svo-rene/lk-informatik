@@ -67,6 +67,16 @@
             <li><strong>Runde 4 – Mehr Karten (10 min):</strong> Schätzt vorher, wie viele Vergleiche euer Verfahren für 16 Karten braucht. Probiert es dann aus. Was passiert mit der Zahl der Vergleiche, wenn sich die Kartenzahl verdoppelt? Und dann die erste Einschätzung: Ein Python-Programm schafft etwa 10 Millionen Vergleiche pro Sekunde. Würde euer Verfahren für die 100 Millionen Songs des Streamingdienstes reichen?</li>
         </ol>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Was habt ihr beim Aufwärmen herausgefunden? <span class="niveau">AFB I</span></summary>
+                <p>Wie viele Vergleiche braucht man, um unter 8 verdeckten Karten die größte zu finden? Geht es mit weniger? Und warum reichen beim Sortieren von 3 Karten manchmal 2 Vergleiche?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Es sind immer genau 7 Vergleiche (n − 1): Jede Karte außer der größten muss mindestens einmal einen Vergleich „verlieren“, sonst könnte sie noch die größte sein. Bei 3 Karten reichen 2 Vergleiche, wenn man Glück hat: Aus 35 &lt; 46 und 46 &lt; 81 folgt schon 35 &lt; 81, der dritte Vergleich ist überflüssig. Liegt die Mitte nicht in der Mitte, braucht man 3.</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-2">Schritt 2: Vom Kartenspiel zum Pseudocode</h2>
 
 <p>Was ihr mit den Karten gemacht habt, wird jetzt zu einer Anleitung, die jemand ausführen kann, der euch nicht kennt. Diese Form heißt <strong>Pseudocode</strong>: Sie ist für Menschen gut lesbar und braucht keine genaue Python-Syntax, ist aber trotzdem eindeutig. So übersetzt ihr das Kartenspiel:</p>
@@ -118,7 +128,7 @@ wiederhole für i von 1 bis zum letzten Platz:
         setze Zeiger g auf Platz i
 gib g zurück</code></pre>
             <p><strong>Python:</strong></p>
-            <pre><code class="language-python">def position_der_groessten(liste):
+            <pre class="ausfuehrbar"><code class="language-python">def position_der_groessten(liste):
     g = 0
     for i in range(1, len(liste)):
         if liste[i] &gt; liste[g]:
@@ -146,6 +156,16 @@ print(position_der_groessten(karten))   # 1</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Ist eure Anleitung ein Algorithmus? <span class="niveau">AFB II</span></summary>
+                <p>Prüft eure Anleitung mit den Eigenschaften aus 2.1.2: Ist sie endlich beschrieben, ausführbar, eindeutig, und endet sie für jede Startreihenfolge? Welche Stelle hat die andere Gruppe beim wörtlichen Ausführen markiert?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Häufige Lücken: „Nimm eine kleine Karte“ ist nicht eindeutig (welche?), „bis alles passt“ ist keine Bedingung, die der Computer prüfen kann, und bei „wiederhole“ fehlt das Ende. Eindeutig wird es mit Platznummern, Zeigern und einer Abbruchbedingung wie „bis i der letzte Platz ist“ oder „solange in einem Durchgang getauscht wurde“.</p>
+                </details>
+            </details>
+        </div>
+
 <h2 id="schritt-3">Schritt 3: Selbst programmieren – ohne KI</h2>
 
 <div class="hinweis">
@@ -162,7 +182,7 @@ print(position_der_groessten(karten))   # 1</code></pre>
             <details>
                 <summary>Tipp 1: So fängst du an</summary>
                 <p>Schreibe deinen Pseudocode als Kommentare in die Datei und setze unter jede Kommentarzeile den passenden Python-Code. Starte mit einer festen kleinen Liste, z.&nbsp;B. <code>[3, 1, 2]</code>, und lass dir mit <code>print(liste)</code> nach jedem Durchgang die Liste ausgeben. So siehst du, ob das Programm dasselbe macht wie ihr mit den Karten.</p>
-                <pre><code class="language-python">def sortiere(liste):
+                <pre class="ausfuehrbar"><code class="language-python">def sortiere(liste):
     # wiederhole für i von 0 bis ...
         # vergleiche ...
         # wenn ...: tausche ...
@@ -205,6 +225,16 @@ liste[j] = temp</code></pre>
             <li><strong>2.2.9 Mergesort</strong> und <strong>2.2.9b Quicksort</strong>: zwei Verfahren, die viel weniger vergleichen. Dafür holt ihr die Karten noch einmal heraus.</li>
         </ul>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Was verrät die Strichliste? <span class="niveau">AFB II</span></summary>
+                <p>Eine Gruppe brauchte für 8 Karten 28 Vergleiche und für 16 Karten 120. Eine andere Gruppe mit einem anderen Verfahren brauchte für dieselben 8 Karten nur 13 Vergleiche, bei einer neu gemischten Reihe aber 25. Was kannst du über die beiden Verfahren sagen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Die erste Gruppe vergleicht immer jede Karte mit allen Karten rechts davon: 7 + 6 + … + 1 = 28 und 15 + 14 + … + 1 = 120 Vergleiche, unabhängig von der Startreihenfolge. Faktor 120 / 28 ≈ 4,3: doppelt so viele Karten, etwa viermal so viel Arbeit. Bei der zweiten Gruppe hängt die Zahl der Vergleiche von der Startreihenfolge ab. Man muss also den besten, den schlechtesten und den mittleren Fall unterscheiden.</p>
+                </details>
+            </details>
+        </div>
+
 <div class="hinweis" id="einschaetzen">
             <details open>
                 <summary>Einschätzen: zurück zum Streamingdienst</summary>
@@ -225,7 +255,7 @@ liste[j] = temp</code></pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Bei 10 Karten braucht ein einfaches Verfahren, das jede Karte mit jeder vergleicht, bis zu 10 · 9 / 2 = 45 Vergleiche. Bei 1 000 Karten sind es schon 499 500 – zehnmal so viele Karten bedeuten also rund hundertmal so viel Arbeit. Das zeigt sich an einer konkreten Frage: Kommt in einem Kartenstapel eine Karte doppelt vor?</p>
-            <pre><code class="language-python">def hat_doppelte(karten):
+            <pre class="ausfuehrbar"><code class="language-python">def hat_doppelte(karten):
     vergleiche = 0
     n = len(karten)
     for i in range(n):
@@ -303,22 +333,22 @@ print(hat_doppelte([5, 8, 5]))     # [True, 2]</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-2-2-1-1">
             <details>
-                <summary>Kurz geprüft 1: Was habt ihr beim Aufwärmen herausgefunden? <span class="niveau">AFB I</span></summary>
-                <p>Wie viele Vergleiche braucht man, um unter 8 verdeckten Karten die größte zu finden? Geht es mit weniger? Und warum reichen beim Sortieren von 3 Karten manchmal 2 Vergleiche?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Es sind immer genau 7 Vergleiche (n − 1): Jede Karte außer der größten muss mindestens einmal einen Vergleich „verlieren“, sonst könnte sie noch die größte sein. Bei 3 Karten reichen 2 Vergleiche, wenn man Glück hat: Aus 35 &lt; 46 und 46 &lt; 81 folgt schon 35 &lt; 81, der dritte Vergleich ist überflüssig. Liegt die Mitte nicht in der Mitte, braucht man 3.</p>
-                </details>
+                <summary>Aufgabe 2.2.1.1: Euer Sortierverfahren in Python <span class="niveau">AFB II–III</span></summary>
+                <ol>
+                    <li>Schreibe eine Funktion <code>sortiere(liste)</code>, die euren Pseudocode umsetzt: Sie bekommt eine Liste mit Zahlen und sortiert sie aufsteigend. Halte dich eng an euren Pseudocode – jede Zeile der Anleitung wird zu einer oder zwei Zeilen Python.</li>
+                    <li>Teste mit den Zahlen deiner Karten, z.&nbsp;B. <code>[46, 95, 69, 68, 53, 92, 85, 62]</code>, und lege eine Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe an. Nimm auch eine schon sortierte Liste, eine absteigend sortierte Liste, eine Liste mit doppelten Zahlen, <code>[7]</code> und <code>[]</code> dazu.</li>
+                    <li>Baue einen Zähler <code>vergleiche</code> ein, der bei jedem Vergleich zweier Listenelemente um 1 erhöht wird, und gib ihn am Ende aus. Vergleiche mit eurer Strichliste: Kommt für dieselbe Startreihenfolge dieselbe Zahl heraus?</li>
+                    <li>Zähle für eine Liste mit 8 und eine mit 16 Zahlen (jeweils absteigend sortiert). Um welchen Faktor wächst die Zahl der Vergleiche?</li>
+                </ol>
+                <p class="tipp">Speichere deine Fassung als Commit (siehe 2.1.8), zum Beispiel „eigenes Sortierverfahren, 8 Karten: 28 Vergleiche“. Du brauchst sie auf den nächsten Seiten wieder.</p>
             </details>
         </div>
 
 <div class="aufgabe">
             <details>
-                <summary>Kurz geprüft 2: Ist eure Anleitung ein Algorithmus? <span class="niveau">AFB II</span></summary>
-                <p>Prüft eure Anleitung mit den Eigenschaften aus 2.1.2: Ist sie endlich beschrieben, ausführbar, eindeutig, und endet sie für jede Startreihenfolge? Welche Stelle hat die andere Gruppe beim wörtlichen Ausführen markiert?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Häufige Lücken: „Nimm eine kleine Karte“ ist nicht eindeutig (welche?), „bis alles passt“ ist keine Bedingung, die der Computer prüfen kann, und bei „wiederhole“ fehlt das Ende. Eindeutig wird es mit Platznummern, Zeigern und einer Abbruchbedingung wie „bis i der letzte Platz ist“ oder „solange in einem Durchgang getauscht wurde“.</p>
-                </details>
+                <summary>Aufgabe 2.2.1.2: Wo wird sortiert? <span class="niveau">AFB I</span></summary>
+                <p>Nenne drei Anwendungen auf deinem Smartphone, die Daten sortieren, und gib jeweils an, nach welchem Kriterium sortiert wird. Begründe bei einer Anwendung, warum die Sortierung das spätere Suchen beschleunigt.</p>
             </details>
         </div>

@@ -1,51 +1,9 @@
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-        <details>
-            <summary>Kurz geprüft 3: Liste mit zwei Namen <span class="niveau">AFB I–II</span></summary>
-            <p>Was geben die letzten drei Zeilen aus?</p>
-            <pre><code class="language-python">a = [5]
-b = a
-b.append(7)
-c = [5, 7]
-print(a)
-print(a is b)
-print(a is c)</code></pre>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p><code>[5, 7]</code>, <code>True</code>, <code>False</code>. <code>a</code> und <code>b</code> sind zwei Namen für dieselbe Liste, deshalb sieht man die 7 auch über <code>a</code>. <code>c</code> hat zwar dieselben Werte, ist aber eine eigene, neue Liste.</p>
-            </details>
-        </details>
-    </div>
-
-<div class="aufgabe" id="a-4-4-1">
-        <details>
-            <summary>Aufgabe 4.4.1: Spieler-Statistik <span class="niveau">AFB I</span></summary>
-            <p>Erstelle eine Klasse <code>Spieler</code> mit den Attributen:</p>
-            <ul>
-                <li><code>name</code> (Instanzattribut)</li>
-                <li><code>anzahl_spieler</code> (Klassenattribut)</li>
-            </ul>
-            <p>Der Konstruktor soll <code>anzahl_spieler</code> bei jedem neuen Objekt um 1 erhöhen. Erzeuge drei Objekte und gib am Ende die Gesamtzahl aus.</p>
-        </details>
-    </div>
-
-<div class="aufgabe" id="a-4-4-2">
-        <details>
-            <summary>Aufgabe 4.4.2: Bücher mit Steuer <span class="niveau">AFB II</span></summary>
-            <p>Erstelle eine Klasse <code>Buch</code> mit:</p>
-            <ul>
-                <li><code>titel</code> und <code>preis_netto</code> als Instanzattributen</li>
-                <li><code>mwst</code> (Mehrwertsteuer) als Klassenattribut – z.&nbsp;B. 7&nbsp;%</li>
-            </ul>
-            <p>➤ Erzeuge mindestens zwei Bücher und gib für jedes den Titel und den Bruttopreis aus.<br>
-            ➤ Ändere danach den Mehrwertsteuersatz und zeige, wie sich das auf die Ausgabe des Preises auswirkt.</p>
-        </details>
-    </div>
-
 <div class="aufgabe" id="a-4-4-3">
         <details>
             <summary>Aufgabe 4.4.3: Ausgaben vorhersagen <span class="niveau">AFB III</span></summary>
-            <pre><code class="language-python">class Zaehler:
+            <pre class="ausfuehrbar"><code class="language-python">class Zaehler:
     stand = 0
     def __init__(self):
         self.stand += 1
@@ -89,7 +47,7 @@ print(a.stand, b.stand, Zaehler.stand)</code></pre>
         <details>
             <summary>Aufgabe 4.4.6: Ergebnis prüfen an der Kinokasse <span class="niveau">AFB II</span></summary>
             <p>Die Software der Kinokasse verwendet diese Klasse (Preise in Euro):</p>
-            <pre><code class="language-python">class Ticket:
+            <pre class="ausfuehrbar"><code class="language-python">class Ticket:
     grundpreis = 9
     verkauft = 0
 

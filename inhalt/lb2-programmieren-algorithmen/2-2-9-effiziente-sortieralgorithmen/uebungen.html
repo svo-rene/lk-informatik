@@ -20,60 +20,6 @@
 
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Zeiger verfolgen <span class="niveau">AFB I</span></summary>
-                <p>Verfolge <code>merge([2, 4], [1, 9])</code>. Welche Werte haben <code>i</code> und <code>j</code>, wenn die <code>while</code>-Schleife endet? Was hängen die beiden <code>extend</code>-Zeilen an?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>2 &lt;= 1? nein → 1, <code>j</code> = 1; 2 &lt;= 9 → 2, <code>i</code> = 1; 4 &lt;= 9 → 4, <code>i</code> = 2. Jetzt ist <code>i &lt; 2</code> falsch: Die Schleife endet mit <code>i</code> = 2 und <code>j</code> = 1. <code>links[2:]</code> ist leer, <code>rechts[1:]</code> hängt die 9 an. Ergebnis: [1, 2, 4, 9].</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Teilen <span class="niveau">AFB I</span></summary>
-                <p>Wie wird die Liste [6, 2, 5, 1, 4] geteilt (<code>mitte = len(liste) // 2</code>)? Notiere alle Teillisten bis zum Basisfall.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>mitte</code> = 5 // 2 = 2: [6, 2] und [5, 1, 4]. Dann [6] und [2] sowie [5] und [1, 4] (3 // 2 = 1). Zum Schluss [1] und [4].</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 5: Neue Liste und Aufrufe <span class="niveau">AFB I</span></summary>
-                <p>Nach <code>zahlen = [4, 2]</code> wird <code>mergesort(zahlen)</code> aufgerufen. Welchen Wert hat <code>zahlen</code> danach? Wie oft wird <code>mergesort</code> dabei insgesamt aufgerufen?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>zahlen</code> ist weiterhin <code>[4, 2]</code>, denn die sortierte Liste <code>[2, 4]</code> ist eine neue Liste, die nur zurückgegeben wird. Aufrufe: einmal mit [4, 2], dann je einmal mit [4] und [2] (Basisfälle), also 3.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-2-2-9-1">
-            <details>
-                <summary>Aufgabe 2.2.9.1: Mergesort von Hand <span class="niveau">AFB II</span></summary>
-                <p>Sortiere [5, 1, 7, 2, 8, 6, 3, 4] mit Mergesort von Hand. Notiere alle Teillisten und zähle die Vergleiche beim Zusammenführen.</p>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-2-2-9-2">
-            <details>
-                <summary>Aufgabe 2.2.9.2: Mergesort erarbeiten <span class="niveau">AFB I–II</span></summary>
-                <ul>
-                    <li>Recherchiere, was das Prinzip <strong>Divide and Conquer</strong> bedeutet, und halte es in eigenen Worten schriftlich fest.</li>
-                    <li>Erarbeite dir den Algorithmus <strong>Mergesort</strong> mithilfe der Seite <a href="https://www.happycoders.eu/de/algorithmen/mergesort/" target="_blank">https://www.happycoders.eu/de/algorithmen/mergesort/</a>:
-                        <ul>
-                            <li>Wie funktioniert Mergesort Schritt für Schritt?</li>
-                            <li>Warum ist die Zeitkomplexität O(n · log n)?</li>
-                            <li>Wie lässt sich Mergesort in Python umsetzen?</li>
-                        </ul>
-                    </li>
-                    <li>Implementiere Mergesort in Python und teste deinen Code mit verschiedenen Datensätzen (leer, ein Element, sortiert, absteigend, mit doppelten Werten).</li>
-                </ul>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-2-2-9-3">
             <details>
                 <summary>Aufgabe 2.2.9.3: Quicksort (Zusatz) <span class="niveau">AFB III</span></summary>

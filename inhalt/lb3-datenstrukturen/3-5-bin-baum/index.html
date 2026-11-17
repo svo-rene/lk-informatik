@@ -65,6 +65,16 @@
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Links oder rechts? <span class="niveau">AFB I</span></summary>
+                <p>Betrachte den Baum aus Beispiel 1. Welche der Zahlen 2, 7, 9 und 12 dürften irgendwo im linken Teilbaum der 8 stehen? Welche davon dürften im rechten Teilbaum der 3 stehen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Im linken Teilbaum der 8 nur Werte kleiner als 8: 2 und 7. Der rechte Teilbaum der 3 liegt zugleich im linken Teilbaum der 8 – dort müssen Werte größer als 3 <em>und</em> kleiner als 8 sein: nur die 7.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-2">Weiter mit Schritt 2: Einfügen →</a></p>
 
 <h2 id="schritt-2">Schritt 2: Einfügen in den Suchbaum</h2>
@@ -78,6 +88,16 @@
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>2_baeume/suchbaum.py</code> an und tippe den Code aus dem Video ab: die Klassen <code>Knoten</code> und <code>Suchbaum</code> und die Methode <code>einfuegen</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>b = Suchbaum()</code> · <code>b.einfuegen(8)</code>. Danach committen, z.&nbsp;B. <code>3.5 Schritt 2: Knoten, Suchbaum, einfuegen angelegt</code>.</p>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Einen kleinen Suchbaum aufbauen <span class="niveau">AFB I</span></summary>
+                <p>Füge 5, 2, 8, 4 in dieser Reihenfolge in einen leeren Suchbaum ein und zeichne ihn. Mit welchen Knoten wird <code>einfuegen</code> nacheinander aufgerufen, bevor die 4 ihren Platz bekommt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>5 ist die Wurzel, 2 ihr linkes, 8 ihr rechtes Kind. Zwei Aufrufe: von außen mit <code>knoten</code> = 5 (4 &lt; 5, links ist die 2 → Aufruf mit der 2), dann mit <code>knoten</code> = 2 (4 &gt; 2, rechts ist frei). Die 4 wird rechtes Kind der 2.</p>
+                </details>
+            </details>
+        </div>
+
 <div class="hinweis">
             <details>
                 <summary>Hinweis: Einfügen in der Zeiger-Werkstatt</summary>
@@ -85,7 +105,7 @@
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-5-1">Aufgabe 3.5.1</a> – einen größeren Suchbaum von Hand aufbauen. Die In-Order-Reihenfolge, nach der dort auch gefragt ist, lernst du in Schritt 4 genauer kennen.</p>
+<p>Danach: <a href="#a-3-5-1">Aufgabe 3.5.1</a> – einen größeren Suchbaum von Hand aufbauen. Die In-Order-Reihenfolge, nach der dort auch gefragt ist, lernst du in Schritt 4 genauer kennen.</p>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: Suchen →</a></p>
 
@@ -105,7 +125,7 @@
 <div class="beispiel klappbar">
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Einfügen und Suchen in Python</summary>
-            <pre><code class="language-python">class Knoten:
+            <pre class="ausfuehrbar"><code class="language-python">class Knoten:
     def __init__(self, wert):
         self.wert = wert
         self.links = None
@@ -221,6 +241,16 @@ print(b.in_order())                    # [1, 3, 6, 8, 10, 14]</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Suchwege <span class="niveau">AFB I</span></summary>
+                <p>Gib für den Baum aus Beispiel 1 an, mit welchen Knoten <code>suchen</code> bei <code>b.suchen(10)</code> und bei <code>b.suchen(2)</code> nacheinander aufgerufen wird, und was jeweils zurückgegeben wird.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>suchen(10)</code>: Aufruf mit 8 (10 &gt; 8 → rechts), dann mit 10 – gefunden, <code>True</code>. <code>suchen(2)</code>: 8 (2 &lt; 8 → links), 3 (2 &lt; 3 → links), 1 (2 &gt; 1 → rechts, aber rechts von 1 ist kein Kind) – <code>False</code>, ohne weiteren Aufruf. Das Ergebnis wird über alle wartenden Aufrufe nach oben zurückgegeben.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-4">Weiter mit Schritt 4: Sortiert ausgeben →</a></p>
 
 <h2 id="schritt-4">Schritt 4: Sortiert ausgeben – und wann der Suchbaum langsam wird</h2>
@@ -235,6 +265,16 @@ print(b.in_order())                    # [1, 3, 6, 8, 10, 14]</code></pre>
         </figure>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/suchbaum.py</code> den Code aus dem Video: die Methode <code>in_order</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>b.in_order()</code>. Danach committen, z.&nbsp;B. <code>3.5 Schritt 4: in_order ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Sortiert und entartet <span class="niveau">AFB I</span></summary>
+                <p>Gib die In-Order-Reihenfolge deines Baums aus Kurz geprüft 2 an. Wie hoch wird ein Suchbaum, in den man 1, 2, 3, 4 in dieser Reihenfolge einfügt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>In-Order: 2, 4, 5, 8 – aufsteigend sortiert. Bei 1, 2, 3, 4 hängt jeder Wert rechts am vorigen: eine Kette mit 4 Knoten und der Höhe 3.</p>
+                </details>
+            </details>
+        </div>
 
 <div class="hinweis">
             <details>
@@ -254,7 +294,7 @@ print(b.in_order())                    # [1, 3, 6, 8, 10, 14]</code></pre>
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-5-2">Aufgabe 3.5.2</a> – die Suchbaum-Eigenschaft richtig prüfen, und <a href="uebungen.html#a-3-5-3">Aufgabe 3.5.3</a> – die Leserverwaltung der Stadtbibliothek.</p>
+<p>Danach: <a href="#a-3-5-2">Aufgabe 3.5.2</a> – die Suchbaum-Eigenschaft richtig prüfen, und <a href="uebungen.html#a-3-5-3">Aufgabe 3.5.3</a> – die Leserverwaltung der Stadtbibliothek.</p>
 
 <div class="praxisbezug">
             <details>
@@ -290,22 +330,16 @@ print(b.in_order())                    # [1, 3, 6, 8, 10, 14]</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-5-1">
             <details>
-                <summary>Kurz geprüft 1: Links oder rechts? <span class="niveau">AFB I</span></summary>
-                <p>Betrachte den Baum aus Beispiel 1. Welche der Zahlen 2, 7, 9 und 12 dürften irgendwo im linken Teilbaum der 8 stehen? Welche davon dürften im rechten Teilbaum der 3 stehen?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Im linken Teilbaum der 8 nur Werte kleiner als 8: 2 und 7. Der rechte Teilbaum der 3 liegt zugleich im linken Teilbaum der 8 – dort müssen Werte größer als 3 <em>und</em> kleiner als 8 sein: nur die 7.</p>
-                </details>
+                <summary>Aufgabe 3.5.1: Suchbaum aufbauen <span class="niveau">AFB I</span></summary>
+                <p>Füge die Werte 15, 8, 20, 3, 11, 17, 25, 9 in dieser Reihenfolge in einen leeren binären Suchbaum ein. Zeichne den Baum, gib den kleinsten und den größten Wert an und notiere die In-Order-Reihenfolge.</p>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-5-2">
             <details>
-                <summary>Kurz geprüft 2: Einen kleinen Suchbaum aufbauen <span class="niveau">AFB I</span></summary>
-                <p>Füge 5, 2, 8, 4 in dieser Reihenfolge in einen leeren Suchbaum ein und zeichne ihn. Mit welchen Knoten wird <code>einfuegen</code> nacheinander aufgerufen, bevor die 4 ihren Platz bekommt?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>5 ist die Wurzel, 2 ihr linkes, 8 ihr rechtes Kind. Zwei Aufrufe: von außen mit <code>knoten</code> = 5 (4 &lt; 5, links ist die 2 → Aufruf mit der 2), dann mit <code>knoten</code> = 2 (4 &gt; 2, rechts ist frei). Die 4 wird rechtes Kind der 2.</p>
-                </details>
+                <summary>Aufgabe 3.5.2: Suchbaum-Eigenschaft prüfen <span class="niveau">AFB II</span></summary>
+                <p>Eine Mitschülerin prüft die Suchbaum-Eigenschaft so: „Für jeden Knoten ist <code>links.wert &lt; wert &lt; rechts.wert</code>.“ Zeige an einem Beispiel, dass diese Prüfung nicht ausreicht, und beschreibe eine korrekte Prüfung.</p>
             </details>
         </div>

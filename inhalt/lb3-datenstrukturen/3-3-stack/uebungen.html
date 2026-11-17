@@ -21,54 +21,6 @@
 
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Knoten zeichnen <span class="niveau">AFB I</span></summary>
-                <p>In Thonny wird eingegeben: <code>s = Stack()</code>, <code>s.push(1)</code>, <code>s.push(2)</code>, <code>s.push(3)</code>. Zeichne die Knoten mit <code>__head</code>. Was liefert danach <code>s.pop()</code>, und worauf zeigt <code>__head</code> dann?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>__head</code> → [3|•] → [2|•] → [1|None]: Der zuletzt aufgelegte Knoten ist der erste. <code>s.pop()</code> liefert 3, danach zeigt <code>__head</code> auf den Knoten mit der 2.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Den Stapel verfolgen <span class="niveau">AFB I</span></summary>
-                <p>Verfolge <code>klammern_ok("[(x)]")</code> mit Papier: Wie sieht der Stapel nach jedem Zeichen aus, und was gibt die Funktion zurück?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>[</code>: Stapel [ · <code>(</code>: Stapel [, ( (oben) · <code>x</code>: übersprungen · <code>)</code>: <code>pop</code> liefert (, passt, Stapel [ · <code>]</code>: <code>pop</code> liefert [, passt, Stapel leer. Am Ende ist der Stapel leer: <code>True</code>.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 5: Drei Fehlerarten <span class="niveau">AFB I</span></summary>
-                <p>Alle drei Aufrufe liefern <code>False</code>: <code>klammern_ok("(]")</code>, <code>klammern_ok(")(")</code>, <code>klammern_ok("([]")</code>. Gib für jeden an, bei welchem Zeichen bzw. an welcher Stelle der Funktion das <code>False</code> entsteht.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>"(]"</code>: bei <code>]</code> liefert <code>pop</code> die <code>(</code>, erwartet wird <code>[</code> – passt nicht. <code>")("</code>: schon beim ersten Zeichen ist der Stapel leer, <code>s.is_empty()</code> ist <code>True</code>. <code>"([]"</code>: <code>[</code> und <code>]</code> passen, aber am Ende liegt noch <code>(</code> auf dem Stapel – <code>return s.is_empty()</code> liefert <code>False</code>.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-3-1">
-            <details>
-                <summary>Aufgabe 3.3.1: LIFO nachvollziehen <span class="niveau">AFB I</span></summary>
-                <p>Ein leerer Stapel erhält die Operationen push(4), push(7), push(2), pop(), push(9), top(), pop(), pop(). Gib nach jeder Operation den Inhalt (oben rechts) und die Rückgabewerte an.</p>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-3-2">
-            <details>
-                <summary>Aufgabe 3.3.2: Text umkehren und Undo <span class="niveau">AFB II</span></summary>
-                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/umkehren_undo.py</code> – neu anlegen; die Klasse <code>Stack</code> holst du mit <code>from stack_knoten import Stack</code><br><strong>Commits:</strong> nach Teil 1: <code>3.3.2 Teil 1: umkehren(text) mit Stack</code> · nach Teil 2: <code>3.3.2 Teil 2: Undo-Simulation, Text wieder „Hallo“</code></p>
-                <ol>
-                    <li>Schreibe mit der Klasse <code>Stack</code> eine Funktion <code>umkehren(text)</code>, die einen Text rückwärts zurückgibt.</li>
-                    <li>Simuliere einen einfachen Texteditor: Die Eingaben „Hallo“, „ “, „Welt“ werden an einen Text angehängt und jeweils auf einen Undo-Stack gelegt. Zweimal „Rückgängig“ soll den Text wieder auf „Hallo“ setzen.</li>
-                </ol>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-3-3-3">
             <details>
                 <summary>Aufgabe 3.3.3: Stapel oder Schlange? <span class="niveau">AFB III</span></summary>

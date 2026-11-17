@@ -46,7 +46,7 @@
             <details>
                 <summary>Aufgabe 4.0.5: Ein Fahrkartenpreis – vier Denkweisen <span class="niveau">AFB II</span></summary>
                 <p>Der Verkehrsverbund berechnet Fahrkartenpreise nach dem Alter: Kinder unter 6 Jahren fahren kostenlos, 6- bis 14-Jährige zahlen 150 Cent, alle ab 15 Jahren 300 Cent. Vier Teams haben das Problem in verschiedenen Paradigmen gelöst:</p>
-                <pre><code class="language-python"># Variante A
+                <pre class="ausfuehrbar"><code class="language-python"># Variante A
 alter_gruppe = [4, 9, 15, 40]
 gesamt = 0
 for alter in alter_gruppe:
@@ -57,7 +57,7 @@ for alter in alter_gruppe:
     else:
         gesamt = gesamt + 300
 print(gesamt)</code></pre>
-                <pre><code class="language-python"># Variante B
+                <pre class="ausfuehrbar"><code class="language-python"># Variante B
 class Fahrgast:
     def __init__(self, alter):
         self.alter = alter
@@ -74,7 +74,7 @@ gesamt = 0
 for f in gruppe:
     gesamt = gesamt + f.preis()
 print(gesamt)</code></pre>
-                <pre><code class="language-python"># Variante C
+                <pre class="ausfuehrbar"><code class="language-python"># Variante C
 def preis(alter):
     return 0 if alter &lt; 6 else (150 if alter &lt;= 14 else 300)
 

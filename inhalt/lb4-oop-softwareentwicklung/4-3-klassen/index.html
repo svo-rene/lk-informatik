@@ -27,7 +27,17 @@
         <figcaption>Video 1: Eine Klasse, viele Objekte (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
     </figure>
 
-<p>Danach: <a href="uebungen.html#a-4-3-1">Aufgabe 4.3.1</a> – Klasse oder Objekt?</p>
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Ein Bauplan, drei Pflanzen <span class="niveau">AFB I</span></summary>
+            <p>Ein Programm für einen Schulgarten hat eine Klasse <code>Pflanze</code> mit dem Attribut <code>name</code>. Daraus werden drei Objekte erzeugt. Wie oft steht der Code der Klasse im Programm? Wie viele Werte für <code>name</code> gibt es?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Der Code der Klasse steht nur einmal im Programm. Es gibt drei Werte für <code>name</code>, denn jedes der drei Objekte hat seinen eigenen Wert.</p>
+            </details>
+        </details>
+    </div>
+
+<p>Danach: <a href="#a-4-3-1">Aufgabe 4.3.1</a> – Klasse oder Objekt?</p>
 
 <p><a href="#schritt-2">Weiter mit Schritt 2: <code>__init__</code> und <code>self</code> →</a></p>
 
@@ -100,6 +110,16 @@ balu.bellen()   # Ausgabe: Balu (Rasse: Labrador) bellt!</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Wo landet der Wert? <span class="niveau">AFB I–II</span></summary>
+            <p>Es wird <code>bello = Hund("Bello", "Mops")</code> ausgeführt. Worauf zeigt <code>self</code>, während <code>__init__</code> läuft? Was gibt <code>print(bello.name)</code> aus? Und was ginge schief, wenn in <code>__init__</code> statt <code>self.rasse = rasse</code> nur <code>rasse = rasse</code> stünde?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>self</code> zeigt auf das neue Objekt, auf das nach dem Konstruktor auch <code>bello</code> verweist. Ausgabe: <code>Bello</code>. Ohne <code>self.</code> wäre <code>rasse</code> nur eine Variable in <code>__init__</code>, die danach verschwindet. Das Objekt hätte kein Attribut <code>rasse</code>, und <code>bello.bellen()</code> bricht mit <code>AttributeError: 'Hund' object has no attribute 'rasse'</code> ab.</p>
+            </details>
+        </details>
+    </div>
+
 <p><a href="#schritt-3">Weiter mit Schritt 3: Vom Klassendiagramm zum Code →</a></p>
 
 <h2 id="schritt-3">Schritt 3: Vom Klassendiagramm zum Code</h2>
@@ -138,7 +158,7 @@ balu.bellen()   # Ausgabe: Balu (Rasse: Labrador) bellt!</code></pre>
                 <tr><td>Akku(geraet: string, ladung: int)<br>laden(prozent: int): void<br>status(): string</td></tr>
             </tbody>
         </table>
-        <pre><code class="language-python">class Akku:
+        <pre class="ausfuehrbar"><code class="language-python">class Akku:
     def __init__(self, geraet, ladung):
         self.geraet = geraet
         self.ladung = ladung            # in Prozent
@@ -184,7 +204,17 @@ print(tablet.status())   # Tablet: 100 %</code></pre>
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-4-3-2">Aufgabe 4.3.2</a> – Baue eine eigene Klasse.</p>
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 3: Die Lampe übersetzen <span class="niveau">AFB I–II</span></summary>
+            <p>Ein Klassendiagramm <code>Lampe</code> hat die Attribute <code>ort: string</code> und <code>an: bool</code> sowie die Methoden <code>Lampe(ort: string)</code> und <code>schalten(): void</code>. Gib die Kopfzeilen der Klasse und der beiden Methoden in Python an. Was muss in <code>__init__</code> mit dem Attribut <code>an</code> geschehen?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>class Lampe:</code>, <code>def __init__(self, ort):</code> und <code>def schalten(self):</code>. <code>schalten</code> braucht kein <code>return</code> (<code>void</code>). Da <code>an</code> kein Parameter des Konstruktors ist, bekommt es in <code>__init__</code> einen festen Startwert, z.&nbsp;B. <code>self.an = False</code>.</p>
+            </details>
+        </details>
+    </div>
+
+<p>Danach: <a href="#a-4-3-2">Aufgabe 4.3.2</a> – Baue eine eigene Klasse.</p>
 
 <div class="praxisbezug">
         <details>
@@ -220,22 +250,25 @@ print(tablet.status())   # Tablet: 100 %</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-3-1">
         <details>
-            <summary>Kurz geprüft 1: Ein Bauplan, drei Pflanzen <span class="niveau">AFB I</span></summary>
-            <p>Ein Programm für einen Schulgarten hat eine Klasse <code>Pflanze</code> mit dem Attribut <code>name</code>. Daraus werden drei Objekte erzeugt. Wie oft steht der Code der Klasse im Programm? Wie viele Werte für <code>name</code> gibt es?</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p>Der Code der Klasse steht nur einmal im Programm. Es gibt drei Werte für <code>name</code>, denn jedes der drei Objekte hat seinen eigenen Wert.</p>
-            </details>
+            <summary>Aufgabe 4.3.1: Klasse oder Objekt? <span class="niveau">AFB I</span></summary>
+            <p>Entscheide jeweils, ob eher eine Klasse oder ein Objekt beschrieben wird: (a) Auto, (b) der rote VW mit dem Kennzeichen DD-IN 2026, (c) Schüler, (d) Lea aus dem Informatik-LK, (e) Buch „1984“ in der Schulbibliothek mit der Signatur B-117.</p>
         </details>
     </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-3-2">
         <details>
-            <summary>Kurz geprüft 2: Wo landet der Wert? <span class="niveau">AFB I–II</span></summary>
-            <p>Es wird <code>bello = Hund("Bello", "Mops")</code> ausgeführt. Worauf zeigt <code>self</code>, während <code>__init__</code> läuft? Was gibt <code>print(bello.name)</code> aus? Und was ginge schief, wenn in <code>__init__</code> statt <code>self.rasse = rasse</code> nur <code>rasse = rasse</code> stünde?</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p><code>self</code> zeigt auf das neue Objekt, auf das nach dem Konstruktor auch <code>bello</code> verweist. Ausgabe: <code>Bello</code>. Ohne <code>self.</code> wäre <code>rasse</code> nur eine Variable in <code>__init__</code>, die danach verschwindet. Das Objekt hätte kein Attribut <code>rasse</code>, und <code>bello.bellen()</code> bricht mit <code>AttributeError: 'Hund' object has no attribute 'rasse'</code> ab.</p>
-            </details>
+            <summary>Aufgabe 4.3.2: Baue eine eigene Klasse <span class="niveau">AFB II</span></summary>
+            <p>Überlege dir eine eigene Klasse, z.&nbsp;B. <code>Auto</code>, <code>Buch</code>, <code>Spieler</code> oder etwas aus deinem Alltag.</p>
+            <ul>
+                <li>Welche Attribute soll deine Klasse haben?</li>
+                <li>Welche Methoden könnte sie besitzen?</li>
+            </ul>
+            <ol>
+                <li>Erstelle ein Klassendiagramm in GoodNotes oder auf <a href="https://app.diagrams.net/" target="_blank">draw.io</a>.</li>
+                <li>Schreib die Klasse in Python und erzeuge ein bis zwei Objekte davon.</li>
+                <li>Lass eine Methode aufrufen und beobachte die Ausgabe. Zeichne zu einem Objekt das Objektdiagramm.</li>
+            </ol>
         </details>
     </div>

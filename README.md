@@ -26,6 +26,14 @@ Die Seiten in `inhalt/` enthalten nur den Seiteninhalt (ohne `<html>`, `<head>`)
 Kopf, Seitenleiste, Reiter und Blättern erzeugt `bauen.py`.
 Die Kästen (`merke`, `aufgabe`, `beispiel klappbar`, `hinweis`, `praxisbezug` …) sind dieselben wie in OPAL.
 
+## Ausführbarer Python-Code
+
+Ein Codeblock `<pre class="ausfuehrbar"><code class="language-python">…</code></pre>` bekommt die Knöpfe
+„Ausführen“ und „Ändern“. Ausgeführt wird mit [Natter](https://github.com/wi-wissen/Natter) im Browser
+(wird erst beim ersten Klick geladen). Natter kann keine eigenen Module aus Nachbardateien, kein `csv`,
+kein `typing`, keine Typangaben an Attributen (`self.x: int = …`) und kein `pow(a, b, m)` –
+solche Blöcke nicht markieren. Alle anderen Codeblöcke bekommen nur „Kopieren“.
+
 ## Neues Thema anlegen
 
 1. Ordner `inhalt/<lernbereich>/<nr-name>/` mit `thema.json`, `index.html` und bei Bedarf `uebungen.html`, `vertiefung.html` anlegen

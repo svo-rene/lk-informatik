@@ -1,55 +1,5 @@
 <h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
 
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 3: Die Queue vorhersagen <span class="niveau">AFB I</span></summary>
-                <p>Was gibt dieses Programmstück aus? Welches Element steht danach vorn, welches hinten?</p>
-                <pre><code class="language-python">q = Queue()
-q.enqueue(5)
-q.enqueue(7)
-q.enqueue(9)
-print(q.dequeue(), q.peek())</code></pre>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>5 7</code> – die 5 kam zuerst und wird mit <code>dequeue</code> vorn entnommen. Danach steht die 7 vorn; <code>peek</code> zeigt sie, ohne sie zu entfernen. Hinten (zuletzt mit <code>enqueue</code> angestellt) steht die 9.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 4: Zu spät markiert <span class="niveau">AFB II</span></summary>
-                <p>Jemand setzt <code>visited[...] = True</code> erst direkt nach <code>current = queue.dequeue()</code> (für <code>current</code>) und nicht mehr beim Einreihen der Nachbarn. Was passiert dann bei <code>g.bfs(0)</code> im Beispielgraphen? Verfolge die Schlange zwei, drei Runden lang.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Knoten kommen mehrfach in die Schlange: Nach 0 ist sie <code>[1, 2]</code>, nach 1 schon <code>[2, 2, 4]</code>, weil 2 noch nicht markiert ist. Die Reihenfolge wird <code>[0, 1, 2, 2, 4, 4, 4]</code> – Knoten werden mehrfach besucht. Wer beim Einreihen markiert, stellt jeden Knoten nur einmal an.</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe">
-            <details>
-                <summary>Kurz geprüft 5: Was kostet <code>pop(0)</code> im Stern? <span class="niveau">AFB II</span></summary>
-                <p>Ein Graph hat 10&nbsp;001 Knoten: Knoten 0 ist mit allen anderen verbunden, sonst gibt es keine Kanten. Wie viele Elemente rücken bei <code>bfs_liste(0)</code> insgesamt nach? Und bei <code>bfs</code> mit der <code>Queue</code>?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Nach Knoten 0 stehen 10&nbsp;000 Knoten in der Schlange. Jedes <code>pop(0)</code> lässt die übrigen nachrücken: 9&nbsp;999 + 9&nbsp;998 + … + 1 + 0 = 9&nbsp;999 · 10&nbsp;000 / 2, also rund 50 Millionen Verschiebungen – O(Knoten²). Mit der <code>Queue</code> rückt nichts nach: 10&nbsp;001-mal <code>dequeue</code> in O(1), dazu 20&nbsp;000 Nachbar-Einträge – O(Knoten + Kanten).</p>
-                </details>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-8-1">
-            <details>
-                <summary>Aufgabe 3.8.1: Breitensuche von Hand <span class="niveau">AFB I</span></summary>
-                <p>Ergänze im Beispielgraphen die Kante 3–4. Führe <code>bfs(3)</code> von Hand aus und notiere nach jedem Schritt den Inhalt der Schlange.</p>
-            </details>
-        </div>
-
-<div class="aufgabe" id="a-3-8-2">
-            <details>
-                <summary>Aufgabe 3.8.2: Graph mit Namen <span class="niveau">AFB II</span></summary>
-                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/namens_graph.py</code> – neu anlegen; Vorlage ist deine Klasse aus <code>graph.py</code><br><strong>Commits:</strong> wenn es läuft: <code>3.8.2: Graph mit Dictionary und Namen, bfs ab Dresden</code></p>
-                <p>Schreibe die Klasse so um, dass sie ein Dictionary verwendet und die Knoten Namen tragen (z.&nbsp;B. Städte). Teste mit Dresden–Leipzig, Dresden–Chemnitz, Chemnitz–Zwickau, Leipzig–Halle und führe eine Breitensuche ab Dresden durch.</p>
-            </details>
-        </div>
-
 <div class="aufgabe" id="a-3-8-3">
             <details>
                 <summary>Aufgabe 3.8.3: Tiefensuche und Zusammenhang <span class="niveau">AFB II–III</span></summary>

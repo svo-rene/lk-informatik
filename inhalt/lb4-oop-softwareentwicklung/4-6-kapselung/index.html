@@ -51,6 +51,16 @@ konto1.kontostand = 10000000  # Geld „aus dem Nichts“ – ebenfalls ein Fehl
 
 <p>Das gilt sowohl für Attribute als auch für Methoden.</p>
 
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Was passiert ohne Kapselung? <span class="niveau">AFB I</span></summary>
+            <p>Im Konto ohne Kapselung wird nach <code>konto1 = Konto("Alex", 100)</code> die Zeile <code>konto1.kontostand = konto1.kontostand - 250</code> ausgeführt. Welchen Wert hat der Kontostand danach, und meldet Python einen Fehler? Mit welchem UML-Zeichen müsste <code>kontostand</code> im Klassendiagramm stehen, damit so etwas nicht vorgesehen ist?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Der Kontostand ist −150, Python meldet keinen Fehler – das Konto kann sich nicht wehren. Im Klassendiagramm sollte das Attribut privat sein: <code>- kontostand</code>. Geändert wird es dann nur über öffentliche Methoden (<code>+</code>), die prüfen können.</p>
+            </details>
+        </details>
+    </div>
+
 <p><a href="#schritt-2">Weiter mit Schritt 2: Privat und geschützt in Python →</a></p>
 
 <h2 id="schritt-2">Schritt 2: Privat und geschützt in Python</h2>
@@ -70,7 +80,17 @@ konto1.kontostand = 10000000  # Geld „aus dem Nichts“ – ebenfalls ein Fehl
         <li><code>__name</code>: privat (private) – Python benennt das Attribut intern in <code>_Klassenname__name</code> um („Name Mangling“). Von außen ist es unter dem Namen <code>__name</code> nicht erreichbar.</li>
     </ul>
 
-<p>Danach: <a href="uebungen.html#a-4-6-1">Aufgabe 4.6.1</a> – Sichtbarkeit erkennen.</p>
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Wie heißt das Attribut wirklich? <span class="niveau">AFB I</span></summary>
+            <p>Mit der Klasse <code>Konto</code> aus dem Video (privates Attribut <code>__kontostand</code>) wird <code>k = Konto("Ben", 40)</code> angelegt. Was liefern <code>k._Konto__kontostand</code> und <code>k.__kontostand</code>? Was liefert <code>k.get_kontostand()</code>, nachdem jemand <code>k.__kontostand = 0</code> ausgeführt hat?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>k._Konto__kontostand</code> liefert 40 (so heißt das Attribut intern – benutzen sollte man das aber nicht). <code>k.__kontostand</code> löst einen <code>AttributeError</code> aus. Die Zuweisung <code>k.__kontostand = 0</code> legt ein neues, zusätzliches Attribut an; <code>k.get_kontostand()</code> liefert weiterhin 40.</p>
+            </details>
+        </details>
+    </div>
+
+<p>Danach: <a href="#a-4-6-1">Aufgabe 4.6.1</a> – Sichtbarkeit erkennen.</p>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: Getter und Setter mit Prüfung →</a></p>
 
@@ -174,7 +194,17 @@ print(k._Konto__kontostand)    # 100 – so heißt es intern (bitte nicht benutz
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-4-6-2">Aufgabe 4.6.2</a> – Temperatursensor schützen.</p>
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 3: Der Setter entscheidet <span class="niveau">AFB I</span></summary>
+            <p>Mit der Klasse aus Beispiel 1: <code>k = Konto("Ben", 40)</code>, dann <code>k.set_kontostand(-1)</code>, <code>k.set_kontostand(0)</code> und <code>print(k.get_kontostand())</code>. Was wird insgesamt ausgegeben?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Zuerst <code>Kontostand darf nicht negativ sein.</code> (−1 wird abgewiesen, der Wert bleibt 40), dann <code>0</code>: Der Grenzfall 0 erfüllt <code>neuer_betrag &gt;= 0</code> und wird übernommen.</p>
+            </details>
+        </details>
+    </div>
+
+<p>Danach: <a href="#a-4-6-2">Aufgabe 4.6.2</a> – Temperatursensor schützen.</p>
 
 <div class="hinweis">
         <details>
@@ -218,22 +248,37 @@ print(k._Konto__kontostand)    # 100 – so heißt es intern (bitte nicht benutz
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-6-1">
         <details>
-            <summary>Kurz geprüft 1: Was passiert ohne Kapselung? <span class="niveau">AFB I</span></summary>
-            <p>Im Konto ohne Kapselung wird nach <code>konto1 = Konto("Alex", 100)</code> die Zeile <code>konto1.kontostand = konto1.kontostand - 250</code> ausgeführt. Welchen Wert hat der Kontostand danach, und meldet Python einen Fehler? Mit welchem UML-Zeichen müsste <code>kontostand</code> im Klassendiagramm stehen, damit so etwas nicht vorgesehen ist?</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p>Der Kontostand ist −150, Python meldet keinen Fehler – das Konto kann sich nicht wehren. Im Klassendiagramm sollte das Attribut privat sein: <code>- kontostand</code>. Geändert wird es dann nur über öffentliche Methoden (<code>+</code>), die prüfen können.</p>
-            </details>
+            <summary>Aufgabe 4.6.1: Sichtbarkeit erkennen <span class="niveau">AFB I–II</span></summary>
+            <p>Schau dir diesen Code an und beantworte die Fragen:</p>
+            <pre><code class="language-python">class Schueler:
+    def __init__(self, name, noten):
+        self.name = name
+        self._noten = noten</code></pre>
+            <ul>
+                <li>Welche Attribute sind öffentlich, welche geschützt?</li>
+                <li>Kann man <code>s1._noten</code> direkt von außen lesen? Sollte man es?</li>
+                <li>Wie würdest du <code>_noten</code> besser schützen?</li>
+            </ul>
         </details>
     </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-6-2">
         <details>
-            <summary>Kurz geprüft 2: Wie heißt das Attribut wirklich? <span class="niveau">AFB I</span></summary>
-            <p>Mit der Klasse <code>Konto</code> aus dem Video (privates Attribut <code>__kontostand</code>) wird <code>k = Konto("Ben", 40)</code> angelegt. Was liefern <code>k._Konto__kontostand</code> und <code>k.__kontostand</code>? Was liefert <code>k.get_kontostand()</code>, nachdem jemand <code>k.__kontostand = 0</code> ausgeführt hat?</p>
-            <details class="loesung-details"><summary>Lösung zeigen</summary>
-            <p><code>k._Konto__kontostand</code> liefert 40 (so heißt das Attribut intern – benutzen sollte man das aber nicht). <code>k.__kontostand</code> löst einen <code>AttributeError</code> aus. Die Zuweisung <code>k.__kontostand = 0</code> legt ein neues, zusätzliches Attribut an; <code>k.get_kontostand()</code> liefert weiterhin 40.</p>
-            </details>
+            <summary>Aufgabe 4.6.2: Temperatursensor schützen <span class="niveau">AFB II–III</span></summary>
+            <p>Erstelle eine Klasse <code>Temperatursensor</code> mit folgenden Eigenschaften:</p>
+            <ul>
+                <li><strong>öffentliches Attribut:</strong> <code>ort</code> (z.&nbsp;B. „Serverraum“)</li>
+                <li><strong>privates Attribut:</strong> <code>__temperatur</code> (in °C)</li>
+                <li>eine Methode <code>get_temperatur()</code>, um den aktuellen Wert auszulesen</li>
+                <li>eine Methode <code>set_temperatur()</code>, die nur Werte zwischen −50 und +150 erlaubt</li>
+            </ul>
+            <p><strong>Teste dein Programm:</strong></p>
+            <ul>
+                <li>Erzeuge einen Sensor für „Außenbereich“ mit 10 °C.</li>
+                <li>Versuche, die Temperatur von außen direkt mit <code>s.__temperatur = 900</code> zu setzen, und lies danach <code>get_temperatur()</code> aus. Was passiert und warum?</li>
+                <li>Setze die Temperatur mit <code>set_temperatur(900)</code> und danach mit <code>set_temperatur(23)</code>. Was passiert jeweils?</li>
+            </ul>
         </details>
     </div>

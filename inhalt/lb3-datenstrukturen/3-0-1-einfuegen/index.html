@@ -38,6 +38,16 @@ Adresse: 1000   1008   1016   1024   1032</code></pre>
             <figcaption>Video 1: Wie liegt eine Python-Liste im Speicher? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
         </figure>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Adresse ausrechnen <span class="niveau">AFB I</span></summary>
+                <p>Eine Python-Liste beginnt an der Adresse 2000. An welcher Adresse liegt <code>liste[6]</code>? Dauert das Lesen von <code>liste[600000]</code> in einer sehr langen Liste länger als das Lesen von <code>liste[6]</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>2000 + 6 · 8 = 2048. Nein: Auch für <code>liste[600000]</code> wird die Adresse mit einer einzigen Rechnung bestimmt (2000 + 600000 · 8). Der Zugriff über den Index kostet immer O(1).</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-2">Weiter mit Schritt 2: Einfügen und Löschen →</a></p>
 
 <h2 id="schritt-2">Schritt 2: Einfügen und Löschen: Wer muss rutschen?</h2>
@@ -95,7 +105,17 @@ nachher:  |  3 |  5 |  8 | 12 | 20 | 25 |    →  4 Verschiebungen = n − k</co
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-0-1-1">Aufgabe 3.0.1.1</a> – Verschiebungen für verschiedene Befehle zählen, und <a href="uebungen.html#a-3-0-1-2">Aufgabe 3.0.1.2</a> – was passiert, wenn man vorn einfügen in einer Schleife wiederholt.</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Wer rückt wohin? <span class="niveau">AFB I</span></summary>
+                <p>Gegeben ist <code>zahlen = [10, 20, 30, 40, 50, 60]</code>. Es wird <code>zahlen.insert(2, 25)</code> ausgeführt. Welche Elemente rücken, in welcher Reihenfolge, und wie viele Verschiebungen sind es?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Es rücken 60, 50, 40 und 30 je einen Platz nach hinten – von hinten beginnend, sonst würde ein Wert überschrieben. Das sind n − k = 6 − 2 = 4 Verschiebungen. Danach ist <code>zahlen = [10, 20, 25, 30, 40, 50, 60]</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-0-1-1">Aufgabe 3.0.1.1</a> – Verschiebungen für verschiedene Befehle zählen, und <a href="#a-3-0-1-2">Aufgabe 3.0.1.2</a> – was passiert, wenn man vorn einfügen in einer Schleife wiederholt.</p>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: Einfügen in eine sortierte Liste →</a></p>
 
@@ -114,7 +134,7 @@ nachher:  |  3 |  5 |  8 | 12 | 20 | 25 |    →  4 Verschiebungen = n − k</co
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Die Bestenliste eines Online-Spiels</summary>
             <p><strong>Ausgangssituation:</strong> Ein Online-Spiel führt eine Bestenliste mit 100&nbsp;000 Punktzahlen, absteigend sortiert. Nach jeder Runde wird die neue Punktzahl an der richtigen Stelle eingefügt. Das Entwicklungsteam will wissen, wie teuer das ist. Um die Verschiebungen sichtbar zu machen, schreibt es das Einfügen selbst, statt <code>insert</code> zu benutzen.</p>
-            <pre><code class="language-python">def einfuegen_sortiert(bestenliste, punkte):
+            <pre class="ausfuehrbar"><code class="language-python">def einfuegen_sortiert(bestenliste, punkte):
     """fügt punkte in die absteigend sortierte bestenliste ein
     und gibt die Anzahl der Verschiebungen zurück"""
     bestenliste.append(None)          # Liste um einen Platz verlängern
@@ -157,6 +177,16 @@ print(einfuegen_sortiert(liste, 700), liste)   # 2 [900, 750, 700, 600, 400]</co
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Die freie Stelle verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Verfolge <code>einfuegen_sortiert([90, 70, 50, 30, 10], 60)</code> mit Papier: Welche Werte rücken nach hinten, wo landet die 60, und was gibt die Funktion zurück? Prüfe danach in Thonny.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nach <code>append(None)</code> ist die freie Stelle i = 5. Es rücken 10, 30 und 50 je einen Platz nach hinten (alle kleiner als 60), bei 70 &lt; 60 endet die Schleife. Die 60 kommt auf Platz 2: <code>[90, 70, 60, 50, 30, 10]</code>, Rückgabe 3.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-4">Weiter mit Schritt 4: Und wenn der Platz nicht reicht? →</a></p>
 
 <h2 id="schritt-4">Schritt 4: Und wenn der Platz nicht reicht?</h2>
@@ -173,6 +203,16 @@ print(einfuegen_sortiert(liste, 700), liste)   # 2 [900, 750, 700, 600, 400]</co
             <div class="lp-video"><video controls preload="none" poster="../vid/3-0-1-4_kapazitaet_vorschau.png" src="../vid/3-0-1-4_kapazitaet.mp4"></video><a href="../vid/3-0-1-4_kapazitaet.mp4">Video ansehen</a></div>
             <figcaption>Video 4: Und wenn der Platz nicht reicht? Länge, Kapazität und Umzug (ca. 1 min)</figcaption>
         </figure>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Länge und Kapazität <span class="niveau">AFB I</span></summary>
+                <p>Eine Liste hat die Länge 6 und die Kapazität 8. Wie viele <code>append</code>-Aufrufe gehen noch ohne Umzug? Wie viele Elemente werden beim nächsten Umzug kopiert, und welche Kapazität hat die Liste danach, wenn sie sich verdoppelt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Zwei <code>append</code>-Aufrufe passen noch (Länge 7 und 8). Beim dritten ist die Kapazität erschöpft: Alle 8 Elemente werden kopiert, die neue Kapazität ist 16, und das neue Element kommt auf Platz 8.</p>
+                </details>
+            </details>
+        </div>
 
 <div class="hinweis">
             <details>
@@ -201,22 +241,39 @@ print(einfuegen_sortiert(liste, 700), liste)   # 2 [900, 750, 700, 600, 400]</co
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-0-1-1">
             <details>
-                <summary>Kurz geprüft 1: Adresse ausrechnen <span class="niveau">AFB I</span></summary>
-                <p>Eine Python-Liste beginnt an der Adresse 2000. An welcher Adresse liegt <code>liste[6]</code>? Dauert das Lesen von <code>liste[600000]</code> in einer sehr langen Liste länger als das Lesen von <code>liste[6]</code>?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>2000 + 6 · 8 = 2048. Nein: Auch für <code>liste[600000]</code> wird die Adresse mit einer einzigen Rechnung bestimmt (2000 + 600000 · 8). Der Zugriff über den Index kostet immer O(1).</p>
-                </details>
+                <summary>Aufgabe 3.0.1.1: Verschiebungen zählen <span class="niveau">AFB I</span></summary>
+                <p>Gegeben ist <code>liste = ["a", "b", "c", "d", "e", "f", "g", "h"]</code>. Jede der folgenden Operationen wird <strong>einzeln</strong> auf diese ursprüngliche Liste angewendet. Gib jeweils an, wie viele Elemente verschoben werden, und wie die Liste danach aussieht.</p>
+                <ol>
+                    <li><code>liste.insert(0, "x")</code></li>
+                    <li><code>liste.insert(3, "x")</code></li>
+                    <li><code>liste.append("x")</code> (die Kapazität reicht aus)</li>
+                    <li><code>liste.pop(0)</code></li>
+                    <li><code>liste.pop()</code></li>
+                    <li><code>del liste[5]</code></li>
+                </ol>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-0-1-2">
             <details>
-                <summary>Kurz geprüft 2: Wer rückt wohin? <span class="niveau">AFB I</span></summary>
-                <p>Gegeben ist <code>zahlen = [10, 20, 30, 40, 50, 60]</code>. Es wird <code>zahlen.insert(2, 25)</code> ausgeführt. Welche Elemente rücken, in welcher Reihenfolge, und wie viele Verschiebungen sind es?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Es rücken 60, 50, 40 und 30 je einen Platz nach hinten – von hinten beginnend, sonst würde ein Wert überschrieben. Das sind n − k = 6 − 2 = 4 Verschiebungen. Danach ist <code>zahlen = [10, 20, 25, 30, 40, 50, 60]</code>.</p>
-                </details>
+                <summary>Aufgabe 3.0.1.2: Zwei Wege zum selben Ergebnis <span class="niveau">AFB II</span></summary>
+                <p>Beide Programmteile erzeugen eine Liste mit den Zahlen von n − 1 bis 0:</p>
+                <pre><code class="language-python"># Variante A
+liste = []
+for i in range(n):
+    liste.insert(0, i)
+
+# Variante B
+liste = []
+for i in range(n):
+    liste.append(i)
+liste.reverse()</code></pre>
+                <ol>
+                    <li>Prüfe für n = 4 von Hand, dass beide Varianten <code>[3, 2, 1, 0]</code> liefern.</li>
+                    <li>Zähle für n = 4 die Verschiebungen in Variante A. Gib eine Formel für beliebiges n an und berechne den Wert für n = 10&nbsp;000.</li>
+                    <li><code>reverse()</code> tauscht das erste mit dem letzten Element, das zweite mit dem vorletzten usw. Bestimme den Aufwand von Variante B in O-Notation und begründe, welche Variante du verwendest.</li>
+                </ol>
             </details>
         </div>

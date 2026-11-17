@@ -162,7 +162,7 @@ print("Bobs Beruf gelöscht:", benutzer_db['Bob'])</code></pre>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Ein Punktezähler wie <code>INCR</code> in Redis</summary>
             <p><strong>Ausgangssituation:</strong> Eine Lern-App vergibt Punkte. Wie mit dem Redis-Befehl <code>INCR</code> soll ein
                Zähler je Nutzer erhöht werden, auch wenn es den Nutzer noch gar nicht gibt.</p>
-            <pre><code class="language-python">punkte = {}
+            <pre class="ausfuehrbar"><code class="language-python">punkte = {}
 
 def punkte_erhoehen(nutzer, anzahl=1):
     punkte[nutzer] = punkte.get(nutzer, 0) + anzahl
@@ -199,7 +199,7 @@ print(punkte)</code></pre>
                gefragte Preise sollen deshalb in einem Key-Value-Cache zwischengespeichert werden (so wird Redis in der Praxis oft
                eingesetzt). Gezählt wird, wie oft der Cache hilft (Treffer) und wie oft doch die Datenbank gefragt werden muss
                (Fehlgriff). Die Datenbank wird hier durch ein Dictionary simuliert.</p>
-            <pre><code class="language-python">datenbank = {"P1": 19.99, "P2": 5.49, "P3": 12.00}   # die "langsame" Datenbank
+            <pre class="ausfuehrbar"><code class="language-python">datenbank = {"P1": 19.99, "P2": 5.49, "P3": 12.00}   # die "langsame" Datenbank
 cache = {}
 statistik = {"treffer": 0, "fehlgriffe": 0}
 

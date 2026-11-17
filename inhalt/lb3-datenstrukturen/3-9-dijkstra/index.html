@@ -56,6 +56,16 @@
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Eine Runde Moore <span class="niveau">AFB I</span></summary>
+                <p>Ein gerichteter Graph hat die Kanten S→A (3), S→B (5) und B→A (−4). Relaxiere in Runde 1 in dieser Reihenfolge: S→A, S→B, B→A. Gib nach Runde 1 für A und B „Distanz / Vorgänger“ an. Ändert sich in Runde 2 noch etwas?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>S→A: A = 3 / S. S→B: B = 5 / S. B→A: 5 + (−4) = 1 &lt; 3, also A = 1 / B. In Runde 2 ändert sich nichts mehr – fertig. Kürzester Weg nach A: S → B → A mit Länge 1.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-2">Weiter mit Schritt 2: Dijkstra an einem Beispiel →</a></p>
 
 <hr>
@@ -119,7 +129,7 @@
             </ol>
             <p>Kürzester Weg nach E: A → C → B → D → E mit der Länge 2 + 1 + 5 + 2 = 10. Die direkte Kante C–E (10) führt zu 12 und ist länger.</p>
             <p><strong>Probe:</strong> Die Summe der Kantengewichte auf dem abgelesenen Weg muss gleich der Distanz in der Tabelle sein: 2 + 1 + 5 + 2 = 10. Die Falle in diesem Beispiel: Die „direkte“ Kante C–E und die Kante A–B sehen kurz aus, sind aber nicht Teil der kürzesten Wege.</p>
-            <pre><code class="language-python">def dijkstra(graph, start, dist, vorgaenger):
+            <pre class="ausfuehrbar"><code class="language-python">def dijkstra(graph, start, dist, vorgaenger):
     # Vorbereitung: alle Distanzen unendlich, kein Vorgänger, noch nichts fertig
     for k in graph:
         dist[k] = float("inf")
@@ -158,6 +168,16 @@ print(vorgaenger)    # {'A': None, 'B': 'C', 'C': 'A', 'D': 'B', 'E': 'D'}</code
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Wer wird als Nächstes fertig? <span class="niveau">AFB I</span></summary>
+                <p>Ein ungerichteter Graph hat die Kanten S–A (1), S–B (4), A–B (2) und B–Z (1). Start ist S. In welcher Reihenfolge werden die Knoten fertig? Wie lang ist der kürzeste Weg nach Z, und welcher ist es?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Reihenfolge: S (0), A (1), B (3 / A – verbessert von 4 / S), Z (4 / B). Kürzester Weg S → A → B → Z mit 1 + 2 + 1 = 4.</p>
+                </details>
+            </details>
+        </div>
+
 <div class="hinweis">
             <details>
                 <summary>Hinweis: Dijkstra selbst durchklicken</summary>
@@ -165,7 +185,7 @@ print(vorgaenger)    # {'A': None, 'B': 'C', 'C': 'A', 'D': 'B', 'E': 'D'}</code
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-9-1">Aufgabe 3.9.1</a> – Dijkstra von Hand in einer Tabelle.</p>
+<p>Danach: <a href="#a-3-9-1">Aufgabe 3.9.1</a> – Dijkstra von Hand in einer Tabelle.</p>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: Dijkstra im Code – der Aufbau →</a></p>
 
@@ -180,6 +200,25 @@ print(vorgaenger)    # {'A': None, 'B': 'C', 'C': 'A', 'D': 'B', 'E': 'D'}</code
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>3_graphen/dijkstra.py</code> an und tippe den Code aus dem Video ab: die Funktion <code>dijkstra</code>. Starte mit F5 und vergleiche die Ausgabe mit dem Video. Danach committen, z.&nbsp;B. <code>3.9 Schritt 3: dijkstra angelegt</code>.</p>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Den kleinsten offenen Knoten finden <span class="niveau">AFB I</span></summary>
+                <p>Was geben die beiden <code>print</code>-Anweisungen aus? Überlege erst, dann probiere es in Thonny aus.</p>
+                <pre class="ausfuehrbar"><code class="language-python">dist = {"A": 0, "B": 3, "C": 2, "D": 8}
+fertig = ["A"]
+u = None
+for k in dist:
+    if k not in fertig:
+        if u is None or dist[k] &lt; dist[u]:
+            u = k
+print(u)
+print(float("inf") + 1 &gt; 1000000)</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>C</code> – A ist schon fertig und wird übersprungen; unter B (3), C (2) und D (8) hat C die kleinste Distanz. <code>u is None</code> sorgt dafür, dass der erste offene Knoten genommen wird. <code>True</code> – unendlich plus 1 bleibt unendlich und ist größer als jede Zahl.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-4">Weiter mit Schritt 4: Dijkstra im Code Schritt für Schritt →</a></p>
 
 <h2 id="schritt-4">Schritt 4: Dijkstra im Code Schritt für Schritt</h2>
@@ -191,6 +230,16 @@ print(vorgaenger)    # {'A': None, 'B': 'C', 'C': 'A', 'D': 'B', 'E': 'D'}</code
             <figcaption>Video 3: Dijkstra im Code Schritt für Schritt (ca. 2,5 min)</figcaption>
         </figure>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Wie oft wird gesucht? <span class="niveau">AFB II</span></summary>
+                <p>Beim Aufruf <code>dijkstra(graph, "A", dist, vorgaenger)</code> aus Beispiel 2: Wie oft wird die <code>while</code>-Schleife durchlaufen, und wie viele Knoten sieht die Suche nach dem kleinsten offenen Knoten jedes Mal an? Was folgt daraus für die Laufzeit bei n Knoten?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Die <code>while</code>-Schleife läuft 5-mal, einmal für jeden Knoten. Die Suche geht jedes Mal mit <code>for k in graph</code> alle 5 Knoten durch, zusammen also 5 · 5 = 25 Schritte. Bei n Knoten sind es n · n Schritte – diese Fassung liegt in O(n²). Das passt zur Messreihe in Aufgabe 3.9.5.</p>
+                </details>
+            </details>
+        </div>
+
 <div class="hinweis">
             <details>
                 <summary>Hinweis: Warum Dijkstra bei negativen Gewichten scheitert</summary>
@@ -198,7 +247,7 @@ print(vorgaenger)    # {'A': None, 'B': 'C', 'C': 'A', 'D': 'B', 'E': 'D'}</code
             </details>
         </div>
 
-<p>Danach: <a href="uebungen.html#a-3-9-2">Aufgabe 3.9.2</a> – den Weg aus <code>vorgaenger</code> rekonstruieren, und <a href="uebungen.html#a-3-9-3">Aufgabe 3.9.3</a> – Dijkstra oder Moore? Verfahren beurteilen.</p>
+<p>Danach: <a href="#a-3-9-2">Aufgabe 3.9.2</a> – den Weg aus <code>vorgaenger</code> rekonstruieren, und <a href="uebungen.html#a-3-9-3">Aufgabe 3.9.3</a> – Dijkstra oder Moore? Verfahren beurteilen.</p>
 
 <div class="praxisbezug">
             <details>
@@ -222,22 +271,17 @@ print(vorgaenger)    # {'A': None, 'B': 'C', 'C': 'A', 'D': 'B', 'E': 'D'}</code
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-9-1">
             <details>
-                <summary>Kurz geprüft 1: Eine Runde Moore <span class="niveau">AFB I</span></summary>
-                <p>Ein gerichteter Graph hat die Kanten S→A (3), S→B (5) und B→A (−4). Relaxiere in Runde 1 in dieser Reihenfolge: S→A, S→B, B→A. Gib nach Runde 1 für A und B „Distanz / Vorgänger“ an. Ändert sich in Runde 2 noch etwas?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>S→A: A = 3 / S. S→B: B = 5 / S. B→A: 5 + (−4) = 1 &lt; 3, also A = 1 / B. In Runde 2 ändert sich nichts mehr – fertig. Kürzester Weg nach A: S → B → A mit Länge 1.</p>
-                </details>
+                <summary>Aufgabe 3.9.1: Dijkstra von Hand <span class="niveau">AFB I</span></summary>
+                <p>Ein ungerichteter Graph hat die Kanten S–A (7), S–B (3), A–B (2), A–Z (1), B–Z (8). Bestimme mit dem Dijkstra-Algorithmus in einer Tabelle die kürzesten Distanzen von S aus und den kürzesten Weg nach Z.</p>
             </details>
         </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-9-2">
             <details>
-                <summary>Kurz geprüft 2: Wer wird als Nächstes fertig? <span class="niveau">AFB I</span></summary>
-                <p>Ein ungerichteter Graph hat die Kanten S–A (1), S–B (4), A–B (2) und B–Z (1). Start ist S. In welcher Reihenfolge werden die Knoten fertig? Wie lang ist der kürzeste Weg nach Z, und welcher ist es?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Reihenfolge: S (0), A (1), B (3 / A – verbessert von 4 / S), Z (4 / B). Kürzester Weg S → A → B → Z mit 1 + 2 + 1 = 4.</p>
-                </details>
+                <summary>Aufgabe 3.9.2: Weg rekonstruieren <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/dijkstra.py</code> – weiterführen<br><strong>Commits:</strong> wenn es läuft: <code>3.9.2: weg(vorgaenger, ziel) ergänzt, Weg nach E stimmt</code></p>
+                <p>Die Funktion <code>dijkstra</code> liefert neben den Distanzen ein Dictionary <code>vorgaenger</code>. Schreibe eine Funktion <code>weg(vorgaenger, ziel)</code>, die daraus den Weg vom Start zum Ziel als Liste zurückgibt, und teste sie für E im komplexeren Beispiel.</p>
             </details>
         </div>

@@ -13,6 +13,7 @@ Aufbau von inhalt/:
 """
 import html
 import json
+import re
 import os
 import shutil
 import sys
@@ -43,6 +44,13 @@ def e(s):
     return html.escape(s, quote=True)
 
 
+SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{}</svg>'
+SVG_LUPE = SVG.format('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>')
+SVG_MENUE = SVG.format('<path d="M4 6h16M4 12h16M4 18h16"/>')
+SVG_MOND = SVG.format('<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>')
+SVG_SONNE = SVG.format('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>')
+
+
 # ---------------------------------------------------------------------------
 def laden():
     kurs = lies_json(os.path.join(INHALT, "kurs.json"))
@@ -71,11 +79,12 @@ def themenname(t):
 # ---------------------------------------------------------------------------
 def seitenleiste(bereiche, root, aktiv_bereich=None, aktiv_thema=None):
     z = ['<nav class="leiste" id="leiste" aria-label="Lernbereiche">',
-         '<div class="suche"><input type="search" id="filter" placeholder="Thema suchen …" aria-label="Thema suchen"></div>',
+         '<div class="suche">' + SVG_LUPE + '<input type="search" id="filter" placeholder="Thema suchen …" aria-label="Thema suchen"></div>',
          f'<a class="leiste-start{" aktiv" if aktiv_bereich is None else ""}" href="{root}index.html">Überblick</a>']
     for b in bereiche:
         offen = " open" if aktiv_bereich is b else ""
-        z.append(f'<details class="lb"{offen}><summary><span class="lb-nr">{e(b["nr"])}</span> {e(b["titel"])}</summary>')
+        z.append(f'<details class="lb"{offen}><summary><span class="lb-nr">{e(b["nr"])}</span> {e(b["titel"])}</summary>'
+                 '<div class="lb-inhalt">')
         z.append(f'<a class="lb-uebersicht{" aktiv" if aktiv_bereich is b and aktiv_thema is None else ""}" '
                  f'href="{root}{b["slug"]}/index.html">Überblick {e(b["titel"])}</a>')
         for k in b["kapitel"]:
@@ -85,36 +94,45 @@ def seitenleiste(bereiche, root, aktiv_bereich=None, aktiv_thema=None):
                 z.append(f'<li><a{cls} href="{root}{b["slug"]}/{t["slug"]}/index.html">'
                          f'<span class="t-nr">{e(t["nr"])}</span> {e(t["titel"])}</a></li>')
             z.append("</ul>")
-        z.append("</details>")
+        z.append("</div></details>")
     z.append("</nav>")
     return "\n".join(z)
 
 
-def geruest(kurs, bereiche, root, titel, inhalt, aktiv_bereich=None, aktiv_thema=None, kopf_extra=""):
+def geruest(kurs, bereiche, root, titel, inhalt, aktiv_bereich=None, aktiv_thema=None, toc=False):
     return f"""<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(titel)} – {e(kurs["titel"])}</title>
+<title>{e(titel) if titel == kurs["titel"] else e(titel) + " – " + e(kurs["titel"])}</title>
+<script>try{{var t=localStorage.getItem("thema");if(t)document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}</script>
 <link rel="stylesheet" href="{root}assets/inhalt.css">
 <link rel="stylesheet" href="{root}assets/seite.css">
 <link rel="icon" href="{root}assets/icon.svg" type="image/svg+xml">
-{kopf_extra}
 </head>
-<body>
+<body class="{"mit-toc" if toc else ""}" data-root="{root}">
 <header class="kopf">
-  <button class="menue-knopf" id="menue-knopf" aria-controls="leiste" aria-expanded="false">☰ <span>Themen</span></button>
-  <a class="marke" href="{root}index.html"><span class="marke-zeichen">&lt;/&gt;</span> {e(kurs["titel"])}</a>
+  <button class="menue-knopf" id="menue-knopf" aria-controls="leiste" aria-expanded="false">{SVG_MENUE}<span>Themen</span></button>
+  <a class="marke" href="{root}index.html"><span class="marke-zeichen">&lt;/&gt;</span><span>{e(kurs["titel"])}</span></a>
+  <div class="kopf-rechts">
+    <button class="knopf-rund" id="thema-knopf" title="Hell oder dunkel" aria-label="Hell oder dunkel umschalten">
+      <span class="thema-dunkel">{SVG_MOND}</span><span class="thema-hell">{SVG_SONNE}</span>
+    </button>
+  </div>
 </header>
 <div class="rahmen">
 {seitenleiste(bereiche, root, aktiv_bereich, aktiv_thema)}
+<div class="haupt-rahmen">
 <main class="haupt" id="inhalt">
 {inhalt}
 </main>
+{'<aside class="toc" id="toc" aria-label="Auf dieser Seite"></aside>' if toc else ""}
+</div>
 </div>
 <footer class="fuss">
-  <a href="{root}hinweise.html">Hinweise, Lizenzen und Bildnachweise</a>
+  <a href="{root}hinweise.html">Hinweise und Bildnachweise</a>
+  <a href="{root}impressum.html">Impressum</a>
 </footer>
 <script src="{root}assets/prism.js"></script>
 <script src="{root}assets/seite.js"></script>
@@ -142,11 +160,11 @@ def startseite(kurs, bereiche):
 
 <h2>So ist jedes Thema aufgebaut</h2>
 <div class="aufbau">
-  <div class="aufbau-teil"><span class="aufbau-kopf">1 · Einführung</span>
+  <div class="aufbau-teil"><span class="aufbau-kopf"><span class="aufbau-zahl">1</span>Einführung</span>
     <p>Worum es geht, Beispiele und Erklärvideos. Am Ende <strong>Das Wichtigste</strong> zum Merken und ein bis zwei <strong>Grundaufgaben</strong>.</p></div>
-  <div class="aufbau-teil"><span class="aufbau-kopf">2 · Übungen</span>
+  <div class="aufbau-teil"><span class="aufbau-kopf"><span class="aufbau-zahl">2</span>Übungen</span>
     <p>Weitere Aufgaben aus dem Unterricht und zum Üben zu Hause, dazu Notebooks und Material zum Herunterladen.</p></div>
-  <div class="aufbau-teil"><span class="aufbau-kopf">3 · Vertiefung</span>
+  <div class="aufbau-teil"><span class="aufbau-kopf"><span class="aufbau-zahl">3</span>Vertiefung</span>
     <p>Anspruchsvollere Aufgaben, Lösungswege und interaktive Werkzeuge für alle, die weiter gehen wollen.</p></div>
 </div>
 
@@ -181,26 +199,28 @@ def themenseite(kurs, bereiche, b, t, seite, vorher, nachher):
     for s in t["seiten"]:
         aktiv = ' class="aktiv" aria-current="page"' if s is seite else ""
         z = ' <span class="zusatz-marke">interaktiv</span>' if s.get("zusatz") else ""
-        reiter.append(f'<a{aktiv} href="{s["datei"]}">{e(s["titel"])}{z}</a>')
+        anz = len(re.findall(r"<summary[^>]*>\s*Aufgabe\b", lies(os.path.join(INHALT, b["slug"], t["slug"], s["datei"]))))
+        zahl = f' <span class="r-zahl">{anz}</span>' if anz and not s.get("zusatz") else ""
+        reiter.append(f'<a{aktiv} href="{s["datei"]}">{e(s["titel"])}{zahl}{z}</a>')
     weiter = ""
     if seite["datei"] == "index.html" and len(t["seiten"]) > 1:
         links = "".join(f'<a class="weiter-link" href="{s["datei"]}">{e(s["titel"])} →</a>' for s in t["seiten"][1:])
         weiter = f'<div class="weiter-kasten"><p><strong>Weiter mit diesem Thema</strong></p>{links}</div>'
     nav = '<nav class="blaettern" aria-label="Themen blättern">'
-    nav += (f'<a class="zurueck" href="../{vorher["slug"]}/index.html">← {e(themenname(vorher))}</a>' if vorher else "<span></span>")
-    nav += (f'<a class="vor" href="../{nachher["slug"]}/index.html">{e(themenname(nachher))} →</a>' if nachher else "<span></span>")
+    nav += (f'<a class="zurueck" href="../{vorher["slug"]}/index.html"><small>← Vorheriges Thema</small>{e(themenname(vorher))}</a>' if vorher else "")
+    nav += (f'<a class="vor" href="../{nachher["slug"]}/index.html"><small>Nächstes Thema →</small>{e(themenname(nachher))}</a>' if nachher else "")
     nav += "</nav>"
     unterseite = "" if seite["datei"] == "index.html" else f' › {e(seite["titel"])}'
     inhalt = f"""<p class="pfad"><a href="{root}index.html">Überblick</a> › <a href="../index.html">{e(b["nr"])} {e(b["titel"])}</a>{unterseite}</p>
 <h1><span class="h1-nr">{e(t["nr"])}</span> {e(t["titel"])}</h1>
 <nav class="reiter" aria-label="Teile dieses Themas">{"".join(reiter)}</nav>
-<div class="seiteninhalt">
+<div class="seiteninhalt{" immer-hell" if seite.get("zusatz") else ""}">
 {roh}
 </div>
 {weiter}
 {nav}"""
     titel = themenname(t) + ("" if seite["datei"] == "index.html" else " – " + seite["titel"])
-    return geruest(kurs, bereiche, root, titel, inhalt, aktiv_bereich=b, aktiv_thema=t)
+    return geruest(kurs, bereiche, root, titel, inhalt, aktiv_bereich=b, aktiv_thema=t, toc=True)
 
 
 def hinweisseite(kurs, bereiche):
@@ -212,23 +232,45 @@ sind – soweit unten nicht anders angegeben – selbst erstellt.</p>
 <h2>Fremdmaterial mit freier Lizenz</h2>
 <table><thead><tr><th>Datei</th><th>Urheber</th><th>Lizenz</th></tr></thead><tbody>{zeilen}</tbody></table>
 <p>Bildschirmfotos zeigen die Programme Filius, Thonny, Forgejo, DB Browser for SQLite, LibreOffice und schulKI bei der Benutzung.</p>
+<h2>Python im Browser</h2>
+<p>Programme mit dem Knopf „Ausführen“ laufen mit <a href="https://natter.wi7.net/">Natter</a> (Julian Dorn, MIT-Lizenz) direkt im Browser.
+Natter wird erst beim ersten Klick über jsDelivr geladen; dabei überträgt der Browser seine IP-Adresse an jsDelivr.</p>
 <h2>Verlinkte Angebote</h2>
 <p>Links zu anderen Webseiten (z.&nbsp;B. Jupyter, FLACI, inf-schule) führen zu Angeboten Dritter. Für deren Inhalte sind die jeweiligen Anbieter verantwortlich.</p>
 """
     return geruest(kurs, bereiche, "", "Hinweise", inhalt)
 
 
+def impressumseite(kurs, bereiche):
+    inhalt = """<h1>Impressum</h1>
+<div class="hinweis"><p>Diese Seite wird noch ergänzt.</p></div>
+<h2>Angaben</h2>
+<p>[Name]<br>[Anschrift]</p>
+<h2>Kontakt</h2>
+<p>[E-Mail-Adresse]</p>
+<h2>Verantwortlich für den Inhalt</h2>
+<p>[Name, Anschrift]</p>
+<h2>Datenschutz</h2>
+<p>[Hinweise zum Hosting bei GitHub Pages und zu eingebundenen Diensten]</p>
+"""
+    return geruest(kurs, bereiche, "", "Impressum", inhalt)
+
+
 # ---------------------------------------------------------------------------
 def bauen():
     kurs, bereiche = laden()
     if os.path.isdir(SITE):
-        shutil.rmtree(SITE)
+        def schreibbar(fn, pfad, _):  # git legt schreibgeschützte Dateien an
+            os.chmod(pfad, 0o666)
+            fn(pfad)
+        shutil.rmtree(SITE, onexc=schreibbar)
     os.makedirs(SITE)
     shutil.copytree(VORLAGE, os.path.join(SITE, "assets"))
     schreibe(os.path.join(SITE, ".nojekyll"), "")
     schreibe(os.path.join(SITE, "index.html"), startseite(kurs, bereiche))
     schreibe(os.path.join(SITE, "hinweise.html"), hinweisseite(kurs, bereiche))
-    anzahl = 2
+    schreibe(os.path.join(SITE, "impressum.html"), impressumseite(kurs, bereiche))
+    anzahl = 3
     for b in bereiche:
         quelle = os.path.join(INHALT, b["slug"])
         ziel = os.path.join(SITE, b["slug"])
@@ -270,6 +312,7 @@ def veroeffentlichen():
     git("add", "-A")
     git("commit", "-q", "-m", f"Seite gebaut aus {stand}")
     git("push", "-q", "--force", remote, "gh-pages")
+    bauen()  # _site ohne .git neu schreiben
     print("Veröffentlicht. GitHub Pages braucht danach etwa eine Minute.")
 
 

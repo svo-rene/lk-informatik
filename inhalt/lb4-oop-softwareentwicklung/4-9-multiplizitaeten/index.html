@@ -110,7 +110,17 @@ print(a.inhaber.name)            # Lea</code></pre>
     </details>
 </div>
 
-<p>Danach: <a href="uebungen.html#a-4-9-1">Aufgabe 4.9.1</a> – Spieler und Waffen, dann <a href="uebungen.html#a-4-9-2">Aufgabe 4.9.2</a> – Multiplizitäten erkennen.</p>
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 1: Vom Satz zum Attribut <span class="niveau">AFB I</span></summary>
+        <p>Ein <code>Fahrrad</code> hat genau einen <code>Rahmen</code> (wird im Konstruktor übergeben), keinen oder einen <code>Korb</code> und beliebig viele <code>Aufkleber</code>. Wie lauten die drei Attribute im Konstruktor mit Typ und Startwert?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p><code>self.rahmen: Rahmen = rahmen</code> (1, Pflichtparameter), <code>self.korb: Korb | None = None</code> (0..1), <code>self.aufkleber: list[Aufkleber] = []</code> (*, eine Liste von Verweisen, anfangs leer).</p>
+        </details>
+    </details>
+</div>
+
+<p>Danach: <a href="#a-4-9-1">Aufgabe 4.9.1</a> – Spieler und Waffen, dann <a href="#a-4-9-2">Aufgabe 4.9.2</a> – Multiplizitäten erkennen.</p>
 
 <p><a href="#schritt-2">Weiter mit Schritt 2: Grenzen durchsetzen →</a></p>
 
@@ -244,6 +254,16 @@ for f in (mathe, info, physik):
     </details>
 </div>
 
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 2: Warum so und nicht anders? <span class="niveau">AFB I</span></summary>
+        <p>(a) Warum schreibt der Konstruktor nicht einfach <code>self.faecher = [startfach]</code>, sondern ruft <code>self.unterrichtet(startfach)</code> auf? (b) Was müsste man ändern, damit eine Lehrkraft bis zu drei Fächer unterrichten darf?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>(a) Mit <code>[startfach]</code> würde die Gegenrichtung fehlen: Das Fach wüsste nichts von der Lehrkraft. Über <code>unterrichtet</code> laufen alle Änderungen durch dieselben Prüfungen und pflegen beide Seiten. (b) Nur das Klassenattribut: <code>MAX_FAECHER: int = 3</code>. Prüfung und Meldung lesen den Wert von dort.</p>
+        </details>
+    </details>
+</div>
+
 <p><a href="#schritt-3">Weiter mit Schritt 3: Grenzen Schritt für Schritt →</a></p>
 
 <h2 id="schritt-3">Schritt 3: Grenzen Schritt für Schritt</h2>
@@ -254,6 +274,16 @@ for f in (mathe, info, physik):
     <div class="lp-video"><video controls preload="none" poster="../vid/4-9-3_schritte_vorschau.png" src="../vid/4-9-3_schritte.mp4"></video><a href="../vid/4-9-3_schritte.mp4">Video ansehen</a></div>
     <figcaption>Video 3: Grenzen Schritt für Schritt (ca. 1,5 min)</figcaption>
 </figure>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 3: Kim kommt dazu <span class="niveau">AFB I</span></summary>
+        <p>Nach dem Beispielprogramm folgen <code>kim = Lehrkraft("Kim Berg", info)</code>, dann <code>kim.unterrichtet(physik)</code> und <code>kim.unterrichtet(mathe)</code>. Was liefern die beiden Aufrufe? Welche Namen stehen danach in <code>info.lehrkraefte</code>, <code>physik.lehrkraefte</code> und <code>mathe.lehrkraefte</code>?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p><code>kim.unterrichtet(physik)</code> liefert <code>True</code> (Kim hat danach 2 Fächer). <code>kim.unterrichtet(mathe)</code> gibt die Meldung „Kim Berg darf höchstens 2 Fächer unterrichten.“ aus und liefert <code>False</code>. Informatik: Lisa Müller, Kim Berg. Physik: Tom Schneider, Kim Berg. Mathematik unverändert: Lisa Müller, Tom Schneider.</p>
+        </details>
+    </details>
+</div>
 
 <p>Danach: <a href="uebungen.html#a-4-9-3">Aufgabe 4.9.3</a> – Grenzen gegen <code>clear()</code> schützen.</p>
 
@@ -277,22 +307,33 @@ for f in (mathe, info, physik):
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-9-1">
     <details>
-        <summary>Kurz geprüft 1: Vom Satz zum Attribut <span class="niveau">AFB I</span></summary>
-        <p>Ein <code>Fahrrad</code> hat genau einen <code>Rahmen</code> (wird im Konstruktor übergeben), keinen oder einen <code>Korb</code> und beliebig viele <code>Aufkleber</code>. Wie lauten die drei Attribute im Konstruktor mit Typ und Startwert?</p>
-        <details class="loesung-details"><summary>Lösung zeigen</summary>
-        <p><code>self.rahmen: Rahmen = rahmen</code> (1, Pflichtparameter), <code>self.korb: Korb | None = None</code> (0..1), <code>self.aufkleber: list[Aufkleber] = []</code> (*, eine Liste von Verweisen, anfangs leer).</p>
-        </details>
+        <summary>Aufgabe 4.9.1: Beziehung mit Multiplizitäten <span class="niveau">AFB II</span></summary>
+        <p>Erstelle ein UML-Diagramm für folgendes Szenario:</p>
+        <ul>
+            <li>Ein <code>Spieler</code> besitzt mehrere <code>Waffen</code>.</li>
+            <li>Jede <code>Waffe</code> gehört genau einem <code>Spieler</code>.</li>
+        </ul>
+        <p>Zeichne ein Klassendiagramm mit korrekten Multiplizitäten und implementiere die Klassen in Python mit Typisierung.</p>
     </details>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-4-9-2">
     <details>
-        <summary>Kurz geprüft 2: Warum so und nicht anders? <span class="niveau">AFB I</span></summary>
-        <p>(a) Warum schreibt der Konstruktor nicht einfach <code>self.faecher = [startfach]</code>, sondern ruft <code>self.unterrichtet(startfach)</code> auf? (b) Was müsste man ändern, damit eine Lehrkraft bis zu drei Fächer unterrichten darf?</p>
-        <details class="loesung-details"><summary>Lösung zeigen</summary>
-        <p>(a) Mit <code>[startfach]</code> würde die Gegenrichtung fehlen: Das Fach wüsste nichts von der Lehrkraft. Über <code>unterrichtet</code> laufen alle Änderungen durch dieselben Prüfungen und pflegen beide Seiten. (b) Nur das Klassenattribut: <code>MAX_FAECHER: int = 3</code>. Prüfung und Meldung lesen den Wert von dort.</p>
-        </details>
+        <summary>Aufgabe 4.9.2: Multiplizitäten erkennen <span class="niveau">AFB I–II</span></summary>
+        <p>Betrachte folgenden Codeausschnitt:</p>
+        <pre><code class="language-python">class Kurs:
+    def __init__(self, thema: str):
+        self.thema: str = thema
+        self.teilnehmer: list[Schueler] = []
+
+class Schueler:
+    def __init__(self, name: str):
+        self.name: str = name</code></pre>
+        <ul>
+            <li>Welche Multiplizitäten ergeben sich?</li>
+            <li>Wie würdest du das in UML notieren?</li>
+        </ul>
     </details>
 </div>

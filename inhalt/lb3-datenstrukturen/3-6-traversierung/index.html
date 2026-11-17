@@ -63,6 +63,21 @@
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Vier Reihenfolgen an vier Knoten <span class="niveau">AFB I</span></summary>
+                <pre><code>      D
+     / \
+    B   F
+   /
+  A</code></pre>
+                <p>Gib Pre-, In-, Post- und Level-Order dieses Baums an.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Pre-Order: D, B, A, F · In-Order: A, B, D, F · Post-Order: A, B, F, D · Level-Order: D, B, F, A. Hier unterscheiden sich Pre- und Level-Order: Nach B geht die Tiefensuche erst zu A hinunter, die Breitensuche erst zu F hinüber.</p>
+                </details>
+            </details>
+        </div>
+
 <p><a href="#schritt-2">Weiter mit Schritt 2: Der Baum in Python →</a></p>
 
 <h2 id="schritt-2">Schritt 2: Der Baum in Python</h2>
@@ -75,6 +90,16 @@
         </figure>
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>2_baeume/traversierung.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>Knoten</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>blatt = Knoten(3)</code>. Danach committen, z.&nbsp;B. <code>3.6 Schritt 2: Knoten angelegt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Knoten in Knoten <span class="niveau">AFB I</span></summary>
+                <p>Schreibe den Baum aus Kurz geprüft 1 als eine Anweisung <code>b = Knoten(…)</code>. Was liefert für den Baum aus dem Video <code>baum.rechts.links</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>b = Knoten("D", Knoten("B", Knoten("A")), Knoten("F"))</code> – A ist das linke Kind von B, also das zweite Argument. <code>baum.rechts</code> ist die 15, und sie hat links kein Kind: <code>None</code>.</p>
+                </details>
+            </details>
+        </div>
 
 <p><a href="#schritt-3">Weiter mit Schritt 3: In-Order Schritt für Schritt →</a></p>
 
@@ -89,7 +114,17 @@
 
 <p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/traversierung.py</code> den Code aus dem Video: die Funktionen <code>pre_order</code>, <code>in_order</code> und <code>post_order</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>klein = Knoten(&quot;B&quot;, Knoten(&quot;A&quot;), Knoten(&quot;C&quot;))</code> · <code>in_order(klein)</code> · <code>pre_order(klein)</code>. Danach committen, z.&nbsp;B. <code>3.6 Schritt 3: pre_order, in_order, post_order ergänzt</code>.</p>
 
-<p>Danach: <a href="uebungen.html#a-3-6-1">Aufgabe 3.6.1</a> – Pre-, In- und Post-Order am größeren Baum von Hand.</p>
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Aufrufe zählen <span class="niveau">AFB II</span></summary>
+                <p>Wie oft wird <code>in_order</code> insgesamt aufgerufen, wenn du <code>in_order(klein)</code> für den Baum B mit den Kindern A und C startest? Wie viele davon bekommen <code>None</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>7-mal: je ein Aufruf für B, A und C und vier Aufrufe mit <code>None</code> – links und rechts von A sowie links und rechts von C. Allgemein bekommt jeder Knoten zwei Aufrufe für seine Kinder, auch wenn sie fehlen.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-6-1">Aufgabe 3.6.1</a> – Pre-, In- und Post-Order am größeren Baum von Hand.</p>
 
 <p><a href="#schritt-4">Weiter mit Schritt 4: Level-Order →</a></p>
 
@@ -204,6 +239,16 @@ print(level_order(baum))  # [10, 5, 15, 3, 7, 20]</code></pre>
             </details>
         </div>
 
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Die Schlange führen <span class="niveau">AFB I</span></summary>
+                <p>Führe <code>level_order</code> für den Baum aus Kurz geprüft 1 (D mit den Kindern B und F, A links unter B) von Hand aus. Wie sehen <code>schlange</code> und <code>ergebnis</code> aus, nachdem die ersten zwei Knoten entnommen wurden?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Schlange von vorn nach hinten. Start: D. D entnehmen: <code>ergebnis = [D]</code>, Schlange: B, F. B entnehmen: <code>ergebnis = [D, B]</code>, B stellt A und <code>None</code> hinten an, also Schlange: F, A, <code>None</code>.</p>
+                </details>
+            </details>
+        </div>
+
 <p>Danach: <a href="uebungen.html#a-3-6-4">Aufgabe 3.6.4</a> und <a href="uebungen.html#a-3-6-5">Aufgabe 3.6.5</a> – Tiefen- und Breitensuche in Anwendungen.</p>
 
 <div class="praxisbezug">
@@ -238,27 +283,39 @@ print(level_order(baum))  # [10, 5, 15, 3, 7, 20]</code></pre>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
-<div class="aufgabe">
+<div class="aufgabe" id="a-3-6-1">
             <details>
-                <summary>Kurz geprüft 1: Vier Reihenfolgen an vier Knoten <span class="niveau">AFB I</span></summary>
-                <pre><code>      D
-     / \
-    B   F
-   /
-  A</code></pre>
-                <p>Gib Pre-, In-, Post- und Level-Order dieses Baums an.</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p>Pre-Order: D, B, A, F · In-Order: A, B, D, F · Post-Order: A, B, F, D · Level-Order: D, B, F, A. Hier unterscheiden sich Pre- und Level-Order: Nach B geht die Tiefensuche erst zu A hinunter, die Breitensuche erst zu F hinüber.</p>
-                </details>
+                <summary>Aufgabe 3.6.1: Baumtraversierung <span class="niveau">AFB I</span></summary>
+                <p>Gegeben ist folgender binärer Baum:</p>
+                <pre><code>       10
+      /  \
+     5    15
+    / \     \
+   3   7     20</code></pre>
+                <ol>
+                    <li>Führe eine Pre-Order-Traversierung dieses Baums durch.</li>
+                    <li>Führe eine In-Order-Traversierung dieses Baums durch.</li>
+                    <li>Führe eine Post-Order-Traversierung dieses Baums durch.</li>
+                </ol>
             </details>
         </div>
 
 <div class="aufgabe">
             <details>
-                <summary>Kurz geprüft 2: Knoten in Knoten <span class="niveau">AFB I</span></summary>
-                <p>Schreibe den Baum aus Kurz geprüft 1 als eine Anweisung <code>b = Knoten(…)</code>. Was liefert für den Baum aus dem Video <code>baum.rechts.links</code>?</p>
-                <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>b = Knoten("D", Knoten("B", Knoten("A")), Knoten("F"))</code> – A ist das linke Kind von B, also das zweite Argument. <code>baum.rechts</code> ist die 15, und sie hat links kein Kind: <code>None</code>.</p>
-                </details>
+                <summary>Aufgabe 3.6.2: Suche in einem binären Suchbaum <span class="niveau">AFB I–II</span></summary>
+                <p>Gegeben ist der folgende binäre Suchbaum:</p>
+                <pre><code>        8
+       /  \
+      3    10
+     / \     \
+    1   6     14
+       / \    /
+      4   7  13</code></pre>
+                <ol>
+                    <li>Suche nach der Zahl 6 im Baum und beschreibe den Suchvorgang.</li>
+                    <li>Suche nach der Zahl 9 im Baum und beschreibe, was passiert, wenn das Element nicht gefunden wird.</li>
+                    <li>Die binäre Suche kann in einem Suchbaum oder in einer sortierten Liste umgesetzt werden. Beschreibe die binäre Suche und erkläre, warum sich die Suche im binären Suchbaum und in der Liste stark ähneln. <a href="https://www.inf-schule.de/algorithmen/standardalgorithmen/suchen/binsuche" target="_blank">https://www.inf-schule.de/algorithmen/standardalgorithmen/suchen/binsuche</a></li>
+                    <li>Bestimme die Komplexitätsklasse der Suche in binären Suchbäumen.</li>
+                </ol>
             </details>
         </div>
