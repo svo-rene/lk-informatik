@@ -68,11 +68,11 @@
 
 <p>Die Überträge werden – wie beim schriftlichen Addieren im Dezimalsystem – über der Rechnung notiert:</p>
 
-<pre class="darstellung">Übertrag:  . 1 1 1 1 . . .
-           0 0 1 0 1 1 0 1
-         + 0 0 0 1 0 1 1 0
-           ---------------
-           0 1 0 0 0 0 1 1</pre>
+<pre class="rechnung">Übertrag: | . 1 1 1 1 . . .
+          | 0 0 1 0 1 1 0 1
++         | 0 0 0 1 0 1 1 0
+---
+          | 0 1 0 0 0 0 1 1</pre>
 
 <p><strong>Wichtig bei der Einrückung:</strong> Ein Übertrag wird immer <strong>eine Stelle weiter links</strong> notiert als dort, wo er entsteht. In diesem Beispiel entsteht der erste Übertrag an der 3.&nbsp;Stelle (1 + 1 = 0 Übertrag 1) – die 1 steht deshalb über der <strong>4.</strong> Stelle, weil sie erst dort mitaddiert wird. Genau wie im Dezimalsystem: Bei 7 + 5 schreibt man die 2 hin und den Übertrag 1 über die nächste Spalte.</p>
 
@@ -89,11 +89,11 @@ Stelle 8 (2^7):  0 + 0        = 0</pre>
 
 <p><strong>Probe im Dezimalsystem:</strong></p>
 
-<pre class="darstellung">0010 1101 = 32 + 8 + 4 + 1   = 45
-0001 0110 = 16 + 4 + 2       = 22
-                               ---
-                                67
-0100 0011 = 64 + 2 + 1       = 67   &#10003;</pre>
+<pre class="rechnung">0010 1101 | = 32 + 8 + 4 + 1 = | 45
+0001 0110 | = 16 + 4 + 2 = | 22
+---
+          | | 67
+0100 0011 | = 64 + 2 + 1 = | 67 # &#10003;</pre>
 
 <p><strong>Ergebnis:</strong> 0010 1101 + 0001 0110 = <strong>0100 0011</strong> (= 67). Die Summe passt in 8 Bit (67 &le; 255), in einem 8-Bit-Register geht also kein Übertrag verloren.</p>
 
@@ -105,10 +105,10 @@ Stelle 8 (2^7):  0 + 0        = 0</pre>
     <details>
         <summary>Hinweis: Ein nützlicher Sonderfall – eine Zahl zu sich selbst addieren</summary>
         <p>Addiert man eine Binärzahl zu sich selbst, verdoppelt man sie. Im Binärsystem sieht das so aus:</p>
-        <pre class="darstellung">  1101
-+ 1101
-------
- 11010</pre>
+        <pre class="rechnung">  | 1101
++ | 1101
+---
+  | 11010</pre>
         <p>Das Ergebnis <strong>11010</strong> ist die Ausgangszahl <strong>1101</strong> mit einer <strong>angehängten 0</strong> – die Ziffernfolge ist unverändert, nur um eine Stelle nach links verschoben. Probe: 1101<sub>2</sub> = 13, und 11010<sub>2</sub> = 26 &#10003;</p>
         <p>Der Grund: Verschiebt man eine Ziffer eine Position nach links, verdoppelt sich ihr Stellenwert (aus 2<sup>k</sup> wird 2<sup>k+1</sup>). Eine Verdopplung ist also nichts anderes als eine Linksverschiebung – genau wie im Dezimalsystem das Anhängen einer 0 eine Multiplikation mit 10 bewirkt.</p>
         <p>Prozessoren nutzen das aus: Ein <em>Shift-Befehl</em> (Linksverschiebung) multipliziert mit 2. Er wird im Rechenwerk (ALU) von einer einfachen Schiebeschaltung ausgeführt und ist deutlich schneller als eine allgemeine Multiplikation. Wie das Rechenwerk addiert, lernst du in Kapitel 3 (3.6 Halbaddierer, 3.7 Volladdierer) und in 4.1.</p>

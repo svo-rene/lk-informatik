@@ -61,30 +61,27 @@
 <p>Die Zahl <strong>10100,1101</strong> soll vom 2er-System ins 10er-System umgewandelt werden. Ganzzahliger Anteil und Nachkommateil werden jeweils getrennt behandelt.</p>
 <h3>Umwandlung des ganzzahligen Teils</h3>
 <p>Die Zahl <strong>10100</strong> (2er-System) wird ins Dezimalsystem umgewandelt. Jede Stelle der Zahl hat den Wert der entsprechenden Zweierpotenz. Die der ersten Ziffer von rechts entsprechende Potenz ist 2<sup>0</sup> = 1. Multipliziere jede Ziffer mit der entsprechenden Potenz und summiere. Gehe am besten von rechts nach links vor:</p>
-<pre class="darstellung">        0 &middot;  1 =   0
-        0 &middot;  2 =   0
-        1 &middot;  4 =   4
-        0 &middot;  8 =   0
-        1 &middot; 16 =  16
-                 &mdash;&mdash;&mdash;
-                  20
-    </pre>
+<pre class="rechnung">0 &middot; | 1 | = | 0
+0 &middot; | 2 | = | 0
+1 &middot; | 4 | = | 4
+0 &middot; | 8 | = | 0
+1 &middot; | 16 | = | 16
+---
+| | | 20</pre>
 <h3>Umwandlung des Nachkommateils</h3>
 <p>Der Stellenwert der ersten Nachkommastelle wird mit der Basis 2 und dem Exponenten −1 berechnet (also 0,5), danach wird der Exponent mit jeder weiteren Stelle immer kleiner (−2, −3, …).</p>
 <p>Für den Nachkommateil 1101 ergibt sich also:</p>
-<pre class="darstellung">                    1 &middot;  1/2  =  0,5
-                    1 &middot;  1/4  =  0,25
-                    0 &middot;  1/8  =  0
-                    1 &middot;  1/16 =  0,0625
-                                &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
-                                 0,8125
-                </pre>
+<pre class="rechnung">1 &middot; | 1/2 | = | 0,5
+1 &middot; | 1/4 | = | 0,25
+0 &middot; | 1/8 | = | 0
+1 &middot; | 1/16 | = | 0,0625
+---
+| | | 0,8125</pre>
 <p>Addiere nun den bereits ermittelten ganzzahligen Anteil 20:</p>
-<pre class="darstellung">        0,8125
-     + 20
-       &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
-       20,8125
-    </pre>
+<pre class="rechnung">  | 0,8125
++ | 20
+---
+  | 20,8125</pre>
 <p>Daher lautet die vollständige Zahl <strong>20,8125</strong>.</p>
 <p><strong>Probe:</strong> Verschiebt man das Komma um 4 Stellen nach rechts, erhält man die ganze Zahl 101001101<sub>2</sub> = 256 + 64 + 8 + 4 + 1 = 333. Das Verschieben entspricht einer Multiplikation mit 2<sup>4</sup> = 16, also gilt 10100,1101<sub>2</sub> = 333 / 16 = 20,8125 &#10003;</p>
             </details>
@@ -116,11 +113,11 @@ Ergebnis: 0,0001 1001</pre>
 
 <p>Mit 8 Bit speichert der Rechner also <code>0,00011001</code>. Rechnen wir zurück, was das wirklich bedeutet:</p>
 
-<pre class="darstellung">1 &middot; 1/16  = 0,0625
-1 &middot; 1/32  = 0,03125
-1 &middot; 1/256 = 0,00390625
-              -----------
-              0,09765625</pre>
+<pre class="rechnung">1 &middot; | 1/16 | = | 0,0625
+1 &middot; | 1/32 | = | 0,03125
+1 &middot; | 1/256 | = | 0,00390625
+---
+| | | 0,09765625</pre>
 
 <p>Statt 0,10&nbsp;€ ist also <strong>0,09765625&nbsp;€</strong> gespeichert – rund 0,23&nbsp;Cent zu wenig. Mehr Bits verkleinern diese Abweichung, beseitigen sie aber <strong>nie</strong>: Die Periode geht unendlich weiter, irgendwo muss immer abgeschnitten werden.</p>
 

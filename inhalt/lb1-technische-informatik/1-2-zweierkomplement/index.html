@@ -71,13 +71,13 @@
 <p>Ein 8-Bit-Register im Zweierkomplement enthält den Wert 100. Das Programm addiert 50 dazu:</p>
 
 <pre class="darstellung">100 = 0110 0100
- 50 = 0011 0010
+ 50 = 0011 0010</pre>
 
-Übertrag:  1 1 . . . . . .
-           0 1 1 0 0 1 0 0     (100)
-         + 0 0 1 1 0 0 1 0     ( 50)
-           ---------------
-           1 0 0 1 0 1 1 0</pre>
+<pre class="rechnung">Übertrag: | 1 1 . . . . . .
+          | 0 1 1 0 0 1 0 0 # (100)
++         | 0 0 1 1 0 0 1 0 # (50)
+---
+          | 1 0 0 1 0 1 1 0</pre>
 
 <p>Das Ergebnis beginnt jetzt mit einer 1 – das Register liest es also als <strong>negative</strong> Zahl. Zurückgerechnet: invertieren ergibt 0110 1001, plus 1 ergibt 0110 1010 = 106. Das Register enthält also <strong>&minus;106</strong> statt der erwarteten 150.</p>
 
@@ -93,11 +93,11 @@
 
 <p>Ein vorzeichenloses 8-Bit-Register (Wertebereich 0 bis 255) steht auf 250, es werden 20 addiert:</p>
 
-<pre class="darstellung">Übertrag: (1) 1 1 1 . . . . .
-              1 1 1 1 1 0 1 0     (250)
-            + 0 0 0 1 0 1 0 0     ( 20)
-              ---------------
-          (1)  0 0 0 0 1 1 1 0</pre>
+<pre class="rechnung">Übertrag: | (1) 1 1 1 . . . . .
+          | . 1 1 1 1 1 0 1 0 # (250)
++         | . 0 0 0 1 0 1 0 0 # (20)
+---
+          | (1) 0 0 0 0 1 1 1 0</pre>
 
 <p>Die Summe 270 bräuchte 9 Bit. Der Übertrag aus der höchsten Stelle geht verloren, übrig bleibt 0000 1110 = <strong>14</strong>. Der Zähler ist bei 256 wieder auf 0 gesprungen und rechnet damit <strong>modulo 256</strong>: 270 &minus; 256 = 14.</p>
             </details>

@@ -429,6 +429,75 @@ pre.darstellung {
     border: 1px solid var(--linie);
     font-size: 0.9rem;
 }
+/* Schriftliche Rechnungen: eine Ziffer je Kästchen, Kommas untereinander (bauen.py: rechnung_html) */
+.rechnung-rahmen {
+    overflow-x: auto;
+    margin: 1rem 0 1.25rem;
+}
+table.rechnung {
+    width: auto;
+    border-collapse: collapse;
+    margin: 0;
+    font-family: var(--schrift-code);
+    font-variant-numeric: tabular-nums;
+    font-size: 1rem;
+    background: none;
+    border: 0;
+}
+table.rechnung th,
+table.rechnung td {
+    background: none;
+    border: 0;
+    padding: 0;
+    line-height: 1;
+    height: 1.9em;
+}
+table.rechnung th {
+    font-weight: normal;
+    text-align: right;
+    white-space: nowrap;
+    padding: 0 0.45em;
+    color: var(--text);
+}
+table.rechnung td {
+    width: 1.9em;
+    min-width: 1.9em;
+    text-align: center;
+    border: 1px solid var(--linie-stark);
+    color: var(--text);
+}
+table.rechnung td.komma {
+    width: 0.9em;
+    min-width: 0.9em;
+    font-weight: 600;
+}
+table.rechnung td.notiz {
+    width: auto;
+    border: 0;
+    text-align: left;
+    white-space: nowrap;
+    padding-left: 0.8em;
+    color: var(--text-2);
+    font-family: var(--schrift);
+}
+table.rechnung tr.uebertrag td:not(.notiz),
+table.rechnung tr.uebertrag th {
+    font-size: 0.75em;
+    color: var(--akzent);
+    vertical-align: bottom;
+    padding-bottom: 0.15em;
+    height: 1.6em;
+}
+table.rechnung tr.uebertrag td:not(.notiz) { width: 2.53em; min-width: 2.53em; }
+table.rechnung tr.uebertrag td.komma { width: 1.2em; min-width: 1.2em; }
+table.rechnung tr.ergebnis td:not(.notiz) {
+    border-top: 2px solid var(--text);
+    font-weight: 700;
+}
+table.rechnung td.ueberlauf {
+    color: var(--text-2);
+    text-decoration: line-through;
+}
 pre.schema {
     background: var(--akzent-weich) !important;
     color: var(--text);

@@ -34,6 +34,23 @@ Ein Codeblock `<pre class="ausfuehrbar"><code class="language-python">…</code>
 kein `typing`, keine Typangaben an Attributen (`self.x: int = …`) und kein `pow(a, b, m)` –
 solche Blöcke nicht markieren. Alle anderen Codeblöcke bekommen nur „Kopieren“.
 
+## Schriftliche Rechnungen
+
+Rechnungen, bei denen Ziffern untereinanderstehen müssen, als `<pre class="rechnung">`. `bauen.py` macht daraus
+ein Kästchen-Raster (eine Ziffer je Kästchen, Kommas untereinander):
+
+```
+Übertrag: | . 1 1 1 1 . . .
+          | 0 0 1 0 1 1 0 1
++         | 0 0 0 1 0 1 1 0 # (22)
+---
+          | 0 1 0 0 0 0 1 1
+```
+
+- Felder mit `|` trennen; das letzte Feld ist die Zahl, alles davor Beschriftung, nach ` # ` eine Notiz.
+- Zahl ohne Leerzeichen: ein Kästchen je Zeichen (`0,0625`); mit Leerzeichen: je Stück (`(1)` = Überlauf, `.` = leer).
+- `---` zieht den Ergebnisstrich, eine Beschriftung „Übertrag“ macht die Zeile klein.
+
 ## Neues Thema anlegen
 
 1. Ordner `inhalt/<lernbereich>/<nr-name>/` mit `thema.json`, `index.html` und bei Bedarf `uebungen.html`, `vertiefung.html` anlegen

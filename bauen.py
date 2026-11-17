@@ -191,10 +191,80 @@ def bereichseite(kurs, bereiche, b):
     return geruest(kurs, bereiche, root, f'{b["nr"]} {b["titel"]}', "\n".join(teile), aktiv_bereich=b)
 
 
+def rechnung_html(text):
+    """Schriftliche Rechnung aus <pre class="rechnung"> als Kästchen-Tabelle.
+
+    Je Zeile:  Beschriftung | … | Zahl  # Notiz   (# mit Leerzeichen davor und danach)
+    - Das letzte Feld vor # ist die Zahl: ohne Leerzeichen ein Kästchen je Zeichen (0,0625),
+      mit Leerzeichen ein Kästchen je Stück (0 1 1 0, auch (1) für einen Überlauf). "." = leeres Kästchen.
+    - Alle Zahlen stehen rechtsbündig, Kommazahlen am Komma ausgerichtet.
+    - Eine Zeile nur aus - oder — zieht den Ergebnisstrich über der nächsten Zeile.
+    - Beginnt die Beschriftung mit "Übertrag", wird die Zeile klein gesetzt.
+    Beschriftung und Notiz dürfen HTML enthalten (C<sub>in</sub>).
+    """
+    zeilen = []
+    strich = False
+    for z in text.strip("\n").split("\n"):
+        if not z.strip():
+            continue
+        if re.fullmatch(r"\s*(-|—|&mdash;)+\s*", z):
+            strich = True
+            continue
+        notiz = ""
+        if re.search(r"\s#\s", z):
+            z, notiz = re.split(r"\s#\s", z, maxsplit=1)
+        teile = [p.strip() for p in z.split("|")]
+        zahl = html.unescape(teile[-1])
+        stuecke = zahl.split() if " " in zahl else list(zahl)
+        if "," in stuecke:
+            k = stuecke.index(",")
+            ganz, bruch, komma = stuecke[:k], stuecke[k + 1:], True
+        else:
+            ganz, bruch, komma = stuecke, [], False
+        art = "ergebnis" if strich else ("uebertrag" if teile[0].startswith("Übertrag") else "")
+        zeilen.append({"marken": teile[:-1], "ganz": ganz, "bruch": bruch, "komma": komma,
+                       "notiz": notiz.strip(), "art": art})
+        strich = False
+    if not zeilen:
+        return ""
+    n_marken = max(len(z["marken"]) for z in zeilen)
+    n_ganz = max(len(z["ganz"]) for z in zeilen)
+    n_bruch = max(len(z["bruch"]) for z in zeilen)
+    mit_komma = any(z["komma"] for z in zeilen)
+    mit_notiz = any(z["notiz"] for z in zeilen)
+
+    def kaestchen(s, extra=""):
+        klasse = extra
+        if s == ".":
+            s = ""
+        elif s.startswith("("):
+            klasse = (klasse + " ueberlauf").strip()
+        k = f' class="{klasse}"' if klasse else ""
+        return f"<td{k}>{e(s)}</td>"
+
+    reihen = []
+    for z in zeilen:
+        marken = z["marken"] + [""] * (n_marken - len(z["marken"]))
+        zellen = "".join(f'<th scope="row">{m}</th>' for m in marken)
+        zellen += "".join(kaestchen(s) for s in [""] * (n_ganz - len(z["ganz"])) + z["ganz"])
+        if mit_komma:
+            zellen += kaestchen("," if z["komma"] else "", "komma")
+        zellen += "".join(kaestchen(s) for s in z["bruch"] + [""] * (n_bruch - len(z["bruch"])))
+        if mit_notiz:
+            zellen += f'<td class="notiz">{z["notiz"]}</td>'
+        k = f' class="{z["art"]}"' if z["art"] else ""
+        reihen.append(f"<tr{k}>{zellen}</tr>")
+    return '<div class="rechnung-rahmen"><table class="rechnung">' + "".join(reihen) + "</table></div>"
+
+
+def rechnungen(roh):
+    return re.sub(r'<pre class="rechnung">(.*?)</pre>', lambda m: rechnung_html(m.group(1)), roh, flags=re.S)
+
+
 def themenseite(kurs, bereiche, b, t, seite, vorher, nachher):
     root = "../../"
     pfad = os.path.join(INHALT, b["slug"], t["slug"], seite["datei"])
-    roh = lies(pfad)
+    roh = rechnungen(lies(pfad))
     reiter = []
     for s in t["seiten"]:
         aktiv = ' class="aktiv" aria-current="page"' if s is seite else ""
