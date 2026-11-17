@@ -25,7 +25,7 @@
 
 <h3>Zum Nachlesen: Problem – direkter Zugriff kann schiefgehen oder ausgenutzt werden</h3>
 
-<pre><code class="language-python">class Konto:
+<pre class="ausfuehrbar"><code class="language-python">class Konto:
     def __init__(self, inhaber, kontostand):
         self.inhaber = inhaber
         self.kontostand = kontostand
@@ -109,7 +109,7 @@ konto1.kontostand = 10000000  # Geld „aus dem Nichts“ – ebenfalls ein Fehl
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Kontostand mit Getter und Setter schützen</summary>
         <p><strong>Ausgangssituation:</strong> Im Problem-Code oben kann jeder den Kontostand beliebig überschreiben, auch mit −5000. Ziel: Der Kontostand soll nie negativ werden.</p>
-        <pre><code class="language-python">class Konto:
+        <pre class="ausfuehrbar"><code class="language-python">class Konto:
     def __init__(self, inhaber, kontostand):
         self.inhaber = inhaber
         self.__kontostand = kontostand
@@ -252,7 +252,7 @@ print(k._Konto__kontostand)    # 100 – so heißt es intern (bitte nicht benutz
         <details>
             <summary>Aufgabe 4.6.1: Sichtbarkeit erkennen <span class="niveau">AFB I–II</span></summary>
             <p>Schau dir diesen Code an und beantworte die Fragen:</p>
-            <pre><code class="language-python">class Schueler:
+            <pre class="ausfuehrbar"><code class="language-python">class Schueler:
     def __init__(self, name, noten):
         self.name = name
         self._noten = noten</code></pre>

@@ -68,7 +68,7 @@
 
 <p>Die Überträge werden – wie beim schriftlichen Addieren im Dezimalsystem – über der Rechnung notiert:</p>
 
-<pre>Übertrag:  . 1 1 1 1 . . .
+<pre class="darstellung">Übertrag:  . 1 1 1 1 . . .
            0 0 1 0 1 1 0 1
          + 0 0 0 1 0 1 1 0
            ---------------
@@ -78,7 +78,7 @@
 
 <p>Stelle für Stelle nachvollzogen, von rechts beginnend:</p>
 
-<pre>Stelle 1 (2^0):  1 + 0        = 1,  kein Übertrag
+<pre class="darstellung">Stelle 1 (2^0):  1 + 0        = 1,  kein Übertrag
 Stelle 2 (2^1):  0 + 1        = 1,  kein Übertrag
 Stelle 3 (2^2):  1 + 1        = 0,  Übertrag 1   (geht auf Stelle 4)
 Stelle 4 (2^3):  1 + 0 + Ü1   = 0,  Übertrag 1   (geht auf Stelle 5)
@@ -89,7 +89,7 @@ Stelle 8 (2^7):  0 + 0        = 0</pre>
 
 <p><strong>Probe im Dezimalsystem:</strong></p>
 
-<pre>0010 1101 = 32 + 8 + 4 + 1   = 45
+<pre class="darstellung">0010 1101 = 32 + 8 + 4 + 1   = 45
 0001 0110 = 16 + 4 + 2       = 22
                                ---
                                 67
@@ -105,7 +105,7 @@ Stelle 8 (2^7):  0 + 0        = 0</pre>
     <details>
         <summary>Hinweis: Ein nützlicher Sonderfall – eine Zahl zu sich selbst addieren</summary>
         <p>Addiert man eine Binärzahl zu sich selbst, verdoppelt man sie. Im Binärsystem sieht das so aus:</p>
-        <pre>  1101
+        <pre class="darstellung">  1101
 + 1101
 ------
  11010</pre>
@@ -183,12 +183,12 @@ Stelle 8 (2^7):  0 + 0        = 0</pre>
     <p><strong>Binär &harr; Hexadezimal: der direkte Weg (ohne Dezimalsystem)</strong></p>
     <p>Zwischen Binär- und Hexadezimalsystem braucht man <strong>keinen Umweg über das Dezimalsystem</strong>. Der Grund: 16 = 2<sup>4</sup>. Eine Hexadezimalziffer kann genau 16 verschiedene Werte annehmen – und genau das leisten auch 4 Bit. Jede Hexadezimalziffer entspricht deshalb exakt einer Vierergruppe von Bits.</p>
     <p><strong>Binär &rarr; Hexadezimal:</strong> Teile die Binärzahl <strong>von rechts</strong> in Vierergruppen ein und ersetze jede Gruppe durch ihre Hexadezimalziffer.</p>
-    <pre>1101   0110
+    <pre class="darstellung">1101   0110
   &darr;      &darr;
   13      6
   D       6      &rarr;  D6 (Hexadezimal)</pre>
     <p><strong>Hexadezimal &rarr; Binär:</strong> Ersetze jede Hexadezimalziffer durch ihre 4-Bit-Gruppe.</p>
-    <pre>  A     7
+    <pre class="darstellung">  A     7
   &darr;     &darr;
 1010  0111      &rarr;  10100111 (Binär)</pre>
     <p><strong>Achtung – immer von rechts gruppieren!</strong> Die Zahl 1011011 hat 7 Stellen. Von links gruppiert ergäbe das 1011|011 – falsch. Richtig ist von rechts: 101|1011, links mit einer Null aufgefüllt also 0101|1011 = 5B<sub>16</sub>. Probe: 5 · 16 + 11 = 91, und 1011011<sub>2</sub> = 64 + 16 + 8 + 2 + 1 = 91 &#10003;</p>
@@ -210,7 +210,7 @@ Stelle 8 (2^7):  0 + 0        = 0</pre>
 
 <div class="merke">
     <p><strong>Die vier Regeln der binären Addition:</strong></p>
-    <pre>0 + 0     = 0
+    <pre class="darstellung">0 + 0     = 0
 0 + 1     = 1
 1 + 1     = 0   Übertrag 1
 1 + 1 + 1 = 1   Übertrag 1   (wenn zusätzlich ein Übertrag hereinkommt)</pre>

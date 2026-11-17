@@ -41,7 +41,7 @@
 <p><strong>Ausgangssituation:</strong> Du willst dir einen ersten &Uuml;berblick &uuml;ber die Tabelle <code>Studenten</code>
    verschaffen und alles sehen, was darin steht.</p>
 <h3>Beispiel 1: Alle Spalten ausw&auml;hlen</h3>
-<pre><code>SELECT *
+<pre><code class="language-sql">SELECT *
 FROM Studenten;</code></pre>
 <p><strong>Ergebnis</strong> &ndash; der Stern steht f&uuml;r &bdquo;alle Spalten&ldquo;, die Tabelle kommt also
    unver&auml;ndert zur&uuml;ck (5 Zeilen):</p>
@@ -71,7 +71,7 @@ FROM Studenten;</code></pre>
 
 <h3>Beispiel 2: Bestimmte Spalten ausw&auml;hlen (Projektion)</h3>
 
-<pre><code>SELECT Vorname, Nachname
+<pre><code class="language-sql">SELECT Vorname, Nachname
 FROM Studenten;</code></pre>
 
 <p><strong>Ergebnis</strong> &ndash; es bleiben alle 5 Zeilen, aber nur noch 2 Spalten:</p>
@@ -89,7 +89,7 @@ FROM Studenten;</code></pre>
 
 <h3>Beispiel 3: Die Reihenfolge im SELECT bestimmt die Reihenfolge der Spalten</h3>
 
-<pre><code>SELECT Nachname, Vorname
+<pre><code class="language-sql">SELECT Nachname, Vorname
 FROM Studenten;</code></pre>
 
 <p><strong>Ergebnis</strong> &ndash; dieselben Daten, aber die Spalten sind vertauscht:</p>
@@ -111,7 +111,7 @@ FROM Studenten;</code></pre>
 
 <h3>Beispiel 4: Spalten umbenennen</h3>
 
-<pre><code>SELECT Nachname AS Familienname, Notendurchschnitt AS Schnitt
+<pre><code class="language-sql">SELECT Nachname AS Familienname, Notendurchschnitt AS Schnitt
 FROM Studenten;</code></pre>
 
 <p><strong>Ergebnis</strong> &ndash; die Daten sind identisch, nur die &Uuml;berschriften &auml;ndern sich:</p>
@@ -132,7 +132,7 @@ FROM Studenten;</code></pre>
 <p>Hier wird eine Spalte ausgegeben, die es in der Tabelle gar nicht gibt: das Alter, berechnet aus dem
    Geburtsjahr. Ohne <code>AS</code> h&auml;tte die Spalte die ganze Rechnung als &Uuml;berschrift.</p>
 
-<pre><code>SELECT Vorname, Nachname, 2026 - CAST(substr(Geburtsdatum, 1, 4) AS INTEGER) AS Lebensjahre
+<pre><code class="language-sql">SELECT Vorname, Nachname, 2026 - CAST(substr(Geburtsdatum, 1, 4) AS INTEGER) AS Lebensjahre
 FROM Studenten;</code></pre>
 
 <p><strong>Ergebnis:</strong></p>
@@ -178,7 +178,7 @@ FROM Studenten;</code></pre>
 
 <h3>Beispiel 6: Aufsteigend sortieren</h3>
 
-<pre><code>SELECT Vorname, Nachname
+<pre><code class="language-sql">SELECT Vorname, Nachname
 FROM Studenten
 ORDER BY Nachname;</code></pre>
 
@@ -198,7 +198,7 @@ ORDER BY Nachname;</code></pre>
 
 <h3>Beispiel 7: Absteigend sortieren</h3>
 
-<pre><code>SELECT Vorname, Notendurchschnitt
+<pre><code class="language-sql">SELECT Vorname, Notendurchschnitt
 FROM Studenten
 ORDER BY Notendurchschnitt DESC;</code></pre>
 
@@ -222,7 +222,7 @@ ORDER BY Notendurchschnitt DESC;</code></pre>
 <p>Die zweite Spalte im <code>ORDER BY</code> entscheidet nur dann, wenn die erste gleich ist &ndash; wie im
    Telefonbuch, wo bei gleichem Nachnamen der Vorname z&auml;hlt.</p>
 
-<pre><code>SELECT Vorname, Nachname, Notendurchschnitt
+<pre><code class="language-sql">SELECT Vorname, Nachname, Notendurchschnitt
 FROM Studenten
 ORDER BY Notendurchschnitt ASC, Nachname ASC;</code></pre>
 
@@ -249,7 +249,7 @@ ORDER BY Notendurchschnitt ASC, Nachname ASC;</code></pre>
    (Geburtsjahr als Zahl) und Notendurchschnitt unter dem Namen <code>Schnitt</code>. Die jüngsten Jahrgänge
    sollen oben stehen, innerhalb eines Jahrgangs die beste Note zuerst. Grundlage ist der Ausschnitt mit den
    5 Zeilen von oben.</p>
-<pre><code>SELECT Nachname,
+<pre><code class="language-sql">SELECT Nachname,
        CAST(substr(Geburtsdatum, 1, 4) AS INTEGER) AS Jahrgang,
        Notendurchschnitt AS Schnitt
 FROM Studenten
@@ -305,7 +305,7 @@ ORDER BY Jahrgang DESC, Schnitt ASC;</code></pre>
 <li><strong>Reihenfolge?</strong> J&uuml;ngste zuerst, also das sp&auml;teste Datum oben &rarr; <code>ORDER BY Geburtsdatum DESC</code></li>
 </ol>
 <p>Zusammengesetzt ergibt das:</p>
-<pre><code>SELECT Vorname, Geburtsdatum AS Geboren
+<pre><code class="language-sql">SELECT Vorname, Geburtsdatum AS Geboren
 FROM Studenten
 ORDER BY Geburtsdatum DESC;</code></pre>
 <p>Diese f&uuml;nf Fragen funktionieren bei jeder Abfrage, auch bei den komplizierteren sp&auml;ter &ndash; probiere sie gleich an Aufgabe 1.3.2 aus.</p>

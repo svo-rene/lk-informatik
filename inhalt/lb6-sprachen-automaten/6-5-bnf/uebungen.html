@@ -24,7 +24,7 @@
 <details>
 <summary>Aufgabe 6.5.5: Leseausweise – EBNF in BNF übertragen <span class="niveau">AFB II</span></summary>
 <p>Die Schulbibliothek beschreibt ihre Ausweisnummern in EBNF:</p>
-<pre>ausweis   = buchstabe, [ "-" ], ziffer, { ziffer } ;
+<pre class="darstellung">ausweis   = buchstabe, [ "-" ], ziffer, { ziffer } ;
 buchstabe = "A" | "B" | "C" ;
 ziffer    = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;</pre>
 <ol type="a">
@@ -39,7 +39,7 @@ ziffer    = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;</pre>
 <details>
 <summary>Aufgabe 6.5.6: Listen wie in Python <span class="niveau">AFB II</span></summary>
 <p>Eine vereinfachte Grammatik für Listen aus Zahlen (ohne Leerzeichen):</p>
-<pre>&lt;liste&gt;    ::= "[" "]" | "[" &lt;elemente&gt; "]"
+<pre class="darstellung">&lt;liste&gt;    ::= "[" "]" | "[" &lt;elemente&gt; "]"
 &lt;elemente&gt; ::= &lt;zahl&gt; | &lt;zahl&gt; "," &lt;elemente&gt;
 &lt;zahl&gt;     ::= &lt;ziffer&gt; | &lt;ziffer&gt; &lt;zahl&gt;
 &lt;ziffer&gt;   ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"</pre>

@@ -235,12 +235,23 @@
                     konsole.innerHTML = "";
                     runner = m.createRunner();
                     m.createConsole(konsole, { lang: "de" }).connect(runner);
+                    var etwasPassiert = false;
+                    runner.on("output", function () { etwasPassiert = true; });
+                    runner.on("error", function () { etwasPassiert = true; });
+                    runner.on("input", function () { etwasPassiert = true; });
                     var quelltext = code.textContent;
                     if (m.detectModules(quelltext).indexOf("plot") >= 0) runner.use(m.createPlot(ausgabe.querySelector(".code-plot")));
                     laeuft = true;
                     start.className = "code-knopf";
                     start.innerHTML = SVG.stopp + "<span>Stopp</span>";
-                    return runner.run(quelltext);
+                    return runner.run(quelltext).then(function () {
+                        if (etwasPassiert || ausgabe.querySelector(".code-plot svg")) return;
+                        var leer = document.createElement("p");
+                        leer.className = "code-leer";
+                        leer.textContent = "Das Programm ist ohne Fehler durchgelaufen, gibt aber nichts aus. " +
+                            "Mit „Ändern“ kannst du z. B. print(…) ergänzen und sehen, was in den Variablen steht.";
+                        konsole.appendChild(leer);
+                    });
                 }).catch(function (fehler) {
                     konsole.textContent = "Python konnte nicht geladen werden (" + fehler + "). Ist die Internetverbindung da?";
                 }).then(function () {

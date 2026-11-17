@@ -31,7 +31,7 @@
 
 <p>INNER JOIN verknüpft zwei Tabellen basierend auf einer Bedingung und gibt nur die Zeilen zurück, die in beiden Tabellen übereinstimmen.</p>
 
-<pre><code>SELECT *
+<pre><code class="language-sql">SELECT *
     FROM Tabelle1
     INNER JOIN Tabelle2 ON Tabelle1.Spalte = Tabelle2.Spalte;</code></pre>
 
@@ -110,7 +110,7 @@
         <h4>INNER JOIN Abfrage</h4>
         <p>Nun wollen wir einen INNER JOIN durchführen, um die Mitarbeitenden mit ihren Abteilungsinformationen zu verknüpfen:</p>
     
-        <pre><code>SELECT Mitarbeiter.MitarbeiterID, Mitarbeiter.Name, 
+        <pre><code class="language-sql">SELECT Mitarbeiter.MitarbeiterID, Mitarbeiter.Name, 
            Abteilungen.AbteilungName, Abteilungen.Standort
     FROM Mitarbeiter
     INNER JOIN Abteilungen ON Mitarbeiter.AbteilungID = Abteilungen.AbteilungID;</code></pre>
@@ -176,7 +176,7 @@
             Allgemein:
         </p>
 
-<pre><code>SELECT Kunden.Name, Bestellungen.BestellNr
+<pre><code class="language-sql">SELECT Kunden.Name, Bestellungen.BestellNr
 FROM Kunden
 LEFT JOIN Bestellungen ON Kunden.KundenID = Bestellungen.KundenID;</code></pre>
 
@@ -184,7 +184,7 @@ LEFT JOIN Bestellungen ON Kunden.KundenID = Bestellungen.KundenID;</code></pre>
 
 <p>Mit denselben Tabellen wie oben. Sarah Koch hat keine Abteilung (<code>NULL</code>) und fehlte deshalb beim INNER JOIN.</p>
 
-<pre><code>SELECT Mitarbeiter.MitarbeiterID, Mitarbeiter.Name,
+<pre><code class="language-sql">SELECT Mitarbeiter.MitarbeiterID, Mitarbeiter.Name,
        Abteilungen.AbteilungName, Abteilungen.Standort
 FROM Mitarbeiter
 LEFT JOIN Abteilungen ON Mitarbeiter.AbteilungID = Abteilungen.AbteilungID;</code></pre>
@@ -213,7 +213,7 @@ LEFT JOIN Abteilungen ON Mitarbeiter.AbteilungID = Abteilungen.AbteilungID;</cod
                Verbindungstabelle <code>Kursnote(k_id, s_id, note)</code>. Die Oberstufenberatung möchte wissen: „Wer hat in
                den Kernfächern Mathematik, Deutsch und Englisch <em>mindestens zwei</em> Noten, und wie lautet der
                Durchschnitt dieser Kernfachnoten? Die besten zuerst.“</p>
-            <pre><code>SELECT Schueler.name, Schueler.vorname,
+            <pre><code class="language-sql">SELECT Schueler.name, Schueler.vorname,
        COUNT(*) AS Kernfaecher,
        ROUND(AVG(Kursnote.note), 2) AS Schnitt
 FROM Schueler

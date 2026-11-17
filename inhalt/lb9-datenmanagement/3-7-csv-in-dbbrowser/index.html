@@ -14,12 +14,12 @@
     Zahlenvergleich musst du die Spalte deshalb mit <code>CAST(... AS REAL)</code> in eine Zahl umwandeln.
 </p>
 
-<pre>
+<pre><code class="language-sql">
 SELECT *
 FROM Messwerte
 WHERE Temperatur != 'N/A'
   AND CAST(Temperatur AS REAL) BETWEEN -30 AND 50;
-</pre>
+</code></pre>
 
 <div class="hinweis">
     <details>
@@ -45,11 +45,11 @@ WHERE Temperatur != 'N/A'
     Sicherheitsbedingungen mehr und kannst dich direkt auf die eigentliche Auswertung konzentrieren.
 </p>
 
-<pre>
+<pre><code class="language-sql">
 SELECT Typ, AVG(Temperatur) AS Durchschnittstemperatur
 FROM Sensordaten
 GROUP BY Typ;
-</pre>
+</code></pre>
 
 <h2>3. In der Tabellenkalkulation vorbereiten, dann importieren</h2>
 
@@ -90,14 +90,14 @@ GROUP BY Typ;
             Steht dort <code>TEXT</code>, muss für Zahlenvergleiche und Sortierung umgewandelt werden.</li>
         <li><strong>Abfragen</strong> – Spaltennamen mit Umlaut setzt man sicherheitshalber in doppelte Anführungszeichen.</li>
     </ol>
-<pre>
+<pre><code class="language-sql">
 SELECT Produkt, CAST("Verkäufe" AS INTEGER) AS Anzahl
 FROM Verkauf
 ORDER BY Anzahl DESC;
 
 SELECT SUM(CAST("Verkäufe" AS INTEGER)) AS Gesamt
 FROM Verkauf;
-</pre>
+</code></pre>
     <p><strong>Ergebnis:</strong> Cola 120, Schokoriegel 110, Wasser 95, Chips 78, Saft 60; Gesamt 463.</p>
     <p><strong>Kontrolle:</strong> 120 + 110 + 95 + 78 + 60 = 463. Ohne <code>CAST</code> würde eine Textspalte zeichenweise sortiert:
        <code>95, 78, 60, 120, 110</code> – weil „9“ als Zeichen größer ist als „1“.</p>
@@ -124,7 +124,7 @@ FROM Verkauf;
             vorkommt. <code>LEFT JOIN</code> behält jedes Produkt; <code>COALESCE(..., 0)</code> macht aus der fehlenden Summe eine 0.</li>
         <li><strong>Runden</strong> – Kommazahlen werden intern binär gespeichert, deshalb wird die Summe mit <code>ROUND(..., 2)</code> auf Cent gerundet.</li>
     </ol>
-<pre>
+<pre><code class="language-sql">
 SELECT p.Bezeichnung,
        COALESCE(SUM(CAST(b.Menge AS INTEGER)), 0) AS Stueck,
        ROUND(COALESCE(SUM(CAST(b.Menge AS INTEGER) * p.Preis), 0), 2) AS Umsatz
@@ -132,7 +132,7 @@ FROM Produkt p
 LEFT JOIN Bestellposition b ON CAST(b.ProduktNr AS INTEGER) = p.ProduktNr
 GROUP BY p.ProduktNr
 ORDER BY Umsatz DESC;
-</pre>
+</code></pre>
     <p><strong>Ergebnis:</strong></p>
     <table class="gitter">
         <tr><th>Bezeichnung</th><th>Stueck</th><th>Umsatz</th></tr>

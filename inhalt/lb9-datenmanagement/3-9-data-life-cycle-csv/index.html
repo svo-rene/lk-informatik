@@ -24,7 +24,7 @@
 
 <h2>2. Daten mit Python einlesen</h2>
 
-<pre><code>import csv
+<pre><code class="language-python">import csv
 
 daten = []
 with open('umfrage.csv', newline='', encoding='utf-8') as file:
@@ -39,7 +39,7 @@ for eintrag in daten:
 
 <h2>3. Daten bereinigen</h2>
 
-<pre><code>def ist_zahl(text):
+<pre><code class="language-python">def ist_zahl(text):
     """True, wenn text eine ganze Zahl oder Dezimalzahl ist (z. B. '3', '7.5', '7,5')."""
     try:
         float(text.replace(',', '.'))
@@ -69,7 +69,7 @@ for zeile in daten:
 
 <h2>4. Daten analysieren</h2>
 
-<pre><code>zaehler = {}
+<pre><code class="language-python">zaehler = {}
 for z in bereinigt:
     antwort = z[1]
     if antwort in zaehler:
@@ -86,7 +86,7 @@ print("Durchschnitt (Zahl):", round(durchschnitt, 1))
 
 <h2>5. Neue CSV-Datei speichern</h2>
 
-<pre><code>with open('umfrage_bereinigt.csv', 'w', newline='', encoding='utf-8') as file:
+<pre><code class="language-python">with open('umfrage_bereinigt.csv', 'w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file, delimiter=';')
     writer.writerow(['Nr', 'Antwort_Wort', 'Antwort_Zahl'])
     writer.writerows(bereinigt)

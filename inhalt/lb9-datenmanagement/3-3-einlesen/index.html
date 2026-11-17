@@ -42,7 +42,7 @@
         Eine CSV-Datei kann zeilenweise eingelesen und jede Zeile in eine Liste umgewandelt werden:
     </p>
 
-<pre><code>import csv
+<pre><code class="language-python">import csv
 
 with open('daten.csv', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter=';')
@@ -63,14 +63,14 @@ with open('daten.csv', newline='', encoding='utf-8') as csvfile:
     <h3>Beispiel</h3>
     <p>Angenommen, die Datei <code>schueler.csv</code> enthält:</p>
 
-    <pre><code>Name;Alter;Note
+    <pre class="darstellung"><code>Name;Alter;Note
 Anna;17;1.3
 Ben;16;2.0
 …</code></pre>
 
     <p>Dann ergibt sich in Python beim Einlesen als Liste (hier die ersten drei Zeilen):</p>
 
-    <pre><code>['Name', 'Alter', 'Note']
+    <pre class="darstellung"><code>['Name', 'Alter', 'Note']
 ['Anna', '17', '1.3']
 ['Ben', '16', '2.0']</code></pre>
 
@@ -97,7 +97,7 @@ print(len(zeilen) - 1)    # Anzahl der Datensätze ohne Kopfzeile</code></pre>
             Die Kopfzeile ist kein Datensatz.</li>
     </ol>
     <p><strong>Ergebnis</strong> für die Datei mit 11 Zeilen (Kopfzeile + 10 Datensätze):</p>
-    <pre><code>['Name', 'Alter', 'Note']
+    <pre class="darstellung"><code>['Name', 'Alter', 'Note']
 ['Anna', '17', '1.3']
 10</code></pre>
     <p><strong>Testfälle und Kontrolle:</strong></p>
@@ -119,7 +119,7 @@ print(len(zeilen) - 1)    # Anzahl der Datensätze ohne Kopfzeile</code></pre>
         Wenn die CSV-Datei eine Kopfzeile mit Spaltennamen hat, können wir die Daten direkt als Wörterbücher laden:
     </p>
 
-<pre><code>import csv
+<pre><code class="language-python">import csv
 
 with open('daten.csv', newline='', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile, delimiter=';')
@@ -137,14 +137,14 @@ with open('daten.csv', newline='', encoding='utf-8') as csvfile:
 
 <p>Angenommen, die Datei <code>produkte.csv</code> enthält:</p>
 
-<pre><code>Produkt;Preis
+<pre class="darstellung"><code>Produkt;Preis
 Taschenrechner;19.99
 USB-Stick;8.49
 …</code></pre>
 
 <p>Dann ergibt sich in Python beim Einlesen als Dictionary (hier die ersten beiden Datensätze):</p>
 
-<pre><code>{'Produkt': 'Taschenrechner', 'Preis': '19.99'}
+<pre class="darstellung"><code>{'Produkt': 'Taschenrechner', 'Preis': '19.99'}
 {'Produkt': 'USB-Stick', 'Preis': '8.49'}</code></pre>
 
 <p>Jede Zeile wird zu einem Wörterbuch (<code>dict</code>), wobei die Spaltennamen als Schlüssel verwendet werden.</p>
@@ -194,19 +194,19 @@ USB-Stick;8.49
         Beim Öffnen einer Datei muss der Dateiname exakt angegeben werden. Liegt die Datei im gleichen Ordner wie dein Python-Programm, reicht der Dateiname alleine:
     </p>
 
-<pre><code>with open('schueler.csv', newline='', encoding='utf-8') as csvfile:</code></pre>
+<pre><code class="language-python">with open('schueler.csv', newline='', encoding='utf-8') as csvfile:</code></pre>
 
 <p>
         Liegt die Datei in einem Unterordner (z.&nbsp;B. „downloads“), musst du den Pfad ergänzen:
     </p>
 
-<pre><code>with open('downloads/schueler.csv', newline='', encoding='utf-8') as csvfile:</code></pre>
+<pre><code class="language-python">with open('downloads/schueler.csv', newline='', encoding='utf-8') as csvfile:</code></pre>
 
 <p>
         Achtung: Bei Windows sind Backslashes (<code>\</code>) üblich. In Python sollte man Pfade entweder mit Schrägstrich (<code>/</code>) schreiben oder doppelte Backslashes verwenden:
     </p>
 
-<pre><code>with open('downloads\\schueler.csv', newline='', encoding='utf-8') as csvfile:</code></pre>
+<pre><code class="language-python">with open('downloads\\schueler.csv', newline='', encoding='utf-8') as csvfile:</code></pre>
 
 <p>
         Oder besser: immer den Schrägstrich <code>/</code> verwenden. Python versteht das auf allen Systemen!
@@ -219,14 +219,14 @@ USB-Stick;8.49
         Zahlenspalten um und sammelt alle Datensätze in einer Liste:
     </p>
 
-<pre><code>import csv
+<pre><code class="language-python">import csv
 
 schueler = []
 with open('schueler.csv', newline='', encoding='utf-8-sig') as csvfile:
     reader = csv.DictReader(csvfile, delimiter=';')
     for row in reader:
-        row['Alter'] = int(row['Alter'])      # Text '17'  -> Zahl 17
-        row['Note'] = float(row['Note'])      # Text '1.3' -> Zahl 1.3
+        row['Alter'] = int(row['Alter'])      # Text '17'  -&gt; Zahl 17
+        row['Note'] = float(row['Note'])      # Text '1.3' -&gt; Zahl 1.3
         schueler.append(row)
 
 print(len(schueler), "Datensätze eingelesen")
@@ -283,7 +283,7 @@ print("Summe:", summe, "Durchschnitt:", summe / len(ergebnis))</code></pre>
                 vollständig und richtig umgewandelt wurde.</li>
         </ol>
         <p><strong>Ergebnis:</strong></p>
-        <pre><code>Warnung: nur eine Spalte erkannt: ['Name,Punkte']
+        <pre class="darstellung"><code>Warnung: nur eine Spalte erkannt: ['Name,Punkte']
 None
 10 Datensätze
 {'Name': 'Anna', 'Punkte': 85}

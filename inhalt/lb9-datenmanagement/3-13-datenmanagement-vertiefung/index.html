@@ -196,7 +196,7 @@ for nr in [1013, 2027, 3550, 4021, 5117, 6048]:
 print(faecher)
 print(5117 in faecher[5117 % 10])</code></pre>
             <p><strong>Ergebnis:</strong></p>
-            <pre><code>[[3550], [4021], [], [1013], [], [], [], [2027, 5117], [6048], []]
+            <pre class="darstellung"><code>[[3550], [4021], [], [1013], [], [], [], [2027, 5117], [6048], []]
 True</code></pre>
             <p><strong>Kontrolle:</strong> Sechs Nummern, sechs Einträge in den Fächern. Eine Hashfunktion ist nur gut, wenn sie die Schlüssel
                gleichmäßig verteilt – sonst wird ein Fach zur langen Liste (siehe Aufgabe 3.13.5).</p>
@@ -239,7 +239,7 @@ with open('temperatur_sensor.csv', newline='', encoding='utf-8') as datei:
                     steigt Stunde für Stunde, obwohl die Temperatur fällt. Ein solcher Fehler fällt erst bei einem Testfall mit bekanntem Ergebnis auf.</li>
             </ol>
             <p><strong>Ergebnis:</strong></p>
-            <pre><code>10:00 19.8
+            <pre class="darstellung"><code>10:00 19.8
 11:00 21.0
 12:00 22.3
 13:00 23.3
@@ -298,7 +298,7 @@ gruppen = shuffle_phase(alle_paare)
 print(gruppen)
 print([reduce_phase(w, e) for w, e in gruppen.items()])</code></pre>
             <p><strong>Ergebnis:</strong></p>
-            <pre><code>{'daten': [1, 1, 1], 'sind': [1], 'wertvoll': [1, 1], 'schützen': [1], 'schutz': [1], 'ist': [1]}
+            <pre class="darstellung"><code>{'daten': [1, 1, 1], 'sind': [1], 'wertvoll': [1, 1], 'schützen': [1], 'schutz': [1], 'ist': [1]}
 [('daten', 3), ('sind', 1), ('wertvoll', 2), ('schützen', 1), ('schutz', 1), ('ist', 1)]</code></pre>
             <p><strong>Kontrolle:</strong> Die drei Dokumente haben 3 + 3 + 3 = 9 Wörter; die Summe aller Zählerstände ist 3 + 1 + 2 + 1 + 1 + 1 = 9.</p>
             </details>

@@ -15,7 +15,7 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
 <p><strong>Ausgangssituation:</strong> Zusammen mit der Regel für <code>&lt;zahl&gt;</code> aus dem Merkkasten beschreibt</p>
-<pre>&lt;ziffer&gt; ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</pre>
+<pre class="darstellung">&lt;ziffer&gt; ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</pre>
 <p>alle natürlichen Zahlen in Ziffernschreibweise. Wir leiten <code>407</code> ab.</p>
 <ol>
 <li><strong>Anzahl der Ziffern bestimmen:</strong> <code>407</code> hat drei Ziffern, also wird <code>&lt;zahl&gt; ::= &lt;zahl&gt;&lt;ziffer&gt;</code> zweimal angewendet: <code>&lt;zahl&gt; ⇒ &lt;zahl&gt;&lt;ziffer&gt; ⇒ &lt;zahl&gt;&lt;ziffer&gt;&lt;ziffer&gt;</code>. <em>Warum?</em> Jede Anwendung der rekursiven Regel hängt rechts eine Ziffer an.</li>
@@ -39,7 +39,7 @@
 
 <p>Beispiel einer BNF-Regel mit Zeichenketten als Terminale:</p>
 
-<pre>&lt;schlüsselwort&gt; ::= "if" | "else" | "while" | "for"</pre>
+<pre class="darstellung">&lt;schlüsselwort&gt; ::= "if" | "else" | "while" | "for"</pre>
 
 <div class="hinweis">
 <details>
@@ -60,7 +60,7 @@
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
 <p><strong>Bezeichner in BNF und EBNF</strong><br>Ein Bezeichner beginnt mit einem Buchstaben, danach folgen beliebig viele Buchstaben oder Ziffern.</p>
-<pre>BNF:   &lt;bezeichner&gt; ::= &lt;buchstabe&gt; | &lt;bezeichner&gt;&lt;buchstabe&gt; | &lt;bezeichner&gt;&lt;ziffer&gt;
+<pre class="darstellung">BNF:   &lt;bezeichner&gt; ::= &lt;buchstabe&gt; | &lt;bezeichner&gt;&lt;buchstabe&gt; | &lt;bezeichner&gt;&lt;ziffer&gt;
 EBNF:  bezeichner = buchstabe, { buchstabe | ziffer } ;</pre>
 <p>Die BNF braucht eine rekursive Regel, die EBNF drückt dasselbe mit <code>{ }</code> aus.</p>
 <p><strong>Den Bezeichner <code>x1y</code> in beiden Notationen erzeugen:</strong></p>

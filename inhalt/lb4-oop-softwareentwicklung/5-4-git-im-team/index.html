@@ -152,7 +152,7 @@
 
 <p>Ein <strong>Commit-Graph</strong> zeigt Commits als Punkte und ihre Vorgänger als Linien. Auf git.inf7.eu findest du ihn über „… Commits“ in der Graph-Ansicht; dort steht – wie bei <code>git log --graph</code> – der neueste Commit oben. Nach Bens Merge sieht der Verlauf so aus:</p>
 
-<pre><code>*   e5f0c21 (main) Merge pull request '#3 Runde mit Prozentwert auswerten' (#4) from 3-auswertung into main
+<pre class="darstellung"><code>*   e5f0c21 (main) Merge pull request '#3 Runde mit Prozentwert auswerten' (#4) from 3-auswertung into main
 |\
 | * 9b1d7a2 #3 Runde: Prozent auf ganze Zahl gerundet
 | * 4c8e6f0 #3 Runde: richtige Antworten zählen
@@ -161,7 +161,7 @@
 
 <p>Auf Papier zeichnet man denselben Verlauf meist waagerecht. Die Zeit läuft nach rechts, jede Linie verbindet einen Commit mit seinem Nachfolger, der Zeiger <code>main</code> steht am neuesten Commit:</p>
 
-<pre><code>main           1a2b3c4 ──────────────────────────────── e5f0c21   ◀ main
+<pre class="darstellung"><code>main           1a2b3c4 ──────────────────────────────── e5f0c21   ◀ main
                       \                                 /
 3-auswertung           4c8e6f0 ──────── 9b1d7a2 ───────</code></pre>
 
@@ -201,7 +201,7 @@
 
 <p>Git führt Änderungen zeilenweise zusammen. Ändert Branch A die Zeilen 3–5 und Branch B die Zeilen 20–22 derselben Datei, übernimmt Git beides automatisch. Haben aber beide Branches <strong>dieselben Zeilen</strong> unterschiedlich geändert (oder die eine Seite die Zeilen gelöscht, die andere sie geändert), entsteht ein <strong>Konflikt</strong>. Git schreibt dann beide Fassungen mit Markierungen in die Datei:</p>
 
-<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; main
+<pre class="darstellung"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; main
     print("3 – Bestenliste")
 =======
     print("3 – Statistik")
@@ -213,12 +213,12 @@
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Zwei Pull Requests ändern dieselbe Zeile – Konflikt erkennen, lösen, künftig vermeiden</summary>
             <p><strong>Ausgangssituation:</strong> In <code>main</code> (Commit <code>5b7e0d4</code>) enthält <code>main.py</code> dieses Menü:</p>
-            <pre><code class="language-python">def zeige_menue() -&gt; None:
+            <pre class="ausfuehrbar"><code class="language-python">def zeige_menue() -&gt; None:
     print("1 – Neue Runde")
     print("2 – Einstellungen")
     print("0 – Ende")</code></pre>
             <p>Am Montag legen Ben (Issue <code>#7</code>, Branch <code>7-menue-bestenliste</code>) und Mia (Issue <code>#10</code>, Branch <code>10-menue-statistik</code>) beide von <code>5b7e0d4</code> aus einen Branch an. Beide fügen hinter Zeile 3 eine neue Zeile ein: Ben <code>print("3 – Bestenliste")</code>, Mia <code>print("3 – Statistik")</code>. Bens PR <code>#9</code> wird am Dienstag gemergt. Mias PR <code>#11</code> zeigt danach: Konflikte, Merge nicht möglich.</p>
-            <pre><code>main                 5b7e0d4 ─────────────────────── M   ◀ main
+            <pre class="darstellung"><code>main                 5b7e0d4 ─────────────────────── M   ◀ main
                         |  \                         /
 7-menue-bestenliste     |   6d1c8e2 ────────────────        (PR #9, gemergt)
                          \
@@ -226,7 +226,7 @@
             <ol>
                 <li><strong>Ursache erkennen:</strong> Beide Branches gehen von <code>5b7e0d4</code> aus und haben <em>an derselben Stelle</em> verschiedene Zeilen eingefügt. Für Mias PR vergleicht Git drei Fassungen: den gemeinsamen Vorgänger <code>5b7e0d4</code>, das aktuelle <code>main</code> (mit Bens Zeile) und Mias Branch. Weil beide Seiten dieselbe Stelle geändert haben, entscheidet Git nicht selbst. Warum es Ben nicht traf: Als Bens PR gemergt wurde, hatte sich <code>main</code> seit der Abzweigung nicht geändert.</li>
                 <li><strong>Was Git in die Datei schreiben würde:</strong>
-                    <pre><code>def zeige_menue() -&gt; None:
+                    <pre class="darstellung"><code>def zeige_menue() -&gt; None:
     print("1 – Neue Runde")
     print("2 – Einstellungen")
 &lt;&lt;&lt;&lt;&lt;&lt;&lt; main
@@ -249,7 +249,7 @@
             <details>
                 <summary>Kurz geprüft 3: Konfliktmarkierungen lesen <span class="niveau">AFB I</span></summary>
                 <p>In einer Datei steht nach einem Konflikt:</p>
-                <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; main
+                <pre class="darstellung"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; main
 punkte_pro_aufgabe = 10
 =======
 punkte_pro_aufgabe = 5

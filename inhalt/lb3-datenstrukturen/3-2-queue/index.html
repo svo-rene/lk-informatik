@@ -33,7 +33,7 @@
                     <li><strong>Überall sonst:</strong> den Text einfach als erste Nachricht in einen neuen Chat kopieren.</li>
                 </ul>
                 <p>Keine Namen oder Noten eingeben. Diese Anweisung kannst du kopieren:</p>
-                <pre>Ich lerne im Informatik-LK Datenstrukturen in Python: verkettete Liste (Node mit data und next, LinkedList mit head), Schlange (Queue mit head und tail: enqueue, dequeue, peek, is_empty) und Stapel (Stack, oben = head: push, pop, top, is_empty).
+                <pre class="darstellung">Ich lerne im Informatik-LK Datenstrukturen in Python: verkettete Liste (Node mit data und next, LinkedList mit head), Schlange (Queue mit head und tail: enqueue, dequeue, peek, is_empty) und Stapel (Stack, oben = head: push, pop, top, is_empty).
 Hilf mir beim Selbstlösen, nicht mit fertigen Lösungen:
 - Frag zuerst nach meinem Code und der vollständigen Fehlermeldung.
 - Hilf in Stufen: Rückfrage, dann Hinweis, dann Zeigerdiagramm in Textform, höchstens 3 Zeilen Code für einen einzelnen Schritt.
@@ -323,7 +323,7 @@ if __name__ == "__main__":        # Testzeilen nur beim direkten Start (F5), nic
                 <li><strong>Sonderfall „letztes Element entnommen“:</strong> Wird <code>__head</code> beim Entnehmen <code>None</code>, muss auch <code>__tail</code> auf <code>None</code> gesetzt werden. Sonst zeigte <code>__tail</code> noch auf den entnommenen Knoten. Das nächste <code>enqueue</code> würde dort anhängen und <code>__head</code> bliebe <code>None</code>; der neue Auftrag wäre „verschwunden“.</li>
             </ol>
             <p><strong>Speicherbild Schritt für Schritt:</strong></p>
-            <pre><code>Queue():                 __head → None                                     __tail → None
+            <pre class="darstellung"><code>Queue():                 __head → None                                     __tail → None
 enqueue("Brief.pdf"):    __head → [Brief.pdf|None] ← __tail
 enqueue("Foto.jpg"):     __head → [Brief.pdf|•] → [Foto.jpg|None] ← __tail
 enqueue("Referat.docx"): __head → [Brief.pdf|•] → [Foto.jpg|•] → [Referat.docx|None] ← __tail

@@ -70,8 +70,8 @@
 <p><strong>Ausgangssituation:</strong> Die Gesch&auml;ftsleitung fragt: &bdquo;Wie viele Verkaufsvorg&auml;nge
    stehen in der Tabelle <code>Verk&auml;ufe</code>?&ldquo;</p>
 <h3>Beispiel 1: Zeilen z&auml;hlen mit COUNT</h3>
-<pre><code>SELECT COUNT(*) AS AnzahlVerkaeufe
-FROM Verk&auml;ufe;</code></pre>
+<pre><code class="language-sql">SELECT COUNT(*) AS AnzahlVerkaeufe
+FROM Verkäufe;</code></pre>
 <p><strong>Ergebnis:</strong></p>
 <table><thead><tr><th>AnzahlVerkaeufe</th></tr></thead><tbody><tr><td>20</td></tr></tbody></table>
 <p>Aus 20 Zeilen wird eine einzige Zahl. Beachte: Gez&auml;hlt werden <em>Verkaufsvorg&auml;nge</em>, nicht
@@ -90,8 +90,8 @@ FROM Verk&auml;ufe;</code></pre>
 
 <h3>Beispiel 2: Werte einer Spalte summieren mit SUM</h3>
 
-<pre><code>SELECT SUM(Menge) AS VerkaufteStueck
-FROM Verk&auml;ufe;</code></pre>
+<pre><code class="language-sql">SELECT SUM(Menge) AS VerkaufteStueck
+FROM Verkäufe;</code></pre>
 
 <p><strong>Ergebnis:</strong></p>
 
@@ -102,8 +102,8 @@ FROM Verk&auml;ufe;</code></pre>
 <p>Der Umsatz einer Zeile ist <code>Menge * Preis</code>. Die Rechnung wird f&uuml;r jede Zeile einzeln
    ausgef&uuml;hrt, und erst danach summiert SUM alle Ergebnisse auf.</p>
 
-<pre><code>SELECT ROUND(SUM(Menge * Preis), 2) AS Gesamtumsatz
-FROM Verk&auml;ufe;</code></pre>
+<pre><code class="language-sql">SELECT ROUND(SUM(Menge * Preis), 2) AS Gesamtumsatz
+FROM Verkäufe;</code></pre>
 
 <p><strong>Ergebnis:</strong></p>
 
@@ -114,10 +114,10 @@ FROM Verk&auml;ufe;</code></pre>
 
 <h3>Beispiel 4: Durchschnitt, kleinster und gr&ouml;&szlig;ter Wert</h3>
 
-<pre><code>SELECT ROUND(AVG(Preis), 2) AS Durchschnittspreis,
+<pre><code class="language-sql">SELECT ROUND(AVG(Preis), 2) AS Durchschnittspreis,
        MIN(Preis) AS Guenstigster,
        MAX(Preis) AS Teuerster
-FROM Verk&auml;ufe;</code></pre>
+FROM Verkäufe;</code></pre>
 
 <p><strong>Ergebnis</strong> &ndash; mehrere Aggregatfunktionen d&uuml;rfen in einer Abfrage stehen, das
    Ergebnis bleibt eine Zeile:</p>
@@ -145,8 +145,8 @@ FROM Verk&auml;ufe;</code></pre>
 <p>In den 20 Zeilen kommt jedes Produkt zweimal vor &ndash; einmal im Januar und einmal sp&auml;ter zu einem
    anderen Preis. Beim Produkt <em>Maus</em> sind das die Zeilen mit den Mengen 15 und 20.</p>
 
-<pre><code>SELECT Produkt, SUM(Menge) AS GesamtMenge
-FROM Verk&auml;ufe
+<pre><code class="language-sql">SELECT Produkt, SUM(Menge) AS GesamtMenge
+FROM Verkäufe
 GROUP BY Produkt
 ORDER BY Produkt;</code></pre>
 
@@ -171,8 +171,8 @@ ORDER BY Produkt;</code></pre>
 
 <h4>Beispiel 6: Mehrere Aggregate je Gruppe</h4>
 
-<pre><code>SELECT Produkt, COUNT(*) AS Anzahl, ROUND(SUM(Menge * Preis), 2) AS Umsatz
-FROM Verk&auml;ufe
+<pre><code class="language-sql">SELECT Produkt, COUNT(*) AS Anzahl, ROUND(SUM(Menge * Preis), 2) AS Umsatz
+FROM Verkäufe
 GROUP BY Produkt
 ORDER BY Umsatz DESC;</code></pre>
 
@@ -202,8 +202,8 @@ ORDER BY Umsatz DESC;</code></pre>
 
 <h4>Beispiel 7: WHERE &ndash; Zeilen aussortieren, dann gruppieren</h4>
 
-<pre><code>SELECT Produkt, SUM(Menge) AS GesamtMenge
-FROM Verk&auml;ufe
+<pre><code class="language-sql">SELECT Produkt, SUM(Menge) AS GesamtMenge
+FROM Verkäufe
 WHERE Preis &lt; 100
 GROUP BY Produkt
 ORDER BY Produkt;</code></pre>
@@ -223,8 +223,8 @@ ORDER BY Produkt;</code></pre>
 
 <h4>Beispiel 8: HAVING &ndash; gruppieren, dann Gruppen aussortieren</h4>
 
-<pre><code>SELECT Produkt, SUM(Menge) AS GesamtMenge
-FROM Verk&auml;ufe
+<pre><code class="language-sql">SELECT Produkt, SUM(Menge) AS GesamtMenge
+FROM Verkäufe
 GROUP BY Produkt
 HAVING SUM(Menge) &gt; 20
 ORDER BY Produkt;</code></pre>
@@ -244,12 +244,12 @@ ORDER BY Produkt;</code></pre>
 <details>
 <summary>Hinweis: Der h&auml;ufigste Fehler &ndash; Aggregat im WHERE</summary>
 <p>Diese Abfrage sieht plausibel aus, funktioniert aber nicht:</p>
-<pre><code>SELECT Produkt, SUM(Menge)
-FROM Verk&auml;ufe
+<pre><code class="language-sql">SELECT Produkt, SUM(Menge)
+FROM Verkäufe
 WHERE SUM(Menge) &gt; 20
 GROUP BY Produkt;</code></pre>
 <p>SQLite antwortet mit:</p>
-<pre><code>misuse of aggregate: SUM()</code></pre>
+<pre class="darstellung"><code>misuse of aggregate: SUM()</code></pre>
 <p>Der Grund: <code>WHERE</code> wird f&uuml;r <em>jede einzelne Zeile</em> gepr&uuml;ft, bevor es
    &uuml;berhaupt Gruppen gibt. Zu diesem Zeitpunkt kann <code>SUM(Menge)</code> gar nicht berechnet werden.
    Die Bedingung muss deshalb nach hinten in ein <code>HAVING</code> &ndash; siehe Beispiel 8.</p>
@@ -267,7 +267,7 @@ GROUP BY Produkt;</code></pre>
 <p><strong>Ausgangssituation:</strong> Die Geschäftsleitung fragt: „Welche Produkte wurden im
    <em>Januar</em> mehrfach verkauft und haben dabei zusammen mehr als 1500&nbsp;€ Umsatz gebracht? Zeigt
    Anzahl der Verkäufe, Stückzahl und Umsatz, den größten Umsatz zuerst.“</p>
-<pre><code>SELECT Produkt,
+<pre><code class="language-sql">SELECT Produkt,
        COUNT(*) AS Verkaeufe,
        SUM(Menge) AS Stueck,
        ROUND(SUM(Menge * Preis), 2) AS Umsatz

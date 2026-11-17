@@ -55,7 +55,7 @@ print(round(summe / len(punkte), 1), bestanden)</code></pre>
         <details>
             <summary>Aufgabe 4.1.4: Stammbaum – logisch und imperativ <span class="niveau">AFB II</span></summary>
             <p>Eine Stammbaum-App speichert, wer Elternteil von wem ist. In Prolog sieht der Ausschnitt so aus:</p>
-            <pre><code>elternteil(erna, ines).
+            <pre class="darstellung"><code>elternteil(erna, ines).
 elternteil(erna, tom).
 elternteil(ines, lea).
 elternteil(ines, max).
@@ -67,7 +67,7 @@ geschwister(X, Y)     :- elternteil(E, X), elternteil(E, Y), X \= Y.</code></pre
                 <li>Gib an, wie SWI-Prolog auf die Anfrage <code>?- grosselternteil(erna, E).</code> antwortet, wenn du nach jeder Antwort <code>;</code> eingibst. Gib außerdem die Antwort auf <code>?- setof(G, geschwister(lea, G), L).</code> an und erkläre, warum lea nicht ihr eigenes Geschwister ist.</li>
                 <li>Ergänze eine Regel <code>cousin(X, Y)</code>: X und Y sind Cousins bzw. Cousinen, wenn ihre Elternteile Geschwister sind. Gib die Antwort auf <code>?- setof(C, cousin(ida, C), L).</code> an.</li>
                 <li>Dieselben Daten liegen in Python als Liste von Paaren vor:
-                    <pre><code class="language-python">beziehungen = [("erna", "ines"), ("erna", "tom"), ("ines", "lea"),
+                    <pre class="ausfuehrbar"><code class="language-python">beziehungen = [("erna", "ines"), ("erna", "tom"), ("ines", "lea"),
                ("ines", "max"), ("tom", "ida")]</code></pre>
                     Schreibe imperativ eine Funktion <code>enkel(person, beziehungen)</code>, die die Liste aller Enkel von <code>person</code> zurückgibt (in der Reihenfolge, in der sie gefunden werden). Teste sie:
                     <table class="gitter">

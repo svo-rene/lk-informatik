@@ -75,7 +75,7 @@
         <p><strong>Schritt 1 – die innere Abfrage allein ausführen.</strong> Das kannst du im DB Browser
            wörtlich so machen: markiere den inneren Teil und lass nur ihn laufen.</p>
 
-        <pre><code>SELECT id
+        <pre><code class="language-sql">SELECT id
 FROM klasse
 WHERE name = '10A';</code></pre>
 
@@ -85,7 +85,7 @@ WHERE name = '10A';</code></pre>
         <p><strong>Schritt 2 – das Ergebnis gedanklich einsetzen.</strong> Die äußere Abfrage sieht also
            in Wirklichkeit so aus:</p>
 
-        <pre><code>SELECT name
+        <pre><code class="language-sql">SELECT name
 FROM schueler
 WHERE klasse_id = 1;</code></pre>
 
@@ -93,7 +93,7 @@ WHERE klasse_id = 1;</code></pre>
            die innere Abfrage in Klammern ein. Das ist der eigentliche Vorteil: Die Abfrage funktioniert
            auch dann noch, wenn die 10A irgendwann eine andere id bekommt.</p>
 
-        <pre><code>SELECT name
+        <pre><code class="language-sql">SELECT name
 FROM schueler
 WHERE klasse_id = (
     SELECT id
@@ -133,7 +133,7 @@ WHERE klasse_id = (
 
 <p>Schritt 1, die innere Abfrage, liefert jetzt <em>zwei</em> Zeilen:</p>
 
-<pre><code>SELECT id
+<pre><code class="language-sql">SELECT id
 FROM klasse
 WHERE name IN ('10A', '10B');</code></pre>
 
@@ -144,7 +144,7 @@ WHERE name IN ('10A', '10B');</code></pre>
             man <code>IN</code> – zu lesen als „ist einer von diesen“:
         </p>
 
-<pre><code>SELECT name
+<pre><code class="language-sql">SELECT name
 FROM schueler
 WHERE klasse_id IN (
     SELECT id
@@ -174,14 +174,14 @@ WHERE klasse_id IN (
 
 <p>Schritt 1 – die innere Abfrage allein:</p>
 
-<pre><code>SELECT MIN(wert)
+<pre><code class="language-sql">SELECT MIN(wert)
 FROM note;</code></pre>
 
 <table><thead><tr><th>MIN(wert)</th></tr></thead><tbody><tr><td>1.0</td></tr></tbody></table>
 
 <p>Schritt 2 – dieses Zwischenergebnis als Vergleichswert einsetzen:</p>
 
-<pre><code>SELECT s.name, n.wert
+<pre><code class="language-sql">SELECT s.name, n.wert
 FROM schueler s
 JOIN note n ON n.schueler_id = s.id
 WHERE n.wert = (
@@ -212,7 +212,7 @@ WHERE n.wert = (
             <p><strong>Ausgangssituation:</strong> Für eine Ehrung sucht die Schulleitung alle Schüler*innen, deren
                <em>persönlicher</em> Notendurchschnitt besser ist als der Durchschnitt <em>aller</em> Noten der Schule.
                Ausgegeben werden Klasse, Name und persönlicher Schnitt, bester Schnitt zuerst.</p>
-            <pre><code>SELECT k.name AS klasse, s.name, ROUND(AVG(n.wert), 2) AS schnitt
+            <pre><code class="language-sql">SELECT k.name AS klasse, s.name, ROUND(AVG(n.wert), 2) AS schnitt
 FROM schueler s
 JOIN klasse k ON s.klasse_id = k.id
 JOIN note n   ON n.schueler_id = s.id
@@ -288,7 +288,7 @@ ORDER BY schnitt ASC, s.name ASC;</code></pre>
                     JOIN. Brauchst du aus der zweiten Tabelle nur einen <em>Vergleichswert</em>, ist ein
                     Subselect meist besser lesbar. Beispiel 1 ließe sich auch als JOIN schreiben:
                 </p>
-                <pre><code>SELECT s.name
+                <pre><code class="language-sql">SELECT s.name
 FROM schueler s
 JOIN klasse k ON s.klasse_id = k.id
 WHERE k.name = '10A';</code></pre>

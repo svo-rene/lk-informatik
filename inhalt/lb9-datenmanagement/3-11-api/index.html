@@ -88,7 +88,7 @@
             <code>pip install requests</code> (bei Anaconda ist es schon dabei).
         </p>
 
-<pre><code>import requests
+<pre><code class="language-python">import requests
 
 antwort = requests.get("https://catfact.ninja/fact")
 daten = antwort.json()
@@ -101,7 +101,7 @@ print(daten["fact"])</code></pre>
             die aktuelle Temperatur.
         </p>
 
-<pre><code>import requests
+<pre><code class="language-python">import requests
 
 url = "https://api.open-meteo.com/v1/forecast"
 parameter = {
@@ -127,7 +127,7 @@ print("Aktuelle Temperatur in Berlin:", daten["current_weather"]["temperature"],
             einen Fehlercode. Deshalb prüft man vor dem Auslesen den Statuscode:
         </p>
 
-<pre><code>import requests
+<pre><code class="language-python">import requests
 
 name = "pikachuu"          # Tippfehler!
 antwort = requests.get(f"https://pokeapi.co/api/v2/pokemon/{name}", timeout=10)
@@ -172,7 +172,7 @@ print(daten['current_weather']['winddirection'], daten['current_weather_units'][
             <p><strong>Ausgangssituation:</strong> Ein Programm soll aus der stündlichen Vorhersage die höchste Temperatur mit Uhrzeit bestimmen. Dabei
                kann einiges schiefgehen: keine Internetverbindung, ein Fehlercode, eine Antwort ohne die erwarteten Daten oder einzelne fehlende
                Werte (<code>null</code>). Weil Live-Daten sich ständig ändern, lässt sich die Auswertung nur mit festen Beispielantworten testen.</p>
-            <pre><code class="language-python">import json
+            <pre class="ausfuehrbar"><code class="language-python">import json
 import requests
 
 def abrufen(lat, lon):

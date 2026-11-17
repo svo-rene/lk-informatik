@@ -79,7 +79,7 @@ assert ergebnis == False, f"5 Punkte: erwartet False, tatsächlich {ergebnis}"</
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Unterpunktet oder nicht? – Klassen, Grenzen, Testdatei</summary>
             <p><strong>Ausgangssituation:</strong> In der Oberstufe gilt ein Kurshalbjahr mit weniger als 5 Punkten als <em>unterpunktet</em>. Punkte gibt es von 0 bis 15; andere Werte sind Tippfehler. Spezifikation der Funktion <code>ist_unterpunktet(punkte: int) -&gt; bool</code>: 0 bis 4 → <code>True</code>, 5 bis 15 → <code>False</code>, sonst <code>ValueError</code>. Jemand hat programmiert:</p>
-            <pre><code class="language-python"># kurshalbjahr.py
+            <pre class="ausfuehrbar"><code class="language-python"># kurshalbjahr.py
 def ist_unterpunktet(punkte: int) -&gt; bool:
     if punkte &lt; 0 or punkte &gt; 15:
         raise ValueError("Punkte müssen zwischen 0 und 15 liegen")
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     print("Alle Tests bestanden.")</code></pre>
                     Warum eine Schleife über Paare: Jeder neue Grenzwert ist eine Zeile mehr in der Liste, nicht ein neuer Block Code.</li>
                 <li><strong>Test starten:</strong> <code>test_kurshalbjahr.py</code> in Thonny ausführen. Die letzte Zeile der Ausgabe lautet:
-                    <pre><code>AssertionError: 5 Punkte: erwartet False, tatsächlich True</code></pre>
+                    <pre class="darstellung"><code>AssertionError: 5 Punkte: erwartet False, tatsächlich True</code></pre>
                     Die Meldung zeigt den Fehler genau: Bei 5 Punkten stimmt das Ergebnis nicht. Ursache ist <code>&lt;= 5</code> statt <code>&lt; 5</code>.</li>
             </ol>
             <p><strong>Ergebnis:</strong> Nach der Korrektur <code>return punkte &lt; 5</code> gibt die Testdatei „Alle Tests bestanden.“ aus.</p>
@@ -200,7 +200,7 @@ assert wirft_value_error(ist_unterpunktet, 16), "16 Punkte: erwartet ValueError"
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Der Aufzug – zwei Grenzen, ein Zustand und ein versteckter Fehler</summary>
             <p><strong>Ausgangssituation:</strong> Für ein Simulationsprogramm des Schulaufzugs gibt es die Klasse <code>Aufzug</code>. Spezifikation: höchstens 8 Personen <em>und</em> höchstens 630&nbsp;kg. <code>einsteigen(gewicht_kg)</code> nimmt eine Person nur auf, wenn danach beide Grenzen eingehalten sind, und gibt dann <code>True</code> zurück. Sonst gibt sie <code>False</code> zurück und <strong>nichts ändert sich</strong>. Gewichte unter 1&nbsp;kg oder über 250&nbsp;kg sind Tippfehler (<code>ValueError</code>).</p>
-            <pre><code class="language-python"># aufzug.py  (Model)
+            <pre class="ausfuehrbar"><code class="language-python"># aufzug.py  (Model)
 class Aufzug:
     MAX_PERSONEN = 8
     MAX_LAST_KG = 630
@@ -296,7 +296,7 @@ if __name__ == "__main__":
     print(f"{len(tests) - fehler} von {len(tests)} Tests bestanden")</code></pre>
                 </li>
                 <li><strong>Ausgabe lesen:</strong>
-                    <pre><code>ok      test_normalfall
+                    <pre class="darstellung"><code>ok      test_normalfall
 FEHLER  test_genau_630_kg – bei 630 kg: erwartet True, tatsächlich False
 FEHLER  test_631_kg – Last: erwartet 600, tatsächlich 631
 FEHLER  test_neunte_person – Personen: erwartet 8, tatsächlich 9
@@ -393,7 +393,7 @@ ok      test_unmoegliches_gewicht
             <details>
                 <summary>Aufgabe 5.3.2: Eine Testdatei schreiben und den Fehler finden <span class="niveau">AFB II</span></summary>
                 <p>So hat ein Mitschüler <code>lesepunkte</code> aus Aufgabe 5.3.1 programmiert:</p>
-                <pre><code class="language-python"># lesepunkte.py
+                <pre class="ausfuehrbar"><code class="language-python"># lesepunkte.py
 def lesepunkte(seiten: int) -&gt; int:
     if seiten &lt; 1 or seiten &gt;= 2000:
         raise ValueError("Seitenzahl ungültig")

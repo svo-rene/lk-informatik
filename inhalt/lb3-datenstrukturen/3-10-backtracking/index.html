@@ -31,7 +31,7 @@
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> einen Weg im Graphen finden</summary>
         <p>Gegeben ist ein <strong>ungerichteter</strong>, ungewichteter Graph. Wir wollen <strong>einen</strong> Weg von einem Startknoten zu einem Zielknoten finden. Die Tiefensuche liefert dabei den ersten Weg, den sie findet – das ist <strong>nicht unbedingt der kürzeste</strong>.</p>
 
-        <pre><code>Adjazenzmatrix (symmetrisch, da ungerichtet):
+        <pre class="darstellung"><code>Adjazenzmatrix (symmetrisch, da ungerichtet):
 
    0  1  2  3  4
 0  0  1  1  0  0
@@ -131,7 +131,7 @@ print(a, path)</code></pre>
             <figcaption>Abb. 1: Führt eine Entscheidung in eine Sackgasse (X), geht der Algorithmus zur letzten Entscheidung zurück und probiert die nächste Möglichkeit.</figcaption>
         </figure>
 
-<pre><code class="language-python">def loese(zustand):
+<pre class="ausfuehrbar"><code class="language-python">def loese(zustand):
     platz = naechster_freier_platz(zustand)
     if platz is None:
         return True                      # alles belegt

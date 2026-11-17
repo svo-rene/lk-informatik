@@ -30,7 +30,7 @@
 
 <p>Bei Funktionen gibst du Typen für Parameter und Rückgabewerte an:</p>
 
-<pre><code class="language-python">def ist_positiv(zahl: int) -&gt; bool:
+<pre class="ausfuehrbar"><code class="language-python">def ist_positiv(zahl: int) -&gt; bool:
     return zahl &gt; 0</code></pre>
 
 <p>So ist klar: Die Funktion erwartet eine ganze Zahl und liefert einen Wahrheitswert zurück.</p>
@@ -76,7 +76,7 @@
 
 <p>Ab Python 3.10 kannst du mehrere mögliche Typen mit dem Zeichen <code>|</code> angeben:</p>
 
-<pre><code class="language-python">def ausgabe(wert: int | float) -&gt; None:
+<pre class="ausfuehrbar"><code class="language-python">def ausgabe(wert: int | float) -&gt; None:
     print("Wert:", wert)</code></pre>
 
 <p><code>int | float</code> bedeutet: Der Wert kann entweder eine ganze Zahl oder eine Kommazahl sein. <code>-&gt; None</code> kennzeichnet eine Prozedur ohne Rückgabewert.</p>
@@ -112,7 +112,7 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> moderne Schreibweise (ab Python 3.10, z.&nbsp;B. in Thonny)</summary>
     <p><strong>Ausgangssituation:</strong> Eine Funktion soll die Position eines Namens in einer Namensliste liefern. Kommt der Name nicht vor, gibt es keine Position.</p>
-    <pre><code class="language-python">def finde_index(name: str, namen: list[str]) -&gt; int | None:
+    <pre class="ausfuehrbar"><code class="language-python">def finde_index(name: str, namen: list[str]) -&gt; int | None:
     if name in namen:
         return namen.index(name)
     return None</code></pre>
@@ -224,7 +224,7 @@ print(lk.bester())      # ('Ben', 14.0)</code></pre>
     <details>
         <summary>Aufgabe 4.7.1: Typen ergänzen <span class="niveau">AFB I</span></summary>
         <p>Ergänze sinnvolle Typen für Parameter und Rückgabewerte:</p>
-        <pre><code class="language-python">def mittlere_laenge(worte):
+        <pre class="ausfuehrbar"><code class="language-python">def mittlere_laenge(worte):
     gesamt = sum(len(w) for w in worte)
     return gesamt / len(worte)
 
@@ -240,7 +240,7 @@ def erste_ziffer(text):
     <details>
         <summary>Aufgabe 4.7.2: Klasse Buch typisieren <span class="niveau">AFB I–II</span></summary>
         <p>Vervollständige die Klasse <code>Buch</code> mit sinnvollen Typangaben. Das Erscheinungsjahr kann leer bleiben (z.&nbsp;B. wenn es unbekannt ist).</p>
-        <pre><code class="language-python">class Buch:
+        <pre class="ausfuehrbar"><code class="language-python">class Buch:
     def __init__(self, titel, autor, erscheinungsjahr):
         self.titel = titel
         self.autor = autor

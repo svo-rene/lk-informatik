@@ -27,9 +27,9 @@ console.log(sum);</code></pre>
         Beschrieben wird das gewünschte Ergebnis, nicht der konkrete Ablauf.
     </p>
 
-<pre><code>SELECT id, username, description
+<pre><code class="language-sql">SELECT id, username, description
 FROM users
-WHERE description = 'Info LK > alles';</code></pre>
+WHERE description = 'Info LK &gt; alles';</code></pre>
 
 <p>Teste SQL-Anfragen z.&nbsp;B. auf <a href="https://sqliteonline.com" target="_blank">sqliteonline.com</a>.</p>
 
@@ -61,7 +61,7 @@ print(fakultaet(5))        # 120</code></pre>
         Gut geeignet für Probleme, die sich durch Fakten und logische Regeln beschreiben lassen.
     </p>
 
-<pre><code>vogel(pinguin).
+<pre class="darstellung"><code>vogel(pinguin).
 vogel(amsel).
 
 kann_fliegen(X) :- vogel(X), X \= pinguin.
@@ -149,7 +149,7 @@ class Person:
 objekte = [Person(n, a) for n, a in personen]
 ergebnis = sorted(p.name for p in objekte if p.ist_volljaehrig())
 print(ergebnis)            # ['Ala', 'Ben']</code></pre>
-        <pre><code>-- deklarativ in SQL
+        <pre><code class="language-sql">-- deklarativ in SQL
 SELECT name FROM personen WHERE alter &gt;= 18 ORDER BY name;</code></pre>
         <pre><code>% logisch in Prolog (SWI-Prolog)
 person(mia, 17).
@@ -239,7 +239,7 @@ Liste = [ala, ben].</code></pre>
         <details>
             <summary>Aufgabe 4.1.2: Code-Beispiele einordnen <span class="niveau">AFB I–II</span></summary>
             <p>Ordne jedem Ausschnitt ein Paradigma zu und begründe kurz:</p>
-            <pre><code>a)  preise = [3.5, 2.0, 4.2]
+            <pre class="darstellung"><code>a)  preise = [3.5, 2.0, 4.2]
     netto = list(map(lambda p: p / 1.19, preise))
 
 b)  SELECT titel FROM buecher WHERE jahr &gt; 2020;

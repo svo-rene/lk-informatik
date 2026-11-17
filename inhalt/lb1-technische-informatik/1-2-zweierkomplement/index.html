@@ -52,7 +52,7 @@
     <details>
         <summary>Hinweis: Dasselbe Bitmuster, zwei verschiedene Zahlen</summary>
         <p>Ob ein Bitmuster als Zweierkomplementzahl oder als vorzeichenlose Binärzahl gelesen wird, ist eine <strong>Vereinbarung des Programms</strong> – am Bitmuster selbst ist das nicht erkennbar:</p>
-        <pre>1101 0011   als vorzeichenlose Zahl    =  211
+        <pre class="darstellung">1101 0011   als vorzeichenlose Zahl    =  211
 1101 0011   als 8-Bit-Zweierkomplement =  -45</pre>
         <p>Beide Lesarten sind korrekt – es kommt darauf an, welchen Datentyp das Programm verwendet. Ein vorzeichenloses 8-Bit-Register hat den Wertebereich <strong>0 bis 255</strong>, ein vorzeichenbehaftetes <strong>&minus;128 bis +127</strong>. Verwechselt man beides, entstehen genau die Fehler, um die es im nächsten Abschnitt geht.</p>
     </details>
@@ -70,7 +70,7 @@
 
 <p>Ein 8-Bit-Register im Zweierkomplement enthält den Wert 100. Das Programm addiert 50 dazu:</p>
 
-<pre>100 = 0110 0100
+<pre class="darstellung">100 = 0110 0100
  50 = 0011 0010
 
 Übertrag:  1 1 . . . . . .
@@ -93,7 +93,7 @@
 
 <p>Ein vorzeichenloses 8-Bit-Register (Wertebereich 0 bis 255) steht auf 250, es werden 20 addiert:</p>
 
-<pre>Übertrag: (1) 1 1 1 . . . . .
+<pre class="darstellung">Übertrag: (1) 1 1 1 . . . . .
               1 1 1 1 1 0 1 0     (250)
             + 0 0 0 1 0 1 0 0     ( 20)
               ---------------

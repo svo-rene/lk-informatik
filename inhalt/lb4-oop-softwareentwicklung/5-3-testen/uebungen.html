@@ -4,7 +4,7 @@
             <details>
                 <summary>Aufgabe 5.3.3: Eine Klasse testen – die Stempelkarte <span class="niveau">AFB II–III</span></summary>
                 <p>Das Schülercafé gibt Stempelkarten aus: Für jedes Getränk gibt es einen Stempel, höchstens 10. Eine volle Karte (genau 10 Stempel) kann gegen ein Gratisgetränk eingelöst werden; danach hat sie wieder 0 Stempel. Auf eine volle Karte kommt kein weiterer Stempel.</p>
-                <pre><code class="language-python"># stempelkarte.py
+                <pre class="ausfuehrbar"><code class="language-python"># stempelkarte.py
 class Stempelkarte:
     MAX_STEMPEL = 10
 
@@ -42,7 +42,7 @@ class Stempelkarte:
             <details>
                 <summary>Aufgabe 5.3.4: Ergebnis prüfen – Schaltjahre <span class="niveau">AFB II</span></summary>
                 <p>Ein Jahr ist ein Schaltjahr, wenn es durch 4 teilbar ist – außer es ist durch 100 teilbar. Durch 400 teilbare Jahre sind aber wieder Schaltjahre (2000 ja, 1900 nein).</p>
-                <pre><code class="language-python"># kalender.py
+                <pre class="ausfuehrbar"><code class="language-python"># kalender.py
 def ist_schaltjahr(jahr: int) -&gt; bool:
     return jahr % 4 == 0 and jahr % 100 != 0</code></pre>
                 <pre><code class="language-python"># test_kalender.py
@@ -86,7 +86,7 @@ if __name__ == "__main__":
             <details>
                 <summary>Aufgabe 5.3.6: Von Akzeptanzkriterien zu Tests – das AG-Brett <span class="niveau">AFB II</span></summary>
                 <p>In Beispiel 1 auf Seite 5.2 stehen drei Akzeptanzkriterien für das digitale AG-Brett. Das Team hat dazu zwei Model-Klassen geschrieben:</p>
-                <pre><code class="language-python"># ag.py  (Model)
+                <pre class="ausfuehrbar"><code class="language-python"># ag.py  (Model)
 class AG:
     MAX_PLAETZE = 20
 

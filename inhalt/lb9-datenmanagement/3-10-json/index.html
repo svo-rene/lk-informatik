@@ -80,7 +80,7 @@
 
 <p>Hier ist ein Beispiel für ein JSON-Objekt:</p>
 
-<pre>
+<pre class="darstellung">
 {
     "name": "Max Mustermann",
     "age": 30,
@@ -91,7 +91,7 @@
 
 <p>Ein weiteres Beispiel mit verschachtelten Objekten:</p>
 
-<pre>
+<pre class="darstellung">
 {
     "person": {
         "name": "Max Mustermann",
@@ -139,7 +139,7 @@
             ansprichst.
         </p>
 
-<pre><code>import json
+<pre class="ausfuehrbar"><code class="language-python">import json
 
 text = '{"name": "Max Mustermann", "age": 30, "skills": ["JavaScript", "Python", "JSON"]}'
 
@@ -160,10 +160,10 @@ print(daten["skills"][1])  # Python</code></pre>
             Open-Meteo für Dresden (so, wie du sie auf Seite 3.11 selbst abrufen wirst):
         </p>
 
-<pre><code>import json
+<pre><code class="language-python">import json
 
 with open('wetter_dresden.json', encoding='utf-8') as datei:
-    wetter = json.load(datei)             # Datei -> Dictionary
+    wetter = json.load(datei)             # Datei -&gt; Dictionary
 
 aktuell = wetter['current_weather']        # inneres Objekt
 print(aktuell['temperature'], wetter['current_weather_units']['temperature'])   # 14.8 °C
@@ -196,7 +196,7 @@ with open('auswertung.json', 'w', encoding='utf-8') as datei:
             <thead><tr><th>JSON</th><th>XML</th></tr></thead>
             <tbody>
                 <tr>
-                    <td><pre><code>{
+                    <td><pre class="darstellung"><code>{
   "name": "Max Mustermann",
   "age": 30,
   "skills": ["Python", "SQL"]
@@ -245,7 +245,7 @@ print(json.dumps(daten, ensure_ascii=False))</code></pre>
                     <code>null</code>. Die Reihenfolge der Schlüssel bleibt erhalten.</li>
             </ol>
             <p><strong>Ergebnis:</strong></p>
-            <pre><code>&lt;class 'dict'&gt;
+            <pre class="darstellung"><code>&lt;class 'dict'&gt;
 Informatik 2
 True None
 {"name": "Lina", "klasse": "12", "kurse": ["Informatik", "Mathe", "Physik"], "volljaehrig": true, "handy": null}</code></pre>
@@ -305,12 +305,12 @@ print(len(zeilen), "Zeilen aus", len(daten["ausleihen"]), "Ausleihvorgängen")</
                 <li><strong>Schreiben</strong> – wie auf Seite 3.6 mit Kopfzeile und Semikolon.</li>
             </ol>
             <p><strong>Ergebnis:</strong> Konsolenausgabe</p>
-            <pre><code>['Lina', '10b', 'Tschick', 14]
+            <pre class="darstellung"><code>['Lina', '10b', 'Tschick', 14]
 ['Lina', '10b', 'Momo', 21]
 ['Ole', 'unbekannt', 'Krabat', 7]
 3 Zeilen aus 3 Ausleihvorgängen</code></pre>
             <p>und Inhalt von <code>ausleihen.csv</code>:</p>
-            <pre><code>Name;Klasse;Titel;Tage
+            <pre class="darstellung"><code>Name;Klasse;Titel;Tage
 Lina;10b;Tschick;14
 Lina;10b;Momo;21
 Ole;unbekannt;Krabat;7</code></pre>

@@ -33,7 +33,7 @@
                     <li><strong>Überall sonst:</strong> den Text einfach als erste Nachricht in einen neuen Chat kopieren.</li>
                 </ul>
                 <p>Keine Namen oder Noten eingeben. Diese Anweisung kannst du kopieren:</p>
-                <pre>Ich lerne im Informatik-LK Datenstrukturen in Python: verkettete Liste (Node mit data und next, LinkedList mit head), Schlange (Queue mit head und tail: enqueue, dequeue, peek, is_empty) und Stapel (Stack, oben = head: push, pop, top, is_empty).
+                <pre class="darstellung">Ich lerne im Informatik-LK Datenstrukturen in Python: verkettete Liste (Node mit data und next, LinkedList mit head), Schlange (Queue mit head und tail: enqueue, dequeue, peek, is_empty) und Stapel (Stack, oben = head: push, pop, top, is_empty).
 Hilf mir beim Selbstlösen, nicht mit fertigen Lösungen:
 - Frag zuerst nach meinem Code und der vollständigen Fehlermeldung.
 - Hilf in Stufen: Rückfrage, dann Hinweis, dann Zeigerdiagramm in Textform, höchstens 3 Zeilen Code für einen einzelnen Schritt.
@@ -328,7 +328,7 @@ print(klammern_ok("(a + [b * c)]"))   # False</code></pre>
                 <li><strong>Textende:</strong> Nur wenn der Stapel jetzt leer ist, wurde jede geöffnete Klammer auch geschlossen.</li>
             </ol>
             <p><strong>Speicherbild Schritt für Schritt</strong> für <code>"(a + [b * c)]"</code>:</p>
-            <pre><code>Zeichen   Aktion                                Stapel
+            <pre class="darstellung"><code>Zeichen   Aktion                                Stapel
 (         push("(")                             __head → [(|None]
 a, +      keine Klammer, übersprungen           unverändert
 [         push("[")                             __head → [[|•] → [(|None]
@@ -336,7 +336,7 @@ b, *, c   übersprungen                          unverändert
 )         pop() liefert "[", erwartet wird "("  __head → [(|None]
           → passt nicht: return False</code></pre>
             <p>und für <code>"(a + [b * c])"</code>:</p>
-            <pre><code>(         push("(")                             __head → [(|None]
+            <pre class="darstellung"><code>(         push("(")                             __head → [(|None]
 [         push("[")                             __head → [[|•] → [(|None]
 ]         pop() liefert "[", passt              __head → [(|None]
 )         pop() liefert "(", passt              __head → None

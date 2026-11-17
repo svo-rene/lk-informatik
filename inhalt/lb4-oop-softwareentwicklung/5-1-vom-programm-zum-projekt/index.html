@@ -51,7 +51,7 @@
 
 <p>In einem monolithischen Programm steht alles in einer Datei:</p>
 
-<pre><code>- Klassen
+<pre class="darstellung"><code>- Klassen
 - Eingaben
 - Berechnungen
 - Ausgaben
@@ -70,7 +70,7 @@
 
 <p>Statt alles in eine Datei zu schreiben, nutzt du mehrere Module:</p>
 
-<pre><code>projekt/
+<pre class="darstellung"><code>projekt/
 │
 ├── fahrzeug.py
 ├── auto.py
@@ -216,7 +216,7 @@ if __name__ == "__main__":
                 <li><strong>Ablauf von <code>main.py</code> verfolgen:</strong> Python führt zuerst <code>fahrzeug.py</code> aus (Klasse wird definiert, keine Ausgabe), dann <code>auto.py</code>. Dessen Import von <code>fahrzeug</code> löst nichts Neues aus, weil das Modul schon geladen ist. Danach läuft <code>main()</code>: Die Schleife ruft für jedes Objekt <code>beschreibung()</code> auf – beim <code>Auto</code> die überschriebene Fassung.</li>
             </ol>
             <p><strong>Ergebnis:</strong> Ausgabe beim Start von <code>main.py</code>:</p>
-            <pre><code>Fahrzeug der Marke Simson
+            <pre class="darstellung"><code>Fahrzeug der Marke Simson
 Fahrzeug der Marke VW mit 5 Türen</code></pre>
             <p><strong>Kontrolle:</strong></p>
             <table class="gitter">
@@ -388,7 +388,7 @@ if __name__ == "__main__":
                 <li><strong>Ablauf an einer Eingabe:</strong> Eingaben Ella, Mats, Ella, Mats, Lisa und dann leer. „Lisa“ ist kein Kandidat, also <code>False</code> und die Meldung. Am Ende haben Ella und Mats je 2 Stimmen.</li>
             </ol>
             <p><strong>Ergebnis</strong> (Konsole beim Start von <code>main.py</code>):</p>
-            <pre><code>Stimme (leer = Ende): Ella
+            <pre class="darstellung"><code>Stimme (leer = Ende): Ella
 Stimme (leer = Ende): Mats
 Stimme (leer = Ende): Ella
 Stimme (leer = Ende): Mats
@@ -469,7 +469,7 @@ Gleichstand – Stichwahl nötig</code></pre>
             <details>
                 <summary>Aufgabe 5.1.2: Wer importiert wen? – Pausenverkauf der Schülerfirma <span class="niveau">AFB II</span></summary>
                 <p>Die Schülerfirma verkauft in der Hofpause Brezeln und Äpfel. Ein Mitglied hat das Programm schon auf vier Module verteilt:</p>
-                <pre><code class="language-python"># artikel.py
+                <pre class="ausfuehrbar"><code class="language-python"># artikel.py
 class Artikel:
     def __init__(self, name: str, preis_cent: int):
         self.name = name

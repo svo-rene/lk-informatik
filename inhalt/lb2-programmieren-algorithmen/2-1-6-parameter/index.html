@@ -24,15 +24,15 @@ print(verdopple(wert))    # Ausgabe: 10 (Rückgabewert)</code></pre>
             <p>Im <strong>Speicherbild</strong> stehen links die Namen, rechts die Objekte im Speicher. Ein Pfeil bedeutet „zeigt auf“.</p>
             <ol>
                 <li><strong>Nach <code>wert = 5</code>:</strong>
-                    <pre><code>global      wert ──────► [int 5]</code></pre>
+                    <pre class="darstellung"><code>global      wert ──────► [int 5]</code></pre>
                 </li>
                 <li><strong>Beim Aufruf <code>verdopple(wert)</code>:</strong> Der Parameter <code>zahl</code> erhält eine Referenz auf <em>dasselbe</em> Objekt. Kopiert wird nichts.
-                    <pre><code>global      wert ──────┐
+                    <pre class="darstellung"><code>global      wert ──────┐
                        ├──► [int 5]
 verdopple   zahl ──────┘</code></pre>
                 </li>
                 <li><strong>Nach <code>zahl = zahl * 2</code>:</strong> <code>zahl * 2</code> erzeugt ein <em>neues</em> Objekt 10, und nur <code>zahl</code> wird umgehängt. <em>Warum:</em> Ein <code>int</code>-Objekt lässt sich nicht verändern, jede Rechnung erzeugt ein neues Objekt.
-                    <pre><code>global      wert ──────► [int 5]
+                    <pre class="darstellung"><code>global      wert ──────► [int 5]
 verdopple   zahl ──────► [int 10]</code></pre>
                 </li>
                 <li><strong>Nach dem <code>return</code>:</strong> Der Name <code>zahl</code> verschwindet mit dem Funktionsaufruf. Der Rückgabewert 10 wird in Zeile 6 nicht gespeichert und geht verloren.</li>
@@ -68,12 +68,12 @@ ersetze_liste(zahlen)
 print(zahlen)             # [1, 2, 3, 42] – unverändert!</code></pre>
             <ol>
                 <li><strong>Aufruf <code>aendere_liste(zahlen)</code>:</strong> <code>liste</code> und <code>zahlen</code> zeigen auf dieselbe Liste. <code>append</code> verändert dieses eine Objekt.
-                    <pre><code>global          zahlen ──┐
+                    <pre class="darstellung"><code>global          zahlen ──┐
                          ├──► [list 1, 2, 3, 42]
 aendere_liste   liste  ──┘</code></pre>
                     <em>Warum sieht der Aufrufer die Änderung?</em> Es gibt nur ein Listenobjekt, und Listen sind <strong>veränderlich</strong> (mutable).</li>
                 <li><strong>Aufruf <code>ersetze_liste(zahlen)</code>:</strong> Zuerst zeigen wieder beide Namen auf dieselbe Liste. Dann erzeugt <code>[0, 0, 0]</code> eine neue Liste, und nur <code>liste</code> wird umgehängt.
-                    <pre><code>global          zahlen ──► [list 1, 2, 3, 42]
+                    <pre class="darstellung"><code>global          zahlen ──► [list 1, 2, 3, 42]
 ersetze_liste   liste  ──► [list 0, 0, 0]     (verschwindet nach dem Aufruf)</code></pre>
                 </li>
                 <li><strong>Falle <code>+=</code>:</strong> Bei Listen verändert <code>liste += [7]</code> das vorhandene Objekt (wie <code>extend</code>). <code>liste = liste + [7]</code> erzeugt dagegen eine neue Liste.

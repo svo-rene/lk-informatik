@@ -45,7 +45,7 @@
             Ein Dictionary in Python wird mit geschweiften Klammern <code>{ }</code> erstellt, und die Daten werden als Paare von Schlüssel und Wert darin abgelegt. Hier ist ein Beispiel:
         </p>
 
-<pre><code># Ein einfaches Dictionary
+<pre class="ausfuehrbar"><code class="language-python"># Ein einfaches Dictionary
 benutzer = {
     'Name': 'Alice',
     'Alter': 25,
@@ -77,23 +77,23 @@ print("Beruf entfernt:", benutzer)</code></pre>
                 </p>
                 <ul>
                     <li><code>get()</code>: ruft den Wert zu einem Schlüssel ab, ohne dass ein Fehler auftritt, wenn der Schlüssel nicht existiert.
-                    <pre><code>wert = benutzer.get('Name', 'Unbekannt')</code></pre>
+                    <pre><code class="language-python">wert = benutzer.get('Name', 'Unbekannt')</code></pre>
                     <p>Wenn der Schlüssel 'Name' vorhanden ist, wird der zugehörige Wert zurückgegeben. Wenn nicht, wird 'Unbekannt' als Standardwert zurückgegeben.</p></li>
 
                     <li><code>keys()</code>: gibt alle Schlüssel im Dictionary zurück.
-                    <pre><code>alle_schluessel = list(benutzer.keys())</code></pre>
+                    <pre><code class="language-python">alle_schluessel = list(benutzer.keys())</code></pre>
                     <p>Ergebnis: <code>['Name', 'Alter', 'Stadt']</code>.</p></li>
 
                     <li><code>values()</code>: gibt alle Werte im Dictionary zurück, ohne die zugehörigen Schlüssel.
-                    <pre><code>alle_werte = list(benutzer.values())</code></pre>
+                    <pre><code class="language-python">alle_werte = list(benutzer.values())</code></pre>
                     <p>Ergebnis: <code>['Alice', 26, 'Berlin']</code>.</p></li>
 
                     <li><code>items()</code>: gibt alle Schlüssel-Wert-Paare gleichzeitig zurück &ndash; besonders praktisch zum Durchlaufen (Iterieren) eines Dictionarys.
-                    <pre><code>for schluessel, wert in benutzer.items():
-    print(schluessel, "->", wert)</code></pre></li>
+                    <pre><code class="language-python">for schluessel, wert in benutzer.items():
+    print(schluessel, "-&gt;", wert)</code></pre></li>
 
                     <li><code>len()</code>: gibt die Anzahl der gespeicherten Schlüssel-Wert-Paare zurück.
-                    <pre><code>anzahl = len(benutzer)   # 3</code></pre></li>
+                    <pre><code class="language-python">anzahl = len(benutzer)   # 3</code></pre></li>
                 </ul>
             </details>
         </div>
@@ -104,7 +104,7 @@ print("Beruf entfernt:", benutzer)</code></pre>
             Mit einer <code>for</code>-Schleife kannst du alle Schlüssel eines Dictionarys der Reihe nach durchgehen und darüber auf die zugehörigen Werte zugreifen – hier mit dem Dictionary <code>benutzer</code> von oben:
         </p>
 
-<pre><code>for schluessel in benutzer:
+<pre><code class="language-python">for schluessel in benutzer:
     print(schluessel, benutzer[schluessel])</code></pre>
 
 <p>
@@ -118,7 +118,7 @@ print("Beruf entfernt:", benutzer)</code></pre>
             Eine Liste eignet sich gut, wenn du gleichartige Elemente in einer bestimmten Reihenfolge speichern willst (z.&nbsp;B. alle Namen einer Klasse). Willst du aber zu einem <strong>eindeutigen Namen</strong> gezielt einen Wert nachschlagen, ist ein Dictionary die bessere Wahl:
         </p>
 
-<pre><code># Mit einer Liste musst du dir die Reihenfolge merken:
+<pre class="ausfuehrbar"><code class="language-python"># Mit einer Liste musst du dir die Reihenfolge merken:
 benutzer_liste = ["Alice", 25, "Entwicklerin"]
 print(benutzer_liste[1])   # 25 - aber was war an Position 1 nochmal?
 
@@ -134,7 +134,7 @@ print(benutzer_dict["Alter"])   # 25 - sofort klar, was gemeint ist</code></pre>
 
 <h3>Mehrere Benutzer in einem verschachtelten Dictionary speichern</h3>
 
-<pre><code># Ein Dictionary, das mehrere Benutzer speichert
+<pre class="ausfuehrbar"><code class="language-python"># Ein Dictionary, das mehrere Benutzer speichert
 benutzer_db = {
     'Alice': {'Alter': 25, 'Beruf': 'Entwicklerin'},
     'Bob': {'Alter': 30, 'Beruf': 'Designer'},
@@ -182,7 +182,7 @@ print(punkte)</code></pre>
                 <li><strong>Nur lesen für „clara“</strong> – <code>get</code> mit Standardwert liefert 0, legt aber <em>keinen</em> Schlüssel an.</li>
             </ol>
             <p><strong>Ergebnis:</strong> Die Ausgabe lautet</p>
-            <pre><code>1
+            <pre class="darstellung"><code>1
 11
 1
 0
@@ -236,7 +236,7 @@ print(statistik)</code></pre>
                     Die nächste Anfrage ist ein Fehlgriff und holt den neuen Preis.</li>
             </ol>
             <p><strong>Ergebnis:</strong> Die Ausgabe lautet</p>
-            <pre><code>P1 19.99
+            <pre class="darstellung"><code>P1 19.99
 P2 5.49
 P1 19.99
 P9 None
@@ -265,7 +265,7 @@ P1 17.99
     Ein JSON-Objekt sieht fast genauso aus wie ein Python-Dictionary:
 </p>
 
-<pre><code>{
+<pre class="darstellung"><code>{
   "Name": "Alice",
   "Alter": 25,
   "Beruf": "Entwicklerin"

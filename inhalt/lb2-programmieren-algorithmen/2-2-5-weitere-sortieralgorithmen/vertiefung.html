@@ -5,7 +5,7 @@
             <details>
                 <summary>Aufgabe 2.2.5.7: Fehler finden und Ergebnis prüfen <span class="niveau">AFB III</span></summary>
                 <p><strong>Programm A</strong> ist ein Insertionsort, der Elemente verschiebt statt zu tauschen:</p>
-                <pre><code class="language-python">def insertion_sort_a(liste):
+                <pre class="ausfuehrbar"><code class="language-python">def insertion_sort_a(liste):
     for i in range(1, len(liste)):
         wert = liste[i]
         j = i - 1
@@ -15,7 +15,7 @@
         liste[j + 1] = wert
     return liste</code></pre>
                 <p><strong>Programm B</strong> soll ein Selectionsort sein:</p>
-                <pre><code class="language-python">def selection_sort_b(liste):
+                <pre class="ausfuehrbar"><code class="language-python">def selection_sort_b(liste):
     n = len(liste)
     for i in range(n - 1):
         for j in range(i + 1, n):

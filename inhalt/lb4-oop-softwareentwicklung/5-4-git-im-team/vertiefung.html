@@ -4,10 +4,10 @@
             <details>
                 <summary>Aufgabe 5.4.6: Beurteile – „Kein Konflikt, also alles gut“ <span class="niveau">AFB III</span></summary>
                 <p>Ben benennt in Branch <code>16-getter</code> in <code>runde.py</code> die Methode <code>punkte()</code> in <code>get_punkte()</code> um und passt alle Aufrufe in <code>main.py</code> an. Gleichzeitig schreibt Mia in Branch <code>17-zwischenstand</code> in <code>ansicht.py</code> eine neue Funktion:</p>
-                <pre><code class="language-python">def zeige_stand(runde: Runde) -&gt; None:
+                <pre class="ausfuehrbar"><code class="language-python">def zeige_stand(runde: Runde) -&gt; None:
     print(f"Punkte: {runde.punkte()}")</code></pre>
                 <p>Beide PRs zeigen keinen Konflikt, beide Reviews sind positiv, beide werden gemergt. Danach bricht das Programm ab mit</p>
-                <pre><code>AttributeError: 'Runde' object has no attribute 'punkte'</code></pre>
+                <pre class="darstellung"><code>AttributeError: 'Runde' object has no attribute 'punkte'</code></pre>
                 <ol>
                     <li>Erkläre, warum Git keinen Konflikt gemeldet hat, obwohl die beiden Änderungen nicht zusammenpassen.</li>
                     <li>Beurteile die Aussage „Kein Konflikt, also alles gut“.</li>

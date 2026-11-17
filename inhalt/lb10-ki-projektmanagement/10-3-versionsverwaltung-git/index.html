@@ -135,7 +135,7 @@
 
 <p>Ein typisches Gruppenrepository sieht so aus:</p>
 
-<pre><code>ki-projekt-weinsorten/
+<pre class="darstellung"><code>ki-projekt-weinsorten/
 ├── README.md               Ziel, Daten, Vorgehen, Ergebnis, Reflexion (verantwortlich: Tom)
 ├── plan.md                 PSP, Gantt Soll/Ist, Risiken, Rollen (verantwortlich: Ali)
 ├── titanic_lena.ipynb      Pflicht-Notebook aus KW 47, je Person
@@ -149,7 +149,7 @@
 
 <p>Die Zuständigkeiten gehören gleich oben in die <code>README.md</code>, damit jede Person sie auf der Startseite des Repositorys sieht:</p>
 
-<pre><code># KI-Projekt Weinsorten
+<pre class="darstellung"><code># KI-Projekt Weinsorten
 
 Gruppe: Lena, Tom, Ali (Kurs Informatik)
 
@@ -232,7 +232,7 @@ Gruppe: Lena, Tom, Ali (Kurs Informatik)
             <li>Reiter <strong>„Issues“</strong> → <strong>„Neues Issue“</strong>.</li>
             <li><strong>Titel:</strong> kurz und als Aufgabe formuliert, z.&nbsp;B. „Insertion Sort implementieren und Laufzeit vergleichen“.</li>
             <li><strong>Beschreibung</strong> im Reiter „Verfassen“: die User Story nach dem Satzschema aus 10.2 und darunter das Akzeptanzkriterium als <strong>Aufgabenliste</strong>. In Markdown schreibst du dafür <code>- [ ]</code> vor jeden Punkt:
-                <pre><code>Als Entwickler*in möchte ich Insertion Sort mit Bubblesort V2 vergleichen,
+                <pre class="darstellung"><code>Als Entwickler*in möchte ich Insertion Sort mit Bubblesort V2 vergleichen,
 damit ich das schnellere Verfahren wählen kann.
 
 Fertig, wenn:
@@ -319,7 +319,7 @@ Fertig, wenn:
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation: eine verschwundene Änderung.</strong> Ali ist für <code>plan.md</code> verantwortlich. Am Montag lautet der Gantt-Teil der Datei:</p>
-            <pre><code>| Arbeitspaket      | Soll  | Ist   |
+            <pre class="darstellung"><code>| Arbeitspaket      | Soll  | Ist   |
 | Daten erkunden    | KW 48 |       |
 | Modell trainieren | KW 49 |       |
 ## Risiken
@@ -328,7 +328,7 @@ Fertig, wenn:
             <ol>
                 <li><strong>Was:</strong> die Datei <code>plan.md</code> öffnen und auf „Verlauf“ klicken. Er zeigt drei Commits: Montag Ali „Gantt (Soll) angelegt“, Dienstag 10:10 Ali „Gantt: Ist für KW 48 eingetragen“, Dienstag 10:20 Tom „Risiko Krankheit ergänzt“. – <em>warum:</em> Der Verlauf verrät, wann die Änderung zuletzt noch vorhanden war und wer danach hochgeladen hat.</li>
                 <li><strong>Was:</strong> auf die SHA von Toms Commit klicken. Forgejo vergleicht ihn mit dem vorherigen Stand („Ursprung“):
-                    <pre><code>-| Daten erkunden    | KW 48 | KW 48 |
+                    <pre class="darstellung"><code>-| Daten erkunden    | KW 48 | KW 48 |
 +| Daten erkunden    | KW 48 |       |
  | Modell trainieren | KW 49 |       |
  ## Risiken

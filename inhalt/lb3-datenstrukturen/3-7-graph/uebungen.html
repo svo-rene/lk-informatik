@@ -56,7 +56,7 @@ print(raetsel(graph))</code></pre>
                 <p><strong>4 Abwandeln:</strong></p>
                 <ol type="a"><li>Schreibe <code>ausgangsgrad(graph)</code>, die für jeden Knoten zählt, wie viele Kanten von ihm ausgehen. Tipp: Das geht ohne zweite Schleife.</li><li>Schreibe <code>quellen(graph)</code>, die alle Knoten liefert, bei denen keine Kante ankommt. Nutze <code>raetsel</code>.</li></ol>
                 <p><strong>5 Fehler finden:</strong> <code>als_matrix</code> soll die Adjazenzmatrix bauen, liefert aber vier gleiche Zeilen. Halte im Debugger nach dem ersten Setzen einer 1 an und sieh dir <code>m</code> an: Was fällt auf? Korrigiere den Fehler.</p>
-                <pre><code class="language-python">def als_matrix(graph):
+                <pre class="ausfuehrbar"><code class="language-python">def als_matrix(graph):
     knoten = list(graph)
     n = len(knoten)
     m = [[0] * n] * n

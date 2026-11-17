@@ -196,7 +196,7 @@ print(scanne("x1*(y+7)"))</code></pre>
 <li><strong>Fehlerfall:</strong> Für <code>#</code> gibt es keinen Automaten. Der Scanner erzeugt ein Token FEHLER und liest weiter, damit er weitere Fehler in derselben Zeile melden kann.</li>
 </ol>
 <p><strong>Ergebnis (Ausgabe des Programms):</strong></p>
-<pre>'summe = summe + 42;' ok
+<pre class="darstellung">'summe = summe + 42;' ok
 'x1*(y+7)' ok
 '3a' ok
 'a # b' ok
@@ -237,10 +237,10 @@ print(scanne("x1*(y+7)"))</code></pre>
 <details>
 <summary>Aufgabe 6.14.2: Analyse eines Python-Codes <span class="niveau">AFB II</span></summary>
 <p>Betrachte den folgenden Python-Code:</p>
-<pre>def greet(name):
+<pre class="ausfuehrbar"><code class="language-python">def greet(name):
     print("Hello, " + name + "!")
 
-greet("Alice")</pre>
+greet("Alice")</code></pre>
 <ol>
 <li>Identifiziere die Tokens in der ersten Zeile des Codes.</li>
 <li>Gib eine vereinfachte Grammatikregel für die Funktionsdefinition an.</li>

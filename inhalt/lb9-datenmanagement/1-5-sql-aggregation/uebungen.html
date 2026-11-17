@@ -37,7 +37,7 @@
 <summary>Aufgabe 1.5.6: Ergebnis vorhersagen <span class="niveau">AFB II</span></summary>
 <p>Sage das Ergebnis der folgenden Abfrage voraus, ohne sie auszuführen. Notiere dazu wie in Beispiel 9 die
    Zwischenergebnisse nach WHERE, nach GROUP BY und nach HAVING. Prüfe erst danach im DB Browser.</p>
-<pre><code>SELECT Produkt, SUM(Menge) AS Stueck
+<pre><code class="language-sql">SELECT Produkt, SUM(Menge) AS Stueck
 FROM Verkäufe
 WHERE Menge &gt;= 5
 GROUP BY Produkt

@@ -5,7 +5,7 @@
                 <summary>Aufgabe 3.2.6: Fehler finden im Ticketsystem <span class="niveau">AFB III</span></summary>
                 <p class="git-datei"><strong>Datei:</strong> <code>1_listen/ticket_queue_fehler.py</code> – neu anlegen; Klasse, <code>Node</code>, <code>statusanzeige</code> und Tests abtippen<br><strong>Commits:</strong> zuerst unverändert: <code>3.2.6: fehlerhafte TicketQueue mit Test 1 übernommen</code> · nach Teil 3: <code>3.2.6 Teil 3: TicketQueue und statusanzeige korrigiert</code> · nach Teil 4: <code>3.2.6 Teil 4: Attribute privat, Tabelle geprüft</code></p>
                 <p>Der IT-Support der Schule verwaltet Störungsmeldungen in einer Schlange. Ein Schüler hat dafür eine eigene Klasse geschrieben (<code>Node</code> wie in Beispiel 2) und zusätzlich einen Zähler eingebaut. Seitdem melden Lehrkräfte: „Mein Ticket wurde angenommen, aber die Statusanzeige sagt, es gibt keine offenen Tickets.“</p>
-                <pre><code class="language-python">class TicketQueue:
+                <pre class="ausfuehrbar"><code class="language-python">class TicketQueue:
     def __init__(self):
         self._head = None
         self._tail = None

@@ -26,7 +26,7 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> Fakt und Regel in Prolog:</p>
-            <pre><code>mensch(sokrates).
+            <pre class="darstellung"><code>mensch(sokrates).
 sterblich(X) :- mensch(X).</code></pre>
             <p>Die Regel liest man: „X ist sterblich, wenn X ein Mensch ist.“ Gestellt wird die Anfrage <code>?- sterblich(sokrates).</code></p>
             <ol>
@@ -37,7 +37,7 @@ sterblich(X) :- mensch(X).</code></pre>
             </ol>
             <p><strong>Ergebnis:</strong> Auf die Anfrage <code>?- sterblich(sokrates).</code> antwortet Prolog mit <code>true</code>.</p>
             <p><strong>Erweiterung – Regel mit zwei Bedingungen:</strong> ein kleiner Stammbaum.</p>
-            <pre><code>elternteil(anna, ben).
+            <pre class="darstellung"><code>elternteil(anna, ben).
 elternteil(ben, clara).
 grosselternteil(X, Z) :- elternteil(X, Y), elternteil(Y, Z).</code></pre>
             <p>Das Komma bedeutet „und“. Auf <code>?- grosselternteil(anna, Wer).</code> sucht Prolog eine Belegung für die Variable <code>Wer</code> und antwortet <code>Wer = clara</code>: Es findet zuerst <code>elternteil(anna, ben)</code>, setzt <code>Y = ben</code> und dann <code>elternteil(ben, clara)</code>.</p>

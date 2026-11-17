@@ -40,15 +40,15 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> Gegeben ist die reguläre Grammatik G mit ε-Regeln:</p>
-            <pre>S → aA | bB | ε
+            <pre class="darstellung">S → aA | bB | ε
 A → aA | ε
 B → bB | a</pre>
             <p><strong>Schritt 1:</strong> S und A können ε erzeugen.</p>
             <p><strong>Schritt 2:</strong> Für jede Regel, deren Nichtterminal rechts ε erzeugen kann (hier A), wird eine Variante ohne dieses Nichtterminal ergänzt:</p>
-            <pre>S → aA | a | bB
+            <pre class="darstellung">S → aA | a | bB
 A → aA | a</pre>
             <p><strong>Schritt 3:</strong> A → ε wird entfernt. S → ε bleibt, weil ε zur Sprache gehört und S auf keiner rechten Seite vorkommt:</p>
-            <pre>S → aA | a | bB | ε
+            <pre class="darstellung">S → aA | a | bB | ε
 A → aA | a
 B → bB | a</pre>
             <p><strong>Ergebnis:</strong> Dies ist die äquivalente reguläre Grammatik G' ohne ε-Regeln (bis auf die erlaubte Startregel).</p>
@@ -60,9 +60,9 @@ B → bB | a</pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> S kommt rechts vor.</p>
-            <pre>S → aS | ε</pre>
+            <pre class="darstellung">S → aS | ε</pre>
             <p>Die Grammatik erzeugt a* (einschließlich ε). S kann ε erzeugen, also wird S → a ergänzt und S → ε entfernt: S → aS | a erzeugt nur noch a<sup>+</sup>. Da ε zur Sprache gehört, S aber rechts vorkommt, darf S → ε nicht einfach stehen bleiben. Lösung mit neuem Startsymbol:</p>
-            <pre>S' → aS | a | ε
+            <pre class="darstellung">S' → aS | a | ε
 S  → aS | a</pre>
             <p>Jetzt ist die Grammatik streng regulär und erzeugt wieder a*.</p>
             <ol>
@@ -105,7 +105,7 @@ S  → aS | a</pre>
             <details>
                 <summary>Aufgabe 6.12.1: <span class="niveau">AFB I</span></summary>
                 <p>Gegeben sei folgende reguläre Grammatik G:</p>
-                <pre>S → aA | bB | ε
+                <pre class="darstellung">S → aA | bB | ε
 A → aA | b
 B → bB | ε</pre>
                 <p>Überführe diese Grammatik in eine äquivalente reguläre Grammatik ohne ε-Regeln.</p>
@@ -116,7 +116,7 @@ B → bB | ε</pre>
             <details>
                 <summary>Aufgabe 6.12.2: <span class="niveau">AFB II</span></summary>
                 <p>Gegeben sei folgende reguläre Grammatik G:</p>
-                <pre>S → aA | bB
+                <pre class="darstellung">S → aA | bB
 A → aA | ε
 B → bB | aA | ε</pre>
                 <p>Überführe diese Grammatik in eine äquivalente reguläre Grammatik ohne ε-Regeln.</p>

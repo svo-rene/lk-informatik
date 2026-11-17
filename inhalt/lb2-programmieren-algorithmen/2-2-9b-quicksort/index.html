@@ -234,7 +234,7 @@ print(zahlen)   # [1, 2, 3, 5, 6, 7, 8, 9]</code></pre>
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> <code>quicksort([4, 7, 2, 6, 1, 5])</code> mit der Fassung aus Schritt 2 (Pivot = letzte Zahl).</p>
-            <pre><code>quicksort([4, 7, 2, 6, 1, 5])   Pivot 5 → kleiner [4, 2, 1]  gleich [5]  groesser [7, 6]   6 Vergleiche
+            <pre class="darstellung"><code>quicksort([4, 7, 2, 6, 1, 5])   Pivot 5 → kleiner [4, 2, 1]  gleich [5]  groesser [7, 6]   6 Vergleiche
   quicksort([4, 2, 1])          Pivot 1 → kleiner []         gleich [1]  groesser [4, 2]   3 Vergleiche
     quicksort([])               Basisfall
     quicksort([4, 2])           Pivot 2 → kleiner []         gleich [2]  groesser [4]      2 Vergleiche
@@ -320,7 +320,7 @@ print(zahlen)   # [1, 2, 3, 5, 6, 7, 8, 9]</code></pre>
             <details open>
                 <summary>Einschätzen: zurück zum Streamingdienst</summary>
                 <p>Auch Quicksort kommt ins Messlabor (Teil 6 im <a href="../notebooks/2-2-3_einfuehrung_komplexitaet.ipynb" download>Notebook von Seite 2.2.3</a>). Damit <code>stoppe</code> es benutzen kann, braucht es dieselbe Form wie die anderen Verfahren: <em>ein</em> Parameter, die Liste. Dafür steht im Notebook schon eine kleine <strong>Hülle</strong>, die nur die Grenzen ergänzt – <code>partitioniere</code> und <code>quicksort</code> sind die aus Schritt 4:</p>
-                <pre><code class="language-python">def quicksort_ganz(liste):
+                <pre class="ausfuehrbar"><code class="language-python">def quicksort_ganz(liste):
     quicksort(liste, 0, len(liste) - 1)</code></pre>
                 <p>Miss Quicksort für 12 500, 25 000 und 50 000 Songs und vergleiche im Diagramm mit Mergesort. Dann der Praxistest: Die Charts von gestern (sortiert) bekommen 20 neue Songs hinten dran. Schätze, was Quicksort damit macht, bevor du die Zelle ausführst.</p>
                 <details class="loesung-details"><summary>Lösung zeigen</summary>

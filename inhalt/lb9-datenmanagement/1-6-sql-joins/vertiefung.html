@@ -7,7 +7,7 @@
                 </summary>
                 <p>Gewünscht ist eine Liste <em>aller</em> 15 Nutzerinnen und Nutzer mit der Anzahl ihrer Ausleihen im November 2024 –
                    wer im November nichts ausgeliehen hat, soll mit 0 erscheinen. Jana schreibt:</p>
-                <pre><code>SELECT Nutzer.Vorname, Nutzer.Nachname, COUNT(*) AS Anzahl
+                <pre><code class="language-sql">SELECT Nutzer.Vorname, Nutzer.Nachname, COUNT(*) AS Anzahl
 FROM Nutzer
 LEFT JOIN Ausleihen ON Nutzer.NutzerID = Ausleihen.NutzerID
 WHERE Ausleihen.Ausleihdatum LIKE '2024-11%'
@@ -27,7 +27,7 @@ GROUP BY Nutzer.NutzerID;</code></pre>
                     Aufgabe 1.6.7: Ergebnis prüfen – der Test sah gut aus <span class="niveau">AFB III</span>
                 </summary>
                 <p>Ben soll alle Bücher mit dem Nachnamen ihres Autors ausgeben. Er schreibt:</p>
-                <pre><code>SELECT Buecher.Titel, Autoren.Nachname
+                <pre><code class="language-sql">SELECT Buecher.Titel, Autoren.Nachname
 FROM Buecher
 INNER JOIN Autoren ON Buecher.BuchID = Autoren.AutorID;</code></pre>
                 <p>Er prüft die ersten Zeilen („Faust – von Goethe“, „Die Räuber – Schiller“, „Der Zauberberg – Mann“) und ist zufrieden.</p>

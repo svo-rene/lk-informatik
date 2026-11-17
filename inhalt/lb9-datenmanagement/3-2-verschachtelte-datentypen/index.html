@@ -8,7 +8,7 @@
             Eine Liste kann andere Listen enthalten. Dies erlaubt z.&nbsp;B. die Darstellung von Tabellen oder Matrizen.
         </p>
 
-<pre><code>matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+<pre class="ausfuehrbar"><code class="language-python">matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
 print(matrix[1])      # [4, 5, 6]  – die zweite Zeile (Zählung ab 0)
 print(matrix[1][2])   # 6          – darin das dritte Element</code></pre>
@@ -21,7 +21,7 @@ print(matrix[1][2])   # 6          – darin das dritte Element</code></pre>
             Ein Dictionary kann Listen als Werte enthalten. Dies ist praktisch, wenn mehreren Kategorien mehrere Elemente zugeordnet werden sollen.
         </p>
 
-<pre><code>noten = {"Anna": [2, 1, 3], "Ben": [3, 2, 2]}
+<pre class="ausfuehrbar"><code class="language-python">noten = {"Anna": [2, 1, 3], "Ben": [3, 2, 2]}
 
 print(noten["Anna"])      # [2, 1, 3]
 print(noten["Anna"][0])   # 2 – Annas erste Note</code></pre>
@@ -32,7 +32,7 @@ print(noten["Anna"][0])   # 2 – Annas erste Note</code></pre>
             Auch Dictionaries können verschachtelt werden, z.&nbsp;B. zur Modellierung komplexer Objekte.
         </p>
 
-<pre><code>personen = {
+<pre class="ausfuehrbar"><code class="language-python">personen = {
     "anna": {"alter": 16, "klasse": "10A"},
     "ben": {"alter": 15, "klasse": "9B"}
 }</code></pre>
@@ -43,13 +43,13 @@ print(noten["Anna"][0])   # 2 – Annas erste Note</code></pre>
             Die Kombination aller Strukturen erlaubt es, realitätsnahe Datenmodelle zu erstellen.
         </p>
 
-<pre><code>schule = {
+<pre class="ausfuehrbar"><code class="language-python">schule = {
     "10A": [{"name": "Anna", "noten": [2, 1, 3]},
             {"name": "Carla", "noten": [1, 1, 2]}],
     "9B":  [{"name": "Ben", "noten": [3, 2, 2]}]
 }
 
-# Zugriff Schritt für Schritt: Klasse -> Liste -> Person -> Notenliste -> Note
+# Zugriff Schritt für Schritt: Klasse -&gt; Liste -&gt; Person -&gt; Notenliste -&gt; Note
 print(schule["10A"][1]["name"])       # Carla
 print(schule["10A"][1]["noten"][2])   # 2
 
@@ -122,7 +122,7 @@ print(stundenplan["Mo"][2][0])</code></pre>
                     Buchstaben von „Informatik“.</li>
             </ol>
             <p><strong>Ergebnis:</strong></p>
-            <pre><code>['Mathe', 'Deutsch', 'Informatik']
+            <pre class="darstellung"><code>['Mathe', 'Deutsch', 'Informatik']
 Informatik
 2
 ['Englisch', 'Sport', 'Physik']
@@ -165,7 +165,7 @@ print(f"Warenwert: {summe:.2f} €")</code></pre>
                 <li><strong>Ausgabe formatieren</strong> – Kommazahlen sind intern nicht immer exakt; <code>:.2f</code> zeigt genau zwei Nachkommastellen.</li>
             </ol>
             <p><strong>Ergebnis:</strong></p>
-            <pre><code>Lea Kraus - 3 Positionen
+            <pre class="darstellung"><code>Lea Kraus - 3 Positionen
 Warenwert: 44.42 €</code></pre>
             <table class="gitter">
                 <tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr>

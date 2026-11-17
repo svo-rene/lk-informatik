@@ -85,7 +85,7 @@
                     Dieselbe Struktur wie in der Anleitung oben, nur als SQL – so sieht es aus, wenn der
                     DB Browser deine Klicks übersetzt:
                 </p>
-<pre><code>CREATE TABLE Lieferant (
+<pre><code class="language-sql">CREATE TABLE Lieferant (
     LieferantNr INTEGER PRIMARY KEY,
     Name        TEXT NOT NULL,
     Telefon     TEXT
@@ -165,7 +165,7 @@ Bestellung(<u>BestellNr</u>, Datum, &uarr;KundenNr)</pre>
                         der Oberfläche setzt du das PK-Häkchen einfach bei <em>beiden</em> Spalten
                         BestellNr und ProduktNr, das ergibt den zusammengesetzten Primärschlüssel. Weil das
                         im Dialog schnell unübersichtlich wird, ist SQL hier ausnahmsweise der bequemere Weg:
-<pre><code>CREATE TABLE Bestellposition (
+<pre><code class="language-sql">CREATE TABLE Bestellposition (
     BestellNr INTEGER,
     ProduktNr INTEGER,
     Menge     INTEGER NOT NULL,
@@ -186,7 +186,7 @@ Bestellung(<u>BestellNr</u>, Datum, &uarr;KundenNr)</pre>
                         <em>einer</em> Spalte, ist das Trennzeichen falsch eingestellt.</li>
                     <li><strong>Daten umfüllen</strong> – <code>CAST</code> macht aus dem importierten Text
                         echte Zahlen:
-<pre><code>INSERT INTO Bestellposition (BestellNr, ProduktNr, Menge)
+<pre><code class="language-sql">INSERT INTO Bestellposition (BestellNr, ProduktNr, Menge)
 SELECT CAST(BestellNr AS INTEGER),
        CAST(ProduktNr AS INTEGER),
        CAST(Menge     AS INTEGER)
@@ -230,7 +230,7 @@ FROM import_positionen;</code></pre></li>
                         Feldtrennzeichen <strong>;</strong>, Texttrennzeichen <strong>"</strong>.</li>
                     <li><strong>Gegenlesen:</strong> Öffne die fertige Datei mit einem Texteditor. Du musst
                         genau das sehen:
-<pre><code>BestellNr;Sterne;Kommentar
+<pre class="darstellung"><code>BestellNr;Sterne;Kommentar
 5001;5;schnell geliefert
 5003;3;Verpackung war beschaedigt</code></pre></li>
                 </ol>

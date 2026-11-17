@@ -66,7 +66,7 @@
                 <p>
                     Lege in der Tabelle Schueler eine neue Spalte „gesamtnote“ an und fülle sie für alle Schüler*innen mit dem Durchschnitt ihrer Kursnoten. Eine Spalte fügst du mit diesem Befehl hinzu:
                 </p>
-                <pre><code>ALTER TABLE Tabellenname ADD COLUMN attribut datentyp;</code></pre>
+                <pre><code class="language-sql">ALTER TABLE Tabellenname ADD COLUMN attribut datentyp;</code></pre>
             </details>
         </div>
 
@@ -78,7 +78,7 @@
                     Aufgabe 1.8.9: Den Zustand verfolgen <span class="niveau">AFB II</span>
                 </summary>
                 <p>Zum neuen Schuljahr wird ein Informatikkurs eingerichtet. Die Sekretärin führt nacheinander aus:</p>
-                <pre><code>INSERT INTO Kurs (k_id, name) VALUES (6, 'Informatik');
+                <pre><code class="language-sql">INSERT INTO Kurs (k_id, name) VALUES (6, 'Informatik');
 INSERT INTO Kursnote (k_id, s_id, note) VALUES (6, 2, 1.3), (6, 5, 2.7);
 UPDATE Kursnote SET note = note - 0.3 WHERE k_id = 6 AND note &gt; 2.0;
 DELETE FROM Kursnote WHERE k_id = 5 AND s_id = 5;</code></pre>

@@ -28,7 +28,7 @@
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> Die reguläre Grammatik G mit den Produktionsregeln</p>
-            <pre>S → aA | bB
+            <pre class="darstellung">S → aA | bB
 A → aA | a
 B → bB | b</pre>
             <p>erzeugt die Wörter aa, aaa, …, bb, bbb, … Der zugehörige Automat hat die Zustände S, A, B und den neuen Endzustand C (= E):</p>
@@ -72,7 +72,7 @@ B → bB | b</pre>
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> DEA für „gerade Anzahl von a“ über {a, b} (Kapitel 6.7, Aufgabe 6.7.7): q0 (Start- und Endzustand) –a→ q1, q0 –b→ q0, q1 –a→ q0, q1 –b→ q1.</p>
-            <pre>q0 → a q1 | b q0 | b
+            <pre class="darstellung">q0 → a q1 | b q0 | b
 q1 → a q0 | a | b q1
 S' → a q1 | b q0 | b | ε      (neues Startsymbol, weil q0 Endzustand ist und Pfeile nach q0 führen)</pre>
             <p>Ableitung von <code>aba</code>: S' ⇒ a q1 ⇒ ab q1 ⇒ aba</p>

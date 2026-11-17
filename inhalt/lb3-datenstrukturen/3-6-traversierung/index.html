@@ -56,7 +56,7 @@
 <div class="beispiel klappbar">
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> drei Knoten</summary>
-            <pre><code>      B
+            <pre class="darstellung"><code>      B
      / \
     A   C</code></pre>
             <p>Pre-Order: B, A, C · In-Order: A, B, C · Post-Order: A, C, B · Level-Order: B, A, C</p>
@@ -66,7 +66,7 @@
 <div class="aufgabe">
             <details>
                 <summary>Kurz geprüft 1: Vier Reihenfolgen an vier Knoten <span class="niveau">AFB I</span></summary>
-                <pre><code>      D
+                <pre class="darstellung"><code>      D
      / \
     B   F
    /
@@ -213,7 +213,7 @@ print(level_order(baum))  # [10, 5, 15, 3, 7, 20]</code></pre>
                 <summary>Vergleich: Queue aus 3.2 oder einfache Liste als Schlange?</summary>
                 <p>Bis vor Kurzem stand hier eine Python-Liste als Schlange. Wir nehmen jetzt die <code>Queue</code> aus Seite 3.2 – hier siehst du beide Fassungen und warum.</p>
                 <p><strong>Fassung mit Liste</strong> (liefert dasselbe Ergebnis):</p>
-                <pre><code class="language-python">def level_order_liste(wurzel):
+                <pre class="ausfuehrbar"><code class="language-python">def level_order_liste(wurzel):
     ergebnis = []
     schlange = [wurzel]
     while len(schlange) &gt; 0:
@@ -287,7 +287,7 @@ print(level_order(baum))  # [10, 5, 15, 3, 7, 20]</code></pre>
             <details>
                 <summary>Aufgabe 3.6.1: Baumtraversierung <span class="niveau">AFB I</span></summary>
                 <p>Gegeben ist folgender binärer Baum:</p>
-                <pre><code>       10
+                <pre class="darstellung"><code>       10
       /  \
      5    15
     / \     \
@@ -304,7 +304,7 @@ print(level_order(baum))  # [10, 5, 15, 3, 7, 20]</code></pre>
             <details>
                 <summary>Aufgabe 3.6.2: Suche in einem binären Suchbaum <span class="niveau">AFB I–II</span></summary>
                 <p>Gegeben ist der folgende binäre Suchbaum:</p>
-                <pre><code>        8
+                <pre class="darstellung"><code>        8
        /  \
       3    10
      / \     \

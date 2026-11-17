@@ -17,7 +17,7 @@
 
 <p>Mehr kann das Modell nicht. Eine ganze Antwort entsteht, indem diese Vorhersage in einer Schleife wiederholt wird: Ein Token wird ausgewählt, an den Text angehängt, und der verlängerte Text ist die Eingabe für den nächsten Durchlauf. Man nennt das <strong>autoregressiv</strong>.</p>
 
-<pre><code>text = prompt
+<pre class="darstellung"><code>text = prompt
 solange das Modell nicht das Ende-Token wählt:
     verteilung = modell(text)        # Wahrscheinlichkeit für jedes Token im Vokabular
     token = auswaehlen(verteilung)   # z. B. das wahrscheinlichste oder zufällig gewichtet
@@ -350,7 +350,7 @@ print(round(-math.log(p[1]), 3))                    # 1.804     Verlust, wenn "L
 
 <p><strong>Kennzeichnung:</strong> Wo KI eingesetzt werden darf, wird sie angegeben, z.&nbsp;B. am Ende einer Abgabe:</p>
 
-<pre><code>KI-Nutzung: schulKI.de, 12.11.2026
+<pre class="darstellung"><code>KI-Nutzung: schulKI.de, 12.11.2026
 Zweck: Fehlermeldung "IndexError" in Funktion auswerten() erklären lassen
 Wichtigster Prompt: "Erkläre mir, was diese Fehlermeldung bedeutet,
                     und gib mir einen Hinweis, wo ich suchen muss. Schreibe keinen Code."

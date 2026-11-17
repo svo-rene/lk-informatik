@@ -114,7 +114,7 @@ print("Summe von 0 bis", n, "mit Rekursion:", sum_recursion(n))
             <details>
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
             <p><strong>Ausgangssituation:</strong> Ablauf von <code>sum_recursion(3)</code></p>
-            <pre><code>rekursiver Abstieg:              | rekursiver Aufstieg:
+            <pre class="darstellung"><code>rekursiver Abstieg:              | rekursiver Aufstieg:
 3 + sum_recursion(2)             |     -&gt; 3 + 3 = 6
     2 + sum_recursion(1)         |   -&gt; 2 + 1 = 3
         1 + sum_recursion(0)     | -&gt; 1 + 0 = 1
@@ -197,7 +197,7 @@ print(zaehle_dateien(schule))   # 5</code></pre>
                 <li><strong>Basisfall erkennen:</strong> Ein Eintrag, der keine Liste ist, ist eine Datei und zählt 1. Ein leerer Ordner liefert 0, weil die Schleife nicht läuft. <em>Warum gibt es kein eigenes <code>if</code> für den Basisfall?</em> Die Rekursion endet automatisch, sobald keine Unterordner mehr da sind.</li>
                 <li><strong>Rekursionsschritt:</strong> Für jeden Unterordner wird dieselbe Funktion mit dem <em>kleineren</em> Teilproblem aufgerufen. Das Ergebnis wird zur eigenen Anzahl addiert.</li>
                 <li><strong>Aufrufbaum zeichnen:</strong> Jeder Knoten ist ein Aufruf, die Kinder sind die Aufrufe, die er selbst auslöst.
-                    <pre><code>zaehle(schule)                              -&gt; 1 + 3 + 1 = 5
+                    <pre class="darstellung"><code>zaehle(schule)                              -&gt; 1 + 3 + 1 = 5
 ├── "plan.pdf"                              +1
 ├── zaehle(["info.py", [...]])              -&gt; 1 + 2 = 3
 │   ├── "info.py"                           +1
@@ -247,7 +247,7 @@ print(zaehle_dateien_iterativ(tief))     # 0 – kein RecursionError</code></pre
 <div class="aufgabe">
             <details>
                 <summary>Kurz geprüft 5: Endet das? <span class="niveau">AFB II</span></summary>
-                <pre><code class="language-python">def schritte(n):
+                <pre class="ausfuehrbar"><code class="language-python">def schritte(n):
     if n == 0:
         return 0
     return 1 + schritte(n - 2)</code></pre>

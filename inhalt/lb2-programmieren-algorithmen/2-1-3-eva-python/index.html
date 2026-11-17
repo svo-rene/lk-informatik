@@ -63,7 +63,7 @@ print(int(a) + int(b))         # V + A: erst umwandeln, dann rechnen</code></pre
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Eine Fahrzeit in Minuten soll in Stunden und Minuten umgerechnet werden. Zusätzlich soll die Ankunftszeit berechnet werden, auch wenn die Fahrt über Mitternacht geht.</p>
-            <pre><code class="language-python">minuten = int(input("Fahrzeit in Minuten: "))   # E
+            <pre class="ausfuehrbar"><code class="language-python">minuten = int(input("Fahrzeit in Minuten: "))   # E
 stunden = minuten // 60                         # V: ganzzahlige Division
 rest = minuten % 60                             # V: Rest (Modulo)
 print(stunden, "h", rest, "min")                # A

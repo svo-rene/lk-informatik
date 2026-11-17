@@ -24,7 +24,7 @@ print(s, noten)</code></pre>
             <details>
                 <summary>Aufgabe 2.1.6.7: Entwurfsentscheidung – verändern oder neu erzeugen? <span class="niveau">AFB III</span></summary>
                 <p>Für die Notenverwaltung soll eine Funktion allen Schülerinnen und Schülern Bonuspunkte gutschreiben. Zwei Entwürfe stehen zur Wahl:</p>
-                <pre><code class="language-python">def bonus_a(punkte, bonus):          # Entwurf A
+                <pre class="ausfuehrbar"><code class="language-python">def bonus_a(punkte, bonus):          # Entwurf A
     for i in range(len(punkte)):
         punkte[i] = min(15, punkte[i] + bonus)
 

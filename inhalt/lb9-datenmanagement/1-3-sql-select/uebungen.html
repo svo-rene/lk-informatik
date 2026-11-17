@@ -21,7 +21,7 @@
 <summary>Aufgabe 1.3.4: Ergebnis vorhersagen <span class="niveau">AFB II</span></summary>
 <p>Bevor du eine Abfrage ausführst, solltest du ungefähr wissen, was herauskommen muss. Sage für den Ausschnitt
    mit den 5 Zeilen oben das Ergebnis dieser Abfrage voraus: Spaltenüberschriften, Werte und Reihenfolge.</p>
-<pre><code>SELECT Nachname AS Name,
+<pre><code class="language-sql">SELECT Nachname AS Name,
        Notendurchschnitt AS Schnitt,
        2026 - CAST(substr(Geburtsdatum, 1, 4) AS INTEGER) AS Lebensjahre
 FROM Studenten

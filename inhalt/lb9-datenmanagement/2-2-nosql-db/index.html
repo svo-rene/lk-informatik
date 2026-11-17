@@ -70,7 +70,7 @@
 <p><strong>So sehen die Daten aus.</strong> Beide Dokumente liegen in derselben Collection
            <code>nutzer</code> – haben aber unterschiedliche Felder:</p>
 
-<pre><code>{
+<pre class="darstellung"><code>{
   "_id": 1,
   "name": "Anna",
   "stadt": "Dresden",
@@ -105,7 +105,7 @@
 
                 <p><strong>Schritt 1 – Daten einsetzen.</strong> Ersetze den Inhalt des oberen linken Feldes
                    durch diese drei Dokumente:</p>
-<pre><code>[
+<pre class="darstellung"><code>[
   { "name": "Anna",  "stadt": "Dresden",  "punkte": 340 },
   { "name": "Ben",   "stadt": "Radebeul", "punkte": 120 },
   { "name": "Clara", "stadt": "Dresden",  "punkte": 512 }
@@ -177,7 +177,7 @@
 
 <p>Die passenden Redis-Befehle dazu:</p>
 
-<pre><code>SET   nutzer:1:name "Anna"
+<pre class="darstellung"><code>SET   nutzer:1:name "Anna"
 GET   nutzer:1:name          &rarr;  "Anna"
 INCR  nutzer:1:punkte        &rarr;  341
 EXPIRE session:9f3a7c 1800   (Sitzung verfällt nach 30 Minuten)</code></pre>
@@ -192,7 +192,7 @@ EXPIRE session:9f3a7c 1800   (Sitzung verfällt nach 30 Minuten)</code></pre>
                 </p>
 
                 <p><strong>Schritt 1 – etwas ablegen und wieder holen.</strong></p>
-<pre><code>SET kurs:27INF1:raum "A12"      &rarr;  OK
+<pre class="darstellung"><code>SET kurs:27INF1:raum "A12"      &rarr;  OK
 GET kurs:27INF1:raum            &rarr;  "A12"
 GET kurs:27INF1:zeit            &rarr;  (nil)</code></pre>
                 <p>
@@ -203,7 +203,7 @@ GET kurs:27INF1:zeit            &rarr;  (nil)</code></pre>
 
                 <p><strong>Schritt 2 – zählen.</strong> Ein eigener Befehl fürs Hochzählen, weil Zähler die
                    häufigste Anwendung überhaupt sind:</p>
-<pre><code>INCR seitenaufrufe              &rarr;  1
+<pre class="darstellung"><code>INCR seitenaufrufe              &rarr;  1
 INCR seitenaufrufe              &rarr;  2
 INCR seitenaufrufe              &rarr;  3</code></pre>
                 <p>
@@ -213,7 +213,7 @@ INCR seitenaufrufe              &rarr;  3</code></pre>
 
                 <p><strong>Schritt 3 – etwas verfallen lassen.</strong> Das ist der Grund, warum Redis
                    hinter Anmelde-Sitzungen und Warenkörben steckt:</p>
-<pre><code>SET session:9f3a7c "nutzer=1"   &rarr;  OK
+<pre class="darstellung"><code>SET session:9f3a7c "nutzer=1"   &rarr;  OK
 EXPIRE session:9f3a7c 30        &rarr;  1
 TTL session:9f3a7c              &rarr;  27   (Sekunden bis zum Verfall)</code></pre>
                 <p>
@@ -223,7 +223,7 @@ TTL session:9f3a7c              &rarr;  27   (Sekunden bis zum Verfall)</code></
                 </p>
 
                 <p><strong>Schritt 4 – nachsehen, was drin ist.</strong></p>
-<pre><code>KEYS *                          &rarr;  Liste aller Schlüssel</code></pre>
+<pre class="darstellung"><code>KEYS *                          &rarr;  Liste aller Schlüssel</code></pre>
                 <p>
                     <strong>Und jetzt der wichtige Punkt:</strong> Es gibt keinen Befehl „zeige alle
                     Schlüssel, deren Wert Dresden enthält“. Suchen kann Redis nur über den Schlüssel, nie
@@ -257,7 +257,7 @@ TTL session:9f3a7c              &rarr;  27   (Sekunden bis zum Verfall)</code></
 
 <p>Die Abfragesprache von Neo4j heißt Cypher und malt das Muster praktisch nach, das gesucht wird:</p>
 
-<pre><code>MATCH (a:Person {name: "Anna"})-[:KENNT]-&gt;(b:Person)-[:MITGLIED_IN]-&gt;(g:Gruppe)
+<pre><code class="language-sql">MATCH (a:Person {name: "Anna"})-[:KENNT]-&gt;(b:Person)-[:MITGLIED_IN]-&gt;(g:Gruppe)
 RETURN b.name, g.name</code></pre>
 
 <p>
@@ -281,7 +281,7 @@ RETURN b.name, g.name</code></pre>
                 </ul>
 
                 <p><strong>Schritt 1 – ein kleines Netz anlegen.</strong></p>
-<pre><code>CREATE (a:Person {name: 'Anna'}),
+<pre><code class="language-sql">CREATE (a:Person {name: 'Anna'}),
        (b:Person {name: 'Ben'}),
        (c:Person {name: 'Clara'}),
        (a)-[:KENNT]-&gt;(b),
@@ -292,7 +292,7 @@ RETURN b.name, g.name</code></pre>
                 </p>
 
                 <p><strong>Schritt 2 – alles anzeigen.</strong></p>
-<pre><code>MATCH (p:Person)
+<pre><code class="language-sql">MATCH (p:Person)
 RETURN p.name;</code></pre>
                 <p>
                     Ergebnis: Anna, Ben, Clara. <code>MATCH</code> ist das Gegenstück zu
@@ -300,13 +300,13 @@ RETURN p.name;</code></pre>
                 </p>
 
                 <p><strong>Schritt 3 – einen Schritt weit gehen.</strong></p>
-<pre><code>MATCH (a:Person {name: 'Anna'})-[:KENNT]-&gt;(x)
+<pre><code class="language-sql">MATCH (a:Person {name: 'Anna'})-[:KENNT]-&gt;(x)
 RETURN x.name;</code></pre>
                 <p>Ergebnis: Ben. Gelesen: „Starte bei Anna, folge einer KENNT-Kante, gib aus, wo du landest.“</p>
 
                 <p><strong>Schritt 4 – zwei Schritte weit gehen.</strong> Die <code>*2</code> hinter der
                    Kante heißt „genau zwei Kanten hintereinander“:</p>
-<pre><code>MATCH (a:Person {name: 'Anna'})-[:KENNT*2]-&gt;(x)
+<pre><code class="language-sql">MATCH (a:Person {name: 'Anna'})-[:KENNT*2]-&gt;(x)
 RETURN x.name;</code></pre>
                 <p>
                     Ergebnis: Clara – die Bekannte einer Bekannten. Genau das ist der Freundschaftsvorschlag
@@ -321,7 +321,7 @@ RETURN x.name;</code></pre>
                         Kopien der Tabelle, zusammengefügt mit UNION, oder eine rekursive Abfrage. In Cypher ändert man
                         dafür nur eine Zahl:
                     </p>
-<pre><code>MATCH (a:Person {name: 'Anna'})-[:KENNT*1..5]-&gt;(x)
+<pre><code class="language-sql">MATCH (a:Person {name: 'Anna'})-[:KENNT*1..5]-&gt;(x)
 RETURN DISTINCT x.name;</code></pre>
                 </div>
             </details>
@@ -344,7 +344,7 @@ RETURN DISTINCT x.name;</code></pre>
            stadt, punkte) und ihre Klasse <code>Nutzer</code>. Die Methoden stehen nur einmal in der
            Klassendefinition im Programm, nicht in jedem gespeicherten Objekt:</p>
 
-<pre><code>class Nutzer:
+<pre><code class="language-python">class Nutzer:
     def __init__(self, name, stadt):
         self.name = name
         self.stadt = stadt
@@ -368,7 +368,7 @@ gleiche.punkte_gutschreiben(10)   # geladenes Objekt ist wieder ein Nutzer, die 
             kann aber beliebig viele untergeordnete haben. Zugegriffen wird immer von der Wurzel aus entlang des Pfades.
         </p>
 
-<pre><code>Schule
+<pre class="darstellung"><code>Schule
 ├── Klasse 10A
 │   ├── Anna
 │   └── Ben
@@ -410,14 +410,14 @@ gleiche.punkte_gutschreiben(10)   # geladenes Objekt ist wieder ein Nutzer, die 
 db.nutzer.find({ name: "Dana" }, { stadt: 1, _id: 0 })     &rarr;  { "stadt": "Pirna" }</code></pre></li>
                 <li><strong>Als Key-Value speichern</strong> – Der Store kennt nur Paare. Darum steckt die Struktur im Schlüssel
                     (<code>nutzer:&lt;ID&gt;:&lt;feld&gt;</code>), damit man später gezielt zugreifen kann.
-<pre><code>SET nutzer:4:name  "Dana"
+<pre class="darstellung"><code>SET nutzer:4:name  "Dana"
 SET nutzer:4:stadt "Pirna"
 SET nutzer:4:kennt "1"
 GET nutzer:4:stadt                                          &rarr;  "Pirna"</code></pre></li>
                 <li><strong>Als Graph speichern</strong> – Dana wird ein Knoten, die Bekanntschaft eine eigene Kante mit Richtung.
-<pre><code>MATCH (a:Person {name: 'Anna'})
+<pre><code class="language-sql">MATCH (a:Person {name: 'Anna'})
 CREATE (d:Person {name: 'Dana', stadt: 'Pirna'})-[:KENNT]-&gt;(a);
-MATCH (d:Person {name: 'Dana'}) RETURN d.stadt;             &rarr;  "Pirna"</code></pre></li>
+MATCH (d:Person {name: 'Dana'}) RETURN d.stadt;             →  "Pirna"</code></pre></li>
                 <li><strong>Vergleichen</strong> – Dokument und Graph finden Dana über ein beliebiges Feld (hier den Namen). Der
                     Key-Value-Store findet die Stadt nur, wenn man den Schlüssel, also Danas ID 4, schon kennt.</li>
             </ol>
@@ -436,8 +436,8 @@ MATCH (d:Person {name: 'Dana'}) RETURN d.stadt;             &rarr;  "Pirna"</cod
             <ol>
                 <li><strong>Graph: Muster nachzeichnen</strong> – Die Frage ist ein Weg über eine Kante mit Bedingung am Ziel. Das ist
                     genau eine Abfrage:
-<pre><code>MATCH (a:Person {name: 'Anna'})-[:KENNT]-&gt;(b:Person {stadt: 'Dresden'})
-RETURN b.name;                                              &rarr;  "Emil"</code></pre></li>
+<pre><code class="language-sql">MATCH (a:Person {name: 'Anna'})-[:KENNT]-&gt;(b:Person {stadt: 'Dresden'})
+RETURN b.name;                                              →  "Emil"</code></pre></li>
                 <li><strong>Dokument, Variante „Verweise“</strong> – Annas Dokument enthält <code>"kennt": [2, 5]</code>. Es sind zwei
                     Schritte nötig: erst Annas Liste holen, dann die Bekannten filtern.
 <pre><code>db.nutzer.find({ name: "Anna" }, { kennt: 1, _id: 0 })     &rarr;  { "kennt": [2, 5] }

@@ -30,7 +30,7 @@
             <p><strong>Ausgangssituation:</strong> Ein Programm soll zwei Zahlen addieren, z.&nbsp;B. <code>a = 7</code> und <code>b = 5</code>. Wir vergleichen, wie dieselbe Anweisung auf den drei Abstraktionsebenen aussieht. Im vereinfachten Assembler bedeutet <code>LOAD R1, a</code> „lade den Wert von a in das Register R1“, <code>ADD R1, R2</code> „R1 := R1 + R2“ und <code>STORE R1, summe</code> „schreibe R1 in die Speicherzelle summe“.</p>
             <pre><code class="language-python"># höhere Programmiersprache (Python)
 summe = a + b</code></pre>
-            <pre><code># maschinennah (vereinfachter Assembler)
+            <pre class="darstellung"><code># maschinennah (vereinfachter Assembler)
 LOAD  R1, a
 LOAD  R2, b
 ADD   R1, R2
@@ -107,7 +107,7 @@ print(summe)        # 24
 
 # funktional/deklarativ: beschreiben, was berechnet werden soll
 print(sum(z for z in zahlen if z % 2 == 0))   # 24</code></pre>
-            <pre><code>-- deklarativ in SQL (Tabelle zahlen mit Spalte wert)
+            <pre><code class="language-sql">-- deklarativ in SQL (Tabelle zahlen mit Spalte wert)
 SELECT SUM(wert) FROM zahlen WHERE wert % 2 = 0;</code></pre>
             <ol>
                 <li><strong>Imperativ:</strong> Die Variable <code>summe</code> startet bei 0. Die Schleife nimmt jede Zahl einzeln, prüft mit <code>z % 2 == 0</code>, ob sie gerade ist, und verändert gegebenenfalls <code>summe</code>. Warum imperativ? Wir legen die Reihenfolge der Schritte und jede Zustandsänderung selbst fest.

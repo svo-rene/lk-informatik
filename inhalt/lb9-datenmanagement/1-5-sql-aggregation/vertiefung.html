@@ -7,11 +7,11 @@
    Abfrage tatsächlich berechnet, und korrigiere sie.</p>
 <ol>
 <li>Gewünscht: Wie viele Mäuse wurden insgesamt verkauft?
-<pre><code>SELECT COUNT(Menge) AS VerkaufteMaeuse
+<pre><code class="language-sql">SELECT COUNT(Menge) AS VerkaufteMaeuse
 FROM Verkäufe
 WHERE Produkt = 'Maus';</code></pre></li>
 <li>Gewünscht: je Produkt die verkaufte Stückzahl und das Datum des Verkaufs.
-<pre><code>SELECT Produkt, Datum, SUM(Menge) AS Stueck
+<pre><code class="language-sql">SELECT Produkt, Datum, SUM(Menge) AS Stueck
 FROM Verkäufe
 GROUP BY Produkt;</code></pre></li>
 </ol>

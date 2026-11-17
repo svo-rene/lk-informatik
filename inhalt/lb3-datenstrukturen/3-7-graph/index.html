@@ -123,7 +123,7 @@
 <div class="beispiel klappbar">
             <details>
                 <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> gewichteter, ungerichteter Graph (Fahrzeiten in Minuten) in Python – als Adjazenzliste mit einem Dictionary und als Matrix</summary>
-            <pre><code>   Neustadt --4-- Albertplatz --6-- Pieschen
+            <pre class="darstellung"><code>   Neustadt --4-- Albertplatz --6-- Pieschen
        |               |
        7               3
        |               |
@@ -159,7 +159,7 @@ for i in range(len(namen)):
                 <li><em>Was:</em> Für die Matrix wird jede Station <code>a</code> (äußere Schleife, eine Zeile) mit jeder Station <code>b</code> (innere Schleife, eine Spalte) verglichen. Steht <code>b</code> im Dictionary von <code>a</code>, kommt das Gewicht in die Zeile, sonst 0. <em>Warum:</em> Ein direkter Zugriff <code>netz[a][b]</code> würde bei fehlender Kante einen <code>KeyError</code> auslösen – deshalb erst mit <code>in</code> prüfen.</li>
             </ol>
             <p><strong>Ergebnis</strong> (Reihenfolge Neustadt, Albertplatz, Pieschen, Altmarkt, Postplatz):</p>
-            <pre><code>Neustadt [0, 4, 0, 7, 0]
+            <pre class="darstellung"><code>Neustadt [0, 4, 0, 7, 0]
 Albertplatz [4, 0, 6, 0, 3]
 Pieschen [0, 6, 0, 0, 0]
 Altmarkt [7, 0, 0, 0, 5]

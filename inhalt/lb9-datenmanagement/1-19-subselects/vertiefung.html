@@ -6,10 +6,10 @@
                     Aufgabe 1.19.9: Fehler finden – NOT IN und die leere Ergebnismenge <span class="niveau">AFB III</span>
                 </summary>
                 <p>Zum Halbjahr wird eine neue Klasse angelegt und eine neue Schülerin aufgenommen, deren Klasse noch nicht feststeht:</p>
-                <pre><code>INSERT INTO klasse (name) VALUES ('11A');
+                <pre><code class="language-sql">INSERT INTO klasse (name) VALUES ('11A');
 INSERT INTO schueler (name, klasse_id) VALUES ('Mia Neu', NULL);</code></pre>
                 <p>Die Sekretärin möchte wissen, welche Klassen noch keine Schüler*innen haben, und schreibt:</p>
-                <pre><code>SELECT name
+                <pre><code class="language-sql">SELECT name
 FROM klasse
 WHERE id NOT IN (SELECT klasse_id FROM schueler);</code></pre>
                 <ol>
@@ -26,7 +26,7 @@ WHERE id NOT IN (SELECT klasse_id FROM schueler);</code></pre>
                     Aufgabe 1.19.10: JOIN oder Subselect? <span class="niveau">AFB III</span>
                 </summary>
                 <p>Gesucht sind die Namen aller Schüler*innen mit mindestens einer Note besser als 2.0. Drei Vorschläge liegen vor:</p>
-                <pre><code>-- Vorschlag A
+                <pre><code class="language-sql">-- Vorschlag A
 SELECT s.name FROM schueler s JOIN note n ON n.schueler_id = s.id WHERE n.wert &lt; 2.0;
 
 -- Vorschlag B

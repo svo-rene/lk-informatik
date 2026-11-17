@@ -61,7 +61,7 @@
 <p>Die Zahl <strong>10100,1101</strong> soll vom 2er-System ins 10er-System umgewandelt werden. Ganzzahliger Anteil und Nachkommateil werden jeweils getrennt behandelt.</p>
 <h3>Umwandlung des ganzzahligen Teils</h3>
 <p>Die Zahl <strong>10100</strong> (2er-System) wird ins Dezimalsystem umgewandelt. Jede Stelle der Zahl hat den Wert der entsprechenden Zweierpotenz. Die der ersten Ziffer von rechts entsprechende Potenz ist 2<sup>0</sup> = 1. Multipliziere jede Ziffer mit der entsprechenden Potenz und summiere. Gehe am besten von rechts nach links vor:</p>
-<pre>        0 &middot;  1 =   0
+<pre class="darstellung">        0 &middot;  1 =   0
         0 &middot;  2 =   0
         1 &middot;  4 =   4
         0 &middot;  8 =   0
@@ -72,7 +72,7 @@
 <h3>Umwandlung des Nachkommateils</h3>
 <p>Der Stellenwert der ersten Nachkommastelle wird mit der Basis 2 und dem Exponenten −1 berechnet (also 0,5), danach wird der Exponent mit jeder weiteren Stelle immer kleiner (−2, −3, …).</p>
 <p>Für den Nachkommateil 1101 ergibt sich also:</p>
-<pre>                    1 &middot;  1/2  =  0,5
+<pre class="darstellung">                    1 &middot;  1/2  =  0,5
                     1 &middot;  1/4  =  0,25
                     0 &middot;  1/8  =  0
                     1 &middot;  1/16 =  0,0625
@@ -80,7 +80,7 @@
                                  0,8125
                 </pre>
 <p>Addiere nun den bereits ermittelten ganzzahligen Anteil 20:</p>
-<pre>        0,8125
+<pre class="darstellung">        0,8125
      + 20
        &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
        20,8125
@@ -100,14 +100,14 @@
             <details>
                 <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span> 10 Cent im Binärsystem – ein periodischer Bruch</summary>
 <p>Wenden wir die Multiplikationsmethode auf 0,1 an, mit 8 Bit für den Bruchteil:</p>
-<pre>0,1 &middot; 2 = 0,2   &rarr;  0        0,6 &middot; 2 = 1,2   &rarr;  1
+<pre class="darstellung">0,1 &middot; 2 = 0,2   &rarr;  0        0,6 &middot; 2 = 1,2   &rarr;  1
 0,2 &middot; 2 = 0,4   &rarr;  0        0,2 &middot; 2 = 0,4   &rarr;  0
 0,4 &middot; 2 = 0,8   &rarr;  0        0,4 &middot; 2 = 0,8   &rarr;  0
 0,8 &middot; 2 = 1,6   &rarr;  1        0,8 &middot; 2 = 1,6   &rarr;  1
 
 Ergebnis: 0,0001 1001</pre>
 <p>Sieh dir die Reste genau an: Nach dem fünften Schritt taucht wieder <strong>0,2</strong> auf – derselbe Wert wie nach dem ersten Schritt. Ab hier wiederholt sich alles endlos. Die Ziffernfolge ist <strong>periodisch</strong>:</p>
-<pre>0,1 (Dezimal) = 0,0 0011 0011 0011 … (Binär)</pre>
+<pre class="darstellung">0,1 (Dezimal) = 0,0 0011 0011 0011 … (Binär)</pre>
 <p>Das ist derselbe Effekt wie bei 1/3 im Dezimalsystem: 0,333… lässt sich nicht mit endlich vielen Ziffern exakt hinschreiben. Nur ist im Binärsystem eine andere Menge von Brüchen betroffen.</p>
             </details>
         </div>
@@ -116,7 +116,7 @@ Ergebnis: 0,0001 1001</pre>
 
 <p>Mit 8 Bit speichert der Rechner also <code>0,00011001</code>. Rechnen wir zurück, was das wirklich bedeutet:</p>
 
-<pre>1 &middot; 1/16  = 0,0625
+<pre class="darstellung">1 &middot; 1/16  = 0,0625
 1 &middot; 1/32  = 0,03125
 1 &middot; 1/256 = 0,00390625
               -----------
@@ -129,7 +129,7 @@ Ergebnis: 0,0001 1001</pre>
 <summary>Praxisbezug: Warum Rundungsfehler richtig teuer werden können</summary>
 <p>Ein einzelner Fehler von 0,23&nbsp;Cent fällt niemandem auf. Entscheidend ist, dass er <strong>systematisch</strong> ist – er geht immer in dieselbe Richtung und <strong>summiert sich auf</strong>.</p>
 <p>Rechne es an einem Supermarkt mit 5000 Buchungen pro Tag durch:</p>
-<pre>5000 &middot; 0,00234375 € &asymp; 11,72 € pro Tag
+<pre class="darstellung">5000 &middot; 0,00234375 € &asymp; 11,72 € pro Tag
                      &asymp; 4277 € pro Jahr</pre>
 <p>Die Kasse stimmt dann nicht mehr – und man findet keinen einzelnen fehlerhaften Vorgang, den man korrigieren könnte, weil jede einzelne Buchung „fast richtig“ ist.</p>
 <p><strong>Die Lösung der Praxis:</strong> Geldbeträge werden gar nicht erst als Bruchzahlen gespeichert, sondern als <strong>ganzzahlige Cent-Beträge</strong> (10&nbsp;Cent statt 0,10&nbsp;€). Ganzzahlen sind binär immer exakt darstellbar. Alternativ gibt es dezimale Festkommaformate (z.&nbsp;B. den Datentyp <code>decimal</code>), die intern im Dezimalsystem rechnen.</p>

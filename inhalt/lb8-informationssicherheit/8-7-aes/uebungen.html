@@ -5,7 +5,7 @@
                 <summary>Aufgabe 8.7.3: Substitution von Buchstaben <span class="niveau">AFB I</span></summary>
                 <p>In dieser Aufgabe implementierst du eine allgemeine Substitution von Zeichen mithilfe einer Ersetzungstabelle (Dictionary).</p>
                 <p>Schreibe in Python eine Funktion:</p>
-                <pre><code>def substitute(text, table):
+                <pre class="ausfuehrbar"><code class="language-python">def substitute(text, table):
     """Gibt einen neuen String zurück, in dem alle Zeichen,
     die in table vorkommen, durch die zugehörigen Werte ersetzt werden.
     Zeichen, die nicht in table stehen, bleiben unverändert."""
@@ -13,7 +13,7 @@
     pass
 </code></pre>
                 <p>Beispiel:</p>
-                <pre><code>table = {"A": "Q", "B": "W", "C": "E", "D": "R", "E": "T", "F": "Z"}
+                <pre><code class="language-python">table = {"A": "Q", "B": "W", "C": "E", "D": "R", "E": "T", "F": "Z"}
 print(substitute("FACE", table))   # Erwartet: "ZQET"</code></pre>
                 <p>Teste die Funktion mit mehreren Eingaben (Großbuchstaben, Kleinbuchstaben, Zeichen ohne Ersetzung usw.) und überprüfe, ob nur die gewünschten Zeichen ersetzt werden.</p>
             </details>
@@ -24,14 +24,14 @@ print(substitute("FACE", table))   # Erwartet: "ZQET"</code></pre>
                 <summary>Aufgabe 8.7.4: Substitution von Ziffern <span class="niveau">AFB I</span></summary>
                 <p>Jetzt implementierst du eine Substitution für einzelne Dezimalziffern (0–9). Gegeben ist ein Dictionary, das jede Ziffer auf eine andere Ziffer abbildet.</p>
                 <p>Schreibe die Funktion:</p>
-                <pre><code>def substitute_digits(number, mapping):
+                <pre class="ausfuehrbar"><code class="language-python">def substitute_digits(number, mapping):
     """Ersetzt jede Ziffer der Dezimalzahl number gemäß dem Dictionary mapping
     und gibt die neue Zahl (als int) zurück."""
     # TODO: implementieren
     pass
 </code></pre>
                 <p>Beispiel:</p>
-                <pre><code>mapping = {0: 5, 1: 7, 2: 2, 3: 9, 4: 3, 5: 8, 6: 6, 7: 1, 8: 0, 9: 4}
+                <pre><code class="language-python">mapping = {0: 5, 1: 7, 2: 2, 3: 9, 4: 3, 5: 8, 6: 6, 7: 1, 8: 0, 9: 4}
 print(substitute_digits(2034, mapping))  # Erwartet: 2593</code></pre>
                 <p>Tipp: Du kannst die Zahl zunächst in einen String umwandeln, Ziffer für Ziffer ersetzen und anschließend wieder in int umwandeln.</p>
             </details>
@@ -42,14 +42,14 @@ print(substitute_digits(2034, mapping))  # Erwartet: 2593</code></pre>
                 <summary>Aufgabe 8.7.5: Transposition – paarweises Vertauschen <span class="niveau">AFB I</span></summary>
                 <p>Bei einer Transposition werden die Daten nicht ersetzt, sondern nur umsortiert. Implementiere eine einfache Zeichenvertauschung.</p>
                 <p>Schreibe die Funktion:</p>
-                <pre><code>def swap_pairs(text):
+                <pre class="ausfuehrbar"><code class="language-python">def swap_pairs(text):
     """Vertauscht den Text paarweise:
-    "ABCD" -> "BADC", "HELLO" -> "EHLLO" (letztes Zeichen bleibt stehen)."""
+    "ABCD" -&gt; "BADC", "HELLO" -&gt; "EHLLO" (letztes Zeichen bleibt stehen)."""
     # TODO: implementieren
     pass
 </code></pre>
                 <p>Teste deine Funktion z.&nbsp;B. mit:</p>
-                <pre><code>print(swap_pairs("ABCD"))   # Erwartet: "BADC"
+                <pre><code class="language-python">print(swap_pairs("ABCD"))   # Erwartet: "BADC"
 print(swap_pairs("HELLO"))  # Erwartet: "EHLLO"</code></pre>
             </details>
         </div>
@@ -59,15 +59,15 @@ print(swap_pairs("HELLO"))  # Erwartet: "EHLLO"</code></pre>
                 <summary>Aufgabe 8.7.6: Transposition – allgemeine Block-Permutation <span class="niveau">AFB II</span></summary>
                 <p>Hier implementierst du eine allgemeine Permutation für einen Block von Zeichen. Die neue Reihenfolge der Zeichen wird durch eine Liste von Indizes beschrieben.</p>
                 <p>Implementiere:</p>
-                <pre><code>def permute_block(block, order):
+                <pre class="ausfuehrbar"><code class="language-python">def permute_block(block, order):
     """Gibt einen neuen String zurück, in dem die Zeichen von block
     gemäß der Positionsliste order umsortiert werden.
-    Beispiel: block = "ABCD", order = [2, 0, 3, 1] -> "CADB"."""
+    Beispiel: block = "ABCD", order = [2, 0, 3, 1] -&gt; "CADB"."""
     # TODO: implementieren
     pass
 </code></pre>
                 <p>Teste deine Funktion z.&nbsp;B. mit:</p>
-                <pre><code>print(permute_block("ABCD", [2, 0, 3, 1]))  # Erwartet: "CADB"</code></pre>
+                <pre><code class="language-python">print(permute_block("ABCD", [2, 0, 3, 1]))  # Erwartet: "CADB"</code></pre>
                 <p>Achte darauf, dass die Länge von <code>order</code> zur Länge von <code>block</code> passt.</p>
             </details>
         </div>
@@ -77,14 +77,14 @@ print(swap_pairs("HELLO"))  # Erwartet: "EHLLO"</code></pre>
                 <summary>Aufgabe 8.7.7: Expansion – aus einer Zahl mehrere ableiten <span class="niveau">AFB I</span></summary>
                 <p>Eine einfache Form von „Expansion“ besteht darin, aus einem Ausgangswert mehrere abgeleitete Werte zu berechnen – ähnlich wie AES aus einem Schlüssel viele Rundenschlüssel ableitet.</p>
                 <p>Implementiere die Funktion:</p>
-                <pre><code>def expand_value(x):
+                <pre class="ausfuehrbar"><code class="language-python">def expand_value(x):
     """Gibt eine Liste mit drei Werten zurück:
     [x + 1, x * 2, (x * 3) % 10]."""
     # TODO: implementieren
     pass
 </code></pre>
                 <p>Beispiel:</p>
-                <pre><code>print(expand_value(4))  # Erwartet: [5, 8, 2]</code></pre>
+                <pre><code class="language-python">print(expand_value(4))  # Erwartet: [5, 8, 2]</code></pre>
             </details>
         </div>
 
@@ -93,7 +93,7 @@ print(swap_pairs("HELLO"))  # Erwartet: "EHLLO"</code></pre>
                 <summary>Aufgabe 8.7.8: Expansion – Liste von Werten erweitern <span class="niveau">AFB II</span></summary>
                 <p>Auf Basis von Aufgabe 8.7.7 soll nun eine ganze Liste von Werten erweitert werden.</p>
                 <p>Implementiere:</p>
-                <pre><code>def expand_list(values):
+                <pre class="ausfuehrbar"><code class="language-python">def expand_list(values):
     """Nimmt eine Liste von Zahlen und gibt eine neue Liste zurück,
     in der für jede Zahl x die drei Werte aus expand_value(x)
     hintereinander angehängt werden."""
@@ -101,7 +101,7 @@ print(swap_pairs("HELLO"))  # Erwartet: "EHLLO"</code></pre>
     pass
 </code></pre>
                 <p>Beispiel:</p>
-                <pre><code>print(expand_list([2, 7]))
+                <pre><code class="language-python">print(expand_list([2, 7]))
 # Erwartet: expand_value(2) + expand_value(7), also [3, 4, 6, 8, 14, 1]</code></pre>
             </details>
         </div>

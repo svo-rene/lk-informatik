@@ -4,7 +4,7 @@
             <details>
                 <summary>Aufgabe 2.1.8.5: Fehler finden im Diff <span class="niveau">AFB III</span></summary>
                 <p>Paul hat Bubblesort optimiert und mit der Nachricht „Abbruch eingebaut – deutlich schneller! Test [3, 1, 2] ok“ committet. Sein Messteil enthält kein <code>assert</code>. Der Diff:</p>
-                <pre><code> def sortiere(liste):
+                <pre class="darstellung"><code> def sortiere(liste):
      n = len(liste)
      for i in range(n - 1):
 +        getauscht = False
@@ -29,7 +29,7 @@
             <details>
                 <summary>Aufgabe 2.1.8.6: Warum sind Notebooks schlecht vergleichbar? <span class="niveau">AFB III</span></summary>
                 <p>Sara hat ihr Laufzeitexperiment als Jupyter-Notebook <code>experiment.ipynb</code> im Repository. Sie ändert nur eine Zeile, nämlich <code>[2000, 4000]</code> in <code>[2000, 4000, 8000]</code>, führt alle Zellen erneut aus und lädt die Datei hoch. Ein Ausschnitt des Diffs (gekürzt):</p>
-                <pre><code>-   "execution_count": 3,
+                <pre class="darstellung"><code>-   "execution_count": 3,
 +   "execution_count": 7,
  ...
 -    "for n in [2000, 4000]:\n",

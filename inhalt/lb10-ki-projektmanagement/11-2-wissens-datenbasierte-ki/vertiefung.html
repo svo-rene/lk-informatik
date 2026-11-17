@@ -4,7 +4,7 @@
             <details>
                 <summary>Aufgabe 11.2.5: Fehler im Prolog-Stammbaum <span class="niveau">AFB III</span></summary>
                 <p>Mia hat den Stammbaum aus Beispiel 1 um eine Generation erweitert. Mit der Anfrage <code>?- grosselternteil(anna, Wer).</code> möchte sie <code>Wer = clara</code> erhalten, mit <code>?- grosselternteil(ben, Wer).</code> die Antwort <code>Wer = david</code>. Ihr Programm funktioniert aber nicht:</p>
-                <pre><code>Elternteil(anna, ben).
+                <pre class="darstellung"><code>Elternteil(anna, ben).
 elternteil(ben, Clara).
 elternteil(clara, david)
 grosselternteil(X, Z) :- elternteil(X, Y), elternteil(X, Z).</code></pre>

@@ -130,11 +130,12 @@ body { margin: 0; padding: 0; max-width: none; }
     border-radius: 8px;
 }
 .leiste details.lb > summary:hover { background: var(--bg-weich); opacity: 1; }
-.leiste details.lb > summary::before { align-self: center; color: var(--text-3); width: 0.45em; height: 0.45em; }
+.leiste details.lb > summary::before { align-self: flex-start; margin-top: 0.55em; color: var(--text-3); width: 0.45em; height: 0.45em; }
 .leiste details.lb[open] > summary { margin-bottom: 2px; }
 .lb-nr {
     flex: none;
-    min-width: 3.4em;
+    width: 5.6em;
+    white-space: nowrap;
     font-size: 0.72rem;
     font-weight: 700;
     color: var(--akzent-text);
@@ -402,6 +403,7 @@ div.code-toolbar { position: static; }
     --nw-accent: var(--akzent);
 }
 .code-hinweis { font-size: 0.78rem; color: var(--text-3); padding: 4px 12px 8px; margin: 0; }
+.code-leer { margin: 0; font-family: var(--schrift); font-style: italic; opacity: 0.75; white-space: normal; }
 
 /* ---------- Startseite ---------- */
 .held {

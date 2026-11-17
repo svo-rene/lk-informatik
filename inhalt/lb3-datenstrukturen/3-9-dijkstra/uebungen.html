@@ -42,7 +42,7 @@ print(vorgaenger)</code></pre>
                 <p><strong>4 Abwandeln:</strong></p>
                 <ol type="a"><li>Ergänze <code>dijkstra</code> um eine Ausgabe: Nach jedem Schritt soll eine Zeile erscheinen mit dem Knoten, der gerade fertig wurde, und dem aktuellen <code>dist</code> – also eine Zeile deiner Tabelle aus Schritt 1.</li><li>Schreibe <code>dijkstra_bis(graph, start, ziel)</code>, die aufhört, sobald das Ziel fertig ist, und nur dessen Entfernung zurückgibt. Warum darf man an dieser Stelle aufhören?</li></ol>
                 <p><strong>5 Fehler finden:</strong> Diese Fassung liefert für A die Entfernung 2 und für Z sogar 1. Gehe im Debugger zu dem Moment, in dem <code>dist['A']</code> geändert wird: Welche Zahl wird eingetragen, und welche müsste es sein? Korrigiere den Fehler.</p>
-                <pre><code class="language-python">def dijkstra(graph, start, dist):
+                <pre class="ausfuehrbar"><code class="language-python">def dijkstra(graph, start, dist):
     for k in graph:
         dist[k] = float("inf")
     dist[start] = 0

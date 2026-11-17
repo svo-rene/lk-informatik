@@ -44,7 +44,7 @@
             <p><strong>Ausgangssituation (Lawineneffekt und Salt):</strong> Ein Schulportal will Passwörter als Hashwerte speichern. Zwei Nutzer haben das Passwort „geheim“.</p>
             <ol>
                 <li><strong>Lawineneffekt beobachten:</strong>
-                    <pre>SHA-256("Hallo")  = 753692ec36adb4c794c973945eb2a99c1649703ea6f76bf259abb4fb838e013e
+                    <pre class="darstellung">SHA-256("Hallo")  = 753692ec36adb4c794c973945eb2a99c1649703ea6f76bf259abb4fb838e013e
 SHA-256("hallo")  = d3751d33f9cd5049c4af2b462735457e4d3baf130bcbb87f389e349fbaeb20b9
 SHA-256("Hallo!") = 357a57fe73d6c63bb1923e970f79a924db3a3609eb9797547784a94ee38fc3df</pre>
                     Ein einziges geändertes Zeichen ergibt einen völlig anderen Hashwert. Ähnliche Passwörter verraten also nichts über ähnliche Hashwerte.</li>

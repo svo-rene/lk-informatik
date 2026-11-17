@@ -422,6 +422,13 @@ pre code, pre code[class*=language-] {
     font-size: inherit;
     text-shadow: none !important;
 }
+/* Rechnungen, Ausgaben, Daten, Bäume: kein Programmcode, daher hell */
+pre.darstellung {
+    background: var(--bg-weich) !important;
+    color: var(--text);
+    border: 1px solid var(--linie);
+    font-size: 0.9rem;
+}
 pre.schema {
     background: var(--akzent-weich) !important;
     color: var(--text);

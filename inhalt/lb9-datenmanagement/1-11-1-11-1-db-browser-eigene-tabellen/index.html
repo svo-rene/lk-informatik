@@ -93,7 +93,7 @@
                 <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
         <p><strong>Ausgangssituation:</strong> Die Tabellen <code>Trainingsgruppen</code> und <code>Mitglieder</code> aus Abschnitt 2
            (1:n-Beziehung: eine Gruppe hat mehrere Mitglieder, ein Mitglied gehört zu höchstens einer Gruppe) sollen per SQL angelegt werden.</p>
-        <pre>
+        <pre><code class="language-sql">
 CREATE TABLE Trainingsgruppen (
     TrainingsgruppeID INTEGER PRIMARY KEY,
     Bezeichnung TEXT NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE Mitglieder (
     TrainingsgruppeID INTEGER,
     FOREIGN KEY (TrainingsgruppeID) REFERENCES Trainingsgruppen (TrainingsgruppeID)
 );
-        </pre>
+        </code></pre>
         <ol>
             <li><strong>Zuerst die Tabelle ohne Fremdschlüssel anlegen (<code>Trainingsgruppen</code>).</strong> <em>Warum?</em> Der
                 Fremdschlüssel in <code>Mitglieder</code> verweist auf sie; die Zieltabelle sollte vorher existieren.</li>
@@ -163,10 +163,10 @@ CREATE TABLE Mitglieder (
             „SQL ausführen“ hinzu.
         </p>
 
-<pre>
+<pre><code class="language-sql">
 INSERT INTO Trainingsgruppen (TrainingsgruppeID, Bezeichnung, Trainer)
 VALUES (1, 'Bambini', 'Frau Weber');
-        </pre>
+        </code></pre>
 
 <h3>4.3 Als CSV-Datei importieren</h3>
 
@@ -208,7 +208,7 @@ VALUES (1, 'Bambini', 'Frau Weber');
 Teilnahmen(<u>&uarr;MitgliedID, &uarr;WettkampfID</u>, Platz)</pre>
             <ol>
                 <li><strong>Erst die Tabelle ohne Fremdschlüssel anlegen.</strong>
-<pre><code>CREATE TABLE Wettkaempfe (
+<pre><code class="language-sql">CREATE TABLE Wettkaempfe (
     WettkampfID INTEGER PRIMARY KEY,
     Bezeichnung TEXT NOT NULL,
     Datum TEXT NOT NULL
@@ -217,7 +217,7 @@ Teilnahmen(<u>&uarr;MitgliedID, &uarr;WettkampfID</u>, Platz)</pre>
                     zwar dulden, viele andere Datenbanksysteme aber nicht – und die Reihenfolge „erst das Ziel, dann der Verweis“
                     braucht man beim Einfügen ohnehin.</li>
                 <li><strong>Den zusammengesetzten Primärschlüssel als eigene Zeile schreiben.</strong>
-<pre><code>CREATE TABLE Teilnahmen (
+<pre><code class="language-sql">CREATE TABLE Teilnahmen (
     MitgliedID INTEGER,
     WettkampfID INTEGER,
     Platz INTEGER,
@@ -229,7 +229,7 @@ Teilnahmen(<u>&uarr;MitgliedID, &uarr;WettkampfID</u>, Platz)</pre>
                     <code>table "Teilnahmen" has more than one primary key</code>. Ein Primärschlüssel aus zwei Spalten ist
                     <em>ein</em> Schlüssel und wird deshalb einmal am Ende angegeben.</li>
                 <li><strong>Daten in der richtigen Reihenfolge einfügen.</strong> Angenommen, die Mitglieder 1 und 2 existieren bereits:
-<pre><code>INSERT INTO Wettkaempfe (WettkampfID, Bezeichnung, Datum)
+<pre><code class="language-sql">INSERT INTO Wettkaempfe (WettkampfID, Bezeichnung, Datum)
 VALUES (1, 'Stadtmeisterschaft', '2026-06-13');
 
 INSERT INTO Teilnahmen (MitgliedID, WettkampfID, Platz)
@@ -237,13 +237,13 @@ VALUES (1, 1, 2), (2, 1, 1);</code></pre>
                     <em>Warum diese Reihenfolge?</em> Eine Teilnahme an Wettkampf 1 darf erst gespeichert werden, wenn es
                     Wettkampf 1 gibt.</li>
                 <li><strong>Die Schlüsselregeln testen.</strong> Führe die folgenden Befehle einzeln aus:
-<pre><code>INSERT INTO Teilnahmen VALUES (99, 1, 3);   -- Mitglied 99 gibt es nicht
+<pre><code class="language-sql">INSERT INTO Teilnahmen VALUES (99, 1, 3);   -- Mitglied 99 gibt es nicht
 INSERT INTO Teilnahmen VALUES (1, 1, 4);    -- Mitglied 1 ist schon eingetragen</code></pre>
                     Der erste scheitert mit <code>FOREIGN KEY constraint failed</code> (referenzielle Integrität), der zweite mit
                     <code>UNIQUE constraint failed: Teilnahmen.MitgliedID, Teilnahmen.WettkampfID</code> (Primärschlüssel).
                     <em>Warum testen?</em> So siehst du, dass die Datenbank die Regeln wirklich überwacht.</li>
                 <li><strong>Probe mit einer Abfrage.</strong>
-<pre><code>SELECT m.Vorname, m.Nachname, w.Bezeichnung, t.Platz
+<pre><code class="language-sql">SELECT m.Vorname, m.Nachname, w.Bezeichnung, t.Platz
 FROM Teilnahmen t
 JOIN Mitglieder m   ON t.MitgliedID = m.MitgliedID
 JOIN Wettkaempfe w  ON t.WettkampfID = w.WettkampfID

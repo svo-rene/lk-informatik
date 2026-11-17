@@ -64,52 +64,52 @@ bookings(<u>booking_id</u>, &uarr;visitor_id, &uarr;attraction_id, &uarr;show_id
                 <p>Diese Übersicht enthält die wichtigsten SQL-Befehle und Konzepte, die du für die Freizeitpark-Übungen brauchst. Alle Beispiele laufen mit <code>freizeitpark.sql</code>.</p>
                 <h3>1. SELECT – Daten abfragen</h3>
                 <p><strong>SELECT [Spalten] FROM [Tabelle];</strong> – wählt bestimmte Spalten oder alle (<code>*</code>) aus einer Tabelle aus.</p>
-                <pre><code>SELECT * FROM visitors;</code></pre>
+                <pre><code class="language-sql">SELECT * FROM visitors;</code></pre>
                 <p><strong>SELECT DISTINCT [Spalte] FROM [Tabelle];</strong> – gibt nur verschiedene Werte zurück.</p>
-                <pre><code>SELECT DISTINCT ticket_type FROM tickets;</code></pre>
+                <pre><code class="language-sql">SELECT DISTINCT ticket_type FROM tickets;</code></pre>
                 <p><strong>SELECT [Spalten] FROM [Tabelle] WHERE [Bedingung];</strong> – filtert Ergebnisse nach einer Bedingung.</p>
-                <pre><code>SELECT * FROM attractions WHERE suitable_for_children = 1;</code></pre>
+                <pre><code class="language-sql">SELECT * FROM attractions WHERE suitable_for_children = 1;</code></pre>
                 <h3>2. INSERT – Daten einfügen</h3>
                 <p><strong>INSERT INTO [Tabelle] ([Spalten]) VALUES ([Werte]);</strong> – fügt neue Daten in eine Tabelle ein.</p>
-                <pre><code>INSERT INTO visitors (name, age, year_of_birth) VALUES ('Max Mustermann', 20, 2003);</code></pre>
+                <pre><code class="language-sql">INSERT INTO visitors (name, age, year_of_birth) VALUES ('Max Mustermann', 20, 2003);</code></pre>
                 <h3>3. UPDATE – Daten aktualisieren</h3>
                 <p><strong>UPDATE [Tabelle] SET [Spalte] = [neuer Wert] WHERE [Bedingung];</strong> – ändert Daten, die die Bedingung erfüllen.</p>
-                <pre><code>UPDATE tickets SET price = 30 WHERE ticket_type = 'Standard';</code></pre>
+                <pre><code class="language-sql">UPDATE tickets SET price = 30 WHERE ticket_type = 'Standard';</code></pre>
                 <h3>4. DELETE – Daten löschen</h3>
                 <p><strong>DELETE FROM [Tabelle] WHERE [Bedingung];</strong> – löscht Zeilen, die der Bedingung entsprechen. Zeilen, auf die noch ein Fremdschlüssel verweist (z.&nbsp;B. ein Besucher mit Buchungen), lassen sich bei aktiven Fremdschlüsseln nicht löschen.</p>
-                <pre><code>DELETE FROM bookings WHERE booking_id = 10;</code></pre>
+                <pre><code class="language-sql">DELETE FROM bookings WHERE booking_id = 10;</code></pre>
                 <h3>5. JOIN – Tabellen verbinden</h3>
                 <p><strong>INNER JOIN</strong> – gibt nur Zeilen zurück, zu denen es in beiden Tabellen einen passenden Partner gibt.</p>
-                <pre><code>SELECT visitors.name, tickets.ticket_type FROM visitors INNER JOIN tickets ON visitors.visitor_id = tickets.visitor_id;</code></pre>
+                <pre><code class="language-sql">SELECT visitors.name, tickets.ticket_type FROM visitors INNER JOIN tickets ON visitors.visitor_id = tickets.visitor_id;</code></pre>
                 <p><strong>LEFT JOIN</strong> – gibt alle Zeilen der linken Tabelle zurück und ergänzt passende Zeilen der rechten Tabelle (sonst NULL).</p>
-                <pre><code>SELECT visitors.name, bookings.booking_date FROM visitors LEFT JOIN bookings ON visitors.visitor_id = bookings.visitor_id;</code></pre>
+                <pre><code class="language-sql">SELECT visitors.name, bookings.booking_date FROM visitors LEFT JOIN bookings ON visitors.visitor_id = bookings.visitor_id;</code></pre>
                 <h3>6. Aggregatfunktionen – Berechnungen über Gruppen von Daten</h3>
                 <p><strong>COUNT()</strong> – zählt die Zeilen, die die Bedingung erfüllen.</p>
-                <pre><code>SELECT COUNT(*) FROM tickets WHERE ticket_type = 'VIP';</code></pre>
+                <pre><code class="language-sql">SELECT COUNT(*) FROM tickets WHERE ticket_type = 'VIP';</code></pre>
                 <p><strong>SUM()</strong> – berechnet die Summe einer Zahlenspalte.</p>
-                <pre><code>SELECT SUM(price) FROM tickets WHERE ticket_type = 'Standard';</code></pre>
+                <pre><code class="language-sql">SELECT SUM(price) FROM tickets WHERE ticket_type = 'Standard';</code></pre>
                 <p><strong>AVG()</strong> – berechnet den Durchschnitt einer Zahlenspalte.</p>
-                <pre><code>SELECT AVG(annual_visitors) FROM attractions;</code></pre>
+                <pre><code class="language-sql">SELECT AVG(annual_visitors) FROM attractions;</code></pre>
                 <p><strong>MAX()</strong> und <strong>MIN()</strong> – geben den größten bzw. kleinsten Wert zurück.</p>
-                <pre><code>SELECT MAX(price) FROM tickets;
+                <pre><code class="language-sql">SELECT MAX(price) FROM tickets;
 SELECT MIN(age) FROM visitors;</code></pre>
                 <h3>7. GROUP BY – Daten gruppieren</h3>
                 <p><strong>GROUP BY</strong> – fasst Zeilen mit gleichen Werten zu Gruppen zusammen, meist zusammen mit Aggregatfunktionen.</p>
-                <pre><code>SELECT ticket_type, COUNT(*) FROM tickets GROUP BY ticket_type;</code></pre>
+                <pre><code class="language-sql">SELECT ticket_type, COUNT(*) FROM tickets GROUP BY ticket_type;</code></pre>
                 <p><strong>HAVING</strong> – filtert Gruppen nach einer Bedingung (nach <code>GROUP BY</code>).</p>
-                <pre><code>SELECT ticket_type, COUNT(*) FROM tickets GROUP BY ticket_type HAVING COUNT(*) &gt; 2;</code></pre>
+                <pre><code class="language-sql">SELECT ticket_type, COUNT(*) FROM tickets GROUP BY ticket_type HAVING COUNT(*) &gt; 2;</code></pre>
                 <h3>8. ORDER BY – Ergebnisse sortieren</h3>
                 <p><strong>ORDER BY [Spalte] [ASC|DESC];</strong> – sortiert aufsteigend (ASC) oder absteigend (DESC).</p>
-                <pre><code>SELECT * FROM shows ORDER BY show_time DESC;</code></pre>
+                <pre><code class="language-sql">SELECT * FROM shows ORDER BY show_time DESC;</code></pre>
                 <h3>9. BETWEEN – Bereichsabfragen</h3>
                 <p><strong>WHERE [Spalte] BETWEEN [Wert1] AND [Wert2];</strong> – filtert Werte in einem Bereich (Grenzen eingeschlossen).</p>
-                <pre><code>SELECT * FROM visitors WHERE age BETWEEN 18 AND 30;</code></pre>
+                <pre><code class="language-sql">SELECT * FROM visitors WHERE age BETWEEN 18 AND 30;</code></pre>
                 <h3>10. LIKE – Musterabgleich</h3>
                 <p><strong>WHERE [Spalte] LIKE '[Muster]';</strong> – sucht nach einem Muster in einem Text. <code>%</code> steht für beliebig viele Zeichen.</p>
-                <pre><code>SELECT * FROM attractions WHERE attraction_name LIKE 'A%';</code></pre>
+                <pre><code class="language-sql">SELECT * FROM attractions WHERE attraction_name LIKE 'A%';</code></pre>
                 <h3>11. IN – Werteliste abgleichen</h3>
                 <p><strong>WHERE [Spalte] IN ([Wert1], [Wert2], …);</strong> – prüft, ob ein Wert in einer Liste vorkommt.</p>
-                <pre><code>SELECT * FROM tickets WHERE ticket_type IN ('VIP', 'Standard');</code></pre>
+                <pre><code class="language-sql">SELECT * FROM tickets WHERE ticket_type IN ('VIP', 'Standard');</code></pre>
             </details>
         </div>
 

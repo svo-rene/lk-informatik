@@ -81,7 +81,7 @@ else:
                 <li><strong>Von außen nach innen lesen:</strong> äußere Zählschleife → innere Zählschleife → Verzweigung → Tausch. <em>Warum:</em> Die Einrückung der Blöcke zeigt die Schachtelung. Was weiter innen steht, wird öfter ausgeführt.</li>
                 <li><strong>Ungenauigkeiten erkennen:</strong> In Abb. 6 heißt die Zählvariable der äußeren Schleife versehentlich j; gemeint ist i. Die Startwerte fehlen: Beide Schleifen beginnen bei 0. Die Obergrenzen sind wie bei <code>range</code> ausschließlich gemeint. <em>Warum wichtig:</em> Ein Struktogramm ist nur so eindeutig wie seine Beschriftung. Unklare Grenzen führen beim Programmieren zu Fehlern um eins.</li>
                 <li><strong>Übersetzen:</strong>
-                    <pre><code class="language-python">def bubblesort(zahlen):
+                    <pre class="ausfuehrbar"><code class="language-python">def bubblesort(zahlen):
     for i in range(len(zahlen) - 1):              # äußere Zählschleife
         for j in range(len(zahlen) - 1 - i):      # innere Zählschleife
             if zahlen[j] &gt; zahlen[j + 1]:         # Verzweigung
@@ -92,7 +92,7 @@ else:
     return zahlen</code></pre>
                 </li>
                 <li><strong>Erweitern um den Abbruch:</strong> Bubblesort mit Abbruch wiederholt Durchläufe, <em>bis</em> kein Tausch mehr stattfindet. Das ist eine <strong>fußgesteuerte Schleife</strong>: Die Bedingung wird erst nach dem Rumpf geprüft, der Rumpf läuft mindestens einmal. Im Struktogramm steht die Bedingung deshalb im unteren Balken:
-                    <pre><code>┌──────────────────────────────────────────────┐
+                    <pre class="darstellung"><code>┌──────────────────────────────────────────────┐
 │ getauscht ← falsch                           │
 │ ┌──────────────────────────────────────────┐ │
 │ │ für j von 0 bis Länge − 2                │ │
@@ -104,7 +104,7 @@ else:
 └──────────────────────────────────────────────┘</code></pre>
                 </li>
                 <li><strong>Falle beim Übersetzen:</strong> Python kennt keine fußgesteuerte Schleife. Man bildet sie mit <code>while True</code> und <code>break</code> nach:
-                    <pre><code class="language-python">def bubblesort_abbruch(zahlen):
+                    <pre class="ausfuehrbar"><code class="language-python">def bubblesort_abbruch(zahlen):
     while True:
         getauscht = False
         for j in range(len(zahlen) - 1):

@@ -23,7 +23,7 @@
                 <summary>Aufgabe 3.10.3: Sudoku <span class="niveau">AFB II–III</span></summary>
                 <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/sudoku.py</code> – neu anlegen<br><strong>Commits:</strong> nach Teil 1: <code>3.10.3 Teil 1: zahl_erlaubt mit 3×3-Block</code> · nach Teil 2: <code>3.10.3 Teil 2: fuelle_sudoku löst das Rätsel</code> · nach Teil 3: <code>3.10.3 Teil 3: Prüffunktion für fertige Felder</code> · nach Teil 4 und 5: <code>3.10.3 Teil 5: Aufrufe gezählt</code></p>
                 <p>In einem 9×9-Sudoku kommt jede Ziffer von 1 bis 9 in jeder Zeile, jeder Spalte und jedem 3×3-Block genau einmal vor. Freie Felder sind mit 0 gespeichert.</p>
-                <pre><code class="language-python">raetsel = [
+                <pre class="ausfuehrbar"><code class="language-python">raetsel = [
     [5, 3, 0, 0, 7, 0, 0, 0, 0],
     [6, 0, 0, 1, 9, 5, 0, 0, 0],
     [0, 9, 8, 0, 0, 0, 0, 6, 0],
@@ -62,7 +62,7 @@ def zeige(feld):
                 <summary>Aufgabe 3.10.4: Landkarte färben <span class="niveau">AFB II–III</span></summary>
                 <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/landkarte.py</code> – neu anlegen<br><strong>Commits:</strong> nach Teil 2: <code>3.10.4 Teil 2: Färbung mit 3 und 4 Farben getestet</code></p>
                 <p>Die 16 Bundesländer sollen so gefärbt werden, dass benachbarte Länder verschiedene Farben haben. Die Nachbarschaft ist als Dictionary gegeben.</p>
-                <pre><code class="language-python">NACHBARN = {
+                <pre class="ausfuehrbar"><code class="language-python">NACHBARN = {
     "SH": ["HH", "NI", "MV"], "HH": ["SH", "NI"], "MV": ["SH", "NI", "BB"],
     "NI": ["SH", "HH", "MV", "BB", "ST", "TH", "HE", "NW", "HB"], "HB": ["NI"],
     "BB": ["MV", "NI", "ST", "SN", "BE"], "BE": ["BB"], "ST": ["NI", "BB", "SN", "TH"],
@@ -122,7 +122,7 @@ print(raetsel(3, []))</code></pre>
                 <p><strong>4 Abwandeln:</strong></p>
                 <ol type="a"><li>Ändere die Funktion so, dass sie Folgen aus den Ziffern 0, 1 und 2 zählt, in denen keine zwei <em>gleichen</em> Ziffern nebeneinander stehen. Für n = 3 sind es 12.</li><li>Verbiete mit den Ziffern 0 und 1 zwei gleiche Ziffern nebeneinander. Welche Folgen bleiben für n = 3 übrig?</li></ol>
                 <p><strong>5 Fehler finden:</strong> <code>sammeln</code> soll alle gültigen Folgen in einer Liste speichern, am Ende stehen aber fünf leere Listen darin. Setze einen Haltepunkt auf <code>ergebnisse.append(folge)</code> und beobachte <code>ergebnisse</code>, während danach <code>folge.pop()</code> läuft. Was passiert mit den gespeicherten Folgen? Korrigiere den Fehler.</p>
-                <pre><code class="language-python">def sammeln(n, folge, ergebnisse):
+                <pre class="ausfuehrbar"><code class="language-python">def sammeln(n, folge, ergebnisse):
     if len(folge) == n:
         ergebnisse.append(folge)
         return

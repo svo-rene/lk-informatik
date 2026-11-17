@@ -12,7 +12,7 @@
 
 <p>Angenommene CSV-Datei <code>sportveranstaltung.csv</code>:</p>
 
-<pre><code>Name;Verein;Zeit;Stadt
+<pre class="darstellung"><code>Name;Verein;Zeit;Stadt
 Anna Müller;Lauftreff Dresden;42;Dresden
 Ben Schneider;SV Chemnitz;45;Chemnitz
 Clara Schulz;LG Leipzig;40;Leipzig
@@ -29,7 +29,7 @@ Finn Neumann;Lauftreff Dresden;38;Dresden
     auf die Sportdaten überträgst. Alle Beispiele beginnen mit demselben Einlesen:
 </p>
 
-<pre><code>import csv
+<pre><code class="language-python">import csv
 
 schueler = []
 with open('schueler.csv', newline='', encoding='utf-8-sig') as csvfile:
@@ -43,7 +43,7 @@ with open('schueler.csv', newline='', encoding='utf-8-sig') as csvfile:
 <p><strong>Ausgangssituation:</strong> Aus <code>schueler.csv</code> soll die Durchschnittsnote aller 10 Schüler*innen berechnet werden.
    Nach dem Einlesen sind aber alle Werte Texte.</p>
 <h3>Beispiel 1: Texte in Zahlen umwandeln – int() und float()</h3>
-<pre><code>print(schueler[0])                       # {'Name': 'Anna', 'Alter': '17', 'Note': '1.3'}
+<pre><code class="language-python">print(schueler[0])                       # {'Name': 'Anna', 'Alter': '17', 'Note': '1.3'}
 print(schueler[0]['Alter'] + '1')        # 171   – Text + Text wird aneinandergehängt!
 print(int(schueler[0]['Alter']) + 1)     # 18    – erst umwandeln, dann rechnen
 print(float(schueler[0]['Note']) * 2)    # 2.6
@@ -94,7 +94,7 @@ print(round(summe / len(schueler), 2))</code></pre>
 
 <h3>Beispiel 2: Den besten Wert finden</h3>
 
-<pre><code>beste = schueler[0]                      # Startwert: der erste Datensatz
+<pre><code class="language-python">beste = schueler[0]                      # Startwert: der erste Datensatz
 for s in schueler:
     if float(s['Note']) &lt; float(beste['Note']):
         beste = s
@@ -110,7 +110,7 @@ print(beste['Name'], beste['Note'])      # Eva 1.0</code></pre>
 
 <h3>Beispiel 3: Filtern</h3>
 
-<pre><code>for s in schueler:
+<pre><code class="language-python">for s in schueler:
     if float(s['Note']) &lt; 2.0:
         print(s['Name'], s['Note'])
 # Ausgabe:
@@ -127,7 +127,7 @@ print(beste['Name'], beste['Note'])      # Eva 1.0</code></pre>
 
 <h3>Beispiel 4: Gruppieren und Zählen</h3>
 
-<pre><code>anzahl_je_alter = {}
+<pre><code class="language-python">anzahl_je_alter = {}
 namen_je_alter = {}
 for s in schueler:
     alter = s['Alter']
@@ -199,7 +199,7 @@ print("Nicht gewertet:", ", ".join(nicht_gewertet))</code></pre>
         <li><strong>Ausgeben</strong> – <code>:.1f</code> rundet für die Anzeige auf eine Nachkommastelle (41,666… wird 41.7).</li>
     </ol>
     <p><strong>Ergebnis:</strong></p>
-    <pre><code>1. Lauftreff Dresden: 4 Teilnehmende, Schnitt 40.5 min, Schnellste Person: Finn Neumann (38 min)
+    <pre class="darstellung"><code>1. Lauftreff Dresden: 4 Teilnehmende, Schnitt 40.5 min, Schnellste Person: Finn Neumann (38 min)
 2. LG Leipzig: 3 Teilnehmende, Schnitt 41.7 min, Schnellste Person: Clara Schulz (40 min)
 3. SV Chemnitz: 2 Teilnehmende, Schnitt 46.0 min, Schnellste Person: Ben Schneider (45 min)
 Nicht gewertet: SV Zwickau</code></pre>
@@ -236,7 +236,7 @@ Nicht gewertet: SV Zwickau</code></pre>
 
 <h3>Beispiel: Teilnehmende mit bestimmtem Namensanfang finden</h3>
 
-<pre><code>for row in reader:
+<pre><code class="language-python">for row in reader:
     if row['Name'].startswith('A'):
         print(row['Name'])     # Anna Müller</code></pre>
 
