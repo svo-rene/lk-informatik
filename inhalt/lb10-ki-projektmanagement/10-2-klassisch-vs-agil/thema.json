@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Vergleich des klassischen und agilen Projektmanagements": [
+      "Ich kann das Vorgehen im klassischen und im agilen Projektmanagement beschreiben (z. B. Projektstrukturplan und Gantt-Diagramm bzw. Scrum und Kanban).",
+      "Ich kann klassisches und agiles Projektmanagement vergleichen und begründen, welches Vorgehen zu einem Projekt passt."
+    ]
+  }
 }

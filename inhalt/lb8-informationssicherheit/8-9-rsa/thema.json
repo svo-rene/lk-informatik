@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Einsatzgebiete": [
+      "Ich kann Einsatzgebiete eines asymmetrischen Verfahrens (z. B. RSA) nennen und begründen, warum es meist nur kurze Daten wie Schlüssel oder Hashwerte verarbeitet."
+    ],
+    "Sicherheit": [
+      "Ich kann ein asymmetrisches Verfahren mit kleinen Zahlen durchführen (z. B. RSA) und erklären, auf welchem mathematischen Problem seine Sicherheit beruht.",
+      "Ich kann beurteilen, warum ein Lehrbuchverfahren ohne große Schlüssel und Zufallsanteil unsicher ist."
+    ]
+  }
 }

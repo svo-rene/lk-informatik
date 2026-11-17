@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Liste": [
+      "Ich kann erklären, wie eine Liste als Array im Speicher liegt und warum der Zugriff über den Index schnell ist.",
+      "Ich kann begründen, warum Einfügen und Löschen am Anfang oder in der Mitte eines Arrays O(n) kosten."
+    ]
+  }
 }

@@ -10,5 +10,10 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Auswertung verknüpfter Daten mit SQL": [
+      "Ich kann eine in Worten gestellte Frage in eine SQL-Abfrage mit passend verknüpften Bedingungen übersetzen."
+    ]
+  }
 }

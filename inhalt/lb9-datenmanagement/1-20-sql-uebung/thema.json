@@ -10,5 +10,11 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Auswertung verknüpfter Daten mit SQL": [
+      "Ich kann für eine vorgegebene Datenbank komplexere Fragen mit SQL beantworten und dabei Joins über mehrere Tabellen, Gruppierung und Filter kombinieren.",
+      "Ich kann den Datenbestand einer Datenbank mit SQL ändern."
+    ]
+  }
 }

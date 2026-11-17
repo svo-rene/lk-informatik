@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Stapel und Schlange": [
+      "Ich kann das FIFO-Prinzip der Schlange erklären und Anwendungsbeispiele nennen.",
+      "Ich kann eine Schlange mit ihren Grundoperationen implementieren (z. B. mit einer verketteten Liste) und begründen, welche Umsetzung alle Operationen in O(1) erlaubt."
+    ]
+  }
 }

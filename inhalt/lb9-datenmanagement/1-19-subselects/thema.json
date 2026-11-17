@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Auswertung verknüpfter Daten mit SQL": [
+      "Ich kann Abfragen mit Unterabfragen formulieren, deren Ergebnis die äußere Abfrage weiterverwendet.",
+      "Ich kann entscheiden, ob eine Unterabfrage einen oder mehrere Werte liefert, und dann = oder IN verwenden."
+    ]
+  }
 }

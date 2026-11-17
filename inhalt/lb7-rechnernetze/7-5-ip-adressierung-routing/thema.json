@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Adressierung und Routing mittels Internetprotokoll": [
+      "Ich kann den Aufbau von IP-Adressen (IPv4 und IPv6) mit Netz- und Hostanteil erklären und private von öffentlichen Adressen unterscheiden.",
+      "Ich kann erklären, wann ein Host ein Paket direkt zustellt und wann er es an sein Standard-Gateway schickt.",
+      "Ich kann mit einer Routingtabelle entscheiden, wohin ein Router ein Paket weiterleitet, und die Entscheidung begründen."
+    ]
+  }
 }

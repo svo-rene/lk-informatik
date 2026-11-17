@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Datensicherung": [
+      "Ich kann Sicherungsarten (Voll-, differenzielle und inkrementelle Sicherung) unterscheiden und Speicherbedarf und Wiederherstellung berechnen.",
+      "Ich kann für eine gegebene Situation ein Datensicherungskonzept entwerfen und begründen (z. B. nach der 3-2-1-Regel).",
+      "Ich kann erklären, warum Redundanz wie RAID keine Datensicherung ersetzt."
+    ]
+  }
 }

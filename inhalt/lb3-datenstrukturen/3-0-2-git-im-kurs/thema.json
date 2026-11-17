@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Kennen des Konzepts der Versionsverwaltung bei der Softwareentwicklung": [
+      "Ich kann erklären, wie sich ein Commit vom bloßen Speichern unterscheidet.",
+      "Ich kann meine Arbeit regelmäßig mit aussagekräftigen Commits versionieren und den Verlauf nutzen.",
+      "Ich kann begründen, welche Daten nicht in ein Repository gehören."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Visualisierung von Daten": [
+      "Ich kann für eine Fragestellung einen passenden Diagrammtyp auswählen und begründen.",
+      "Ich kann Daten als vollständig beschriftetes Diagramm darstellen (z. B. mit einer Tabellenkalkulation)."
+    ]
+  }
 }

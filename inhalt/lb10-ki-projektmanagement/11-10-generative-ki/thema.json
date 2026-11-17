@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Sich positionieren zur Nachvollziehbarkeit, Erklärbarkeit, Zuverlässigkeit und Bias von Künstlicher Intelligenz": [
+      "Ich kann begründet Stellung nehmen, warum Antworten generativer KI überzeugend klingen, aber falsch oder einseitig sein können.",
+      "Ich kann Regeln für einen verantwortungsvollen Umgang mit generativer KI begründen."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Komplexitätsklassen": [
+      "Ich kann erklären, was die Zeitkomplexität eines Algorithmus beschreibt.",
+      "Ich kann den Aufwand eines Algorithmus über die Zahl der Grundoperationen (z. B. Vergleiche) bestimmen und ihr Wachstum bei größerem n einschätzen."
+    ]
+  }
 }

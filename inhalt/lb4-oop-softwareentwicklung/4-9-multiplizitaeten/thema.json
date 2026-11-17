@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Aggregation und Assoziation": [
+      "Ich kann angeben, wie viele Objekte an einer Beziehung beteiligt sein können (Multiplizität), und das aus einer Beschreibung oder aus Code ablesen.",
+      "Ich kann eine Beziehung mit ihrer Multiplizität in Code umsetzen (z. B. als einzelnen Verweis oder als Liste) und dabei Unter- und Obergrenzen einhalten."
+    ]
+  }
 }

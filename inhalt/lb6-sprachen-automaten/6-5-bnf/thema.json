@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Backus-Naur-Form": [
+      "Ich kann Grammatiken in Backus-Naur-Form lesen und für einfache Sprachen selbst aufschreiben, auch mit rekursiven Regeln für Wiederholungen.",
+      "Ich kann mit einer Grammatik in Backus-Naur-Form ein Wort ableiten."
+    ]
+  }
 }

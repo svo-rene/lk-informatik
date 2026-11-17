@@ -14,5 +14,16 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Überblick zu den Teilbereichen": [
+      "Ich kann wissensbasierte und datenbasierte KI unterscheiden und begründen, wofür sich welcher Ansatz eignet."
+    ],
+    "Symbolische KI: Anwendung, Logik": [
+      "Ich kann erklären, wie ein wissensbasiertes System aus Fakten und Regeln durch logisches Schließen Folgerungen zieht, und Anwendungen nennen."
+    ],
+    "Maschinelles Lernen: überwacht, unüberwacht, bestärkend": [
+      "Ich kann überwachtes, unüberwachtes und bestärkendes Lernen unterscheiden und Anwendungen zuordnen."
+    ]
+  }
 }

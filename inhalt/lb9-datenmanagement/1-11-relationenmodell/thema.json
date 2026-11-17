@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Relationenmodell": [
+      "Ich kann ein ER-Modell in ein Relationenmodell mit Primär- und Fremdschlüsseln überführen und dabei 1:1-, 1:n- und m:n-Beziehungen richtig umsetzen.",
+      "Ich kann aus einem Relationenmodell das zugehörige ER-Modell ableiten."
+    ]
+  }
 }

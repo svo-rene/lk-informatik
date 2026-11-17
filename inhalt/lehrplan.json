@@ -1,8 +1,5 @@
 {
  "quelle": "Lehrplan Gymnasium Informatik Sachsen 2022, Jahrgangsstufen 11/12 Leistungskurs, linke Spalte (verbindliche Lernziele und Lerninhalte)",
- "anzeigen": [
-  "1"
- ],
  "lernbereiche": [
   {
    "lb": "1",
@@ -169,7 +166,8 @@
        "text": "Graph",
        "themen": [
         "lb3-datenstrukturen/3-7-graph",
-        "lb3-datenstrukturen/3-8-graph-code"
+        "lb3-datenstrukturen/3-8-graph-code",
+        "lb3-datenstrukturen/3-9-dijkstra"
        ]
       },
       {
@@ -855,7 +853,6 @@
       {
        "text": "Brute-Force-Methode",
        "themen": [
-        "lb8-informationssicherheit/8-3-symmetrische-verfahren",
         "lb8-informationssicherheit/8-6-kryptoanalyse"
        ]
       },
@@ -1097,8 +1094,7 @@
         "lb10-ki-projektmanagement/11-5-entscheidungsbaum",
         "lb10-ki-projektmanagement/11-6-k-naechster-nachbar",
         "lb10-ki-projektmanagement/11-7-k-means",
-        "lb10-ki-projektmanagement/11-8-neuronale-netze",
-        "lb10-ki-projektmanagement/11-9-genetische-algorithmen"
+        "lb10-ki-projektmanagement/11-8-neuronale-netze"
        ]
       }
      ]
@@ -1110,8 +1106,7 @@
        "text": "Sammeln und Aufbereiten der Daten",
        "themen": [
         "lb10-ki-projektmanagement/11-3-ki-modelle-optimieren",
-        "lb10-ki-projektmanagement/10-4-tutorial-jupyter",
-        "lb10-ki-projektmanagement/10-5-ki-projektmanagement"
+        "lb10-ki-projektmanagement/10-4-tutorial-jupyter"
        ]
       },
       {

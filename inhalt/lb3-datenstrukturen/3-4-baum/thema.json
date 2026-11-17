@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Baum": [
+      "Ich kann den Aufbau eines Baums mit den Begriffen Wurzel, Knoten, Kante, Kind, Blatt und Höhe beschreiben.",
+      "Ich kann einen Baum als Knoten mit Kindern implementieren und Eigenschaften rekursiv berechnen (z. B. Höhe, Anzahl der Blätter)."
+    ]
+  }
 }

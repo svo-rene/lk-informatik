@@ -14,5 +14,13 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Maschinelles Lernen: überwacht, unüberwacht, bestärkend": [
+      "Ich kann den Aufbau eines künstlichen neuronalen Netzes beschreiben und erklären, wie es durch Anpassen der Gewichte lernt."
+    ],
+    "Sich positionieren zur Nachvollziehbarkeit, Erklärbarkeit, Zuverlässigkeit und Bias von Künstlicher Intelligenz": [
+      "Ich kann begründet Stellung nehmen, wie nachvollziehbar und zuverlässig die Entscheidungen eines neuronalen Netzes sind."
+    ]
+  }
 }

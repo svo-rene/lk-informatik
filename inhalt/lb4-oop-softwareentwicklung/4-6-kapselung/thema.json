@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Kapselung": [
+      "Ich kann das Prinzip der Kapselung erklären und begründen, warum die inneren Daten eines Objekts vor direktem Zugriff geschützt werden.",
+      "Ich kann die Sichtbarkeit von Attributen und Methoden festlegen und in einem Modell ablesen (z. B. + und − im UML-Klassendiagramm).",
+      "Ich kann den Zugriff auf geschützte Attribute über Methoden mit Prüfung ermöglichen (z. B. Getter und Setter)."
+    ]
+  }
 }

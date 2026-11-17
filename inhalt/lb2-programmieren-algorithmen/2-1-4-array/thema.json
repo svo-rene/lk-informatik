@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Feld": [
+      "Ich kann erklären, wie ein Feld (Array) mehrere Werte unter einem Namen speichert und wie man über den Index auf die Elemente zugreift.",
+      "Ich kann ein Feld mit einer Schleife vollständig durchlaufen, um Werte zu suchen, zu zählen oder zu verändern."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Auswertung verknüpfter Daten mit SQL": [
+      "Ich kann mit SELECT und FROM gezielt Spalten einer Tabelle abfragen, umbenennen und berechnete Spalten bilden.",
+      "Ich kann Abfrageergebnisse mit ORDER BY nach einem oder mehreren Kriterien sortieren."
+    ]
+  }
 }

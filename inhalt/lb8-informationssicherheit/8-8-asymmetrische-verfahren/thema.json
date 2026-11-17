@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Grundprinzipien": [
+      "Ich kann das Grundprinzip asymmetrischer Verfahren mit öffentlichem und privatem Schlüssel erklären und angeben, welcher Schlüssel beim Verschlüsseln und beim Signieren verwendet wird.",
+      "Ich kann erklären, warum asymmetrische Verfahren auf Einwegfunktionen mit Falltür beruhen, und ihre Vor- und Nachteile gegenüber symmetrischen Verfahren beurteilen."
+    ]
+  }
 }

@@ -14,5 +14,10 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Entwurf endlicher Automaten": [
+      "Ich kann erkennen, ob in einem Automaten Übergänge fehlen, und ihn so vervollständigen, dass er dieselbe Sprache akzeptiert (z. B. mit einem Fangzustand)."
+    ]
+  }
 }

@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Struktur von Unterprogrammen": [
+      "Ich kann erklären, was ein Unterprogramm ist und warum man Programme in Unterprogramme gliedert.",
+      "Ich kann Funktionen mit Rückgabewert und Prozeduren ohne Rückgabewert unterscheiden und selbst schreiben."
+    ],
+    "Verwendung von Parametern": [
+      "Ich kann Unterprogramme mit Parametern definieren und beim Aufruf passende Argumente übergeben."
+    ]
+  }
 }

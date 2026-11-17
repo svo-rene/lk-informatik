@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Graph": [
+      "Ich kann einen Graphen mit den Begriffen Knoten, Kante, gerichtet, gewichtet, Weg und Zyklus beschreiben und einen Baum als besonderen Graphen einordnen.",
+      "Ich kann einen Graphen als Adjazenzmatrix und als Adjazenzliste darstellen und zwischen den Darstellungen umwandeln."
+    ]
+  }
 }

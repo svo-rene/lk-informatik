@@ -14,5 +14,10 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Sich positionieren zur Nachvollziehbarkeit, Erklärbarkeit, Zuverlässigkeit und Bias von Künstlicher Intelligenz": [
+      "Ich kann erklären, warum ein Sprachmodell wahrscheinliche statt wahre Antworten erzeugt, und begründet Stellung nehmen, wie zuverlässig seine Antworten sind."
+    ]
+  }
 }

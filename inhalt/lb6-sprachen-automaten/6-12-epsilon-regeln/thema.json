@@ -14,5 +14,10 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Übertragen der Kenntnisse auf die wechselseitige Überführung zwischen Grammatiken und Automaten bei regulären Sprachen": [
+      "Ich kann eine reguläre Grammatik mit ε-Regeln in eine gleichwertige reguläre Grammatik ohne ε-Regeln umformen."
+    ]
+  }
 }

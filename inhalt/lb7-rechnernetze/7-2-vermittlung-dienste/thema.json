@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "zentrale und dezentrale Netzwerkdienste": [
+      "Ich kann zentrale und dezentrale Netzwerkdienste unterscheiden, Beispiele zuordnen und Vor- und Nachteile (z. B. Ausfallsicherheit, Datenschutz) nennen.",
+      "Ich kann das Client-Server-Prinzip und das Peer-to-Peer-Prinzip erklären und voneinander abgrenzen."
+    ],
+    "Vermittlungsverfahren": [
+      "Ich kann Leitungs-, Nachrichten- und Paketvermittlung beschreiben und erklären, warum das Internet mit Paketvermittlung arbeitet."
+    ]
+  }
 }

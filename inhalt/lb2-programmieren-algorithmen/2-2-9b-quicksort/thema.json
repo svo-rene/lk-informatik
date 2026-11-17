@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Divide-and-Conquer": [
+      "Ich kann erklären, wie ein Teile-und-herrsche-Verfahren eine Liste aufteilt und die Teile rekursiv löst (z. B. Quicksort mit Pivotelement)."
+    ],
+    "Nachweis der Komplexität": [
+      "Ich kann die Laufzeit eines Sortierverfahrens im besten und im schlechtesten Fall begründen und angeben, wann der schlechteste Fall eintritt.",
+      "Ich kann effiziente Sortierverfahren nach Laufzeit und Speicherbedarf vergleichen (z. B. Mergesort und Quicksort)."
+    ]
+  }
 }

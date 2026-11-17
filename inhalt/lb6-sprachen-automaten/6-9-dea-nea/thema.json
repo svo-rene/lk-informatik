@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Unterscheidung von Automatentypen": [
+      "Ich kann deterministische und nichtdeterministische endliche Automaten unterscheiden.",
+      "Ich kann weitere Automatentypen (z. B. Kellerautomat, Turingmaschine) nach ihrem Speicher unterscheiden und den Sprachklassen der Chomsky-Hierarchie zuordnen."
+    ],
+    "Prüfen und Ableiten von Wörtern": [
+      "Ich kann prüfen, ob ein nichtdeterministischer Automat ein Wort akzeptiert, auch wenn er ε-Übergänge hat."
+    ]
+  }
 }

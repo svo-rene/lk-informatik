@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Backtracking": [
+      "Ich kann das Prinzip des Backtracking (vorwärts gehen, Sackgasse erkennen, Entscheidung zurücknehmen) erklären.",
+      "Ich kann Backtracking als Tiefensuche in einem Baum beschreiben und an einem Beispiel durchführen."
+    ]
+  }
 }

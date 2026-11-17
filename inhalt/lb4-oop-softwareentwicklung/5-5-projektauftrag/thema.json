@@ -10,5 +10,10 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Gestalten einer Problemlösung mittels objektorientierten Paradigmas": [
+      "Ich kann für ein selbst gewähltes Problem ein objektorientiertes Modell entwerfen und als lauffähiges Programm umsetzen."
+    ]
+  }
 }

@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Sich positionieren zur Nachvollziehbarkeit, Erklärbarkeit, Zuverlässigkeit und Bias von Künstlicher Intelligenz": [
+      "Ich kann erklären, wie Bias in KI-Systemen entsteht, und begründet Stellung nehmen, warum KI-Ergebnisse nicht objektiv sind."
+    ],
+    "Beurteilen der gesellschaftlichen Auswirkungen durch Anwendungen der Künstlichen Intelligenz": [
+      "Ich kann gesellschaftliche Auswirkungen von KI-Anwendungen (z. B. auf Datenschutz, Urheberrecht, Arbeitsmarkt) beurteilen.",
+      "Ich kann Möglichkeiten der Regulierung von KI beschreiben und bewerten."
+    ]
+  }
 }

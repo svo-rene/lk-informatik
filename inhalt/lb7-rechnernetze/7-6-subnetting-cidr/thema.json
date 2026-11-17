@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Netzwerksegmentierung": [
+      "Ich kann erklären, warum man Netze in Subnetze aufteilt.",
+      "Ich kann zu einer IP-Adresse mit Subnetzmaske bzw. Präfixlänge Netzadresse, Broadcast-Adresse und Anzahl nutzbarer Hosts bestimmen und prüfen, ob zwei Hosts im selben Subnetz liegen.",
+      "Ich kann einen Adressbereich nach vorgegebenem Bedarf in passende Subnetze aufteilen (z. B. mit VLSM)."
+    ]
+  }
 }

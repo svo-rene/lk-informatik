@@ -19,5 +19,12 @@
       "titel": "Zeiger-Werkstatt",
       "zusatz": true
     }
-  ]
+  ],
+  "kann": {
+    "Liste": [
+      "Ich kann den Aufbau einer verketteten Liste aus Knoten und Verweisen erklären und zeichnen.",
+      "Ich kann Grundoperationen einer verketteten Liste (z. B. Anhängen, Durchlaufen, Einfügen, Löschen) implementieren.",
+      "Ich kann Array und verkettete Liste nach dem Aufwand ihrer Operationen vergleichen."
+    ]
+  }
 }

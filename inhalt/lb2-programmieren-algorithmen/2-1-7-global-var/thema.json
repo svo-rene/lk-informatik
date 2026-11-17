@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Struktur von Unterprogrammen": [
+      "Ich kann lokale und globale Variablen unterscheiden und ihren Gültigkeitsbereich angeben.",
+      "Ich kann begründen, warum Unterprogramme Daten besser über Parameter und Rückgabewerte austauschen als über globale Variablen."
+    ]
+  }
 }

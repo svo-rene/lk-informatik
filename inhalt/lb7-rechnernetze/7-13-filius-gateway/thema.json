@@ -10,5 +10,13 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Adressierung und Routing mittels Internetprotokoll": [
+      "Ich kann mit der Subnetzmaske begründen, ob zwei Rechner direkt kommunizieren können oder einen Router brauchen."
+    ],
+    "Anwenden der Kenntnisse über Netzwerke auf die praktische Realisierung eines Netzwerkes": [
+      "Ich kann zwei Netze über einen Router verbinden, die Geräte passend adressieren (inkl. Standard-Gateway) und die Verbindung testen (z. B. in Filius mit ping)."
+    ]
+  }
 }

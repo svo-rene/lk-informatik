@@ -14,5 +14,10 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Maschinelles Lernen: überwacht, unüberwacht, bestärkend": [
+      "Ich kann an einem Verfahren (z. B. k-NN) erklären, wie ein neuer Datenpunkt anhand bekannter Trainingsdaten klassifiziert wird und warum die Merkmale dafür vergleichbar skaliert sein müssen."
+    ]
+  }
 }

@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Rekursion und Iteration": [
+      "Ich kann Iteration und Rekursion unterscheiden und erklären, dass eine rekursive Lösung einen Basisfall und einen Rekursionsschritt braucht.",
+      "Ich kann ein Problem sowohl iterativ als auch rekursiv implementieren.",
+      "Ich kann den Ablauf einer Rekursion (z. B. mit dem Aufrufstapel) nachvollziehen und erklären, warum sie ohne erreichbaren Basisfall nicht endet."
+    ]
+  }
 }

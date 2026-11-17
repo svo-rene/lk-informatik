@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Einblick gewinnen in die Grundlagen der Softwarearchitektur": [
+      "Ich kann begründen, warum größere Programme in Module mit klar abgegrenzten Aufgaben aufgeteilt werden.",
+      "Ich kann die Trennung von Logik, Darstellung und Ablaufsteuerung erklären (z. B. nach dem MVC-Muster) und Programmteile diesen Aufgaben zuordnen."
+    ]
+  }
 }

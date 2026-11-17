@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Entwurf endlicher Automaten": [
+      "Ich kann zu einem nichtdeterministischen Automaten einen gleichwertigen deterministischen Automaten konstruieren (z. B. mit der Potenzmengenkonstruktion).",
+      "Ich kann begründen, dass deterministische und nichtdeterministische endliche Automaten dieselben Sprachen erkennen."
+    ]
+  }
 }

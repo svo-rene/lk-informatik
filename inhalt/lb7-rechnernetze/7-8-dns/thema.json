@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Namensauflösung": [
+      "Ich kann den hierarchischen Aufbau von Domainnamen erklären und beschreiben, wie ein Name schrittweise in eine IP-Adresse aufgelöst wird.",
+      "Ich kann erklären, wozu Zwischenspeichern (Caching) bei der Namensauflösung dient und welche Eintragstypen man für welchen Zweck braucht."
+    ]
+  }
 }

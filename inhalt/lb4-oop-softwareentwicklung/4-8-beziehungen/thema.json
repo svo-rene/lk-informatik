@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Aggregation und Assoziation": [
+      "Ich kann Assoziation und Aggregation erklären und für zwei Klassen begründet entscheiden, welche Beziehung vorliegt.",
+      "Ich kann Beziehungen zwischen Klassen darstellen (z. B. im UML-Klassendiagramm) und als Verweise zwischen Objekten umsetzen."
+    ]
+  }
 }

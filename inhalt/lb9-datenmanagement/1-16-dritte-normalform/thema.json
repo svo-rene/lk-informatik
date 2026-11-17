@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Normalisierungen": [
+      "Ich kann transitive Abhängigkeiten erkennen und eine Relation in die dritte Normalform überführen.",
+      "Ich kann eine Ausgangstabelle schrittweise bis zur dritten Normalform normalisieren und prüfen, ob sich die Ausgangsdaten wieder zusammensetzen lassen."
+    ]
+  }
 }

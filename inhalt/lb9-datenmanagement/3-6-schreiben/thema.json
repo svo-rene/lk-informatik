@@ -14,5 +14,13 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Datei": [
+      "Ich kann Ergebnisse aus einem Programm in eine Datei schreiben."
+    ],
+    "Kennen von Möglichkeiten zum Datenaustausch über standardisierte Datenformate": [
+      "Ich kann Daten in einem standardisierten Format (z. B. CSV) speichern, sodass andere Programme sie weiterverarbeiten können."
+    ]
+  }
 }

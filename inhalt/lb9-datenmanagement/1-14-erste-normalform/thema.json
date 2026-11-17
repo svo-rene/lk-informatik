@@ -14,5 +14,10 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Normalisierungen": [
+      "Ich kann prüfen, ob eine Relation in der ersten Normalform ist, und sie gegebenenfalls in die erste Normalform überführen."
+    ]
+  }
 }

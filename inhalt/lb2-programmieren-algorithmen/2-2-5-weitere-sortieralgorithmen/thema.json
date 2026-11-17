@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Nachweis der Komplexität": [
+      "Ich kann weitere einfache Sortierverfahren (z. B. Insertionsort, Selectionsort) beschreiben und ihre Komplexität im besten und schlechtesten Fall begründen.",
+      "Ich kann einfache Sortierverfahren nach Vergleichen, Vertauschungen und Eignung für bestimmte Daten (z. B. fast sortierte Listen) vergleichen."
+    ]
+  }
 }

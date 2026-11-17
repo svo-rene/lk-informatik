@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Arbeitstechniken des Projektmanagements": [
+      "Ich kann erklären, was ein Projekt ausmacht und wie Zeit, Kosten und Qualität voneinander abhängen.",
+      "Ich kann Arbeitstechniken des Projektmanagements (z. B. Stakeholderanalyse, Risikomanagement, Kreativitätstechniken) beschreiben und an einem Beispiel anwenden."
+    ]
+  }
 }

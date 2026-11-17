@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Auswertung verknüpfter Daten mit SQL": [
+      "Ich kann Daten aus mehreren Tabellen über Primär- und Fremdschlüssel mit einem JOIN verknüpfen.",
+      "Ich kann erklären, wann ein INNER JOIN und wann ein LEFT JOIN das gewünschte Ergebnis liefert."
+    ]
+  }
 }

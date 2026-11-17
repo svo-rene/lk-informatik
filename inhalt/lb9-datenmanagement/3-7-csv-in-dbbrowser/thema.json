@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Auswertung verknüpfter Daten mit SQL": [
+      "Ich kann Daten aus einer Datei in eine Datenbank übernehmen und mit SQL filtern und auswerten.",
+      "Ich kann begründen, ob Daten besser vor dem Import oder erst in der Datenbank bereinigt werden."
+    ]
+  }
 }

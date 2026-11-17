@@ -10,5 +10,13 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Entity-Relationship-Modell": [
+      "Ich kann für eine neue Problemstellung ein vollständiges ER-Modell mit begründeten Kardinalitäten erstellen."
+    ],
+    "Relationenmodell": [
+      "Ich kann für eine neue Problemstellung ein Relationenmodell entwickeln und die Anzahl der benötigten Relationen begründen."
+    ]
+  }
 }

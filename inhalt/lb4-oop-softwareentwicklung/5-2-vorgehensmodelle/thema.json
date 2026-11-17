@@ -14,5 +14,17 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "klassische Softwareentwicklung": [
+      "Ich kann klassische Vorgehensmodelle beschreiben (z. B. Wasserfall- und V-Modell) und angeben, wann dort was geprüft wird."
+    ],
+    "agile Softwareentwicklung": [
+      "Ich kann das Vorgehen in der agilen Softwareentwicklung beschreiben (z. B. Scrum) und es klassischen Modellen gegenüberstellen.",
+      "Ich kann begründen, welches Vorgehensmodell zu einem gegebenen Projekt passt."
+    ],
+    "Anwenden von Methoden der agilen Softwareentwicklung": [
+      "Ich kann Anforderungen als prüfbare User Stories mit Akzeptanzkriterien formulieren."
+    ]
+  }
 }

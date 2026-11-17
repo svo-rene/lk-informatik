@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Kennen des Konzepts der Versionsverwaltung bei der Softwareentwicklung": [
+      "Ich kann beschreiben, wie ein Team mit einer Versionsverwaltung parallel arbeitet und Änderungen nachvollziehbar zusammenführt (z. B. mit Branches, Commits und Pull Requests in Git).",
+      "Ich kann einen Versionsverlauf mit Verzweigungen und Zusammenführungen lesen (z. B. einen Commit-Graphen).",
+      "Ich kann erklären, wie Konflikte beim Zusammenführen entstehen und wie ein Team sie vermeiden kann."
+    ]
+  }
 }

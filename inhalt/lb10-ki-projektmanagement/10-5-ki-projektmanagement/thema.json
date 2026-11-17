@@ -6,5 +6,19 @@
       "datei": "index.html",
       "titel": "Einführung"
     }
-  ]
+  ],
+  "kann": {
+    "Auswahl eines Algorithmus": [
+      "Ich kann für eine eigene Fragestellung und einen Datensatz ein Verfahren des maschinellen Lernens auswählen und die Wahl begründen."
+    ],
+    "Test und Anpassung": [
+      "Ich kann mein Modell testen, mit anderen Modellen oder einem einfachen Vergleichswert vergleichen und schrittweise verbessern."
+    ],
+    "Zerlegung in Teilaufgaben": [
+      "Ich kann ein Projekt in Teilprojekte und Arbeitspakete zerlegen und Verantwortlichkeiten festlegen."
+    ],
+    "Ablaufplanung": [
+      "Ich kann den Ablauf eines Projekts mit Meilensteinen planen (z. B. als Gantt-Diagramm) und die Umsetzung in kurzen Iterationen steuern."
+    ]
+  }
 }

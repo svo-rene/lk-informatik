@@ -10,5 +10,13 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Kennen von Phasen des Datenmanagements": [
+      "Ich kann an einem eigenen Datensatz alle Phasen des Datenmanagements von der Erfassung bis zur Löschung durchlaufen."
+    ],
+    "zielgerichtete Datenerfassung": [
+      "Ich kann eine Datenerhebung so planen, dass sie zur Fragestellung passt, auswertbar ist und nur die nötigen Daten erfasst."
+    ]
+  }
 }

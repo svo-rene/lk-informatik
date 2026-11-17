@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Einsatzgebiete": [
+      "Ich kann erklären, wie zwei Partner über einen unsicheren Kanal einen gemeinsamen geheimen Schlüssel vereinbaren (z. B. mit Diffie-Hellman), und Einsatzgebiete dafür nennen.",
+      "Ich kann begründen, warum eine Schlüsselvereinbarung ohne Authentifizierung durch einen Man-in-the-Middle angreifbar ist."
+    ]
+  }
 }

@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Divide-and-Conquer": [
+      "Ich kann an einem effizienten Sortierverfahren (z. B. Mergesort) zeigen, wie Teilen, rekursives Lösen und Kombinieren zusammenwirken."
+    ],
+    "Nachweis der Komplexität": [
+      "Ich kann begründen, warum ein Sortierverfahren, das die Liste immer halbiert und linear zusammenführt, in O(n · log n) liegt.",
+      "Ich kann effiziente und einfache Sortierverfahren nach Laufzeit und Speicherbedarf vergleichen."
+    ]
+  }
 }

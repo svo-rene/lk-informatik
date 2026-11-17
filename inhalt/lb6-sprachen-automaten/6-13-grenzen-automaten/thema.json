@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Unterscheidung von Automatentypen": [
+      "Ich kann begründen, warum endliche Automaten bestimmte Sprachen nicht erkennen können (z. B. korrekt geklammerte Ausdrücke).",
+      "Ich kann angeben, welcher Automatentyp für eine Sprache mindestens nötig ist, und Automatentypen nach ihrer Leistungsfähigkeit ordnen."
+    ]
+  }
 }

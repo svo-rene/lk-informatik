@@ -14,5 +14,16 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Brute-Force-Methode": [
+      "Ich kann für einen Schlüssel- oder Passwortraum die Zahl der Möglichkeiten und die Dauer einer vollständigen Suche berechnen."
+    ],
+    "Häufigkeitsanalyse": [
+      "Ich kann erklären, warum die Häufigkeitsanalyse monoalphabetische Verfahren bricht, und sie auf einen Geheimtext anwenden."
+    ],
+    "Social Engineering": [
+      "Ich kann Social Engineering als Angriff auf den Menschen erklären, Beispiele erkennen und Schutzmaßnahmen nennen."
+    ]
+  }
 }

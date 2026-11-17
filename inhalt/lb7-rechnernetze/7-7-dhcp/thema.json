@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Adressvergabe": [
+      "Ich kann den Ablauf einer automatischen Adressvergabe beschreiben (z. B. mit DHCP) und erklären, welche Nachrichten als Broadcast gesendet werden.",
+      "Ich kann angeben, welche Einstellungen ein Client bei der automatischen Adressvergabe erhält, und begründen, warum Geräte sich bei IPv4 nicht einfach selbst eine Adresse geben."
+    ]
+  }
 }

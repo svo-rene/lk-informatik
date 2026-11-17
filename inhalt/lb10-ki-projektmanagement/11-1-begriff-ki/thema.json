@@ -14,5 +14,13 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Begriffsbestimmung Künstliche Intelligenz": [
+      "Ich kann erklären, was man unter Künstlicher Intelligenz versteht und warum der Begriff schwer abzugrenzen ist."
+    ],
+    "Überblick zu den Teilbereichen": [
+      "Ich kann schwache und starke KI unterscheiden und KI-Systeme typischen Anwendungsfeldern (z. B. Bild- und Spracherkennung) zuordnen."
+    ]
+  }
 }

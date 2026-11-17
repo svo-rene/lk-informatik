@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Identifizierung und Authentifizierung": [
+      "Ich kann Identifikation, Authentifizierung und Autorisierung unterscheiden und Anmeldeverfahren den Faktoren Wissen, Besitz und Sein zuordnen.",
+      "Ich kann beurteilen, wie gut ein Anmeldeverfahren gegen typische Angriffe schützt (z. B. Passwort, Einmalcode, Passkey)."
+    ]
+  }
 }

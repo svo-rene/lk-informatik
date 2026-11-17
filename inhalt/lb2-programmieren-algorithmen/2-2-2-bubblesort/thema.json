@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Nachweis der Komplexität": [
+      "Ich kann die Zahl der Vergleiche eines einfachen Sortierverfahrens (z. B. Bubblesort) im besten und im schlechtesten Fall bestimmen und daraus die Komplexität angeben.",
+      "Ich kann begründen, für welche Datenmengen ein Verfahren mit quadratischer Laufzeit geeignet ist."
+    ]
+  }
 }

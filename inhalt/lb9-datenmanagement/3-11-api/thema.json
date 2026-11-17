@@ -14,5 +14,13 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Datenextraktion": [
+      "Ich kann Daten über eine Web-API abrufen und die benötigten Werte aus der Antwort herausziehen."
+    ],
+    "Kennen von Möglichkeiten zum Datenaustausch über standardisierte Datenformate": [
+      "Ich kann erklären, wie Programme über eine Schnittstelle mit Anfragen, Statuscodes und standardisierten Formaten Daten austauschen."
+    ]
+  }
 }

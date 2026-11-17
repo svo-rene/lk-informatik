@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Divide-and-Conquer": [
+      "Ich kann das Prinzip Divide and Conquer mit seinen Schritten Teilen, Herrschen und Kombinieren erklären.",
+      "Ich kann ein Verfahren nach diesem Prinzip (z. B. die binäre Suche) erläutern und erklären, warum das Halbieren zu Laufzeiten wie O(log n) führt."
+    ]
+  }
 }

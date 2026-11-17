@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Ableiten von Wörtern": [
+      "Ich kann den Aufbau einer formalen Grammatik erklären (Terminale, Nichtterminale, Produktionsregeln, Startsymbol).",
+      "Ich kann für eine einfache Sprache eine Grammatik entwerfen und prüfen, ob sie die gewünschten Wörter erzeugt (z. B. mit einem Simulationswerkzeug)."
+    ]
+  }
 }

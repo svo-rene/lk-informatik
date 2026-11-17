@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Kennen von Möglichkeiten zum Datenaustausch über standardisierte Datenformate": [
+      "Ich kann den Aufbau eines JSON-Dokuments aus Objekten und Arrays beschreiben.",
+      "Ich kann Daten aus einem JSON-Dokument einlesen und gezielt auf verschachtelte Werte zugreifen."
+    ]
+  }
 }

@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Chomsky-Hierarchie": [
+      "Ich kann die vier Typen der Chomsky-Hierarchie anhand der Form ihrer Regeln unterscheiden.",
+      "Ich kann eine Grammatik begründet dem passenden Typ der Chomsky-Hierarchie zuordnen.",
+      "Ich kann erklären, wie die Sprachklassen ineinander enthalten sind, und eine kontextfreie Sprache angeben, die nicht regulär ist."
+    ]
+  }
 }

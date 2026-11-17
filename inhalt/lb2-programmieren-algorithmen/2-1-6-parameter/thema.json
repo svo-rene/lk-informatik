@@ -14,5 +14,17 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Werteparameter": [
+      "Ich kann erklären, dass ein Werteparameter eine Kopie erhält und Änderungen daran den Aufrufer nicht betreffen."
+    ],
+    "Referenzparameter": [
+      "Ich kann erklären, dass ein Referenzparameter auf die Variable des Aufrufers verweist und Änderungen dort wirken.",
+      "Ich kann vorhersagen, ob eine Änderung im Unterprogramm beim Aufrufer ankommt (z. B. neue Zuweisung oder Ändern einer Liste in Python)."
+    ],
+    "Verwendung von Parametern": [
+      "Ich kann entscheiden, ob ein Unterprogramm ein Ergebnis zurückgeben oder ein übergebenes Objekt verändern soll, und es entsprechend umsetzen."
+    ]
+  }
 }

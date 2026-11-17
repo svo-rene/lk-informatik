@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Kennen des Konzepts der Versionsverwaltung bei der Softwareentwicklung": [
+      "Ich kann erklären, wozu Versionsverwaltung in der Softwareentwicklung dient.",
+      "Ich kann die Grundbegriffe Repository, Commit, Historie und Diff erklären.",
+      "Ich kann Änderungen als Versionen mit aussagekräftiger Nachricht speichern, Versionen vergleichen und einen alten Stand zurückholen."
+    ]
+  }
 }

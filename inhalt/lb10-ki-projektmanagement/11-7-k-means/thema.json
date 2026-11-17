@@ -14,5 +14,10 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Maschinelles Lernen: überwacht, unüberwacht, bestärkend": [
+      "Ich kann an einem Verfahren (z. B. k-Means) erklären, wie beim unüberwachten Lernen Gruppen in Daten ohne vorgegebene Ergebnisse gefunden werden."
+    ]
+  }
 }

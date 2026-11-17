@@ -10,5 +10,14 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Gestalten einer Problemlösung mittels objektorientierten Paradigmas": [
+      "Ich kann ein objektorientiertes Programm im Team schrittweise weiterentwickeln und seine Qualität prüfen (z. B. mit Tests und Code-Review)."
+    ],
+    "Anwenden von Methoden der agilen Softwareentwicklung": [
+      "Ich kann in kurzen Iterationen im Team arbeiten: Aufgaben planen, den Arbeitsstand sichtbar machen und das Vorgehen gemeinsam auswerten (z. B. mit Sprints, Board und Retrospektive).",
+      "Ich kann prüfen, ob eine Aufgabe nach den vereinbarten Kriterien fertig ist (z. B. nach einer Definition of Done)."
+    ]
+  }
 }

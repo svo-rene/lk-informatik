@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Attribut und Attributwert": [
+      "Ich kann erklären, dass jedes Objekt eigene Attributwerte hat, und dafür sorgen, dass sie beim Erzeugen sinnvoll belegt werden (z. B. im Konstruktor).",
+      "Ich kann Instanzattribute und Klassenattribute unterscheiden und begründen, wann welches passt.",
+      "Ich kann erklären, dass zwei Namen auf dasselbe Objekt verweisen können, und das von zwei Objekten mit gleichen Attributwerten unterscheiden."
+    ]
+  }
 }

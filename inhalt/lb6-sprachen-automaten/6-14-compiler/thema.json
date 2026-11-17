@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Funktionsprinzipien von Compiler und Interpreter": [
+      "Ich kann die Arbeitsweise von Compiler und Interpreter erklären und ihre Vor- und Nachteile vergleichen."
+    ],
+    "Übersetzungsprozess": [
+      "Ich kann die Phasen der Übersetzung (lexikalische, syntaktische, semantische Analyse) beschreiben und an einem Programmausschnitt zeigen, was in jeder Phase geprüft wird.",
+      "Ich kann erklären, wo bei der Übersetzung endliche Automaten und Grammatiken eingesetzt werden."
+    ]
+  }
 }

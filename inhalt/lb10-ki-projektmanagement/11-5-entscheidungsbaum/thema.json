@@ -14,5 +14,10 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Maschinelles Lernen: überwacht, unüberwacht, bestärkend": [
+      "Ich kann an einem Verfahren (z. B. Entscheidungsbaum) erklären, wie ein Modell aus Trainingsdaten Regeln für eine Klassifikation ableitet."
+    ]
+  }
 }

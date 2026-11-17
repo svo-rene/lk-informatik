@@ -10,5 +10,13 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Adressierung und Routing mittels Internetprotokoll": [
+      "Ich kann die Einträge einer Routingtabelle (Zielnetz, Maske, nächstes Gateway, Schnittstelle) für ein Netz mit mehreren Routern aufstellen."
+    ],
+    "Anwenden der Kenntnisse über Netzwerke auf die praktische Realisierung eines Netzwerkes": [
+      "Ich kann ein Netz mit mehreren Routern aufbauen, die Routingtabellen von Hand einrichten und Fehler bei der Erreichbarkeit finden und beheben."
+    ]
+  }
 }

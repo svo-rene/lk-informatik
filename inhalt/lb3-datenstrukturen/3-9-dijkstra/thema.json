@@ -19,5 +19,11 @@
       "titel": "Dijkstra-Simulator",
       "zusatz": true
     }
-  ]
+  ],
+  "kann": {
+    "Graph": [
+      "Ich kann in einem gewichteten Graphen schrittweise kürzeste Wege bestimmen (z. B. mit dem Verfahren von Dijkstra).",
+      "Ich kann begründen, unter welchen Bedingungen ein Verfahren für kürzeste Wege ein falsches Ergebnis liefert (z. B. bei negativen Kantengewichten)."
+    ]
+  }
 }

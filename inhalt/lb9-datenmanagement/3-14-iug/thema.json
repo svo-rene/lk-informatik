@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Beurteilen von Datenquellen hinsichtlich Bias und Verlässlichkeit": [
+      "Ich kann verschiedene Arten von Bias in Daten erkennen und ihre Ursachen erklären.",
+      "Ich kann beurteilen, ob aus Daten ein Zusammenhang oder eine Ursache abgeleitet werden darf (Korrelation und Kausalität)."
+    ],
+    "Sich positionieren zur Erfassung, Verarbeitung und dauerhaften Speicherung verschiedener Daten im gesellschaftlichen Kontext": [
+      "Ich kann begründet Stellung nehmen zur Erfassung und Auswertung großer Datenmengen über Menschen in der Gesellschaft."
+    ]
+  }
 }

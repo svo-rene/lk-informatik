@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Einordnung in CAP-Theorem": [
+      "Ich kann die Begriffe Konsistenz, Verfügbarkeit und Partitionstoleranz des CAP-Theorems erklären.",
+      "Ich kann begründen, warum ein verteiltes Datenbanksystem bei einer Netzwerkstörung zwischen Konsistenz und Verfügbarkeit wählen muss, und Systeme danach einordnen.",
+      "Ich kann die Konsistenz im Sinne von ACID von der Konsistenz im Sinne von CAP unterscheiden."
+    ]
+  }
 }

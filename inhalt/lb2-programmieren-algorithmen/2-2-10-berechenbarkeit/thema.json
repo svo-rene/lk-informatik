@@ -14,5 +14,19 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "algorithmische Unlösbarkeit": [
+      "Ich kann technische und theoretische Grenzen der Berechenbarkeit unterscheiden und erklären, dass es Probleme gibt, die kein Algorithmus lösen kann (z. B. das Halteproblem)."
+    ],
+    "P-Probleme": [
+      "Ich kann erklären, was ein Problem der Klasse P ist, und Beispiele nennen."
+    ],
+    "NP-Probleme": [
+      "Ich kann erklären, was ein Problem der Klasse NP ist, und am Beispiel zeigen, dass das Prüfen einer Lösung leicht, das Finden aber schwer sein kann."
+    ],
+    "Beurteilen von Entscheidungsproblemen": [
+      "Ich kann Entscheidungsprobleme danach beurteilen, ob sie entscheidbar und ob sie praktisch effizient lösbar sind, und begründen, ob mehr Rechenleistung dabei hilft."
+    ]
+  }
 }

@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Vererbung": [
+      "Ich kann Vererbung als „ist-ein“-Beziehung erklären und von Assoziation und Aggregation abgrenzen.",
+      "Ich kann eine Unterklasse bilden, die Attribute und Methoden der Oberklasse übernimmt und eigene ergänzt.",
+      "Ich kann eine geerbte Methode überschreiben oder erweitern und erklären, welche Methode bei einem Aufruf ausgeführt wird."
+    ]
+  }
 }

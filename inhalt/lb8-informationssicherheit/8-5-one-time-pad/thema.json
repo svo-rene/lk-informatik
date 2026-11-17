@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Sicherheit": [
+      "Ich kann die Bedingungen nennen, unter denen ein Verfahren perfekt sicher ist (One-Time-Pad), und begründen, warum es trotzdem kaum eingesetzt wird.",
+      "Ich kann begründen, was passiert, wenn eine dieser Bedingungen verletzt wird."
+    ]
+  }
 }

@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Transportwegverschlüsselung": [
+      "Ich kann erklären, wie eine Transportverschlüsselung (z. B. TLS) symmetrische und asymmetrische Verfahren kombiniert, um Vertraulichkeit, Integrität und Authentizität zu sichern.",
+      "Ich kann erklären, was ein VPN schützt und wo sein Schutz endet."
+    ],
+    "Zertifikate": [
+      "Ich kann erklären, wozu ein Server beim Verbindungsaufbau ein Zertifikat vorlegt und was der Client daran prüft."
+    ]
+  }
 }

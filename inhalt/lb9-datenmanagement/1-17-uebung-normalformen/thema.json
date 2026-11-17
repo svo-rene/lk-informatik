@@ -10,5 +10,10 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Normalisierungen": [
+      "Ich kann für unbekannte Tabellen begründen, welche Normalform verletzt ist, und sie normalisieren."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Entity-Relationship-Modell": [
+      "Ich kann Entitäten, Attribute, Beziehungen und Kardinalitäten (1:1, 1:n, m:n) erklären.",
+      "Ich kann aus einer Sachbeschreibung ein ER-Modell entwickeln, auch mit Attributen an Beziehungen."
+    ]
+  }
 }

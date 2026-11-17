@@ -10,5 +10,13 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Namensauflösung": [
+      "Ich kann beschreiben, mit welchen Rechnern und Diensten ein Client beim Aufruf einer Webseite über ihren Namen nacheinander kommuniziert."
+    ],
+    "Anwenden der Kenntnisse über Netzwerke auf die praktische Realisierung eines Netzwerkes": [
+      "Ich kann in einem Netz einen DNS-Server mit eigenen Einträgen und einen Webserver einrichten und das Zusammenspiel der Dienste testen."
+    ]
+  }
 }

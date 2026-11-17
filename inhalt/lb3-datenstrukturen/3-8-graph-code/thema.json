@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Graph": [
+      "Ich kann einen Graphen mit Adjazenzlisten implementieren.",
+      "Ich kann die Breitensuche in einem Graphen durchführen und erklären, warum sie in ungewichteten Graphen Wege mit den wenigsten Kanten findet.",
+      "Ich kann Adjazenzliste und Adjazenzmatrix nach Speicherbedarf und Eignung vergleichen."
+    ]
+  }
 }

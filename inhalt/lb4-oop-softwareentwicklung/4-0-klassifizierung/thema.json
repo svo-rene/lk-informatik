@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Kennen der Klassifizierung von Programmiersprachen": [
+      "Ich kann Programmiersprachen nach ihrer Abstraktionsebene einordnen und Maschinensprache, maschinennahe und höhere Sprachen unterscheiden.",
+      "Ich kann erklären, warum Programme in höheren Sprachen übersetzt werden müssen und wodurch sie weitgehend unabhängig von der Hardware sind.",
+      "Ich kann Programmiersprachen nach ihrem Paradigma einordnen und dabei imperative und deklarative Sprachen unterscheiden."
+    ]
+  }
 }

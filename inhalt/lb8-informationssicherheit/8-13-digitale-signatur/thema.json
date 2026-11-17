@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Zertifikate": [
+      "Ich kann erklären, wie ein Zertifikat einen öffentlichen Schlüssel bestätigt und wie eine Vertrauenskette bis zu einer vertrauenswürdigen Stelle geprüft wird."
+    ],
+    "digitale Signaturen": [
+      "Ich kann den Ablauf von Signieren und Prüfen beschreiben (z. B. an einem Mini-RSA-Beispiel) und erklären, wie eine digitale Signatur Integrität, Authentizität und Verbindlichkeit sichert.",
+      "Ich kann eine digitale Signatur von einem MAC und von einer handschriftlichen Unterschrift abgrenzen."
+    ]
+  }
 }

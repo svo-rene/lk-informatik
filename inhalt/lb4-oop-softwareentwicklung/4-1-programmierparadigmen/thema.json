@@ -14,5 +14,19 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "imperativ": [
+      "Ich kann das imperative Paradigma beschreiben (eine Folge von Anweisungen verändert schrittweise den Zustand) und imperativen Code daran erkennen."
+    ],
+    "objektorientiert": [
+      "Ich kann das objektorientierte Paradigma beschreiben (Daten und Verhalten werden in Objekten gebündelt) und objektorientierten Code daran erkennen."
+    ],
+    "funktional": [
+      "Ich kann das funktionale Paradigma beschreiben (Programme aus Funktionen ohne Seiteneffekte) und funktionalen Code von imperativem unterscheiden."
+    ],
+    "logisch": [
+      "Ich kann das logische Paradigma beschreiben (Fakten und Regeln, aus denen das System Antworten ableitet) und an einem Beispiel (z. B. in Prolog) erläutern."
+    ]
+  }
 }

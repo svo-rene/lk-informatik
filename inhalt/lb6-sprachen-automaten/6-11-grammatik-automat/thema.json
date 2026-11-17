@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Übertragen der Kenntnisse auf die wechselseitige Überführung zwischen Grammatiken und Automaten bei regulären Sprachen": [
+      "Ich kann eine reguläre Grammatik in einen endlichen Automaten überführen, der dieselbe Sprache erkennt.",
+      "Ich kann einen endlichen Automaten in eine reguläre Grammatik überführen, die dieselbe Sprache erzeugt.",
+      "Ich kann begründen, wann eine Grammatik und wann ein Automat die geeignetere Beschreibung einer Sprache ist."
+    ]
+  }
 }

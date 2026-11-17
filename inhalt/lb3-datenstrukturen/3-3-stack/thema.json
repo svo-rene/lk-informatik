@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Stapel und Schlange": [
+      "Ich kann das LIFO-Prinzip des Stapels erklären und Anwendungsbeispiele nennen.",
+      "Ich kann einen Stapel mit seinen Grundoperationen implementieren.",
+      "Ich kann einen Stapel zur Lösung eines Problems einsetzen (z. B. Prüfen einer Klammerung)."
+    ]
+  }
 }

@@ -14,5 +14,16 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Datei": [
+      "Ich kann Daten aus einer Datei in ein Programm einlesen und dabei Trennzeichen und Datentypen beachten."
+    ],
+    "Datenextraktion": [
+      "Ich kann aus einer Datei gezielt die Daten herausziehen, die ich für eine Auswertung brauche."
+    ],
+    "Kennen von Möglichkeiten zum Datenaustausch über standardisierte Datenformate": [
+      "Ich kann den Aufbau einer CSV-Datei beschreiben."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Normalisierungen": [
+      "Ich kann Einfüge-, Änderungs- und Löschanomalien an einer Tabelle erkennen und erklären, wie sie durch Redundanz entstehen.",
+      "Ich kann begründen, warum Normalisierung Anomalien vermeidet."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Grundprinzipien": [
+      "Ich kann das Grundprinzip symmetrischer Verfahren erklären und an einem Beispiel (z. B. Caesar oder Vigenère) umsetzen.",
+      "Ich kann Vor- und Nachteile symmetrischer Verfahren, besonders das Problem der Schlüsselverteilung, beurteilen."
+    ]
+  }
 }

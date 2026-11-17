@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Auswertung verknüpfter Daten mit SQL": [
+      "Ich kann Datensätze mit INSERT einfügen, mit UPDATE ändern und mit DELETE löschen.",
+      "Ich kann vor dem Ändern oder Löschen prüfen, welche Datensätze eine Bedingung trifft."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Kennen von Problemstellungen des Datenmanagements in verschiedenen Bereichen": [
+      "Ich kann an Beispielen aus dem Alltag beschreiben, wo große Datenmengen verwaltet werden und welche Probleme dabei entstehen.",
+      "Ich kann erklären, wie Redundanz zu Inkonsistenz führt und warum Daten deshalb in einer Datenbank mit einem Datenbankmanagementsystem verwaltet werden."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Methode": [
+      "Ich kann erklären, was eine Methode ist, und Methoden für eine Klasse schreiben und an einem Objekt aufrufen.",
+      "Ich kann Methoden, die den Zustand eines Objekts verändern, von Methoden unterscheiden, die ihn nur abfragen."
+    ]
+  }
 }

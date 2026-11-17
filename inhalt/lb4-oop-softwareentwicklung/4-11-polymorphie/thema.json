@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Polymorphie": [
+      "Ich kann Polymorphie erklären: Dieselbe Botschaft löst je nach Klasse des Objekts unterschiedliches Verhalten aus.",
+      "Ich kann Objekte verschiedener Klassen über eine gemeinsame Methode einheitlich behandeln und begründen, warum das Programm dadurch leichter erweiterbar ist."
+    ],
+    "Botschaft und Ereignis": [
+      "Ich kann erklären, was eine Botschaft und was ein Ereignis ist und wie ein Objekt darauf reagiert."
+    ]
+  }
 }

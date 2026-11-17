@@ -14,5 +14,16 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Grundprinzipien": [
+      "Ich kann den Ablauf eines hybriden Verfahrens beschreiben und angeben, wann welcher Schlüssel benutzt wird."
+    ],
+    "Einsatzgebiete": [
+      "Ich kann begründen, warum man in der Praxis meist hybride Verfahren einsetzt, und Beispiele nennen."
+    ],
+    "Sicherheit": [
+      "Ich kann symmetrische, asymmetrische und hybride Verfahren nach Schlüsselmanagement, Geschwindigkeit und Sicherheit vergleichen und verbleibende Schwachstellen benennen."
+    ]
+  }
 }

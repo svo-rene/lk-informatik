@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Traversierung": [
+      "Ich kann erklären, was Traversierung ist, und Tiefensuche und Breitensuche unterscheiden.",
+      "Ich kann für einen Baum die Besuchsreihenfolge in Pre-, In-, Post- und Level-Order angeben.",
+      "Ich kann eine Traversierung implementieren (z. B. rekursiv als Tiefensuche oder mit einer Schlange als Breitensuche)."
+    ]
+  }
 }

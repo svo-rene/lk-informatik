@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Baum": [
+      "Ich kann Binärbaum und binären Suchbaum unterscheiden und die Ordnungseigenschaft des Suchbaums erklären.",
+      "Ich kann Einfügen und Suchen im binären Suchbaum durchführen und implementieren.",
+      "Ich kann begründen, wann ein Suchbaum schnell sucht und wann er so langsam wie eine Liste wird."
+    ]
+  }
 }

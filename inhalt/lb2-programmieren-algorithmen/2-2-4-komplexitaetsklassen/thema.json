@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Komplexitätsklassen": [
+      "Ich kann die wichtigen Komplexitätsklassen von O(1) bis O(n!) nach ihrem Wachstum ordnen und typische Algorithmen zuordnen.",
+      "Ich kann Schrittzahlen verschiedener Klassen für konkrete n berechnen und vergleichen.",
+      "Ich kann begründen, welche Laufzeiten als effizient gelten und warum exponentielle Verfahren schon für mittlere n praktisch nicht ausführbar sind."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Klasse und Objekt": [
+      "Ich kann den Unterschied zwischen einer Klasse (Bauplan) und ihren Objekten (Instanzen) erklären.",
+      "Ich kann eine Klasse mit Attributen und Methoden modellieren (z. B. als UML-Klassendiagramm), sie in Code umsetzen und Objekte davon erzeugen."
+    ]
+  }
 }

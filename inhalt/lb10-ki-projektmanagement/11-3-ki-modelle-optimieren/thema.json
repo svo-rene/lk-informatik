@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Sammeln und Aufbereiten der Daten": [
+      "Ich kann erklären, warum Daten vor dem Training aufbereitet und in Trainings-, Validierungs- und Testdaten aufgeteilt werden."
+    ],
+    "Test und Anpassung": [
+      "Ich kann Over- und Underfitting an Trainings-, Validierungs- und Testergebnissen erkennen und Gegenmaßnahmen nennen.",
+      "Ich kann die Qualität eines Modells mit geeigneten Maßen (z. B. Konfusionsmatrix, Genauigkeit, Präzision, Sensitivität) beurteilen."
+    ]
+  }
 }

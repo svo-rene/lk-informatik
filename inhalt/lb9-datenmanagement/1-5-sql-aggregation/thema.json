@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Auswertung verknüpfter Daten mit SQL": [
+      "Ich kann Daten mit Aggregatfunktionen (COUNT, SUM, AVG, MIN, MAX) auswerten.",
+      "Ich kann Datensätze mit GROUP BY gruppieren, Gruppen mit HAVING filtern und dabei WHERE und HAVING richtig unterscheiden."
+    ]
+  }
 }

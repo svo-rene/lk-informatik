@@ -14,5 +14,15 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "physische und logische Topologien": [
+      "Ich kann gängige physische Topologien (z. B. Stern, Bus, Ring, Baum, vermascht) beschreiben, in einem Netz erkennen und ihre Vor- und Nachteile, besonders bei Ausfällen, vergleichen.",
+      "Ich kann den Unterschied zwischen physischer und logischer Topologie an einem Beispiel erklären (z. B. Hub und Switch)."
+    ],
+    "Übertragungsmedien": [
+      "Ich kann Übertragungsmedien (Funk, Kupferkabel, Glasfaser) nach Datenrate, Reichweite, Störanfälligkeit und Kosten unterscheiden und für einen Einsatzzweck auswählen.",
+      "Ich kann die Übertragungszeit für eine Datenmenge bei gegebener Datenrate abschätzen."
+    ]
+  }
 }

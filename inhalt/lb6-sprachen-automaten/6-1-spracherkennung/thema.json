@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Einblick gewinnen in Chancen und Risiken automatischer Sprachverarbeitung": [
+      "Ich kann erklären, warum Maschinen für die Verarbeitung von Sprache eindeutige Regeln brauchen und warum natürliche Sprache dabei Schwierigkeiten macht.",
+      "Ich kann an Beispielen (z. B. Sprachassistenten) Chancen und Risiken automatischer Sprachverarbeitung nennen und eine eigene Einschätzung begründen."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Anwendungsbereiche": [
+      "Ich kann das Prinzip einer Key-Value-Datenbank erklären und typische Anwendungsbereiche nennen.",
+      "Ich kann Daten als Schlüssel-Wert-Paare speichern, abfragen und ändern (z. B. mit einem Python-Dictionary)."
+    ]
+  }
 }

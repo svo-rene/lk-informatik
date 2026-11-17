@@ -14,5 +14,25 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Vertraulichkeit": [
+      "Ich kann das Schutzziel Vertraulichkeit erklären und Maßnahmen nennen, die es sichern (z. B. Verschlüsselung)."
+    ],
+    "Integrität": [
+      "Ich kann das Schutzziel Integrität erklären und Maßnahmen nennen, mit denen Veränderungen erkannt werden (z. B. Hashwerte)."
+    ],
+    "Authentizität": [
+      "Ich kann das Schutzziel Authentizität erklären und Maßnahmen nennen, mit denen die Echtheit eines Partners oder einer Quelle nachgewiesen wird."
+    ],
+    "Verbindlichkeit": [
+      "Ich kann das Schutzziel Verbindlichkeit erklären und von Authentizität abgrenzen."
+    ],
+    "Verfügbarkeit": [
+      "Ich kann das Schutzziel Verfügbarkeit erklären, Maßnahmen dafür nennen und bei einem Sicherheitsvorfall begründen, welches Schutzziel vorrangig verletzt ist."
+    ],
+    "Prinzipien des Datenschutzes": [
+      "Ich kann Datenschutz von Informationssicherheit abgrenzen und erklären, warum Informationssicherheit eine Voraussetzung für Datenschutz ist."
+    ]
+  }
 }

@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Grundprinzipien": [
+      "Ich kann die Grundbegriffe der Kryptologie (Klartext, Geheimtext, Schlüssel, Kryptographie, Kryptoanalyse) erklären und Verfahren nach ihrem Prinzip einordnen (z. B. Substitution oder Transposition).",
+      "Ich kann das Kerckhoffs-Prinzip erklären und damit die Sicherheit eines Verfahrens beurteilen."
+    ],
+    "kryptographische und nichtkryptographische Verfahren": [
+      "Ich kann kryptographische Verfahren von nichtkryptographischen (z. B. Steganographie) unterscheiden und begründet Stellung nehmen, wann ein Verfahren Vertraulichkeit wirklich sichert."
+    ]
+  }
 }

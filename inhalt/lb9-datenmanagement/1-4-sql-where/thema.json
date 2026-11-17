@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Auswertung verknüpfter Daten mit SQL": [
+      "Ich kann Datensätze mit WHERE nach Bedingungen auswählen und Bedingungen mit AND, OR und NOT verknüpfen.",
+      "Ich kann mit LIKE und Platzhaltern nach Textmustern suchen."
+    ]
+  }
 }

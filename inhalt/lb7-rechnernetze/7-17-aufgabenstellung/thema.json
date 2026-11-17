@@ -6,5 +6,11 @@
       "datei": "index.html",
       "titel": "Einführung"
     }
-  ]
+  ],
+  "kann": {
+    "Anwenden der Kenntnisse über Netzwerke auf die praktische Realisierung eines Netzwerkes": [
+      "Ich kann ein Netz für eine vorgegebene Situation planen (Topologie, Übertragungsmedien, Adressbereiche und Subnetze, Dienste) und meine Entscheidungen begründen.",
+      "Ich kann ein geplantes Netz in einer Simulation (z. B. Filius) umsetzen, testen und dokumentieren."
+    ]
+  }
 }

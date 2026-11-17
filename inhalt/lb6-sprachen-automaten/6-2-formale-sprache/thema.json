@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Syntax": [
+      "Ich kann erklären, was die Syntax einer Sprache festlegt, und Syntaxfehler erkennen.",
+      "Ich kann die Grundbegriffe formaler Sprachen (Alphabet, Wort, leeres Wort, formale Sprache) erklären und an Beispielen anwenden."
+    ],
+    "Semantik": [
+      "Ich kann erklären, was die Semantik einer Sprache ist, und an Beispielen Syntaxfehler von Semantikfehlern unterscheiden."
+    ]
+  }
 }

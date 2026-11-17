@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Entwurf endlicher Automaten": [
+      "Ich kann für eine einfache Sprache einen deterministischen endlichen Automaten entwerfen und ihn beschreiben (z. B. als Zustandsdiagramm oder formal als 5-Tupel)."
+    ],
+    "Prüfen und Ableiten von Wörtern": [
+      "Ich kann mit einem endlichen Automaten prüfen, ob ein Wort akzeptiert wird.",
+      "Ich kann die Sprache beschreiben, die ein gegebener Automat akzeptiert."
+    ]
+  }
 }

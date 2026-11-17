@@ -14,5 +14,10 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Häufigkeitsanalyse": [
+      "Ich kann erklären, warum polyalphabetische Verfahren eine einfache Häufigkeitsanalyse erschweren und wie man sie nach Bestimmung der Schlüssellänge doch angreifen kann (z. B. mit dem Kasiski-Test)."
+    ]
+  }
 }

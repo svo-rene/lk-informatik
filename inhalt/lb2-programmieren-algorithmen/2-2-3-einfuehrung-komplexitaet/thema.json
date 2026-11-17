@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Nachweis der Komplexität": [
+      "Ich kann die Bedeutung der O-Notation erklären und mit ihrer Definition nachweisen, dass eine Schrittzahl in einer Komplexitätsklasse liegt.",
+      "Ich kann für Programmstücke mit Schleifen die Zahl der Durchläufe in Abhängigkeit von n bestimmen und die Komplexitätsklasse angeben.",
+      "Ich kann Messwerte (z. B. aus einem Verdopplungsexperiment) auswerten und prüfen, ob sie zu einer Komplexitätsklasse passen."
+    ]
+  }
 }

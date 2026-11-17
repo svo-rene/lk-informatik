@@ -14,5 +14,16 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Prinzipien des Datenschutzes": [
+      "Ich kann die Grundsätze des Datenschutzes für personenbezogene Daten (z. B. Zweckbindung, Datenminimierung, Speicherbegrenzung) erklären und auf Beispiele anwenden."
+    ],
+    "Kennen von Problemstellungen des Datenmanagements in verschiedenen Bereichen": [
+      "Ich kann an einem Bereich (z. B. Gesundheit, Verkehr, Handel) beschreiben, welchen Nutzen und welche Risiken die Erfassung großer Datenmengen hat."
+    ],
+    "Beurteilen von Datenquellen hinsichtlich Bias und Verlässlichkeit": [
+      "Ich kann eine Datenquelle danach beurteilen, wie verlässlich und vollständig ihre Daten sind."
+    ]
+  }
 }

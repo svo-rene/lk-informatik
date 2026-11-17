@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Relationenmodell": [
+      "Ich kann die Grundbegriffe des relationalen Datenmodells (Relation, Attribut, Datensatz, Datentyp, Schema) erklären.",
+      "Ich kann begründen, warum jede Relation einen Primärschlüssel braucht, und einen geeigneten Primärschlüssel festlegen."
+    ]
+  }
 }

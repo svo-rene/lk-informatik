@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Datenbereinigung": [
+      "Ich kann fehlende, fehlerhafte und unrealistische Werte in einem Datensatz erkennen.",
+      "Ich kann einen Datensatz bereinigen, indem ich Werte entferne, ersetze oder vereinheitliche (z. B. mit regulären Ausdrücken)."
+    ]
+  }
 }

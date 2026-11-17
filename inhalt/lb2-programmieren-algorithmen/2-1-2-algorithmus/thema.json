@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Kennen des erweiterten Algorithmusbegriffes": [
+      "Ich kann die Eigenschaften eines Algorithmus (z. B. Finitheit, Ausführbarkeit, Terminierung, Determiniertheit, Determinismus) erklären und an einem Beispiel prüfen.",
+      "Ich kann erklären, was der erweiterte Algorithmusbegriff ist, und Beispiele für sinnvolle Verfahren nennen, die nicht terminieren oder nicht determiniert sind.",
+      "Ich kann die Kontrollstrukturen Sequenz, Verzweigung und Wiederholung in einem Algorithmus erkennen und beschreiben."
+    ]
+  }
 }

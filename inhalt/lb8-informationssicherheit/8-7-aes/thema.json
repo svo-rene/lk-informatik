@@ -14,5 +14,13 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Einsatzgebiete": [
+      "Ich kann Einsatzgebiete eines modernen symmetrischen Verfahrens (z. B. AES) nennen und begründen, warum dort ein symmetrisches Verfahren verwendet wird."
+    ],
+    "Sicherheit": [
+      "Ich kann erklären, worauf die Sicherheit eines modernen Blockverfahrens beruht (z. B. Konfusion und Diffusion, Schlüssellänge) und warum auch die Art der Anwendung (Betriebsmodus) die Sicherheit beeinflusst."
+    ]
+  }
 }

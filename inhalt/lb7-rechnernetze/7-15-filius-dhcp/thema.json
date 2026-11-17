@@ -10,5 +10,13 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Adressvergabe": [
+      "Ich kann die Nachrichten einer automatischen Adressvergabe im Datenverkehr nachweisen und erklären."
+    ],
+    "Anwenden der Kenntnisse über Netzwerke auf die praktische Realisierung eines Netzwerkes": [
+      "Ich kann einen DHCP-Server so einrichten, dass Clients Adresse, Gateway und DNS-Server automatisch erhalten, und Konfigurationsfehler beheben."
+    ]
+  }
 }

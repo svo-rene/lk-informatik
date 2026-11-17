@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Identifizierung und Authentifizierung": [
+      "Ich kann Identifizierung und Authentifizierung unterscheiden und erklären, wann eine echte Zwei-Faktor-Authentifizierung vorliegt.",
+      "Ich kann beschreiben, wie Benutzer in einem Netz zentral authentifiziert werden (z. B. WLAN-Anmeldung über RADIUS), und Vorteile gegenüber einem gemeinsamen Passwort erläutern."
+    ]
+  }
 }

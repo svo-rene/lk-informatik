@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Anwendungsbereiche": [
+      "Ich kann verschiedene Datenbankmodelle (z. B. dokumentenorientiert, Key-Value, Graph) beschreiben und mit dem relationalen Modell vergleichen.",
+      "Ich kann für eine Anwendung begründen, welches Datenbankmodell geeignet ist."
+    ],
+    "Einordnung in CAP-Theorem": [
+      "Ich kann relationale und NoSQL-Datenbanken im CAP-Theorem einordnen."
+    ]
+  }
 }

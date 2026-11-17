@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Maschinelles Lernen: überwacht, unüberwacht, bestärkend": [
+      "Ich kann an einem Verfahren (z. B. lineare Regression) erklären, wie beim überwachten Lernen aus Beispielen mit bekannten Ergebnissen ein Modell entsteht.",
+      "Ich kann Klassifikation und Regression unterscheiden."
+    ]
+  }
 }

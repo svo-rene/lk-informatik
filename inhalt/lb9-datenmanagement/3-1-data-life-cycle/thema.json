@@ -14,5 +14,13 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Kennen von Phasen des Datenmanagements": [
+      "Ich kann die Phasen des Datenmanagements von der Erstellung bis zur Löschung beschreiben und Vorgänge einer Phase zuordnen."
+    ],
+    "Sich positionieren zur Erfassung, Verarbeitung und dauerhaften Speicherung verschiedener Daten im gesellschaftlichen Kontext": [
+      "Ich kann begründet Stellung nehmen, welche Probleme bei der dauerhaften Speicherung und beim Löschen von Daten entstehen."
+    ]
+  }
 }

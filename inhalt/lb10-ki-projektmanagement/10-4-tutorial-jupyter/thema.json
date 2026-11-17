@@ -10,5 +10,16 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Sammeln und Aufbereiten der Daten": [
+      "Ich kann einen Datensatz für das Training eines Modells einlesen, aufbereiten und aufteilen."
+    ],
+    "Auswahl eines Algorithmus": [
+      "Ich kann ein Verfahren des maschinellen Lernens passend zur Aufgabe (z. B. Klassifikation, Regression, Clustering) auswählen und anwenden."
+    ],
+    "Test und Anpassung": [
+      "Ich kann ein trainiertes Modell testen und durch Ändern von Hyperparametern gezielt verbessern."
+    ]
+  }
 }

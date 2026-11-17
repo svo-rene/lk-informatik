@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "One-Way-Hash-Funktion": [
+      "Ich kann die Eigenschaften einer kryptographischen Hashfunktion (Einwegeigenschaft, Kollisionsresistenz, Lawineneffekt) erklären und eine gegebene Hashfunktion danach bewerten.",
+      "Ich kann Einsatzzwecke von Hashfunktionen nennen (z. B. Integritätsprüfung, Passwortspeicherung) und erklären, welches Schutzziel sie sichern."
+    ]
+  }
 }

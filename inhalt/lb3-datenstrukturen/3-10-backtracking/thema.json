@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Backtracking": [
+      "Ich kann mit Backtracking systematisch nach Lösungen suchen, z. B. nach einem Weg in einem Graphen oder einer Belegung, die Regeln erfüllt.",
+      "Ich kann ein Backtracking-Verfahren rekursiv umsetzen: Kandidat prüfen, setzen, Rest lösen und bei Misserfolg zurücknehmen."
+    ]
+  }
 }

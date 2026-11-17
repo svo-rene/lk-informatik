@@ -10,5 +10,16 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Entity-Relationship-Modell": [
+      "Ich kann für ein eigenes Anwendungsbeispiel ein ER-Modell entwerfen."
+    ],
+    "Relationenmodell": [
+      "Ich kann aus meinem ER-Modell ein Relationenmodell ableiten und als Datenbank umsetzen (z. B. mit CREATE TABLE)."
+    ],
+    "Normalisierungen": [
+      "Ich kann mein Datenbankmodell auf die Normalformen prüfen und verbessern."
+    ]
+  }
 }

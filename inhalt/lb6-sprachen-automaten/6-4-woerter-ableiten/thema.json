@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Ableiten von Wörtern": [
+      "Ich kann ein Wort mit den Regeln einer Grammatik schrittweise ableiten.",
+      "Ich kann begründen, ob ein Wort zur Sprache einer Grammatik gehört."
+    ]
+  }
 }

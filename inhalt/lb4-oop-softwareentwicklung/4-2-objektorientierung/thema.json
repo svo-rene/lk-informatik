@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Klasse und Objekt": [
+      "Ich kann erklären, was ein Objekt ist (eindeutige Einheit mit Zustand und Verhalten), und in einem Alltagssystem Objekte erkennen."
+    ],
+    "Attribut und Attributwert": [
+      "Ich kann für ein Objekt Attribute (Eigenschaften) und Methoden (Fähigkeiten) unterscheiden.",
+      "Ich kann den Zustand eines Objekts über seine Attributwerte beschreiben (z. B. in einem Objektdiagramm)."
+    ]
+  }
 }
