@@ -1,0 +1,123 @@
+<p>„Wenn du die Prüfung bestehst, bekommst du das Zertifikat.“ Solche Wenn-dann-Sätze stehen in Verträgen, Spielregeln und Programmen. Aber was genau wird damit versprochen – und was nicht? Genau das klären die beiden Operatoren dieser Seite.</p>
+
+<h2>Implikation</h2>
+
+<p>
+            Die Implikation ist ein logischer Ausdruck der Form „Wenn A, dann B“ (geschrieben A → B). Sie bedeutet, dass die Aussage B wahr ist, wenn die Aussage A wahr ist. Anders gesagt: Wenn die Bedingung A erfüllt ist, folgt daraus die Konsequenz B. Wenn A falsch ist, kann die Aussage B wahr oder falsch sein, die Implikation bleibt in diesem Fall erfüllt.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Implikation: Regen und nasse Straße</summary>
+            <p>Gegeben sind die Aussagen A: „Es regnet.“ und B: „Die Straße ist nass.“ Die Wahrheitstabelle zeigt die logische Auswertung der Implikation „Wenn es regnet, dann ist die Straße nass.“</p>
+
+            <table class="gitter">
+                <tr>
+                    <th>A (Es regnet)</th>
+                    <th>B (Die Straße ist nass)</th>
+                    <th>A → B (Implikation: Wenn A, dann B)</th>
+                </tr>
+                <tr><td>0 (false)</td><td>0 (false)</td><td>1 (true)</td></tr>
+                <tr><td>0 (false)</td><td>1 (true)</td><td>1 (true)</td></tr>
+                <tr><td>1 (true)</td><td>0 (false)</td><td>0 (false)</td></tr>
+                <tr><td>1 (true)</td><td>1 (true)</td><td>1 (true)</td></tr>
+            </table>
+            <p>Die zweite Zeile verwirrt oft: Die Straße ist nass, obwohl es nicht regnet (z.&nbsp;B. wegen eines Sprengwagens). Das widerspricht der Regel nicht – sie sagt nur etwas darüber, was passiert, <em>wenn</em> es regnet. Falsch ist die Implikation nur in der dritten Zeile: Es regnet, aber die Straße bleibt trocken.</p>
+            </details>
+        </div>
+
+<hr>
+
+<h2>Äquivalenz</h2>
+
+<p>
+            Die Äquivalenz ist ein logischer Ausdruck der Form „A genau dann, wenn B“ (geschrieben A ↔ B). Sie bedeutet, dass A und B entweder beide wahr oder beide falsch sein müssen, um die Äquivalenz zu erfüllen. Wenn die Aussagen A und B den gleichen Wahrheitswert haben, ist die Äquivalenz wahr, ansonsten ist sie falsch.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">einfach</span> Äquivalenz: Wochenende und frei</summary>
+            <p>Gegeben sind die Aussagen A: „Es ist Wochenende.“ und B: „Du hast frei.“ Die Wahrheitstabelle zeigt die logische Auswertung der Äquivalenz „Du hast frei genau dann, wenn es Wochenende ist.“</p>
+
+            <table class="gitter">
+                <tr>
+                    <th>A (Es ist Wochenende)</th>
+                    <th>B (Du hast frei)</th>
+                    <th>A ↔ B (Äquivalenz: A genau dann, wenn B)</th>
+                </tr>
+                <tr><td>0 (false)</td><td>0 (false)</td><td>1 (true)</td></tr>
+                <tr><td>0 (false)</td><td>1 (true)</td><td>0 (false)</td></tr>
+                <tr><td>1 (true)</td><td>0 (false)</td><td>0 (false)</td></tr>
+                <tr><td>1 (true)</td><td>1 (true)</td><td>1 (true)</td></tr>
+            </table>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span> A → B ist dasselbe wie ¬A ∨ B</summary>
+            <p>Mit einer Wahrheitstabelle lässt sich zeigen, dass beide Ausdrücke in jeder Zeile denselben Wert haben:</p>
+            <table class="gitter">
+                <tr><th>A</th><th>B</th><th>¬A</th><th>¬A ∨ B</th><th>A → B</th></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+            </table>
+            <p>Die beiden letzten Spalten stimmen überein. Deshalb braucht eine Schaltung kein eigenes „Implikationsgatter“: Ein NICHT-Gatter vor A und ein ODER-Gatter genügen (→ Kapitel 3).</p>
+            <p><strong>Achtung, typischer Denkfehler:</strong> Aus A → B folgt <em>nicht</em> B → A. „Wenn es regnet, ist die Straße nass“ heißt nicht „Wenn die Straße nass ist, regnet es“.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Wenn-dann in der echten Welt</summary>
+                <p><strong>Alltag:</strong> Verträge, AGB und Garantiebedingungen sind voller Implikationen: „Wenn der Mangel innerhalb von zwei Jahren auftritt, dann repariert der Händler kostenlos.“ Über den Fall „Mangel tritt nach drei Jahren auf“ sagt der Satz nichts – genau wie die Implikation bei A = 0.</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Jurist/in</strong>: prüft, ob eine Regel als „wenn … dann“ oder als „genau dann, wenn“ gemeint ist – ein Unterschied, der vor Gericht entscheidend sein kann.</li>
+                    <li><strong>Softwaretester/in bzw. Testingenieur/in</strong>: formuliert Anforderungen als Wenn-dann-Regeln („Wenn das Passwort dreimal falsch war, dann wird das Konto gesperrt.“) und prüft gezielt die Zeile A = 1, B = 0, in der die Anforderung verletzt wäre – z.&nbsp;B. bei Softwarefirmen, die Steuergeräte für Fahrzeuge testen.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Implikation A → B</strong> („wenn A, dann B“): nur <strong>falsch</strong>, wenn A wahr und B falsch ist. Sie lässt sich mit den Grundoperatoren schreiben: <strong>A → B = ¬A ∨ B</strong>.</p>
+            <p><strong>Äquivalenz A ↔ B</strong> („A genau dann, wenn B“): <strong>wahr</strong>, wenn A und B denselben Wahrheitswert haben. Sie gilt, wenn die Implikation in beide Richtungen gilt: <strong>A ↔ B = (A → B) ∧ (B → A)</strong>.</p>
+            <table class="gitter">
+                <tr><th>A</th><th>B</th><th>A → B</th><th>A ↔ B</th></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.4.1: Umkehrung der Implikation <span class="niveau">AFB I</span></summary>
+                <p>Gegeben sind A: „Du hast ein gültiges Ticket.“ und B: „Du darfst in die Straßenbahn einsteigen.“</p>
+                <ol>
+                    <li>Erstelle die Wahrheitstabelle für A → B und für B → A.</li>
+                    <li>Formuliere beide Implikationen als Wenn-dann-Satz.</li>
+                    <li>Gib an, in welchen Zeilen sich A → B und B → A unterscheiden.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.4.2: Versprechen prüfen <span class="niveau">AFB II</span></summary>
+                <p>Ein Elternteil sagt: „Wenn du dein Zimmer aufräumst, darfst du heute Abend zocken.“ (A: Zimmer aufgeräumt, B: zocken erlaubt)</p>
+                <ol>
+                    <li>Gib an, in welcher der vier Situationen das Versprechen gebrochen wurde. Begründe mit der Wahrheitstabelle.</li>
+                    <li>Das Kind räumt nicht auf und darf trotzdem zocken. Beurteile, ob das Versprechen damit gebrochen ist.</li>
+                    <li>Formuliere den Satz so um, dass er eine Äquivalenz ausdrückt.</li>
+                    <li>Zeige mit einer Wahrheitstabelle, dass (A → B) ∧ (B → A) dieselben Werte liefert wie A ↔ B.</li>
+                </ol>
+            </details>
+        </div>

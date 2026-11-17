@@ -1,0 +1,234 @@
+<p>
+            In der Informatik verwendest du Automaten als theoretische Modelle, um Berechnungen und Sprachverarbeitung zu beschreiben. Stelle dir einen Automaten wie eine Maschine vor, die Eingaben verarbeitet und nach festen Regeln entscheidet, ob sie eine Eingabe akzeptiert. Es gibt verschiedene Arten von Automaten, die sich in ihrer Leistungsfähigkeit unterscheiden.
+        </p>
+
+<h2>1. Deterministischer endlicher Automat (DEA) – Wiederholung</h2>
+
+<p>
+            Ein DEA ist der einfachste Typ von Automat. Stelle dir einen DEA wie ein Flussdiagramm vor, bei dem du von einem Startpunkt aus, abhängig von der Eingabe, eindeutig von einem Zustand zum nächsten gelangst.
+        </p>
+
+<p>Formale Definition: Ein DEA ist ein 5-Tupel (Q, Σ, δ, q0, F), wobei</p>
+
+<ul>
+            <li>Q: eine endliche Menge von Zuständen (z.&nbsp;B. q0, q1, q2),</li>
+            <li>Σ: das Eingabealphabet (z.&nbsp;B. {0, 1} für Binärzahlen),</li>
+            <li>δ: Q × Σ → Q die Übergangsfunktion,</li>
+            <li>q0: der Startzustand (ein Element aus Q),</li>
+            <li>F: die Menge der akzeptierenden Endzustände (eine Teilmenge von Q).</li>
+        </ul>
+
+<h2>2. Nichtdeterministischer endlicher Automat (NEA)</h2>
+
+<p>
+            Ein NEA ist ähnlich wie ein DEA, aber er kann für eine Eingabe in einem Zustand mehrere mögliche Folgezustände haben – oder auch keinen. Stelle dir vor, der Automat kann sich „aufteilen“ und mehrere Wege gleichzeitig verfolgen, oder er „rät“ immer den richtigen Weg.
+        </p>
+
+<p>Formale Definition: Ein NEA ist ein 5-Tupel (Q, Σ, δ, q0, F), wobei</p>
+
+<ul>
+            <li>Q, Σ, q0 und F: wie beim DEA,</li>
+            <li>δ: Q × Σ → 𝒫(Q) (Die Übergangsfunktion bildet auf die Potenzmenge von Q ab, d.&nbsp;h., sie liefert eine <em>Menge</em> möglicher Folgezustände, eventuell die leere Menge ∅.)</li>
+        </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> NEA über {a, b} für alle Wörter, die auf <code>ab</code> enden: q0 hat Schleifen für a und b, zusätzlich q0 –a→ q1, q1 –b→ q2, q2 ist Endzustand.</p>
+            <p>Wort <code>aab</code>, Mengen der erreichbaren Zustände: {q0} –a→ {q0, q1} –a→ {q0, q1} –b→ {q0, q2}. Die Menge enthält q2, also wird <code>aab</code> akzeptiert. Ein akzeptierender Weg ist q0 –a→ q0 –a→ q1 –b→ q2. Der Weg q0 → q1 → ? bleibt dagegen nach dem zweiten a stecken – das ist erlaubt, es genügt ein erfolgreicher Weg.</p>
+            <ol>
+                <li><strong>Start:</strong> M = {q0}. <em>Warum?</em> Vor dem ersten Zeichen ist nur der Startzustand möglich.</li>
+                <li><strong>a lesen:</strong> q0 –a→ q0 und q0 –a→ q1, also M = {q0, q1}. <em>Warum?</em> Der NEA verfolgt beide Möglichkeiten gleichzeitig.</li>
+                <li><strong>a lesen:</strong> aus q0 wieder {q0, q1}, aus q1 gibt es kein a (Beitrag ∅), also M = {q0, q1}. <em>Warum?</em> Ein Weg, der steckenbleibt, fällt einfach weg.</li>
+                <li><strong>b lesen:</strong> aus q0 nach q0, aus q1 nach q2, also M = {q0, q2}.</li>
+                <li><strong>Entscheidung:</strong> q2 ∈ M, also gibt es mindestens einen akzeptierenden Weg.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>aab</code> wird akzeptiert.</p>
+            <p><strong>Kontrolle:</strong> <code>aba</code>: {q0} –a→ {q0, q1} –b→ {q0, q2} –a→ {q0, q1}. Am Ende fehlt q2 → verworfen, obwohl unterwegs q2 erreicht wurde.</p>
+            <p>Vergleiche mit dem DEA für dieselbe Sprache in Kapitel 6.7: Der NEA ist leichter zu entwerfen, weil er nur „raten“ muss, wo das Ende beginnt.</p>
+            </details>
+        </div>
+
+<h3>ε-Übergänge (ε-NEA)</h3>
+
+<p>Ein <strong>ε-NEA</strong> darf zusätzlich Übergänge mit der Beschriftung ε besitzen. Über einen ε-Übergang wechselt der Automat den Zustand, <em>ohne</em> ein Zeichen zu lesen. Die Übergangsfunktion ist dann δ: Q × (Σ ∪ {ε}) → 𝒫(Q).</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> ε-NEA für a*b*: q0 hat eine Schleife für a, q0 –ε→ q1, q1 hat eine Schleife für b, q1 ist Endzustand.</p>
+            <ul>
+                <li>Start: ε-Hülle({q0}) = {q0, q1} – also wird schon ε akzeptiert.</li>
+                <li><code>aab</code>: {q0, q1} –a→ {q0} → Hülle {q0, q1} –a→ {q0, q1} –b→ {q1} ✓ (akzeptiert)</li>
+                <li><code>ba</code>: {q0, q1} –b→ {q1} –a→ ∅ ✗ (verworfen)</li>
+            </ul>
+            <p><strong>Das Vorgehen bei jedem Zeichen:</strong></p>
+            <ol>
+                <li><strong>Hülle vor dem ersten Zeichen:</strong> {q0} wird zu {q0, q1} erweitert. <em>Warum?</em> Der Automat darf über ε nach q1 wechseln, ohne etwas zu lesen. Wer diesen Schritt vergisst, verwirft fälschlich ε und alle Wörter aus nur b.</li>
+                <li><strong>Zeichen lesen:</strong> Für jeden Zustand der Menge die Übergänge mit dem gelesenen Zeichen ausführen und die Ergebnisse vereinigen. Bei <code>aab</code>, erstes a: q0 → q0, q1 hat kein a → {q0}.</li>
+                <li><strong>Hülle nach jedem Zeichen:</strong> {q0} → {q0, q1}. <em>Warum?</em> Nach dem a dürfen sofort b folgen, dafür muss q1 wieder erreichbar sein.</li>
+                <li><strong>Die Falle bei <code>ba</code>:</strong> Nach dem b ist nur noch q1 möglich; von q1 führt kein ε-Übergang zurück nach q0. Ein a nach einem b ist deshalb nicht mehr lesbar – die Menge wird leer.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> ε und <code>aab</code> werden akzeptiert, <code>ba</code> wird verworfen – genau wie es der Ausdruck a*b* verlangt.</p>
+            <p><strong>Kontrolle:</strong> <code>bb</code>: {q0, q1} –b→ {q1} –b→ {q1} ✓ – ohne die Start-Hülle wäre dieses Wort fälschlich verworfen worden.</p>
+            <p>ε-Übergänge machen es leicht, Automaten für Teilausdrücke „hintereinanderzuschalten“. Genau so übersetzen Regex-Bibliotheken einen regulären Ausdruck in einen Automaten (Thompson-Konstruktion).</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: NEA in DEA umwandeln</summary>
+                <p>
+                    Du kannst jeden NEA (auch mit ε-Übergängen) in einen äquivalenten DEA umwandeln. Der resultierende DEA kann jedoch exponentiell mehr Zustände haben (bis zu 2<sup>|Q|</sup>). Das Verfahren heißt <strong>Potenzmengenkonstruktion</strong> und wird in <a href="../6-10-potenzmengenkonstruktion/">Kapitel 6.10</a> behandelt.
+                </p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: NEA in Regex-Engines und Lexer-Generatoren</summary>
+                <p><strong>Alltag:</strong> Wenn du in einem Editor (VS Code, Notepad++) oder mit <code>grep</code> nach einem regulären Ausdruck wie <code>colou?r</code> suchst, wird der Ausdruck zuerst in einen NEA mit ε-Übergängen übersetzt und dann simuliert oder in einen DEA umgewandelt.</p>
+                <p><strong>Beruf:</strong> Lexer-Generatoren wie flex oder die Lexer-Stufe von ANTLR erzeugen aus den regulären Ausdrücken aller Token einen ε-NEA, wandeln ihn per Potenzmengenkonstruktion in einen DEA um und minimieren ihn. Softwareentwicklerinnen in Sicherheitsfirmen setzen dasselbe Prinzip in Intrusion-Detection-Systemen ein, die Netzwerkverkehr in Echtzeit nach tausenden Angriffsmustern durchsuchen.</p>
+            </details>
+        </div>
+
+<h2>3. Weitere Automatentypen</h2>
+
+<p>Neben endlichen Automaten werden in der Informatik weitere Modelle betrachtet, die unterschiedliche Arten von Sprachen bzw. Problemen erfassen.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Weitere Automatentypen</summary>
+                <h3>Kellerautomat</h3>
+                <p>
+                    Ein Kellerautomat erweitert den endlichen Automaten um einen Stapelspeicher (Keller). Stelle dir einen Kellner vor, der Teller stapelt und immer nur den obersten Teller sehen und nehmen kann (LIFO – last in, first out).
+                </p>
+                <p>Formale Definition: Ein Kellerautomat ist ein 7-Tupel (Q, Σ, Γ, δ, q0, Z0, F), wobei</p>
+                <ul>
+                    <li>Q, Σ, q0 und F: wie beim DEA,</li>
+                    <li>Γ: das Kelleralphabet (Symbole, die du auf den Keller legen kannst),</li>
+                    <li>δ: Q × (Σ ∪ {ε}) × Γ → 𝒫(Q × Γ*) (Die Übergangsfunktion berücksichtigt den aktuellen Zustand, die Eingabe – oder ε für einen Übergang ohne Lesen – und das oberste Kellersymbol.),</li>
+                    <li>Z0: das Startsymbol im Keller.</li>
+                </ul>
+
+                <h3>Linear beschränkter Automat (LBA)</h3>
+                <p>Ein LBA ist eine nichtdeterministische Turingmaschine, deren Kopf den Bereich der Eingabe nicht verlassen darf. Sie kann also lesen, schreiben und sich in beide Richtungen bewegen, hat aber nur so viel Platz, wie die Eingabe lang ist. LBAs erkennen genau die kontextsensitiven Sprachen.</p>
+
+                <h3>Turingmaschine</h3>
+                <p>
+                    Eine Turingmaschine ist das mächtigste Automatenmodell. Stelle dir ein unendlich langes Band vor, auf dem du lesen, schreiben und dich in beide Richtungen bewegen kannst.
+                </p>
+                <p>Formale Definition: Eine Turingmaschine ist ein 7-Tupel (Q, Σ, Γ, δ, q0, b, F), wobei</p>
+                <ul>
+                    <li>Q, Σ, q0 und F: wie beim DEA,</li>
+                    <li>Γ: das Bandalphabet (enthält alle Symbole, die auf dem Band vorkommen können, einschließlich Σ und b),</li>
+                    <li>δ: Q × Γ → Q × Γ × {L, R} (Die Übergangsfunktion legt fest, in welchen Zustand übergegangen wird, welches Symbol geschrieben wird und ob der Lese-/Schreibkopf nach links (L) oder rechts (R) bewegt wird.),</li>
+                    <li>b: das Leersymbol (für unbeschriebene Bandabschnitte).</li>
+                </ul>
+
+                <h3>Registermaschine</h3>
+                <p>
+                    Eine Registermaschine arbeitet mit einer endlichen Anzahl von Registern, die beliebig große natürliche Zahlen speichern können. Stelle dir eine Rechenmaschine mit mehreren Zählern vor.
+                </p>
+                <p>Formale Definition (vereinfacht): Eine Registermaschine ist ein 4-Tupel (Q, R, δ, q0), wobei</p>
+                <ul>
+                    <li>Q: die Menge der Zustände bzw. Programmzeilen,</li>
+                    <li>R: die Menge der Register,</li>
+                    <li>δ: Q → (Q × Operation) ∪ {HALT} (Die Übergangsfunktion gibt den nächsten Zustand und die auszuführende Operation an oder beendet die Berechnung),</li>
+                    <li>q0: der Startzustand.</li>
+                </ul>
+
+                <div class="merke">
+                    <p>
+                        <strong>Merke:</strong><br>
+                        Die Automatentypen unterscheiden sich in ihrer Mächtigkeit:
+                        DEA = NEA &lt; Kellerautomat &lt; linear beschränkter Automat &lt; Turingmaschine = Registermaschine.<br>
+                        Diese Hierarchie entspricht den Sprachklassen in der Chomsky-Hierarchie.
+                    </p>
+                </div>
+
+                <h3>Bezug zur Chomsky-Hierarchie</h3>
+                <p>
+                    Die Chomsky-Hierarchie, benannt nach dem Linguisten Noam Chomsky, klassifiziert formale Sprachen und Grammatiken in vier Typen. Jeder Automatentyp entspricht einer Sprachklasse in dieser Hierarchie:
+                </p>
+                <ul>
+                    <li>Typ 3 (reguläre Sprachen): endliche Automaten (DEA/NEA)</li>
+                    <li>Typ 2 (kontextfreie Sprachen): (nichtdeterministische) Kellerautomaten</li>
+                    <li>Typ 1 (kontextsensitive Sprachen): linear beschränkte Automaten</li>
+                    <li>Typ 0 (rekursiv aufzählbare Sprachen): Turingmaschinen</li>
+                </ul>
+            </details>
+        </div>
+
+<h3>Einen Kellerautomaten Schritt für Schritt verfolgen</h3>
+
+<p>Den Ablauf eines Kellerautomaten beschreibt man mit <strong>Konfigurationen</strong> (Zustand, Resteingabe, Kellerinhalt); das oberste Kellersymbol steht links. Ein Rechenschritt wird mit ⊢ notiert. Der Automat akzeptiert, wenn er die Eingabe vollständig gelesen hat und in einem Endzustand ist.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">Kellerautomat</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Editor prüft, ob runde Klammern korrekt geschachtelt sind. Kellerautomat K = ({q0, qf}, {(, )}, {X, Z0}, δ, q0, Z0, {qf}) mit</p>
+            <ul>
+                <li>δ(q0, (, Z0) = {(q0, XZ0)} und δ(q0, (, X) = {(q0, XX)} – für jede öffnende Klammer ein X auf den Keller legen,</li>
+                <li>δ(q0, ), X) = {(q0, ε)} – für jede schließende Klammer ein X entfernen,</li>
+                <li>δ(q0, ε, Z0) = {(qf, Z0)} – liegt nur noch Z0 im Keller, darf der Automat ohne Lesen in den Endzustand wechseln.</li>
+            </ul>
+            <p><strong>Konfigurationsfolge für <code>(()())</code>:</strong></p>
+            <ol>
+                <li>(q0, <code>(()())</code>, Z0) ⊢ (q0, <code>()())</code>, XZ0) – erste ( gelesen, X auf Z0 gelegt.</li>
+                <li>⊢ (q0, <code>)())</code>, XXZ0) – zweite ( gelesen; der Keller zählt jetzt zwei offene Klammern.</li>
+                <li>⊢ (q0, <code>())</code>, XZ0) – ) gelesen, oberstes X entfernt. <em>Warum?</em> Diese Klammer schließt die zuletzt geöffnete (LIFO).</li>
+                <li>⊢ (q0, <code>))</code>, XXZ0) ⊢ (q0, <code>)</code>, XZ0) ⊢ (q0, ε, Z0) – nach den restlichen drei Zeichen liegt nur noch Z0 im Keller.</li>
+                <li>⊢ (qf, ε, Z0) – ε-Übergang in den Endzustand. Eingabe gelesen, Zustand qf → <strong>akzeptiert</strong>.</li>
+            </ol>
+            <p><strong>Die Fallen:</strong></p>
+            <ul>
+                <li><code>())</code>: (q0, <code>())</code>, Z0) ⊢ (q0, <code>))</code>, XZ0) ⊢ (q0, <code>)</code>, Z0). Für ) mit Z0 oben gibt es keinen Übergang. Der ε-Übergang nach qf hilft nicht, denn danach ist die Eingabe noch nicht gelesen → <strong>verworfen</strong> (zu viele schließende Klammern).</li>
+                <li><code>((</code>: (q0, <code>((</code>, Z0) ⊢ (q0, <code>(</code>, XZ0) ⊢ (q0, ε, XXZ0). Oben liegt X, der Wechsel nach qf ist nicht möglich → <strong>verworfen</strong> (Klammern nicht geschlossen).</li>
+                <li>Bei <code>()()</code> liegt schon nach <code>()</code> nur Z0 im Keller. Der Automat <em>könnte</em> jetzt nach qf wechseln, bliebe dort aber mit Resteingabe stecken. Wie beim NEA genügt es, dass <em>ein</em> Weg – hier: in q0 weiterlesen – akzeptiert.</li>
+            </ul>
+            <p><strong>Ergebnis:</strong> Der Keller speichert, wie viele Klammern offen sind – und zwar beliebig viele. Genau das kann ein endlicher Automat nicht.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Merke:</strong> Bei einem DEA gibt es für jede Eingabe in jedem Zustand genau einen Folgezustand. Jedes Wort hat daher genau einen Berechnungsweg.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Merke: Akzeptanz beim NEA</strong><br>
+            Ein NEA <strong>akzeptiert</strong> ein Wort w, wenn es <strong>mindestens einen</strong> Berechnungsweg gibt, der w vollständig liest und in einem Endzustand endet.<br>
+            Er <strong>verwirft</strong> w, wenn <em>alle</em> möglichen Wege entweder steckenbleiben (kein Übergang vorhanden) oder nach dem letzten Zeichen in einem Nicht-Endzustand enden.<br>
+            Praktisch prüft man das, indem man Zeichen für Zeichen die <em>Menge</em> aller erreichbaren Zustände mitführt: w wird akzeptiert, wenn diese Menge am Ende einen Endzustand enthält.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Merke:</strong> Die <strong>ε-Hülle</strong> eines Zustands q ist die Menge aller Zustände, die von q aus allein über ε-Übergänge erreichbar sind (q selbst eingeschlossen). Beim Prüfen eines Wortes bildet man nach jedem Schritt – und schon vor dem ersten Zeichen – die ε-Hülle der erreichten Zustände. ε-NEA, NEA und DEA erkennen genau dieselbe Sprachklasse: die regulären Sprachen.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.9.1: <span class="niveau">AFB I/II</span></summary>
+                <p>Beschreibe, was dieser Automat macht, und erkläre, warum es sich um einen NEA handelt.</p>
+                <figure>
+                    <img src="../img/NEA.png" width="400" alt="NEA mit Zuständen q0, q1, q2">
+                    <figcaption>Abb. 1: NEA</figcaption>
+                </figure>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.9.2: <span class="niveau">AFB II</span></summary>
+                <p>
+                    Entwirf einen einfachen DEA, der Binärzahlen akzeptiert, die durch 3 teilbar sind. Zeichne das Zustandsdiagramm und gib die formale Definition als 5-Tupel an.
+                </p>
+                <p>
+                    <strong>Hinweis:</strong> Führende Nullen sind erlaubt. Das leere Wort und die 0 stehen für den Wert 0 und werden akzeptiert, weil 0 durch 3 teilbar ist.
+                </p>
+            </details>
+        </div>

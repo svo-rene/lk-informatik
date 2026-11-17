@@ -1,0 +1,223 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.6.3: Grammatiken entwerfen und einordnen <span class="niveau">AFB II/III</span></summary>
+<ol>
+<li>Gib eine Grammatik für alle Binärzahlen ohne führende Nullen an, deren Wert gerade ist. Die Zahl 0 gehört dazu.</li>
+<li>Gib eine Grammatik für alle korrekt geklammerten Ausdrücke aus ( und ) an, etwa (()()) oder ().</li>
+<li>Ordne beide Grammatiken in die Chomsky-Hierarchie ein.</li>
+<li>Begründe, warum sich die Sprache aus 2 nicht mit einer regulären Grammatik beschreiben lässt.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.6.4: Interaktives Zuordnungsquiz <span class="niveau">AFB I–III</span></summary>
+<p>Ordne die angezeigten Grammatiken dem passenden <strong>Typ 0–3</strong> zu (jeweils der speziellste Typ, den alle Regeln erfüllen). Nach dem Klick erhältst du sofort Feedback. Mit „Lösungen anzeigen“ werden alle Lösungen eingeblendet.</p>
+
+<div class="quiz-chomsky" role="region" aria-label="Interaktives Chomsky-Quiz">
+  <div class="toolbar" style="display:flex;gap:.5rem;flex-wrap:wrap;justify-content:space-between;align-items:center;margin:.5rem 0 1rem 0">
+    <div class="kpis" style="display:flex;gap:.5rem;align-items:center">
+      <div class="kpi" aria-live="polite" style="border:1px solid #999;padding:.25rem .5rem;border-radius:.5rem">Punktzahl: <b id="quiz-score">0</b>/<span id="quiz-total">0</span></div>
+      <div class="kpi" style="border:1px solid #999;padding:.25rem .5rem;border-radius:.5rem">Gelöst: <b id="quiz-answered">0</b></div>
+    </div>
+    <div class="actions">
+      <button id="quiz-reset">Zurücksetzen</button>
+      <button id="quiz-reveal">Lösungen anzeigen</button>
+    </div>
+  </div>
+
+  <div id="quiz-cards" class="grid" style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))"></div>
+
+  <p style="font-size:90%;opacity:.85;margin-top:1rem">Tipp: Prüfe zuerst die <em>linke Seite</em> jeder Regel. Steht dort mehr als ein Symbol, ist die Grammatik höchstens vom Typ 1. Ist eine Regel verkürzend (rechts kürzer als links, Ausnahme S → ε), ist die Grammatik nicht mehr vom Typ 1, sondern nur vom Typ 0.</p>
+</div>
+
+<style>
+/* Quiz-Stile auf den Container begrenzt */
+.quiz-chomsky .card{background:#fff;border:2px solid #000;border-radius:8px;padding:10px}
+.quiz-chomsky .pill{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;background:#f2f2f2;border:1px solid #999}
+.quiz-chomsky .grammar{font-family:Consolas, 'Courier New', monospace;background:#f5f5f5;border:1px solid #ddd;border-radius:6px;padding:8px;margin:.25rem 0 .5rem 0}
+.quiz-chomsky .options{display:grid;gap:6px}
+.quiz-chomsky button.option{appearance:none;border:2px solid #000;background:#fff;color:#000;padding:.5rem .6rem;border-radius:8px;cursor:pointer;text-align:left}
+.quiz-chomsky button.option:hover{background:#fdfda5}
+.quiz-chomsky button.option[disabled]{opacity:.6;cursor:not-allowed}
+.quiz-chomsky .feedback{margin-top:.4rem;font-size:90%}
+.quiz-chomsky .feedback.ok{color:#006400}
+.quiz-chomsky .feedback.err{color:#8B0000}
+.quiz-chomsky .toolbar button{border:2px solid #000;background:#f2f2f2;border-radius:8px;padding:.4rem .6rem;cursor:pointer}
+.quiz-chomsky .toolbar button:hover{background:#e6e6e6}
+</style>
+
+<script>
+(function(){
+  const TYPES = {
+    "3":"Typ 3 – regulär",
+    "2":"Typ 2 – kontextfrei",
+    "1":"Typ 1 – kontextsensitiv",
+    "0":"Typ 0 – unbeschränkt"
+  };
+
+  // Aufgaben in drei Niveaus (leicht → schwer)
+  const QUESTIONS = [
+    { id:"A", lvl:"leicht",
+      grammar:["S → aS | bS | ε"],
+      correct:"3",
+      why:{ ok:"Rechtslineare Regeln (A → aB bzw. A → ε) ⇒ regulär (Typ 3). Hinweis: Hier wird die in 6.6 beschriebene ε-Variante verwendet.",
+            hint:"Regeln der Form A → aB, A → a (bzw. A → ε) sind das Kennzeichen von Typ 3." }
+    },
+    { id:"B", lvl:"leicht",
+      grammar:["S → aSb | ab"],
+      correct:"2",
+      why:{ ok:"Links steht nur ein Nichtterminal (S), rechts steht S in der Mitte ⇒ Typ 2. Die Sprache {aⁿbⁿ} ist auch nicht regulär.",
+            hint:"Form A → γ mit genau einem Nichtterminal links ⇒ mindestens Typ 2. Steht das Nichtterminal rechts nicht am Rand, ist es nicht Typ 3." }
+    },
+    { id:"C", lvl:"mittel",
+      grammar:["S → AB","AB → BA","A → a","B → b"],
+      correct:"1",
+      why:{ ok:"Links steht teils mehr als ein Symbol (AB), keine Regel ist verkürzend ⇒ Typ 1.",
+            hint:"Mehr als ein Symbol auf der linken Seite, aber nicht verkürzend ⇒ kontextsensitiv (Typ 1)." }
+    },
+    { id:"D", lvl:"mittel",
+      grammar:["S → aSbS | ε"],
+      correct:"2",
+      why:{ ok:"Links nur ein Nichtterminal, rechts mehrere ⇒ kontextfrei (Typ 2).",
+            hint:"Ein Nichtterminal links ⇒ Typ 2; wegen aSbS nicht Typ 3." }
+    },
+    { id:"E", lvl:"mittel",
+      grammar:["S → aA","A → bB","B → c"],
+      correct:"3",
+      why:{ ok:"Alle Regeln haben die Form A → aB oder A → a ⇒ regulär (Typ 3).",
+            hint:"Rechtslineare Regeln sind das Erkennungsmerkmal für Typ 3." }
+    },
+    { id:"F", lvl:"schwer",
+      grammar:["S → aS | a","aS → Sa"],
+      correct:"1",
+      why:{ ok:"Links steht Kontext (aS), rechts ist es nicht kürzer ⇒ Typ 1.",
+            hint:"Mehr als ein Symbol links, nicht verkürzend ⇒ Typ 1." }
+    },
+    { id:"G", lvl:"schwer",
+      grammar:["S → aS | SS | ε"],
+      correct:"2",
+      why:{ ok:"Links stets ein Nichtterminal ⇒ kontextfrei. Wegen SS ist die Grammatik nicht regulär. Achtung: Die erzeugte Sprache a* ist trotzdem regulär (z. B. durch S → aS | ε) – gefragt ist hier der Typ der Grammatik.",
+            hint:"Zwei Nichtterminale auf der rechten Seite (SS) ⇒ die Grammatik ist nicht vom Typ 3." }
+    },
+    { id:"H", lvl:"schwer",
+      grammar:["SS → S","S → a | b"],
+      correct:"0",
+      why:{ ok:"Die Regel SS → S ist verkürzend (2 Symbole → 1). Das ist ab Typ 1 verboten ⇒ die Grammatik ist nur vom Typ 0. (Die erzeugte Sprache {a, b} ist trotzdem sehr einfach – der Grammatiktyp beschreibt nur die Form der Regeln.)",
+            hint:"Ist eine Regel verkürzend, erfüllt die Grammatik die Bedingungen von Typ 1 nicht mehr." }
+    },
+    { id:"I", lvl:"schwer",
+      grammar:["S → aSb | bSa | ε"],
+      correct:"2",
+      why:{ ok:"Ein Nichtterminal links ⇒ Typ 2. Die Sprache enthält u. a. alle aⁿbⁿ und ist nicht regulär. Achtung: Es sind keine Palindrome (ab ist kein Palindrom). Palindrome erzeugt z. B. S → aSa | bSb | a | b | ε.",
+            hint:"Ein Nichtterminal links, S rechts in der Mitte ⇒ Typ 2." }
+    },
+    { id:"J", lvl:"leicht",
+      grammar:["S → Sa | Sb | ε"],
+      correct:"3",
+      why:{ ok:"Linkslineare Regeln (A → Ba bzw. A → ε) ⇒ regulär (Typ 3).",
+            hint:"Auch linkslineare Grammatiken sind regulär." }
+    }
+  ];
+
+  let score = 0, answered = 0; const total = QUESTIONS.length;
+  const $cards = document.getElementById('quiz-cards');
+  const $score = document.getElementById('quiz-score');
+  const $ans = document.getElementById('quiz-answered');
+  const $total = document.getElementById('quiz-total');
+  $total.textContent = total;
+
+  function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a }
+
+  function render(){
+    $cards.innerHTML = '';
+    const qs = shuffle([...QUESTIONS]);
+    qs.forEach(q=>{
+      const card = document.createElement('section');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="pill">Grammatik ${q.id} • ${q.lvl}</div>
+        <div class="grammar">${q.grammar.map(line=>escapeHtml(line)).join('<br>')}</div>
+        <div class="options">
+          ${[['0','Typ 0 (unbeschränkt)'],['1','Typ 1 (kontextsensitiv)'],['2','Typ 2 (kontextfrei)'],['3','Typ 3 (regulär)']]
+            .map(([val,label])=>`<button class="option" data-q="${q.id}" data-val="${val}" aria-pressed="false">${label}</button>`).join('')}
+        </div>
+        <div class="feedback" id="quiz-fb-${q.id}" aria-live="polite"></div>
+      `;
+      $cards.appendChild(card);
+    });
+    $cards.querySelectorAll('button.option').forEach(btn=>btn.addEventListener('click', onPick));
+  }
+
+  function onPick(e){
+    const btn = e.currentTarget;
+    const id = btn.dataset.q;
+    const val = btn.dataset.val;
+    const q = QUESTIONS.find(x=>x.id===id);
+    const siblings = [...btn.parentElement.querySelectorAll('button.option')];
+    if(siblings.some(b=>b.disabled)) return;
+    const ok = (val === q.correct);
+    const fb = document.getElementById(`quiz-fb-${id}`);
+    siblings.forEach(b=> b.disabled = true);
+    btn.style.borderColor = ok ? '#006400' : '#8B0000';
+    btn.style.background = ok ? '#adfb95' : '#ffa0a0';
+    fb.classList.toggle('ok', ok); fb.classList.toggle('err', !ok);
+    fb.textContent = ok ? `Richtig: ${q.why.ok}` : `Nicht ganz. ${q.why.hint}`;
+    answered += 1; if(ok) score += 1;
+    $score.textContent = score; $ans.textContent = answered;
+  }
+
+  function resetAll(){
+    score = 0; answered = 0; $score.textContent = '0'; $ans.textContent = '0';
+    render();
+  }
+  function revealAll(){
+    document.querySelectorAll('.quiz-chomsky button.option').forEach(btn=>btn.disabled=true);
+    QUESTIONS.forEach(q=>{
+      const fb = document.getElementById(`quiz-fb-${q.id}`);
+      if(!fb) return;
+      fb.classList.remove('err'); fb.classList.add('ok');
+      fb.innerHTML = `Lösung: <b>${TYPES[q.correct]}</b>. ${escapeHtml(q.why.ok)}`;
+    });
+  }
+  function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  document.getElementById('quiz-reset').addEventListener('click', resetAll);
+  document.getElementById('quiz-reveal').addEventListener('click', revealAll);
+
+  render();
+})();
+</script>
+
+</details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.6.5: Grammatiken entwerfen und einordnen <span class="niveau">AFB II</span></summary>
+<p>Gib für jede Sprache eine Grammatik von möglichst speziellem Typ an und ordne sie ein. Prüfe deine Grammatik jeweils an zwei Wörtern.</p>
+<ol type="a">
+<li>alle Wörter über {a, b}, die mindestens ein b enthalten</li>
+<li>{a<sup>n</sup>cb<sup>n</sup> | n ≥ 0}, z.&nbsp;B. c, acb, aacbb</li>
+<li>alle Wörter über {a, b} mit gleich vielen a wie b (einschließlich ε)</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.6.6: Typ der Grammatik oder Typ der Sprache? <span class="niveau">AFB II</span></summary>
+<p>Gegeben ist G mit S → AB, A → aA | a, B → bB | b.</p>
+<ol type="a">
+<li>Ordne G in die Chomsky-Hierarchie ein.</li>
+<li>Gib L(G) an.</li>
+<li>Gib eine Typ-3-Grammatik für L(G) an und erkläre, was das über den Typ der Sprache aussagt.</li>
+<li>Leite <code>aabbb</code> in beiden Grammatiken ab.</li>
+</ol>
+</details>
+</div>

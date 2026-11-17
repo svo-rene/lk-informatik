@@ -1,0 +1,41 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.0.1.5: Fehler finden – negative Messwerte entfernen <span class="niveau">AFB III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/negative_werte.py</code> – neu anlegen; hochladen, sobald dein Repository steht (Seite 3.0.2)<br><strong>Commits:</strong> zuerst das Programm aus der Aufgabe unverändert: <code>3.0.1.5: Ausgangsprogramm mit pop(i) übernommen</code> · nach Teil 4: <code>3.0.1.5 Teil 4: neue Liste in O(n), 4 Tests ok</code></p>
+                <p>Ein Temperatursensor liefert gelegentlich ungültige negative Werte. Sie sollen aus der Liste entfernt werden:</p>
+                <pre><code class="language-python">def entferne_negative(werte):
+    for i in range(len(werte)):
+        if werte[i] &lt; 0:
+            werte.pop(i)
+
+messung = [3, -1, -2, 5]
+entferne_negative(messung)
+print(messung)</code></pre>
+                <ol>
+                    <li>Verfolge den Ablauf Schritt für Schritt mit einer Tabelle (i, Liste vor dem Schritt, Aktion). Gib die tatsächliche Ausgabe bzw. Fehlermeldung an.</li>
+                    <li>Benenne die beiden Fehler, die beim Löschen während des Durchlaufens entstehen.</li>
+                    <li>Auch eine korrigierte Fassung, die weiterhin <code>pop(i)</code> benutzt, ist bei einer Liste mit 1&nbsp;000&nbsp;000 Messwerten, von denen die Hälfte negativ ist, sehr langsam. Begründe das mit der O-Notation.</li>
+                    <li>Schreibe eine Fassung in O(n), die eine neue Liste nur mit den gültigen Werten aufbaut, und teste sie:</li>
+                </ol>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>[3, -1, -2, 5]</code></td><td><code>[3, 5]</code></td><td></td></tr>
+                        <tr><td><code>[]</code></td><td><code>[]</code></td><td></td></tr>
+                        <tr><td><code>[-4, -4]</code></td><td><code>[]</code></td><td></td></tr>
+                        <tr><td><code>[0, 7]</code></td><td><code>[0, 7]</code> – 0 ist kein negativer Wert</td><td></td></tr>
+                    </tbody>
+                </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.0.1.6: Beurteile den Vorschlag <span class="niveau">AFB III</span></summary>
+                <p>Ein Entwickler des Spiels aus Beispiel 2 schreibt in den Team-Chat: „Wir suchen die Einfügestelle ab jetzt mit binärer Suche. Damit ist das Einfügen in die Bestenliste O(log n) und auch bei 10 Millionen Spielern kein Problem mehr.“</p>
+                <p>Beurteile die Aussage. Rechne dazu für 10&nbsp;000&nbsp;000 Einträge die Vergleiche der binären Suche und die Verschiebungen im Mittel aus und mache einen begründeten Vorschlag, wie das Team weiter vorgehen sollte.</p>
+                <p class="tipp">Überlege, ob wirklich nach jeder Runde die ganze Liste aktuell sein muss.</p>
+            </details>
+        </div>

@@ -1,0 +1,211 @@
+<p>
+            Das <strong>CAP-Theorem</strong>, auch als Brewer-Theorem bekannt, beschreibt drei wünschenswerte
+            Eigenschaften eines <em>verteilten</em> Datenbanksystems, dessen Daten auf mehreren Rechnern (Knoten) liegen:
+            <strong>Consistency</strong> (Konsistenz), <strong>Availability</strong> (Verfügbarkeit) und
+            <strong>Partition Tolerance</strong> (Partitionstoleranz). Das Theorem besagt: Fällt die Netzwerkverbindung
+            zwischen den Knoten aus (eine <em>Partition</em>), kann das System nicht gleichzeitig konsistent und verfügbar
+            bleiben. Es muss sich in diesem Moment für C oder für A entscheiden.
+        </p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>
+                    Praxisbezug: Warum Banking-Apps und Online-Shops CAP in der Praxis brauchen
+                </summary>
+                <p>
+                    Stell dir vor, du überweist Geld per Banking-App und siehst kurz die Meldung „Dienst vorübergehend
+                    nicht erreichbar“ – statt eines falschen Kontostands. Das ist kein Zufall: Banken entscheiden sich
+                    bei einer Netzwerkstörung bewusst gegen Verfügbarkeit (Consistency vor Availability), damit niemals
+                    doppelte Buchungen oder falsche Salden angezeigt werden. Ein Online-Shop dagegen nimmt bei einem
+                    Serverproblem lieber weiterhin Bestellungen an (Availability vor Consistency) und gleicht Lagerbestände
+                    erst später ab – auch wenn dadurch selten ein Artikel doppelt verkauft wird. Wie real solche Kompromisse
+                    sind, zeigte der große AWS-Ausfall am 20. Oktober 2025 in der Region US-East-1: Ursache war ein Fehler
+                    in der automatischen DNS-Verwaltung des Datenbankdienstes DynamoDB. Zwei gleichzeitig laufende
+                    Aktualisierungen gerieten sich in die Quere (eine sogenannte Race Condition), und am Ende war der
+                    DNS-Eintrag des DynamoDB-Endpunkts leer. Die Datenbank selbst lief weiter, aber Anwendungen fanden ihre
+                    Adresse nicht mehr – sie war für sie nicht <em>verfügbar</em>. Weil viele andere AWS-Dienste intern
+                    DynamoDB nutzen, folgte eine Kettenreaktion, durch die u.&nbsp;a. Signal, Snapchat, Slack, Zoom und
+                    Fortnite stundenlang gestört waren. Der Ausfall zeigt, wie abhängig weltweit genutzte Systeme von der
+                    Verfügbarkeit eines einzelnen Datenbankdienstes sind.
+                </p>
+                <p><strong>Berufsfelder:</strong> In der IT arbeiten u.&nbsp;a. Cloud- und Infrastruktur-Architekt*innen,
+                    Site Reliability Engineers (SRE), Backend-Entwickler*innen und Datenbankadministrator*innen direkt mit
+                    solchen Trade-offs. Aber auch außerhalb der reinen Technik ist das Thema relevant: Im IT-Projektmanagement
+                    muss entschieden werden, welches Verhalten bei Störungen fachlich vertretbar ist, im Produktmanagement bei
+                    Fintechs und Banken wird festgelegt, wie ein System sich Kund*innen gegenüber bei Ausfällen verhalten soll,
+                    und in der IT-Revision/IT-Auditing sowie im Risikomanagement wird geprüft, ob Systeme regulatorische
+                    Anforderungen an Konsistenz und Verfügbarkeit erfüllen.
+                </p>
+                <p><strong>Weiterlesen:</strong>
+                    <a href="https://www.heise.de/hintergrund/Won-t-fix-Teil-3-Warum-verteilter-Konsens-schwer-bis-unmoeglich-ist-11350521.html" target="_blank" rel="noopener">Won't fix! – Teil 3: Warum verteilter Konsens schwer bis unmöglich ist</a>
+                    &nbsp;/&nbsp;
+                    <a href="https://der-it-blog.de/2025/aws-stoerung-vom-20-oktober-2025-was-passiert-ist-warum-es-alle-traf-und-wie-sie-sich-gegen-ausfaelle-und-cyberangriffe-wappnen/" target="_blank" rel="noopener">AWS-Störung vom 20. Oktober 2025: Was passiert ist, warum es alle traf – und wie Sie sich gegen Ausfälle und Cyberangriffe wappnen</a>
+                </p>
+            </details>
+        </div>
+
+<p>Überblick:</p>
+
+<table border="1">
+            <thead>
+              <tr>
+                <th>Kategorie</th>
+                <th>Merkmale</th>
+                <th>Datenbanktypen</th>
+                <th>Beispiel-Szenarien</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CA</td>
+                <td>Konsistenz und Verfügbarkeit, aber nur, weil es keine Partition geben kann: Das System ist <em>nicht verteilt</em></td>
+                <td>Relationale Datenbank auf einem einzelnen Server (z.&nbsp;B. SQLite, eine einzelne MySQL- oder PostgreSQL-Instanz)</td>
+                <td>Vereinsverwaltung, Schulverwaltung, kleine Onlineshops; fällt der Server aus, ist allerdings alles weg</td>
+              </tr>
+              <tr>
+                <td>CP</td>
+                <td>Starke Konsistenz und Partitionstoleranz, eingeschränkte Verfügbarkeit bei Partitionierung</td>
+                <td>Dokumentenorientierte Datenbanken wie MongoDB, Graphdatenbanken (je nach Konfiguration)</td>
+                <td>Verteilte Content-Management-Systeme, die auf Konsistenz angewiesen sind</td>
+              </tr>
+              <tr>
+                <td>AP</td>
+                <td>Hohe Verfügbarkeit und Partitionstoleranz, „letztendliche Konsistenz“ (eventual consistency)</td>
+                <td>Key-Value-, spalten- oder zeitreihenorientierte Datenbanken, dokumentenorientierte Datenbanken wie CouchDB</td>
+                <td>Social-Media-Plattformen, IoT-Anwendungen, die hohe Verfügbarkeit benötigen</td>
+              </tr>
+            </tbody>
+        </table>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Nicht jede Datenbank passt eindeutig in eine Kategorie
+                </summary>
+                <p>
+                    Auch innerhalb einer Datenbankkategorie kann die CAP-Einordnung je nach konkretem System
+                    unterschiedlich ausfallen: MongoDB priorisiert in der Standardkonfiguration Konsistenz und
+                    Partitionstoleranz (CP) – bei einer Netzwerkteilung stoppt der Primärknoten lieber
+                    Schreibzugriffe, statt inkonsistente Daten zuzulassen. CouchDB dagegen ist eher auf
+                    Verfügbarkeit und Partitionstoleranz (AP) ausgelegt und lässt bei einer Netzwerkteilung
+                    Schreibzugriffe auf mehreren Knoten zu, mit späterer Konfliktauflösung. Mehr dazu findest du
+                    auf Seite 2.2 (NoSQL-Datenbanken).
+                </p>
+            </details>
+        </div>
+
+<p>
+            Die relationalen Datenbanken aus Kapitel 1 laufen meist auf einem einzigen Server. Dort gibt es keine
+            Partition, das CAP-Theorem greift also gar nicht – das System ist konsistent und verfügbar, solange der Server
+            läuft (Einordnung „CA“). Werden relationale Datenbanken auf mehrere Server verteilt (Replikation), müssen auch
+            sie wählen: Mit <em>synchroner</em> Replikation wartet jeder Schreibzugriff, bis alle Kopien bestätigt haben –
+            bei einer Netzwerkstörung werden Schreibzugriffe dann abgelehnt (CP). Mit <em>asynchroner</em> Replikation
+            bleibt das System erreichbar, eine Kopie kann aber kurzzeitig veraltete Daten liefern (AP-Verhalten).
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Ein Kontostand auf zwei Knoten</summary>
+            <p><strong>Ausgangssituation:</strong> Eine Bank speichert den Kontostand von Mia auf zwei Knoten, Knoten D (Dresden)
+               und Knoten L (Leipzig). Beide zeigen 500&nbsp;€. Um 10:00 Uhr reißt die Verbindung zwischen D und L ab (Partition).
+               Um 10:01 Uhr hebt Mia über Knoten D 200&nbsp;€ ab. Um 10:02 Uhr fragt ihr Vater über Knoten L den Kontostand ab.</p>
+            <ol>
+                <li><strong>Prüfen, ob eine Partition vorliegt</strong> – ja: D und L können sich nicht mehr abstimmen. Nur in diesem Fall
+                    muss das System zwischen C und A wählen.</li>
+                <li><strong>Den Zustand der Knoten notieren</strong> – D kennt 300&nbsp;€, L kennt noch 500&nbsp;€, weil die Abbuchung
+                    L nicht erreicht.</li>
+                <li><strong>Verhalten als CP-System bestimmen</strong> – L kann nicht sicher sein, den aktuellen Stand zu kennen. Es
+                    antwortet deshalb mit einer Fehlermeldung („Dienst vorübergehend nicht verfügbar“). Konsistenz bleibt erhalten,
+                    Verfügbarkeit wird geopfert.</li>
+                <li><strong>Verhalten als AP-System bestimmen</strong> – L antwortet sofort mit 500&nbsp;€. Das System ist verfügbar,
+                    aber die Antwort ist veraltet. Nach dem Ende der Partition gleichen sich die Knoten an (letztendliche Konsistenz).</li>
+                <li><strong>Entscheiden</strong> – Ein falscher Kontostand kann zu Überziehungen führen, eine kurze Fehlermeldung schadet
+                    kaum. Die Bank wählt deshalb CP.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> CP: Knoten L meldet einen Fehler. AP: Knoten L meldet 500&nbsp;€ (veraltet). Für Kontostände ist CP angemessen.</p>
+            <p><strong>Kontrolle:</strong> Ohne Partition gäbe es keinen Konflikt: L hätte die Abbuchung sofort erhalten und 300&nbsp;€ gemeldet –
+               konsistent <em>und</em> verfügbar.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Ticketverkauf mit drei Knoten – eine Entscheidung je Funktion</summary>
+            <p><strong>Ausgangssituation:</strong> Ein Ticketshop für ein Konzert in der Messe Dresden läuft auf drei Knoten A, B und C.
+               Für Block K ist genau noch <strong>ein</strong> Sitzplatz frei. Um 19:00 Uhr fällt die Leitung zu Knoten C aus: A und B
+               sind miteinander verbunden, C ist allein. Der Shop hat zwei Funktionen: (1) einen bestimmten Platz kaufen und
+               (2) eine Saalübersicht anzeigen, wie viele Plätze ungefähr noch frei sind.</p>
+            <ol>
+                <li><strong>Die Partition beschreiben</strong> – Es entstehen zwei Teile: {A, B} mit zwei von drei Knoten (Mehrheit) und
+                    {C} mit einem Knoten (Minderheit). Das ist wichtig, weil ein CP-System meist nur die Mehrheit weiterarbeiten lässt:
+                    Zwei Teile können nicht beide eine Mehrheit haben, also kann es keine widersprüchlichen Entscheidungen geben.</li>
+                <li><strong>Funktion „Platz kaufen“ untersuchen</strong> – Kauft Jana den letzten Platz über A und gleichzeitig Paul
+                    denselben Platz über C, würde ein AP-System beide Käufe annehmen. Nach der Partition stünde ein Platz zweimal im
+                    Verkaufssystem – ein echter Schaden (Ärger am Einlass, Rückerstattung).</li>
+                <li><strong>Entscheidung für „Platz kaufen“: CP</strong> – {A, B} verkauft weiter, C lehnt Käufe ab („Bitte später erneut
+                    versuchen“). Paul ist kurz verärgert, aber kein Platz wird doppelt verkauft.</li>
+                <li><strong>Funktion „Saalübersicht“ untersuchen</strong> – Zeigt C noch „1 Platz frei in Block K“, obwohl er schon verkauft
+                    ist, entsteht kein Schaden: Spätestens beim Kauf wird erneut geprüft.</li>
+                <li><strong>Entscheidung für „Saalübersicht“: AP</strong> – Alle Knoten antworten sofort, auch mit leicht veralteten Daten.</li>
+                <li><strong>Die Falle vermeiden</strong> – „Wir nehmen einfach CA“ geht nicht: Das System ist verteilt, Partitionen
+                    kommen vor. Die Frage ist nie <em>ob</em>, sondern nur, wie sich das System <em>während</em> einer Partition verhält.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Dasselbe System trifft für verschiedene Funktionen unterschiedliche Entscheidungen: Kaufen ist CP, die
+               Übersicht ist AP. Reale Systeme stellen das je Anfrage ein (z.&nbsp;B. über Konsistenzstufen wie bei Cassandra oder MongoDB).</p>
+            <p><strong>Kontrolle:</strong> Für jede Entscheidung die Probefrage stellen: „Was ist der schlimmste Fall, wenn die Antwort veraltet
+               ist?“ – Doppelverkauf (schwer) → C vor A; ungenaue Anzeige (harmlos) → A vor C.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Consistency (Konsistenz):</strong> Jede Leseanfrage liefert den zuletzt geschriebenen Wert – egal, welcher Knoten antwortet. Alle Knoten zeigen also denselben Datenstand.<br>
+                <strong>Availability (Verfügbarkeit):</strong> Jede Anfrage an einen funktionierenden Knoten bekommt eine Antwort (keine Fehlermeldung, kein endloses Warten).<br>
+                <strong>Partition Tolerance (Partitionstoleranz):</strong> Das System arbeitet weiter, auch wenn Nachrichten zwischen Knoten verloren gehen oder das Netz in Teile zerfällt.
+            </p>
+            <p>
+                In einem verteilten System lassen sich Netzwerkstörungen nicht ausschließen, P ist dort also Pflicht.
+                Die eigentliche Wahl lautet deshalb: <strong>Im Fall einer Partition entweder Konsistenz (CP) oder
+                Verfügbarkeit (AP).</strong> Solange das Netz funktioniert, kann ein System durchaus C und A zugleich bieten.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Achtung, zweimal „C“:</strong> Das C in <strong>ACID</strong> und das C in <strong>CAP</strong>
+                bedeuten Verschiedenes. <em>ACID-Konsistenz</em> heißt: Eine Transaktion hält alle Regeln der Datenbank ein
+                (Primärschlüssel, Fremdschlüssel, CHECK- und NOT-NULL-Bedingungen) – das gilt auch für eine einzelne
+                Datenbank auf einem Server. <em>CAP-Konsistenz</em> heißt: Alle Kopien auf verschiedenen Knoten zeigen
+                denselben, aktuellen Wert – das ist nur bei verteilten Systemen ein Thema.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>ACID</strong> ist ein Prinzip, das sicherstellt, dass Datenbanktransaktionen zuverlässig und sicher ablaufen. Die vier Buchstaben stehen für die folgenden Eigenschaften:
+            </p>
+            <ul>
+                <li><strong>A – Atomicity (Atomarität):</strong> Eine Transaktion wird entweder vollständig ausgeführt oder gar nicht. Es gibt keinen Zwischenzustand. Wenn ein Fehler auftritt, werden alle Änderungen zurückgenommen (Rollback).</li>
+                <li><strong>C – Consistency (Konsistenz):</strong> Eine Transaktion bringt die Datenbank von einem regelkonformen Zustand in einen anderen. Alle definierten Regeln und Einschränkungen (Constraints) werden eingehalten.</li>
+                <li><strong>I – Isolation (Isolation):</strong> Mehrere Transaktionen, die gleichzeitig ausgeführt werden, beeinflussen sich nicht gegenseitig. Jede Transaktion läuft so ab, als wäre sie die einzige, die auf die Datenbank zugreift.</li>
+                <li><strong>D – Durability (Dauerhaftigkeit):</strong> Sobald eine Transaktion abgeschlossen ist, bleiben ihre Änderungen auch im Falle eines Systemausfalls dauerhaft bestehen.</li>
+            </ul>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.1: <span class="niveau">AFB II</span></summary>
+                <p>Vergleiche ein relationales Datenbanksystem (z.&nbsp;B. MySQL) mit einem verteilten NoSQL-System (z.&nbsp;B. MongoDB) hinsichtlich der drei Eigenschaften des CAP-Theorems. Unterscheide bei MySQL zwischen dem Betrieb auf einem Server und dem Betrieb mit Replikation.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.2: <span class="niveau">AFB II</span></summary>
+                <p>Ordne die folgenden Datenbanksysteme jeweils der Kategorie CA, CP oder AP zu und begründe deine Entscheidung: Redis, Cassandra, PostgreSQL, Neo4j. Recherchiere bei Bedarf, wie die Konsistenz in diesen Systemen konfiguriert werden kann.</p>
+            </details>
+        </div>

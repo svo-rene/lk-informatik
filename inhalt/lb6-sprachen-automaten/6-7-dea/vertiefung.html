@@ -1,0 +1,36 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.10: Fehler finden – ein Test, der nichts findet <span class="niveau">AFB III</span></summary>
+                <p>Tom soll einen DEA für „gerade Anzahl 0 <em>und</em> gerade Anzahl 1“ entwerfen. Er gibt diese Tabelle ab (Startzustand gg, Endzustand gg):</p>
+                <table>
+                    <thead><tr><th>δ</th><th>0</th><th>1</th></tr></thead>
+                    <tbody>
+                        <tr><td>→ gg (Endzustand)</td><td>ug</td><td>gu</td></tr>
+                        <tr><td>ug</td><td>gg</td><td>uu</td></tr>
+                        <tr><td>gu</td><td>uu</td><td>gg</td></tr>
+                        <tr><td>uu</td><td>ug</td><td>ug</td></tr>
+                    </tbody>
+                </table>
+                <p>Seine Testwörter ε, <code>00</code>, <code>11</code> und <code>0110</code> werden alle richtig entschieden.</p>
+                <ol type="a">
+                    <li>Bestätige das durch Angabe der Zustandsfolgen.</li>
+                    <li>Finde den fehlerhaften Übergang und ein möglichst kurzes Wort, das Toms Automat falsch entscheidet.</li>
+                    <li>Begründe, warum Toms Tests den Fehler nicht finden konnten, und formuliere eine Regel für die Auswahl von Testwörtern.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.11: Der Getränkeautomat in der Schulmensa <span class="niveau">AFB III</span></summary>
+                <p>Ein Getränk kostet 60&nbsp;ct. Der Automat nimmt nur 10-, 20- und 50-Cent-Münzen an (Zeichen z, w, f) und gibt kein Wechselgeld. Ein Kauf ist gültig, wenn die eingeworfenen Münzen <em>genau</em> 60&nbsp;ct ergeben.</p>
+                <ol type="a">
+                    <li>Entwirf einen vollständigen DEA über {z, w, f}, der genau die gültigen Münzfolgen akzeptiert. Erkläre die Bedeutung der Zustände.</li>
+                    <li>Prüfe <code>zf</code>, <code>wzf</code>, <code>wwz</code> und <code>zzzzzz</code> über die Zustandsfolge.</li>
+                    <li>Begründe, warum endlich viele Zustände genügen, obwohl beliebig lange Münzfolgen eingegeben werden können.</li>
+                    <li>Der Betreiber will auch Überzahlung zulassen (Summe mindestens 60&nbsp;ct). Beschreibe, wie sich dein Automat ändert, und beurteile, ob der Fangzustand dann noch nötig ist.</li>
+                </ol>
+            </details>
+        </div>

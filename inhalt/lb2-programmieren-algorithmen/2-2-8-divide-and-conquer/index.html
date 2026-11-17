@@ -1,0 +1,298 @@
+<p>Wie findest du in einem gedruckten Wörterbuch das Wort „Informatik“? Du schlägst ungefähr in der Mitte auf, siehst „M“ und weißt: Das gesuchte Wort liegt in der vorderen Hälfte. Mit dieser Hälfte machst du genauso weiter. Nach wenigen Schritten bist du am Ziel – das ist das Prinzip „Teile und herrsche“.</p>
+
+<p>Das Prinzip „Divide and Conquer“ (Teile und herrsche) ist eine grundlegende Strategie der Algorithmik. Ein komplexes Problem wird in kleinere, leichter lösbare Teilprobleme gleicher Art zerlegt. Diese werden (meist rekursiv) gelöst, und ihre Ergebnisse werden zur Gesamtlösung kombiniert.</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in fünf kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und rechne mit.</p>
+
+<ol class="schritte">
+            <li>Die Idee: Suchen durch Halbieren</li>
+            <li>Die binäre Suche in Python</li>
+            <li>Die binäre Suche Schritt für Schritt – danach Aufgabe 2.2.8.1</li>
+            <li>Wie schnell ist die binäre Suche?</li>
+            <li>Teilen, herrschen, kombinieren: das Maximum – danach Aufgabe 2.2.8.2 und 2.2.8.3</li>
+        </ol>
+
+<p>Zum Schluss findest du Anwendungen, den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Die Idee – Suchen durch Halbieren</h2>
+
+<p>In einer <strong>sortierten</strong> Liste muss man nicht jedes Element ansehen. Ein Blick in die Mitte genügt, um eine ganze Hälfte auszuschließen – genau wie beim Wörterbuch. Im Video wird die 23 in der Liste 2, 5, 8, 12, 16, 23, 38 gesucht. Achte auf die Zeiger <code>links</code>, <code>mitte</code> und <code>rechts</code> und darauf, welcher Teil der Liste grau wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-8-1_idee_vorschau.png" src="../vid/2-2-8-1_idee.mp4"></video><a href="../vid/2-2-8-1_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Suchen durch Halbieren (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<h2 id="schritt-2">Schritt 2: Die binäre Suche in Python</h2>
+
+<p>Im Programm wird der Suchbereich durch die zwei Indizes <code>links</code> und <code>rechts</code> beschrieben. Die Funktion ruft sich für die passende Hälfte selbst auf – sie ist also rekursiv, mit dem leeren Bereich als Basisfall. Drei Python-Bausteine werden im Video kurz erklärt: Standardwerte für Parameter (<code>links=0, rechts=None</code>), der Test <code>rechts is None</code> und die Ganzzahldivision <code>//</code>.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-8-2_code_vorschau.png" src="../vid/2-2-8-2_code.mp4"></video><a href="../vid/2-2-8-2_code.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Die binäre Suche in Python (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h2 id="schritt-3">Schritt 3: Die binäre Suche Schritt für Schritt</h2>
+
+<p>Jetzt läuft das Programm zweimal: einmal mit der 23 (wird gefunden) und einmal mit der 13 (kommt nicht vor). Rechts siehst du die Zeiger in der Liste und unten den Aufrufstapel. Achte darauf, wie <code>links</code> und <code>rechts</code> zusammenrücken und was passiert, wenn sie sich überkreuzen.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-8-3_schritte_vorschau.png" src="../vid/2-2-8-3_schritte.mp4"></video><a href="../vid/2-2-8-3_schritte.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Die binäre Suche Schritt für Schritt (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen stehen Code, Ablauf und Testfälle in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> binäre Suche in einer sortierten Liste (nur eine Hälfte wird weiter untersucht)</p>
+            <pre><code class="language-python">def binaere_suche(liste, gesucht, links=0, rechts=None):
+    if rechts is None:
+        rechts = len(liste) - 1
+    if links &gt; rechts:                  # Basisfall: Bereich leer
+        return -1
+    mitte = (links + rechts) // 2       # Teilen
+    if liste[mitte] == gesucht:
+        return mitte
+    elif gesucht &lt; liste[mitte]:        # nur links weitersuchen
+        return binaere_suche(liste, gesucht, links, mitte - 1)
+    else:                               # nur rechts weitersuchen
+        return binaere_suche(liste, gesucht, mitte + 1, rechts)
+
+print(binaere_suche([2, 5, 8, 12, 16, 23, 38], 23))   # 5</code></pre>
+            <ol>
+                <li><strong>Erster Aufruf:</strong> links = 0, rechts = 6, mitte = (0 + 6) // 2 = 3. liste[3] = 12 ist kleiner als 23. <em>Warum genügt die rechte Hälfte?</em> Die Liste ist sortiert, also stehen alle Werte links von 12 ebenfalls unter 23.</li>
+                <li><strong>Zweiter Aufruf:</strong> links = 4, rechts = 6, mitte = 5. liste[5] = 23 → gefunden, Rückgabe 5.</li>
+                <li><strong>Ohne Treffer:</strong> Wird der Bereich leer (links &gt; rechts), greift der Basisfall und liefert −1.</li>
+            </ol>
+            <table>
+                <thead><tr><th>Aufruf</th><th>links</th><th>rechts</th><th>mitte</th><th>liste[mitte]</th><th>Entscheidung</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>0</td><td>6</td><td>3</td><td>12</td><td>23 &gt; 12 → rechts weiter</td></tr>
+                    <tr><td>2</td><td>4</td><td>6</td><td>5</td><td>23</td><td>gefunden</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Ergebnis:</strong> Index 5 nach 2 Vergleichsrunden, die lineare Suche hätte 6 gebraucht. <strong>Kontrolle:</strong> <code>[2, 5, 8, 12, 16, 23, 38].index(23)</code> ist 5.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>([2, 5, 8, 12, 16, 23, 38], 23)</code></td><td><code>5</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>([2, 5, 8, 12, 16, 23, 38], 2)</code></td><td><code>0</code></td><td>Randfall: erstes Element, 3 Runden</td></tr>
+                    <tr><td><code>([], 7)</code></td><td><code>-1</code></td><td>leere Liste: rechts = −1, sofort Basisfall</td></tr>
+                    <tr><td><code>([7], 7)</code> bzw. <code>([7], 3)</code></td><td><code>0</code> bzw. <code>-1</code></td><td>ein Element</td></tr>
+                    <tr><td><code>([-9, -5, 0, 4], -5)</code></td><td><code>1</code></td><td>negative Zahlen</td></tr>
+                    <tr><td><code>([5, 1, 9], 5)</code></td><td><code>-1</code> (obwohl 5 vorkommt!)</td><td>Falle: Die Vorbedingung „sortiert“ ist verletzt</td></tr>
+                    <tr><td><code>([1, 2, 3], "a")</code></td><td><code>TypeError</code></td><td>falscher Typ: <code>"a" &lt; 2</code> ist nicht definiert</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.8.1 – binäre Suche von Hand.</p>
+
+<h2 id="schritt-4">Schritt 4: Wie schnell ist die binäre Suche?</h2>
+
+<p>Jede Runde halbiert den Suchbereich. Wie viele Runden braucht man also höchstens – und wie viele Vergleiche die lineare Suche? Achte im Video darauf, was bei doppelt so langer Liste passiert, und auf die Voraussetzung, ohne die die binäre Suche falsche Ergebnisse liefert.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-8-4_aufwand_vorschau.png" src="../vid/2-2-8-4_aufwand.mp4"></video><a href="../vid/2-2-8-4_aufwand.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Wie schnell ist die binäre Suche? (ca. 1 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen: Beispiel 3 zählt die Vergleichsrunden beider Verfahren für eine und zwei Millionen Zahlen und misst die Laufzeit.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Wie viel schneller ist die binäre Suche wirklich? Beide Suchverfahren zählen ihre Vergleichsrunden und werden mit <code>time.perf_counter()</code> gemessen. Der schlechteste Fall ist ein Wert, der größer als alle Listenelemente ist und deshalb nicht vorkommt.</p>
+            <pre><code class="language-python">import time
+
+def lineare_suche(liste, gesucht):
+    vergleiche = 0
+    for i in range(len(liste)):
+        vergleiche = vergleiche + 1
+        if liste[i] == gesucht:
+            return [i, vergleiche]
+    return [-1, vergleiche]
+
+def binaere_suche_iterativ(liste, gesucht):
+    vergleiche = 0
+    links = 0
+    rechts = len(liste) - 1
+    while links &lt;= rechts:
+        mitte = (links + rechts) // 2
+        vergleiche = vergleiche + 1                      # eine Vergleichsrunde
+        if liste[mitte] == gesucht:
+            return [mitte, vergleiche]
+        elif gesucht &lt; liste[mitte]:
+            rechts = mitte - 1
+        else:
+            links = mitte + 1
+    return [-1, vergleiche]
+
+for n in [1_000_000, 2_000_000]:
+    liste = list(range(0, 2 * n, 2))        # n gerade Zahlen, sortiert
+    gesucht = 2 * n                          # größer als alle: schlechtester Fall
+    start = time.perf_counter()
+    ergebnis = lineare_suche(liste, gesucht)
+    t_lin = round((time.perf_counter() - start) * 1000, 3)   # in ms
+    v_lin = ergebnis[1]
+    start = time.perf_counter()
+    ergebnis = binaere_suche_iterativ(liste, gesucht)
+    t_bin = round((time.perf_counter() - start) * 1000, 3)
+    v_bin = ergebnis[1]
+    print(n, v_lin, t_lin, "ms", v_bin, t_bin, "ms")</code></pre>
+            <ol>
+                <li><strong>Vergleiche linear:</strong> Jedes Element wird angesehen, also 1 000 000 bzw. 2 000 000 Runden. <em>Warum schlechtester Fall:</em> Der gesuchte Wert kommt nicht vor.</li>
+                <li><strong>Vergleiche binär:</strong> Der Suchbereich halbiert sich in jeder Runde (1 000 000 → 500 000 → … → 1), bis er leer ist. Das ergibt ⌊log<sub>2</sub> n⌋ + 1 Runden: 20 für eine Million und 21 für zwei Millionen. <em>Warum nur eine Runde mehr?</em> Die doppelte Liste ist nach einer Halbierung wieder so groß wie die alte.</li>
+                <li><strong>Laufzeit messen und auswerten:</strong> Beispielwerte eines Schulrechners: linear 61 ms bzw. 123 ms (Faktor ≈ 2 → O(n)), binär jeweils etwa 0,006 ms (praktisch unverändert → O(log n)). Die absoluten Zeiten schwanken, die Vergleichszahlen nicht.</li>
+                <li><strong>Falle Duplikate:</strong> <code>binaere_suche_iterativ([1, 3, 3, 3, 5], 3)</code> liefert <code>[2, 1]</code>, <code>lineare_suche</code> dagegen <code>[1, 2]</code>. Beide Indizes sind „richtig“, aber die binäre Suche findet nicht unbedingt das <em>erste</em> Vorkommen.</li>
+                <li><strong>Preis der Geschwindigkeit:</strong> Die binäre Suche setzt eine sortierte Liste voraus. Muss erst sortiert werden, kostet das mehr als eine einzelne lineare Suche. Es lohnt sich erst, wenn oft in denselben Daten gesucht wird.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Ausgabe <code>1000000 1000000 … 20 …</code> und <code>2000000 2000000 … 21 …</code>. Bei doppeltem n verdoppelt sich der Aufwand der linearen Suche, bei der binären Suche kommt nur eine Runde hinzu.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe <code>binaere_suche_iterativ</code></th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[2, 5, 8, 12, 16, 23, 38], 38</code></td><td><code>[6, 3]</code></td><td>Normalfall, letztes Element</td></tr>
+                    <tr><td><code>[], 5</code></td><td><code>[-1, 0]</code></td><td>leere Liste</td></tr>
+                    <tr><td><code>[7], 7</code></td><td><code>[0, 1]</code></td><td>ein Element</td></tr>
+                    <tr><td><code>[-9, -5, 0, 4], -5</code></td><td><code>[1, 1]</code></td><td>negative Zahlen, sofort getroffen</td></tr>
+                    <tr><td><code>[1, 3, 3, 3, 5], 3</code></td><td><code>[2, 1]</code></td><td>Duplikate: nicht das erste Vorkommen</td></tr>
+                    <tr><td><code>["a", "c"], 2</code></td><td><code>TypeError</code></td><td>falscher Typ</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<h2 id="schritt-5">Schritt 5: Teilen, herrschen, kombinieren – das Maximum</h2>
+
+<p>Bei der binären Suche fällt nach dem Teilen eine Hälfte weg. Beim Maximum einer Liste werden <strong>beide</strong> Hälften gebraucht – hier siehst du alle drei Schritte von Divide and Conquer. Kurz erklärt wird das Slicing (<code>liste[:mitte]</code>, <code>liste[mitte:]</code>). Achte im Aufrufbaum darauf, wie die Ergebnisse von unten nach oben kombiniert werden.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-8-5_maximum_vorschau.png" src="../vid/2-2-8-5_maximum.mp4"></video><a href="../vid/2-2-8-5_maximum.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Teilen, herrschen, kombinieren (ca. 2 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen – mit der Falle „leere Liste“, die nicht im Video vorkommt – steht alles in Beispiel 2:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Maximum einer Liste mit allen drei Schritten</p>
+            <pre><code class="language-python">def maximum(liste):
+    if len(liste) == 1:                 # Basisfall
+        return liste[0]
+    mitte = len(liste) // 2
+    links = maximum(liste[:mitte])      # Teilen und rekursiv lösen
+    rechts = maximum(liste[mitte:])
+    if links &gt; rechts:                # Kombinieren
+        return links
+    else:
+        return rechts
+
+print(maximum([7, 3, 19, 4, 11]))       # 19</code></pre>
+            <ol>
+                <li><strong>Teilen:</strong> mitte = 5 // 2 = 2 → [7, 3] und [19, 4, 11]. <em>Warum <code>//</code>:</em> Bei ungerader Länge ist die rechte Hälfte um eins größer, beide Teile sind aber nicht leer.</li>
+                <li><strong>Herrschen:</strong> maximum([7, 3]) liefert 7. maximum([19, 4, 11]) teilt weiter in [19] und [4, 11] und liefert 19.</li>
+                <li><strong>Kombinieren:</strong> 7 &gt; 19? Nein → Ergebnis 19. Zurückgegeben wird also der größere der beiden Werte.</li>
+                <li><strong>Aufwand zählen:</strong> Jeder Kombinierschritt kostet einen Vergleich, und es gibt n − 1 davon (hier 4). Das ist genauso viel wie bei der linearen Suche nach dem Maximum. <em>Warum lohnt sich Divide and Conquer hier nicht?</em> Jedes Element muss ohnehin einmal angesehen werden. Das Halbieren spart nur dann Arbeit, wenn wie bei der binären Suche eine Hälfte <em>wegfallen</em> darf. Die Teillisten-Kopien mit <code>liste[:mitte]</code> kosten sogar zusätzlich Zeit und Speicher.</li>
+                <li><strong>Falle leere Liste:</strong> Für <code>[]</code> ist len = 0 ≠ 1, mitte = 0, und <code>maximum([])</code> ruft sich mit derselben leeren Liste wieder auf → <code>RecursionError</code>. Abhilfe: <code>if len(liste) == 0: return None</code> als zusätzlicher Basisfall.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> 19 mit 4 Vergleichen. Die Rekursionstiefe beträgt nur ⌈log<sub>2</sub> n⌉ + 1, hier 4 (längste Aufrufkette: [7, 3, 19, 4, 11] → [19, 4, 11] → [4, 11] → [11]).</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[7, 3, 19, 4, 11]</code></td><td><code>19</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>[5]</code></td><td><code>5</code></td><td>Basisfall</td></tr>
+                    <tr><td><code>[-3, -8]</code></td><td><code>-3</code></td><td>negative Zahlen</td></tr>
+                    <tr><td><code>[2, 2]</code></td><td><code>2</code></td><td>Gleichstand</td></tr>
+                    <tr><td><code>[]</code></td><td><code>RecursionError</code></td><td>Fehlerfall, siehe Punkt 5</td></tr>
+                    <tr><td><code>["b", "a"]</code></td><td><code>'b'</code></td><td>Texte: alphabetisch größter</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.8.2 – die drei Schritte erkennen und einen Aufrufbaum zeichnen, dann Aufgabe 2.2.8.3 – schnelles Potenzieren.</p>
+
+<h2>Anwendungen des Divide-and-Conquer-Prinzips</h2>
+
+<ul>
+            <li><strong>Sortieralgorithmen:</strong> Mergesort und Quicksort teilen eine Liste in kleinere Teillisten, sortieren diese rekursiv und setzen sie wieder zusammen.</li>
+            <li><strong>Suchalgorithmen:</strong> Die binäre Suche in einer sortierten Liste oder in einem Suchbaum halbiert den Suchraum in jedem Schritt.</li>
+            <li><strong>Rechnen mit großen Zahlen:</strong> Schnelles Potenzieren berechnet x<sup>n</sup> über x<sup>n/2</sup> · x<sup>n/2</sup> mit nur etwa log<sub>2</sub> n Multiplikationen; das wird z.&nbsp;B. bei der RSA-Verschlüsselung genutzt.</li>
+            <li><strong>Numerik:</strong> Das Bisektionsverfahren findet Nullstellen, indem es ein Intervall immer wieder halbiert.</li>
+            <li><strong>Parallelisierung:</strong> Die Teilprobleme sind unabhängig voneinander und können auf mehreren Prozessorkernen gleichzeitig gelöst werden.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Nicht jede Rekursion ist Divide and Conquer</summary>
+                <p>Die Tiefensuche (DFS) und die Breitensuche (BFS) in Graphen sind <strong>kein</strong> Divide and Conquer: Sie besuchen Knoten nacheinander, teilen das Problem aber nicht in unabhängige Teilprobleme, deren Lösungen anschließend kombiniert werden. Auch <code>sum_recursion(n)</code> aus 2.2.7 verkleinert das Problem nur um 1 und teilt es nicht auf.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Teile und herrsche im Großen</summary>
+                <p>
+                    <strong>Alltag:</strong> Bei „Ich denke mir eine Zahl zwischen 1 und 1000“ findest du jede Zahl mit höchstens 10 Fragen, wenn du immer die Mitte des verbleibenden Bereichs nennst.<br><br>
+                    <strong>Beruf:</strong> Big-Data-Ingenieurinnen und -Ingenieure verarbeiten riesige Datenmengen mit dem MapReduce-Prinzip: Die Daten werden auf viele Rechner verteilt, dort parallel verarbeitet und die Teilergebnisse anschließend zusammengeführt. Auch Hochleistungsrechner wie die am Zentrum für Informationsdienste und Hochleistungsrechnen der TU Dresden zerlegen Simulationen in Teilgebiete, die parallel berechnet werden.
+                </p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>Divide and Conquer zerlegt ein Problem in kleinere Teilprobleme derselben Art, löst sie rekursiv und kombiniert die Teillösungen. Die binäre Suche nutzt das besonders wirksam: Weil die Liste sortiert ist, fällt in jeder Runde eine Hälfte weg, und sie braucht nur O(log n) statt O(n) Vergleiche. Beim Maximum müssen dagegen beide Hälften bearbeitet werden – dort spart das Teilen keine Vergleiche. Später nutzen Mergesort und Quicksort dasselbe Prinzip zum schnellen Sortieren.</p>
+
+<div class="hinweis" id="einschaetzen">
+            <details open>
+                <summary>Einschätzen: zurück zum Streamingdienst</summary>
+                <p>Die Suche des Streamingdienstes soll einen Titel unter 100 Millionen Songs finden. Die binäre Suche braucht dafür nur etwa log<sub>2</sub>(10<sup>8</sup>) ≈ 27 Vergleiche – aber nur in einer <em>sortierten</em> Liste. Sortieren kostet selbst etwas. Schätze ab:</p>
+                <ol>
+                    <li>Eine einzige Suche: Lohnt es sich, vorher zu sortieren (mit Mergesort, etwa n · log<sub>2</sub> n Vergleiche), oder ist die lineare Suche besser?</li>
+                    <li>Am Tag kommen 1 Million Suchanfragen. Wie viele Vergleiche sind es mit linearer Suche (im Mittel n / 2 pro Suche) und wie viele mit „einmal sortieren, dann binär suchen“?</li>
+                </ol>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Eine Suche: linear höchstens 10<sup>8</sup> Vergleiche, Sortieren allein schon ≈ 2,7 · 10<sup>9</sup>. Für eine einzige Suche lohnt sich Sortieren nicht. Eine Million Suchen: linear 10<sup>6</sup> · 5 · 10<sup>7</sup> = 5 · 10<sup>13</sup> Vergleiche (mehrere Wochen Rechenzeit), sortiert 2,7 · 10<sup>9</sup> + 10<sup>6</sup> · 27 ≈ 2,7 · 10<sup>9</sup> (wenige Minuten). Einschätzen heißt also auch: Wie oft wird etwas gemacht? Einmalige Vorarbeit lohnt sich, wenn sie sich auf viele Anfragen verteilt (siehe auch Aufgabe 2.2.8.7).</p>
+                </details>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Divide and Conquer</strong> besteht aus drei Schritten:</p>
+            <ol>
+                <li><strong>Teilen (Divide):</strong> Das Problem wird in kleinere Teilprobleme derselben Art zerlegt.</li>
+                <li><strong>Herrschen (Conquer):</strong> Die Teilprobleme werden rekursiv gelöst. Sind sie klein genug (Basisfall), werden sie direkt gelöst.</li>
+                <li><strong>Kombinieren (Combine):</strong> Die Teillösungen werden zur Lösung des Gesamtproblems zusammengesetzt.</li>
+            </ol>
+            <p>Halbiert man das Problem in jedem Schritt, entstehen nur etwa log<sub>2</sub> n Ebenen. Das ist der Grund für Laufzeiten wie O(log n) oder O(n log n).</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Wo schaust du hin? <span class="niveau">AFB I</span></summary>
+                <p>Du suchst die 17 in der sortierten Liste 1, 4, 6, 9, 13, 17, 20. Welche Zahlen schaust du nacheinander an, und welche fallen nach dem ersten Vergleich weg?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Zuerst die Mitte (Index 3): 9. Weil 17 &gt; 9, fallen 1, 4, 6 und 9 weg. Im Rest 13, 17, 20 ist die Mitte die 17 – gefunden nach 2 Vergleichen.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Ganzzahldivision und Standardwerte <span class="niveau">AFB I</span></summary>
+                <p>Was ergeben <code>9 // 2</code> und <code>(3 + 8) // 2</code>? Welche Werte haben <code>links</code> und <code>rechts</code> beim Aufruf <code>binaere_suche([4, 8, 15], 8)</code>, nachdem die ersten beiden Zeilen ausgeführt sind?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>9 // 2</code> ist 4, <code>(3 + 8) // 2</code> ist 5. <code>links</code> ist 0 (Standardwert), <code>rechts</code> war <code>None</code> und wird auf <code>len(liste) - 1</code> = 2 gesetzt.</p>
+                </details>
+            </details>
+        </div>

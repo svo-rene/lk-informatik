@@ -1,0 +1,142 @@
+<p>
+            DB Browser für SQLite ist ein Open-Source-Tool zur Erstellung, Bearbeitung und Abfrage von SQLite-Datenbanken. Es bietet eine benutzerfreundliche grafische Oberfläche, mit der du SQLite-Datenbanken auch ohne SQL-Befehle verwalten kannst.
+        </p>
+
+<p>
+            SQLite ist ein relationales Datenbankmanagementsystem, das sich von anderen Systemen wie MySQL oder PostgreSQL unterscheidet. Der Hauptunterschied liegt in der Ausführung:
+        </p>
+
+<ul>
+            <li><strong>Serverseitige Ausführung:</strong> Traditionelle Datenbanksysteme wie MySQL laufen auf einem separaten Server. Clients verbinden sich über ein Netzwerk mit diesem Server, um Datenbankoperationen durchzuführen.</li>
+            <li><strong>Clientseitige Ausführung:</strong> SQLite wird direkt in die Anwendung integriert. Die gesamte Datenbank ist in einer einzigen Datei gespeichert, die lokal auf dem Gerät liegt.</li>
+        </ul>
+
+<p>
+            Vorteile von SQLite:
+        </p>
+
+<ul>
+            <li>Leichtgewichtig und schnell</li>
+            <li>Keine Serverinstallation oder -konfiguration erforderlich</li>
+            <li>Ideal für eingebettete Systeme und mobile Anwendungen</li>
+            <li>Einfach zu sichern (nur eine Datei)</li>
+            <li>Plattformunabhängig</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Dokumentation und Download
+                </summary>
+                <p>
+                    Weitere Informationen zu DB Browser für SQLite findest du in der <a href="https://github.com/sqlitebrowser/sqlitebrowser/wiki" target="_blank">offiziellen Dokumentation</a>.<br>
+                    Du kannst DB Browser für SQLite von der <a href="https://sqlitebrowser.org/dl/" target="_blank">offiziellen Download-Seite</a> herunterladen.
+                </p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: SQLite im Alltag und im Beruf</summary>
+<p>SQLite steckt in fast jedem Smartphone: Messenger, Browser und Foto-Apps speichern ihre Daten in SQLite-Dateien, weil kein eigener Datenbankserver n&ouml;tig ist. In der <strong>Datenbankadministration</strong> und der Softwareentwicklung nutzt man Werkzeuge wie DB Browser, um solche Dateien zu untersuchen, Testdaten anzulegen oder Fehler zu finden. Auch in der <strong>IT-Forensik</strong>, etwa beim Landeskriminalamt Sachsen, werden SQLite-Datenbanken aus beschlagnahmten Handys mit genau solchen Programmen ausgewertet &ndash; nat&uuml;rlich nur mit richterlichem Beschluss, denn es handelt sich um personenbezogene Daten.</p>
+</details>
+</div>
+
+<h2>&Uuml;bung 1: Kurs-Datenbank</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> Du hast einen SQL-Dump <code>kurs.sql</code> und m&ouml;chtest die Daten darin im DB Browser
+   ansehen. Der Dump ist noch keine Datenbank, sondern nur eine Textdatei mit Befehlen.</p>
+<h3>Importieren und erste Abfrage</h3>
+<ol>
+<li>Lade die Datei <a href="../material/kurs.sql">kurs.sql</a> herunter.</li>
+<li>&Ouml;ffne DB Browser f&uuml;r SQLite.</li>
+<li>Klicke auf &bdquo;Datei&ldquo; &gt; &bdquo;Importieren&ldquo; &gt; &bdquo;Datenbank aus SQL-Datei&ldquo;.</li>
+<li>W&auml;hle die Datei &bdquo;kurs.sql&ldquo; aus und klicke auf &bdquo;&Ouml;ffnen&ldquo;.</li>
+<li>Speichere die entstehende Datenbank unter einem passenden Namen ab (z.&nbsp;B. <code>kurs.db</code>).</li>
+<li>Gehe zum Reiter &bdquo;SQL ausf&uuml;hren&ldquo;.</li>
+<li>Gib folgende Abfrage ein und f&uuml;hre sie aus:
+<pre><code>SELECT *
+FROM Schueler;</code></pre></li>
+<li>Betrachte das Ergebnis der Abfrage.</li>
+</ol>
+<p><strong>Was bei den wichtigsten Schritten passiert und warum:</strong></p>
+<ol>
+<li><strong>Importieren (Schritte 3&ndash;4):</strong> DB Browser f&uuml;hrt die Befehle der Datei nacheinander aus:
+    drei <code>CREATE TABLE</code> (Schueler, Kurs, Kursnote) und drei <code>INSERT</code>. <em>Warum?</em> Erst dadurch
+    entstehen aus dem Text echte Tabellen mit Daten.</li>
+<li><strong>Speichern (Schritt 5):</strong> Die Datenbank wird als eine einzige Datei abgelegt. <em>Warum?</em> Ohne Speichern
+    w&auml;re die importierte Datenbank nach dem Schlie&szlig;en verloren.</li>
+<li><strong>Abfrage ausf&uuml;hren (Schritte 6&ndash;7):</strong> <code>SELECT * FROM Schueler;</code> liest alle Zeilen und
+    Spalten der Tabelle <code>Schueler</code>. <em>Warum gerade diese Abfrage?</em> Sie zeigt ohne Vorwissen &uuml;ber die
+    Spalten, ob der Import geklappt hat.</li>
+</ol>
+<p><strong>Ergebnis</strong> (mit den Daten aus <code>kurs.sql</code>):</p>
+<table>
+<thead><tr><th>s_id</th><th>name</th><th>vorname</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>M&uuml;ller</td><td>Lisa</td></tr>
+<tr><td>2</td><td>Schmidt</td><td>Max</td></tr>
+<tr><td>3</td><td>Fischer</td><td>Anna</td></tr>
+<tr><td>4</td><td>Weber</td><td>Tim</td></tr>
+<tr><td>5</td><td>Meyer</td><td>Sophie</td></tr>
+</tbody>
+</table>
+<p><strong>Kontrolle:</strong> Im Reiter &bdquo;Datenbankstruktur&ldquo; m&uuml;ssen drei Tabellen stehen. Das Ergebnis hat 5 Zeilen &ndash;
+   genau so viele, wie im Dump f&uuml;r <code>Schueler</code> eingef&uuml;gt werden. Erscheint eine Fehlermeldung wie
+   <code>no such table: Schueler</code>, ist der Import nicht gelaufen oder es wurde eine andere Datenbankdatei ge&ouml;ffnet.</p>
+            </details>
+        </div>
+
+<h2>&Uuml;bung 2: Bibliotheksdatenbank</h2>
+
+<p>In dieser &Uuml;bung wirst du SQL-Abfragen, Aggregatfunktionen und Joins anhand einer Bibliotheksdatenbank &uuml;ben. Bevor du beginnst, lade bitte die Datei <a href="../material/bibliothek.sql">bibliothek.sql</a> herunter und importiere diese in den DB Browser (SQLite).</p>
+
+<h3>Einfache Abfragen</h3>
+
+<h3>Aggregatfunktionen</h3>
+
+<h3>Joins mit zwei Tabellen</h3>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Weiterüben</summary>
+        <p>
+            Experimentiere mit den Abfragen und versuche, sie zu modifizieren oder zu erweitern. 
+            Du könntest zum Beispiel die Ergebnisse anders filtern, sortieren oder zusätzliche Bedingungen hinzufügen. 
+            Dies hilft dir, ein tieferes Verständnis für SQL-Abfragen zu entwickeln.
+        </p>
+    </details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>DB Browser (SQLite)</strong> ist ein grafisches Werkzeug f&uuml;r SQLite-Datenbanken. Eine SQLite-Datenbank ist <em>eine einzige Datei</em> (z.&nbsp;B. <code>kurs.db</code>). Ein SQL-Dump (<code>.sql</code>) ist dagegen nur ein Text mit SQL-Befehlen, der beim Import ausgef&uuml;hrt wird und die Tabellen samt Daten erzeugt: <strong>Datei &gt; Importieren &gt; Datenbank aus SQL-Datei</strong>. &Auml;nderungen werden erst mit <strong>&bdquo;&Auml;nderungen schreiben&ldquo;</strong> (Strg + S) dauerhaft in der Datenbankdatei gespeichert.</p>
+</div>
+
+<div class="merke">
+<p>
+    Mit <code>LIMIT n</code> am Ende einer Abfrage begrenzt du die Anzahl der zurückgegebenen Zeilen auf
+    <code>n</code>. In Kombination mit <code>ORDER BY</code> erhältst du so z.&nbsp;B. die ersten 5 Einträge einer
+    sortierten Liste.
+</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.7.1: Einfache SELECT-Abfrage <span class="niveau">AFB I</span></summary>
+<p>Schreibe eine SQL-Abfrage, die alle Kurse aus der Tabelle &bdquo;Kurs&ldquo; ausw&auml;hlt.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.7.2: SELECT mit Bedingung <span class="niveau">AFB I</span></summary>
+<p>Schreibe eine SQL-Abfrage, die alle Sch&uuml;ler*innen mit dem Nachnamen &bdquo;M&uuml;ller&ldquo; aus der Tabelle &bdquo;Schueler&ldquo; ausw&auml;hlt.</p>
+</details>
+</div>

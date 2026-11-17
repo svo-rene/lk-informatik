@@ -1,0 +1,18 @@
+{
+  "nr": "6.5",
+  "titel": "Backus-Naur-Form (BNF)",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+<p>
+        In der letzten Einheit hast du gelernt, wie man ein Objekt beschreiben kann – z.&nbsp;B. <code>luna : Hund</code> mit den Attributen <code>name</code> und <code>groesse</code>. Doch was, wenn wir viele solcher Objekte erstellen wollen? Oder wenn sie Verhalten haben sollen – also Methoden wie <code>bellen()</code> oder <code>wachsen()</code>?
+    </p>
+
+<p>
+        Genau dafür brauchen wir <strong>Klassen</strong>: Sie sind die Baupläne für Objekte. Mit einer Klasse kannst du beliebig viele gleich aufgebaute Objekte erzeugen, die sich nur in ihren Attributwerten unterscheiden.
+    </p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in drei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee als Tafelbild oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe mit.</p>
+
+<ol class="schritte">
+        <li><a href="#schritt-1">Eine Klasse, viele Objekte</a> – danach Aufgabe 4.3.1</li>
+        <li><a href="#schritt-2"><code>__init__</code> und <code>self</code> Schritt für Schritt</a></li>
+        <li><a href="#schritt-3">Vom Klassendiagramm zum Code</a> – danach Aufgabe 4.3.2</li>
+    </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Eine Klasse, viele Objekte</h2>
+
+<p>Eine Hundeschule möchte ihre Hunde verwalten. Jeder Hund hat einen Namen und eine Rasse und kann bellen. Statt jeden Hund einzeln zu beschreiben, legt man einmal den Bauplan fest – die Klasse <code>Hund</code>. Im Video entstehen aus diesem Bauplan erst im Tafelbild, dann in Python mehrere Hunde. Achte darauf, was alle Hunde gemeinsam haben und was jeder Hund für sich hat.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-3-1_bauplan_vorschau.png" src="../vid/4-3-1_bauplan.mp4"></video><a href="../vid/4-3-1_bauplan.mp4">Video ansehen</a></div>
+        <figcaption>Video 1: Eine Klasse, viele Objekte (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+    </figure>
+
+<p>Danach: <a href="uebungen.html#a-4-3-1">Aufgabe 4.3.1</a> – Klasse oder Objekt?</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: <code>__init__</code> und <code>self</code> →</a></p>
+
+<h2 id="schritt-2">Schritt 2: <code>__init__</code> und <code>self</code> Schritt für Schritt</h2>
+
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: Was macht der <code>__init__</code>-Teil?</summary>
+            <p>
+                <code>__init__</code> ist der sogenannte Konstruktor. Er wird automatisch aufgerufen, wenn du ein neues Objekt erzeugst (z.&nbsp;B. <code>Hund("Luna", "Dackel")</code>). Dort legst du die Startwerte der Attribute wie <code>name</code> und <code>rasse</code> fest.
+            </p>
+        </details>
+    </div>
+
+<p>Was passiert eigentlich bei <code>luna = Hund("Luna", "Dackel")</code>? Im Video läuft der Konstruktor in Thonny Zeile für Zeile. Rechts im Speicherbild siehst du, worauf <code>self</code> gerade zeigt (orange) und wann die Variable <code>luna</code> ihren Pfeil bekommt. Achte darauf, dass <code>self</code> beim zweiten Hund auf ein anderes Objekt zeigt.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-3-2_init_self_vorschau.png" src="../vid/4-3-2_init_self.mp4"></video><a href="../vid/4-3-2_init_self.mp4">Video ansehen</a></div>
+        <figcaption>Video 2: <code>__init__</code> und <code>self</code> (ca. 2 min)</figcaption>
+    </figure>
+
+<p>Zum Nachlesen steht die Klasse aus den Videos mit allen Schritten in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Eine Klasse, die beschreibt, wie ein „Hund“ aufgebaut ist</summary>
+        <p><strong>Ausgangssituation:</strong> Eine Hundeschule möchte ihre Hunde verwalten. Jeder Hund hat einen Namen und eine Rasse und kann bellen. Statt jeden Hund einzeln zu beschreiben, legen wir einmal den Bauplan fest – als UML-Klassendiagramm und als Python-Klasse.</p>
+        <table class="gitter">
+            <tbody>
+                <tr><th>Hund</th></tr>
+                <tr><td>name: string<br>rasse: string</td></tr>
+                <tr><td>Hund(name: string, rasse: string)<br>bellen(): void</td></tr>
+            </tbody>
+        </table>
+        <pre><code class="language-python">class Hund:
+    def __init__(self, name, rasse):
+        self.name = name
+        self.rasse = rasse
+
+    def bellen(self):
+        print(f"{self.name} (Rasse: {self.rasse}) bellt!")</code></pre>
+        <p>Mit dieser Klasse kannst du nun beliebig viele Hunde erzeugen:</p>
+        <pre><code class="language-python">luna = Hund("Luna", "Dackel")
+balu = Hund("Balu", "Labrador")
+
+luna.bellen()   # Ausgabe: Luna (Rasse: Dackel) bellt!
+balu.bellen()   # Ausgabe: Balu (Rasse: Labrador) bellt!</code></pre>
+        <ol>
+            <li><strong>Klasse definieren:</strong> <code>class Hund:</code> legt nur den Bauplan an; es existiert noch kein Hund. Warum? Eine Klasse beschreibt, <em>welche</em> Attribute und Methoden Objekte haben werden – die drei Teile des Klassendiagramms finden sich im Code wieder (Name → <code>class Hund</code>, Attribute → <code>self.name</code>, <code>self.rasse</code>, Methoden → <code>def __init__</code> als Konstruktor <code>Hund(…)</code> und <code>def bellen</code>; <code>void</code> heißt: keine Rückgabe).</li>
+            <li><strong>Objekt erzeugen:</strong> <code>Hund("Luna", "Dackel")</code> legt ein neues, leeres Objekt an und ruft automatisch <code>__init__</code> auf. Dabei ist <code>self</code> das neue Objekt, <code>name = "Luna"</code>, <code>rasse = "Dackel"</code>. Mit <code>self.name = name</code> wird der Wert im Objekt gespeichert. Die Variable <code>luna</code> verweist danach auf dieses Objekt.</li>
+            <li><strong>Zweites Objekt:</strong> <code>Hund("Balu", "Labrador")</code> erzeugt ein weiteres, unabhängiges Objekt nach demselben Bauplan. Warum ist das nützlich? Der Code der Klasse wird nur einmal geschrieben, egal wie viele Hunde es gibt.</li>
+            <li><strong>Methode aufrufen:</strong> Bei <code>luna.bellen()</code> ist <code>self</code> das Objekt <code>luna</code>. Der f-String setzt <code>self.name</code> („Luna“) und <code>self.rasse</code> („Dackel“) ein.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Eine Klasse, zwei Objekte mit eigenen Attributwerten:</p>
+        <table class="gitter">
+            <thead><tr><th><u>luna : Hund</u></th><th><u>balu : Hund</u></th></tr></thead>
+            <tbody>
+                <tr><td>name = "Luna"<br>rasse = "Dackel"</td><td>name = "Balu"<br>rasse = "Labrador"</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Kontrolle:</strong></p>
+        <table class="gitter">
+            <thead><tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr></thead>
+            <tbody>
+                <tr><td><code>luna.bellen()</code></td><td><code>Luna (Rasse: Dackel) bellt!</code></td></tr>
+                <tr><td><code>balu.bellen()</code></td><td><code>Balu (Rasse: Labrador) bellt!</code></td></tr>
+                <tr><td><code>Hund("Rex", "Pudel").bellen()</code></td><td><code>Rex (Rasse: Pudel) bellt!</code></td></tr>
+            </tbody>
+        </table>
+            </details>
+        </div>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Vom Klassendiagramm zum Code →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Vom Klassendiagramm zum Code</h2>
+
+<p>Die UML hilft dir, die Struktur deiner Programme im Voraus zu durchdenken. Ein Klassendiagramm besteht aus drei Teilen: Klassenname, Attribute und Methoden. Hier siehst du das Klassendiagramm für <code>Hund</code>:</p>
+
+<figure>
+        <img src="../img/klassendiagramm.png" width="600" alt="UML-Klassendiagramm der Klasse Hund mit Attributen und Methoden">
+        <figcaption>Abb. 1: Klassendiagramm der Klasse „Hund“</figcaption>
+    </figure>
+
+<p>Und hier noch einmal ein konkretes Objekt der Klasse:</p>
+
+<figure>
+        <img src="../img/objektdiagramm.png" width="600" alt="Objektdiagramm des Objekts luna der Klasse Hund">
+        <figcaption>Abb. 2: Objektdiagramm des Objekts „Luna“ der Klasse „Hund“</figcaption>
+    </figure>
+
+<p>Im Video wird das Klassendiagramm <code>Akku</code> aus Beispiel 2 Teil für Teil in Python übersetzt und dann getestet. Achte darauf, wo im Code <code>self</code> dazukommt, obwohl es im Diagramm nicht steht, und was <code>void</code> und <code>string</code> als Rückgabetyp bedeuten. Neu ist die Funktion <code>min</code>; sie wird im Video kurz gezeigt.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-3-3_uml_code_vorschau.png" src="../vid/4-3-3_uml_code.mp4"></video><a href="../vid/4-3-3_uml_code.mp4">Video ansehen</a></div>
+        <figcaption>Video 3: Vom Klassendiagramm zum Code (ca. 2 min)</figcaption>
+    </figure>
+
+<p>Zum Nachlesen: die Klasse <code>Akku</code> mit allen Schritten und Testfällen.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Eine Klasse, deren Methoden den Zustand der Objekte verändern</summary>
+        <p><strong>Ausgangssituation:</strong> Eine Lade-App überwacht die Akkus mehrerer Geräte. Jeder Akku gehört zu einem Gerät und hat eine Ladung in Prozent. Man kann ihn um eine bestimmte Prozentzahl laden – mehr als 100&nbsp;% sind aber nicht möglich – und seinen Status abfragen. Das Handy hat 35&nbsp;%, das Tablet 90&nbsp;%; beide werden um 50 Prozentpunkte geladen.</p>
+        <table class="gitter">
+            <tbody>
+                <tr><th>Akku</th></tr>
+                <tr><td>geraet: string<br>ladung: int</td></tr>
+                <tr><td>Akku(geraet: string, ladung: int)<br>laden(prozent: int): void<br>status(): string</td></tr>
+            </tbody>
+        </table>
+        <pre><code class="language-python">class Akku:
+    def __init__(self, geraet, ladung):
+        self.geraet = geraet
+        self.ladung = ladung            # in Prozent
+
+    def laden(self, prozent):
+        self.ladung = min(100, self.ladung + prozent)
+
+    def status(self):
+        return f"{self.geraet}: {self.ladung} %"
+
+handy = Akku("Handy", 35)
+tablet = Akku("Tablet", 90)
+handy.laden(50)
+tablet.laden(50)
+print(handy.status())    # Handy: 85 %
+print(tablet.status())   # Tablet: 100 %</code></pre>
+        <p>Beide Objekte entstehen aus demselben Bauplan, haben aber einen eigenen Zustand.</p>
+        <ol>
+            <li><strong>Objekte erzeugen:</strong> <code>Akku("Handy", 35)</code> und <code>Akku("Tablet", 90)</code> rufen jeweils <code>__init__</code> auf. Jedes Objekt speichert eigene Werte für <code>geraet</code> und <code>ladung</code>.</li>
+            <li><strong><code>handy.laden(50)</code>:</strong> <code>self</code> ist <code>handy</code>. Gerechnet wird <code>min(100, 35 + 50)</code> = <code>min(100, 85)</code> = 85. Nur die Ladung des Handys ändert sich; das Tablet ist davon nicht betroffen.</li>
+            <li><strong><code>tablet.laden(50)</code> – Sonderfall:</strong> <code>min(100, 90 + 50)</code> = <code>min(100, 140)</code> = 100. Warum <code>min</code>? Ein Akku kann nicht über 100&nbsp;% geladen werden. Die Regel steht einmal in der Klasse und gilt damit automatisch für jedes Objekt.</li>
+            <li><strong><code>status()</code> gibt einen Text zurück:</strong> Die Methode druckt nicht selbst, sondern liefert mit <code>return</code> den String <code>"Handy: 85 %"</code>. Erst <code>print(…)</code> gibt ihn aus. So kann man den Status auch weiterverwenden, z.&nbsp;B. in einer App-Anzeige.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Ausgabe <code>Handy: 85 %</code> und <code>Tablet: 100 %</code>. Objektdiagramme danach:</p>
+        <table class="gitter">
+            <thead><tr><th><u>handy : Akku</u></th><th><u>tablet : Akku</u></th></tr></thead>
+            <tbody>
+                <tr><td>geraet = "Handy"<br>ladung = 85</td><td>geraet = "Tablet"<br>ladung = 100</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Kontrolle:</strong></p>
+        <table class="gitter">
+            <thead><tr><th>Objekt und Aufrufe</th><th>erwartete Ausgabe von <code>print(….status())</code></th></tr></thead>
+            <tbody>
+                <tr><td><code>Akku("Handy", 35)</code>, <code>laden(50)</code></td><td><code>Handy: 85 %</code></td></tr>
+                <tr><td><code>Akku("Tablet", 90)</code>, <code>laden(50)</code></td><td><code>Tablet: 100 %</code> (Grenze greift)</td></tr>
+                <tr><td><code>Akku("Uhr", 100)</code>, <code>laden(0)</code></td><td><code>Uhr: 100 %</code></td></tr>
+                <tr><td><code>Akku("Handy", 35)</code>, zweimal <code>laden(30)</code></td><td><code>Handy: 95 %</code> (35 → 65 → 95)</td></tr>
+                <tr><td><code>Akku("Handy", 35)</code>, <code>laden(-50)</code></td><td><code>Handy: -15 %</code> – Schwachstelle: negative Werte werden nicht abgefangen</td></tr>
+            </tbody>
+        </table>
+        <p>Der letzte Testfall zeigt: Die Klasse schützt nur vor „zu viel“, nicht vor unsinnigen Eingaben. Wie man Objekte vor ungültigen Zuständen schützt, lernst du in 4.6.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-4-3-2">Aufgabe 4.3.2</a> – Baue eine eigene Klasse.</p>
+
+<div class="praxisbezug">
+        <details>
+            <summary>Praxisbezug: Klassen in echter Software</summary>
+            <p>
+                <strong>Alltag:</strong> In einem Onlineshop ist jedes angezeigte Produkt ein Objekt der Klasse <code>Produkt</code> mit Name, Preis und Lagerbestand – Tausende Objekte, ein Bauplan.<br><br>
+                <strong>Beruf:</strong> Softwareentwicklerinnen und -entwickler zeichnen Klassendiagramme mit Werkzeugen wie draw.io, Enterprise Architect oder direkt in der Entwicklungsumgebung. In vielen Firmen werden Klassendiagramme in Code-Reviews und in der Dokumentation verwendet, damit neue Teammitglieder schnell verstehen, wie ein System aufgebaut ist.
+            </p>
+        </details>
+    </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+        Eine Klasse ist der Bauplan, nach dem beliebig viele Objekte (Instanzen) erzeugt werden. In Python legt <code>class Name:</code> die Klasse an. Der Konstruktor <code>__init__</code> läuft bei jedem <code>Name(…)</code> automatisch; <code>self</code> ist dabei das gerade entstehende Objekt, und <code>self.attribut = wert</code> speichert die Startwerte im Objekt. Beim Methodenaufruf <code>objekt.methode()</code> ist <code>self</code> das Objekt vor dem Punkt. Aus einem Klassendiagramm wird so: Name → <code>class</code>, Konstruktor → <code>__init__</code>, Attribute → <code>self.…</code>, jede Methode → <code>def methode(self, …)</code>.
+    </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            Eine <strong>Klasse</strong> ist der Bauplan, ein <strong>Objekt</strong> ist das konkrete Ding.<br>
+            Klassen legen fest, welche Attribute und Methoden ihre Objekte haben.<br>
+            Objekte sind individuelle Ausprägungen dieser Klasse; man nennt sie auch <strong>Instanzen</strong>. Das Erzeugen eines Objekts heißt <strong>Instanziieren</strong>.
+        </p>
+    </div>
+
+<div class="merke">
+        <p>
+            Das <strong>Klassendiagramm</strong> zeigt den Bauplan mit Attributen (Eigenschaften) und Methoden (Verhalten). Das <strong>Objektdiagramm</strong> zeigt ein konkretes Objekt mit den tatsächlichen Werten seiner Attribute.
+        </p>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Ein Bauplan, drei Pflanzen <span class="niveau">AFB I</span></summary>
+            <p>Ein Programm für einen Schulgarten hat eine Klasse <code>Pflanze</code> mit dem Attribut <code>name</code>. Daraus werden drei Objekte erzeugt. Wie oft steht der Code der Klasse im Programm? Wie viele Werte für <code>name</code> gibt es?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Der Code der Klasse steht nur einmal im Programm. Es gibt drei Werte für <code>name</code>, denn jedes der drei Objekte hat seinen eigenen Wert.</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Wo landet der Wert? <span class="niveau">AFB I–II</span></summary>
+            <p>Es wird <code>bello = Hund("Bello", "Mops")</code> ausgeführt. Worauf zeigt <code>self</code>, während <code>__init__</code> läuft? Was gibt <code>print(bello.name)</code> aus? Und was ginge schief, wenn in <code>__init__</code> statt <code>self.rasse = rasse</code> nur <code>rasse = rasse</code> stünde?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>self</code> zeigt auf das neue Objekt, auf das nach dem Konstruktor auch <code>bello</code> verweist. Ausgabe: <code>Bello</code>. Ohne <code>self.</code> wäre <code>rasse</code> nur eine Variable in <code>__init__</code>, die danach verschwindet. Das Objekt hätte kein Attribut <code>rasse</code>, und <code>bello.bellen()</code> bricht mit <code>AttributeError: 'Hund' object has no attribute 'rasse'</code> ab.</p>
+            </details>
+        </details>
+    </div>

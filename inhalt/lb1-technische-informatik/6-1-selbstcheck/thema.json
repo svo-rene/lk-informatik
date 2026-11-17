@@ -1,0 +1,15 @@
+{
+  "nr": "6.1",
+  "titel": "Selbstcheck",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungsstunde.html",
+      "titel": "Übungsstunde",
+      "zusatz": true
+    }
+  ]
+}

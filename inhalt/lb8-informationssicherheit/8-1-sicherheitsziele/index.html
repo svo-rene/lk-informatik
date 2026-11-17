@@ -1,0 +1,191 @@
+<p>
+            Du überweist Geld per Banking-App, schickst Sprachnachrichten und speicherst Fotos in der Cloud. Dabei erwartest du ganz selbstverständlich, dass niemand mitliest, nichts verfälscht wird, der Absender echt ist und der Dienst funktioniert, wenn du ihn brauchst. Genau diese Erwartungen beschreiben die Schutzziele der Informationssicherheit.
+        </p>
+
+<h2>Die fünf Schutzziele</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Du überweist 50&nbsp;€ mit der Banking-App. Auf dem Weg zur Bank kann dreierlei schiefgehen. Welches Schutzziel ist jeweils verletzt?</p>
+            <ol>
+                <li><strong>Eine Nachricht wird auf dem Weg abgefangen und mitgelesen.</strong> Ein Unbefugter erhält Kenntnis vom Inhalt – verletzt ist die <strong>Vertraulichkeit</strong>.</li>
+                <li><strong>Der Überweisungsbetrag wird von 50&nbsp;€ auf 500&nbsp;€ geändert.</strong> Die Daten sind nicht mehr unverändert – verletzt ist die <strong>Integrität</strong>.</li>
+                <li><strong>Der Server der Bank fällt aus.</strong> Der Dienst ist nicht nutzbar, wenn du ihn brauchst – es fehlt die <strong>Verfügbarkeit</strong>.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Jeder Vorfall verletzt vorrangig ein anderes der drei CIA-Ziele.<br>
+            <strong>Kontrolle:</strong> Frage jeweils: Wurde etwas <em>gelesen</em> (Vertraulichkeit), <em>verändert</em> (Integrität) oder <em>verhindert</em> (Verfügbarkeit)?</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Online-Shop erhält eine Bestellung über 2000&nbsp;€. Der Kunde behauptet später, er habe nie bestellt.</p>
+            <ol>
+                <li><strong>Wer muss überzeugt werden?</strong> Der Shop muss nun <em>Dritten</em> (etwa einem Gericht) beweisen, dass die Bestellung von genau diesem Kunden stammt. Es genügt also nicht, dass der Shop selbst von der Echtheit überzeugt ist (Authentizität); er braucht einen Nachweis gegenüber anderen. Das ist das Schutzziel <strong>Verbindlichkeit</strong>.</li>
+                <li><strong>Reicht der Passwort-Login?</strong> Nein. Das Passwort könnte auch ein anderer gekannt haben. Außerdem führt der Shop sein Anmeldeprotokoll selbst; ein Eintrag „Login mit Passwort“ beweist einem Dritten deshalb wenig.</li>
+                <li><strong>Was schafft Verbindlichkeit?</strong> Erst eine digitale Signatur mit einem privaten Schlüssel, den nur der Kunde besitzt (8.13). Diese Signatur kann weder ein anderer Kunde noch der Shop selbst erzeugen.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Gefährdet ist die <strong>Verbindlichkeit</strong>; sichern lässt sie sich nur mit einem Nachweis, den allein der Kunde erzeugen kann.<br>
+            <strong>Falle:</strong> Authentizität und Verbindlichkeit werden oft verwechselt. Authentizität heißt „Ich weiß, dass du es warst“, Verbindlichkeit heißt „Ich kann es anderen beweisen“.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Technologien zur Umsetzung von Vertraulichkeit</summary>
+                <h3>Verschlüsselung</h3>
+                <p>Verschlüsselung wandelt Informationen mithilfe eines Schlüssels so um, dass Unbefugte sie nicht lesen können. Man unterscheidet symmetrische und asymmetrische Verfahren (siehe 8.3 und 8.8).</p>
+                <p>Einsatzbereiche: E-Mail-Verschlüsselung, Dateiverschlüsselung, verschlüsselte Internetkommunikation (HTTPS).</p>
+                <h3>Transport Layer Security (TLS)</h3>
+                <p>TLS ist ein Protokoll, das Daten bei der Übertragung über das Internet schützt. Es verschlüsselt die Kommunikation zwischen Browser und Server.</p>
+                <p>Einsatzbereiche: sichere Webseiten (HTTPS), sichere E-Mail-Übertragung, sichere Dateiübertragungen.</p>
+                <h3>Virtual Private Networks (VPN)</h3>
+                <p>Ein VPN baut eine verschlüsselte Verbindung über ein unsicheres Netz auf. Der Datenverkehr zwischen dem Gerät und dem VPN-Server wird verschlüsselt.</p>
+                <p>Einsatzbereiche: Zugriff auf Firmennetze aus dem Homeoffice, Schutz im öffentlichen WLAN.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Technologien zur Umsetzung von Integrität</summary>
+                <h3>Hashfunktionen</h3>
+                <p>Eine Hashfunktion berechnet aus Daten beliebiger Länge einen Hashwert fester Länge. Der Hashwert ist <em>nicht</em> eindeutig – verschiedene Eingaben können denselben Wert haben –, bei guten Hashfunktionen ist es aber praktisch unmöglich, solche Kollisionen gezielt zu finden. Schon eine kleine Änderung der Daten ergibt einen völlig anderen Hashwert, deshalb lassen sich Änderungen erkennen (siehe 8.12).</p>
+                <p>Einsatzbereiche: Integritätsprüfung von Dateien, Passwortspeicherung, Blockchain.</p>
+                <h3>Nachrichtenauthentifizierungscodes (MAC)</h3>
+                <p>Ein MAC ist eine kryptographische Prüfsumme, die mit einem <em>gemeinsamen geheimen</em> Schlüssel berechnet wird (z.&nbsp;B. HMAC). Er zeigt dem Empfänger, dass die Nachricht unverändert ist (Integrität) und von jemandem stammt, der den Schlüssel kennt (Authentizität). Weil aber Sender und Empfänger denselben Schlüssel besitzen, hätte auch der Empfänger den MAC erzeugen können. Ein MAC liefert deshalb <strong>keine</strong> Verbindlichkeit.</p>
+                <p>Einsatzbereiche: TLS-Verbindungen, sichere Datenübertragung, Integritätsprüfungen.</p>
+                <h3>Blockchain</h3>
+                <p>Eine Blockchain speichert Daten in Blöcken, die über Hashwerte miteinander verkettet sind. Eine Änderung an einem Block würde sofort auffallen, weil die Hashwerte der folgenden Blöcke nicht mehr passen.</p>
+                <p>Einsatzbereiche: Kryptowährungen, Smart Contracts, Nachverfolgung von Lieferketten.</p>
+                <h3>Versionsverwaltung</h3>
+                <p>Versionsverwaltungssysteme wie Git speichern Änderungen an Dateien über die Zeit, sodass jede Änderung nachvollziehbar ist und rückgängig gemacht werden kann.</p>
+                <p>Einsatzbereiche: Softwareentwicklung, Dokumentenmanagement.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Technologien zur Umsetzung von Authentizität</summary>
+                <h3>Digitale Zertifikate</h3>
+                <p>Digitale Zertifikate sind elektronische Dokumente, die bestätigen, dass ein öffentlicher Schlüssel zu einer bestimmten Person, Organisation oder Webseite gehört. Sie werden von einer vertrauenswürdigen Zertifizierungsstelle (CA) ausgestellt und signiert (siehe 8.13).</p>
+                <p>Einsatzbereiche: TLS für sichere Webkommunikation, E-Mail-Verschlüsselung, Signatur von Software und Dokumenten.</p>
+                <h3>Zwei-Faktor-Authentifizierung (2FA)</h3>
+                <p>Bei 2FA muss man zwei Faktoren aus verschiedenen Kategorien vorlegen: etwas, das man weiß (Passwort), etwas, das man besitzt (Smartphone), oder etwas, das man ist (Fingerabdruck).</p>
+                <p>Einsatzbereiche: Online-Banking, E-Mail-Konten, Zugang zu Firmennetzen.</p>
+                <h3>Biometrische Verfahren</h3>
+                <p>Biometrische Verfahren erkennen Personen an körperlichen oder verhaltensbezogenen Merkmalen, etwa an Fingerabdruck, Gesicht, Iris oder Stimme.</p>
+                <p>Einsatzbereiche: Entsperren von Smartphones, Zutrittskontrollen, Identitätsprüfung im Finanzsektor.</p>
+                <h3>Einmalpasswörter (One-Time Password)</h3>
+                <p>Ein Einmalpasswort gilt nur für eine einzige Anmeldung oder Transaktion, z.&nbsp;B. ein sechsstelliger Code aus einer Authenticator-App (TOTP) oder eine TAN beim Online-Banking.</p>
+                <p><em>Achtung Verwechslungsgefahr:</em> Die Abkürzung OTP steht auch für das Verschlüsselungsverfahren One-Time-Pad (8.5). Im Kurs schreiben wir deshalb „Einmalpasswort“ bzw. „One-Time-Pad“ aus.</p>
+                <p>Einsatzbereiche: Online-Transaktionen, Zwei-Faktor-Authentifizierung, sichere Anmeldung.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Technologien zur Umsetzung von Verfügbarkeit</summary>
+                <h3>Redundanz</h3>
+                <p>Redundanz bedeutet, dass zusätzliche oder doppelte Systemkomponenten vorhanden sind, die beim Ausfall eines Teils einspringen, z.&nbsp;B. ein RAID-System (siehe 8.15).</p>
+                <p>Einsatzbereiche: Netzwerkinfrastruktur, Datenbanksysteme, Speichersysteme.</p>
+                <h3>Load Balancer</h3>
+                <p>Load Balancer verteilen eingehende Anfragen auf mehrere Server, damit keiner überlastet wird.</p>
+                <p>Einsatzbereiche: Webserver, Anwendungsserver, Datenbankserver.</p>
+                <h3>Failover-Systeme</h3>
+                <p>Failover-Systeme schalten automatisch auf ein Ersatzsystem um, wenn das primäre System ausfällt. Das verkürzt Ausfallzeiten und hält den Betrieb aufrecht.</p>
+                <p>Einsatzbereiche: Cloud-Dienste, Netzwerkdienste, Datenbanken.</p>
+                <h3>Disaster Recovery</h3>
+                <p>Disaster-Recovery-Pläne sind vorbereitete Maßnahmen, mit denen nach einem schweren Ereignis (Brand, Hochwasser, Cyberangriff, technischer Ausfall) Daten wiederhergestellt und Dienste möglichst schnell wieder bereitgestellt werden.</p>
+                <p>Einsatzbereiche: IT-Infrastruktur von Unternehmen, Online-Dienste, Rechenzentren.</p>
+                <h3>Datensicherung und Cloud-Dienste</h3>
+                <p>Regelmäßige Sicherungen an getrennten Orten, auch in der Cloud, sorgen dafür, dass Daten nach einem Verlust wiederhergestellt werden können.</p>
+                <p>Einsatzbereiche: Datenspeicherung, Anwendungshosting, Backup-Lösungen.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Technologien zur Umsetzung von Verbindlichkeit</summary>
+                <h3>Digitale Signaturen</h3>
+                <p>Eine digitale Signatur wird mit dem privaten Schlüssel des Absenders erzeugt, den nur er besitzt. Jeder kann sie mit dem öffentlichen Schlüssel prüfen. Deshalb kann der Absender die Signatur später nicht abstreiten (siehe 8.13).</p>
+                <p>Einsatzbereiche: Verträge, elektronische Rechnungen, Software-Updates.</p>
+                <h3>Audit-Logs (Überwachungsprotokolle)</h3>
+                <p>Audit-Logs zeichnen fortlaufend auf, wer wann welche Aktion ausgeführt hat. Damit sie als Nachweis taugen, müssen sie selbst vor Veränderung geschützt sein.</p>
+                <p>Einsatzbereiche: IT-Sicherheit, Compliance-Prüfungen, forensische Analysen.</p>
+                <h3>Zeitstempeldienste</h3>
+                <p>Zeitstempeldienste versehen digitale Dokumente mit einem signierten Zeitstempel. Damit ist belegt, dass die Daten zu einem bestimmten Zeitpunkt existiert haben und seitdem nicht verändert wurden.</p>
+                <p>Einsatzbereiche: Dokumentenmanagement, rechtliche Nachweise, Audit-Trails.</p>
+            </details>
+        </div>
+
+<hr>
+
+<h2>Datenschutz</h2>
+
+<p>Datenschutz bezieht sich auf den Schutz personenbezogener Daten und deren Verarbeitung, um die Privatsphäre jedes Einzelnen zu schützen.</p>
+
+<h3>Unterschied zwischen Informationssicherheit und Datenschutz</h3>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Schutzziele im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Das Schloss-Symbol in der Adresszeile des Browsers zeigt eine HTTPS-Verbindung an. TLS&nbsp;1.3 sorgt dann für Vertraulichkeit (Verschlüsselung), Integrität (Prüfsummen) und Authentizität des Servers (Zertifikat). Es sagt aber nichts darüber, ob die Webseite selbst seriös ist – auch Phishing-Seiten haben oft ein Schloss.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> In Unternehmen und Behörden kümmert sich die oder der <strong>IT-Sicherheitsbeauftragte</strong> darum, dass die Schutzziele eingehalten werden. Sie oder er arbeitet dabei häufig nach dem <strong>IT-Grundschutz</strong> des Bundesamts für Sicherheit in der Informationstechnik (BSI): Man bestimmt den Schutzbedarf jedes Systems für Vertraulichkeit, Integrität und Verfügbarkeit und wählt passende Maßnahmen aus. Kliniken, Stadtwerke und Verwaltungen, etwa in Dresden, brauchen solche Fachleute dringend. Den Weg dorthin eröffnet z.&nbsp;B. ein Informatikstudium mit Schwerpunkt IT-Sicherheit an der TU Dresden oder eine Ausbildung zur Fachinformatikerin bzw. zum Fachinformatiker.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Schutzziele der Informationssicherheit</strong><br>
+                Die drei Grundziele heißen nach ihren englischen Anfangsbuchstaben <strong>CIA</strong>:
+            </p>
+            <ul>
+                <li><strong>Vertraulichkeit</strong> (Confidentiality): Nur Berechtigte können die Information lesen.</li>
+                <li><strong>Integrität</strong> (Integrity): Daten sind vollständig und unverändert; unbefugte Änderungen werden zumindest erkannt.</li>
+                <li><strong>Verfügbarkeit</strong> (Availability): Daten und Systeme sind für Berechtigte nutzbar, wenn sie gebraucht werden.</li>
+            </ul>
+            <p>Ergänzt werden sie durch:</p>
+            <ul>
+                <li><strong>Authentizität</strong>: Die Echtheit eines Kommunikationspartners oder einer Datenquelle ist nachgewiesen.</li>
+                <li><strong>Verbindlichkeit</strong> (Nichtabstreitbarkeit): Eine Handlung kann einer Person eindeutig zugeordnet werden, und diese kann sie später nicht gegenüber Dritten abstreiten.</li>
+            </ul>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Informationssicherheit</strong> schützt <em>alle</em> Informationen – auch Baupläne oder Quellcode – vor Bedrohungen, um Vertraulichkeit, Integrität, Verfügbarkeit, Authentizität und Verbindlichkeit zu gewährleisten.<br>
+                <strong>Datenschutz</strong> schützt <em>Personen</em> vor dem Missbrauch ihrer personenbezogenen Daten. Er ist gesetzlich geregelt, vor allem durch die Datenschutz-Grundverordnung (DSGVO). Informationssicherheit ist eine Voraussetzung für wirksamen Datenschutz.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.1.1: Schutzziele erarbeiten <span class="niveau">AFB I</span></summary>
+                <p>Bearbeite die folgenden LearningApps. Fülle mithilfe der LearningApps das <span class="material-fehlt">Arbeitsblatt (nur im Unterricht)</span> aus.</p>
+                <iframe style="border: 0px; width: 600px; height: 500px;" src="https://learningapps.org/watch?v=p4ksu6ukc24" allowfullscreen="allowfullscreen" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen"></iframe>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.1.2: Vorfälle einordnen <span class="niveau">AFB II</span></summary>
+                <p>Gib für jeden Vorfall an, welches Schutzziel vorrangig verletzt ist, und begründe kurz.</p>
+                <ol type="a">
+                    <li>Ein Angreifer legt den Webserver der Schule mit massenhaften Anfragen lahm (DDoS).</li>
+                    <li>Im öffentlichen WLAN liest jemand die unverschlüsselten Anmeldedaten mit.</li>
+                    <li>Eine Phishing-Mail gibt sich als Nachricht deiner Bank aus.</li>
+                    <li>Eine Mitarbeiterin bestreitet, eine Bestellung ausgelöst zu haben; es gibt nur einen Eintrag „Login mit Passwort“.</li>
+                    <li>Schadsoftware ändert in einer Tabelle unbemerkt einzelne Noten.</li>
+                </ol>
+            </details>
+        </div>

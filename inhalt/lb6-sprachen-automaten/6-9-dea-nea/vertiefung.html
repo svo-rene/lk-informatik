@@ -1,0 +1,19 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.9.10: Eine Registermaschine rechnet <span class="niveau">AFB III</span></summary>
+                <p>Eine Registermaschine kennt die Befehle <code>INC Ri</code> (Register i um 1 erhöhen), <code>DEC Ri</code> (um 1 verringern), <code>JZ Ri, n</code> (ist Ri = 0, springe zu Zeile n, sonst weiter mit der nächsten Zeile), <code>GOTO n</code> und <code>HALT</code>. Gegeben ist das Programm:</p>
+<pre>1: JZ R2, 5
+2: DEC R2
+3: INC R1
+4: GOTO 1
+5: HALT</pre>
+                <ol type="a">
+                    <li>Simuliere das Programm für R1 = 2 und R2 = 3. Gib die Konfigurationsfolge als Tabelle (Zeile, R1, R2) an.</li>
+                    <li>Beschreibe allgemein, was das Programm berechnet und welchen Nebeneffekt es hat.</li>
+                    <li>Ändere das Programm so, dass R2 am Ende wieder seinen Anfangswert hat. Du darfst ein Hilfsregister R3 (Anfangswert 0) verwenden.</li>
+                    <li>Begründe, warum ein endlicher Automat diese Rechnung nicht für beliebig große Zahlen ausführen kann, eine Registermaschine aber schon.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,220 @@
+<p>
+        Bevor wir anfangen zu programmieren, lohnt sich ein Perspektivwechsel. Statt „Was muss der Computer tun?“ fragen wir: <strong>„Welche Dinge (Objekte) gibt es in meinem Problem – und wie hängen sie zusammen?“</strong>
+    </p>
+
+<p>
+        Objektorientiertes Denken bedeutet, die Welt in <strong>Objekte mit Eigenschaften und Fähigkeiten</strong> zu zerlegen. Du überlegst, welche Dinge es gibt, welche Eigenschaften sie haben (Attribute) und was sie tun können (Methoden).
+    </p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in drei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–1,5 min, ohne Ton) die Idee als Tafelbild, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und zeichne mit.</p>
+
+<ol class="schritte">
+        <li><a href="#schritt-1">Was ist ein Objekt? – vom Alltag zum Objektdiagramm</a></li>
+        <li><a href="#schritt-2">Zustand und Verhalten</a> – danach Aufgabe 4.2.1</li>
+        <li><a href="#schritt-3">Objekte schicken sich Botschaften</a> – danach Aufgabe 4.2.2</li>
+    </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Was ist ein Objekt?</h2>
+
+<p>Ein Objekt ist ein konkretes Ding – wie ein Ball, ein Schüler oder ein Auto. Es hat:</p>
+
+<ul>
+        <li><strong>Attribute</strong> → Daten, z.&nbsp;B. Farbe, Name, Geschwindigkeit</li>
+        <li><strong>Methoden</strong> → Aktionen, z.&nbsp;B. <code>springen()</code>, <code>sprechen()</code>, <code>bremsen()</code></li>
+    </ul>
+
+<p>
+        Die UML (Unified Modeling Language) ist eine grafische Modellierungssprache für objektorientierte Systeme. Ein <strong>Objektdiagramm</strong> zeigt ein konkretes Objekt mit seinen aktuellen Attributwerten. Der Kopf enthält unterstrichen <code>objektname : Klasse</code>.
+    </p>
+
+<p>Im Video wird aus der Hündin Luna ein Objektdiagramm. Achte darauf, was im Kopf steht, was darunter steht – und was <em>nicht</em> im Objektdiagramm vorkommt.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-2-1_objekt_vorschau.png" src="../vid/4-2-1_objekt.mp4"></video><a href="../vid/4-2-1_objekt.mp4">Video ansehen</a></div>
+        <figcaption>Video 1: Was ist ein Objekt? (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+    </figure>
+
+<p>Zum Nachlesen: Ein Objekt vom Typ „Hund“ könnte z.&nbsp;B. so aussehen:</p>
+
+<figure>
+        <img src="../img/objektdiagramm.png" width="600" alt="Objektdiagramm des Objekts luna der Klasse Hund mit Attributwerten">
+        <figcaption>Abb. 1: Objektdiagramm des Objekts „Luna“ der Klasse „Hund“</figcaption>
+    </figure>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Zustand und Verhalten →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Zustand und Verhalten</h2>
+
+<h3>Attribute: Was weiß ein Objekt?</h3>
+
+<p>Attribute sind die Daten, die in einem Objekt gespeichert sind. Beim Objekt „Luna“ sind das z.&nbsp;B. der Name, das Alter und die Größe.</p>
+
+<h3>Methoden: Was kann ein Objekt tun?</h3>
+
+<p>Methoden sind Funktionen, die zu einem Objekt gehören und auf ihm ausgeführt werden. Ein Objekt „Hund“ könnte z.&nbsp;B. eine Methode <code>bellen()</code> oder <code>wachsen()</code> besitzen.</p>
+
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: Was ist der Unterschied zwischen Attribut und Methode?</summary>
+            <p>
+                Ein <strong>Attribut</strong> speichert Daten, z.&nbsp;B. <code>alter = 17</code>.<br>
+                Eine <strong>Methode</strong> führt eine Aktion aus, z.&nbsp;B. <code>zeige_profil()</code>.<br>
+                Methoden können Attribute lesen oder verändern – ähnlich wie Verben in einem Satz. Attribute entsprechen eher den Substantiven und Adjektiven.
+            </p>
+        </details>
+    </div>
+
+<p>Im Video schaltet und bremst Lea mit <code>fahrrad1</code>. Achte darauf, welches Attribut sich bei welcher Botschaft ändert und welches gleich bleibt.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-2-2_zustand_vorschau.png" src="../vid/4-2-2_zustand.mp4"></video><a href="../vid/4-2-2_zustand.mp4">Video ansehen</a></div>
+        <figcaption>Video 2: Zustand und Verhalten (ca. 1 min)</figcaption>
+    </figure>
+
+<p>Zum Nachlesen steht das Fahrrad-Beispiel aus dem Video ausführlich in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Ein Fahrrad als Objekt</summary>
+        <p><strong>Ausgangssituation:</strong> Objekt <code>fahrrad1</code> – Attribute: farbe = „rot“, gang = 3, geschwindigkeit = 18 km/h; Methoden: <code>schalten(neuer_gang)</code>, <code>bremsen()</code>.</p>
+        <p>Das Fahrrad gehört zum Schul-Fahrradverleih. Lea fährt mit 18 km/h im 3. Gang, schaltet vor einer Steigung in den 5. Gang und bremst danach an der Ampel bis zum Stillstand.</p>
+        <ol>
+            <li><strong>Objekt benennen:</strong> <code>fahrrad1 : Fahrrad</code> (Objektname : Klasse, im Diagramm unterstrichen). Warum? Ein Objekt muss eindeutig identifizierbar sein – auch wenn ein zweites rotes Fahrrad dieselben Werte hätte, wäre es ein anderes Objekt.</li>
+            <li><strong>Attribute bestimmen:</strong> Was das Fahrrad „weiß“, steckt in Substantiven und Adjektiven des Textes: farbe, gang, geschwindigkeit. Ihre aktuellen Werte bilden den <strong>Zustand</strong>. Warum nicht „Lea“? Lea ist ein eigenes Objekt und keine Eigenschaft des Fahrrads.</li>
+            <li><strong>Methoden bestimmen:</strong> Was das Fahrrad „kann“, steckt in den Verben: schalten, bremsen. <code>schalten</code> braucht einen Parameter, weil man wissen muss, in welchen Gang geschaltet wird.</li>
+            <li><strong>Botschaft <code>fahrrad1.schalten(5)</code>:</strong> Der Zustand ändert sich: gang 3 → 5. Die anderen Attribute bleiben, wie sie sind.</li>
+            <li><strong>Botschaft <code>fahrrad1.bremsen()</code>:</strong> geschwindigkeit 18 → 0. Warum ohne Parameter? Laut Text wird bis zum Stillstand gebremst; das Fahrrad braucht keine weitere Information.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Objektdiagramm vor und nach den beiden Botschaften. Methoden stehen im Objektdiagramm nicht, denn es zeigt nur den Zustand.</p>
+        <table class="gitter">
+            <thead><tr><th><u>fahrrad1 : Fahrrad</u> (vorher)</th><th><u>fahrrad1 : Fahrrad</u> (nachher)</th></tr></thead>
+            <tbody>
+                <tr><td>farbe = "rot"<br>gang = 3<br>geschwindigkeit = 18</td><td>farbe = "rot"<br>gang = 5<br>geschwindigkeit = 0</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Kontrolle:</strong> Jede Botschaft hat genau das Attribut verändert, zu dem sie passt. Die Farbe ist unverändert, weil keine Methode sie betrifft. Das Objekt ist dasselbe geblieben – nur sein Zustand hat sich geändert.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-4-2-1">Aufgabe 4.2.1</a> – Attribut oder Methode?</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Objekte schicken sich Botschaften →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Objekte schicken sich Botschaften</h2>
+
+<p>In einem OOP-System arbeiten viele Objekte zusammen. Ein Objekt kann ein anderes „anstoßen“, indem es eine seiner Methoden aufruft.</p>
+
+<p>Beispiel: Das Objekt <code>wecker</code> ruft <code>schueler.aufstehen()</code> auf.</p>
+
+<p>Im Video meldet Leas Smartwatch dem Handy einen neuen Schritt-Rekord. Achte darauf, welches Objekt welchen Zustand ändert – und warum die Uhr nicht direkt in die Liste des Handys schreibt.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-2-3_botschaften_vorschau.png" src="../vid/4-2-3_botschaften.mp4"></video><a href="../vid/4-2-3_botschaften.mp4">Video ansehen</a></div>
+        <figcaption>Video 3: Objekte schicken sich Botschaften (ca. 1,5 min)</figcaption>
+    </figure>
+
+<p>Zum Nachlesen steht der Ablauf aus dem Video in Beispiel 2:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Objekte arbeiten zusammen – eine Smartwatch meldet einem Handy einen Schritt-Rekord</summary>
+        <p><strong>Ausgangssituation:</strong> Leas Smartwatch zählt Schritte. Ihr bisheriger Tagesrekord liegt bei 12 480 Schritten, die Uhr steht genau auf diesem Wert. Wird der Rekord überschritten, soll Leas Handy eine Nachricht anzeigen. Objektdiagramme vorher:</p>
+        <table class="gitter">
+            <thead><tr><th><u>uhr : Smartwatch</u></th><th><u>handy : Smartphone</u></th></tr></thead>
+            <tbody>
+                <tr><td>besitzer = "Lea"<br>schritte = 12 480<br>rekord = 12 480</td><td>benachrichtigungen = []</td></tr>
+            </tbody>
+        </table>
+        <pre><code>Objekt uhr (Smartwatch):   schritte = 12 480, besitzer = "Lea"
+Objekt handy (Smartphone): benachrichtigungen = []
+
+1. uhr.schritt_zaehlen()            -&gt; schritte wird 12 481
+2. uhr prüft: Rekord überschritten?  -&gt; ja
+3. uhr sendet Botschaft: handy.benachrichtigen("Neuer Rekord!")
+4. handy speichert die Nachricht und zeigt sie an</code></pre>
+        <p>Keines der Objekte muss wissen, wie das andere intern arbeitet – es genügt, seine Methoden zu kennen.</p>
+        <ol>
+            <li><strong>Zustand ändern:</strong> Der Bewegungssensor löst <code>uhr.schritt_zaehlen()</code> aus, schritte wird 12 481. Warum über eine Methode? Nur die Uhr selbst verändert ihre Attribute.</li>
+            <li><strong>Bedingung prüfen:</strong> Die Uhr vergleicht schritte (12 481) mit rekord (12 480). 12 481 &gt; 12 480, also ist der Rekord überschritten. Die Uhr merkt sich den neuen Rekord: rekord = 12 481.</li>
+            <li><strong>Botschaft senden:</strong> Die Uhr ruft <code>handy.benachrichtigen("Neuer Rekord!")</code> auf. Warum schreibt sie die Nachricht nicht direkt in die Liste des Handys? Die Uhr kennt nur die Methode des Handys, nicht dessen Inneres. So kann das Handy selbst entscheiden, wie es die Nachricht speichert und anzeigt (Stichwort Kapselung).</li>
+            <li><strong>Botschaft verarbeiten:</strong> Das Handy hängt die Nachricht an seine Liste an und zeigt sie an.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Objektdiagramme nach der Botschaft:</p>
+        <table class="gitter">
+            <thead><tr><th><u>uhr : Smartwatch</u></th><th><u>handy : Smartphone</u></th></tr></thead>
+            <tbody>
+                <tr><td>besitzer = "Lea"<br>schritte = 12 481<br>rekord = 12 481</td><td>benachrichtigungen = ["Neuer Rekord!"]</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Kontrolle:</strong> Spiele den nächsten Schritt durch: schritte wird 12 482, und 12 482 &gt; 12 481 – die Uhr würde erneut „Neuer Rekord!“ senden, und zwar bei <em>jedem</em> weiteren Schritt. Die Modellierung hat also eine Schwachstelle. Abhilfe: ein zusätzliches Attribut <code>rekord_gemeldet</code> (wahr/falsch), das nach der ersten Meldung gesetzt wird, oder die Prüfung erst am Tagesende. Solche Fehler findet man, indem man Botschaften mit konkreten Attributwerten durchspielt.</p>
+            </details>
+        </div>
+
+<h3>Kapselung: Zugriff steuern</h3>
+
+<p>Ein Objekt sollte nur über seine Methoden benutzt werden. Die internen Details (Attribute) bleiben verborgen – das nennt man <strong>Kapselung</strong> (siehe 4.6).</p>
+
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: Warum ist Kapselung wichtig?</summary>
+            <p>Wenn du die inneren Daten eines Objekts schützt, kannst du leichter Fehler vermeiden und später Dinge ändern, ohne dass andere Teile deines Programms nicht mehr funktionieren.</p>
+        </details>
+    </div>
+
+<p>Danach: <a href="uebungen.html#a-4-2-2">Aufgabe 4.2.2</a> – Denk in Objekten.</p>
+
+<div class="praxisbezug">
+        <details>
+            <summary>Praxisbezug: Objektorientierte Analyse</summary>
+            <p>
+                <strong>Alltag:</strong> Auch ohne Programmierung denkst du objektorientiert: Dein Smartphone „weiß“ seinen Akkustand (Attribut) und „kann“ Fotos aufnehmen (Methode).<br><br>
+                <strong>Beruf:</strong> Bevor in einem Softwareprojekt programmiert wird, führen Softwarearchitektinnen und Business-Analysten eine <strong>objektorientierte Analyse</strong> durch: In Gesprächen mit dem Kunden – etwa einer Stadtverwaltung, die ein Online-Terminsystem möchte – sammeln sie die wichtigen Objekte (Bürger, Termin, Sachbearbeiterin) und zeichnen sie als UML-Diagramme. Diese Diagramme sind die gemeinsame Sprache zwischen Kunde und Entwicklungsteam.
+            </p>
+        </details>
+    </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+        Ein Objekt ist ein eindeutiges Ding mit Attributen (Daten) und Methoden (Fähigkeiten). Die aktuellen Attributwerte bilden seinen Zustand; das Objektdiagramm zeigt genau diesen Zustand mit dem unterstrichenen Kopf <code>objektname : Klasse</code>. Objekte arbeiten zusammen, indem sie sich Botschaften schicken, also Methoden anderer Objekte aufrufen. Jedes Objekt ändert dabei nur seinen eigenen Zustand.
+    </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            Ein <strong>Objekt</strong> ist eine eindeutig identifizierbare Einheit mit einem <strong>Zustand</strong> (den aktuellen Werten seiner Attribute) und einem <strong>Verhalten</strong> (seinen Methoden). In der OOP setzen solche Objekte dein Programm wie Bausteine zusammen – genau wie reale Dinge haben sie Eigenschaften und können etwas tun.
+        </p>
+    </div>
+
+<div class="merke">
+        <p>
+            OOP ist wie ein Team aus kleinen, spezialisierten Einheiten (Objekten), die sich gegenseitig <strong>Botschaften</strong> schicken – in Form von Methodenaufrufen.
+        </p>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Eine Trinkflasche als Objekt <span class="niveau">AFB I</span></summary>
+            <p>Pauls Trinkflasche ist blau, fasst 0,75&nbsp;l und enthält gerade 0,4&nbsp;l Wasser. Gib das Objektdiagramm an (Kopf und Attribute mit Werten).</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Kopf (unterstrichen): <code>flasche : Trinkflasche</code>. Attribute: <code>farbe = "blau"</code>, <code>volumen = 0.75</code>, <code>fuellstand = 0.4</code>. Methoden wie <code>trinken()</code> oder <code>auffuellen()</code> stehen nicht im Objektdiagramm. Paul kann als Attribut <code>besitzer = "Paul"</code> vorkommen oder als eigenes Objekt modelliert werden.</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Die Flurlampe <span class="niveau">AFB I</span></summary>
+            <p>Für das Objekt <code>lampe1 : Lampe</code> gibt es: helligkeit, einschalten, farbe, dimmen(prozent). Was davon sind Attribute, was Methoden? Welches Attribut ändert die Botschaft <code>lampe1.dimmen(50)</code>, welches bleibt gleich?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Attribute: helligkeit, farbe. Methoden: <code>einschalten()</code>, <code>dimmen(prozent)</code>. <code>lampe1.dimmen(50)</code> ändert die helligkeit (auf 50&nbsp;%), die farbe bleibt gleich. Das Objekt bleibt dasselbe, nur sein Zustand ändert sich.</p>
+            </details>
+        </details>
+    </div>

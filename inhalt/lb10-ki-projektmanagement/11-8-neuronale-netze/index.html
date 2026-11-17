@@ -1,0 +1,255 @@
+<h2>1. Das Vorbild: das biologische Neuron</h2>
+
+<p>Unser Gehirn besteht aus Milliarden von Nervenzellen (Neuronen), die über Verbindungen miteinander Signale austauschen. Ein Neuron empfängt elektrische Signale von anderen Neuronen, „summiert“ sie gewissermaßen auf und feuert selbst nur dann ein Signal, wenn eine bestimmte Reizschwelle überschritten wird. Diese einfache Grundidee – Eingaben sammeln, gewichten und bei Überschreiten einer Schwelle reagieren – diente als Inspiration für das <strong>künstliche Neuron</strong>, den Grundbaustein neuronaler Netze.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Analogie, keine Kopie</summary>
+                <p>Künstliche neuronale Netze sind nur sehr grob dem biologischen Vorbild nachempfunden. Sie sind mathematische Modelle, keine Nachbildung eines echten Gehirns. Die Analogie hilft aber, die Grundidee zu verstehen.</p>
+            </details>
+        </div>
+
+<h2>2. Das Perzeptron</h2>
+
+<p>Das <strong>Perzeptron</strong> ist die einfachste Form eines künstlichen Neurons. Es funktioniert in drei Schritten:</p>
+
+<ol>
+            <li>Jede Eingabe <code>x</code> wird mit einem <strong>Gewicht</strong> <code>w</code> multipliziert.</li>
+            <li>Alle gewichteten Eingaben werden zu einer <strong>Summe</strong> addiert.</li>
+            <li>Eine <strong>Aktivierungsfunktion</strong> (hier: ein einfacher Schwellenwert) entscheidet anhand der Summe, ob das Neuron „feuert“ (Ausgabe 1) oder nicht (Ausgabe 0).</li>
+        </ol>
+
+<h3>2.1 Ein Beispiel zum Nachrechnen</h3>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Perzeptron erhält drei Eingaben mit folgenden Werten und Gewichten:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Eingabe</th>
+                        <th>Wert <code>x</code></th>
+                        <th>Gewicht <code>w</code></th>
+                        <th>Produkt <code>x · w</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>x₁</td><td>1</td><td>0,5</td><td>0,5</td></tr>
+                    <tr><td>x₂</td><td>0</td><td>0,8</td><td>0</td></tr>
+                    <tr><td>x₃</td><td>1</td><td>0,3</td><td>0,3</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><strong>Was:</strong> Jede Eingabe mit ihrem Gewicht multiplizieren (Spalte „Produkt“ der Tabelle). – <em>warum:</em> Das Gewicht legt fest, wie stark eine Eingabe die Entscheidung beeinflusst; die Eingabe x₂ = 0 trägt trotz des großen Gewichts 0,8 nichts bei.</li>
+                <li><strong>Was:</strong> Die Produkte addieren. Die gewichtete Summe ergibt sich zu: <code>Summe = 0,5 + 0 + 0,3 = 0,8</code> – <em>warum:</em> Das Neuron sammelt alle gewichteten Eingaben zu einem einzigen Wert.</li>
+                <li><strong>Was:</strong> Die Aktivierungsfunktion anwenden. Als Schwellenwert sei <code>Θ = 0,6</code> festgelegt. Die Aktivierungsfunktion lautet:
+                    <br><code>Ausgabe = 1, wenn Summe ≥ Θ, sonst Ausgabe = 0</code>
+                    – <em>warum:</em> Erst der Vergleich mit der Schwelle macht aus der Summe eine Ja/Nein-Entscheidung.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Da <code>0,8 ≥ 0,6</code>, feuert das Neuron: Die Ausgabe ist <code>1</code>.</p>
+            <p><strong>Kontrolle:</strong> Ändert man nur x₁ auf 0, ergibt sich <code>Summe = 0 + 0 + 0,3 = 0,3 &lt; 0,6</code> und die Ausgabe wird 0. Das passt: x₁ hat hier das größte wirksame Gewicht, ohne x₁ wird die Schwelle nicht erreicht.</p>
+            </details>
+        </div>
+
+<h2>3. Grenzen eines einzelnen Perzeptrons</h2>
+
+<p>Ein einzelnes Perzeptron kann nur Probleme lösen, bei denen sich die beiden Klassen durch eine einzige gerade Linie (bzw. Ebene) trennen lassen – man spricht von <strong>linear trennbaren Problemen</strong>. Es gibt jedoch einfache Probleme, die dafür nicht geeignet sind. Ein bekanntes Beispiel ist die logische Funktion <strong>XOR</strong> (entweder–oder): Hier lässt sich keine einzige gerade Trennlinie finden, die alle Fälle korrekt zuordnet. Ein einzelnes Perzeptron scheitert daher an dieser Aufgabe.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Warum ist das wichtig?</summary>
+                <p>Marvin Minsky und Seymour Papert zeigten diese Grenze 1969 in ihrem Buch „Perceptrons“. Das trug dazu bei, dass die Forschung an neuronalen Netzen in den 1970er-Jahren stark zurückging (vgl. den ersten KI-Winter in 11.1). Erst mehrschichtige Netze, die mit Backpropagation trainiert werden konnten (populär ab Mitte der 1980er-Jahre), überwanden diese Beschränkung.</p>
+            </details>
+        </div>
+
+<h2>4. Mehrschichtige neuronale Netze (Multi-Layer-Perceptron)</h2>
+
+<p>Um auch nicht linear trennbare Probleme wie XOR zu lösen, verschaltet man mehrere Perzeptronen in <strong>Schichten (Layer)</strong>. Ein solches Netz besteht typischerweise aus:</p>
+
+<ul>
+            <li><strong>Eingabeschicht (Input Layer):</strong> nimmt die Eingabedaten entgegen (z.&nbsp;B. Pixelwerte eines Bildes).</li>
+            <li><strong>Versteckte Schicht(en) (Hidden Layer):</strong> eine oder mehrere Zwischenschichten, die die Eingaben schrittweise zu komplexeren Merkmalen verarbeiten.</li>
+            <li><strong>Ausgabeschicht (Output Layer):</strong> liefert das Endergebnis, z.&nbsp;B. die erkannte Ziffer.</li>
+        </ul>
+
+<p>In einem vollständig verbundenen Netz ist jedes Neuron mit allen Neuronen der vorherigen Schicht verbunden. Statt eines einfachen Schwellenwerts verwenden moderne Netze meist weichere <strong>Aktivierungsfunktionen</strong> wie die <strong>Sigmoid-Funktion</strong> (gibt Werte zwischen 0 und 1 aus) oder <strong>ReLU</strong> (Rectified Linear Unit, gibt negative Werte als 0 aus, positive Werte unverändert). Die genaue Formel ist an dieser Stelle nicht wichtig – entscheidend ist, dass diese Funktionen dem Netz erlauben, auch komplexe, nichtlineare Zusammenhänge abzubilden.</p>
+
+<figure>
+            <img src="../img/mlp-svg.svg" width="550" alt="Aufbau eines mehrschichtigen neuronalen Netzes mit Eingabe-, versteckter und Ausgabeschicht">
+            <figcaption>Abb. 1: Multi-Layer-Perceptron</figcaption>
+        </figure>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> XOR mit zwei Schichten – genau die Aufgabe, an der ein einzelnes Perzeptron scheitert (Abschnitt 3). Alle Neuronen nutzen die Schwellenwertfunktion aus Abschnitt 2.</p>
+            <ul>
+                <li>verstecktes Neuron h₁ („ODER“): Gewichte 1 und 1, Θ = 1</li>
+                <li>verstecktes Neuron h₂ („UND“): Gewichte 1 und 1, Θ = 2</li>
+                <li>Ausgabeneuron: Gewicht 1 für h₁, Gewicht −1 für h₂, Θ = 1</li>
+            </ul>
+            <ol>
+                <li><strong>Was:</strong> Für jede Eingabekombination zuerst die versteckte Schicht berechnen: h₁ feuert, wenn <code>x₁ + x₂ ≥ 1</code>, h₂ feuert, wenn <code>x₁ + x₂ ≥ 2</code>. – <em>warum:</em> Die versteckte Schicht zerlegt das Problem in zwei Teilprobleme (ODER, UND), die jeweils linear trennbar sind und deshalb von einem einzelnen Perzeptron gelöst werden können.</li>
+                <li><strong>Was:</strong> Die Ausgaben h₁ und h₂ sind die Eingaben des Ausgabeneurons: <code>Summe = 1 · h₁ + (−1) · h₂</code>, Vergleich mit Θ = 1. – <em>warum:</em> Das negative Gewicht wirkt hemmend: Das Ausgabeneuron feuert bei „ODER, aber nicht UND“.</li>
+                <li><strong>Was:</strong> Den kritischen Fall (1|1) ausführlich durchrechnen: h₁: <code>1 + 1 = 2 ≥ 1</code> → 1; h₂: <code>2 ≥ 2</code> → 1; Ausgang: <code>1 · 1 + (−1) · 1 = 0 &lt; 1</code> → 0. – <em>warum:</em> Das ist die Falle: Ein einzelnes „ODER-Neuron“ würde hier 1 liefern. Erst das hemmende UND-Neuron korrigiert diesen Fall.</li>
+                <li><strong>Was:</strong> Alle vier Fälle in einer Tabelle zusammenstellen. – <em>warum:</em> Ein Netz ist erst geprüft, wenn es für jede Zeile der Wahrheitstabelle stimmt.
+                    <table>
+                        <thead>
+                            <tr><th>x₁</th><th>x₂</th><th>h₁</th><th>h₂</th><th>Summe am Ausgang</th><th>Ausgabe</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                            <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                            <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                            <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li><strong>Was:</strong> Das Netz in Python nachbauen und mit allen vier Eingaben testen. – <em>warum:</em> So lässt sich die Handrechnung automatisch prüfen; dieselbe Funktion <code>perzeptron</code> wird dreimal mit verschiedenen Gewichten verwendet.
+<pre><code class="language-python">def perzeptron(eingaben, gewichte, schwelle):
+    summe = 0
+    for i in range(len(eingaben)):
+        summe = summe + eingaben[i] * gewichte[i]
+    if summe &gt;= schwelle:
+        return 1
+    return 0
+
+def xor_netz(x1, x2):
+    h1 = perzeptron([x1, x2], [1, 1], 1)    # ODER
+    h2 = perzeptron([x1, x2], [1, 1], 2)    # UND
+    return perzeptron([h1, h2], [1, -1], 1)
+
+# Testfälle: Eingabe (x1, x2) -&gt; erwartete Ausgabe 0, 1, 1, 0
+for x1 in [0, 1]:
+    for x2 in [0, 1]:
+        print(x1, x2, "-&gt;", xor_netz(x1, x2))</code></pre>
+                    Ablauf für die Eingabe <code>xor_netz(1, 1)</code>: Im ersten Aufruf läuft die Schleife zweimal, <code>summe</code> wird 0 → 1 → 2; wegen <code>2 &gt;= 1</code> ist <code>h1 = 1</code>. Im zweiten Aufruf ergibt sich ebenso 2, wegen <code>2 &gt;= 2</code> ist <code>h2 = 1</code>. Im dritten Aufruf ist <code>summe = 1 · 1 + 1 · (−1) = 0</code>, wegen <code>0 &lt; 1</code> wird 0 zurückgegeben.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Das Netz berechnet also genau XOR: „mindestens eine Eingabe ist 1, aber nicht beide“.</p>
+            <p><strong>Kontrolle:</strong> Das Programm gibt <code>0 0 -&gt; 0</code>, <code>0 1 -&gt; 1</code>, <code>1 0 -&gt; 1</code> und <code>1 1 -&gt; 0</code> aus. Das stimmt mit der Wahrheitstabelle von XOR (0, 1, 1, 0) und mit der Tabelle oben überein.</p>
+            </details>
+        </div>
+
+<h2>5. Wie lernt ein neuronales Netz?</h2>
+
+<p>Beim Training bekommt das Netz zunächst zufällige Gewichte. Für jedes Trainingsbeispiel berechnet es eine Ausgabe und vergleicht diese mit dem tatsächlich gewünschten Ergebnis – der Unterschied wird als <strong>Fehler</strong> gemessen. Über ein Verfahren namens <strong>Backpropagation</strong> wird dieser Fehler rückwärts durch das Netz „zurückgereicht“, um zu bestimmen, wie jedes einzelne Gewicht angepasst werden muss, damit der Fehler kleiner wird. Diese schrittweise Anpassung nennt man <strong>Gradientenabstieg</strong>.</p>
+
+<p>Eine anschauliche Analogie: Stell dir vor, du stehst nachts im dichten Nebel an einem Berghang und möchtest den tiefsten Punkt (das Tal) finden. Du siehst nur wenige Schritte weit, also tastest du dich vor: An jeder Stelle prüfst du, in welche Richtung es am steilsten bergab geht, und machst einen kleinen Schritt in diese Richtung. Schritt für Schritt näherst du dich so dem tiefsten Punkt an – auch wenn du die gesamte Landschaft nie auf einmal siehst. Genau so „tastet“ sich ein neuronales Netz beim Training Schritt für Schritt zu Gewichten vor, die den Fehler minimieren.</p>
+
+<h2>6. Deep Learning</h2>
+
+<p><strong>Deep Learning</strong> bezeichnet neuronale Netze mit sehr vielen versteckten Schichten („tiefe“ Netze). Je mehr Schichten und Neuronen ein Netz hat, desto komplexere Muster kann es potenziell lernen – allerdings nur, wenn genügend Trainingsdaten vorhanden sind und genug Rechenleistung zur Verfügung steht. Aus diesem Grund werden für das Training großer neuronaler Netze häufig <strong>Grafikprozessoren (GPUs)</strong> eingesetzt, die viele Berechnungen gleichzeitig (parallel) durchführen können.</p>
+
+<p>Auch moderne Sprachmodelle und Chatbots, wie sie hinter vielen KI-Assistenten stecken, sind im Kern (sehr große) neuronale Netze, die auf riesigen Textmengen trainiert wurden. Mehr dazu erfährst du auf der Seite 11.10 Generative KI und Sprachmodelle.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Nobelpreise 2024 für Grundlagen und Anwendungen neuronaler Netze</summary>
+                <p>2024 wurden gleich zwei Nobelpreise für Arbeiten rund um neuronale Netze vergeben – jeweils an <strong>Personen</strong>, nicht an ein KI-System:</p>
+                <ul>
+                    <li><strong>Physik:</strong> John Hopfield und Geoffrey Hinton für grundlegende Entdeckungen und Erfindungen, die maschinelles Lernen mit künstlichen neuronalen Netzen ermöglichen.</li>
+                    <li><strong>Chemie:</strong> je zur Hälfte an David Baker (computergestütztes Proteindesign) sowie an Demis Hassabis und John Jumper (Google DeepMind) für die Vorhersage von Proteinstrukturen mit dem KI-System AlphaFold.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2>7. Hyperparameter bei neuronalen Netzen</h2>
+
+<p>Wie du bereits bei anderen Verfahren gelernt hast, müssen auch bei neuronalen Netzen vor dem Training <strong>Hyperparameter</strong> festgelegt werden. Wichtige Beispiele sind:</p>
+
+<ul>
+            <li><strong>Anzahl der Schichten</strong> (Tiefe des Netzes)</li>
+            <li><strong>Anzahl der Neuronen pro Schicht</strong> (Breite des Netzes)</li>
+            <li><strong>Lernrate:</strong> wie groß die Schritte beim Gradientenabstieg sind (zu groß → das Netz „überspringt“ das Minimum; zu klein → das Training dauert sehr lange)</li>
+            <li><strong>Anzahl der Trainingsdurchläufe (Epochen):</strong> wie oft der gesamte Trainingsdatensatz durchlaufen wird</li>
+        </ul>
+
+<p>Genau wie bei k-Means, k-Nächste-Nachbarn oder Entscheidungsbäumen müssen diese Werte mithilfe der Validierungsdaten ausprobiert und angepasst werden, um ein gutes Ergebnis zu erzielen.</p>
+
+<h2>8. Overfitting bei neuronalen Netzen</h2>
+
+<p>Auch neuronale Netze können overfitten: Ist ein Netz zu groß (zu viele Schichten oder Neuronen) im Verhältnis zur Menge der Trainingsdaten, kann es die Trainingsdaten „auswendig lernen“, statt allgemeingültige Muster zu erkennen. Die Folge: sehr hohe Genauigkeit auf den Trainingsdaten, aber deutlich schlechtere Ergebnisse auf neuen, unbekannten Daten – das kennst du bereits als Overfitting (vgl. 11.3).</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Gegenmaßnahmen</summary>
+                <p>Typische Strategien gegen Overfitting bei neuronalen Netzen sind unter anderem: mehr Trainingsdaten sammeln, das Netz verkleinern, das Training früher beenden (Early Stopping) oder spezielle Techniken wie „Dropout“, die zufällig Teile des Netzes während des Trainings deaktivieren.</p>
+            </details>
+        </div>
+
+<h2>9. Anwendungsbeispiele</h2>
+
+<p>Neuronale Netze und Deep Learning stecken heute in vielen Anwendungen, zum Beispiel:</p>
+
+<ul>
+            <li><strong>Bilderkennung:</strong> z.&nbsp;B. Erkennung von Objekten, Gesichtern oder handgeschriebenen Zahlen</li>
+            <li><strong>Sprachassistenten:</strong> Spracherkennung und Sprachsynthese</li>
+            <li><strong>Autonomes Fahren:</strong> Erkennung von Verkehrsschildern, Fußgängern und Fahrbahnmarkierungen</li>
+            <li><strong>Texterstellung:</strong> Chatbots und generative Sprachmodelle</li>
+        </ul>
+
+<h2>10. Vor- und Nachteile neuronaler Netze</h2>
+
+<h3>10.1 Vorteile</h3>
+
+<ul>
+            <li>sehr leistungsfähig und flexibel, auch bei komplexen, nichtlinearen Zusammenhängen</li>
+            <li>können mit sehr unterschiedlichen Datenarten arbeiten (Bilder, Text, Ton, Zahlen)</li>
+        </ul>
+
+<h3>10.2 Nachteile</h3>
+
+<ul>
+            <li>benötigen in der Regel sehr viele Trainingsdaten</li>
+            <li>schwer interpretierbar: Anders als bei einem Entscheidungsbaum lässt sich kaum nachvollziehen, „warum“ ein Netz zu einer bestimmten Entscheidung kommt („Black Box“)</li>
+            <li>hoher Rechenaufwand beim Training, oft nur mit leistungsstarker Hardware (GPUs) praktikabel</li>
+        </ul>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Deep Learning in Forschung und Industrie</summary>
+                <p><strong>Alltag:</strong> Die automatische Untertitelung von Videos, die Bildverbesserung deiner Handykamera und Übersetzungsprogramme beruhen auf tiefen neuronalen Netzen.</p>
+                <p><strong>Beruf:</strong> <strong>ML Engineers</strong> und Deep-Learning-Forschende entwickeln und trainieren solche Netze, oft auf großen GPU-Rechnern. In Sachsen stehen dafür u.&nbsp;a. die Hochleistungsrechner der TU Dresden und der Universität Leipzig zur Verfügung, an denen das KI-Kompetenzzentrum <strong>ScaDS.AI Dresden/Leipzig</strong> forscht. In der Industrie werden neuronale Netze z.&nbsp;B. zur automatischen Sichtprüfung von Bauteilen oder Wafern eingesetzt.</p>
+            </details>
+        </div>
+
+<h2>11. Praktische Umsetzung: handgeschriebene Ziffern erkennen</h2>
+
+<p>Erinnerst du dich an die User Story aus dem Projektmanagement-Kapitel (10.5): <em>„Als angehende Entwicklerin möchte ich ein Modell trainieren, das handgeschriebene Zahlen erkennen und zuordnen kann.“</em> Genau das setzen wir jetzt praktisch um: Mit einem kleinen neuronalen Netz trainierst du ein Modell, das handgeschriebene Ziffern erkennt.</p>
+
+<p>Lade das folgende Notebook herunter: <a href="../notebooks/11-8_neuronale_netze.ipynb" download="">Notebook „Neuronale Netze“</a>.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Perzeptron</strong> – berechnet eine gewichtete Summe seiner Eingaben und vergleicht diese mit einem Schwellenwert. Die Gewichte bestimmen, wie stark eine Eingabe die Entscheidung beeinflusst – sie werden beim Training des Netzes verändert.</p>
+        </div>
+
+<div class="merke">
+            <p>Training eines neuronalen Netzes bedeutet: Gewichte immer wieder in kleinen Schritten so anpassen, dass der Fehler zwischen Vorhersage und tatsächlichem Ergebnis kleiner wird (Gradientenabstieg mithilfe von Backpropagation). Die genauen mathematischen Ableitungen dahinter sind nicht Gegenstand dieses Kurses – wichtig ist das Grundprinzip.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.8.1: Perzeptron-Ausgabe berechnen <span class="niveau">AFB I</span></summary>
+                <p>Ein Perzeptron hat zwei Eingaben mit den Werten <code>x₁ = 1</code> und <code>x₂ = 1</code> sowie die Gewichte <code>w₁ = 0,4</code> und <code>w₂ = 0,4</code>. Der Schwellenwert beträgt <code>Θ = 0,9</code>.</p>
+                <ol>
+                    <li>Berechne die gewichtete Summe.</li>
+                    <li>Bestimme die Ausgabe des Perzeptrons (0 oder 1).</li>
+                    <li>Verändere eines der Gewichte so, dass sich die Ausgabe ändert. Gib das neue Gewicht an und begründe deine Wahl.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.8.2: Ein Netz für XOR prüfen <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Zeichne die vier Eingabekombinationen von XOR in ein Koordinatensystem (x₁ nach rechts, x₂ nach oben) und begründe, warum keine Gerade die Punkte mit Ausgabe 1 von denen mit Ausgabe 0 trennt.</li>
+                    <li>Im XOR-Beispiel oben wird das Gewicht von h₂ am Ausgang von −1 auf −0,5 geändert. Berechnet das Netz dann noch XOR?</li>
+                </ol>
+            </details>
+        </div>

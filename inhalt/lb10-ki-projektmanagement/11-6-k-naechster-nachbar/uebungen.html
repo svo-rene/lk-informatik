@@ -1,0 +1,63 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.6.3: k-NN in der Praxis <span class="niveau">AFB III</span></summary>
+                <p>Wähle eines der beiden oben genannten Anwendungsbeispiele (Empfehlungssystem oder Bildklassifikation) und beantworte dazu folgende Fragen:</p>
+                <ol>
+                    <li>Welche konkreten Merkmale (Features) könnten verwendet werden, um den Abstand zwischen zwei „Datenpunkten“ zu berechnen (z.&nbsp;B. zwischen zwei Kundinnen oder Kunden oder zwei Bildern)?</li>
+                    <li>Was würde vermutlich passieren, wenn du für dieses Beispiel k = 1 wählst? Was, wenn du k so groß wählst, dass es der Gesamtzahl aller Trainingsdaten entspricht?</li>
+                    <li>Begründe mithilfe der Begriffe Overfitting und Underfitting (siehe Seite 11.3 „KI-Systeme: Training und Optimierung“), welche Auswirkungen ein zu kleines bzw. zu großes k jeweils hätte.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.6.4: Joggen oder Radfahren? <span class="niveau">AFB II</span></summary>
+                <p>Eine Fitness-App erkennt die Sportart aus zwei bereits skalierten Merkmalen (je 0–10): Schrittfrequenz-Stufe x und Pulsstufe y. Gespeichert sind fünf Trainingsaufzeichnungen:</p>
+                <table>
+                    <thead>
+                        <tr><th>Aufzeichnung</th><th>x</th><th>y</th><th>Sportart</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>T1</td><td>5</td><td>5</td><td>Joggen</td></tr>
+                        <tr><td>T2</td><td>6</td><td>7</td><td>Joggen</td></tr>
+                        <tr><td>T3</td><td>4</td><td>8</td><td>Radfahren</td></tr>
+                        <tr><td>T4</td><td>1</td><td>4</td><td>Radfahren</td></tr>
+                        <tr><td>T5</td><td>8</td><td>1</td><td>Radfahren</td></tr>
+                    </tbody>
+                </table>
+                <p>Eine neue Aufzeichnung liegt bei N = (4, 4).</p>
+                <ol>
+                    <li>Berechne die Abstände von N zu allen fünf Aufzeichnungen, einmal euklidisch und einmal mit dem Manhattan-Abstand <code>d = |x₂ − x₁| + |y₂ − y₁|</code> (siehe 11.7, Abschnitt 2.2).</li>
+                    <li>Klassifiziere N mit beiden Abstandsmaßen für k = 1, k = 3 und k = 5.</li>
+                    <li>Erkläre, warum sich die Rangfolge von T2 und T3 zwischen den beiden Abstandsmaßen umkehrt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.6.7: k-NN für Zahlen – Fahrradpreise schätzen <span class="niveau">AFB II</span></summary>
+                <p>Für die Fahrradbörse am Schulfest soll ein fairer Preis vorgeschlagen werden. Bekannt sind fünf verkaufte Räder mit Alter (Jahre) und Zustandsnote (1 = sehr gut bis 5 = schlecht):</p>
+                <table>
+                    <thead>
+                        <tr><th>Rad</th><th>Alter</th><th>Zustand</th><th>Preis</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>R1</td><td>1</td><td>1</td><td>400&nbsp;€</td></tr>
+                        <tr><td>R2</td><td>2</td><td>2</td><td>300&nbsp;€</td></tr>
+                        <tr><td>R3</td><td>5</td><td>2</td><td>150&nbsp;€</td></tr>
+                        <tr><td>R4</td><td>3</td><td>4</td><td>120&nbsp;€</td></tr>
+                        <tr><td>R5</td><td>6</td><td>5</td><td>50&nbsp;€</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Schätze mit k-NN (euklidischer Abstand, Regression laut Abschnitt 2) den Preis eines Rads mit Alter 2 und Zustand 3 für k = 1, k = 3 und k = 5.</li>
+                    <li>Welcher Preis ergibt sich mit k-NN für ein neues, nagelneues Rad (Alter 0, Zustand 1)? Vergleiche mit der linearen Regression (11.4): Welche Grenze hat k-NN bei Werten außerhalb der Trainingsdaten?</li>
+                </ol>
+            </details>
+        </div>

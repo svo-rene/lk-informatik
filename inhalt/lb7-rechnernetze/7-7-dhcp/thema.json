@@ -1,0 +1,18 @@
+{
+  "nr": "7.7",
+  "titel": "DHCP",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+<p>Wenn du dich in der Schule anmeldest, prüft der Server: „Passwort korrekt <strong>und</strong> Nutzer bekannt?“ Nur wenn beides zutrifft, kommst du hinein. Solche Ja-Nein-Entscheidungen trifft ein Computer milliardenfach pro Sekunde – und die Regeln dafür hat George Boole schon 1854 aufgeschrieben, lange vor dem ersten Computer.</p>
+
+<p>Die boolesche Algebra ist ein mathematisches Teilgebiet, das sich mit logischen Aussagen und deren Verknüpfung mittels spezieller Operatoren beschäftigt. Sie wurde von George Boole entwickelt und basiert auf zwei logischen Werten: „wahr“ (repräsentiert durch 1) und „falsch“ (repräsentiert durch 0). Die boolesche Algebra ermöglicht die Manipulation und Analyse logischer Ausdrücke, um logische Beziehungen und Aussagen zu formulieren und zu untersuchen.</p>
+
+<h2>Verwendungsbereiche der booleschen Algebra</h2>
+
+<ol>
+            <li><strong>Digitale Schaltungen:</strong> In der Elektrotechnik und Informatik wird die boolesche Algebra verwendet, um digitale Schaltungen zu entwerfen und zu analysieren. Die Schaltungen bestehen aus Logikgattern, die auf den booleschen Operatoren basieren und in Computern, Mikrocontrollern und anderen elektronischen Geräten zum Einsatz kommen.</li>
+            <li><strong>Programmierung und Informatik:</strong> Die boolesche Algebra ist eine grundlegende Komponente in der Programmierung. In Programmiersprachen werden boolesche Ausdrücke verwendet, um Bedingungen zu formulieren und Entscheidungen zu treffen. Dies ist entscheidend für das Schreiben von Kontrollstrukturen wie Schleifen und bedingten Anweisungen.</li>
+            <li><strong>Wahrheitstabellen:</strong> Die boolesche Algebra wird verwendet, um Wahrheitstabellen zu erstellen. Diese Tabellen zeigen alle möglichen Kombinationen von Eingangswerten und die entsprechenden Ergebnisse einer logischen Aussage.</li>
+            <li><strong>Logische Suche und Filterung:</strong> In Datenbanken und Suchmaschinen werden boolesche Ausdrücke verwendet, um komplexe Suchabfragen zu erstellen und Daten entsprechend zu filtern.</li>
+            <li><strong>Logik in der Mathematik und Philosophie:</strong> Die boolesche Algebra findet auch Anwendung in der mathematischen Logik und in der Philosophie bei der Untersuchung von Aussagen und Argumenten.</li>
+        </ol>
+
+<hr>
+
+<h2>Aussagen</h2>
+
+<p>Eine Aussage ist ein Satz oder eine Behauptung, die entweder wahr oder falsch sein kann, aber nicht beides gleichzeitig. Sie muss klar und eindeutig formuliert sein, sodass ihre Wahrheit oder Falschheit eindeutig bestimmt werden kann. Aussagen können in natürlicher Sprache oder symbolischer Sprache ausgedrückt werden.</p>
+
+<p>
+            <strong>Wahrheitswert:</strong><br>
+            Eine Aussage ist wahr, wenn sie der Realität entspricht oder die dargestellten Fakten oder Bedingungen zutreffen. Sie ist falsch, wenn sie nicht mit der Realität übereinstimmt oder die dargestellten Fakten oder Bedingungen nicht erfüllt sind.
+        </p>
+
+<p>
+            <strong>Zeitlicher Aspekt:</strong><br>
+            Der zeitliche Aspekt bei Aussagen ist wichtig, da sich ihre Wahrheit oder Falschheit je nach Zeitpunkt ändern kann. Eine Aussage kann zu einem bestimmten Zeitpunkt wahr sein, aber zu einem anderen Zeitpunkt falsch werden, wenn sich die zugrunde liegenden Bedingungen ändern.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Aussage oder nicht?</summary>
+            <table class="gitter">
+                <tr><th>Satz</th><th>Aussage?</th><th>Wahrheitswert</th></tr>
+                <tr><td>„Dresden ist die Landeshauptstadt von Sachsen.“</td><td>ja</td><td>wahr (1)</td></tr>
+                <tr><td>„7 ist eine gerade Zahl.“</td><td>ja</td><td>falsch (0)</td></tr>
+                <tr><td>„Wie spät ist es?“</td><td>nein – eine Frage</td><td>–</td></tr>
+                <tr><td>„Mach das Fenster zu!“</td><td>nein – eine Aufforderung</td><td>–</td></tr>
+            </table>
+            <p>Auch eine falsche Aussage ist eine Aussage. Entscheidend ist nur, dass man ihr eindeutig <em>einen</em> der beiden Wahrheitswerte zuordnen kann.</p>
+            <p><strong>Probe:</strong> Stelle dir zu jedem Satz die Prüffrage „Kann man darauf eindeutig mit wahr oder falsch antworten?“ Bei der Frage und der Aufforderung geht das nicht.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Grenzfälle</summary>
+            <ul>
+                <li><strong>„x ist größer als 5.“</strong> – Solange x nicht festgelegt ist, ist das <em>keine</em> Aussage, sondern eine <strong>Aussageform</strong>. Erst durch Einsetzen entsteht eine Aussage: Für x = 8 ist sie wahr, für x = 2 falsch. Genau so arbeitet eine Bedingung <code>if x &gt; 5:</code> im Programm: Sie wird bei jedem Durchlauf mit dem aktuellen Wert von x neu ausgewertet.</li>
+                <li><strong>„Es regnet.“</strong> – Das ist eine Aussage, aber ihr Wahrheitswert hängt von Ort und Zeitpunkt ab (zeitlicher Aspekt). Ein Wetter-Sensor liefert deshalb nicht einmal einen Wert, sondern immer wieder neue.</li>
+                <li><strong>„Dieser Satz ist falsch.“</strong> – Wäre der Satz wahr, wäre er falsch; wäre er falsch, wäre er wahr. Man kann ihm keinen Wahrheitswert zuordnen, also ist er <em>keine</em> Aussage (Lügner-Paradoxon).</li>
+            </ul>
+            <p><strong>Ergebnis:</strong> Eine Aussageform wird erst durch Einsetzen eines Werts zur Aussage, eine zeitabhängige Aussage hat zu jedem festen Zeitpunkt genau einen Wahrheitswert, ein selbstwidersprüchlicher Satz ist nie eine Aussage.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Warum die boolesche Algebra die Basis der Informatik ist</summary>
+                <p><strong>Alltag:</strong> Jede <code>if</code>-Bedingung in einer App, jeder Filter im Onlineshop („nur verfügbar UND unter 50&nbsp;€“) und jede Regel im Smart Home („Licht an, wenn Bewegung UND dunkel“) ist ein boolescher Ausdruck.</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Softwareentwickler/in</strong>: formuliert täglich Bedingungen in Programmen – in jeder Programmiersprache.</li>
+                    <li><strong>Chipdesigner/in</strong>: beschreibt Schaltungen als boolesche Funktionen, die später als Transistoren auf dem Chip landen – in Dresden z.&nbsp;B. bei Infineon, GlobalFoundries oder Bosch.</li>
+                    <li><strong>Datenbank- und Suchmaschinenentwickler/in</strong>: übersetzt Suchanfragen in boolesche Bedingungen, mit denen Millionen Datensätze gefiltert werden.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Boolesche Algebra:</strong></p>
+            <p>Die boolesche Algebra beschäftigt sich mit der Verknüpfung von logischen Aussagen. Sie basiert auf zwei logischen Werten: „wahr“ (1) und „falsch“ (0). In der booleschen Algebra werden logische Operatoren wie „NICHT“ (NOT), „UND“ (AND) und „ODER“ (OR) verwendet, um aus einfachen Aussagen neue, zusammengesetzte Aussagen zu bilden.</p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Aussage:</strong><br>
+                Eine Aussage ist ein sprachliches Gebilde mit eindeutiger Bedeutung, das entweder wahr (1) oder falsch (0) ist, aber nie beides gleichzeitig.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.1: Aussage oder nicht? <span class="niveau">AFB I</span></summary>
+                <p>Entscheide für jeden Satz, ob es sich um eine Aussage handelt. Gib bei Aussagen den Wahrheitswert an, bei Nicht-Aussagen den Grund.</p>
+                <ol>
+                    <li>„Die Elbe fließt durch Dresden.“</li>
+                    <li>„Ein Byte besteht aus 10 Bit.“</li>
+                    <li>„Speichere die Datei!“</li>
+                    <li>„Ist 17 eine Primzahl?“</li>
+                    <li>„17 ist eine Primzahl.“</li>
+                    <li>„Informatik ist das schönste Fach.“</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.2: Aussagen im Programm <span class="niveau">AFB II</span></summary>
+                <p>Eine Smart-Home-Steuerung soll das Licht im Flur einschalten. Folgende Informationen stehen zur Verfügung:</p>
+                <p><code>bewegung</code> (Bewegungsmelder hat ausgelöst), <code>dunkel</code> (Helligkeitssensor misst weniger als 50 Lux), <code>urlaub</code> (Urlaubsmodus ist aktiv).</p>
+                <ol>
+                    <li>Formuliere jede der drei Variablen als Aussage in natürlicher Sprache.</li>
+                    <li>Begründe, warum „Der Flur ist ziemlich dunkel.“ für die Steuerung keine brauchbare Aussage ist, „Die Helligkeit ist kleiner als 50 Lux.“ dagegen schon.</li>
+                    <li>Das Licht soll angehen, wenn Bewegung erkannt wird und es dunkel ist, aber nicht im Urlaubsmodus. Beschreibe die Bedingung mit den Wörtern UND, ODER, NICHT.</li>
+                    <li>Erkläre am Beispiel <code>dunkel</code>, warum der zeitliche Aspekt von Aussagen hier wichtig ist.</li>
+                </ol>
+            </details>
+        </div>

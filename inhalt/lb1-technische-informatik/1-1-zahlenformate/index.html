@@ -1,0 +1,270 @@
+<h2>Binärzahlen</h2>
+
+<p>Binärzahlen spielen eine wichtige Rolle in der Informatik, da sie die Grundlage für die interne Repräsentation und Verarbeitung von Informationen in Computern bilden.</p>
+
+<p><strong>Einsatzbereiche von Binärzahlen in der Informatik:</strong></p>
+
+<ul>
+  <li>Datenrepräsentation: Binärzahlen ermöglichen die Darstellung von Informationen wie Zahlen, Text, Bildern und Multimedia in einer für Computer verständlichen Form.</li>
+  <li>Digitale Schaltungen: Elektronische Schaltungen in Computern und anderen Geräten arbeiten auf der Grundlage von Binärzahlen. Die Schaltungselemente können zwischen den Zuständen „0“ und „1“ wechseln, um Informationen zu verarbeiten.</li>
+  <li>Speicherung und Übertragung von Daten: Daten werden in Computern und in der Kommunikation zwischen Geräten in binärer Form gespeichert und übertragen. Binärzahlen ermöglichen eine effiziente und zuverlässige Speicherung und Übertragung von Informationen.</li>
+  <li>Prozessorarchitektur: Die meisten Prozessoren und Computerarchitekturen arbeiten auf der Grundlage von Binärzahlen. Sie führen Operationen wie Addition, Subtraktion, logische Verknüpfungen und Verschiebungen auf Binärzahlen aus.</li>
+  <li>Algorithmen und Datenstrukturen: Viele Algorithmen und Datenstrukturen in der Informatik verwenden Binärzahlen. Beispielsweise werden Sortieralgorithmen, Suchalgorithmen und verschiedene Datenstrukturen wie Bäume und Graphen mit Binärzahlen manipuliert.</li>
+  <li>Kryptographie: In der Kryptographie werden Binärzahlen für die Verschlüsselung, Entschlüsselung und Sicherung von Daten verwendet. Kryptographische Algorithmen arbeiten häufig auf der Basis von Bitmanipulationen und logischen Operationen mit Binärzahlen.</li>
+  <li>Maschinelles Lernen und künstliche Intelligenz: In Bereichen wie maschinellem Lernen und künstlicher Intelligenz werden Binärzahlen verwendet, um Daten zu repräsentieren und mathematische Operationen auf ihnen durchzuführen.</li>
+</ul>
+
+<p>Diese Einsatzbereiche verdeutlichen, warum Binärzahlen in der Informatik von grundlegender Bedeutung sind und die Grundlage für viele Aspekte der digitalen Welt bilden.</p>
+
+<hr>
+
+<h2>Hexadezimalzahlen</h2>
+
+<p>Hexadezimalzahlen haben verschiedene Einsatzbereiche in der Informatik. Hier sind einige davon als Beispiele:</p>
+
+<ul>
+    <li>Kompakte Darstellung: Hexadezimalzahlen bieten eine kompakte Darstellung von Binärzahlen. Da jede Hexadezimalziffer 4 Bit repräsentiert, können große Binärzahlen effizienter und leichter lesbar dargestellt werden.</li>
+    <li>Speicheradressen: In Computersystemen werden Speicheradressen häufig in hexadezimaler Form angegeben. Dies erleichtert das Lesen und Verstehen der Adressen und die Verwaltung des Speichers.</li>
+    <li>Programmierung: Hexadezimalzahlen werden in der Programmierung verwendet, insbesondere beim Umgang mit niedrigeren Ebenen wie Assembler und maschinennaher Programmierung. Sie ermöglichen eine direkte und präzise Darstellung von Binärzahlen.</li>
+    <li>Farbcodierung: In der Darstellung von Farben werden Hexadezimalzahlen verwendet, um die Intensität von Rot, Grün und Blau (RGB) zu repräsentieren. Jede Farbkomponente wird mit einer zweistelligen hexadezimalen Zahl zwischen 00 und FF dargestellt.</li>
+    <li>Netzwerkadressen: MAC-Adressen (z.&nbsp;B. <code>D4:3D:7E:38:3B:33</code>) und IPv6-Adressen werden hexadezimal notiert. IPv4-Adressen (z.&nbsp;B. <code>192.168.0.1</code>) schreibt man dagegen dezimal.</li>
+    <li>Fehleranalyse und Debugging: Bei der Fehleranalyse und dem Debugging von Computern und Software können hexadezimale Zahlen verwendet werden, um Speicherinhalte oder Registerwerte darzustellen und zu überprüfen.</li>
+    <li>Dateiformate: Einige Dateiformate, wie zum Beispiel das Intel-Hex-Format oder das Hexdump-Format, verwenden Hexadezimalzahlen, um Daten darzustellen und übertragen zu können.</li>
+    <li>Kryptographie: Hexadezimale Zahlen werden in einigen kryptographischen Anwendungen verwendet, um Schlüssel, Hashes und andere kryptographische Elemente darzustellen.</li>
+</ul>
+
+<p>Die Verwendung von Hexadezimalzahlen bietet eine bequeme Möglichkeit, Binärzahlen kompakt darzustellen und zu manipulieren. Sie erleichtern die Arbeit mit niedrigeren Ebenen der Computersysteme und sind in verschiedenen Bereichen der Informatik von Bedeutung.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Umrechnen im Fünfersystem</summary>
+<p>Die beiden Verfahren für Binär- und Hexadezimalzahlen funktionieren für <strong>jede</strong> Basis b. Im Fünfersystem (Basis 5) gibt es nur die Ziffern 0, 1, 2, 3, 4, die Stellenwerte sind 5<sup>0</sup> = 1, 5<sup>1</sup> = 5, 5<sup>2</sup> = 25, 5<sup>3</sup> = 125, …</p>
+<p><strong>a)</strong> 3142<sub>5</sub> soll ins Dezimalsystem umgerechnet werden. <strong>b)</strong> 97 soll ins Fünfersystem umgerechnet werden.</p>
+<ol>
+  <li><strong>Was:</strong> Ziffern prüfen: 3, 1, 4, 2 sind alle kleiner als 5 – <em>warum:</em> Eine Ziffer 5 oder größer kann es im Fünfersystem nicht geben; „3152<sub>5</sub>“ wäre gar keine gültige Zahl.</li>
+  <li><strong>Was:</strong> Stellenwerte von rechts zuordnen: 2 &middot; 1, 4 &middot; 5, 1 &middot; 25, 3 &middot; 125 – <em>warum:</em> Die Stelle k hat den Stellenwert 5<sup>k</sup>, gezählt wird ab k = 0 ganz rechts.</li>
+  <li><strong>Was:</strong> Produkte addieren: 375 + 25 + 20 + 2 = <strong>422</strong> – <em>warum:</em> Der Wert einer Zahl ist die Summe „Ziffer mal Stellenwert“, genau wie bei 101011<sub>2</sub>.</li>
+  <li><strong>Was:</strong> Für b) fortlaufend durch 5 teilen:<br>
+      97 / 5 = 19 Rest 2<br>
+      19 / 5 = 3 Rest 4<br>
+      3 / 5 = 0 Rest 3<br>
+      – <em>warum:</em> Jeder Rest ist eine Ziffer der Zielbasis, der erste Rest gehört an die Einerstelle.</li>
+  <li><strong>Was:</strong> Reste von unten nach oben lesen: 342<sub>5</sub> – <em>warum:</em> Der zuletzt ermittelte Rest ist die höchstwertige Ziffer (dieselbe Falle wie bei 43 &rarr; 101011).</li>
+</ol>
+<p><strong>Ergebnis:</strong> 3142<sub>5</sub> = 422 und 97 = 342<sub>5</sub>.</p>
+<p><strong>Probe:</strong> Rückwärts rechnen: 3 &middot; 25 + 4 &middot; 5 + 2 = 75 + 20 + 2 = 97 &#10003;. Und für a) in die andere Richtung: 422 / 5 = 84 Rest 2, 84 / 5 = 16 Rest 4, 16 / 5 = 3 Rest 1, 3 / 5 = 0 Rest 3 &rarr; 3142<sub>5</sub> &#10003;</p>
+            </details>
+        </div>
+
+<hr>
+
+<h2>Rechnen im Binärsystem: Addition</h2>
+
+<p>Binärzahlen werden genauso schriftlich addiert wie Dezimalzahlen: Stelle für Stelle von rechts nach links, mit Übertrag in die nächsthöhere Stelle. Der einzige Unterschied ist, dass es nur die Ziffern 0 und 1 gibt – ein Übertrag entsteht deshalb schon bei 1 + 1 und nicht erst bei 9 + 1.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> 0010 1101 + 0001 0110 – Addition mit Übertragskette</summary>
+
+<p>Die Überträge werden – wie beim schriftlichen Addieren im Dezimalsystem – über der Rechnung notiert:</p>
+
+<pre>Übertrag:  . 1 1 1 1 . . .
+           0 0 1 0 1 1 0 1
+         + 0 0 0 1 0 1 1 0
+           ---------------
+           0 1 0 0 0 0 1 1</pre>
+
+<p><strong>Wichtig bei der Einrückung:</strong> Ein Übertrag wird immer <strong>eine Stelle weiter links</strong> notiert als dort, wo er entsteht. In diesem Beispiel entsteht der erste Übertrag an der 3.&nbsp;Stelle (1 + 1 = 0 Übertrag 1) – die 1 steht deshalb über der <strong>4.</strong> Stelle, weil sie erst dort mitaddiert wird. Genau wie im Dezimalsystem: Bei 7 + 5 schreibt man die 2 hin und den Übertrag 1 über die nächste Spalte.</p>
+
+<p>Stelle für Stelle nachvollzogen, von rechts beginnend:</p>
+
+<pre>Stelle 1 (2^0):  1 + 0        = 1,  kein Übertrag
+Stelle 2 (2^1):  0 + 1        = 1,  kein Übertrag
+Stelle 3 (2^2):  1 + 1        = 0,  Übertrag 1   (geht auf Stelle 4)
+Stelle 4 (2^3):  1 + 0 + Ü1   = 0,  Übertrag 1   (geht auf Stelle 5)
+Stelle 5 (2^4):  0 + 1 + Ü1   = 0,  Übertrag 1   (geht auf Stelle 6)
+Stelle 6 (2^5):  1 + 0 + Ü1   = 0,  Übertrag 1   (geht auf Stelle 7)
+Stelle 7 (2^6):  0 + 0 + Ü1   = 1,  kein Übertrag
+Stelle 8 (2^7):  0 + 0        = 0</pre>
+
+<p><strong>Probe im Dezimalsystem:</strong></p>
+
+<pre>0010 1101 = 32 + 8 + 4 + 1   = 45
+0001 0110 = 16 + 4 + 2       = 22
+                               ---
+                                67
+0100 0011 = 64 + 2 + 1       = 67   &#10003;</pre>
+
+<p><strong>Ergebnis:</strong> 0010 1101 + 0001 0110 = <strong>0100 0011</strong> (= 67). Die Summe passt in 8 Bit (67 &le; 255), in einem 8-Bit-Register geht also kein Übertrag verloren.</p>
+
+<p>Mach diese Probe immer – sie kostet wenige Sekunden und deckt jeden vergessenen Übertrag auf.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Ein nützlicher Sonderfall – eine Zahl zu sich selbst addieren</summary>
+        <p>Addiert man eine Binärzahl zu sich selbst, verdoppelt man sie. Im Binärsystem sieht das so aus:</p>
+        <pre>  1101
++ 1101
+------
+ 11010</pre>
+        <p>Das Ergebnis <strong>11010</strong> ist die Ausgangszahl <strong>1101</strong> mit einer <strong>angehängten 0</strong> – die Ziffernfolge ist unverändert, nur um eine Stelle nach links verschoben. Probe: 1101<sub>2</sub> = 13, und 11010<sub>2</sub> = 26 &#10003;</p>
+        <p>Der Grund: Verschiebt man eine Ziffer eine Position nach links, verdoppelt sich ihr Stellenwert (aus 2<sup>k</sup> wird 2<sup>k+1</sup>). Eine Verdopplung ist also nichts anderes als eine Linksverschiebung – genau wie im Dezimalsystem das Anhängen einer 0 eine Multiplikation mit 10 bewirkt.</p>
+        <p>Prozessoren nutzen das aus: Ein <em>Shift-Befehl</em> (Linksverschiebung) multipliziert mit 2. Er wird im Rechenwerk (ALU) von einer einfachen Schiebeschaltung ausgeführt und ist deutlich schneller als eine allgemeine Multiplikation. Wie das Rechenwerk addiert, lernst du in Kapitel 3 (3.6 Halbaddierer, 3.7 Volladdierer) und in 4.1.</p>
+    </details>
+</div>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Hexadezimalzahlen im Alltag und im Beruf</summary>
+        <p><strong>Alltag:</strong> Jede Farbe auf einer Webseite steht im CSS als Hex-Code, z.&nbsp;B. <code>#7D8E95</code> für ein Graublau. Jedes WLAN-fähige Gerät – dein Smartphone, deine Spielkonsole – hat eine MAC-Adresse aus sechs Hex-Bytes, die du in den Einstellungen nachsehen kannst.</p>
+        <p><strong>Berufsleben:</strong></p>
+        <ul>
+            <li><strong>Netzwerktechniker/in</strong> bzw. Fachinformatiker/in für Systemintegration: liest MAC-Adressen in Switch- und Router-Tabellen, um ein Gerät im Netz zu finden oder zu sperren.</li>
+            <li><strong>Hardware-/Chipentwickler/in</strong>: prüft beim Testen neuer Chips Registerinhalte und Speicheradressen, die immer hexadezimal angezeigt werden – in Dresden z.&nbsp;B. bei Infineon oder GlobalFoundries („Silicon Saxony“).</li>
+            <li><strong>IT-Forensiker/in</strong>: untersucht beschlagnahmte Datenträger im Hex-Editor und erkennt Dateitypen an ihren ersten Bytes (z.&nbsp;B. beginnt jede PNG-Datei mit <code>89 50 4E 47</code>).</li>
+        </ul>
+    </details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p><strong>Stellenwertsystem</strong> – Eine Zahl wird durch Ziffern dargestellt, deren Wert von ihrer Position abhängt. Bei der Basis b hat die Stelle k (von rechts, beginnend bei 0) den Stellenwert b<sup>k</sup>. Das <strong>Binärsystem</strong> hat die Basis 2 und die Ziffern 0 und 1, das <strong>Hexadezimalsystem</strong> hat die Basis 16 und die Ziffern 0–9 und A–F.</p>
+</div>
+
+<div class="merke">
+    <p><strong>Dezimal zu Binär</strong></p>
+    <p>Um eine Dezimalzahl in eine Binärzahl umzurechnen, dividiere die Dezimalzahl sukzessive durch 2 und notiere den Rest bei jeder Division. Die Binärzahl ist dann die umgekehrte Reihenfolge der Reste.</p>
+    <p>Beispiel: Umrechnung von 43 (Dezimal) in Binär</p>
+    <p>
+      43 / 2 = 21 Rest 1<br>
+      21 / 2 = 10 Rest 1<br>
+      10 / 2 = 5 Rest 0<br>
+      5 / 2 = 2 Rest 1<br>
+      2 / 2 = 1 Rest 0<br>
+      1 / 2 = 0 Rest 1
+    </p>
+    <p>Die Binärzahl ist die umgekehrte Reihenfolge der Reste, also von unten nach oben gelesen: 101011 (Binär)</p>
+    <p><strong>Achte genau auf die Leserichtung:</strong> Von oben nach unten gelesen ergäben dieselben Reste 110101 – und das wäre 53 statt 43. Mache deshalb immer die Probe: 32 + 8 + 2 + 1 = 43 &#10003;</p>
+</div>
+
+<div class="merke">
+    <p><strong>Binär zu Dezimal</strong></p>
+    <p>Um eine Binärzahl in eine Dezimalzahl umzurechnen, multipliziere jede Binärziffer von rechts nach links mit der entsprechenden Potenz von 2 und addiere die Ergebnisse.</p>
+    <p>Beispiel: Umrechnung von 101011 (Binär) in Dezimal</p>
+    <p>
+      1 · 2<sup>5</sup> (32) + 0 · 2<sup>4</sup> (0) + 1 · 2<sup>3</sup> (8) + 0 · 2<sup>2</sup> (0) + 1 · 2<sup>1</sup> (2) + 1 · 2<sup>0</sup> (1) = 32 + 0 + 8 + 0 + 2 + 1 = 43 (Dezimal)
+    </p>
+</div>
+
+<div class="merke">
+    <p><strong>Dezimal zu Hexadezimal</strong></p>
+    <p>Um eine Dezimalzahl in eine Hexadezimalzahl umzurechnen, teile die Dezimalzahl sukzessive durch 16 und notiere den Rest bei jeder Division. Die Hexadezimalzahl ist dann die umgekehrte Reihenfolge der Reste.</p>
+    <p>Beispiel: Umrechnung von 178 (Dezimal) in Hexadezimal</p>
+    <p>
+        178 / 16 = 11 Rest 2<br>
+        11 / 16 = 0 Rest 11 (B)
+    </p>
+    <p>Die Hexadezimalzahl ist die umgekehrte Reihenfolge der Reste: B2 (Hexadezimal)</p>
+</div>
+
+<div class="merke">
+    <p><strong>Hexadezimal zu Dezimal</strong></p>
+    <p>Um eine Hexadezimalzahl in eine Dezimalzahl umzurechnen, multipliziere jede Hexadezimalziffer von rechts nach links mit der entsprechenden Potenz von 16 und addiere die Ergebnisse.</p>
+    <p>Beispiel: Umrechnung von 5F (Hexadezimal) in Dezimal</p>
+    <p>
+    5 · 16<sup>1</sup> (80) + F (15) · 16<sup>0</sup> (15) = 80 + 15 = 95 (Dezimal)
+    </p>
+</div>
+
+<div class="merke">
+    <p><strong>Binär &harr; Hexadezimal: der direkte Weg (ohne Dezimalsystem)</strong></p>
+    <p>Zwischen Binär- und Hexadezimalsystem braucht man <strong>keinen Umweg über das Dezimalsystem</strong>. Der Grund: 16 = 2<sup>4</sup>. Eine Hexadezimalziffer kann genau 16 verschiedene Werte annehmen – und genau das leisten auch 4 Bit. Jede Hexadezimalziffer entspricht deshalb exakt einer Vierergruppe von Bits.</p>
+    <p><strong>Binär &rarr; Hexadezimal:</strong> Teile die Binärzahl <strong>von rechts</strong> in Vierergruppen ein und ersetze jede Gruppe durch ihre Hexadezimalziffer.</p>
+    <pre>1101   0110
+  &darr;      &darr;
+  13      6
+  D       6      &rarr;  D6 (Hexadezimal)</pre>
+    <p><strong>Hexadezimal &rarr; Binär:</strong> Ersetze jede Hexadezimalziffer durch ihre 4-Bit-Gruppe.</p>
+    <pre>  A     7
+  &darr;     &darr;
+1010  0111      &rarr;  10100111 (Binär)</pre>
+    <p><strong>Achtung – immer von rechts gruppieren!</strong> Die Zahl 1011011 hat 7 Stellen. Von links gruppiert ergäbe das 1011|011 – falsch. Richtig ist von rechts: 101|1011, links mit einer Null aufgefüllt also 0101|1011 = 5B<sub>16</sub>. Probe: 5 · 16 + 11 = 91, und 1011011<sub>2</sub> = 64 + 16 + 8 + 2 + 1 = 91 &#10003;</p>
+    <p>Genau deshalb schreibt man Speicheradressen, Farbwerte und MAC-Adressen hexadezimal: Ein Byte (8 Bit) ist immer genau zwei Hexadezimalziffern lang, und man kann die Bits jederzeit ohne Rechnung ablesen.</p>
+</div>
+
+<div class="merke">
+    <p><strong>Wie viele Werte passen in n Stellen?</strong></p>
+    <p>Jede Binärstelle kann unabhängig von den anderen 0 oder 1 sein – also 2 Möglichkeiten. Bei n Stellen multiplizieren sich diese Möglichkeiten:</p>
+    <p><strong>Anzahl der Bitmuster = 2<sup>n</sup></strong></p>
+    <p>Beispiele: 4 Bit &rarr; 2<sup>4</sup> = 16 &nbsp;&middot;&nbsp; 5 Bit &rarr; 2<sup>5</sup> = 32 &nbsp;&middot;&nbsp; 8 Bit (1 Byte) &rarr; 2<sup>8</sup> = 256 &nbsp;&middot;&nbsp; 16 Bit &rarr; 2<sup>16</sup> = 65536</p>
+    <p><strong>Die häufigste Verwechslung – Anzahl gegen größten Wert:</strong> Mit 8 Bit lassen sich <strong>256</strong> verschiedene Muster bilden, aber der <strong>größte darstellbare Wert</strong> ist nur <strong>255</strong>. Der Grund: Die Zählung beginnt bei 0. Es gilt also:</p>
+    <ul>
+        <li>Anzahl der darstellbaren Werte: 2<sup>n</sup></li>
+        <li>Wertebereich (vorzeichenlos): 0 bis 2<sup>n</sup> &minus; 1</li>
+    </ul>
+    <p>Allgemein für ein Stellenwertsystem mit der Basis b: Mit n Stellen lassen sich b<sup>n</sup> Werte darstellen, der größte ist b<sup>n</sup> &minus; 1. Im Dezimalsystem mit 3 Stellen also 10&sup3; = 1000 Werte von 0 bis 999.</p>
+</div>
+
+<div class="merke">
+    <p><strong>Die vier Regeln der binären Addition:</strong></p>
+    <pre>0 + 0     = 0
+0 + 1     = 1
+1 + 1     = 0   Übertrag 1
+1 + 1 + 1 = 1   Übertrag 1   (wenn zusätzlich ein Übertrag hereinkommt)</pre>
+    <p>Mehr Fälle gibt es nicht. Die letzte Zeile wird am häufigsten übersehen.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.1.1: Binär und Dezimal <span class="niveau">AFB I</span></summary>
+        <p><strong>Binär zu Dezimal</strong></p>
+        <p>Wandle die folgenden Binärzahlen in Dezimalzahlen um:</p>
+        <ol>
+            <li>10101 (Binär) = ? (Dezimal)</li>
+            <li>11010 (Binär) = ? (Dezimal)</li>
+            <li>100111 (Binär) = ? (Dezimal)</li>
+            <li>1100100 (Binär) = ? (Dezimal)</li>
+            <li>111100 (Binär) = ? (Dezimal)</li>
+        </ol>
+        <hr>
+        <p><strong>Dezimal zu Binär</strong></p>
+        <p>Wandle die folgenden Dezimalzahlen in Binärzahlen um:</p>
+        <ol>
+            <li>37 (Dezimal) = ? (Binär)</li>
+            <li>155 (Dezimal) = ? (Binär)</li>
+            <li>218 (Dezimal) = ? (Binär)</li>
+            <li>445 (Dezimal) = ? (Binär)</li>
+            <li>1000 (Dezimal) = ? (Binär)</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.1.2: Dezimal und Hexadezimal <span class="niveau">AFB I</span></summary>
+        <p><strong>Teil 1: Dezimal zu Hexadezimal</strong></p>
+        <p>Wandle die folgenden Dezimalzahlen in Hexadezimalzahlen um:</p>
+        <ol>
+          <li>255 (Dezimal) = ? (Hexadezimal)</li>
+          <li>512 (Dezimal) = ? (Hexadezimal)</li>
+          <li>1024 (Dezimal) = ? (Hexadezimal)</li>
+          <li>87599 (Dezimal) = ? (Hexadezimal)</li>
+          <li>45054 (Dezimal) = ? (Hexadezimal)</li>
+        </ol>
+        <hr>
+        <p><strong>Teil 2: Hexadezimal zu Dezimal</strong></p>
+        <p>Wandle die folgenden Hexadezimalzahlen in Dezimalzahlen um:</p>
+        <ol>
+          <li>FF (Hexadezimal) = ? (Dezimal)</li>
+          <li>3A7 (Hexadezimal) = ? (Dezimal)</li>
+          <li>1F0C (Hexadezimal) = ? (Dezimal)</li>
+          <li>FEE (Hexadezimal) = ? (Dezimal)</li>
+          <li>1202 (Hexadezimal) = ? (Dezimal)</li>
+        </ol>
+    </details>
+</div>

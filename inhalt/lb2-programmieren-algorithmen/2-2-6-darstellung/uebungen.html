@@ -1,0 +1,68 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.6.3: Programmablaufplan <span class="niveau">AFB II–III</span></summary>
+                <p>Erstelle einen Programmablaufplan für <strong>einen</strong> der beiden Algorithmen Selectionsort oder Insertionsort. Beurteile anschließend, welche der beiden Darstellungen für diesen Algorithmus übersichtlicher ist.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.6.4: Ergebnis vorhersagen aus einem Struktogramm <span class="niveau">AFB II</span></summary>
+                <pre><code>┌────────────────────────────────────────┐
+│ Eingabe: n                             │
+├────────────────────────────────────────┤
+│ z ← 0                                  │
+├────────────────────────────────────────┤
+│ solange n &gt; 0                          │
+│   ┌────────────────────────────────────┤
+│   │ n mod 2 = 1 ?                      │
+│   ├──────────────────┬─────────────────┤
+│   │ ja               │ nein            │
+│   │ z ← z + 1        │ ∅               │
+│   ├──────────────────┴─────────────────┤
+│   │ n ← n div 2                        │
+├───┴────────────────────────────────────┤
+│ Ausgabe: z                             │
+└────────────────────────────────────────┘</code></pre>
+                <p>„div“ ist die ganzzahlige Division, „mod“ der Rest.</p>
+                <ol>
+                    <li>Führe das Struktogramm für n = 13 von Hand aus. Notiere n und z nach jedem Schleifendurchlauf in einer Tabelle.</li>
+                    <li>Bestimme ebenso die Ausgaben für n = 16, n = 7 und n = 0. Beschreibe, was der Algorithmus berechnet.</li>
+                    <li>Übersetze das Struktogramm in eine Python-Funktion <code>f(n)</code> und überprüfe deine Vorhersagen mit einer Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe. Ergänze den Fall n = −5 und erkläre das Ergebnis.</li>
+                </ol>
+                <p class="tipp">Schreibe 13 als Summe von Zweierpotenzen.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.6.5: Fahrkartenautomat modellieren <span class="niveau">AFB II</span></summary>
+                <p>Ein Fahrkartenautomat berechnet den Preis in Cent: Kinder unter 6 Jahren fahren kostenlos; 6- bis 17-Jährige zahlen 200; mit Schülerausweis zahlen auch 18- bis 20-Jährige 200; ab 65 Jahren kostet die Fahrt 300; alle anderen zahlen 450. Danach werden Münzen eingeworfen, bis der Preis erreicht ist, und das Wechselgeld wird berechnet.</p>
+                <ol>
+                    <li>Zeichne ein Struktogramm für <code>ticketpreis(alter, ausweis)</code> mit verschachtelten Verzweigungen. Bei ungültigem Alter (keine ganze Zahl oder negativ) wird <code>None</code> geliefert.</li>
+                    <li>Zeichne einen PAP für <code>bezahle(preis, muenzen)</code>. Die Liste <code>muenzen</code> enthält die eingeworfenen Münzen in Cent. Es werden nur so viele Münzen genommen, bis der Preis erreicht ist. Reichen die Münzen nicht, wird <code>None</code> zurückgegeben, sonst das Wechselgeld.</li>
+                    <li>Implementiere beide Funktionen und teste sie:
+                        <table>
+                            <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>ticketpreis(5, False)</code></td><td></td><td></td></tr>
+                                <tr><td><code>ticketpreis(17, False)</code></td><td></td><td></td></tr>
+                                <tr><td><code>ticketpreis(18, False)</code></td><td></td><td></td></tr>
+                                <tr><td><code>ticketpreis(19, True)</code></td><td></td><td></td></tr>
+                                <tr><td><code>ticketpreis(65, False)</code></td><td></td><td></td></tr>
+                                <tr><td><code>ticketpreis(-1, False)</code></td><td></td><td></td></tr>
+                                <tr><td><code>bezahle(450, [200, 200, 100])</code></td><td></td><td></td></tr>
+                                <tr><td><code>bezahle(200, [50, 200, 100])</code></td><td></td><td></td></tr>
+                                <tr><td><code>bezahle(0, [])</code></td><td></td><td></td></tr>
+                                <tr><td><code>bezahle(300, [100])</code></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li>Entscheide, ob die Bezahlschleife kopf- oder fußgesteuert sein sollte. Denke an kostenlose Fahrten.</li>
+                </ol>
+            </details>
+        </div>

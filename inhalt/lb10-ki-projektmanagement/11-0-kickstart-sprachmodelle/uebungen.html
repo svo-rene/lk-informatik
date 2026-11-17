@@ -1,0 +1,90 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/11-0_kickstart_sprachmodelle.ipynb" download>11-0_kickstart_sprachmodelle.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (JupyterLite der Schule; falls nicht erreichbar: <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.0.3: Was darf in den Prompt? <span class="niveau">AFB II</span></summary>
+                <p>Entscheide für jede Situation, ob sie nach den Regeln aus Abschnitt 8 und 9 in Ordnung ist. Begründe und formuliere problematische Prompts so um, dass sie erlaubt sind (falls möglich).</p>
+                <ol type="a">
+                    <li>„Erkläre mir den Unterschied zwischen Werte- und Referenzparametern in Python an einem Beispiel.“</li>
+                    <li>Lena fügt ihre Funktion und die Fehlermeldung ein: „Was bedeutet dieser Fehler? Gib mir nur einen Hinweis.“</li>
+                    <li>„Hier ist die Notenliste unseres Kurses mit Namen. Berechne den Durchschnitt und sag mir, wer unter 5 Punkten liegt.“</li>
+                    <li>„Formuliere eine Entschuldigung für die Klausur. Ich habe seit Montag eine Magen-Darm-Grippe, mein Arzt ist Dr. Müller in Pieschen.“</li>
+                    <li>Während der Leistungskontrolle am Rechner fragt Max nach der Lösung von Aufgabe 2.</li>
+                    <li>„Schreib mir den kompletten Code für die Hausaufgabe 2.2.5 Insertion Sort.“</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.0.4: Top-k-Auswahl programmieren <span class="niveau">AFB II</span></summary>
+                <p>Viele Sprachmodelle ziehen nur aus den k wahrscheinlichsten Tokens. Deren Wahrscheinlichkeiten werden dazu neu normiert, damit sie wieder zusammen 1 ergeben.</p>
+                <ol>
+                    <li>Schreibe eine Funktion <code>top_k(kandidaten, wahrscheinlichkeiten, k)</code>, die eine Liste von Paaren <code>(kandidat, neue_wahrscheinlichkeit)</code> zurückgibt, absteigend sortiert nach Wahrscheinlichkeit.</li>
+                    <li>Prüfe deine Funktion mit den Werten aus Beispiel 3 (T = 1) und dieser Testfalltabelle. Ergänze die Spalte „tatsächliche Ausgabe“.</li>
+                </ol>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe k</th><th>erwartete Ausgabe (gerundet)</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td>2</td><td>[('Dresden', 0.818), ('Leipzig', 0.182)]</td><td></td></tr>
+                        <tr><td>1</td><td>[('Dresden', 1.0)]</td><td></td></tr>
+                        <tr><td>4</td><td>alle vier, Werte wie in Beispiel 3</td><td></td></tr>
+                        <tr><td>10 (größer als Anzahl)</td><td>alle vier, Werte wie in Beispiel 3</td><td></td></tr>
+                        <tr><td>0 (Randfall)</td><td>[]</td><td></td></tr>
+                    </tbody>
+                </table>
+                <ol start="3">
+                    <li>Beschreibe, welchen Einfluss k auf die erzeugten Texte hat, und vergleiche mit der Wirkung der Temperatur.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.0.8: Ähnlichkeit und Mehrdeutigkeit <span class="niveau">AFB II/III</span></summary>
+                <p>Zu den Vektoren aus Beispiel 2 kommt Maus = (0,6; 0,5; 0,3).</p>
+                <ol>
+                    <li>Berechne die Kosinus-Ähnlichkeit von „Maus“ zu „Hund“, „Katze“ und „Auto“ (drei Nachkommastellen) und ordne.</li>
+                    <li>„Maus“ kann auch ein Eingabegerät sein. Erkläre, warum <em>ein</em> fester Vektor pro Token für mehrdeutige Wörter ein Problem ist.</li>
+                    <li>Erkläre, wie der Attention-Mechanismus (Abschnitt 4) dieses Problem im Satz „Ich klicke mit der Maus auf das Symbol“ löst.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.0.9: Was ein langer Chat kostet <span class="niveau">AFB II/III</span></summary>
+                <p>Lena stellt in <em>einem</em> schulKI-Chat nacheinander fünf Fragen zu verschiedenen Hausaufgaben. Nimm vereinfacht an:</p>
+                <ul>
+                    <li>Jede ihrer Fragen hat 50 Tokens, jede Antwort 300 Tokens.</li>
+                    <li>Bei jeder neuen Frage werden die bisherigen Nachrichten (Fragen und Antworten) mitgeschickt, höchstens aber die letzten 6.</li>
+                    <li>Verbraucht werden alle mitgeschickten Tokens plus die Tokens der neuen Frage und der Antwort.</li>
+                </ul>
+                <ol>
+                    <li>Berechne den Tokenverbrauch für jede der fünf Fragen und insgesamt.</li>
+                    <li>Berechne den Verbrauch, wenn Lena für jede Frage einen neuen Chat beginnt, und vergleiche.</li>
+                    <li>Bei der fünften Frage bezieht sich Lena auf die Antwort zu ihrer ersten Frage („Wie war das noch mal mit …?“). Erkläre, warum das schiefgehen kann.</li>
+                    <li>Neue Konten bei schulKI erhalten 200&nbsp;000 Tokens zum Testen. Berechne, wie viele solcher Fünf-Fragen-Chats damit möglich wären. Leite eine begründete Empfehlung für das Arbeiten mit schulKI ab.</li>
+                </ol>
+            </details>
+        </div>

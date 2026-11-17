@@ -1,0 +1,113 @@
+<div class="hinweis">
+<details>
+<summary>Hinweis: Grundidee</summary>
+<p>Alle Grundrechenarten lassen sich auf die Addition zurückführen – die Subtraktion z.&nbsp;B. über das Zweierkomplement (Rückblick auf 1.2). Wer addieren kann, kann also im Prinzip alles berechnen.</p>
+</details>
+</div>
+
+<p>Ein Halbaddierer ist eine digitale Schaltung, die zwei einzelne <strong>Bits</strong> addiert. Er hat zwei Eingänge A und B und gibt das Summenbit (S) und das Übertragsbit bzw. Carry-Bit (C) aus.</p>
+
+<h2>Binäre Addition</h2>
+
+<p>Die binäre Addition ist ähnlich wie die Dezimaladdition, aber sie verwendet nur die Ziffern 0 und 1.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> 0 + 1</summary>
+<pre>
+    0
++   1
+-------
+   01      → C = 0, S = 1 (kein Übertrag)</pre>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">einfach</span> 1 + 1 mit Übertrag</summary>
+<pre>
+    1
++   1
+-------
+   10      → C = 1, S = 0</pre>
+<p>1 + 1 = 2, und 2 ist binär <strong>10</strong>. In der eigenen Stelle bleibt eine 0 stehen (S = 0), die 1 wandert als Übertrag in die nächste Stelle (C = 1). Das ist genau wie im Dezimalsystem bei 5 + 5 = 10.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span> Warum heißt er „Halb“-Addierer?</summary>
+<p>Addiert man zwei mehrstellige Zahlen, z.&nbsp;B. 11 + 01 (3 + 1), entsteht in der rechten Stelle ein Übertrag:</p>
+<pre>
+Übertrag:  1
+           1 1
+         + 0 1
+         -----
+         1 0 0     (= 4)</pre>
+<p>In der zweiten Stelle müssen deshalb <strong>drei</strong> Bits addiert werden: 1 + 0 + Übertrag 1. Der Halbaddierer hat aber nur zwei Eingänge. Er reicht also nur für die niedrigste Stelle – für alle weiteren braucht man den Volladdierer (3.7).</p>
+<ol>
+<li><strong>Was:</strong> Stelle 2<sup>0</sup> mit einem Halbaddierer: A<sub>0</sub> = 1, B<sub>0</sub> = 1, also 1 + 1 = 10<sub>2</sub> → S<sub>0</sub> = 0, C<sub>0</sub> = 1 –<em>warum:</em> In der niedrigsten Stelle gibt es noch keinen Übertrag, zwei Eingänge genügen.</li>
+<li><strong>Was:</strong> Stelle 2<sup>1</sup>: Zu addieren sind A<sub>1</sub> = 1, B<sub>1</sub> = 0 und der Übertrag C<sub>0</sub> = 1, also 1 + 0 + 1 = 10<sub>2</sub> → S<sub>1</sub> = 0, Übertrag 1 – <em>warum:</em> Hier kommen drei Bits zusammen. Ein Halbaddierer mit A<sub>1</sub> und B<sub>1</sub> allein würde S<sub>1</sub> = 1 liefern und den Übertrag C<sub>0</sub> verlieren.</li>
+<li><strong>Was:</strong> Der Übertrag aus Stelle 2<sup>1</sup> wird zur Stelle 2<sup>2</sup> – <em>warum:</em> Das Ergebnis braucht eine Stelle mehr als die Summanden.</li>
+</ol>
+<p><strong>Probe:</strong> 100<sub>2</sub> = 4 = 3 + 1 ✓. Die Falle: Hätte man in Stelle 2<sup>1</sup> nur einen Halbaddierer verwendet, käme 010<sub>2</sub> = 2 heraus.</p>
+            </details>
+        </div>
+
+<h2>Wahrheitstabelle für den Halbaddierer</h2>
+
+<p>Die Wahrheitstabelle für den Halbaddierer zeigt alle möglichen Eingangskombinationen und die entsprechenden Ausgaben (Summe und Carry).</p>
+
+<h2>Schaltungssynthese für den Halbaddierer</h2>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: Kein Spielzeug, sondern echte Prozessor-Hardware</summary>
+<p>Halb- und Volladdierer sind keine rein didaktischen Beispiele. Sie sind die Grundbausteine des Addierwerks in der <strong>ALU (Arithmetic Logic Unit, Rechenwerk)</strong>, also dem Teil einer echten CPU, der für Berechnungen zuständig ist (siehe auch Von-Neumann-Architektur in 4.1). Die ALU enthält daneben noch Schaltungen für logische Operationen, Vergleiche und Verschiebungen. Ein moderner Prozessor addiert mehrere Milliarden Mal pro Sekunde – nach genau dem Prinzip, das du hier von Hand nachbaust, nur mit schnelleren Varianten der Übertragsberechnung. Mehr dazu im <a href="https://en.wikipedia.org/wiki/Arithmetic_logic_unit" target="_blank">Wikipedia-Artikel „Arithmetic logic unit“</a>.</p>
+<p><strong>Alltag:</strong> Jede Rechnung im Taschenrechner, jede Punktzahl in einem Spiel und jede Pixelposition auf deinem Bildschirm läuft am Ende durch Addierschaltungen.</p>
+<p><strong>Berufsleben:</strong></p>
+<ul>
+<li><strong>Prozessorentwickler/in</strong>: optimiert Addierwerke, damit sie möglichst schnell und stromsparend rechnen – bei Chipherstellern wie AMD, Intel, ARM oder in Dresden bei Firmen, die Spezialprozessoren z.&nbsp;B. für KI oder Mobilfunk entwickeln.</li>
+<li><strong>FPGA-Entwickler/in</strong>: programmiert rekonfigurierbare Chips, auf denen Addierer und andere Schaltnetze per Software „verdrahtet“ werden, z.&nbsp;B. für Messtechnik oder Bildverarbeitung.</li>
+</ul>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Halbaddierer:</strong> Schaltnetz mit zwei Eingängen A, B und zwei Ausgängen.</p>
+<ul>
+<li><strong>S (Summenbit)</strong>: die Stelle mit der Wertigkeit 2<sup>0</sup> = 1 des Ergebnisses.</li>
+<li><strong>C (Carry, Übertrag)</strong>: die Stelle mit der Wertigkeit 2<sup>1</sup> = 2, die in die nächsthöhere Stelle übertragen wird.</li>
+</ul>
+<p>Das zweistellige Ergebnis CS ist die Summe A + B als Binärzahl.</p>
+</div>
+
+<div class="merke">
+<p><strong>Zusammenfassung Halbaddierer</strong> (vergleiche mit deinen Lösungen zu 3.6.1 und 3.6.2):</p>
+<table class="gitter">
+<tr><th>A</th><th>B</th><th>C</th><th>S</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+</table>
+<p><strong>S = A ⊕ B</strong> (XOR: S ist 1, wenn genau ein Eingang 1 ist) &nbsp;&nbsp; <strong>C = A ∧ B</strong> (UND: ein Übertrag entsteht nur bei 1 + 1 = 10)</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.6.1: Wahrheitstabelle erstellen <span class="niveau">AFB I</span></summary>
+<p>Erstelle eine Wahrheitstabelle für alle möglichen Additionen von zwei Eingängen für den Halbaddierer.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.6.2: Schaltungssynthese <span class="niveau">AFB II</span></summary>
+<p>Erstelle aus der Wahrheitstabelle für die Addition von zwei Eingängen eine logische Schaltung für den Halbaddierer.<br>Überprüfe deine Lösung mithilfe deiner Wahrheitstabelle in LogicSim.</p>
+</details>
+</div>

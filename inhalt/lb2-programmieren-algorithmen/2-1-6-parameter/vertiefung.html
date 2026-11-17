@@ -1,0 +1,42 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.6.6: Fehler finden – die Kopie, die keine ist <span class="niveau">AFB III</span></summary>
+                <p>Die Funktion soll eine absteigend sortierte Kopie liefern und die Originalliste nicht verändern:</p>
+                <pre><code class="language-python">def sortiert_absteigend(liste):
+    kopie = liste
+    kopie.sort(reverse=True)
+    return kopie
+
+noten = [2, 1, 3]
+s = sortiert_absteigend(noten)
+print(s, noten)</code></pre>
+                <ol>
+                    <li>Gib erwartete und tatsächliche Ausgabe an und erkläre den Fehler mit einem Speicherbild.</li>
+                    <li>Korrigiere die Funktion auf zwei verschiedene Arten und teste mit <code>[2, 1, 3]</code>, <code>[]</code>, <code>[5]</code> und <code>[-1, -3, 2]</code>.</li>
+                    <li>Eine Lehrkraft speichert Noten als Liste von Listen: <code>tabelle = [[1, 2], [3, 4]]</code>. Sie erstellt <code>k = tabelle.copy()</code> und führt <code>k[0].append(9)</code> aus. Sage den Inhalt von <code>tabelle</code> voraus und begründe mit einem Speicherbild, warum <code>copy()</code> hier nicht ausreicht.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.6.7: Entwurfsentscheidung – verändern oder neu erzeugen? <span class="niveau">AFB III</span></summary>
+                <p>Für die Notenverwaltung soll eine Funktion allen Schülerinnen und Schülern Bonuspunkte gutschreiben. Zwei Entwürfe stehen zur Wahl:</p>
+                <pre><code class="language-python">def bonus_a(punkte, bonus):          # Entwurf A
+    for i in range(len(punkte)):
+        punkte[i] = min(15, punkte[i] + bonus)
+
+def bonus_b(punkte, bonus):          # Entwurf B
+    neu = []
+    for p in punkte:
+        neu.append(min(15, p + bonus))
+    return neu</code></pre>
+                <ol>
+                    <li>Gib für <code>p = [10, 14, 3]</code> und <code>bonus = 2</code> an, was nach <code>bonus_a(p, 2)</code> bzw. nach <code>q = bonus_b(p, 2)</code> in <code>p</code> und <code>q</code> steht.</li>
+                    <li>Beurteile beide Entwürfe für diese Situationen: (a) Die Lehrkraft möchte vorher und nachher vergleichen. (b) Die Liste enthält die Werte von einer Million Sensoren, der Speicher ist knapp. (c) Ein Teammitglied ruft die Funktion auf, ohne ihren Code zu kennen.</li>
+                    <li>Formuliere eine Regel für die Benennung solcher Funktionen, die Missverständnisse vermeidet.</li>
+                </ol>
+            </details>
+        </div>

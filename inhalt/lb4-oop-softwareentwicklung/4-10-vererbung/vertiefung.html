@@ -1,0 +1,62 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-4-10-8">
+    <details>
+        <summary>Aufgabe 4.10.8: Fehler finden – „ist ein“ oder „hat ein“? <span class="niveau">AFB III</span></summary>
+        <p>In einem Entwurf für eine Schul-App finden sich diese Klassen:</p>
+        <pre><code class="language-python">class Motor:
+    def __init__(self, ps: int):
+        self.ps = ps
+
+    def starten(self) -&gt; str:
+        return "Brumm"
+
+class Auto(Motor):                       # (1)
+    def __init__(self, marke: str, ps: int):
+        super().__init__(ps)
+        self.marke = marke
+
+class Person:
+    def __init__(self, name: str):
+        self.name = name
+
+class Lehrkraft(Person):                 # (2)
+    def __init__(self, name: str, kuerzel: str):
+        self.kuerzel = kuerzel
+
+class Schulklasse(Person):               # (3)
+    def __init__(self, bezeichnung: str):
+        super().__init__(bezeichnung)
+        self.schueler: list[Person] = []
+
+frau_k = Lehrkraft("Frau Krause", "KR")
+print(frau_k.kuerzel)
+print(frau_k.name)</code></pre>
+        <ol>
+            <li>Sage die Ausgabe des Programms vorher.</li>
+            <li>Prüfe die drei Vererbungen (1)–(3) mit dem „ist-ein“-Test. Gib bei falscher Vererbung an, welche Beziehung stattdessen passt.</li>
+            <li>Finde den Programmierfehler in der Klasse, deren Vererbung fachlich richtig ist.</li>
+            <li>Korrigiere den Code vollständig und gib Testfälle an, die zeigen, dass alles funktioniert.</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-10-10">
+    <details>
+        <summary>Aufgabe 4.10.10: Vererbung beurteilen – wenn die Hierarchie explodiert <span class="niveau">AFB III</span></summary>
+        <p>In einem Rollenspiel gibt es Ritter und Magier. Nach und nach kamen Fähigkeiten dazu, und das Team hat jedes Mal eine neue Unterklasse angelegt:</p>
+        <pre><code>Figur
+ ├── Ritter
+ │    ├── FliegenderRitter
+ │    └── SchwimmenderRitter
+ └── Magier
+      ├── FliegenderMagier
+      ├── SchwimmenderMagier
+      └── FliegenderSchwimmenderMagier</code></pre>
+        <ol>
+            <li>Beurteile diesen Entwurf. Wie viele Klassen bräuchte man bei 2 Figurtypen und 4 kombinierbaren Fähigkeiten (fliegen, schwimmen, klettern, tauchen), wenn jede Kombination eine eigene Klasse bekommt?</li>
+            <li>Prüfe mit dem „ist-ein“-Test: Ist „fliegend“ eine Spezialisierung der Figur oder eine Fähigkeit, die eine Figur <em>hat</em>?</li>
+            <li>Entwirf einen alternativen Aufbau nach dem Grundsatz „Komposition vor Vererbung“ (Klassendiagramm und Python-Skizze). Eine Figur soll eine Fähigkeit auch während des Spiels dazugewinnen können.</li>
+        </ol>
+    </details>
+</div>

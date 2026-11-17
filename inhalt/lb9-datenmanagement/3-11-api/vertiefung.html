@@ -1,0 +1,37 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.11.3: Robuste Abfrage <span class="niveau">AFB III</span>
+                </summary>
+                <p>
+                    Schreibe eine Funktion <code>pokemon_info(name)</code>, die für einen eingegebenen Namen Größe in Metern und
+                    Gewicht in Kilogramm zurückgibt (die PokeAPI liefert Dezimeter und Hektogramm). Bei einem unbekannten Namen
+                    soll die Funktion <code>None</code> zurückgeben, statt abzustürzen. Teste sie mit einem gültigen und einem
+                    ungültigen Namen.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.11.5: Fehler finden – das Wetter-Widget <span class="niveau">AFB III</span></summary>
+                <p>Für die Schulhomepage hat Paula ein Wetter-Widget geschrieben und den Code öffentlich auf GitHub gestellt:</p>
+                <pre><code class="language-python">import requests
+
+API_KEY = "a83f0c2e9b17d4..."      # Schlüssel eines kommerziellen Wetterdienstes
+
+url = "https://api.open-meteo.com/v1/forecast"
+parameter = {"latitude": 51.05, "longitude": 13.74, "hourly": "temperature_2m"}
+daten = requests.get(url, params=parameter).json()
+print("Jetzt:", daten["current_weather"]["temperature"], "°C")</code></pre>
+                <ol>
+                    <li>Das Programm bricht mit <code>KeyError: 'current_weather'</code> ab. Erkläre die Ursache mit Hilfe der Parameter und korrigiere.</li>
+                    <li>Benenne zwei weitere Schwachstellen, die erst bei Störungen sichtbar werden (Server langsam, Fehlercode), und zeige die Korrektur.</li>
+                    <li>Beurteile den Umgang mit <code>API_KEY</code>: Welche Folgen kann die Veröffentlichung haben, und wie macht man es richtig?</li>
+                    <li>Das Widget soll auf jeder Seite der Homepage erscheinen, die 2&nbsp;000-mal am Tag aufgerufen wird. Beurteile, ob es jedes Mal die
+                        API abfragen sollte, und schlage eine bessere Lösung vor.</li>
+                </ol>
+            </details>
+        </div>

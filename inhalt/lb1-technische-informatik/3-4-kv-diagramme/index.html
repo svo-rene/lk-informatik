@@ -1,0 +1,170 @@
+<p>Beim Alarmanlagen-Beispiel aus 3.3 musstest du die Gesetze der Aussagenlogik „von Hand“ anwenden, um zu vereinfachen. Dabei übersieht man leicht eine Möglichkeit. Mit einem KV-Diagramm sieht man die Vereinfachung direkt.</p>
+
+<p>Karnaugh-Veitch-Diagramme (kurz KV-Diagramme) sind eine grafische Darstellung boolescher Funktionen, die es ermöglicht, auf Basis von Wahrheitstabellen boolesche Funktionen zu vereinfachen. Jedes Feld entspricht genau einer Zeile der Wahrheitstabelle, also einem Minterm. Die Felder sind so angeordnet, dass sich <strong>benachbarte Felder in genau einer Variablen unterscheiden</strong>.</p>
+
+<h2>Schritte zur Vereinfachung mit einem KV-Diagramm</h2>
+
+<ol>
+<li><strong>Wahrheitstabelle erstellen:</strong> Beginne mit der Erstellung einer Wahrheitstabelle für die logische Funktion. Diese Tabelle zeigt alle möglichen Kombinationen der Eingangsvariablen und die entsprechenden Ausgaben.</li>
+<li><strong>KV-Diagramm zeichnen:</strong> Zeichne ein KV-Diagramm. Es hat je nach Anzahl der Variablen eine vorgegebene Form:
+<ul>
+<li>Für 2 Variablen: 2 × 2 Felder</li>
+<li>Für 3 Variablen: 2 × 4 Felder</li>
+<li>Für 4 Variablen: 4 × 4 Felder</li>
+</ul>
+<figure><img src="../img/KV-Diagramm-Vorlage.png" width="500" alt="Vorlagen für KV-Diagramme mit zwei, drei und vier Variablen"></figure>
+</li>
+<li><strong>Wahrheitswerte eintragen:</strong> Trage die Ausgabewerte (Einsen) aus der Wahrheitstabelle in die entsprechenden Felder des KV-Diagramms ein.</li>
+<li><strong>Gruppen bilden:</strong> Fasse benachbarte Einsen nach den Regeln im Merkkasten zu Gruppen zusammen.</li>
+<li><strong>Vereinfachte Ausdrücke ableiten:</strong> Leite die vereinfachten logischen Ausdrücke für jede Gruppe ab. Die übrig gebliebenen Variablen werden mit einem AND verknüpft. Sollten mehrere Gruppen gebildet werden, dann werden die abgelesenen Terme mit einem OR verknüpft.</li>
+</ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Alarmanlage</summary>
+<p>Ausgehend von der Aufgabenstellung (siehe 3.3 Schaltungssynthese) wurde eine Wahrheitstabelle erstellt.</p>
+<ol>
+<li><strong>Erstellen der Wahrheitstabelle</strong>
+<table class="gitter">
+<thead>
+<tr><th>A</th><th>B</th><th>C</th><th>f</th></tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+</tbody>
+</table>
+</li>
+<li><strong>KV-Diagramm zeichnen:</strong>
+<figure><img src="../img/KV-Diagramm-Vorlage-3.png" width="250" alt="Leeres KV-Diagramm für drei Variablen"></figure>
+</li>
+<li><strong>Wahrheitswerte eintragen:</strong>
+<figure><img src="../img/KV-Diagramm-Vorlage-3a.png" width="250" alt="KV-Diagramm mit eingetragenen Einsen und Nullen"></figure>
+</li>
+<li><strong>Gruppen bilden:</strong> Die Eins im Feld ABC wird von beiden Gruppen genutzt (Überlappung).
+<figure><img src="../img/KV-Diagramm-Vorlage-3b.png" width="250" alt="KV-Diagramm mit zwei überlappenden Zweiergruppen"></figure>
+</li>
+<li><strong>Vereinfachte Ausdrücke ableiten:</strong> Rote Gruppe: A und C bleiben gleich, B wechselt → A ∧ C. Blaue Gruppe: B und C bleiben gleich, A wechselt → B ∧ C.
+<p><code>f = (A ∧ C) ∨ (B ∧ C)</code></p>
+</li>
+<li><strong>Falls möglich, mit den Gesetzen der Aussagenlogik weiter vereinfachen:</strong>
+<p><code>f = C ∧ (A ∨ B)</code> (Distributivgesetz)</p>
+</li>
+</ol>
+<p><strong>Probe:</strong> Feld A¬BC (Zeile ¬B, Spalte 2): C ∧ (A ∨ B) = 1 ∧ 1 = 1, im Diagramm steht 1. Feld AB¬C (Zeile B, Spalte 1): C = 0, also 0, im Diagramm steht 0. Das Ergebnis stimmt mit Beispiel 2 aus 3.3 überein.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Gruppe über den Rand</summary>
+<p>Eine Funktion f(A,B,C) ist für die Minterme AB¬C, ¬AB¬C, A¬B¬C, ¬A¬B¬C und ABC gleich 1. Im KV-Diagramm (gleiche Anordnung wie oben) ergibt sich:</p>
+<table class="gitter">
+<tr><th></th><th colspan="2">A</th><th colspan="2">¬A</th></tr>
+<tr><th>B</th><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><th>¬B</th><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th></th><th>¬C</th><th colspan="2">C</th><th>¬C</th></tr>
+</table>
+<ul>
+<li><strong>Vierergruppe über den Rand:</strong> Die linke und die rechte Spalte sind benachbart (beide gehören zu ¬C). Die vier Einsen dort bilden ein Rechteck. A und B wechseln, übrig bleibt <strong>¬C</strong>.</li>
+<li><strong>Zweiergruppe mit Überlappung:</strong> Die Eins bei ABC wird mit der Eins bei AB¬C zusammengefasst, die schon zur Vierergruppe gehört. C wechselt, übrig bleibt <strong>A ∧ B</strong>.</li>
+</ul>
+<p>Ergebnis: <code>f = ¬C ∨ (A ∧ B)</code>. Aus fünf Mintermen mit je drei Variablen sind zwei kurze Terme geworden. Hätte man die Nachbarschaft über den Rand übersehen, bräuchte man zwei Zweiergruppen statt einer Vierergruppe.</p>
+<p><strong>Probe:</strong> Die drei Nullfelder ¬ABC, A¬BC und ¬A¬BC haben C = 1 und nicht A = B = 1, dort liefert ¬C ∨ (A ∧ B) jeweils 0. In allen fünf Einsfeldern ist ¬C = 1 oder A ∧ B = 1.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span> Vier Variablen mit Eckengruppe – der Prüfautomat</summary>
+<p>Ein Prüfautomat liest an jedem Werkstück vier Sensoren A, B, C und D aus. Ein Werkstück wird aussortiert (f = 1), wenn die Sensoren eine der folgenden Belegungen melden. Die Zeilennummer ist die Dualzahl ABCD, A ist das höchstwertige Bit: <strong>0, 4, 5, 7, 8, 10, 11, 12, 13, 15</strong>. Gesucht ist eine möglichst kleine Schaltung.</p>
+<ol>
+<li><strong>Was:</strong> Jede Zeilennummer in ihre Belegung zerlegen, z.&nbsp;B. 12 = 1100 → A = 1, B = 1, C = 0, D = 0, also das Feld A B ¬C ¬D. – <em>Warum:</em> Ins KV-Diagramm trägt man Felder nach Variablenwerten ein, nicht nach Zeilennummern. Wer die Nummer falsch zerlegt, setzt die Eins ins falsche Feld.</li>
+<li><strong>Was:</strong> Die Einsen ins 4-Variablen-Diagramm im Kursstil eintragen (Spalten A¬C, AC, ¬AC, ¬A¬C; Zeilen B¬D, BD, ¬BD, ¬B¬D), alle übrigen Felder sind 0:
+<table class="gitter">
+<tr><th></th><th colspan="2">A</th><th colspan="2">¬A</th><th></th></tr>
+<tr><th rowspan="2">B</th><td>1</td><td>0</td><td>0</td><td>1</td><th>¬D</th></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><th rowspan="2">D</th></tr>
+<tr><th rowspan="2">¬B</th><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td><th>¬D</th></tr>
+<tr><th></th><th>¬C</th><th colspan="2">C</th><th>¬C</th><th></th></tr>
+</table>
+– <em>Warum:</em> In dieser Anordnung unterscheiden sich benachbarte Felder in genau einer Variablen. Das gilt auch über den Rand hinweg.</li>
+<li><strong>Was:</strong> Die vier Eckfelder zu einer Vierergruppe zusammenfassen. – <em>Warum:</em> Linker und rechter Rand sind benachbart (beide ¬C), ebenso oberer und unterer Rand (beide ¬D). Die vier Ecken bilden deshalb ein Rechteck. A und B wechseln, übrig bleibt <strong>¬C ∧ ¬D</strong>.</li>
+<li><strong>Was:</strong> Die zweite Zeile (B, D) als Vierergruppe nehmen. – <em>Warum:</em> Alle vier Felder sind 1. A und C wechseln, übrig bleibt <strong>B ∧ D</strong>.</li>
+<li><strong>Was:</strong> Die Einsen in Spalte AC, Zeilen ¬BD und ¬B¬D, zu einer Zweiergruppe zusammenfassen. – <em>Warum:</em> Das sind die einzigen noch nicht abgedeckten Einsen. Eine Vierergruppe ist hier nicht möglich: Links daneben steht im Feld A¬B¬CD (Nr. 9) eine 0, rechts daneben (Nr. 3 und 2) stehen zwei Nullen, und die ganze Spalte AC scheitert am Feld ABC¬D (Nr. 14) in der obersten Zeile. D wechselt, übrig bleibt <strong>A ∧ ¬B ∧ C</strong>.</li>
+<li><strong>Was:</strong> Die Terme mit ODER verbinden und die Gatter zählen. – <em>Warum:</em> Jede Gruppe ist ein Teil der DNF. Für die Schaltung braucht man 3 NICHT (B, C, D), 2 UND mit zwei Eingängen, 1 UND mit drei Eingängen und 1 ODER mit drei Eingängen, also 7 Gatter.</li>
+</ol>
+<p><strong>Ergebnis:</strong> <code>f = (¬C ∧ ¬D) ∨ (B ∧ D) ∨ (A ∧ ¬B ∧ C)</code></p>
+<p><strong>Die Falle:</strong> Wer die Nachbarschaft der Ecken übersieht, fasst die Ecken als zwei Zweiergruppen zusammen, B ∧ ¬C ∧ ¬D und ¬B ∧ ¬C ∧ ¬D. Das ist nicht falsch, kostet aber einen Term und zwei UND-Eingänge mehr.</p>
+<p><strong>Probe:</strong> Feld 10 = 1010 (A = 1, B = 0, C = 1, D = 0): ¬C ∧ ¬D = 0, B ∧ D = 0, A ∧ ¬B ∧ C = 1 → f = 1 ✓. Nullfeld 9 = 1001: ¬C ∧ ¬D = 0 (D = 1), B ∧ D = 0 (B = 0), A ∧ ¬B ∧ C = 0 (C = 0) → f = 0 ✓. Ein Skript, das alle 16 Belegungen durchläuft, liefert genau bei den zehn genannten Zeilennummern eine 1.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: Grenzen von Hand – und was danach kommt</summary>
+<p>KV-Diagramme funktionieren von Hand nur bis etwa 4–6 Variablen. Chipdesigner setzen daher für reale Schaltungen mit Hunderten oder Tausenden Eingängen automatisierte Minimierungsalgorithmen (z.&nbsp;B. Quine-McCluskey oder Espresso) in professioneller EDA-Software (Electronic Design Automation) ein. Das Grundprinzip ist aber genau dasselbe wie beim KV-Diagramm: möglichst große Gruppen gemeinsamer Werte finden und daraus einen minimalen Ausdruck ableiten – nur eben automatisch für Schaltungen, die kein Mensch mehr überschauen könnte.</p>
+<p><strong>Berufsleben:</strong></p>
+<ul>
+<li><strong>Digitaltechnik-Ingenieur/in</strong>: minimiert kleine Steuerlogiken, z.&nbsp;B. für die Ansteuerung einer Sieben-Segment-Anzeige oder einer Ampel, auch heute noch mit KV-Diagrammen – das geht schneller als jedes Programm.</li>
+<li><strong>EDA-Softwareentwickler/in</strong>: programmiert die Algorithmen, die dieselbe Aufgabe für Millionen Gatter lösen – ein gefragtes Profil in der Chipbranche rund um Dresden.</li>
+</ul>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Regeln für die Gruppenbildung im KV-Diagramm:</strong></p>
+<ol>
+<li>Es werden nur <strong>Einsen</strong> zusammengefasst, jede Eins muss in mindestens einer Gruppe liegen.</li>
+<li>Eine Gruppe ist immer ein <strong>Rechteck</strong> (oder Quadrat) aus waagerecht bzw. senkrecht benachbarten Feldern – keine Diagonalen, keine L-Formen.</li>
+<li>Die Anzahl der Felder einer Gruppe ist eine <strong>Zweierpotenz</strong>: 1, 2, 4, 8 oder 16.</li>
+<li>Gruppen sollen <strong>so groß wie möglich</strong> sein, und es sollen <strong>so wenige Gruppen wie möglich</strong> entstehen.</li>
+<li>Gruppen dürfen sich <strong>überlappen</strong>: Eine Eins darf zu mehreren Gruppen gehören, wenn dadurch eine Gruppe größer wird.</li>
+<li><strong>Nachbarschaft über den Rand:</strong> Der linke und der rechte Rand sowie der obere und der untere Rand gelten als benachbart (man kann sich das Diagramm zu einer Rolle gebogen vorstellen). Beim 4 × 4-Diagramm bilden deshalb auch die vier Eckfelder eine Gruppe.</li>
+<li><strong>Ablesen:</strong> Eine Variable, die innerhalb der Gruppe ihren Wert wechselt, fällt weg. Eine Gruppe aus 2<sup>k</sup> Feldern verliert genau k Variablen.</li>
+</ol>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.4.1: Vereinfachen mit dem KV-Diagramm <span class="niveau">AFB II</span></summary>
+<p>Vereinfache die Schaltfunktionen unter Nutzung eines KV-Diagramms. Prüfe am Ende, ob das Distributivgesetz angewandt werden kann.</p>
+<ol>
+<li>f = (¬A ∧ B) ∨ (A ∧ B)</li>
+<li>f = (¬A ∧ ¬B) ∨ (¬A ∧ B) ∨ (A ∧ ¬B)</li>
+<li>f = (A ∧ B ∧ C) ∨ (A ∧ ¬B ∧ ¬C) ∨ (¬A ∧ ¬B ∧ ¬C) ∨ (¬A ∧ B ∧ C)</li>
+<li>f = (A ∧ B ∧ C ∧ D) ∨ (¬A ∧ B ∧ ¬C ∧ D) ∨ (¬A ∧ B ∧ C ∧ D) ∨ (¬A ∧ B ∧ ¬C ∧ ¬D) ∨ (¬A ∧ B ∧ C ∧ ¬D) ∨ (A ∧ ¬B ∧ C ∧ ¬D) ∨ (A ∧ ¬B ∧ C ∧ D)</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.4.2: Gruppen über den oberen und unteren Rand <span class="niveau">AFB II</span></summary>
+<p>Gegeben ist das KV-Diagramm einer Funktion f(A,B,C,D) (Anordnung wie in der Vorlage für vier Variablen):</p>
+<table class="gitter">
+<tr><th></th><th colspan="2">A</th><th colspan="2">¬A</th><th></th></tr>
+<tr><th rowspan="2">B</th><td>1</td><td>1</td><td>1</td><td>0</td><th>¬D</th></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><th rowspan="2">D</th></tr>
+<tr><th rowspan="2">¬B</th><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td><th>¬D</th></tr>
+<tr><th></th><th>¬C</th><th colspan="2">C</th><th>¬C</th><th></th></tr>
+</table>
+<ol>
+<li>Bilde möglichst große Gruppen. Beachte, dass die oberste und die unterste Zeile benachbart sind.</li>
+<li>Lies für jede Gruppe den Term ab und gib die vereinfachte Funktion an.</li>
+<li>Prüfe dein Ergebnis an zwei Feldern: an einer Eins aus der obersten Zeile und an einer Null deiner Wahl.</li>
+</ol>
+</details>
+</div>

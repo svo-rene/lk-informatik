@@ -1,0 +1,216 @@
+<p>
+            Der Liniennetzplan der Dresdner Straßenbahn, deine Kontakte in einem Messenger oder die Verlinkungen zwischen Webseiten: Überall geht es um Dinge und ihre Verbindungen. Ein Graph ist eine abstrakte Darstellung einer Menge von Objekten (Knoten), bei der einige Paare dieser Objekte durch Kanten verbunden sind. Graphen werden in vielen Disziplinen verwendet, um Beziehungen zwischen Objekten zu untersuchen und darzustellen. Sie sind grundlegend für viele Bereiche der Informatik und Mathematik.
+        </p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in vier kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und zeichne oder tippe mit.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Was ist ein Graph? Knoten, Kanten, Wege, Zyklen</a> – danach Aufgabe 3.7.1</li>
+            <li><a href="#schritt-2">Adjazenzmatrix und Adjazenzliste</a> – danach Aufgabe 3.7.2 und 3.7.3</li>
+            <li><a href="#schritt-3">Das Straßenbahnnetz in Python</a></li>
+            <li><a href="#schritt-4">Vom Dictionary zur Matrix</a> – danach Aufgabe 3.7.4</li>
+        </ol>
+
+<p class="git-datei"><strong>Zum Mittippen:</strong> <code>3_graphen/strassenbahn.py</code> – neu anlegen.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.7 Schritt 3: Straßenbahnnetz als Dictionary</code> · <code>3.7 Schritt 4: Matrix aus dem Dictionary</code> (Regeln auf Seite 3.0.2)</p>
+
+<p>Am Ende findest du den Praxisbezug und alle Aufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Was ist ein Graph?</h2>
+
+<p>Ein Graph beschreibt nur, <em>was womit verbunden ist</em> – Haltestellen und Gleise, Personen und Freundschaften, Webseiten und Links. Im Video lernst du an einem kleinen Graphen mit den Knoten A bis E die wichtigsten Begriffe kennen. Achte darauf, wie sich gerichtete und gewichtete Graphen unterscheiden und was einen Weg von einem Zyklus unterscheidet.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-7-1_was_ist_ein_graph_vorschau.png" src="../vid/3-7-1_was_ist_ein_graph.mp4"></video><a href="../vid/3-7-1_was_ist_ein_graph.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Was ist ein Graph? (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<p>Zum Nachlesen:</p>
+
+<h3>1. Gerichtete und ungerichtete Graphen</h3>
+
+<p><strong>Gerichtete Graphen</strong> haben Kanten mit einer Richtung, dargestellt durch Pfeile. Beispiel: ein Straßennetz mit Einbahnstraßen, in dem man von A nach B, aber nicht unbedingt umgekehrt fahren kann.</p>
+
+<p><strong>Ungerichtete Graphen</strong> haben Kanten ohne Richtung; jede Verbindung gilt in beide Richtungen. Beispiel: ein Freundschaftsnetzwerk, in dem eine Kante eine beidseitige Freundschaft darstellt.</p>
+
+<h3>2. Gewichtete Graphen</h3>
+
+<p>Bei gewichteten Graphen ist jeder Kante ein Wert („Gewicht“) zugeordnet, bei dem es sich z.&nbsp;B. um eine Entfernung, eine Fahrzeit oder Kosten handelt.</p>
+
+<figure>
+            <img src="../img/skizze_graph.svg" width="450" alt="Gewichteter Graph mit den Knoten A bis E">
+            <figcaption>Abb. 1: Gewichteter Graph mit ungerichteten Kanten und einer gerichteten Kante (Pfeil von B nach E).</figcaption>
+        </figure>
+
+<h3>3. Nachbarn, Wege und Zyklen</h3>
+
+<p><strong>Nachbarn:</strong> Zwei Knoten sind benachbart (adjazent), wenn sie durch eine Kante verbunden sind.</p>
+
+<p><strong>Weg:</strong> eine Folge von Knoten, bei der jeder Knoten mit dem nächsten durch eine Kante verbunden ist. Die <strong>Länge</strong> eines Wegs ist die Anzahl seiner Kanten bzw. bei gewichteten Graphen die Summe der Gewichte.</p>
+
+<p><strong>Zyklus:</strong> ein Weg, der am selben Knoten beginnt und endet und dabei keinen anderen Knoten mehrfach besucht.</p>
+
+<p>Danach: <a href="uebungen.html#a-3-7-1">Aufgabe 3.7.1</a> – dieselben Begriffe am Straßenbahnnetz (der Graph steht in Beispiel 2 in <a href="#schritt-3">Schritt 3</a>).</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Adjazenzmatrix und Adjazenzliste →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Adjazenzmatrix und Adjazenzliste</h2>
+
+<p>Ein Computer kann keine Bilder von Graphen speichern. Er braucht eine Tabelle oder Listen. Im Video siehst du beide Darstellungen am selben kleinen Graphen – ungerichtet, gerichtet und gewichtet. Achte darauf, warum die Matrix eines ungerichteten Graphen symmetrisch ist und was die Liste an Platz spart.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-7-2_matrix_liste_vorschau.png" src="../vid/3-7-2_matrix_liste.mp4"></video><a href="../vid/3-7-2_matrix_liste.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Adjazenzmatrix und Adjazenzliste (ca. 2 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen:</p>
+
+<p><strong>Adjazenzmatrix:</strong> eine n×n-Tabelle, deren Eintrag in Zeile i und Spalte j angibt, ob (bzw. mit welchem Gewicht) eine Kante von Knoten i zu Knoten j existiert. Bei ungerichteten Graphen ist die Matrix symmetrisch.</p>
+
+<p><strong>Adjazenzliste:</strong> Zu jedem Knoten wird eine Liste seiner Nachbarn gespeichert.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> ungerichteter Graph mit drei Knoten und den Kanten 1–2 und 2–3</summary>
+            <table class="gitter">
+                <tr><th></th><th>Knoten 1</th><th>Knoten 2</th><th>Knoten 3</th></tr>
+                <tr><th>Knoten 1</th><td>0</td><td>1</td><td>0</td></tr>
+                <tr><th>Knoten 2</th><td>1</td><td>0</td><td>1</td></tr>
+                <tr><th>Knoten 3</th><td>0</td><td>1</td><td>0</td></tr>
+            </table>
+            <p>Adjazenzliste: 1: [2] · 2: [1, 3] · 3: [2]</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-7-2">Aufgabe 3.7.2</a> – Matrix und Liste eines gerichteten Graphen, und <a href="uebungen.html#a-3-7-3">Aufgabe 3.7.3</a> – Matrix oder Liste für ein großes Straßennetz?</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Das Straßenbahnnetz in Python →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Das Straßenbahnnetz in Python</h2>
+
+<p>In Python speichert man einen gewichteten Graphen bequem als Dictionary: Jede Station ist ein Schlüssel, ihr Wert ist ein inneres Dictionary „Nachbar → Fahrzeit“. Im Video fragst du in der Kommandozeile Nachbarn und Gewichte ab. Achte darauf, was bei einer fehlenden Kante passiert und wie du vorher mit <code>in</code> prüfst, ob es die Kante gibt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-7-3_strassenbahn_python_vorschau.png" src="../vid/3-7-3_strassenbahn_python.mp4"></video><a href="../vid/3-7-3_strassenbahn_python.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Das Straßenbahnnetz in Python – ein gewichteter Graph als Dictionary (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>3_graphen/strassenbahn.py</code> an und tippe den Code aus dem Video ab. Starte mit F5 und vergleiche die Ausgabe mit dem Video. Danach committen, z.&nbsp;B. <code>3.7 Schritt 3: Code aus dem Video ergänzt</code>.</p>
+
+<p>Zum Nachlesen steht der ganze Code mit Erklärungen in Beispiel 2 (Schritt 4 nutzt ihn weiter):</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> gewichteter, ungerichteter Graph (Fahrzeiten in Minuten) in Python – als Adjazenzliste mit einem Dictionary und als Matrix</summary>
+            <pre><code>   Neustadt --4-- Albertplatz --6-- Pieschen
+       |               |
+       7               3
+       |               |
+   Altmarkt ----5---- Postplatz</code></pre>
+            <pre><code class="language-python">netz = {
+    "Neustadt":    {"Albertplatz": 4, "Altmarkt": 7},
+    "Albertplatz": {"Neustadt": 4, "Pieschen": 6, "Postplatz": 3},
+    "Pieschen":    {"Albertplatz": 6},
+    "Altmarkt":    {"Neustadt": 7, "Postplatz": 5},
+    "Postplatz":   {"Albertplatz": 3, "Altmarkt": 5},
+}
+print(list(netz["Albertplatz"]))          # Nachbarn von Albertplatz
+print(netz["Neustadt"]["Altmarkt"])       # Gewicht der Kante: 7
+
+# dieselbe Information als Matrix (0 = keine Kante)
+namen = list(netz)
+matrix = []
+for a in namen:
+    zeile = []
+    for b in namen:
+        if b in netz[a]:
+            zeile.append(netz[a][b])   # Kante: Gewicht eintragen
+        else:
+            zeile.append(0)            # keine Kante
+    matrix.append(zeile)
+
+for i in range(len(namen)):
+    print(namen[i], matrix[i])</code></pre>
+            <p>Die Stationsnamen und Fahrzeiten sind vereinfacht.</p>
+            <ol>
+                <li><em>Was:</em> Jede Station ist ein Schlüssel, ihr Wert ist ein inneres Dictionary „Nachbar → Fahrzeit“. <em>Warum:</em> So stehen Nachbarn und Gewichte an einer Stelle; jede ungerichtete Kante wird zweimal eingetragen (z.&nbsp;B. Neustadt → Albertplatz und Albertplatz → Neustadt).</li>
+                <li><em>Was:</em> <code>list(netz["Albertplatz"])</code> liefert die Schlüssel des inneren Dictionarys. <em>Ergebnis:</em> <code>['Neustadt', 'Pieschen', 'Postplatz']</code>.</li>
+                <li><em>Was:</em> Für die Matrix wird jede Station <code>a</code> (äußere Schleife, eine Zeile) mit jeder Station <code>b</code> (innere Schleife, eine Spalte) verglichen. Steht <code>b</code> im Dictionary von <code>a</code>, kommt das Gewicht in die Zeile, sonst 0. <em>Warum:</em> Ein direkter Zugriff <code>netz[a][b]</code> würde bei fehlender Kante einen <code>KeyError</code> auslösen – deshalb erst mit <code>in</code> prüfen.</li>
+            </ol>
+            <p><strong>Ergebnis</strong> (Reihenfolge Neustadt, Albertplatz, Pieschen, Altmarkt, Postplatz):</p>
+            <pre><code>Neustadt [0, 4, 0, 7, 0]
+Albertplatz [4, 0, 6, 0, 3]
+Pieschen [0, 6, 0, 0, 0]
+Altmarkt [7, 0, 0, 0, 5]
+Postplatz [0, 3, 0, 5, 0]</code></pre>
+            <p><strong>Probe:</strong> Die Matrix ist symmetrisch und die Hauptdiagonale ist 0 – wie es bei einem ungerichteten Graphen ohne Schleifen sein muss. Die 10 Einträge ungleich 0 entsprechen den 5 Kanten, die je zweimal vorkommen.</p>
+            </details>
+        </div>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Vom Dictionary zur Matrix →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Vom Dictionary zur Matrix</h2>
+
+<p>Aus dem Dictionary entsteht die Adjazenzmatrix mit zwei ineinander geschachtelten Schleifen. Im Video entsteht erst eine einzelne Zeile der Matrix, dann die ganze. Achte darauf, welche Schleife die Zeilen und welche die Spalten erzeugt. Der Code ist der untere Teil von Beispiel 2 in <a href="#schritt-3">Schritt 3</a>.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-7-4_matrix_python_vorschau.png" src="../vid/3-7-4_matrix_python.mp4"></video><a href="../vid/3-7-4_matrix_python.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Vom Dictionary zur Matrix (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>3_graphen/strassenbahn.py</code> den Code aus dem Video. Starte mit F5 und vergleiche die Ausgabe mit dem Video. Danach committen, z.&nbsp;B. <code>3.7 Schritt 4: Code aus dem Video ergänzt</code>.</p>
+
+<p>Danach: <a href="uebungen.html#a-3-7-4">Aufgabe 3.7.4</a> – Wer folgt wem? Speichere einen gerichteten Graphen in Python.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Graphen in Navi, Netzwerken und sozialen Medien</summary>
+                <p>
+                    <strong>Alltag:</strong> Dein Navi speichert das Straßennetz als gerichteten, gewichteten Graphen: Kreuzungen sind Knoten, Straßenabschnitte sind Kanten, die Gewichte sind Fahrzeiten, Einbahnstraßen sind gerichtete Kanten. Die Funktion „Personen, die du kennen könntest“ sucht im Freundschaftsgraphen nach Freunden deiner Freunde.<br><br>
+                    <strong>Beruf:</strong> Verkehrsplanerinnen und -planer, z.&nbsp;B. bei Verkehrsverbünden wie dem VVO, modellieren Liniennetze als Graphen, um Umsteigezeiten und Fahrpläne zu optimieren. Netzwerkadministratorinnen und -administratoren betrachten Router als Knoten und Leitungen als Kanten, um Ausfälle zu analysieren. Data Scientists werten mit Graphdatenbanken Beziehungen zwischen Kunden oder Betrugsmuster bei Banküberweisungen aus.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Ein <strong>Graph</strong> G = (V, E) besteht aus einer Menge von <strong>Knoten</strong> V (engl. vertices) und einer Menge von <strong>Kanten</strong> E (engl. edges), die jeweils zwei Knoten verbinden. Graphen bilden Verbindungen und Beziehungen ab. Ein Baum ist ein spezieller Graph: zusammenhängend und ohne Zyklen.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>In gerichteten Graphen zeigen Pfeile die Richtung einer Kante an. In ungerichteten Graphen kann eine Kante in beide Richtungen durchlaufen werden.</p>
+        </div>
+
+<div class="merke">
+            <p>Gewichtete Graphen tragen an jeder Kante eine Information über Länge, Dauer oder Kosten der Verbindung.</p>
+        </div>
+
+<div class="merke">
+            <p>Nachbarn sind durch eine Kante direkt verbunden, Wege verbinden Knoten über mehrere Kanten, und Zyklen führen zum Ausgangsknoten zurück.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Begriffe an einem kleinen Graphen <span class="niveau">AFB I</span></summary>
+                <p>Ein ungerichteter Graph hat die Kanten A–B, B–C, C–A und C–D. Zeichne ihn. Nenne die Nachbarn von C, einen Weg von A nach D mit der Länge 2 und einen Zyklus. Ist der Graph ein Baum?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nachbarn von C: A, B und D. Weg der Länge 2: A – C – D. Zyklus: A – B – C – A. Kein Baum, denn ein Baum hat keine Zyklen.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Matrix und Liste aufstellen <span class="niveau">AFB I</span></summary>
+                <p>Ein ungerichteter Graph hat die Knoten 1, 2, 3, 4 und die Kanten 1–2, 1–3 und 3–4. Wie viele Einsen stehen in seiner Adjazenzmatrix? Gib die Adjazenzliste an.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>6 Einsen: 3 Kanten, jede steht zweimal in der Matrix (Zeile i, Spalte j und Zeile j, Spalte i). Adjazenzliste: 1: [2, 3] · 2: [1] · 3: [1, 4] · 4: [3].</p>
+                </details>
+            </details>
+        </div>

@@ -1,0 +1,50 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+  <details>
+    <summary>Aufgabe 3.7.3: Addierer als Bausteine <span class="niveau">AFB III</span></summary>
+    <p>In dieser Aufgabe darfst du Halbaddierer (HA) und Volladdierer (VA) nur als fertige Blöcke verwenden.</p>
+    <ol>
+      <li>Drei Bewegungsmelder A, B und C liefern je 0 oder 1. Die Anzahl der aktiven Melder soll als zweistellige Binärzahl S<sub>1</sub>S<sub>0</sub> ausgegeben werden. Zeige mit einer Wahrheitstabelle, dass ein einziger Block genügt.</li>
+      <li>Erweitere die Schaltung auf fünf Melder A bis E. Die Anzahl wird dreistellig ausgegeben. Skizziere die Verschaltung mit möglichst wenigen Blöcken.</li>
+      <li>Zwei dreistellige Binärzahlen A<sub>2</sub>A<sub>1</sub>A<sub>0</sub> und B<sub>2</sub>B<sub>1</sub>B<sub>0</sub> sollen addiert werden, zusätzlich ein einzelnes Bit E. Skizziere eine Schaltung aus drei Volladdierern und erläutere, wo E angeschlossen wird.</li>
+      <li>Bewerte deine Lösung aus Teil 2 im Hinblick auf die Anzahl der Blöcke und die Signallaufzeit.</li>
+    </ol>
+  </details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+                <details>
+                    <summary>Aufgabe 3.7.4: Ein Bitmuster, zwei Deutungen <span class="niveau">AFB II</span></summary>
+                    <p>Ein Lernroboter rechnet mit 4-Bit-Registern. Sein Addierwerk ist ein Ripple-Carry-Addierer aus vier Volladdierern VA<sub>0</sub> bis VA<sub>3</sub>. Er schreibt S<sub>3</sub>S<sub>2</sub>S<sub>1</sub>S<sub>0</sub> ins Ergebnisregister und den Übertrag C<sub>4</sub> aus VA<sub>3</sub> ins sogenannte Carry-Flag. C<sub>3</sub> ist der Übertrag von VA<sub>2</sub> in die höchste Stufe. Das Addierwerk weiß nicht, ob ein Programm die Bitmuster vorzeichenlos (0 bis 15) oder im Zweierkomplement (−8 bis 7) deutet.</p>
+                    <table class="gitter">
+                        <tr><th>Fall</th><th>Register A</th><th>Register B</th></tr>
+                        <tr><td>a)</td><td>0101</td><td>0100</td></tr>
+                        <tr><td>b)</td><td>0011</td><td>1101</td></tr>
+                        <tr><td>c)</td><td>1011</td><td>1010</td></tr>
+                        <tr><td>d)</td><td>1110</td><td>0001</td></tr>
+                    </table>
+                    <ol>
+                        <li>Addiere jeweils schriftlich mit allen Überträgen. Gib den Registerinhalt S<sub>3</sub>S<sub>2</sub>S<sub>1</sub>S<sub>0</sub> sowie C<sub>3</sub> und C<sub>4</sub> an.</li>
+                        <li>Deute A, B und das Ergebnis jeweils vorzeichenlos und im Zweierkomplement. Entscheide für beide Deutungen, ob das Ergebnisregister den richtigen Wert enthält.</li>
+                        <li>Beschreibe anhand deiner Ergebnisse, an welchen Überträgen das Addierwerk einen Überlauf in der jeweiligen Deutung erkennen kann.</li>
+                        <li>Ein Mitschüler sagt: „Wenn das Carry-Flag 0 ist, stimmt das Ergebnis.“ Beurteile diese Aussage.</li>
+                    </ol>
+                </details>
+            </div>
+
+<div class="aufgabe">
+                <details>
+                    <summary>Aufgabe 3.7.6: 2-Bit-Vergleicher für ein Sortierband <span class="niveau">AFB II</span></summary>
+                    <p>Ein Sortierband ordnet Pakete in Größenklassen 0 bis 3 ein. Ein Sensor liefert die Klasse X = X<sub>1</sub>X<sub>0</sub> des ankommenden Pakets, ein Speicher die Klasse Y = Y<sub>1</sub>Y<sub>0</sub> des freien Fachs (jeweils als 2-Bit-Zahl). Eine Warnlampe G soll leuchten, wenn das Paket zu groß ist, also wenn X &gt; Y gilt. Ein Volladdierer soll dafür nicht verwendet werden.</p>
+                    <ol>
+                        <li>Stelle die Wahrheitstabelle mit den 16 Belegungen auf.</li>
+                        <li>Trage G in ein KV-Diagramm für vier Variablen im Kursstil ein. Benenne dabei A = X<sub>1</sub>, B = X<sub>0</sub>, C = Y<sub>1</sub>, D = Y<sub>0</sub>. Bilde möglichst große Gruppen (Rand beachten!) und lies G ab.</li>
+                        <li>Zwei der Terme haben einen gemeinsamen Teil. Klammere ihn aus. Gib eine Schaltung mit höchstens 7 Gattern an, die nur Gatter mit zwei Eingängen verwendet, und beschreibe die Verdrahtung in Textform. Vergleiche mit der Gatteranzahl der nicht ausgeklammerten Form.</li>
+                        <li>Erkläre deine ausgeklammerte Lösung in Worten, so wie man zwei Zahlen „von links nach rechts“ vergleicht.</li>
+                    </ol>
+                    <p>Baue die Schaltung in LogicSim auf und teste mindestens die Fälle 3 &gt; 2, 2 &gt; 3, 2 = 2 und 1 &gt; 0.</p>
+                </details>
+            </div>

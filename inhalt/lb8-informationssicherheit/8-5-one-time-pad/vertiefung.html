@@ -1,0 +1,25 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.5.4: Drei Vorschläge prüfen <span class="niveau">AFB III</span></summary>
+                <p>Drei Teams wollen ein „One-Time-Pad“ für ihren Klassenchat einsetzen. Beurteile jeden Vorschlag: Welche der vier Bedingungen ist verletzt, und welcher Angriff wird dadurch möglich?</p>
+                <ol type="a">
+                    <li>Team A nimmt als Schlüssel den Text eines Romans, beginnend auf Seite 1, und rückt für jede Nachricht weiter.</li>
+                    <li>Team B erzeugt den Schlüssel mit <code>random.seed(2026)</code> und <code>random.randint(0, 25)</code>, damit alle Mitglieder denselben Schlüssel berechnen können.</li>
+                    <li>Team C erzeugt echt zufällige Schlüssel, schickt sie aber vorher per unverschlüsselter E-Mail an alle Mitglieder.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.5.5: Perfekt geheim – aber nicht unverfälschbar <span class="niveau">AFB III</span></summary>
+                <p>Ein Vorgesetzter beantwortet die Frage „Angriff starten?“ mit „JA“ oder „NE“. Die Antwort wird korrekt per One-Time-Pad (Buchstaben mod 26) mit dem Schlüssel „QX“ verschlüsselt. Mallory kennt den Schlüssel nicht, vermutet aber, dass die Antwort „JA“ lautet, und kann den Geheimtext unterwegs verändern.</p>
+                <ol type="a">
+                    <li>Berechne den Geheimtext von „JA“.</li>
+                    <li>Mallory addiert zu jedem Geheimtextbuchstaben die Differenz „NE“ − „JA“ (mod 26). Berechne den veränderten Geheimtext und zeige, dass der Empfänger „NE“ entschlüsselt.</li>
+                    <li>Erläutere, welches Schutzziel das One-Time-Pad sichert und welches nicht. Nenne eine Maßnahme, mit der sich die Veränderung erkennen lässt.</li>
+                </ol>
+            </details>
+        </div>

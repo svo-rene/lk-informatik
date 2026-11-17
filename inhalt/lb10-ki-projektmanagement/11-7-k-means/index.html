@@ -1,0 +1,200 @@
+<p>k-Means-Clustering ist ein unüberwachter Lernalgorithmus, der verwendet wird, um Datenpunkte in k Cluster zu gruppieren. Er hilft, Muster in Daten zu erkennen, ohne dass diese vorher gekennzeichnet werden müssen.</p>
+
+<h2>Anwendungsbeispiele</h2>
+
+<ul>
+            <li><strong>Kundensegmentierung:</strong> Ein Online-Shop kann Kunden basierend auf ihrem Einkaufsverhalten in Cluster einteilen, um gezielte Marketingstrategien zu entwickeln.</li>
+            <li><strong>Bildkompression:</strong> k-Means reduziert die Anzahl der Farben in einem Bild, indem es ähnliche Farbtöne zu Clustern zusammenfasst.</li>
+            <li><strong>Anomalieerkennung:</strong> k-Means ordnet <em>jeden</em> Punkt einem Cluster zu. Als Anomalien gelten deshalb Punkte, die <strong>ungewöhnlich weit von ihrem eigenen Cluster-Zentrum</strong> entfernt liegen (oder sehr kleine Cluster bilden), z.&nbsp;B. ungewöhnliche Netzwerkzugriffe oder Betrugsfälle. Verfahren wie DBSCAN können Punkte dagegen ausdrücklich als „keinem Cluster zugehörig“ (Rauschen) markieren.</li>
+        </ul>
+
+<h2>1. Wie funktioniert k-Means-Clustering?</h2>
+
+<ol>
+            <li>Wähle k (die Anzahl der Cluster).</li>
+            <li>Initialisiere die k Cluster-Zentren, z.&nbsp;B. indem k zufällige Datenpunkte als Startzentren gewählt werden.</li>
+            <li>Weise jedem Datenpunkt das nächstgelegene Cluster-Zentrum zu.</li>
+            <li>Berechne die neue Position der Cluster-Zentren als Durchschnittsposition (Mittelwert) aller Punkte in jedem Cluster.</li>
+            <li>Wiederhole die Schritte 3 und 4, bis sich die Cluster-Zentren nicht mehr signifikant ändern (Konvergenz) oder eine maximale Anzahl von Iterationen erreicht ist.</li>
+        </ol>
+
+<p><strong>Konvergenz:</strong> Der Algorithmus erreicht Konvergenz, wenn die Positionen der Cluster-Zentren zwischen zwei Iterationen kaum oder gar nicht mehr variieren. Dies bedeutet, dass sich die Cluster stabilisiert haben.</p>
+
+<div class="gallery">
+            <img src="../img/k-means-initial.svg" alt="k-Means: Initialzustand">
+            <img src="../img/k-means-iteration1.svg" alt="k-Means: erste Iteration">
+            <img src="../img/k-means-iteration2.svg" alt="k-Means: zweite Iteration">
+            <img src="../img/k-means-final.svg" alt="k-Means: finaler Zustand">
+        </div>
+
+<p>Diese vier Diagramme zeigen den k-Means-Clustering-Prozess Schritt für Schritt:</p>
+
+<ol>
+            <li><strong>Initialzustand:</strong> Alle Datenpunkte sind grau, und die initialen Cluster-Zentren sind zufällig platziert.</li>
+            <li><strong>Erste Iteration:</strong> Die Datenpunkte werden den nächstgelegenen Cluster-Zentren zugeordnet (farblich markiert). Die Cluster-Zentren bewegen sich zum Durchschnitt ihrer zugeordneten Punkte.</li>
+            <li><strong>Zweite Iteration:</strong> Die Cluster-Zentren bewegen sich weiter, und einige Datenpunkte ändern möglicherweise ihre Clusterzugehörigkeit (durch erneute Abstandsberechnung).</li>
+            <li><strong>Finaler Zustand:</strong> Die Cluster-Zentren haben ihre endgültigen Positionen erreicht, und die Datenpunkte sind in ihre finalen Cluster eingeteilt.</li>
+        </ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation – Rechenbeispiel (k = 2):</strong> Punkte (1|1), (2|1), (4|3), (5|4); Startzentren Z₁ = (1|1) und Z₂ = (5|4).</p>
+            <ol>
+                <li><strong>Zuweisung:</strong> (2|1) hat zu Z₁ den Abstand 1, zu Z₂ den Abstand √18 ≈ 4,24 → Z₁. (4|3) hat zu Z₁ den Abstand √13 ≈ 3,61, zu Z₂ den Abstand √2 ≈ 1,41 → Z₂. (Die Startzentren selbst gehören zu ihrem eigenen Cluster.) – <em>warum:</em> Schritt 3 des Algorithmus, jeder Punkt kommt zum nächstgelegenen Zentrum.</li>
+                <li><strong>Aktualisierung:</strong> Z₁ = ((1 + 2)/2 | (1 + 1)/2) = (1,5|1); Z₂ = ((4 + 5)/2 | (3 + 4)/2) = (4,5|3,5). – <em>warum:</em> Schritt 4, das Zentrum rückt in die Mitte seiner Punkte.</li>
+                <li><strong>Erneute Zuweisung:</strong> Alle Punkte bleiben in ihrem Cluster → Konvergenz. – <em>warum:</em> Ändert sich die Zuordnung nicht, ändern sich auch die Mittelwerte nicht mehr.</li>
+                <li><strong>Güte berechnen:</strong> SSE = 0,25 + 0,25 + 0,5 + 0,5 = 1,5. – <em>warum:</em> Mit der SSE lassen sich verschiedene Läufe vergleichen (siehe Hinweis zur Bestimmung von k).</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Cluster {(1|1), (2|1)} mit Zentrum (1,5|1) und {(4|3), (5|4)} mit Zentrum (4,5|3,5).</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Eine Schülerfirma will für die Lieferung von Schulmaterial zwei Abholstationen aufstellen, jede möglichst nah an „ihren“ Kundinnen und Kunden. Die Wohnorte (in km auf einem Stadtplan) sind A(1|1), B(2|1), C(1|3), D(5|4), E(6|5), F(6|3). Zufällig gewählte Startzentren: Z₁ = A(1|1) und Z₂ = B(2|1) – zwei Punkte, die nebeneinander liegen. Das ist ein ungünstiger Start (Falle).</p>
+            <ol>
+                <li><strong>1. Iteration, Zuweisung</strong> (euklidischer Abstand zu Z₁ | Z₂): A 0 | 1 → Z₁; B 1 | 0 → Z₂; C 2 | 2,24 → Z₁; D 5 | 4,24 → Z₂; E 6,40 | 5,66 → Z₂; F 5,39 | 4,47 → Z₂. Cluster 1 = {A, C}, Cluster 2 = {B, D, E, F}. – <em>warum:</em> Weil Z₂ etwas weiter rechts liegt, „gewinnt“ es alle rechten Punkte und dazu B.</li>
+                <li><strong>1. Iteration, Aktualisierung:</strong> Z₁ = ((1 + 1)/2 | (1 + 3)/2) = (1|2); Z₂ = ((2 + 5 + 6 + 6)/4 | (1 + 4 + 5 + 3)/4) = (4,75|3,25). – <em>warum:</em> Z₂ wird zur Mitte von B, D, E und F gezogen und verlässt damit die linke Gruppe.</li>
+                <li><strong>2. Iteration, Zuweisung:</strong> A 1 | 4,37 → Z₁; B 1,41 | 3,55 → Z₁ (B wechselt!); C 1 | 3,76 → Z₁; D 4,47 | 0,79 → Z₂; E 5,83 | 2,15 → Z₂; F 5,10 | 1,27 → Z₂. Cluster 1 = {A, B, C}, Cluster 2 = {D, E, F}. – <em>warum:</em> Nach dem Verschieben ist Z₁ für B näher; genau dieses Umsortieren macht k-Means aus.</li>
+                <li><strong>2. Iteration, Aktualisierung:</strong> Z₁ = (4/3 | 5/3) ≈ (1,33|1,67); Z₂ = (17/3 | 4) ≈ (5,67|4).</li>
+                <li><strong>3. Iteration:</strong> A 0,75 | 5,55; B 0,94 | 4,74; C 1,37 | 4,77 → Z₁; D 4,35 | 0,67; E 5,74 | 1,05; F 4,85 | 1,05 → Z₂. Die Zuordnung ändert sich nicht → Zentren bleiben gleich → <strong>Konvergenz</strong>. – <em>warum:</em> Abbruchkriterium aus Schritt 5.</li>
+                <li><strong>Güte verfolgen:</strong> SSE mit den Zentren nach Iteration 1: 21,5; nach Iteration 2: 6. – <em>warum:</em> Die SSE sinkt bei k-Means mit jeder Iteration oder bleibt gleich. Das ist eine gute Kontrolle für Handrechnungen.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Station 1 bei etwa (1,33|1,67) für A, B, C; Station 2 bei etwa (5,67|4) für D, E, F; SSE = 6.</p>
+            <p><strong>Kontrolle:</strong> SSE von Hand: Cluster 1: (1/9 + 4/9) + (4/9 + 4/9) + (1/9 + 16/9) = 30/9 ≈ 3,33; Cluster 2: (4/9 + 0) + (1/9 + 1) + (1/9 + 1) = 24/9 ≈ 2,67; zusammen 54/9 = 6 ✓. Trotz des ungünstigen Starts wurde hier die naheliegende Einteilung gefunden. Das ist aber nicht garantiert: Deshalb startet man k-Means mehrfach mit verschiedenen Startzentren und behält das Ergebnis mit der kleinsten SSE (vgl. Abschnitt 3).</p>
+            </details>
+        </div>
+
+<h2>2. Abstandsmessungen zum Cluster-Zentrum</h2>
+
+<p>Ein wichtiger Aspekt des k-Means-Algorithmus ist die Messung des Abstands zwischen Datenpunkten und den Cluster-Zentren. Es gibt verschiedene Methoden, diesen Abstand zu berechnen:</p>
+
+<h3>2.1 Euklidischer Abstand</h3>
+
+<p>Dies ist die am häufigsten verwendete Abstandsmessung. Sie entspricht der „Luftlinie“ zwischen zwei Punkten.</p>
+
+<p>Formel: <code>d = √((x₂ − x₁)² + (y₂ − y₁)²)</code></p>
+
+<h3>2.2 Manhattan-Abstand</h3>
+
+<p>Auch bekannt als „City-Block-Distanz“. Hier wird die Summe der absoluten Differenzen der Koordinaten berechnet – so, als würde man in Manhattan nur entlang der Straßenblöcke laufen.</p>
+
+<p>Formel: <code>d = |x₂ − x₁| + |y₂ − y₁|</code></p>
+
+<h3>2.3 Unterschiede zwischen den Abständen</h3>
+
+<figure>
+            <img src="../img/manhattan-euclidean-distance.svg" alt="Vergleich zwischen Manhattan- und euklidischem Abstand">
+            <figcaption>Abb. 1: Manhattan-Abstand (entlang der Gitterlinien) und euklidischer Abstand (Luftlinie)</figcaption>
+        </figure>
+
+<ul>
+            <li>Der Manhattan-Abstand ist nie kleiner als der euklidische Abstand. <strong>Gleich</strong> sind beide nur, wenn die Punkte <strong>horizontal oder vertikal</strong> nebeneinander liegen (z.&nbsp;B. (0|0) und (3|0): beide Abstände 3).</li>
+            <li>Bei <strong>diagonaler</strong> Anordnung (45°) ist der Unterschied am größten: Von (0|0) nach (1|1) beträgt der euklidische Abstand √2 ≈ 1,41, der Manhattan-Abstand 2 – also das √2-Fache. In zwei Dimensionen liegt der Manhattan-Abstand deshalb immer zwischen dem 1- und dem √2-Fachen des euklidischen Abstands.</li>
+            <li>Der Manhattan-Abstand folgt den Gitterlinien, während der euklidische Abstand die direkte Verbindung darstellt.</li>
+            <li>Die Wahl der Distanzmetrik kann die Clustering-Ergebnisse beeinflussen, insbesondere bei speziellen Datenstrukturen.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Manhattan-Abstand und k-Medians</summary>
+                <p>Der Mittelwert ist genau der Punkt, der die Summe der <em>quadrierten euklidischen</em> Abstände minimiert – deshalb passen Mittelwert und euklidischer Abstand bei k-Means zusammen. Verwendet man den Manhattan-Abstand, ist der <strong>Median</strong> der Koordinaten das passende Zentrum. Dieses Verfahren heißt <strong>k-Medians</strong>. Manhattan-Abstand mit Mittelwert-Zentren zu kombinieren, ist ein Mischverfahren, das funktioniert, aber streng genommen weder k-Means noch k-Medians ist.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Wie bestimmt man eigentlich k?</summary>
+                <p>Es gibt mehrere Möglichkeiten, k zu bestimmen, die meist von der Aufgabe abhängen.</p>
+                <p>Wenn bestimmte Cluster gebildet werden sollen, lässt sich k meistens schon daraus abschätzen (z.&nbsp;B. bestimmte Nutzergruppen oder bestimmte Artikel).</p>
+                <p>Wenn keine Anzahl an gewünschten Gruppen bekannt ist, gibt es verschiedene Abschätzungsmethoden wie z.&nbsp;B. die Ellbogenmethode (Elbow-Methode). Dabei berechnet man für mehrere Werte von k die Summe der quadrierten Abstände (SSE). Der Punkt, an dem die Abnahme der SSE deutlich langsamer wird (ähnlich einem „Knick“), wird als geeigneter Wert für k angesehen.</p>
+                <p><strong>Beispiel:</strong></p>
+                <ul>
+                    <li>k = 2: SSE = 150</li>
+                    <li>k = 3: SSE = 75</li>
+                    <li>k = 4: SSE = 40</li>
+                    <li>k = 5: SSE = 38</li>
+                </ul>
+                <p>Hier wäre k = 4 geeignet, da die Abnahme der SSE nach diesem Punkt nur noch minimal ist.</p>
+                <h3>Berechnung der SSE</h3>
+                <p>Die SSE wird wie folgt berechnet:</p>
+                <ul>
+                    <li>Berechne für jeden Datenpunkt den Abstand zu seinem zugeordneten Cluster-Zentrum.</li>
+                    <li>Quadriere diesen Abstand.</li>
+                    <li>Summiere die quadrierten Abstände über alle Datenpunkte.</li>
+                </ul>
+                <p><strong>Formel:</strong> <code>SSE = Σ d(xᵢ, cᵢ)²</code>. Dabei ist xᵢ ein Datenpunkt, cᵢ das ihm zugeordnete Cluster-Zentrum, und die Summe läuft über alle Datenpunkte.</p>
+                <p><strong>Beispiel:</strong> Gegeben sind die Datenpunkte (1|1), (2|2), (3|3) und das Cluster-Zentrum (2|2).</p>
+                <ul>
+                    <li>Abstand von (1|1) zu (2|2): √((2 − 1)² + (2 − 1)²) = √2 → Quadrat = 2</li>
+                    <li>Abstand von (2|2) zu (2|2): 0 → Quadrat = 0</li>
+                    <li>Abstand von (3|3) zu (2|2): √((3 − 2)² + (3 − 2)²) = √2 → Quadrat = 2</li>
+                </ul>
+                <p><strong>SSE:</strong> 2 + 0 + 2 = 4</p>
+            </details>
+        </div>
+
+<h2>3. Vor- und Nachteile von k-Means-Clustering</h2>
+
+<h3>Vorteile</h3>
+
+<ul>
+            <li>einfach zu verstehen und umzusetzen</li>
+            <li>skaliert gut für große Datensätze</li>
+        </ul>
+
+<h3>Nachteile</h3>
+
+<ul>
+            <li>Die Anzahl der Cluster (k) muss im Voraus festgelegt werden.</li>
+            <li>empfindlich gegenüber der initialen Platzierung der Cluster-Zentren (deshalb startet man mehrfach und nimmt das Ergebnis mit der kleinsten SSE)</li>
+            <li>hat Schwierigkeiten mit nicht kugelförmigen Clustern</li>
+            <li>sehr anfällig für Ausreißer im Datensatz, weil sie den Mittelwert stark verschieben</li>
+        </ul>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Segmentierung im Handel und in der Industrie</summary>
+                <p><strong>Alltag:</strong> Wenn ein Online-Shop dir andere Angebote zeigt als deinen Eltern, steckt oft eine Kundensegmentierung dahinter.</p>
+                <p><strong>Beruf:</strong> <strong>Data Scientists</strong> im Marketing nutzen Clustering, um Zielgruppen zu bilden, und in der Produktion, um typische Betriebszustände von Maschinen zu erkennen – ein Messwert weit weg von allen bekannten Zentren kann auf einen beginnenden Defekt hinweisen. Solche Verfahren zur vorausschauenden Wartung werden u.&nbsp;a. in der sächsischen Industrie und an Forschungseinrichtungen wie dem Fraunhofer IWU erforscht.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>k-Means</strong> – unüberwachtes Verfahren, das Datenpunkte in k Cluster einteilt: Jeder Punkt gehört zu dem Cluster, dessen Zentrum ihm am nächsten liegt, und jedes Zentrum ist der Mittelwert seiner Punkte. Ziel ist eine möglichst kleine Summe der quadrierten Abstände zu den Zentren (SSE). k-Means ist besonders nützlich, wenn du große Datenmengen nach Gemeinsamkeiten und Mustern durchsuchen möchtest.</p>
+        </div>
+
+<div class="merke">
+            <p>Die Formeln oben sind der Übersichtlichkeit halber nur für zwei Merkmale (x und y) dargestellt. In der Praxis haben Datenpunkte oft viel mehr Merkmale (z.&nbsp;B. Blütenblattlänge, Blütenblattbreite, Kelchblattlänge und Kelchblattbreite bei Blumendaten – also 4 Merkmale). Die Formeln lassen sich aber einfach erweitern: Für jedes weitere Merkmal kommt ein zusätzlicher Term hinzu. Beim euklidischen Abstand zweier Punkte p = (p₁, …, pₙ) und q = (q₁, …, qₙ) mit n Merkmalen gilt: <code>d = √((p₁ − q₁)² + (p₂ − q₂)² + … + (pₙ − qₙ)²)</code>. Python-Bibliotheken berechnen das automatisch für beliebig viele Merkmale. Wie bei k-NN (11.6) müssen die Merkmale dafür vorher skaliert werden.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.7.1: k-Means-Algorithmus anwenden <span class="niveau">AFB I–II</span></summary>
+                <p>Lade das folgende Arbeitsblatt herunter und bearbeite Arbeitsauftrag 1 und 2: <span class="material-fehlt">Arbeitsblatt k-Means (nur im Unterricht)</span>. Verwende zur Berechnung der Entfernung den <strong>euklidischen Abstand</strong> (auf ganze bzw. eine Nachkommastelle gerundet genügt).</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.7.3: Kundensegmentierung <span class="niveau">AFB II–III</span></summary>
+                <p>Ein Online-Shop möchte seine Kunden in Gruppen einteilen, um gezielte Marketingstrategien zu entwickeln. Folgende Daten stehen für jeden Kunden zur Verfügung:</p>
+                <ul>
+                    <li>durchschnittlicher Bestellwert</li>
+                    <li>Anzahl der Bestellungen pro Jahr</li>
+                    <li>Zeitspanne seit der letzten Bestellung in Tagen</li>
+                </ul>
+                <ol>
+                    <li>Wie würdest du den k-Means-Algorithmus auf dieses Szenario anwenden?</li>
+                    <li>Welche Vorverarbeitung der Daten könnte notwendig sein?</li>
+                    <li>Wie würdest du einen geeigneten Wert für k bestimmen?</li>
+                    <li>Welche Herausforderungen könnten bei der Interpretation der Ergebnisse auftreten?</li>
+                </ol>
+            </details>
+        </div>

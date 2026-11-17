@@ -1,0 +1,86 @@
+<p>Ein Volladdierer wird benötigt, wenn du drei Bits addieren möchtest statt nur zwei, wie es beim Halbaddierer der Fall ist. Im Vergleich zum Halbaddierer berücksichtigt der Volladdierer einen zusätzlichen Eingang, nämlich den Übertrag (C<sub>in</sub>), der von der vorherigen Stelle der Addition stammen kann.<br>
+                Wenn du mehrstellige Binärzahlen addieren möchtest, wird ein Volladdierer für jede Stelle benötigt. Der Übertrag (C<sub>out</sub>) von einer Stelle wird als Eingang (C<sub>in</sub>) für die nächste Stelle verwendet, um sicherzustellen, dass die Addition korrekt durchgeführt wird.</p>
+
+<h2>Addition mit Volladdierer</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> 1 + 0 + 1</summary>
+            <pre>
+   1  (A)
++  0  (B)
++  1  (C<sub>in</sub>)
+-------
+  10  → Summe S = 0, Carry-Ausgang C<sub>out</sub> = 1</pre>
+            <p>Zwei Einsen ergeben 2 = 10<sub>2</sub>. Genauso: 1 + 1 + 1 = 3 = 11<sub>2</sub>, also S = 1 und C<sub>out</sub> = 1.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> 4-Bit-Addition mit vier verketteten Volladdierern</summary>
+            <p>0110 + 0111 (6 + 7). Jeder Volladdierer VA<sub>i</sub> bearbeitet eine Stelle und gibt seinen Übertrag an den nächsten weiter:</p>
+            <table class="gitter">
+                <tr><th>Stufe</th><th>A<sub>i</sub></th><th>B<sub>i</sub></th><th>C<sub>in</sub></th><th>S<sub>i</sub></th><th>C<sub>out</sub></th></tr>
+                <tr><td>VA<sub>0</sub> (2<sup>0</sup>)</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>VA<sub>1</sub> (2<sup>1</sup>)</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                <tr><td>VA<sub>2</sub> (2<sup>2</sup>)</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>VA<sub>3</sub> (2<sup>3</sup>)</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+            </table>
+            <p>Ergebnis S<sub>3</sub>S<sub>2</sub>S<sub>1</sub>S<sub>0</sub> = <strong>1101</strong> = 13 ✓. Der letzte Übertrag C<sub>out</sub> von VA<sub>3</sub> ist 0. Bei vorzeichenloser Deutung (0 bis 15) gibt es also keinen Überlauf. Ob das auch im Zweierkomplement gilt, klärt die Probe unten. Beachte: VA<sub>2</sub> kann erst rechnen, wenn der Übertrag von VA<sub>1</sub> feststeht – der Übertrag „wandert“ (englisch <em>ripple</em>) durch alle Stufen.</p>
+            <p><strong>Probe:</strong> 1101<sub>2</sub> = 8 + 4 + 1 = 13 = 6 + 7 ✓ – aber nur, wenn das Register <em>vorzeichenlos</em> gedeutet wird (0 bis 15). Die Falle: Deutet ein Programm dasselbe Bitmuster im Zweierkomplement (−8 bis 7, siehe 1.2), steht 1101 für −3. Zwei positive Zahlen ergeben dann ein negatives Ergebnis – ein Überlauf, obwohl der letzte Übertrag 0 ist. Ein Übertrag aus der höchsten Stelle zeigt also nur den Überlauf bei vorzeichenlosen Zahlen an.</p>
+            </details>
+        </div>
+
+<h2>Wahrheitstabelle für den Volladdierer</h2>
+
+<p>Die Wahrheitstabelle für einen Volladdierer zeigt alle möglichen Eingangskombinationen (A, B, C<sub>in</sub>) und die entsprechenden Ausgaben (Summe S und Carry-Ausgang C<sub>out</sub>).</p>
+
+<h2>Schaltungssynthese für den Volladdierer</h2>
+
+<div class="praxisbezug">
+                <details>
+                    <summary>Praxisbezug: Vom Ripple-Carry-Addierer zur echten ALU</summary>
+                    <p>
+                        Verkettest du mehrere Volladdierer so wie hier beschrieben (Carry-out einer Stelle wird zum Carry-in der nächsten), erhältst du einen sogenannten <strong>Ripple-Carry-Addierer</strong>. Er ist das einfachste Prinzip, um mehrstellige Binärzahlen, z.&nbsp;B. zwei 32- oder 64-Bit-Zahlen, zu addieren (siehe auch 3.6 Halbaddierer und 4.1 Von-Neumann-Architektur). Sein Nachteil: Bei 64 Stellen muss der Übertrag im schlimmsten Fall durch alle 64 Stufen laufen. Echte ALUs nutzen deshalb schnellere Varianten wie den <strong>Carry-Lookahead-Addierer</strong>, der die Überträge mit zusätzlicher Logik vorausberechnet, statt auf jede Stufe zu warten.
+                    </p>
+                    <p><strong>Berufsleben:</strong></p>
+                    <ul>
+                        <li><strong>Prozessorentwickler/in</strong>: wägt ab, wie viel zusätzliche Chipfläche ein schnellerer Addierer kosten darf – eine typische Entscheidung beim Entwurf neuer Prozessoren.</li>
+                        <li><strong>FPGA- bzw. Digitaltechnik-Ingenieur/in</strong>: baut Addierwerke für Spezialhardware, z.&nbsp;B. für Signalverarbeitung im Mobilfunk oder für Messgeräte – Anwendungen, an denen auch Firmen und Institute in Dresden arbeiten.</li>
+                    </ul>
+                </details>
+            </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+                <p><strong>Volladdierer:</strong> Schaltnetz mit <strong>drei Eingängen</strong> A, B und C<sub>in</sub> (Übertrag aus der vorherigen Stelle) und <strong>zwei Ausgängen</strong> S (Summenbit) und C<sub>out</sub> (Übertrag in die nächste Stelle). Die zweistellige Binärzahl C<sub>out</sub>S ist die Summe A + B + C<sub>in</sub>, also die Anzahl der Einsen an den Eingängen (0 bis 3).</p>
+                <p>Bei mehrstelligen Zahlen wird C<sub>out</sub> einer Stelle zu C<sub>in</sub> der nächsthöheren Stelle.</p>
+            </div>
+
+<div class="merke">
+                <p><strong>Zusammenfassung Volladdierer</strong> (vergleiche mit deinen Lösungen zu 3.7.1 und 3.7.2):</p>
+                <p><strong>S = A ⊕ B ⊕ C<sub>in</sub></strong> (S ist 1 bei einer ungeraden Anzahl von Einsen)<br>
+                <strong>C<sub>out</sub> = (A ∧ B) ∨ (A ∧ C<sub>in</sub>) ∨ (B ∧ C<sub>in</sub>)</strong> (C<sub>out</sub> ist 1, wenn mindestens zwei Eingänge 1 sind)</p>
+                <p>Ein Volladdierer lässt sich aus zwei Halbaddierern und einem ODER-Gatter für die beiden Überträge aufbauen.</p>
+            </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+                <details>
+                    <summary>Aufgabe 3.7.1: Wahrheitstabelle erstellen <span class="niveau">AFB I</span></summary>
+                    <p>Erstelle eine Wahrheitstabelle für alle möglichen Additionen von zwei Eingängen und einem Carry-Eingang für den Volladdierer.</p>
+                </details>
+            </div>
+
+<div class="aufgabe">
+                <details>
+                    <summary>Aufgabe 3.7.2: Schaltungssynthese <span class="niveau">AFB II</span></summary>
+                    <p>
+                        Erstelle aus der Wahrheitstabelle für den Volladdierer die logische Schaltung.
+                        <br>Überprüfe deine Lösung mithilfe deiner Wahrheitstabelle in LogicSim.
+                    </p>
+                </details>
+            </div>

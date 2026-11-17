@@ -1,0 +1,31 @@
+<p>Solange ein einziger Router alle Netze direkt kennt, funktioniert das Routing von selbst (→ 7.13). Sobald mehrere Router hintereinander liegen, braucht jeder Router Einträge für die Netze, die er nur über einen anderen Router erreicht. Genau das zeigt das Video – danach richtest du die Routingtabellen selbst ein (→ 7.5).</p>
+
+<video width="500" controls>
+            <source src="../vid/routingtable.mp4" type="video/mp4">
+            Dein Browser kann dieses Video nicht abspielen. <a href="../vid/routingtable.mp4" download="">Lade das Video herunter</a> und öffne es mit einem Videoplayer.
+        </video>
+
+<h2>Dateien</h2>
+
+<ul>
+            <li>Ausgangspunkt: <a href="../material/gateway.fls" download="">gateway.fls</a> – zwei Netze (192.168.0.0/24 und 192.168.1.0/24) an einem Vermittlungsrechner R1.</li>
+        </ul>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.14.1: Routingtabellen von Hand einrichten <span class="niveau">AFB II</span></summary>
+                <p>Erweitere gateway.fls zu folgendem Netz:</p>
+                <ul>
+                    <li>R1 erhält eine dritte Schnittstelle 10.0.0.1/30 (Transfernetz).</li>
+                    <li>Ein zweiter Vermittlungsrechner R2 hat die Schnittstellen 10.0.0.2/30 (Transfernetz, per Kabel direkt mit R1 verbunden) und 192.168.2.1/24.</li>
+                    <li>Im neuen Netz 192.168.2.0/24 hängt ein Notebook 192.168.2.20 mit Gateway 192.168.2.1 an einem Switch.</li>
+                </ul>
+                <ol>
+                    <li>Deaktiviere in den Einstellungen beider Vermittlungsrechner das automatische Routing und teste <code>ping 192.168.2.20</code> vom Notebook 192.168.0.10. Erkläre das Ergebnis.</li>
+                    <li>Trage die fehlenden Einträge in die Weiterleitungstabellen von R1 und R2 ein (Ziel, Netzmaske, nächstes Gateway, Schnittstelle), bis alle drei Notebooks einander erreichen.</li>
+                    <li>Begründe, warum das Transfernetz die Maske 255.255.255.252 hat.</li>
+                </ol>
+            </details>
+        </div>

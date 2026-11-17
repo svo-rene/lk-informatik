@@ -1,0 +1,104 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 3: Kim kommt dazu <span class="niveau">AFB I</span></summary>
+        <p>Nach dem Beispielprogramm folgen <code>kim = Lehrkraft("Kim Berg", info)</code>, dann <code>kim.unterrichtet(physik)</code> und <code>kim.unterrichtet(mathe)</code>. Was liefern die beiden Aufrufe? Welche Namen stehen danach in <code>info.lehrkraefte</code>, <code>physik.lehrkraefte</code> und <code>mathe.lehrkraefte</code>?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p><code>kim.unterrichtet(physik)</code> liefert <code>True</code> (Kim hat danach 2 Fächer). <code>kim.unterrichtet(mathe)</code> gibt die Meldung „Kim Berg darf höchstens 2 Fächer unterrichten.“ aus und liefert <code>False</code>. Informatik: Lisa Müller, Kim Berg. Physik: Tom Schneider, Kim Berg. Mathematik unverändert: Lisa Müller, Tom Schneider.</p>
+        </details>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-9-1">
+    <details>
+        <summary>Aufgabe 4.9.1: Beziehung mit Multiplizitäten <span class="niveau">AFB II</span></summary>
+        <p>Erstelle ein UML-Diagramm für folgendes Szenario:</p>
+        <ul>
+            <li>Ein <code>Spieler</code> besitzt mehrere <code>Waffen</code>.</li>
+            <li>Jede <code>Waffe</code> gehört genau einem <code>Spieler</code>.</li>
+        </ul>
+        <p>Zeichne ein Klassendiagramm mit korrekten Multiplizitäten und implementiere die Klassen in Python mit Typisierung.</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-9-2">
+    <details>
+        <summary>Aufgabe 4.9.2: Multiplizitäten erkennen <span class="niveau">AFB I–II</span></summary>
+        <p>Betrachte folgenden Codeausschnitt:</p>
+        <pre><code class="language-python">class Kurs:
+    def __init__(self, thema: str):
+        self.thema: str = thema
+        self.teilnehmer: list[Schueler] = []
+
+class Schueler:
+    def __init__(self, name: str):
+        self.name: str = name</code></pre>
+        <ul>
+            <li>Welche Multiplizitäten ergeben sich?</li>
+            <li>Wie würdest du das in UML notieren?</li>
+        </ul>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-9-3">
+    <details>
+        <summary>Aufgabe 4.9.3: Grenzen durchsetzen <span class="niveau">AFB III</span></summary>
+        <p>Im Beispiel oben kann man <code>tom.faecher.clear()</code> aufrufen – danach hat Tom kein Fach mehr, obwohl die Multiplizität 1..2 verlangt. Beurteile dieses Problem und schlage eine Lösung mit den Mitteln aus 4.6 vor.</p>
+    </details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-4-9-4">
+    <details>
+        <summary>Aufgabe 4.9.4: Modelliere aus einem Sachtext – Tablet-Ausleihe <span class="niveau">AFB II</span></summary>
+        <blockquote>„Die Schule verleiht Tablets. Jedes Tablet hat eine Inventarnummer und steckt in genau einem Tablet-Koffer; ein Koffer fasst höchstens 16 Tablets und kann auch leer sein. Wird ein Koffer ausgemustert, kommen seine Tablets in einen anderen Koffer. Eine Schülerin oder ein Schüler darf höchstens ein Tablet gleichzeitig ausleihen, und ein Tablet ist zu jedem Zeitpunkt an höchstens eine Person verliehen.“</blockquote>
+        <ol>
+            <li>Bestimme Klassen, Attribute, Methoden, die Beziehungsarten und die Multiplizitäten an <em>beiden</em> Enden jeder Beziehung. Zeichne das Klassendiagramm.</li>
+            <li>Implementiere die Klassen <code>Koffer</code>, <code>Tablet</code> und <code>Schueler</code> mit Typangaben. Alle Grenzen sollen im Code durchgesetzt werden; ein 17.&nbsp;Tablet in einem Koffer soll einen <code>ValueError</code> auslösen.</li>
+            <li>Teste nacheinander:</li>
+        </ol>
+        <table class="gitter">
+            <tr><th>Aufruf</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+            <tr><td><code>k = Koffer("K1"); t1 = Tablet("T-01", k); t2 = Tablet("T-02", k); lea = Schueler("Lea"); ben = Schueler("Ben")</code>, dann <code>print(t1.ausleihen(lea))</code></td><td>True</td><td></td></tr>
+            <tr><td><code>print(t2.ausleihen(lea))</code></td><td>False (Lea hat schon ein Tablet)</td><td></td></tr>
+            <tr><td><code>print(t1.ausleihen(ben))</code></td><td>False (T-01 ist verliehen)</td><td></td></tr>
+            <tr><td><code>print(t1.zurueckgeben(), lea.tablet)</code></td><td>True None</td><td></td></tr>
+            <tr><td><code>print(t1.ausleihen(ben), t1.ausgeliehen_von.name)</code></td><td>True Ben</td><td></td></tr>
+            <tr><td><code>for i in range(3, 18): Tablet(f"T-{i:02d}", k)</code></td><td>ValueError beim Tablet T-17</td><td></td></tr>
+            <tr><td><code>print(len(k.tablets))</code></td><td>16</td><td></td></tr>
+        </table>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-9-5">
+    <details>
+        <summary>Aufgabe 4.9.5: Multiplizitäten aus Code ablesen – Linienbus <span class="niveau">AFB II</span></summary>
+        <pre><code class="language-python">class Fahrer:
+    def __init__(self, name: str):
+        self.name: str = name
+
+class Haltestelle:
+    def __init__(self, name: str):
+        self.name: str = name
+
+class Reifen:
+    def __init__(self, position: int):
+        self.position: int = position
+
+class Bus:
+    def __init__(self, kennzeichen: str, fahrer: Fahrer):
+        self.kennzeichen: str = kennzeichen
+        self.fahrer: Fahrer = fahrer                                 # (a)
+        self.ersatzfahrer: Fahrer | None = None                      # (b)
+        self.haltestellen: list[Haltestelle] = []                    # (c)
+        self.reifen: list[Reifen] = [Reifen(i) for i in range(6)]    # (d)</code></pre>
+        <ol>
+            <li>Gib für (a) bis (d) die Multiplizität an, die aus dem Code folgt, und die Beziehungsart. Achte bei (a) und (b) darauf, dass zweimal dieselbe Klasse beteiligt ist.</li>
+            <li>Welche Multiplizitäten lassen sich aus diesem Code <em>nicht</em> ablesen? Woher bekommt man sie?</li>
+            <li>Zeichne das Klassendiagramm.</li>
+            <li>Der Verkehrsbetrieb legt fest: „Jeder Bus fährt mindestens 2 Haltestellen an.“ Ändere die Klasse <code>Bus</code> so, dass <code>2..*</code> durchgesetzt wird, und gib zwei Testfälle an.</li>
+        </ol>
+    </details>
+</div>

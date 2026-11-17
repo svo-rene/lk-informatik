@@ -1,0 +1,369 @@
+<p>
+            JSON (<strong>JavaScript Object Notation</strong>) ist ein leichtgewichtiges Datenformat, das sich hervorragend 
+            zur Strukturierung und zum Austausch von Daten eignet. Es wurde ursprünglich für JavaScript entwickelt, 
+            ist aber inzwischen sprachunabhängig und wird von fast allen modernen Programmiersprachen unterstützt.
+        </p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>
+                    Praxisbezug: JSON im ganz normalen Alltag
+                </summary>
+                <p>
+                    JSON begegnet dir öfter, als du denkst, auch wenn du es nie direkt siehst: Öffnest du morgens die Wetter-App,
+                    holt sie sich die aktuelle Temperatur im Hintergrund als JSON von einem Server. Fragst du in der Fahrplan-App
+                    des ÖPNV nach der nächsten Verbindung, wird die Antwort mit Abfahrtszeiten und Verspätungen ebenfalls häufig
+                    als JSON übertragen. Auch die Deutsche Bahn stellt ihre Fahrplandaten (Bahnhofssuche, Abfahrts- und
+                    Ankunftstafeln, Zugläufe) über eine offene REST-Schnittstelle bereit, die JSON und XML als Format anbietet.
+                </p>
+                <p>
+                    <strong>Berufsfelder:</strong> Mit JSON arbeiten zum einen klassische IT-Berufe wie Web- und
+                    App-Entwickler*innen oder Data Engineers, die Schnittstellen anbinden und Daten weiterverarbeiten.
+                    Zum anderen kommen aber auch Berufe außerhalb der Informatik regelmäßig mit JSON-Exporten und -Importen
+                    in Kontakt, etwa in der Marktforschung beim Export von Umfragedaten, im Datenjournalismus bei der
+                    Auswertung offener Datensätze (Open Data) oder in der Verkehrsplanung bei der Nutzung von
+                    Echtzeit-Fahrplandaten.
+                </p>
+                <p>
+                    <strong>Weiterlesen:</strong>
+                    <a href="https://www.heise.de/news/Open-Data-Deutsche-Bahn-gibt-Schnittstelle-fuer-Fahrplandaten-frei-3118919.html" target="_blank" rel="noopener">Open Data: Deutsche Bahn gibt Schnittstelle für Fahrplandaten frei</a>
+                </p>
+            </details>
+        </div>
+
+<h2>Was ist JSON?</h2>
+
+<p>
+            JSON ist ein textbasiertes Datenformat, das zur Übertragung von Daten zwischen Systemen und Anwendungen 
+            verwendet wird. Es ist einfach lesbar und gleichzeitig für Maschinen leicht zu parsen und zu generieren. 
+            JSON ist zu einem Standard für Web-APIs geworden und ersetzt zunehmend ältere Formate wie XML.
+        </p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Was ist eine API?</summary>
+                <p>
+                    Eine API (<strong>Application Programming Interface</strong>) ist eine Schnittstelle, die es zwei Anwendungen ermöglicht, miteinander zu kommunizieren. 
+                    APIs definieren die Regeln und Formate, die eine Anwendung verwenden kann, um Daten oder Dienste von einer anderen anzufordern. 
+                    Ein bekanntes Beispiel ist eine Wetter-API, die aktuelle Wetterdaten in einem strukturierten Format wie JSON bereitstellt.
+                </p>
+            </details>
+        </div>
+
+<h2>Wie ist JSON aufgebaut?</h2>
+
+<p>
+            JSON besteht aus Schlüssel-Wert-Paaren und unterstützt folgende Datentypen:
+        </p>
+
+<ul>
+            <li><strong>Objekte</strong>: Geschachtelte Paare von Schlüssel und Wert, um komplexe Datenstrukturen darzustellen.</li>
+            <li><strong>Arrays</strong>: Geordnete Listen von Werten, die verschiedene Datentypen enthalten können.</li>
+            <li><strong>Primitive Datentypen</strong>: String, Zahl, Boolean (true/false) und null.</li>
+        </ul>
+
+<h2>Was ist ein JSON-Objekt?</h2>
+
+<p>
+            Ein JSON-Objekt ist eine Sammlung von <strong>Schlüssel-Wert-Paaren</strong>, die durch geschweifte Klammern 
+            <code>{}</code> umschlossen sind. Es ist das grundlegende Strukturmerkmal in JSON und ermöglicht die Darstellung 
+            komplexer Datenstrukturen.
+        </p>
+
+<p>JSON-Objekte haben folgende Eigenschaften:</p>
+
+<ul>
+            <li><strong>Schlüssel:</strong> Immer ein String, der als Bezeichner für den Wert dient (z.&nbsp;B. <code>"name"</code>).</li>
+            <li><strong>Werte:</strong> Können Strings, Zahlen, Boolean-Werte, null, Arrays oder andere JSON-Objekte sein.</li>
+            <li><strong>Trennzeichen:</strong> Schlüssel und Wert werden durch einen Doppelpunkt (<code>:</code>) getrennt. Paare werden durch ein Komma (<code>,</code>) getrennt.</li>
+        </ul>
+
+<p>Hier ist ein Beispiel für ein JSON-Objekt:</p>
+
+<pre>
+{
+    "name": "Max Mustermann",
+    "age": 30,
+    "skills": ["JavaScript", "Python", "JSON"],
+    "isEmployed": true
+}
+        </pre>
+
+<p>Ein weiteres Beispiel mit verschachtelten Objekten:</p>
+
+<pre>
+{
+    "person": {
+        "name": "Max Mustermann",
+        "age": 30
+    },
+    "job": {
+        "title": "Softwareentwickler",
+        "skills": ["JavaScript", "Python", "JSON"]
+    }
+}
+        </pre>
+
+<p>Verschachtelte Objekte erlauben es, komplexe Strukturen wie Personen mit zugehörigen Jobs und Fähigkeiten darzustellen.</p>
+
+<h2>Warum wird JSON in der Praxis genutzt?</h2>
+
+<p>JSON ist in der Praxis aus mehreren Gründen beliebt:</p>
+
+<ul>
+            <li><strong>Einfachheit:</strong> JSON ist leicht zu lesen und zu schreiben, sowohl für Menschen als auch für Maschinen.</li>
+            <li><strong>Interoperabilität:</strong> JSON ist sprachunabhängig und wird von nahezu allen modernen Programmiersprachen 
+                und Frameworks unterstützt.</li>
+            <li><strong>Effizienz:</strong> Es hat eine geringere Datenübertragungsgröße im Vergleich zu XML, da es keine 
+                zusätzlichen Tags benötigt.</li>
+            <li><strong>Web-Kompatibilität:</strong> JSON ist das bevorzugte Format für die Kommunikation zwischen Web-Clients und Servern 
+                in modernen APIs.</li>
+
+        </ul>
+
+<h2>Typische Anwendungsbereiche</h2>
+
+<ul>
+            <li>Datenaustausch in Web-APIs.</li>
+            <li>Speichern von Konfigurationen und Einstellungen.</li>
+            <li>Transport von Daten in clientseitigen Webanwendungen.</li>
+            <li>Cloud-Dienste und serverlose Architekturen.</li>
+        </ul>
+
+<h2>JSON in Python verarbeiten</h2>
+
+<p>
+            Mit dem Modul <code>json</code> kannst du einen JSON-Text in Python-Datenstrukturen umwandeln
+            (<code>json.loads()</code>) und umgekehrt (<code>json.dumps()</code>). Ein verschachteltes JSON-Objekt
+            wird dabei zu verschachtelten Dictionaries und Listen, die du wie gewohnt mit eckigen Klammern
+            ansprichst.
+        </p>
+
+<pre><code>import json
+
+text = '{"name": "Max Mustermann", "age": 30, "skills": ["JavaScript", "Python", "JSON"]}'
+
+daten = json.loads(text)  # wandelt den JSON-Text in ein Dictionary um
+print(daten["name"])       # Max Mustermann
+print(daten["skills"][1])  # Python</code></pre>
+
+<h3>JSON-Dateien lesen und schreiben: json.load() und json.dump()</h3>
+
+<p>
+            Liegt das JSON nicht als Text im Programm, sondern in einer Datei, verwendest du die Varianten <em>ohne</em> „s“:
+            <code>json.load(datei)</code> liest eine geöffnete Datei ein, <code>json.dump(daten, datei)</code> schreibt Python-Daten
+            als JSON in eine Datei. Merkhilfe: Das „s“ in <code>loads</code>/<code>dumps</code> steht für <em>string</em>.
+        </p>
+
+<p>
+            Die Kursdatei <a href="../notebooks/wetter_dresden.json" download>wetter_dresden.json</a> enthält eine Antwort der Wetter-API
+            Open-Meteo für Dresden (so, wie du sie auf Seite 3.11 selbst abrufen wirst):
+        </p>
+
+<pre><code>import json
+
+with open('wetter_dresden.json', encoding='utf-8') as datei:
+    wetter = json.load(datei)             # Datei -> Dictionary
+
+aktuell = wetter['current_weather']        # inneres Objekt
+print(aktuell['temperature'], wetter['current_weather_units']['temperature'])   # 14.8 °C
+
+# Komplexer: stündliche Werte aus zwei parallelen Arrays auswerten
+stunden = wetter['hourly']['time']
+temps = wetter['hourly']['temperature_2m']
+for zeit, temp in zip(stunden, temps):
+    print(zeit[11:], temp)                 # 08:00 11.9 ... 11:00 16.1
+print('Maximum:', max(temps))              # Maximum: 16.1
+
+# Ergebnis als neue JSON-Datei speichern
+auswertung = {'ort': 'Dresden', 'max_temperatur': max(temps)}
+with open('auswertung.json', 'w', encoding='utf-8') as datei:
+    json.dump(auswertung, datei, ensure_ascii=False, indent=2)</code></pre>
+
+<p>
+            <code>indent=2</code> sorgt für eine eingerückte, gut lesbare Datei; <code>ensure_ascii=False</code> schreibt Umlaute
+            direkt statt als <code>\u00fc</code>.
+        </p>
+
+<h2>JSON und XML im Vergleich</h2>
+
+<p>
+            Vor JSON war <strong>XML</strong> (Extensible Markup Language) das übliche Austauschformat. XML beschreibt Daten mit
+            selbst gewählten <em>Tags</em> in spitzen Klammern – ähnlich wie HTML. Dieselbe Person sieht in beiden Formaten so aus:
+        </p>
+
+<table class="gitter">
+            <thead><tr><th>JSON</th><th>XML</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><pre><code>{
+  "name": "Max Mustermann",
+  "age": 30,
+  "skills": ["Python", "SQL"]
+}</code></pre></td>
+                    <td><pre><code>&lt;person&gt;
+  &lt;name&gt;Max Mustermann&lt;/name&gt;
+  &lt;age&gt;30&lt;/age&gt;
+  &lt;skills&gt;
+    &lt;skill&gt;Python&lt;/skill&gt;
+    &lt;skill&gt;SQL&lt;/skill&gt;
+  &lt;/skills&gt;
+&lt;/person&gt;</code></pre></td>
+                </tr>
+            </tbody>
+        </table>
+
+<p>
+            XML braucht zu jedem Wert ein öffnendes und ein schließendes Tag und ist deshalb länger. Es kennt dafür Attribute,
+            Kommentare und strenge Prüfregeln (Schemas) und wird bis heute bei Office-Dokumenten (.docx), im Bankwesen und in
+            Behördenschnittstellen verwendet. Bei Web-APIs hat sich JSON durchgesetzt, weil es kürzer ist und direkt zu den
+            Datenstrukturen von JavaScript und Python passt.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Vom JSON-Text zum Dictionary und zurück</summary>
+            <p><strong>Ausgangssituation:</strong> Eine Kurswahl-App schickt den Datensatz einer Schülerin als JSON-Text. Er soll gelesen,
+               um einen Kurs ergänzt und wieder als JSON ausgegeben werden.</p>
+            <pre><code class="language-python">import json
+
+text = '{"name": "Lina", "klasse": "12", "kurse": ["Informatik", "Mathe"], "volljaehrig": true, "handy": null}'
+daten = json.loads(text)
+print(type(daten))
+print(daten["kurse"][0], len(daten["kurse"]))
+print(daten["volljaehrig"], daten["handy"])
+daten["kurse"].append("Physik")
+print(json.dumps(daten, ensure_ascii=False))</code></pre>
+            <ol>
+                <li><strong><code>json.loads(text)</code></strong> – wandelt den Text in Python-Daten um. Das äußere JSON-Objekt wird ein
+                    <code>dict</code>, daher <code>&lt;class 'dict'&gt;</code>.</li>
+                <li><strong>Zugriff auf das Array</strong> – <code>"kurse"</code> ist eine <code>list</code>: Element 0 ist „Informatik“, die Länge 2.</li>
+                <li><strong>Datentypen übersetzen</strong> – JSON <code>true</code> wird Python <code>True</code>, JSON <code>null</code> wird
+                    <code>None</code>. Deshalb gibt <code>print</code> <code>True None</code> aus.</li>
+                <li><strong>Ändern</strong> – <code>append</code> auf der inneren Liste, wie bei jedem verschachtelten Dictionary (Seite 3.2).</li>
+                <li><strong><code>json.dumps(daten)</code></strong> – macht daraus wieder JSON-Text: doppelte Anführungszeichen, <code>true</code>,
+                    <code>null</code>. Die Reihenfolge der Schlüssel bleibt erhalten.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong></p>
+            <pre><code>&lt;class 'dict'&gt;
+Informatik 2
+True None
+{"name": "Lina", "klasse": "12", "kurse": ["Informatik", "Mathe", "Physik"], "volljaehrig": true, "handy": null}</code></pre>
+            <p><strong>Kontrolle:</strong> <code>json.loads(json.dumps(daten)) == daten</code> ergibt <code>True</code> – Hin- und Rückweg verlieren
+               nichts. Ein <code>print(daten)</code> sähe dagegen anders aus (einfache Anführungszeichen, <code>True</code>, <code>None</code>): Das ist
+               Python-Schreibweise, kein gültiges JSON.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Verschachteltes JSON in eine flache CSV-Tabelle umwandeln</summary>
+            <p><strong>Ausgangssituation:</strong> Die Bibliothekssoftware exportiert Ausleihen als verschachteltes JSON. Für die Auswertung in
+               DB Browser (Seite 3.7) wird eine CSV-Tabelle mit einer Zeile je ausgeliehenem Buch gebraucht. Achtung: Ein Vorgang enthält keine
+               Bücher, bei einem fehlt die Klasse.</p>
+            <pre><code class="language-python">import json
+import csv
+
+text = '''
+{"bibliothek": "Gymnasium Elbtal",
+ "ausleihen": [
+   {"schueler": {"name": "Lina", "klasse": "10b"},
+    "buecher": [{"titel": "Tschick", "tage": 14}, {"titel": "Momo", "tage": 21}]},
+   {"schueler": {"name": "Malik", "klasse": "9a"},
+    "buecher": []},
+   {"schueler": {"name": "Ole"},
+    "buecher": [{"titel": "Krabat", "tage": 7}]}
+ ]}
+'''
+daten = json.loads(text)
+
+zeilen = []
+for a in daten["ausleihen"]:
+    name = a["schueler"]["name"]
+    klasse = a["schueler"].get("klasse", "unbekannt")
+    for b in a["buecher"]:
+        zeilen.append([name, klasse, b["titel"], b["tage"]])
+
+with open("ausleihen.csv", "w", newline="", encoding="utf-8") as datei:
+    writer = csv.writer(datei, delimiter=";")
+    writer.writerow(["Name", "Klasse", "Titel", "Tage"])
+    writer.writerows(zeilen)
+
+for z in zeilen:
+    print(z)
+print(len(zeilen), "Zeilen aus", len(daten["ausleihen"]), "Ausleihvorgängen")</code></pre>
+            <ol>
+                <li><strong>Struktur lesen</strong> – Objekt → <code>"ausleihen"</code> (Array) → je Vorgang ein Objekt mit dem Objekt
+                    <code>"schueler"</code> und dem Array <code>"buecher"</code>. Zwei Arrays ineinander bedeuten zwei Schleifen.</li>
+                <li><strong>Äußere Schleife</strong> – je Ausleihvorgang Name und Klasse holen. Bei Ole fehlt <code>"klasse"</code>;
+                    <code>["klasse"]</code> gäbe einen <code>KeyError</code>, <code>.get("klasse", "unbekannt")</code> setzt einen Ersatzwert.</li>
+                <li><strong>Innere Schleife</strong> – je Buch eine flache Zeile: Name und Klasse werden in jede Zeile kopiert. Lina erscheint deshalb
+                    zweimal – beim „Flachklopfen“ entsteht Redundanz, wie bei einer nicht normalisierten Tabelle.</li>
+                <li><strong>Sonderfall Malik</strong> – Seine Bücherliste ist leer, die innere Schleife läuft nicht, er taucht in der CSV gar nicht auf.
+                    Ob das gewollt ist, muss man entscheiden: Für „Welche Bücher sind verliehen?“ ist es richtig, für „Wer war in der Bibliothek?“
+                    ginge Information verloren.</li>
+                <li><strong>Schreiben</strong> – wie auf Seite 3.6 mit Kopfzeile und Semikolon.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Konsolenausgabe</p>
+            <pre><code>['Lina', '10b', 'Tschick', 14]
+['Lina', '10b', 'Momo', 21]
+['Ole', 'unbekannt', 'Krabat', 7]
+3 Zeilen aus 3 Ausleihvorgängen</code></pre>
+            <p>und Inhalt von <code>ausleihen.csv</code>:</p>
+            <pre><code>Name;Klasse;Titel;Tage
+Lina;10b;Tschick;14
+Lina;10b;Momo;21
+Ole;unbekannt;Krabat;7</code></pre>
+            <p><strong>Kontrolle:</strong> Zahl der CSV-Datenzeilen = Summe der Bücher in allen Vorgängen: 2 + 0 + 1 = 3. Die Zahl der Vorgänge (3)
+               stimmt nur zufällig überein – deshalb wird beides ausgegeben.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>JSON</strong> (JavaScript Object Notation) ist ein textbasiertes Format für strukturierte Daten.
+                Es kennt <strong>Objekte</strong> <code>{ }</code> mit Schlüssel-Wert-Paaren (Schlüssel immer in doppelten
+                Anführungszeichen), <strong>Arrays</strong> <code>[ ]</code> als geordnete Listen sowie Zeichenketten, Zahlen,
+                <code>true</code>/<code>false</code> und <code>null</code>. Objekte und Arrays dürfen beliebig verschachtelt werden.
+                In Python wird ein JSON-Objekt zu einem <code>dict</code>, ein Array zu einer <code>list</code>.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.10.1: Eine JSON-Datei verarbeiten <span class="niveau">AFB II</span></summary>
+                <p>
+                    Lies die Datei <a href="../notebooks/wetter_dresden.json" download>wetter_dresden.json</a> mit <code>json.load()</code> ein und gib
+                    aus:
+                </p>
+                <ol>
+                    <li>die aktuelle Windgeschwindigkeit mit Einheit,</li>
+                    <li>die niedrigste Temperatur aus den stündlichen Werten und die zugehörige Uhrzeit.</li>
+                </ol>
+                <p>
+                    <em>Ausblick:</em> Auf Seite 3.11 lernst du, wie du dieselben Daten mit <code>requests</code> live von der
+                    Open-Meteo-API abrufst.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.10.2: Struktur eines JSON-Dokuments analysieren <span class="niveau">AFB II</span></summary>
+                <p>
+                    Öffne die folgenden Adressen im Browser, analysiere das JSON-Dokument einer öffentlichen Web-API und erkläre
+                    seine Struktur: Welche Objekte und Arrays gibt es, wie tief ist die Verschachtelung, und mit welchem
+                    Python-Zugriff käme man an einen bestimmten Wert?
+                    <br>
+                    Zum Beispiel: <br>
+                    <a href="https://api.open-meteo.com/v1/forecast?latitude=51.05&amp;longitude=13.74&amp;hourly=temperature_2m" target="_blank" rel="noopener">https://api.open-meteo.com/v1/forecast?latitude=51.05&amp;longitude=13.74&amp;hourly=temperature_2m</a>
+                    <br>
+                    oder <br>
+                    <a href="https://pokeapi.co/api/v2/pokemon/pikachu" target="_blank" rel="noopener">https://pokeapi.co/api/v2/pokemon/pikachu</a>
+                </p>
+            </details>
+        </div>

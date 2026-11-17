@@ -1,0 +1,44 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.4.3: Ein Byte, mehrere Bedeutungen <span class="niveau">AFB III</span></summary>
+        <ol>
+            <li>Im Speicher steht das Byte <code>0100 0001</code>. Gib an, welchen Wert es als vorzeichenlose Binärzahl hat und welches Zeichen es in ASCII darstellt.</li>
+            <li>Im Speicher steht das Byte <code>0110 0011</code>. Beantworte dieselben beiden Fragen.</li>
+            <li>Erkläre, woran ein Programm erkennen kann, ob ein Byte als Zahl oder als Zeichen zu behandeln ist.</li>
+            <li>Ein Nutzer tippt in ein Eingabefeld die Ziffernfolge <code>42</code>. Gib an, welche zwei Bytes dabei gespeichert werden, und erkläre, warum das Programm damit nicht direkt rechnen kann.</li>
+        </ol>
+    </details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.4.4: UTF-8 von Hand <span class="niveau">AFB II</span></summary>
+        <p>Für ein Schild an der Schulmensa soll der Text „Grüße“ und das Preiszeichen „€“ als UTF-8-Bytes in einen Mikrocontroller geschrieben werden. Gegeben sind die Codepoints:</p>
+        <table class="gitter">
+            <tr><th>Zeichen</th><th>G</th><th>r</th><th>ü</th><th>ß</th><th>e</th><th>€</th></tr>
+            <tr><th>Codepoint</th><td>U+0047</td><td>U+0072</td><td>U+00FC</td><td>U+00DF</td><td>U+0065</td><td>U+20AC</td></tr>
+        </table>
+        <ol>
+            <li>Bestimme für jedes Zeichen mithilfe der Mustertabelle aus Beispiel 2 die Anzahl der UTF-8-Bytes.</li>
+            <li>Kodiere „ü“, „ß“ und „€“ schrittweise von Hand und gib die Bytes hexadezimal an. Führe für „€“ die Probe durch.</li>
+            <li>Gib die vollständige Bytefolge für „Grüße“ an und bestimme ihre Länge in Byte.</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.4.5: Speicherbedarf eines Chat-Servers <span class="niveau">AFB II</span></summary>
+        <p>Ein Chat-Server speichert die Nachricht <strong>„Schöne Grüße aus Žilina 😀“</strong>.</p>
+        <p>Dabei gilt: ö, ü, ß und Ž liegen im Bereich U+0080 bis U+07FF, das Emoji 😀 hat den Codepoint U+1F600. Alle anderen Zeichen (auch die Leerzeichen) sind ASCII-Zeichen.</p>
+        <ol>
+            <li>Bestimme die Anzahl der Zeichen und den Speicherbedarf der Nachricht in UTF-8 und in UTF-32 (jedes Zeichen 4 Byte).</li>
+            <li>Der Server speichert 2 Millionen Nachrichten mit durchschnittlich 80 Zeichen. Erfahrungsgemäß sind 95&nbsp;% der Zeichen ASCII-Zeichen, 4&nbsp;% brauchen in UTF-8 zwei Byte und 1&nbsp;% vier Byte. Berechne den Speicherbedarf in Megabyte (1&nbsp;MB = 10<sup>6</sup>&nbsp;Byte) für UTF-8 und für UTF-32.</li>
+            <li>Ein Entwickler möchte trotzdem UTF-32 verwenden, „weil dann jedes Zeichen gleich lang ist“. Beurteile diesen Vorschlag für den Chat-Server.</li>
+        </ol>
+    </details>
+</div>

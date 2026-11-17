@@ -1,0 +1,119 @@
+<p>Wie kannst du einer Person, die du nie getroffen hast, eine geheime Nachricht schicken, ohne vorher einen Schlüssel auszutauschen? Genau dieses Problem lösen asymmetrische Verfahren.</p>
+
+<p>Asymmetrische Verschlüsselung, auch Public-Key-Kryptographie genannt, verwendet zwei verschiedene, aber mathematisch zusammenhängende Schlüssel: einen öffentlichen Schlüssel zum Verschlüsseln und einen privaten Schlüssel zum Entschlüsseln. Damit ist vertrauliche Kommunikation über unsichere Kanäle möglich, ohne dass vorher ein geheimer Schlüssel ausgetauscht werden muss.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation (Briefkasten):</strong> Alice will Bob einen geheimen Brief schicken, ohne dass die beiden vorher etwas Geheimes vereinbart haben.</p>
+            <ol>
+                <li><strong>Bob stellt einen Briefkasten mit Schlitz auf</strong> – er veröffentlicht seinen öffentlichen Schlüssel. Jeder darf wissen, wo der Kasten steht.</li>
+                <li><strong>Alice wirft den Brief ein</strong> – sie verschlüsselt mit Bobs öffentlichem Schlüssel. Danach kommt sie selbst nicht mehr an den Brief heran.</li>
+                <li><strong>Nur Bob öffnet den Kasten</strong> – nur er besitzt den Schlüssel zum Kasten, also den privaten Schlüssel.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Vertraulichkeit ohne vorherigen geheimen Schlüsselaustausch.<br>
+            <strong>Kontrolle (Grenze des Vergleichs):</strong> Ein Briefkasten kann aufgebrochen werden; beim asymmetrischen Verfahren entspricht das dem Berechnen des privaten aus dem öffentlichen Schlüssel – das muss praktisch unmöglich sein.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation (Rechnung mit kleinen Zahlen):</strong> Bob veröffentlicht den öffentlichen Schlüssel (e, n) = (3, 33) und behält den privaten Schlüssel d = 7 für sich. Alice will die Zahl 8 senden.</p>
+            <ol>
+                <li><strong>Alice verschlüsselt mit Bobs öffentlichem Schlüssel:</strong> 8³ = 512, 512 mod 33 = 512 − 15 · 33 = 17. <em>Warum Bobs Schlüssel?</em> Nur der Besitzer des passenden privaten Schlüssels soll entschlüsseln können.</li>
+                <li><strong>Was sieht ein Lauscher?</strong> Nur 17 und (3, 33). Um zu entschlüsseln, bräuchte er d.</li>
+                <li><strong>Bob entschlüsselt mit seinem privaten Schlüssel:</strong> 17⁷ mod 33. Schrittweise: 17² = 289 ≡ 25, 17⁴ ≡ 25² = 625 ≡ 31, 17⁷ = 17⁴ · 17² · 17 ≡ 31 · 25 · 17 = 13&nbsp;175 ≡ 8 (mod 33).</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Bob erhält die Nachricht 8.<br>
+            <strong>Falle:</strong> Mit so kleinen Zahlen kann der Lauscher d leicht finden: 33 = 3 · 11 ist sofort zerlegt. Wie man solche Schlüssel erzeugt und warum große Zahlen nötig sind, zeigt 8.9 (RSA).</p>
+            </details>
+        </div>
+
+<h2>Vor- und Nachteile der asymmetrischen Verschlüsselung</h2>
+
+<h3>Vorteile</h3>
+
+<ul>
+            <li>Schlüsselverteilung: Da der öffentliche Schlüssel frei verteilt werden kann, entfällt der geheime Schlüsselaustausch, der bei symmetrischer Verschlüsselung nötig ist. Bei n Teilnehmern genügen n Schlüsselpaare.</li>
+            <li>Digitale Signaturen: Asymmetrische Verfahren ermöglichen digitale Signaturen, die Authentizität, Integrität und Verbindlichkeit von Nachrichten und Dokumenten sicherstellen.</li>
+        </ul>
+
+<h3>Nachteile</h3>
+
+<ul>
+            <li>Geschwindigkeit: Asymmetrische Algorithmen sind um ein Vielfaches langsamer als symmetrische und benötigen mehr Rechenleistung.</li>
+            <li>Schlüssellänge: Für eine vergleichbare Sicherheit sind deutlich längere Schlüssel nötig, z.&nbsp;B. RSA mit 3072 Bit statt AES mit 128 Bit.</li>
+            <li>Echtheit des öffentlichen Schlüssels: Man muss sicher sein, dass ein öffentlicher Schlüssel wirklich zur richtigen Person gehört. Dafür braucht man Zertifikate (8.13).</li>
+        </ul>
+
+<h2>Aktuelle asymmetrische Verfahren</h2>
+
+<p>Die asymmetrische Kryptographie wurde in den 1970er-Jahren als Lösung für das Problem der Schlüsselverteilung entwickelt (Diffie und Hellman 1976, RSA 1977).</p>
+
+<ul>
+            <li><strong>RSA</strong> (Rivest, Shamir, Adleman): eines der ersten öffentlich bekannten und bis heute am weitesten verbreiteten asymmetrischen Verfahren (8.9).</li>
+            <li><strong>ECC</strong> (Elliptische-Kurven-Kryptographie): bietet bei kürzeren Schlüsseln eine vergleichbare Sicherheit wie RSA und wird deshalb zunehmend eingesetzt, z.&nbsp;B. bei TLS&nbsp;1.3 und in Messengern.</li>
+        </ul>
+
+<h2>Kryptoanalyse</h2>
+
+<p>Die Sicherheit der asymmetrischen Kryptographie beruht auf mathematischen Problemen, die für große Zahlen als schwer lösbar gelten: der Faktorisierung großer Zahlen bei RSA und dem diskreten Logarithmus bei Diffie-Hellman und ECC. Die Kryptoanalyse sucht nach Schwächen in diesen mathematischen Grundlagen oder in der Implementierung, um die Verschlüsselung ohne Kenntnis des privaten Schlüssels zu brechen.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Public-Key-Verfahren im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Bei WhatsApp und Signal erzeugt jedes Handy ein eigenes Schlüsselpaar; der öffentliche Schlüssel liegt beim Server, der private verlässt das Gerät nie. Die „Sicherheitsnummer“ bzw. der QR-Code in den Kontaktinfos ist ein Fingerabdruck dieser Schlüssel – vergleicht ihr ihn persönlich, schließt ihr einen untergeschobenen Schlüssel aus. Auch die elektronische Patientenakte der Krankenkassen und der Personalausweis mit Online-Funktion nutzen Schlüsselpaare.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> Gerade stellen Behörden und Unternehmen auf Post-Quanten-Kryptographie um. Das BSI empfiehlt in der TR-02102 bereits hybride Verfahren aus klassischem und Post-Quanten-Schlüsselaustausch. Fachleute für Kryptographie-Migration inventarisieren dafür alle Systeme, die RSA oder ECC nutzen – eine gefragte Aufgabe für IT-Sicherheitsberaterinnen und -berater.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Asymmetrisches Verfahren:</strong> Jeder Teilnehmer besitzt ein <strong>Schlüsselpaar</strong> aus öffentlichem Schlüssel (darf jeder kennen) und privatem Schlüssel (kennt nur der Besitzer). Aus dem öffentlichen Schlüssel lässt sich der private nicht mit vertretbarem Aufwand berechnen.
+            </p>
+            <ul>
+                <li><strong>Verschlüsseln:</strong> mit dem <em>öffentlichen</em> Schlüssel des <em>Empfängers</em>; entschlüsseln kann nur der Empfänger mit seinem <em>privaten</em> Schlüssel.</li>
+                <li><strong>Signieren:</strong> mit dem <em>privaten</em> Schlüssel des <em>Absenders</em>; prüfen kann jeder mit dessen <em>öffentlichem</em> Schlüssel (siehe 8.13).</li>
+            </ul>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Einwegfunktion mit Falltür:</strong> Asymmetrische Verfahren brauchen eine Funktion, die leicht zu berechnen, aber ohne Zusatzwissen praktisch nicht umkehrbar ist. Mit einer geheimen Zusatzinformation (der „Falltür“, hier dem privaten Schlüssel) wird die Umkehrung leicht.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.8.1: Wer benutzt welchen Schlüssel? <span class="niveau">AFB I</span></summary>
+                <p>Alice und Bob besitzen je ein Schlüsselpaar. Gib jeweils an, welcher Schlüssel verwendet wird.</p>
+                <ol type="a">
+                    <li>Alice verschlüsselt eine Nachricht an Bob.</li>
+                    <li>Bob entschlüsselt die Nachricht.</li>
+                    <li>Alice signiert ein Dokument.</li>
+                    <li>Bob prüft Alices Signatur.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.8.2: Sicherheit asymmetrischer Verfahren <span class="niveau">AFB II–III</span></summary>
+                <ol>
+                    <li>Erkläre, auf welchem mathematischen Problem die Sicherheit von RSA beruht und warum das Problem für große Zahlen als schwer gilt.</li>
+                    <li>Quantencomputer könnten mit dem Shor-Algorithmus große Zahlen effizient faktorisieren. Erläutere, warum das auch für Nachrichten gefährlich ist, die heute verschlüsselt und abgefangen werden.</li>
+                    <li>Beurteile, ob symmetrische Verfahren wie AES in gleichem Maße bedroht sind.</li>
+                    <li>Recherchiere, was Post-Quanten-Kryptographie ist, und nenne ein standardisiertes Verfahren.</li>
+                    <li>Eine Krankenkasse überlegt, ihre Verschlüsselung jetzt umzustellen, obwohl es noch keine großen Quantencomputer gibt. Nimm Stellung.</li>
+                </ol>
+            </details>
+        </div>

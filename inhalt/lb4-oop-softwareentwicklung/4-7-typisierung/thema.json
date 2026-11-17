@@ -1,0 +1,18 @@
+{
+  "nr": "4.7",
+  "titel": "Typisierung in Python: Klarheit im Code",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

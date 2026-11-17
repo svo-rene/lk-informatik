@@ -1,0 +1,35 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-4-7-6">
+    <details>
+        <summary>Aufgabe 4.7.6: Fehler finden – Typangaben, die lügen <span class="niveau">AFB III</span></summary>
+        <p>Eine Wetter-AG misst Temperaturen auf dem Schulhof. Das Programm hat Typangaben – trotzdem stimmt einiges nicht:</p>
+        <pre><code class="language-python">class Messreihe:
+    def __init__(self, ort: str):
+        self.ort: str = ort
+        self.werte: list[float] = []
+
+    def hinzufuegen(self, wert: float) -&gt; None:
+        self.werte.append(wert)
+
+    def maximum(self) -&gt; float:
+        if not self.werte:
+            return None
+        return max(self.werte)
+
+    def bericht(self) -&gt; str:
+        print(f"{self.ort}: max {self.maximum()} °C")
+
+
+m = Messreihe("Schulhof")
+m.hinzufuegen("21.5")
+m.hinzufuegen(19.0)
+text = m.bericht()
+print(text.upper())</code></pre>
+        <ol>
+            <li>Sage vorher, was beim Ausführen passiert. In welcher Zeile bricht das Programm ab, und mit welcher Art von Fehler?</li>
+            <li>Finde alle Stellen, an denen Code und Typangaben einander widersprechen. Gib jeweils an, ob Python oder ein Prüfwerkzeug wie <code>mypy</code> das bemerkt.</li>
+            <li>Korrigiere das Programm so, dass es zu den Typangaben passt, und gib für den korrigierten Ablauf die erwartete Ausgabe an. Ergänze einen Testfall für eine leere Messreihe.</li>
+        </ol>
+    </details>
+</div>

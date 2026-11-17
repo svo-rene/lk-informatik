@@ -1,0 +1,67 @@
+<p>In 4.1 hast du die Speicherhierarchie vom Register bis zur Cloud und die Unterscheidung in optische, magnetische und elektronische Speicher kennengelernt. Auf dieser Seite vertieft ihr das Thema Speichersysteme: in Form von Referaten, die ihr in Gruppen erarbeitet und dem Kurs vorstellt.</p>
+
+<h2>Rechenbeispiele zur Speicherhierarchie</h2>
+
+<p>Unabhängig von eurem Referatsthema zeigen die beiden Beispiele, wie man mit den Zugriffszeiten der Speichertreppe aus 4.1 rechnet. Ein Cache hilft nur, wenn die gesuchten Daten tatsächlich dort liegen. Der Anteil der Zugriffe, die der Cache bedienen kann, heißt <strong>Trefferquote</strong>. Alle Zahlen sind gerundete Annahmen in der Größenordnung der Tabelle aus 4.1.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Mittlere Zugriffszeit mit einem Cache</summary>
+        <p>Ein Cache antwortet in 1&nbsp;ns, der Arbeitsspeicher in 100&nbsp;ns. 95&nbsp;% der Zugriffe finden ihre Daten im Cache. <em>Vereinfachende Annahme:</em> Ein Fehlzugriff dauert insgesamt so lange wie ein Zugriff auf den Arbeitsspeicher.</p>
+        <ol>
+          <li><strong>Was:</strong> Fehlzugriffsquote bestimmen: 1 − 0,95 = 0,05. – <em>warum:</em> Jeder Zugriff ist entweder ein Treffer oder ein Fehlzugriff.</li>
+          <li><strong>Was:</strong> gewichteten Mittelwert bilden: t = 0,95 · 1&nbsp;ns + 0,05 · 100&nbsp;ns = 0,95&nbsp;ns + 5&nbsp;ns = 5,95&nbsp;ns. – <em>warum:</em> Jede Zugriffszeit zählt so stark, wie oft sie vorkommt. Der einfache Mittelwert (1 + 100) / 2 wäre falsch.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Im Mittel dauert ein Zugriff <strong>5,95&nbsp;ns</strong>, etwa 17-mal schneller als ohne Cache (100 / 5,95 ≈ 16,8).</p>
+        <p><strong>Probe:</strong> 1000 Zugriffe: 950 · 1&nbsp;ns + 50 · 100&nbsp;ns = 950&nbsp;ns + 5000&nbsp;ns = 5950&nbsp;ns, geteilt durch 1000 ergibt 5,95&nbsp;ns.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Zwei Cache-Stufen und die Macht der letzten Prozente</summary>
+        <p>Ein Prozessor hat einen L1-Cache (1&nbsp;ns) und einen L3-Cache (10&nbsp;ns), dahinter den Arbeitsspeicher (100&nbsp;ns). <em>Annahmen:</em> 90&nbsp;% aller Zugriffe treffen im L1-Cache. Von den Zugriffen, die dort nichts finden, treffen 80&nbsp;% im L3-Cache, der Rest muss zum Arbeitsspeicher. Wie lange dauert ein Zugriff im Mittel? Und welche Trefferquote bräuchte ein einziger Cache (1&nbsp;ns) für dasselbe Ergebnis?</p>
+        <ol>
+          <li><strong>Was:</strong> Anteile aller Zugriffe bestimmen: L1: 0,9; L3: 0,1 · 0,8 = 0,08; Arbeitsspeicher: 0,1 · 0,2 = 0,02. Probe: 0,9 + 0,08 + 0,02 = 1. – <em>warum (die Falle):</em> Die 80&nbsp;% beziehen sich nur auf die 10&nbsp;%, die im L1-Cache nichts finden, nicht auf alle Zugriffe.</li>
+          <li><strong>Was:</strong> gewichteter Mittelwert: t = 0,9 · 1&nbsp;ns + 0,08 · 10&nbsp;ns + 0,02 · 100&nbsp;ns = 0,9 + 0,8 + 2 = 3,7&nbsp;ns. – <em>warum:</em> wie in Beispiel 1, nur mit drei Stufen.</li>
+          <li><strong>Was:</strong> Gleichung für einen einzigen Cache mit Trefferquote h aufstellen: h · 1 + (1 − h) · 100 = 3,7 ⇔ 100 − 99h = 3,7 ⇔ h = 96,3 / 99 ≈ 0,973. – <em>warum:</em> So sieht man, was die zweite Stufe „wert“ ist.</li>
+          <li><strong>Was:</strong> deuten: Schon die 2&nbsp;% Zugriffe auf den Arbeitsspeicher verursachen 2 der 3,7&nbsp;ns, also mehr als die Hälfte. – <em>warum:</em> Die langsamste Stufe dominiert, auch wenn sie selten gebraucht wird.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Mittlere Zugriffszeit <strong>3,7&nbsp;ns</strong>. Ein einzelner Cache müsste dafür eine Trefferquote von etwa <strong>97,3&nbsp;%</strong> erreichen. Weil die seltenen Wege zum Arbeitsspeicher den Mittelwert bestimmen, lohnt es sich, die letzten Prozente Fehlzugriffe abzufangen.</p>
+        <p><strong>Probe:</strong> 1000 Zugriffe: 900 · 1 + 80 · 10 + 20 · 100 = 900 + 800 + 2000 = 3700&nbsp;ns, also 3,7&nbsp;ns je Zugriff. Gegenprobe Teil 3: 0,973 · 1 + 0,027 · 100 ≈ 0,97 + 2,7 ≈ 3,7&nbsp;ns.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Speicher im Alltag und im Beruf</summary>
+                <p><strong>Alltag:</strong> Ein alter Laptop wird nach dem Umbau auf eine SSD plötzlich viel schneller, obwohl der Prozessor derselbe bleibt. Und auch die „Cloud“ liegt am Ende auf ganz realen Festplatten, SSDs und Magnetbändern in Rechenzentren.</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Rechenzentrumstechniker/in</strong>: tauscht defekte Festplatten, überwacht Speichersysteme und sorgt für Kühlung und Stromversorgung – z.&nbsp;B. in Rechenzentren von Hochschulen, Stadtwerken oder Cloud-Anbietern.</li>
+                    <li><strong>Storage- bzw. Cloud-Administrator/in</strong>: plant, welche Daten auf schnellen SSDs, auf günstigen Festplatten oder im Archiv auf Band liegen, und richtet Datensicherungen ein.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 4.3.2: Ein großes Video oder viele kleine Dateien <span class="niveau">AFB II</span></summary>
+                <p>Bei Massenspeichern zählen zwei Größen: die <em>Zugriffszeit</em>, bis eine Datei gefunden ist, und die <em>Datenrate</em>, mit der sie danach gelesen wird. Lesezeit einer Datei = Zugriffszeit + Dateigröße / Datenrate. <em>Annahmen</em> (1&nbsp;MB = 10<sup>6</sup> Byte, 1&nbsp;GB = 10<sup>9</sup> Byte):</p>
+                <table>
+                    <thead><tr><th></th><th>Festplatte (HDD)</th><th>SSD</th></tr></thead>
+                    <tbody>
+                        <tr><td>Zugriffszeit je Datei</td><td>10&nbsp;ms</td><td>0,1&nbsp;ms</td></tr>
+                        <tr><td>Datenrate</td><td>200&nbsp;MB/s</td><td>3000&nbsp;MB/s</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Berechne für beide Laufwerke, wie lange das Lesen eines 4-GB-Videos dauert, und um welchen Faktor die SSD schneller ist.</li>
+                    <li>Beim Start eines Betriebssystems werden dagegen z.&nbsp;B. 10.000 kleine Dateien zu je 40&nbsp;KB (40.000 Byte) gelesen. Berechne auch hier beide Zeiten und den Faktor.</li>
+                    <li>Beschreibe, welcher Anteil der Zeit in Teil 1 und in Teil 2 jeweils auf die Zugriffszeit entfällt, und erkläre damit, warum sich ein Rechner nach dem Umbau auf eine SSD beim Starten viel stärker beschleunigt als beim Kopieren großer Videos.</li>
+                </ol>
+                <p class="tipp">„Beschreibe“ heißt: Sachverhalt mit Zahlen und Fachbegriffen geordnet darstellen – hier also beide Anteile angeben und vergleichen, bevor du erklärst.</p>
+            </details>
+        </div>

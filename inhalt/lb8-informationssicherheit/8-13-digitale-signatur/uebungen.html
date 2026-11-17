@@ -1,0 +1,68 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.13.3: Grenzen der Signatur <span class="niveau">AFB II</span></summary>
+                <p>Erkläre mithilfe des Man-in-the-Middle-Angriffs, warum eine gültige Signatur allein, also Integrität und Authentizität gegenüber einem bestimmten öffentlichen Schlüssel, für eine sichere Kommunikation nicht ausreicht.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.13.4: TLS verdeutlichen <span class="niveau">AFB II</span></summary>
+                <p>Zur sicheren Datenübertragung im Internet wird das TLS-Protokoll verwendet. Verdeutliche den Ablauf dieses Protokolls (z.&nbsp;B. als Sequenzdiagramm).</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.13.5: Zertifikate im Browser <span class="niveau">AFB II</span></summary>
+                <p>Zertifikate kann man einsehen. Bearbeite die folgenden Hintergrundinformationen: <a href="https://www.inf-schule.de/kryptologie/sicherheitsinfrastruktur/exkurs_zertifikate">https://www.inf-schule.de/kryptologie/sicherheitsinfrastruktur/exkurs_zertifikate</a><br>
+                In deinen Browsereinstellungen findest du folgende Option: <i>Aktuelle Gültigkeit von Zertifikaten durch Anfrage bei OCSP-Server bestätigen lassen: Ja/Nein</i>. Erkläre diese Option.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.13.6: Sichere E-Mail <span class="niveau">AFB II</span></summary>
+                <p>Im Zusammenhang mit sicherer E-Mail-Kommunikation fallen die Begriffe S/MIME und PGP. Recherchiere die Bedeutung und Funktionsweise dieser Verfahren.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.13.7: Welche Signatur ist echt? <span class="niveau">AFB II</span></summary>
+                <p>Der öffentliche Schlüssel der Schulleiterin lautet (e, n) = (7, 187). Im Postfach des Sekretariats liegen drei signierte Nachrichten. Angegeben sind jeweils der Hashwert h, den das Sekretariat selbst aus der Nachricht berechnet hat, und die mitgeschickte Signatur s.</p>
+                <table class="gitter">
+                    <tr><th>Nachricht</th><th>h</th><th>s</th></tr>
+                    <tr><td>N1: „Wandertag am Freitag“</td><td>10</td><td>175</td></tr>
+                    <tr><td>N2: „Unterrichtsausfall für alle“</td><td>42</td><td>175</td></tr>
+                    <tr><td>N3: „Elternabend um 19 Uhr“</td><td>25</td><td>49</td></tr>
+                </table>
+                <ol type="a">
+                    <li>Prüfe alle drei Signaturen durch Rechnung (fortgesetztes Quadrieren modulo 187).</li>
+                    <li>Erkläre, was mit Nachricht N2 vermutlich passiert ist.</li>
+                    <li>Begründe, warum der Angreifer für N2 keine gültige Signatur berechnen konnte, obwohl er (7, 187) kennt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.13.9: Signieren programmieren – und eine schwache Hashfunktion <span class="niveau">AFB II–III</span></summary>
+                <ol type="a">
+                    <li>Schreibe die Python-Funktionen <code>signiere(h, privat)</code> und <code>pruefe(h, s, oeffentlich)</code> für Mini-RSA. Schlüssel werden als Paare (d, n) bzw. (e, n) übergeben.</li>
+                    <li>Weise die Funktionen mit diesen Testfällen nach (erwartete und tatsächliche Ausgabe). Der private Schlüssel zu (7, 187) ist (23, 187).
+                        <ul>
+                            <li><code>signiere(10, (23, 187))</code> → <code>175</code></li>
+                            <li><code>pruefe(10, 175, (7, 187))</code> → <code>True</code></li>
+                            <li><code>pruefe(42, 175, (7, 187))</code> → <code>False</code></li>
+                        </ul>
+                    </li>
+                    <li>Als Hashfunktion soll <code>mini_hash(text)</code> dienen: die Summe der Zeichencodes (<code>ord</code>) modulo 187. Teste: <code>mini_hash("JA")</code> → <code>139</code>.</li>
+                    <li>Die Schulleiterin signiert die Antwort „JA“. Zeige, dass dieselbe Signatur auch für eine andere Nachricht gültig ist, und beurteile, welche Eigenschaft der Hashfunktion verletzt ist.</li>
+                </ol>
+            </details>
+        </div>

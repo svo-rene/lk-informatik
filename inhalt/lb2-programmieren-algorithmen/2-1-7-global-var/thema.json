@@ -1,0 +1,18 @@
+{
+  "nr": "2.1.7",
+  "titel": "Lokale und globale Variablen",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

@@ -1,0 +1,332 @@
+<h2>1. Was sind Entscheidungsbäume?</h2>
+
+<p>Entscheidungsbäume sind ein vielseitiges Werkzeug, um Entscheidungsprozesse abzubilden und komplexe Abläufe zu strukturieren. Sie stellen Entscheidungsregeln in einer baumartigen Struktur dar: Jeder innere Knoten enthält einen Test, jedes Blatt eine Klassifikation.</p>
+
+<h2>2. Aufbau eines Entscheidungsbaums</h2>
+
+<p>Ein Entscheidungsbaum besteht aus folgenden Elementen:</p>
+
+<ul>
+            <li><strong>Wurzelknoten:</strong> der oberste Knoten des Baums, der den ersten Test enthält.</li>
+            <li><strong>Innere Knoten:</strong> Knoten, die einen weiteren Test darstellen.</li>
+            <li><strong>Blätter:</strong> die Endknoten, die die endgültige Klassifikation oder den Vorhersagewert enthalten.</li>
+            <li><strong>Zweige:</strong> Verbindungen zwischen den Knoten, die mögliche Ergebnisse der Tests repräsentieren.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Baumtiefe und Overfitting</summary>
+                <p>Die Tiefe eines Entscheidungsbaums beeinflusst seine Komplexität und Genauigkeit. Ein tiefer Baum kann sehr genaue Vorhersagen für Trainingsdaten machen, aber er neigt zu Overfitting, wenn er sich zu stark an die Trainingsdaten anpasst. Eine zu geringe Tiefe kann hingegen zu einer ungenauen oder zu allgemeinen Modellierung führen (Underfitting, vgl. 11.3). Die maximale Tiefe ist deshalb ein typischer Hyperparameter.</p>
+            </details>
+        </div>
+
+<h2>3. Konstruktion eines Entscheidungsbaums mithilfe der Entropie</h2>
+
+<p>Du kannst Entscheidungsbäume mit verschiedenen Algorithmen erstellen. Einer der häufig verwendeten Ansätze basiert auf dem Konzept der Entropie und dem Informationsgewinn (z.&nbsp;B. in den Algorithmen ID3 und C4.5).</p>
+
+<h3>3.1 Ausgangsdaten</h3>
+
+<p>Betrachte folgende Daten, die Aufschluss darüber geben, ob Menschen bei verschiedenen Wetterbedingungen Fahrrad fahren:</p>
+
+<table>
+            <thead>
+                <tr>
+                    <th>Datensatz</th>
+                    <th>Bodenfrost</th>
+                    <th>Fahrrad fahren?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Ja</td><td>Nein</td></tr>
+                <tr><td>2</td><td>Ja</td><td>Nein</td></tr>
+                <tr><td>3</td><td>Nein</td><td>Ja</td></tr>
+                <tr><td>4</td><td>Nein</td><td>Nein</td></tr>
+            </tbody>
+        </table>
+
+<h3>3.2 Berechnung der Entropie des Wurzelknotens</h3>
+
+<p>Die Entropie des Wurzelknotens beschreibt die Unsicherheit vor der Aufteilung. Die Formel lautet:</p>
+
+<p><code>H = −(p₁ · log₂(p₁) + p₂ · log₂(p₂))</code></p>
+
+<p>Dabei gilt:</p>
+
+<ul>
+            <li><code>p₁</code> ist der Anteil der Klasse „Ja“,</li>
+            <li><code>p₂</code> ist der Anteil der Klasse „Nein“.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: log₂ mit dem Taschenrechner</summary>
+                <p>Die meisten Taschenrechner haben keine eigene Taste für <code>log₂</code>. Du kannst den Logarithmus zur Basis 2 aber ganz einfach über die Formel <code>log₂(x) = log(x) / log(2)</code> (oder gleichwertig <code>ln(x) / ln(2)</code>) mit jedem Taschenrechner berechnen, der <code>log</code> oder <code>ln</code> anbietet. Das brauchst du z.&nbsp;B. für Aufgabe 11.5.1.</p>
+            </details>
+        </div>
+
+<div class="beispiel">
+            <p>Im Wurzelknoten haben wir:</p>
+            <ul>
+                <li>1 „Ja“ → <code>p₁ = 1/4 = 0,25</code></li>
+                <li>3 „Nein“ → <code>p₂ = 3/4 = 0,75</code></li>
+            </ul>
+            <p>Einsetzen in die Formel:</p>
+            <p><code>H = −(0,25 · log₂(0,25) + 0,75 · log₂(0,75))</code></p>
+            <p>Berechnung:</p>
+            <ul>
+                <li><code>log₂(0,25) = −2</code> → <code>0,25 · (−2) = −0,5</code></li>
+                <li><code>log₂(0,75) ≈ −0,415</code> → <code>0,75 · (−0,415) ≈ −0,311</code></li>
+            </ul>
+            <p>Entropie des Wurzelknotens: <code>H = −(−0,5 − 0,311) ≈ 0,811</code></p>
+        </div>
+
+<h3>3.3 Aufteilung nach „Bodenfrost“</h3>
+
+<p>Die Daten werden in zwei Teilmengen aufgeteilt:</p>
+
+<ul>
+            <li>linke Teilmenge: Bodenfrost = Ja</li>
+            <li>rechte Teilmenge: Bodenfrost = Nein</li>
+        </ul>
+
+<h4>3.3.1 Linke Teilmenge (Bodenfrost = Ja)</h4>
+
+<p>Enthält die Datensätze:</p>
+
+<table>
+            <thead>
+                <tr><th>Datensatz</th><th>Bodenfrost</th><th>Fahrrad fahren?</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Ja</td><td>Nein</td></tr>
+                <tr><td>2</td><td>Ja</td><td>Nein</td></tr>
+            </tbody>
+        </table>
+
+<p>Klassenverteilung:</p>
+
+<ul>
+            <li>0 „Ja“ → <code>p₁ = 0</code></li>
+            <li>2 „Nein“ → <code>p₂ = 1</code></li>
+        </ul>
+
+<p>Entropie: <code>H = −(0 · log₂(0) + 1 · log₂(1)) = 0</code></p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Was ist mit log₂(0)?</summary>
+                <p>Mathematisch ist <code>log₂(0)</code> nicht definiert (der Wert strebt gegen minus unendlich). In der Entropie-Berechnung wird deshalb per Konvention festgelegt: <code>0 · log₂(0) := 0</code>. Das ist sinnvoll, denn eine Klasse, die in einer Teilmenge gar nicht vorkommt (Anteil 0), trägt auch keine Unsicherheit bei.</p>
+            </details>
+        </div>
+
+<h4>3.3.2 Rechte Teilmenge (Bodenfrost = Nein)</h4>
+
+<p>Enthält die Datensätze:</p>
+
+<table>
+            <thead>
+                <tr><th>Datensatz</th><th>Bodenfrost</th><th>Fahrrad fahren?</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>3</td><td>Nein</td><td>Ja</td></tr>
+                <tr><td>4</td><td>Nein</td><td>Nein</td></tr>
+            </tbody>
+        </table>
+
+<p>Klassenverteilung:</p>
+
+<ul>
+            <li>1 „Ja“ → <code>p₁ = 1/2 = 0,5</code></li>
+            <li>1 „Nein“ → <code>p₂ = 1/2 = 0,5</code></li>
+        </ul>
+
+<p>Entropie: <code>H = −(0,5 · log₂(0,5) + 0,5 · log₂(0,5)) = 1</code></p>
+
+<h3>3.4 Gesamtentropie nach der Aufteilung</h3>
+
+<p>Die Gesamtentropie setzt sich aus den gewichteten Entropien der Teilmengen zusammen:</p>
+
+<p><code>H_gesamt = (n_links / n_gesamt) · H_links + (n_rechts / n_gesamt) · H_rechts</code></p>
+
+<p>Einsetzen der Werte: <code>n_links = 2</code>, <code>n_rechts = 2</code>, <code>n_gesamt = 4</code>, <code>H_links = 0</code>, <code>H_rechts = 1</code>.</p>
+
+<p><code>H_gesamt = (2/4) · 0 + (2/4) · 1 = 0 + 0,5 = 0,5</code></p>
+
+<h3>3.5 Informationsgewinn</h3>
+
+<p>Der Informationsgewinn ergibt sich aus der Differenz zwischen der Entropie des Wurzelknotens und der Gesamtentropie nach der Aufteilung:</p>
+
+<p><code>IG = H_Wurzel − H_gesamt = 0,811 − 0,5 = 0,311</code></p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Wie groß muss der Informationsgewinn sein?</summary>
+                <p>Es gibt <strong>keinen allgemeingültigen Schwellenwert</strong>, ab dem ein Informationsgewinn „gut“ ist. Entscheidend ist der <strong>Vergleich</strong>: An jedem Knoten wird das Merkmal mit dem höchsten Informationsgewinn gewählt. Ein Mindest-Informationsgewinn kann als Stoppkriterium vorgegeben werden; er ist dann ein Hyperparameter, der – wie die maximale Tiefe – mithilfe von Validierungsdaten gewählt wird.</p>
+            </details>
+        </div>
+
+<h3>3.6 Alternative: der Gini-Index</h3>
+
+<p>Statt der Entropie wird häufig der <strong>Gini-Index</strong> (Gini-Unreinheit) verwendet – z.&nbsp;B. im CART-Algorithmus und standardmäßig in der Python-Bibliothek scikit-learn, die du im Titanic-Notebook nutzt. Er ist ohne Logarithmus schneller zu berechnen:</p>
+
+<p><code>G = 1 − (p₁² + p₂²)</code></p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation – Rechenbeispiel</strong> (dieselben vier Datensätze wie oben): Wie stark verringert die Aufteilung nach „Bodenfrost“ die Gini-Unreinheit?</p>
+            <ol>
+                <li><strong>Wurzel:</strong> <code>G = 1 − (0,25² + 0,75²) = 1 − (0,0625 + 0,5625) = 0,375</code> – <em>warum:</em> Die Unreinheit vor der Aufteilung ist der Vergleichswert.</li>
+                <li><strong>Bodenfrost = Ja</strong> (2 × Nein): <code>G = 1 − (0² + 1²) = 0</code> – <em>warum:</em> Der Knoten ist rein, er enthält nur eine Klasse.</li>
+                <li><strong>Bodenfrost = Nein</strong> (1 × Ja, 1 × Nein): <code>G = 1 − (0,5² + 0,5²) = 0,5</code> – <em>warum:</em> Je 50&nbsp;% ist bei zwei Klassen die größtmögliche Unreinheit.</li>
+                <li><strong>gewichtet:</strong> <code>G_gesamt = (2/4) · 0 + (2/4) · 0,5 = 0,25</code> – <em>warum:</em> Jede Teilmenge zählt mit ihrem Anteil an den Datensätzen.</li>
+                <li><strong>Verringerung der Unreinheit:</strong> <code>0,375 − 0,25 = 0,125</code> – <em>warum:</em> Je größer die Verringerung, desto besser trennt das Merkmal.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Aufteilung nach Bodenfrost senkt die Unreinheit von 0,375 auf 0,25. Entropie und Gini-Index führen in den allermeisten Fällen zur gleichen Wahl des Merkmals.</p>
+            </details>
+        </div>
+
+<h3>3.7 Schritte zur Konstruktion eines Entscheidungsbaums</h3>
+
+<ol>
+            <li>Berechne die Gesamtentropie (bzw. die gewichtete Gini-Unreinheit) für jede mögliche Aufteilung (Attribut) des Datensatzes.</li>
+            <li>Wähle das Attribut mit dem kleinsten Wert als Entscheidungsknoten.</li>
+            <li>Wiederhole den Prozess rekursiv für jeden Unterknoten, bis ein Stoppkriterium erreicht ist (z.&nbsp;B. Knoten ist rein, maximale Tiefe erreicht oder minimaler Informationsgewinn unterschritten).</li>
+        </ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Die Schülerfirma, die die Mensa betreibt, möchte vorhersagen, wer zum Mittagessen kommt, um weniger Essen wegzuwerfen. Sie hat zehn Datensätze erhoben:</p>
+            <table>
+                <thead>
+                    <tr><th>Nr.</th><th>Nachmittagsunterricht</th><th>Wetter</th><th>Stufe</th><th>Mensa?</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>ja</td><td>sonnig</td><td>Sek I</td><td>ja</td></tr>
+                    <tr><td>2</td><td>ja</td><td>Regen</td><td>Sek I</td><td>ja</td></tr>
+                    <tr><td>3</td><td>ja</td><td>sonnig</td><td>Sek I</td><td>ja</td></tr>
+                    <tr><td>4</td><td>ja</td><td>sonnig</td><td>Sek I</td><td>ja</td></tr>
+                    <tr><td>5</td><td>ja</td><td>sonnig</td><td>Sek II</td><td>nein</td></tr>
+                    <tr><td>6</td><td>nein</td><td>Regen</td><td>Sek II</td><td>ja</td></tr>
+                    <tr><td>7</td><td>nein</td><td>sonnig</td><td>Sek I</td><td>nein</td></tr>
+                    <tr><td>8</td><td>nein</td><td>sonnig</td><td>Sek II</td><td>nein</td></tr>
+                    <tr><td>9</td><td>nein</td><td>sonnig</td><td>Sek II</td><td>nein</td></tr>
+                    <tr><td>10</td><td>nein</td><td>sonnig</td><td>Sek I</td><td>nein</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><strong>Wurzel bewerten:</strong> 5 × ja, 5 × nein → <code>G = 1 − (0,5² + 0,5²) = 0,5</code> – <em>warum:</em> Vergleichswert vor jeder Aufteilung (maximale Unreinheit).</li>
+                <li><strong>Alle Attribute durchrechnen (gewichteter Gini-Index):</strong> – <em>warum:</em> Der Algorithmus vergleicht jede mögliche Aufteilung (Schritt 1 in 3.7).
+                    <ul>
+                        <li>Nachmittagsunterricht: ja → 4 ja, 1 nein → <code>G = 1 − (0,64 + 0,04) = 0,32</code>; nein → 1 ja, 4 nein → <code>G = 0,32</code>; gewichtet <code>5/10 · 0,32 + 5/10 · 0,32 = 0,32</code></li>
+                        <li>Wetter: Regen → 2 ja, 0 nein → <code>G = 0</code>; sonnig → 3 ja, 5 nein → <code>G = 1 − (9/64 + 25/64) = 30/64 ≈ 0,469</code>; gewichtet <code>2/10 · 0 + 8/10 · 0,469 = 0,375</code></li>
+                        <li>Stufe: Sek I → 4 ja, 2 nein → <code>G = 1 − (16/36 + 4/36) ≈ 0,444</code>; Sek II → 1 ja, 3 nein → <code>G = 0,375</code>; gewichtet <code>6/10 · 0,444 + 4/10 · 0,375 ≈ 0,417</code></li>
+                    </ul>
+                </li>
+                <li><strong>Falle erkennen:</strong> Nur „Wetter“ erzeugt einen reinen Zweig (Regen). Trotzdem ist es nicht die beste Wahl – <em>warum:</em> Der reine Zweig enthält nur 2 von 10 Datensätzen; der große Zweig „sonnig“ bleibt fast maximal unrein. Entscheidend ist der <em>gewichtete</em> Wert.</li>
+                <li><strong>Wurzel wählen:</strong> Nachmittagsunterricht (0,32 &lt; 0,375 &lt; 0,417) – <em>warum:</em> kleinste gewichtete Unreinheit. Mit der Entropie ergibt sich dieselbe Reihenfolge: 0,722 (Nachmittag) &lt; 0,764 (Wetter) &lt; 0,876 (Stufe).</li>
+                <li><strong>Rekursiv weiter im Zweig „Nachmittagsunterricht = ja“</strong> (Nr. 1–5; 4 ja, 1 nein): Wetter → Regen {2} rein, sonnig {1, 3, 4, 5} 3 : 1 → gewichtet <code>4/5 · 0,375 = 0,3</code>; Stufe → Sek I {1–4} rein „ja“, Sek II {5} rein „nein“ → <code>0</code>. Gewählt wird Stufe – <em>warum:</em> Sie trennt den Zweig vollständig.</li>
+                <li><strong>Rekursiv weiter im Zweig „Nachmittagsunterricht = nein“</strong> (Nr. 6–10; 1 ja, 4 nein): Wetter → Regen {6} rein „ja“, sonnig {7–10} rein „nein“ → <code>0</code>; Stufe → Sek I {7, 10} rein, Sek II {6, 8, 9} 1 : 2 → <code>3/5 · 0,444 ≈ 0,267</code>. Gewählt wird Wetter.</li>
+                <li><strong>Stoppen:</strong> Alle Blätter sind rein – <em>warum:</em> Stoppkriterium „Knoten ist rein“ aus 3.7.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong></p>
+            <pre><code>Nachmittagsunterricht?
+├── ja   → Stufe?
+│          ├── Sek I  → Mensa: ja
+│          └── Sek II → Mensa: nein
+└── nein → Wetter?
+           ├── Regen  → Mensa: ja
+           └── sonnig → Mensa: nein</code></pre>
+            <p>Neuer Fall: kein Nachmittagsunterricht, Regen, Sek II → Wetter = Regen → Vorhersage „Mensa: ja“.</p>
+            <p><strong>Kontrolle und kritischer Blick:</strong> Alle zehn Trainingsdatensätze werden richtig klassifiziert. Das Blatt „Sek II → nein“ beruht aber auf einem einzigen Datensatz (Nr. 5), ebenso „Regen → ja“ (Nr. 6). Solche Blätter sind anfällig für Zufall und Overfitting. Mit einer maximalen Tiefe von 1 hätte der Baum nur die Wurzel und würde im Zweig „ja“ per Mehrheit „Mensa: ja“ vorhersagen – ob das auf neuen Daten besser ist, entscheiden Testdaten.</p>
+            </details>
+        </div>
+
+<h2>4. Vor- und Nachteile von Entscheidungsbäumen</h2>
+
+<h3>4.1 Vorteile</h3>
+
+<ul>
+            <li>einfach zu verstehen und zu interpretieren (jede Vorhersage lässt sich als Regel ablesen)</li>
+            <li>erfordern wenig Datenvorbereitung (z.&nbsp;B. keine Skalierung der Merkmale)</li>
+            <li>Manche Verfahren (z.&nbsp;B. C4.5 und neuere Versionen von scikit-learn) können fehlende Werte direkt verarbeiten; oft werden fehlende Werte aber vorher ergänzt (wie im Titanic-Notebook).</li>
+        </ul>
+
+<h3>4.2 Nachteile</h3>
+
+<ul>
+            <li>Neigung zu Overfitting bei tiefen Bäumen</li>
+            <li>Instabilität: Kleine Datenänderungen können stark unterschiedliche Bäume erzeugen.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Pruning und Random Forests</summary>
+                <p>Die Nachteile können durch Pruning (Beschneiden des fertigen Baums) oder Ensemble-Methoden wie Random Forests (viele Bäume auf zufälligen Teilmengen, die per Mehrheitsentscheid abstimmen) reduziert werden.</p>
+            </details>
+        </div>
+
+<h2>5. Anwendungsbeispiele</h2>
+
+<p>Entscheidungsbäume werden in vielen Bereichen eingesetzt, z.&nbsp;B. für:</p>
+
+<ul>
+            <li>medizinische Diagnosen</li>
+            <li>Kreditwürdigkeitsprüfungen</li>
+            <li>Kundenservicestrategien</li>
+        </ul>
+
+<p>Im Titanic-Notebook (10.4) trainierst du selbst einen Entscheidungsbaum und wählst seine Tiefe mit einer Kreuzvalidierung.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Erklärbare Entscheidungen</summary>
+                <p><strong>Alltag:</strong> Die Hotline-Ansage „Drücken Sie die 1 für …, die 2 für …“ ist ein von Hand gebauter Entscheidungsbaum.</p>
+                <p><strong>Beruf:</strong> In Banken und Versicherungen setzen <strong>Data Scientists</strong> und Risikoanalysten gern baumbasierte Modelle ein, weil sich Entscheidungen über Kredite oder Tarife begründen lassen müssen. Die DSGVO gibt Betroffenen bei automatisierten Einzelentscheidungen Anspruch auf aussagekräftige Informationen über die involvierte Logik – mit einem Entscheidungsbaum lässt sich diese Logik direkt zeigen.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Entscheidungsbaum</strong> – Modell, das eine Entscheidung als Folge von Tests auf Merkmalen darstellt; von der Wurzel führt jeder Pfad über die Testergebnisse zu einem Blatt mit der Vorhersage. Entscheidungsbäume können manuell durch Expertenwissen erstellt werden (wissensbasierter Ansatz) oder von Algorithmen automatisch aus Daten erzeugt werden (datenbasierter Ansatz).</p>
+        </div>
+
+<div class="merke">
+            <p>Der Algorithmus wählt immer das Attribut mit der geringsten Gesamtentropie bzw. dem höchsten Informationsgewinn als nächsten Entscheidungsknoten.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Gini-Index</strong> – Maß für die Unreinheit eines Knotens: die Wahrscheinlichkeit, dass zwei zufällig (mit Zurücklegen) gezogene Datensätze des Knotens zu verschiedenen Klassen gehören. G = 0 bedeutet ein reiner Knoten (nur eine Klasse); bei zwei Klassen ist G höchstens 0,5 (je 50&nbsp;%). Gewählt wird die Aufteilung mit der kleinsten gewichteten Gini-Unreinheit.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.5.1: Wurzelknoten mit Entropie bestimmen <span class="niveau">AFB II</span></summary>
+                <p>Gegeben sei folgender Datensatz:</p>
+                <table>
+                    <tr><th>Datensatz</th><th>Wind</th><th>Regen</th><th>Bodenfrost</th><th>Radfahren?</th></tr>
+                    <tr><td>d1</td><td>nein</td><td>ja</td><td>nein</td><td>ja</td></tr>
+                    <tr><td>d2</td><td>ja</td><td>nein</td><td>nein</td><td>ja</td></tr>
+                    <tr><td>d3</td><td>ja</td><td>nein</td><td>ja</td><td>nein</td></tr>
+                    <tr><td>d4</td><td>nein</td><td>nein</td><td>nein</td><td>ja</td></tr>
+                    <tr><td>d5</td><td>nein</td><td>nein</td><td>ja</td><td>nein</td></tr>
+                    <tr><td>d6</td><td>ja</td><td>ja</td><td>nein</td><td>nein</td></tr>
+                </table>
+                <ol>
+                    <li>Berechne die Gesamtentropie der Attribute Wind, Regen und Bodenfrost.</li>
+                    <li>Erkläre, welches Attribut als Wurzelknoten gewählt wird.</li>
+                    <li>Beschreibe, warum es sich hierbei um eine datenbasierte KI handelt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.5.2: Gini-Index anwenden <span class="niveau">AFB II</span></summary>
+                <p>Berechne für den Datensatz aus Aufgabe 11.5.1 die gewichtete Gini-Unreinheit der drei Attribute. Führt der Gini-Index zum selben Wurzelknoten wie die Entropie?</p>
+            </details>
+        </div>

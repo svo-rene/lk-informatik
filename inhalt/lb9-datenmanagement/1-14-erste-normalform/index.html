@@ -1,0 +1,225 @@
+<p>
+            Die erste Normalform (1NF) ist der grundlegende Schritt im Prozess der Datennormalisierung. Sie legt den Grundstein für eine saubere und effiziente Datenbankstruktur.
+        </p>
+
+<h2>Beispiele für Verletzungen der 1NF</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+        <h3>Beispiel 1: Mehrwertige Einträge</h3>
+        <p><strong>Ausgangssituation:</strong> In einer Schülertabelle stehen alle belegten Fächer einer Person in einer Zelle.
+           Die Tabelle soll in die 1NF gebracht werden.</p>
+    
+        <p>Betrachten wir folgende Tabelle „Schüler“ (Primärschlüssel: SchülerID):</p>
+    
+        <table border="1">
+            <tr>
+                <th>SchülerID</th>
+                <th>Name</th>
+                <th>Fächer</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Max Mustermann</td>
+                <td>Mathematik, Physik, Informatik</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Lisa Müller</td>
+                <td>Deutsch, Englisch</td>
+            </tr>
+        </table>
+    
+        <p>
+            Diese Tabelle verletzt die 1NF, da die Spalte „Fächer“ mehrwertige Einträge enthält.
+        </p>
+    
+        <p>Um die Tabelle in die 1NF zu überführen, können wir wie folgt vorgehen:</p>
+    
+        <table border="1">
+            <tr>
+                <th>SchülerID</th>
+                <th>Name</th>
+                <th>Fach</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Max Mustermann</td>
+                <td>Mathematik</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Max Mustermann</td>
+                <td>Physik</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Max Mustermann</td>
+                <td>Informatik</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Lisa Müller</td>
+                <td>Deutsch</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Lisa Müller</td>
+                <td>Englisch</td>
+            </tr>
+        </table>
+
+        <p>
+            <strong>Achtung, neuer Primärschlüssel:</strong> Die SchülerID ist jetzt nicht mehr eindeutig – die 1 steht
+            dreimal da. Eindeutig ist erst die Kombination <strong>(SchülerID, Fach)</strong>, also:
+            <code>Schüler(<u>SchülerID, Fach</u>, Name)</code>. Weil der Schlüssel jetzt zusammengesetzt ist und
+            „Name“ nur von der SchülerID abhängt, ist die Tabelle zwar in der 1NF, aber noch nicht in der 2NF
+            (siehe Seite 1.15).
+        </p>
+
+        <p><strong>Die Schritte – was und warum:</strong></p>
+        <ol>
+            <li><strong>Jede Zelle prüfen:</strong> „Mathematik, Physik, Informatik“ enthält drei Werte. <em>Warum ist das ein Problem?</em>
+                Eine Abfrage wie <code>WHERE Fach = 'Physik'</code> fände Max nicht; man müsste mit <code>LIKE</code> im Text suchen.</li>
+            <li><strong>Mehrwertige Zelle auflösen:</strong> Für jeden Einzelwert eine eigene Zeile anlegen, die übrigen Werte (SchülerID, Name)
+                werden übernommen. <em>Warum?</em> So steht in jeder Zelle genau ein Wert, und keine Information geht verloren.</li>
+            <li><strong>Primärschlüssel neu bestimmen:</strong> SchülerID ist nicht mehr eindeutig, (SchülerID, Fach) schon.
+                <em>Warum nötig?</em> Ohne eindeutigen Schlüssel wäre die neue Tabelle keine gültige Relation.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> <code>Schüler(<u>SchülerID, Fach</u>, Name)</code> mit 5 Zeilen (Tabelle oben).</p>
+        <p><strong>Kontrolle:</strong> 3 + 2 Fächer = 5 Zeilen. Kein Paar (SchülerID, Fach) kommt doppelt vor, und jede Zelle enthält nur einen Wert.
+           Die neue Redundanz (Name steht dreimal bei Max) ist gewollt und wird erst in der 2NF beseitigt.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Ist „Name“ atomar?
+                </summary>
+                <p>
+                    Das Attribut „Name“ kann, muss aber nicht atomar sein. Es hängt von der Aufgabenstellung ab, z.&nbsp;B. davon, ob nach dem Nachnamen sortiert werden soll.
+                </p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Schreibwaren-Onlineshop notiert Bestellungen bisher so (Primärschlüssel: BestellNr).
+               Künftig will der Shop Kundinnen und Kunden <em>nach Nachnamen sortieren</em>, Lieferungen <em>je Postleitzahl</em>
+               auswerten und die <em>verkaufte Stückzahl je Artikel</em> summieren.</p>
+            <table>
+                <thead><tr><th>BestellNr</th><th>Kunde</th><th>Lieferadresse</th><th>Artikel</th><th>Versand</th></tr></thead>
+                <tbody>
+                    <tr><td>7001</td><td>Weber, Jana</td><td>Ringstr. 3, 04109 Leipzig</td><td>2x Stift, 1x Heft</td><td>4,90</td></tr>
+                    <tr><td>7002</td><td>Ali Öztürk</td><td>Bahnhofstr. 1, 01067 Dresden</td><td>3x Heft</td><td>gratis</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><strong>Spalte Kunde.</strong> Weil nach dem Nachnamen sortiert werden soll, ist der Name hier <em>nicht</em> atomar.
+                    Außerdem steht er in zwei Formaten da („Nachname, Vorname“ und „Vorname Nachname“). → Zerlegen in <em>Nachname</em> und <em>Vorname</em>.</li>
+                <li><strong>Spalte Lieferadresse.</strong> Für die Auswertung je PLZ muss die PLZ einzeln ansprechbar sein. → Zerlegen in
+                    <em>Strasse</em>, <em>PLZ</em>, <em>Ort</em>. Straße und Hausnummer bleiben zusammen, denn keine Auswertung braucht die Hausnummer allein.</li>
+                <li><strong>Spalte Artikel – zwei Probleme in einer Zelle.</strong> Erstens stehen mehrere Artikel in einer Zelle (mehrwertig) → je Artikel
+                    eine eigene Zeile. Zweitens steckt in „2x Stift“ eine Menge <em>und</em> ein Artikel → zwei Spalten <em>Menge</em> und <em>Artikel</em>.
+                    <em>Warum beides?</em> Nur so lässt sich die Stückzahl je Artikel mit SUM berechnen.</li>
+                <li><strong>Spalte Versand.</strong> „4,90“ ist eine Zahl, „gratis“ ein Text – die Spalte verletzt die Regel „gleicher Datentyp“.
+                    → einheitlich als Zahl, „gratis“ wird 0.00.</li>
+                <li><strong>Neuen Primärschlüssel bestimmen.</strong> Nach dem Aufteilen in Zeilen kommt BestellNr 7001 zweimal vor. Eindeutig ist
+                    (BestellNr, Artikel): Ein Artikel steht in einer Bestellung nur einmal, die Menge regelt den Rest.</li>
+            </ol>
+            <p><strong>Ergebnis (1NF):</strong></p>
+            <table>
+                <thead><tr><th>BestellNr</th><th>Nachname</th><th>Vorname</th><th>Strasse</th><th>PLZ</th><th>Ort</th><th>Artikel</th><th>Menge</th><th>Versand</th></tr></thead>
+                <tbody>
+                    <tr><td>7001</td><td>Weber</td><td>Jana</td><td>Ringstr. 3</td><td>04109</td><td>Leipzig</td><td>Stift</td><td>2</td><td>4.90</td></tr>
+                    <tr><td>7001</td><td>Weber</td><td>Jana</td><td>Ringstr. 3</td><td>04109</td><td>Leipzig</td><td>Heft</td><td>1</td><td>4.90</td></tr>
+                    <tr><td>7002</td><td>Öztürk</td><td>Ali</td><td>Bahnhofstr. 1</td><td>01067</td><td>Dresden</td><td>Heft</td><td>3</td><td>0.00</td></tr>
+                </tbody>
+            </table>
+            <p><code>Bestellung(<u>BestellNr, Artikel</u>, Nachname, Vorname, Strasse, PLZ, Ort, Menge, Versand)</code></p>
+            <p><strong>Probe:</strong> Alle drei Wünsche sind jetzt erfüllbar – z.&nbsp;B. ergibt die Summe der Menge für „Heft“ 1 + 3 = 4.
+               Keine Information ist verloren gegangen. <strong>Falle:</strong> Die Tabelle ist jetzt in der 1NF, aber Jana Webers Daten und
+               die Versandkosten von 7001 stehen doppelt da. Diese neue Redundanz ist kein Fehler des Vorgehens, sondern wird mit der
+               2. Normalform (Seite 1.15) beseitigt: Nachname, Vorname, Adresse und Versand hängen nur von der BestellNr ab.</p>
+            </details>
+        </div>
+
+<h2>Vorteile der ersten Normalform</h2>
+
+<ul>
+            <li>Vereinfachte Datenabfrage und -manipulation</li>
+            <li>Verbesserte Datenintegrität</li>
+            <li>Leichtere Erweiterbarkeit der Datenbank</li>
+            <li>Grundlage für weitere Normalisierungsschritte</li>
+        </ul>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            Eine Relation befindet sich in der ersten Normalform, wenn folgende Bedingungen erfüllt sind:
+        </p>
+    
+        <ol>
+            <li>Jede Spalte enthält nur atomare Werte. Atomar bedeutet, dass eine weitere Zerlegung keinen Informationsgewinn bringen würde; was atomar ist, hängt also von der Aufgabenstellung ab.</li>
+            <li>Alle Einträge in einer Spalte sind vom gleichen Datentyp.</li>
+            <li>Jede Spalte hat einen eindeutigen Namen.</li>
+        </ol>
+    
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.14.1: <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Gegeben ist folgende Tabelle „Mitarbeiter“ (Primärschlüssel: MitarbeiterID):
+                </p>
+                <table border="1">
+                    <tr>
+                        <th>MitarbeiterID</th>
+                        <th>Name</th>
+                        <th>Abteilung</th>
+                        <th>Projekte</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Max Müller</td>
+                        <td>IT</td>
+                        <td>Webshop, CRM-System</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Laura Schmidt</td>
+                        <td>Marketing</td>
+                        <td>Sommerkampagne</td>
+                    </tr>
+                </table>
+                <p>
+                    a) Erkläre, warum diese Tabelle nicht der 1NF entspricht.<br>
+                    b) Überführe die Tabelle in die 1NF und gib den neuen Primärschlüssel an.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.14.2: Atomar – ja oder nein? <span class="niveau">AFB I</span>
+                </summary>
+                <p>Ein Gymnasium speichert zu jeder Schülerin und jedem Schüler: Name („Lea Sommer“), Geburtsdatum („2008-03-12“),
+                   Anschrift („Lindenweg 2, 01309 Dresden“) und Telefon („0351 123456“). Entscheide für jede der drei Aufgabenstellungen,
+                   welche Spalten atomar sind und welche zerlegt werden müssen. Begründe kurz.</p>
+                <ol>
+                    <li>Die Datenbank soll nur Adressaufkleber für Elternbriefe drucken.</li>
+                    <li>Die Schulleitung möchte eine Statistik „Schülerzahl je Postleitzahl“.</li>
+                    <li>Das Sekretariat möchte die Klassenliste alphabetisch nach Nachnamen ausgeben.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,14 @@
+{
+  "nr": "5.5",
+  "titel": "Projektauftrag und Themen",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

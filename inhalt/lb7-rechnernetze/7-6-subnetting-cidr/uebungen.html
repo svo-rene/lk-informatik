@@ -1,0 +1,94 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.6.3: Subnetze berechnen <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Bestimme jeweils Subnetzmaske, Netzadresse, Broadcast-Adresse, Bereich der Hostadressen und Anzahl nutzbarer Hosts: (a) 172.16.8.64/26 &nbsp; (b) 172.16.8.128/28 &nbsp; (c) 10.20.0.0/22 &nbsp; (d) 192.168.5.37/30</li>
+                    <li>Im Netz aus (b) haben der Router und ein Drucker schon feste Adressen. Wie viele Geräte können zusätzlich angeschlossen werden?</li>
+                    <li>Wofür eignet sich ein /30-Netz wie in (d)?</li>
+                    <li>Eine Schule hat das Netz 192.168.10.0/24. Sie braucht ein Schülernetz mit 100 Geräten, ein Verwaltungsnetz mit 25 Geräten und ein Servernetz mit 6 Servern. Jedes Subnetz braucht zusätzlich eine Adresse für das Gateway (Router). Plane die Subnetze und begründe die Präfixlängen. Gib an, welcher Bereich frei bleibt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.6.4: IP-Plan für eine Firma <span class="niveau">AFB III</span></summary>
+                <p>Ein Maschinenbauunternehmen aus Dresden erhält für seinen Standort den Block 10.10.0.0/23. Benötigt werden: Produktion 200 Geräte, Büro 90 Geräte, Gäste-WLAN 50 Geräte, Server 12 Geräte und zwei Punkt-zu-Punkt-Verbindungen zwischen Routern. Jedes Subnetz mit Endgeräten braucht zusätzlich eine Gateway-Adresse.</p>
+                <ol>
+                    <li>Erstelle einen IP-Plan mit VLSM (Netzadresse, Präfix, Hostbereich, Broadcast).</li>
+                    <li>Gib den frei bleibenden Bereich an und beurteile, ob die Firma damit wachsen kann.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.6.5: Ein Subnetzrechner in Python <span class="niveau">AFB II</span></summary>
+                <p>Du programmierst einen Subnetzrechner, der genau so rechnet wie du auf dieser Seite: Adresse in eine 32-Bit-Zahl umwandeln, mit der Maske per AND verknüpfen, Hostbits auf 1 setzen. Ergänze die Funktionen im Gerüst. Verwende dafür nur Rechenoperationen und die bitweisen Operatoren <code>&amp;</code> (AND) und <code>|</code> (OR), <strong>nicht</strong> das Modul <code>ipaddress</code>.</p>
+<pre><code class="language-python">def ip_zu_zahl(ip):
+    """'192.168.10.77' -&gt; 32-Bit-Zahl; ValueError bei ungültiger Adresse."""
+    ...
+
+def zahl_zu_ip(zahl):
+    """32-Bit-Zahl -&gt; Text in Punktschreibweise."""
+    ...
+
+def maske(praefix):
+    """Präfixlänge 0..32 -&gt; Maske als 32-Bit-Zahl (z. B. 27 -&gt; 255.255.255.224)."""
+    ...
+
+def praefix_aus_maske(maske_text):
+    """'255.255.255.224' -&gt; 27; ValueError, wenn Einsen und Nullen nicht sauber getrennt sind."""
+    ...
+
+def netzinfo(ip, praefix):
+    """Gibt ein Dictionary mit maske, netz, broadcast, erster_host,
+    letzter_host und hosts zurück (Präfix 1 bis 30)."""
+    ...
+
+def gleiches_netz(ip1, ip2, praefix):
+    """True, wenn beide Adressen bei dieser Präfixlänge im selben Subnetz liegen."""
+    ...</code></pre>
+                <ol>
+                    <li>Implementiere die Funktionen. Beginne mit <code>ip_zu_zahl</code> und <code>zahl_zu_ip</code> und teste sie, bevor du weitermachst.</li>
+                    <li>Teste dein Programm mit den Testfällen der Tabelle und trage die tatsächliche Ausgabe ein. Ergänze zwei eigene Testfälle aus den Aufgaben dieser Seite.</li>
+                    <li>Erweitere das Programm um eine Funktion <code>pruefe_konfiguration(ip, praefix, gateway)</code>, die eine Liste von Problemen zurückgibt: Die IP-Adresse ist die Netz- oder Broadcast-Adresse, das Gateway liegt nicht im eigenen Netz, oder IP-Adresse und Gateway sind gleich. Prüfe damit die Geräte aus Aufgabe 7.6.6.</li>
+                </ol>
+                <table>
+                    <thead>
+                        <tr><th>Nr.</th><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td><code>ip_zu_zahl("192.168.10.77")</code></td><td><code>3232238157</code></td><td></td></tr>
+                        <tr><td>2</td><td><code>zahl_zu_ip(3232238157)</code></td><td><code>"192.168.10.77"</code></td><td></td></tr>
+                        <tr><td>3</td><td><code>zahl_zu_ip(maske(27))</code></td><td><code>"255.255.255.224"</code></td><td></td></tr>
+                        <tr><td>4</td><td><code>netzinfo("192.168.10.77", 27)</code></td><td>netz 192.168.10.64, broadcast 192.168.10.95, erster_host 192.168.10.65, letzter_host 192.168.10.94, hosts 30</td><td></td></tr>
+                        <tr><td>5</td><td><code>netzinfo("172.16.45.13", 20)</code></td><td>maske 255.255.240.0, netz 172.16.32.0, broadcast 172.16.47.255, hosts 4094</td><td></td></tr>
+                        <tr><td>6</td><td><code>netzinfo("192.168.100.130", 30)</code></td><td>netz 192.168.100.128, broadcast 192.168.100.131, hosts 2</td><td></td></tr>
+                        <tr><td>7</td><td><code>netzinfo("10.0.0.0", 8)</code></td><td>netz 10.0.0.0, broadcast 10.255.255.255, hosts 16777214</td><td></td></tr>
+                        <tr><td>8</td><td><code>gleiches_netz("192.168.10.77", "192.168.10.100", 27)</code></td><td><code>False</code></td><td></td></tr>
+                        <tr><td>9</td><td><code>gleiches_netz("192.168.10.77", "192.168.10.94", 27)</code></td><td><code>True</code></td><td></td></tr>
+                        <tr><td>10</td><td><code>praefix_aus_maske("255.255.255.224")</code></td><td><code>27</code></td><td></td></tr>
+                        <tr><td>11</td><td><code>praefix_aus_maske("255.255.0.255")</code></td><td><code>ValueError</code></td><td></td></tr>
+                        <tr><td>12</td><td><code>ip_zu_zahl("192.168.1.256")</code></td><td><code>ValueError</code></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p class="tipp">Eine Adresse a.b.c.d ist die Zahl a · 256<sup>3</sup> + b · 256<sup>2</sup> + c · 256 + d. Die Maske zu /p hat oben p Einsen: 2<sup>32</sup> − 2<sup>32−p</sup>. Zur Kontrolle deiner Ergebnisse (nicht als Lösung) kannst du <code>ipaddress.ip_network("192.168.10.77/27", strict=False)</code> aus der Standardbibliothek verwenden.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.6.7: VLANs für ein Gymnasium <span class="niveau">AFB II</span></summary>
+                <p>Ein Gymnasium erhält vom Schulträger den Block 10.8.0.0/22. Auf den gemeinsamen Etagen-Switches sollen vier VLANs eingerichtet werden (vgl. Beispiel 4): VLAN 10 Schüler-WLAN mit 400 Geräten, VLAN 20 Lehrkräfte mit 120 Geräten, VLAN 30 Verwaltung mit 25 Geräten, VLAN 40 Drucker mit 10 Geräten. Jedes VLAN braucht zusätzlich eine Gateway-Adresse; das Gateway soll jeweils die erste Hostadresse sein.</p>
+                <ol>
+                    <li>Erstelle den IP-Plan mit VLSM (VLAN, Netzadresse/Präfix, Gateway, Hostbereich, Broadcast).</li>
+                    <li>Gib den freien Bereich an und zerlege ihn in möglichst wenige Subnetze.</li>
+                    <li>Ein Hausmeister steckt das Lehrer-Notebook versehentlich an eine Dose, deren Switch-Port zu VLAN 10 gehört. Das Notebook bezieht seine Adresse per DHCP. Beschreibe, welche Adresse es erhält und welche Folgen das hat.</li>
+                </ol>
+            </details>
+        </div>

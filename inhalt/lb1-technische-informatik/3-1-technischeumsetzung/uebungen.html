@@ -1,0 +1,55 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.3: Gatter erkennen (LearningApps) <span class="niveau">AFB I</span></summary>
+                <iframe src="https://learningapps.org/watch?v=p5wahj3ga24" style="border:0px;width:100%;max-width:1000px;height:500px" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.4: XOR, NAND und NOR <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Baue in LogicSim ein XOR-Gatter nur aus UND-, ODER- und NICHT-Gattern nach. Nutze A ⊕ B = (¬A ∧ B) ∨ (A ∧ ¬B) und prüfe alle vier Eingabekombinationen.</li>
+                    <li>Zeige mit einer Wahrheitstabelle, dass ¬A NAND ¬B dasselbe liefert wie A ∨ B.</li>
+                    <li>Ein Treppenhauslicht hat unten den Schalter A und oben den Schalter B. Jeder Schalter soll das Licht umschalten können, egal wie der andere steht. Begründe, welches Gatter hierfür passt.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.5: Dachfenster im Gewächshaus <span class="niveau">AFB II</span></summary>
+                <p>Das Dachfenster eines Schulgewächshauses wird von einer kleinen Gatterschaltung gesteuert. Eingänge: A = Automatik eingeschaltet, B = Temperatur über 28&nbsp;°C, C = Windstille, D = Regensensor meldet Regen (jeweils 1 = trifft zu). Der Hausmeister hat die Verdrahtung als Gatterliste notiert:</p>
+                <table class="gitter">
+                    <tr><th>Gatter</th><th>Typ</th><th>Eingänge</th></tr>
+                    <tr><td>G1</td><td>NICHT</td><td>D</td></tr>
+                    <tr><td>G2</td><td>UND</td><td>A, B, C</td></tr>
+                    <tr><td>G3</td><td>UND</td><td>A, B, G1</td></tr>
+                    <tr><td>f (Fenster öffnet)</td><td>ODER</td><td>G2, G3</td></tr>
+                </table>
+                <ol>
+                    <li>Stelle den booleschen Ausdruck für f auf und beschreibe in einem Satz, wann das Fenster öffnet.</li>
+                    <li>Klammere den gemeinsamen Teil der beiden UND-Terme aus. Achte darauf, welche Klammern du setzen musst.</li>
+                    <li>Weise mit einer Wahrheitstabelle (16 Zeilen) nach, dass beide Ausdrücke gleichwertig sind.</li>
+                    <li>Gib für beide Varianten die Anzahl der Gatter an (ein Gatter mit mehreren Eingängen zählt als ein Gatter) und baue die kleinere Variante in LogicSim auf.</li>
+                </ol>
+                <p class="tipp">Ausklammern funktioniert wie in der Mathematik: Aus (X ∧ Y) ∨ (X ∧ Z) wird X ∧ (Y ∨ Z). Hier ist X selbst schon ein UND-Term.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.6: Ein Chip nur mit NOR-Gattern <span class="niveau">AFB II</span></summary>
+                <p>Ein Bastelset enthält ausschließlich NOR-Bausteine. Wie das NAND-Gatter ist auch das NOR-Gatter funktional vollständig.</p>
+                <ol>
+                    <li>Baue aus NOR-Gattern ein NICHT-, ein ODER- und ein UND-Gatter. Gib jeweils die Umformung mit den Gesetzen der booleschen Algebra an (vgl. Beispiel 2).</li>
+                    <li>Gib an, wie viele NOR-Gatter du jeweils brauchst, und vergleiche mit den Zahlen beim NAND aus Beispiel 2.</li>
+                    <li>Baue die Schaltung für A NAND B nur aus NOR-Gattern in LogicSim auf und teste alle vier Eingabekombinationen.</li>
+                </ol>
+                <p class="tipp">Verbinde beide Eingänge eines NOR-Gatters – was passiert dann?</p>
+            </details>
+        </div>

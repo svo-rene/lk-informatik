@@ -1,0 +1,97 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 4.0.3: Sprachwahl begründen <span class="niveau">AFB III</span></summary>
+                <p>Ein Start-up plant (a) die Steuerung eines Sensors auf einem kleinen Mikrocontroller, (b) eine Web-App zur Anzeige der Messwerte und (c) Auswertungen über alle gespeicherten Messwerte. Schlage jeweils eine Sprachklasse bzw. ein Paradigma vor und begründe deine Wahl.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 4.0.4: Die Mensakasse auf Maschinenebene <span class="niveau">AFB II</span></summary>
+                <p>Die Mensakasse berechnet nach jedem Einkauf das Restguthaben einer Schülerkarte (alle Beträge in Cent):</p>
+                <pre><code class="language-python">rest = guthaben - essen - getraenk</code></pre>
+                <p>Der Prozessor der Kasse kennt nur diese Befehle (wie in Beispiel 1):</p>
+                <table class="gitter">
+                    <thead><tr><th>Befehl</th><th>Bedeutung</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>LOAD Rx, name</code></td><td>Wert der Speicherzelle <code>name</code> in Register Rx laden</td></tr>
+                        <tr><td><code>STORE Rx, name</code></td><td>Inhalt von Rx in die Speicherzelle <code>name</code> schreiben</td></tr>
+                        <tr><td><code>ADD Rx, Ry</code></td><td>Rx := Rx + Ry</td></tr>
+                        <tr><td><code>SUB Rx, Ry</code></td><td>Rx := Rx − Ry</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Übersetze die Python-Zeile in ein Assemblerprogramm, das mit den Registern R1 und R2 auskommt.</li>
+                    <li>Verfolge dein Programm in einer Tabelle (Befehl | R1 | R2 | rest) für guthaben = 1000, essen = 350, getraenk = 120.</li>
+                    <li>Prüfe dein Programm mit den Testfällen:
+                        <table class="gitter">
+                            <thead><tr><th>guthaben, essen, getraenk</th><th>erwarteter Wert von rest</th><th>Wert nach deinem Assemblerprogramm</th></tr></thead>
+                            <tbody>
+                                <tr><td>1000, 350, 120</td><td>530</td><td></td></tr>
+                                <tr><td>800, 350, 150</td><td>300</td><td></td></tr>
+                                <tr><td>500, 500, 0</td><td>0</td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li>Die Schule tauscht die Kasse gegen ein Gerät mit einem anderen Prozessor. Begründe, welches der beiden Programme (Python oder Assembler) weiterverwendet werden kann und was mit dem anderen geschehen muss.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 4.0.5: Ein Fahrkartenpreis – vier Denkweisen <span class="niveau">AFB II</span></summary>
+                <p>Der Verkehrsverbund berechnet Fahrkartenpreise nach dem Alter: Kinder unter 6 Jahren fahren kostenlos, 6- bis 14-Jährige zahlen 150 Cent, alle ab 15 Jahren 300 Cent. Vier Teams haben das Problem in verschiedenen Paradigmen gelöst:</p>
+                <pre><code class="language-python"># Variante A
+alter_gruppe = [4, 9, 15, 40]
+gesamt = 0
+for alter in alter_gruppe:
+    if alter &lt; 6:
+        gesamt = gesamt + 0
+    elif alter &lt;= 14:
+        gesamt = gesamt + 150
+    else:
+        gesamt = gesamt + 300
+print(gesamt)</code></pre>
+                <pre><code class="language-python"># Variante B
+class Fahrgast:
+    def __init__(self, alter):
+        self.alter = alter
+
+    def preis(self):
+        if self.alter &lt; 6:
+            return 0
+        elif self.alter &lt;= 14:
+            return 150
+        return 300
+
+gruppe = [Fahrgast(4), Fahrgast(9), Fahrgast(15), Fahrgast(40)]
+gesamt = 0
+for f in gruppe:
+    gesamt = gesamt + f.preis()
+print(gesamt)</code></pre>
+                <pre><code class="language-python"># Variante C
+def preis(alter):
+    return 0 if alter &lt; 6 else (150 if alter &lt;= 14 else 300)
+
+print(sum(map(preis, [4, 9, 15, 40])))</code></pre>
+                <pre><code>% Variante D (Prolog)
+preis(Alter, 0)   :- Alter &lt; 6.
+preis(Alter, 150) :- Alter &gt;= 6, Alter =&lt; 14.
+preis(Alter, 300) :- Alter &gt;= 15.
+
+?- preis(40, P).
+?- preis(9, P).</code></pre>
+                <ol>
+                    <li>Ordne jede Variante in die Paradigmen-Hierarchie ein (oberste Ebene und Paradigma darunter). Nenne jeweils ein Merkmal <em>im Code</em>, an dem du das erkennst.</li>
+                    <li>Gib die Ausgaben von A, B und C an. Ermittle außerdem, was A, B und C ausgeben, wenn die Gruppe aus Personen mit dem Alter 6, 14 und 5 besteht.</li>
+                    <li>Gib an, wie SWI-Prolog auf die beiden Anfragen in Variante D antwortet. Erkläre, warum bei der zweiten Anfrage nach dem Eingeben von <code>;</code> noch eine Antwort folgt.</li>
+                    <li>Der Verbund führt einen Seniorentarif ein: ab 65 Jahren 200 Cent. Beurteile, in welcher Variante die Änderung am wenigsten Stellen im Code betrifft.</li>
+                </ol>
+                <p class="tipp">Tipp: Prolog probiert die Regeln von oben nach unten aus. Nach einer Antwort merkt es sich, welche Regeln es noch nicht versucht hat.</p>
+            </details>
+        </div>

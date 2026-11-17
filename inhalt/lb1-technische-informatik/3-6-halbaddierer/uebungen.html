@@ -1,0 +1,43 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.6.3: Grenzen des Halbaddierers <span class="niveau">AFB III</span></summary>
+<ol>
+<li>Berechne 11 + 11 (binär) schriftlich und markiere alle Überträge.</li>
+<li>Begründe, an welcher Stelle ein einzelner Halbaddierer nicht mehr ausreicht.</li>
+<li>Überlege, wie man mit zwei Halbaddierern und einem zusätzlichen Gatter drei Bits addieren könnte. Skizziere deine Idee.</li>
+</ol>
+</details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.6.4: Halbsubtrahierer entwerfen <span class="niveau">AFB II</span></summary>
+<p>Das Rechenwerk eines Lagerroboters soll Kisten nicht nur dazuzählen, sondern auch abziehen. Für die niedrigste Stelle wird ein <strong>Halbsubtrahierer</strong> gebraucht: Er berechnet A − B für zwei einzelne Bits. Ausgänge sind das Differenzbit D und das Leihbit L. L = 1 bedeutet: Man muss sich von der nächsthöheren Stelle eine 1 „leihen“ (wie beim schriftlichen Subtrahieren im Dezimalsystem). Es gilt A − B = D − 2 · L.</p>
+<ol>
+<li>Stelle die Wahrheitstabelle für D und L auf und prüfe jede Zeile mit der Gleichung A − B = D − 2 · L.</li>
+<li>Gib die Funktionen für D und L als disjunktive Normalform an und vergleiche sie mit dem Halbaddierer: Welcher Ausgang ist gleich, welcher unterscheidet sich, und wie?</li>
+<li>Entwirf die Schaltung nur mit NICHT-, UND- und ODER-Gattern mit je zwei Eingängen. Nutze ein Gatter für beide Ausgänge. Beschreibe die Verdrahtung in Textform und gib die Gatteranzahl an.</li>
+</ol>
+<p>Baue die Schaltung in LogicSim auf und teste alle vier Belegungen.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.6.5: Rundenzähler mit Überlauf <span class="niveau">AFB II</span></summary>
+<p>Eine Carrerabahn zählt die Runden eines Autos in einem 3-Bit-Register Z<sub>2</sub>Z<sub>1</sub>Z<sub>0</sub>. Bei jeder Durchfahrt der Lichtschranke wird der Inhalt um 1 erhöht. Ein <strong>Inkrementierer</strong> berechnet dafür den neuen Wert N<sub>2</sub>N<sub>1</sub>N<sub>0</sub> und ein Übertragsbit U, das anzeigt, dass das Ergebnis nicht mehr in drei Bit passt.</p>
+<ol>
+<li>Stelle die Wahrheitstabelle mit den Eingängen Z<sub>2</sub>, Z<sub>1</sub>, Z<sub>0</sub> und den Ausgängen N<sub>2</sub>, N<sub>1</sub>, N<sub>0</sub>, U auf.</li>
+<li>Lies N<sub>0</sub>, N<sub>1</sub> und U direkt ab. Minimiere N<sub>2</sub> mit einem KV-Diagramm im Kursstil (A = Z<sub>2</sub>, B = Z<sub>1</sub>, C = Z<sub>0</sub>). Zeige anschließend mit Ausklammern und De Morgan, dass N<sub>2</sub> = Z<sub>2</sub> ⊕ (Z<sub>1</sub> ∧ Z<sub>0</sub>) gilt.</li>
+<li>Entwirf den Inkrementierer mit höchstens 6 Gattern (NICHT, UND, ODER, XOR mit je zwei Eingängen), ohne fertige Halbaddierer-Blöcke. Beschreibe die Verdrahtung in Textform.</li>
+<li>Das Register startet bei 000. Gib den Registerinhalt nach 13 Runden an und wie oft U dabei 1 war. Beurteile, ob man aus dem Registerinhalt allein die Rundenzahl ablesen kann.</li>
+<li>Ein anderes Programm deutet denselben Registerinhalt als Zahl im Zweierkomplement (−4 bis 3). Ermittle, bei welchem Zählschritt dann ein Überlauf entsteht und ob U ihn anzeigt. Gib eine Funktion für ein Bit V an, das genau diesen Überlauf meldet.</li>
+</ol>
+<p>Baue den Inkrementierer in LogicSim auf und prüfe ihn mit allen acht Belegungen.</p>
+<p class="tipp">Fasse Z<sub>1</sub> ∧ Z<sub>0</sub> zu einem Hilfssignal K zusammen. K wird mehrfach gebraucht.</p>
+</details>
+</div>

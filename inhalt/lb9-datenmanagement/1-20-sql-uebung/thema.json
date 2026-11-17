@@ -1,0 +1,14 @@
+{
+  "nr": "1.20",
+  "titel": "SQL-Übungen für DB Browser (SQLite) – Thema: Freizeitpark",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

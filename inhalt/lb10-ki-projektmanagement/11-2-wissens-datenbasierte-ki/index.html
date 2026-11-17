@@ -1,0 +1,167 @@
+<h2>1. Wissensbasierte Ansätze (Expertensysteme)</h2>
+
+<p>Wissensbasierte Ansätze versuchen, Intelligenz durch die explizite Formulierung von Wissen, Regeln oder Strategien nachzuahmen. Solche Systeme, oft als Expertensysteme bezeichnet, waren vor allem in den 1980er Jahren populär (vgl. 11.1).</p>
+
+<h3>1.1 Tabellenbasiertes Wissen</h3>
+
+<p>Einfaches Wissen wird in Tabellen gespeichert und abgerufen. Das ist nützlich für Aufgaben wie Übersetzungen, Erklärungen von Fachbegriffen oder Preisvergleiche.</p>
+
+<h3>1.2 Problemlösen durch Suche</h3>
+
+<p>Hier wird versucht, optimale Lösungen in einem definierten Problemraum zu finden. Beispiele dafür sind Wegfindungsalgorithmen in Navigationssystemen oder Strategien in Spielen wie Schach.</p>
+
+<h3>1.3 Logisches Schließen</h3>
+
+<p>Aus einer Wissensbasis mit Fakten und Regeln können neue Aussagen abgeleitet oder überprüft werden. Das wird zum Beispiel beim Beweisen mathematischer Aussagen oder zur Unterstützung bei medizinischen Diagnosen eingesetzt.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Prolog</summary>
+                <p>Prolog ist eine Programmiersprache, die speziell für logikbasierte Anwendungen entwickelt wurde. Damit kannst du auf Grundlage von Fakten und Regeln logische Schlüsse ziehen. Prolog wird oft in Bereichen wie künstlicher Intelligenz und Wissensverarbeitung eingesetzt, z.&nbsp;B. für Expertensysteme, Sprachverarbeitung oder logische Rätsel.</p>
+                <p><strong>Wichtig zur Schreibweise:</strong> In Prolog beginnen <em>Konstanten</em> (konkrete Dinge wie <code>sokrates</code>) und Prädikatnamen (wie <code>mensch</code>) mit einem <strong>Kleinbuchstaben</strong>. Wörter mit <strong>Großbuchstaben</strong> (wie <code>X</code>) sind <em>Variablen</em>. Jede Klausel endet mit einem Punkt.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Fakt und Regel in Prolog:</p>
+            <pre><code>mensch(sokrates).
+sterblich(X) :- mensch(X).</code></pre>
+            <p>Die Regel liest man: „X ist sterblich, wenn X ein Mensch ist.“ Gestellt wird die Anfrage <code>?- sterblich(sokrates).</code></p>
+            <ol>
+                <li><strong>Was:</strong> Prolog sucht eine Klausel, deren Kopf zur Anfrage <code>sterblich(sokrates)</code> passt, und findet die Regel <code>sterblich(X) :- mensch(X).</code> – <em>warum:</em> Einen Fakt <code>sterblich(sokrates)</code> gibt es nicht, die Aussage kann also nur über eine Regel abgeleitet werden.</li>
+                <li><strong>Was:</strong> Die Variable <code>X</code> wird mit <code>sokrates</code> belegt – <em>warum:</em> Nur so stimmen Anfrage und Regelkopf überein; die Regel gilt für jedes beliebige <code>X</code>.</li>
+                <li><strong>Was:</strong> Prolog prüft die Bedingung der Regel, jetzt also <code>mensch(sokrates)</code> – <em>warum:</em> Der Regelkopf gilt nur, wenn alle Bedingungen hinter <code>:-</code> erfüllt sind.</li>
+                <li><strong>Was:</strong> <code>mensch(sokrates)</code> steht als Fakt in der Wissensbasis – <em>warum:</em> Fakten gelten ohne weitere Bedingung, die Ableitung ist damit abgeschlossen.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Auf die Anfrage <code>?- sterblich(sokrates).</code> antwortet Prolog mit <code>true</code>.</p>
+            <p><strong>Erweiterung – Regel mit zwei Bedingungen:</strong> ein kleiner Stammbaum.</p>
+            <pre><code>elternteil(anna, ben).
+elternteil(ben, clara).
+grosselternteil(X, Z) :- elternteil(X, Y), elternteil(Y, Z).</code></pre>
+            <p>Das Komma bedeutet „und“. Auf <code>?- grosselternteil(anna, Wer).</code> sucht Prolog eine Belegung für die Variable <code>Wer</code> und antwortet <code>Wer = clara</code>: Es findet zuerst <code>elternteil(anna, ben)</code>, setzt <code>Y = ben</code> und dann <code>elternteil(ben, clara)</code>.</p>
+            <p><strong>Kontrolle:</strong> Rückwärts gelesen stimmt die Kette: Anna ist Elternteil von Ben, Ben ist Elternteil von Clara, also ist Anna Großelternteil von Clara. Die Anfrage <code>?- grosselternteil(ben, Wer).</code> liefert dagegen <code>false</code>, weil es keinen Fakt <code>elternteil(clara, …)</code> gibt.</p>
+            </details>
+        </div>
+
+<h3>1.4 Entscheidungsbäume</h3>
+
+<p>Entscheidungsbäume stellen Entscheidungsregeln in einer hierarchischen Struktur dar. Sie werden oft im Kundenservice oder für einfache Diagnose-Tools genutzt.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Entscheidungsbäume beim maschinellen Lernen</summary>
+                <p>In wissensbasierten Ansätzen, wie Expertensystemen, werden Entscheidungsbäume manuell erstellt. Dabei definiert ein Experte die Regeln und logischen Pfade basierend auf Wissen und Erfahrung. Diese Systeme lösen jedoch nur Probleme, die durch diese Regeln abgedeckt sind.</p>
+                <p>Im maschinellen Lernen entstehen Entscheidungsbäume automatisch aus Daten. Statt Regeln manuell festzulegen, wird der Baum durch Training mit einem Datensatz erstellt. Das Modell identifiziert die besten Trennstellen („Splits“), um Entscheidungen zu treffen oder Vorhersagen zu machen (vgl. 11.5).</p>
+            </details>
+        </div>
+
+<h2>2. Datenbasierte Ansätze (maschinelles Lernen)</h2>
+
+<p>Datenbasierte Ansätze, besonders maschinelles Lernen, sind heute sehr wichtig. Diese Methoden ermöglichen es KI-Systemen, aus Daten zu lernen und sich anzupassen, ohne dass du jede Regel explizit programmieren musst.</p>
+
+<h3>2.1 Überwachtes Lernen</h3>
+
+<p>Beim überwachten Lernen trainierst du ein Modell mit gekennzeichneten Daten. Es lernt, eine Eingabe einer bestimmten Ausgabe zuzuordnen. Für jedes Trainingsbeispiel ist also bereits das „richtige“ Ergebnis bekannt (man spricht auch von einem <strong>Label</strong>), zum Beispiel ein Foto, das vorab als „Hund“ oder „Katze“ markiert wurde. Aus vielen solcher Beispiele lernt das Modell eine allgemeine Regel, mit der es auch bei neuen, noch unbekannten Eingaben die passende Ausgabe vorhersagen kann. Typische Anwendungen sind z.&nbsp;B. die Klassifizierung von Bildern oder die Erkennung von Spam-E-Mails.</p>
+
+<h3>2.2 Unüberwachtes Lernen</h3>
+
+<p>Unüberwachtes Lernen nutzt Daten ohne Kennzeichnungen, um Muster oder Strukturen zu erkennen. Es gibt hier also keine vorgegebenen „richtigen“ Antworten. Stattdessen sucht der Algorithmus selbstständig nach Ähnlichkeiten in den Daten und fasst ähnliche Datenpunkte zu Gruppen zusammen (man nennt das <strong>Clustering</strong>). Ein Beispiel ist die Kundensegmentierung: Ein Online-Shop gruppiert seine Kundinnen und Kunden automatisch anhand ihres Kaufverhaltens, ohne vorher festzulegen, welche Gruppen es überhaupt geben soll.</p>
+
+<h3>2.3 Bestärkendes Lernen (Reinforcement Learning)</h3>
+
+<p>Hier lernt ein <strong>Agent</strong> durch Interaktionen mit seiner Umgebung, Aktionen auszuführen, um Belohnungen zu maximieren. Als Agent bezeichnet man dabei das lernende System selbst, zum Beispiel ein Programm, das ein Computerspiel steuert, oder einen Roboter. Der Agent probiert verschiedene Aktionen aus und erhält dafür eine Rückmeldung in Form von Belohnung oder Bestrafung (z.&nbsp;B. Punkte in einem Spiel). Mit der Zeit lernt er so, welche Aktionen in welcher Situation zu einem guten Ergebnis führen – ganz ohne dass ihm vorher „richtige“ Antworten vorgegeben wurden. (Statt „bestärkendes“ liest man auch „verstärkendes Lernen“.)</p>
+
+<h2>3. Vergleich und Anwendungsbereiche</h2>
+
+<p>Wissensbasierte und datenbasierte Ansätze haben ihre Stärken und Schwächen:</p>
+
+<ul>
+            <li>Wissensbasierte Systeme sind ideal für Domänen mit klaren Regeln und Expertenwissen; ihre Entscheidungen sind gut nachvollziehbar.</li>
+            <li>Datenbasierte Systeme eignen sich besser für komplexe Probleme mit vielen Variablen und unklaren Regeln, brauchen aber viele (gute) Daten.</li>
+            <li>Moderne KI-Systeme kombinieren oft beide Ansätze, um die Vorteile beider Methoden zu nutzen.</li>
+        </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Eine Schule stattet ihre Klassenzimmer mit einer „Lüftungsampel“ aus. Ein regelbasiertes System soll aus Messwerten eine Lüftungsempfehlung ableiten. Die Fachleute für Gebäudetechnik haben diese Regeln formuliert:</p>
+            <ul>
+                <li><strong>R1:</strong> Wenn CO<sub>2</sub>-Gehalt &gt; 1000&nbsp;ppm, dann Luftqualität = schlecht.</li>
+                <li><strong>R2:</strong> Wenn Luftqualität = schlecht und Regen = nein, dann Fenster öffnen = ja.</li>
+                <li><strong>R3:</strong> Wenn Fenster öffnen = ja und Außentemperatur &lt; 5&nbsp;°C, dann Lüftungsdauer = 5 Minuten (Stoßlüften).</li>
+                <li><strong>R4:</strong> Wenn Fenster öffnen = ja und Außentemperatur ≥ 5&nbsp;°C, dann Lüftungsdauer = 10 Minuten.</li>
+                <li><strong>R5:</strong> Wenn Luftqualität = schlecht und Regen = ja, dann Hinweis = Lüftungsanlage einschalten.</li>
+            </ul>
+            <p>Gemessen werden (Fakten): CO<sub>2</sub>-Gehalt = 1600&nbsp;ppm, Außentemperatur = −5&nbsp;°C, Regen = nein.</p>
+            <ol>
+                <li><strong>Was:</strong> Durchgang 1: Alle Regeln werden mit den vorhandenen Fakten verglichen. Nur bei R1 ist die Bedingung erfüllt (1600 &gt; 1000), neuer Fakt: Luftqualität = schlecht. – <em>warum:</em> R2 bis R5 brauchen Fakten (Luftqualität, Fenster öffnen), die noch nicht in der Wissensbasis stehen. Man geht also von den Fakten aus „vorwärts“ zu neuen Schlüssen; dieses Vorgehen heißt <strong>Vorwärtsverkettung</strong>.</li>
+                <li><strong>Was:</strong> Durchgang 2: Mit dem neuen Fakt ist R2 erfüllt (schlecht und kein Regen), neuer Fakt: Fenster öffnen = ja. R5 feuert nicht. – <em>warum:</em> R5 verlangt Regen = ja, gemessen wurde aber Regen = nein.</li>
+                <li><strong>Was:</strong> Durchgang 3: R3 ist erfüllt (Fenster öffnen = ja und −5&nbsp;°C &lt; 5&nbsp;°C), neuer Fakt: Lüftungsdauer = 5 Minuten. R4 feuert nicht. – <em>warum:</em> R3 und R4 schließen sich über die Temperaturbedingung gegenseitig aus, deshalb kann immer nur eine der beiden Regeln feuern.</li>
+                <li><strong>Was:</strong> Durchgang 4: Keine Regel liefert einen neuen Fakt, das Verfahren endet. – <em>warum:</em> Ohne neue Fakten würden weitere Durchgänge immer dasselbe Ergebnis liefern.</li>
+                <li><strong>Was:</strong> Vergleich mit einem datenbasierten Ansatz: Man könnte stattdessen ein Jahr lang Messwerte aufzeichnen und dazu notieren, ob die Lehrkraft gelüftet hat (Label), und daraus z.&nbsp;B. einen Entscheidungsbaum lernen lassen. – <em>warum:</em> So braucht man keine Fachleute, die Regeln formulieren, aber viele gelabelte Daten. Das gelernte Modell übernimmt allerdings auch das Verhalten der Lehrkräfte, etwa wenn in der ersten Stunde aus Gewohnheit nie gelüftet wurde, und es lernt dann womöglich „erste Stunde → nicht lüften“, obwohl das fachlich falsch ist.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Ampel empfiehlt „Fenster öffnen, 5 Minuten Stoßlüften“. Das System kann seine Empfehlung lückenlos begründen: R1 → R2 → R3.</p>
+            <p><strong>Kontrolle und Falle:</strong> Die Kette lässt sich mit der Regelliste von Hand nachprüfen, das ist die Stärke wissensbasierter Systeme. Die Schwäche zeigt ein Sonderfall: Ist der CO<sub>2</sub>-Sensor defekt und meldet 0&nbsp;ppm, feuert keine Regel, und die Ampel bleibt stumm, ohne einen Fehler zu melden. An diese Situation hat beim Formulieren der Regeln niemand gedacht. Ein wissensbasiertes System kann nur so gut sein wie seine Regeln, ein datenbasiertes nur so gut wie seine Daten.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Regeln und Daten im Berufsalltag</summary>
+                <p><strong>Alltag:</strong> Die Plausibilitätsprüfung in einer Steuererklärungs-Software ist wissensbasiert (feste Regeln aus dem Steuerrecht), die Betrugserkennung deiner Bank bei Kartenzahlungen ist datenbasiert (gelernt aus Millionen von Transaktionen).</p>
+                <p><strong>Beruf:</strong> Wissensbasierte Systeme werden dort weiterentwickelt, wo Entscheidungen erklärbar sein müssen, z.&nbsp;B. bei Konfigurationssoftware im Maschinenbau oder bei Prüfregeln in Versicherungen. <strong>Data Scientists</strong> dagegen bauen datenbasierte Modelle; in der Praxis arbeiten beide Seiten oft zusammen, indem Fachwissen als Regeln die gelernten Modelle ergänzt.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Was ist ein Advance Organizer?</summary>
+                <p>Ein Advance Organizer ist eine grafische Übersicht (z.&nbsp;B. eine Mindmap oder Concept Map), mit der du neue Fachbegriffe und ihre Beziehungen zueinander übersichtlich darstellst. Er hilft dir, den Überblick über ein Thema zu behalten und Zusammenhänge zwischen Begriffen sichtbar zu machen. Ordne dazu die Begriffe z.&nbsp;B. nach Ober- und Unterbegriffen an und verbinde sie mit beschrifteten Pfeilen, die die Beziehung erklären (z.&nbsp;B. „ist eine Art von“, „nutzt“, „steht im Gegensatz zu“).</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Wissensbasierte (symbolische) KI</strong> – Menschen formulieren Wissen ausdrücklich als Fakten und Regeln; das System zieht daraus Schlüsse. <strong>Datenbasierte KI (maschinelles Lernen)</strong> – das System leitet die Regeln selbst aus Beispieldaten ab.</p>
+        </div>
+
+<div class="merke">
+            <p>Wissensbasierte Systeme funktionieren besonders gut in Bereichen mit klaren Regeln und Strukturen. Sie kommen an ihre Grenzen, wenn sie mit unvorhergesehenen Situationen oder komplexen, mehrdeutigen Daten umgehen müssen.</p>
+        </div>
+
+<div class="merke">
+            <p>Die Wahl zwischen wissensbasierten und datenbasierten Ansätzen hängt stark von der spezifischen Aufgabe, der verfügbaren Datenmenge und dem Grad der Strukturiertheit des Problems ab.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.2.1: Lernmethoden zuordnen <span class="niveau">AFB I</span></summary>
+                <p>Ordne die folgenden Beispiele der passenden Lernmethode des maschinellen Lernens zu:</p>
+                <ol>
+                    <li>Bildklassifizierung (z.&nbsp;B. Erkennung von Hunderassen)</li>
+                    <li>Kundensegmentierung in einem Online-Shop</li>
+                    <li>ein KI-Agent, der lernt, ein Computerspiel zu spielen</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.2.2: Advance Organizer <span class="niveau">AFB II</span></summary>
+                <p>Erstelle eine Übersicht (Advance Organizer) über den Bereich „Künstliche Intelligenz“. Nutze diese Begriffe mit Definitionen und Beispielen und setze sie in Beziehung:</p>
+                <ul>
+                    <li>starke KI</li>
+                    <li>schwache KI</li>
+                    <li>wissensbasierte KI</li>
+                    <li>datenbasierte KI</li>
+                    <li>überwachtes Lernen</li>
+                    <li>unüberwachtes Lernen</li>
+                    <li>bestärkendes Lernen</li>
+                </ul>
+            </details>
+        </div>

@@ -1,0 +1,43 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.3.3: Eigene Grammatik <span class="niveau">AFB II/III</span></summary>
+<p>Entwickle selbst eine Grammatik, z.&nbsp;B. für:</p>
+<ul>
+<li>ein Datum im Format <code>JJJJ-MM-TT</code></li>
+<li>ein Autokennzeichen</li>
+<li>eine binäre Zahl mit gerader Stellenanzahl</li>
+</ul>
+</details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.3.5: Raumnummern im Schulhaus <span class="niveau">AFB II</span></summary>
+<p>Die Raumnummern eines Schulzentrums werden durch diese Grammatik mit dem Startsymbol Raum beschrieben:</p>
+<pre>Raum     → Gebaeude "-" Etage Ziffer Ziffer
+Gebaeude → "A" | "B" | "C"
+Etage    → "0" | "1" | "2" | "3"
+Ziffer   → "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"</pre>
+<ol type="a">
+<li>Gib N und T an.</li>
+<li>Entscheide, ob <code>B-305</code>, <code>A-41</code>, <code>D-112</code> und <code>C-099</code> zu L(G) gehören. Gib für <code>B-305</code> eine vollständige Ableitung an und begründe jede Ablehnung.</li>
+<li>Berechne, wie viele Raumnummern die Grammatik erzeugt.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.3.6: Sprache einer Grammatik bestimmen <span class="niveau">AFB II</span></summary>
+<p>G<sub>1</sub> = ({S, A}, {0, 1}, P<sub>1</sub>, S) mit P<sub>1</sub>: S → 1A, A → 0A | 1A | 0<br>
+G<sub>2</sub> = ({S}, {a, b}, P<sub>2</sub>, S) mit P<sub>2</sub>: S → aSb | ε</p>
+<ol type="a">
+<li>Gib für beide Grammatiken die drei kürzesten Wörter mit Ableitung an.</li>
+<li>Beschreibe L(G<sub>1</sub>) und L(G<sub>2</sub>) in Worten und in Mengenschreibweise. Deute L(G<sub>1</sub>), wenn man die Wörter als Binärzahlen liest.</li>
+</ol>
+</details>
+</div>

@@ -1,0 +1,257 @@
+<p>
+        Software kann auf viele verschiedene Arten entwickelt werden – und das ist auch gut so. Unterschiedliche Probleme erfordern unterschiedliche Herangehensweisen. Deshalb gibt es verschiedene <strong>Programmierparadigmen</strong>: Denkmodelle, mit denen Entwicklerinnen und Entwickler ihre Programme strukturieren.
+    </p>
+
+<p>
+        Profis in der Softwareentwicklung nutzen je nach Anwendung unterschiedliche Paradigmen – oft sogar mehrere gleichzeitig. Webserver und Apps werden häufig objektorientiert entworfen. Bei der Datenanalyse und im Machine Learning werden Daten oft deklarativ (z.&nbsp;B. mit SQL) abgefragt und funktional in „Pipelines“ weiterverarbeitet. Regelbasierte Expertensysteme arbeiten logisch. Wer sich in der Informatik auskennt, sollte die wichtigsten Paradigmen kennen – und verstehen.
+    </p>
+
+<h2>Imperatives Paradigma</h2>
+
+<p>
+        <strong>„Sag dem Computer genau, was er tun soll.“</strong><br>
+        Im Mittelpunkt steht eine klare Abfolge von Anweisungen. Jede Anweisung kann den Zustand des Programms (die Werte der Variablen) ändern.
+    </p>
+
+<pre><code>let a = 5;
+let b = 10;
+let sum = a + b;
+console.log(sum);</code></pre>
+
+<p>Teste es z.&nbsp;B. online unter <a href="https://jsfiddle.net/" target="_blank">jsfiddle.net</a>.</p>
+
+<h2>Deklaratives Paradigma</h2>
+
+<p>
+        <strong>„Beschreibe, was du willst – nicht, wie es passieren soll.“</strong><br>
+        Beschrieben wird das gewünschte Ergebnis, nicht der konkrete Ablauf.
+    </p>
+
+<pre><code>SELECT id, username, description
+FROM users
+WHERE description = 'Info LK > alles';</code></pre>
+
+<p>Teste SQL-Anfragen z.&nbsp;B. auf <a href="https://sqliteonline.com" target="_blank">sqliteonline.com</a>.</p>
+
+<h2>Funktionales Paradigma</h2>
+
+<p>
+        <strong>„Nutze reine Funktionen – ohne Seiteneffekte.“</strong><br>
+        Die funktionale Programmierung setzt Programme aus Funktionen zusammen, die für dieselbe Eingabe immer dieselbe Ausgabe liefern und keinen veränderbaren Zustand nutzen.
+    </p>
+
+<pre><code class="language-python">zahlen = [1, 2, 3, 4, 5]
+quadrate = list(map(lambda x: x * x, zahlen))
+print(quadrate)            # [1, 4, 9, 16, 25]
+
+def fakultaet(n):
+    if n == 0:
+        return 1
+    else:
+        return n * fakultaet(n - 1)
+
+print(fakultaet(5))        # 120</code></pre>
+
+<p>Teste es z.&nbsp;B. auf <a href="https://replit.com/languages/python3" target="_blank">replit.com</a>.</p>
+
+<h2>Logisches Paradigma</h2>
+
+<p>
+        <strong>„Definiere Fakten und Regeln – der Computer zieht Schlüsse.“</strong><br>
+        Gut geeignet für Probleme, die sich durch Fakten und logische Regeln beschreiben lassen.
+    </p>
+
+<pre><code>vogel(pinguin).
+vogel(amsel).
+
+kann_fliegen(X) :- vogel(X), X \= pinguin.
+
+?- kann_fliegen(amsel).
+% Antwort: true</code></pre>
+
+<p>Teste es in <a href="https://swish.swi-prolog.org/" target="_blank">SWISH Prolog</a>.</p>
+
+<h2>Objektorientiertes Paradigma (OOP)</h2>
+
+<p>
+        <strong>„Denke in Objekten – mit Eigenschaften und Fähigkeiten.“</strong><br>
+        Hier bildest du Dinge der realen Welt nach: Ein Hund hat einen Namen und eine Rasse – und kann bellen.
+    </p>
+
+<pre><code class="language-python">class Hund:
+    def __init__(self, name, rasse):
+        self.name = name
+        self.rasse = rasse
+
+    def bellen(self):
+        print(f"{self.name} (Rasse: {self.rasse}) bellt!")
+
+mein_hund = Hund("Bello", "Dackel")
+mein_hund.bellen()         # Bello (Rasse: Dackel) bellt!</code></pre>
+
+<p>Teste Python-Code z.&nbsp;B. auf <a href="https://replit.com/languages/python3" target="_blank">replit.com</a>.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Summe von 1 bis 10</summary>
+        <p><strong>Ausgangssituation:</strong> Summe von 1 bis 10 – imperativ mit Schleife (<code>s = 0; for i in range(1, 11): s += i</code>) oder funktional mit <code>sum(range(1, 11))</code>. Beide liefern 55.</p>
+        <pre><code class="language-python"># imperativ
+s = 0
+for i in range(1, 11):
+    s += i
+print(s)                    # 55
+
+# funktional
+print(sum(range(1, 11)))    # 55</code></pre>
+        <ol>
+            <li><strong>Imperativ – Startzustand festlegen:</strong> <code>s = 0</code>. Warum? Die Summe wird schrittweise in einer Variablen aufgebaut, die vorher einen definierten Wert braucht.</li>
+            <li><strong>Imperativ – Zustand in jedem Durchlauf ändern:</strong> <code>range(1, 11)</code> liefert 1, 2, …, 10 (die 11 ist nicht dabei). <code>s</code> durchläuft die Werte 1, 3, 6, 10, 15, 21, 28, 36, 45, 55. Warum imperativ? Wir schreiben dem Computer jeden einzelnen Rechenschritt vor.</li>
+            <li><strong>Funktional – Ergebnis beschreiben:</strong> <code>sum(range(1, 11))</code> sagt nur „Summe der Zahlen von 1 bis 10“. Es gibt keine Variable, die wir verändern. Warum funktional? Das Ergebnis entsteht durch Zusammensetzen der Funktionen <code>range</code> und <code>sum</code>; derselbe Aufruf liefert immer dasselbe Ergebnis.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Beide Programme geben 55 aus. Die imperative Lösung zeigt den Weg, die funktionale das Ziel.</p>
+        <p><strong>Kontrolle:</strong> Mit der Gaußschen Summenformel gilt 10 · 11 / 2 = 55. Ersetzt man 11 durch n + 1, ergeben sich diese Testfälle:</p>
+        <table class="gitter">
+            <thead><tr><th>obere Grenze n</th><th>erwartete Ausgabe (beide Varianten)</th></tr></thead>
+            <tbody>
+                <tr><td>10</td><td>55</td></tr>
+                <tr><td>1</td><td>1</td></tr>
+                <tr><td>0</td><td>0 (<code>range(1, 1)</code> ist leer)</td></tr>
+                <tr><td>100</td><td>5050</td></tr>
+            </tbody>
+        </table>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Dieselbe Aufgabe „Namen aller volljährigen Personen, alphabetisch“ in vier Paradigmen</summary>
+        <p><strong>Ausgangssituation:</strong> Gegeben sind drei Personen mit Name und Alter: Mia (17), Ben (19), Ala (21). Gesucht sind die Namen aller Volljährigen in alphabetischer Reihenfolge. Dasselbe Problem wird imperativ, funktional, objektorientiert, logisch (Prolog) und zum Vergleich in SQL gelöst.</p>
+        <pre><code class="language-python">personen = [("Mia", 17), ("Ben", 19), ("Ala", 21)]
+
+# imperativ
+ergebnis = []
+for name, alter in personen:
+    if alter &gt;= 18:
+        ergebnis.append(name)
+ergebnis.sort()
+
+# funktional
+ergebnis = sorted(name for name, alter in personen if alter &gt;= 18)
+
+# objektorientiert
+class Person:
+    def __init__(self, name, alter):
+        self.name = name
+        self.alter = alter
+    def ist_volljaehrig(self):
+        return self.alter &gt;= 18
+
+objekte = [Person(n, a) for n, a in personen]
+ergebnis = sorted(p.name for p in objekte if p.ist_volljaehrig())
+print(ergebnis)            # ['Ala', 'Ben']</code></pre>
+        <pre><code>-- deklarativ in SQL
+SELECT name FROM personen WHERE alter &gt;= 18 ORDER BY name;</code></pre>
+        <pre><code>% logisch in Prolog (SWI-Prolog)
+person(mia, 17).
+person(ben, 19).
+person(ala, 21).
+
+volljaehrig(Name) :- person(Name, Alter), Alter &gt;= 18.
+
+?- volljaehrig(X).
+X = ben ;
+X = ala.
+
+?- setof(X, volljaehrig(X), Liste).
+Liste = [ala, ben].</code></pre>
+        <ol>
+            <li><strong>Imperativ:</strong> Die Liste <code>ergebnis</code> wird schrittweise verändert: <code>[]</code> → <code>['Ben']</code> → <code>['Ben', 'Ala']</code> → nach <code>sort()</code> <code>['Ala', 'Ben']</code>. Mia wird übersprungen, weil 17 &gt;= 18 falsch ist. Warum imperativ? Jeder Schritt und jede Änderung ist ausdrücklich vorgeschrieben.</li>
+            <li><strong>Funktional:</strong> <code>sorted(…)</code> erzeugt aus dem Ausdruck „Namen aller Personen mit alter &gt;= 18“ eine <em>neue</em>, sortierte Liste. Nichts wird nachträglich verändert. Warum? Funktionen ohne Seiteneffekte sind leicht zu testen: gleiche Eingabe, gleiche Ausgabe.</li>
+            <li><strong>Objektorientiert:</strong> Name und Alter werden mit der Methode <code>ist_volljaehrig()</code> zu einem <code>Person</code>-Objekt gebündelt. Statt das Alter von außen zu prüfen, „fragt“ man das Objekt. Warum? Die Regel „ab 18“ steht an genau einer Stelle – bei der Person, zu der sie gehört.</li>
+            <li><strong>Logisch:</strong> Prolog bekommt nur Fakten (<code>person(…)</code>) und eine Regel. Bei der Anfrage <code>volljaehrig(X)</code> probiert es die Fakten der Reihe nach: mia scheitert an 17 &gt;= 18, dann folgt <code>X = ben</code>; nach <code>;</code> sucht Prolog weiter (Backtracking) und findet <code>X = ala</code>. Danach gibt es keine Alternativen mehr, deshalb steht dort ein Punkt. <code>setof</code> sammelt alle Lösungen und sortiert sie. Namen werden kleingeschrieben, weil großgeschriebene Wörter in Prolog Variablen sind.</li>
+            <li><strong>SQL:</strong> Die Abfrage beschreibt Bedingung (<code>WHERE</code>) und Sortierung (<code>ORDER BY</code>); wie gesucht wird, entscheidet die Datenbank.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Alle Varianten liefern Ala und Ben in dieser Reihenfolge – Python <code>['Ala', 'Ben']</code>, Prolog <code>Liste = [ala, ben]</code>. Imperativ und objektorientiert wird ein Ablauf vorgegeben, funktional, logisch und in SQL wird das gewünschte Ergebnis beschrieben.</p>
+        <p><strong>Kontrolle:</strong> Testfälle für die drei Python-Varianten. Die Falle liegt beim Grenzfall „genau 18“: Mit <code>&gt; 18</code> statt <code>&gt;= 18</code> würde Tom fehlen.</p>
+        <table class="gitter">
+            <thead><tr><th>Eingabe <code>personen</code></th><th>erwartete Ausgabe</th></tr></thead>
+            <tbody>
+                <tr><td><code>[("Mia", 17), ("Ben", 19), ("Ala", 21)]</code></td><td><code>['Ala', 'Ben']</code></td></tr>
+                <tr><td><code>[("Tom", 18)]</code></td><td><code>['Tom']</code></td></tr>
+                <tr><td><code>[("Zoe", 30), ("Max", 16), ("Eda", 18)]</code></td><td><code>['Eda', 'Zoe']</code></td></tr>
+                <tr><td><code>[("Mia", 17)]</code></td><td><code>[]</code></td></tr>
+            </tbody>
+        </table>
+        <p>Sonderfall in Prolog: Gibt es keine einzige volljährige Person, findet <code>setof</code> keine Lösung und antwortet mit <code>false.</code> statt mit einer leeren Liste.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: Warum wir in der Schule OOP vertiefen</summary>
+            <p>
+                Objektorientierung ist in der Praxis allgegenwärtig: Fast jede moderne App, jede Website, viele Spiele und technische Systeme nutzen objektorientierte Programmierung. Deshalb ist OOP nicht nur im Lehrplan verankert, sondern ein praxisrelevantes Fundament für alle, die Software entwickeln wollen.
+            </p>
+        </details>
+    </div>
+
+<div class="praxisbezug">
+        <details>
+            <summary>Praxisbezug: Paradigmen im Berufsalltag</summary>
+            <p>
+                <strong>Alltag:</strong> Die Suche in einer Online-Bibliothek („alle Bücher von Autorin X nach 2020“) ist eine deklarative Datenbankabfrage; die App, die dir die Ergebnisse anzeigt, ist objektorientiert programmiert.<br><br>
+                <strong>Beruf:</strong> Eine Full-Stack-Entwicklerin schreibt an einem Tag objektorientierten Code für das Backend (z.&nbsp;B. in Java oder Python), SQL-Abfragen für die Datenbank und funktionalen JavaScript-Code für die Weboberfläche. Das Wechseln zwischen Paradigmen gehört in Softwarefirmen – auch in der wachsenden IT-Branche in Dresden und Leipzig – zum normalen Arbeitsalltag.
+            </p>
+        </details>
+    </div>
+
+<p>
+        Jedes Paradigma hat seine Stärken. Als Entwicklerin oder Entwickler solltest du flexibel entscheiden können, welches Denkmodell zu welchem Problem passt. Wir steigen jetzt tiefer in das objektorientierte Paradigma ein, denn es bildet die Grundlage vieler moderner Programme.
+    </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            Ein <strong>Programmierparadigma</strong> ist ein grundlegender Denkstil der Programmierung. Es legt fest, wie ein Problem betrachtet und wie ein Programm zu seiner Lösung aufgebaut wird. Manche Paradigmen eignen sich besser für komplexe Datenmodelle, andere für mathematische Berechnungen oder für Wissen, das sich als Regeln beschreiben lässt.
+        </p>
+    </div>
+
+<div class="merke">
+        <p>
+            <strong>OOP</strong> hilft dir, Programme strukturiert und nachvollziehbar aufzubauen. Du bildest reale Dinge mit Klassen und Objekten ab. Das macht es einfacher, große Softwareprojekte zu verstehen und weiterzuentwickeln.
+        </p>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 4.1.1: Paradigmen im Alltag finden <span class="niveau">AFB II</span></summary>
+            <p>
+                Denk an Situationen oder digitale Systeme in deinem Alltag. Welche Programmierparadigmen könnten dort verwendet worden sein? Beispiele: Navigationssysteme, Taschenrechner-App, Schulverwaltungssoftware, Wetter-App.<br>
+                Notiere zwei bis drei Beispiele und überlege: Wird dort eher imperative Logik, objektorientierte Modellierung oder etwas anderes genutzt?
+            </p>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 4.1.2: Code-Beispiele einordnen <span class="niveau">AFB I–II</span></summary>
+            <p>Ordne jedem Ausschnitt ein Paradigma zu und begründe kurz:</p>
+            <pre><code>a)  preise = [3.5, 2.0, 4.2]
+    netto = list(map(lambda p: p / 1.19, preise))
+
+b)  SELECT titel FROM buecher WHERE jahr &gt; 2020;
+
+c)  elternteil(anna, ben).
+    grosselternteil(X, Z) :- elternteil(X, Y), elternteil(Y, Z).
+
+d)  konto = Konto("Mia", 100)
+    konto.einzahlen(50)
+
+e)  summe = 0
+    for p in preise:
+        summe = summe + p</code></pre>
+        </details>
+    </div>

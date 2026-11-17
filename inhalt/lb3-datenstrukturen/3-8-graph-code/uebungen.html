@@ -1,0 +1,153 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Die Queue vorhersagen <span class="niveau">AFB I</span></summary>
+                <p>Was gibt dieses Programmstück aus? Welches Element steht danach vorn, welches hinten?</p>
+                <pre><code class="language-python">q = Queue()
+q.enqueue(5)
+q.enqueue(7)
+q.enqueue(9)
+print(q.dequeue(), q.peek())</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>5 7</code> – die 5 kam zuerst und wird mit <code>dequeue</code> vorn entnommen. Danach steht die 7 vorn; <code>peek</code> zeigt sie, ohne sie zu entfernen. Hinten (zuletzt mit <code>enqueue</code> angestellt) steht die 9.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Zu spät markiert <span class="niveau">AFB II</span></summary>
+                <p>Jemand setzt <code>visited[...] = True</code> erst direkt nach <code>current = queue.dequeue()</code> (für <code>current</code>) und nicht mehr beim Einreihen der Nachbarn. Was passiert dann bei <code>g.bfs(0)</code> im Beispielgraphen? Verfolge die Schlange zwei, drei Runden lang.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Knoten kommen mehrfach in die Schlange: Nach 0 ist sie <code>[1, 2]</code>, nach 1 schon <code>[2, 2, 4]</code>, weil 2 noch nicht markiert ist. Die Reihenfolge wird <code>[0, 1, 2, 2, 4, 4, 4]</code> – Knoten werden mehrfach besucht. Wer beim Einreihen markiert, stellt jeden Knoten nur einmal an.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Was kostet <code>pop(0)</code> im Stern? <span class="niveau">AFB II</span></summary>
+                <p>Ein Graph hat 10&nbsp;001 Knoten: Knoten 0 ist mit allen anderen verbunden, sonst gibt es keine Kanten. Wie viele Elemente rücken bei <code>bfs_liste(0)</code> insgesamt nach? Und bei <code>bfs</code> mit der <code>Queue</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nach Knoten 0 stehen 10&nbsp;000 Knoten in der Schlange. Jedes <code>pop(0)</code> lässt die übrigen nachrücken: 9&nbsp;999 + 9&nbsp;998 + … + 1 + 0 = 9&nbsp;999 · 10&nbsp;000 / 2, also rund 50 Millionen Verschiebungen – O(Knoten²). Mit der <code>Queue</code> rückt nichts nach: 10&nbsp;001-mal <code>dequeue</code> in O(1), dazu 20&nbsp;000 Nachbar-Einträge – O(Knoten + Kanten).</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-8-1">
+            <details>
+                <summary>Aufgabe 3.8.1: Breitensuche von Hand <span class="niveau">AFB I</span></summary>
+                <p>Ergänze im Beispielgraphen die Kante 3–4. Führe <code>bfs(3)</code> von Hand aus und notiere nach jedem Schritt den Inhalt der Schlange.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-8-2">
+            <details>
+                <summary>Aufgabe 3.8.2: Graph mit Namen <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/namens_graph.py</code> – neu anlegen; Vorlage ist deine Klasse aus <code>graph.py</code><br><strong>Commits:</strong> wenn es läuft: <code>3.8.2: Graph mit Dictionary und Namen, bfs ab Dresden</code></p>
+                <p>Schreibe die Klasse so um, dass sie ein Dictionary verwendet und die Knoten Namen tragen (z.&nbsp;B. Städte). Teste mit Dresden–Leipzig, Dresden–Chemnitz, Chemnitz–Zwickau, Leipzig–Halle und führe eine Breitensuche ab Dresden durch.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-8-3">
+            <details>
+                <summary>Aufgabe 3.8.3: Tiefensuche und Zusammenhang <span class="niveau">AFB II–III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/graph.py</code> – weiterführen; Testfälle in <code>test_graph.py</code><br><strong>Commits:</strong> nach Teil 1: <code>3.8.3 Teil 1: dfs rekursiv ergänzt</code> · nach Teil 2: <code>3.8.3 Teil 2: ist_zusammenhaengend ergänzt, Tests ok</code></p>
+                <ol>
+                    <li>Implementiere eine rekursive Tiefensuche <code>dfs(start, visited)</code> für die Klasse <code>Graph</code>.</li>
+                    <li>Schreibe damit eine Methode <code>ist_zusammenhaengend()</code>, die prüft, ob von Knoten 0 aus alle Knoten erreichbar sind.</li>
+                    <li>Begründe, warum die Breitensuche in einem <em>gewichteten</em> Graphen nicht unbedingt den kürzesten Weg findet.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="primm">Code lesen, untersuchen, abwandeln</h2>
+
+<p>Bevor du selbst programmierst, liest du fertigen Code und findest heraus, was er tut: <strong>Vorhersagen</strong> (auf Papier, ohne Rechner) → <strong>Ausführen</strong> → <strong>Untersuchen</strong> mit dem Debugger → <strong>Abwandeln</strong> → <strong>Fehler finden</strong>. Rechne mit etwa 25 Minuten. Wie der Debugger funktioniert, zeigen der Kasten „So debuggst du in Thonny“ und das Video auf Kursseite 3.4.</p>
+
+<div class="aufgabe" id="primm-3-8">
+            <details open>
+                <summary>PRIMM 3.8: Was prüft <code>raetsel</code>? <span class="niveau">AFB I–II</span></summary>
+                <p class="git-datei"><strong>Dateien:</strong> <a href="../material/primm_3-8_raetsel.py" download>primm_3-8_raetsel.py</a> und <a href="../material/primm_3-8_fehler.py" download>primm_3-8_fehler.py</a> in <code>3_graphen/</code> speichern, dazu <code>queue_knoten.py</code> (siehe Beispiel 1) – erst nach Schritt 1 öffnen.</p>
+                <p><strong>1 Vorhersagen</strong> (Papier, ohne Rechner): Was geben die beiden Aufrufe aus? Zeichne den Graphen und beschreibe in einem Satz, was die Methode prüft.</p>
+                <pre><code class="language-python">    def raetsel(self, start):
+        visited = [False] * self.size
+        queue = Queue()
+        queue.enqueue(start)
+        visited[start] = True
+        anzahl = 0
+        while not queue.is_empty():
+            current = queue.dequeue()
+            anzahl = anzahl + 1
+            for n in self.graph[current]:
+                if not visited[n]:
+                    visited[n] = True
+                    queue.enqueue(n)
+        return anzahl == self.size
+
+
+g = Graph(5)
+g.add_edge(0, 1)
+g.add_edge(1, 2)
+g.add_edge(3, 4)
+print(g.raetsel(0))
+print(g.raetsel(3))</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>Ausgabe: <code>False</code> und <code>False</code>. Die Methode zählt mit einer Breitensuche, wie viele Knoten vom Start aus erreichbar sind, und prüft, ob das <em>alle</em> sind – also ob der Graph <strong>zusammenhängend</strong> ist. Er besteht aus zwei Teilen (0–1–2 und 3–4), deshalb ist das Ergebnis von jedem Start aus <code>False</code>.</p></details>
+                <p><strong>2 Ausführen:</strong> Öffne <code>primm_3-8_raetsel.py</code> in Thonny, starte mit <kbd>F5</kbd> und vergleiche mit deiner Vorhersage.</p>
+                <p><strong>3 Untersuchen</strong> mit dem Debugger (<kbd>Strg</kbd>&nbsp;+&nbsp;<kbd>F5</kbd>):</p>
+                <ol><li>In welcher Reihenfolge werden die Knoten bei <code>raetsel(0)</code> aus der Schlange genommen?</li><li>Welchen Wert hat <code>anzahl</code> am Ende von <code>raetsel(0)</code>, welchen am Ende von <code>raetsel(3)</code>?</li><li>Welche Kante müsste man ergänzen, damit beide Aufrufe <code>True</code> liefern?</li></ol>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>1. 0, 1, 2. 2. 3 bzw. 2. 3. Irgendeine Kante zwischen den beiden Teilen, z. B. <code>g.add_edge(2, 3)</code>.</p></details>
+                <p><strong>4 Abwandeln:</strong></p>
+                <ol type="a"><li>Schreibe <code>unerreichbar(start)</code>, die alle Knoten liefert, die vom Start aus nicht erreichbar sind (für <code>start = 0</code>: <code>[3, 4]</code>).</li><li>Schreibe <code>komponenten()</code>, die zählt, aus wie vielen Teilen der Graph besteht. Tipp: Starte so lange neue Breitensuchen, bis jeder Knoten besucht ist.</li></ol>
+                <p><strong>5 Fehler finden:</strong> Diese Breitensuche liefert <code>[0, 1, 2, 2, 3, 3]</code> statt <code>[0, 1, 2, 3]</code>. Beobachte im Debugger, welche Knoten nach dem Entnehmen der 1 mit <code>enqueue</code> angestellt werden: Warum wird die 2 ein zweites Mal angestellt? Korrigiere den Fehler und vergleiche mit <code>bfs</code> aus Beispiel 1.</p>
+                <pre><code class="language-python">    def bfs(self, start):
+        visited = [False] * self.size
+        queue = Queue()
+        queue.enqueue(start)
+        reihenfolge = []
+        while not queue.is_empty():
+            current = queue.dequeue()
+            visited[current] = True
+            reihenfolge.append(current)
+            for n in self.graph[current]:
+                if not visited[n]:
+                    queue.enqueue(n)
+        return reihenfolge</code></pre>
+                <p>Lösungen zu Schritt 4 und 5 stehen in der Musterlösung.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-3-8-4">
+            <details>
+                <summary>Aufgabe 3.8.4: Fluchtweg im Rasterplan <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/fluchtweg.py</code> – neu anlegen<br><strong>Commits:</strong> nach Teil 2: <code>3.8.4 Teil 2: abstaende mit Breitensuche</code> · nach Teil 3: <code>3.8.4 Teil 3: drei Tests ergänzt</code></p>
+                <p>Für eine Brandschutzübung wird der Grundriss eines Kellers als Raster gespeichert: <code>#</code> ist eine Wand, <code>.</code> ein begehbares Feld, S der Standort, A der Ausgang. Man kann nur waagerecht oder senkrecht gehen.</p>
+                <pre><code class="language-python">plan = ["S..#.",
+        "##.#.",
+        ".....",
+        ".####",
+        "....A"]</code></pre>
+                <ol>
+                    <li>Beschreibe, wie man den Plan als Graphen auffasst: Was sind Knoten, was sind Kanten? Wie viele Knoten hat der Graph?</li>
+                    <li>Schreibe eine Funktion <code>abstaende(plan, start_z, start_s)</code>, die mit einer Breitensuche für jedes Feld die kleinste Anzahl an Schritten vom Start aus berechnet. Sie gibt eine Tabelle <code>abstand</code> zurück, die so aufgebaut ist wie der Plan (eine Liste von Zeilen); <code>abstand[z][s] == -1</code> heißt „nicht erreichbar“. Tipp: Nimm zwei Schlangen, eine für die Zeile und eine für die Spalte des Felds.</li>
+                    <li>Teste: Abstand zum Ausgang <code>abstand[4][4]</code>, Abstand zum Feld <code>abstand[0][4]</code> und welchen Wert ein Wandfeld bekommt. Notiere jeweils erwartete und tatsächliche Ausgabe.</li>
+                    <li>Begründe, warum eine Tiefensuche hier nicht genügt, obwohl sie den Ausgang auch findet.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-8-6">
+            <details>
+                <summary>Aufgabe 3.8.6: Kontakte zweiten Grades <span class="niveau">AFB II–III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/graph.py</code> – weiterführen; Testfälle in <code>test_graph.py</code><br><strong>Commits:</strong> nach Teil 1: <code>3.8.6 Teil 1: kontakte_grad ergänzt</code> · nach Teil 2: <code>3.8.6 Teil 2: Tests für k = 1, 2, 3 ok</code></p>
+                <p>Ein Berufsnetzwerk zeigt dir „Kontakte 2. Grades“: Personen, die mit einem deiner Kontakte verbunden sind, aber nicht mit dir.</p>
+                <ol>
+                    <li>Ergänze die Klasse <code>Graph</code> um eine Methode <code>kontakte_grad(start, k)</code>, die alle Knoten mit genau k Kanten Abstand vom Start als aufsteigend sortierte Liste zurückgibt.</li>
+                    <li>Teste mit dem Beispielgraphen: <code>kontakte_grad(0, 1)</code>, <code>kontakte_grad(0, 2)</code>, <code>kontakte_grad(0, 3)</code>.</li>
+                    <li>Das Netzwerk hat 2 Millionen Mitglieder, jedes mit durchschnittlich 150 Kontakten. Schätze ab, wie viele Knoten deine Methode für k = 2 höchstens bearbeiten muss, wenn sie die Suche nach Ebene k abbricht – und wie viele, wenn sie das ganze Netzwerk durchsucht. Beurteile, ob sich der Abbruch lohnt.</li>
+                </ol>
+            </details>
+        </div>

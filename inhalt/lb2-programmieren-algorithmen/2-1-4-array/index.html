@@ -1,0 +1,294 @@
+<h2>Was ist eine Datenstruktur?</h2>
+
+<p>In der Programmierung ist eine Datenstruktur eine Möglichkeit, Daten zu organisieren und zu speichern. Datenstrukturen ermöglichen den effizienten Zugriff auf Daten, ihre Speicherung und ihre Verarbeitung. Stell dir vor, du müsstest die Noten aller 25 Schülerinnen und Schüler eines Kurses in 25 einzelnen Variablen speichern – mit einer Liste genügt ein einziger Name.</p>
+
+<h2>Array</h2>
+
+<p>
+            Ein klassisches Array hat eine feste Länge und enthält nur Werte eines Datentyps. In Python nutzt man stattdessen fast immer <strong>Listen</strong>: Sie können Werte verschiedener Datentypen speichern und wachsen bei Bedarf dynamisch. Wegen dieser Vorteile verwenden wir die Liste als Array, auch wenn das historisch nicht ganz korrekt ist.
+        </p>
+
+<figure>
+            <img src="../img/zahlweise_python.png" alt="Zählweise der Indizes in Python, beginnend bei 0" width="300">
+            <figcaption>Abb. 1: Zählweise der Indizes in Python</figcaption>
+        </figure>
+
+<h3>Erstellen eines Arrays in Python</h3>
+
+<p>In Python werden Arrays bzw. Listen so erstellt:</p>
+
+<pre><code class="language-python">mein_array0 = []                 # erzeugt ein leeres Array ohne Werte
+mein_array1 = [1, 2, 3, 4, 5]
+
+print(mein_array1[3])            # gibt den Wert 4 aus
+print(mein_array1)               # gibt [1, 2, 3, 4, 5] aus
+print(len(mein_array1))          # gibt die Anzahl der Elemente zurück, hier 5
+print(mein_array1[-1])           # negativer Index: letztes Element, hier 5</code></pre>
+
+<h2>Arbeiten mit Arrays in Python</h2>
+
+<p>Um den Inhalt eines Arrays auszugeben, gibt es verschiedene Schleifen:</p>
+
+<h3>1. for-Schleife</h3>
+
+<pre><code class="language-python">mein_array = [1, 2, 3, 4, 5]
+for element in mein_array:
+    print(element)</code></pre>
+
+<h3>2. while-Schleife</h3>
+
+<pre><code class="language-python">mein_array = [1, 2, 3, 4, 5]
+i = 0
+while i &lt; len(mein_array):
+    print(mein_array[i])
+    i = i + 1</code></pre>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> In einer Liste stehen Noten. Gezählt werden soll, wie oft die Note 1 vorkommt.</p>
+            <pre><code class="language-python">def zaehle_einsen(noten):
+    anzahl = 0
+    for i in range(len(noten)):      # i läuft über alle Indizes 0 … len - 1
+        if noten[i] == 1:
+            anzahl = anzahl + 1
+    return anzahl
+
+print(zaehle_einsen([2, 1, 3, 1, 4]))   # 2</code></pre>
+            <ol>
+                <li><strong>Indexbereich festlegen:</strong> <code>len([2, 1, 3, 1, 4])</code> ist 5, also läuft i von 0 bis 4. <em>Warum:</em> Der letzte gültige Index ist <code>len(noten) - 1</code>.</li>
+                <li><strong>Jedes Element prüfen:</strong>
+                    <table>
+                        <thead><tr><th>i</th><th>noten[i]</th><th>gleich 1?</th><th>anzahl</th></tr></thead>
+                        <tbody>
+                            <tr><td>0</td><td>2</td><td>nein</td><td>0</td></tr>
+                            <tr><td>1</td><td>1</td><td>ja</td><td>1</td></tr>
+                            <tr><td>2</td><td>3</td><td>nein</td><td>1</td></tr>
+                            <tr><td>3</td><td>1</td><td>ja</td><td>2</td></tr>
+                            <tr><td>4</td><td>4</td><td>nein</td><td>2</td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li><strong>Rückgabe:</strong> Nach dem letzten Durchlauf wird <code>anzahl</code> zurückgegeben. <em>Warum:</em> Erst dann sind alle Elemente geprüft.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> 2. <strong>Kontrolle:</strong> Die Listenmethode <code>noten.count(1)</code> liefert ebenfalls 2.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[2, 1, 3, 1, 4]</code></td><td><code>2</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>[]</code></td><td><code>0</code></td><td>leere Liste: Schleife läuft nicht</td></tr>
+                    <tr><td><code>[1]</code></td><td><code>1</code></td><td>ein Element</td></tr>
+                    <tr><td><code>[5, 5]</code></td><td><code>0</code></td><td>keine Eins vorhanden</td></tr>
+                    <tr><td><code>["1", 1]</code></td><td><code>1</code></td><td>falscher Typ: <code>"1" == 1</code> ist <code>False</code> – kein Absturz, aber stilles Fehlverhalten</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Wochentemperaturen auswerten – Summe, Maximum und Position in einem Durchlauf</p>
+            <pre><code class="language-python">temperaturen = [12.5, 15.0, 9.5, 18.0, 16.5]
+summe = 0
+max_index = 0
+for i in range(len(temperaturen)):
+    summe = summe + temperaturen[i]
+    if temperaturen[i] &gt; temperaturen[max_index]:
+        max_index = i
+print("Durchschnitt:", summe / len(temperaturen))            # Durchschnitt: 14.3
+print("Wärmster Tag:", max_index + 1, "mit", temperaturen[max_index], "°C")   # Wärmster Tag: 4 mit 18.0 °C</code></pre>
+            <ol>
+                <li><strong>Startwerte wählen:</strong> <code>summe = 0</code> und <code>max_index = 0</code>. <em>Warum:</em> Gespeichert wird der <em>Index</em> des bisher wärmsten Tages, nicht die Temperatur. So funktioniert das Verfahren auch, wenn alle Werte negativ sind. Ein Startwert <code>maximum = 0</code> wäre dann falsch.</li>
+                <li><strong>Ein Durchlauf für beides:</strong>
+                    <table>
+                        <thead><tr><th>i</th><th>temperaturen[i]</th><th>summe</th><th>max_index</th></tr></thead>
+                        <tbody>
+                            <tr><td>0</td><td>12.5</td><td>12.5</td><td>0</td></tr>
+                            <tr><td>1</td><td>15.0</td><td>27.5</td><td>1</td></tr>
+                            <tr><td>2</td><td>9.5</td><td>37.0</td><td>1</td></tr>
+                            <tr><td>3</td><td>18.0</td><td>55.0</td><td>3</td></tr>
+                            <tr><td>4</td><td>16.5</td><td>71.5</td><td>3</td></tr>
+                        </tbody>
+                    </table>
+                    <em>Warum:</em> Summe und Maximum lassen sich im selben Durchlauf bestimmen. Die Liste muss also nur einmal gelesen werden.</li>
+                <li><strong>Auswerten:</strong> 71.5 / 5 = 14.3. Der Index 3 entspricht dem 4. Tag, deshalb wird <code>max_index + 1</code> ausgegeben.</li>
+                <li><strong>Sonderfall Gleichstand:</strong> Wegen <code>&gt;</code> (nicht <code>&gt;=</code>) bleibt bei gleich warmen Tagen der <em>erste</em> stehen.</li>
+                <li><strong>Falle leere Liste:</strong> Für <code>[]</code> läuft die Schleife nicht. Danach bricht <code>summe / len(temperaturen)</code> mit <code>ZeroDivisionError</code> ab. Vor der Auswertung muss also <code>len(temperaturen) &gt; 0</code> geprüft werden.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>Durchschnitt: 14.3</code> und <code>Wärmster Tag: 4 mit 18.0 °C</code>.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[12.5, 15.0, 9.5, 18.0, 16.5]</code></td><td>Durchschnitt 14.3, Tag 4</td><td>Normalfall</td></tr>
+                    <tr><td><code>[5.0]</code></td><td>Durchschnitt 5.0, Tag 1</td><td>ein Element</td></tr>
+                    <tr><td><code>[16.0, 18.0, 18.0]</code></td><td>Tag 2</td><td>Gleichstand: erster wärmster Tag</td></tr>
+                    <tr><td><code>[-3.5, -1.0, -7.0]</code></td><td>Tag 2 mit −1.0 °C</td><td>nur negative Werte</td></tr>
+                    <tr><td><code>[]</code></td><td><code>ZeroDivisionError</code></td><td>Fehlerfall: vorher abfangen</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<h2>Listenmethoden</h2>
+
+<p>In Python gibt es viele nützliche Methoden, mit denen sich Listen verändern, erweitern, durchsuchen oder verarbeiten lassen. Die jeweilige Methode wird mit dem Punktoperator aufgerufen.</p>
+
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<p>Beispiel:</p>
+
+<pre><code class="language-python">meine_werte = [77, 3, 15, 37]
+meine_werte.append(51)     # fügt 51 am Ende an: [77, 3, 15, 37, 51]
+meine_werte.insert(1, 18)  # fügt 18 beim Index 1 ein, alles danach rutscht nach hinten:
+                           # [77, 18, 3, 15, 37, 51]
+meine_werte.remove(15)     # entfernt den ersten Eintrag mit dem Wert 15
+letzter = meine_werte.pop()  # entfernt das letzte Element und gibt es zurück (51)</code></pre>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Listen überall</summary>
+                <p>
+                    <strong>Alltag:</strong> Deine Playlist, der Einkaufszettel in einer App oder der Verlauf im Browser sind Listen: Elemente werden angehängt (<code>append</code>), eingefügt (<code>insert</code>) oder gelöscht (<code>remove</code>).<br><br>
+                    <strong>Beruf:</strong> Data Analysts werten Messreihen aus, etwa Stromverbrauchswerte eines Energieversorgers. Sie arbeiten dabei mit Arrays aus Bibliotheken wie NumPy, die echte Arrays mit fester Länge und einheitlichem Datentyp sind – genau deshalb sind sie für Millionen von Werten viel schneller als Python-Listen.
+                </p>
+            </details>
+        </div>
+
+<h2>Datei – Daten dauerhaft speichern</h2>
+
+<p>Eine Liste existiert nur, solange das Programm läuft. Sollen Messwerte, Punkte oder Adressen erhalten bleiben, speichert man sie in einer <strong>Datei</strong>. Ein sehr verbreitetes Format für Tabellen ist CSV: Tabellenkalkulationen wie Excel oder LibreOffice Calc können CSV-Dateien öffnen und speichern.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Einstieg: Notebook „Die Auswertung der Klausur“ (Textdateien lesen und schreiben)</summary>
+                <p>Bevor es um CSV-Dateien geht, lernst du in diesem Notebook in drei Schritten, wie Python eine einfache Textdatei liest und schreibt (Vorhersagen – Ausführen – Untersuchen – Verändern). Am Ende schreibst du selbst ein Programm, das den Durchschnitt einer Klausur aus der Datei <code>punkte.txt</code> berechnet und in einer Datei speichert:
+                <a href="../notebooks/2-1-4_b_klausurauswertung_textdateien.ipynb" download>2-1-4_b_klausurauswertung_textdateien.ipynb herunterladen</a>.</p>
+                <p>Die Datei <code>punkte.txt</code> musst du nicht herunterladen: Die erste Zelle des Notebooks legt sie an. Öffne das Notebook wie oben beschrieben im <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">JupyterLite der Schule</a> und lade es am Ende wieder herunter.</p>
+            </details>
+        </div>
+
+<pre><code class="language-python"># Schreiben: Modus "w" legt die Datei neu an (ein vorhandener Inhalt wird überschrieben)
+with open("temperaturen.csv", "w", encoding="utf-8") as datei:
+    datei.write("tag;temperatur\n")          # Kopfzeile, \n beendet die Zeile
+    datei.write("Mo;12.5\n")
+    datei.write("Di;15.0\n")
+
+# Lesen: Modus "r"
+werte = []
+with open("temperaturen.csv", "r", encoding="utf-8") as datei:
+    datei.readline()                         # Kopfzeile lesen und verwerfen
+    for zeile in datei:                      # jede weitere Zeile, z. B. "Mo;12.5\n"
+        teile = zeile.strip().split(";")     # strip entfernt \n, split zerlegt: ["Mo", "12.5"]
+        werte.append(float(teile[1]))
+print(werte)                                 # [12.5, 15.0]</code></pre>
+
+<p><code>with open(…) as datei:</code> öffnet die Datei und schließt sie am Ende des eingerückten Blocks automatisch – auch wenn ein Fehler auftritt. Mit dem Modus <code>"a"</code> (append) werden Zeilen am Ende angehängt, statt die Datei zu überschreiben. <code>encoding="utf-8"</code> sorgt dafür, dass Umlaute richtig gespeichert werden. Existiert eine Datei beim Lesen nicht, bricht Python mit <code>FileNotFoundError</code> ab.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Eine Lehrkraft exportiert Klausurpunkte aus einer Tabellenkalkulation als <code>punkte.csv</code>. Die Datei enthält einen Tippfehler („abc“) und am Ende eine Leerzeile. Das Programm soll gültige Zeilen einlesen, ungültige melden, den Durchschnitt ausgeben und eine Datei <code>auswertung.csv</code> mit der Spalte „bestanden“ (ab 5 Punkten) schreiben.</p>
+            <pre><code class="language-python"># Testdatei anlegen – so sähe der Export aus
+with open("punkte.csv", "w", encoding="utf-8") as datei:
+    datei.write("name;punkte\nAnna;12\nBen;4\nLea;abc\nTom;9\n\n")
+
+# 1. Einlesen in zwei Listen
+namen = []
+punkte = []
+with open("punkte.csv", "r", encoding="utf-8") as datei:
+    datei.readline()                                 # Kopfzeile überspringen
+    for zeile in datei:
+        zeile = zeile.strip()
+        teile = zeile.split(";")
+        if len(teile) == 2 and teile[1].isdigit():  # gültige Zeile
+            namen.append(teile[0])
+            punkte.append(int(teile[1]))
+        elif zeile != "":                            # ungültig, aber nicht leer
+            print("übersprungen:", zeile)
+
+# 2. Ergebnisdatei schreiben
+with open("auswertung.csv", "w", encoding="utf-8") as datei:
+    datei.write("name;punkte;bestanden\n")
+    for i in range(len(namen)):
+        if punkte[i] &gt;= 5:
+            bestanden = "ja"
+        else:
+            bestanden = "nein"
+        datei.write(namen[i] + ";" + str(punkte[i]) + ";" + bestanden + "\n")
+
+# 3. Durchschnitt nur bei vorhandenen Daten
+if len(punkte) &gt; 0:
+    print("Durchschnitt:", round(sum(punkte) / len(punkte), 2))
+else:
+    print("Keine gültigen Daten")</code></pre>
+            <ol>
+                <li><strong>Kopfzeile überspringen:</strong> <code>datei.readline()</code> liest die erste Zeile „name;punkte“. Das Ergebnis wird nicht verwendet. <em>Warum:</em> „punkte“ ist keine Zahl und würde sonst als ungültige Zeile gemeldet.</li>
+                <li><strong>Zeile für Zeile prüfen:</strong>
+                    <table>
+                        <thead><tr><th>Zeile (nach <code>strip</code>)</th><th><code>teile</code></th><th>Entscheidung</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>Anna;12</code></td><td><code>["Anna", "12"]</code></td><td>gültig, 12 wird angehängt</td></tr>
+                            <tr><td><code>Ben;4</code></td><td><code>["Ben", "4"]</code></td><td>gültig</td></tr>
+                            <tr><td><code>Lea;abc</code></td><td><code>["Lea", "abc"]</code></td><td><code>isdigit()</code> ist falsch → Meldung</td></tr>
+                            <tr><td><code>Tom;9</code></td><td><code>["Tom", "9"]</code></td><td>gültig</td></tr>
+                            <tr><td>(leer)</td><td><code>[""]</code></td><td>nur ein Teil, leer → still ignoriert</td></tr>
+                        </tbody>
+                    </table>
+                    <em>Warum:</em> Ein einziger Tippfehler soll nicht das ganze Programm mit <code>ValueError</code> abbrechen.</li>
+                <li><strong>Parallele Listen:</strong> <code>namen[i]</code> und <code>punkte[i]</code> gehören zum selben Datensatz. <em>Warum:</em> Beide Listen werden immer gemeinsam ergänzt, deshalb stimmen die Indizes überein.</li>
+                <li><strong>Schreiben:</strong> Jede Ergebniszeile wird mit <code>+</code> aus Texten zusammengesetzt; die Punktzahl muss dafür mit <code>str()</code> zu Text werden, <code>"\n"</code> beendet die Zeile.</li>
+                <li><strong>Durchschnitt:</strong> (12 + 4 + 9) / 3 = 25 / 3 ≈ 8.33. <em>Warum die Prüfung:</em> Enthält die Datei keine gültige Zeile, wäre <code>len(punkte)</code> gleich 0.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Auf dem Bildschirm erscheinen <code>übersprungen: Lea;abc</code> und <code>Durchschnitt: 8.33</code>. Die Datei <code>auswertung.csv</code> enthält:</p>
+            <pre><code>name;punkte;bestanden
+Anna;12;ja
+Ben;4;nein
+Tom;9;ja</code></pre>
+            <table>
+                <thead><tr><th>Eingabedatei</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td>wie oben</td><td>siehe Ergebnis</td><td>Normalfall mit Tippfehler und Leerzeile</td></tr>
+                    <tr><td>nur Kopfzeile</td><td><code>Keine gültigen Daten</code>, Datei nur mit Kopfzeile</td><td>Randfall: leere Tabelle</td></tr>
+                    <tr><td>Zeile <code>Mia;-3</code></td><td><code>übersprungen: Mia;-3</code></td><td>negative Punkte sind ungültig; <code>"-3".isdigit()</code> ist falsch</td></tr>
+                    <tr><td>Zeile <code>Max; 7</code></td><td><code>übersprungen: Max; 7</code></td><td>Falle: das Leerzeichen vor der 7 macht die Zeile ungültig</td></tr>
+                    <tr><td>Datei fehlt</td><td><code>FileNotFoundError</code></td><td>Fehlerfall</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Ein <strong>Array</strong> (Feld) speichert mehrere Werte unter einem gemeinsamen Namen. Jedes Element hat einen eindeutigen <strong>Index</strong>, über den man direkt darauf zugreift. Die Zählung beginnt bei 0: Das 1. Element hat den Index 0, das letzte den Index <code>len(liste) - 1</code>.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                Eine <strong>Datei</strong> speichert Daten dauerhaft auf einem Datenträger. Eine <strong>CSV-Datei</strong> (comma-separated values) ist eine Textdatei, in der jede Zeile einen Datensatz enthält. Die Felder einer Zeile sind durch ein Trennzeichen getrennt, in Deutschland meist durch ein Semikolon, weil das Komma als Dezimalzeichen dient. Die erste Zeile enthält oft die Spaltennamen (Kopfzeile).<br>
+                Beim Lesen ist jede Zeile ein <strong>Text</strong> (<code>str</code>). Zahlen müssen – wie bei <code>input()</code> – mit <code>int()</code> oder <code>float()</code> umgewandelt werden.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.4.1: Arrays durchlaufen <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Erstelle ein Array, das die Namen von fünf verschiedenen Tieren enthält. Gib die Namen der Tiere mit einer for-Schleife aus.</li>
+                    <li>Erstelle ein Array, das die Preise von fünf Dönerläden in Dresden enthält. Finde den günstigsten Preis und gib ihn aus.</li>
+                    <li>Erstelle ein Array, das die Temperaturen an fünf aufeinanderfolgenden Tagen speichert. Berechne den Durchschnitt und gib ihn aus.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.4.2: Passwortgenerator <span class="niveau">AFB II</span></summary>
+                <p>Importiere das Modul <code>random</code> (<code>import random</code>). Erstelle anschließend ein Array mit fünf Adjektiven und ein zweites Array mit fünf Nomen. Erzeuge nun drei Zufallszahlen. Die ersten beiden Zufallszahlen sollen mit <code>random.randint(0, 4)</code> über den Index ein Adjektiv bzw. ein Nomen aus den beiden Arrays auswählen. Die dritte Zufallszahl liegt zwischen 1 und 100. Gib das erstellte zufällige Passwort als Kombination aus Adjektiv, Nomen und Zahl aus.</p>
+            </details>
+        </div>

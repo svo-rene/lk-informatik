@@ -1,0 +1,18 @@
+{
+  "nr": "11.8",
+  "titel": "Neuronale Netze und Deep Learning",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

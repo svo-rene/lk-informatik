@@ -1,0 +1,36 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.1.9: Fehler finden in einer Klausurlösung <span class="niveau">AFB III</span></summary>
+        <p>Jonas hat in einer Übungsklausur die folgenden Lösungen abgegeben. Jede enthält genau einen Fehler.</p>
+        <ol type="a">
+            <li><strong>89 ins Fünfersystem:</strong> 89 / 5 = 17 Rest 4, 17 / 5 = 3 Rest 2, 3 / 5 = 0 Rest 3. Ergebnis: <strong>423<sub>5</sub></strong></li>
+            <li><strong>1011011<sub>2</sub> ins Hexadezimalsystem:</strong> Vierergruppen 1011 | 011, also B und 3. Ergebnis: <strong>B3<sub>16</sub></strong></li>
+            <li><strong>352<sub>7</sub> ins Dezimalsystem:</strong> 3 &middot; 7<sup>3</sup> + 5 &middot; 7<sup>2</sup> + 2 &middot; 7<sup>1</sup> = 1029 + 245 + 14 = <strong>1288</strong></li>
+            <li><strong>Addition im Siebenersystem:</strong> 6<sub>7</sub> + 1<sub>7</sub> = <strong>7<sub>7</sub></strong></li>
+        </ol>
+        <ol>
+            <li>Finde in jeder Lösung den Fehler, beschreibe seine Ursache und gib das richtige Ergebnis an.</li>
+            <li>Beurteile für jede der vier Lösungen, ob Jonas den Fehler mit einer Probe (Rückrechnung ins Ausgangssystem) selbst hätte entdecken können.</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.1.10: Farben aufhellen im 8-Bit-Register <span class="niveau">AFB III</span></summary>
+        <p>Ein Bildbearbeitungsprogramm hellt Farben auf, indem es zu jedem Farbkanal (Rot, Grün, Blau) den Wert <code>40</code><sub>16</sub> addiert. Jeder Kanal wird in einem <strong>vorzeichenlosen 8-Bit-Register</strong> gespeichert. Das Programm wird mit den beiden Farben aus Aufgabe 1.1.3 getestet:</p>
+        <table class="gitter">
+            <tr><th>Farbe</th><th>vorher</th><th>nachher</th></tr>
+            <tr><td>Graublau</td><td><code>#7D8E95</code></td><td>?</td></tr>
+            <tr><td>Hellbeige</td><td><code>#FBE0C3</code></td><td>?</td></tr>
+        </table>
+        <ol>
+            <li>Berechne für beide Farben den Registerinhalt jedes Kanals nach der Addition. Gib das Ergebnis hexadezimal und dezimal an.</li>
+            <li>Beschreibe, welche Farbe der Nutzer nach dem „Aufhellen“ von Hellbeige sieht, und erkläre die Ursache.</li>
+            <li>Beurteile die Arbeitsweise des Programms und schlage eine Verbesserung vor, mit der aus einer hellen Farbe nie eine dunkle werden kann.</li>
+        </ol>
+        <p class="tipp">Tipp: Ein 8-Bit-Register kann nur die Werte 0 bis 255 speichern. Was darüber hinausgeht, fällt als Übertrag weg (vgl. Aufgabe 1.1.6, Teil 3).</p>
+    </details>
+</div>

@@ -1,0 +1,14 @@
+{
+  "nr": "7.14",
+  "titel": "Filius-Praxis: Mehrere Router und Routingtabellen",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

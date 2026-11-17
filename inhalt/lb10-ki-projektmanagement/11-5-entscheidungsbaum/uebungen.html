@@ -1,0 +1,83 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/11-5_titanic.ipynb" download>11-5_titanic.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (JupyterLite der Schule; falls nicht erreichbar: <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+                <p><strong>Wichtig:</strong> Das Notebook liest die Datei(en) <a href="../notebooks/titanic.csv" download>titanic.csv</a> ein. Lade sie mit in den Dateibereich hoch, sonst meldet Python <code>FileNotFoundError</code>.</p>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.5.3: Eigener Entscheidungsbaum <span class="niveau">AFB III</span></summary>
+                <p>Überlege dir ein eigenes Anwendungsbeispiel für einen Entscheidungsbaum in einem Bereich deiner Wahl. Skizziere grob, wie der Baum aussehen könnte und welche Attribute du verwenden würdest. Begründe, welches Attribut an der Wurzel stehen sollte.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.5.4: Ein Spamfilter als Entscheidungsbaum <span class="niveau">AFB II</span></summary>
+                <p>Für den Schul-Mailserver sollen verdächtige Mails markiert werden. Die IT-AG hat zehn Mails von Hand eingeordnet:</p>
+                <table>
+                    <thead>
+                        <tr><th>Nr.</th><th>enthält Link</th><th>Absender bekannt</th><th>Wort „Gewinn“</th><th>Spam?</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>ja</td><td>nein</td><td>ja</td><td>ja</td></tr>
+                        <tr><td>2</td><td>ja</td><td>nein</td><td>nein</td><td>ja</td></tr>
+                        <tr><td>3</td><td>ja</td><td>ja</td><td>nein</td><td>nein</td></tr>
+                        <tr><td>4</td><td>ja</td><td>nein</td><td>ja</td><td>ja</td></tr>
+                        <tr><td>5</td><td>nein</td><td>ja</td><td>nein</td><td>nein</td></tr>
+                        <tr><td>6</td><td>ja</td><td>nein</td><td>nein</td><td>ja</td></tr>
+                        <tr><td>7</td><td>nein</td><td>ja</td><td>ja</td><td>nein</td></tr>
+                        <tr><td>8</td><td>nein</td><td>nein</td><td>ja</td><td>nein</td></tr>
+                        <tr><td>9</td><td>ja</td><td>ja</td><td>ja</td><td>ja</td></tr>
+                        <tr><td>10</td><td>nein</td><td>nein</td><td>nein</td><td>nein</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Bestimme mit dem gewichteten Gini-Index das Wurzelattribut.</li>
+                    <li>Baue den Baum rekursiv weiter, bis alle Blätter rein sind, und zeichne ihn.</li>
+                    <li>Klassifiziere zwei neue Mails: (Link ja, Absender bekannt, ohne „Gewinn“) und (ohne Link, Absender unbekannt, mit „Gewinn“). Beurteile, ob die zweite Vorhersage plausibel ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.5.7: Gini-Index in Python <span class="niveau">AFB II</span></summary>
+                <p>Schreibe zwei Python-Funktionen (ohne Bibliotheken):</p>
+                <ul>
+                    <li><code>gini(ja, nein)</code> berechnet die Gini-Unreinheit eines Knotens aus den Anzahlen der beiden Klassen.</li>
+                    <li><code>gini_gewichtet(teilmengen)</code> erhält eine Liste von Paaren <code>[ja, nein]</code> (eines je Zweig) und berechnet die gewichtete Gini-Unreinheit.</li>
+                </ul>
+                <p>Teste mit diesen Fällen (auf 4 Stellen gerundet) und trage die tatsächliche Ausgabe ein:</p>
+                <table>
+                    <thead>
+                        <tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>gini(1, 3)</code></td><td><code>0.375</code></td><td></td></tr>
+                        <tr><td><code>gini(0, 2)</code></td><td><code>0.0</code></td><td></td></tr>
+                        <tr><td><code>gini_gewichtet([[0, 2], [1, 1]])</code></td><td><code>0.25</code> (Beispiel 1)</td><td></td></tr>
+                        <tr><td><code>gini_gewichtet([[4, 1], [1, 4]])</code></td><td><code>0.32</code> (Beispiel 2)</td><td></td></tr>
+                        <tr><td><code>gini(0, 0)</code></td><td><code>0</code> (leerer Knoten, kein Absturz)</td><td></td></tr>
+                    </tbody>
+                </table>
+                <p class="tipp">Nutze die Funktionen anschließend, um deine Ergebnisse aus Aufgabe 11.5.4 zu prüfen.</p>
+            </details>
+        </div>

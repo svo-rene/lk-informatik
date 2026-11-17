@@ -1,0 +1,54 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<p>Diese Aufgaben sind zum &Uuml;ben und Vertiefen zu Hause gedacht. Gib ER-Modelle wie in Beispiel 5 als Tabelle der
+   Beziehungen (mit Lesesätzen und Kardinalitäten) und als Liste der Entitäten mit Attributen an, Schlüsselattribute
+   unterstrichen – oder zeichne sie mit draw.io.</p>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 1.11.6: Fehler finden &ndash; ein missgl&uuml;ckter R&uuml;ckweg <span class="niveau">AFB III</span>
+        </summary>
+        <p>Zu diesem Relationenmodell der Sch&uuml;lerzeitung</p>
+        <pre class="schema">Ressort(<u>RessortNr</u>, Bezeichnung)
+Redakteur(<u>RedNr</u>, Name, Klasse, &uarr;RessortNr)
+Ausgabe(<u>AusgabeNr</u>, Datum, Auflage)
+Beitrag(<u>&uarr;RedNr, &uarr;AusgabeNr</u>, Seiten)</pre>
+        <p>hat ein Mitsch&uuml;ler dieses ER-Modell beschrieben:</p>
+        <ul>
+            <li>Entit&auml;ten: Ressort (<u>RessortNr</u>, Bezeichnung), Redakteur (<u>RedNr</u>, Name, Klasse, RessortNr),
+                Ausgabe (<u>AusgabeNr</u>, Datum, Auflage), Beitrag (RedNr, AusgabeNr, Seiten)</li>
+            <li>Beziehung <em>arbeitet in</em> zwischen Redakteur und Ressort: &bdquo;Ein Redakteur arbeitet in mehreren Ressorts,
+                ein Ressort hat einen Redakteur.&ldquo; (Redakteur 1 : n Ressort)</li>
+            <li>Beziehung <em>hat</em> zwischen Redakteur und Beitrag (1:n) und Beziehung <em>hat</em> zwischen Ausgabe und Beitrag (1:n)</li>
+        </ul>
+        <p>Finde mindestens vier Fehler, begr&uuml;nde jeden mit einer Regel des R&uuml;ckwegs und gib das richtige ER-Modell an.</p>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 1.11.7: Was das Schema verr&auml;t &ndash; und was nicht <span class="niveau">AFB III</span>
+        </summary>
+        <p>Ein Amt speichert Personen und Ausweise. Es gibt zwei Entw&uuml;rfe f&uuml;r die Tabelle <code>Ausweis</code>:</p>
+        <pre><code>-- Entwurf A
+CREATE TABLE Ausweis (
+    AusweisNr TEXT PRIMARY KEY,
+    Ablauf    DATE,
+    PersonNr  INTEGER REFERENCES Person(PersonNr)
+);
+-- Entwurf B
+CREATE TABLE Ausweis (
+    AusweisNr TEXT PRIMARY KEY,
+    Ablauf    DATE,
+    PersonNr  INTEGER NOT NULL UNIQUE REFERENCES Person(PersonNr)
+);</code></pre>
+        <ol>
+            <li>Leite f&uuml;r beide Entw&uuml;rfe die Kardinalit&auml;t der Beziehung zwischen Person und Ausweis ab und formuliere die Lesesätze.</li>
+            <li>Fachlich gilt: Ein Ausweis geh&ouml;rt immer genau einer Person; eine Person kann nacheinander mehrere Ausweise besitzen
+                (abgelaufene bleiben gespeichert). Beurteile, welcher Entwurf passt, und verbessere ihn wenn n&ouml;tig.</li>
+            <li>Nenne zwei Aussagen &uuml;ber die Wirklichkeit, die man aus keinem der beiden Entw&uuml;rfe ablesen kann.</li>
+        </ol>
+    </details>
+</div>

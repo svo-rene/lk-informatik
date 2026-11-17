@@ -1,0 +1,239 @@
+<p>
+        In der objektorientierten Programmierung sollen Objekte ihre Daten selbst verwalten. Du möchtest verhindern, dass jemand von außen direkt auf sensible Daten zugreift oder sie unkontrolliert verändert. Genau dafür gibt es das Prinzip der <strong>Kapselung</strong> – unterstützt durch <strong>Sichtbarkeiten</strong> und sogenannte <strong>Getter- und Setter-Methoden</strong>.
+    </p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in drei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) den Code in Thonny und rechts das Speicherbild mit dem Objekt und seinen Attributen, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe mit.</p>
+
+<ol class="schritte">
+        <li><a href="#schritt-1">Warum direkter Zugriff schiefgeht</a></li>
+        <li><a href="#schritt-2">Privat und geschützt in Python</a> – danach Aufgabe 4.6.1</li>
+        <li><a href="#schritt-3">Getter und Setter mit Prüfung</a> – danach Aufgabe 4.6.2</li>
+    </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Warum direkter Zugriff schiefgeht</h2>
+
+<p>Ein einfaches Konto speichert Inhaber und Kontostand in öffentlichen Attributen. Im Video siehst du im Speicherbild, was passiert, wenn jemand von außen unsinnige Werte einträgt – und wie die Idee der Kapselung das verhindert. Achte am Ende auf die Zeichen <code>+</code>, <code>#</code> und <code>-</code> im Klassendiagramm.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-6-1_problem_vorschau.png" src="../vid/4-6-1_problem.mp4"></video><a href="../vid/4-6-1_problem.mp4">Video ansehen</a></div>
+        <figcaption>Video 1: Warum direkter Zugriff schiefgeht (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+    </figure>
+
+<h3>Zum Nachlesen: Problem – direkter Zugriff kann schiefgehen oder ausgenutzt werden</h3>
+
+<pre><code class="language-python">class Konto:
+    def __init__(self, inhaber, kontostand):
+        self.inhaber = inhaber
+        self.kontostand = kontostand
+
+konto1 = Konto("Alex", 100)
+konto1.kontostand = -5000     # Das sollte nicht erlaubt sein.
+konto1.kontostand = 10000000  # Geld „aus dem Nichts“ – ebenfalls ein Fehler.</code></pre>
+
+<h3>So sieht Sichtbarkeit in UML aus</h3>
+
+<figure>
+        <img src="../img/sichtbarkeiten.png" width="600" alt="UML-Klassendiagramm der Klasse Konto mit privatem Attribut kontostand und öffentlichen Methoden">
+        <figcaption>Abb. 1: Das Attribut kontostand ist privat und daher nur über Getter- und Setter-Methoden erreichbar</figcaption>
+    </figure>
+
+<p>In UML-Diagrammen wird die Sichtbarkeit durch Symbole angegeben:</p>
+
+<ul>
+        <li><code>+</code> → öffentlich</li>
+        <li><code>-</code> → privat</li>
+        <li><code>#</code> → geschützt</li>
+    </ul>
+
+<p>Das gilt sowohl für Attribute als auch für Methoden.</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Privat und geschützt in Python →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Privat und geschützt in Python</h2>
+
+<p>In Sprachen wie Java gibt es Schlüsselwörter wie <code>private</code> oder <code>public</code>. Python macht das anders: Hier regeln <strong>Namenskonventionen</strong> die Sichtbarkeit. Achte im Video darauf, unter welchem Namen das private Attribut <code>__kontostand</code> wirklich im Objekt steht, was Python beim Zugriff von außen meldet und was eine Zuweisung von außen im Speicherbild anrichtet.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-6-2_privat_vorschau.png" src="../vid/4-6-2_privat.mp4"></video><a href="../vid/4-6-2_privat.mp4">Video ansehen</a></div>
+        <figcaption>Video 2: Privat und geschützt in Python (ca. 2 min)</figcaption>
+    </figure>
+
+<h3>Zum Nachlesen: Sichtbarkeit in Python</h3>
+
+<ul>
+        <li><code>name</code>: öffentlich (public) – darf von überall verwendet werden.</li>
+        <li><code>_name</code>: geschützt (protected) – nur für die Klasse und ihre Unterklassen gedacht. Das ist reine Konvention; Python verhindert den Zugriff nicht.</li>
+        <li><code>__name</code>: privat (private) – Python benennt das Attribut intern in <code>_Klassenname__name</code> um („Name Mangling“). Von außen ist es unter dem Namen <code>__name</code> nicht erreichbar.</li>
+    </ul>
+
+<p>Danach: <a href="uebungen.html#a-4-6-1">Aufgabe 4.6.1</a> – Sichtbarkeit erkennen.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Getter und Setter mit Prüfung →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Getter und Setter mit Prüfung</h2>
+
+<p>Um ein Attribut zu schützen und trotzdem Zugriff zu erlauben, nutzt man <strong>Getter</strong> (zum Lesen) und <strong>Setter</strong> (zum kontrollierten Ändern). Im Video läuft der Setter einmal mit einem ungültigen und einmal mit einem gültigen Wert. Achte darauf, welcher Zweig der <code>if</code>-Anweisung jeweils läuft und wann sich der Wert im Objekt ändert.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-6-3_setter_vorschau.png" src="../vid/4-6-3_setter.mp4"></video><a href="../vid/4-6-3_setter.mp4">Video ansehen</a></div>
+        <figcaption>Video 3: Getter und Setter mit Prüfung (ca. 1,5 min)</figcaption>
+    </figure>
+
+<p>Zum Nachlesen steht der Setter in Beispiel 1. Beispiel 2 zeigt, wie fachliche Methoden einen allgemeinen Setter ersetzen, und erklärt noch einmal genau, was beim Zugriff von außen passiert.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Kontostand mit Getter und Setter schützen</summary>
+        <p><strong>Ausgangssituation:</strong> Im Problem-Code oben kann jeder den Kontostand beliebig überschreiben, auch mit −5000. Ziel: Der Kontostand soll nie negativ werden.</p>
+        <pre><code class="language-python">class Konto:
+    def __init__(self, inhaber, kontostand):
+        self.inhaber = inhaber
+        self.__kontostand = kontostand
+
+    def get_kontostand(self):
+        return self.__kontostand
+
+    def set_kontostand(self, neuer_betrag):
+        if neuer_betrag &gt;= 0:
+            self.__kontostand = neuer_betrag
+        else:
+            print("Kontostand darf nicht negativ sein.")</code></pre>
+        <p>Jetzt ist das Attribut <code>__kontostand</code> privat und wird nur über Methoden gelesen oder verändert. So schützt du dein Objekt vor falscher Benutzung.</p>
+        <ol>
+            <li><strong>Attribut privat machen:</strong> Aus <code>self.kontostand</code> wird <code>self.__kontostand</code>. Warum: Von außen ist das Attribut unter diesem Namen nicht mehr erreichbar; niemand ändert es „aus Versehen“.</li>
+            <li><strong>Getter ergänzen:</strong> <code>get_kontostand()</code> gibt den Wert nur zurück. Warum: Lesen soll weiterhin erlaubt sein, Lesen kann nichts kaputt machen.</li>
+            <li><strong>Setter mit Prüfung ergänzen:</strong> <code>set_kontostand()</code> übernimmt den neuen Wert nur, wenn er nicht negativ ist. Warum: Die Regel „nie negativ“ steht jetzt an genau einer Stelle, und jede Änderung muss an ihr vorbei.</li>
+        </ol>
+        <pre><code class="language-python">k = Konto("Alex", 100)
+k.set_kontostand(-5000)     # Kontostand darf nicht negativ sein.
+print(k.get_kontostand())   # 100
+k.set_kontostand(250)
+print(k.get_kontostand())   # 250</code></pre>
+        <p><strong>Ergebnis:</strong> Ein ungültiger Wert wird abgewiesen, ein gültiger übernommen.</p>
+        <p><strong>Kontrolle:</strong></p>
+        <table class="gitter">
+            <tr><th>Aufruf</th><th>erwartete Ausgabe / Wert</th></tr>
+            <tr><td><code>Konto("Alex", 100).get_kontostand()</code></td><td>100</td></tr>
+            <tr><td><code>k.set_kontostand(-5000)</code>, danach <code>k.get_kontostand()</code></td><td>„Kontostand darf nicht negativ sein.“, Wert bleibt 100</td></tr>
+            <tr><td><code>k.set_kontostand(0)</code>, danach <code>k.get_kontostand()</code></td><td>0 (Grenzfall: 0 ist erlaubt)</td></tr>
+        </table>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Statt eines allgemeinen Setters bietet das Konto fachlich sinnvolle Methoden an – und was beim Zugriff von außen wirklich passiert</summary>
+        <p><strong>Ausgangssituation:</strong> Ein allgemeiner Setter erlaubt immer noch, den Kontostand von 100 auf 1&nbsp;000&nbsp;000 zu setzen. Bei einer Bank darf sich der Kontostand aber nur durch Einzahlen und Abheben ändern. Das Klassendiagramm zeigt die gewünschte Schnittstelle:</p>
+        <table class="gitter" aria-label="UML-Klassendiagramm Konto">
+            <tr><th>Konto</th></tr>
+            <tr><td>+ inhaber: str<br>− __kontostand: float</td></tr>
+            <tr><td>+ get_kontostand(): float<br>+ einzahlen(betrag: float): None<br>+ abheben(betrag: float): bool</td></tr>
+        </table>
+        <pre><code class="language-python">class Konto:
+    def __init__(self, inhaber, kontostand=0):
+        self.inhaber = inhaber
+        self.__kontostand = kontostand
+
+    def get_kontostand(self):
+        return self.__kontostand
+
+    def einzahlen(self, betrag):
+        if betrag &gt; 0:
+            self.__kontostand += betrag
+
+    def abheben(self, betrag):
+        if 0 &lt; betrag &lt;= self.__kontostand:
+            self.__kontostand -= betrag
+            return True
+        return False
+
+k = Konto("Alex", 100)
+k.abheben(500)                 # False, Kontostand bleibt 100
+k.__kontostand = 10000000      # legt ein NEUES Attribut __kontostand an!
+print(k.get_kontostand())      # 100 – das private Attribut ist unverändert
+print(k._Konto__kontostand)    # 100 – so heißt es intern (bitte nicht benutzen)</code></pre>
+        <ol>
+            <li><strong>Setter durch fachliche Methoden ersetzen:</strong> Es gibt nur noch <code>einzahlen()</code> und <code>abheben()</code>. Warum: Die Schnittstelle bildet ab, was eine Bank erlaubt; einen Kontostand einfach „setzen“ gibt es in der Realität nicht.</li>
+            <li><strong><code>k.abheben(500)</code>:</strong> Die Bedingung <code>0 &lt; 500 &lt;= 100</code> ist falsch, also wird nichts abgezogen und <code>False</code> zurückgegeben. Warum: Der Rückgabewert teilt dem Aufrufer mit, dass die Botschaft abgelehnt wurde – ohne Ausgabe im Objekt selbst.</li>
+            <li><strong><code>k.__kontostand = 10000000</code> außerhalb der Klasse:</strong> Die Umbenennung („Name Mangling“) findet nur <em>innerhalb</em> der Klasse statt. Außerhalb legt Python deshalb ein zusätzliches Attribut mit dem Namen <code>__kontostand</code> an. Das echte private Attribut heißt intern <code>_Konto__kontostand</code> und bleibt 100.</li>
+            <li><strong><code>k.get_kontostand()</code>:</strong> Im Klassenrumpf wird <code>self.__kontostand</code> zu <code>self._Konto__kontostand</code> umbenannt. Deshalb liefert der Getter 100 – der „Angriff“ hat nichts bewirkt.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Ausgaben: <code>100</code> und <code>100</code>. Der Kontostand ist nur über die beiden fachlichen Methoden veränderbar.</p>
+        <p><strong>Kontrolle:</strong> Weitere Testfälle mit einem neuen Konto <code>k = Konto("Alex", 100)</code>:</p>
+        <table class="gitter">
+            <tr><th>Aufruf</th><th>Rückgabe</th><th>Kontostand danach</th></tr>
+            <tr><td><code>k.einzahlen(-20)</code></td><td><code>None</code> (nichts passiert)</td><td>100</td></tr>
+            <tr><td><code>k.abheben(30)</code></td><td><code>True</code></td><td>70</td></tr>
+            <tr><td><code>k.abheben(0)</code></td><td><code>False</code></td><td>70</td></tr>
+            <tr><td><code>k.abheben(70)</code></td><td><code>True</code> (Grenzfall: alles abheben)</td><td>0</td></tr>
+        </table>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-4-6-2">Aufgabe 4.6.2</a> – Temperatursensor schützen.</p>
+
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: Warum ist das wichtig?</summary>
+            <p>
+                Denk an komplexe Systeme wie Banking-Apps oder Spiele: Wenn jede Komponente einfach alles ändern darf, entstehen Fehler und Chaos. Kapselung hilft, <strong>klare Schnittstellen</strong> zu schaffen – für sauberen und wartbaren Code. In fortgeschrittenem Python werden Getter und Setter oft mit <code>@property</code> geschrieben; das Prinzip bleibt dasselbe.
+            </p>
+        </details>
+    </div>
+
+<div class="praxisbezug">
+        <details>
+            <summary>Praxisbezug: Kapselung schützt Daten</summary>
+            <p>
+                <strong>Alltag:</strong> Am Geldautomaten kannst du nur über festgelegte Funktionen (Abheben, Kontostand anzeigen) auf dein Konto zugreifen – nicht direkt auf die Datenbank der Bank. Das ist Kapselung im Großen.<br><br>
+                <strong>Beruf:</strong> In der Bank- und Versicherungs-IT – etwa bei Rechenzentren großer Finanzdienstleister in Sachsen – verlangen Sicherheitsrichtlinien, dass sensible Daten nur über geprüfte Methoden verändert werden. Jede Änderung wird dort zusätzlich protokolliert. Softwareentwicklerinnen und -entwickler sowie IT-Sicherheitsfachleute prüfen in Code-Reviews, ob Attribute ausreichend gekapselt sind.
+            </p>
+        </details>
+    </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+        Öffentliche Attribute kann jeder von außen beliebig ändern. Kapselung verbirgt die Daten im Objekt und bietet Methoden an, die Änderungen prüfen. In Python ist <code>_name</code> geschützt (nur eine Abmachung) und <code>__name</code> privat: Python benennt das Attribut in der Klasse in <code>_Klasse__name</code> um, sodass <code>objekt.__name</code> von außen einen <code>AttributeError</code> auslöst und eine Zuweisung von außen nur ein neues Attribut anlegt. Getter lesen, Setter ändern nach einer Prüfung – oft passen fachliche Methoden wie <code>einzahlen</code> und <code>abheben</code> noch besser.
+    </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            <strong>Kapselung</strong> ist ein Grundprinzip der objektorientierten Programmierung: Ein Objekt verbirgt seine inneren Daten und stellt nach außen nur ausgewählte Methoden zur Verfügung, über die auf die Daten zugegriffen wird.<br>
+            <strong>Sichtbarkeit</strong> legt fest, ob und von wo aus auf die Bestandteile eines Objekts (Attribute, Methoden) zugegriffen werden darf.
+        </p>
+    </div>
+
+<div class="merke">
+        <p>
+            In Python ist nichts wirklich „unsichtbar“. Mit <code>_</code> oder <code>__</code> machst du aber deutlich: Dieses Attribut soll nur intern verwendet werden. Ein doppelter Unterstrich schützt zusätzlich durch Umbenennung vor versehentlichem Zugriff.
+        </p>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Was passiert ohne Kapselung? <span class="niveau">AFB I</span></summary>
+            <p>Im Konto ohne Kapselung wird nach <code>konto1 = Konto("Alex", 100)</code> die Zeile <code>konto1.kontostand = konto1.kontostand - 250</code> ausgeführt. Welchen Wert hat der Kontostand danach, und meldet Python einen Fehler? Mit welchem UML-Zeichen müsste <code>kontostand</code> im Klassendiagramm stehen, damit so etwas nicht vorgesehen ist?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Der Kontostand ist −150, Python meldet keinen Fehler – das Konto kann sich nicht wehren. Im Klassendiagramm sollte das Attribut privat sein: <code>- kontostand</code>. Geändert wird es dann nur über öffentliche Methoden (<code>+</code>), die prüfen können.</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Wie heißt das Attribut wirklich? <span class="niveau">AFB I</span></summary>
+            <p>Mit der Klasse <code>Konto</code> aus dem Video (privates Attribut <code>__kontostand</code>) wird <code>k = Konto("Ben", 40)</code> angelegt. Was liefern <code>k._Konto__kontostand</code> und <code>k.__kontostand</code>? Was liefert <code>k.get_kontostand()</code>, nachdem jemand <code>k.__kontostand = 0</code> ausgeführt hat?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>k._Konto__kontostand</code> liefert 40 (so heißt das Attribut intern – benutzen sollte man das aber nicht). <code>k.__kontostand</code> löst einen <code>AttributeError</code> aus. Die Zuweisung <code>k.__kontostand = 0</code> legt ein neues, zusätzliches Attribut an; <code>k.get_kontostand()</code> liefert weiterhin 40.</p>
+            </details>
+        </details>
+    </div>

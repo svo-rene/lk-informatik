@@ -1,0 +1,47 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.6: Fehler finden – die Lagerverwaltung <span class="niveau">AFB III</span></summary>
+                <p>Für den Schulkiosk hat Paul eine kleine Lagerverwaltung geschrieben. Eingebucht werden gelieferte Artikel,
+                   ausgebucht verkaufte. Gewünscht ist die Ausgabe <code>{'Stift': 50, 'Heft': 25, 'Lineal': 5}</code>,
+                   <code>False</code>, <code>False</code>.</p>
+                <pre><code class="language-python">lager = {"Stift": 40, "Heft": 25}
+
+def einbuchen(artikel, menge):
+    lager[artikel] = menge
+
+def ausbuchen(artikel, menge):
+    if lager[artikel] &gt;= menge:
+        lager[artikel] -= menge
+        return True
+    return False
+
+einbuchen("Stift", 10)
+einbuchen("Lineal", 5)
+print(lager)
+print(ausbuchen("Heft", 30))
+print(ausbuchen("Zirkel", 1))</code></pre>
+                <ol>
+                    <li>Bestimme ohne Computer die tatsächliche Ausgabe des Programms.</li>
+                    <li>Benenne die beiden Fehler und erkläre, warum der eine „still“ (ohne Fehlermeldung) und der andere „laut“ auftritt.</li>
+                    <li>Korrigiere die beiden Funktionen und gib zwei weitere Testfälle an, die die Korrektur absichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.7: Schlüssel für einen Vokabeltrainer entwerfen <span class="niveau">AFB III</span></summary>
+                <p>Eine Vokabeltrainer-App soll ihre Daten in Redis speichern. Die App muss folgende Fragen beantworten:</p>
+                <ol>
+                    <li>Was heißt das englische Wort „library“ auf Deutsch?</li>
+                    <li>Welche Vokabeln gehören zu Lektion 4?</li>
+                    <li>Wie oft hat Nutzerin 12 die Vokabel „library“ schon richtig beantwortet?</li>
+                    <li>Welche Vokabeln hat Nutzerin 12 noch nie richtig beantwortet?</li>
+                </ol>
+                <p>Entwirf ein Schlüsselschema (Muster und je ein Beispiel-Paar), sodass möglichst viele Fragen mit einem einzigen
+                   <code>GET</code> beantwortet werden können. Beurteile, welche der Fragen sich mit einem reinen Key-Value-Store nur
+                   umständlich beantworten lässt, und begründe, ob für diese App ein anderes Datenmodell besser geeignet wäre.</p>
+            </details>
+        </div>

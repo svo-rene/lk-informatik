@@ -1,0 +1,154 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe" id="a-4-11-1">
+    <details>
+        <summary>Aufgabe 4.11.1: Medien abspielen <span class="niveau">AFB I</span></summary>
+        <p>Erstelle die Klassen <code>YouTube</code>, <code>TikTok</code> und <code>Spotify</code>. Alle sollen eine Methode <code>spiele_medien()</code> besitzen, die jeweils etwas anderes ausgibt. Lege Objekte der Klassen an und rufe die Methode für die Objekte auf.</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-11-2">
+    <details>
+        <summary>Aufgabe 4.11.2: Erweiterbar programmieren <span class="niveau">AFB II</span></summary>
+        <p>Schreibe eine Funktion <code>starte_apps(liste)</code>, die für jedes Objekt in der Liste eine gemeinsame Methode aufruft. Ergänze anschließend eine weitere App-Klasse, ohne die Funktion zu verändern.</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-11-3">
+    <details>
+        <summary>Aufgabe 4.11.3: Code analysieren <span class="niveau">AFB II</span></summary>
+        <p>Analysiere folgenden Code:</p>
+        <pre><code class="language-python">class App:
+    def update(self):
+        print("App wird aktualisiert.")
+
+class WetterApp(App):
+    def update(self):
+        print("Wetterdaten werden geladen.")
+
+class NaviApp(App):
+    def update(self):
+        print("Kartenmaterial wird aktualisiert.")
+
+for a in [WetterApp(), NaviApp()]:
+    a.update()</code></pre>
+        <p>• Welche Methode wird jeweils ausgeführt?<br>
+        • Warum ist das ein Beispiel für Polymorphie?</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-11-4">
+    <details>
+        <summary>Aufgabe 4.11.4: Begriffe erklären <span class="niveau">AFB II–III</span></summary>
+        <p>Erkläre mit eigenen Worten:<br>
+        • Was ist eine Botschaft?<br>
+        • Was versteht man unter Polymorphie?<br>
+        • Warum ist Polymorphie für größere Programme hilfreich? Beziehe dich auf ein Beispiel.</p>
+    </details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-4-11-5">
+    <details>
+        <summary>Aufgabe 4.11.5: Ergebnis vorhersagen – wer bellt hier? <span class="niveau">AFB II</span></summary>
+        <pre><code class="language-python">class Tier:
+    def __init__(self, name):
+        self.name = name
+
+    def laut(self):
+        return "..."
+
+    def vorstellen(self):
+        return f"{self.name} sagt {self.laut()}"
+
+class Hund(Tier):
+    def laut(self):
+        return "Wuff"
+
+class Welpe(Hund):
+    def laut(self):
+        return super().laut().lower() + "!"
+
+class Fisch(Tier):
+    pass
+
+for t in [Hund("Rex"), Welpe("Bobo"), Fisch("Flossi")]:
+    print(t.vorstellen())</code></pre>
+        <ol>
+            <li>Sage die drei Ausgabezeilen vorher, ohne das Programm auszuführen.</li>
+            <li>Die Methode <code>vorstellen()</code> steht nur in <code>Tier</code>. Erkläre, warum sie trotzdem <code>Hund.laut()</code> bzw. <code>Welpe.laut()</code> aufruft.</li>
+            <li>Gib für <code>Welpe("Bobo").vorstellen()</code> die Reihenfolge aller ausgeführten Methoden an (Klasse.Methode).</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-11-6">
+    <details>
+        <summary>Aufgabe 4.11.6: Zahlungsarten am Schulkiosk <span class="niveau">AFB II</span></summary>
+        <p>Der Schulkiosk bekommt ein Kassensystem. Je nach Zahlungsart kommen Gebühren hinzu. Alle Beträge werden in Cent (ganze Zahlen) gerechnet:</p>
+        <ul>
+            <li>Barzahlung: keine Gebühr</li>
+            <li>Kartenzahlung: 1&nbsp;% des Betrags (ganzzahlig abgerundet), mindestens aber 10 Cent</li>
+            <li>Onlinezahlung: 35 Cent plus 2,5&nbsp;% des Betrags (ganzzahlig abgerundet)</li>
+        </ul>
+        <ol>
+            <li>Schreibe eine Oberklasse <code>Zahlungsart</code> mit den Methoden <code>bezeichnung()</code> und <code>gebuehr(betrag_cent: int) -&gt; int</code> sowie die drei Unterklassen.</li>
+            <li>Schreibe eine Funktion <code>abrechnen(betrag_cent, zahlungsart) -&gt; str</code>, die z.&nbsp;B. <code>"Karte: 20.20 €"</code> zurückgibt. Die Funktion darf keine <code>if</code>-Abfrage auf die Zahlungsart enthalten.</li>
+            <li>Ergänze danach eine Klasse <code>Gutschein</code> (10&nbsp;% Rabatt, ganzzahlig abgerundet), ohne <code>abrechnen</code> zu verändern.</li>
+        </ol>
+        <table class="gitter">
+            <tr><th>Aufruf</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+            <tr><td><code>abrechnen(2000, Barzahlung())</code></td><td>Bar: 20.00 €</td><td></td></tr>
+            <tr><td><code>abrechnen(2000, Kartenzahlung())</code></td><td>Karte: 20.20 €</td><td></td></tr>
+            <tr><td><code>abrechnen(2000, Onlinezahlung())</code></td><td>Online: 20.85 €</td><td></td></tr>
+            <tr><td><code>abrechnen(500, Kartenzahlung())</code></td><td>Karte: 5.10 € (Mindestgebühr)</td><td></td></tr>
+            <tr><td><code>abrechnen(500, Onlinezahlung())</code></td><td>Online: 5.47 €</td><td></td></tr>
+            <tr><td><code>abrechnen(2000, Gutschein())</code></td><td>Gutschein: 18.00 €</td><td></td></tr>
+        </table>
+        <p class="tipp">Ganzzahlig abrunden geht mit <code>//</code>, z.&nbsp;B. <code>betrag_cent * 25 // 1000</code> für 2,5&nbsp;%.</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-11-8">
+    <details>
+        <summary>Aufgabe 4.11.8: Botschaften verfolgen – Fußgängerampel <span class="niveau">AFB II–III</span></summary>
+        <pre><code class="language-python">class Ampel:
+    def __init__(self, name):
+        self.name = name
+        self.farbe = "rot"
+
+    def schalte(self, farbe):
+        self.farbe = farbe
+        print(f"{self.name}: {farbe}")
+
+class Steuerung:
+    def __init__(self, auto_ampel, fuss_ampel):
+        self.auto = auto_ampel
+        self.fuss = fuss_ampel
+
+    def anforderung(self):
+        self.auto.schalte("gelb")
+        self.auto.schalte("rot")
+        self.fuss.schalte("grün")
+
+class Taster:
+    def __init__(self, steuerung):
+        self.steuerung = steuerung
+
+    def gedrueckt(self):
+        print("Taster gedrückt")
+        self.steuerung.anforderung()
+
+auto = Ampel("Autoampel")
+auto.schalte("grün")
+fuss = Ampel("Fußgängerampel")
+taster = Taster(Steuerung(auto, fuss))
+taster.gedrueckt()</code></pre>
+        <ol>
+            <li>Gib die vollständige Ausgabe an.</li>
+            <li>Benenne das Ereignis und liste alle Botschaften, die es auslöst, in der richtigen Reihenfolge als „Sender → Empfänger: methode(argumente)“ auf.</li>
+            <li>Nachts soll die Autoampel bei „gelb“ statt „Autoampel: gelb“ die Zeile „Autoampel: gelb blinkt“ ausgeben. Löse das mit einer Unterklasse <code>BlinkAmpel</code>, ohne <code>Steuerung</code> oder <code>Taster</code> zu ändern. Gib die neue Ausgabe an und begründe, warum keine weitere Klasse angepasst werden muss.</li>
+        </ol>
+    </details>
+</div>

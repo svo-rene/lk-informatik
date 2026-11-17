@@ -1,0 +1,84 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/2-1-2_algorithmus.ipynb" download>2-1-2_algorithmus.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser das JupyterLite der Schule <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (alternativ <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.2.3: Terminiert das? <span class="niveau">AFB III</span></summary>
+                <pre><code class="language-python">x = int(input("Startwert: "))
+while x != 0:
+    x = x - 2</code></pre>
+                <p>Untersuche, für welche Eingaben das Programm terminiert. Ändere es so, dass es für jede ganze Zahl terminiert, und begründe, welche Eigenschaft eines Algorithmus du damit sicherstellst.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.2.4: Ergebnis vorhersagen <span class="niveau">AFB II</span></summary>
+                <p>Bestimme die Ausgaben der beiden Programme <strong>ohne</strong> sie auszuführen. Lege dazu eine Tabelle mit der Belegung aller Variablen nach jedem Schleifendurchlauf an. Prüfe erst danach am Rechner.</p>
+                <pre><code class="language-python"># Programm A
+summe = 0
+for i in range(1, 6):
+    if i % 2 == 0:
+        summe = summe + i
+    elif i == 5:
+        summe = summe * 2
+    else:
+        summe = summe - 1
+print(summe)
+
+# Programm B
+x = 10
+zaehler = 0
+while x &gt; 1:
+    if x % 3 == 0:
+        x = x // 3
+    else:
+        x = x - 1
+    zaehler = zaehler + 1
+print(x, zaehler)</code></pre>
+                <p class="tipp">Bei Programm A lohnt ein genauer Blick auf die Reihenfolge von <code>if</code> und <code>elif</code>: Welcher Zweig ist für i = 5 zuständig?</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.2.6: Wechselgeld am Schulkiosk <span class="niveau">AFB II</span></summary>
+                <p>Die Kasse am Schulkiosk soll das Wechselgeld mit möglichst wenigen Münzen auszahlen. Verfügbar sind Münzen zu 200, 100, 50, 20, 10, 5, 2 und 1 Cent. Das Verfahren: Nimm immer die größte Münze, die noch in den Restbetrag passt.</p>
+                <ol>
+                    <li>Schreibe eine Funktion <code>wechselgeld(betrag)</code>, die den Betrag in Cent erhält und die Liste der Münzen zurückgibt. Ist der Betrag keine ganze Zahl oder negativ, gibt sie <code>None</code> zurück.</li>
+                    <li>Teste mit der Tabelle und ergänze zwei eigene Testfälle.
+                        <table>
+                            <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>wechselgeld(388)</code></td><td><code>[200, 100, 50, 20, 10, 5, 2, 1]</code></td><td></td></tr>
+                                <tr><td><code>wechselgeld(4)</code></td><td><code>[2, 2]</code></td><td></td></tr>
+                                <tr><td><code>wechselgeld(1000)</code></td><td><code>[200, 200, 200, 200, 200]</code></td><td></td></tr>
+                                <tr><td><code>wechselgeld(0)</code></td><td><code>[]</code></td><td></td></tr>
+                                <tr><td><code>wechselgeld(-5)</code></td><td><code>None</code></td><td></td></tr>
+                                <tr><td><code>wechselgeld("50")</code></td><td><code>None</code></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li>Begründe, dass dein Algorithmus für jede zulässige Eingabe terminiert.</li>
+                </ol>
+            </details>
+        </div>

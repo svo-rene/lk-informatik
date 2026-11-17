@@ -1,0 +1,228 @@
+<p>Vom Wanderparkplatz verzweigen sich die Wege: am Wald entlang, am Fluss entlang oder den Berg hinauf. Jeder Weg führt zu einem Ziel – einem Felsentor, einem Bootssteg, einem Gipfel. Du hast nur 40 Minuten. Welches Ziel schaffst du? Probierst du einen Weg aus und merkst unterwegs, dass die Zeit nicht reicht, gehst du zur letzten Abzweigung zurück und nimmst den nächsten Weg. Genau so arbeitet <strong>Backtracking</strong>.</p>
+
+<p>Die Wege bilden einen Baum: Sie verzweigen sich nur und laufen nie wieder zusammen. Rekursion auf Bäumen kennst du aus 3.4 bis 3.6 – neu ist das <strong>Zurückgehen</strong>. Nebenbei lernst du, wie man einen allgemeinen Baum mit einer eigenen Klasse <code>Baum</code> verwaltet.</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in vier kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe in Thonny mit.</p>
+
+<ol class="schritte">
+            <li>Die Idee: vorwärts, Sackgasse, zurück</li>
+            <li>Knoten und Baum: eine Klasse für den ganzen Baum</li>
+            <li>Einfügen: erst den Elternknoten suchen – Treffer nach oben melden</li>
+            <li>Eine Tour mit Zeitlimit: prüfen, vorwärts, zurücknehmen – danach Aufgabe 3.6b.1 bis 3.6b.3</li>
+        </ol>
+
+<p class="git-datei"><strong>Zum Mittippen:</strong> <code>2_baeume/wanderwege.py</code> – neu anlegen, weiter in den Aufgaben 3.6b.2 und 3.6b.3.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.6b Schritt 2: Knoten und Baum angelegt</code> · <code>3.6b Schritt 4: tour mit Zeitlimit</code> (Regeln auf Seite 3.0.2)</p>
+
+<h2 id="schritt-1">Schritt 1: Die Idee – vorwärts, Sackgasse, zurück</h2>
+
+<p>Im Video suchst du im Wegenetz eine Tour vom Parkplatz zu einem Ziel, die höchstens 40 Minuten dauert. An jedem Knoten steht, wie viele Minuten der Weg vom vorigen Punkt dorthin dauert. Achte darauf, <strong>woran</strong> die Suche eine Sackgasse erkennt und <strong>wohin</strong> sie dann zurückgeht.</p>
+
+<figure>
+            <img src="../img/skizze_wanderwege.svg" width="600" alt="Wegenetz als Baum: Parkplatz mit Waldweg, Uferweg und Bergpfad; darunter Schlucht, Felsentor, Mühle, Wasserfall, Bootssteg und Gipfel mit Gehzeiten in Minuten">
+            <figcaption>Abb. 1: Das Wegenetz als Baum. Die Zahl ist die Gehzeit in Minuten vom vorigen Punkt. Die Blätter sind die Ziele.</figcaption>
+        </figure>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-6b-1_idee_vorschau.png" src="../vid/3-6b-1_idee.mp4"></video><a href="../vid/3-6b-1_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Die Idee – vorwärts, Sackgasse, zurück (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<h2 id="schritt-2">Schritt 2: Knoten und Baum – eine Klasse für den ganzen Baum</h2>
+
+<p>In 3.4 hast du einen Baum nur aus <code>Knoten</code>-Objekten gebaut und Funktionen wie <code>hoehe(knoten)</code> von außen aufgerufen. Wie bei der verketteten Liste (Klassen <code>Node</code> und <code>LinkedList</code>) kann man den ganzen Baum aber auch in eine eigene Klasse packen: Die Klasse <code>Baum</code> hält die Wurzel in einem privaten Attribut, von außen benutzt man nur ihre Methoden. Achte im Video darauf, warum es zu jeder rekursiven Methode <strong>zwei</strong> Methoden gibt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-6b-2_baum_klasse_vorschau.png" src="../vid/3-6b-2_baum_klasse.mp4"></video><a href="../vid/3-6b-2_baum_klasse.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Knoten und Baum – öffentliche Methode, private Hilfsmethode (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>2_baeume/wanderwege.py</code> an und tippe den Code aus dem Video ab: die Klassen <code>Knoten</code> und <code>Baum</code> und die Methoden <code>hoehe</code> und <code>__hoehe</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>netz = Baum(&quot;Parkplatz&quot;)</code> · <code>netz.hoehe()</code>. Danach committen, z.&nbsp;B. <code>3.6b Schritt 2: Knoten, Baum, hoehe angelegt</code>.</p>
+
+<h2 id="schritt-3">Schritt 3: Einfügen – erst den Elternknoten suchen</h2>
+
+<p>Mit <code>netz.einfuegen("Mühle", "Wasserfall", 30)</code> soll der Wasserfall unter der Mühle eingehängt werden. Dazu muss die Methode den Knoten „Mühle“ erst finden. Die private Methode <code>__finde</code> sucht ihn im Baum: Sie fragt der Reihe nach die Teilbäume der Kinder. Findet ein Teilbaum nichts, meldet er <code>None</code> zurück, und das nächste Kind ist dran. Das ist schon Backtracking in seiner einfachsten Form. Achte im Video auf die Zeile, die einen Treffer nach oben durchreicht.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-6b-3_finde_vorschau.png" src="../vid/3-6b-3_finde.mp4"></video><a href="../vid/3-6b-3_finde.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Einfügen mit <code>__finde</code> – Treffer durchreichen oder <code>None</code> melden (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/wanderwege.py</code> den Code aus dem Video: die Methoden <code>einfuegen</code> und <code>__finde</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>netz.einfuegen(&quot;Mühle&quot;, &quot;Wasserfall&quot;, 30)</code> · <code>netz.einfuegen(&quot;Turm&quot;, &quot;Aussicht&quot;, 5)</code>. Danach committen, z.&nbsp;B. <code>3.6b Schritt 3: einfuegen, __finde ergänzt</code>.</p>
+
+<h2 id="schritt-4">Schritt 4: Eine Tour mit Zeitlimit – prüfen, vorwärts, zurücknehmen</h2>
+
+<p>Jetzt die Frage vom Anfang: <code>netz.tour(40)</code> soll eine Tour vom Parkplatz zu einem Ziel liefern, die höchstens 40 Minuten dauert. Die Liste <code>weg</code> merkt sich, wo man gerade ist. Vor jedem Schritt wird <strong>geprüft</strong>, ob die Zeit noch reicht. Ist das so, kommt der Punkt in den Weg (<strong>vorwärts</strong>). Führt keiner seiner Wege zum Ziel, wird er mit <code>weg.pop()</code> wieder herausgenommen (<strong>zurück</strong>). Achte im Video darauf, was in <code>weg</code> steht, wenn die Suche zurückgeht.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-6b-4_tour_vorschau.png" src="../vid/3-6b-4_tour.mp4"></video><a href="../vid/3-6b-4_tour.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: <code>tour(40)</code> Schritt für Schritt – <code>weg.append</code> und <code>weg.pop</code> (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/wanderwege.py</code> den Code aus dem Video: die Methoden <code>tour</code> und <code>__tour</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>netz.tour(40)</code>. Danach committen, z.&nbsp;B. <code>3.6b Schritt 4: tour, __tour ergänzt</code>.</p>
+
+<p>Zum Nachlesen:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">komplex</span> Wegenetz mit den Klassen Knoten und Baum</summary>
+            <pre><code class="language-python">class Knoten:
+    def __init__(self, name, minuten):
+        self.name = name
+        self.minuten = minuten          # Gehzeit vom vorigen Punkt
+        self.kinder = []
+
+
+class Baum:
+    def __init__(self, name):
+        self.__wurzel = Knoten(name, 0)
+
+    def hoehe(self):
+        return self.__hoehe(self.__wurzel)
+
+    def __hoehe(self, knoten):
+        if not knoten.kinder:           # Blatt: Höhe 0
+            return 0
+        groesste = 0
+        for kind in knoten.kinder:
+            h = self.__hoehe(kind)
+            if h &gt; groesste:
+                groesste = h
+        return 1 + groesste
+
+    def einfuegen(self, eltern_name, name, minuten):
+        eltern = self.__finde(self.__wurzel, eltern_name)
+        if eltern is None:
+            print(eltern_name, "gibt es nicht.")
+        else:
+            eltern.kinder.append(Knoten(name, minuten))
+
+    def __finde(self, knoten, name):
+        if knoten.name == name:
+            return knoten               # gefunden
+        for kind in knoten.kinder:
+            treffer = self.__finde(kind, name)
+            if treffer is not None:
+                return treffer          # Treffer nach oben durchreichen
+        return None                     # hier nicht: zurück
+
+    def tour(self, limit):
+        weg = []
+        if self.__tour(self.__wurzel, 0, limit, weg):
+            return weg
+        return None
+
+    def __tour(self, knoten, zeit, limit, weg):
+        zeit = zeit + knoten.minuten
+        if zeit &gt; limit:
+            return False                # zu weit: Sackgasse
+        weg.append(knoten.name)         # vorwärts: Punkt in den Weg
+        if not knoten.kinder:
+            return True                 # Ziel erreicht
+        for kind in knoten.kinder:
+            if self.__tour(kind, zeit, limit, weg):
+                return True             # Erfolg nach oben melden
+        weg.pop()                       # zurück: Punkt wieder heraus
+        return False
+
+
+netz = Baum("Parkplatz")
+netz.einfuegen("Parkplatz", "Waldweg", 15)
+netz.einfuegen("Parkplatz", "Uferweg", 10)
+netz.einfuegen("Parkplatz", "Bergpfad", 25)
+netz.einfuegen("Waldweg", "Schlucht", 20)
+netz.einfuegen("Schlucht", "Felsentor", 25)
+netz.einfuegen("Uferweg", "Mühle", 15)
+netz.einfuegen("Mühle", "Wasserfall", 30)
+netz.einfuegen("Mühle", "Bootssteg", 10)
+netz.einfuegen("Bergpfad", "Gipfel", 20)
+
+print(netz.hoehe())        # 3
+print(netz.tour(40))       # ['Parkplatz', 'Uferweg', 'Mühle', 'Bootssteg']</code></pre>
+            <p><strong>Ablauf von <code>netz.tour(40)</code></strong> (Spalte „weg“: Inhalt nach dem Schritt):</p>
+            <table>
+                <thead><tr><th>Aufruf</th><th>Punkt</th><th><code>zeit</code></th><th>Aktion</th><th><code>weg</code></th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>Parkplatz</td><td>0</td><td>vorwärts</td><td>[Parkplatz]</td></tr>
+                    <tr><td>2</td><td>Waldweg</td><td>15</td><td>vorwärts</td><td>[Parkplatz, Waldweg]</td></tr>
+                    <tr><td>3</td><td>Schlucht</td><td>35</td><td>vorwärts</td><td>[…, Waldweg, Schlucht]</td></tr>
+                    <tr><td>4</td><td>Felsentor</td><td>60</td><td><strong>zu weit</strong>, <code>False</code></td><td>unverändert</td></tr>
+                    <tr><td>(3)</td><td>Schlucht</td><td>35</td><td>kein Kind mehr: <code>pop</code>, <code>False</code></td><td>[Parkplatz, Waldweg]</td></tr>
+                    <tr><td>(2)</td><td>Waldweg</td><td>15</td><td>kein Kind mehr: <code>pop</code>, <code>False</code></td><td>[Parkplatz]</td></tr>
+                    <tr><td>5</td><td>Uferweg</td><td>10</td><td>vorwärts</td><td>[Parkplatz, Uferweg]</td></tr>
+                    <tr><td>6</td><td>Mühle</td><td>25</td><td>vorwärts</td><td>[…, Uferweg, Mühle]</td></tr>
+                    <tr><td>7</td><td>Wasserfall</td><td>55</td><td><strong>zu weit</strong>, <code>False</code></td><td>unverändert</td></tr>
+                    <tr><td>8</td><td>Bootssteg</td><td>35</td><td>vorwärts, Blatt: Ziel, <code>True</code></td><td>[…, Mühle, Bootssteg]</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><em>Was:</em> Die Suche geht über den Waldweg bis zur Schlucht. <em>Warum:</em> Bis dorthin reicht die Zeit (35 ≤ 40).</li>
+                <li><em>Was:</em> Das Felsentor wäre nach 60 Minuten erreicht – der Aufruf meldet sofort <code>False</code>, der Punkt kommt gar nicht erst in den Weg. <em>Warum:</em> Weiterzugehen lohnt nicht, die Zeit kann nur noch mehr werden.</li>
+                <li><em>Was:</em> Schlucht und Waldweg haben keine weiteren Kinder und werden mit <code>pop</code> aus dem Weg genommen. <em>Warum:</em> Ohne Rücknahme stünden sie später noch im Ergebnis, obwohl die Tour gar nicht über sie führt.</li>
+                <li><em>Was:</em> Über Uferweg und Mühle ist der Wasserfall zu weit, der Bootssteg nach 35 Minuten erreichbar. Er ist ein Blatt, also ein Ziel: <code>True</code> wird bis zur Wurzel durchgereicht, jeder wartende Aufruf hört sofort auf.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>['Parkplatz', 'Uferweg', 'Mühle', 'Bootssteg']</code> nach 8 Aufrufen und 2 Rücknahmen. <strong>Probe:</strong> 10 + 15 + 10 = 35 ≤ 40. Der Bergpfad wird nicht mehr probiert – die Suche liefert die <strong>erste</strong> passende Tour, nicht unbedingt die beste.</p>
+            <table>
+                <thead><tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td>Normalfall</td><td><code>netz.tour(40)</code></td><td><code>['Parkplatz', 'Uferweg', 'Mühle', 'Bootssteg']</code></td></tr>
+                    <tr><td>Grenze genau erreicht</td><td><code>netz.tour(60)</code></td><td><code>['Parkplatz', 'Waldweg', 'Schlucht', 'Felsentor']</code></td></tr>
+                    <tr><td>keine Tour möglich</td><td><code>netz.tour(30)</code></td><td><code>None</code></td></tr>
+                    <tr><td>Elternknoten fehlt</td><td><code>netz.einfuegen("Turm", "Aussicht", 5)</code></td><td><code>Turm gibt es nicht.</code></td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 3.6b.1 – eine Tour von Hand verfolgen, Aufgabe 3.6b.2 – die Klasse <code>Baum</code> ausbauen und Aufgabe 3.6b.3 – alle Touren finden.</p>
+
+<hr>
+
+<h2>Ausblick: Backtracking ohne gespeicherten Baum</h2>
+
+<p>Hier lagen alle Möglichkeiten schon als Baum im Speicher. Bei vielen Problemen ist das nicht so: Beim Klausurplan, beim Sudoku oder beim N-Damen-Problem (Kursseite 3.10) entsteht der Baum der Möglichkeiten erst beim Suchen – jede Entscheidung („Mathe am Montag“, „eine 5 in dieses Feld“) ist ein Schritt nach unten. Das Muster bleibt dasselbe wie in <code>__tour</code>: prüfen, ob die Entscheidung erlaubt ist, setzen, rekursiv weiter, bei einer Sackgasse zurücknehmen.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Routen, Spiele und Menüs</summary>
+                <p>
+                    <strong>Alltag:</strong> Wander- und Rad-Apps schlagen Touren vor, die in eine vorgegebene Zeit passen. Ein Sprachmenü am Telefon („Drücken Sie 1 für …“) ist ein Baum; wer eine Frage nicht beantwortet bekommt, geht ein Menü zurück und probiert die nächste Taste.<br><br>
+                    <strong>Beruf:</strong> Spielprogramme für Schach oder Vier gewinnt durchsuchen den Baum der möglichen Züge in der Tiefe und kehren zurück, sobald ein Zug sicher schlechter ist als ein schon gefundener. Auch Programme, die Fehler in Anlagen suchen („Wenn die Pumpe läuft, prüfe das Ventil …“), arbeiten Entscheidungsbäume mit Rückweg ab.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Backtracking</strong> ist eine systematische Suche: Man trifft eine Entscheidung und geht damit weiter (<strong>vorwärts</strong>). Erkennt man, dass es so nicht zum Ziel führt (<strong>Sackgasse</strong>), nimmt man die letzte Entscheidung zurück und probiert die nächste Möglichkeit (<strong>zurück</strong>). Im Baum ist das eine Tiefensuche, die bei einer Sackgasse zum Elternknoten zurückkehrt.
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>Verwaltungsklasse für einen Baum:</strong> Die Klasse <code>Knoten</code> speichert die Daten eines Knotens und die Liste seiner Kinder. Die Klasse <code>Baum</code> speichert die Wurzel privat (<code>__wurzel</code>). Eine rekursive Aufgabe teilt man auf: Die <strong>öffentliche</strong> Methode (z.&nbsp;B. <code>hoehe()</code>) braucht keinen Knoten als Parameter und ruft die <strong>private</strong> Hilfsmethode mit der Wurzel auf (<code>__hoehe(self.__wurzel)</code>). Die Hilfsmethode ruft sich für die Kinder selbst auf.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Nur 30 Minuten <span class="niveau">AFB I</span></summary>
+                <p>Suche wie im Video eine Tour mit höchstens <strong>30</strong> Minuten. Die Wege werden von links nach rechts probiert. An welchen Punkten merkst du, dass die Zeit nicht reicht? Welches Ergebnis hat die Suche?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Waldweg (15) → Schlucht wäre 35 Minuten: zu weit, zurück. Uferweg (10) → Mühle (25) → Wasserfall wäre 55, Bootssteg 35: beides zu weit, zurück bis zum Parkplatz. Bergpfad (25) → Gipfel wäre 45: zu weit. Es gibt <strong>keine</strong> Tour mit höchstens 30 Minuten – die Suche hat alle Möglichkeiten ausgeschlossen.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Wer darf was? <span class="niveau">AFB I</span></summary>
+                <p>Es gilt <code>netz = Baum("Parkplatz")</code>, sonst ist noch nichts eingefügt. Was liefert <code>netz.hoehe()</code>? Was passiert bei <code>netz.__hoehe(netz.__wurzel)</code> in der Kommandozeile – und warum ist das so gewollt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>netz.hoehe()</code> liefert 0: Die Wurzel ist ein Blatt. Der zweite Aufruf endet mit einem <code>AttributeError</code>, denn Attribute und Methoden mit <code>__</code> sind privat und von außen nicht erreichbar. So kann niemand von außen die Wurzel austauschen oder den Baum an der Klasse vorbei verändern – wer den Baum benutzt, braucht nur die öffentlichen Methoden.</p>
+                </details>
+            </details>
+        </div>

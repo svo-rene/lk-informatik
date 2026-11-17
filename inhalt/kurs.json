@@ -1,0 +1,41 @@
+{
+  "titel": "Leistungskurs Informatik",
+  "bereiche": [
+    "lb1-technische-informatik",
+    "lb2-programmieren-algorithmen",
+    "lb3-datenstrukturen",
+    "lb4-oop-softwareentwicklung",
+    "lb6-sprachen-automaten",
+    "lb7-rechnernetze",
+    "lb8-informationssicherheit",
+    "lb9-datenmanagement",
+    "lb10-ki-projektmanagement"
+  ],
+  "nachweise": [
+    {
+      "datei": "Infografik_Software-Hardware-nachhaltig.jpg",
+      "urheber": "Institut für ökologische Wirtschaftsforschung (IÖW), www.nachhaltige-digitalisierung.de",
+      "lizenz": "CC BY-NC-SA"
+    },
+    {
+      "datei": "AB_Neumann-Architektur.pdf",
+      "urheber": "Tino Hempel",
+      "lizenz": "CC BY-SA 4.0 DE"
+    },
+    {
+      "datei": "vs_aa_vigenere-verschluesselung.pdf",
+      "urheber": "Informatik-Werkstatt, Universität Klagenfurt (AAU) 2018",
+      "lizenz": "CC BY-NC-SA 4.0"
+    },
+    {
+      "datei": "aes_demo.png",
+      "urheber": "inf-schule.de",
+      "lizenz": "CC BY-SA 4.0"
+    },
+    {
+      "datei": "undraw_Airport_re_oqk1.png",
+      "urheber": "unDraw (Katerina Limpitsouni)",
+      "lizenz": "unDraw-Lizenz (frei nutzbar)"
+    }
+  ]
+}

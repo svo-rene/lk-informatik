@@ -1,0 +1,50 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.13.3: Grundsätze im Alltag wiederfinden <span class="niveau">AFB II</span></summary>
+                <p>
+                    Wähle einen der vier Grundsätze (Datenminimierung, Erforderlichkeit, Zweckbindung, Recht auf
+                    informationelle Selbstbestimmung) und finde ein reales Beispiel (App, Webseite, Formular),
+                    bei dem dieser Grundsatz möglicherweise verletzt wird. Begründe deine Einschätzung.
+                </p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.13.5: Eine schlechte Hashfunktion erkennen <span class="niveau">AFB II</span></summary>
+                <p>Die Mensa legt die Kartennummern 7, 15, 22, 36, 43 und 50 in einer Hashtabelle mit 7 Fächern ab, Hashfunktion
+                   <code>h(k) = k mod 7</code>.</p>
+                <ol>
+                    <li>Bestimme für jede Nummer das Fach und zeichne die Tabelle (mit Verkettung bei Kollisionen).</li>
+                    <li>Gib an, wie viele Vergleiche die Suche nach 50 braucht, und vergleiche mit Beispiel 2.</li>
+                    <li>Erkläre, warum diese Hashfunktion für diese Nummern schlecht ist, und prüfe, ob 10 Fächer mit <code>h(k) = k mod 10</code> besser wären.</li>
+                    <li>Begründe, warum ein Index das Suchen beschleunigt, aber jedes Einfügen und Ändern etwas langsamer macht.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.13.6: Ausreißer im Datenstrom melden <span class="niveau">AFB II</span></summary>
+                <p>Die Gewächshaus-Steuerung soll fehlerhafte Messungen sofort erkennen, ohne die ganze Messreihe zu speichern. Regel: Ein Wert
+                   ist ein <em>Ausreißer</em>, wenn er um mehr als 10 Grad vom Mittelwert der bis zu drei letzten <em>gültigen</em> Werte
+                   abweicht. Ausreißer werden gemeldet und kommen nicht ins Fenster. Der allererste Wert gilt immer als gültig.</p>
+                <ol>
+                    <li>Schreibe eine Funktion <code>pruefen(fenster, wert, grenze=10)</code>, die <code>True</code> für einen Ausreißer zurückgibt und
+                        gültige Werte in das Fenster (<code>deque(maxlen=3)</code>) übernimmt.</li>
+                    <li>Lies <a href="../notebooks/sensordaten.csv" download>sensordaten.csv</a> Zeile für Zeile und gib für jeden Ausreißer Zeit und Wert aus.</li>
+                    <li>Begründe, warum ein fester Grenzbereich wie −30 bis 50&nbsp;°C (Seite 3.5) den Wert 48.0 nicht erkennt, deine Regel aber schon.</li>
+                </ol>
+                <table class="gitter">
+                    <tr><th>Testfall</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                    <tr><td>Werte 20, 21, 50, 22 nacheinander</td><td><code>False False True False</code></td><td></td></tr>
+                    <tr><td>Werte 20, 30 (Abweichung genau 10)</td><td><code>False False</code></td><td></td></tr>
+                    <tr><td><code>sensordaten.csv</code></td><td>Ausreißer um 11:20 (48.0) und 11:30 (−40.0)</td><td></td></tr>
+                </table>
+                <p class="tipp"><code>deque(maxlen=3)</code> wirft beim Anhängen eines vierten Werts den ältesten automatisch hinaus.</p>
+            </details>
+        </div>

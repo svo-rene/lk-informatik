@@ -1,0 +1,78 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.2.6: Netzplan prüfen <span class="niveau">AFB III</span></summary>
+                <p>Das Mensa-Team erweitert seine App um eine KI-gestützte Prognose, wie viele Portionen an einem Tag gebraucht werden. Jonas hat die Arbeitspakete geplant (Dauer in Wochen):</p>
+                <table>
+                    <thead>
+                        <tr><th>Paket</th><th>Dauer</th><th>Vorgänger</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>P1 Bestelldaten exportieren</td><td>1</td><td>–</td></tr>
+                        <tr><td>P2 Daten bereinigen</td><td>2</td><td>P1</td></tr>
+                        <tr><td>P3 Wetterdaten beschaffen</td><td>1</td><td>–</td></tr>
+                        <tr><td>P4 Modell trainieren</td><td>3</td><td>P2, P3</td></tr>
+                        <tr><td>P5 Anzeige für die Küche programmieren</td><td>2</td><td>P1</td></tr>
+                        <tr><td>P6 Gesamttest</td><td>1</td><td>P4, P5</td></tr>
+                    </tbody>
+                </table>
+                <p>Dazu schreibt Jonas ins Projekttagebuch:</p>
+                <ul>
+                    <li>„Die Projektdauer beträgt 10 Wochen, das ist die Summe aller Dauern.“</li>
+                    <li>„Der kritische Pfad ist P3 – P4 – P6, denn ohne Wetterdaten kann nicht trainiert werden.“</li>
+                    <li>„P5 hat keinen Puffer, weil sie direkt nach P1 beginnen muss.“</li>
+                </ul>
+                <ol type="a">
+                    <li>Berechne für alle Pakete FA, FE, SA, SE und den Gesamtpuffer GP und bestimme den kritischen Pfad.</li>
+                    <li>Widerlege jede der drei Aussagen von Jonas mit deinen Ergebnissen und erkläre jeweils seinen Denkfehler.</li>
+                    <li>Die Beschaffung der Wetterdaten dauert 3 statt 1 Woche. Untersuche, ob sich das Projektende verschiebt und was sich am kritischen Pfad ändert.</li>
+                </ol>
+                <p class="tipp">Gehe vor wie in Beispiel 2: erst vorwärts (FA, FE), dann rückwärts (SE, SA), dann GP = SA − FA.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.2.8: User Stories verbessern <span class="niveau">AFB III</span></summary>
+                <p>Lena ist Product Owner der Mensa-App und hat diese Einträge ins Product Backlog geschrieben:</p>
+                <ol>
+                    <li>„Als Entwickler möchte ich eine SQLite-Datenbank verwenden, um Daten zu speichern.“</li>
+                    <li>„Die App soll benutzerfreundlich und schnell sein.“</li>
+                    <li>„Als Schüler möchte ich Essen vorbestellen, stornieren, bezahlen und Gerichte bewerten, um die Mensa besser zu nutzen.“</li>
+                    <li>„Als Küchenleiter möchte ich um 10 Uhr die Anzahl der Bestellungen je Gericht sehen, um die richtige Menge zu kochen.“</li>
+                </ol>
+                <p>Damit das Team weiß, wann eine Story fertig ist, werden zu jeder Story <strong>Akzeptanzkriterien</strong> notiert: konkrete, überprüfbare Bedingungen, die das Ergebnis erfüllen muss (ähnlich der „Definition of Done“, aber für eine einzelne Story).</p>
+                <ol type="a">
+                    <li>Beurteile jeden der vier Einträge: Ist es eine gute User Story? Benenne gegebenenfalls den Mangel.</li>
+                    <li>Formuliere die mangelhaften Einträge so um, dass sie dem Satzschema entsprechen und in einem Sprint umsetzbar sind.</li>
+                    <li>Formuliere für Story 4 drei Akzeptanzkriterien, die die Testklasse tatsächlich überprüfen kann.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.2.9: Klassisch, agil oder beides? <span class="niveau">AFB III</span></summary>
+                <p>Der Schulträger finanziert für das nächste Schuljahr zwei Erweiterungen der Mensa-App:</p>
+                <ul>
+                    <li><strong>Teilprojekt 1:</strong> Im Speisesaal werden in den Herbstferien vier Bestellterminals fest montiert und verkabelt. Elektriker, Netzwerktechnik und die Brandschutzabnahme müssen in genau diesen zwei Wochen nacheinander erledigt werden. Was gebaut wird, steht fest.</li>
+                    <li><strong>Teilprojekt 2:</strong> Eine KI soll vorhersagen, wie viele Gäste ohne Vorbestellung essen werden. Ob das genau genug gelingt und welche Daten (Wetter, Stundenplan, Ferien) dafür nützen, weiß noch niemand.</li>
+                </ul>
+                <ol type="a">
+                    <li>Entscheide für jedes Teilprojekt, ob klassisch oder agil vorgegangen werden sollte, und begründe mit mindestens zwei Aspekten aus der Vergleichstabelle.</li>
+                    <li>Nenne für jedes Teilprojekt zwei passende Werkzeuge von dieser Seite.</li>
+                    <li>Beide Teilprojekte hängen an einer Stelle zusammen. Beschreibe diese Schnittstelle und wie ihr sie in der Planung berücksichtigt.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Weiterführende Links</h2>
+
+<ul>
+            <li><a href="https://de.wikipedia.org/wiki/Gantt-Diagramm" target="_blank" rel="noopener">Gantt-Diagramm (Wikipedia)</a> – Hintergrundwissen zur Geschichte und zu den Vor- und Nachteilen des Gantt-Diagramms, gut zur Vertiefung von Aufgabe 10.2.1.</li>
+            <li><a href="https://www.youtube.com/watch?v=jQH6CH0cmZI" target="_blank" rel="noopener">Was ist Scrum? Die perfekte Erklärung für Einsteiger (YouTube)</a> – ein kurzes deutschsprachiges Erklärvideo zu Scrum, dem bekanntesten Framework des agilen Projektmanagements.</li>
+            <li><a href="https://scrumguides.org/" target="_blank" rel="noopener">Der Scrum Guide (scrumguides.org)</a> – die offizielle, kurze Beschreibung von Scrum, auch auf Deutsch.</li>
+            <li><a href="https://www.youtube.com/watch?v=BuKkYMXDDws" target="_blank" rel="noopener">Kanban einfach erklärt (YouTube)</a> – ein Video, das die Kanban-Methode noch einmal visuell zusammenfasst, ideal zur Vorbereitung auf Aufgabe 10.2.2.</li>
+            <li><a href="https://www.atlassian.com/de/agile/project-management/user-stories" target="_blank" rel="noopener">User Storys mit Beispielen und Vorlage (Atlassian)</a> – weitere Beispiele und Tipps zum Schreiben guter User Stories, hilfreich für Aufgabe 10.2.3.</li>
+        </ul>

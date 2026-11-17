@@ -1,0 +1,44 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.7.5: Fehler finden – Namen, die sich in die Quere kommen <span class="niveau">AFB III</span></summary>
+                <p><strong>Programm A</strong> soll das Maximum einer Liste bestimmen und danach noch zwei Zahlen vergleichen:</p>
+                <pre><code class="language-python">werte = [4, 9, 2]
+max = 0
+for w in werte:
+    if w &gt; max:
+        max = w
+print("Maximum:", max)
+print("Größere Zahl:", max(3, 7))</code></pre>
+                <p><strong>Programm B</strong> zählt gerade Zahlen. Ein Mitschüler testet zweimal hintereinander:</p>
+                <pre><code class="language-python">anzahl = 0
+
+def zaehle_gerade(liste):
+    global anzahl
+    for x in liste:
+        if x % 2 == 0:
+            anzahl = anzahl + 1
+    return anzahl
+
+print(zaehle_gerade([2, 4, 5]))   # erwartet: 2
+print(zaehle_gerade([6, 7]))      # erwartet: 1</code></pre>
+                <ol>
+                    <li>Gib für beide Programme die tatsächliche Ausgabe an und erkläre die Ursache mit dem Begriff Gültigkeitsbereich.</li>
+                    <li>Bei Programm B ist der erste Test grün, der zweite rot. Vertauscht man die Reihenfolge der beiden Tests, ändern sich die Ergebnisse. Begründe, warum das ein deutliches Warnsignal ist.</li>
+                    <li>Korrigiere beide Programme und lege für <code>zaehle_gerade</code> eine Testtabelle (Eingabe | erwartete Ausgabe | tatsächliche Ausgabe) mit <code>[2, 4, 5]</code>, <code>[6, 7]</code>, <code>[]</code>, <code>[-2, -3]</code> und <code>[0]</code> an.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.7.7: Sind globale Variablen immer schlecht? <span class="niveau">AFB III</span></summary>
+                <p>In einem Forum behauptet jemand: „Globale Variablen sind immer schlechter Stil und gehören verboten.“</p>
+                <ol>
+                    <li>Beurteile für die drei Situationen, ob eine globale Variable vertretbar ist: (a) <code>MWST = 0.19</code> wird in mehreren Funktionen gelesen, aber nie verändert. (b) Ein Spiel speichert den Punktestand in <code>punkte</code>, und fünf Funktionen erhöhen ihn mit <code>global punkte</code>. (c) <code>DATEINAME = "punkte.csv"</code> steht am Anfang eines Programms, damit man ihn leicht ändern kann.</li>
+                    <li>Nimm begründet Stellung zur Aussage. Gehe auf Testbarkeit, Lesbarkeit und Fehlersuche ein.</li>
+                    <li>Formuliere zwei Regeln für den Umgang mit globalen Namen, die du in einem Projekt im Team vereinbaren würdest.</li>
+                </ol>
+            </details>
+        </div>

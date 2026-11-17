@@ -1,0 +1,114 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Rolle, Ziel, Nutzen – und ein Kriterium <span class="niveau">AFB I–II</span></summary>
+                <p>Story: „Als AG-Leiterin möchte ich sehen, wie viele Plätze in meiner AG noch frei sind, um Interessierten sofort zusagen zu können.“ Gib Rolle, Ziel und Nutzen an. Ist „Die Anzeige ist schnell“ ein gutes Akzeptanzkriterium? Formuliere stattdessen ein Kriterium im Muster Gegeben – Wenn – Dann mit konkreten Zahlen.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Rolle: AG-Leiterin; Ziel: freie Plätze ihrer AG sehen; Nutzen: Interessierten sofort zusagen. „Die Anzeige ist schnell“ ist nicht prüfbar – wie schnell? Besser z.&nbsp;B.: <em>Gegeben</em> meine AG hat 17 von 20 Plätzen belegt, <em>wenn</em> ich meine AG öffne, <em>dann</em> steht dort „3 Plätze frei“. (Ein Grenzfall wäre 20 von 20 → „0 Plätze frei“ bzw. „(voll)“.)</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Kriterium oder DoD – und was zählt? <span class="niveau">AFB I–II</span></summary>
+                <p>(a) Gehört „Tests laufen fehlerfrei“ in die Akzeptanzkriterien einer Story oder in die Definition of Done? (b) Ein Team hat in einem Sprint T1 (5 SP) und T2 (2 SP) vollständig fertig. T3 (3 SP) ist programmiert und geprüft, aber noch nicht in <code>main</code> übernommen. Die DoD verlangt die Übernahme in <code>main</code>. Wie groß ist die Velocity dieses Sprints?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>(a) In die Definition of Done – die Regel gilt für jede Story, nicht nur für eine. (b) 5 + 2 = 7 SP. T3 erfüllt die DoD nicht und zählt nicht mit; sie wandert zurück ins Product Backlog.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-2-1">
+            <details>
+                <summary>Aufgabe 5.2.1: Tätigkeiten im V-Modell zuordnen – Zugang zur Turnhalle <span class="niveau">AFB I–II</span></summary>
+                <p>Die Turnhalle der Schule bekommt ein Zugangssystem mit Chipkarten. Sportvereine dürfen nur zu ihren gebuchten Zeiten hinein, Lehrkräfte immer. Eine Firma arbeitet nach dem V-Modell. Im Protokoll stehen diese Tätigkeiten (ungeordnet):</p>
+                <table class="gitter">
+                    <tr><th>Nr.</th><th>Tätigkeit</th></tr>
+                    <tr><td>T1</td><td>Mit dem Hausmeister wird festgelegt, wer wann hinein darf und dass er Buchungen selbst eintragen kann.</td></tr>
+                    <tr><td>T2</td><td>Es wird festgelegt, dass das System aus Kartenleser, Server mit Belegungsplan und Webseite für den Hausmeister besteht und dass der Kartenleser beim Server nachfragt.</td></tr>
+                    <tr><td>T3</td><td>Für die Klasse <code>Zutrittsregel</code> wird ein Klassendiagramm mit der Methode <code>darf_rein(karte: str, minute: int) -&gt; bool</code> erstellt.</td></tr>
+                    <tr><td>T4</td><td>Bei einer Buchung von 18:00 bis 19:30 Uhr wird <code>darf_rein</code> mit einer Vereinskarte für 17:59, 18:00, 19:30 und 19:31 Uhr aufgerufen und mit den erwarteten Werten verglichen.</td></tr>
+                    <tr><td>T5</td><td>Geprüft wird, ob eine auf der Webseite eingetragene Buchung beim Kartenleser ankommt.</td></tr>
+                    <tr><td>T6</td><td>Es wird festgelegt, dass die Tür spätestens eine Sekunde nach dem Vorhalten der Karte öffnet und dass das System bei Netzausfall 24 Stunden mit dem zuletzt geladenen Plan weiterarbeitet.</td></tr>
+                    <tr><td>T7</td><td>Das Entwicklerteam zieht am fertigen System das Netzwerkkabel und prüft, dass Karten weiter erkannt werden.</td></tr>
+                    <tr><td>T8</td><td>Der Hausmeister arbeitet eine Woche mit echten Vereinskarten und unterschreibt danach die Übernahme.</td></tr>
+                </table>
+                <ol type="a">
+                    <li>Ordne jede Tätigkeit einer Stufe des V-Modells zu.</li>
+                    <li>Gib für jede Test-Tätigkeit an, gegen welche andere Tätigkeit sie prüft.</li>
+                    <li>Bei T8 stellt der Hausmeister fest, dass Vereine auch 15 Minuten vor Beginn hinein müssen, um sich umzuziehen. Erkläre, in welche Stufe das Projekt zurück muss und warum das im V-Modell teuer ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-2-2">
+            <details>
+                <summary>Aufgabe 5.2.2: Das passende Vorgehensmodell wählen <span class="niveau">AFB II</span></summary>
+                <p>Entscheide für jedes Vorhaben zwischen Wasserfall, V-Modell und Scrum. Begründe mit zwei Merkmalen der Situation.</p>
+                <ol>
+                    <li><strong>Abizeitungs-Webseite:</strong> Der Abiturjahrgang möchte eine Webseite mit Steckbriefen, Umfragen und Fotos. Was davon am wichtigsten ist, wird im Jahrgang noch diskutiert. Erste Inhalte sollen schon in drei Wochen online sein.</li>
+                    <li><strong>Steuerung eines Treppenlifts:</strong> Ein Hersteller lässt die Software für einen Treppenlift neu entwickeln. Die Anforderungen stehen in einer Norm. Vor dem Verkauf verlangt eine Prüfstelle Nachweise, dass jede Sicherheitsfunktion getestet wurde.</li>
+                    <li><strong>Notenrechner anpassen:</strong> Das Programm, mit dem die Schule Kurshalbjahre auswertet, soll eine geänderte Rundungsregel übernehmen. Die Änderung ist vollständig beschrieben und in zwei Tagen erledigt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-2-3">
+            <details>
+                <summary>Aufgabe 5.2.3: Akzeptanzkriterien schreiben – der Vertretungsplan <span class="niveau">AFB II</span></summary>
+                <p>Für eine Vertretungsplan-App steht im Product Backlog: „Als Schülerin der 10b möchte ich die Vertretungen meiner Klasse für heute und den nächsten Schultag sehen, um mich auf Raum- und Lehrerwechsel einzustellen.“</p>
+                <ol type="a">
+                    <li>Formuliere mindestens drei Akzeptanzkriterien im Muster Gegeben – Wenn – Dann. Mindestens zwei davon sollen Grenzfälle prüfen (denk an den Freitag und an Tage ohne Vertretung).</li>
+                    <li>Nenne zwei Punkte, die in die Definition of Done des Teams gehören, aber nicht in die Akzeptanzkriterien dieser Story. Begründe.</li>
+                    <li>Schreibe den vollständigen Text des Issues in Markdown (Titel, Story, Kriterien als Aufgabenliste).</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-5-2-4">
+            <details>
+                <summary>Aufgabe 5.2.4: Schätzen und planen <span class="niveau">AFB II</span></summary>
+                <p>Das Team der Vertretungsplan-App hat in den Sprints 1 bis 4 eine Velocity von 16, 12, 15 und 13 SP erreicht. Das restliche Product Backlog (Reihenfolge = Priorität):</p>
+                <table class="gitter">
+                    <tr><th>Story</th><th>Inhalt</th><th>SP</th></tr>
+                    <tr><td>V5</td><td>Benachrichtigung bei Ausfall der ersten Stunde</td><td>5</td></tr>
+                    <tr><td>V6</td><td>Raumänderungen hervorheben</td><td>2</td></tr>
+                    <tr><td>V7</td><td>Wochenansicht</td><td>8</td></tr>
+                    <tr><td>V8</td><td>Kürzel der Lehrkräfte erklären</td><td>1</td></tr>
+                    <tr><td>V9</td><td>Klausurtermine anzeigen</td><td>5</td></tr>
+                    <tr><td>V10</td><td>Dunkle Darstellung</td><td>3</td></tr>
+                    <tr><td>V11</td><td>Mehrere Klassen merken</td><td>3</td></tr>
+                </table>
+                <ol type="a">
+                    <li>Beim Planning Poker für V7 decken die vier Developers 3, 5, 8 und 13 auf. Beschreibe den weiteren Ablauf und erkläre, warum es falsch wäre, einfach 7 (den gerundeten Mittelwert) einzutragen.</li>
+                    <li>Das Team übernimmt Stories streng in der Reihenfolge des Backlogs, bis die nächste nicht mehr passt, und teilt keine Story. Berechne die Velocity für die Planung, gib für jeden folgenden Sprint die Stories an und bestimme, wie viele Sprints das Team für das ganze Backlog braucht.</li>
+                    <li>Sprint 5 ist nach deiner Planung schlecht ausgelastet. Mach dem Product Owner zwei Vorschläge, was er tun könnte, und nenne jeweils einen Nachteil.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-2-5">
+            <details>
+                <summary>Aufgabe 5.2.5: Fehler finden – ein schlecht vorbereitetes Issue <span class="niveau">AFB II–III</span></summary>
+                <p>So sieht Issue #9 im Repository der Vertretungsplan-App aus:</p>
+                <pre><code>Titel: Klausuren
+
+Als Entwickler möchte ich eine Klasse Klausur programmieren,
+um Klausuren zu speichern.
+
+Akzeptanzkriterien:
+- [ ] Die Klausurtermine werden richtig angezeigt.
+- [ ] Die Seite lädt schnell.
+- [ ] Ein Teammitglied hat den Code im Pull Request geprüft.
+- [ ] Gegeben ich bin in Klasse 11, wenn ich die Klausuren öffne,
+      dann sehe ich Klausuren.</code></pre>
+                <ol type="a">
+                    <li>Beurteile die Story und jedes der vier Kriterien. Benenne jeweils den Mangel.</li>
+                    <li>Schreibe das Issue neu: Story aus Sicht der Nutzer, drei prüfbare Kriterien, davon mindestens ein Grenzfall.</li>
+                </ol>
+            </details>
+        </div>

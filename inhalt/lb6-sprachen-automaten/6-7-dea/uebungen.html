@@ -1,0 +1,85 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.3: <span class="niveau">AFB I</span></summary>
+                <p>Überprüfe durch Angabe der Zustandsfolge, ob der abgebildete Automat DEA 1 die Eingaben 100111 bzw. 01011 akzeptiert.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.4: <span class="niveau">AFB II</span></summary>
+                <p>Entwirf einen DEA, der alle Binärwörter akzeptiert, die mit 01 beginnen und mit 10 enden. Gib auch die entsprechende reguläre Grammatik an.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.5: <span class="niveau">AFB II</span></summary>
+                <p>
+                    Konstruiere einen minimalen DEA über Σ = {0,1}, der alle Wörter akzeptiert,
+                    in denen das Teilwort <code>11</code> <em>nicht</em> vorkommt.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.6: Abituraufgabe Fahrradverleih <span class="niveau">AFB II/III</span></summary>
+                <p>
+                    Die Firma „Bike-a-Bit“ betreibt einen Fahrradverleih. Jedes Fahrrad hat eine eindeutige Kennung, die aus Standort- und Typinformationen besteht. Die Kennung setzt sich zusammen aus:
+                </p>
+                <ul>
+                    <li>einem oder zwei Großbuchstaben (A–Z) für den Standort,</li>
+                    <li>einer Zahl zwischen 1 und 99,</li>
+                    <li>optional einem <strong>E</strong> (für E-Bikes)</li>
+                    <li>oder – bei Kinderfahrrädern – einem <strong>K</strong> und einem Zahlenwert für die Reifengröße (12, 14, 16, …, 24).</li>
+                </ul>
+                <p>
+                    Die Kennung wird intern zur Verwaltung verwendet und ist über dem Alphabet Σ = {0–9, A–Z} definiert. Die Sprache L enthält alle gültigen Fahrradkennungen.
+                </p>
+                <ol type="a">
+                    <li>Gib eine Grammatik in formaler Textnotation (z.&nbsp;B. EBNF) an, die L beschreibt.</li>
+                    <li>Skizziere ein Zustandsübergangsdiagramm eines DEA, der L akzeptiert.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.7: Vollständige Automaten <span class="niveau">AFB II/III</span></summary>
+                <ol>
+                    <li>Entwirf einen DEA über {a, b}, der genau die Wörter mit einer geraden Anzahl von a akzeptiert. Gib zusätzlich eine reguläre Grammatik an.</li>
+                    <li>Entwirf einen vollständigen DEA über {0, 1}, der genau die Wörter der Länge 3 akzeptiert, die mit 1 beginnen. Zeichne alle Übergänge ein, auch die zum Fangzustand.</li>
+                    <li>Prüfe mit deinem Automaten aus 2 die Wörter 101, 011 und 1100 über die Zustandsfolge.</li>
+                    <li>Erläutere, warum ein Automat, der alle Wörter mit gleich vielen a und b akzeptieren soll, nicht endlich sein kann.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.8: Anzahl der a durch 3 teilbar <span class="niveau">AFB II</span></summary>
+                <ol type="a">
+                    <li>Entwirf einen DEA über Σ = {a, b}, der genau die Wörter akzeptiert, in denen die Anzahl der a durch 3 teilbar ist. Gib die Bedeutung jedes Zustands und die Übergangstabelle an.</li>
+                    <li>Prüfe <code>abaaba</code>, <code>baaab</code> und ε über die Zustandsfolge.</li>
+                    <li>Gib an, was du ändern musst, damit der Automat die Wörter akzeptiert, bei denen die Anzahl der a bei Division durch 3 den Rest 1 lässt.</li>
+                </ol>
+                <p class="tipp">Gehe vor wie in Beispiel 2: Was muss sich der Automat über die bisher gelesenen a merken?</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.9: DEA-Simulator anpassen und testen <span class="niveau">AFB II</span></summary>
+                <p>Verwende das Programm aus Beispiel 3.</p>
+                <ol type="a">
+                    <li>Ersetze <code>delta</code>, <code>start</code> und <code>endzustaende</code> so, dass das Programm den DEA aus Aufgabe 6.7.8 a) simuliert.</li>
+                    <li>Lege mindestens sechs Testfälle an, darunter ε, ein Wort ohne a, ein Wort mit sechs a und ein Wort mit einem unerlaubten Zeichen. Notiere in einer Tabelle Eingabe, erwartete Ausgabe und tatsächliche Ausgabe.</li>
+                    <li>Schreibe eine Funktion <code>anzahl_akzeptiert(woerter)</code>, die für eine Liste von Wörtern zurückgibt, wie viele davon akzeptiert werden. Teste sie mit <code>["a", "aa", "aaa", "bab", "ababab"]</code> (erwartete Ausgabe: 2).</li>
+                </ol>
+            </details>
+        </div>

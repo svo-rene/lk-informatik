@@ -1,0 +1,50 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.1.4: Fehler finden – ein Durchgang reicht doch? <span class="niveau">AFB III</span></summary>
+                <p>Lina hat ein Sortierverfahren entwickelt: „Gehe einmal von links nach rechts durch und tausche jedes Nachbarpaar, das falsch herum liegt.“</p>
+                <pre><code class="language-python">def sortiere_einmal(liste):
+    for i in range(len(liste) - 1):
+        if liste[i] &gt; liste[i + 1]:
+            temp = liste[i]
+            liste[i] = liste[i + 1]
+            liste[i + 1] = temp
+    return liste</code></pre>
+                <p>Ihre Tests waren alle erfolgreich:</p>
+                <table>
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>[2, 1, 3]</code></td><td><code>[1, 2, 3]</code></td><td><code>[1, 2, 3]</code></td></tr>
+                        <tr><td><code>[1, 3, 2]</code></td><td><code>[1, 2, 3]</code></td><td><code>[1, 2, 3]</code></td></tr>
+                        <tr><td><code>[5]</code></td><td><code>[5]</code></td><td><code>[5]</code></td></tr>
+                        <tr><td><code>[]</code></td><td><code>[]</code></td><td><code>[]</code></td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Finde einen Testfall mit drei Elementen, der zeigt, dass das Verfahren nicht korrekt sortiert. Gib erwartete und tatsächliche Ausgabe an.</li>
+                    <li>Erkläre, was ein Durchgang sicher leistet und was nicht.</li>
+                    <li>Begründe, wie viele Durchgänge im schlechtesten Fall nötig sind, und ergänze das Programm entsprechend.</li>
+                    <li>Beurteile Linas Testauswahl: Welche Art von Testfall fehlt?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.1.6: Ist das ein Algorithmus? <span class="niveau">AFB III</span></summary>
+                <p>Zwei Gruppen haben beim Kartenspiel diese Vorschläge notiert:</p>
+                <pre><code>Gruppe 1:
+Nimm eine kleine Karte und lege sie nach vorn.
+Mach so weiter, bis alles passt.
+
+Gruppe 2:
+Wiederhole, solange die Reihe nicht sortiert ist:
+    Wähle zufällig zwei Karten und vertausche sie.</code></pre>
+                <ol>
+                    <li>Prüfe beide Vorschläge auf die Eigenschaften eines Algorithmus aus 2.1.2 (Finitheit, Ausführbarkeit, Terminierung, Determiniertheit, Determinismus) und auf die Regeln des Kartenspiels.</li>
+                    <li>Gruppe 2 behauptet: „Irgendwann ist die Reihe sortiert, also ist unser Verfahren korrekt.“ Nimm Stellung.</li>
+                    <li>Überarbeite den Vorschlag von Gruppe 1 so, dass er alle Eigenschaften erfüllt und nur erlaubte Aktionen des Kartenspiels verwendet.</li>
+                </ol>
+            </details>
+        </div>

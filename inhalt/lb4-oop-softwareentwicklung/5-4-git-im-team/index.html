@@ -1,0 +1,294 @@
+<p>Wenn drei Leute gleichzeitig an einem Referat in einem Online-Dokument schreiben, sieht jeder sofort die Änderungen der anderen. Bei Programmen ist das gefährlich: Ein halb fertiger Code eines Teammitglieds legt das Programm für alle lahm, und niemand hat geprüft, ob die Änderung überhaupt stimmt. Softwareteams arbeiten deshalb anders: Jede Änderung entsteht zuerst <strong>abseits</strong> der gemeinsamen Fassung, eine zweite Person <strong>prüft</strong> sie, und erst dann wird sie <strong>übernommen</strong>. Genau so arbeitet ihr im Projekt – vollständig im Browser auf <strong>git.inf7.eu</strong>, ohne Installation.</p>
+
+<p><strong>Das kennst du schon aus 10.3</strong> (Kurs „KI und Projektmanagement“): anmelden auf git.inf7.eu, Gruppenrepository anlegen und Mitarbeiter eintragen, Dateien hochladen und im Web-Editor ändern, gute Commit-Nachrichten, Historie und Diff lesen, Issues mit Aufgabenliste und das Board unter „Projekte“. Dort habt ihr alle direkt in <code>main</code> gespeichert und durch eigene Dateien verhindert, dass ein Upload die Arbeit eines anderen überschreibt. Neu sind hier <strong>Branches</strong>, <strong>Pull Requests</strong>, <strong>Reviews</strong>, das <strong>Mergen</strong>, der <strong>Commit-Graph</strong> und <strong>Merge-Konflikte</strong>.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Die Beschriftungen auf git.inf7.eu</summary>
+                <p>Die Schritte beziehen sich auf die deutsche Oberfläche von Forgejo auf git.inf7.eu (Version 16). Einige Knöpfe können je nach Version leicht anders heißen, z.&nbsp;B. „Zusammenführen“ oder „Mergen“. Sucht dann nach dem sinngemäß passenden Eintrag. Git selbst ist auf den Schulrechnern nicht installiert; alles auf dieser Seite geht im Browser.</p>
+            </details>
+        </div>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in drei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) den Ablauf als Tafelbild mit dem Commit-Graphen, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Die genauen Klicks im Browser stehen jeweils darunter zum Nachlesen.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Wie kommt eine Änderung nach <code>main</code>? Issue → Branch → Pull Request → Review → Merge</a></li>
+            <li><a href="#schritt-2">Den Commit-Graph lesen</a> – danach Aufgabe 5.4.1</li>
+            <li><a href="#schritt-3">Merge-Konflikte erkennen, lösen und vermeiden</a> – danach Aufgabe 5.4.2 und 5.4.3</li>
+        </ol>
+
+<p>Zum Schluss findest du die Regeln für euer Projekt, den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Wie kommt eine Änderung nach <code>main</code>?</h2>
+
+<p>Im Repository <code>kopfrechentrainer</code> setzt Ben ein Issue um, Mia macht das Review. Das Video zeigt den ganzen Weg als Folge von Tafelbildern: oben die Leiste Issue → Branch → PR → Review → Merge, darunter der Commit-Graph, rechts die wichtigsten Angaben im Browser. Achte darauf, wohin die Zeiger <code>main</code> und <code>3-auswertung</code> nach jedem Commit zeigen und welche zwei Vorgänger der Merge-Commit hat. Die Knöpfe heißen im Browser je nach Version etwas anders – siehe Hinweis oben.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-4-1_ablauf_vorschau.png" src="../vid/5-4-1_ablauf.mp4"></video><a href="../vid/5-4-1_ablauf.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Wie kommt eine Änderung nach main? (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: die neuen Begriffe</h3>
+
+<ul>
+            <li><strong>Branch</strong> (Zweig): eine eigene Entwicklungslinie mit eigenem Namen. Ein Branch zweigt von einem Commit ab; neue Commits auf dem Branch ändern <code>main</code> nicht. Ein Branch ist technisch nur ein <strong>Zeiger</strong> auf seinen neuesten Commit.</li>
+            <li><strong><code>main</code></strong>: der Hauptbranch. Hier liegt immer die lauffähige, geprüfte Fassung.</li>
+            <li><strong>Pull Request (PR)</strong>: der Antrag „Bitte übernehmt die Commits meines Branches nach <code>main</code>“. Ein PR zeigt alle Änderungen als Diff und bietet Platz für Kommentare. In Forgejo teilen sich Issues und Pull Requests die Nummern: Gibt es Issue <code>#3</code>, bekommt der nächste PR z.&nbsp;B. <code>#4</code>.</li>
+            <li><strong>Review</strong> (Code-Review): Eine zweite Person liest den Diff, kommentiert einzelne Zeilen und entscheidet: <em>Zustimmen</em>, <em>Kommentieren</em> oder <em>Änderung anfordern</em>.</li>
+            <li><strong>Merge</strong> (Zusammenführen): Die Commits des Branches werden in <code>main</code> übernommen. Forgejo legt dabei in der Regel einen <strong>Merge-Commit</strong> an, der zwei Vorgänger (Eltern) hat: den letzten Commit von <code>main</code> und den letzten Commit des Branches.</li>
+            <li><strong>Merge-Konflikt</strong>: Zwei Branches haben dieselbe Stelle derselben Datei unterschiedlich geändert. Git kann nicht entscheiden, welche Fassung gilt, und mergt nicht automatisch.</li>
+        </ul>
+
+<h3>Zum Nachlesen: der Ablauf im Browser</h3>
+
+<p>Beispiel: Im Repository <code>kopfrechentrainer</code> soll Ben das Issue <code>#3</code> „Runde mit Prozentwert auswerten“ umsetzen. Mia macht das Review.</p>
+
+<h4>Browser-Schritt 1: Issue übernehmen</h4>
+
+<p>Issue <code>#3</code> öffnen, in der Seitenleiste bei „Zuständige“ „Mir selbst zuweisen“ wählen und die Karte im Board unter „Projekte“ nach „In Progress“ ziehen – wie in 10.3.</p>
+
+<figure>
+            <img src="../img/git_27_issue_vorschau.jpg" width="600" alt="Formular Neues Issue in der Vorschau mit Aufgabenliste und Seitenleiste mit Labels, Meilenstein, Projekte und Zuständige">
+            <figcaption>Bild 1: Ein Issue mit Aufgabenliste. Rechts in der Seitenleiste: „Projekte“ (Board) und „Zuständige“.</figcaption>
+        </figure>
+
+<h4>Browser-Schritt 2: Ändern und dabei einen neuen Branch anlegen</h4>
+
+<ol>
+            <li>Datei öffnen (z.&nbsp;B. <code>runde.py</code>) und auf den <strong>Stift</strong> klicken – oder für eine neue Datei „Datei hinzufügen ▾“ → „Neue Datei“ bzw. „Datei hochladen“.</li>
+            <li>Ändern und unter „Vorschau der Änderungen“ prüfen, ob nur das Gewollte geändert ist.</li>
+            <li>Im Kasten „Änderungen committen“ die Commit-Nachricht mit Issue-Nummer schreiben, z.&nbsp;B. <code>#3 Runde: richtige Antworten zählen</code>.</li>
+            <li><strong>Nicht</strong> „Direkt in den Branch ‚main‘ einchecken“, sondern <strong>„Einen neuen Branch für diesen Commit erstellen und einen Pull-Request starten.“</strong> wählen.</li>
+            <li>Es erscheint ein Feld für den Branch-Namen. Statt des Vorschlags (z.&nbsp;B. <code>…-patch-1</code>) schreibst du <strong>Issue-Nummer und Stichwort</strong>: <code>3-auswertung</code> (Kleinbuchstaben, Bindestriche, keine Umlaute).</li>
+            <li>„Änderungen committen“. Forgejo legt den Branch an, speichert den Commit dort und öffnet das Formular für einen neuen Pull Request.</li>
+        </ol>
+
+<figure>
+            <img src="../img/git_14_commit_optionen.jpg" width="600" alt="Kasten Änderungen committen mit den Optionen Direkt in den Branch main einchecken und Einen neuen Branch für diesen Commit erstellen und einen Pull-Request starten">
+            <figcaption>Bild 2: Im Team richtig ist die untere Option „Einen neuen Branch … erstellen und einen Pull-Request starten.“ (Im Bild ist noch die obere ausgewählt, wie in 10.3.)</figcaption>
+        </figure>
+
+<h4>Browser-Schritt 3: Den Pull Request anlegen</h4>
+
+<ol>
+            <li>Oben steht der Vergleich: Ziel <code>main</code> ← Quelle <code>3-auswertung</code>. Darunter siehst du den Diff.</li>
+            <li><strong>Titel:</strong> <code>#3 Runde mit Prozentwert auswerten</code>.</li>
+            <li><strong>Beschreibung:</strong> was geändert wurde, wie es getestet ist, und die Zeile <code>Schließt #3</code> (oder englisch <code>closes #3</code>). Dann wird das Issue beim Merge in der Regel automatisch geschlossen – kontrolliert, ob es geklappt hat.</li>
+            <li>In der Seitenleiste bei <strong>„Reviewer“</strong> Mia eintragen (sonst im Kommentar mit <code>@mia…</code> erwähnen).</li>
+            <li>„Pull-Request erstellen“.</li>
+        </ol>
+
+<h4>Browser-Schritt 4: Weitere Commits auf denselben Branch</h4>
+
+<p>Der PR ist erst ein Vorschlag. Weitere Änderungen gehören auf <strong>denselben</strong> Branch, dann erscheinen sie automatisch im PR:</p>
+
+<ol>
+            <li>Auf der Startseite des Repositorys oben links in der <strong>Branch-Auswahl</strong> von <code>main</code> auf <code>3-auswertung</code> wechseln.</li>
+            <li>Jetzt erst die Datei öffnen bzw. hochladen und ändern.</li>
+            <li>Im Kasten „Änderungen committen“ steht jetzt „Direkt in den Branch ‚3-auswertung‘ einchecken.“ – genau das ist richtig.</li>
+        </ol>
+
+<p class="tipp">Häufigster Fehler: Man vergisst den Wechsel in der Branch-Auswahl und legt beim nächsten Speichern einen zweiten Branch mit einem zweiten PR an. Dann den überzähligen PR schließen und die Änderung auf dem richtigen Branch wiederholen.</p>
+
+<h4>Browser-Schritt 5: Review</h4>
+
+<ol>
+            <li>Mia öffnet den PR (Reiter „Pull-Requests“) und dort die Ansicht der geänderten Dateien.</li>
+            <li>Mit dem <strong>+</strong> neben einer Zeilennummer schreibt sie einen Kommentar genau zu dieser Zeile: <em>Zeile, Problem, Vorschlag</em>, z.&nbsp;B. „Z. 14: Bei einer leeren Runde teilst du durch 0. Vorschlag: bei 0 Aufgaben 0 zurückgeben und dafür einen Test ergänzen.“</li>
+            <li>Zum Schluss schickt sie das Review ab und wählt <strong>Zustimmen</strong> (alles gut), <strong>Kommentieren</strong> (Fragen, Kleinigkeiten) oder <strong>Änderung anfordern</strong> (so nicht mergen).</li>
+            <li>Ben antwortet auf Kommentare, korrigiert auf demselben Branch (Browser-Schritt 4) und bittet um ein neues Review.</li>
+        </ol>
+
+<p>Ein gutes Review prüft: Erfüllt der Code die Akzeptanzkriterien des Issues? Gibt es Tests, auch für Grenzwerte, und laufen sie? Sind Kapselung und MVC eingehalten (kein <code>print</code>/<code>input</code> im Model)? Sind Namen und Typhinweise verständlich? Kommentare sind sachlich und konkret – kritisiert wird der Code, nicht die Person.</p>
+
+<h4>Browser-Schritt 6: Mergen und aufräumen</h4>
+
+<ol>
+            <li>Nach der Freigabe klickt Ben unten im PR auf den Merge-Knopf (Einstellung „Merge-Commit erstellen“) und bestätigt.</li>
+            <li>Danach bietet Forgejo an, den Branch zu löschen: „Branch löschen“. Der Branch ist nur noch ein überflüssiger Zeiger, die Commits bleiben in <code>main</code> erhalten.</li>
+            <li>Karte im Board nach „Done“, Issue geschlossen? Wenn nicht, von Hand schließen.</li>
+        </ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Ein Pull Request vom Issue bis zum Merge</summary>
+            <p><strong>Ausgangssituation:</strong> Repository <code>kopfrechentrainer</code>, Gruppe Ben und Mia. In <code>main</code> liegt nur der Commit <code>1a2b3c4</code> „Grundgerüst Kopfrechentrainer“ mit <code>aufgabe.py</code> und einem leeren <code>runde.py</code>. Issue <code>#3</code>: „Als Schüler möchte ich nach einer Runde sehen, wie viel Prozent ich richtig hatte, um meinen Fortschritt zu verfolgen.“ Ben übernimmt.</p>
+            <ol>
+                <li><strong>Branch beim Speichern anlegen:</strong> Ben öffnet <code>runde.py</code>, schreibt die Klasse <code>Runde</code> mit <code>antworten()</code>, Nachricht <code>#3 Runde: richtige Antworten zählen</code>, Option „neuen Branch … Pull-Request“, Name <code>3-auswertung</code>. Warum: <code>main</code> bleibt unberührt, solange niemand geprüft hat.</li>
+                <li><strong>PR anlegen:</strong> Titel <code>#3 Runde mit Prozentwert auswerten</code>, Beschreibung „Neue Klasse Runde; Tests folgen. Schließt #3“, Reviewer Mia. Forgejo vergibt die Nummer <code>#4</code>, weil <code>#3</code> schon das Issue ist. Warum gleich anlegen: Mia sieht früh, woran Ben arbeitet, und kann Fragen stellen.</li>
+                <li><strong>Zweiter Commit auf demselben Branch:</strong> Ben wechselt in der Branch-Auswahl auf <code>3-auswertung</code>, lädt <code>runde.py</code> mit der Methode <code>prozent()</code> und <code>test_runde.py</code> hoch, Nachricht <code>#3 Runde: Prozent auf ganze Zahl gerundet</code>, „Direkt in den Branch ‚3-auswertung‘ einchecken“. Warum: Der Commit erscheint automatisch im selben PR.</li>
+                <li><strong>Review:</strong> Mia lädt beide Dateien herunter, startet <code>test_runde.py</code> in Thonny (alle grün), kommentiert eine Zeile („Z. 12: Name <code>r</code> ist unklar, Vorschlag <code>richtige</code>“) und wählt danach <em>Zustimmen</em>, weil der Name kein Fehler ist. Warum Tests selbst starten: Der Reviewer verlässt sich nicht auf die Aussage „läuft bei mir“.</li>
+                <li><strong>Mergen:</strong> Mia hat zugestimmt, der Hinweis betrifft nur einen Namen. Ben antwortet im PR „Lege ich als neues Issue an“ (damit es nicht vergessen wird), klickt auf den Merge-Knopf und dann auf „Branch löschen“. Wäre der Hinweis ein Fehler gewesen, hätte er ihn vorher mit einem weiteren Commit auf demselben Branch behoben. Issue <code>#3</code> wird durch „Schließt #3“ geschlossen, die Karte wandert nach „Done“.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Der Commit-Graph sieht aus wie in Schritt 2: zwei Commits auf dem Branch, ein Merge-Commit <code>e5f0c21</code> auf <code>main</code> mit den Eltern <code>1a2b3c4</code> und <code>9b1d7a2</code>.</p>
+            <p><strong>Kontrolle:</strong> In der Commit-Liste steht kein Commit von Ben direkt auf <code>main</code> außer dem Merge-Commit; im PR <code>#4</code> sind Mias Kommentar und ihre Freigabe dokumentiert. Das ist später der Nachweis für Bens Anteil <em>und</em> für Mias Review.</p>
+            </details>
+        </div>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Den Commit-Graph lesen →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Den Commit-Graph lesen</h2>
+
+<p>Der Commit-Graph zeigt, was im Repository passiert ist: wer wann abgezweigt ist, was gemergt wurde und wo die Branch-Zeiger stehen. Im Video siehst du Bens Verlauf aus Schritt 1 in zwei Darstellungen – waagerecht wie auf Papier und senkrecht wie in Forgejo. Achte darauf, worauf die Pfeile zeigen, woran man eine Abzweigung und einen Merge-Commit erkennt und was beim Löschen eines Branches verschwindet.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-4-2_graph_vorschau.png" src="../vid/5-4-2_graph.mp4"></video><a href="../vid/5-4-2_graph.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Den Commit-Graph lesen (ca. 1 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: den Commit-Graph lesen</h3>
+
+<p>Ein <strong>Commit-Graph</strong> zeigt Commits als Punkte und ihre Vorgänger als Linien. Auf git.inf7.eu findest du ihn über „… Commits“ in der Graph-Ansicht; dort steht – wie bei <code>git log --graph</code> – der neueste Commit oben. Nach Bens Merge sieht der Verlauf so aus:</p>
+
+<pre><code>*   e5f0c21 (main) Merge pull request '#3 Runde mit Prozentwert auswerten' (#4) from 3-auswertung into main
+|\
+| * 9b1d7a2 #3 Runde: Prozent auf ganze Zahl gerundet
+| * 4c8e6f0 #3 Runde: richtige Antworten zählen
+|/
+* 1a2b3c4 Grundgerüst Kopfrechentrainer</code></pre>
+
+<p>Auf Papier zeichnet man denselben Verlauf meist waagerecht. Die Zeit läuft nach rechts, jede Linie verbindet einen Commit mit seinem Nachfolger, der Zeiger <code>main</code> steht am neuesten Commit:</p>
+
+<pre><code>main           1a2b3c4 ──────────────────────────────── e5f0c21   ◀ main
+                      \                                 /
+3-auswertung           4c8e6f0 ──────── 9b1d7a2 ───────</code></pre>
+
+<ul>
+            <li>Eine <strong>Abzweigung</strong> (<code>|/</code> bzw. die Linie nach unten) zeigt, von welchem Commit ein Branch ausging – hier von <code>1a2b3c4</code>.</li>
+            <li>Ein <strong>Merge-Commit</strong> (<code>|\</code>) hat zwei Eltern – hier <code>1a2b3c4</code> und <code>9b1d7a2</code>.</li>
+            <li><strong>Branch-Zeiger</strong> stehen in Klammern hinter dem Commit, auf den sie zeigen. Nach dem Löschen von <code>3-auswertung</code> steht dort nur noch <code>(main)</code>.</li>
+            <li>Ein Commit, der direkt in <code>main</code> gespeichert wurde, liegt auf der linken Linie und hat keinen Pull Request – im Team ein Regelverstoß.</li>
+        </ul>
+
+<p>Im Video zeigen die Pfeile vom Commit auf seinen Vorgänger (Elter), so wie Git die Verbindung speichert. Auf Papier genügen Linien wie oben.</p>
+
+<p>Danach: <a href="uebungen.html#a-5-4-1">Aufgabe 5.4.1</a> – einen Verlauf lesen und zeichnen.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Merge-Konflikte →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Merge-Konflikte erkennen, lösen und vermeiden</h2>
+
+<p>Ben und Mia fügen in <code>main.py</code> an derselben Stelle je einen Menüpunkt ein. Bens PR wird zuerst gemergt – danach kann Mias PR nicht mehr automatisch gemergt werden. Im Video siehst du, warum, wie Git die beiden Fassungen mit Konfliktmarkierungen in die Datei schreiben würde und wie Mia das im Browser löst. Achte darauf, was zwischen <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> und <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> steht und warum man nicht einfach eine Fassung übernimmt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-4-3_konflikt_vorschau.png" src="../vid/5-4-3_konflikt.mp4"></video><a href="../vid/5-4-3_konflikt.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Ein Merge-Konflikt (ca. 2 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Merge-Konflikte – und wie ihr sie vermeidet</h3>
+
+<p>Git führt Änderungen zeilenweise zusammen. Ändert Branch A die Zeilen 3–5 und Branch B die Zeilen 20–22 derselben Datei, übernimmt Git beides automatisch. Haben aber beide Branches <strong>dieselben Zeilen</strong> unterschiedlich geändert (oder die eine Seite die Zeilen gelöscht, die andere sie geändert), entsteht ein <strong>Konflikt</strong>. Git schreibt dann beide Fassungen mit Markierungen in die Datei:</p>
+
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; main
+    print("3 – Bestenliste")
+=======
+    print("3 – Statistik")
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 10-menue-statistik</code></pre>
+
+<p>Oben steht die Fassung des einen, unten die des anderen Branches. Ein Mensch muss entscheiden, was gilt, die Markierungen entfernen und das Ergebnis committen. Auf git.inf7.eu zeigt der PR dann einen Hinweis auf Konflikte, und der Merge-Knopf ist gesperrt. Im Browser lässt sich ein Konflikt nur umständlich lösen (Beispiel 2).</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Zwei Pull Requests ändern dieselbe Zeile – Konflikt erkennen, lösen, künftig vermeiden</summary>
+            <p><strong>Ausgangssituation:</strong> In <code>main</code> (Commit <code>5b7e0d4</code>) enthält <code>main.py</code> dieses Menü:</p>
+            <pre><code class="language-python">def zeige_menue() -&gt; None:
+    print("1 – Neue Runde")
+    print("2 – Einstellungen")
+    print("0 – Ende")</code></pre>
+            <p>Am Montag legen Ben (Issue <code>#7</code>, Branch <code>7-menue-bestenliste</code>) und Mia (Issue <code>#10</code>, Branch <code>10-menue-statistik</code>) beide von <code>5b7e0d4</code> aus einen Branch an. Beide fügen hinter Zeile 3 eine neue Zeile ein: Ben <code>print("3 – Bestenliste")</code>, Mia <code>print("3 – Statistik")</code>. Bens PR <code>#9</code> wird am Dienstag gemergt. Mias PR <code>#11</code> zeigt danach: Konflikte, Merge nicht möglich.</p>
+            <pre><code>main                 5b7e0d4 ─────────────────────── M   ◀ main
+                        |  \                         /
+7-menue-bestenliste     |   6d1c8e2 ────────────────        (PR #9, gemergt)
+                         \
+10-menue-statistik        8e4a2f9   ◀ 10-menue-statistik     (PR #11, Konflikt)</code></pre>
+            <ol>
+                <li><strong>Ursache erkennen:</strong> Beide Branches gehen von <code>5b7e0d4</code> aus und haben <em>an derselben Stelle</em> verschiedene Zeilen eingefügt. Für Mias PR vergleicht Git drei Fassungen: den gemeinsamen Vorgänger <code>5b7e0d4</code>, das aktuelle <code>main</code> (mit Bens Zeile) und Mias Branch. Weil beide Seiten dieselbe Stelle geändert haben, entscheidet Git nicht selbst. Warum es Ben nicht traf: Als Bens PR gemergt wurde, hatte sich <code>main</code> seit der Abzweigung nicht geändert.</li>
+                <li><strong>Was Git in die Datei schreiben würde:</strong>
+                    <pre><code>def zeige_menue() -&gt; None:
+    print("1 – Neue Runde")
+    print("2 – Einstellungen")
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; main
+    print("3 – Bestenliste")
+=======
+    print("3 – Statistik")
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 10-menue-statistik
+    print("0 – Ende")</code></pre>
+                    Die Zeilen ohne Änderung stehen nur einmal da. Warum das hilft: Man sieht genau, wo sich die beiden Fassungen widersprechen.</li>
+                <li><strong>Inhaltlich entscheiden:</strong> Das Menü soll beides anbieten: <code>3 – Bestenliste</code> und <code>4 – Statistik</code>. Eine der beiden Fassungen einfach zu übernehmen, wäre falsch – dann fehlte ein Menüpunkt.</li>
+                <li><strong>Im Browser lösen:</strong> Mia wechselt in der Branch-Auswahl auf <code>main</code> (dort ist Bens Zeile schon drin), öffnet <code>main.py</code> mit dem Stift, ergänzt <code>print("4 – Statistik")</code> und speichert mit „neuen Branch … Pull-Request“ als <code>10-menue-statistik-2</code>, Nachricht <code>#10 Menü: Punkt 4 Statistik</code>. Den alten PR <code>#11</code> schließt sie mit dem Kommentar „ersetzt durch neuen PR wegen Konflikt mit #9“. Warum ein neuer Branch: Ihr alter Branch würde auch nach einer weiteren Änderung mit <code>main</code> kollidieren, weil er weiter von <code>5b7e0d4</code> ausgeht. Der neue Branch beginnt beim aktuellen <code>main</code>.</li>
+                <li><strong>Ursache abstellen:</strong> In der Retrospektive vereinbart die Gruppe: <code>main.py</code> hat je Sprint eine verantwortliche Person (in diesem Sprint Ben). Wer einen Menüpunkt braucht, schreibt ihn ins Issue, Ben trägt ihn ein. Warum: Mit eigenen Dateien je Person kann ein solcher Konflikt gar nicht erst entstehen.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Das Menü enthält vier Einträge, <code>main</code> läuft, der Verlauf dokumentiert den geschlossenen PR <code>#11</code> und den neuen PR.</p>
+            <p><strong>Kontrolle:</strong> Der neue PR zeigt im Diff genau <em>eine</em> grüne Zeile und keine roten. Zeigt er rote Zeilen bei Bens Menüpunkt, wurde der neue Branch versehentlich nicht vom aktuellen <code>main</code> aus angelegt.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-5-4-2">Aufgabe 5.4.2</a> – Pull Request und Review zu zweit üben (mit Konflikt), und <a href="uebungen.html#a-5-4-3">Aufgabe 5.4.3</a> – ein Review schreiben.</p>
+
+<h2>Die Regeln für euer Projekt</h2>
+
+<figure>
+            <img src="../img/git_23_commit_liste.jpg" width="600" alt="Commit-Liste mit Spalten Autor, SHA1, Nachricht, Datum und Suchfeld Commits suchen">
+            <figcaption>Bild 3: Die Commit-Liste. Mit „Commits suchen …“ und einer Issue-Nummer wie <code>#3</code> findest du alle Commits zu einem Issue – deshalb Regel 3.</figcaption>
+        </figure>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Pull Requests im Berufsalltag</summary>
+                <p><strong>Alltag:</strong> Freie Software wie der Browser Firefox, die Programmiersprache Python oder Forgejo selbst entsteht über Pull Requests von Menschen auf der ganzen Welt. Jede Änderung wird vor der Übernahme von erfahrenen Leuten geprüft.</p>
+                <p><strong>Beruf:</strong> In Softwarefirmen gilt fast überall „kein Merge ohne Review“. Der Hauptbranch ist technisch geschützt; ein PR braucht eine oder zwei Freigaben, und automatische Tests müssen grün sein. Wer gute Reviews schreibt – konkret, freundlich, mit Vorschlag – ist im Team sehr gefragt. Auch in der Ausbildung zur Fachinformatikerin bzw. zum Fachinformatiker für Anwendungsentwicklung gehört dieser Ablauf heute zum Alltag.</p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>Im Team entsteht jede Änderung auf einem eigenen Branch, der beim Speichern im Browser angelegt wird und nach Issue-Nummer und Stichwort heißt. Ein Pull Request beantragt die Übernahme nach <code>main</code>; eine andere Person reviewt den Diff, startet die Tests und stimmt zu, kommentiert oder fordert Änderungen an. Erst dann wird gemergt – dabei entsteht ein Merge-Commit mit zwei Eltern – und der Branch, der nur ein Zeiger ist, wird gelöscht. Im Commit-Graph sieht man Abzweigungen, Merge-Commits und die Branch-Zeiger. Ändern zwei Branches dieselben Zeilen, entsteht ein Merge-Konflikt: Ein Mensch entscheidet, was gilt. Besser ist es, Konflikte durch eigene Dateien je Person, kleine Pull Requests und Branches vom aktuellen <code>main</code> zu vermeiden.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Feature-Branch-Ablauf:</strong> Issue → eigener Branch → Commits → Pull Request → Review durch eine andere Person → Merge nach <code>main</code> → Branch löschen.<br>
+            <code>main</code> enthält nur geprüften, lauffähigen Code. Jede Änderung kommt über einen Pull Request dorthin.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Konflikte vermeiden ist besser als Konflikte lösen.</strong></p>
+            <ul>
+                <li>In jedem Sprint bearbeitet jede Person <strong>eigene Dateien</strong>: ihr Modul und die Testdatei daneben.</li>
+                <li>Gemeinsame Dateien (<code>main.py</code>, <code>ansicht.py</code>, <code>README.md</code>) haben je Sprint <strong>eine verantwortliche Person</strong>. Wünsche der anderen kommen als Kommentar ins Issue.</li>
+                <li>Kleine Pull Requests, schnell reviewen, schnell mergen. Ein Branch, der eine Woche lebt, sammelt Konflikte.</li>
+                <li>Jeden neuen Branch vom <strong>aktuellen</strong> <code>main</code> aus anlegen (Branch-Auswahl steht auf <code>main</code>).</li>
+            </ul>
+        </div>
+
+<div class="merke">
+            <p><strong>Regel 1 – Nie direkt auf <code>main</code>.</strong> Jede Änderung entsteht auf einem eigenen Branch <code>&lt;issue-nr&gt;-&lt;stichwort&gt;</code>, z.&nbsp;B. <code>3-auswertung</code>.</p>
+            <p><strong>Regel 2 – Jede Änderung kommt als Pull Request.</strong> Eine <em>andere</em> Person der Gruppe reviewt sie (mindestens ein konkreter Kommentar oder eine Freigabe). Gemergt wird erst nach der Freigabe, danach wird der Branch gelöscht.</p>
+            <p><strong>Regel 3 – Commit-Nachrichten beginnen mit der Issue-Nummer:</strong> <code>#3 Runde: Prozent auf ganze Zahl gerundet</code>.</p>
+            <p><strong>Regel 4 – Eigene Dateien je Person und Sprint</strong>, gemeinsame Dateien mit einer verantwortlichen Person (Schritt 3).</p>
+            <p><strong>Regel 5 – <code>main</code> läuft immer.</strong> Vor dem Pull Request laufen alle Tests fehlerfrei; wer reviewt, startet sie noch einmal.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Reihenfolge und Nummer <span class="niveau">AFB I</span></summary>
+                <p>Bringe in die richtige Reihenfolge: Merge-Knopf klicken – Issue sich selbst zuweisen – Review mit „Zustimmen“ – Branch löschen – Speichern mit neuem Branch und Pull Request – Pull Request mit „Schließt #…“ anlegen. Im Repository gibt es schon die Issues <code>#1</code> bis <code>#6</code> und noch keinen PR. Welche Nummer bekommt der erste PR?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Issue sich selbst zuweisen → Speichern mit neuem Branch und Pull Request → Pull Request mit „Schließt #…“ anlegen → Review mit „Zustimmen“ → Merge-Knopf klicken → Branch löschen. Der PR bekommt die Nummer <code>#7</code>, weil sich Issues und Pull Requests die Nummern teilen.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Eltern und Zeiger <span class="niveau">AFB I</span></summary>
+                <p>In <code>main</code> liegen die Commits <code>P</code> und danach <code>Q</code>. Von <code>Q</code> zweigt der Branch <code>8-hilfe</code> ab, auf dem <code>R</code> und danach <code>S</code> entstehen. Dann wird der PR gemergt (Merge-Commit <code>X</code>). Welche Eltern hat <code>X</code>? Worauf zeigt <code>8-hilfe</code> kurz vor dem Löschen, und welche Commits verschwinden beim Löschen des Branches?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>X</code> hat die Eltern <code>Q</code> (letzter Commit von <code>main</code>) und <code>S</code> (letzter Commit des Branches). <code>8-hilfe</code> zeigt auf <code>S</code>. Beim Löschen verschwindet nur der Zeiger, kein Commit – <code>R</code> und <code>S</code> sind über <code>X</code> weiter in <code>main</code> enthalten.</p>
+                </details>
+            </details>
+        </div>

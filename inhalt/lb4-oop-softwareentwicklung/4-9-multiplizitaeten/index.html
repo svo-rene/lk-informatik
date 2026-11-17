@@ -1,0 +1,298 @@
+<p>
+    Nachdem du gelernt hast, welche Arten von Beziehungen es zwischen Klassen gibt (Assoziation, Aggregation, Komposition), kommt jetzt ein wichtiges Detail der UML: <strong>Multiplizitäten</strong>. Sie zeigen an, <strong>wie viele</strong> Objekte auf jeder Seite einer Beziehung beteiligt sein können.
+</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in drei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1,5–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Rechts im Video siehst du das Speicherbild mit Objekten, Listen und Verweisen. Halte die Videos ruhig an und tippe mit.</p>
+
+<ol class="schritte">
+    <li><a href="#schritt-1">0..1, 1 und * im Code: Attribut oder Liste von Verweisen</a> – danach Aufgabe 4.9.1 und 4.9.2</li>
+    <li><a href="#schritt-2">Grenzen durchsetzen: 1..2 im Code</a></li>
+    <li><a href="#schritt-3">Grenzen Schritt für Schritt</a> – danach Aufgabe 4.9.3</li>
+</ol>
+
+<p>Zum Schluss findest du den Praxisbezug und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: 0..1, 1 und * im Code</h2>
+
+<p>Jede Multiplizität hat eine typische Form im Code: Genau 1 wird zu einem Pflichtparameter, 0..1 zu einem Attribut, das <code>None</code> sein darf, und * zu einer Liste von Verweisen. Im Video siehst du das am Beispiel Person und Personalausweis. Achte darauf, an welcher Klasse welche Zahl steht und wie die beiden Objekte sich gegenseitig kennen. Neu ist die Zeile <code>from __future__ import annotations</code>, sie wird kurz erklärt.</p>
+
+<figure>
+    <div class="lp-video"><video controls preload="none" poster="../vid/4-9-1_im_code_vorschau.png" src="../vid/4-9-1_im_code.mp4"></video><a href="../vid/4-9-1_im_code.mp4">Video ansehen</a></div>
+    <figcaption>Video 1: Multiplizitäten im Code – 0..1, 1 und * (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+</figure>
+
+<h3>Zum Nachlesen: Typische Multiplizitäten</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Multiplizität</th>
+            <th>Bedeutung</th>
+            <th>Python</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>1</code></td>
+            <td>genau ein Objekt</td>
+            <td><code>self.fach: Fach</code></td>
+        </tr>
+        <tr>
+            <td><code>0..1</code></td>
+            <td>optional – entweder ein Objekt oder keins</td>
+            <td><code>self.fach: Fach | None</code></td>
+        </tr>
+        <tr>
+            <td><code>0..*</code> oder <code>*</code></td>
+            <td>beliebig viele – auch null</td>
+            <td><code>self.schueler: list[Schueler]</code></td>
+        </tr>
+        <tr>
+            <td><code>1..*</code></td>
+            <td>mindestens eins</td>
+            <td>Liste wie oben, man muss aber sicherstellen, dass sie nicht leer ist (z.&nbsp;B. ein Element schon im Konstruktor verlangen)</td>
+        </tr>
+        <tr>
+            <td><code>1..2</code></td>
+            <td>mindestens eins, höchstens zwei</td>
+            <td>Liste mit Prüfung der Unter- und Obergrenze</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Person und Personalausweis</summary>
+    <p><strong>Ausgangssituation:</strong> Ein Personalausweis gehört genau einer Person (1), eine Person hat keinen oder einen gültigen Personalausweis (0..1).</p>
+    <ol>
+        <li><strong>Von beiden Seiten fragen:</strong> „Wie viele Ausweise hat <em>eine</em> Person?“ → keinen oder einen, also <code>0..1</code>. „Wie vielen Personen gehört <em>ein</em> Ausweis?“ → genau einer, also <code>1</code>. Warum: Jede Seite einer Beziehung hat ihre eigene Multiplizität.</li>
+        <li><strong>An die richtige Seite schreiben:</strong> <code>0..1</code> steht beim Personalausweis, <code>1</code> bei der Person. Warum: Die Zahl steht immer an der Klasse, deren Anzahl sie angibt.</li>
+        <li><strong>In Python übersetzen:</strong> 0..1 wird zu <code>Personalausweis | None</code> mit Startwert <code>None</code>. Genau 1 wird zu einem Pflichtparameter im Konstruktor, damit kein Ausweis ohne Inhaber entstehen kann.</li>
+    </ol>
+    <table class="gitter" aria-label="UML-Klassendiagramm Person und Personalausweis">
+        <tr><th>Person</th><td rowspan="2" style="text-align: center; vertical-align: middle;">1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0..1<br>────── besitzt ──────</td><th>Personalausweis</th></tr>
+        <tr><td>+ name: str<br>+ ausweis: Personalausweis | None</td><td>+ nummer: str<br>+ inhaber: Person</td></tr>
+    </table>
+    <pre><code class="language-python">from __future__ import annotations
+
+class Person:
+    def __init__(self, name: str):
+        self.name: str = name
+        self.ausweis: Personalausweis | None = None    # 0..1
+
+class Personalausweis:
+    def __init__(self, nummer: str, inhaber: Person):
+        self.nummer: str = nummer
+        self.inhaber: Person = inhaber                 # genau 1
+        inhaber.ausweis = self                         # Gegenrichtung
+
+lea = Person("Lea")
+print(lea.ausweis)               # None
+a = Personalausweis("AUSWEIS-001", lea)
+print(lea.ausweis.nummer)        # AUSWEIS-001
+print(a.inhaber.name)            # Lea</code></pre>
+    <p><strong>Ergebnis:</strong> UML: Person <code>1</code> ——— <code>0..1</code> Personalausweis. Im Code steht 0..1 als optionales Attribut und 1 als Pflichtparameter.</p>
+    <p><strong>Kontrolle:</strong></p>
+    <table class="gitter">
+        <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+        <tr><td><code>print(Person("Ben").ausweis)</code></td><td>None (untere Grenze 0 erlaubt)</td></tr>
+        <tr><td><code>Personalausweis("AUSWEIS-002")</code></td><td><code>TypeError</code>, weil das Argument <code>inhaber</code> fehlt (untere Grenze 1 durchgesetzt)</td></tr>
+    </table>
+            </details>
+        </div>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Wozu <code>from __future__ import annotations</code>?</summary>
+        <p>In <code>Person</code> steht als Typ schon <code>Personalausweis</code>, obwohl diese Klasse erst weiter unten definiert wird. Viele Typangaben wertet Python sofort aus; ein noch unbekannter Name führt dann zu einem <code>NameError</code> (in der Kommandozeile z.&nbsp;B. bei <code>x: Spaeter = 5</code>). Die Zeile <code>from __future__ import annotations</code> ganz oben in der Datei sorgt dafür, dass Typangaben erst später ausgewertet werden. So können sich zwei Klassen in ihren Typangaben gegenseitig nennen.</p>
+    </details>
+</div>
+
+<p>Danach: <a href="uebungen.html#a-4-9-1">Aufgabe 4.9.1</a> – Spieler und Waffen, dann <a href="uebungen.html#a-4-9-2">Aufgabe 4.9.2</a> – Multiplizitäten erkennen.</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Grenzen durchsetzen →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Grenzen durchsetzen – 1..2 im Code</h2>
+
+<p>Eine Lehrkraft unterrichtet ein oder zwei Fächer (1..2), ein Fach wird von keiner, einer oder mehreren Lehrkräften unterrichtet (0..*). Diese Grenzen sollen nicht nur im Klassendiagramm stehen: Der Code soll selbst dafür sorgen, dass keine Lehrkraft ohne Fach und keine mit drei Fächern entsteht. Achte im Video auf die Reihenfolge in <code>unterrichtet</code>: erst prüfen, dann ändern. Der Operator <code>in</code> für Listen wird kurz erklärt.</p>
+
+<figure>
+    <div class="lp-video"><video controls preload="none" poster="../vid/4-9-2_grenzen_vorschau.png" src="../vid/4-9-2_grenzen.mp4"></video><a href="../vid/4-9-2_grenzen.mp4">Video ansehen</a></div>
+    <figcaption>Video 2: Grenzen durchsetzen – wie sorgt der Code für 1..2? (ca. 1,5 min)</figcaption>
+</figure>
+
+<h3>Zum Nachlesen: Lehrkraft unterrichtet Fächer</h3>
+
+<table class="gitter" aria-label="UML-Klassendiagramm Lehrkraft und Fach">
+    <tr>
+        <th>Lehrkraft</th>
+        <td rowspan="3" style="text-align: center; vertical-align: middle;">
+            0..* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1..2<br>
+            ◄──── unterrichtet ────►
+        </td>
+        <th>Fach</th>
+    </tr>
+    <tr>
+        <td>+ name: str<br>+ faecher: list[Fach]</td>
+        <td>+ titel: str<br>+ lehrkraefte: list[Lehrkraft]</td>
+    </tr>
+    <tr>
+        <td>+ unterrichtet(fach: Fach): bool</td>
+        <td>+ lehrkraft_hinzu(lehrkraft: Lehrkraft): None</td>
+    </tr>
+</table>
+
+<p style="text-align: center;"><em>Abb. 1: Bidirektionale Assoziation „unterrichtet“ mit Multiplizitäten. „1..2“ steht bei Fach (so viele Fächer hat eine Lehrkraft), „0..*“ steht bei Lehrkraft (so viele Lehrkräfte hat ein Fach).</em></p>
+
+<p>In Python könnte das so aussehen:</p>
+
+<div class="beispiel klappbar" id="beispiel-2">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Die Multiplizität 1..2 wird im Code durchgesetzt</summary>
+    <p><strong>Ausgangssituation:</strong> Das Klassendiagramm in Abb. 1 soll so programmiert werden, dass die Grenzen 1..2 nicht nur auf dem Papier stehen: Keine Lehrkraft ohne Fach, keine mit drei Fächern, und beide Seiten der bidirektionalen Beziehung bleiben stimmig.</p>
+<pre><code class="language-python">from __future__ import annotations
+# sorgt dafür, dass Typannotationen erst später ausgewertet werden,
+# sodass sich Klassen in Typen gegenseitig referenzieren können
+
+
+class Lehrkraft:
+    MAX_FAECHER: int = 2   # Multiplizität 1..2 auf der Seite von Fach
+
+    def __init__(self, name: str, startfach: Fach):
+        self.name: str = name
+        self.faecher: list[Fach] = []
+        self.unterrichtet(startfach)   # mindestens ein Fach (untere Grenze 1)
+
+    def unterrichtet(self, fach: Fach) -&gt; bool:
+        if fach in self.faecher:
+            return True                  # Beziehung besteht schon
+        if len(self.faecher) &gt;= Lehrkraft.MAX_FAECHER:
+            print(f"{self.name} darf höchstens {Lehrkraft.MAX_FAECHER} Fächer unterrichten.")
+            return False                 # obere Grenze erreicht: abbrechen
+        self.faecher.append(fach)
+        fach.lehrkraft_hinzu(self)       # Gegenrichtung pflegen
+        return True
+
+
+class Fach:
+    def __init__(self, titel: str):
+        self.titel: str = titel
+        self.lehrkraefte: list[Lehrkraft] = []   # Multiplizität 0..*
+
+    def lehrkraft_hinzu(self, lehrkraft: Lehrkraft) -&gt; None:
+        # wird nur von Lehrkraft.unterrichtet() aufgerufen
+        if lehrkraft not in self.lehrkraefte:
+            self.lehrkraefte.append(lehrkraft)
+
+
+# -------------------------
+# Beispielaufrufe
+# -------------------------
+
+# Fächer anlegen
+mathe = Fach("Mathematik")
+info = Fach("Informatik")
+physik = Fach("Physik")
+
+# Lehrkräfte anlegen: jede braucht ein Startfach
+lisa = Lehrkraft("Lisa Müller", mathe)
+tom = Lehrkraft("Tom Schneider", mathe)
+
+# weitere Beziehungen herstellen
+lisa.unterrichtet(info)
+tom.unterrichtet(physik)
+tom.unterrichtet(info)    # drittes Fach: wird abgelehnt
+
+for lk in (lisa, tom):
+    print(lk.name, "-&gt;", [f.titel for f in lk.faecher])
+for f in (mathe, info, physik):
+    print(f.titel, "-&gt;", [lk.name for lk in f.lehrkraefte])
+
+# Ausgabe:
+# Tom Schneider darf höchstens 2 Fächer unterrichten.
+# Lisa Müller -&gt; ['Mathematik', 'Informatik']
+# Tom Schneider -&gt; ['Mathematik', 'Physik']
+# Mathematik -&gt; ['Lisa Müller', 'Tom Schneider']
+# Informatik -&gt; ['Lisa Müller']
+# Physik -&gt; ['Tom Schneider']</code></pre>
+    <ol>
+        <li><strong>Untere Grenze 1 durchsetzen:</strong> Der Konstruktor verlangt ein <code>startfach</code> und ruft sofort <code>unterrichtet(startfach)</code> auf. Warum: So kann keine Lehrkraft ohne Fach entstehen.</li>
+        <li><strong>Obere Grenze 2 durchsetzen:</strong> <code>unterrichtet()</code> prüft vor dem Anhängen <code>len(self.faecher) &gt;= MAX_FAECHER</code>. Warum: Die Prüfung muss <em>vor</em> der Änderung stehen, sonst wäre das dritte Fach schon eingetragen.</li>
+        <li><strong>Reihenfolge der Prüfungen:</strong> Zuerst wird geprüft, ob die Beziehung schon besteht. Warum: Ruft man <code>lisa.unterrichtet(mathe)</code> ein zweites Mal auf, soll das weder ein Duplikat erzeugen noch als „drittes Fach“ abgelehnt werden.</li>
+        <li><strong>Gegenrichtung pflegen:</strong> Nach dem Anhängen ruft <code>unterrichtet()</code> selbst <code>fach.lehrkraft_hinzu(self)</code> auf. Warum: Bei einer bidirektionalen Assoziation müssen beide Listen zueinander passen.</li>
+        <li><strong>Ablauf <code>tom.unterrichtet(info)</code>:</strong> Tom hat schon [Mathematik, Physik]. Info ist nicht enthalten, aber 2 &gt;= 2 ist wahr, also erscheint die Meldung, und <code>False</code> wird zurückgegeben. Diese Meldung steht in der Ausgabe ganz oben, weil sie vor den beiden <code>for</code>-Schleifen gedruckt wird.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong> Siehe Ausgabe im Code: Jede Lehrkraft hat 1 oder 2 Fächer, und die Listen beider Seiten stimmen überein.</p>
+    <p><strong>Kontrolle:</strong></p>
+    <table class="gitter">
+        <tr><th>Aufruf (nach dem Programm oben)</th><th>erwartete Ausgabe</th></tr>
+        <tr><td><code>print(lisa.unterrichtet(mathe), len(lisa.faecher))</code></td><td>True 2 (kein Duplikat)</td></tr>
+        <tr><td><code>print(tom.unterrichtet(info))</code></td><td>Meldung „Tom Schneider darf höchstens 2 Fächer unterrichten.“, dann False</td></tr>
+        <tr><td><code>kim = Lehrkraft("Kim Berg", physik); print(len(kim.faecher), len(physik.lehrkraefte))</code></td><td>1 2</td></tr>
+    </table>
+            </details>
+        </div>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Warum speichert auch das Fach seine Lehrkräfte?</summary>
+        <p>
+            Wenn die Beziehung bidirektional ist, müssen sich die Objekte gegenseitig kennen: Die Lehrkraft kennt ihre Fächer, das Fach seine Lehrkräfte. Beide Seiten müssen dann immer gemeinsam aktualisiert werden. Deshalb ruft <code>unterrichtet()</code> selbst <code>lehrkraft_hinzu()</code> auf – so kann man die Gegenrichtung nicht vergessen.
+        </p>
+    </details>
+</div>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Grenzen Schritt für Schritt →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Grenzen Schritt für Schritt</h2>
+
+<p>Jetzt läuft das Beispiel in Thonny Befehl für Befehl. Rechts im Speicherbild siehst du für Lisa und Tom die Liste <code>faecher</code> mit ihren Verweisen auf die Fach-Objekte. Die Listen <code>lehrkraefte</code> der Fächer stehen dort verkürzt mit Namen. Achte darauf, was beim dritten Fach für Tom passiert – und was beim doppelten Fach für Lisa. Zum Nachlesen steht der Ablauf in <a href="#beispiel-2">Beispiel 2</a> (Punkt 5 und Kontrolle).</p>
+
+<figure>
+    <div class="lp-video"><video controls preload="none" poster="../vid/4-9-3_schritte_vorschau.png" src="../vid/4-9-3_schritte.mp4"></video><a href="../vid/4-9-3_schritte.mp4">Video ansehen</a></div>
+    <figcaption>Video 3: Grenzen Schritt für Schritt (ca. 1,5 min)</figcaption>
+</figure>
+
+<p>Danach: <a href="uebungen.html#a-4-9-3">Aufgabe 4.9.3</a> – Grenzen gegen <code>clear()</code> schützen.</p>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Multiplizitäten als Geschäftsregeln</summary>
+        <p>
+            <strong>Alltag:</strong> „Ein Konto gehört mindestens einem Inhaber, ein Kunde kann beliebig viele Konten haben“ oder „Pro Bestellung mindestens ein Artikel“ – solche Regeln begegnen dir beim Online-Banking oder im Webshop.<br><br>
+            <strong>Beruf:</strong> Multiplizitäten werden in der Softwareentwicklung zu Datenbankregeln (Fremdschlüssel, Pflichtfelder) und zu Prüfungen im Code. Anforderungsanalystinnen und -analysten klären sie früh mit dem Kunden, denn eine falsch gewählte Multiplizität („ein Kunde hat genau eine Adresse“) ist später nur mit viel Aufwand zu ändern.
+        </p>
+    </details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p>
+        Die <strong>Multiplizität</strong> gibt an, <strong>wie viele Objekte</strong> an einer Beziehung beteiligt sein können – z.&nbsp;B. genau eins, keins oder eins, oder beliebig viele. Sie wird in der Form <code>untere..obere Grenze</code> an das Ende der Beziehungslinie geschrieben, und zwar an die Klasse, <strong>deren Anzahl</strong> beschrieben wird: Die Zahl beim Fach sagt, wie viele Fächer <em>eine</em> Lehrkraft hat.
+    </p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 1: Vom Satz zum Attribut <span class="niveau">AFB I</span></summary>
+        <p>Ein <code>Fahrrad</code> hat genau einen <code>Rahmen</code> (wird im Konstruktor übergeben), keinen oder einen <code>Korb</code> und beliebig viele <code>Aufkleber</code>. Wie lauten die drei Attribute im Konstruktor mit Typ und Startwert?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p><code>self.rahmen: Rahmen = rahmen</code> (1, Pflichtparameter), <code>self.korb: Korb | None = None</code> (0..1), <code>self.aufkleber: list[Aufkleber] = []</code> (*, eine Liste von Verweisen, anfangs leer).</p>
+        </details>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 2: Warum so und nicht anders? <span class="niveau">AFB I</span></summary>
+        <p>(a) Warum schreibt der Konstruktor nicht einfach <code>self.faecher = [startfach]</code>, sondern ruft <code>self.unterrichtet(startfach)</code> auf? (b) Was müsste man ändern, damit eine Lehrkraft bis zu drei Fächer unterrichten darf?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>(a) Mit <code>[startfach]</code> würde die Gegenrichtung fehlen: Das Fach wüsste nichts von der Lehrkraft. Über <code>unterrichtet</code> laufen alle Änderungen durch dieselben Prüfungen und pflegen beide Seiten. (b) Nur das Klassenattribut: <code>MAX_FAECHER: int = 3</code>. Prüfung und Meldung lesen den Wert von dort.</p>
+        </details>
+    </details>
+</div>

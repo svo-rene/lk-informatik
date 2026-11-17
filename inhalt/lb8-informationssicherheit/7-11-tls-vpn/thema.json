@@ -1,0 +1,18 @@
+{
+  "nr": "7.11",
+  "titel": "Transportverschlüsselung: TLS und VPN",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

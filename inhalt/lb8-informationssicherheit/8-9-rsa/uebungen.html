@@ -1,0 +1,42 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.9.3: Schlüssel berechnen <span class="niveau">AFB II</span></summary>
+                <p>Berechne für p = 13, q = 17 und e = 5 die Zahl d nach dem RSA-Verfahren und verschlüssele dann den Klartext m = 5. (Kontrolle: Der Geheimtext ist 31.)</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.9.4: Ein Kuss per RSA <span class="niveau">AFB II</span></summary>
+                <p>Der öffentliche Schlüssel von Alice lautet (e, n) = (13, 253). Bob möchte Alice eine liebe Nachricht schicken. Er wählt dazu (wie in englischsprachigen Ländern üblich) das „X“ als Symbol für einen Kuss; der ASCII-Code von X ist 88. Diese Botschaft verschlüsselt er und schickt sie an Alice.</p>
+                <ol type="a">
+                    <li>Berechne Bobs Geheimtext.</li>
+                    <li>Alice erhält den Geheimtext und entschlüsselt ihn mit d = 17. Weise nach, dass die Nachricht „X“ lautet.</li>
+                    <li>Bestätige, dass d = 17 zum öffentlichen Schlüssel passt (253 = 11 · 23).</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.9.5: RSA implementieren <span class="niveau">AFB III</span></summary>
+                <p>Implementiere RSA in Python und teste es für kleine Primzahlen. Lehne unzulässige Werte für e ab und prüfe, dass Ent- und Verschlüsseln wieder die Ausgangszahl liefern.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.9.6: Zu kleiner Schlüssel <span class="niveau">AFB II</span></summary>
+                <p>Jana hat für den Klassenchat einen RSA-Schlüssel erzeugt und den öffentlichen Schlüssel (e, n) = (7, 143) veröffentlicht. Du fängst den Geheimtext c = 136 ab. Er steht für einen Buchstaben (A&nbsp;=&nbsp;0, …, Z&nbsp;=&nbsp;25).</p>
+                <ol type="a">
+                    <li>Faktorisiere n und berechne φ(n).</li>
+                    <li>Bestimme Janas privaten Schlüssel d mit dem erweiterten euklidischen Algorithmus.</li>
+                    <li>Entschlüssele c durch fortgesetztes Quadrieren und gib den Buchstaben an.</li>
+                    <li>Erläutere, welcher Schritt bei einem echten RSA-Schlüssel scheitern würde.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,92 @@
+<p>Diese Seite fasst zusammen, was am Ende des KI-Projekts in eurem Gruppenrepository liegt und wozu ihr Rückmeldung bekommt. Den Projektauftrag und den Zeitplan findest du auf Seite 10.5 „Projektaufgabe“, die Arbeit mit dem Repository auf Seite 10.3 „Versionsverwaltung mit Git“.</p>
+
+<h2>Was am Ende im Repository liegt</h2>
+
+<table>
+            <tr><th>Teil</th><th>wer</th><th>wo im Repository</th><th>Inhalt</th></tr>
+            <tr><td>Projektbeschreibung</td><td>eine verantwortliche Person, Beiträge aller</td><td><code>README.md</code></td><td>Ziel, Daten, Vorgehen, Ergebnis, Reflexion; dazu Halluzinationsbeispiel und KI-Nutzung der Gruppe (Vorlage unten)</td></tr>
+            <tr><td>Projektstrukturplan und Gantt-Diagramm</td><td>eine verantwortliche Person</td><td><code>plan.md</code></td><td>Teilprojekte und Arbeitspakete (jede Person hat Pakete zu ihrem eigenen Modell); Gantt-Diagramm über KW 47 bis KW 2 mit Soll und Ist und den Meilensteinen; Risiken und Rollen</td></tr>
+            <tr><td>User Stories und Kanban-Board</td><td>Gruppe</td><td>Issues, Board im Repository, Ordner <code>kanban/</code></td><td>Issues mit Akzeptanzkriterium und zuständiger Person; je Sprint ein datierter Screenshot des Boards</td></tr>
+            <tr><td>Eigenes Notebook</td><td>jede Person</td><td><code>modell_&lt;vorname&gt;.ipynb</code></td><td>selbst trainiertes und getestetes Modell, am Ende die Abschnitte „Tests“ und „KI-Nutzung“; außerdem das Pflicht-Notebook <code>titanic_&lt;vorname&gt;.ipynb</code> aus KW 47</td></tr>
+            <tr><td>Präsentation</td><td>Gruppe</td><td><code>praesentation/</code></td><td>Folien als PDF, spätestens vor Beginn der Vorstellungen am Montag, 11.1.2027</td></tr>
+        </table>
+
+<h2>Vorlage: README.md</h2>
+
+<p>Die verantwortliche Person legt die Datei in KW 47 an. Die Abschnitte wachsen mit dem Projekt; wer etwas ergänzen möchte, schreibt es als Kommentar in ein Issue (Regel 2 aus 10.3).</p>
+
+<pre><code># Projekttitel
+Gruppe: Vorname (zuständig für …), Vorname (…), Vorname (…)
+
+## 1 Ziel
+Fragestellung in einem Satz. Woran erkennen wir, dass das Projekt gelungen ist?
+
+## 2 Daten
+Datensatz mit Quelle, Anzahl Datensätze und Merkmale, Zielgröße bzw. Klassen,
+Besonderheiten (fehlende Werte, ungleiche Klassen). Keine personenbezogenen Daten.
+
+## 3 Vorgehen
+Wer hat welches Verfahren trainiert? Aufbereitung, Aufteilung (Training/Validierung/Test),
+gewählte Hyperparameter mit kurzer Begründung.
+
+## 4 Ergebnis
+| Person | Verfahren | Hyperparameter | Testergebnis | Baseline |
+|--------|-----------|----------------|--------------|----------|
+Gemeinsames Fazit: Welches Modell eignet sich wofür, wie zuverlässig ist es,
+wo liegen Grenzen und mögliche Verzerrungen (Bias)?
+
+Generative KI: Halluzinationsbeispiel bzw. Chatbot-Vergleich mit Quellenabgleich.
+
+## 5 Reflexion
+Gruppe: Soll und Ist im Gantt-Diagramm – wo gab es Abweichungen, wie haben wir reagiert?
+Je Person drei bis fünf Sätze: mein Beitrag, was ich verstanden habe,
+wo ich noch unsicher bin, was ich im nächsten Projekt anders mache.
+
+## KI-Nutzung der Gruppe
+Werkzeug, Zweck, wie geprüft – oder „keine“.</code></pre>
+
+<h2>Abschnitt „Tests“ im eigenen Notebook</h2>
+
+<p>Halte am Ende deines Notebooks in einer Markdown-Zelle fest, wie du dein Modell geprüft hast. Fülle den Abschnitt laufend aus, nicht erst am Schluss:</p>
+
+<pre><code>## Tests – Vorname – Modell: Verfahren
+
+Aufteilung: Training … % / Validierung … % / Test … %, random_state = …
+Hyperparameter: Kandidaten …, gewählt …, weil (Validierung: …)
+
+Testergebnis (einmalig): Metrik …, Ergebnis …, Baseline …
+Deutung: …
+
+| Nr. | Eingabe | erwartete Ausgabe | tatsächliche Ausgabe | warum dieser Testfall? |
+|-----|---------|-------------------|----------------------|------------------------|
+| 1   | …       | …                 | …                    | Normalfall             |
+| 2   | …       | …                 | …                    | Grenzfall              |
+| 3   | …       | …                 | …                    | Sonderfall             |</code></pre>
+
+<p>Geeignete Einzeltests sind z.&nbsp;B. ein typischer Datensatz aus den Testdaten, ein Datensatz nahe einer Entscheidungsgrenze und ein absichtlich ungewöhnlicher Datensatz (z.&nbsp;B. ein Wert weit außerhalb des Trainingsbereichs). Bei selbst geschriebenen Funktionen (z.&nbsp;B. einer eigenen Genauigkeitsberechnung) gibst du Eingabe, erwartete und tatsächliche Ausgabe an.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Warum die Angabe zur KI-Nutzung wichtig ist</summary>
+                <p>Es ist in Ordnung, Chatbots als Projektwerkzeug einzusetzen (Kursseite 11.0, Abschnitt 9) – genau wie es in vielen Berufen inzwischen üblich ist. Wichtig ist, dass ihr transparent macht, wo ihr sie genutzt habt, und dass ihr die Ergebnisse selbst verstanden und geprüft habt. Was du nicht verstanden hast, merkst du spätestens bei den Nachfragen nach der Vorstellung – und in der Klausur gibt es keinen Chatbot.</p>
+            </details>
+        </div>
+
+<h2>Rückmeldung und Klausur</h2>
+
+<p>Das Projekt wird nicht benotet. Nach eurer Vorstellung bekommt ihr eine Rückmeldung zu drei Bereichen, jeweils mit dem, was <em>gelungen</em> ist, und dem, was <em>ausbaufähig</em> ist:</p>
+
+<ul>
+            <li><strong>Präsentation:</strong> roter Faden, Vergleich und Fazit, Einordnung, Verständlichkeit des eigenen Teils.</li>
+            <li><strong>Modell und Notebook:</strong> Aufbereitung, Aufteilung, Hyperparameter, einmaliger Test mit Baseline, Tests, Deutung in eigenen Worten.</li>
+            <li><strong>Zusammenarbeit und Git:</strong> Planung mit Soll und Ist, Board und User Stories, Commits, Regeln im Gruppenrepository.</li>
+        </ul>
+
+<p>Grundlage ist eure kurze Selbsteinschätzung im Abschnitt „Reflexion“ der <code>README.md</code>. Die Nachfragen nach der Vorstellung sind zugleich Wiederholungsfragen: <strong>Die KI-Themen des Projekts werden in der Klausur am Montag, 18.1.2027 (KW 3) abgefragt.</strong> Nutzt die Rückmeldung, um gezielt zu wiederholen, was noch unsicher ist.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Projektdokumentation</strong> – nachvollziehbare Darstellung von Zielen, Planung, Vorgehen, Ergebnissen und Reflexion eines Projekts. Sie macht sichtbar, wer was wann und warum gemacht hat.</p>
+            <p><strong>Schlank dokumentieren:</strong> Eure Dokumentation besteht aus der <code>README.md</code> (Ziel, Daten, Vorgehen, Ergebnis, Reflexion), den Planungsartefakten und euren Notebooks. Das Projekt wird nicht benotet; die Dokumentation ist Grundlage für eure Vorstellung am <strong>Montag, 11.1.2027</strong> und für die Rückmeldung. Stand ist die Endabgabe am <strong>Freitag, 8.1.2027</strong>.</p>
+        </div>

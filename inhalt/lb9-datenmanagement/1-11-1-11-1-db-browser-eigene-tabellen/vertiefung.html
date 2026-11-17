@@ -1,0 +1,47 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.11.1.5: Fehler finden – das Skript der Schulbibliothek <span class="niveau">AFB III</span>
+                </summary>
+                <p>Paul möchte für die Schulbibliothek Leser, Bücher und Ausleihen anlegen. Sein Skript bricht mehrfach ab oder
+                   speichert nicht das, was es soll:</p>
+                <pre><code>CREATE TABLE Leser (
+    LeserID INTEGER PRIMARY KEY,
+    Name TEXT NOT NULL
+);
+CREATE TABLE Buch (
+    BuchID INTEGER PRIMARY KEY,
+    Titel TEXT NOT NULL
+);
+CREATE TABLE Ausleihe (
+    BuchID INTEGER PRIMARY KEY,
+    LeserID INTEGER PRIMARY KEY,
+    Datum TEXT,
+    FOREIGN KEY (LeserID) REFERENCES Leser (LeserID)
+);
+INSERT INTO Ausleihe VALUES (1, 1, '2026-09-01');
+INSERT INTO Leser (LeserID, Name) VALUES (1, 'Ole');
+INSERT INTO Buch (Titel) VALUES ('Momo', 'Krabat');</code></pre>
+                <p>Finde mindestens vier Fehler – Syntaxfehler, Verstöße gegen Schlüsselregeln und Modellierungsfehler. Gib zu jedem die
+                   Fehlermeldung bzw. die Folge an und schreibe ein korrigiertes Skript. Beurteile außerdem, ob (BuchID, LeserID)
+                   als Primärschlüssel für eine Bibliothek ausreicht.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.11.1.6: Schneller Import – gute Idee? <span class="niveau">AFB III</span>
+                </summary>
+                <p>Der Kassenwart des Vereins hat 300 Mitglieder aus einer alten Excel-Liste als CSV-Datei. Er importiert sie mit
+                   „Datei &gt; Importieren &gt; Tabelle aus CSV-Datei“ unter dem neuen Tabellennamen <code>mitglieder_import</code>
+                   und arbeitet ab jetzt nur noch mit dieser Tabelle, weil „die Daten ja alle drin sind“.</p>
+                <ol>
+                    <li>Beschreibe, welche Eigenschaften die neue Tabelle hat und welche ihr im Vergleich zu <code>Mitglieder</code> fehlen.</li>
+                    <li>Beurteile an zwei konkreten Situationen aus dem Vereinsalltag, welche Probleme daraus entstehen können.</li>
+                    <li>Entwirf ein Vorgehen in Schritten, mit dem die 300 Datensätze sicher in die Tabelle <code>Mitglieder</code> gelangen.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,43 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.8.1: Museums-Alarmanlage <span class="niveau">AFB III</span></summary>
+                <p>Du sollst eine boolesche Funktion für eine Schaltung konzipieren, die das folgende Problem löst:</p>
+                <p>In einem Museum gibt es zwei gesicherte Objekte. Die Objekte sind durch die Bewegungssensoren A und B gesichert. Der Alarm E ertönt, solange mindestens einer der Sensoren eine Bewegung meldet. Während Wartungsarbeiten kann der Alarm unterdrückt werden: Solange zwei Mitarbeiter mit ihren Sicherheitsschlüsseln <strong>gleichzeitig</strong> die Schalter C und D aktivieren, ertönt kein Alarm.</p>
+                <ol>
+                    <li>Erstelle eine Wahrheitstabelle mit mindestens den Spalten A, B, C, D und E.</li>
+                    <li>Ermittle mithilfe der Wahrheitstabelle die KDNF und die KKNF.</li>
+                    <li>Gibt es noch einen anderen Weg, auf die logische Funktion zu schließen? Notiere dein Ergebnis.</li>
+                </ol>
+                <p><em>Hinweis:</em> Eine echte Alarmanlage soll oft weiterläuten, auch wenn die Bewegung schon vorbei ist, bis jemand den Alarm quittiert. Dafür muss sich die Schaltung etwas „merken“ – das leistet kein Schaltnetz, sondern erst ein Speicherbaustein (Flipflop). Deshalb ist die Aufgabe hier so formuliert, dass E nur von den aktuellen Eingängen abhängt.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.8.3: Schranke im Parkhaus <span class="niveau">AFB II</span></summary>
+                <p>Die Ausfahrtschranke eines Parkhauses öffnet (f = 1), wenn ein gültiges Ticket eingesteckt ist (A) und ein Fahrzeug in der Lichtschranke steht (B). Außerdem kann das Personal die Schranke jederzeit mit einer Taste (C) öffnen.</p>
+                <ol>
+                    <li>Erstelle die Wahrheitstabelle für f(A, B, C).</li>
+                    <li>Gib die KDNF und die KKNF an.</li>
+                    <li>Beurteile, welche der beiden kanonischen Formen hier kürzer ist, und formuliere eine allgemeine Regel, an der man das schon an der Wahrheitstabelle erkennt.</li>
+                    <li>Vereinfache die KDNF mit den Gesetzen (jede Zeile mit Gesetz) und vergleiche das Ergebnis mit dem Text.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.8.4: Von der KDNF zur kurzen Formel <span class="niveau">AFB II</span></summary>
+                <p>Ein Logikanalysator hat an einer unbekannten Steuerung alle 16 Eingangskombinationen getestet und daraus automatisch die KDNF erzeugt:</p>
+                <p>f(A, B, C, D) = (A ∧ B ∧ C ∧ D) ∨ (A ∧ B ∧ C ∧ ¬D) ∨ (A ∧ B ∧ ¬C ∧ ¬D)</p>
+                <ol>
+                    <li>Vereinfache f so weit wie möglich. Gib zu jeder Zeile das Gesetz an.</li>
+                    <li>Begründe ohne vollständige Wahrheitstabelle, dass dein Ergebnis genau in drei der 16 Zeilen wahr ist.</li>
+                </ol>
+                <p class="tipp">Der mittlere Minterm passt sowohl zum ersten als auch zum dritten. Du darfst ihn mit dem Idempotenzgesetz doppelt verwenden.</p>
+            </details>
+        </div>

@@ -1,0 +1,306 @@
+<p>
+            Schon Julius Caesar verschlüsselte seine Briefe, im Zweiten Weltkrieg entschied das Brechen der Enigma mit über den Kriegsverlauf, und heute ist jede WhatsApp-Nachricht verschlüsselt. Diese Seite verschafft dir einen Überblick über die Begriffe der Kryptologie.
+        </p>
+
+<figure>
+            <img src="../img/uebersicht_kryptologie.png" width="800" alt="Übersicht der Kryptologie zum Ausfüllen">
+            <figcaption>Abb. 1: Übersicht der Kryptologie (zum Ausfüllen)</figcaption>
+        </figure>
+
+<p>
+            Die Abbildung ordnet die Verfahren nach der Tätigkeit: Wer den Schlüssel kennt, <em>verschlüsselt</em> und <em>entschlüsselt</em> mit Kryptographie; wer ihn nicht kennt, kann nur mit Kryptoanalyse entschlüsseln. Fachlich gliedert sich die Kryptologie in Kryptographie und Kryptoanalyse (siehe Merkkasten).
+        </p>
+
+<h2>Die Begriffe im Einzelnen</h2>
+
+<div class="hinweis">
+            <details>
+                <summary>Kryptologie</summary>
+                <p><strong>Kryptologie</strong> ist die Wissenschaft von der Verschlüsselung und Entschlüsselung von Informationen. Sie teilt sich in die zwei Bereiche <strong>Kryptographie</strong> (Verfahren entwickeln und anwenden) und <strong>Kryptoanalyse</strong> (Verfahren brechen).</p>
+                <p>Das Wort stammt aus dem Griechischen: „kryptos“ (verborgen) und „logos“ (Lehre).</p>
+                <p>Historisch wurde Kryptologie vor allem für militärische und diplomatische Zwecke genutzt. Heute ist sie unverzichtbar für Online-Banking, E-Mail-Verschlüsselung, digitale Signaturen und vieles mehr.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Verschlüsseln</summary>
+                <p><strong>Verschlüsseln</strong> bedeutet, lesbare Informationen (Klartext) in eine unleserliche Form (Geheimtext) umzuwandeln, sodass nur Berechtigte die Information wieder lesen können.</p>
+                <p>Dafür braucht man einen <strong>Schlüssel</strong>, der festlegt, wie die Umwandlung erfolgt.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Entschlüsseln</summary>
+                <p><strong>Entschlüsseln</strong> bedeutet, verschlüsselte Informationen in den Klartext zurückzuverwandeln. Das kann auf zwei Arten geschehen:</p>
+                <ul>
+                    <li><strong>berechtigtes Entschlüsseln:</strong> mit Kenntnis des Schlüssels,</li>
+                    <li><strong>Kryptoanalyse:</strong> Brechen der Verschlüsselung ohne Kenntnis des Schlüssels.</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Kryptographie</summary>
+                <p><strong>Kryptographie</strong> beschäftigt sich mit dem Entwickeln und Anwenden von Verschlüsselungsverfahren. Die klassischen Verfahren unterteilen sich in zwei Hauptkategorien:</p>
+                <ul>
+                    <li><strong>Substitution:</strong> Zeichen werden durch andere Zeichen ersetzt.</li>
+                    <li><strong>Transposition:</strong> Zeichen werden in ihrer Reihenfolge umgeordnet.</li>
+                </ul>
+                <p>Moderne Kryptographie verwendet mathematische Verfahren und arbeitet auf Bit-Ebene. Sie kombiniert Substitution und Transposition vielfach hintereinander (z.&nbsp;B. AES).</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Steganographie</summary>
+                <p><strong>Steganographie</strong> ist die Kunst, Nachrichten zu verstecken. Bei der Kryptographie ist die Nachricht sichtbar, aber unleserlich; bei der Steganographie bleibt schon ihre Existenz verborgen.</p>
+                <p><strong>Historisches Beispiel:</strong> Im antiken Griechenland soll man einem Sklaven den Kopf kahl geschoren, eine Nachricht auf die Kopfhaut tätowiert und ihn nach dem Nachwachsen der Haare als Boten geschickt haben.</p>
+                <p><strong>Moderne Beispiele:</strong></p>
+                <ul>
+                    <li>unsichtbare Tinte</li>
+                    <li>versteckte Botschaften in den niederwertigsten Bits von Bilddateien</li>
+                    <li>Wasserzeichen in digitalen Medien</li>
+                    <li>Mikropunkte (Texte auf Stecknadelkopfgröße verkleinert)</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Substitution</summary>
+                <p><strong>Substitution:</strong> Buchstaben oder Zeichen werden durch andere ersetzt. Man unterscheidet monoalphabetische und polyalphabetische Substitution.</p>
+                <p>Substitutionsverfahren gehören zu den ältesten kryptographischen Methoden. Sie sind einfach umzusetzen, je nach Variante aber unterschiedlich sicher.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Monoalphabetisch</summary>
+                <p><strong>Monoalphabetische Substitution:</strong> Jeder Buchstabe wird immer durch denselben anderen Buchstaben ersetzt. Die Zuordnung zwischen Klartext- und Geheimtextalphabet bleibt also konstant.</p>
+                <div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel: Caesar-Verschlüsselung <br>
+                    Verschiebung um 3 Stellen: A→D, B→E, C→F, …, X→A, Y→B, Z→C<br>
+                    Klartext: <code>HALLO WELT</code><br>
+                    Geheimtext: <code>KDOOR ZHOW</code></summary>
+            </details>
+        </div>
+                <p>Die Caesar-Verschlüsselung hat nur 25 sinnvolle Schlüssel (Verschiebungen 1 bis 25) und ist deshalb sehr unsicher.</p>
+                <p><strong>Sicherheit:</strong> Jede monoalphabetische Verschlüsselung lässt sich durch Häufigkeitsanalyse leicht brechen, da die häufigsten Buchstaben der Sprache (im Deutschen E, N, I, S, R) auch im Geheimtext am häufigsten vorkommen.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Polyalphabetisch</summary>
+                <p><strong>Polyalphabetische Substitution:</strong> Ein Buchstabe kann – abhängig von seiner Position im Text – durch verschiedene andere Buchstaben ersetzt werden. Das erschwert eine Häufigkeitsanalyse deutlich.</p>
+                <div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel: Vigenère-Verschlüsselung mit dem Schlüsselwort <code>KEY</code><br>
+                    Das Schlüsselwort wird unter den Klartext geschrieben und wiederholt:</summary>
+                    <pre>Klartext:   H A L L O W E L T
+Schlüssel:  K E Y K E Y K E Y
+Geheimtext: R E J V S U O P R</pre>
+                    <p>Jeder Buchstabe wird um den Wert des Schlüsselbuchstabens verschoben (K&nbsp;=&nbsp;10, E&nbsp;=&nbsp;4, Y&nbsp;=&nbsp;24).<br>
+                    Das H wird mit K verschlüsselt → R (Verschiebung um 10).<br>
+                    Das erste L wird mit Y verschlüsselt → J (Verschiebung um 24).<br>
+                    Das zweite L wird mit K verschlüsselt → V (Verschiebung um 10).</p>
+                    <p>Derselbe Buchstabe L wird also unterschiedlich verschlüsselt.</p>
+            </details>
+        </div>
+                <p><strong>Historischer Hinweis:</strong> Die Vigenère-Verschlüsselung galt lange als unknackbar und wurde „Le Chiffre indéchiffrable“ (die unentzifferbare Verschlüsselung) genannt. Erst im 19.&nbsp;Jahrhundert fand man Methoden zur Kryptoanalyse (siehe 8.4).</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Transposition</summary>
+                <p><strong>Transposition:</strong> Die Buchstaben des Klartexts bleiben erhalten, aber ihre Reihenfolge wird nach einem bestimmten Schema verändert.</p>
+                <div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: Spaltentransposition <br>
+                    Klartext <code>HALLOWORLD</code> mit 5 Spalten:</summary>
+                    <table class="gitter">
+                        <tr><td>H</td><td>A</td><td>L</td><td>L</td><td>O</td></tr>
+                        <tr><td>W</td><td>O</td><td>R</td><td>L</td><td>D</td></tr>
+                    </table>
+                    <p>Man schreibt den Text zeilenweise in die Tabelle und liest spaltenweise aus.<br>
+                    Geheimtext: <code>HWAOLRLLOD</code></p>
+            </details>
+        </div>
+                <div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: Skytale (antikes Sparta) <br>
+                    Ein Lederband wird eng um einen Stab gewickelt. Der Klartext wird in Längsrichtung des Stabes geschrieben, und zwar auf jeder Windung ein Zeichen pro Zeile. Wickelt man das Band ab, stehen die Zeichen durcheinander. Nur mit einem Stab gleichen Durchmessers wird der Text wieder lesbar.</summary>
+                    <p>Klartext <code>HALLOWELT</code> (9 Zeichen), das Band macht <strong>3 Umwicklungen</strong>. In Längsrichtung passen also 3 Zeichen in eine Zeile (eines pro Windung), und es entstehen 3 Zeilen:</p>
+                    <table class="gitter">
+                        <tr><th></th><th>Windung 1</th><th>Windung 2</th><th>Windung 3</th></tr>
+                        <tr><th>Zeile 1</th><td>H</td><td>A</td><td>L</td></tr>
+                        <tr><th>Zeile 2</th><td>L</td><td>O</td><td>W</td></tr>
+                        <tr><th>Zeile 3</th><td>E</td><td>L</td><td>T</td></tr>
+                    </table>
+                    <p>Auf dem abgewickelten Band liegen die Zeichen einer Windung nebeneinander: erst Windung 1 (H, L, E), dann Windung 2 (A, O, L), dann Windung 3 (L, W, T).<br>
+                    Text auf dem Band: <code>HLEAOLLWT</code><br>
+                    Um den passenden Stab gewickelt ergibt sich wieder: <code>HALLOWELT</code></p>
+                    <p>Die Skytale ist also eine Spaltentransposition mit 3 Spalten – vergleiche Aufgabe 8.2.3.</p>
+            </details>
+        </div>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Kryptoanalyse</summary>
+                <p><strong>Kryptoanalyse</strong> ist die Wissenschaft vom Brechen verschlüsselter Nachrichten ohne Kenntnis des Schlüssels. Sie entwickelte sich parallel zur Kryptographie (siehe 8.6).</p>
+                <p><strong>Wichtige Methoden:</strong></p>
+                <ul>
+                    <li><strong>Häufigkeitsanalyse:</strong> nutzt die typische Verteilung von Buchstaben in einer Sprache (wirksam bei monoalphabetischer Substitution),</li>
+                    <li><strong>Brute-Force-Angriff:</strong> systematisches Ausprobieren aller möglichen Schlüssel,</li>
+                    <li><strong>Kasiski-Test:</strong> bestimmt die Schlüssellänge der Vigenère-Verschlüsselung über wiederkehrende Muster,</li>
+                    <li><strong>Known-Plaintext-Angriff:</strong> Angriff, wenn Teile des Klartexts bekannt sind,</li>
+                    <li><strong>mathematische Analysen:</strong> Ausnutzen von Schwächen im Verschlüsselungsalgorithmus.</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Symmetrische Verfahren</summary>
+                <p><strong>Symmetrische Verschlüsselung:</strong> Sender und Empfänger verwenden denselben Schlüssel zum Ver- und Entschlüsseln. Der Schlüssel muss vor der Kommunikation sicher ausgetauscht werden (siehe 8.3).</p>
+                <p><strong>Vorteile:</strong></p>
+                <ul>
+                    <li>sehr schnell und effizient,</li>
+                    <li>ideal für große Datenmengen,</li>
+                    <li>geringer Rechenaufwand.</li>
+                </ul>
+                <p><strong>Nachteile:</strong></p>
+                <ul>
+                    <li>Der Schlüssel muss sicher übertragen werden (Schlüsselverteilungsproblem).</li>
+                    <li>Bei n Teilnehmern werden n·(n−1)/2 Schlüssel benötigt.</li>
+                    <li>Die Schlüsselverwaltung in großen Netzen ist aufwendig.</li>
+                </ul>
+                <p><strong>Historische Beispiele:</strong></p>
+                <ul>
+                    <li><strong>Caesar, Vigenère:</strong> klassische Verfahren (siehe oben),</li>
+                    <li><strong>Enigma:</strong> Verschlüsselungsmaschine im Zweiten Weltkrieg,</li>
+                    <li><strong>One-Time-Pad:</strong> beweisbar sicher, wenn es korrekt verwendet wird (siehe 8.5).</li>
+                </ul>
+                <p><strong>Moderne Beispiele:</strong></p>
+                <ul>
+                    <li><strong>DES</strong> (Data Encryption Standard): 56-Bit-Schlüssel, seit 1998 per Brute Force gebrochen,</li>
+                    <li><strong>3DES:</strong> dreifache Anwendung von DES, langsam und inzwischen ebenfalls nicht mehr zugelassen,</li>
+                    <li><strong>AES</strong> (Advanced Encryption Standard): aktueller Standard mit Schlüssellängen von 128, 192 oder 256 Bit (siehe 8.7).</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Asymmetrische Verfahren</summary>
+                <p><strong>Asymmetrische Verschlüsselung:</strong> Bei asymmetrischen Verfahren (Public-Key-Verfahren) besitzt jeder Teilnehmer ein Schlüsselpaar: einen öffentlichen Schlüssel zum Verschlüsseln und einen privaten Schlüssel zum Entschlüsseln (siehe 8.8).</p>
+                <p><strong>Vorteile:</strong></p>
+                <ul>
+                    <li>Kein geheimer Schlüsselaustausch nötig – der öffentliche Schlüssel darf offen verteilt werden.</li>
+                    <li>einfachere Schlüsselverwaltung: Bei n Teilnehmern werden nur n Schlüsselpaare benötigt,</li>
+                    <li>ermöglicht digitale Signaturen.</li>
+                </ul>
+                <p><strong>Nachteile:</strong></p>
+                <ul>
+                    <li>deutlich langsamer als symmetrische Verfahren (Faktor 100 bis 1000),</li>
+                    <li>höherer Rechenaufwand,</li>
+                    <li>Man muss sicher sein, dass ein öffentlicher Schlüssel wirklich zur richtigen Person gehört (Zertifikate).</li>
+                </ul>
+                <p><strong>Wichtige Verfahren:</strong></p>
+                <ul>
+                    <li><strong>RSA:</strong> beruht auf der Schwierigkeit, große Zahlen zu faktorisieren; typische Schlüssellängen 2048 oder 4096 Bit,</li>
+                    <li><strong>Elliptische Kurven (ECC):</strong> kleinere Schlüssel bei gleicher Sicherheit,</li>
+                    <li><strong>Diffie-Hellman:</strong> Verfahren zur Schlüsselvereinbarung (siehe 8.10).</li>
+                </ul>
+                <p><strong>Hybride Verfahren:</strong> In der Praxis (z.&nbsp;B. HTTPS, E-Mail-Verschlüsselung) werden beide Verfahren kombiniert: Asymmetrisch wird ein zufälliger symmetrischer Sitzungsschlüssel ausgetauscht, mit dem dann die eigentlichen Daten verschlüsselt werden (siehe 8.11).</p>
+            </details>
+        </div>
+
+<h2>Verfahren erkennen</h2>
+
+<p>Liegen dir ein Klartext und der zugehörige Geheimtext vor, kannst du oft schon erkennen, zu welcher Klasse das Verfahren gehört. Die beiden Beispiele zeigen, wie du dabei vorgehst.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Aus dem Klartext <code>ABITUR</code> wurde der Geheimtext <code>AIUBTR</code>. Ist das eine Substitution oder eine Transposition?</p>
+            <ol>
+                <li><strong>Buchstabenbestand vergleichen.</strong> Klartext: A, B, I, T, U, R. Geheimtext: A, I, U, B, T, R. Es sind genau dieselben Buchstaben, nur in anderer Reihenfolge. <em>Warum?</em> Eine Transposition ordnet nur um, eine Substitution ersetzt Zeichen und führt deshalb in der Regel neue Buchstaben ein.</li>
+                <li><strong>Schema suchen.</strong> Schreibt man den Klartext zeilenweise in 2 Spalten (AB / IT / UR) und liest spaltenweise aus, erhält man A I U und B T R. <em>Warum?</em> Kennt man das Schema, ist das Verfahren genau bestimmt; die Spaltenzahl 2 ist der Schlüssel.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Spaltentransposition mit 2 Spalten.<br>
+            <strong>Kontrolle:</strong> Zum Vergleich ergibt Caesar mit Verschiebung 1 aus ABITUR den Text BCJUVS – darin kommen neue Buchstaben vor, also Substitution.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Eine Agentin hat dreimal die Nachricht <code>TREFFEN</code> mit drei verschiedenen Verfahren verschlüsselt. Abgefangen wurden: (1) <code>TFREENFX</code>, (2) <code>WUHIIHQ</code>, (3) <code>BEJTNRS</code>. Ordne die Verfahren ein und bestimme, wo möglich, den Schlüssel.</p>
+            <ol>
+                <li><strong>Muster des Klartexts notieren.</strong> In TREFFEN stehen an Position 4 und 5 zwei gleiche Buchstaben (FF), an Position 3 und 6 jeweils ein E. <em>Warum?</em> Wie mit solchen Wiederholungen umgegangen wird, verrät die Art der Substitution.</li>
+                <li><strong>Geheimtext (1):</strong> Er enthält T, F, R, E, E, N, F und zusätzlich ein X. Bis auf das X ist es der Buchstabenbestand des Klartexts. <em>Falle:</em> Das X ist ein Füllzeichen, wie in Aufgabe 8.2.3. Schreibt man TREFFEN in 4 Spalten (TREF / FENX) und liest spaltenweise, entsteht genau TF RE EN FX. → <strong>Spaltentransposition mit 4 Spalten.</strong></li>
+                <li><strong>Geheimtext (2):</strong> Alle Buchstaben sind neu, also Substitution. Das Muster bleibt erhalten: An Position 4 und 5 steht II, an Position 3 und 6 jeweils H. Gleiche Klartextbuchstaben werden also gleich ersetzt. Jede Verschiebung beträgt 3 (T→W, R→U, E→H, …). → <strong>monoalphabetisch, Caesar mit Schlüssel 3.</strong></li>
+                <li><strong>Geheimtext (3):</strong> Das Muster ist zerstört: Aus FF wird TN, das erste E wird zu J, das zweite zu R. → <strong>polyalphabetisch.</strong> Weil der Klartext bekannt ist, lassen sich die Verschiebungen direkt berechnen (Geheimtext − Klartext, mod 26): T→B: 1 − 19 = −18 ≡ 8 (I), R→E: 4 − 17 = −13 ≡ 13 (N), E→J: 5 (F), F→T: 14 (O), F→N: 8 (I), E→R: 13 (N), N→S: 5 (F). → <strong>Vigenère mit dem Schlüsselwort INFO.</strong></li>
+            </ol>
+            <p><strong>Ergebnis:</strong> (1) Transposition, (2) monoalphabetische Substitution (Caesar 3), (3) polyalphabetische Substitution (Vigenère, INFO).<br>
+            <strong>Kontrolle bzw. Falle:</strong> Ein erhaltenes Muster beweist allein noch nicht, dass das Verfahren monoalphabetisch ist: Bei Vigenère werden gleiche Buchstaben auch gleich verschlüsselt, wenn ihr Abstand ein Vielfaches der Schlüssellänge ist (8.3, 8.4). Sicher ist die Einordnung erst, wenn man – wie hier – prüft, dass die Verschiebung überall gleich ist. Dass man mit einem einzigen bekannten Klartext den ganzen Vigenère-Schlüssel erhält, zeigt außerdem, wie gefährlich ein Known-Plaintext-Angriff ist.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Kryptologie im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Beim Online-Banking, bei WhatsApp oder Signal und bei jedem Aufruf einer HTTPS-Seite arbeiten moderne Nachfahren von Substitution und Transposition. Steganographie begegnet dir in unsichtbaren Wasserzeichen, mit denen Streamingdienste und Fotoagenturen Raubkopien zurückverfolgen.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> Kryptologinnen und Kryptologen arbeiten z.&nbsp;B. beim Bundesamt für Sicherheit in der Informationstechnik (BSI), das mit der Technischen Richtlinie TR-02102 festlegt, welche Verfahren und Schlüssellängen in Deutschland als sicher gelten. In Unternehmen prüfen Pentesterinnen und Pentester, ob Verschlüsselung richtig eingesetzt wird. Einen Einstieg bietet z.&nbsp;B. ein Informatikstudium mit Vertiefung IT-Sicherheit an der TU Dresden.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Kryptologie</strong> ist die Wissenschaft von der Verschlüsselung. Sie besteht aus zwei Teilgebieten:<br>
+                <strong>Kryptographie</strong> – Entwurf und Anwendung von Verfahren, die Nachrichten für Unbefugte unlesbar machen,<br>
+                <strong>Kryptoanalyse</strong> – Brechen solcher Verfahren, also Gewinnen des Klartexts oder Schlüssels ohne Kenntnis des Schlüssels.<br>
+                <strong>Steganographie</strong> ist keine Verschlüsselung: Sie <em>versteckt</em> die Existenz einer Nachricht.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Kerckhoffs-Prinzip</strong> (Auguste Kerckhoffs, 1883): Die Sicherheit eines Verschlüsselungsverfahrens darf nur von der Geheimhaltung des <strong>Schlüssels</strong> abhängen, nicht von der Geheimhaltung des <strong>Verfahrens</strong>. Deshalb sind moderne Verfahren wie AES und RSA öffentlich bekannt und werden weltweit geprüft.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.2.1: Übersicht vervollständigen <span class="niveau">AFB I</span></summary>
+                <p>Öffne die Begriffe oben nacheinander und vervollständige die Übersicht in Abb.&nbsp;1. Trage in jedes Feld eine kurze Erklärung bzw. Beispielverfahren ein.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.2.2: Umkehrung <span class="niveau">AFB I</span></summary>
+                <p>Schreibe eine Funktion <code>umkehren(text)</code>, die den Text rückwärts ausgibt.</p>
+                <p><strong>Beispiel:</strong> „HALLO“ → „OLLAH“</p>
+                <ol type="a">
+                    <li>Schreibe die Funktion.</li>
+                    <li>Begründe, warum das keine sichere Verschlüsselung ist.</li>
+                </ol>
+            </details>
+        </div>

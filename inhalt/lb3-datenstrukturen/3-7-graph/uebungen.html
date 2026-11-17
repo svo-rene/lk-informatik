@@ -1,0 +1,123 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/3-7_graphen_grundlagen.ipynb" download>3-7_graphen_grundlagen.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Abfragen vorhersagen <span class="niveau">AFB I</span></summary>
+                <p>Was liefern diese Eingaben für das Dictionary <code>netz</code> aus Beispiel 2? Überlege erst, dann probiere es in Thonny aus.</p>
+                <pre><code class="language-python">netz["Altmarkt"]["Postplatz"]
+list(netz["Pieschen"])
+"Pieschen" in netz["Neustadt"]
+netz["Neustadt"]["Pieschen"]</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>5</code> · <code>['Albertplatz']</code> · <code>False</code> (keine Kante von Neustadt nach Pieschen) · <code>KeyError: 'Pieschen'</code>, weil Neustadt keinen Schlüssel „Pieschen“ hat.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Die Schleifen lesen <span class="niveau">AFB I</span></summary>
+                <p>Gegeben sind <code>g = {"A": {"B": 2}, "B": {"A": 2}, "C": {}}</code> und <code>namen = list(g)</code>. Welche Liste <code>zeile</code> entsteht in der inneren Schleife für <code>a = "A"</code>? Welche Matrix entsteht insgesamt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[0, 2, 0]</code> – die Zeile von A. Die ganze Matrix: <code>[[0, 2, 0], [2, 0, 0], [0, 0, 0]]</code>. C hat keine Kanten, deshalb ist seine Zeile (und Spalte) überall 0.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-7-1">
+            <details>
+                <summary>Aufgabe 3.7.1: Begriffe anwenden <span class="niveau">AFB I</span></summary>
+                <p>Betrachte den Graphen im komplexeren Beispiel. Gib die Nachbarn von Postplatz an, einen Weg von Pieschen nach Altmarkt und dessen Länge sowie einen Zyklus.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-7-2">
+            <details>
+                <summary>Aufgabe 3.7.2: Adjazenzmatrix aufstellen <span class="niveau">AFB II</span></summary>
+                <p>Ein gerichteter Graph hat die Knoten A, B, C, D und die Kanten A→B, A→C, B→C, C→A und C→D. Stelle die Adjazenzmatrix und die Adjazenzliste auf. Begründe, warum die Matrix nicht symmetrisch ist, und gib an, von welchem Knoten aus man alle anderen erreichen kann.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-7-3">
+            <details>
+                <summary>Aufgabe 3.7.3: Matrix oder Liste? <span class="niveau">AFB III</span></summary>
+                <p>Das Straßennetz von Sachsen soll mit etwa 100 000 Kreuzungen gespeichert werden; jede Kreuzung hat im Schnitt 3 Nachbarn. Vergleiche den Speicherbedarf von Adjazenzmatrix und Adjazenzliste und beurteile, welche Darstellung geeignet ist. Nenne eine Situation, in der die Matrix vorteilhaft ist.</p>
+            </details>
+        </div>
+
+<h2 id="primm">Code lesen, untersuchen, abwandeln</h2>
+
+<p>Bevor du selbst programmierst, liest du fertigen Code und findest heraus, was er tut: <strong>Vorhersagen</strong> (auf Papier, ohne Rechner) → <strong>Ausführen</strong> → <strong>Untersuchen</strong> mit dem Debugger → <strong>Abwandeln</strong> → <strong>Fehler finden</strong>. Rechne mit etwa 25 Minuten. Wie der Debugger funktioniert, zeigen der Kasten „So debuggst du in Thonny“ und das Video auf Kursseite 3.4.</p>
+
+<div class="aufgabe" id="primm-3-7">
+            <details open>
+                <summary>PRIMM 3.7: Was zählt <code>raetsel</code>? <span class="niveau">AFB I–II</span></summary>
+                <p class="git-datei"><strong>Dateien:</strong> <a href="../material/primm_3-7_raetsel.py" download>primm_3-7_raetsel.py</a> und <a href="../material/primm_3-7_fehler.py" download>primm_3-7_fehler.py</a> in <code>3_graphen/</code> speichern – erst nach Schritt 1 öffnen.</p>
+                <p><strong>1 Vorhersagen</strong> (Papier, ohne Rechner): Was gibt das Programm aus? Zeichne dazu den gerichteten Graphen.</p>
+                <pre><code class="language-python">graph = {&quot;A&quot;: [&quot;B&quot;, &quot;C&quot;], &quot;B&quot;: [&quot;C&quot;], &quot;C&quot;: [&quot;A&quot;], &quot;D&quot;: [&quot;C&quot;]}
+
+
+def raetsel(graph):
+    zaehler = {}
+    for u in graph:
+        zaehler[u] = 0
+    for u in graph:
+        for v in graph[u]:
+            zaehler[v] = zaehler[v] + 1
+    return zaehler
+
+
+print(raetsel(graph))</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>Ausgabe: <code>{'A': 1, 'B': 1, 'C': 3, 'D': 0}</code>. <code>raetsel</code> zählt für jeden Knoten, wie viele Kanten bei ihm ankommen – den <strong>Eingangsgrad</strong>. Auf C zeigen A, B und D, auf D zeigt niemand.</p></details>
+                <p><strong>2 Ausführen:</strong> Öffne <code>primm_3-7_raetsel.py</code> in Thonny, starte mit <kbd>F5</kbd> und vergleiche mit deiner Vorhersage.</p>
+                <p><strong>3 Untersuchen</strong> mit dem Debugger (<kbd>Strg</kbd>&nbsp;+&nbsp;<kbd>F5</kbd>):</p>
+                <ol><li>Welchen Inhalt hat <code>zaehler</code>, nachdem die äußere Schleife den Knoten A abgearbeitet hat?</li><li>Wie oft wird die Zeile <code>zaehler[v] = zaehler[v] + 1</code> insgesamt ausgeführt? Was hat diese Zahl mit dem Graphen zu tun?</li><li>Warum braucht es die erste Schleife, die alle Zähler auf 0 setzt? Was passiert ohne sie?</li></ol>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>1. <code>{'A': 0, 'B': 1, 'C': 1, 'D': 0}</code>. 2. Fünfmal – einmal je Kante. 3. Ohne Startwert gäbe es beim ersten <code>zaehler[v] + 1</code> einen <code>KeyError</code>, und D (Eingangsgrad 0) käme gar nicht vor.</p></details>
+                <p><strong>4 Abwandeln:</strong></p>
+                <ol type="a"><li>Schreibe <code>ausgangsgrad(graph)</code>, die für jeden Knoten zählt, wie viele Kanten von ihm ausgehen. Tipp: Das geht ohne zweite Schleife.</li><li>Schreibe <code>quellen(graph)</code>, die alle Knoten liefert, bei denen keine Kante ankommt. Nutze <code>raetsel</code>.</li></ol>
+                <p><strong>5 Fehler finden:</strong> <code>als_matrix</code> soll die Adjazenzmatrix bauen, liefert aber vier gleiche Zeilen. Halte im Debugger nach dem ersten Setzen einer 1 an und sieh dir <code>m</code> an: Was fällt auf? Korrigiere den Fehler.</p>
+                <pre><code class="language-python">def als_matrix(graph):
+    knoten = list(graph)
+    n = len(knoten)
+    m = [[0] * n] * n
+    for u in graph:
+        for v in graph[u]:
+            m[knoten.index(u)][knoten.index(v)] = 1
+    return m</code></pre>
+                <p>Lösungen zu Schritt 4 und 5 stehen in der Musterlösung.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-3-7-4">
+            <details>
+                <summary>Aufgabe 3.7.4: Wer folgt wem? <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/folgen.py</code> – neu anlegen<br><strong>Commits:</strong> nach Teil 2: <code>3.7.4 Teil 2: Graph als Dictionary und als Matrix</code> · nach Teil 3: <code>3.7.4 Teil 3: folgt_anzahl und follower, Tests für Ben und Emil</code></p>
+                <p>In einer Foto-App kann man anderen Personen folgen, ohne dass sie zurückfolgen müssen. Anna folgt Ben, Ben folgt Anna und Cem, Cem folgt Dana, Dana folgt Ben, und Emil folgt Anna.</p>
+                <ol>
+                    <li>Begründe, ob ein gerichteter oder ungerichteter Graph passt, und zeichne ihn.</li>
+                    <li>Speichere den Graphen in Python als Dictionary mit Listen und stelle die Adjazenzmatrix auf.</li>
+                    <li>Schreibe Funktionen <code>folgt_anzahl(name)</code> (ausgehende Kanten) und <code>follower(name)</code> (eingehende Kanten, als Liste). Gib Testfälle für Ben und Emil an.</li>
+                    <li>Bestimme alle Paare, die sich gegenseitig folgen, und alle Zyklen. Beschreibe, woran man gegenseitiges Folgen in der Matrix erkennt.</li>
+                </ol>
+            </details>
+        </div>

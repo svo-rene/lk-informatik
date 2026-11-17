@@ -1,0 +1,152 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 3: Die Suche verfolgen <span class="niveau">AFB I</span></summary>
+        <p>Zu <code>Tier</code> und <code>Hund</code> von oben kommt <code>class Dackel(Hund): pass</code>. In welchen Klassen sucht Python bei <code>Dackel().sprich()</code> nach <code>sprich</code>, und was wird ausgegeben?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>Zuerst in <code>Dackel</code> – dort steht nichts. Dann in <code>Hund</code> – dort wird <code>sprich</code> gefunden, die Suche hört auf. Ausgabe: <code>Der Hund bellt.</code> <code>Tier.sprich</code> wird nicht erreicht.</p>
+        </details>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-10-1">
+    <details>
+        <summary>Aufgabe 4.10.1: UML-Diagramm Musikinstrumente <span class="niveau">AFB II</span></summary>
+        <p>Zeichne ein UML-Diagramm mit folgenden Klassen: <code>Musikinstrument</code> (Oberklasse), <code>Gitarre</code>, <code>Klavier</code>, <code>Schlagzeug</code> (Unterklassen). Gib je ein bis zwei Attribute und eine Methode an.</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-10-2">
+    <details>
+        <summary>Aufgabe 4.10.2: Unterklasse bilden <span class="niveau">AFB I</span></summary>
+        <p>Erstelle eine Klasse <code>Mitarbeiter</code> mit dem Attribut <code>name</code>. Leite eine Klasse <code>Manager</code> ab, die zusätzlich das Attribut <code>abteilung</code> besitzt.</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-10-3">
+    <details>
+        <summary>Aufgabe 4.10.3: Initialisierung beschreiben <span class="niveau">AFB II</span></summary>
+        <p>Was passiert beim Erstellen des folgenden Objekts? Beschreibe die Initialisierung der Attribute:</p>
+        <pre><code class="language-python">class Tier:
+    def __init__(self, art):
+        self.art = art
+
+class Vogel(Tier):
+    def __init__(self, art, fluegelspannweite):
+        super().__init__(art)
+        self.fluegelspannweite = fluegelspannweite
+
+spatz = Vogel("Spatz", 25)</code></pre>
+        <p><strong>Fragen:</strong><br>
+        • Welche Werte besitzt das Objekt <code>spatz</code>?<br>
+        • Welche Klasse ist für welches Attribut zuständig?<br>
+        • Was passiert ohne den Aufruf von <code>super().__init__(art)</code>?</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-10-4">
+    <details>
+        <summary>Aufgabe 4.10.4: Code analysieren <span class="niveau">AFB II</span></summary>
+        <p>Analysiere den folgenden Code und beschreibe das Verhalten:</p>
+        <pre><code class="language-python">class Smartphone:
+    def info(self):
+        print("Ich bin ein elektronisches Gerät.")
+
+class AndroidPhone(Smartphone):
+    def info(self):
+        print("Ich bin ein Android-Smartphone.")
+
+geraet = AndroidPhone()
+geraet.info()</code></pre>
+        <p><strong>Fragen:</strong><br>
+        • Welche Methode wird ausgeführt?<br>
+        • Wie könnte man die Methode der Oberklasse zusätzlich ausgeben?</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-10-5">
+    <details>
+        <summary>Aufgabe 4.10.5: Methode überschreiben und erweitern <span class="niveau">AFB I–II</span></summary>
+        <p>Ergänze eine Methode <code>arbeite()</code> in <code>Mitarbeiter</code> (aus Aufgabe 4.10.2), die eine einfache Ausgabe erzeugt. Überschreibe diese Methode in <code>Manager</code> mit einer anderen Nachricht. Verwende zusätzlich <code>super()</code>, um beide Ausgaben zu kombinieren.</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-10-6">
+    <details>
+        <summary>Aufgabe 4.10.6: Doppelten Code vermeiden <span class="niveau">AFB III</span></summary>
+        <p>Ein Verleih hat seine Fahrzeuge bisher mit zwei unabhängigen Klassen programmiert:</p>
+        <pre><code class="language-python">class Fahrrad:
+    def __init__(self, rahmennummer, farbe, tagespreis, gangzahl):
+        self.rahmennummer = rahmennummer
+        self.farbe = farbe
+        self.tagespreis = tagespreis
+        self.gangzahl = gangzahl
+
+    def beschreibung(self):
+        return f"Fahrrad: {self.rahmennummer}, {self.farbe}, {self.tagespreis} €/Tag, {self.gangzahl} Gänge"
+
+    def mietpreis(self, tage):
+        return self.tagespreis * tage
+
+
+class Scooter:
+    def __init__(self, rahmennummer, farbe, tagespreis, akku_wh):
+        self.rahmennummer = rahmennummer
+        self.farbe = farbe
+        self.tagespreis = tagespreis
+        self.akku_wh = akku_wh
+
+    def beschreibung(self):
+        return f"Scooter: {self.rahmennummer}, {self.farbe}, {self.tagespreis} €/Tag, Akku {self.akku_wh} Wh"
+
+    def mietpreis(self, tage):
+        return self.tagespreis * tage + 2 * tage   # Ladepauschale</code></pre>
+        <ol>
+            <li>Benenne den doppelten Code und erläutere, welche Probleme er bei späteren Änderungen verursacht.</li>
+            <li>Entwirf ein UML-Klassendiagramm mit einer Oberklasse <code>Fahrzeug</code>.</li>
+            <li>Implementiere die Oberklasse und passe beide Klassen an. Alle Attribute sind privat und nur über Getter lesbar.</li>
+            <li>Schreibe eine Klasse <code>Fuhrpark</code>, die beliebig viele Fahrzeuge aufnimmt, alle Beschreibungen ausgibt und den Gesamtpreis für eine Anzahl Tage berechnet.</li>
+            <li>Erläutere an deinem Programm, wo Polymorphie genutzt wird.</li>
+            <li>Weise die Funktion mit einem Testfall nach, der beide Fahrzeugarten enthält.</li>
+        </ol>
+    </details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-4-10-7">
+    <details>
+        <summary>Aufgabe 4.10.7: Code erkunden – Space Invaders <span class="niveau">AFB II–III</span></summary>
+        <p>Lade das Spiel <a href="../material/space_invaders.py" download>space_invaders.py</a> herunter. Es ist mit der Bibliothek <code>p5</code> geschrieben (Zeichenbefehle wie <code>rect</code>, <code>fill</code>, <code>setup()</code> und <code>draw()</code>). Zum Ausführen müsstest du <code>p5</code> erst installieren. Für diese Aufgabe reicht es, den Code zu <strong>lesen</strong>.</p>
+        <ol>
+            <li>Lege eine Tabelle an: Welche Klassen gibt es, welche Attribute und Methoden haben sie?</li>
+            <li>Bestimme alle Beziehungen zwischen den Klassen (Assoziation, Aggregation, Komposition) und zeichne das Klassendiagramm. Achte darauf, wo die Objekte jeweils erzeugt werden.</li>
+            <li>Suche nach Vererbung im Code. Was stellst du fest? Welche Attribute und Methoden kommen in mehreren Klassen gleich oder ähnlich vor?</li>
+            <li>Entwirf eine Oberklasse <code>Spielobjekt</code> (UML und Python-Code der Oberklasse) und zeige am Beispiel <code>Alien</code>, wie eine Unterklasse dann aussieht.</li>
+            <li>Erläutere, wie sich die Funktion <code>draw()</code> mit deiner Oberklasse durch Polymorphie vereinfachen ließe.</li>
+        </ol>
+        <p class="tipp">Beginne mit dem Konstruktor von <code>Spiel</code>: Dort siehst du, welche Objekte zu einem Spiel gehören.</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-10-9">
+    <details>
+        <summary>Aufgabe 4.10.9: Modelliere aus einem Sachtext – Smart Home <span class="niveau">AFB II</span></summary>
+        <blockquote>„Eine Smart-Home-App verwaltet Geräte. Jedes Gerät hat einen Namen und einen Raum und kann ein- und ausgeschaltet werden. Lampen haben zusätzlich eine Helligkeit von 0 bis 100&nbsp;%, die sich nur im eingeschalteten Zustand ändern lässt; eine neue Lampe hat 100&nbsp;%. Thermostate haben eine Zieltemperatur zwischen 5 und 30&nbsp;°C, Standard ist 20.0&nbsp;°C. Steckdosen messen den Verbrauch des angeschlossenen Geräts in Watt; wird eine Steckdose ausgeschaltet, ist ihr Verbrauch 0. Jedes Gerät liefert mit <code>status()</code> eine Textzeile über seinen Zustand.“</blockquote>
+        <ol>
+            <li>Entwirf ein Klassendiagramm mit einer Oberklasse und drei Unterklassen. Kennzeichne, welche Methoden geerbt, überschrieben oder erweitert werden.</li>
+            <li>Implementiere die Klassen mit geschützten Attributen (<code>_name</code>) und Typangaben.</li>
+            <li>Teste nacheinander:</li>
+        </ol>
+        <table class="gitter">
+            <tr><th>Aufruf</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+            <tr><td><code>l = Lampe("Deckenlicht", "Flur"); print(l.dimmen(40))</code></td><td>False (Lampe ist aus)</td><td></td></tr>
+            <tr><td><code>l.einschalten(); print(l.dimmen(40), l.status())</code></td><td>True Deckenlicht (Flur): an, 40 %</td><td></td></tr>
+            <tr><td><code>t = Thermostat("Heizung", "Bad"); print(t.set_ziel(35), t.set_ziel(22.5))</code></td><td>False True</td><td></td></tr>
+            <tr><td><code>print(t.status())</code></td><td>Heizung (Bad): aus, Ziel 22.5 °C</td><td></td></tr>
+            <tr><td><code>s = Steckdose("Kaffeemaschine", "Küche"); s.einschalten(); s.messen(1200); print(s.status())</code></td><td>Kaffeemaschine (Küche): an, 1200 W</td><td></td></tr>
+            <tr><td><code>s.ausschalten(); print(s.status())</code></td><td>Kaffeemaschine (Küche): aus, 0.0 W</td><td></td></tr>
+        </table>
+    </details>
+</div>

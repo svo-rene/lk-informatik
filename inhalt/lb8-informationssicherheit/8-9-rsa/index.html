@@ -1,0 +1,139 @@
+<p>Das RSA-Verfahren (1977, benannt nach Rivest, Shamir und Adleman) ist ein weit verbreitetes asymmetrisches Verfahren. Seine Sicherheit beruht darauf, dass es sehr schwer ist, große Zahlen in ihre Primfaktoren zu zerlegen. Es nutzt zwei Schlüssel: einen öffentlichen Schlüssel zum Verschlüsseln von Nachrichten und einen privaten Schlüssel zum Entschlüsseln. Der öffentliche Schlüssel kann frei geteilt werden, der private muss geheim bleiben. Damit wird ein geheimer Schlüsselaustausch überflüssig. Beim Verschlüsseln berechnet der Absender mit dem öffentlichen Schlüssel des Empfängers aus dem Klartext den Geheimtext. Dieser wird übertragen und kann nur mithilfe des privaten Schlüssels vom Empfänger wieder entschlüsselt werden.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Einwegfunktion und Falltürfunktion</summary>
+                <p>Eine <strong>Einwegfunktion</strong> ist leicht zu berechnen, ihre Umkehrung ist aber praktisch nicht durchführbar. Eine <strong>Falltürfunktion</strong> ist eine besondere Einwegfunktion: Mit einer geheimen Zusatzinformation, der „Falltür“, lässt sie sich doch leicht umkehren.</p>
+                <p>Ein anschauliches Beispiel für eine Einwegfunktion ist ein gedrucktes Telefonbuch einer Großstadt: Kennt man den Namen, findet man schnell die Telefonnummer. Kennt man nur die Nummer, ist es sehr aufwendig, den Namen zu finden. Ein zusätzliches, nach Nummern sortiertes Verzeichnis wäre die Falltür.</p>
+                <p>Beim RSA-Verfahren ist das Multiplizieren zweier großer Primzahlen p · q = n leicht, das Faktorisieren von n dagegen extrem aufwendig. Die eigentliche Falltürfunktion ist die Verschlüsselung c = m<sup>e</sup> mod n: Ohne weiteres Wissen lässt sie sich nicht umkehren. Wer aber p und q kennt, kann φ(n) und damit den privaten Schlüssel d berechnen – das ist die Falltür.</p>
+            </details>
+        </div>
+
+<p>RSA durchläuft mehrere Schritte: Schlüsselerzeugung, Verschlüsselung, Übertragung und Entschlüsselung. Im Folgenden wird der Ablauf an einem einfachen Beispiel gezeigt, in dem Alice das Wort „INFO“ an Bob überträgt.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <h2>Schlüsselerzeugung (durch Bob)</h2>
+            <ol>
+                <li>Wähle zwei Primzahlen: p = 3 und q = 11.</li>
+                <li>Berechne n: n = p · q = 3 · 11 = 33.</li>
+                <li>Berechne die Eulersche φ-Funktion: φ(n) = (p − 1) · (q − 1) = 2 · 10 = 20.</li>
+                <li>Wähle e: e muss teilerfremd zu φ(n) sein, und es gilt 1 &lt; e &lt; φ(n). Wir wählen e = 3.</li>
+                <li>Berechne d mit e · d mod φ(n) = 1: d = 7, denn 3 · 7 = 21 und 21 mod 20 = 1.</li>
+            </ol>
+            <p>Bobs öffentlicher Schlüssel ist (e, n) = (3, 33), sein privater Schlüssel ist (d, n) = (7, 33).</p>
+
+            <h2>Verschlüsselung (durch Alice)</h2>
+            <p>Um die Nachricht „INFO“ zu senden, verschlüsselt Alice zunächst den ersten Buchstaben „I“.</p>
+            <ol>
+                <li>Buchstaben in eine Zahl umwandeln: I = 8 (wenn man bei A = 0 beginnt).</li>
+                <li>Mit Bobs öffentlichem Schlüssel verschlüsseln: c = m<sup>e</sup> mod n = 8³ mod 33 = 512 mod 33 = 17.</li>
+            </ol>
+
+            <h2>Übertragung</h2>
+            <p>Alice sendet die verschlüsselte Nachricht 17 an Bob.</p>
+
+            <h2>Entschlüsselung (durch Bob)</h2>
+            <ol>
+                <li>Bob empfängt die verschlüsselte Nachricht 17.</li>
+                <li>Er entschlüsselt mit seinem privaten Schlüssel: m = c<sup>d</sup> mod n = 17⁷ mod 33 = 8.</li>
+                <li>Zahl in einen Buchstaben umwandeln: 8 = I.</li>
+            </ol>
+            <p>Bob erhält so den ersten Buchstaben von Alices Nachricht. Für das ganze Wort ergibt sich:</p>
+            <table class="gitter">
+                <tr><th>Buchstabe</th><td>I</td><td>N</td><td>F</td><td>O</td></tr>
+                <tr><th>m</th><td>8</td><td>13</td><td>5</td><td>14</td></tr>
+                <tr><th>c = m³ mod 33</th><td>17</td><td>19</td><td>26</td><td>5</td></tr>
+                <tr><th>c⁷ mod 33</th><td>8</td><td>13</td><td>5</td><td>14</td></tr>
+            </table>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Bob wählt p = 7 und q = 19 und möchte zunächst e = 3 verwenden. Danach soll Alice ihm die Nachricht m = 10 schicken. Hier muss d mit dem erweiterten euklidischen Algorithmus bestimmt und mit großen Exponenten gerechnet werden.</p>
+            <ol>
+                <li><strong>n und φ(n) berechnen:</strong> n = 7 · 19 = 133, φ(n) = 6 · 18 = 108 = 2² · 3³.</li>
+                <li><strong>e prüfen – die Falle:</strong> ggT(3, 108) = 3 ≠ 1, also ist <strong>e = 3 unzulässig</strong>. <em>Warum?</em> Dann gibt es kein d mit 3 · d mod 108 = 1, denn 3 · d − 1 wäre nie durch 3 teilbar. Bob wählt stattdessen e = 5; ggT(5, 108) = 1.</li>
+                <li><strong>d mit dem erweiterten euklidischen Algorithmus bestimmen:</strong>
+                    <pre>108 = 21 · 5 + 3
+  5 =  1 · 3 + 2
+  3 =  1 · 2 + 1
+Rückwärts: 1 = 3 − 2 = 3 − (5 − 3) = 2 · 3 − 5
+             = 2 · (108 − 21 · 5) − 5 = 2 · 108 − 43 · 5</pre>
+                    Also ist −43 · 5 ≡ 1 (mod 108), und d = −43 + 108 = <strong>65</strong>. <em>Warum +108?</em> d soll zwischen 1 und φ(n) liegen.</li>
+                <li><strong>Verschlüsseln durch Alice</strong> mit (5, 133), schrittweise modulo 133: 10² = 100, 10⁴ = 100² = 10&nbsp;000 ≡ 25, 10⁵ = 10⁴ · 10 ≡ 250 ≡ <strong>117</strong>. Geheimtext c = 117.</li>
+                <li><strong>Entschlüsseln durch Bob</strong> mit d = 65 = 64 + 1 durch fortgesetztes Quadrieren (alles mod 133): 117² ≡ 123, 117⁴ ≡ 100, 117⁸ ≡ 25, 117¹⁶ ≡ 93, 117³² ≡ 4, 117⁶⁴ ≡ 16. Dann 117⁶⁵ = 117⁶⁴ · 117 ≡ 16 · 117 = 1872 ≡ <strong>10</strong>. <em>Warum so?</em> 117⁶⁵ hätte 135 Stellen; durch Quadrieren mit sofortigem Rest bleiben alle Zahlen klein, und man braucht nur 7 Multiplikationen.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Öffentlicher Schlüssel (5, 133), privater Schlüssel (65, 133); aus m = 10 wird c = 117 und wieder m = 10.<br>
+            <strong>Kontrolle:</strong> e · d = 5 · 65 = 325 = 3 · 108 + 1. ✓</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: RSA im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Die meisten Zertifikate hinter dem HTTPS-Schloss enthalten einen RSA-Schlüssel mit 2048 oder 4096 Bit; damit beweist der Server seine Echtheit. Auch Software-Updates für dein Handy oder deinen Rechner sind häufig mit RSA signiert, damit keine manipulierte Version installiert wird.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> Security-Ingenieurinnen und -Ingenieure prüfen bei Audits, ob Firmen noch zu kurze RSA-Schlüssel (z.&nbsp;B. 1024 Bit) oder veraltetes Padding verwenden, und planen den Umstieg auf längere Schlüssel oder Post-Quanten-Verfahren. Mathematik aus dem Leistungskurs – modulares Rechnen, Primzahlen, ggT – ist dabei Alltagswerkzeug.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>RSA-Schlüsselerzeugung</strong></p>
+            <ol>
+                <li>Wähle zwei verschiedene große Primzahlen p und q.</li>
+                <li>Berechne das RSA-Modul n = p · q.</li>
+                <li>Berechne φ(n) = (p − 1) · (q − 1).</li>
+                <li>Wähle e mit 1 &lt; e &lt; φ(n) und ggT(e, φ(n)) = 1.</li>
+                <li>Berechne d mit e · d mod φ(n) = 1 (modulares Inverses, z.&nbsp;B. mit dem erweiterten euklidischen Algorithmus).</li>
+            </ol>
+            <p>
+                Öffentlicher Schlüssel: (e, n). Privater Schlüssel: (d, n); p, q und φ(n) werden gelöscht oder geheim gehalten.<br>
+                <strong>Verschlüsseln:</strong> c = m<sup>e</sup> mod n &nbsp;&nbsp; <strong>Entschlüsseln:</strong> m = c<sup>d</sup> mod n &nbsp;&nbsp; (mit 0 ≤ m &lt; n)
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>RSA in der Praxis:</strong> Das „Schulbuch-RSA“ oben ist unsicher. Weil jeder Buchstabe einzeln und immer gleich verschlüsselt wird, ist es in Wahrheit eine monoalphabetische Substitution, die man mit Häufigkeitsanalyse bricht. Echtes RSA verwendet deshalb
+            </p>
+            <ul>
+                <li>ein Modul n mit mindestens 3000 Bit (Empfehlung des BSI, TR-02102),</li>
+                <li>ein zufälliges <strong>Padding</strong> wie <strong>OAEP</strong>, das die Nachricht vor dem Verschlüsseln mit Zufallsdaten auffüllt – so wird dieselbe Nachricht jedes Mal anders verschlüsselt,</li>
+                <li>und verschlüsselt fast nur kurze Daten, meist einen symmetrischen Schlüssel (hybride Verfahren, 8.11).</li>
+            </ul>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.9.1: Einweg- oder Falltürfunktion? <span class="niveau">AFB II</span></summary>
+                <p>Beschreibe, ob bzw. inwiefern die folgenden Vorgänge mit Einweg- oder Falltürfunktionen verglichen werden können. Gib gegebenenfalls die zusätzliche Information an, mit der sich die Eingabewerte der Falltürfunktion bestimmen lassen.</p>
+                <ol type="a">
+                    <li>Erbsen und Linsen mischen</li>
+                    <li>flüssige Farben mischen</li>
+                    <li>Sand und Kies mischen</li>
+                    <li>schriftliches Quadrieren einer Zahl</li>
+                    <li>Zerstörung einer Ritterburg aus mehr als 1000 Legosteinen</li>
+                    <li>Einwerfen eines Briefs in einen Postkasten</li>
+                    <li>Primfaktorzerlegung einer ganzen Zahl mit über tausend Stellen</li>
+                    <li>Nachschlagen englischer Vokabeln in einem Deutsch-Englisch-Wörterbuch</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.9.2: RSA in der Klasse <span class="niveau">AFB I</span></summary>
+                <p>Öffne den <a href="https://www.cryptool.org/de/cto/rsa-step-by-step/" target="_blank">Link</a>. Erstelle ein Schlüsselpaar aus privatem und öffentlichem Schlüssel. Trage deinen öffentlichen Schlüssel <a href="https://cryptpad.fr/sheet/#/2/sheet/edit/7X3WrdnwIZyR-w4HJcdNds--/" target="_blank">hier</a> ein. Wähle eine Person und sende ihr eine geheime Nachricht, indem du sie in die Tabelle einträgst. Hat dir jemand eine Nachricht geschickt, dann entschlüssele sie mit deinem privaten Schlüssel.</p>
+            </details>
+        </div>

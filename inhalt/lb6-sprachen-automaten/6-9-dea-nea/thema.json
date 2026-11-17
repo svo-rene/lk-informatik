@@ -1,0 +1,18 @@
+{
+  "nr": "6.9",
+  "titel": "NEA, ε-Übergänge und weitere Automatentypen",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

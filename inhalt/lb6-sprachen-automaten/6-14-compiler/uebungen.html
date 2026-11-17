@@ -1,0 +1,75 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.14.3: Semantische Analyse und Fehlererkennung <span class="niveau">AFB II/III</span></summary>
+<p>Betrachte den folgenden Java-Code:</p>
+<pre>public class Flaeche {
+    static int berechneFlaeche(int laenge, int breite) {
+        return laenge * breite;
+    }
+
+    public static void main(String[] args) {
+        int ergebnis = berechneFlaeche(5);
+        String text = ergebnis;
+        System.out.println("Die Fläche ist: " + text);
+    }
+}</pre>
+<ol>
+<li>Welche semantischen Fehler enthält dieser Code?</li>
+<li>Welche Verfahren erkennen diese Fehler, und zu welchem Zeitpunkt?</li>
+<li>Wie meldet der Java-Compiler diese Fehler dem Programmierer?</li>
+<li>Vergleiche: Was passiert beim entsprechenden Python-Programm <code>ergebnis = berechne_flaeche(5)</code>?</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.14.4: Verbindung zur Informatik <span class="niveau">AFB III</span></summary>
+<p>→ Beschreibe, warum ein Compiler ähnliche Anforderungen wie Alexa hat – nur auf einer anderen Sprachebene.<br>→ Überlege: Warum ist eine formale Beschreibung bei Programmiersprachen zwingend notwendig?</p>
+</details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.14.5: Den Scanner von Hand ausführen <span class="niveau">AFB II</span></summary>
+<p>Verwende den Mini-Scanner aus Beispiel 3, ohne ihn zu ändern.</p>
+<ol type="a">
+<li>Gib die Tokenliste für <code>preis2 = (netto+19)*3;</code> an.</li>
+<li>Sage voraus, welche Tokens <code>x==1</code> und <code>12.5</code> liefern. Überprüfe deine Vorhersage anschließend in Python.</li>
+<li>Erläutere, welche Probleme die Ergebnisse aus b) in den späteren Compilerphasen verursachen.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.14.6: Den Scanner erweitern <span class="niveau">AFB II/III</span></summary>
+<p>Erweitere den Mini-Scanner aus Beispiel 3:</p>
+<ol type="a">
+<li>Die Wörter <code>if</code>, <code>while</code> und <code>print</code> sollen als Token SCHLUESSELWORT erkannt werden, alle anderen Wörter weiterhin als BEZEICHNER.</li>
+<li>Die Zeichenfolge <code>==</code> soll ein einziges Token GLEICH ergeben, ein einzelnes <code>=</code> weiterhin ZUWEISUNG.</li>
+<li>Teste mindestens mit <code>if x==1</code>, <code>iffy = 2</code>, <code>a = = b</code> und <code>print(x)</code>. Gib für jeden Test Eingabe, erwartete und tatsächliche Ausgabe an.</li>
+</ol>
+<p class="tipp">Für b) musst du beim Lesen von <code>=</code> auf das nächste Zeichen schauen. Prüfe vorher, ob es überhaupt noch ein nächstes Zeichen gibt.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.14.8: Welche Phase meldet den Fehler? <span class="niveau">AFB II/III</span></summary>
+<p>Ein Compiler für eine Python-ähnliche Sprache verwendet einen Scanner wie in Beispiel 3 (ergänzt um Doppelpunkt, Komma und die Erweiterungen aus Aufgabe 6.14.6), einen Parser für eine kontextfreie Grammatik und eine semantische Analyse mit Symboltabelle. Ordne jeden Fehler der Phase zu, die ihn meldet, und begründe.</p>
+<ol>
+<li><code>preis = 3 $ 4</code></li>
+<li><code>preis = (3 + 4</code></li>
+<li><code>preis = menge * 2</code> (menge wurde nirgends festgelegt)</li>
+<li><code>if preis = 3:</code></li>
+<li><code>print(len(5))</code></li>
+<li><code>2preis = 5</code></li>
+</ol>
+<p>Begründe für Fall 3 mit der Chomsky-Hierarchie, warum der Parser diesen Fehler grundsätzlich nicht finden kann.</p>
+</details>
+</div>

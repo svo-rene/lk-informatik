@@ -1,0 +1,54 @@
+{
+  "nr": "LB 8",
+  "titel": "Informationssicherheit",
+  "text": "Sicherheitsziele, symmetrische und asymmetrische Verschlüsselung, Hashfunktionen, Signaturen und Datensicherung.",
+  "kapitel": [
+    {
+      "titel": "Grundlagen",
+      "themen": [
+        "8-1-sicherheitsziele",
+        "8-2-uebersicht-kryptologie"
+      ]
+    },
+    {
+      "titel": "Symmetrische Verfahren",
+      "themen": [
+        "8-3-symmetrische-verfahren",
+        "8-4-kasiski-test",
+        "8-5-one-time-pad",
+        "8-6-kryptoanalyse",
+        "8-7-aes"
+      ]
+    },
+    {
+      "titel": "Asymmetrische Verfahren",
+      "themen": [
+        "8-8-asymmetrische-verfahren",
+        "8-9-rsa",
+        "8-10-diffie-hellman",
+        "8-11-hybride-verfahren"
+      ]
+    },
+    {
+      "titel": "Integrität und Authentizität",
+      "themen": [
+        "8-12-hashfunktionen",
+        "8-13-digitale-signatur",
+        "8-14-authentifizierung"
+      ]
+    },
+    {
+      "titel": "Netzsicherheit",
+      "themen": [
+        "7-11-tls-vpn",
+        "7-12-authentifizierung"
+      ]
+    },
+    {
+      "titel": "Verfügbarkeit",
+      "themen": [
+        "8-15-datensicherung-raid"
+      ]
+    }
+  ]
+}

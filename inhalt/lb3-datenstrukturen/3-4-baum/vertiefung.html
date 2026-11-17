@@ -1,0 +1,58 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.4.5: Fehler finden in der eingerückten Ausgabe <span class="niveau">AFB III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>2_baeume/baum_ausgabe_fehler.py</code> – neu anlegen; <code>baum4.py</code> herunterladen, unter diesem Namen speichern, Methode aus der Aufgabe einfügen<br><strong>Commits:</strong> zuerst: <code>3.4.5: baum4.py mit fehlerhafter print_tree_structure</code> · nach Teil 2: <code>3.4.5 Teil 2: Aufruf auf print_tree_structure geändert</code> · nach Teil 3: <code>3.4.5 Teil 3: print_tree_structure korrigiert</code></p>
+                <p>Ein Mitschüler hat die Klasse <code>Tree</code> aus <code>baum4.py</code> um eine eingerückte Ausgabe erweitert. Die Methode <code>print_tree</code> hat nur den Parameter <code>node</code>.</p>
+                <pre><code class="language-python">    def print_tree_structure(self, node=None, level=0):
+        if node is None:
+            node = self.root
+            print("  " * level + node.data)
+        for child in node.children:
+            self.print_tree(child, level + 1)</code></pre>
+                <ol>
+                    <li>Beim Aufruf <code>tree1.print_tree_structure()</code> für den Baum Hans → (Brigitte → Petra), Dieter erscheint eine Fehlermeldung. Gib an, welche Meldung zu erwarten ist, und erkläre sie.</li>
+                    <li>Der Mitschüler ersetzt nur <code>self.print_tree</code> durch <code>self.print_tree_structure</code>. Gib die Ausgabe an und finde den zweiten Fehler.</li>
+                    <li>Gib die korrigierte Methode an und die erwartete Ausgabe für den Beispielbaum.</li>
+                    <li>Beurteile, was beim Aufruf für einen leeren Baum (<code>root</code> ist <code>None</code>) passiert, und schlage eine Verbesserung vor.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.4.6: Ist das noch ein Baum? <span class="niveau">AFB III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>2_baeume/ist_baum.py</code> – neu anlegen<br><strong>Commits:</strong> nach Teil 2: <code>3.4.6 Teil 2: ist_baum ergänzt</code> · nach Teil 3: <code>3.4.6 Teil 3: Tests mit beiden Datensätzen ok</code></p>
+                <p>Eine Vereinssoftware speichert für jede Abteilung nur, zu welchem Bereich sie gehört (Elternverweis). Beim Import ist ein Fehler passiert:</p>
+                <pre><code class="language-python">eltern = {
+    "Kasse": "Vorstand",
+    "Jugend": "Vorstand",
+    "Fußball": "Jugend",
+    "Handball": "Jugend",
+    "Turnen": "Breitensport",
+    "Breitensport": "Turnen",
+}</code></pre>
+                <ol>
+                    <li>Zeichne die Struktur und begründe mit der Definition eines Baums, welche Bedingungen verletzt sind.</li>
+                    <li>Schreibe eine Funktion <code>ist_baum(eltern)</code>, die prüft, ob es genau eine Wurzel gibt und ob man von jedem Knoten aus über die Elternverweise zur Wurzel gelangt, ohne einen Knoten doppelt zu besuchen.</li>
+                    <li>Teste mit den Daten oben (erwartet: <code>False</code>) und mit der korrigierten Fassung, in der Breitensport zum Vorstand gehört (erwartet: <code>True</code>).</li>
+                    <li>Vergleiche die Darstellung mit Elternverweisen mit der Darstellung mit Kinderlisten aus Beispiel 2: Welche Frage lässt sich jeweils schnell beantworten?</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="loesungswege">Lösungswege: So gehst du an eine Aufgabe heran</h2>
+
+<p>Jedes Video löst eine eigene Beispielaufgabe in fünf Schritten: <strong>1 Aufgabe</strong> genau lesen → <strong>2 Ansatz</strong> (welche Datenstruktur, wie zerlege ich das Problem?) → <strong>3 Modell</strong> (welche Klassen und Methoden?) → <strong>4 Lösungsweg</strong> (iterativ oder rekursiv?) → <strong>5 Umsetzen und testen</strong>. Geh bei deinen eigenen Aufgaben genauso vor.</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1rem">
+            <figure>
+                <div class="lp-video"><video controls preload="none" poster="../vid/3-4-lw1_summe_vorschau.png" src="../vid/3-4-lw1_summe.mp4"></video><a href="../vid/3-4-lw1_summe.mp4">Video ansehen</a></div>
+                <figcaption>Lösungsweg 1: Rekursion wiederholt – Summe einer verketteten Liste (ca. 2 min)</figcaption>
+            </figure>
+            <figure>
+                <div class="lp-video"><video controls preload="none" poster="../vid/3-4-lw2_nachkommen_vorschau.png" src="../vid/3-4-lw2_nachkommen.mp4"></video><a href="../vid/3-4-lw2_nachkommen.mp4">Video ansehen</a></div>
+                <figcaption>Lösungsweg 2: Baum – Nachkommen im Stammbaum zählen (ca. 2 min)</figcaption>
+            </figure>
+        </div>

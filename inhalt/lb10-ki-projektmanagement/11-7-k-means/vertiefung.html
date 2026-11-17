@@ -1,0 +1,46 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.7.6: Ergebnis prüfen – ist Lisa fertig? <span class="niveau">AFB III</span></summary>
+                <p>Lisa hat k-Means (k = 2, euklidischer Abstand) auf die Punkte (1|1), (2|2), (5|4), (6|6), (7|5) angewendet und schreibt:</p>
+                <blockquote>
+                    <p>„Endergebnis: Cluster 1 = {(1|1), (2|2), (5|4)} mit Zentrum (8/3 | 7/3), Cluster 2 = {(6|6), (7|5)} mit Zentrum (6,5|5,5). Die Zentren sind die Mittelwerte ihrer Punkte, also ist der Algorithmus fertig.“</p>
+                </blockquote>
+                <ol>
+                    <li>Prüfe, ob die Zentren richtig berechnet sind.</li>
+                    <li>Prüfe, ob wirklich Konvergenz vorliegt. Begründe mit Abständen.</li>
+                    <li>Führe den Algorithmus, falls nötig, zu Ende und vergleiche die SSE von Lisas Ergebnis mit deinem.</li>
+                    <li>Formuliere in einem Satz, welche Bedingung Lisa übersehen hat.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.7.7: Wie viele Lesergruppen hat die Bibliothek? <span class="niveau">AFB III</span></summary>
+                <p>Die Schulbibliothek clustert ihre Nutzerinnen und Nutzer nach zwei skalierten Merkmalen (Ausleihen pro Jahr, Anteil Sachbücher). Für verschiedene k ergab sich:</p>
+                <table>
+                    <thead>
+                        <tr><th>k</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>SSE</td><td>400</td><td>180</td><td>60</td><td>52</td><td>47</td><td>44</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Bestimme mit der Ellbogenmethode ein geeignetes k und begründe.</li>
+                    <li>Ein Mitglied der Bibliotheks-AG meint: „k = 6 ist am besten, da ist die SSE am kleinsten.“ Beurteile diese Aussage. Was würde passieren, wenn man k gleich der Anzahl aller Nutzer wählt?</li>
+                    <li>Bei k = 4 besteht ein Cluster nur aus einer einzigen Person, einer Lehrerin mit 300 Ausleihen pro Jahr. Beurteile, was das über die Daten und über die Wahl von k aussagt, und schlage ein Vorgehen vor.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Weiterführende Links</h2>
+
+<ul>
+            <li><a href="https://www.youtube.com/watch?v=4b5d3muPQmA" target="_blank" rel="noopener">StatQuest: K-means clustering (YouTube, englisch)</a> – ein kurzes, sehr anschauliches Erklärvideo, das den Ablauf des Algorithmus (inkl. Ellbogenmethode) noch einmal Schritt für Schritt zeigt.</li>
+            <li><a href="https://www.naftaliharris.com/blog/visualizing-k-means-clustering/" target="_blank" rel="noopener">Visualizing K-Means Clustering (interaktive Animation, englisch)</a> – hier kannst du den Algorithmus live auf verschiedenen Datensätzen ausprobieren und dabei Schritt für Schritt beobachten, wie sich die Cluster-Zentren verschieben.</li>
+            <li><a href="https://datasolut.com/clusteranalyse-kundensegmentierung-beispiel/" target="_blank" rel="noopener">Kundensegmentierung: Beispiel mit k-Means (datasolut.com)</a> – ein praxisnaher Artikel, der zeigt, wie Unternehmen echte Kundendaten mit k-Means in Zielgruppen einteilen.</li>
+            <li><a href="https://scikit-learn.org/stable/auto_examples/cluster/plot_face_compress.html" target="_blank" rel="noopener">Vector Quantization Example (scikit-learn, englisch)</a> – ein Code-Beispiel, das zeigt, wie k-Means genutzt wird, um ein Bild mit weniger Werten (Farb-/Graustufen) zu komprimieren.</li>
+        </ul>

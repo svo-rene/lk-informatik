@@ -1,0 +1,56 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.2.4: Fehler in einer Analyse finden <span class="niveau">AFB III</span></summary>
+                <p>Lena hat die folgende Schaltung analysiert:</p>
+                <table class="gitter">
+                    <tr><th>Gatter</th><th>Typ</th><th>Eingänge</th></tr>
+                    <tr><td>G1</td><td>NOR</td><td>A, B</td></tr>
+                    <tr><td>G2</td><td>UND</td><td>A, C</td></tr>
+                    <tr><td>f (Ausgang)</td><td>ODER</td><td>G1, G2</td></tr>
+                </table>
+                <p>Ihre Lösung:</p>
+                <table class="gitter">
+                    <tr><th>A</th><th>B</th><th>C</th><th>G1</th><th>G2</th><th>f</th></tr>
+                    <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                </table>
+                <p>Lenas Fazit: „f = ¬A ∨ ¬B ∨ C. Die Schaltung ist nur bei A = 1, B = 1, C = 0 aus.“</p>
+                <ol>
+                    <li>Finde den Fehler in Lenas Analyse und erkläre, wie er vermutlich entstanden ist.</li>
+                    <li>Erstelle die korrekte Wahrheitstabelle und die korrekte Funktion. Vereinfache, falls möglich.</li>
+                    <li>Gib alle Zeilen an, in denen Lenas Tabelle falsch ist, und beurteile ihr Fazit.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.2.5: Eine Hofbeleuchtung mit weniger Gattern <span class="niveau">AFB III</span></summary>
+                <p>In einem alten Steuerkasten für die Hofbeleuchtung einer Schule findet ein Techniker eine Platine mit sechs Gattern. Eingänge: A = Schalter „Veranstaltung“, B = Bewegungsmelder meldet Bewegung, C = Nachtruhe (nach 22 Uhr), D = Dämmerungssensor meldet „dunkel“. Ausgang f = Licht an.</p>
+                <table class="gitter">
+                    <tr><th>Gatter</th><th>Typ</th><th>Eingänge</th></tr>
+                    <tr><td>G1</td><td>NICHT</td><td>C</td></tr>
+                    <tr><td>G2</td><td>NICHT</td><td>A</td></tr>
+                    <tr><td>G3</td><td>UND</td><td>A, B, G1</td></tr>
+                    <tr><td>G4</td><td>UND</td><td>A, B, D</td></tr>
+                    <tr><td>G5</td><td>UND</td><td>G2, B, D</td></tr>
+                    <tr><td>f</td><td>ODER</td><td>G3, G4, G5</td></tr>
+                </table>
+                <ol>
+                    <li>Stelle die Funktion f auf und erstelle die Wahrheitstabelle (16 Zeilen).</li>
+                    <li>Vereinfache f mit den Gesetzen der booleschen Algebra. Klammere dazu gemeinsame UND-Teile aus.</li>
+                    <li>Beschreibe in einem Satz, wann das Licht angeht.</li>
+                    <li>Entwirf eine gleichwertige Schaltung mit möglichst wenigen Gattern, gib sie als Gatterliste an und begründe die Gatterzahl.</li>
+                    <li>Baue beide Schaltungen in LogicSim nebeneinander auf, führe die Eingänge an beide und vergleiche die Ausgänge für alle Belegungen.</li>
+                </ol>
+                <p class="tipp">Die Terme mit A ∧ D und ¬A ∧ D unterscheiden sich nur in A.</p>
+            </details>
+        </div>

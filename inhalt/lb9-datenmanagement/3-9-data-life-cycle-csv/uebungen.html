@@ -1,0 +1,71 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/3-9_data-life-cycle-csv.ipynb" download>3-9_data-life-cycle-csv.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+                <p><strong>Wichtig:</strong> Das Notebook liest deine eigene Datei <code>umfrage.csv</code> ein. Lade sie mit in den Dateibereich hoch, sonst meldet Python <code>FileNotFoundError</code>.</p>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.9.3: Was wird beim Bereinigen geprüft? <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Erkläre:
+                </p>
+                    <ul>
+                        <li>Welche Bedingungen müssen erfüllt sein, damit ein Datensatz in <code>bereinigt</code> aufgenommen wird?</li>
+                        <li>Warum prüfen wir, ob <code>ist_zahl(wort)</code> <em>nicht</em> zutrifft?</li>
+                        <li>Was passiert mit Zeilen, in denen die Felder vertauscht sind?</li>
+                        <li>Warum wäre <code>zahl.isdigit()</code> für die Antwort „7.5“ ungeeignet?</li>
+                    </ul>
+                <p>
+                    Teste: Sind alle falschen Einträge herausgefiltert, also sind deine Daten jetzt komplett bereinigt?
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.9.4: Wie greife ich auf Werte zu? <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Versuche Folgendes in deinem Programm:
+                </p>
+                    <ul>
+                        <li><code>print(bereinigt[1])</code> – Was wird ausgegeben?</li>
+                        <li><code>print(bereinigt[1][2])</code> – Was steht an dieser Stelle?</li>
+                        <li><code>print(bereinigt[-1][1])</code> – Was ist das?</li>
+                    </ul>
+                <p>
+                    Erkläre: Wie funktionieren die Zahlen in den eckigen Klammern? Was bedeuten sie?
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.9.5: Darstellung in Diagrammen <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Öffne die bereinigte CSV-Datei in LibreOffice Calc und erstelle passende Diagramme zu deinen Fragestellungen.
+                    Begründe jeweils die Wahl des Diagrammtyps (siehe Seite 3.8).
+                </p>
+            </details>
+        </div>

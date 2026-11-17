@@ -1,0 +1,97 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 3: Was kommt zurück? <span class="niveau">AFB I</span></summary>
+            <p>Was gibt dieses Programmstück aus? <code>s2 = Spieler("Tom", 4)</code>, dann <code>a = s2.punkte_erhoehen(6)</code> und <code>print(a, s2.punkte)</code></p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Ausgabe: <code>None 10</code>. Die Methode hat den Zustand verändert (aus 4 werden 10 Punkte), liefert aber ohne <code>return</code> den Wert <code>None</code>.</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-5-1">
+        <details>
+            <summary>Aufgabe 4.5.1: Methoden unterscheiden <span class="niveau">AFB I</span></summary>
+            <p>Gib für die Klasse <code>Spieler</code> an, welche Methoden verändernd und welche sondierend sind. Ergänze eine sondierende Methode <code>hat_gewonnen(ziel)</code>, die <code>True</code> zurückgibt, wenn der Spieler mindestens <code>ziel</code> Punkte hat.</p>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-5-2">
+        <details>
+            <summary>Aufgabe 4.5.2: Auto mit Tankanzeige <span class="niveau">AFB II–III</span></summary>
+            <p>Erstelle eine Klasse <code>Auto</code> mit den Attributen:</p>
+            <ul>
+                <li><code>marke</code> (z.&nbsp;B. „VW“)</li>
+                <li><code>tankinhalt</code> (z.&nbsp;B. 45.0 Liter)</li>
+            </ul>
+            <p>Schreibe folgende Methoden:</p>
+            <ul>
+                <li><code>tanken(menge: float)</code> → erhöht den Tankinhalt</li>
+                <li><code>zeige_tankinhalt()</code> → zeigt den aktuellen Tankstand</li>
+                <li><code>fahren(weite: int)</code> → fährt eine bestimmte Anzahl an Kilometern und verbraucht dabei (vereinfacht) einen Liter pro Kilometer</li>
+            </ul>
+            <p>Erzeuge Autos und simuliere Tankvorgänge und Fahrten. Hast du an alles gedacht? Verbessere dein Programm.</p>
+        </details>
+    </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-4-5-3">
+        <details>
+            <summary>Aufgabe 4.5.3: Das Smart-Home-Thermostat <span class="niveau">AFB II</span></summary>
+            <p>Ein Hersteller von Smart-Home-Geräten liefert dir dieses Klassendiagramm. Die Solltemperatur darf nie unter 5,0&nbsp;°C und nie über 30,0&nbsp;°C liegen. Das Thermostat heizt, solange die Ist-Temperatur kleiner als die Solltemperatur ist.</p>
+            <table class="gitter">
+                <tbody>
+                    <tr><th>Thermostat</th></tr>
+                    <tr><td>raum: string<br>soll: float<br>ist: float</td></tr>
+                    <tr><td>Thermostat(raum: string, soll: float, ist: float)<br>hoeher(schritt: float): void<br>niedriger(schritt: float): void<br>heizt(): bool<br>anzeige(): string</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li>Gib für jede Methode an, ob sie verändernd oder sondierend ist, und begründe am Rückgabetyp und an der Beschreibung.</li>
+                <li>Implementiere die Klasse in Python. <code>anzeige()</code> liefert einen Text der Form <code>Bad: ist 19.5 °C, soll 21.0 °C</code>.</li>
+                <li>Teste deine Klasse mit diesen Anweisungen in genau dieser Reihenfolge:
+                    <table class="gitter">
+                        <thead><tr><th>Anweisungen</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>t = Thermostat("Bad", 21.0, 19.5)</code><br><code>print(t.anzeige())</code></td><td><code>Bad: ist 19.5 °C, soll 21.0 °C</code></td><td></td></tr>
+                            <tr><td><code>print(t.heizt())</code></td><td><code>True</code></td><td></td></tr>
+                            <tr><td><code>t.niedriger(2.0)</code><br><code>print(t.heizt())</code></td><td><code>False</code></td><td></td></tr>
+                            <tr><td><code>t.hoeher(15.0)</code><br><code>print(t.anzeige())</code></td><td><code>Bad: ist 19.5 °C, soll 30.0 °C</code></td><td></td></tr>
+                            <tr><td><code>t.niedriger(40)</code><br><code>print(t.anzeige())</code></td><td><code>Bad: ist 19.5 °C, soll 5.0 °C</code></td><td></td></tr>
+                            <tr><td><code>print(Thermostat("Flur", 20.0, 20.0).heizt())</code></td><td><code>False</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+            <p class="tipp">Tipp: Mit <code>min(…)</code> und <code>max(…)</code> kannst du einen Wert wie in Beispiel 2 von 4.3 nach oben bzw. unten begrenzen.</p>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-5-4">
+        <details>
+            <summary>Aufgabe 4.5.4: Vorstellungen an der Kinokasse <span class="niveau">AFB II</span></summary>
+            <p>Das Programmkino „Schauburg“ beschreibt seine Anforderungen:</p>
+            <p><em>„Für jede Vorstellung kennen wir den Film, die Uhrzeit und die Zahl der Plätze im Saal. An der Kasse kann man Plätze buchen. Das geht nur, wenn genug frei sind, und die Kasse muss erfahren, ob die Buchung geklappt hat. Gebuchte Plätze können storniert werden. Jederzeit wollen wir die Zahl der freien Plätze abfragen und prüfen können, ob eine Vorstellung ausverkauft ist.“</em></p>
+            <ol>
+                <li>Modelliere die Klasse <code>Vorstellung</code> als Klassendiagramm mit Parametern und Rückgabetypen.</li>
+                <li>Ordne jede Methode als verändernd oder sondierend ein. Eine Methode passt nicht ganz in dieses Schema – welche, und warum?</li>
+                <li>Implementiere die Klasse. Unsinnige Buchungen (null oder negative Anzahl, mehr als frei) sollen abgelehnt werden. Beim Stornieren kann die Zahl der gebuchten Plätze nicht unter 0 fallen.</li>
+                <li>Teste deine Klasse mit diesen Anweisungen in genau dieser Reihenfolge:
+                    <table class="gitter">
+                        <thead><tr><th>Anweisungen</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>v = Vorstellung("Dune", "20:15", 10)</code><br><code>print(v.buchen(6), v.frei())</code></td><td><code>True 4</code></td><td></td></tr>
+                            <tr><td><code>print(v.buchen(5), v.frei())</code></td><td><code>False 4</code></td><td></td></tr>
+                            <tr><td><code>print(v.buchen(-2), v.frei())</code></td><td><code>False 4</code></td><td></td></tr>
+                            <tr><td><code>print(v.buchen(4), v.ist_ausverkauft())</code></td><td><code>True True</code></td><td></td></tr>
+                            <tr><td><code>v.stornieren(3)</code><br><code>print(v.frei(), v.ist_ausverkauft())</code></td><td><code>3 False</code></td><td></td></tr>
+                            <tr><td><code>v.stornieren(20)</code><br><code>print(v.frei())</code></td><td><code>10</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+            <p class="tipp">Tipp: Eine Methode darf eine andere Methode desselben Objekts aufrufen, z.&nbsp;B. <code>self.frei()</code> innerhalb von <code>buchen</code>. So steht die Berechnung der freien Plätze nur an einer Stelle.</p>
+        </details>
+    </div>

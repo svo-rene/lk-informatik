@@ -1,0 +1,167 @@
+<p>
+                In einem echten Prozessor gibt es kein „∧“ oder „∨“ – nur elektrische Bauteile, durch die Strom fließt oder nicht. Wie wird aus einem booleschen Ausdruck wie A ∧ B ∨ C eine Schaltung?
+            </p>
+
+<p>
+                Boolesche Ausdrücke können mithilfe von logischen Gattern in elektronischen Schaltungen umgesetzt werden. Ein Gatter hat einen oder mehrere Eingänge und einen Ausgang; „1“ steht für Spannung an, „0“ für keine Spannung. Die grundlegendsten Gatter sind UND, ODER und NICHT.
+            </p>
+
+<h2>UND (AND-Gatter)</h2>
+
+<p>Das UND-Gatter gibt nur dann „wahr“ aus, wenn alle Eingänge „wahr“ sind.</p>
+
+<figure>
+                    <img src="../img/and_gatter.png" width="400" alt="UND-Gatter mit zwei Eingängen in LogicSim">
+                    <figcaption>AND-Gatter – LogicSim</figcaption>
+                </figure>
+
+<hr>
+
+<h2>ODER (OR-Gatter)</h2>
+
+<p>Das ODER-Gatter gibt „wahr“ aus, wenn mindestens einer der Eingänge „wahr“ ist.</p>
+
+<figure>
+                    <img src="../img/or_gatter.png" width="400" alt="ODER-Gatter mit zwei Eingängen in LogicSim">
+                    <figcaption>OR-Gatter – LogicSim</figcaption>
+                </figure>
+
+<hr>
+
+<h2>NICHT (NOT-Gatter)</h2>
+
+<p>Das NICHT-Gatter kehrt den Wert des Eingangs um. Aus „wahr“ wird „falsch“ und umgekehrt.</p>
+
+<figure>
+                    <img src="../img/not_gatter.png" width="400" alt="NICHT-Gatter mit einem Eingang in LogicSim">
+                    <figcaption>NOT-Gatter – LogicSim</figcaption>
+                </figure>
+
+<hr>
+
+<h2>Weitere Gatter: XOR, NAND und NOR</h2>
+
+<p>
+                Es gibt noch weitere Gatter, die in der Praxis sehr häufig vorkommen. Sie lassen sich alle aus UND, ODER und NICHT zusammensetzen, werden aber als eigene Bausteine angeboten, weil sie kleiner und schneller sind.
+            </p>
+
+<ul>
+                <li><strong>XOR</strong> (Antivalenz, „entweder … oder“, Zeichen ⊕): wahr, wenn die Eingänge <em>verschieden</em> sind. A ⊕ B = (¬A ∧ B) ∨ (A ∧ ¬B)</li>
+                <li><strong>NAND</strong> („nicht und“): das negierte UND. A NAND B = ¬(A ∧ B) – nur falsch, wenn beide Eingänge wahr sind.</li>
+                <li><strong>NOR</strong> („nicht oder“): das negierte ODER. A NOR B = ¬(A ∨ B) – nur wahr, wenn beide Eingänge falsch sind.</li>
+            </ul>
+
+<p>Im Schaltsymbol erkennt man die Negation an einem kleinen Kreis am Ausgang des Gatters.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Schaltung zu f = A ∨ ¬B</summary>
+                <p>f = A ∨ ¬B wird mit einem NICHT-Gatter an B gebaut, dessen Ausgang zusammen mit A in ein ODER-Gatter läuft.</p>
+                <table class="gitter">
+                    <tr><th>A</th><th>B</th><th>¬B</th><th>A ∨ ¬B</th></tr>
+                    <tr><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                </table>
+                <p><strong>Lösungsschritte:</strong></p>
+                <ol>
+                    <li><strong>Was:</strong> Die Formel nach Bindungsstärke zerlegen: Zuerst wird ¬B gebildet, danach A ∨ ¬B. – <em>Warum:</em> ¬ bindet stärker als ∨. Die Reihenfolge der Auswertung ist also auch die Reihenfolge der Gatter vom Eingang zum Ausgang.</li>
+                    <li><strong>Was:</strong> Ein NICHT-Gatter an Schalter B anschließen. – <em>Warum:</em> Das ODER braucht als zweiten Eingang ¬B und nicht B.</li>
+                    <li><strong>Was:</strong> Schalter A und den Ausgang des NICHT-Gatters in ein ODER-Gatter führen und daran die LED anschließen. – <em>Warum:</em> Der Hauptoperator der Formel ist ∨. Sein Ausgang ist der Ausgang f der Schaltung.</li>
+                    <li><strong>Was:</strong> Die Wahrheitstabelle mit der Hilfsspalte ¬B aufstellen und in LogicSim alle vier Belegungen durchschalten. – <em>Warum:</em> Erst der Vergleich aller Zeilen zeigt, dass die Schaltung wirklich die Formel umsetzt.</li>
+                </ol>
+                <p><strong>Probe:</strong> Ein ODER liefert nur dann 0, wenn beide Eingänge 0 sind, hier also A = 0 und ¬B = 0, d.&nbsp;h. B = 1. Genau die Zeile A = 0, B = 1 ist die einzige 0-Zeile der Tabelle. Die Schaltung braucht 2 Gatter.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Alles aus NAND</summary>
+                <p>Weil NAND funktional vollständig ist, bestehen viele Chips intern fast nur aus NAND-Gattern. So entstehen die Grundgatter:</p>
+                <ul>
+                    <li>NICHT: beide Eingänge eines NAND verbinden: A NAND A = ¬(A ∧ A) = <strong>¬A</strong> (Idempotenz).</li>
+                    <li>UND: hinter ein NAND ein zweites NAND als NICHT schalten: ¬(A NAND B) = ¬¬(A ∧ B) = <strong>A ∧ B</strong>.</li>
+                    <li>ODER: beide Eingänge erst negieren, dann NAND: ¬A NAND ¬B = ¬(¬A ∧ ¬B) = <strong>A ∨ B</strong> (De Morgan).</li>
+                </ul>
+                <p>Für ein ODER braucht man also drei NAND-Gatter. Die Gesetze aus 2.5 sind damit direkt Bauanleitungen für Hardware.</p>
+                <p><strong>Lösungsschritte für das ODER aus NAND:</strong></p>
+                <ol>
+                    <li><strong>Was:</strong> Das Ziel A ∨ B doppelt negieren: A ∨ B = ¬¬(A ∨ B). – <em>Warum:</em> Die doppelte Negation ändert nichts am Wert. Sie erzeugt aber das äußere ¬, das ein NAND mitbringt.</li>
+                    <li><strong>Was:</strong> Die innere Negation mit De Morgan umformen: ¬(A ∨ B) = ¬A ∧ ¬B, also A ∨ B = ¬(¬A ∧ ¬B). – <em>Warum:</em> Jetzt steht die Form ¬(X ∧ Y) da, und das ist genau X NAND Y.</li>
+                    <li><strong>Was:</strong> ¬A und ¬B mit je einem NAND herstellen, dessen beide Eingänge verbunden sind (A NAND A = ¬A). – <em>Warum:</em> Es stehen nur NAND-Gatter zur Verfügung. Die Idempotenz A ∧ A = A macht aus einem NAND ein NICHT.</li>
+                    <li><strong>Was:</strong> Die Ausgänge ¬A und ¬B in ein drittes NAND führen. – <em>Warum:</em> Es bildet ¬(¬A ∧ ¬B) = A ∨ B. Insgesamt sind das 3 NAND-Gatter.</li>
+                </ol>
+                <p><strong>Probe</strong> für das ODER aus drei NAND: A = 0, B = 0 → ¬A = 1, ¬B = 1 → 1 NAND 1 = 0 = A ∨ B. A = 1, B = 0 → ¬A = 0, ¬B = 1 → 0 NAND 1 = 1 = A ∨ B. Die übrigen zwei Zeilen prüfst du genauso; in allen vier Zeilen stimmt das Ergebnis mit der ODER-Spalte der Tabelle oben überein.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Gatter im echten Leben</summary>
+                <p><strong>Alltag:</strong> Smart-Home-Regeln und Alarmanlagen verknüpfen Sensoren wie Gatter. Der Speicher in deinem USB-Stick, deiner SSD und deinem Smartphone heißt „NAND-Flash“, weil seine Speicherzellen wie ein NAND-Gatter verschaltet sind. Und die Wechselschaltung im Treppenhaus ist ein XOR.</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Elektroniker/in bzw. Elektrotechnik-Ingenieur/in</strong>: entwirft Steuerungen, z.&nbsp;B. für Gebäudetechnik oder Fertigungsanlagen, und setzt dafür Logikbausteine oder speicherprogrammierbare Steuerungen (SPS) ein.</li>
+                    <li><strong>Chip- und Hardwareentwickler/in</strong>: baut aus Millionen solcher Gatter Prozessoren und Speicherchips – in Dresden z.&nbsp;B. bei Infineon, GlobalFoundries oder Bosch; die Region „Silicon Saxony“ ist einer der größten Mikroelektronik-Standorte Europas.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+                <p><strong>Logikgatter:</strong> Ein Logikgatter ist ein elektronischer Baustein, der eine boolesche Verknüpfung seiner Eingänge berechnet. Jedem Operator entspricht ein Gatter: ∧ = UND-Gatter (AND), ∨ = ODER-Gatter (OR), ¬ = NICHT-Gatter (NOT).</p>
+                <p><strong>Funktionale Vollständigkeit:</strong> Mit UND, ODER und NICHT lässt sich <strong>jede</strong> boolesche Funktion als Schaltung aufbauen (z.&nbsp;B. über ihre KDNF aus 2.8). Man nennt diese drei Gatter deshalb funktional vollständig. Schon das NAND-Gatter allein ist funktional vollständig.</p>
+            </div>
+
+<div class="merke">
+                <p><strong>Wahrheitstabelle aller Grundgatter mit zwei Eingängen:</strong></p>
+                <table class="gitter">
+                    <tr><th>A</th><th>B</th><th>UND<br>A ∧ B</th><th>ODER<br>A ∨ B</th><th>XOR<br>A ⊕ B</th><th>NAND<br>¬(A ∧ B)</th><th>NOR<br>¬(A ∨ B)</th></tr>
+                    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                </table>
+                <p>Das NICHT-Gatter hat nur einen Eingang: A = 0 → 1, A = 1 → 0.</p>
+            </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.1: Erste Schaltungen in LogicSim <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>
+                        Öffne das Programm LogicSim (Laufwerk Programme (P:)) und mache dich mit der Oberfläche vertraut. Erstelle eine UND-, eine ODER- und eine NICHT-Verknüpfung mithilfe der Logikgatter. Beschrifte die Eingänge.
+                    </li>
+                    <li>
+                        Erstelle die Schaltung für den folgenden Term: <strong>A UND B ODER C</strong>. Das Ergebnis soll als „D“ ausgegeben werden. Überprüfe die korrekte Funktionsweise für alle Eingabemöglichkeiten (zum Beispiel mit einer Wahrheitstabelle).
+                    </li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.2: Bewässerungsanlage <span class="niveau">AFB II</span></summary>
+                <p>Eine Bewässerungsanlage soll nur wässern, wenn der Wettersensor gutes Wetter meldet (gekennzeichnet mit „s“) und der Bewegungssensor niemanden im Garten erkennt (gekennzeichnet mit „g“). Die beiden Signale werden jeweils mit 0 (schlechtes Wetter/Garten besetzt) oder 1 (gutes Wetter/Garten frei) kodiert.</p>
+                <ol>
+                    <li>
+                        Interpretiere folgende Zustände:
+                        <ul>
+                            <li>s = 1, g = 1</li>
+                            <li>s = 0, g = 1</li>
+                            <li>s = 0, g = 0</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Erstelle eine Wahrheitstabelle, bei der in der letzten Spalte das in der Beschreibung gewünschte Verhalten der Bewässerungsanlage abgebildet wird (1 – Bewässerung, 0 – keine Bewässerung).
+                    </li>
+                    <li>
+                        Welches Logikgatter würdest du wählen, um das gewünschte Verhalten abzubilden? Begründe deine Auswahl und baue die gewählte Schaltung in LogicSim nach.
+                    </li>
+                </ol>
+            </details>
+        </div>

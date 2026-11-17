@@ -1,0 +1,82 @@
+<p>
+            Auf dieser Seite wendest du alles an, was du auf den Seiten 1.3 bis 1.8 gelernt hast: SELECT, WHERE,
+            LIKE, Aggregatfunktionen und Joins. Die Bankraub-Aufgaben sind ein Kriminalfall, den du nur mit
+            SQL-Abfragen lösen kannst.
+        </p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Ermitteln mit Datenbanken</summary>
+                <p>
+                    Was hier ein Spiel ist, gehört bei Polizei und Zoll zum Berufsalltag: Ermittlerinnen und Ermittler
+                    sowie <strong>Analystinnen und Analysten</strong> beim Landeskriminalamt Sachsen verknüpfen Halterdaten,
+                    Bußgelddaten und Personendaten, um Spuren zusammenzuführen. Genau deshalb sind solche Abfragen streng
+                    geregelt: Nach <strong>DSGVO</strong> und Polizeigesetz dürfen personenbezogene Daten nur für einen
+                    konkreten, erlaubten Zweck abgefragt werden, und jede Abfrage wird protokolliert. Im Onlinehandel
+                    arbeiten <strong>Data Analysts</strong> mit denselben Techniken, etwa um Betrugsmuster bei Bestellungen zu erkennen.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Mehrere Hinweise auf <strong>dieselbe</strong> Person werden mit <code>AND</code> verknüpft: Die Person
+                muss <em>alle</em> Bedingungen gleichzeitig erfüllen. <code>OR</code> brauchst du nur, wenn
+                <em>eine von mehreren</em> Möglichkeiten reicht, z.&nbsp;B. „blau oder schwarz“ – dann gehören die
+                OR-Bedingungen in Klammern: <code>(Farbe = 'blau' OR Farbe = 'schwarz') AND Automarke = 'BMW'</code>.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.9.1: SQL Island <span class="niveau">AFB I</span></summary>
+                <p>
+                    Besuche die Website <a href="https://sql-island.informatik.uni-kl.de/" target="_blank" rel="noopener">SQL Island</a>
+                    und löse das interaktive SQL-Lernspiel. Folge den Anweisungen und verwende SQL-Befehle, um die Aufgaben
+                    auf der Insel zu lösen.
+                </p>
+                <p>
+                    Notiere dir die wichtigsten SQL-Befehle, die du während des Spiels gelernt hast, und schreibe eine kurze
+                    Zusammenfassung deiner Erfahrungen.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.9.2: SQL-Bankraub <span class="niveau">AFB II</span></summary>
+                <p>
+                    Am 30. August 2015 hat ein Gangstertrio die Central Bank in New York ausgeraubt. Du bist frisch gebackene
+                    FBI-Ermittlerin bzw. frisch gebackener FBI-Ermittler und sollst mithilfe des FBI-Computers die Täter
+                    ausfindig machen. Verwende die bereitgestellte
+                    <a href="../material/05_SQL_Bankraub.sqlite" download="">Datenbank</a> und SQL-Befehle, um die Täter
+                    zu identifizieren.
+                </p>
+                <p><strong>Hinweise der Zeugen:</strong></p>
+                <ol>
+                    <li>Ein Täter bedrohte die Angestellten und wurde von einem Komplizen „Lie“ gerufen. Er soll mindestens
+                        1,80&nbsp;m groß gewesen sein und trug auffallend chinesische Kleidung.</li>
+                    <li>Die Täter waren alle zwischen 20 und 30 Jahre alt, sagte die Bankangestellte.</li>
+                    <li>Eine Augenzeugin erinnert sich an das Fluchtfahrzeug. Es sei ein blauer oder schwarzer BMW gewesen,
+                        sagt sie, und das Kennzeichen soll auf 557 geendet haben.</li>
+                </ol>
+                <p><strong>Deine Aufgaben:</strong></p>
+                <ol>
+                    <li>Suche nach einem Verdächtigen mit dem Vornamen „Lie“, der mindestens 1,80&nbsp;m groß ist
+                        (Spalte <code>Groesse</code> in cm).</li>
+                    <li>Übe den Datumsvergleich: Das Geburtsdatum ist im Format JJJJ-MM-TT gespeichert. Filtere alle
+                        Personen, die zwischen dem 01.01.1970 und dem 31.12.1980 geboren sind.</li>
+                    <li>Berechne, in welchem Zeitraum jemand geboren sein muss, der am 30.08.2015 zwischen 20 und 30 Jahre
+                        alt war. Kombiniere diese Bedingung mit deiner Abfrage aus 1. – es bleibt genau ein Verdächtiger übrig.</li>
+                    <li>Finde das Fluchtfahrzeug anhand von Hinweis 3 und seinen Halter bzw. seine Halterin.</li>
+                    <li>Finde die beiden anderen Täter. Tipp: Die Halterin ist zu alt, aber vielleicht hat sie ein Kind im
+                        passenden Alter (Spalten <code>Mutter</code>/<code>Vater</code>). Die Tabelle <code>Strafzettel</code>
+                        verrät dir, wo das Fluchtauto vor der Tat öfter geparkt hat.</li>
+                </ol>
+                <p>Notiere jeden verwendeten SQL-Befehl und begründe deine Vorgehensweise.</p>
+            </details>
+        </div>

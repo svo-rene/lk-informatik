@@ -1,0 +1,21 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.8.6: Fehler finden – drei Störungsmeldungen <span class="niveau">AFB III</span></summary>
+                <p>Im Filius-Netz aus 7.16 (DNS-Server 192.168.2.2, Webserver 192.168.3.2 mit dem Namen gdp.de, DHCP-Server 192.168.0.2 bzw. 192.168.1.2 in den Client-Netzen) hat jemand an der Konfiguration gearbeitet. Nacheinander treten drei verschiedene Störungen auf; zu jedem Zeitpunkt gibt es nur eine. Gemeldet wird:</p>
+                <table>
+                    <thead><tr><th>Notebook</th><th>Beobachtung</th></tr></thead>
+                    <tbody>
+                        <tr><td>A</td><td><code>ping 192.168.3.2</code> wird beantwortet. <code>ping gdp.de</code> meldet, dass der Name nicht aufgelöst werden kann. <code>ipconfig</code> zeigt als DNS-Server 192.168.0.2.</td></tr>
+                        <tr><td>B</td><td><code>ping gdp.de</code> versucht, 192.168.3.20 zu erreichen, und erhält keine Antwort. <code>ping 192.168.3.2</code> wird beantwortet.</td></tr>
+                        <tr><td>C</td><td><code>ping gdp.de</code> funktioniert, im Browser lädt die Seite <code>www.gdp.de</code> aber nicht.</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Gib für jedes Notebook die wahrscheinliche Ursache an und begründe, welche Fehler du durch die Beobachtungen ausschließen kannst.</li>
+                    <li>Gib an, wo (auf welchem Gerät, in welcher Einstellung) du jeden Fehler beheben würdest.</li>
+                    <li>Notebook A bezieht seine Konfiguration per DHCP aus dem Netz 192.168.0.0/24. Beurteile, welche anderen Geräte von Störung A betroffen sind und wann sie den Fehler bemerken.</li>
+                </ol>
+            </details>
+        </div>

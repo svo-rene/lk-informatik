@@ -1,0 +1,41 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.10.3: Klartext nachweisen <span class="niveau">AFB III</span></summary>
+                <p>Öffne die Datei <a href="../material/dns_web.fls" download="">dns_web.fls</a> in Filius (→ 7.16), rufe gdp.de von einem Laptop aus auf und öffne auf dem Laptop den Datenaustausch (Rechtsklick → „Datenaustausch anzeigen“). Weise nach, dass die Webseite unverschlüsselt übertragen wird (vgl. Projektaufgabe P4). Beurteile anschließend, welche Gefahren das in einem öffentlichen WLAN hätte und welche Protokolle man stattdessen einsetzen sollte.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.10.4: Einen HTTP-Dialog auswerten <span class="niveau">AFB II</span></summary>
+                <p>Du tippst <code>www.schule-beispiel.de/vertretung</code> in die Adresszeile. Ein Mitschnitt zeigt (gekürzt):</p>
+<pre>(1) Browser → Server:  GET /vertretung HTTP/1.1
+                        Host: www.schule-beispiel.de
+(2) Server → Browser:  HTTP/1.1 301 Moved Permanently
+                        Location: https://www.schule-beispiel.de/vertretung
+(3) Browser → Server:  [verschlüsselt]
+(4) Server → Browser:  [verschlüsselt]</pre>
+                <p>Der Statuscode 301 bedeutet: Die Seite ist dauerhaft unter der Adresse im Feld <code>Location</code> zu finden; der Browser ruft diese automatisch auf.</p>
+                <ol>
+                    <li>Gib für die Nachrichten (1) bis (4) an, über welches Protokoll und welchen Zielport sie laufen, und erkläre, warum ab (3) nichts mehr lesbar ist.</li>
+                    <li>Nach dem Entschlüsseln steht in (3) eine Anfrage nach <code>/vertretung</code> und in (4) die Antwort <code>200 OK</code>. Die Seite enthält ein Bild <code>/bilder/logo.png</code>, das der Server mit <code>404 Not Found</code> beantwortet. Erkläre, was die beiden Statuscodes bedeuten und wie die Seite im Browser aussieht.</li>
+                    <li>Beurteile, welche Informationen ein Mithörer im selben WLAN aus Nachricht (1) und (2) gewinnt. Wie ließe sich das vermeiden?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.10.6: Welche Ports gibt die Firewall frei? <span class="niveau">AFB II</span></summary>
+                <p>Ein Verein betreibt einen eigenen Server, der aus dem Internet erreichbar ist. Er soll anbieten: die Vereinswebseite (nur verschlüsselt), das Einliefern und Abrufen von Mails der Mitglieder (nur verschlüsselt, Abruf mit Synchronisation auf mehreren Geräten), den Empfang von Mails anderer Mailserver sowie das Hochladen neuer Webseiten durch den Webmaster. Die Firewall soll nur die nötigen Ports öffnen.</p>
+                <ol>
+                    <li>Gib die TCP-Ports an, die geöffnet werden müssen, jeweils mit Protokoll und Begründung.</li>
+                    <li>Der Webmaster möchte lieber FTP verwenden, „weil das so einfach ist“. Begründe, warum Port 21 geschlossen bleiben sollte, und nenne die Alternative.</li>
+                    <li>Begründe, warum man Port 80 trotzdem oft offen lässt, obwohl die Webseite nur verschlüsselt angeboten wird.</li>
+                </ol>
+            </details>
+        </div>

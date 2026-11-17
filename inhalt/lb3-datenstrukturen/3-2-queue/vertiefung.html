@@ -1,0 +1,70 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.2.6: Fehler finden im Ticketsystem <span class="niveau">AFB III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/ticket_queue_fehler.py</code> – neu anlegen; Klasse, <code>Node</code>, <code>statusanzeige</code> und Tests abtippen<br><strong>Commits:</strong> zuerst unverändert: <code>3.2.6: fehlerhafte TicketQueue mit Test 1 übernommen</code> · nach Teil 3: <code>3.2.6 Teil 3: TicketQueue und statusanzeige korrigiert</code> · nach Teil 4: <code>3.2.6 Teil 4: Attribute privat, Tabelle geprüft</code></p>
+                <p>Der IT-Support der Schule verwaltet Störungsmeldungen in einer Schlange. Ein Schüler hat dafür eine eigene Klasse geschrieben (<code>Node</code> wie in Beispiel 2) und zusätzlich einen Zähler eingebaut. Seitdem melden Lehrkräfte: „Mein Ticket wurde angenommen, aber die Statusanzeige sagt, es gibt keine offenen Tickets.“</p>
+                <pre><code class="language-python">class TicketQueue:
+    def __init__(self):
+        self._head = None
+        self._tail = None
+        self._anzahl = 0
+
+    def is_empty(self):
+        return self._anzahl == 0
+
+    def enqueue(self, ticket):
+        neu = Node(ticket)
+        if self._tail is None:
+            self._head = neu
+        else:
+            self._tail.next = neu
+        self._tail = neu
+        self._anzahl += 1
+
+    def dequeue(self):
+        if self.is_empty():
+            raise IndexError("keine offenen Tickets")
+        ticket = self._head.data
+        self._head = self._head.next
+        self._anzahl -= 1
+        return ticket
+
+    def peek(self):
+        return self._head.data
+
+def statusanzeige(t):                     # aus einem anderen Modul
+    if t._head is not None:
+        print("Nächstes Ticket:", t._head.data)
+    else:
+        print("Keine offenen Tickets")</code></pre>
+                <pre><code class="language-python"># Test 1
+t = TicketQueue()
+t.enqueue("#1 Drucker")
+print(t.dequeue())
+t.enqueue("#2 WLAN")
+statusanzeige(t)
+print(t.is_empty())
+print(t.peek())
+
+# Test 2 (einzeln ausgeführt)
+t2 = TicketQueue()
+t2.peek()</code></pre>
+                <ol>
+                    <li>Ermittle die tatsächlichen Ausgaben von Test 1 und Test 2. Zeichne das Zeigerdiagramm mit <code>_head</code>, <code>_tail</code> und <code>_anzahl</code> nach jeder Operation von Test 1.</li>
+                    <li>Erkläre, warum <code>is_empty()</code> und <code>statusanzeige</code> sich widersprechen, und benenne die zwei Fehler in der Klasse.</li>
+                    <li>Korrigiere die Klasse. Beurteile außerdem die Funktion <code>statusanzeige</code> unter dem Gesichtspunkt der Kapselung und schreibe sie so um, dass sie nur öffentliche Methoden benutzt.</li>
+                    <li>Der Schüler hat die Attribute nur <strong>geschützt</strong> (protected, <code>_head</code>) angelegt. Stelle sie in deiner korrigierten Klasse auf <strong>privat</strong> um (<code>__head</code>, <code>__tail</code>, <code>__anzahl</code>). Was würde jetzt mit der alten <code>statusanzeige</code> passieren, wenn sie <code>t.__head</code> statt <code>t._head</code> benutzt? Warum ist das gewollt?</li>
+                </ol>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td>Test 1 mit korrigierter Klasse und Statusanzeige</td><td><code>#1 Drucker</code>, <code>Nächstes Ticket: #2 WLAN</code>, <code>False</code>, <code>#2 WLAN</code></td><td></td></tr>
+                        <tr><td>Test 2 mit korrigierter Klasse</td><td><code>IndexError: keine offenen Tickets</code></td><td></td></tr>
+                        <tr><td><code>statusanzeige(TicketQueue())</code></td><td><code>Keine offenen Tickets</code></td><td></td></tr>
+                        <tr><td><code>t3 = TicketQueue(); t3.enqueue("a"); t3.enqueue("b"); print(t3.dequeue(), t3.dequeue(), t3.is_empty())</code></td><td><code>a b True</code></td><td></td></tr>
+                    </tbody>
+                </table>
+            </details>
+        </div>

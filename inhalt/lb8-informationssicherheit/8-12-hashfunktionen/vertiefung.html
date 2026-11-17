@@ -1,0 +1,15 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.12.6: Fehler finden – vier Aussagen aus dem Schulnetz <span class="niveau">AFB III</span></summary>
+                <p>Beim Aufbau eines Schließfachsystems und einer Download-Seite fallen folgende Aussagen. Untersuche jede, begründe den Fehler und schlage eine Verbesserung vor.</p>
+                <ol>
+                    <li>„Die vierstelligen Schließfach-PINs speichern wir als SHA-256-Hashwert. Weil SHA-256 nicht umkehrbar ist, sind die PINs sicher.“</li>
+                    <li>„Unsere Download-Seite läuft über HTTP, aber direkt neben jeder Datei steht ihr SHA-256-Wert. Damit ist jede Manipulation ausgeschlossen.“</li>
+                    <li>„Für die Passwörter nehmen wir MD5. Das ist schneller als SHA-256, und für eine Schule reicht das.“</li>
+                    <li>„SHA-256 verschlüsselt die Daten. Deshalb können wir die Hashwerte der Notenlisten bedenkenlos veröffentlichen.“</li>
+                </ol>
+                <p class="tipp">Zu 1.: SHA-256("1234") beginnt mit <code>03ac6742</code>. Wie lange braucht ein Rechner, der 10<sup>9</sup> Hashwerte pro Sekunde berechnet, für alle möglichen PINs?</p>
+            </details>
+        </div>

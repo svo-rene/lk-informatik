@@ -1,0 +1,46 @@
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.4.3: Den Schlüssel gruppenweise bestimmen <span class="niveau">AFB II–III</span></summary>
+                <p>Ein Satz aus dieser Lerneinheit wurde mit Vigenère verschlüsselt (Leer- und Satzzeichen entfernt). Der Kasiski-Test hat die Schlüssellänge 3 ergeben. Deshalb ist der Geheimtext hier in Dreiergruppen geschrieben: Der 1. Buchstabe jeder Gruppe gehört zu Gruppe&nbsp;1, der 2. zu Gruppe&nbsp;2, der 3. zu Gruppe&nbsp;3.</p>
+                <pre>CCK RCI GYX GYO SYO MYY UYX EUN QYT RXG QZT TLB NHJ DLM DBK
+HGN ZFZ THM CYY RWN KOK RMK KMG ABG DHM DHA MXT HWN SPU MXK
+QAK GYO LBG KNA MAJ DMB DLL ZBX DHY RYR AMZ CYY GUR AQK QXK
+MGU CYX MYB DLL ZBX DHU DZL DHZ KCI GAK OLA DZZ</pre>
+                <p>Die vier häufigsten Buchstaben je Gruppe (jede Gruppe hat 57 Buchstaben):</p>
+                <table class="gitter">
+                    <tr><th>Gruppe 1</th><td>D: 12</td><td>M: 6</td><td>R: 5</td><td>G: 5</td></tr>
+                    <tr><th>Gruppe 2</th><td>Y: 12</td><td>H: 7</td><td>L: 5</td><td>B: 5</td></tr>
+                    <tr><th>Gruppe 3</th><td>K: 9</td><td>X: 5</td><td>N: 4</td><td>G: 4</td></tr>
+                </table>
+                <ol type="a">
+                    <li>Bestimme für jede Gruppe die Verschiebung unter der Annahme, dass der häufigste Buchstabe für E steht, und gib das Schlüsselwort an.</li>
+                    <li>Prüfe dein Ergebnis mit der Annahme, dass der zweithäufigste Buchstabe jeder Gruppe für N steht. Beschreibe, was du feststellst.</li>
+                    <li>Entschlüssele die ersten vier Dreiergruppen.</li>
+                    <li>Beurteile, wie zuverlässig die Häufigkeitsanalyse bei 57 Buchstaben je Gruppe ist und woran man letztlich erkennt, dass der Schlüssel stimmt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.4.4: Kasiski-Test programmieren <span class="niveau">AFB II</span></summary>
+                <p>Automatisiere die Suche nach Wiederholungen in Python.</p>
+                <ol type="a">
+                    <li>Schreibe <code>wiederholungen(geheim, laenge=3)</code>. Die Funktion gibt ein Dictionary zurück, das jeder Buchstabenfolge der Länge <code>laenge</code>, die mindestens zweimal vorkommt, die Liste ihrer Startpositionen (ab 0 gezählt) zuordnet.</li>
+                    <li>Schreibe <code>abstaende(positionen)</code>, die die Abstände aufeinanderfolgender Positionen liefert, und <code>ggt_liste(zahlen)</code>, die den ggT aller Zahlen berechnet (<code>math.gcd</code> darf verwendet werden).</li>
+                    <li>Teste mit diesen Fällen und notiere die tatsächlichen Ausgaben:
+                        <table class="gitter">
+                            <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+                            <tr><td><code>wiederholungen("ABCXYZABC")</code></td><td><code>{"ABC": [0, 6]}</code></td></tr>
+                            <tr><td><code>abstaende([20, 55, 70])</code></td><td><code>[35, 15]</code></td></tr>
+                            <tr><td><code>ggt_liste([15, 20, 35, 75])</code></td><td><code>5</code></td></tr>
+                        </table>
+                    </li>
+                    <li>Wende deine Funktionen auf den Geheimtext aus Beispiel 2 an (ohne Leerzeichen):<br>
+                        <code>"HQTDXCLCBXCECZVSNTHNPVYBXCLGUPTZMSBNPYLBDAGDTPAEOXHIUJAPVYLGYEKYPFMUZMPVYVPLZOLLHIUZXCECLK"</code><br>
+                        Gib alle gefundenen Folgen mit Positionen und Abständen sowie den ggT aller Abstände an. Vergleiche mit Beispiel 2.</li>
+                </ol>
+            </details>
+        </div>

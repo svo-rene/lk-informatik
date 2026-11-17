@@ -1,0 +1,37 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 2.2.5: Fehler finden – der Spamfilter <span class="niveau">AFB III</span></summary>
+        <p>Ein Spamfilter soll nach der Regel aus dem Praxisbezug arbeiten: Eine Mail ist Spam, wenn („Absender unbekannt“ UND „Betreff enthält ‚Gewinn‘“) ODER „Anhang ist verdächtig“. Es sei U: „Absender unbekannt“, G: „Betreff enthält ‚Gewinn‘“, V: „Anhang ist verdächtig“. Mira hat dazu diese Tabelle erstellt:</p>
+        <table class="gitter">
+            <tr><th>U</th><th>G</th><th>V</th><th>Spam (Miras Tabelle)</th></tr>
+            <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+        </table>
+        <ol>
+            <li>Erstelle die korrekte Wahrheitstabelle mit Hilfsspalte und markiere die Zeilen, in denen Miras Tabelle falsch ist.</li>
+            <li>Mira hat nicht zufällig falsch gerechnet, sondern konsequent eine andere Regel ausgewertet. Finde heraus, welche, und beschreibe sie in Worten.</li>
+            <li>Beurteile, welche Folgen Miras Fehler hätte, wenn ein Hacker das Mailkonto eines Bekannten übernimmt und von dort eine Mail mit Schadsoftware im Anhang verschickt.</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 2.2.6: WLAN-Zugang im Schulnetz <span class="niveau">AFB III</span></summary>
+        <p>Die Schule regelt den WLAN-Zugang neu. Es gilt: L: „Die Person ist eine Lehrkraft.“, N: „Die Person hat die Nutzungsordnung unterschrieben.“, P: „Der Prüfungsmodus ist aktiv.“ (z.&nbsp;B. während der Abiturklausuren). Die Schulleitung möchte: „Lehrkräfte haben immer Zugang. Alle anderen haben Zugang, wenn sie die Nutzungsordnung unterschrieben haben und gerade kein Prüfungsmodus aktiv ist.“</p>
+        <ol>
+            <li>Entwirf eine Bedingung mit UND, ODER, NICHT und Klammern, die genau diese Regel umsetzt.</li>
+            <li>Der Administrator hat (L ODER N) UND NICHT P eingerichtet. Vergleiche beide Bedingungen mit einer gemeinsamen Wahrheitstabelle und gib die Zeilen an, in denen sie sich unterscheiden.</li>
+            <li>Beschreibe, welche Personengruppe in welcher Situation von der Abweichung betroffen ist.</li>
+            <li>Beurteile, ob die Lösung des Administrators trotzdem sinnvoll sein könnte, und nenne ein Argument dafür und eines dagegen.</li>
+        </ol>
+    </details>
+</div>

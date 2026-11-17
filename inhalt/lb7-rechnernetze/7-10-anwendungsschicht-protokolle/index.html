@@ -1,0 +1,120 @@
+<p>
+            Webseite aufrufen, Mail verschicken, Datei hochladen: Für jede dieser Tätigkeiten gibt es ein eigenes „Regelwerk“, das festlegt, wer was in welcher Reihenfolge sagt. Diese Regelwerke heißen Protokolle – und die meisten, die du im Alltag bewusst nutzt, liegen auf der Anwendungsschicht.
+        </p>
+
+<p>Die Anwendungsschicht ist die oberste Ebene des TCP/IP-Modells. Sie umfasst Protokolle und Dienste, über die Anwendungsprogramme das Netz nutzen. Ihre Hauptaufgabe besteht darin, Anwendungsprozesse zu unterstützen, indem sie Dienste bereitstellt, die Netzwerkressourcen für Anwendungen zugänglich machen. Es ist die Schicht, die dem Benutzer die Netzwerkfunktionen in nutzbarer Form anbietet.</p>
+
+<h2>Protokolle und Dienste</h2>
+
+<p>Protokolle und Dienste sind eng miteinander verbunden: Protokolle regeln die Kommunikation zwischen Clients und Servern, während Dienste die von den Clients angeforderten Funktionen oder Ressourcen bereitstellen.</p>
+
+<p><strong>Protokolle</strong> sind Regeln und Verfahren, die die Kommunikation zwischen Computern oder anderen Geräten in einem Netz festlegen. Sie bestimmen Aufbau und Inhalt der Nachrichten, deren Reihenfolge, das Verhalten bei Fehlern und gegebenenfalls die Authentifizierung. Protokolle sind nötig, damit unterschiedliche Computer und Netze miteinander kommunizieren können. Beispiele sind die Protokollfamilie TCP/IP (Transmission Control Protocol/Internet Protocol), HTTP (Hypertext Transfer Protocol), FTP (File Transfer Protocol) und SMTP (Simple Mail Transfer Protocol).</p>
+
+<p><strong>Dienste</strong> sind Programme oder Prozesse, die auf einem Server laufen, um bestimmte Funktionen oder Ressourcen für Clients bereitzustellen. Sie können auf einem physischen Server oder in der Cloud betrieben werden und sind über Netze erreichbar. Beispiele sind Webserver, E-Mail-Server, Datenbankserver, Filesharing-Dienste und DNS. Clients greifen über das Netz auf den Server zu, um die Funktionen des Dienstes zu nutzen.</p>
+
+<h2>Wichtige Protokolle der Anwendungsschicht</h2>
+
+<ul>
+            <li><strong>HTTP (Hypertext Transfer Protocol):</strong> das grundlegende Protokoll des World Wide Web für den Austausch von Webseiten und anderen Ressourcen. Der Client sendet eine Anfrage (Request) mit einer Methode wie GET oder POST, der Server antwortet (Response) mit einem Statuscode wie 200 OK oder 404 Not Found.</li>
+            <li><strong>HTTPS (HTTP Secure):</strong> HTTP über eine TLS-verschlüsselte Verbindung (siehe Kurs „Informationssicherheit“, Seite 7.11). Inhalt, Formulareingaben und Cookies sind dadurch vor Mitlesen und Veränderung geschützt.</li>
+            <li><strong>DNS (Domain Name System):</strong> ein hierarchisches, verteiltes Namenssystem, das Domainnamen in IP-Adressen übersetzt (→ 7.8).</li>
+            <li><strong>DHCP:</strong> automatische Vergabe von IP-Konfigurationen (→ 7.7).</li>
+            <li><strong>SMTP, POP3, IMAP:</strong> Versand und Abruf von E-Mails (siehe unten).</li>
+            <li><strong>FTP (File Transfer Protocol):</strong> Übertragung von Dateien zwischen Client und Server. FTP nutzt eine Steuerverbindung auf Port 21 und eine separate Datenverbindung (im aktiven Modus von Port 20 aus). Benutzername, Passwort und Daten werden unverschlüsselt übertragen; deshalb verwendet man heute FTPS (FTP über TLS) oder SFTP (Dateiübertragung über SSH, Port 22).</li>
+            <li><strong>SSH (Secure Shell):</strong> verschlüsselter Fernzugriff auf die Kommandozeile eines Servers.</li>
+        </ul>
+
+<h2>E-Mail-Protokolle</h2>
+
+<p>Beim E-Mail-Verkehr arbeiten mehrere Protokolle zusammen:</p>
+
+<ul>
+            <li><strong>SMTP (Simple Mail Transfer Protocol)</strong> <em>versendet</em> E-Mails: vom Mailprogramm zum eigenen Mailserver (Einlieferung, Port 587 mit STARTTLS oder Port 465 mit TLS) und zwischen den Mailservern (Port 25). Welcher Server für eine Domain zuständig ist, steht im MX-Eintrag des DNS.</li>
+            <li><strong>POP3 (Post Office Protocol, Version 3)</strong> <em>holt</em> E-Mails vom Server ab und löscht sie dort in der Regel (Port 110, mit TLS 995). Die Mails liegen danach nur auf einem Gerät.</li>
+            <li><strong>IMAP (Internet Message Access Protocol)</strong> <em>verwaltet</em> E-Mails direkt auf dem Server (Port 143, mit TLS 993). Ordner, Gelesen-Status und gelöschte Mails sind auf allen Geräten gleich.</li>
+        </ul>
+
+<table>
+            <thead>
+                <tr><th>Protokoll</th><th>Zweck</th><th>Transport</th><th>Port(s)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>HTTP / HTTPS</td><td>Webseiten</td><td>TCP (HTTP/3: UDP)</td><td>80 / 443</td></tr>
+                <tr><td>DNS</td><td>Namensauflösung</td><td>UDP, TCP</td><td>53</td></tr>
+                <tr><td>DHCP</td><td>Adressvergabe</td><td>UDP</td><td>67 (Server), 68 (Client)</td></tr>
+                <tr><td>SMTP</td><td>Mail versenden</td><td>TCP</td><td>25 (Server zu Server), 587 / 465 (Einlieferung)</td></tr>
+                <tr><td>POP3</td><td>Mail abholen</td><td>TCP</td><td>110, mit TLS 995</td></tr>
+                <tr><td>IMAP</td><td>Mail auf dem Server verwalten</td><td>TCP</td><td>143, mit TLS 993</td></tr>
+                <tr><td>FTP</td><td>Dateiübertragung</td><td>TCP</td><td>21 (Steuerung), 20 (Daten, aktiver Modus)</td></tr>
+                <tr><td>SSH / SFTP</td><td>Fernzugriff, sichere Dateiübertragung</td><td>TCP</td><td>22</td></tr>
+            </tbody>
+        </table>
+
+<p>Die Tabelle zeigt auch: Das World Wide Web (HTTP/HTTPS) ist nur einer von vielen Diensten, die über das Internet laufen (→ 7.2).</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: Eine HTTP-Anfrage im Klartext <span class="beispiel-kopf">einfach</span></summary>
+            <p>Der Browser verbindet sich per TCP mit Port 80 des Servers und sendet:</p>
+<pre>GET /index.html HTTP/1.1
+Host: www.example.com</pre>
+            <p>Der Server antwortet:</p>
+<pre>HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+
+&lt;!DOCTYPE html&gt; …</pre>
+            <p>Anfrage und Antwort sind lesbarer Text. Jeder, der die Leitung mitschneidet, kann sie lesen – deshalb HTTPS.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: Der Weg einer E-Mail <span class="beispiel-kopf">komplex</span></summary>
+            <p>Anna (anna@schule-a.example) schreibt an Ben (ben@firma-b.example).</p>
+            <ol>
+                <li>Annas Mailprogramm liefert die Mail per <strong>SMTP</strong> (Port 587, TLS) mit Benutzername und Passwort beim Mailserver ihrer Schule ab.</li>
+                <li>Der Mailserver der Schule fragt per <strong>DNS</strong> den MX-Eintrag von firma-b.example ab und erhält z.&nbsp;B. mail.firma-b.example.</li>
+                <li>Er überträgt die Mail per <strong>SMTP</strong> (Port 25) an mail.firma-b.example; dort landet sie in Bens Postfach.</li>
+                <li>Ben ruft die Mail auf Handy und Laptop per <strong>IMAP</strong> (Port 993) ab. Liest er sie auf dem Handy, ist sie auch auf dem Laptop als gelesen markiert.</li>
+            </ol>
+            <p>Hätte Ben POP3 mit „vom Server löschen“ eingestellt, wäre die Mail nach dem Abruf auf dem Handy auf dem Laptop gar nicht mehr zu sehen.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Mails auf allen Geräten und der Mailserver in der Firma</summary>
+                <p><strong>Alltag:</strong> Richtest du deine Mailadresse auf Handy und Laptop ein, fragt das Programm meist „IMAP oder POP3?“. Mit IMAP siehst du überall denselben Stand; mit POP3 verschwinden Mails schnell vom Server und liegen nur noch auf einem Gerät. Die Serveradressen und Ports aus der Tabelle oben stehen in der Hilfe jedes Mailanbieters.</p>
+                <p><strong>Beruf:</strong> Systemintegratorinnen und Systemintegratoren betreiben in Firmen Mail-, Web- und Dateiserver oder betreuen sie bei Hosting-Anbietern. Typische Tickets: „Mails von uns landen beim Kunden im Spam“ (DNS-Einträge des Mailservers prüfen), „Nach dem Abruf auf dem Handy fehlen die Mails im Büro“ (Konto auf IMAP umstellen) oder „Der alte FTP-Zugang des Webdesigners soll abgeschaltet werden“ (auf SFTP umstellen, weil FTP Passwörter im Klartext überträgt).</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Protokoll</strong> – eine Menge von Regeln, die festlegt, wie Kommunikationspartner in einem Netz Nachrichten austauschen: Format und Inhalt der Nachrichten, ihre Reihenfolge und das Verhalten bei Fehlern.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Dienst</strong> – fasst bestimmte Aufgaben eines Themengebiets zusammen und stellt seine Funktionen über eine klar definierte Schnittstelle zur Verfügung, im Netz erreichbar über ein Protokoll und meist einen festen Port.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>SMTP versendet</strong> E-Mails, <strong>POP3 und IMAP rufen</strong> sie ab: POP3 lädt sie herunter (meist mit Löschen auf dem Server), IMAP lässt sie auf dem Server und synchronisiert alle Geräte. Anwendungsprotokolle werden über ihren Standardport erreicht; ohne TLS übertragen HTTP, FTP, SMTP, POP3 und IMAP alles im Klartext.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.10.1: Protokolle und Ports <span class="niveau">AFB I</span></summary>
+                <p>Ordne zu: Welches Protokoll und welcher Standardport werden verwendet, wenn du (a) eine verschlüsselte Webseite aufrufst, (b) mit dem Mailprogramm eine Mail an deinen Server übergibst, (c) Mails verschlüsselt per IMAP abrufst, (d) eine Datei unverschlüsselt per FTP hochlädst, (e) einen Domainnamen auflöst?</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.10.2: POP3 oder IMAP? <span class="niveau">AFB II</span></summary>
+                <p>Eine Lehrerin liest ihre Dienstmails auf dem Schul-PC, dem Laptop zu Hause und dem Handy. Ein Rentner nutzt nur einen PC und möchte seine Mails auch ohne Internet lesen können. Empfiehl jeweils POP3 oder IMAP und begründe. Erkläre außerdem, warum für beide trotzdem SMTP nötig ist.</p>
+            </details>
+        </div>

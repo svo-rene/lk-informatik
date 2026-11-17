@@ -1,0 +1,30 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+      <details>
+        <summary>Aufgabe 6.10.7: Fehler finden – eine fehlerhafte Umwandlung <span class="niveau">AFB III</span></summary>
+        <p>Ein NEA über {a, b} akzeptiert Wörter, die mit a beginnen und mit b enden: Startzustand s, Endzustand e; δ(s, a) = {t}, δ(t, a) = {t}, δ(t, b) = {t, e}, alle anderen Übergänge sind leer. Ben hat diese DEA-Tabelle aufgestellt:</p>
+        <table>
+          <thead><tr><th>DEA-Zustand</th><th>a</th><th>b</th><th>akzeptierend?</th></tr></thead>
+          <tbody>
+            <tr><td>→ {s}</td><td>{t}</td><td>{s}</td><td>nein</td></tr>
+            <tr><td>{t}</td><td>{t}</td><td>{e}</td><td>nein</td></tr>
+            <tr><td>{e}</td><td>∅</td><td>∅</td><td>ja</td></tr>
+            <tr><td>∅</td><td>∅</td><td>∅</td><td>nein</td></tr>
+          </tbody>
+        </table>
+        <ol type="a">
+          <li>Finde die zwei fehlerhaften Einträge und erkläre, welcher Denkfehler jeweils dahintersteckt.</li>
+          <li>Gib zu jedem Fehler ein Wort an, das Bens DEA falsch entscheidet.</li>
+          <li>Stelle die korrekte Tabelle auf.</li>
+        </ol>
+      </details>
+    </div>
+
+<div class="aufgabe">
+      <details>
+        <summary>Aufgabe 6.10.8: DEA erzeugen oder NEA simulieren? <span class="niveau">AFB III</span></summary>
+        <p>Ein Entwicklerteam baut eine Suchfunktion für eine Lernplattform. Lisa will jeden Suchausdruck per Potenzmengenkonstruktion in einen DEA umwandeln. Jonas meint, wegen der möglichen 2<sup>n</sup> Zustände solle man immer den NEA direkt simulieren und Zeichen für Zeichen die Zustandsmenge mitführen.</p>
+        <p>Beurteile beide Vorschläge. Berücksichtige den Aufwand je gelesenem Zeichen, den Speicherbedarf und die Frage, wie oft derselbe Ausdruck verwendet wird.</p>
+      </details>
+    </div>

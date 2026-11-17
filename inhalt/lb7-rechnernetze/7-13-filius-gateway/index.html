@@ -1,0 +1,50 @@
+<p>Du beginnst mit zwei Rechnern im selben Netz und verbindest danach zwei getrennte Netze über einen Vermittlungsrechner (Router). Dabei siehst du, warum ein Standard-Gateway nötig ist (→ 7.5) und wie die Subnetzmaske entscheidet, ob ein Ziel „im eigenen Netz“ liegt (→ 7.6).</p>
+
+<video width="500" controls>
+            <source src="../vid/gateway.mp4" type="video/mp4">
+            Dein Browser kann dieses Video nicht abspielen. <a href="../vid/gateway.mp4" download="">Lade das Video herunter</a> und öffne es mit einem Videoplayer.
+        </video>
+
+<h2>Dateien</h2>
+
+<ul>
+            <li>Ausgangspunkt: <a href="../material/ip-adressen.fls" download="">ip-adressen.fls</a> – zwei Notebooks (192.168.0.10 und 192.168.0.11, Maske 255.255.255.0), direkt per Kabel verbunden.</li>
+            <li>Vergleichsdatei: <a href="../material/gateway.fls" download="">gateway.fls</a> – das fertige Netz aus dem Video.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Filius bedienen</summary>
+                <figure>
+                    <img src="../img/ip2.png" width="170" alt="Filius-Symbolleiste mit Hammer für den Entwurfsmodus und grünem Pfeil für den Aktionsmodus">
+                    <figcaption>Abb. 1: Mit dem Hammer baust du das Netz auf (Entwurfsmodus), mit dem grünen Pfeil startest du die Simulation (Aktionsmodus).</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/ip3.png" width="280" alt="Desktop eines Filius-Rechners mit den Symbolen Software-Installation und Befehlszeile">
+                    <figcaption>Abb. 2: Im Aktionsmodus öffnest du per Klick auf einen Rechner dessen Desktop. Bei neu angelegten Rechnern musst du die Befehlszeile zuerst über „Software-Installation“ installieren.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/ip4.png" width="450" alt="Filius-Befehlszeile mit dem eingegebenen Befehl ping">
+                    <figcaption>Abb. 3: In der Befehlszeile stehen u.&nbsp;a. <code>ipconfig</code> und <code>ping</code> zur Verfügung; <code>help</code> zeigt alle Befehle.</figcaption>
+                </figure>
+            </details>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.13.1: Vom Einzelnetz zu zwei Netzen <span class="niveau">AFB II</span></summary>
+                <figure>
+                    <img src="../img/ip1.png" width="450" alt="Zwei Notebooks mit den Adressen 192.168.0.10 und 192.168.0.11 sind direkt per Kabel verbunden">
+                    <figcaption>Abb. 4: Ausgangsnetz aus ip-adressen.fls</figcaption>
+                </figure>
+                <ol>
+                    <li>Öffne ip-adressen.fls, starte den Aktionsmodus und teste in der Befehlszeile von 192.168.0.10 mit <code>ping 192.168.0.11</code>.</li>
+                    <li>Ändere im Entwurfsmodus die Adresse des zweiten Notebooks auf 192.168.1.20 (Maske weiterhin 255.255.255.0) und teste erneut. Erkläre das Ergebnis mit der AND-Verknüpfung.</li>
+                    <li>Baue das Netz aus dem Video nach: Jedes Notebook hängt an einem eigenen Switch; beide Switches sind mit einem Vermittlungsrechner mit zwei Schnittstellen verbunden (192.168.0.1 und 192.168.1.1). Trage bei den Notebooks das passende Gateway ein.</li>
+                    <li>Teste mit <code>ping</code> von 192.168.0.10 nach 192.168.1.20. Vergleiche dein Netz mit gateway.fls.</li>
+                    <li>Trage beim Notebook 192.168.0.10 testweise das falsche Gateway 192.168.1.1 ein. Beschreibe und erkläre, was passiert.</li>
+                </ol>
+            </details>
+        </div>

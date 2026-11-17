@@ -1,0 +1,107 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.6: Fehler finden – verschwundene Titel <span class="niveau">AFB III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/playlist_fehler.py</code> – neu anlegen; Klasse und Tests aus der Aufgabe abtippen<br><strong>Commits:</strong> zuerst unverändert: <code>3.1.6: fehlerhafte Playlist der Mitschülerin übernommen</code> · nach Teil 2: <code>3.1.6 Teil 2: entfernen korrigiert, Test 1 und 2 ok</code> · nach Teil 4: <code>3.1.6 Teil 4: Attribute privat, Tabelle geprüft</code></p>
+                <p>Eine Mitschülerin hat die Playlist um eine Methode zum Entfernen erweitert. Nutzer der App beschweren sich: „Manchmal wird ein neuer Titel angehängt, taucht aber nie auf.“ Hier ist ihre Klasse (<code>Node</code> wie in Beispiel 1):</p>
+                <pre><code class="language-python">class Playlist:
+    def __init__(self):
+        self._head = None
+        self._tail = None
+        self._anzahl = 0
+
+    def anhaengen(self, titel):
+        neu = Node(titel)
+        if self._head is None:
+            self._head = neu
+        else:
+            self._tail.next = neu
+        self._tail = neu
+        self._anzahl += 1
+
+    def __len__(self):
+        return self._anzahl
+
+    def __str__(self):
+        teile = []
+        current = self._head
+        while current is not None:
+            teile.append(str(current.data))
+            current = current.next
+        return " -&gt; ".join(teile)
+
+    def entfernen(self, titel):
+        current = self._head
+        if current.data == titel:
+            self._head = current.next
+            self._anzahl -= 1
+            return True
+        while current.next is not None:
+            if current.next.data == titel:
+                current.next = current.next.next
+                self._anzahl -= 1
+                return True
+            current = current.next
+        return False</code></pre>
+                <p>Die Tests werden <strong>einzeln</strong> ausgeführt:</p>
+                <pre><code class="language-python"># Test 1
+p = Playlist()
+for t in ["A", "B", "C"]:
+    p.anhaengen(t)
+p.entfernen("C")
+p.anhaengen("D")
+print(len(p), p)            # erwartet: 3 A -&gt; B -&gt; D
+
+# Test 2
+leer = Playlist()
+print(leer.entfernen("X"))  # erwartet: False
+
+# Test 3 (aus dem Shuffle-Modul eines anderen Programmierers)
+q = Playlist()
+for t in ["A", "B", "C"]:
+    q.anhaengen(t)
+q._head = q._head.next      # „ersten Titel überspringen“
+print(len(q), q)</code></pre>
+                <ol>
+                    <li>Ermittle durch Verfolgen der Verweise die tatsächlichen Ausgaben der drei Tests. Zeichne für Test 1 das Zeigerdiagramm nach <code>entfernen("C")</code> und nach <code>anhaengen("D")</code>, jeweils mit <code>_head</code>, <code>_tail</code> und <code>_anzahl</code>.</li>
+                    <li>Benenne die Fehler in <code>entfernen</code> und korrigiere die Methode. Denke auch an den Fall, dass der einzige Titel entfernt wird.</li>
+                    <li>Beurteile Test 3 unter dem Gesichtspunkt der Kapselung und schlage vor, wie das Shuffle-Modul stattdessen vorgehen sollte.</li>
+                    <li>Die Mitschülerin hat die Attribute nur <strong>geschützt</strong> (protected, <code>_head</code>) angelegt. Stelle sie in deiner korrigierten Klasse auf <strong>privat</strong> um (<code>__head</code>, <code>__tail</code>, <code>__anzahl</code>) und führe Test 3 – mit <code>q.__head</code> statt <code>q._head</code> – erneut aus. Was passiert jetzt, und warum ist das gewollt?</li>
+                    <li>Prüfe deine korrigierte Klasse mit dieser Tabelle:</li>
+                </ol>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td>Test 1</td><td><code>3 A -&gt; B -&gt; D</code></td><td></td></tr>
+                        <tr><td>Test 2</td><td><code>False</code></td><td></td></tr>
+                        <tr><td>Playlist <code>A</code>: <code>print(p.entfernen("A"), len(p)); p.anhaengen("B"); print(p)</code></td><td><code>True 0</code>, dann <code>B</code></td><td></td></tr>
+                        <tr><td>Playlist <code>A -&gt; B -&gt; C</code>: <code>print(p.entfernen("X"), len(p), p)</code></td><td><code>False 3 A -&gt; B -&gt; C</code></td><td></td></tr>
+                    </tbody>
+                </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.7: Laufzeit messen – Chatverlauf <span class="niveau">AFB III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/messung_chat.py</code> – neu anlegen; die Klasse <code>LinkedList</code> holst du mit <code>from verkettete_liste import LinkedList</code><br><strong>Commits:</strong> nach Teil 2: <code>3.1.7 Teil 2: Messprogramm für Liste und LinkedList, n = 3 geprüft</code> · nach Teil 3: <code>3.1.7 Teil 3: Messwerte als Kommentar ergänzt</code></p>
+                <p>In einer Chat-App steht die neueste Nachricht immer ganz oben. Jede neue Nachricht wird deshalb am <strong>Anfang</strong> eingefügt. Zur Wahl stehen eine Python-Liste mit <code>liste.insert(0, x)</code> und die <code>LinkedList</code> aus Beispiel 2 mit <code>insert_at_start(x)</code>.</p>
+                <ol>
+                    <li>Sage vorher, wie sich die <strong>Gesamtzeit</strong> für n Einfügungen am Anfang bei beiden Varianten ändert, wenn n verdoppelt wird. Begründe mit der O-Notation.</li>
+                    <li>Schreibe ein Messprogramm mit <code>time.perf_counter()</code>, das für n = 10&nbsp;000, 20&nbsp;000, 40&nbsp;000 und 80&nbsp;000 die Zeit beider Varianten misst und ausgibt. (Die größte Messung kann einige Sekunden dauern.)</li>
+                    <li>Führe das Programm aus, trage deine Messwerte in eine Tabelle ein und vergleiche sie mit deiner Vorhersage. Erkläre, warum die Python-Liste bei kleinem n trotz schlechterer O-Klasse gleich schnell oder sogar schneller sein kann.</li>
+                    <li>Die App soll zusätzlich oft „die 500. Nachricht von oben“ anzeigen. Beurteile, welche Struktur du dann wählen würdest.</li>
+                </ol>
+                <p>Bevor du misst, prüfe mit kleinem n, dass beide Varianten dasselbe Ergebnis liefern:</p>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td>n = 3: <code>liste.insert(0, i)</code> für i = 0, 1, 2; <code>print(liste)</code></td><td><code>[2, 1, 0]</code></td><td></td></tr>
+                        <tr><td>n = 3: <code>ll.insert_at_start(i)</code> für i = 0, 1, 2; <code>ll.display()</code></td><td><code>2 -&gt; 1 -&gt; 0 -&gt; None</code></td><td></td></tr>
+                        <tr><td>n = 0: beide Varianten</td><td><code>[]</code> bzw. <code> -&gt; None</code></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p class="tipp">Miss nur die Einfüge-Schleife: <code>start = time.perf_counter()</code> vor der Schleife, <code>dauer = time.perf_counter() - start</code> danach. Absolute Zeiten hängen von deinem Rechner ab – entscheidend ist, um welchen Faktor die Zeit wächst, wenn n sich verdoppelt.</p>
+            </details>
+        </div>

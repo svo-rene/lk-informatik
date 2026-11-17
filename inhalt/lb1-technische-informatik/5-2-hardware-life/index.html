@@ -1,0 +1,206 @@
+<p>Nimm dein Smartphone in die Hand. Es wiegt etwa 200 Gramm. Für seine Herstellung wurden aber rund 70 Kilogramm Rohstoffe bewegt, Wasser in Badewannenmengen verbraucht und mehr CO₂ ausgestoßen, als du in den nächsten Jahren durch das Aufladen verursachen wirst. Und nach durchschnittlich zweieinhalb bis drei Jahren landet es in einer Schublade, obwohl Prozessor und Speicher noch einwandfrei funktionieren.</p>
+
+<p>Der <strong>Hardware-Lebenszyklus</strong> beschreibt den gesamten Weg eines Geräts: Rohstoffgewinnung, Fertigung, Transport, Nutzung, Reparatur, Weitergabe und am Ende Recycling oder Entsorgung. Auf dieser Seite folgen wir diesem Weg einmal komplett. Dabei wirst du merken, dass du an mehreren Stellen selbst entscheidest, wie lang oder kurz dieser Weg ist.</p>
+
+<h2>Station 1: Die Rohstoffe</h2>
+
+<p>In einem Smartphone stecken über 60 verschiedene chemische Elemente. Kupfer und Gold für Leiterbahnen und Kontakte, Kobalt und Lithium für den Akku, Tantal für Kondensatoren, Indium für den Touchscreen, Neodym für die Lautsprechermagnete, dazu Silizium für die Chips. Viele davon stammen aus wenigen Ländern: Ein Großteil des Kobalts kommt aus der Demokratischen Republik Kongo, oft aus Minen mit Kinderarbeit und ohne Arbeitsschutz. Seltene Erden werden zu über zwei Dritteln in China gefördert. Wer Hardware baut, ist also von globalen Lieferketten abhängig, und wer Hardware kauft, auch.</p>
+
+<p>Die gute Nachricht: In einer Tonne alter Handys steckt deutlich mehr Gold als in einer Tonne Golderz. Elektroschrott ist ein Rohstofflager, wenn man ihn einsammelt.</p>
+
+<h2>Station 2: Die Fertigung eines Mikrochips</h2>
+
+<p>Die Fertigung eines Mikrochips beginnt mit einer dünnen Scheibe aus hochreinem Silizium (dem „Wafer“). Darauf werden in einem Reinraum mit Fotolithografie und Ätzverfahren Schicht für Schicht Milliarden von Transistoren erzeugt. Aus diesen Transistoren entstehen genau die Gatter (UND, ODER, NICHT), aus denen du in Kapitel 3 Halb- und Volladdierer gebaut hast, und aus diesen wiederum das Rechenwerk aus Kapitel 4.</p>
+
+<p>Diese Fertigung ist extrem anspruchsvoll und ressourcenintensiv:</p>
+
+<ul>
+            <li><strong>Reinheit:</strong> Die Strukturen auf einem modernen Chip sind nur wenige Nanometer groß. Ein einzelnes Staubkorn ist dagegen ein Felsbrocken und kann eine ganze Charge unbrauchbar machen. Chipfabriken gehören deshalb zu den saubersten Räumen der Welt (siehe <a href="https://www.ingenieur.de/technik/fachbereiche/ittk/wie-arbeitet-ein-reinraum-in-der-chipfertigung/" target="_blank">ingenieur.de: „Wie arbeitet ein Reinraum in der Chipfertigung?“</a>).</li>
+            <li><strong>Wasser und Energie:</strong> Große Chipfabriken verbrauchen täglich so viel Reinstwasser wie eine Kleinstadt und benötigen enorme Mengen Strom (siehe <a href="https://greenspotting.de/dreckige-chips-die-halbleiterindustrie-muss-sauberer-werden/" target="_blank">greenspotting.de: „Dreckige Chips“</a>). In Taiwan, wo ein Großteil der modernsten Chips entsteht, konkurrierten Chipfabriken in Dürrejahren bereits mit der Landwirtschaft um Wasser.</li>
+            <li><strong>Chemikalien:</strong> Für Ätz- und Reinigungsschritte werden zum Teil hochgiftige oder extrem langlebige Chemikalien eingesetzt.</li>
+            <li><strong>Konzentration:</strong> Die modernsten Chips der Welt werden fast ausschließlich von einem einzigen Unternehmen in Taiwan gefertigt (TSMC). Deshalb investieren Europa und die USA Milliarden in eigene Fabriken. In Dresden, im „Silicon Saxony“, entstehen seit 2024 neue Chipwerke, unter anderem eine gemeinsame Fabrik von TSMC, Bosch, Infineon und NXP.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Warum deine KV-Diagramme Wasser sparen
+                </summary>
+                <p>
+                    Alles, was du in „Boolesche Algebra“ und „Schaltnetze“ auf dem Papier vereinfacht hast, wird am Ende genau hier real gefertigt. Je weniger Gatter eine Schaltung braucht (Normalformen, KV-Diagramme), desto weniger Transistoren, desto kleiner die Chipfläche, desto mehr Chips passen auf einen Wafer und desto weniger Energie verbraucht der Chip im Betrieb. Bei Milliarden produzierter Chips macht ein eingespartes Gatter einen messbaren Unterschied für Kosten und Umwelt. Chipdesign ist deshalb heute einer der bestbezahlten Berufe der Informatik.
+                </p>
+            </details>
+        </div>
+
+<h2>Station 3: Die Nutzung und ihr vorzeitiges Ende</h2>
+
+<p>Ein Smartphone wird im Schnitt nur zweieinhalb bis drei Jahre genutzt, ein Laptop vier bis fünf Jahre. Technisch könnten beide deutlich länger halten. Warum werden sie trotzdem ersetzt? Man unterscheidet drei Arten von <strong>Obsoleszenz</strong> (Veralten):</p>
+
+<table>
+            <thead>
+                <tr><th>Art</th><th>Was passiert</th><th>Beispiel</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Technische Obsoleszenz</strong></td>
+                    <td>Ein Bauteil verschleißt oder geht kaputt, und die Reparatur ist unmöglich oder unverhältnismäßig teuer.</td>
+                    <td>Der fest verklebte Akku hält nur noch einen halben Tag. Das Display ist gesprungen, der Tausch kostet fast so viel wie ein neues Gerät.</td>
+                </tr>
+                <tr>
+                    <td><strong>Funktionale Obsoleszenz</strong></td>
+                    <td>Die Hardware funktioniert, aber die Software zieht sich zurück: keine Updates mehr, neue Apps laufen nicht, Sicherheitslücken bleiben offen.</td>
+                    <td>Android-Geräte bekommen oft nur zwei bis drei Jahre Updates. Windows 10 verlor im Oktober 2025 den Support, Windows 11 läuft auf vielen älteren PCs nicht (siehe Seite 5.1).</td>
+                </tr>
+                <tr>
+                    <td><strong>Psychologische Obsoleszenz</strong></td>
+                    <td>Das Gerät funktioniert, wirkt aber alt. Werbung, neue Modelle und Vertragsverlängerungen mit „Gratis-Handy“ erzeugen den Wunsch nach etwas Neuem.</td>
+                    <td>Jährliche neue Modellreihen, Mobilfunkverträge mit Gerätetausch alle 24 Monate.</td>
+                </tr>
+            </tbody>
+        </table>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Was die EU dagegen tut
+                </summary>
+                <ul>
+                    <li><strong>Recht auf Reparatur:</strong> Die EU-Richtlinie <a href="https://commission.europa.eu/law/law-topic/consumer-protection-law/directive-repair-goods_en" target="_blank">„Right to Repair“ (EU 2024/1799)</a> verpflichtet Hersteller unter anderem von Smartphones, Tablets und Haushaltsgeräten, Reparaturen zu angemessenen Preisen und in angemessener Zeit anzubieten, auch nach Ablauf der Garantie, und Ersatzteile bereitzuhalten.</li>
+                    <li><strong>Einheitlicher Ladeanschluss:</strong> Seit Ende 2024 müssen neue Smartphones, Tablets und Kameras in der EU über USB-C laden. Das spart Ladegeräte und Elektroschrott.</li>
+                    <li><strong>Energielabel mit Reparierbarkeitsindex:</strong> Seit Juni 2025 tragen neue Smartphones und Tablets in der EU ein Energielabel, das neben der Energieeffizienzklasse und der Akkulaufzeit auch eine Reparierbarkeitsklasse von A bis E, die Sturzfestigkeit, die Zahl der Ladezyklen und den Schutz gegen Staub und Wasser angibt. Die zugehörige Ökodesign-Verordnung verpflichtet die Hersteller außerdem, noch mindestens fünf Jahre nach dem Verkaufsende eines Modells Betriebssystem-Updates bereitzustellen.</li>
+                    <li><strong>Austauschbare Akkus:</strong> Ab 2027 müssen Akkus in neuen tragbaren Geräten von den Nutzenden selbst mit handelsüblichem Werkzeug austauschbar sein (EU-Batterieverordnung).</li>
+                </ul>
+                <p>Ein bekanntes Vorreiter-Beispiel ist der niederländische Hersteller <a href="https://www.fairphone.com/" target="_blank">Fairphone</a>, dessen Smartphones so konstruiert sind, dass Akku, Display und Kamera mit einem Schraubendreher gewechselt werden können, und der acht Jahre Updates verspricht. Wie reparierbar dein eigenes Gerät ist, verrät der <a href="https://www.ifixit.com/repairability/smartphone-repairability-scores" target="_blank">Reparierbarkeits-Score von iFixit</a>.</p>
+            </details>
+        </div>
+
+<h2>Station 4: Das Ende. Schublade, Müll oder Rohstofflager?</h2>
+
+<p>Am Ende des Lebenszyklus steht die Entsorgung, und hier wird Hardware zu einem der am schnellsten wachsenden Abfallprobleme der Welt. Laut dem <a href="https://ewastemonitor.info/the-global-e-waste-monitor-2024/" target="_blank">Global E-Waste Monitor 2024</a> der Vereinten Nationen fielen 2022 weltweit rund 62 Millionen Tonnen Elektroschrott an, im Schnitt 7,8&nbsp;kg pro Person. Nur etwa 22&nbsp;% davon wurden nachweislich fachgerecht recycelt. Bis 2030 wird ein Anstieg auf rund 82 Millionen Tonnen pro Jahr erwartet, weil die Menge fünfmal schneller wächst als das dokumentierte Recycling.</p>
+
+<p>Ein großer Teil des nicht recycelten Elektroschrotts wird illegal in Länder wie Ghana oder Nigeria exportiert, wo er auf offenen Deponien wie Agbogbloshie bei Accra von Hand zerlegt und verbrannt wird, um an Kupfer und Aluminium zu kommen. Die Schadstoffe landen in Boden, Wasser und Lunge der Arbeitenden, oft Kinder.</p>
+
+<p>Der andere Teil verschwindet einfach: Der Branchenverband Bitkom schätzt, dass in deutschen Haushalten über 200 Millionen ausgediente Handys in Schubladen liegen. Jedes davon enthält Gold, Kupfer, Kobalt und seltene Erden, die neu abgebaut werden müssen, solange die Geräte dort liegen.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Vor der Weitergabe: Daten wirklich löschen
+                </summary>
+                <p>
+                    Wer ein Gerät verschenkt, verkauft oder abgibt, sollte es vorher zurücksetzen. Aus Seite 5.1 weißt du, dass „Löschen“ im Dateisystem oft nur den Eintrag im Inhaltsverzeichnis entfernt, die Daten bleiben auf dem Speicher. Bei Smartphones ist der Speicher heute standardmäßig verschlüsselt, und „Auf Werkseinstellungen zurücksetzen“ verwirft den Schlüssel, damit sind die Daten unlesbar. Bei alten Laptops mit unverschlüsselter Festplatte reicht das nicht: Hier muss der Datenträger mit einem Löschprogramm überschrieben werden. Datenschutz ist also ein Grund, warum viele Geräte in der Schublade bleiben, obwohl es dafür eine einfache Lösung gibt.
+                </p>
+            </details>
+        </div>
+
+<h2>Was nachhaltige Hard- und Software ausmacht</h2>
+
+<p>Die folgende Infografik des Instituts für ökologische Wirtschaftsforschung fasst zusammen, an welchen Stellschrauben Hersteller, Softwareentwickler und Nutzende drehen können. Beachte, wie viele davon Software betreffen: Ein schlankes Programm, offener Quellcode und lange Update-Versorgung halten Hardware länger nutzbar.</p>
+
+<figure>
+            <img src="../img/Infografik_Software-Hardware-nachhaltig.jpg" width="600" alt="Infografik zu Stellschrauben für nachhaltige Hard- und Software">
+            <figcaption><em><span style="font-size: 8pt;">Institut für ökologische Wirtschaftsforschung (IÖW), CC BY-NC-SA, www.nachhaltige-digitalisierung.de</span></em></figcaption>
+        </figure>
+
+<h2>Rechnen mit dem CO₂-Fußabdruck</h2>
+
+<p>Ob sich Weiternutzen, Reparieren oder Neukaufen lohnt, lässt sich mit einer einfachen Bilanz abschätzen: einmalige Emissionen der Herstellung plus jährliche Emissionen durch den Strom in der Nutzung. Die Zahlen in den Beispielen sind gerundete Annahmen in der Größenordnung von Herstellerangaben.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> CO₂ pro Nutzungsjahr eines Tablets</summary>
+        <p><em>Annahmen:</em> Herstellung und Transport eines Tablets verursachen 100&nbsp;kg CO₂, der Strom in der Nutzung 8&nbsp;kg CO₂ pro Jahr. Wie groß ist der Fußabdruck pro Nutzungsjahr, wenn das Tablet 4 Jahre bzw. 6 Jahre genutzt wird?</p>
+        <ol>
+          <li><strong>Was:</strong> Gesamtemissionen bei 4 Jahren: 100 + 4 · 8 = 132&nbsp;kg. – <em>warum:</em> Die Herstellung fällt einmal an, der Strom jedes Jahr.</li>
+          <li><strong>Was:</strong> pro Jahr: 132 / 4 = 33&nbsp;kg. – <em>warum:</em> Erst der Wert pro Nutzungsjahr macht unterschiedlich lange Nutzungsdauern vergleichbar.</li>
+          <li><strong>Was:</strong> dasselbe für 6 Jahre: (100 + 6 · 8) / 6 = 148 / 6 ≈ 24,7&nbsp;kg pro Jahr. – <em>warum:</em> Die Herstellung verteilt sich auf mehr Jahre.</li>
+          <li><strong>Was:</strong> Anteil der Herstellung bei 4 Jahren: 100 / 132 ≈ 76&nbsp;%. – <em>warum:</em> Zeigt, wo der größte Hebel liegt.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Zwei Jahre längere Nutzung senken den Fußabdruck von 33 auf rund 24,7&nbsp;kg CO₂ pro Jahr, also um ein Viertel. Weil drei Viertel der Emissionen in der Herstellung stecken, wirkt längere Nutzung viel stärker als Stromsparen.</p>
+        <p><strong>Probe:</strong> 24,7 · 6 ≈ 148 = 100 + 48 und 33 · 4 = 132 = 100 + 32.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Wann hat ein sparsamer Neu-PC seine Herstellung „abbezahlt“?</summary>
+        <p>Ein Büro-PC verbraucht im Mittel 80&nbsp;W. Ein neuer, sparsamer PC bräuchte nur 40&nbsp;W. <em>Annahmen:</em> Nutzung 6 Stunden an 220 Arbeitstagen pro Jahr, Strom verursacht 0,4&nbsp;kg CO₂ pro kWh, die Herstellung des neuen PCs 300&nbsp;kg CO₂. Nach wie vielen Jahren hat die Stromersparnis die Herstellung ausgeglichen (Amortisationszeit)?</p>
+        <ol>
+          <li><strong>Was:</strong> Energie pro Jahr in kWh: alt 80&nbsp;W · 6&nbsp;h · 220 = 105.600&nbsp;Wh = 105,6&nbsp;kWh; neu 40&nbsp;W · 6&nbsp;h · 220 = 52,8&nbsp;kWh. – <em>warum (Falle 1):</em> Watt ist eine Leistung, keine Energie. Erst Leistung mal Zeit ergibt Energie, und Wh müssen durch 1000 geteilt werden, um kWh zu erhalten.</li>
+          <li><strong>Was:</strong> CO₂ pro Jahr: alt 105,6 · 0,4 = 42,24&nbsp;kg, neu 52,8 · 0,4 = 21,12&nbsp;kg; Ersparnis 21,12&nbsp;kg pro Jahr. – <em>warum:</em> Der Emissionsfaktor rechnet Strom in CO₂ um.</li>
+          <li><strong>Was:</strong> Amortisationszeit: 300&nbsp;kg / 21,12&nbsp;kg pro Jahr ≈ 14,2 Jahre. – <em>warum:</em> So lange muss der neue PC laufen, bis seine Herstellung durch Einsparung ausgeglichen ist.</li>
+          <li><strong>Was:</strong> Annahme prüfen: Wird der Strommix sauberer, z.&nbsp;B. 0,2&nbsp;kg CO₂ pro kWh, halbiert sich die Ersparnis, und die Amortisationszeit verdoppelt sich auf etwa 28,4 Jahre. – <em>warum (Falle 2):</em> Die Herstellungsemissionen sind schon entstanden, die Einsparung liegt in der Zukunft und hängt vom künftigen Strom ab.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Der neue PC gleicht seine Herstellung erst nach etwa <strong>14 Jahren</strong> aus, bei saubererem Strom noch später. Ein Büro-PC wird selten so lange genutzt. Ökologisch ist es deshalb besser, den alten PC weiterzunutzen, solange er seine Aufgabe erfüllt.</p>
+        <p><strong>Probe:</strong> Nach 14,2 Jahren hat der alte PC 14,2 · 42,24 ≈ 600&nbsp;kg verursacht, der neue 300 + 14,2 · 21,12 ≈ 600&nbsp;kg. Beide Bilanzen sind gleich.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Nachhaltige IT als Berufsfeld</summary>
+                <p><strong>Alltag:</strong> Ob du dein Smartphone reparieren lässt, ein gebrauchtes Gerät kaufst oder das alte Handy aus der Schublade zum Recyclinghof bringst – jede dieser Entscheidungen verlängert oder verkürzt den Lebenszyklus.</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Chipdesigner/in und Prozessingenieur/in</strong>: Je weniger Gatter eine Schaltung braucht, desto weniger Chipfläche, Reinstwasser und Energie kostet ihre Fertigung – ein Arbeitsfeld mit Tausenden Stellen in den Dresdner Halbleiterwerken („Silicon Saxony“).</li>
+                    <li><strong>Refurbishing-Techniker/in</strong>: bereitet gebrauchte Laptops und Smartphones auf, löscht Daten zertifiziert und bringt die Geräte in einen zweiten Lebenszyklus.</li>
+                    <li><strong>Nachhaltigkeitsmanager/in bzw. Green-IT-Berater/in</strong>: berechnet den CO₂-Fußabdruck der IT eines Unternehmens und plant längere Nutzungszeiten und Rücknahmeprogramme.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Merke: Die Phasen des Hardware-Lebenszyklus</strong><br>
+                1. <strong>Planung und Design</strong>: Hier wird entschieden, ob ein Gerät reparierbar, aufrüstbar und lange mit Updates versorgt wird.<br>
+                2. <strong>Rohstoffgewinnung</strong>: Metalle, seltene Erden, Silizium, oft unter problematischen Bedingungen.<br>
+                3. <strong>Fertigung</strong>: Chips, Displays, Akkus, Zusammenbau, meist in Ostasien.<br>
+                4. <strong>Transport und Verkauf</strong>.<br>
+                5. <strong>Nutzung und Wartung</strong>: Strom, Updates, Reparaturen.<br>
+                6. <strong>Ende der Nutzung</strong>: Weitergabe, Wiederverwendung, Recycling oder Elektroschrott.<br>
+                Jede Phase kostet Energie, Rohstoffe und Geld. Bei Smartphones und Laptops entfällt der Großteil des ökologischen Fußabdrucks auf die Herstellung, nicht auf die Nutzung.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 5.2.1: Steckbrief deines Geräts <span class="niveau">AFB I</span>
+                </summary>
+                <p>Erstelle einen Steckbrief für dein eigenes Smartphone (oder ein anderes Gerät, das du regelmäßig nutzt). Recherchiere dazu:</p>
+                <ol>
+                    <li>Wie alt ist das Gerät, und wie lange möchtest du es voraussichtlich noch nutzen?</li>
+                    <li>Bis wann bekommt es laut Hersteller Betriebssystem- und Sicherheitsupdates? (Suchbegriff: Modellname + „Update-Garantie“ oder „end of support“)</li>
+                    <li>Ist der Akku ohne Spezialwerkzeug wechselbar? Was kostet ein Akkutausch beim Hersteller, was in einer unabhängigen Werkstatt?</li>
+                    <li>Welchen Reparierbarkeits-Score hat das Gerät bei iFixit oder auf dem EU-Energielabel?</li>
+                    <li>Was würde dich am ehesten dazu bringen, es zu ersetzen? Ordne diesen Grund einer der drei Obsoleszenz-Arten zu.</li>
+                </ol>
+                <p>Tragt die Nutzungsdauern der ganzen Klasse zusammen und berechnet den Durchschnitt. Vergleicht ihn mit der durchschnittlichen Nutzungsdauer von Smartphones in Deutschland (recherchiert eine aktuelle Zahl mit Quelle). Diskutiert, woran es liegt, wenn eure Zahl abweicht.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 5.2.2: Rechnen mit dem Fußabdruck <span class="niveau">AFB II</span>
+                </summary>
+                <p>Für die Rechnung nutzen wir gerundete Werte, die sich an Umweltberichten großer Hersteller orientieren:</p>
+                <table>
+                    <thead><tr><th>Gerät</th><th>Herstellung und Transport (einmalig)</th><th>Stromverbrauch in der Nutzung (pro Jahr)</th></tr></thead>
+                    <tbody>
+                        <tr><td>Smartphone</td><td>60 kg CO₂</td><td>5 kg CO₂</td></tr>
+                        <tr><td>Laptop</td><td>250 kg CO₂</td><td>20 kg CO₂</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Welcher Anteil der Gesamtemissionen eines Smartphones entfällt bei drei Jahren Nutzung auf die Herstellung? Was folgt daraus für die Frage, wo man am wirksamsten sparen kann?</li>
+                    <li>Person A kauft alle zwei Jahre ein neues Smartphone, Person B alle vier Jahre. Berechne die CO₂-Bilanz beider Personen über acht Jahre und vergleiche.</li>
+                    <li>Ein neuer Laptop verbraucht 30 % weniger Strom als der alte (also 14 statt 20 kg CO₂ pro Jahr). Der Hersteller wirbt: „Umweltfreundlich, jetzt wechseln!“ Berechne, wie viele Jahre man den neuen Laptop nutzen müsste, bis die Stromersparnis die Emissionen seiner Herstellung ausgeglichen hat. Beurteile die Werbung.</li>
+                    <li>Eine Schule mit 900 Schülerinnen und Schülern überlegt, alle Smartphones der Schülerschaft pauschal ein Jahr länger zu nutzen (von drei auf vier Jahre). Schätze, wie viel CO₂ das pro Jahr spart. Vergleiche mit einem Flug von Berlin nach Mallorca und zurück, der pro Person etwa 500 kg CO₂ verursacht.</li>
+                </ol>
+            </details>
+        </div>

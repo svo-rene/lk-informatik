@@ -1,0 +1,179 @@
+<p>Zeichen müssen in der Informatik kodiert werden, damit sie von Computern und digitalen Systemen verarbeitet und gespeichert werden können. Hier sind einige Gründe, warum Zeichen kodiert werden müssen:</p>
+
+<ol>
+  <li>Maschinenverständlichkeit: Computer arbeiten auf der Grundlage von binären Daten, d.&nbsp;h. Nullen und Einsen. Zeichen, die wir in Texten verwenden, müssen in eine binäre Darstellung umgewandelt werden, damit sie von Computern verstanden und verarbeitet werden können.</li>
+  <li>Datenrepräsentation: Durch die Kodierung von Zeichen können sie als Zahlenwerte dargestellt und in Speicher und Dateien gespeichert werden. Jedes Zeichen wird einem spezifischen Zahlencode zugeordnet, der es eindeutig repräsentiert.</li>
+  <li>Interoperabilität: Durch die Verwendung von Zeichenkodierungen können verschiedene Computersysteme und Programme miteinander kommunizieren und Informationen austauschen. Einheitliche Zeichenkodierungen stellen sicher, dass Zeichen auf verschiedenen Plattformen und in verschiedenen Ländern konsistent interpretiert werden können.</li>
+  <li>Internationale Unterstützung: Verschiedene Sprachen und Schriftsysteme haben unterschiedliche Zeichensätze. Durch die Kodierung von Zeichen können verschiedene Sprachen und Schriftsysteme in Computern unterstützt werden, um eine globale Kommunikation und Zusammenarbeit zu ermöglichen.</li>
+  <li>Textverarbeitung und Anzeige: Die Zeichenkodierung ermöglicht die korrekte Darstellung und Anzeige von Text auf Bildschirmen, Druckern und anderen Ausgabegeräten. Die richtige Interpretation der Zeichenkodierung ist entscheidend, um Texte in der gewünschten Form darzustellen.</li>
+  <li>Suche und Sortierung: Durch die Kodierung von Zeichen können Such- und Sortieralgorithmen auf Textdaten angewendet werden. Die Verwendung der richtigen Zeichenkodierung ist wichtig, um genaue Suchergebnisse und eine korrekte Sortierreihenfolge zu gewährleisten.</li>
+</ol>
+
+<p>Die Kodierung von Zeichen ist daher entscheidend, um eine effiziente und genaue Verarbeitung, Speicherung, Darstellung und Kommunikation von Textdaten in der digitalen Welt zu ermöglichen.</p>
+
+<p>
+    Es gibt verschiedene Zeichenkodierungsstandards, wie beispielsweise <strong>ASCII</strong> (American Standard Code for Information Interchange), <strong>Unicode</strong> und verschiedene <strong>Kodierungsformen von Unicode</strong> wie UTF-8, UTF-16 und UTF-32. Diese Standards legen fest, wie Zeichen in binäre Codes umgewandelt werden, und ermöglichen eine einheitliche und interoperable Darstellung von Zeichen in verschiedenen Computersystemen und Sprachen.
+</p>
+
+<p>
+    Die Auswahl der Zeichenkodierung ist wichtig, um sicherzustellen, dass Zeichen korrekt interpretiert, angezeigt, übertragen und verarbeitet werden können. Unterschiedliche Zeichenkodierungen unterstützen unterschiedliche Zeichensätze und Sprachen, und die Wahl der richtigen Zeichenkodierung ist entscheidend, um Textdaten effektiv und genau zu behandeln.
+</p>
+
+<hr>
+
+<h2>ASCII-Kodierung</h2>
+
+<p>Die ASCII-Kodierung (American Standard Code for Information Interchange) ist eine der ältesten und bekanntesten Zeichenkodierungen. Sie legt eine Zuordnung zwischen Zeichen und ihren entsprechenden binären Codes fest. ASCII verwendet eine 7-Bit-Kodierung, was bedeutet, dass es insgesamt 128 verschiedene Zeichen darstellen kann.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> ASCII-Kodierung von Zeichen</summary>
+<p>Das Zeichen „A“ hat in ASCII den dezimalen Wert 65. In binärer Form entspricht dies 01000001.</p>
+<p>
+  Zeichen: A<br>
+  ASCII-Dezimalwert: 65<br>
+  Binäre Darstellung: 01000001
+</p>
+
+<p>Auf ähnliche Weise hat das Zeichen „a“ den dezimalen Wert 97, was in binärer Form 01100001 entspricht.</p>
+<p>
+  Zeichen: a<br>
+  ASCII-Dezimalwert: 97<br>
+  Binäre Darstellung: 01100001
+</p>
+            </details>
+        </div>
+
+<p>Die ASCII-Kodierung enthält außerdem <strong>Steuerzeichen</strong> (Werte 0 bis 31 und 127) wie den Zeilenumbruch (New Line, 10) und den Wagenrücklauf (Carriage Return, 13). Sie werden nicht angezeigt, sondern steuern Funktionen oder Formatierungen. Das <strong>Leerzeichen</strong> (32) gehört dagegen zu den druckbaren Zeichen: Es belegt auf dem Bildschirm einen Platz, nur eben ohne sichtbares Symbol.</p>
+
+<p>Die ASCII-Kodierung bietet eine grundlegende Möglichkeit, englische Buchstaben, Zahlen, Satzzeichen und einige Steuerzeichen zu repräsentieren. Sie war weit verbreitet in älteren Computersystemen und ist auch heute noch in vielen Anwendungen und Protokollen im Einsatz. Allerdings unterstützt ASCII keine internationalen Zeichensätze oder diakritischen Zeichen anderer Sprachen. Für solche Fälle werden erweiterte Zeichenkodierungen wie Unicode verwendet.</p>
+
+<hr>
+
+<h2>Unicode</h2>
+
+<p>Unicode ist ein internationaler Standard, der eine einheitliche Kodierung für Zeichen aus verschiedenen Schriftsystemen und Sprachen bietet. Im Gegensatz zur ASCII-Kodierung, die nur einen begrenzten Zeichensatz abdeckt, unterstützt Unicode eine breite Palette von Zeichen, einschließlich nicht-lateinischer Schriftzeichen, diakritischer Zeichen, Symbole und vielem mehr.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Unicode-Zeichen und ihre UTF-8-Bytes</summary>
+<p>Ein Beispiel für Unicode ist das Zeichen „☺“, das ein lächelndes Gesicht darstellt. In Unicode hat dieses Zeichen den Codepoint <strong>U+263A</strong>. Die Angabe nach „U+“ ist die Nummer des Zeichens in hexadezimaler Schreibweise, also 263A<sub>16</sub> = 9786.</p>
+<p>In einer HTML-Seite kannst du das Zeichen über diese Nummer einfügen: Die Zeichenreferenz <code>&amp;#x263A;</code> erscheint im Browser als &#x263A;.</p>
+<p>Gespeichert wird der Codepoint je nach Kodierungsform unterschiedlich: In UTF-8 belegt ☺ drei Bytes (<code>E2 98 BA</code>), in UTF-16 zwei Bytes (<code>26 3A</code>). Das „A“ (U+0041) braucht in UTF-8 dagegen nur ein Byte – dasselbe wie in ASCII.</p>
+<p>Wie kommt man von U+263A auf die drei Bytes <code>E2 98 BA</code>? UTF-8 verteilt die Bits des Codepoints nach festen Mustern auf ein bis vier Bytes:</p>
+<table class="gitter">
+    <tr><th>Codepoint-Bereich</th><th>Nutzbits</th><th>Bytemuster</th></tr>
+    <tr><td>U+0000 bis U+007F</td><td>7</td><td><code>0xxxxxxx</code></td></tr>
+    <tr><td>U+0080 bis U+07FF</td><td>11</td><td><code>110xxxxx 10xxxxxx</code></td></tr>
+    <tr><td>U+0800 bis U+FFFF</td><td>16</td><td><code>1110xxxx 10xxxxxx 10xxxxxx</code></td></tr>
+    <tr><td>U+10000 bis U+10FFFF</td><td>21</td><td><code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></td></tr>
+</table>
+<ol>
+  <li><strong>Was:</strong> Bereich bestimmen: 263A liegt zwischen 0800 und FFFF, also 3 Bytes mit 16 Nutzbits – <em>warum:</em> Die Anzahl der Bytes hängt nur davon ab, wie viele Bits der Codepoint braucht.</li>
+  <li><strong>Was:</strong> Codepoint in 16 Bit schreiben, jede Hexziffer als Vierergruppe: 2 6 3 A &rarr; <code>0010 0110 0011 1010</code> – <em>warum:</em> Hex &rarr; Binär geht ohne Umweg über das Dezimalsystem (siehe 1.1).</li>
+  <li><strong>Was:</strong> Von rechts in Gruppen 4 | 6 | 6 aufteilen: <code>0010</code> | <code>011000</code> | <code>111010</code> – <em>warum:</em> Das Muster hat im ersten Byte 4 freie Stellen, in den beiden Folgebytes je 6.</li>
+  <li><strong>Was:</strong> Gruppen in das Muster einsetzen: <code>1110</code>0010 = E2, <code>10</code>011000 = 98, <code>10</code>111010 = BA – <em>warum:</em> Die Präfixe <code>1110</code> und <code>10</code> kennzeichnen Startbyte und Folgebytes, damit ein Programm die Zeichengrenzen im Bytestrom erkennt.</li>
+</ol>
+<p><strong>Ergebnis:</strong> ☺ (U+263A) = <code>E2 98 BA</code> in UTF-8.</p>
+<p><strong>Probe:</strong> Präfixe wieder entfernen und die Nutzbits aneinanderhängen: 0010 011000 111010 = 0010 0110 0011 1010 = 263A<sub>16</sub> &#10003;. <strong>Falle:</strong> Wer von links statt von rechts in Gruppen teilt oder die 16 Bit nicht mit führenden Nullen auffüllt, setzt die Bits an die falschen Stellen.</p>
+            </details>
+        </div>
+
+<p>Unicode bietet eine umfangreiche Zeichendatenbank, die über 150.000 Zeichen aus verschiedenen Schriftsystemen enthält. Jedes Zeichen hat einen eindeutigen Codepoint, der es identifiziert. Die Verwendung des Unicode-Standards ermöglicht die Darstellung von Texten in verschiedenen Sprachen und Schriftsystemen auf verschiedenen Plattformen und Geräten, ohne dass spezifische Zeichenkodierungen für jede einzelne Sprache verwendet werden müssen.</p>
+
+<p>Es ist wichtig anzumerken, dass Unicode verschiedene Kodierungsformate hat, die verwendet werden können, um die Codepoints in binäre Daten umzuwandeln, wie zum Beispiel UTF-8, UTF-16 und UTF-32. Diese Kodierungsformate bieten verschiedene Möglichkeiten, Zeichen in binäre Darstellungen umzuwandeln, und haben unterschiedliche Vor- und Nachteile je nach Anwendungsfall.</p>
+
+<p>Unicode hat den Vorteil, dass es eine umfassende und standardisierte Methode bietet, um Zeichen aus verschiedenen Sprachen und Schriftsystemen darzustellen, was die Interoperabilität und Kommunikation zwischen verschiedenen Systemen und in multilingualen Umgebungen erleichtert.</p>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Wenn die Zeichenkodierung falsch geraten wird</summary>
+        <p>
+            Hast du schon einmal eine E-Mail, Webseite oder SMS gesehen, in der statt „ä“, „ö“, „ü“ plötzlich Zeichenfolgen wie „Ã¤“, „Ã¶“ oder „â€™“ auftauchen? Das nennt man <strong>Mojibake</strong> bzw. im Deutschen „Zeichensalat“: Der Text wurde mit einer Kodierung (z.&nbsp;B. UTF-8) gespeichert, aber mit einer anderen (z.&nbsp;B. Windows-1252) wieder eingelesen – jedes Byte wird dann als falsches Zeichen interpretiert.
+        </p>
+        <p>
+            Das ist kein exotisches Randproblem, sondern passiert bis heute regelmäßig beim Datenaustausch zwischen älteren Systemen, unterschiedlichen Programmiersprachen oder Datenbanken. Mehr Beispiele und Hintergrund im <a href="https://de.wikipedia.org/wiki/Zeichensalat" target="_blank">Wikipedia-Artikel „Zeichensalat“</a>.
+        </p>
+        <p><strong>Berufsleben:</strong></p>
+        <ul>
+            <li><strong>Webentwickler/in</strong>: sorgt dafür, dass Webseite, Server und Datenbank durchgehend UTF-8 verwenden, damit Umlaute und Emojis in Formularen richtig ankommen.</li>
+            <li><strong>Datenbankadministrator/in</strong>: migriert alte Kundendaten (z.&nbsp;B. aus Windows-1252) nach UTF-8, ohne dass Namen wie „Müller“ oder „Dvořák“ beschädigt werden – eine typische Aufgabe bei Behörden, Stadtwerken oder Versicherungen.</li>
+            <li><strong>Internationalisierung/Lokalisierung</strong>: Softwarefirmen bereiten Programme für andere Sprachen und Schriften vor (z.&nbsp;B. Arabisch von rechts nach links, Chinesisch mit Tausenden Schriftzeichen).</li>
+        </ul>
+    </details>
+</div>
+
+<hr>
+
+<h2>Ein Bitmuster allein bedeutet noch nichts</h2>
+
+<p>Im Speicher eines Rechners steht immer nur eine Folge von Nullen und Einsen. Ob eine bestimmte Bitfolge eine Zahl, ein Schriftzeichen, ein Stück Bild oder eine Speicheradresse ist, steht <strong>nicht im Bitmuster selbst</strong>. Betrachten wir ein einzelnes Byte:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">einfach</span> Ein Byte – fünf Deutungen</summary>
+<pre>0011 0111</pre>
+
+<p>Je nachdem, wie ein Programm dieses Byte liest, bedeutet es etwas völlig anderes:</p>
+
+<table class="gitter">
+    <tr><th>Gelesen als …</th><th>Ergebnis</th><th>Rechenweg</th></tr>
+    <tr><td>vorzeichenlose Binärzahl</td><td>55</td><td>32 + 16 + 4 + 2 + 1 = 55</td></tr>
+    <tr><td>8-Bit-Zweierkomplementzahl</td><td>+55</td><td>höchstwertiges Bit = 0 → positiv, also derselbe Wert</td></tr>
+    <tr><td>ASCII-kodiertes Zeichen</td><td>das Schriftzeichen <strong>„7“</strong></td><td>55 = 48 + 7, und die Ziffer „0“ hat den Wert 48</td></tr>
+    <tr><td>Hexadezimaldarstellung</td><td>37<sub>16</sub></td><td>0011 = 3, 0111 = 7</td></tr>
+    <tr><td>Festkommazahl mit 4 Bit Bruchteil</td><td>3,4375</td><td>0011 = 3 und 0,0111 = 0,4375</td></tr>
+</table>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p>
+        <strong>Zeichenkodierung</strong> bezeichnet die Methode, mit der Zeichen, Symbole oder Schriftzeichen in eine binäre Darstellung umgewandelt werden, damit Computer und digitale Systeme sie verarbeiten, übertragen oder speichern können.
+        Eine Zeichenkodierung legt eine feste Zuordnung zwischen den Zeichen und den zugehörigen binären Codes fest. Jedes Zeichen erhält einen eindeutigen Code, der es repräsentiert. Dieser Code kann als eine Folge von Bits oder Bytes dargestellt werden.
+    </p>
+</div>
+
+<div class="merke">
+    <p><strong>Vier Ankerwerte statt einer ganzen Tabelle</strong></p>
+    <p>Du musst die ASCII-Tabelle nicht auswendig können. Es genügen vier Werte, weil die Zeichen jeweils lückenlos aufeinanderfolgen:</p>
+    <p>
+        <code>'A' = 65</code> &nbsp;&middot;&nbsp; <code>'a' = 97</code> &nbsp;&middot;&nbsp; <code>'0' = 48</code> &nbsp;&middot;&nbsp; <code>Leerzeichen = 32</code>
+    </p>
+    <p>Beispiel: „H“ ist der 8. Großbuchstabe, also 65 + 7 = <strong>72</strong>. Und „i“ ist der 9. Kleinbuchstabe, also 97 + 8 = <strong>105</strong>.</p>
+    <p>Praktisch nebenbei: Der Abstand zwischen Groß- und Kleinbuchstaben beträgt immer genau <strong>32</strong> (65 → 97). Das ist 2<sup>5</sup> – Groß- und Kleinschreibung unterscheiden sich also in genau <strong>einem</strong> gekippten Bit.</p>
+</div>
+
+<div class="merke">
+    <p><strong>Bedeutung eines Bitmusters:</strong> Die Bedeutung eines Bitmusters entsteht erst durch die <strong>Vereinbarung</strong>, mit der es gelesen wird – durch den <strong>Datentyp</strong> der Variablen (etwa <code>int</code> gegenüber <code>char</code>), durch das Dateiformat oder durch eine mitgelieferte Angabe zur Zeichenkodierung. Ohne diese Zusatzinformation lässt sich ein Byte nicht interpretieren.</p>
+    <p>Besonders wichtig ist der Unterschied zwischen der <strong>Zahl 7</strong> und dem <strong>Schriftzeichen „7“</strong>: Die Zahl 7 wird als <code>0000 0111</code> gespeichert, das Zeichen „7“ dagegen als <code>0011 0111</code> (= 55). Deshalb muss ein Programm eine Benutzereingabe erst umwandeln, bevor es damit rechnen kann.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.4.1: ASCII und Unicode <span class="niveau">AFB I</span></summary>
+        <ol>
+            <li>
+                Kodiere ein Wort deiner Wahl in ASCII. Gehe davon aus, dass das „A“ die 65 ist und das „a“ die 97. Berechne im Kopf die Dezimalzahlen für die Buchstaben deines Wortes. Rechne danach die Zahlen in Binärzahlen um.
+            </li>
+            <li>
+                Sieh dir Übersichten zum ASCII-Code und zu Unicode an. Fertige eine Tabelle an und vergleiche ASCII-Code und Unicode hinsichtlich der folgenden Eigenschaften:
+                Zeichenanzahl, Kodierungsgröße, Zeichensatz, Verwendung.
+            </li>
+            <li>
+                Notiere dir auftretende Fragen.
+            </li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.4.2: Die Nachricht des „Marsianers“ <span class="niveau">AFB II</span></summary>
+        <p>Der „Marsianer“ benutzt ein Hexadezimalsystem und empfängt folgende Nachricht:<br> 52 65 74 74 75 6E 67 2E 69 6E 2E 53 69 63 68 74 3A 29<br> Wandle die Nachricht in das Dezimalsystem um und dekodiere den Text mithilfe einer ASCII-Tabelle.</p>
+    </details>
+</div>

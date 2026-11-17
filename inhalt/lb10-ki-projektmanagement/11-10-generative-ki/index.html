@@ -1,0 +1,167 @@
+<p>Chatbots wie ChatGPT oder Claude und Bildgeneratoren wie Midjourney sind mittlerweile Alltag – die meisten von euch nutzen sie regelmäßig. Auf dieser Seite schaust du dir an, was technisch dahintersteckt, und ordnest das kritisch ein. Die technischen Grundlagen (Tokens, Embeddings, Attention, Softmax und Temperatur) kennst du aus dem KI-Kickstart (11.0); hier baust du darauf auf.</p>
+
+<h2>1. Was ist ein Sprachmodell?</h2>
+
+<p>Ein <strong>Sprachmodell</strong> (Language Model, bei sehr großen Modellen: Large Language Model, LLM) hat im Kern eine einzige Aufgabe: Es sagt vorher, welches Wort (genauer: welches Textstück, ein sogenanntes <strong>Token</strong>) als Nächstes am wahrscheinlichsten kommt, gegeben den bisherigen Text. Das Modell wird dazu auf riesigen Mengen an Text trainiert (Bücher, Webseiten, Artikel, Code) und lernt dabei, wie wahrscheinlich verschiedene Fortsetzungen eines Textes sind.</p>
+
+<p>Ein Chatbot erzeugt seine Antwort, indem er dieses „Nächstes-Wort-Vorhersagen“ immer wieder wiederholt: Token für Token wird die wahrscheinlichste (oder eine zufällig unter den wahrscheinlichsten ausgewählte) Fortsetzung angehängt, bis ein vollständiger Antworttext entstanden ist.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Sprachmodell soll den Text „Heute scheint die …“ um ein Token fortsetzen.</p>
+            <ol>
+                <li><strong>Was:</strong> Das Modell berechnet für mögliche nächste Tokens eine Wahrscheinlichkeit. Nach „Heute scheint die …“ könnte ein Modell folgende Wahrscheinlichkeiten berechnen: „Sonne“ 85&nbsp;%, „Lampe“ 5&nbsp;%, „Welt“ 3&nbsp;%, … – <em>warum:</em> Das ist die eigentliche Aufgabe eines Sprachmodells: eine Wahrscheinlichkeitsverteilung über das nächste Token, gelernt aus den Trainingstexten.</li>
+                <li><strong>Was:</strong> Ein Token auswählen. Wählt es immer das wahrscheinlichste Token, schreibt es „Sonne“. – <em>warum:</em> Diese Auswahlregel ist die einfachste; sie liefert bei gleichem Prompt immer denselben Text.</li>
+                <li><strong>Was:</strong> Alternativ gewichtet zufällig auswählen. Wird dagegen gewichtet zufällig ausgewählt (Sampling), erscheint in etwa 15 von 100 Durchläufen ein anderes Wort – und jedes neue Wort verändert die Wahrscheinlichkeiten für alle folgenden. Deshalb liefert derselbe Prompt oft unterschiedliche Antworten. – <em>warum:</em> 100&nbsp;% − 85&nbsp;% = 15&nbsp;% der Wahrscheinlichkeit entfallen auf andere Tokens; Sampling macht Texte abwechslungsreicher.</li>
+                <li><strong>Was:</strong> Das gewählte Token anhängen und mit dem verlängerten Text von vorn beginnen. – <em>warum:</em> So entsteht eine ganze Antwort Token für Token.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Mit der Regel „immer das wahrscheinlichste Token“ lautet der Text „Heute scheint die Sonne“; mit Sampling in etwa 85 von 100 Durchläufen ebenfalls, in den übrigen etwa 15 Durchläufen steht dort ein anderes Wort.</p>
+            <p><strong>Ausblick:</strong> Ein Parameter namens <em>Temperatur</em> steuert, wie stark auch unwahrscheinlichere Tokens zum Zug kommen: niedrige Temperatur → vorhersehbarer Text, hohe Temperatur → kreativer, aber fehleranfälliger.</p>
+            <p><strong>Kontrolle:</strong> Die Wahrscheinlichkeiten aller möglichen nächsten Tokens ergeben zusammen 100&nbsp;%. Die drei genannten ergeben 85 + 5 + 3 = 93&nbsp;%, die restlichen 7&nbsp;% verteilen sich auf weitere Tokens („…“).</p>
+            </details>
+        </div>
+
+<h2>2. Bezug zu neuronalen Netzen</h2>
+
+<p>Moderne Sprachmodelle sind (sehr große) neuronale Netze (11.8), die nach der sogenannten <strong>Transformer-Architektur</strong> aufgebaut sind. Das Grundprinzip aus dem Kapitel zu neuronalen Netzen gilt auch hier: gewichtete Verbindungen, die durch Training auf riesigen Datenmengen angepasst werden. Der Unterschied ist vor allem die schiere Größe: Aktuelle Sprachmodelle bestehen aus Milliarden, teils (nach Schätzungen) über einer Billion trainierbarer Parameter (Gewichte) und werden auf Textmengen trainiert, die kein Mensch in einem Leben lesen könnte.</p>
+
+<h2>3. Prompting: Wie man mit einem Sprachmodell „spricht“</h2>
+
+<p>Der Text, den du in ein Chatbot-Fenster eingibst, heißt <strong>Prompt</strong>. Das Modell behandelt deinen Prompt als „bisherigen Text“ und setzt ihn fort – bei einer Frage bedeutet die wahrscheinlichste Fortsetzung meist eine passende Antwort, weil das Modell in seinen Trainingsdaten unzählige Beispiele für Frage-Antwort-Muster gesehen hat und zusätzlich darauf trainiert wurde, hilfreich zu antworten.</p>
+
+<h2>4. Grenzen und Risiken</h2>
+
+<ul>
+            <li><strong>Halluzinationen:</strong> Das Modell erzeugt manchmal selbstsicher klingende, aber komplett erfundene oder falsche Aussagen – z.&nbsp;B. nicht existierende Quellenangaben oder falsche Fakten. Das passiert, weil das Modell immer eine möglichst wahrscheinliche Fortsetzung liefert, auch wenn es „eigentlich“ keine verlässliche Antwort kennt.</li>
+            <li><strong>Wissensstand:</strong> Die Trainingsdaten haben einen Stichtag – Ereignisse danach kennt das Modell nicht, sofern es nicht zusätzlich auf aktuelle Quellen zugreifen kann.</li>
+            <li><strong>Bias:</strong> Vorurteile und Schieflagen, die in den Trainingstexten stecken, können vom Modell übernommen und wiedergegeben werden (siehe auch Seite 11.11 „KI und Gesellschaft“).</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Ein bekannter, echter Fall</summary>
+                <p>2023 reichte ein New Yorker Anwalt einen mit ChatGPT erstellten Schriftsatz bei Gericht ein – der Chatbot hatte darin mehrere Gerichtsfälle als Belege zitiert, die es nie gegeben hatte. Der Richter bemerkte es, und es hatte rechtliche Konsequenzen für den Anwalt. Ein gutes Beispiel dafür, dass Halluzinationen kein theoretisches, sondern ein reales Problem sind.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Wie eine Halluzination entstehen kann, siehst du schon an einem winzigen Sprachmodell, das nur Häufigkeiten zählt (ein Bigramm-Modell, also ein n-Gramm-Modell mit n = 2, wie im Notebook in Abschnitt 7). Es betrachtet immer nur das <em>letzte</em> Wort und wurde mit diesem Text trainiert (vier Sätze, Satzzeichen zählen als eigenes Token):</p>
+            <pre><code>dresden liegt an der elbe .
+leipzig liegt an der pleiße .
+meißen liegt an der elbe .
+pirna liegt an der elbe .</code></pre>
+            <p>Das Modell soll den Prompt „leipzig liegt an der“ um ein Wort fortsetzen.</p>
+            <ol>
+                <li><strong>Was:</strong> Für das letzte Wort des Prompts („der“) zählen, welche Wörter im Trainingstext direkt darauf folgen: „elbe“ 3-mal, „pleiße“ 1-mal, zusammen 4. – <em>warum:</em> Ein Bigramm-Modell kennt nur diese Zählung; alles, was weiter vorn im Prompt steht, sieht es nicht.</li>
+                <li><strong>Was:</strong> Häufigkeiten in Wahrscheinlichkeiten umrechnen: P(elbe | der) = 3 / 4 = 0,75 und P(pleiße | der) = 1 / 4 = 0,25. – <em>warum:</em> Teilt man jede Anzahl durch die Gesamtzahl, ergibt sich die Wahrscheinlichkeitsverteilung für das nächste Token.</li>
+                <li><strong>Was:</strong> Das wahrscheinlichste Token wählen: „elbe“. – <em>warum:</em> Das ist die Auswahlregel aus Beispiel 1 ohne Zufall.</li>
+                <li><strong>Was:</strong> Den entstandenen Satz prüfen: „leipzig liegt an der elbe .“ – <em>warum:</em> Hier liegt die Falle: Der Satz ist grammatisch einwandfrei und klingt plausibel, ist aber falsch, denn Leipzig liegt nicht an der Elbe (der Trainingstext sagt: an der Pleiße). Der Satz kommt im Trainingstext nicht einmal vor; das Modell hat ihn aus häufigen Mustern neu zusammengesetzt, weil „der → elbe“ häufiger war als „der → pleiße“.</li>
+                <li><strong>Was:</strong> Mit Sampling statt fester Auswahl rechnen: In etwa 75 von 100 Durchläufen entsteht der falsche, in etwa 25 der richtige Satz. – <em>warum:</em> Zufall ändert nichts an der Ursache; das Modell hat keine Vorstellung davon, ob eine Aussage stimmt, sondern nur davon, was häufig aufeinanderfolgt.</li>
+            </ol>
+            <p>Das kleine Programm zählt die Folgewörter und wählt das wahrscheinlichste aus:</p>
+            <pre><code class="language-python">korpus = ["dresden liegt an der elbe .",
+          "leipzig liegt an der pleiße .",
+          "meißen liegt an der elbe .",
+          "pirna liegt an der elbe ."]
+
+def folgewoerter(korpus, wort):
+    """Zählt, wie oft jedes Wort direkt auf wort folgt."""
+    zaehler = {}
+    for satz in korpus:
+        tokens = satz.split()
+        for i in range(len(tokens) - 1):
+            if tokens[i] == wort:
+                naechstes = tokens[i + 1]
+                zaehler[naechstes] = zaehler.get(naechstes, 0) + 1
+    return zaehler
+
+def wahrscheinlichkeiten(korpus, wort):
+    """Rechnet die Anzahlen in Wahrscheinlichkeiten um."""
+    zaehler = folgewoerter(korpus, wort)
+    gesamt = sum(zaehler.values())
+    ergebnis = {}
+    for w in zaehler:
+        ergebnis[w] = zaehler[w] / gesamt
+    return ergebnis
+
+def wahrscheinlichstes_wort(korpus, text):
+    """Bigramm-Modell: betrachtet nur das letzte Wort des Textes."""
+    letztes = text.split()[-1]
+    p = wahrscheinlichkeiten(korpus, letztes)
+    return max(p, key=p.get)
+
+# Testfälle (erwartete Ausgabe als Kommentar)
+print(folgewoerter(korpus, "der"))                        # {'elbe': 3, 'pleiße': 1}
+print(wahrscheinlichkeiten(korpus, "der"))                # {'elbe': 0.75, 'pleiße': 0.25}
+print(wahrscheinlichkeiten(korpus, "liegt"))              # {'an': 1.0}
+print(wahrscheinlichstes_wort(korpus, "leipzig liegt an der"))  # elbe</code></pre>
+            <p><strong>Ergebnis:</strong> Das Modell setzt „leipzig liegt an der“ mit „elbe“ fort (Wahrscheinlichkeit 0,75) und erzeugt damit eine flüssige, aber falsche Aussage – eine Halluzination im Kleinen.</p>
+            <p><strong>Kontrolle:</strong> 0,75 + 0,25 = 1, die Verteilung ist vollständig. Ein echtes LLM berücksichtigt zwar viel mehr Kontext als ein Wort und hätte „Leipzig“ im Blick, der Mechanismus ist aber derselbe: Bei Fakten, die in den Trainingsdaten selten vorkommen, kann ein häufiges, ähnliches Muster „gewinnen“. Deshalb gilt: Aussagen eines Sprachmodells immer an einer echten Quelle prüfen.</p>
+            </details>
+        </div>
+
+<h2>5. Warum Antworten „objektiv“ klingen, es aber nicht sind</h2>
+
+<p>Chatbot-Antworten sind oft flüssig formuliert und wirken dadurch autoritativ und sachlich – das täuscht aber über etwas Wichtiges hinweg: In jedem Sprachmodell stecken viele <strong>subjektive Entscheidungen</strong>. Welche Texte wurden zum Training ausgewählt? Wie wurde das Modell in der Nachtrainingsphase (Feinabstimmung) auf bestimmte Antwortstile getrimmt? Welche Regeln haben die Entwicklerinnen und Entwickler dem Modell vorgegeben? Nichts davon ist im glatten, selbstsicheren Ton einer Antwort sichtbar.</p>
+
+<h2>6. Verantwortungsvoller Umgang</h2>
+
+<p>Ein paar Grundregeln, die sich direkt aus den Grenzen oben ergeben:</p>
+
+<ul>
+            <li><strong>Fakten prüfen statt blind übernehmen:</strong> Besonders bei Quellenangaben, Zahlen und Daten lohnt sich ein Blick in eine echte Quelle, bevor du eine KI-Antwort verwendest.</li>
+            <li><strong>Transparent sein:</strong> In eurem Abschlussprojekt müsst ihr ohnehin dokumentieren, wo ihr KI-Werkzeuge genutzt habt (siehe Seite 10.6 „Projektdokumentation“) – das ist keine Ausnahme, sondern zunehmend gängige Praxis, auch im Berufsleben.</li>
+            <li><strong>Die Grenze zwischen Hilfsmittel und Täuschung kennen:</strong> Sich beim Verstehen eines Themas von einem Chatbot helfen zu lassen, ist etwas anderes, als unverstandenen Text als eigene Leistung auszugeben.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Regulierung</summary>
+                <p>Generative KI unterliegt inzwischen auch gesetzlichen Regeln, allen voran dem EU AI Act (z.&nbsp;B. Pflichten für Anbieter von KI-Modellen mit allgemeinem Verwendungszweck und Transparenzpflichten für KI-generierte Inhalte). Mehr dazu, inklusive der gestaffelten Geltung, findest du auf der Seite 11.11 KI und Gesellschaft.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Generative KI im Beruf</summary>
+                <p><strong>Alltag:</strong> Die Autovervollständigung deiner Handytastatur ist ein kleines Sprachmodell – sie schlägt das wahrscheinlich nächste Wort vor.</p>
+                <p><strong>Beruf:</strong> In vielen Unternehmen entstehen gerade Rollen rund um generative KI: <strong>ML Engineers</strong> binden Sprachmodelle an firmeneigene Dokumente an, damit Mitarbeitende interne Handbücher befragen können; Fachleute für KI-Governance prüfen, ob dabei Datenschutz, Urheberrecht und der AI Act eingehalten werden. Auch der Mittelstand in Sachsen nutzt Sprachmodelle, z.&nbsp;B. für Kundenanfragen oder technische Dokumentation.</p>
+            </details>
+        </div>
+
+<h2>7. Praktische Umsetzung: ein eigenes, winziges Sprachmodell</h2>
+
+<p>Im folgenden Notebook baust du selbst ein stark vereinfachtes Sprachmodell (ein sogenanntes n-Gramm-Modell), das nach demselben Grundprinzip funktioniert wie ein LLM – nur ohne neuronales Netz, nur mit einfacher Häufigkeitszählung. Das macht das Prinzip „Wahrscheinlichkeit für das nächste Wort“ ganz konkret erlebbar.</p>
+
+<p>Lade das folgende Notebook herunter: <a href="../notebooks/11-10_generative_ki_ngramm.ipynb" download="">Notebook „Generative KI“</a>.</p>
+
+<p><strong>Weiterführend (Projektthema „Eigenes Sprachmodell trainieren“):</strong> Im Notebook <a href="../notebooks/11-10b_eigenes_sprachmodell.ipynb" download>11-10b_eigenes_sprachmodell.ipynb herunterladen</a> trainierst du selbst ein Zeichen-Sprachmodell auf rund 400 sächsischen Ortsnamen – erst durch Zählen, dann als kleines neuronales Netz mit Gradientenabstieg – und lässt es neue, sächsisch klingende Ortsnamen erfinden. Es greift Softmax, Temperatur und Verlust aus dem KI-Kickstart (11.0) auf; die Erklärungen stehen vollständig im Notebook, Teile des Codes ergänzt du selbst und prüfst sie mit Testzellen.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Sprachmodell</strong> – im Kern eine riesige Wahrscheinlichkeitsverteilung über „welches Token kommt als Nächstes“, gelernt aus gigantischen Textmengen. Texte entstehen, indem das Modell Token für Token eine Fortsetzung auswählt und anhängt.</p>
+        </div>
+
+<div class="merke">
+            <p>Eine überzeugend klingende Antwort ist keine Garantie für eine richtige oder neutrale Antwort. Das gilt für Sprachmodelle genauso wie für alle anderen KI-Modelle, die du in diesem Kurs kennengelernt hast (siehe auch Seite 11.11 „KI und Gesellschaft“, Abschnitt „Scheinbare Objektivität“).</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.10.1: Quellenabgleich <span class="niveau">AFB II</span></summary>
+                <p>Stelle einem Chatbot deiner Wahl eine Sachfrage zu einem Thema, das du gut kennst oder gut recherchieren kannst. Gleiche die Antwort mit einer echten, zitierfähigen Quelle ab. Stimmen alle Details? Notiere Abweichungen, falls es welche gibt.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.10.3: Notebook bearbeiten <span class="niveau">AFB II</span></summary>
+                <p>Öffne das Notebook in JupyterLite (siehe Seite 10.4) und bearbeite alle enthaltenen Aufgaben. Vergleiche am Ende gezielt, was dein einfaches Modell mit einem echten LLM gemeinsam hat und was komplett anders ist.</p>
+            </details>
+        </div>

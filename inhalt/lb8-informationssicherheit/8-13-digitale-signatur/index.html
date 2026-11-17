@@ -1,0 +1,138 @@
+<p>Digitale Signaturen sichern elektronische Dokumente, Nachrichten und Transaktionen. Ähnlich wie eine handschriftliche Unterschrift auf Papier soll eine digitale Signatur die <strong>Authentizität</strong> (wer hat es erstellt?), die <strong>Integrität</strong> (wurde es verändert?) und die <strong>Verbindlichkeit</strong> (kann der Absender es abstreiten?) digitaler Daten gewährleisten.</p>
+
+<h2>Authentizität: Das asymmetrische Prinzip umgedreht</h2>
+
+<p>Um die Echtheit eines Dokuments zu bestätigen, braucht der Absender etwas, das nur er besitzt und mit dessen Hilfe ihn andere eindeutig erkennen können: seinen privaten Schlüssel.</p>
+
+<p>Beim Verschlüsseln verwendet man den öffentlichen Schlüssel des Empfängers. Beim Signieren ist es umgekehrt: Der Absender wendet seinen <em>privaten</em> Schlüssel an – bei RSA kann man sich das vereinfacht als „Verschlüsseln mit dem privaten Schlüssel“ vorstellen. Jeder kann das Ergebnis mit dem <em>öffentlichen</em> Schlüssel des Absenders prüfen. Da der private Schlüssel geheim ist, ist die Herkunft der Nachricht bestätigt. Signierte Dokumente können beliebig viele Personen prüfen, da der öffentliche Schlüssel für alle verfügbar ist.</p>
+
+<h2>Integrität: Hashfunktion</h2>
+
+<p>Für die Integrität nutzt die digitale Signatur eine kryptographische Hashfunktion wie SHA-256. Sie berechnet aus dem Dokument einen kurzen Hashwert fester Länge, eine Art Fingerabdruck. Ein Hashwert ist nicht eindeutig, aber es ist praktisch unmöglich, ein zweites Dokument mit demselben Hashwert zu finden. Die Eigenschaften von Hashfunktionen findest du ausführlich in <strong>8.12</strong>.</p>
+
+<h3>Ablauf von Signieren und Prüfen</h3>
+
+<ol>
+            <li><strong>Signieren:</strong> Der Absender berechnet den Hashwert der Nachricht und signiert ihn mit seinem <strong>privaten</strong> Schlüssel. Er sendet Nachricht und Signatur.</li>
+            <li><strong>Prüfen:</strong> Der Empfänger wendet den <strong>öffentlichen Schlüssel des Absenders</strong> auf die Signatur an und erhält den ursprünglichen Hashwert (<strong>Authentizität</strong>). Anschließend berechnet er selbst den Hashwert der empfangenen Nachricht und vergleicht beide. Stimmen sie überein, ist die Nachricht unverändert (<strong>Integrität</strong>).</li>
+        </ol>
+
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation (Mini-RSA):</strong> Alice hat den öffentlichen Schlüssel (e, n) = (3, 33) und den privaten Schlüssel d = 7. Der Hashwert ihres Dokuments sei h = 4 (echte Hashwerte sind natürlich viel länger).</p>
+            <ol>
+                <li><strong>Signieren mit dem privaten Schlüssel:</strong> s = h<sup>d</sup> mod n = 4⁷ mod 33. Schrittweise: 4² = 16, 4⁴ = 256 ≡ 25, 4⁷ = 4⁴ · 4² · 4 ≡ 25 · 16 · 4 = 1600 ≡ <strong>16</strong>. <em>Warum der private Schlüssel?</em> Nur Alice kann so rechnen.</li>
+                <li><strong>Senden:</strong> Alice schickt das Dokument und die Signatur s = 16.</li>
+                <li><strong>Prüfen mit Alices öffentlichem Schlüssel:</strong> s<sup>e</sup> mod n = 16³ mod 33 = 4096 mod 33 = 4. Der Empfänger berechnet selbst den Hashwert des Dokuments, ebenfalls 4.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Beide Werte stimmen überein, die Signatur ist gültig.<br>
+            <strong>Kontrolle:</strong> Jeder kann diese Prüfung durchführen, denn dafür braucht man nur den öffentlichen Schlüssel.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation (Software-Update):</strong> Ein Hersteller verteilt ein Update über viele Server, die er nicht alle kontrolliert. Ein Angreifer versucht, ein manipuliertes Update unterzuschieben.</p>
+            <ol>
+                <li><strong>Signieren beim Hersteller:</strong> Er berechnet den Hashwert des Updates und signiert ihn mit seinem privaten Schlüssel, der in einem besonders geschützten System liegt.</li>
+                <li><strong>Öffentlichen Schlüssel sicher bekannt machen:</strong> Dein Betriebssystem kennt den öffentlichen Schlüssel des Herstellers bereits aus einem Zertifikat. <em>Warum wichtig?</em> Sonst könnte der Angreifer einen eigenen öffentlichen Schlüssel mitliefern.</li>
+                <li><strong>Prüfen vor der Installation:</strong> Das Betriebssystem berechnet den Hashwert des heruntergeladenen Updates und vergleicht ihn mit dem Wert, den es aus der Signatur und dem öffentlichen Schlüssel erhält.</li>
+                <li><strong>Angriff scheitert:</strong> Ändert der Angreifer auch nur ein Byte, passt der Hashwert nicht mehr. Eine passende neue Signatur kann er ohne den privaten Schlüssel nicht erzeugen. Das Update wird abgelehnt.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Integrität und Authentizität des Updates sind gesichert, auch wenn es über unsichere Wege kommt.<br>
+            <strong>Falle:</strong> Die Sicherheit hängt vollständig am privaten Schlüssel des Herstellers. Wird er gestohlen, kann der Angreifer „echt“ signierte Schadsoftware verteilen; dann muss das Zertifikat widerrufen werden.</p>
+            </details>
+        </div>
+
+<h2>Vertrauen in den öffentlichen Schlüssel: Zertifikate</h2>
+
+<p>Ein verbleibendes Sicherheitsrisiko ist die Frage, ob ein öffentlicher Schlüssel wirklich zu der Person gehört, die er zu gehören vorgibt.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Man-in-the-Middle-Angriff</summary>
+                <p>Bei einem Man-in-the-Middle-Angriff (MitM-Angriff) fängt ein Angreifer die Kommunikation zwischen zwei Parteien ab, liest mit und manipuliert sie, ohne dass die beiden es bemerken. Er schiebt sich „in die Mitte“ und gibt sich gegenüber jeder Seite als die jeweils andere aus. Bei der Signatur könnte er z.&nbsp;B. seinen eigenen öffentlichen Schlüssel als den des Absenders ausgeben.</p>
+            </details>
+        </div>
+
+<p>Zertifikate ermöglichen es, die Identität einer Person, einer Organisation oder einer Webseite zu überprüfen. Ein Zertifikat bestätigt, dass ein bestimmter öffentlicher Schlüssel zu einem bestimmten Inhaber gehört; es enthält u.&nbsp;a. den Namen des Inhabers, seinen öffentlichen Schlüssel, die Gültigkeitsdauer und die Signatur der ausstellenden Zertifizierungsstelle (CA).</p>
+
+<h3>Ablauf der Zertifikaterstellung</h3>
+
+<ol>
+            <li>Eine Organisation erstellt ein Schlüsselpaar.</li>
+            <li>Die Organisation sendet ihren öffentlichen Schlüssel an eine vertrauenswürdige Zertifizierungsstelle (CA).</li>
+            <li>Die CA überprüft die Identität der Organisation und erstellt ein digitales Zertifikat.</li>
+            <li>Die CA signiert das Zertifikat mit <strong>ihrem privaten Schlüssel</strong> und sendet es an die Organisation zurück.</li>
+        </ol>
+
+<h3>Prüfen einer signierten Nachricht mit Zertifikat</h3>
+
+<p>Der Inhaber eines Zertifikats kann seine Nachrichten signieren und das Zertifikat mitschicken. Der Empfänger</p>
+
+<ol>
+            <li>prüft zunächst die Signatur des Zertifikats mit dem <strong>öffentlichen Schlüssel der CA</strong>. Diesen kennt er bereits, weil die Zertifikate vertrauenswürdiger Wurzel-CAs im Betriebssystem oder Browser vorinstalliert sind; oft führt eine Kette über Zwischenzertifikate bis zu einer solchen Wurzel-CA,</li>
+            <li>prüft Name, Gültigkeitsdauer und ob das Zertifikat widerrufen wurde,</li>
+            <li>verwendet danach den im Zertifikat enthaltenen <strong>öffentlichen Schlüssel des Absenders</strong>, um die Signatur der Nachricht zu prüfen.</li>
+        </ol>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Signaturen im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Beim HTTPS-Schloss prüft dein Browser in Millisekunden eine ganze Zertifikatskette bis zu einer vorinstallierten Wurzel-CA; ist etwas faul, erscheint die Warnung „Diese Verbindung ist nicht sicher“. App-Stores und Betriebssysteme installieren nur signierte Updates. Mit dem Personalausweis und einer entsprechenden App kannst du Verträge sogar rechtsverbindlich qualifiziert elektronisch signieren (eIDAS-Verordnung der EU).
+                </p>
+                <p>
+                    <strong>Beruf:</strong> In Trustcentern wie D-Trust, einer Tochter der Bundesdruckerei, prüfen Mitarbeitende die Identität von Antragstellern und betreiben die hochgesicherten Systeme, in denen die privaten Schlüssel der CAs liegen. In Unternehmen verwalten PKI-Administratorinnen und -Administratoren die internen Zertifikate; ein abgelaufenes Zertifikat kann einen ganzen Onlineshop lahmlegen.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Digitale Signatur:</strong> Die Signatur wird mit dem <strong>privaten Schlüssel des Absenders</strong> erzeugt und mit dem <strong>öffentlichen Schlüssel des Absenders</strong> geprüft.<br>
+                Weil nur der Absender seinen privaten Schlüssel besitzt, kann nur er die Signatur erzeugt haben (Authentizität, Verbindlichkeit). Weil die Signatur vom Hashwert des Dokuments abhängt, fällt jede Änderung auf (Integrität).
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>MAC oder Signatur?</strong> Ein Message Authentication Code (MAC) wird mit einem <em>gemeinsamen</em> geheimen Schlüssel berechnet. Er sichert Integrität und Authentizität zwischen zwei Partnern, aber <strong>keine Verbindlichkeit</strong>: Da beide den Schlüssel kennen, könnte auch der Empfänger den MAC erzeugt haben. Nur die digitale Signatur mit einem privaten Schlüssel, den allein der Absender besitzt, liefert Nichtabstreitbarkeit.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Vertrauenskette:</strong> Der öffentliche Schlüssel des Absenders wird durch die Signatur der CA bestätigt, der öffentliche Schlüssel der CA durch eine übergeordnete CA bis hin zur Wurzel-CA, der man ausdrücklich vertraut. Diese Infrastruktur heißt Public-Key-Infrastruktur (PKI).
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.13.1: Signatur und Unterschrift <span class="niveau">AFB II</span></summary>
+                <ul>
+                    <li>Vergleiche das Verfahren der digitalen Signatur mit der klassischen Unterschrift auf Dokumenten.</li>
+                    <li>Asymmetrische Verfahren haben Nachteile. Erläutere, wie diese beim Signieren umgangen werden.</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.13.2: Mini-RSA-Signatur <span class="niveau">AFB II</span></summary>
+                <p>Alice verwendet den öffentlichen Schlüssel (3, 33) und den privaten Schlüssel d = 7.</p>
+                <ol type="a">
+                    <li>Signiere den Hashwert h = 5.</li>
+                    <li>Bob erhält die Nachricht und die Signatur. Prüfe die Signatur.</li>
+                    <li>Ein Angreifer ändert die Nachricht, ihr Hashwert ist nun 6; die Signatur lässt er unverändert. Zeige, dass Bob die Manipulation erkennt.</li>
+                </ol>
+            </details>
+        </div>

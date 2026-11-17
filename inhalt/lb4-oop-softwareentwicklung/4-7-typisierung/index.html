@@ -1,0 +1,221 @@
+<p>
+    Python ist eine dynamisch typisierte Sprache. Das bedeutet: Du <em>musst</em> keine Typen angeben, der Typ einer Variablen ergibt sich erst beim Ausführen aus ihrem Wert. Trotzdem ist es sehr sinnvoll, Typen freiwillig anzugeben – mit sogenannten <strong>Typhinweisen</strong> (engl. type hints).
+</p>
+
+<p>
+    Gerade bei größeren Programmen, bei Klassen und bei der Zusammenarbeit mit anderen helfen Typen enorm dabei, Code zu verstehen und Fehler zu vermeiden.
+</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in zwei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe mit.</p>
+
+<ol class="schritte">
+    <li><a href="#schritt-1">Typhinweise lesen und schreiben</a> – danach Aufgabe 4.7.1 bis 4.7.3</li>
+    <li><a href="#schritt-2">Was Python prüft – und was nicht</a> – danach Aufgabe 4.7.4</li>
+</ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Typhinweise lesen und schreiben</h2>
+
+<p>Typhinweise stehen hinter einem Doppelpunkt (<code>zahl: int</code>), der Rückgabetyp steht hinter einem Pfeil (<code>-&gt; bool</code>). Im Video liest du zuerst die Typhinweise einer Funktion, dann die einer Klasse. Kurz erklärt werden <code>type(…)</code> und <code>str | None</code>. Achte im Speicherbild darauf, welchen Wert das Attribut <code>projekt</code> am Anfang hat.</p>
+
+<figure>
+    <div class="lp-video"><video controls preload="none" poster="../vid/4-7-1_typhinweise_vorschau.png" src="../vid/4-7-1_typhinweise.mp4"></video><a href="../vid/4-7-1_typhinweise.mp4">Video ansehen</a></div>
+    <figcaption>Video 1: Typhinweise lesen und schreiben (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+</figure>
+
+<h3>Zum Nachlesen: Typisierung bei Funktionen</h3>
+
+<p>Bei Funktionen gibst du Typen für Parameter und Rückgabewerte an:</p>
+
+<pre><code class="language-python">def ist_positiv(zahl: int) -&gt; bool:
+    return zahl &gt; 0</code></pre>
+
+<p>So ist klar: Die Funktion erwartet eine ganze Zahl und liefert einen Wahrheitswert zurück.</p>
+
+<h3>Zum Nachlesen: Typisierung bei Klassen – unser Ansatz</h3>
+
+<p>
+    Bei Klassen führen wir Typisierung direkt im <strong>Konstruktor</strong> ein. Die Typen werden dabei <strong>direkt bei der Initialisierung der Attribute</strong> angegeben.
+</p>
+
+<pre><code class="language-python">class Schueler:
+    def __init__(self, name: str, klasse: int):
+        self.name: str = name
+        self.klasse: int = klasse
+        self.projekt: str | None = None</code></pre>
+
+<h4>Was passiert hier genau?</h4>
+
+<ul>
+    <li><code>name: str</code> beim Parameter legt fest, welcher Typ übergeben werden soll.</li>
+    <li><code>self.name: str = name</code> sagt ausdrücklich: Das Attribut <code>name</code> ist ein Text.</li>
+    <li><code>projekt: str | None</code> zeigt: Das Attribut kann leer sein (z.&nbsp;B. zu Beginn).</li>
+</ul>
+
+<h4>Warum ist diese Schreibweise sinnvoll?</h4>
+
+<ul>
+    <li><strong>Alles an einem Ort:</strong> Typ und Startwert stehen direkt zusammen.</li>
+    <li><strong>Sehr gut lesbar:</strong> Man sieht sofort, welche Attribute eine Klasse hat.</li>
+    <li><strong>Praxisnah:</strong> Diese Schreibweise wird in echten Python-Projekten häufig verwendet.</li>
+    <li><strong>IDE-Unterstützung:</strong> Autovervollständigung und Fehlerhinweise funktionieren besser.</li>
+    <li><strong>Besonders wichtig bei <code>None</code>:</strong> Ohne Typangabe wäre unklar, was später erlaubt ist.</li>
+</ul>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Typ am Parameter und am Attribut</summary>
+        <p>Auch wenn der Typ bereits beim Parameter steht, ist die zusätzliche Typangabe beim Attribut sinnvoll. Das Attribut kann später auch an anderer Stelle geändert werden.</p>
+    </details>
+</div>
+
+<h3>Zum Nachlesen: Komplexere Typen</h3>
+
+<p>Ab Python 3.10 kannst du mehrere mögliche Typen mit dem Zeichen <code>|</code> angeben:</p>
+
+<pre><code class="language-python">def ausgabe(wert: int | float) -&gt; None:
+    print("Wert:", wert)</code></pre>
+
+<p><code>int | float</code> bedeutet: Der Wert kann entweder eine ganze Zahl oder eine Kommazahl sein. <code>-&gt; None</code> kennzeichnet eine Prozedur ohne Rückgabewert.</p>
+
+<p>Danach: <a href="uebungen.html#a-4-7-1">Aufgabe 4.7.1</a> – Typen ergänzen, <a href="uebungen.html#a-4-7-2">Aufgabe 4.7.2</a> – Klasse Buch typisieren und <a href="uebungen.html#a-4-7-3">Aufgabe 4.7.3</a> – Klasse Rechner.</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Was Python prüft – und was nicht →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Was Python prüft – und was nicht</h2>
+
+<p>Typhinweise sind Hinweise, keine Kontrolle. Im Video werden die Funktionen und die Klasse aus Schritt 1 und die Funktion <code>finde_index</code> aus Beispiel 1 mit falschen Typen aufgerufen. Achte darauf, wann es <em>keine</em> Fehlermeldung gibt, wann ein Fehler erst an einer ganz anderen Stelle auftaucht – und wann einfach ein falsches Ergebnis herauskommt.</p>
+
+<figure>
+    <div class="lp-video"><video controls preload="none" poster="../vid/4-7-2_pruefen_vorschau.png" src="../vid/4-7-2_pruefen.mp4"></video><a href="../vid/4-7-2_pruefen.mp4">Video ansehen</a></div>
+    <figcaption>Video 2: Was Python prüft – und was nicht (ca. 1,5 min)</figcaption>
+</figure>
+
+<h3>Zum Nachlesen: Listen und optionale Rückgabewerte</h3>
+
+<p>Seit Python 3.9 kannst du die eingebauten Typen direkt verwenden: <code>list[str]</code>, <code>dict[str, int]</code>, <code>tuple[int, int]</code>. Seit Python 3.10 schreibst du optionale Werte als <code>int | None</code>. Das Modul <code>typing</code> mit <code>List</code> und <code>Optional</code> brauchst du nur noch für ältere Python-Versionen; in älterem Code wirst du diese Schreibweise aber oft sehen.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> moderne Schreibweise (ab Python 3.10, z.&nbsp;B. in Thonny)</summary>
+    <p><strong>Ausgangssituation:</strong> Eine Funktion soll die Position eines Namens in einer Namensliste liefern. Kommt der Name nicht vor, gibt es keine Position.</p>
+    <pre><code class="language-python">def finde_index(name: str, namen: list[str]) -&gt; int | None:
+    if name in namen:
+        return namen.index(name)
+    return None</code></pre>
+    <ol>
+        <li><strong>Parameter typisieren:</strong> <code>name: str</code> und <code>namen: list[str]</code>. Warum: Wer die Funktion aufruft, sieht sofort, dass eine Liste von Texten erwartet wird – nicht etwa ein einzelner Text mit Kommas.</li>
+        <li><strong>Alle Rückgabewege prüfen:</strong> Im ersten Fall wird ein Index (<code>int</code>) zurückgegeben, im zweiten <code>None</code>. Warum: Der Rückgabetyp muss <em>jeden</em> möglichen Ausgang abdecken.</li>
+        <li><strong>Rückgabetyp festlegen:</strong> <code>-&gt; int | None</code>. Warum: So weiß der Aufrufer, dass er den Fall <code>None</code> behandeln muss, bevor er mit dem Ergebnis rechnet.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong> Die Signatur <code>finde_index(name: str, namen: list[str]) -&gt; int | None</code> beschreibt die Funktion vollständig.</p>
+    <p><strong>Kontrolle:</strong></p>
+    <table class="gitter">
+        <tr><th>Aufruf</th><th>erwartete Rückgabe</th></tr>
+        <tr><td><code>finde_index("Ben", ["Mia", "Ben"])</code></td><td>1</td></tr>
+        <tr><td><code>finde_index("Tom", ["Mia", "Ben"])</code></td><td>None</td></tr>
+        <tr><td><code>finde_index("Mia", [])</code></td><td>None (leere Liste)</td></tr>
+    </table>
+    <p>Gleichwertige ältere Schreibweise mit dem Modul <code>typing</code>:</p>
+    <pre><code class="language-python">from typing import List, Optional
+
+def finde_index(name: str, namen: List[str]) -&gt; Optional[int]:
+    ...</code></pre>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Typhinweise mit verschachtelten Typen und eigener Klasse</summary>
+    <p><strong>Ausgangssituation:</strong> Ein Kurs soll zu jedem Namen beliebig viele Punktzahlen speichern und den Namen mit dem besten Durchschnitt liefern. Das Klassendiagramm mit Typen:</p>
+    <table class="gitter" aria-label="UML-Klassendiagramm Kurs">
+        <tr><th>Kurs</th></tr>
+        <tr><td>+ fach: str<br>+ noten: dict[str, list[int]]</td></tr>
+        <tr><td>+ eintragen(name: str, punkte: int): None<br>+ bester(): tuple[str, float] | None</td></tr>
+    </table>
+    <pre><code class="language-python">class Kurs:
+    def __init__(self, fach: str):
+        self.fach: str = fach
+        self.noten: dict[str, list[int]] = {}      # Name -&gt; Liste von Punkten
+
+    def eintragen(self, name: str, punkte: int) -&gt; None:
+        self.noten.setdefault(name, []).append(punkte)
+
+    def bester(self) -&gt; tuple[str, float] | None:
+        if not self.noten:
+            return None
+        name = max(self.noten, key=lambda n: sum(self.noten[n]) / len(self.noten[n]))
+        return name, sum(self.noten[name]) / len(self.noten[name])
+
+lk = Kurs("Informatik")
+lk.eintragen("Mia", 13)
+lk.eintragen("Mia", 11)
+lk.eintragen("Ben", 14)
+print(lk.bester())      # ('Ben', 14.0)</code></pre>
+    <ol>
+        <li><strong>Verschachtelten Typ lesen:</strong> <code>dict[str, list[int]]</code> heißt: Schlüssel sind Namen, Werte sind Listen von Punktzahlen. Warum: Ohne diese Angabe müsste man den ganzen Code lesen, um herauszufinden, was in <code>noten</code> steckt.</li>
+        <li><strong>Eintragen nachvollziehen:</strong> <code>setdefault(name, [])</code> liefert die vorhandene Liste oder legt eine leere an. Nach den drei Aufrufen gilt <code>noten == {"Mia": [13, 11], "Ben": [14]}</code>.</li>
+        <li><strong>Besten bestimmen:</strong> <code>max</code> vergleicht die Durchschnitte: Mia (13 + 11) / 2 = 12.0, Ben 14 / 1 = 14.0. Ben gewinnt, zurückgegeben wird das Tupel <code>("Ben", 14.0)</code>.</li>
+        <li><strong>Sonderfall leerer Kurs:</strong> Ohne Einträge gibt es keinen Besten. Deshalb lautet der Rückgabetyp <code>tuple[str, float] | None</code> und nicht nur <code>tuple[str, float]</code>.</li>
+        <li><strong>Falle – Python prüft die Typen nicht:</strong> <code>lk.eintragen("Tom", "15")</code> läuft ohne Fehlermeldung, obwohl <code>punkte: int</code> verlangt ist. Erst der nächste Aufruf <code>lk.bester()</code> bricht ab: <code>sum(["15"])</code> löst <code>TypeError: unsupported operand type(s) for +: 'int' and 'str'</code> aus. Der Fehler zeigt sich also an einer ganz anderen Stelle als dort, wo er gemacht wurde. Ein Prüfwerkzeug wie <code>mypy</code> meldet ihn dagegen schon in der Zeile mit <code>eintragen</code>.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong> Ausgabe <code>('Ben', 14.0)</code>. Die Typangaben dokumentieren den Aufbau der Daten und machen den Sonderfall <code>None</code> sichtbar.</p>
+    <p><strong>Kontrolle:</strong></p>
+    <table class="gitter">
+        <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+        <tr><td><code>print(Kurs("Physik").bester())</code></td><td>None</td></tr>
+        <tr><td>wie oben, zusätzlich <code>lk.eintragen("Ben", 10)</code>, dann <code>print(lk.bester())</code></td><td><code>('Mia', 12.0)</code> (Ben jetzt 12.0, bei Gleichstand liefert <code>max</code> den zuerst eingetragenen Namen)</td></tr>
+    </table>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-4-7-4">Aufgabe 4.7.4</a> – Notenliste. Zum Vertiefen passt <a href="vertiefung.html#a-4-7-6">Aufgabe 4.7.6</a> – Typangaben, die lügen.</p>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Typen in großen Projekten</summary>
+        <p>
+            <strong>Alltag:</strong> Ein Formular, das bei „Geburtsdatum“ nur ein Datum annimmt, verhindert Eingabefehler – Typhinweise tun dasselbe für Programmcode.<br><br>
+            <strong>Beruf:</strong> In großen Python-Projekten (z.&nbsp;B. bei Instagram oder Dropbox) wurden Typhinweise nachträglich eingeführt, weil Fehler mit falschen Typen sonst erst beim Kunden auftraten. In vielen Firmen prüft ein Werkzeug wie <code>mypy</code> vor jeder Veröffentlichung automatisch, ob alle Typangaben zusammenpassen.
+        </p>
+    </details>
+</div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+    Typhinweise beschreiben, welche Typen Parameter (<code>zahl: int</code>), Rückgabewerte (<code>-&gt; bool</code>) und Attribute (<code>self.name: str = name</code>) haben sollen. Mit <code>|</code> gibst du mehrere mögliche Typen an, z.&nbsp;B. <code>str | None</code>; <code>list[str]</code> ist eine Liste von Texten. Python prüft die Hinweise beim Ausführen nicht: Falsche Typen laufen oft still durch und führen erst später oder gar nicht sichtbar zu Fehlern. Prüfwerkzeuge wie <code>mypy</code> finden solche Fehler schon vor dem Start.
+</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p>
+        <strong>Typhinweise</strong> geben an, welchen Datentyp Parameter, Rückgabewerte und Attribute haben sollen, z.&nbsp;B. <code>def f(x: int) -&gt; str</code>. Python selbst prüft sie beim Ausführen <strong>nicht</strong> – ein falscher Typ führt nicht automatisch zu einer Fehlermeldung. Entwicklungsumgebungen und Prüfwerkzeuge wie <code>mypy</code> werten sie aber aus. Typisierung ist freiwillig, macht deinen Code aber übersichtlicher, sicherer und leichter verständlich.
+    </p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 1: Einen Funktionskopf lesen <span class="niveau">AFB I</span></summary>
+        <p>Was verrät dir der Kopf <code>def mittelwert(werte: list[float]) -&gt; float | None:</code>? Was soll übergeben werden, und was kann zurückkommen? In welchem Fall ist <code>None</code> als Rückgabe vermutlich gedacht?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>Übergeben wird eine Liste von Kommazahlen. Zurück kommt eine Kommazahl – oder <code>None</code>. <code>None</code> ist vermutlich für eine leere Liste gedacht, denn dort gibt es keinen Mittelwert (man würde sonst durch 0 teilen).</p>
+        </details>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 2: Fehler oder nicht? <span class="niveau">AFB I</span></summary>
+        <p>Was passiert beim Ausführen von <code>finde_index("a", "Banane")</code> und von <code>Schueler("Tom", "11")</code>? Gibt Python eine Fehlermeldung aus?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>Keine Fehlermeldung. <code>finde_index("a", "Banane")</code> liefert <code>1</code> – <code>in</code> und <code>index</code> arbeiten auch mit einem Text, gefunden wird der Buchstabe a an Position 1. <code>Schueler("Tom", "11")</code> legt ein Objekt an, dessen Attribut <code>klasse</code> der Text <code>"11"</code> ist. Beides widerspricht den Typhinweisen, aber Python prüft sie nicht; erst ein Prüfwerkzeug wie <code>mypy</code> würde es melden.</p>
+        </details>
+    </details>
+</div>

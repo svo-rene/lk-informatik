@@ -1,0 +1,229 @@
+<p>
+        In der objektorientierten Programmierung besteht ein Objekt nicht nur aus Daten (Attributen), sondern auch aus <strong>Verhalten</strong>. Dieses Verhalten wird durch <strong>Methoden</strong> beschrieben. Eine Methode ist eine Funktion, die zu einem Objekt gehört und meist auf dessen Attribute zugreift.
+    </p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in drei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) den Code in Thonny und rechts das Speicherbild mit den Objekten, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe mit.</p>
+
+<ol class="schritte">
+        <li><a href="#schritt-1">Methode aufrufen: <code>objekt.methode()</code> heißt <code>self = objekt</code></a></li>
+        <li><a href="#schritt-2">Methoden mit Parametern</a></li>
+        <li><a href="#schritt-3">Methoden ändern den Zustand</a> – danach Aufgabe 4.5.1 und 4.5.2</li>
+    </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Methode aufrufen – <code>objekt.methode()</code> heißt <code>self = objekt</code></h2>
+
+<p>Ein Hund hat einen Namen und kann bellen. Im Video verfolgst du genau, wie Python den Aufruf <code>luna.bellen()</code> ausführt. Achte im Speicherbild darauf, wo die Methoden liegen (im Objekt oder in der Klasse?) und auf welches Objekt der orange Pfeil <code>self</code> zeigt – erst bei <code>luna</code>, dann bei einem zweiten Hund. Kurz erklärt wird auch der f-String <code>f"{name} bellt!"</code>.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-5-1_aufruf_vorschau.png" src="../vid/4-5-1_aufruf.mp4"></video><a href="../vid/4-5-1_aufruf.mp4">Video ansehen</a></div>
+        <figcaption>Video 1: Was passiert bei luna.bellen()? (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+    </figure>
+
+<p>Zum Nachlesen steht der Ablauf mit Code und Testfällen in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Ein Hund bellt – was beim Methodenaufruf passiert</summary>
+        <p><strong>Ausgangssituation:</strong> Ein Hund hat einen Namen und kann bellen. Wir verfolgen genau, wie Python den Aufruf <code>luna.bellen()</code> ausführt.</p>
+        <table class="gitter">
+            <tbody>
+                <tr><th>Hund</th></tr>
+                <tr><td>name: string</td></tr>
+                <tr><td>Hund(name: string)<br>bellen(): void</td></tr>
+            </tbody>
+        </table>
+        <pre><code class="language-python">class Hund:
+    def __init__(self, name):
+        self.name = name
+
+    def bellen(self):
+        print(f"{self.name} bellt!")
+
+luna = Hund("Luna")
+luna.bellen()   # Ausgabe: Luna bellt!</code></pre>
+        <p>Die Methode <code>bellen</code> greift auf das Attribut <code>name</code> zu. Über <code>self</code> erreicht die Methode die „eigenen“ Daten des Objekts. <code>luna.bellen()</code> bedeutet für Python dasselbe wie <code>Hund.bellen(luna)</code>.</p>
+        <ol>
+            <li><strong>Objekt erzeugen:</strong> <code>Hund("Luna")</code> ruft <code>__init__</code> auf; im neuen Objekt wird <code>name = "Luna"</code> gespeichert.</li>
+            <li><strong>Methode finden:</strong> Bei <code>luna.bellen()</code> sucht Python die Methode <code>bellen</code> in der Klasse von <code>luna</code>, also in <code>Hund</code>. Warum in der Klasse? Methoden werden nur einmal im Bauplan gespeichert und von allen Objekten gemeinsam genutzt.</li>
+            <li><strong><code>self</code> übergeben:</strong> Python setzt das Objekt vor dem Punkt automatisch als erstes Argument ein: <code>Hund.bellen(luna)</code>. In der Methode ist also <code>self</code> = <code>luna</code>. Deshalb hat <code>bellen</code> den Parameter <code>self</code>, obwohl man beim Aufruf nichts in die Klammern schreibt.</li>
+            <li><strong>Methode ausführen:</strong> <code>self.name</code> ist „Luna“, der f-String ergibt „Luna bellt!“, <code>print</code> gibt ihn aus.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Ausgabe <code>Luna bellt!</code>. Dieselbe Methode liefert für jedes Objekt eine andere Ausgabe, weil <code>self</code> jedes Mal ein anderes Objekt ist.</p>
+        <p><strong>Kontrolle:</strong></p>
+        <table class="gitter">
+            <thead><tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr></thead>
+            <tbody>
+                <tr><td><code>luna.bellen()</code></td><td><code>Luna bellt!</code></td></tr>
+                <tr><td><code>Hund.bellen(luna)</code></td><td><code>Luna bellt!</code> (gleichwertige Schreibweise)</td></tr>
+                <tr><td><code>Hund("Balu").bellen()</code></td><td><code>Balu bellt!</code></td></tr>
+                <tr><td><code>luna.bellen</code> (ohne Klammern, als eigene Zeile)</td><td>keine Ausgabe – die Methode wird nicht aufgerufen</td></tr>
+            </tbody>
+        </table>
+            </details>
+        </div>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Methoden mit Parametern →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Methoden mit Parametern</h2>
+
+<p>Methoden können zusätzlich eigene Parameter bekommen – genau wie normale Funktionen. Mit <code>return</code> liefern sie ein Ergebnis an den Aufrufer zurück. Achte im Video darauf, wie die Werte beim Aufruf <code>r1.addiere(5, 3)</code> auf <code>self</code>, <code>x</code> und <code>y</code> verteilt werden und was Python meldet, wenn ein Argument fehlt.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-5-2_parameter_vorschau.png" src="../vid/4-5-2_parameter.mp4"></video><a href="../vid/4-5-2_parameter.mp4">Video ansehen</a></div>
+        <figcaption>Video 2: Methoden mit Parametern (ca. 1,5 min)</figcaption>
+    </figure>
+
+<h3>Zum Nachlesen: der Rechner</h3>
+
+<pre><code class="language-python">class Rechner:
+    def __init__(self, name):
+        self.name = name
+
+    def addiere(self, x, y):
+        return x + y
+
+r1 = Rechner("Taschenrechner")
+ergebnis = r1.addiere(5, 3)
+print(ergebnis)  # Ausgabe: 8</code></pre>
+
+<h3>Methoden in UML-Diagrammen</h3>
+
+<figure>
+        <img src="../img/methoden.png" width="600" alt="UML-Klassendiagramm mit Methoden, Parametern und Rückgabetypen">
+        <figcaption>Abb. 1: Methoden mit Parametern und Rückgabewert</figcaption>
+    </figure>
+
+<p>In UML-Diagrammen werden Methoden mit ihren Parametern und dem Rückgabetyp angegeben, z.&nbsp;B. <code>+ addiere(x: int, y: int): int</code>.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Methoden ändern den Zustand →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Methoden ändern den Zustand</h2>
+
+<p>Die Attributwerte eines Objekts nennt man seinen <strong>Zustand</strong>. Manche Methoden ändern ihn (verändernde Methoden), andere lesen ihn nur (sondierende Methoden). Achte im Video darauf, wann sich der Punktestand im Speicherbild ändert – und warum <code>None</code> ausgegeben wird, wenn man das Ergebnis einer Methode ohne <code>return</code> weiterverwendet. Kurz erklärt wird auch <code>x += 5</code>.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-5-3_zustand_vorschau.png" src="../vid/4-5-3_zustand.mp4"></video><a href="../vid/4-5-3_zustand.mp4">Video ansehen</a></div>
+        <figcaption>Video 3: Methoden ändern den Zustand (ca. 1,5 min)</figcaption>
+    </figure>
+
+<h3>Zum Nachlesen: Methoden, die Attribute verändern</h3>
+
+<p>Der vollständige Ablauf mit beiden Fallen steht in Beispiel 2:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Verändernde und sondierende Methoden – und die Falle mit <code>None</code></summary>
+        <p><strong>Ausgangssituation:</strong> In einem Quizspiel hat jede Spielerin einen Namen und einen Punktestand. Punkte können erhöht werden, und man kann sich eine Info anzeigen lassen. Lina startet mit 10 Punkten und bekommt zweimal 5 Punkte. Beim zweiten Mal versucht der Programmierer, das Ergebnis der Methode weiterzuverwenden.</p>
+        <table class="gitter">
+            <tbody>
+                <tr><th>Spieler</th></tr>
+                <tr><td>name: string<br>punkte: int</td></tr>
+                <tr><td>Spieler(name: string, punkte: int)<br>punkte_erhoehen(wert: int): void<br>zeige_info(): void</td></tr>
+            </tbody>
+        </table>
+        <pre><code class="language-python">class Spieler:
+    def __init__(self, name, punkte):
+        self.name = name
+        self.punkte = punkte
+
+    def punkte_erhoehen(self, wert):
+        self.punkte += wert
+
+    def zeige_info(self):
+        print(f"{self.name} hat {self.punkte} Punkte.")
+
+s1 = Spieler("Lina", 10)
+s1.punkte_erhoehen(5)
+s1.zeige_info()  # Lina hat 15 Punkte.</code></pre>
+        <p>Die Methode <code>punkte_erhoehen</code> ändert den Zustand des Objekts. So kannst du mit Methoden gezielt Einfluss auf die Daten nehmen.</p>
+        <p>Das Programm wird nun fortgesetzt:</p>
+        <pre><code class="language-python">ergebnis = s1.punkte_erhoehen(5)
+print(ergebnis)          # None
+s1.zeige_info()          # Lina hat 20 Punkte.
+print(s1.zeige_info())   # Lina hat 20 Punkte.
+                         # None</code></pre>
+        <ol>
+            <li><strong><code>s1 = Spieler("Lina", 10)</code>:</strong> Das Objekt startet mit punkte = 10.</li>
+            <li><strong><code>s1.punkte_erhoehen(5)</code> – verändernd:</strong> <code>self.punkte += 5</code> setzt punkte auf 15. Die Methode verändert den Zustand, gibt aber nichts zurück.</li>
+            <li><strong><code>s1.zeige_info()</code> – sondierend:</strong> Die Methode liest <code>self.name</code> und <code>self.punkte</code> und gibt <code>Lina hat 15 Punkte.</code> aus. Der Zustand bleibt gleich.</li>
+            <li><strong>Falle 1: <code>ergebnis = s1.punkte_erhoehen(5)</code>:</strong> punkte wird 20. Weil die Methode kein <code>return</code> hat, liefert sie automatisch <code>None</code> („nichts“). <code>print(ergebnis)</code> gibt deshalb <code>None</code> aus – nicht 20.</li>
+            <li><strong>Falle 2: <code>print(s1.zeige_info())</code>:</strong> Zuerst läuft <code>zeige_info()</code> und gibt selbst <code>Lina hat 20 Punkte.</code> aus. Ihr Rückgabewert ist wieder <code>None</code>, und genau den gibt das äußere <code>print</code> anschließend aus. Warum? <code>print</code> in einer Methode <em>zeigt</em> etwas an, <code>return</code> <em>liefert</em> einen Wert an den Aufrufer – das sind zwei verschiedene Dinge.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Das gesamte Programm gibt aus:</p>
+        <pre><code>Lina hat 15 Punkte.
+None
+Lina hat 20 Punkte.
+Lina hat 20 Punkte.
+None</code></pre>
+        <p>Wer einen Wert weiterverwenden will, braucht eine Methode mit <code>return</code>, z.&nbsp;B. <code>def get_punkte(self): return self.punkte</code>. Im UML-Diagramm erkennt man das am Rückgabetyp: <code>void</code> heißt „kein Rückgabewert“.</p>
+        <p><strong>Kontrolle:</strong></p>
+        <table class="gitter">
+            <thead><tr><th>Anweisungen</th><th>erwartete Ausgabe</th></tr></thead>
+            <tbody>
+                <tr><td><code>s = Spieler("Ben", 0)</code><br><code>s.punkte_erhoehen(3)</code><br><code>s.zeige_info()</code></td><td><code>Ben hat 3 Punkte.</code></td></tr>
+                <tr><td><code>s.punkte_erhoehen(-1)</code><br><code>s.zeige_info()</code></td><td><code>Ben hat 2 Punkte.</code> (negative Werte werden nicht abgefangen)</td></tr>
+                <tr><td><code>print(s.punkte_erhoehen(4))</code></td><td><code>None</code> (punkte ist danach 6)</td></tr>
+                <tr><td><code>print(s.zeige_info())</code></td><td><code>Ben hat 6 Punkte.</code><br><code>None</code></td></tr>
+            </tbody>
+        </table>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-4-5-1">Aufgabe 4.5.1</a> – Methoden unterscheiden, und <a href="uebungen.html#a-4-5-2">Aufgabe 4.5.2</a> – Auto mit Tankanzeige.</p>
+
+<div class="praxisbezug">
+        <details>
+            <summary>Praxisbezug: Methoden als Schnittstelle</summary>
+            <p>
+                <strong>Alltag:</strong> Die Tasten deiner Kaffeemaschine sind wie Methoden: „Espresso“ oder „Entkalken“ lösen genau festgelegte Abläufe aus, ohne dass du die Mechanik im Inneren kennen musst.<br><br>
+                <strong>Beruf:</strong> In Softwareprojekten einigen sich Teams zuerst auf die Methoden einer Klasse – Name, Parameter, Rückgabewert – und dokumentieren sie. So können mehrere Personen gleichzeitig arbeiten: Die einen implementieren die Methoden, die anderen nutzen sie schon. Automatisierte Tests (Unit-Tests) prüfen anschließend jede Methode einzeln.
+            </p>
+        </details>
+    </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+        Methoden stehen einmal in der Klasse und werden von allen Objekten gemeinsam genutzt. Beim Aufruf <code>objekt.methode(…)</code> wird das Objekt vor dem Punkt zu <code>self</code>, die übrigen Argumente werden der Reihe nach auf die Parameter verteilt. Verändernde Methoden ändern über <code>self</code> den Zustand des Objekts, sondierende Methoden lesen ihn nur. Ohne <code>return</code> liefert eine Methode <code>None</code>.
+    </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            <strong>Methoden</strong> beschreiben, was ein Objekt tun kann. Du definierst sie wie Funktionen – aber innerhalb der Klasse und mit dem ersten Parameter <code>self</code>, der auf das aufrufende Objekt verweist. Aufgerufen werden sie mit der Punktnotation <code>objekt.methode(argumente)</code>; <code>self</code> wird dabei automatisch übergeben.
+        </p>
+    </div>
+
+<div class="merke">
+        <p>
+            Methoden, die Daten verändern (<strong>verändernde Methoden</strong>), greifen über <code>self</code> auf Attribute zu und ändern deren Werte.<br>
+            Methoden, die nur lesen oder anzeigen (<strong>sondierende Methoden</strong>), verändern den Zustand des Objekts nicht.
+        </p>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Wer ist <code>self</code>? <span class="niveau">AFB I</span></summary>
+            <p>Nach <code>bello = Hund("Bello")</code> wird <code>Hund.bellen(bello)</code> aufgerufen. Was wird ausgegeben, und auf welches Objekt zeigt <code>self</code> dabei? Wie schreibt man denselben Aufruf in der üblichen Kurzform?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Ausgabe: <code>Bello bellt!</code>. <code>self</code> zeigt auf dasselbe Objekt wie <code>bello</code>. Die Kurzform ist <code>bello.bellen()</code> – dort setzt Python das Objekt vor dem Punkt automatisch als <code>self</code> ein.</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Werte verteilen <span class="niveau">AFB I</span></summary>
+            <p>Nach <code>r2 = Rechner("Schul-TR")</code> wird <code>r2.addiere(7, -2)</code> aufgerufen. Welche Werte haben <code>self</code>, <code>x</code> und <code>y</code>, und was wird zurückgegeben? Was passiert bei <code>r2.addiere(1, 2, 3)</code>?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>self</code> ist <code>r2</code>, <code>x = 7</code>, <code>y = -2</code>; zurückgegeben wird <code>5</code>. Bei drei Argumenten meldet Python <code>TypeError: Rechner.addiere() takes 3 positional arguments but 4 were given</code> – <code>self</code> wird mitgezählt, weil Python es automatisch übergibt.</p>
+            </details>
+        </details>
+    </div>

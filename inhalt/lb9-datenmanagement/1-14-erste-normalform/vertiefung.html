@@ -1,0 +1,49 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.14.4: Ergebnis prüfen – zwei Lösungsvorschläge <span class="niveau">AFB III</span>
+                </summary>
+                <p>Eine Stadtbibliothek speichert (Primärschlüssel: LeserNr):</p>
+                <table>
+                    <thead><tr><th>LeserNr</th><th>Name</th><th>Ausleihen</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Ole Brandt</td><td>Momo (bis 12.10.), Krabat (bis 20.10.)</td></tr>
+                        <tr><td>2</td><td>Mira Sahin</td><td>Tschick (bis 15.10.)</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>Vorschlag A</strong> (Primärschlüssel weiterhin LeserNr):</p>
+                <table>
+                    <thead><tr><th>LeserNr</th><th>Name</th><th>Buch1</th><th>Rueckgabe1</th><th>Buch2</th><th>Rueckgabe2</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Ole Brandt</td><td>Momo</td><td>12.10.</td><td>Krabat</td><td>20.10.</td></tr>
+                        <tr><td>2</td><td>Mira Sahin</td><td>Tschick</td><td>15.10.</td><td>NULL</td><td>NULL</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>Vorschlag B</strong> (Primärschlüssel weiterhin LeserNr):</p>
+                <table>
+                    <thead><tr><th>LeserNr</th><th>Name</th><th>Buch</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Ole Brandt</td><td>Momo</td></tr>
+                        <tr><td>1</td><td>Ole Brandt</td><td>Krabat</td></tr>
+                        <tr><td>2</td><td>Mira Sahin</td><td>Tschick</td></tr>
+                    </tbody>
+                </table>
+                <p>Beurteile beide Vorschläge. Prüfe dabei die Regeln der 1NF, den Primärschlüssel, die Vollständigkeit der Daten und die
+                   Frage, was passiert, wenn Ole ein drittes Buch ausleiht. Gib eine korrekte Lösung an.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.14.5: Zu viel des Guten? <span class="niveau">AFB III</span>
+                </summary>
+                <p>Für eine Klassenliste, die nur ausgedruckt und an die Pinnwand gehängt wird, hat Finn jede Spalte so weit wie möglich
+                   zerlegt: Vorname, Nachname, Geburtstag, Geburtsmonat, Geburtsjahr, Vorwahl, Rufnummer, Straße, Hausnummer, PLZ, Ort.
+                   Er sagt: „Je mehr Spalten, desto besser die 1NF.“</p>
+                <p>Beurteile Finns Aussage mithilfe der Definition von „atomar“. Nenne mindestens zwei Nachteile seiner Zerlegung und
+                   eine Situation, in der ein Teil seiner Zerlegung doch sinnvoll wäre.</p>
+            </details>
+        </div>

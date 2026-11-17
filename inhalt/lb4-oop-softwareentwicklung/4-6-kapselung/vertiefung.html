@@ -1,0 +1,62 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-4-6-4">
+        <details>
+            <summary>Aufgabe 4.6.4: Fehler finden – der löchrige Bibliotheksausweis <span class="niveau">AFB III</span></summary>
+            <p>Laut Benutzungsordnung der Schulbibliothek darf man höchstens 5 Medien gleichzeitig ausleihen. Wer offene Gebühren hat, darf nichts Neues ausleihen. Gebühren entstehen nur durch die Bibliothek und werden durch Bezahlen kleiner. Ein Mitschüler hat dazu programmiert:</p>
+            <pre><code class="language-python">class Bibliotheksausweis:
+    MAX_AUSLEIHEN = 5
+
+    def __init__(self, name):
+        self.name = name
+        self.__ausleihen = []
+        self.gebuehren = 0.0
+
+    def get_ausleihen(self):
+        return self.__ausleihen
+
+    def ausleihen(self, titel):
+        if len(self.__ausleihen) &lt; Bibliotheksausweis.MAX_AUSLEIHEN:
+            self.__ausleihen.append(titel)
+
+    def set_gebuehren(self, betrag):
+        self.gebuehren = betrag
+
+
+ausweis = Bibliotheksausweis("Mia")
+liste = ausweis.get_ausleihen()
+for i in range(7):
+    liste.append(f"Buch {i}")
+print(len(ausweis.get_ausleihen()))
+ausweis.gebuehren = -10.0
+print(ausweis.gebuehren)</code></pre>
+            <ol>
+                <li>Sage die beiden Ausgaben vorher. Erkläre, warum trotz der privaten Liste 7 Bücher „ausgeliehen“ sind.</li>
+                <li>Finde mindestens drei Stellen, an denen die Kapselung verletzt ist oder eine Regel der Benutzungsordnung nicht durchgesetzt wird.</li>
+                <li>Korrigiere die Klasse. Ersetze dabei den allgemeinen Setter durch fachlich sinnvolle Methoden.</li>
+                <li>Weise mit Testfällen (Aufruf, erwartete Ausgabe, tatsächliche Ausgabe) nach, dass jede gefundene Lücke geschlossen ist.</li>
+            </ol>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-6-6">
+        <details>
+            <summary>Aufgabe 4.6.6: Getter und Setter = Kapselung? <span class="niveau">AFB III</span></summary>
+            <p>Für eine Verkehrssimulation hat jemand diese Klasse geschrieben:</p>
+            <pre><code class="language-python">class Ampel:
+    def __init__(self):
+        self.__zustand = "rot"
+
+    def get_zustand(self):
+        return self.__zustand
+
+    def set_zustand(self, zustand):
+        self.__zustand = zustand</code></pre>
+            <p>Er meint: „Das Attribut ist privat und hat Getter und Setter – also ist die Klasse sauber gekapselt.“</p>
+            <ol>
+                <li>Beurteile diese Aussage. Zeige mit zwei Aufrufen, dass trotzdem unzulässige Zustände oder Übergänge entstehen können. Eine Ampel schaltet immer rot → rotgelb → grün → gelb → rot.</li>
+                <li>Entwirf eine bessere öffentliche Schnittstelle (Klassendiagramm) und begründe, warum sie keinen Setter enthält.</li>
+                <li>Implementiere deinen Entwurf und teste ihn: Nach viermaligem Weiterschalten muss die Ampel wieder rot zeigen.</li>
+            </ol>
+        </details>
+    </div>

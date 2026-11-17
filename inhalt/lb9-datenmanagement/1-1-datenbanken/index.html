@@ -1,0 +1,236 @@
+<p>Datenmanagement umfasst alle Aktivitäten, die notwendig sind, um Daten als wertvolle Ressource in einer Organisation zu verwalten. Es beinhaltet die Erfassung, Speicherung, Organisation, Pflege, Nutzung und Löschung von Daten.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Ziele des Datenmanagements</summary>
+                <ul>
+                    <li>Sicherstellung der Datenqualität und -integrität</li>
+                    <li>Gewährleistung der Datensicherheit und des Datenschutzes</li>
+                    <li>Optimierung der Datenverfügbarkeit und -zugänglichkeit</li>
+                    <li>Unterstützung datenbasierter Entscheidungsprozesse</li>
+                </ul>
+            </details>
+        </div>
+
+<h2>Warum verwenden wir Datenbanken?</h2>
+
+<p>
+            In unserer modernen Welt werden täglich riesige Mengen an Daten erzeugt und verarbeitet. Ob es sich um Bestellungen in einem Online-Shop, Beiträge in sozialen Medien oder medizinische Aufzeichnungen handelt - all diese Informationen müssen effizient gespeichert, verwaltet und abgerufen werden können. Hier kommen Datenbanken ins Spiel.
+          </p>
+
+<div class="praxisbezug">
+              <details>
+                  <summary>
+                      Praxisbezug: Wenn die Datenbank ausfällt, steht die Verwaltung still
+                  </summary>
+                  <p>
+                      Zum Jahreswechsel 2023/2024 fiel in Berlin über mehrere Tage die zentrale Datenbank des IT-Dienstleistungszentrums (ITDZ) aus, auf der das Fachverfahren VOIS läuft - das System, mit dem Bürgerämter, die Führerscheinstelle sowie Pass- und Ausweisstellen arbeiten. Die Folge: Über 11.000 Termine in ganz Berlin mussten abgesagt oder umgebucht werden, weil ohne funktionierende Datenbank keine Anmeldungen, Führerscheine oder Ausweise bearbeitet werden konnten. Ein weiteres Beispiel zeigt, wie sensibel gespeicherte Daten sein können: Beim Landratsamt Enzkreis waren 2025 durch eine Fehlkonfiguration eines IT-Dienstleisters mehrere tausend personenbezogene Daten von Führerschein-Antragstellenden über das Internet einsehbar. Beide Fälle zeigen: Wer Datenbanken plant, pflegt oder absichert, trägt eine große Verantwortung - für die Verfügbarkeit von Dienstleistungen ebenso wie für den Schutz privater Informationen.
+                  </p>
+                  <p><strong>Berufsfelder:</strong> In der Informatik arbeiten z.&nbsp;B. Datenbankadministrator*innen, Data Engineers und IT-Sicherheitsfachkräfte täglich mit dem Aufbau, Betrieb und der Absicherung solcher Systeme. Aber auch außerhalb der IT ist der sichere Umgang mit Datenbanken wichtig: Verwaltungsfachangestellte in Bürgerämtern und Behörden pflegen Melde- und Antragsdaten, medizinisches Personal arbeitet mit elektronischen Patientenakten, Beschäftigte in Lagerlogistik und Einzelhandel nutzen Warenwirtschaftssysteme, und Bibliothekspersonal verwaltet Bestände und Ausleihen über Bibliotheksdatenbanken.
+                  </p>
+                  <p><strong>Weiterlesen:</strong> <a href="https://stefan-ziller.eu/2024/was-ist-passiert-datenbank-stoerung-im-itdz-legt-buergeraemter-lahm/" target="_blank" rel="noopener">Was ist passiert: Datenbank-Störung im ITDZ legt Bürgerämter lahm</a>, <a href="https://www.egovernment.de/it-panne-enzkreis-persoenliche-daten-oeffentlich-a-0290af93de65f4a44d57268ea49fed6c/" target="_blank" rel="noopener">IT-Panne im Enzkreis: Tausende personenbezogene Daten öffentlich zugänglich</a>
+                  </p>
+              </details>
+          </div>
+
+<h2>Was sind Datenbanken?</h2>
+
+<p>
+            Datenbanken sind strukturierte Sammlungen von Daten, die es uns ermöglichen, große Mengen an Informationen zu organisieren, zu speichern und schnell darauf zuzugreifen. Sie bilden das Rückgrat vieler Anwendungen und Systeme, die wir täglich nutzen.
+          </p>
+
+<h2>Warum sind Datenbanken so wichtig?</h2>
+
+<p>
+            Datenbanken bieten viele Vorteile gegenüber herkömmlichen Methoden der Datenspeicherung:
+          </p>
+
+<ul>
+              <li><strong>Effizienz:</strong> Datenbanken ermöglichen schnellen Zugriff auf große Datenmengen.</li>
+              <li><strong>Datenintegrität:</strong> Sie helfen, Datenkonsistenz und -genauigkeit zu gewährleisten.</li>
+              <li><strong>Datensicherheit:</strong> Datenbanken bieten Mechanismen zum Schutz sensibler Informationen.</li>
+              <li><strong>Datenunabhängigkeit:</strong> Sie trennen die logische Struktur der Daten von der physischen Speicherung.</li>
+              <li><strong>Mehrbenutzerzugriff:</strong> Mehrere Benutzer können gleichzeitig auf die Daten zugreifen.</li>
+          </ul>
+
+<div class="hinweis">
+              <details>
+                  <summary>
+                      Hinweis: Datenbanken im Alltag
+                  </summary>
+                  <p>
+                      Datenbanken begegnen uns überall im Alltag, oft ohne dass wir es merken. Einige Beispiele:
+                      </p><ul>
+                          <li>Soziale Medien speichern unsere Profile, Beiträge und Verbindungen in Datenbanken.</li>
+                          <li>Banken verwenden Datenbanken, um unsere Konten und Transaktionen zu verwalten.</li>
+                          <li>Streaming-Dienste nutzen Datenbanken, um Filme, Serien und unsere Präferenzen zu speichern.</li>
+                          <li>Behörden verwalten Bürgerinformationen in großen Datenbanksystemen.</li>
+                      </ul>
+              </details>
+          </div>
+
+<h2>Grundlegende Konzepte des relationalen Datenmodells</h2>
+
+<p>Grundlegende Konzepte helfen dabei, effiziente und zuverlässige Datenbanken zu entwerfen und zu verwalten.</p>
+
+<h3>1. Redundanz</h3>
+
+<p><strong>Definition:</strong> Redundanz bezieht sich auf die mehrfache Speicherung derselben Daten an verschiedenen Stellen in einer Datenbank.<br>
+              <strong>Im relationalen Modell:</strong> Ziel ist es, Redundanz zu minimieren, um Datenkonsistenz zu gewährleisten und Speicherplatz zu sparen. Dies wird oft durch den Prozess der Normalisierung erreicht.<br>
+              <strong>Beispiel:</strong> Statt den Namen eines Kunden in jeder seiner Bestellungen zu wiederholen, speichert man ihn einmal in einer Kundentabelle und verweist darauf mit einem Fremdschlüssel in der Bestelltabelle.</p>
+
+<h3>2. Konsistenz</h3>
+
+<p><strong>Definition:</strong> Konsistenz bedeutet, dass die Daten in der Datenbank widerspruchsfrei und regelkonform sind.<br>
+              <strong>Im relationalen Modell:</strong> Konsistenz wird durch Integritätsregeln, Constraints und die Vermeidung von Redundanz sichergestellt.<br>
+              <strong>Beispiel:</strong> Wenn ein Kunde seine Adresse ändert, muss diese Änderung nur an einer Stelle vorgenommen werden, und alle Abfragen liefern dann die aktualisierte Adresse.</p>
+
+<h3>3. Integrität</h3>
+
+<p><strong>Definition:</strong> Integrität bezieht sich auf die Korrektheit, Vollständigkeit und Zuverlässigkeit der Daten in einer Datenbank.
+              <strong>Im relationalen Modell:</strong> Integrität wird durch verschiedene Mechanismen gewährleistet:
+              </p>
+
+<ul>
+                  <li><strong>Entitätsintegrität:</strong> Jeder Datensatz ist durch einen Primärschlüssel eindeutig identifizierbar.</li>
+                  <li><strong>Referenzielle Integrität:</strong> Fremdschlüssel verweisen immer auf existierende Datensätze in anderen Tabellen.</li>
+                  
+              </ul>
+
+<p>
+              <strong>Beispiel:</strong> Ein Fremdschlüssel in der Bestelltabelle, der auf die Kundentabelle verweist, stellt sicher, dass jede Bestellung einem existierenden Kunden zugeordnet ist.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+              <p><strong>Ausgangssituation:</strong> Ein kleiner Online-Shop speichert alle Bestellungen in einer einzigen Tabelle:</p>
+              <table>
+                  <thead><tr><th>BestellNr</th><th>Kunde</th><th>Wohnort</th><th>Artikel</th></tr></thead>
+                  <tbody>
+                      <tr><td>501</td><td>Jana Roth</td><td>Leipzig</td><td>Rucksack</td></tr>
+                      <tr><td>502</td><td>Paul Lenz</td><td>Dresden</td><td>Trinkflasche</td></tr>
+                      <tr><td>503</td><td>Jana Roth</td><td>Leipzig</td><td>Stirnlampe</td></tr>
+                      <tr><td>504</td><td>Jana Roth</td><td>Leipzig</td><td>Zelt</td></tr>
+                  </tbody>
+              </table>
+              <ol>
+                  <li><strong>Redundanz suchen.</strong> Die Angabe „Jana Roth wohnt in Leipzig“ steht dreimal in der Tabelle.
+                      <em>Warum ist das Redundanz?</em> Dieselbe Information ist mehrfach gespeichert, obwohl einmal genügen würde.</li>
+                  <li><strong>Eine Änderung durchspielen.</strong> Jana zieht nach Chemnitz. Die Mitarbeiterin ändert nur die
+                      Zeile der neuesten Bestellung 504. <em>Warum passiert so etwas?</em> Wer eine Zeile ändert, sieht die anderen
+                      Zeilen oft gar nicht.</li>
+                  <li><strong>Folge prüfen.</strong> Jetzt wohnt Jana laut Zeile 501 und 503 in Leipzig, laut Zeile 504 in Chemnitz.
+                      Die Daten widersprechen sich – die Datenbank ist <strong>inkonsistent</strong>. Eine Abfrage „Wo wohnt Jana Roth?“
+                      liefert je nach Zeile verschiedene Antworten.</li>
+                  <li><strong>Abhilfe.</strong> Kundendaten kommen in eine eigene Tabelle <code>Kunde</code> (KundenNr, Name, Wohnort),
+                      die Bestellung speichert nur noch die KundenNr. Der Wohnort steht dann genau einmal und wird an genau einer
+                      Stelle geändert.</li>
+              </ol>
+              <p><strong>Ergebnis:</strong> Redundanz ist die <em>Ursache</em>, Inkonsistenz die <em>Folge</em>. Wer Redundanz
+                 vermeidet, schützt die Konsistenz.</p>
+              <p><strong>Probe:</strong> Nach der Aufteilung gibt es für Janas Wohnort nur noch einen Speicherort; ein Widerspruch
+                 zwischen zwei Zeilen ist nicht mehr möglich.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+              <p><strong>Ausgangssituation:</strong> Eine Stadtbibliothek hat ihre Daten aus einer alten Tabellenkalkulation in zwei
+                 Tabellen übertragen. Prüfe, ob die Integritätsregeln eingehalten sind. Unterstrichen ist jeweils der Primärschlüssel,
+                 <code>LeserNr</code> in <code>Ausleihe</code> ist ein Fremdschlüssel auf <code>Leser</code>.</p>
+              <table>
+                  <thead><tr><th colspan="2">Leser</th></tr><tr><th><u>LeserNr</u></th><th>Name</th></tr></thead>
+                  <tbody>
+                      <tr><td>1</td><td>Ole Brandt</td></tr>
+                      <tr><td>2</td><td>Mira Sahin</td></tr>
+                      <tr><td>2</td><td>Tilo Graf</td></tr>
+                      <tr><td>NULL</td><td>Eva Lind</td></tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead><tr><th colspan="3">Ausleihe</th></tr><tr><th><u>AusleihNr</u></th><th>LeserNr</th><th>Titel</th></tr></thead>
+                  <tbody>
+                      <tr><td>71</td><td>1</td><td>Momo</td></tr>
+                      <tr><td>72</td><td>2</td><td>Krabat</td></tr>
+                      <tr><td>73</td><td>5</td><td>Tschick</td></tr>
+                  </tbody>
+              </table>
+              <ol>
+                  <li><strong>Entitätsintegrität in <code>Leser</code> prüfen</strong> – ist jeder Primärschlüsselwert vorhanden und
+                      eindeutig? Nein, zweimal: LeserNr 2 kommt doppelt vor (Mira Sahin und Tilo Graf), und Eva Lind hat gar keine
+                      LeserNr. <em>Warum ist das schlimm?</em> Mira und Tilo lassen sich nicht auseinanderhalten, Eva lässt sich gar
+                      nicht ansprechen.</li>
+                  <li><strong>Entitätsintegrität in <code>Ausleihe</code> prüfen.</strong> Die AusleihNr 71, 72, 73 sind vorhanden und
+                      verschieden – in Ordnung.</li>
+                  <li><strong>Referenzielle Integrität prüfen</strong> – gibt es zu jedem Fremdschlüsselwert einen passenden Leser?
+                      LeserNr 1: ja. LeserNr 5: nein, Ausleihe 73 verweist ins Leere. LeserNr 2: Es gibt zwar einen Treffer, aber
+                      zwei – niemand weiß, wer „Krabat“ ausgeliehen hat. Der Fehler aus Schritt 1 setzt sich also fort.</li>
+                  <li><strong>Folgen für den Betrieb abschätzen.</strong> Die Mahnung für „Tschick“ kann an niemanden geschickt werden;
+                      die Mahnung für „Krabat“ geht womöglich an die falsche Person.</li>
+                  <li><strong>Reparatur planen.</strong> Tilo Graf und Eva Lind bekommen neue, eindeutige Nummern (z.&nbsp;B. 3 und 4).
+                      Für Ausleihe 73 muss geklärt werden, wer das Buch wirklich hat. Erst dann darf die Bibliothek
+                      <code>LeserNr</code> als Primärschlüssel und Fremdschlüssel vom DBMS überwachen lassen, sonst lehnt es die
+                      Altdaten ab.</li>
+              </ol>
+              <p><strong>Ergebnis:</strong> drei Verstöße – zwei gegen die Entitätsintegrität (doppelter Schlüssel 2, fehlender
+                 Schlüssel bei Eva Lind) und einer gegen die referenzielle Integrität (Ausleihe 73). Die Ausleihe 72 ist durch den
+                 doppelten Schlüssel zusätzlich mehrdeutig.</p>
+              <p><strong>Probe:</strong> Nach der Reparatur hat jede Zeile in <code>Leser</code> eine eigene Nummer, und jede LeserNr
+                 in <code>Ausleihe</code> findet genau einen Leser.</p>
+            </details>
+        </div>
+
+<h2>Die Zukunft der Datenbanken</h2>
+
+<p>
+            Mit dem Aufkommen von Big Data, dem Internet der Dinge (IoT) und künstlicher Intelligenz wird die Bedeutung von Datenbanken weiter zunehmen. Moderne Datenbanksysteme müssen in der Lage sein, enorme Datenmengen zu verarbeiten, komplexe Analysen durchzuführen und Echtzeitentscheidungen zu unterstützen.
+          </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+              <p>
+                  Eine Datenbank besteht aus zwei Hauptkomponenten:
+                  </p><ul>
+                      <li>Der Datenbasis, die die eigentlichen Daten enthält</li>
+                      <li>Dem Datenbankmanagementsystem (DBMS), das die Verwaltung und den Zugriff auf die Daten ermöglicht</li>
+                  </ul>
+          </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+              <details>
+                  <summary>
+                      Aufgabe 1.1.1: Datenbanken in deinem Leben <span class="niveau">AFB I</span>
+                  </summary>
+                  <p>
+                      Denke über deinen eigenen Alltag nach und identifiziere mindestens drei Situationen, in denen du mit Datenbanken interagierst. Beschreibe kurz, welche Art von Daten dabei gespeichert und verarbeitet werden könnten.
+                  </p>
+
+              </details>
+          </div>
+
+<div class="aufgabe">
+              <details>
+                  <summary>
+                      Aufgabe 1.1.2: Die Trainingsliste des Schwimmvereins <span class="niveau">AFB II</span>
+                  </summary>
+                  <p>Ein Schwimmverein verwaltet seine Trainingsgruppen in dieser Tabelle:</p>
+                  <table>
+                      <thead><tr><th>Mitglied</th><th>Gruppe</th><th>Trainerin/Trainer</th><th>Telefon Trainer</th></tr></thead>
+                      <tbody>
+                          <tr><td>Lina Ernst</td><td>Delfine</td><td>Frau Kühn</td><td>0351 111</td></tr>
+                          <tr><td>Max Ott</td><td>Delfine</td><td>Frau Kühn</td><td>0351 111</td></tr>
+                          <tr><td>Ali Demir</td><td>Haie</td><td>Herr Dorn</td><td>0351 222</td></tr>
+                          <tr><td>Emma Pohl</td><td>Delfine</td><td>Frau Kühn</td><td>0351 111</td></tr>
+                      </tbody>
+                  </table>
+                  <ol>
+                      <li>Markiere alle redundanten Angaben und begründe, warum sie redundant sind.</li>
+                      <li>Frau Kühn bekommt eine neue Telefonnummer. Beschreibe, wie dabei eine Inkonsistenz entstehen kann, und gib den inkonsistenten Zustand als Tabelle an.</li>
+                      <li>Schlage eine Aufteilung in zwei Tabellen vor, bei der die Telefonnummer nur noch einmal gespeichert wird.</li>
+                  </ol>
+              </details>
+          </div>

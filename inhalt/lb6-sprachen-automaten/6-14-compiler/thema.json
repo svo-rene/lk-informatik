@@ -1,0 +1,18 @@
+{
+  "nr": "6.14",
+  "titel": "Compiler und Interpreter – von der Theorie zur Praxis",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

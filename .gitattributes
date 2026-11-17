@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.mp4 binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.pdf binary
+*.sqlite binary
+*.db binary
+*.fls binary

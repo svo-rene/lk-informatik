@@ -1,0 +1,20 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.8.10: Fehler finden – drei Änderungen, drei Pannen <span class="niveau">AFB III</span>
+                </summary>
+                <p>Alle drei Befehle laufen ohne Fehlermeldung, richten aber Schaden an. Gib jeweils an, welche bzw. wie viele
+                   Zeilen tatsächlich verändert werden, erkläre den Fehler und korrigiere den Befehl.</p>
+                <ol>
+                    <li>Gemeint: Anna Fischer (s_id 3) heißt nach ihrer Heirat „Schulz“.
+                        <pre><code>UPDATE Schueler SET name = 'Schulz';</code></pre></li>
+                    <li>Gemeint: Lisa Müller (s_id 1) bekommt nach einer Nachprüfung in Deutsch (k_id 2) die Note 1.0.
+                        <pre><code>UPDATE Kursnote SET note = 1.0 WHERE s_id = 1 OR k_id = 2;</code></pre></li>
+                    <li>Gemeint: Tim Weber (s_id 4) bekommt in Deutsch (k_id 2) die Note 1.7.
+                        <pre><code>INSERT INTO Kursnote VALUES (2, 1.7, 4);</code></pre></li>
+                </ol>
+                <p>Beurteile abschließend, mit welcher Arbeitsweise sich alle drei Pannen vorab hätten verhindern lassen.</p>
+            </details>
+        </div>

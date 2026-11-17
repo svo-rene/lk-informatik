@@ -1,0 +1,37 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.15.4: Fehler finden – eine Zerlegung mit Lücken <span class="niveau">AFB III</span>
+                </summary>
+                <p>Gegeben ist die Tabelle „Bestellposition“ mit dem Primärschlüssel (BestellNr, ArtikelNr):</p>
+                <table>
+                    <thead><tr><th>BestellNr</th><th>ArtikelNr</th><th>Bestelldatum</th><th>Artikelname</th><th>Menge</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>A5</td><td>2026-02-01</td><td>Schere</td><td>2</td></tr>
+                        <tr><td>1</td><td>A7</td><td>2026-02-01</td><td>Kleber</td><td>5</td></tr>
+                        <tr><td>2</td><td>A5</td><td>2026-02-03</td><td>Schere</td><td>1</td></tr>
+                    </tbody>
+                </table>
+                <p>Nele hat sie so „in die 2NF gebracht“:</p>
+                <pre class="schema">Bestellung(<u>BestellNr</u>, Bestelldatum, Menge)
+Artikel(<u>ArtikelNr</u>, Artikelname)</pre>
+                <p>Fülle Neles Relationen mit den Daten der Ausgangstabelle, finde die Fehler und erkläre, welche Information verloren
+                   geht. Gib eine korrekte Zerlegung an und weise mit einer Probe nach, dass sie verlustfrei ist.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.15.5: Der Trick mit der ID <span class="niveau">AFB III</span>
+                </summary>
+                <p>Zur Tabelle „Kursbuchungen“ oben (Primärschlüssel (MatrikelNr, KursID)) schlägt Jonas vor: „Ich füge einfach eine Spalte
+                   <em>BuchungID</em> mit fortlaufender Nummer hinzu und mache sie zum Primärschlüssel. Ein einteiliger Schlüssel – also ist
+                   die Tabelle automatisch in der 2NF und wir sind fertig.“</p>
+                <p>Beurteile den Vorschlag. Gehe darauf ein, ob die Aussage formal stimmt, ob die Redundanz und die Anomalien damit
+                   verschwinden und welche Abhängigkeiten nach der Änderung bestehen. Was müsste zusätzlich sichergestellt werden, damit
+                   eine Studentin einen Kurs nicht zweimal bucht?</p>
+            </details>
+        </div>

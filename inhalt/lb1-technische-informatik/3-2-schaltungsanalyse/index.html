@@ -1,0 +1,140 @@
+<p>Du hast eine fertige Schaltung vor dir, aber keine Beschreibung, was sie tut. Genau das passiert in der Praxis bei alten Geräten, bei der Fehlersuche oder beim Prüfen fremder Chips.</p>
+
+<p>Die Schaltungsanalyse in der Informatik befasst sich mit der Untersuchung von logischen Schaltungen. Hierbei geht es um das Erstellen von Wahrheitstabellen und booleschen Funktionen aus der gegebenen Schaltung, um das Verhalten der Schaltung zu verstehen und diese optimieren zu können.</p>
+
+<h2>Analyse einer Schaltung</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Eine überflüssige Schaltung</summary>
+        <p>Gegebene Schaltung:</p>
+
+        <figure>
+            <img src="../img/schaltung_1.png" width="600" alt="Schaltung mit den Eingängen A und B, zwei UND-Gattern C und D, einem NICHT-Gatter an B und einem ODER-Gatter E">
+            <figcaption>Schaltung 1 – LogicSim</figcaption>
+        </figure>
+
+        <p>Zwischenergebnisse: C = A ∧ B, D = A ∧ ¬B, Ausgang E = C ∨ D.</p>
+        <p>Anlegen der Wahrheitstabelle:</p>
+        <table class="gitter">
+            <tr><th>A</th><th>B</th><th>C = A ∧ B</th><th>D = A ∧ ¬B</th><th>E = C ∨ D</th></tr>
+            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+        </table>
+        <p>
+            Ableiten der booleschen Funktion:<br>
+            f(A,B) = A¬B ∨ AB = A ∧ (¬B ∨ B) = <strong>A</strong> (Distributivgesetz, Komplement)
+        </p>
+        <p><strong>Lösungsschritte:</strong></p>
+        <ol>
+            <li><strong>Was:</strong> Die Gatter benennen und ihre Ausgänge als Zwischenergebnisse notieren: C = A ∧ B, D = A ∧ ¬B, E = C ∨ D. – <em>Warum:</em> Mit Namen für die Zwischenergebnisse lässt sich die Schaltung Gatter für Gatter auswerten. Man verliert dabei keinen Signalweg.</li>
+            <li><strong>Was:</strong> Die Wahrheitstabelle mit allen 2<sup>2</sup> = 4 Belegungen von A und B anlegen und für jedes Gatter eine Spalte vorsehen. – <em>Warum:</em> Nur eine vollständige Tabelle beschreibt das Verhalten der Schaltung sicher.</li>
+            <li><strong>Was:</strong> Die Spalten in Signalrichtung berechnen, also erst C und D, dann E. – <em>Warum:</em> Ein Gatter kann erst ausgewertet werden, wenn seine Eingänge feststehen.</li>
+            <li><strong>Was:</strong> Die Funktion aus den 1-Zeilen von E als DNF ablesen (A¬B ∨ AB) und vereinfachen: A ausklammern (Distributivgesetz), dann ist ¬B ∨ B = 1 (Komplement) und A ∧ 1 = A (Neutralität). – <em>Warum:</em> Erst die vereinfachte Form zeigt, was die Schaltung wirklich leistet.</li>
+            <li><strong>Was:</strong> Das Ergebnis deuten. – <em>Warum:</em> Ziel der Analyse ist eine Aussage über die Schaltung. Hier lautet sie: Vier Gatter lassen sich durch eine Leitung ersetzen.</li>
+        </ol>
+        <p>Die Analyse zeigt: Die ganze Schaltung ist überflüssig, der Ausgang ist immer gleich A. Genau solche Einsparungen findet man nur durch Analyse.</p>
+        <p><strong>Probe:</strong> Die Spalte E stimmt in allen vier Zeilen mit der Spalte A überein (0, 0, 1, 1). Statt vier Gattern genügt eine direkte Leitung von A zum Ausgang.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Drei Eingänge mit NAND</summary>
+            <p>Ein NAND-Gatter verknüpft A und B zum Zwischenergebnis X. X und C laufen in ein UND-Gatter mit dem Ausgang f.</p>
+            <table class="gitter">
+                <tr><th>A</th><th>B</th><th>C</th><th>X = ¬(A ∧ B)</th><th>f = X ∧ C</th></tr>
+                <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+            </table>
+            <p>f(A,B,C) = ¬(A ∧ B) ∧ C = (¬A ∨ ¬B) ∧ C (De Morgan). In Worten: Der Ausgang ist 1, wenn C gesetzt ist und nicht beide Eingänge A und B gleichzeitig 1 sind.</p>
+            <p><strong>Lösungsschritte:</strong></p>
+            <ol>
+                <li><strong>Was:</strong> Das Zwischenergebnis benennen: X = ¬(A ∧ B) ist der Ausgang des NAND, f = X ∧ C der Ausgang des UND. – <em>Warum:</em> Das NAND ist eine häufige Fehlerquelle. Mit einer eigenen Spalte vergisst man die Negation nicht.</li>
+                <li><strong>Was:</strong> Die Tabelle mit 2<sup>3</sup> = 8 Zeilen anlegen, weil es drei Eingänge gibt. – <em>Warum:</em> Jede Belegung von A, B und C muss geprüft werden.</li>
+                <li><strong>Was:</strong> Die Spalte X ausfüllen. Sie ist nur in den beiden Zeilen mit A = B = 1 gleich 0, sonst 1. – <em>Warum:</em> Ein NAND ist das negierte UND. Das UND ist nur bei 1, 1 wahr.</li>
+                <li><strong>Was:</strong> Die Spalte f = X ∧ C ausfüllen. Sie ist 1, wenn X = 1 und C = 1 ist. – <em>Warum:</em> Das ist die Definition des UND-Gatters.</li>
+                <li><strong>Was:</strong> Die Funktion aufstellen und mit De Morgan umformen: ¬(A ∧ B) ∧ C = (¬A ∨ ¬B) ∧ C. Dann in Worten beschreiben. – <em>Warum:</em> Die Form ohne NAND kann man leichter in Worten beschreiben und mit anderen Schaltungen vergleichen.</li>
+            </ol>
+            <p><strong>Probe:</strong> Die Formel liefert genau für die drei Zeilen mit C = 1 und nicht A = B = 1 eine 1 (001, 011, 101). Gegenprobe für die Falle A = B = C = 1: X = ¬(1 ∧ 1) = 0, also f = 0 ∧ 1 = 0 – auch die Tabelle zeigt in der letzten Zeile 0.</p>
+            </details>
+        </div>
+
+<hr>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Schaltungen verstehen, die andere gebaut haben</summary>
+                <p><strong>Alltag:</strong> Die Schaltung aus Aufgabe 1 berechnet XOR – die Grundlage jeder Addition im Prozessor (→ 3.6 Halbaddierer). Wer eine Schaltung analysieren kann, versteht also, wie der Taschenrechner im Smartphone rechnet.</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Hardware-Sicherheitsforscher/in (Reverse Engineering)</strong>: analysiert fremde Chips Schicht für Schicht, um versteckte Hintertüren oder Kopien zu entdecken – z.&nbsp;B. in Forschungsinstituten oder bei Prüfdienstleistern.</li>
+                    <li><strong>Test- und Prüfingenieur/in</strong> in der Halbleiterfertigung: vergleicht das gemessene Verhalten eines Chips mit der erwarteten Wahrheitstabelle, um Fertigungsfehler zu finden – ein typischer Arbeitsplatz in den Dresdner Chipfabriken.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Schaltungsanalyse:</strong> Die Analyse einer Schaltung ist das Erstellen einer Wahrheitstabelle und einer booleschen Funktion aus einer gegebenen Schaltung.</p>
+            <p>Vorgehen:</p>
+            <ol>
+                <li>Benenne alle Eingänge und die Ausgänge jedes Gatters (Zwischenergebnisse).</li>
+                <li>Lege eine Wahrheitstabelle mit allen 2<sup>n</sup> Eingangskombinationen und je einer Spalte pro Zwischenergebnis an.</li>
+                <li>Berechne die Spalten von den Eingängen zum Ausgang, Gatter für Gatter.</li>
+                <li>Stelle die boolesche Funktion auf (direkt aus der Schaltung oder als DNF aus den 1-Zeilen) und vereinfache sie, falls möglich.</li>
+            </ol>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.2.1: Schaltungen analysieren <span class="niveau">AFB II</span></summary>
+                <p>Analysiere die folgenden Schaltungen (Wahrheitstabelle + boolesche Funktion).<br>
+                Baue die Schaltungen <strong>anschließend</strong> in LogicSim nach und überprüfe dein Ergebnis.</p>
+                <ol>
+                    <li>
+                        <figure>
+                            <img src="../img/schaltung_2.png" width="600" alt="Schaltung mit den Eingängen A und B, zwei NICHT-Gattern, zwei UND-Gattern und einem ODER-Gatter">
+                            <figcaption>Schaltung Aufgabe 1</figcaption>
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img src="../img/schaltung_3.png" width="600" alt="Schaltung mit den Eingängen A, B und C, zwei ODER-Gattern, einem NICHT-Gatter und einem UND-Gatter">
+                            <figcaption>Schaltung Aufgabe 2</figcaption>
+                        </figure>
+                    </li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.2.2: Eine Schaltung aus der Gatterliste <span class="niveau">AFB II</span></summary>
+                <p>Schaltungen werden in der Praxis oft nicht gezeichnet, sondern als Gatterliste (Netzliste) beschrieben: Jede Zeile nennt ein Gatter und woher seine Eingänge kommen. Gegeben ist die Schaltung S0 mit den Eingängen A, B, C:</p>
+                <table class="gitter">
+                    <tr><th>Gatter</th><th>Typ</th><th>Eingänge</th></tr>
+                    <tr><td>G1</td><td>NICHT</td><td>A</td></tr>
+                    <tr><td>G2</td><td>UND</td><td>G1, B</td></tr>
+                    <tr><td>G3</td><td>UND</td><td>A, C</td></tr>
+                    <tr><td>f (Ausgang)</td><td>ODER</td><td>G2, G3</td></tr>
+                </table>
+                <ol>
+                    <li>Erstelle die Wahrheitstabelle mit je einer Spalte für G1, G2, G3 und f.</li>
+                    <li>Stelle die boolesche Funktion f(A,B,C) auf.</li>
+                    <li>Beschreibe, welche Rolle der Eingang A in dieser Schaltung spielt. Vergleiche dazu die f-Spalte mit den Spalten B und C.</li>
+                    <li>Baue die Schaltung in LogicSim nach und überprüfe dein Ergebnis.</li>
+                </ol>
+            </details>
+        </div>

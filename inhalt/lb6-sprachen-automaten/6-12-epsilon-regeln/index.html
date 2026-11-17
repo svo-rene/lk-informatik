@@ -1,0 +1,124 @@
+<p>
+            In der Theorie formaler Sprachen ist es oft nützlich, mit Grammatiken zu arbeiten, die keine ε-Regeln (Regeln A → ε) enthalten. So erfüllt eine reguläre Grammatik die strenge Typ-3-Definition, und jede Ableitung wird mit jedem Schritt länger oder bleibt gleich lang. In diesem Kapitel lernst du, wie man eine gegebene reguläre Grammatik in eine äquivalente reguläre Grammatik ohne ε-Regeln überführt.
+        </p>
+
+<h2>Was sind das leere Wort und ε-Regeln?</h2>
+
+<p>
+            Das leere Wort ε ist das Wort der Länge 0. In einer Grammatik kann es durch eine Produktion der Form A → ε erzeugt werden, wobei A ein Nichtterminal ist. Eine solche Regel heißt <strong>ε-Regel</strong>. In FLACI schreibt man ε als <code>EPSILON</code>.
+        </p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: reguläre Grammatik</summary>
+                <p>
+                    Eine reguläre Grammatik ist eine Grammatik, bei der alle Produktionen die Form A → a oder A → aB haben, wobei A und B Nichtterminale sind und a ein Terminal ist. Zusätzlich darf das Startsymbol S die Produktion S → ε haben, sofern S auf keiner rechten Seite vorkommt (vgl. Kapitel 6.6).
+                </p>
+            </details>
+        </div>
+
+<h2>Schritte zur Überführung</h2>
+
+<ol>
+            <li>Bestimme alle Nichtterminale, die ε erzeugen können.</li>
+            <li>Ergänze neue Produktionen: Für jede Regel A → aB, bei der B ε erzeugen kann, füge A → a hinzu.</li>
+            <li>Entferne alle ε-Regeln (außer ggf. S → ε nach der Regel im Merkkasten).</li>
+        </ol>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Was passiert mit dem leeren Wort?</summary>
+                <p>
+                    Die resultierende Grammatik erzeugt dieselbe Sprache wie die ursprüngliche, eventuell ohne das leere Wort. Gehört ε zur ursprünglichen Sprache, muss es in der neuen Grammatik durch S → ε (bzw. S' → ε) wieder hinzugefügt werden.
+                </p>
+            </details>
+        </div>
+
+<h2>Beispiele</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Gegeben ist die reguläre Grammatik G mit ε-Regeln:</p>
+            <pre>S → aA | bB | ε
+A → aA | ε
+B → bB | a</pre>
+            <p><strong>Schritt 1:</strong> S und A können ε erzeugen.</p>
+            <p><strong>Schritt 2:</strong> Für jede Regel, deren Nichtterminal rechts ε erzeugen kann (hier A), wird eine Variante ohne dieses Nichtterminal ergänzt:</p>
+            <pre>S → aA | a | bB
+A → aA | a</pre>
+            <p><strong>Schritt 3:</strong> A → ε wird entfernt. S → ε bleibt, weil ε zur Sprache gehört und S auf keiner rechten Seite vorkommt:</p>
+            <pre>S → aA | a | bB | ε
+A → aA | a
+B → bB | a</pre>
+            <p><strong>Ergebnis:</strong> Dies ist die äquivalente reguläre Grammatik G' ohne ε-Regeln (bis auf die erlaubte Startregel).</p>
+            <p><strong>Kontrolle:</strong> <code>a</code>: in G S ⇒ aA ⇒ a (mit A → ε), in G' direkt S ⇒ a. <code>aa</code>: in G S ⇒ aA ⇒ aaA ⇒ aa, in G' S ⇒ aA ⇒ aa. <code>ba</code>: in beiden S ⇒ bB ⇒ ba. ε: in beiden S ⇒ ε.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> S kommt rechts vor.</p>
+            <pre>S → aS | ε</pre>
+            <p>Die Grammatik erzeugt a* (einschließlich ε). S kann ε erzeugen, also wird S → a ergänzt und S → ε entfernt: S → aS | a erzeugt nur noch a<sup>+</sup>. Da ε zur Sprache gehört, S aber rechts vorkommt, darf S → ε nicht einfach stehen bleiben. Lösung mit neuem Startsymbol:</p>
+            <pre>S' → aS | a | ε
+S  → aS | a</pre>
+            <p>Jetzt ist die Grammatik streng regulär und erzeugt wieder a*.</p>
+            <ol>
+                <li><strong>Schritt 1:</strong> S → ε zeigt sofort: S kann ε erzeugen.</li>
+                <li><strong>Schritt 2:</strong> In S → aS steht rechts das ε-fähige S, also S → a ergänzen. <em>Warum?</em> Die Ableitung S ⇒ aS ⇒ a muss ohne ε-Regel möglich bleiben.</li>
+                <li><strong>Schritt 3 – die Falle:</strong> Nach dem Entfernen von S → ε fehlt das leere Wort. Es einfach wieder als S → ε anzuhängen, verstößt gegen die Typ-3-Bedingung, weil S in S → aS rechts steht. <em>Lösung:</em> S' übernimmt alle Regeln von S und erhält zusätzlich S' → ε; S' selbst kommt nirgends rechts vor.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> S' → aS | a | ε, S → aS | a mit Startsymbol S'.</p>
+            <p><strong>Kontrolle:</strong> ε: S' ⇒ ε; <code>a</code>: S' ⇒ a; <code>aaa</code>: S' ⇒ aS ⇒ aaS ⇒ aaa. Ein ε kann nur im allerersten Schritt entstehen – genau das verlangt die strenge Definition.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Normalformen für Parser</summary>
+                <p><strong>Alltag:</strong> Ein Eingabefeld „optional“ (z.&nbsp;B. zweiter Vorname) entspricht in einer Grammatik einer ε-Alternative. Für die Prüfung ist es oft einfacher, das optionale Feld als eigene Alternative ohne ε auszuschreiben.</p>
+                <p><strong>Beruf:</strong> Viele Parsing-Algorithmen, etwa der CYK-Algorithmus in der Computerlinguistik, verlangen Grammatiken in einer Normalform ohne ε-Regeln. Entwicklerinnen von Parser-Generatoren und Sprachtechnologie-Software bauen solche Umformungen automatisch ein.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Merke:</strong><br>
+                Eine Grammatik ist <strong>ε-frei</strong>, wenn sie keine Produktion der Form A → ε enthält. Einzige Ausnahme ist die Regel S → ε für das Startsymbol, wenn ε zur Sprache gehört – und zwar nur dann, wenn <strong>S auf keiner rechten Seite</strong> einer Regel vorkommt. Kommt S rechts vor, führt man ein neues Startsymbol S' ein, das alle Regeln von S übernimmt und zusätzlich S' → ε erhält.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Merke:</strong><br>
+                Bei regulären Grammatiken musst du besonders darauf achten, dass die Form A → a oder A → aB erhalten bleibt, damit die Grammatik regulär bleibt.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.12.1: <span class="niveau">AFB I</span></summary>
+                <p>Gegeben sei folgende reguläre Grammatik G:</p>
+                <pre>S → aA | bB | ε
+A → aA | b
+B → bB | ε</pre>
+                <p>Überführe diese Grammatik in eine äquivalente reguläre Grammatik ohne ε-Regeln.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.12.2: <span class="niveau">AFB II</span></summary>
+                <p>Gegeben sei folgende reguläre Grammatik G:</p>
+                <pre>S → aA | bB
+A → aA | ε
+B → bB | aA | ε</pre>
+                <p>Überführe diese Grammatik in eine äquivalente reguläre Grammatik ohne ε-Regeln.</p>
+            </details>
+        </div>

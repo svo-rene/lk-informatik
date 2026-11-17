@@ -1,0 +1,93 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.8.3: Delete <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Lösche alle Kursnoten für den Kurs mit der k_id 4 (Biologie).
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.8.4: <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Erstelle eine SELECT-Abfrage, die Name und Vorname aller Schüler*innen sowie den Kursnamen und die Note für alle ihre Kurse ausgibt. Verwende dafür INNER JOINs.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.8.5: <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Lösche alle Kursnoten für den Kurs „Geschichte“. Diesmal ist die k_id nicht gegeben – ermittle
+                    sie mit einer Subquery, so wie du es schon von Seite 1.4 (WHERE- und LIKE-Klauseln) kennst.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.8.6: <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Finde die Durchschnittsnote für jeden Kurs. Gib den Kursnamen und die Durchschnittsnote aus.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.8.7 (Zusatz): <span class="niveau">AFB III</span>
+                </summary>
+                <p>
+                    Verbessere die Note aller Schüler*innen im Kurs „Mathematik“ um 0,3 Notenstufen. Weil bei
+                    Schulnoten der kleinere Zahlenwert die bessere Note ist, wird dafür 0.3 vom Wert abgezogen.
+                    Keine Note darf dabei besser als 1.0 werden (Beispiel: aus 1.2 wird 1.0, nicht 0.9).
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.8.8 (Zusatz): <span class="niveau">AFB III</span>
+                </summary>
+                <p>
+                    Lege in der Tabelle Schueler eine neue Spalte „gesamtnote“ an und fülle sie für alle Schüler*innen mit dem Durchschnitt ihrer Kursnoten. Eine Spalte fügst du mit diesem Befehl hinzu:
+                </p>
+                <pre><code>ALTER TABLE Tabellenname ADD COLUMN attribut datentyp;</code></pre>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.8.9: Den Zustand verfolgen <span class="niveau">AFB II</span>
+                </summary>
+                <p>Zum neuen Schuljahr wird ein Informatikkurs eingerichtet. Die Sekretärin führt nacheinander aus:</p>
+                <pre><code>INSERT INTO Kurs (k_id, name) VALUES (6, 'Informatik');
+INSERT INTO Kursnote (k_id, s_id, note) VALUES (6, 2, 1.3), (6, 5, 2.7);
+UPDATE Kursnote SET note = note - 0.3 WHERE k_id = 6 AND note &gt; 2.0;
+DELETE FROM Kursnote WHERE k_id = 5 AND s_id = 5;</code></pre>
+                <ol>
+                    <li>Gib <em>ohne</em> DB Browser an, wie viele Zeilen <code>Kursnote</code> nach jedem Befehl hat, und notiere alle
+                        Zeilen mit <code>k_id</code> 5 und 6 im Endzustand.</li>
+                    <li>Welche Durchschnittsnote hat der Informatikkurs am Ende?</li>
+                    <li>Aus Versehen wird der zweite Befehl ein zweites Mal ausgeführt. Was passiert und warum?</li>
+                </ol>
+                <p class="tipp">Prüfe deine Vorhersage anschließend im DB Browser mit <code>SELECT * FROM Kursnote;</code>.</p>
+            </details>
+        </div>

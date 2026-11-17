@@ -1,0 +1,65 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-3-10-7">
+            <details>
+                <summary>Aufgabe 3.10.7: Fehler finden – die vergessene Rücknahme <span class="niveau">AFB III</span></summary>
+                <p>Für einen anderen Jahrgang gelten diese Konflikte; geplant wird in der Reihenfolge Ma, Ph, Ch, De, Ge, En mit den Terminen Mo, Di, Mi:</p>
+                <pre><code class="language-python">KONFLIKTE = {
+    "Ma": ["Ph", "Ch", "De", "En"],
+    "Ph": ["Ma", "Ch"],
+    "Ch": ["Ma", "Ph", "En"],
+    "De": ["Ma", "Ge", "En"],
+    "Ge": ["De"],
+    "En": ["Ma", "Ch", "De"],
+}</code></pre>
+                <p>Paul hat in <code>plane</code> die Zeile <code>del plan[kurs]</code> gelöscht, „weil der Termin beim nächsten Versuch sowieso überschrieben wird“. Sein Programm meldet <code>False</code>.</p>
+                <ol>
+                    <li>Verfolge Pauls Programm in einer Tabelle wie in Beispiel 2, bis es <code>False</code> meldet. Markiere die Stelle, an der ein veralteter Eintrag eine eigentlich erlaubte Wahl verhindert.</li>
+                    <li>Gib das Ergebnis des korrekten Programms an (Plan und Anzahl der Aufrufe) und mache die Probe.</li>
+                    <li>In <code>setze_damen</code> (Aufgabe 3.10.2) führt das Weglassen von <code>spalten[zeile] = -1</code> dagegen nicht zu falschen Ergebnissen. Begründe den Unterschied.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-10-8">
+            <details>
+                <summary>Aufgabe 3.10.8: Beschleunigung beim N-Damen-Problem beurteilen <span class="niveau">AFB III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/n_damen.py</code> – weiterführen; vergleiche danach im Verlauf die Fassung vor und nach Maßnahme A<br><strong>Commits:</strong> nach Teil 1: <code>3.10.8 Teil 1: Merklisten für Spalten und Diagonalen, Aufrufe gezählt</code></p>
+                <p>Ein Programm sucht <strong>alle</strong> Lösungen des 8-Damen-Problems. Drei Ideen zur Beschleunigung werden vorgeschlagen:</p>
+                <ul>
+                    <li><strong>A – Merklisten:</strong> In drei Listen mit <code>True</code>/<code>False</code> wird gemerkt, welche Spalten und Diagonalen schon belegt sind: <code>s_belegt[spalte]</code>, <code>d1[zeile − spalte + N − 1]</code> und <code>d2[zeile + spalte]</code>. So muss nicht bei jeder Prüfung eine Schleife über alle vorigen Zeilen laufen.</li>
+                    <li><strong>B – Symmetrie:</strong> Die Dame in Zeile 0 wird nur in die Spalten 0 bis 3 gesetzt; jede gefundene Lösung wird zusätzlich gespiegelt.</li>
+                    <li><strong>C – mehr Rechenleistung:</strong> Das Programm läuft auf einem zehnmal schnelleren Rechner.</li>
+                </ul>
+                <p>Messung der Aufrufe von <code>setze_damen</code> (einschließlich des ersten Aufrufs):</p>
+                <table>
+                    <thead><tr><th>N</th><th>Lösungen</th><th>Aufrufe ohne Maßnahme</th><th>Aufrufe mit B</th></tr></thead>
+                    <tbody>
+                        <tr><td>4</td><td>2</td><td>17</td><td>9</td></tr>
+                        <tr><td>6</td><td>4</td><td>153</td><td>77</td></tr>
+                        <tr><td>8</td><td>92</td><td>2 057</td><td>1 029</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Implementiere Maßnahme A. Begründe, warum sich die Zahl der Aufrufe dadurch nicht ändert, und gib an, was sich stattdessen ändert.</li>
+                    <li>Bestätige an den Messwerten die Wirkung von Maßnahme B. Erkläre, warum B bei ungeradem N (z.&nbsp;B. N = 5) so nicht korrekt ist, und schlage eine Korrektur vor.</li>
+                    <li>Vergleiche die 2 057 Aufrufe mit dem Durchprobieren aller 8<sup>8</sup> Belegungen (eine Dame pro Zeile) und aller 8! Belegungen (eine Dame pro Zeile und Spalte).</li>
+                    <li>Beurteile alle drei Maßnahmen: Welche verkleinert den Suchbaum, welche verbilligt einen Schritt, und welche ändert das Wachstum des Aufwands mit N?</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="loesungswege">Lösungswege: So gehst du an eine Aufgabe heran</h2>
+
+<p>Jedes Video löst eine eigene Beispielaufgabe in fünf Schritten: <strong>1 Aufgabe</strong> genau lesen → <strong>2 Ansatz</strong> (welche Datenstruktur, welches Verfahren?) → <strong>3 Modell</strong> (welche Klassen, Methoden und Hilfsdaten?) → <strong>4 Lösungsweg</strong> (iterativ, rekursiv, Backtracking?) → <strong>5 Umsetzen und testen</strong>. Geh bei deinen eigenen Aufgaben genauso vor.</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1rem">
+            <figure>
+                <div class="lp-video"><video controls preload="none" poster="../vid/3-10-lw1_sitzplan_vorschau.png" src="../vid/3-10-lw1_sitzplan.mp4"></video><a href="../vid/3-10-lw1_sitzplan.mp4">Video ansehen</a></div>
+                <figcaption>Lösungsweg 1: Belegungsproblem – ein Sitzplan mit Regeln (ca. 2 min)</figcaption>
+            </figure>
+            <figure>
+                <div class="lp-video"><video controls preload="none" poster="../vid/3-10-lw2_gutschein_vorschau.png" src="../vid/3-10-lw2_gutschein.mp4"></video><a href="../vid/3-10-lw2_gutschein.mp4">Video ansehen</a></div>
+                <figcaption>Lösungsweg 2: Auswahlproblem – einen Gutschein genau ausgeben (ca. 2 min)</figcaption>
+            </figure>
+        </div>

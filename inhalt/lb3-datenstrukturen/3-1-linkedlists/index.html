@@ -1,0 +1,329 @@
+<p>Bei einer Schnitzeljagd steht auf jedem Zettel eine Aufgabe und der Ort des nächsten Zettels. Wer den ersten Zettel hat, kann alle anderen nacheinander finden – aber nicht direkt zum fünften springen. Genau so ist eine verkettete Liste aufgebaut.</p>
+
+<p>In 3.0.1 hast du gesehen, warum Einfügen und Löschen in einer Python-Liste O(n) kosten: Die Elemente müssen lückenlos nebeneinander liegen, also muss beim Einfügen alles dahinter rutschen. Die verkettete Liste verzichtet auf diese Bedingung. Lege deine Lösungen zu dieser Seite in deinem Repository im Ordner <code>1_listen</code> ab (siehe 3.0.2).</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in sechs kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee und den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe in Thonny mit.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Die Idee: Knoten und Verweise</a></li>
+            <li><a href="#schritt-2">Die Klasse <code>Node</code></a></li>
+            <li><a href="#schritt-3">Anhängen mit <code>append</code></a></li>
+            <li><a href="#schritt-4">Durchlaufen und Suchen</a> – danach Aufgabe 3.1.1</li>
+            <li><a href="#schritt-5">Einfügen am Anfang</a> – danach Aufgabe 3.1.2</li>
+            <li><a href="#schritt-6">Löschen</a> – danach Aufgabe 3.1.3</li>
+        </ol>
+
+<p class="git-datei"><strong>Zum Mittippen:</strong> <code>1_listen/verkettete_liste.py</code> – neu anlegen. Sie wächst mit jedem Schritt und in den Aufgaben 3.1.1 und 3.1.2.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.1 Schritt 2: Klasse Node angelegt</code> · <code>3.1 Schritt 3: LinkedList mit append</code> (Regeln auf Seite 3.0.2)</p>
+
+<p>Zum Schluss findest du die <a href="#zusammen">ganze Klasse zum Nachlesen</a>, einen Vergleich mit der Python-Liste und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Die Idee – Knoten und Verweise</h2>
+
+<p>Ein Knoten einer einfach verketteten Liste besteht aus zwei Teilen:</p>
+
+<ul>
+            <li><strong>Daten:</strong> die eigentlichen Informationen, die in der Liste gespeichert werden sollen.</li>
+            <li><strong>Verweis auf den nächsten Knoten:</strong> eine Referenz auf das nächste Knotenobjekt oder <code>None</code> am Ende.</li>
+        </ul>
+
+<p>Im Video siehst du, wie Knoten zu einer Kette verbunden werden und warum die Liste nur ihren ersten Knoten kennt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-1_idee_vorschau.png" src="../vid/3-1-1_idee.mp4"></video><a href="../vid/3-1-1_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Was ist eine verkettete Liste? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Die Klasse Node →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Die Klasse <code>Node</code></h2>
+
+<p>In Python ist ein Knoten ein Objekt der Klasse <code>Node</code> mit den Attributen <code>data</code> und <code>next</code>. Im Video schreibst du die Klasse in Thonny und verkettest drei Knoten von Hand in der Kommandozeile. Achte rechts im Speicherbild darauf, dass <code>node1.next = node2</code> nur einen Pfeil setzt und nichts kopiert.</p>
+
+<figure>
+            <img src="../img/linked_list.png" width="700" alt="UML-Klassendiagramm der Klassen LinkedList und Node sowie Objektdiagramm einer Liste mit drei Knoten">
+            <figcaption>Abb. 1: Klassen- und Objektdiagramm einer verketteten Liste mit den Werten 1, 2, 3</figcaption>
+        </figure>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-2_node_vorschau.png" src="../vid/3-1-2_node.mp4"></video><a href="../vid/3-1-2_node.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Die Klasse <code>Node</code> in Thonny – Knoten erzeugen und von Hand verketten (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>1_listen/verkettete_liste.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>Node</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>node1 = Node(1)</code> · <code>node2 = Node(2)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 2: Node angelegt</code>.</p>
+
+<p>Zum Nachlesen steht derselbe Code mit allen Erklärungen in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Eine Liste mit drei Knoten „von Hand“ verketten</summary>
+            <p><strong>Ausgangssituation:</strong> Die Werte 1, 2 und 3 sollen so gespeichert werden, dass man vom ersten Wert aus alle anderen erreicht – wie bei der Schnitzeljagd. Es gibt noch keine Listen-Klasse, sondern nur die Knoten-Klasse <code>Node</code>.</p>
+            <pre><code class="language-python">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None      # Verweis auf den nächsten Knoten
+
+node1 = Node(1)
+node2 = Node(2)
+node3 = Node(3)
+node1.next = node2
+node2.next = node3
+print(node1.next.next.data)   # 3</code></pre>
+            <ol>
+                <li><strong>Knoten erzeugen:</strong> <code>Node(1)</code>, <code>Node(2)</code> und <code>Node(3)</code> legen drei voneinander unabhängige Objekte an. Ihr Attribut <code>next</code> ist jeweils <code>None</code>, weil ein neuer Knoten noch keinen Nachfolger kennt.</li>
+                <li><strong>Ersten Verweis setzen:</strong> <code>node1.next = node2</code> speichert in Knoten 1 einen Verweis auf das Objekt von Knoten 2. Es wird kein Knoten kopiert – <code>node1.next</code> und <code>node2</code> zeigen auf dasselbe Objekt.</li>
+                <li><strong>Zweiten Verweis setzen:</strong> <code>node2.next = node3</code> hängt Knoten 3 hinter Knoten 2. Knoten 3 bleibt das Ende, weil sein <code>next</code> weiterhin <code>None</code> ist.</li>
+                <li><strong>Verweise verfolgen:</strong> <code>node1.next.next.data</code> wird von links nach rechts ausgewertet: <code>node1.next</code> ist Knoten 2, <code>.next</code> davon ist Knoten 3, <code>.data</code> davon ist 3. Jeder Punkt folgt also genau einem Pfeil.</li>
+            </ol>
+            <p><strong>Speicherbild Schritt für Schritt</strong> (<code>[Daten|•]</code> = Knoten mit Verweis, <code>[Daten|None]</code> = Knoten ohne Nachfolger):</p>
+            <pre><code>nach Node(1), Node(2), Node(3):
+node1 → [1|None]      node2 → [2|None]      node3 → [3|None]
+
+nach node1.next = node2:
+node1 → [1|•] → [2|None] ← node2           node3 → [3|None]
+
+nach node2.next = node3:
+node1 → [1|•] → [2|•] → [3|None] ← node3</code></pre>
+            <p><strong>Ergebnis:</strong> Die drei Knoten bilden eine Kette. Vom ersten Knoten aus erreicht man jeden anderen; das Programm gibt <code>3</code> aus.</p>
+            <p><strong>Kontrolle:</strong> Diese Aufrufe kannst du an das Programm anhängen.</p>
+            <table class="gitter">
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>start = None; print(start is None)</code> (leere Kette)</td><td><code>True</code> – ohne ersten Knoten gibt es nichts zu durchlaufen</td></tr>
+                    <tr><td><code>print(node1.data)</code></td><td><code>1</code></td></tr>
+                    <tr><td><code>print(node1.next.data)</code></td><td><code>2</code></td></tr>
+                    <tr><td><code>print(node3.next)</code></td><td><code>None</code> – Ende der Kette</td></tr>
+                    <tr><td><code>print(node1.next.next.next.data)</code> (Fehlerfall)</td><td><code>AttributeError: 'NoneType' object has no attribute 'data'</code> – hinter dem letzten Knoten folgt kein Knoten mehr</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Anhängen mit append →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Anhängen mit <code>append</code></h2>
+
+<p>Damit man Knoten nicht von Hand verketten muss, gibt es die Klasse <code>LinkedList</code>. Sie speichert nur <code>head</code>, den ersten Knoten. Die Methode <code>append</code> hängt hinten an: Dazu läuft eine Hilfsvariable <code>current</code> vom Anfang bis zum letzten Knoten. Achte im Video auf den Sonderfall der leeren Liste und darauf, wo <code>current</code> stehen bleibt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-3_anhaengen_vorschau.png" src="../vid/3-1-3_anhaengen.mp4"></video><a href="../vid/3-1-3_anhaengen.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Anhängen mit <code>append</code> – Schritt für Schritt (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Klasse <code>LinkedList</code> und die Methode <code>append</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>liste = LinkedList()</code> · <code>liste.append(1)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 3: LinkedList, append ergänzt</code>.</p>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Durchlaufen und Suchen →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Durchlaufen und Suchen</h2>
+
+<p>Fast jede Methode einer verketteten Liste beginnt gleich: <code>current = self.head</code>, dann <code>current = current.next</code>, bis man am Ziel ist. Im Video siehst du das an <code>display</code>, das alle Werte ausgibt, und wie Suchen nach demselben Muster funktioniert. Achte darauf, dass <code>head</code> dabei nicht verändert wird – und wie <code>join</code> die Texte zusammenklebt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-4_durchlaufen_vorschau.png" src="../vid/3-1-4_durchlaufen.mp4"></video><a href="../vid/3-1-4_durchlaufen.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Durchlaufen und Suchen (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Methode <code>display</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>liste.display()</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 4: display ergänzt</code>.</p>
+
+<p>Danach: <a href="uebungen.html#a-3-1-1">Aufgabe 3.1.1</a> – eine fehlerhafte Ausgabemethode, die genau gegen diese Regel verstößt.</p>
+
+<p><a href="#schritt-5">Weiter mit Schritt 5: Einfügen am Anfang →</a></p>
+
+<h2 id="schritt-5">Schritt 5: Einfügen am Anfang</h2>
+
+<p>Vorn einfügen geht ohne Schleife: Es werden nur zwei Verweise umgesetzt, deshalb kostet es O(1) – egal, wie lang die Liste ist. Die Reihenfolge der beiden Zeilen entscheidet, ob die Liste erhalten bleibt. Achte im Video darauf, welcher Pfeil zuerst gesetzt wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-5_einfuegen_anfang_vorschau.png" src="../vid/3-1-5_einfuegen_anfang.mp4"></video><a href="../vid/3-1-5_einfuegen_anfang.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Einfügen am Anfang (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Methode <code>insert_at_start</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>liste.insert_at_start(0)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 5: insert_at_start ergänzt</code>.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Verweise selbst umhängen</summary>
+                <p>Öffne im Kursmenü links die Seite <strong>Zeiger-Werkstatt</strong>. Dort hängst du die Pfeile selbst um. Die Übung „3.1 Einfügen am Anfang“ prüft, ob deine Reihenfolge stimmt, und zeigt dir, wenn dabei Knoten verloren gehen – so kannst du auch Kurz geprüft 5 nachstellen. In der Übung „3.1 Durchlaufen bis zum Ende“ lässt du <code>current</code> wie in <code>append</code> bis zum letzten Knoten wandern.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-1-2">Aufgabe 3.1.2</a> – eigene Methoden zum Durchlaufen und Einfügen.</p>
+
+<p><a href="#schritt-6">Weiter mit Schritt 6: Löschen →</a></p>
+
+<h2 id="schritt-6">Schritt 6: Löschen</h2>
+
+<p>Beim Löschen wird ein Knoten übersprungen: Sein Vorgänger zeigt danach direkt auf seinen Nachfolger. Deshalb muss <code>current</code> <em>vor</em> dem zu löschenden Knoten stehen bleiben. Achte im Video auf die beiden Sonderfälle: leere Liste und Wert im ersten Knoten.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-6_loeschen_vorschau.png" src="../vid/3-1-6_loeschen.mp4"></video><a href="../vid/3-1-6_loeschen.mp4">Video ansehen</a></div>
+            <figcaption>Video 6: Löschen (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Methode <code>delete</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>liste.delete(2)</code> · <code>liste.delete(0)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 6: delete ergänzt</code>.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Löschen in der Zeiger-Werkstatt</summary>
+                <p>Öffne im Kursmenü links die Seite <strong>Zeiger-Werkstatt</strong>. In der Übung „3.1 Löschen“ setzt du <code>current.next = current.next.next</code> selbst um und siehst, dass der übersprungene Knoten danach nicht mehr erreichbar ist.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-1-3">Aufgabe 3.1.3</a> – alle Methoden zusammen, als Kästchen mit Pfeilen.</p>
+
+<h2 id="zusammen">Alles zusammen: die Klasse <code>LinkedList</code></h2>
+
+<p>Hier steht die vollständige Klasse aus den Videos 3–6 zum Nachlesen, mit Testprogramm, Speicherbild und Kontrolltabelle.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Klasse <code>LinkedList</code> mit Einfügen, Ausgeben und Löschen</summary>
+            <p><strong>Ausgangssituation:</strong> Die Knoten sollen nicht mehr von Hand verkettet werden. Eine Klasse <code>LinkedList</code> verwaltet den Anfang der Liste (<code>head</code>) und bietet Methoden zum Einfügen am Anfang und am Ende, zum Ausgeben und zum Löschen. Das Testprogramm hängt 1, 2, 3 an, fügt vorn 0 ein und löscht dann die 2.</p>
+            <pre><code class="language-python">class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_at_start(self, data):          # O(1)
+        neu = Node(data)
+        neu.next = self.head
+        self.head = neu
+
+    def append(self, data):                    # O(n): Ende suchen
+        neu = Node(data)
+        if self.head is None:
+            self.head = neu
+            return
+        current = self.head
+        while current.next is not None:
+            current = current.next
+        current.next = neu
+
+    def display(self):                         # head bleibt unverändert!
+        current = self.head
+        teile = []
+        while current is not None:
+            teile.append(str(current.data))
+            current = current.next
+        print(" -&gt; ".join(teile) + " -&gt; None")
+
+    def delete(self, data):                    # ersten Knoten mit data entfernen
+        if self.head is None:
+            return False
+        if self.head.data == data:
+            self.head = self.head.next
+            return True
+        current = self.head
+        while current.next is not None:
+            if current.next.data == data:
+                current.next = current.next.next   # Knoten „überspringen“
+                return True
+            current = current.next
+        return False
+
+my_linked_list = LinkedList()
+for wert in [1, 2, 3]:
+    my_linked_list.append(wert)
+my_linked_list.insert_at_start(0)
+my_linked_list.display()        # 0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; None
+my_linked_list.delete(2)
+my_linked_list.display()        # 0 -&gt; 1 -&gt; 3 -&gt; None</code></pre>
+            <p>Ein weiteres Testprogramm findest du in <a href="../material/linkedlist_test.py" download="linkedlist_test.py">linkedlist_test.py</a>.</p>
+            <p>Die Klasse <code>Node</code> stammt aus Beispiel 1. So läuft das Testprogramm ab:</p>
+            <ol>
+                <li><strong>Leere Liste anlegen:</strong> <code>LinkedList()</code> setzt <code>head = None</code>. Die Liste kennt noch keinen Knoten.</li>
+                <li><strong><code>append(1)</code> bei leerer Liste:</strong> Weil <code>head</code> <code>None</code> ist, wird der neue Knoten direkt zum Anfang. Diesen Sonderfall braucht man, weil es noch keinen letzten Knoten gibt, an den man anhängen könnte.</li>
+                <li><strong><code>append(2)</code> und <code>append(3)</code>:</strong> <code>current</code> wandert von <code>head</code> aus, bis <code>current.next</code> <code>None</code> ist, und hängt dort an. Das kostet O(n), weil das Ende nur durch Durchlaufen erreichbar ist.</li>
+                <li><strong><code>insert_at_start(0)</code>:</strong> Zuerst zeigt <code>neu.next</code> auf den bisherigen Anfang, erst danach wird <code>head = neu</code> gesetzt. In umgekehrter Reihenfolge ginge der Verweis auf die alte Liste verloren. Es wird nichts verschoben, deshalb O(1).</li>
+                <li><strong><code>display()</code>:</strong> Die Methode läuft mit einer eigenen Variablen <code>current</code> durch die Liste. <code>head</code> bleibt unverändert, sonst wäre die Liste nach der Ausgabe „leer“ (vergleiche Aufgabe 3.1.1).</li>
+                <li><strong><code>delete(2)</code>:</strong> Der erste Knoten (0) ist es nicht. <code>current</code> bleibt immer einen Knoten <em>vor</em> dem gesuchten stehen, denn nur dort lässt sich der Verweis umsetzen: Bei <code>current</code> = Knoten 1 gilt <code>current.next.data == 2</code>, also wird <code>current.next = current.next.next</code> gesetzt. Knoten 2 wird übersprungen und ist nicht mehr erreichbar; Python gibt seinen Speicher automatisch frei.</li>
+            </ol>
+            <p><strong>Speicherbild Schritt für Schritt:</strong></p>
+            <pre><code>LinkedList():         head → None
+append(1):            head → [1|None]
+append(2):            head → [1|•] → [2|None]
+append(3):            head → [1|•] → [2|•] → [3|None]            (current lief von 1 bis 2)
+insert_at_start(0):   neu  → [0|•] → [1|•] → [2|•] → [3|None]    1. neu.next = head
+                      head → [0|•] → [1|•] → [2|•] → [3|None]    2. head = neu
+delete(2):            current = [1|•], current.next ist der Knoten mit 2
+                      current.next = current.next.next
+                      head → [0|•] → [1|•] → [3|None]
+                      [2|•] → [3|None]     Knoten 2 zeigt zwar noch auf 3, ist aber
+                                           von head aus nicht mehr erreichbar</code></pre>
+            <p><strong>Ergebnis:</strong> Die Ausgaben lauten <code>0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; None</code> und danach <code>0 -&gt; 1 -&gt; 3 -&gt; None</code>.</p>
+            <p><strong>Kontrolle:</strong> Jeder Test beginnt mit einer neuen Liste, wenn nichts anderes angegeben ist.</p>
+            <table class="gitter">
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>ll = LinkedList(); ll.display()</code> (leere Liste)</td><td><code> -&gt; None</code> – mit einem Leerzeichen am Anfang, weil <code>teile</code> leer ist</td></tr>
+                    <tr><td><code>print(ll.delete(5))</code> bei leerer Liste</td><td><code>False</code></td></tr>
+                    <tr><td><code>ll.append(7); ll.display()</code> (ein Element)</td><td><code>7 -&gt; None</code></td></tr>
+                    <tr><td>danach <code>print(ll.delete(7), ll.head)</code></td><td><code>True None</code> – Sonderfall: der erste Knoten wird gelöscht, die Liste ist wieder leer</td></tr>
+                    <tr><td>Liste 0, 1, 3: <code>print(ll.delete(9))</code></td><td><code>False</code>, die Liste bleibt <code>0 -&gt; 1 -&gt; 3 -&gt; None</code></td></tr>
+                    <tr><td>Liste 0, 1, 3: <code>ll.delete(0); ll.display()</code></td><td><code>1 -&gt; 3 -&gt; None</code></td></tr>
+                </tbody>
+            </table>
+            <p><strong>Hinweis zur Kapselung:</strong> In dieser Klasse ist <code>head</code> bewusst öffentlich, damit du in Aufgabe 3.1.3 die Verweise von außen verfolgen kannst. In einer sauberen Klasse ist der Anfang ein privates Attribut <code>__head</code>, und nur die eigenen Methoden ändern die Verweise. So eine gekapselte Liste baust du in Aufgabe 3.1.4; in Aufgabe 3.1.7 vergleichst du die Laufzeit mit einer Python-Liste.</p>
+            </details>
+        </div>
+
+<figure>
+            <img src="../img/skizze_verkettete_liste.svg" width="450" alt="Verkettete Liste mit den Knoten A, B, C, head zeigt auf A">
+            <figcaption>Abb. 2: Jeder Knoten speichert Daten und den Verweis next; head zeigt auf den ersten Knoten, der letzte zeigt auf None.</figcaption>
+        </figure>
+
+<h2>Vergleich mit dem Array (Python-Liste)</h2>
+
+<table>
+            <thead><tr><th></th><th>verkettete Liste</th><th>Array / Python-Liste</th></tr></thead>
+            <tbody>
+                <tr><td>Zugriff auf das k-te Element</td><td>O(n), Liste von vorn durchlaufen</td><td>O(1), direkt über den Index</td></tr>
+                <tr><td>Einfügen/Löschen am Anfang</td><td>O(1), nur Verweise umsetzen</td><td>O(n), alle Elemente verschieben</td></tr>
+                <tr><td>Einfügen/Löschen in der Mitte</td><td>O(n) für die Suche, dann O(1)</td><td>O(n) für das Verschieben</td></tr>
+                <tr><td>Größe</td><td>wächst knotenweise, kein Umkopieren nötig</td><td>bei voller Kapazität Umkopieren in einen größeren Speicherbereich</td></tr>
+                <tr><td>Speicher</td><td>zusätzlich ein Verweis pro Knoten</td><td>kompakt, ggf. ungenutzte Reserveplätze</td></tr>
+            </tbody>
+        </table>
+
+<p>Einfach verkettete Listen sind eine wichtige Datenstruktur und bilden unter anderem die Grundlage für Stapel (Stack) und Schlangen (Queue).</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Verkettungen im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Die Vor- und Zurück-Funktion deines Browsers oder die „Nächster Titel“-Taste im Musikplayer lassen sich als (doppelt) verkettete Liste umsetzen: Jede Seite bzw. jeder Titel kennt seinen Vorgänger und Nachfolger.<br><br>
+                    <strong>Beruf:</strong> Betriebssystementwicklerinnen und -entwickler verwalten z.&nbsp;B. im Linux-Kernel Prozesse und freie Speicherblöcke in verketteten Listen, weil ständig Elemente eingefügt und entfernt werden, ohne dass Speicher umkopiert werden darf. Auch Blockchains sind eine Form verketteter Liste: Jeder Block enthält einen Verweis (Hash) auf den vorherigen.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Eine <strong>einfach verkettete Liste</strong> ist eine dynamische Datenstruktur aus einer Folge von <strong>Knoten</strong>. Jeder Knoten speichert <strong>Daten</strong> und einen <strong>Verweis</strong> (Referenz) auf den nächsten Knoten. Die Liste selbst kennt nur den ersten Knoten (<code>head</code>); der letzte Knoten verweist auf <code>None</code>.<br>
+                Zugriff auf das k-te Element: O(n), weil man von vorn durchlaufen muss. Einfügen oder Löschen am Anfang: O(1). Einfügen oder Löschen an einer bekannten Stelle: O(1), das Finden dieser Stelle kostet aber O(n).
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Kästchen und Pfeile <span class="niveau">AFB I</span></summary>
+                <p>Eine verkettete Liste enthält die Werte 7, 4 und 9 in dieser Reihenfolge. Zeichne sie als Kästchen mit Pfeilen. Worauf zeigt <code>head</code>? Was steht im <code>next</code>-Feld des Knotens mit der 9?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>head</code> → [7|•] → [4|•] → [9|None]. <code>head</code> zeigt auf den Knoten mit der 7, im <code>next</code>-Feld des Knotens mit der 9 steht <code>None</code>, weil er der letzte ist.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Pfeilen folgen <span class="niveau">AFB I</span></summary>
+                <p>In Thonny wird eingegeben: <code>a = Node("x")</code>, <code>b = Node("y")</code>, <code>b.next = a</code>. Was geben <code>print(b.next.data)</code> und <code>print(a.next)</code> aus? Was passiert bei <code>print(a.next.data)</code>? Überlege erst, dann probiere es aus.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>b.next.data</code> ist <code>x</code>, denn <code>b.next</code> zeigt auf den Knoten <code>a</code>. <code>a.next</code> ist <code>None</code>. <code>a.next.data</code> löst einen <code>AttributeError</code> aus, weil <code>None</code> kein Attribut <code>data</code> hat.</p>
+                </details>
+            </details>
+        </div>

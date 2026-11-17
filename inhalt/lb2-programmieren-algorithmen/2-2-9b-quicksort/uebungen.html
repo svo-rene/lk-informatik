@@ -1,0 +1,95 @@
+<script src="../sortierlabor.js" defer></script>
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Der schlechteste Fall <span class="niveau">AFB II</span></summary>
+                <p>Eine Liste ist <em>absteigend</em> sortiert, z.&nbsp;B. [8, 7, 6, 5, 4, 3, 2, 1], Pivot ist die letzte Zahl. Ist das auch ein schlechter Fall? Wie viele Vergleiche sind es? Prüfe deine Vermutung im Labor.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Ja. Das letzte Element ist jetzt immer das <em>kleinste</em>: <code>kleiner</code> ist leer, <code>groesser</code> enthält alle übrigen. Wieder wird jeder Aufruf nur um eins kleiner: 8 + 7 + … + 2 = 35 Vergleiche, n Ebenen, O(n²).</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Einmal partitionieren <span class="niveau">AFB II</span></summary>
+                <p>Partitioniere [7, 2, 9, 4, 1, 5] (links = 0, rechts = 5) von Hand. Wie sieht die Liste danach aus, welchen Wert gibt <code>partitioniere</code> zurück, und wie oft wird wirklich getauscht (zwei verschiedene Plätze)?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Pivot 5, grenze = 0. j = 0: 7 &lt; 5 nein. j = 1: 2 &lt; 5 ja → tausche 0 und 1: [2, 7, 9, 4, 1, 5], grenze = 1. j = 2: 9 nein. j = 3: 4 ja → tausche 1 und 3: [2, 4, 9, 7, 1, 5], grenze = 2. j = 4: 1 ja → tausche 2 und 4: [2, 4, 1, 7, 9, 5], grenze = 3. Zum Schluss Pivot an Platz 3: [2, 4, 1, 5, 9, 7]. Rückgabe 3, 4 echte Vertauschungen, 5 Vergleiche.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Wer gewinnt wann? <span class="niveau">AFB II</span></summary>
+                <p>Lass das Wettrennen mit n = 40 einmal „zufällig“ und einmal „schon sortiert“ laufen. Welches Verfahren gewinnt jeweils, und welches fällt bei „schon sortiert“ zurück? Erkläre beides.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Zufällig: Mergesort und Quicksort liegen weit vorn, die drei einfachen Verfahren brauchen ein Vielfaches an Vergleichen. Schon sortiert: Bubblesort und Insertionsort gewinnen mit n − 1 = 39 Vergleichen (ein Durchlauf, nie getauscht), Mergesort bleibt gut, Quicksort mit der letzten Zahl als Pivot fällt mit 40 · 39 / 2 = 780 Vergleichen auf das Niveau von Selectionsort zurück – das Pivot ist immer das größte Element.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9b-1">
+            <details>
+                <summary>Aufgabe 2.2.9b.1: Quicksort mit den Karten <span class="niveau">AFB II</span></summary>
+                <p>Spielt die Station Quicksort (Kasten „Mit den Karten“ oben) mit 8 Karten.</p>
+                <ol>
+                    <li>Sortiert gut gemischte Karten und führt eine Strichliste der Vergleiche, getrennt nach Aufrufen. Zeichnet den Baum der Aufrufe auf (wie im Labor).</li>
+                    <li>Legt die Karten aufsteigend sortiert hin und spielt noch einmal. Vergleicht Strichliste und Baum mit Teil 1.</li>
+                    <li>Überlegt euch eine Regel für die Wahl des Pivots, die mit verdeckten Karten funktioniert und den Fall aus Teil 2 vermeidet. Probiert sie aus.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9b-2">
+            <details>
+                <summary>Aufgabe 2.2.9b.2: Quicksort programmieren und testen <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Schreibe die Funktion <code>quicksort(liste)</code> aus Schritt 2 – möglichst ohne abzuschreiben: erst den Basisfall, dann das Aufteilen, dann den rekursiven Teil.</li>
+                    <li>Teste mit allen Testfällen aus Beispiel 1 (Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe) und mit 100 Zufallslisten, deren Ergebnis du mit <code>sorted()</code> vergleichst.</li>
+                    <li>Baue eine globale Zählvariable ein oder gib die Zahl der Vergleiche aus. Vergleiche für n = 8 mit dem Labor.</li>
+                    <li>Ändere die Pivotwahl auf das mittlere Element (<code>liste[len(liste) // 2]</code>) und zähle für eine sortierte Liste mit 100 Zahlen beide Varianten.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9b-3">
+            <details>
+                <summary>Aufgabe 2.2.9b.3: Partitionieren von Hand und im Code <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Sortiere [3, 9, 4, 7, 1, 8, 2, 5] mit der In-place-Fassung von Hand. Notiere für jeden Aufruf von <code>partitioniere</code> den Bereich, das Pivot, die Liste danach und den Rückgabewert.</li>
+                    <li>Zähle Vergleiche und echte Vertauschungen und kontrolliere im Sortierlabor (Schritt 4, eigene Liste eingeben).</li>
+                    <li>Übernimm den Code aus Schritt 4 in Thonny und verfolge den ersten Aufruf von <code>partitioniere</code> mit dem Debugger. Welche Werte haben <code>grenze</code> und <code>j</code>, wenn zum ersten Mal echt getauscht wird?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9b-7">
+            <details>
+                <summary>Aufgabe 2.2.9b.7: Gutachten für den Streamingdienst <span class="niveau">AFB III</span></summary>
+                <p>Der Streamingdienst aus 2.2.1 bittet dich um ein kurzes Gutachten (höchstens eine Seite). Für jede der vier Aufgaben soll klar werden, welches Verfahren du empfiehlst, wie lange es ungefähr dauert und warum.</p>
+                <ol>
+                    <li><strong>Nächtliche Charts:</strong> 100 Millionen Songs, nach Streams sortiert. Die Charts von gestern sind schon sortiert, täglich kommen etwa 50 000 neue Songs dazu, und die Streams fast aller Songs ändern sich ein wenig.</li>
+                    <li><strong>Playlist antippen:</strong> bis zu 2 000 Songs alphabetisch nach Titel, auf dem Smartphone, die Antwort soll in unter 0,1 s kommen.</li>
+                    <li><strong>Neuer Song in der Playlist:</strong> Ein einzelner Song wird in eine schon sortierte Playlist mit 2 000 Songs eingefügt.</li>
+                    <li><strong>Suche nach Titel:</strong> eine Million Suchanfragen pro Tag über alle 100 Millionen Songs.</li>
+                </ol>
+                <p>Stütze jede Empfehlung auf mindestens eine eigene Messung aus deinem Projekt (Messreihe, Hochrechner) und auf die Komplexitätsklasse. Gib auch an, welche Annahmen du gemacht hast und was deine Schätzung unsicher macht.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-2-2-9b-5">
+            <details>
+                <summary>Aufgabe 2.2.9b.5: Laufzeit messen – gutes und schlechtes Pivot <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Miss mit <code>time.perf_counter()</code> die Laufzeit der Fassung aus Schritt 2 für n = 10 000, 20 000 und 40 000 mit Zufallszahlen. Berechne die Faktoren bei Verdopplung und vergleiche mit Mergesort (Aufgabe 2.2.9.5).</li>
+                    <li>Miss für eine schon sortierte Liste mit n = 200, 400 und 800. Begründe die Faktoren. Was passiert bei n = 1 000, und warum?</li>
+                    <li>Wiederhole Teil 2 mit dem mittleren Element als Pivot.</li>
+                </ol>
+                <p class="tipp">Bei Teil 2 kann Python mit <code>RecursionError</code> abbrechen. Das ist kein Fehler deines Programms, sondern genau der Effekt, um den es geht.</p>
+            </details>
+        </div>

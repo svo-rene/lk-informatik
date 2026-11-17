@@ -1,0 +1,336 @@
+<script src="../sortierlabor.js" defer></script>
+<p>Bubblesort ist nicht das einzige einfache Sortierverfahren. Vielleicht hat deine Gruppe beim Kartenspiel in 2.2.1 eines der beiden Verfahren dieser Seite erfunden – vergleiche beim Lesen mit eurer Anleitung. Wenn du Spielkarten auf der Hand sortierst, gehst du vermutlich anders vor: Du steckst jede neue Karte an die passende Stelle. Genau so arbeitet Insertionsort.</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in fünf kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und rechne oder tippe mit.</p>
+
+<ol class="schritte">
+            <li>Insertionsort: die Idee</li>
+            <li>Insertionsort in Python</li>
+            <li>Insertionsort Schritt für Schritt – danach Aufgabe 2.2.5.1</li>
+            <li>Selectionsort: die Idee</li>
+            <li>Selectionsort in Python – danach Aufgabe 2.2.5.2</li>
+        </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben – darunter den Zusatz „Insertionsort mit zwei Arrays“.</p>
+
+<h2 id="schritt-1">Schritt 1: Insertionsort – die Idee</h2>
+
+<p>Insertionsort arbeitet folgendermaßen:</p>
+
+<ol>
+            <li>Das Array wird in einen sortierten linken und einen unsortierten rechten Teil geteilt. Am Anfang besteht der sortierte Teil nur aus dem ersten Element – eine Liste mit einem Element ist immer sortiert.</li>
+            <li>Dann wird das erste unsortierte Element an die richtige Stelle des sortierten Teils eingefügt. Dafür vergleichen wir es immer wieder mit seinem linken Nachbarn und tauschen, solange der Nachbar größer ist.</li>
+            <li>Danach wird wieder das erste Element des unsortierten Teils betrachtet und eingefügt.</li>
+            <li>Am Ende dieses Vorgangs ist die gesamte Liste sortiert.</li>
+        </ol>
+
+<p>Im Video siehst du das an der Liste 5, 2, 9, 3, 4, 6. Der sortierte Teil ist grün. Achte darauf, wann eine Zahl aufhört, nach links zu wandern.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-5-1_insertion_idee_vorschau.png" src="../vid/2-2-5-1_insertion_idee.mp4"></video><a href="../vid/2-2-5-1_insertion_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Wie funktioniert Insertionsort? (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: grafische Darstellung auf happycoders.eu</summary>
+                <p><a href="https://www.happycoders.eu/de/algorithmen/insertion-sort/" target="_blank">https://www.happycoders.eu/de/algorithmen/insertion-sort/</a></p>
+            </details>
+        </div>
+
+<h3>Jetzt du: Sag vorher, wohin die Zahl wandert</h3>
+
+<p>Bei jedem Vergleich mit dem linken Nachbarn entscheidest du, ob die Zahl weiter nach links wandert. Der hellgrüne Bereich ist der sortierte Teil, er wächst mit jeder eingefügten Zahl um eins.</p>
+
+<div class="sortierlabor" data-verfahren="insertion" data-liste="5, 2, 9, 3, 4, 6" data-vorhersage="ja" data-code="nein"></div>
+
+<h2 id="schritt-2">Schritt 2: Insertionsort in Python</h2>
+
+<p>Im Programm wird aus der Regel eine <code>for</code>-Schleife über die einzufügenden Zahlen und eine <code>while</code>-Schleife, die die Zahl nach links wandern lässt. Neu ist <code>range(1, len(liste))</code>: Die Schleife beginnt erst bei Position 1. Achte im Video auf die zwei Wege, auf denen die <code>while</code>-Schleife endet.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-5-2_insertion_code_vorschau.png" src="../vid/2-2-5-2_insertion_code.mp4"></video><a href="../vid/2-2-5-2_insertion_code.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Insertionsort in Python (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen der Code aus dem Video. Er entspricht <code>insertion_sort_nach_name</code> aus Beispiel 2 (Schritt 5), nur ohne Zähler und für einfache Zahlen:</p>
+
+<pre><code class="language-python">def insertion_sort(liste):
+    for i in range(1, len(liste)):
+        j = i
+        while j &gt; 0:
+            if liste[j - 1] &gt; liste[j]:
+                temp = liste[j - 1]
+                liste[j - 1] = liste[j]
+                liste[j] = temp
+                j = j - 1
+            else:
+                break                   # richtige Stelle gefunden
+    return liste
+
+print(insertion_sort([5, 2, 9, 3, 4, 6]))   # [2, 3, 4, 5, 6, 9]</code></pre>
+
+<h2 id="schritt-3">Schritt 3: Insertionsort Schritt für Schritt</h2>
+
+<p>Jetzt läuft das Programm in Thonny mit der Liste [5, 1, 4] aus Beispiel 1. Im Speicherbild zeigt <code>j</code> auf die Zahl, die gerade eingefügt wird. Achte darauf, dass verglichen wird, was links von <code>j</code> steht, und dass <code>j</code> nach jedem Tausch kleiner wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-5-3_insertion_schritte_vorschau.png" src="../vid/2-2-5-3_insertion_schritte.mp4"></video><a href="../vid/2-2-5-3_insertion_schritte.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Insertionsort Schritt für Schritt (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Jetzt du: Den Code im Sortierlabor mitverfolgen</h3>
+
+<p>Derselbe Code wie im Video, diesmal mit deiner Hand am Schalter. Achte auf die beiden Wege aus der <code>while</code>-Schleife: Zeile 4 (<code>j</code> ist 0) und Zeile 9 (<code>break</code>). Probiere danach „Schon sortiert“ und „Absteigend“ und lies jeweils die Vergleiche ab.</p>
+
+<div class="sortierlabor" data-verfahren="insertion" data-liste="5, 1, 4" data-fein="ja"></div>
+
+<p>Zum Nachlesen steht der Ablauf mit Tabelle in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Insertionsort für 5, 1, 4 – zuerst wird 1 vor 5 eingefügt (1, 5, 4), dann 4 zwischen 1 und 5 (1, 4, 5). Gezählt werden Vergleiche und Vertauschungen mit dem linken Nachbarn.</p>
+            <ol>
+                <li><strong>Start:</strong> Der sortierte Teil ist [5], der unsortierte [1, 4]. <em>Warum:</em> Ein einzelnes Element ist immer sortiert.</li>
+                <li><strong>1 einfügen:</strong> Vergleich 5 &gt; 1 → tauschen → 1, 5, 4. Danach steht 1 ganz vorn, es gibt keinen linken Nachbarn mehr. (1 Vergleich, 1 Vertauschung)</li>
+                <li><strong>4 einfügen:</strong> Vergleich 5 &gt; 4 → tauschen → 1, 4, 5. Vergleich 1 &gt; 4? Nein → Stopp. (2 Vergleiche, 1 Vertauschung) <em>Warum Stopp:</em> Links von 4 ist alles sortiert und kleiner. Weitere Vergleiche wären überflüssig.</li>
+            </ol>
+            <table>
+                <thead><tr><th>Schritt</th><th>Liste danach (sortierter Teil fett)</th><th>Vergleiche</th><th>Vertauschungen</th></tr></thead>
+                <tbody>
+                    <tr><td>Start</td><td><strong>5</strong>, 1, 4</td><td>–</td><td>–</td></tr>
+                    <tr><td>1 einfügen</td><td><strong>1, 5</strong>, 4</td><td>1</td><td>1</td></tr>
+                    <tr><td>4 einfügen</td><td><strong>1, 4, 5</strong></td><td>2</td><td>1</td></tr>
+                    <tr><td><strong>Summe</strong></td><td></td><td><strong>3</strong></td><td><strong>2</strong></td></tr>
+                </tbody>
+            </table>
+            <p><strong>Ergebnis:</strong> 1, 4, 5 nach 3 Vergleichen und 2 Vertauschungen. <strong>Kontrolle:</strong> 5, 1, 4 hat zwei Fehlstellungen, (5, 1) und (5, 4). Insertionsort braucht genau so viele Vertauschungen wie Fehlstellungen.</p>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.5.1 – Insertionsort von Hand und in Python.</p>
+
+<h2 id="schritt-4">Schritt 4: Selectionsort – die Idee</h2>
+
+<p>Selectionsort ist ein einfacher Sortieralgorithmus, mit dem man eine Liste auf- oder absteigend sortiert. Er durchläuft die Liste, sucht das kleinste (oder größte) Element im unsortierten Teil und verschiebt es an die richtige Position.</p>
+
+<p>Selectionsort arbeitet folgendermaßen:</p>
+
+<ol>
+            <li>Der Algorithmus nimmt an, dass das erste Element des unsortierten Teils das kleinste ist.</li>
+            <li>Er vergleicht es mit den restlichen Elementen, um das tatsächlich kleinste Element zu finden.</li>
+            <li>Das gefundene Element wird mit dem ersten Element des unsortierten Teils vertauscht und steht damit an seiner endgültigen Position.</li>
+            <li>Der Algorithmus wiederholt diesen Vorgang für den verbleibenden unsortierten Teil, bis die gesamte Liste sortiert ist.</li>
+        </ol>
+
+<p>Im Video sortiert Selectionsort dieselbe Liste 5, 2, 9, 3, 4, 6 wie Insertionsort in Schritt 1. Grün ist hier, was endgültig feststeht. Achte darauf, wie oft getauscht und wie oft verglichen wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-5-4_selection_idee_vorschau.png" src="../vid/2-2-5-4_selection_idee.mp4"></video><a href="../vid/2-2-5-4_selection_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Wie funktioniert Selectionsort? (ca. 1,5 min)</figcaption>
+        </figure>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: grafische Darstellung auf happycoders.eu</summary>
+                <p><a href="https://www.happycoders.eu/de/algorithmen/selection-sort/" target="_blank">https://www.happycoders.eu/de/algorithmen/selection-sort/</a></p>
+            </details>
+        </div>
+
+<h3>Jetzt du: Wer ist das neue Minimum?</h3>
+
+<p>Der blau umrandete Kasten ist das bisherige Minimum (Zeiger <code>min</code>). Bei jedem Vergleich sagst du vorher, ob die neue Zahl kleiner ist. Getauscht wird erst am Ende jeder Runde – höchstens einmal.</p>
+
+<div class="sortierlabor" data-verfahren="selection" data-liste="5, 2, 9, 3, 4, 6" data-vorhersage="ja" data-code="nein"></div>
+
+<h2 id="schritt-5">Schritt 5: Selectionsort in Python</h2>
+
+<p>Selectionsort braucht zwei Schleifen: Die äußere geht mit <code>i</code> die Stellen des unsortierten Teils durch, die innere sucht mit <code>j</code> das Minimum rechts davon. Neu ist <code>range(i + 1, n)</code>, eine Schleife, die direkt rechts von <code>i</code> beginnt. Im zweiten Teil des Videos läuft das Programm mit [5, 1, 4]. Achte darauf, dass sich <code>min_pos</code> nur die Position merkt und erst nach der Suche getauscht wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-5-5_selection_code_vorschau.png" src="../vid/2-2-5-5_selection_code.mp4"></video><a href="../vid/2-2-5-5_selection_code.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Selectionsort in Python (ca. 2 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen der Code aus dem Video. Er entspricht <code>selection_sort_nach_name</code> aus Beispiel 2, nur ohne Zähler und für einfache Zahlen:</p>
+
+<pre><code class="language-python">def selection_sort(liste):
+    n = len(liste)
+    for i in range(n - 1):
+        min_pos = i
+        for j in range(i + 1, n):
+            if liste[j] &lt; liste[min_pos]:
+                min_pos = j
+        if min_pos != i:
+            temp = liste[i]
+            liste[i] = liste[min_pos]
+            liste[min_pos] = temp
+    return liste
+
+print(selection_sort([5, 2, 9, 3, 4, 6]))   # [2, 3, 4, 5, 6, 9]</code></pre>
+
+<h3>Jetzt du: Beide Verfahren im Code vergleichen</h3>
+
+<p>Oben im Labor kannst du zwischen Insertionsort und Selectionsort umschalten. Lass beide dieselbe Liste sortieren und vergleiche die Zähler am Ende. Mit welcher Startliste gewinnt Insertionsort deutlich? Gibt es eine Liste, bei der Selectionsort weniger <em>vertauscht</em>?</p>
+
+<div class="sortierlabor" data-verfahren="selection" data-auswahl="selection,insertion" data-liste="5, 2, 9, 3, 4, 6"></div>
+
+<p>Danach: Aufgabe 2.2.5.2 – Selectionsort von Hand und in Python.</p>
+
+<h3>Zum Nachlesen: Beide Verfahren im Vergleich – Stabilität</h3>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Sortieren nach mehreren Kriterien. Insertionsort ist <em>stabil</em>: Gleiche Schlüssel behalten ihre ursprüngliche Reihenfolge. Sortiert man eine Schülerliste erst nach Vorname und danach stabil nach Nachname, stehen Personen mit gleichem Nachnamen alphabetisch nach Vornamen. Selectionsort ist dagegen <em>nicht</em> stabil. Das zeigt ein direkter Vergleich an der Liste Weber Anna, Weber Tom, Arndt Ole, die schon nach Vornamen geordnet ist und nun nach Nachnamen sortiert wird.</p>
+            <pre><code class="language-python">def insertion_sort_nach_name(liste):
+    vergleiche = 0
+    tausche = 0
+    for i in range(1, len(liste)):
+        j = i
+        while j &gt; 0:
+            vergleiche = vergleiche + 1
+            if liste[j - 1][0] &gt; liste[j][0]:      # nur Nachnamen vergleichen, strikt &gt;
+                temp = liste[j - 1]
+                liste[j - 1] = liste[j]
+                liste[j] = temp
+                tausche = tausche + 1
+                j = j - 1
+            else:
+                break                               # richtige Stelle gefunden
+    return [vergleiche, tausche]
+
+def selection_sort_nach_name(liste):
+    vergleiche = 0
+    tausche = 0
+    n = len(liste)
+    for i in range(n - 1):
+        min_pos = i
+        for j in range(i + 1, n):
+            vergleiche = vergleiche + 1
+            if liste[j][0] &lt; liste[min_pos][0]:
+                min_pos = j
+        if min_pos != i:
+            temp = liste[i]
+            liste[i] = liste[min_pos]
+            liste[min_pos] = temp
+            tausche = tausche + 1
+    return [vergleiche, tausche]
+
+a = [["Weber", "Anna"], ["Weber", "Tom"], ["Arndt", "Ole"]]
+b = a.copy()
+print(insertion_sort_nach_name(a), a)
+print(selection_sort_nach_name(b), b)
+# [3, 2] [['Arndt', 'Ole'], ['Weber', 'Anna'], ['Weber', 'Tom']]
+# [3, 1] [['Arndt', 'Ole'], ['Weber', 'Tom'], ['Weber', 'Anna']]</code></pre>
+            <ol>
+                <li><strong>Insertionsort, i = 1:</strong> Vergleich „Weber“ &gt; „Weber“? Nein → Weber Tom bleibt hinter Weber Anna. (1 Vergleich) <em>Warum entscheidend:</em> Wegen des strikten <code>&gt;</code> werden gleiche Schlüssel nie vertauscht.</li>
+                <li><strong>Insertionsort, i = 2:</strong> Arndt Ole wandert schrittweise nach links: „Weber“ &gt; „Arndt“ → tauschen, noch einmal „Weber“ &gt; „Arndt“ → tauschen, danach ist j = 0. (2 Vergleiche, 2 Vertauschungen) Ergebnis: Arndt Ole, Weber Anna, Weber Tom – <strong>stabil</strong>.</li>
+                <li><strong>Selectionsort, i = 0:</strong> Das Minimum „Arndt“ steht an Position 2. Es wird mit Position 0 <em>vertauscht</em>: Arndt Ole, Weber Tom, Weber Anna. (2 Vergleiche, 1 Vertauschung) <em>Warum ist das die Falle?</em> Der weite Sprung befördert Weber Anna über Weber Tom hinweg nach hinten.</li>
+                <li><strong>Selectionsort, i = 1:</strong> „Weber“ &lt; „Weber“? Nein → keine Änderung. (1 Vergleich) Ergebnis: Weber Tom vor Weber Anna – <strong>nicht stabil</strong>.</li>
+                <li><strong>Bester und schlechtester Fall:</strong>
+                    <table>
+                        <thead><tr><th></th><th>Insertionsort</th><th>Selectionsort</th></tr></thead>
+                        <tbody>
+                            <tr><td>bester Fall (sortiert)</td><td>n − 1 Vergleiche, 0 Vertauschungen: O(n)</td><td>n(n − 1)/2 Vergleiche, 0 Vertauschungen: O(n²)</td></tr>
+                            <tr><td>schlechtester Fall (absteigend)</td><td>n(n − 1)/2 Vergleiche und Vertauschungen: O(n²)</td><td>n(n − 1)/2 Vergleiche, höchstens n − 1 Vertauschungen: O(n²)</td></tr>
+                            <tr><td>stabil</td><td>ja</td><td>nein</td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li><strong>Mehrere Kriterien:</strong> Mit einem stabilen Verfahren sortiert man zuerst nach dem <em>unwichtigeren</em> Merkmal (Vorname) und danach nach dem wichtigeren (Nachname). Pythons eingebautes <code>sort()</code> ist ebenfalls stabil.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Beide Verfahren brauchen hier 3 Vergleiche. Insertionsort braucht 2 Vertauschungen und ist stabil, Selectionsort braucht nur 1 Vertauschung, ist aber nicht stabil.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe <code>insertion_sort_nach_name</code></th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[["Weber", "Anna"], ["Weber", "Tom"], ["Arndt", "Ole"]]</code></td><td><code>[3, 2]</code>, Arndt, Weber Anna, Weber Tom</td><td>Normalfall, siehe oben</td></tr>
+                    <tr><td><code>[]</code></td><td><code>[0, 0]</code></td><td>leere Liste</td></tr>
+                    <tr><td><code>[["Kahn", "Eva"]]</code></td><td><code>[0, 0]</code></td><td>ein Element</td></tr>
+                    <tr><td><code>[["B", "x"], ["A", "y"], ["C", "z"]]</code></td><td><code>[2, 1]</code>, A, B, C</td><td>fast sortiert: je Element nur ein bis zwei Vergleiche</td></tr>
+                    <tr><td><code>["Weber", "Wagner"]</code></td><td><code>[1, 0]</code>, Liste unverändert</td><td>falscher Typ, Falle: <code>"Weber"[0]</code> ist „W“; verglichen wird nur der erste Buchstabe – kein Absturz, aber falsch sortiert</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Einfache Verfahren in echter Software</summary>
+                <p>
+                    <strong>Alltag:</strong> Wer beim Kartenspielen neue Karten in die bereits geordnete Hand steckt, führt Insertionsort aus.<br><br>
+                    <strong>Beruf:</strong> Die Sortierfunktionen in Python (Timsort) und Java nutzen für kleine Teilstücke intern Insertionsort, weil er bei wenigen oder fast sortierten Elementen schneller ist als aufwendige Verfahren. Entwicklerinnen und Entwickler solcher Bibliotheken kombinieren gezielt mehrere Algorithmen.
+                </p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+            Insertionsort fügt jede Zahl durch Tauschen mit dem linken Nachbarn in den sortierten Teil ein und hört auf, sobald der Nachbar nicht größer ist. Deshalb ist er bei fast sortierten Listen schnell und außerdem stabil. Selectionsort sucht in jedem Schritt das Minimum des unsortierten Teils und tauscht es nach vorn: Er tauscht höchstens n − 1-mal, vergleicht aber immer n · (n − 1) / 2-mal und ist nicht stabil. Beide liegen im schlechtesten Fall in O(n²).
+        </p>
+
+<div class="hinweis" id="einschaetzen">
+            <details open>
+                <summary>Einschätzen: zurück zum Streamingdienst</summary>
+                <p>Die Charts von gestern (20 000 Songs) sind sortiert. Heute kommen neue Songs dazu, sie werden hinten angehängt. Ist es schneller, mit Insertionsort einzusortieren oder alles neu zu sortieren?</p>
+                <p>Schätze zuerst: Wer gewinnt bei 1, bei 20 und bei 2 000 neuen Songs – Insertionsort oder Mergesort (O(n log n), kommt auf 2.2.9)? Probiere es dann im Messlabor aus (Notebook von Seite 2.2.3, Teil 4): Füge Insertionsort und Selectionsort ein (Vergleiche mit <code>kommt_vor</code>), vergleiche die Kurven im Diagramm und miss die „Charts von gestern“ mit 20 neuen Songs.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Beispielmessung mit 20 000 Songs (mit Vergleichszähler):</p>
+                <table>
+                    <thead><tr><th>neue Songs</th><th>Insertionsort</th><th>Mergesort</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>0,005 s, 38 432 Vergleiche</td><td>0,036 s, 139 235 Vergleiche</td></tr>
+                        <tr><td>20</td><td>0,063 s, 259 237 Vergleiche</td><td>0,036 s, 139 545 Vergleiche</td></tr>
+                        <tr><td>2 000</td><td>6,7 s, 20 559 841 Vergleiche</td><td>0,10 s, 168 879 Vergleiche</td></tr>
+                    </tbody>
+                </table>
+                <p>Insertionsort geht einmal durch die schon sortierten Songs (je 1 Vergleich) und lässt jeden neuen Song im Mittel durch die halbe Liste wandern: etwa n + k · n / 2 Vergleiche bei k neuen Songs. Für einen einzigen neuen Song ist das O(n) und unschlagbar. Wächst k mit, wird es quadratisch. Mergesort kostet immer etwa n · log n. Einschätzung: Wenige neue Songs → einsortieren, viele → neu sortieren. Die Grenze liegt hier bei etwa 10 neuen Songs.</p>
+                </details>
+            </details>
+        </div>
+
+<h3>Zusatz: Insertionsort mit zwei Arrays</h3>
+
+<p>Insertionsort mit zwei Arrays arbeitet folgendermaßen:</p>
+
+<ol>
+            <li>Es wird ein leeres Array erzeugt, in das die Zahlen sortiert eingefügt werden. Das erste Element des unsortierten Arrays wird in das sortierte Array übertragen und dabei aus dem unsortierten Array gelöscht.</li>
+            <li>Dann wird wieder das erste Element des unsortierten Arrays an die richtige Stelle des sortierten Arrays eingefügt.</li>
+            <li>Am Ende ist das unsortierte Array leer, und im sortierten Array stehen alle Werte in aufsteigender Reihenfolge.</li>
+        </ol>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Insertionsort</strong> (Sortieren durch Einfügen): Das jeweils erste Element des unsortierten Teils wird an der richtigen Stelle in den sortierten Teil eingefügt.<br>
+                <strong>Selectionsort</strong> (Sortieren durch Auswählen): Das kleinste Element des unsortierten Teils wird gesucht und mit dem ersten Element des unsortierten Teils vertauscht.<br>
+                Beide liegen im schlechtesten Fall in <strong>O(n²)</strong>. Insertionsort ist bei fast sortierten Daten schnell (bester Fall O(n)); Selectionsort braucht immer n(n − 1)/2 Vergleiche, aber höchstens n − 1 Vertauschungen.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Eine Zahl einfügen <span class="niveau">AFB I</span></summary>
+                <p>Bei der Liste 2, 6, 8, 9, 5, 1 sind die ersten vier Zahlen schon sortiert. Jetzt wird die 5 eingefügt. Wie sieht die Liste danach aus? Wie viele Vergleiche und Vertauschungen braucht dieses Einfügen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>9 &gt; 5 tauschen, 8 &gt; 5 tauschen, 6 &gt; 5 tauschen, 2 &gt; 5? Nein → Stopp. Danach: 2, 5, 6, 8, 9, 1. Das sind 4 Vergleiche und 3 Vertauschungen.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Schleifen lesen <span class="niveau">AFB I</span></summary>
+                <p>Welche Werte durchläuft <code>i</code> bei einer Liste mit 4 Elementen? Nenne die beiden Fälle, in denen die <code>while</code>-Schleife endet.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>range(1, 4)</code> liefert 1, 2, 3. Die <code>while</code>-Schleife endet, wenn <code>j</code> den Wert 0 erreicht (die Zahl steht ganz vorn), oder mit <code>break</code>, wenn der linke Nachbar nicht größer ist.</p>
+                </details>
+            </details>
+        </div>

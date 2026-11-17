@@ -1,0 +1,151 @@
+<p>
+            In den Einstellungen deines Handys findest du neben der IP-Adresse eine zweite Adresse, etwa <code>DA:A1:19:5C:0E:73</code> – die MAC-Adresse. Sie wird gebraucht, damit ein Frame im lokalen Netz beim richtigen Gerät ankommt. Um diese „letzte Etappe“ kümmert sich die Netzzugangsschicht.
+        </p>
+
+<p>Die Netzzugangsschicht ist die unterste Schicht im TCP/IP-Modell (im OSI-Modell die Schichten 1 und 2). Sie umfasst alles, was für die Übertragung von Daten über das konkrete Medium notwendig ist: die Interaktion mit der Hardware, die Übertragung von Frames, die Adressierung im lokalen Netz sowie die Erkennung (bei Funk teilweise auch die Korrektur) von Übertragungsfehlern.</p>
+
+<h2>Aufgaben der Netzzugangsschicht</h2>
+
+<ul>
+            <li><strong>Physische Datenübertragung:</strong> Übermittlung der Bits über Kupferkabel, Glasfaser oder Funk.</li>
+            <li><strong>MAC-Adressierung:</strong> Identifizierung der Geräte im lokalen Netz über Media-Access-Control-Adressen (MAC-Adressen).</li>
+            <li><strong>Rahmenbildung:</strong> Kapselung der IP-Pakete in Frames (Rahmen), die die für das Medium notwendigen Informationen enthalten.</li>
+            <li><strong>Fehlererkennung:</strong> Erkennen von Übertragungsfehlern mithilfe einer Prüfsumme; fehlerhafte Frames werden verworfen.</li>
+            <li><strong>Flusskontrolle auf Hardware-Ebene:</strong> Steuerung der Datenrate zwischen direkt verbundenen Geräten, um Datenverlust zu vermeiden.</li>
+            <li><strong>Medienzugriff:</strong> Regelung, wer wann senden darf, wenn sich mehrere Geräte ein Medium teilen (z.&nbsp;B. im WLAN).</li>
+        </ul>
+
+<h2>MAC-Adressen</h2>
+
+<p>Die MAC-Adresse (Media Access Control Address) ist eine Hardware-Adresse jeder Netzwerkschnittstelle. Sie besteht aus 48&nbsp;Bit (6&nbsp;Byte) und wird üblicherweise hexadezimal in sechs Gruppen zu je zwei Zeichen dargestellt (z.&nbsp;B. <code>00:1A:2B:3C:4D:5E</code>). Die ersten drei Byte, der OUI (Organizationally Unique Identifier), kennzeichnen den Hersteller; die letzten drei Byte vergibt der Hersteller für das einzelne Gerät.</p>
+
+<p>Der Hersteller trägt die MAC-Adresse fest in die Netzwerkkarte ein, damit sie weltweit eindeutig ist. Das Betriebssystem kann sie aber per Software überschreiben. Smartphones und Laptops nutzen im WLAN aus Datenschutzgründen häufig für jedes Netz eine zufällige MAC-Adresse (<strong>MAC-Randomisierung</strong>), damit sie nicht über verschiedene WLANs hinweg verfolgt werden können. Solche Adressen sind als „lokal verwaltet“ gekennzeichnet: Im ersten Byte ist das zweitniedrigste Bit gesetzt.</p>
+
+<p>MAC-Adressen werden für die Zustellung im lokalen Netz (LAN) verwendet: Switches leiten Frames anhand der Ziel-MAC-Adresse an das richtige Gerät weiter. Über Router hinweg haben sie keine Bedeutung – dort übernimmt die IP-Adresse (→ 7.5). Die Adresse <code>FF:FF:FF:FF:FF:FF</code> ist die Broadcast-Adresse: Ein Frame an sie erreicht alle Geräte im lokalen Netz.</p>
+
+<h2>Ethernet</h2>
+
+<p>Ethernet ist die am weitesten verbreitete Technologie für kabelgebundene lokale Netze. Es legt fest, wie Daten im LAN physisch übertragen werden, einschließlich Rahmenaufbau, Adressierung und Fehlerbehandlung. Ein Ethernet-Frame ist so aufgebaut:</p>
+
+<table>
+            <thead>
+                <tr>
+                    <th>Ziel-MAC</th>
+                    <th>Quell-MAC</th>
+                    <th>Typ</th>
+                    <th>Nutzdaten (z.&nbsp;B. IP-Paket)</th>
+                    <th>Prüfsumme (FCS)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>6 Byte</td>
+                    <td>6 Byte</td>
+                    <td>2 Byte (z.&nbsp;B. 0x0800 = IPv4)</td>
+                    <td>46 bis 1&nbsp;500 Byte</td>
+                    <td>4 Byte (CRC-32)</td>
+                </tr>
+            </tbody>
+        </table>
+
+<p>Der Empfänger berechnet die Prüfsumme neu. Stimmt sie nicht überein, wird der Frame verworfen; Ethernet selbst sendet nicht erneut – das übernimmt bei Bedarf TCP (→ 7.9).</p>
+
+<h3>WLAN (IEEE 802.11)</h3>
+
+<p>WLAN (Wi-Fi) ist die vorherrschende Technologie für drahtlose lokale Netze. Es überträgt Daten per Funk und legt Standards für Sicherheit (z.&nbsp;B. WPA3), Datenraten und Frequenzbänder (2,4&nbsp;GHz, 5&nbsp;GHz, 6&nbsp;GHz) fest. Weil alle Geräte einer Funkzelle dasselbe Medium nutzen, regelt ein Zugriffsverfahren, wer gerade senden darf.</p>
+
+<h3>PPP (Point-to-Point Protocol)</h3>
+
+<p>PPP ermöglicht die direkte Kommunikation zwischen zwei Geräten über eine Punkt-zu-Punkt-Verbindung. Früher wurde es für die Einwahl ins Internet per Modem über die Telefonleitung verwendet; heute nutzen viele DSL-Anschlüsse eine Variante davon (PPPoE), um sich beim Internetanbieter anzumelden.</p>
+
+<h2>Geräte der Netzzugangsschicht</h2>
+
+<ul>
+            <li><strong>Modem</strong> (Modulator/Demodulator): wandelt digitale Daten in Signale für die Leitung um, z.&nbsp;B. für die DSL-Telefonleitung, und zurück.</li>
+            <li><strong>Hub/Repeater:</strong> verstärkt Signale und gibt sie an alle Anschlüsse weiter (heute kaum noch verwendet).</li>
+            <li><strong>Switch:</strong> leitet Frames gezielt anhand der Ziel-MAC-Adresse weiter.</li>
+            <li><strong>Access Point:</strong> verbindet WLAN-Geräte mit dem kabelgebundenen LAN (→ 7.1).</li>
+        </ul>
+
+<div class="gallery">
+            <span class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</span>
+            <span class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</span>
+        </div>
+
+<p><em>Abb. 1: links ein DSL-Modem (Anschlüsse „ETHERNET“ zum Rechner und „DSL“ zur Telefonleitung), rechts ein Switch mit acht Anschlüssen.</em></p>
+
+<h3>Wie ein Switch lernt</h3>
+
+<p>Ein Switch führt eine Tabelle, die <strong>SAT</strong> (Source Address Table, auch MAC-Tabelle). Für jeden eingehenden Frame merkt er sich, an welchem Anschluss (Port) die Quell-MAC-Adresse hängt. Ist die Ziel-MAC-Adresse schon in der Tabelle, schickt er den Frame nur an diesen Port. Ist sie unbekannt oder ist es ein Broadcast, sendet er den Frame an alle anderen Ports (Flooding).</p>
+
+<h2>ARP: von der IP-Adresse zur MAC-Adresse</h2>
+
+<p>Das Address Resolution Protocol (ARP) ordnet einer IP-Adresse im lokalen Netz die zugehörige MAC-Adresse zu. Will ein Gerät ein Paket an eine IP-Adresse im selben Netz (oder an sein Standard-Gateway) senden, fragt es per Broadcast: „Wer hat 192.168.0.2?“ Das gesuchte Gerät antwortet direkt mit seiner MAC-Adresse. Das Ergebnis wird im ARP-Cache gespeichert (anzeigen mit <code>arp -a</code>). ARP liegt an der Grenze zwischen Netzzugangs- und Internetschicht, weil es beide Adressarten miteinander verbindet.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: Eine MAC-Adresse lesen <span class="beispiel-kopf">einfach</span></summary>
+            <p><code>00:1A:2B:3C:4D:5E</code>: Der OUI <code>00:1A:2B</code> verweist auf den Hersteller, <code>3C:4D:5E</code> ist die Gerätenummer. Die Adresse <code>DA:A1:19:5C:0E:73</code> vom Handy oben ist dagegen zufällig erzeugt: Das erste Byte DA ist binär 1101&nbsp;10<strong>1</strong>0 – das zweitniedrigste Bit ist gesetzt, die Adresse ist also lokal verwaltet (MAC-Randomisierung). Das niedrigste Bit ist 0, es ist eine normale Unicast-Adresse.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: Die SAT füllt sich <span class="beispiel-kopf">komplex</span></summary>
+            <p>An einem Switch hängen A (Port 1), B (Port 2) und C (Port 3). Die Tabelle ist anfangs leer.</p>
+            <table>
+                <thead>
+                    <tr><th>Frame</th><th>gelernt</th><th>weitergeleitet an</th><th>Begründung</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>A → B</td><td>A an Port 1</td><td>Port 2 und 3</td><td>B ist noch unbekannt → Flooding</td></tr>
+                    <tr><td>B → A</td><td>B an Port 2</td><td>Port 1</td><td>A ist bekannt</td></tr>
+                    <tr><td>C → Broadcast (ARP)</td><td>C an Port 3</td><td>Port 1 und 2</td><td>Broadcasts gehen immer an alle</td></tr>
+                    <tr><td>A → C</td><td>–</td><td>Port 3</td><td>C ist jetzt bekannt</td></tr>
+                </tbody>
+            </table>
+            <p>Nach wenigen Frames kennt der Switch alle Geräte und entlastet die übrigen Leitungen – anders als ein Hub.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: „Private WLAN-Adresse“ und die Suche nach dem Drucker</summary>
+                <p><strong>Alltag:</strong> In den WLAN-Einstellungen von iPhone („Private WLAN-Adresse“) und Android („Zufällige MAC-Adresse“) ist die MAC-Randomisierung meist eingeschaltet. Deshalb taucht dein Handy in der Geräteliste der FRITZ!Box manchmal als neues Gerät auf, und ein MAC-Filter im Router ist kein verlässlicher Zugangsschutz. Das Modem – bei vielen Heimroutern schon eingebaut – verbindet dein Heimnetz über die DSL- oder Kabelleitung mit dem Internetanbieter.</p>
+                <p><strong>Beruf:</strong> Ticket an die Netzwerkadministration: „Drucker in Raum 204 ist nicht erreichbar.“ Die Administratorin sucht die MAC-Adresse des Druckers in der MAC-Tabelle der verwalteten Switches (z.&nbsp;B. mit <code>show mac address-table</code>) und findet so heraus, an welchem Switch-Port und damit an welcher Netzwerkdose er hängt – oder dass er gar nicht verbunden ist.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>MAC-Adresse</strong> – 48-Bit-Adresse einer Netzwerkschnittstelle, mit der Frames im lokalen Netz zugestellt werden. Sie ist vom Hersteller vergeben, aber per Software änderbar (z.&nbsp;B. MAC-Randomisierung im WLAN). Sie gilt nur bis zum nächsten Router.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Switch</strong> – Gerät der Netzzugangsschicht, das aus den Quell-MAC-Adressen lernt, welches Gerät an welchem Port hängt, und Frames nur an den Port des Empfängers weiterleitet. Unbekannte Ziele und Broadcasts werden an alle Ports geflutet.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.4.1: MAC-Adressen untersuchen <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Gib den OUI und die Gerätenummer der Adresse <code>3C:79:30:29:FA:1F</code> an.</li>
+                    <li>Entscheide für <code>3C:79:30:29:FA:1F</code> und <code>FF:FF:FF:FF:FF:FF</code>, ob es sich um eine Unicast- oder Broadcast-Adresse handelt.</li>
+                    <li>Erkläre, warum eine MAC-Adresse nicht ausreicht, um einen Rechner im Internet zu erreichen.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.4.2: Die Switch-Tabelle <span class="niveau">AFB II</span></summary>
+                <p>An einem Switch hängen W (Port 1), X (Port 2), Y (Port 3) und Z (Port 4). Die SAT ist leer. Nacheinander werden folgende Frames gesendet: W → X, X → W, Y → Broadcast, Z → Y, W → Z. Gib für jeden Frame an, welcher Eintrag neu gelernt wird und an welche Ports der Switch den Frame weiterleitet.</p>
+            </details>
+        </div>

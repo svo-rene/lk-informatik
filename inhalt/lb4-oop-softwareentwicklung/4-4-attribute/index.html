@@ -1,0 +1,275 @@
+<p>
+        In einer Klasse kannst du unterschiedliche Arten von Attributen definieren. Sie beschreiben den <strong>Zustand</strong> eines Objekts. Jetzt schauen wir uns genauer an, wie man sie verwendet – und worin der Unterschied zwischen Instanz- und Klassenattributen liegt.
+    </p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in drei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) den Code in Thonny mit dem Speicherbild rechts, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe mit.</p>
+
+<ol class="schritte">
+        <li><a href="#schritt-1">Instanzattribute: jedes Objekt hat eigene Werte</a></li>
+        <li><a href="#schritt-2">Klassenattribute: ein Wert für alle</a> – danach Aufgaben 4.4.1 bis 4.4.3</li>
+        <li><a href="#schritt-3">Zwei Namen, ein Objekt</a> – danach Aufgabe 4.4.5</li>
+    </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Instanzattribute</h2>
+
+<p>Diese Attribute gehören zu einem <em>konkreten Objekt</em>. Jedes Objekt hat seine eigenen Werte. Im Video siehst du im Speicherbild, dass <code>luna</code> und <code>balu</code> getrennte Speicherplätze für <code>name</code> und <code>rasse</code> haben. Achte auch darauf, was passiert, wenn man nach einem Attribut fragt, das nie mit <code>self.</code> angelegt wurde.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-4-1_instanzattribute_vorschau.png" src="../vid/4-4-1_instanzattribute.mp4"></video><a href="../vid/4-4-1_instanzattribute.mp4">Video ansehen</a></div>
+        <figcaption>Video 1: Instanzattribute (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+    </figure>
+
+<p>Zum Nachlesen steht das Beispiel aus dem Video in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Jeder Hund hat seine eigenen Werte</summary>
+        <p><strong>Ausgangssituation:</strong> Die Hundeschule legt zwei Hunde an, Luna (Dackel) und Balu (Labrador). Name und Rasse sind bei jedem Hund anders, also sind es Instanzattribute. Klassendiagramm (diesmal ohne Methoden außer dem Konstruktor):</p>
+        <table class="gitter">
+            <tbody>
+                <tr><th>Hund</th></tr>
+                <tr><td>name: string<br>rasse: string</td></tr>
+                <tr><td>Hund(name: string, rasse: string)</td></tr>
+            </tbody>
+        </table>
+        <pre><code class="language-python">class Hund:
+    def __init__(self, name, rasse):
+        self.name = name
+        self.rasse = rasse
+
+luna = Hund("Luna", "Dackel")
+balu = Hund("Balu", "Labrador")
+
+print(luna.name)   # Luna
+print(balu.name)   # Balu</code></pre>
+        <ol>
+            <li><strong><code>luna = Hund("Luna", "Dackel")</code>:</strong> Python erzeugt ein neues Objekt und ruft <code>__init__</code> mit <code>self</code> = neues Objekt auf. <code>self.name = name</code> legt <em>im Objekt</em> das Attribut <code>name</code> mit dem Wert „Luna“ an, ebenso <code>rasse</code>. Warum <code>self.</code>? Ohne <code>self.</code> wäre <code>name</code> nur eine lokale Variable, die nach dem Konstruktor verschwindet.</li>
+            <li><strong><code>balu = Hund("Balu", "Labrador")</code>:</strong> Derselbe Konstruktor läuft noch einmal, jetzt mit einem anderen <code>self</code>. Balu bekommt eigene Speicherplätze für <code>name</code> und <code>rasse</code>.</li>
+            <li><strong><code>print(luna.name)</code>:</strong> Python schaut im Objekt <code>luna</code> nach und findet „Luna“; bei <code>balu.name</code> findet es „Balu“. Die beiden Werte stören sich nicht gegenseitig.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Ausgabe <code>Luna</code> und <code>Balu</code>. Objektdiagramme:</p>
+        <table class="gitter">
+            <thead><tr><th><u>luna : Hund</u></th><th><u>balu : Hund</u></th></tr></thead>
+            <tbody>
+                <tr><td>name = "Luna"<br>rasse = "Dackel"</td><td>name = "Balu"<br>rasse = "Labrador"</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Kontrolle:</strong></p>
+        <table class="gitter">
+            <thead><tr><th>Anweisung</th><th>erwartete Ausgabe</th></tr></thead>
+            <tbody>
+                <tr><td><code>print(luna.name)</code></td><td><code>Luna</code></td></tr>
+                <tr><td><code>print(balu.name)</code></td><td><code>Balu</code></td></tr>
+                <tr><td><code>print(luna.rasse, balu.rasse)</code></td><td><code>Dackel Labrador</code></td></tr>
+                <tr><td><code>print(Hund("Rex", "Pudel").name)</code></td><td><code>Rex</code></td></tr>
+            </tbody>
+        </table>
+            </details>
+        </div>
+
+<h3>Attribute im Konstruktor initialisieren</h3>
+
+<p>Der Konstruktor <code>__init__</code> sorgt dafür, dass bei jeder Objekterzeugung die Startwerte gesetzt werden. Dort legst du fest, welche Werte ein Objekt bekommt.</p>
+
+<pre><code class="language-python">class Buch:
+    def __init__(self, titel, autor):
+        self.titel = titel
+        self.autor = autor
+
+buch1 = Buch("1984", "George Orwell")
+print(buch1.titel)  # Ausgabe: 1984</code></pre>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Klassenattribute →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Klassenattribute</h2>
+
+<p>Ein Klassenattribut gehört <em>nicht</em> zu einem einzelnen Objekt, sondern zur Klasse selbst – und damit zu <strong>allen Objekten gemeinsam</strong>.</p>
+
+<pre><code class="language-python">class Auto:
+    anzahl_autos = 0  # Klassenattribut
+
+    def __init__(self, marke):
+        self.marke = marke
+        Auto.anzahl_autos += 1  # Zugriff über den Klassennamen
+
+a1 = Auto("VW")
+a2 = Auto("BMW")
+
+print(Auto.anzahl_autos)  # Ausgabe: 2</code></pre>
+
+<p>Im Video läuft dieses Programm Schritt für Schritt. Im Speicherbild steht das Klassenattribut im Kasten der Klasse, die Instanzattribute stehen in den Objekten. Achte darauf, wo Python bei <code>a1.anzahl_autos</code> sucht – und was eine Zuweisung über ein Objekt anrichtet.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-4-2_klassenattribute_vorschau.png" src="../vid/4-4-2_klassenattribute.mp4"></video><a href="../vid/4-4-2_klassenattribute.mp4">Video ansehen</a></div>
+        <figcaption>Video 2: Klassenattribute (ca. 2 min)</figcaption>
+    </figure>
+
+<h3>UML-Diagramm: Instanz- und Klassenattribute</h3>
+
+<p>Im UML-Diagramm erkennt man den Unterschied an der <em>Unterstreichung</em>:</p>
+
+<figure>
+        <img src="../img/klassendiagramm_klassenattribut.png" width="600" alt="UML-Klassendiagramm der Klasse Auto mit unterstrichenem Klassenattribut anzahl_autos">
+        <figcaption>Abb. 1: Klassenattribut unterstrichen</figcaption>
+    </figure>
+
+<p><em>Instanzattribute wie <code>marke</code> sind normal geschrieben, Klassenattribute wie <code>anzahl_autos</code> sind <strong>unterstrichen</strong>.</em></p>
+
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: Wann brauche ich Klassenattribute?</summary>
+            <p>
+                Ein Klassenattribut ist wie ein gemeinsamer Notizzettel für alle Objekte einer Klasse. Es speichert etwas, das für <strong>alle gemeinsam gilt</strong> – egal, wie viele Objekte du erzeugst. Zum Beispiel:
+            </p>
+            <ul>
+                <li>Wie viele Hunde wurden schon erzeugt?</li>
+                <li>Wie hoch ist der Steuersatz für alle Produkte?</li>
+                <li>Welche Schule besuchen alle Schülerinnen und Schüler?</li>
+            </ul>
+            <p>Solche Dinge musst du <strong>nicht in jedem Objekt einzeln</strong> speichern – ein Klassenattribut reicht.</p>
+        </details>
+    </div>
+
+<p>Zum Nachlesen: Die Stolperfalle aus dem Video an einem Onlineshop in Beispiel 2.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Stolperfalle beim Ändern eines Klassenattributs über ein Objekt</summary>
+        <p><strong>Ausgangssituation:</strong> Ein Onlineshop berechnet Bruttopreise. Der Mehrwertsteuersatz gilt für alle Produkte gleich und ist deshalb ein Klassenattribut (im Klassendiagramm unterstrichen, siehe Abb. 1). Die Steuer wird erst auf 16&nbsp;% gesenkt; danach versucht jemand, nur für die Kopfhörer 7&nbsp;% einzustellen.</p>
+        <table class="gitter">
+            <tbody>
+                <tr><th>Produkt</th></tr>
+                <tr><td><u>mwst: float = 0.19</u><br>name: string<br>netto: float</td></tr>
+                <tr><td>Produkt(name: string, netto: float)<br>brutto(): float</td></tr>
+            </tbody>
+        </table>
+        <pre><code class="language-python">class Produkt:
+    mwst = 0.19                      # Klassenattribut
+
+    def __init__(self, name, netto):
+        self.name = name
+        self.netto = netto
+
+    def brutto(self):
+        return round(self.netto * (1 + self.mwst), 2)
+
+p1 = Produkt("Kopfhörer", 50)
+p2 = Produkt("Maus", 20)
+
+Produkt.mwst = 0.16                  # richtig: gilt für alle Objekte
+print(p1.brutto(), p2.brutto())      # 58.0 23.2
+
+p1.mwst = 0.07                       # erzeugt ein NEUES Instanzattribut nur für p1!
+print(p1.brutto(), p2.brutto())      # 53.5 23.2
+print(Produkt.mwst)                  # 0.16 – das Klassenattribut ist unverändert</code></pre>
+        <p>Python sucht <code>self.mwst</code> zuerst im Objekt und erst dann in der Klasse. Eine Zuweisung über das Objekt legt deshalb ein eigenes Instanzattribut an, das das Klassenattribut für dieses Objekt „verdeckt“.</p>
+        <ol>
+            <li><strong>Objekte anlegen:</strong> <code>p1</code> und <code>p2</code> erhalten im Konstruktor nur <code>name</code> und <code>netto</code>. <code>mwst</code> existiert genau einmal – in der Klasse.</li>
+            <li><strong><code>Produkt.mwst = 0.16</code>:</strong> Der gemeinsame Wert wird geändert. In <code>brutto()</code> findet Python <code>self.mwst</code> in keinem der Objekte und liest deshalb aus der Klasse: 50 · 1,16 = 58.0 und 20 · 1,16 = 23.2 (<code>round(…, 2)</code> glättet dabei kleine Rundungsfehler der Kommazahlen).</li>
+            <li><strong><code>p1.mwst = 0.07</code> – die Falle:</strong> Eine Zuweisung über ein Objekt ändert nie die Klasse, sondern legt im Objekt <code>p1</code> ein <em>neues Instanzattribut</em> <code>mwst</code> an. Ab jetzt findet <code>p1</code> beim Nachschlagen zuerst den eigenen Wert 0.07: 50 · 1,07 = 53.5. <code>p2</code> hat kein eigenes <code>mwst</code> und liest weiterhin 0.16 aus der Klasse: 23.2.</li>
+            <li><strong><code>print(Produkt.mwst)</code>:</strong> Das Klassenattribut ist unverändert 0.16 – die Zuweisung in Schritt 3 hat es nicht berührt.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Die drei Ausgabezeilen lauten <code>58.0 23.2</code>, <code>53.5 23.2</code> und <code>0.16</code>. Am Ende gilt:</p>
+        <table class="gitter">
+            <thead><tr><th>Ausdruck</th><th>wo Python den Wert findet</th><th>Wert</th></tr></thead>
+            <tbody>
+                <tr><td><code>p1.mwst</code></td><td>Instanzattribut von p1</td><td>0.07</td></tr>
+                <tr><td><code>p2.mwst</code></td><td>Klassenattribut (p2 hat kein eigenes)</td><td>0.16</td></tr>
+                <tr><td><code>Produkt.mwst</code></td><td>Klassenattribut</td><td>0.16</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Kontrolle:</strong> Setzt man danach den Steuersatz wieder für alle auf 19&nbsp;%, zeigt sich, dass p1 „abgekoppelt“ ist:</p>
+        <table class="gitter">
+            <thead><tr><th>Anweisungen</th><th>erwartete Ausgabe</th></tr></thead>
+            <tbody>
+                <tr><td><code>Produkt.mwst = 0.19</code><br><code>print(p1.brutto(), p2.brutto())</code></td><td><code>53.5 23.8</code></td></tr>
+                <tr><td><code>print(Produkt("Tastatur", 30).brutto())</code></td><td><code>35.7</code></td></tr>
+            </tbody>
+        </table>
+        <p>p1 rechnet weiter mit seinen eigenen 7&nbsp;%, nur p2 und neue Produkte folgen dem Klassenattribut. Merke: Klassenattribute immer über den Klassennamen ändern.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-4-4-1">Aufgabe 4.4.1</a> – Spieler-Statistik, <a href="uebungen.html#a-4-4-2">Aufgabe 4.4.2</a> – Bücher mit Steuer und <a href="uebungen.html#a-4-4-3">Aufgabe 4.4.3</a> – Ausgaben vorhersagen.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Zwei Namen, ein Objekt →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Zwei Namen, ein Objekt</h2>
+
+<p>Eine Variable enthält nicht das Objekt selbst, sondern einen <strong>Verweis</strong> darauf – im Speicherbild ist das der Pfeil. Bei einer Zuweisung wie <code>hund = luna</code> wird deshalb kein Objekt kopiert, sondern nur ein zweiter Pfeil auf dasselbe Objekt gesetzt. Man nennt das auch <strong>Aliasing</strong> (Alias = zweiter Name). Im Video siehst du, was passiert, wenn man das Objekt über den zweiten Namen ändert. Neu ist der Operator <code>is</code>; er wird im Video kurz gezeigt.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-4-3_aliasing_vorschau.png" src="../vid/4-4-3_aliasing.mp4"></video><a href="../vid/4-4-3_aliasing.mp4">Video ansehen</a></div>
+        <figcaption>Video 3: Zwei Namen, ein Objekt (ca. 1,5 min)</figcaption>
+    </figure>
+
+<p>Danach: <a href="vertiefung.html#a-4-4-5">Aufgabe 4.4.5</a> – Fehler finden: die geteilte Warteliste.</p>
+
+<div class="praxisbezug">
+        <details>
+            <summary>Praxisbezug: Konfiguration und Zähler</summary>
+            <p>
+                <strong>Alltag:</strong> Ändert der Staat den Mehrwertsteuersatz, müssen Kassensysteme im Supermarkt den Wert für alle Produkte gleichzeitig umstellen – ein typischer Fall für einen gemeinsam genutzten Wert statt Tausender Einzelwerte.<br><br>
+                <strong>Beruf:</strong> Entwicklerinnen und Entwickler von Warenwirtschafts- und Kassensoftware legen solche gemeinsamen Werte als Klassenattribute oder als zentrale Konfiguration an. So bleibt die Software wartbar, wenn sich Steuersätze, Währungen oder Grenzwerte ändern.
+            </p>
+        </details>
+    </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+        Instanzattribute legt der Konstruktor mit <code>self.name = …</code> in jedem Objekt einzeln an; jedes Objekt hat eigene Werte. Ein Klassenattribut steht im Klassenrumpf, existiert nur einmal und wird über den Klassennamen geändert; im UML-Diagramm ist es unterstrichen. Python sucht ein Attribut zuerst im Objekt, dann in der Klasse – eine Zuweisung über ein Objekt legt deshalb ein neues Instanzattribut an. Variablen sind Verweise: <code>b = a</code> gibt demselben Objekt einen zweiten Namen, <code>is</code> prüft, ob es dasselbe Objekt ist.
+    </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            <strong>Instanzattribute</strong> gehören zu einem einzelnen Objekt; jedes Objekt hat eigene Werte. Sie werden im Konstruktor über <code>self.name = …</code> angelegt.<br>
+            <strong>Klassenattribute</strong> gehören zur Klasse selbst und werden von allen Objekten gemeinsam genutzt. Sie werden direkt im Klassenrumpf definiert und über den Klassennamen verändert (<code>Auto.anzahl_autos += 1</code>).
+        </p>
+    </div>
+
+<div class="merke">
+        <p>
+            <code>self</code> verweist auf das Objekt, das gerade erzeugt bzw. benutzt wird. Schreibst du <code>luna = Hund("Luna", "Dackel")</code>, dann steht <code>self</code> in <code>__init__(self, name, rasse)</code> für das neue Objekt <code>luna</code>. Dadurch wird <code>luna.name = "Luna"</code> und <code>luna.rasse = "Dackel"</code> gesetzt. Jedes Objekt erhält so seine eigenen Instanzattribute.
+        </p>
+    </div>
+
+<div class="merke">
+        <p>
+            Der Konstruktor sorgt dafür, dass dein Objekt von Anfang an sinnvoll „gefüllt“ ist. Ohne <code>__init__</code> müssten alle Attribute von Hand gesetzt werden – das ist fehleranfällig.
+        </p>
+    </div>
+
+<div class="merke">
+        <p>
+            <code>b = a</code> gibt einem vorhandenen Objekt einen zweiten Namen – es entsteht kein neues Objekt. Änderungen über einen Namen sieht man über alle Namen. <code>a is b</code> prüft, ob zwei Namen auf <em>dasselbe</em> Objekt zeigen; zwei Objekte mit gleichen Werten sind trotzdem verschiedene Objekte.
+        </p>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Ein zweites Buch <span class="niveau">AFB I</span></summary>
+            <p>Mit der Klasse <code>Buch</code> von oben wird <code>b2 = Buch("Momo", "Michael Ende")</code> erzeugt. Was geben <code>print(b2.autor)</code> und <code>print(b2.seiten)</code> aus?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>print(b2.autor)</code> gibt <code>Michael Ende</code> aus. <code>print(b2.seiten)</code> bricht mit <code>AttributeError: 'Buch' object has no attribute 'seiten'</code> ab, denn der Konstruktor legt nur <code>titel</code> und <code>autor</code> an.</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Drei Autos <span class="niveau">AFB II</span></summary>
+            <p>Mit der Klasse <code>Auto</code> von oben werden <code>x = Auto("Opel")</code>, <code>y = Auto("Fiat")</code> und <code>z = Auto("Kia")</code> erzeugt. Danach wird <code>y.anzahl_autos = 10</code> ausgeführt. Was gibt <code>print(Auto.anzahl_autos, x.anzahl_autos, y.anzahl_autos, z.anzahl_autos)</code> aus?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>3 3 10 3</code>. Der Konstruktor hat das Klassenattribut dreimal erhöht. <code>y.anzahl_autos = 10</code> legt nur in <code>y</code> ein eigenes Instanzattribut an; <code>x</code> und <code>z</code> finden kein eigenes und lesen weiter den Wert 3 aus der Klasse.</p>
+            </details>
+        </details>
+    </div>

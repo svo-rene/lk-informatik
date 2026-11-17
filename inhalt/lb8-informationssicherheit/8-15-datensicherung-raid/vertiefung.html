@@ -1,0 +1,37 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.15.3: Ein Sicherungskonzept planen <span class="niveau">AFB III</span></summary>
+                <div class="sachtext">
+                    <p>Ein Architekturbüro in Chemnitz mit acht Beschäftigten speichert 800&nbsp;GB Pläne und Dokumente auf einem Server. An jedem Arbeitstag (Montag bis Freitag) ändern sich etwa 2&nbsp;% der Daten, also 16&nbsp;GB (jeweils andere Dateien). Die Inhaberin stellt folgende Anforderungen:</p>
+                    <ul>
+                        <li>Es darf höchstens die Arbeit eines Tages verloren gehen.</li>
+                        <li>Nach einem Totalausfall muss innerhalb eines Arbeitstages (8&nbsp;Stunden) wieder gearbeitet werden können.</li>
+                        <li>Sicherungen sollen vier Wochen lang aufbewahrt werden.</li>
+                        <li>Ein Befall mit Erpressersoftware darf nicht zum Verlust aller Daten führen.</li>
+                    </ul>
+                    <p>Zur Verfügung stehen: ein NAS im Serverraum (Lesegeschwindigkeit 200&nbsp;MB/s), mehrere USB-Festplatten mit je 4&nbsp;TB und ein Cloud-Speicher, der mit 100&nbsp;Mbit/s erreichbar ist.</p>
+                </div>
+                <ol type="a">
+                    <li>Ordne die Kopien der Daten nach der 3-2-1-Regel den verfügbaren Speichern zu und begründe die Zuordnung.</li>
+                    <li>Geplant ist eine Vollsicherung am Freitagabend und eine tägliche Sicherung montags bis donnerstags. Berechne den Speicherbedarf für vier Wochen Aufbewahrung bei inkrementeller und bei differenzieller Sicherung. Entscheide, welche Variante auf eine 4-TB-Festplatte passt.</li>
+                    <li>Am Donnerstagvormittag fällt der Server aus. Gib für beide Varianten an, welche Sicherungen in welcher Reihenfolge zurückgespielt werden, und prüfe die Anforderung zum Datenverlust.</li>
+                    <li>Berechne die Dauer der Wiederherstellung (1&nbsp;GB = 1000&nbsp;MB) vom NAS und aus der Cloud und beurteile, welche Quelle die 8-Stunden-Anforderung erfüllt.</li>
+                    <li>Erläutere, wie dein Konzept verhindert, dass Erpressersoftware auch die Sicherungen verschlüsselt. Gehe auf die Offline-Sicherung ein.</li>
+                    <li>Entwirf einen Plan für regelmäßige Wiederherstellungstests (Was? Wie oft? Wer? Woran erkennt man Erfolg?).</li>
+                </ol>
+                <p class="tipp">Vergleiche mit Beispiel 1 und mit Aufgabe 8.15.2. Bei b) gehören zu jeder Woche eine Vollsicherung und vier Teilsicherungen.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.15.6: Fehler finden – „Wir sind doppelt abgesichert“ <span class="niveau">AFB III</span></summary>
+                <p>Der Inhaber eines Fotostudios erklärt:</p>
+                <div class="sachtext">
+                    <p>„Unsere Daten sind sicher. Der Server hat RAID 1, jede Nacht wird auf das NAS daneben im Regal gesichert, und außerdem werden alle Ordner automatisch mit einem Cloud-Speicher synchronisiert – das ist unsere Kopie außer Haus. Die Sicherung läuft seit drei Jahren ohne Fehlermeldung, zurückspielen mussten wir noch nie etwas.“</p>
+                </div>
+                <p>Untersuche die Aussage. Finde mindestens vier Schwachstellen, beschreibe für jede ein Schadensszenario und schlage eine Verbesserung vor.</p>
+            </details>
+        </div>

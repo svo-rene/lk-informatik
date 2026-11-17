@@ -1,0 +1,29 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100%" height="100%" fill="#f0f0f0"/>
+    
+    <!-- Koordinatensystem -->
+    <line x1="50" y1="350" x2="550" y2="350" stroke="black" stroke-width="2" />
+    <line x1="50" y1="350" x2="50" y2="50" stroke="black" stroke-width="2" />
+    
+    <!-- Achsenbeschriftungen -->
+    <text x="300" y="390" font-size="14" text-anchor="middle" font-weight="bold">Durchschnittlicher Bestellwert (€)</text>
+    <text x="20" y="200" font-size="14" text-anchor="middle" transform="rotate(-90 20,200)" font-weight="bold">Bestellhäufigkeit (pro Jahr)</text>
+    
+    <!-- Datenpunkte -->
+    <circle cx="100" cy="300" r="4" fill="gray" />
+    <circle cx="150" cy="250" r="4" fill="gray" />
+    <circle cx="200" cy="280" r="4" fill="gray" />
+    <circle cx="250" cy="200" r="4" fill="gray" />
+    <circle cx="300" cy="150" r="4" fill="gray" />
+    <circle cx="350" cy="220" r="4" fill="gray" />
+    <circle cx="400" cy="180" r="4" fill="gray" />
+    <circle cx="450" cy="300" r="4" fill="gray" />
+    <circle cx="500" cy="250" r="4" fill="gray" />
+    
+    <!-- Initiale Zentroide -->
+    <circle cx="150" cy="200" r="8" stroke="red" fill="none" stroke-width="2" />
+    <circle cx="350" cy="250" r="8" stroke="blue" fill="none" stroke-width="2" />
+    <circle cx="400" cy="120" r="8" stroke="green" fill="none" stroke-width="2" />
+    
+    <text x="300" y="30" font-size="16" text-anchor="middle" font-weight="bold">Initialzustand</text>
+</svg>

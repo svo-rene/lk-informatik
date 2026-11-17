@@ -1,0 +1,39 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.10.6: KI-Antwort prüfen <span class="niveau">AFB III</span></summary>
+                <p>Jonas hat für Aufgabe 11.10.4 keine Lust zum Rechnen und fragt einen Chatbot. Er kopiert den Trainingstext in den Prompt und fragt nach P(nächstes Wort | „informatik“) und nach der Wahrscheinlichkeit des Satzes „ich mag informatik sehr .“. Die Antwort klingt überzeugend:</p>
+                <blockquote>
+                    <p>„Gern! Im Text folgt auf ‚informatik‘ zweimal ‚sehr‘ und einmal ‚.‘. Damit gilt P(sehr | informatik) = 2/3 ≈ 0,67 und P(. | informatik) = 1/3 ≈ 0,33.</p>
+                    <p>Die Wahrscheinlichkeit des Satzes erhältst du, indem du die Einzelwahrscheinlichkeiten addierst: 1 + 2/3 + 2/3 + 1 ≈ 3,33. Der Satz ist also sehr wahrscheinlich.</p>
+                    <p>Bigramm-Modelle wurden übrigens erstmals 2017 von Google vorgestellt (Vaswani et al.: ‚N-Gram Models for Chatbots‘, S. 12). Da Sprachmodelle grundsätzlich immer das wahrscheinlichste Wort wählen, gibt dir jeder Chatbot auf dieselbe Frage stets genau dieselbe Antwort.“</p>
+                </blockquote>
+                <ol>
+                    <li>Untersuche die Antwort auf Fehler. Benenne jeden Fehler, ordne ihn einer Fehlerart zu (z.&nbsp;B. Zählfehler, Rechenfehler, falsche Jahreszahl, erfundene Quelle, unzulässige Verallgemeinerung) und korrigiere ihn, soweit das mit dem Wissen von dieser Seite möglich ist.</li>
+                    <li>Mindestens ein Fehler lässt sich ohne jede Recherche schon an einer Eigenschaft des Ergebnisses erkennen. Erkläre, woran.</li>
+                    <li>Beschreibe eine Prüfstrategie, mit der Jonas künftig KI-Antworten mit Rechnungen, Quellenangaben und Jahreszahlen kontrollieren kann.</li>
+                    <li>Erkläre mit dem Funktionsprinzip eines Sprachmodells, warum eine solche Antwort trotz der Fehler so überzeugend klingt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.10.7: Ein Chatbot für das Schulsekretariat? <span class="niveau">AFB III</span></summary>
+                <p>Die Schulleitung eures Gymnasiums überlegt, auf der Schulwebsite einen Chatbot auf Basis eines großen Sprachmodells einzusetzen. Er soll Fragen von Eltern sowie Schülerinnen und Schülern beantworten, z.&nbsp;B. zu Fristen für die Kurswahl, zu Regeln bei Krankmeldungen in Klausuren oder zu Zulassungsbedingungen für das Abitur. Das Sekretariat soll dadurch entlastet werden.</p>
+                <ol>
+                    <li>Beurteilt das Vorhaben. Bezieht euch dabei auf Halluzinationen, den Wissensstand des Modells, Bias und die scheinbare Objektivität von Chatbot-Antworten.</li>
+                    <li>Entwerft Regeln für einen verantwortungsvollen Einsatz (mindestens drei), die die Risiken verringern.</li>
+                    <li>Formuliert eine begründete Empfehlung an die Schulleitung.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Weiterführende Links</h2>
+
+<ul>
+            <li><a href="https://www.youtube.com/watch?v=yMQPQuz5WpA" target="_blank" rel="noopener">But what is a GPT? Visual intro to Transformers (3Blue1Brown, YouTube)</a>: eine der besten frei verfügbaren visuellen Erklärungen, wie die Transformer-Architektur hinter modernen Sprachmodellen tatsächlich funktioniert.</li>
+            <li><a href="https://poloclub.github.io/transformer-explainer/" target="_blank" rel="noopener">Transformer Explainer (Georgia Tech, interaktiv)</a>: Ein echtes, kleines Sprachmodell (GPT-2) läuft live in deinem Browser – du kannst eigenen Text eingeben und Schritt für Schritt sehen, wie die nächste Wortvorhersage entsteht.</li>
+            <li><a href="https://www.ibm.com/think/topics/ai-hallucinations" target="_blank" rel="noopener">What Are AI Hallucinations? (IBM)</a>: verständliche Erklärung, warum und wie Sprachmodelle Dinge „erfinden“, mit weiteren Beispielen.</li>
+        </ul>

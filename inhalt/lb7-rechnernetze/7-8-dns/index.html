@@ -1,0 +1,122 @@
+<p>
+            Du tippst <code>www.tu-dresden.de</code> in den Browser – aber Router können mit Namen nichts anfangen, sie brauchen IP-Adressen. Bevor die Webseite überhaupt angefragt wird, fragt dein Rechner deshalb im Hintergrund das „Telefonbuch des Internets“: das Domain Name System.
+        </p>
+
+<h2>Namensauflösung</h2>
+
+<p>Namensauflösung ist der Vorgang, einen Domainnamen (z.&nbsp;B. „www.example.com“) in eine maschinenlesbare IP-Adresse (z.&nbsp;B. „192.0.2.1“ bei IPv4) umzuwandeln, mit der Netzwerkgeräte ein Ziel im Internet finden und erreichen. Die Namensauflösung ist eine typische Aufgabe der Anwendungsschicht und ermöglicht es, Webangebote zu nutzen, ohne sich komplizierte IP-Adressen merken zu müssen.</p>
+
+<h2>Domain Name System (DNS)</h2>
+
+<p>DNS ist ein dezentrales, hierarchisch aufgebautes System für die Namensauflösung im Internet. Es übersetzt menschenlesbare Domainnamen in IP-Adressen (und umgekehrt). Viele DNS-Server im Internet arbeiten zusammen, um Anfragen zu beantworten. Der Vorgang beginnt meist bei einem <strong>DNS-Resolver</strong> (z.&nbsp;B. dem des Internetanbieters oder dem Heimrouter), der die Anfrage stellvertretend für den Client an andere DNS-Server weitergibt, bis die zugehörige IP-Adresse gefunden ist. DNS-Anfragen laufen normalerweise über UDP auf Port 53, große Antworten über TCP Port 53.</p>
+
+<h3>Die DNS-Hierarchie</h3>
+
+<p>Ein vollständiger Domainname (FQDN, Fully Qualified Domain Name) wird von rechts nach links gelesen: <code>www.example.de.</code></p>
+
+<ul>
+            <li><strong>Root</strong> „.“ (der abschließende Punkt, meist weggelassen): Die Root-Server kennen die Server aller Top-Level-Domains.</li>
+            <li><strong>Top-Level-Domain (TLD)</strong> „de“: Die TLD-Server (für .de betrieben von der DENIC in Frankfurt am Main) kennen die zuständigen Server jeder .de-Domain.</li>
+            <li><strong>Second-Level-Domain</strong> „example“: Der <strong>autoritative</strong> Nameserver dieser Domain kennt die echten Einträge.</li>
+            <li><strong>Subdomain bzw. Hostname</strong> „www“.</li>
+        </ul>
+
+<p>Man unterscheidet zwei Arten von Anfragen: Der Client stellt an den Resolver eine <strong>rekursive</strong> Anfrage („Bring mir die fertige Antwort“). Der Resolver fragt dann <strong>iterativ</strong>: Jeder Server antwortet entweder mit dem Ergebnis oder mit einem Verweis auf den nächsten zuständigen Server. Antworten werden für die im Eintrag angegebene Zeit (TTL) zwischengespeichert (Caching), damit nicht jede Anfrage bis zu den Root-Servern laufen muss.</p>
+
+<h3>Wichtige Eintragstypen (Resource Records)</h3>
+
+<table>
+            <thead>
+                <tr><th>Typ</th><th>Bedeutung</th><th>Beispiel</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>A</td><td>Name → IPv4-Adresse</td><td><code>www.example.com. 86400 IN A 192.0.2.1</code></td></tr>
+                <tr><td>AAAA</td><td>Name → IPv6-Adresse</td><td><code>www.example.com. 86400 IN AAAA 2001:db8::1</code></td></tr>
+                <tr><td>CNAME</td><td>Aliasname → anderer Name</td><td><code>shop.example.com. IN CNAME www.example.com.</code></td></tr>
+                <tr><td>MX</td><td>zuständiger Mailserver einer Domain (→ 7.10)</td><td><code>example.com. IN MX 10 mail.example.com.</code></td></tr>
+                <tr><td>NS</td><td>zuständiger Nameserver einer Domain</td><td><code>example.com. IN NS ns1.example.com.</code></td></tr>
+            </tbody>
+        </table>
+
+<h3>Beispiel: ein IPv4-A-Record</h3>
+
+<p>Ein DNS-A-Record (Address Record) verknüpft einen Domainnamen mit seiner IPv4-Adresse. Ein vollständiger A-Record enthält folgende Elemente:</p>
+
+<ul>
+            <li><strong>Domainname:</strong> der menschenlesbare Name (z.&nbsp;B. „www.example.com.“).</li>
+            <li><strong>TTL (Time to Live):</strong> wie lange ein Resolver den Eintrag im Cache behalten darf, in Sekunden. Ein typischer Wert ist 86400 (24 Stunden).</li>
+            <li><strong>Klasse:</strong> fast immer „IN“ für Internet.</li>
+            <li><strong>Typ:</strong> hier „A“ für eine IPv4-Adresse.</li>
+            <li><strong>IP-Adresse:</strong> die IPv4-Adresse, die dem Domainnamen zugeordnet ist (z.&nbsp;B. „192.0.2.1“).</li>
+        </ul>
+
+<p>So sieht der A-Record in der Zonendatei eines DNS-Servers aus:</p>
+
+<pre>www.example.com. 86400 IN A 192.0.2.1</pre>
+
+<p>Dabei ist „www.example.com.“ der Domainname, „86400“ die TTL in Sekunden, „IN“ die Klasse Internet, „A“ der Typ des Eintrags und „192.0.2.1“ die zugeordnete IPv4-Adresse.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: Ein Name, eine Adresse <span class="beispiel-kopf">einfach</span></summary>
+            <p>Gibt ein Benutzer „www.example.com“ in seinen Webbrowser ein, sendet der Rechner eine DNS-Anfrage nach dem A-Record für „www.example.com“. Der DNS-Server antwortet mit der IPv4-Adresse „192.0.2.1“, und der Browser baut eine Verbindung zu dem Webserver auf, der die Webseite bereitstellt. In Filius entspricht das dem Eintrag <code>gdp.de. A 3600 192.168.3.2</code> auf dem DNS-Server (→ 7.16).</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: Iterative Auflösung von www.gymnasium-beispiel.de <span class="beispiel-kopf">komplex</span></summary>
+            <p>Der Cache des Resolvers ist leer.</p>
+            <ol>
+                <li>Laptop → Resolver (FRITZ!Box bzw. Provider): „Welche IP hat www.gymnasium-beispiel.de?“ (rekursive Anfrage)</li>
+                <li>Resolver → <strong>Root-Server</strong>: Antwort: „Weiß ich nicht, frag die Nameserver für <strong>.de</strong>.“ (Verweis mit NS-Einträgen)</li>
+                <li>Resolver → <strong>TLD-Server .de</strong>: Antwort: „Frag den Nameserver ns1.hoster-beispiel.de, der ist für gymnasium-beispiel.de zuständig.“</li>
+                <li>Resolver → <strong>autoritativer Nameserver</strong> ns1.hoster-beispiel.de: Antwort: <code>www.gymnasium-beispiel.de. 3600 IN A 198.51.100.7</code></li>
+                <li>Resolver → Laptop: 198.51.100.7. Der Resolver speichert die Antwort 3600&nbsp;s (1 Stunde) im Cache.</li>
+            </ol>
+            <p>Fragt eine Mitschülerin zehn Minuten später dieselbe Adresse beim selben Resolver an, antwortet er sofort aus dem Cache – ganz ohne Schritte 2 bis 4. Den Verweis auf die .de-Server hat er ohnehin noch viel länger gespeichert.</p>
+            </details>
+        </div>
+
+<h2>DNS over HTTPS (DoH)</h2>
+
+<p>Klassische DNS-Anfragen sind unverschlüsselt: Jeder im Netz kann mitlesen, welche Namen du auflöst, und Antworten könnten manipuliert werden. DNS over HTTPS (DoH) verbessert Datenschutz und Sicherheit, indem DNS-Anfragen und -Antworten verschlüsselt innerhalb von HTTPS übertragen werden. Das verhindert Überwachung und Manipulation durch Dritte. DoH nutzt dieselbe Portnummer wie normaler HTTPS-Verkehr (443); deshalb können Netzbetreiber DoH-Verkehr kaum von anderem Webverkehr unterscheiden oder gezielt blockieren.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: „Das Internet ist kaputt“ – oder nur das DNS?</summary>
+                <p><strong>Alltag:</strong> Die FRITZ!Box arbeitet im Heimnetz als DNS-Resolver: Dein Handy fragt sie, und sie fragt weiter beim Provider. Fällt dieser DNS-Dienst aus, wirkt es, als sei „das Internet weg“, obwohl die Verbindung funktioniert. Ein <code>ping 1.1.1.1</code> (IP-Adresse) klappt dann, <code>ping www.tu-dresden.de</code> (Name) nicht.</p>
+                <p><strong>Beruf:</strong> Administratorinnen und Administratoren pflegen in Firmen und Schulen einen eigenen internen DNS-Server (z.&nbsp;B. für <code>schule.local</code>, vgl. Projektaufgabe P3) und die öffentlichen Einträge der Firmen-Domain beim Hoster. Ein häufiges Ticket nach einem Serverumzug: „Die neue Webseite ist bei manchen schon da, bei anderen noch nicht.“ Grund ist die TTL – alte Einträge stehen noch in den Caches der Resolver. Deshalb setzt man die TTL vor einem Umzug rechtzeitig herab.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>DNS</strong> – verteiltes, hierarchisches Verzeichnis, das Domainnamen in IP-Adressen übersetzt. Die Auflösung verläuft von der Root über die Top-Level-Domain bis zum autoritativen Nameserver der Domain. Resolver speichern Antworten für die Dauer der TTL zwischen.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.8.1: Domainnamen zerlegen <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Zerlege <code>mail.schule-beispiel.sachsen.de.</code> in Root, Top-Level-Domain und die weiteren Ebenen.</li>
+                    <li>Welcher Eintragstyp wird benötigt, um (a) die IPv6-Adresse eines Webservers, (b) den Mailserver einer Domain, (c) einen Aliasnamen zu speichern?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.8.2: Auflösung und Caching <span class="niveau">AFB II</span></summary>
+                <p>Der Resolver deiner Schule soll <code>www.beispiel-verein.org</code> auflösen. Sein Cache ist leer, der autoritative Eintrag lautet <code>www.beispiel-verein.org. 600 IN A 203.0.113.44</code>.</p>
+                <ol>
+                    <li>Beschreibe die Abfolge der Anfragen und Antworten bis zur IP-Adresse. Kennzeichne, welche Anfrage rekursiv und welche iterativ ist.</li>
+                    <li>Eine Viertelstunde später fragt ein anderer Rechner denselben Namen an. Muss der Resolver erneut den autoritativen Nameserver fragen? Begründe.</li>
+                </ol>
+            </details>
+        </div>

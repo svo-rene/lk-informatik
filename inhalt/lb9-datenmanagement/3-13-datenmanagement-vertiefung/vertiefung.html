@@ -1,0 +1,29 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+  <details>
+    <summary>Aufgabe 3.13.4: Chipkarte an der Schule <span class="niveau">AFB III</span></summary>
+
+    <p>Eine Schule führt eine Chipkarte ein. Mit ihr bezahlen Schüler*innen in der Mensa, leihen Bücher aus und öffnen morgens die Eingangstür. Jede Nutzung wird in der Tabelle NUTZUNG (<u>nutzung_id</u>, ↑karte_id, ort, zeitpunkt) gespeichert, die Tabelle KARTE (<u>karte_id</u>, ↑schueler_id) ordnet jede Karte einer Schülerin oder einem Schüler zu.</p>
+    <ol>
+      <li>Erläutere, welche Rückschlüsse auf einzelne Schüler*innen aus diesen Daten möglich sind.</li>
+      <li>Schreibe eine SQL-Abfrage, die für eine Schülerin oder einen Schüler (z.&nbsp;B. schueler_id 17) zeigt, wo sie bzw. er sich am 12. März 2027 wann aufgehalten hat. Beurteile, was diese Abfrage über die Datenbank aussagt.</li>
+      <li>Entwickle ein Konzept, wie die Schule die Karte nutzen kann, ohne mehr Daten als nötig zu speichern. Beziehe dich auf mindestens drei Datenschutzprinzipien.</li>
+    </ol>
+  </details>
+</div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.13.7: MapReduce durchführen und beurteilen <span class="niveau">AFB III</span></summary>
+                <p>Die Schulkonferenz wertet Freitext-Kommentare zur Mensa aus. Rechner 1 hat K1 „Mensa gut“ und K2 „Essen gut Mensa voll“,
+                   Rechner 2 hat K3 „Mensa voll“ und K4 „Essen kalt“.</p>
+                <ol>
+                    <li>Führe Map, Shuffle (Reduzierer 1: Anfangsbuchstaben a–m, Reduzierer 2: n–z) und Reduce von Hand durch. Gib die Zwischenergebnisse
+                        jedes Schritts an.</li>
+                    <li>Ein Mitschüler schlägt vor, Zeit zu sparen: Jeder Rechner zählt selbst und meldet nur sein häufigstes Wort mit Anzahl (bei Gleichstand
+                        das alphabetisch erste); das Wort mit der größten gemeldeten Zahl gewinnt. Bestimme das Ergebnis dieses Verfahrens und beurteile es.</li>
+                    <li>Beurteile, für welche Datenmengen MapReduce sinnvoll ist und wann ein einzelnes Python-Programm wie in Beispiel 4 die bessere Wahl ist.</li>
+                </ol>
+            </details>
+        </div>

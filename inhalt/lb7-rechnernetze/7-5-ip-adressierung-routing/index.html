@@ -1,0 +1,180 @@
+<p>
+            Eine Anfrage von deinem Handy in Dresden an einen Server in Kalifornien durchläuft rund 15 bis 20 Router. Keiner davon kennt den ganzen Weg – jeder weiß nur, an wen er das Paket als Nächstes weitergibt. Wie das mit IP-Adressen und Routingtabellen funktioniert, zeigt diese Seite.
+        </p>
+
+<p>Die Internetschicht (im OSI-Modell: Vermittlungsschicht) ist dafür verantwortlich, Datenpakete von einem Host zu einem anderen über verschiedene Netze hinweg zu übertragen. Sie bietet eine universelle Weiterleitungsfunktion, mit der Pakete (IP-Datagramme) unabhängig von der Netzwerktechnologie und der Topologie der einzelnen Teilnetze übermittelt werden können. Während IP-Adressen für die Adressierung und das Routing auf der Internetschicht verwendet werden, sind MAC-Adressen auf der Netzzugangsschicht für die Zustellung innerhalb eines lokalen Netzes zuständig (→ 7.4). Erst das Zusammenspiel beider Adressarten ermöglicht die Zustellung von einem Endgerät zum anderen über viele Netze hinweg.</p>
+
+<h2>Aufgaben der Internetschicht</h2>
+
+<ul>
+            <li><strong>Adressierung:</strong> Geräte werden über logische, hierarchisch aufgebaute IP-Adressen adressiert.</li>
+            <li><strong>Routing:</strong> Bestimmung des Weges für die Pakete durch die Netze zum Ziel.</li>
+            <li><strong>Paketübermittlung:</strong> Weiterleitung der Pakete zwischen Netzen und innerhalb eines Netzes.</li>
+            <li><strong>Fehlermeldungen und Diagnose:</strong> über ICMP (Internet Control Message Protocol) werden Probleme gemeldet und diagnostiziert.</li>
+            <li><strong>Fragmentierung und Reassemblierung:</strong> Ist ein Paket größer als die maximale Übertragungseinheit (MTU) eines Teilnetzes, wird es in Fragmente aufgeteilt und am Ziel wieder zusammengesetzt.</li>
+        </ul>
+
+<h2>IPv4-Adressen</h2>
+
+<p>Eine IPv4-Adresse besteht aus 32&nbsp;Bit und wird in vier durch Punkte getrennten Dezimalzahlen von 0 bis 255 geschrieben (z.&nbsp;B. 192.168.1.1). Damit gibt es 2<sup>32</sup> ≈ 4,3 Milliarden Adressen. Jede Adresse besteht aus einem <strong>Netzanteil</strong> (welches Netz?) und einem <strong>Hostanteil</strong> (welches Gerät in diesem Netz?). Wo die Grenze liegt, legt die Subnetzmaske bzw. die Präfixlänge fest, z.&nbsp;B. 192.168.1.1/24: Die ersten 24&nbsp;Bit bilden den Netzanteil (genauer → 7.6).</p>
+
+<p>Innerhalb eines Netzes muss jede IP-Adresse eindeutig sein. Für lokale Netze sind <strong>private Adressbereiche</strong> reserviert, die im Internet nicht weitergeleitet werden und deshalb in vielen Netzen gleichzeitig vorkommen dürfen: 10.0.0.0/8, 172.16.0.0/12 und 192.168.0.0/16. Der Heimrouter übersetzt sie beim Weg ins Internet in seine öffentliche Adresse (<strong>NAT</strong>, Network Address Translation).</p>
+
+<h2>IPv6-Grundlagen</h2>
+
+<p>IPv6 wurde eingeführt, weil die IPv4-Adressen knapp geworden sind. IPv6-Adressen bestehen aus 128&nbsp;Bit (2<sup>128</sup> ≈ 3,4 · 10<sup>38</sup> Adressen) und werden in acht Gruppen zu je vier Hexadezimalziffern geschrieben, z.&nbsp;B. <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>. Zur Verkürzung gelten zwei Regeln:</p>
+
+<ol>
+            <li>Führende Nullen in einer Gruppe dürfen weggelassen werden (<code>0db8</code> → <code>db8</code>, <code>0000</code> → <code>0</code>).</li>
+            <li><strong>Einmal</strong> pro Adresse darf eine Folge von Nullgruppen durch <code>::</code> ersetzt werden.</li>
+        </ol>
+
+<p>Die Beispieladresse lautet verkürzt <code>2001:db8:85a3::8a2e:370:7334</code>. In lokalen Netzen sind die ersten 64&nbsp;Bit meist das Netzpräfix (/64), die letzten 64&nbsp;Bit die Interface-ID. Weitere Unterschiede zu IPv4:</p>
+
+<ul>
+            <li>Geräte können sich selbst eine Adresse bilden (SLAAC, Stateless Address Autoconfiguration); DHCPv6 ist optional.</li>
+            <li>Jede Schnittstelle hat zusätzlich eine link-lokale Adresse (<code>fe80::/10</code>), die nur im eigenen Netzabschnitt gilt. <code>::1</code> ist die Loopback-Adresse (bei IPv4: 127.0.0.1).</li>
+            <li>Es gibt keinen Broadcast mehr, stattdessen Multicast. NAT ist wegen der vielen Adressen normalerweise nicht nötig.</li>
+        </ul>
+
+<h2>Standard-Gateway</h2>
+
+<p>Ein Host prüft vor dem Senden, ob die Ziel-IP-Adresse in seinem eigenen Netz liegt (AND-Verknüpfung mit der Subnetzmaske, → 7.6). Liegt sie im eigenen Netz, stellt er das Paket direkt zu. Andernfalls schickt er es an sein <strong>Standard-Gateway</strong>: den Router im eigenen Netz, der den Weg nach draußen kennt. Die Adresse des Standard-Gateways muss deshalb im selben Netz liegen wie der Host.</p>
+
+<p><strong>Gateway im weiteren Sinn:</strong> Der Begriff „Gateway“ wird außerdem für Geräte oder Programme verwendet, die zwischen Netzen mit <em>unterschiedlichen Protokollen</em> übersetzen (Anwendungs-Gateway). Beispiele sind ein E-Mail-Gateway, das E-Mails zwischen dem Internet und einem internen Mailsystem übermittelt, oder ein VoIP-Gateway, das Telefonanrufe zwischen dem klassischen Telefonnetz und einem VoIP-Netz umsetzt. Das Standard-Gateway eines Hosts übersetzt dagegen keine Protokolle, es ist einfach der nächste Router.</p>
+
+<h2>Routingtabellen</h2>
+
+<p>Routingtabellen sind in Routern (und auch in jedem Host) gespeichert und legen fest, wohin Pakete für ein bestimmtes Zielnetz weitergeleitet werden. Ein Eintrag enthält mindestens:</p>
+
+<ul>
+            <li><strong>Zielnetz</strong> mit <strong>Subnetzmaske bzw. Präfixlänge:</strong> das Netz, für das der Eintrag gilt, z.&nbsp;B. 10.1.0.0/16.</li>
+            <li><strong>Next Hop (nächstes Gateway):</strong> die IP-Adresse des nächsten Routers auf dem Weg zum Ziel. Bei direkt angeschlossenen Netzen entfällt er („direkt“).</li>
+            <li><strong>Schnittstelle:</strong> die Netzwerkschnittstelle, über die das Paket gesendet wird.</li>
+            <li>oft eine <strong>Metrik:</strong> ein Maß für die „Kosten“ des Weges, falls mehrere Wege zur Auswahl stehen.</li>
+        </ul>
+
+<p>Der Eintrag <strong>0.0.0.0/0</strong> heißt <strong>Default-Route</strong>: Er passt auf jede Adresse und wird verwendet, wenn kein genauerer Eintrag existiert.</p>
+
+<h2>Routing</h2>
+
+<p>Routing ist der Prozess, für jedes Paket den Weg durch das Netz vom Ursprung zum Ziel zu bestimmen. Empfängt ein Router ein Paket, vergleicht er die Ziel-IP-Adresse mit allen Einträgen seiner Routingtabelle. Passen mehrere Einträge, gewinnt der mit dem <strong>längsten Präfix</strong>, also der genaueste (<strong>Longest-Prefix-Match</strong>). Dann verringert der Router die TTL (Time to Live) des Pakets um 1 – erreicht sie 0, wird das Paket verworfen, damit es nicht endlos kreist – und sendet es über die gefundene Schnittstelle an den Next Hop bzw. direkt an das Ziel.</p>
+
+<h3>Routing-Protokolle</h3>
+
+<p>Routingtabellen können von Hand eingetragen werden (statisches Routing) oder von den Routern selbst über Routing-Protokolle ausgetauscht werden (dynamisches Routing). OSPF (Open Shortest Path First) wird innerhalb der Netze eines Betreibers verwendet und berechnet kürzeste Wege. BGP (Border Gateway Protocol) verbindet die Netze verschiedener Betreiber (autonome Systeme) im Internet. BGP dient zwar der Internetschicht, ist selbst aber ein Anwendungsprotokoll, das über TCP (Port 179) läuft.</p>
+
+<p><strong>Zur Einordnung:</strong> DHCP vergibt IP-Adressen, gehört aber nicht zur Internetschicht, sondern ist ein Anwendungsprotokoll über UDP (Ports 67/68, → 7.7). ARP verbindet IP- und MAC-Adressen und liegt an der Grenze zur Netzzugangsschicht (→ 7.4).</p>
+
+<h3>ICMP (Internet Control Message Protocol)</h3>
+
+<p>ICMP wird für Diagnose- und Fehlermeldungen verwendet. Damit teilen Router und Hosts Probleme bei der Paketzustellung mit, z.&nbsp;B. „Ziel nicht erreichbar“ oder „Zeitüberschreitung“ (TTL abgelaufen). Auch <code>ping</code> (Echo Request/Echo Reply) und <code>traceroute</code> bzw. <code>tracert</code> beruhen auf ICMP.</p>
+
+<h2>Schnittstellen</h2>
+
+<p>Eine Schnittstelle (Netzwerkschnittstelle, Interface) ist der Punkt, über den ein Gerät (Computer, Router) mit einem Netz verbunden ist, z.&nbsp;B. eine Netzwerkkarte, ein WLAN-Adapter oder ein virtueller Adapter. Jede Schnittstelle hat eine eigene MAC-Adresse und eine oder mehrere IP-Adressen. Ein Router hat mindestens zwei Schnittstellen in verschiedenen Netzen.</p>
+
+<ul>
+            <li><strong>Typen:</strong> physische Anschlüsse (wie die Ethernet-Ports eines Routers) und virtuelle Schnittstellen (z.&nbsp;B. für VLANs auf einem Switch oder für einen VPN-Tunnel).</li>
+            <li><strong>Funktion:</strong> Sie sind Eingangs- und Ausgangspunkte für den Datenverkehr eines Geräts; in der Routingtabelle steht zu jedem Zielnetz, über welche Schnittstelle gesendet wird.</li>
+        </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: Direkt oder über das Gateway? <span class="beispiel-kopf">einfach</span></summary>
+            <p>Laptop A hat 192.168.0.10/24 und das Standard-Gateway 192.168.0.1.</p>
+            <ul>
+                <li>Ziel 192.168.0.77: Netzanteil 192.168.0 ist gleich → direkte Zustellung im eigenen Netz (per ARP die MAC-Adresse von .77 ermitteln).</li>
+                <li>Ziel 192.168.1.20: Netzanteil 192.168.1 ist verschieden → Paket an das Standard-Gateway 192.168.0.1.</li>
+            </ul>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: Longest-Prefix-Match <span class="beispiel-kopf">komplex</span></summary>
+            <p>Ein Router hat folgende Routingtabelle:</p>
+            <table>
+                <thead>
+                    <tr><th>Zielnetz</th><th>Next Hop</th><th>Schnittstelle</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>10.0.0.0/8</td><td>192.168.100.2</td><td>eth1</td></tr>
+                    <tr><td>10.1.0.0/16</td><td>192.168.100.6</td><td>eth2</td></tr>
+                    <tr><td>10.1.2.0/24</td><td>direkt</td><td>eth3</td></tr>
+                    <tr><td>0.0.0.0/0</td><td>203.0.113.1</td><td>eth0</td></tr>
+                </tbody>
+            </table>
+            <ul>
+                <li>10.1.2.55 passt auf /8, /16, /24 und /0 → längstes Präfix /24: direkt über eth3.</li>
+                <li>10.1.9.9 passt auf /8, /16 und /0 → /16: an 192.168.100.6 über eth2.</li>
+                <li>10.200.0.1 passt auf /8 und /0 → /8: an 192.168.100.2 über eth1.</li>
+                <li>8.8.8.8 passt nur auf die Default-Route → an 203.0.113.1 über eth0.</li>
+            </ul>
+            <p><strong>So prüft der Router einen Eintrag</strong> – ausführlich für das Ziel 10.1.9.9:</p>
+            <ol>
+                <li><strong>Ziel-IP mit der Maske des Eintrags verknüpfen</strong> (AND, → 7.6) und mit dem Zielnetz vergleichen, weil ein Eintrag genau dann passt, wenn der Netzanteil übereinstimmt:
+                    <ul>
+                        <li>/24: 10.1.9.9 AND 255.255.255.0 = 10.1.9.0 ≠ 10.1.2.0 → passt nicht.</li>
+                        <li>/16: 10.1.9.9 AND 255.255.0.0 = 10.1.0.0 = 10.1.0.0 → passt.</li>
+                        <li>/8: 10.1.9.9 AND 255.0.0.0 = 10.0.0.0 = 10.0.0.0 → passt.</li>
+                        <li>/0: 10.1.9.9 AND 0.0.0.0 = 0.0.0.0 → passt immer.</li>
+                    </ul>
+                </li>
+                <li><strong>Unter den passenden Einträgen den mit dem längsten Präfix wählen,</strong> weil er das kleinste und damit genaueste Netz beschreibt: /16.</li>
+                <li><strong>Weiterleiten:</strong> TTL um 1 verringern, Paket über eth2 an den Next Hop 192.168.100.6 senden (dessen MAC-Adresse per ARP).</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> 10.1.9.9 geht an 192.168.100.6. <strong>Probe:</strong> 10.1.9.9 liegt im Bereich 10.1.0.0 bis 10.1.255.255 des /16-Netzes, aber nicht im Bereich 10.1.2.0 bis 10.1.2.255 des /24-Netzes.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Der Router zu Hause und das Routing in der Firma</summary>
+                <div class="gallery">
+                    <span class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</span>
+                    <img src="../img/router3_linksys.jpg" alt="Schwarzer Heimrouter von Linksys">
+                </div>
+                <p><em>Abb. 1: Heimrouter verschiedener Hersteller</em></p>
+                <p><strong>Alltag:</strong> Heimrouter wie ein Speedport der Telekom oder ein Linksys-Router sind eigentlich mehrere Geräte in einem: Router und Standard-Gateway für das Heimnetz, NAT (alle Geräte teilen sich eine öffentliche IPv4-Adresse), DHCP-Server (→ 7.7), Switch, WLAN-Access-Point und oft auch Modem. Mit <code>tracert www.tu-dresden.de</code> (Windows) kannst du dir die Router auf dem Weg ansehen – der erste Hop ist immer dein Heimrouter.</p>
+                <p><strong>Beruf:</strong> Netzwerkadministratorinnen und -administratoren sowie Fachinformatikerinnen und Fachinformatiker für Systemintegration richten in Firmen mit mehreren Standorten Routen und VPN-Verbindungen ein. Typisches Ticket: „Der Standort Chemnitz erreicht den Dateiserver in Dresden nicht.“ Mit <code>ping</code> und <code>traceroute</code> wird festgestellt, an welchem Router die Pakete hängen bleiben; oft fehlt eine Route oder ein Next Hop ist falsch eingetragen.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>IP-Adresse</strong> – logische Adresse einer Netzwerkschnittstelle auf der Internetschicht, bestehend aus Netzanteil und Hostanteil. IPv4-Adressen haben 32&nbsp;Bit, IPv6-Adressen 128&nbsp;Bit. Anders als die MAC-Adresse bleibt sie auf dem ganzen Weg vom Sender zum Empfänger erhalten (ohne NAT).
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>Standard-Gateway</strong> – der Router im eigenen Netz, an den ein Host alle Pakete schickt, deren Ziel außerhalb des eigenen Netzes liegt. Im Heimnetz ist das der Heimrouter, z.&nbsp;B. 192.168.178.1.</p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Routing</strong> – jeder Router entscheidet nur über den <strong>Next Hop</strong>, nicht über den ganzen Weg. Passen mehrere Einträge der Routingtabelle, gilt der mit dem längsten Präfix (<strong>Longest-Prefix-Match</strong>); die Default-Route 0.0.0.0/0 greift nur, wenn nichts Genaueres passt.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.5.1: Grundbegriffe und IPv6 <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Erkläre die Begriffe Standard-Gateway und Next Hop in je einem Satz.</li>
+                    <li>Verkürze die IPv6-Adressen <code>2001:0db8:0000:0000:0000:0000:0000:0001</code> und <code>fe80:0000:0000:0000:0a1b:00ff:fe2c:0003</code>.</li>
+                    <li>Welche der Adressen 10.4.2.1, 172.20.5.5, 172.32.0.1 und 192.168.178.34 sind privat?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.5.2: Routingentscheidungen <span class="niveau">AFB II</span></summary>
+                <p>Verwende die Routingtabelle aus dem komplexen Beispiel. Gib für die Ziele 10.1.2.200, 10.1.3.1, 10.0.0.1 und 172.16.0.1 an, welcher Eintrag verwendet wird, und begründe mit dem Longest-Prefix-Match. Erkläre außerdem, was passiert, wenn der Eintrag 10.1.0.0/16 gelöscht wird.</p>
+            </details>
+        </div>

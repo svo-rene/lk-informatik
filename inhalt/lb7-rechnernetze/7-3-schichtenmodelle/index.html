@@ -1,0 +1,198 @@
+<p>
+            Dein Browser muss nicht wissen, ob die Webseite über WLAN, Glasfaser oder ein Seekabel kommt – und das WLAN muss nicht wissen, dass es gerade eine Webseite transportiert. Möglich wird das durch <strong>Schichtenmodelle</strong>: Jede Schicht löst genau eine Teilaufgabe und nutzt dafür die Dienste der Schicht darunter.
+        </p>
+
+<p>Schichtenmodelle dienen dazu, Netzwerkprotokolle und die Kommunikation über ein Netz zu organisieren und zu standardisieren. Sie teilen die Netzwerkarchitektur in hierarchische Schichten auf, wobei jede Schicht eine bestimmte Funktion erfüllt. Dieser modulare Aufbau reduziert die Komplexität, verbessert die Zusammenarbeit (Interoperabilität) verschiedener Systeme, erleichtert Wartung und Entwicklung und vereinfacht die Fehlersuche.</p>
+
+<p>Die Nutzung von Schichtenmodellen bietet mehrere Vorteile:</p>
+
+<ul>
+            <li><strong>Abstraktion:</strong> Jede Schicht verbirgt die Komplexität der darunterliegenden Schichten, wodurch Entwicklung und Analyse einfacher werden.</li>
+            <li><strong>Modularität:</strong> Änderungen in einer Schicht erfordern in der Regel keine Änderungen in anderen Schichten, was Entwicklung und Test vereinfacht.</li>
+            <li><strong>Standardisierung:</strong> Schichtenmodelle fördern internationale Standards und sichern so die Kompatibilität zwischen verschiedenen Geräten und Programmen.</li>
+            <li><strong>Fehlerisolierung:</strong> Probleme lassen sich leichter einer bestimmten Schicht zuordnen und beheben.</li>
+        </ul>
+
+<h2>Das OSI-Schichtenmodell</h2>
+
+<p>Das OSI-Modell (Open Systems Interconnection Model) ist ein theoretisches Referenzmodell, das die Kommunikation in einem Netz in sieben Schichten unterteilt. Es wurde von der Internationalen Organisation für Normung (ISO) entwickelt, um die Netzwerkkommunikation zu standardisieren. Die sieben Schichten sind (von oben nach unten):</p>
+
+<ol reversed>
+            <li><strong>Anwendungsschicht (Application Layer):</strong> Bereitstellung von Netzwerkdiensten für Anwendungen.</li>
+            <li><strong>Darstellungsschicht (Presentation Layer):</strong> Übersetzung, Verschlüsselung und Komprimierung von Daten.</li>
+            <li><strong>Sitzungsschicht (Session Layer):</strong> Verwaltung von Kommunikationssitzungen zwischen Anwendungen.</li>
+            <li><strong>Transportschicht (Transport Layer):</strong> Ende-zu-Ende-Übertragung zwischen Prozessen auf den Endsystemen, auf Wunsch zuverlässig.</li>
+            <li><strong>Vermittlungsschicht (Network Layer):</strong> logische Adressierung und Wegbestimmung (Routing) der Pakete durch das Netz.</li>
+            <li><strong>Sicherungsschicht (Data Link Layer):</strong> Übertragung von Frames zwischen zwei direkt verbundenen Knoten, Fehlererkennung.</li>
+            <li><strong>Bitübertragungsschicht (Physical Layer):</strong> Übertragung der einzelnen Bits als Signale über ein Medium.</li>
+        </ol>
+
+<h2>Das TCP/IP-Schichtenmodell</h2>
+
+<p>Das TCP/IP-Modell ist ein vereinfachtes Schichtenmodell, das für das Internet entwickelt wurde. Es besteht aus vier Schichten, die mehrere OSI-Schichten zusammenfassen (von oben nach unten):</p>
+
+<ol reversed>
+            <li><strong>Anwendungsschicht (Application Layer):</strong> stellt die Schnittstelle für Anwendungsprogramme bereit, z.&nbsp;B. per HTTP, HTTPS, DNS oder SMTP (→ 7.10).</li>
+            <li><strong>Transportschicht (Transport Layer):</strong> ermöglicht die Kommunikation zwischen Prozessen auf den Endsystemen mit Protokollen wie TCP und UDP (→ 7.9).</li>
+            <li><strong>Internetschicht (Internet Layer):</strong> verantwortlich für die Adressierung mit IP-Adressen und die Wegfindung (Routing) der Pakete (→ 7.5).</li>
+            <li><strong>Netzzugangsschicht (Network Access Layer):</strong> zuständig für die Übertragung über das konkrete Medium im lokalen Netz. In der Praxis kommen vor allem Ethernet (Kabel) und IEEE 802.11 (WLAN) zum Einsatz (→ 7.4).</li>
+        </ol>
+
+<h2>Hybrides Schichtenmodell</h2>
+
+<p>In der Praxis hat sich die Aufteilung der Anwendungsschicht (Schicht 4 des TCP/IP-Modells) in die OSI-Schichten 5 bis 7 nicht durchgesetzt; an vielen Stellen benötigt man diese Trennung nicht. Dafür teilt man die Netzzugangsschicht (Schicht 1 des TCP/IP-Modells) meist in zwei Schichten auf, weil hier zwei verschiedene Arbeitsschritte stattfinden: die Signalübertragung und die Frame-Bildung. Daraus ergibt sich das hybride Schichtenmodell, das die heutige Aufteilung in Netzen am besten widerspiegelt:</p>
+
+<ol reversed>
+            <li><strong>Anwendungsschicht (Application Layer):</strong> Schnittstelle für Anwendungsprogramme, z.&nbsp;B. HTTP oder HTTPS.</li>
+            <li><strong>Transportschicht (Transport Layer):</strong> Kommunikation zwischen Prozessen auf den Endsystemen mit TCP und UDP.</li>
+            <li><strong>Vermittlungs- bzw. Internetschicht (Network Layer):</strong> Adressierung und Wegfindung der Pakete.</li>
+            <li><strong>Sicherungsschicht (Data Link Layer):</strong> Übertragung von Frames zwischen zwei direkt verbundenen Knoten.</li>
+            <li><strong>Bitübertragungsschicht (Physical Layer):</strong> physikalische Übertragung der Bits über das Medium.</li>
+        </ol>
+
+<table>
+            <thead>
+                <tr>
+                    <th>OSI</th>
+                    <th>TCP/IP</th>
+                    <th>Dateneinheit (PDU)</th>
+                    <th>Beispiele</th>
+                    <th>Geräte</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>7 Anwendung, 6 Darstellung, 5 Sitzung</td>
+                    <td>4 Anwendung</td>
+                    <td>Daten / Nachricht</td>
+                    <td>HTTP, DNS, SMTP, DHCP</td>
+                    <td>–</td>
+                </tr>
+                <tr>
+                    <td>4 Transport</td>
+                    <td>3 Transport</td>
+                    <td>Segment (TCP), Datagramm (UDP)</td>
+                    <td>TCP, UDP</td>
+                    <td>–</td>
+                </tr>
+                <tr>
+                    <td>3 Vermittlung</td>
+                    <td>2 Internet</td>
+                    <td>Paket (IP-Datagramm)</td>
+                    <td>IPv4, IPv6, ICMP</td>
+                    <td>Router</td>
+                </tr>
+                <tr>
+                    <td>2 Sicherung</td>
+                    <td rowspan="2">1 Netzzugang</td>
+                    <td>Frame (Rahmen)</td>
+                    <td>Ethernet, WLAN (802.11)</td>
+                    <td>Switch, Access Point</td>
+                </tr>
+                <tr>
+                    <td>1 Bitübertragung</td>
+                    <td>Bits / Signale</td>
+                    <td>Kabel, Funk, Licht</td>
+                    <td>Hub, Repeater, Modem</td>
+                </tr>
+            </tbody>
+        </table>
+
+<figure>
+            <img src="../img/datenpaket.png" width="600" alt="Kapselung: Daten, TCP-Header, IP-Header und MAC-Header mit CRC">
+            <figcaption>Abb. 1: Aufbau eines Datenpakets durch Kapselung. Hinweis: Die Dateneinheit der Transportschicht heißt korrekt Segment (TCP) bzw. Datagramm (UDP), die Schicht darunter im TCP/IP-Modell Internetschicht.</figcaption>
+        </figure>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: Ein Brief im Briefumschlag im Paket <span class="beispiel-kopf">einfach</span></summary>
+            <p>Du schreibst einen Brief (Anwendung), steckst ihn in einen Umschlag mit dem Namen des Empfängers (Transport: welcher Prozess bzw. welche Person?), gibst ihn in ein Paket mit der Hausadresse (Internet: welcher Rechner?) und übergibst es dem Boten für die nächste Etappe (Netzzugang: welcher nächste Knoten?). Jede Ebene liest nur ihre eigene Beschriftung.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: Ein Paket durch alle Schichten – mit MAC-Wechsel am Router <span class="beispiel-kopf">komplex</span></summary>
+            <p>Laptop A (192.168.0.10/24, Standard-Gateway 192.168.0.1) ruft eine Webseite auf dem Webserver S (192.168.1.20) in einem anderen Netz ab. Dazwischen liegt Router R mit den Schnittstellen eth0 (192.168.0.1) und eth1 (192.168.1.1).</p>
+            <ol>
+                <li><strong>Anwendung:</strong> Der Browser erzeugt die Anfrage <code>GET /index.html HTTP/1.1</code>.</li>
+                <li><strong>Transport:</strong> TCP verpackt sie in ein Segment mit Quellport 50123 (vom Betriebssystem gewählt) und Zielport 80.</li>
+                <li><strong>Internet:</strong> IP ergänzt Quell-IP 192.168.0.10 und Ziel-IP 192.168.1.20. A stellt per AND-Verknüpfung mit der Subnetzmaske fest (→ 7.6), dass das Ziel nicht im eigenen Netz liegt. Das Paket muss also zum Standard-Gateway.</li>
+                <li><strong>Netzzugang:</strong> A ermittelt per ARP die MAC-Adresse von 192.168.0.1 (→ 7.4) und baut einen Ethernet-Frame an den Router.</li>
+                <li><strong>Router R:</strong> R entfernt den Frame, liest die Ziel-IP, findet in seiner Routingtabelle das direkt angeschlossene Netz 192.168.1.0/24 an eth1 (→ 7.5), verringert die TTL um 1, ermittelt per ARP die MAC-Adresse von S und baut einen <strong>neuen</strong> Frame.</li>
+                <li><strong>Webserver S:</strong> packt Schicht für Schicht aus: Frame → IP-Paket → TCP-Segment → HTTP-Anfrage an den Webserverprozess auf Port 80.</li>
+            </ol>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Abschnitt</th>
+                        <th>Quell-MAC</th>
+                        <th>Ziel-MAC</th>
+                        <th>Quell-IP</th>
+                        <th>Ziel-IP</th>
+                        <th>Ports</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A → R</td>
+                        <td>MAC von A</td>
+                        <td>MAC von R (eth0)</td>
+                        <td>192.168.0.10</td>
+                        <td>192.168.1.20</td>
+                        <td>50123 → 80</td>
+                    </tr>
+                    <tr>
+                        <td>R → S</td>
+                        <td>MAC von R (eth1)</td>
+                        <td>MAC von S</td>
+                        <td>192.168.0.10</td>
+                        <td>192.168.1.20</td>
+                        <td>50123 → 80</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Ergebnis:</strong> Die MAC-Adressen gelten nur für einen Abschnitt und werden an jedem Router neu gesetzt. IP-Adressen und Ports bleiben auf dem ganzen Weg gleich (solange kein NAT im Spiel ist, → 7.5).</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Weiterlesen bei inf-schule.de</summary>
+                <p>
+                    <a href="https://www.inf-schule.de/rechnernetze/grundlagen/schichtenmodelle/schichtenmodell_internet" target="_blank">https://www.inf-schule.de/rechnernetze/grundlagen/schichtenmodelle/schichtenmodell_internet</a>
+                </p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Fehlersuche Schicht für Schicht</summary>
+                <p><strong>Alltag:</strong> „WLAN verbunden, aber kein Internet“ – das Handy meldet damit, dass die unteren Schichten funktionieren (Funkverbindung zum Router steht), aber weiter oben etwas fehlt: keine gültige IP-Adresse, kein erreichbares Gateway oder kein funktionierender DNS-Server.</p>
+                <p><strong>Beruf:</strong> Im IT-Support (typische Tätigkeit von Fachinformatikerinnen und Fachinformatikern für Systemintegration) werden Störungstickets oft „bottom-up“ entlang der Schichten bearbeitet: Leuchtet die LED am Netzwerkanschluss (Schicht 1)? Bekommt der Rechner eine IP-Adresse (<code>ipconfig</code>)? Antwortet das Gateway auf <code>ping</code>? Funktioniert die Namensauflösung (<code>nslookup</code>)? Erst dann liegt der Fehler in der Anwendung. So wird ein Ticket wie „Internet geht nicht in Raum 204“ systematisch eingegrenzt, statt auf Verdacht Einstellungen zu ändern.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Kapselung</strong> – Beim Senden fügt jede Schicht den Daten der Schicht darüber einen eigenen Header hinzu (die Netzzugangsschicht zusätzlich eine Prüfsumme am Ende). Beim Empfänger entfernt jede Schicht ihren Header wieder und gibt den Rest nach oben weiter. Jede Schicht kommuniziert dabei logisch nur mit derselben Schicht auf der Gegenseite.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.3.1: Protokolle und Geräte zuordnen <span class="niveau">AFB I</span></summary>
+                <p>Ordne jedem Begriff die passende Schicht des TCP/IP-Modells zu: HTTP, TCP, IPv4, Ethernet, DNS, UDP, ICMP, WLAN (IEEE 802.11), Router, Switch.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.3.2: Die Antwort des Webservers <span class="niveau">AFB II</span></summary>
+                <p>Der Webserver S aus dem komplexen Beispiel schickt die Webseite an Laptop A zurück. Gib für beide Abschnitte (S → R und R → A) Quell- und Ziel-MAC, Quell- und Ziel-IP sowie die Ports an. Begründe, warum sich nur ein Teil der Adressen ändert.</p>
+            </details>
+        </div>

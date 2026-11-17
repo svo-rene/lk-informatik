@@ -1,0 +1,131 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 3: Ein Motor oder zwei? <span class="niveau">AFB I</span></summary>
+            <p>Was geben die beiden Programmstücke aus?</p>
+            <pre><code class="language-python">m = Motor("R3", 75)
+c = Auto2("Fiat", m)
+d = Auto2("Seat", m)
+c.motor.typ = "R4"
+print(d.motor.typ)
+
+e = Auto("Fiat", "R3", 75)
+f = Auto("Seat", "R3", 75)
+e.motor.typ = "R4"
+print(f.motor.typ)</code></pre>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Erst <code>R4</code>: <code>c</code> und <code>d</code> zeigen auf denselben Motor, die Änderung über <code>c</code> sieht man auch über <code>d</code>. Dann <code>R3</code>: Jedes <code>Auto</code> hat seinen eigenen Motor, die Änderung an <code>e.motor</code> betrifft <code>f</code> nicht.</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-8-1">
+        <details>
+            <summary>Aufgabe 4.8.1: Typisierung korrigieren – „Spielcharaktere“ <span class="niveau">AFB I–II</span></summary>
+            <p>In diesem Beispiel geht es um ein kleines Rollenspiel. Die Typen sind teilweise nicht angegeben oder unklar. Ergänze die Typen sinnvoll und überarbeite den Code so, dass deutlich wird, wie die Klassen miteinander in Beziehung stehen.</p>
+            <pre><code class="language-python">class Level:
+    def __init__(self, nummer):
+        self.nummer = nummer
+
+class Spieler:
+    def __init__(self, benutzername):
+        self.name = benutzername
+        self.level = None
+
+    def wechsel_level(self, neues_level):
+        self.level = neues_level
+        return neues_level</code></pre>
+            <ul>
+                <li>Welchen Typ hat <code>nummer</code> in <code>Level</code>?</li>
+                <li>Was ist <code>neues_level</code>? Muss man hier etwas erlauben oder einschränken?</li>
+                <li>Wie stellt man die mögliche Abwesenheit eines Levels korrekt typisiert dar?</li>
+                <li>Gib auch der Methode <code>wechsel_level()</code> einen passenden Rückgabetyp.</li>
+            </ul>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-8-2">
+        <details>
+            <summary>Aufgabe 4.8.2: Kursverwaltung <span class="niveau">AFB II–III</span></summary>
+            <p>Erstelle die Klassen <code>Lehrkraft</code>, <code>Kurs</code> und <code>Schueler</code>.</p>
+            <ul>
+                <li>Bestimme den Beziehungstyp und stelle die Klassen und ihre Beziehungen in UML dar.</li>
+                <li>Implementiere die Klassen in Python.</li>
+                <li>Teste deine objektorientierte Umsetzung mit eigenen Beispielen.</li>
+            </ul>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-8-3">
+        <details>
+            <summary>Aufgabe 4.8.3: Computer-Modell <span class="niveau">AFB II</span></summary>
+            <p>Modelliere und implementiere ein einfaches Computer-System:</p>
+            <ul>
+                <li>Ein Benutzer hat einen Computer → Assoziation</li>
+                <li>Ein Computer besteht aus einem Prozessor → Komposition</li>
+            </ul>
+        </details>
+    </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-4-8-4">
+        <details>
+            <summary>Aufgabe 4.8.4: Modelliere aus einem Sachtext – Stadtbibliothek <span class="niveau">AFB II</span></summary>
+            <blockquote>„Die Stadtbibliothek stellt ihre Verwaltung auf eine neue Software um. Jede Leserin und jeder Leser hat einen Namen und erhält bei der Anmeldung genau einen Leserausweis mit Ausweisnummer und Ablaufdatum. Der Ausweis ist nicht übertragbar und wird bei der Abmeldung vernichtet. Die Bibliothek besitzt Medien mit Titel und Signatur. Für Themenwochen stellt das Team Themenregale zusammen (z.&nbsp;B. „Klimawandel“), in die vorhandene Medien gestellt werden. Nach der Themenwoche wird das Regal aufgelöst, die Medien bleiben im Bestand. Leserinnen und Leser können Medien ausleihen und zurückgeben und wissen jederzeit, welche Medien sie gerade ausgeliehen haben.“</blockquote>
+            <ol>
+                <li>Bestimme die Klassen mit ihren Attributen und Methoden. Unterstreiche dazu im Text Substantive (Kandidaten für Klassen und Attribute) und Verben (Kandidaten für Methoden).</li>
+                <li>Bestimme für jede Beziehung, ob es eine Assoziation, Aggregation oder Komposition ist. Begründe jeweils mit einer Textstelle und zeichne das Klassendiagramm.</li>
+                <li>Implementiere die Klassen so, dass man die Beziehungsart am Code erkennt (Wo wird das Teil erzeugt? Wird ein Verweis übergeben?).</li>
+                <li>Teste deine Umsetzung:</li>
+            </ol>
+            <table class="gitter">
+                <tr><th>Aufruf (nacheinander)</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                <tr><td><code>lea = Leser("Lea", "A-1001", "2027-07-31"); print(lea.ausweis.nummer)</code></td><td>A-1001</td><td></td></tr>
+                <tr><td><code>m1 = Medium("Klima im Wandel", "K-12"); m2 = Medium("Wetter verstehen", "W-03"); regal = Themenregal("Klimawandel"); regal.hinzufuegen(m1); regal.hinzufuegen(m2); print(len(regal.medien))</code></td><td>2</td><td></td></tr>
+                <tr><td><code>lea.ausleihen(m1); print([m.titel for m in lea.ausgeliehen])</code></td><td>['Klima im Wandel']</td><td></td></tr>
+                <tr><td><code>del regal; print(m1.titel)</code></td><td>Klima im Wandel</td><td></td></tr>
+                <tr><td><code>lea.zurueckgeben(m1); print(lea.ausgeliehen)</code></td><td>[]</td><td></td></tr>
+            </table>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-8-5">
+        <details>
+            <summary>Aufgabe 4.8.5: Code in UML übersetzen – Smartphone <span class="niveau">AFB II</span></summary>
+            <pre><code class="language-python">class Akku:
+    def __init__(self, kapazitaet_mah: int):
+        self.kapazitaet_mah: int = kapazitaet_mah
+
+class Ladegeraet:
+    def __init__(self, watt: int):
+        self.watt: int = watt
+
+class Kontakt:
+    def __init__(self, name: str, nummer: str):
+        self.name: str = name
+        self.nummer: str = nummer
+
+class Smartphone:
+    def __init__(self, modell: str, kapazitaet_mah: int):
+        self.modell: str = modell
+        self.akku: Akku = Akku(kapazitaet_mah)
+        self.ladegeraet: Ladegeraet | None = None
+        self.kontakte: list[Kontakt] = []
+
+    def anschliessen(self, geraet: Ladegeraet) -&gt; None:
+        self.ladegeraet = geraet
+
+    def trennen(self) -&gt; None:
+        self.ladegeraet = None
+
+    def kontakt_speichern(self, kontakt: Kontakt) -&gt; None:
+        self.kontakte.append(kontakt)</code></pre>
+            <ol>
+                <li>Zeichne das vollständige Klassendiagramm mit allen vier Klassen, ihren Attributen, Methoden und Beziehungen (richtige Linien- und Rautenart).</li>
+                <li>Begründe jede Beziehungsart mit einem Merkmal des Codes.</li>
+                <li>Im Handbuch steht neu: „Der Akku kann beim Service getauscht und in ein anderes Gerät eingebaut werden.“ Beschreibe, was sich im Code ändern muss, und welche Beziehung dann vorliegt.</li>
+            </ol>
+        </details>
+    </div>

@@ -1,0 +1,52 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.5.3: <span class="niveau">AFB II</span></summary>
+<p>Entwickle eine vereinfachte BNF-Grammatik für E-Mail-Adressen der Form <code>benutzer@domain.tld</code>.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.5.4: <span class="niveau">AFB II/III</span></summary>
+<p>Für Datumsangaben gibt es verschiedene Schreibweisen. In dieser Aufgabe geht es um das folgende Format:<br><code>6. Dezember 2027</code></p>
+<p><strong>a) Begriffseinordnung</strong><br>Begründe, warum die Menge aller korrekt gebildeten Datumsangaben dieser Form eine <strong>formale Sprache</strong> darstellt.</p>
+<p><strong>b) Grammatik in EBNF</strong><br>Entwickle eine <strong>formale Grammatik in EBNF</strong> (Extended Backus-Naur-Form), die genau dieses Datumsformat beschreibt. Du darfst Monatsnamen ausschreiben (z.&nbsp;B. „Dezember“, „Mai“).</p>
+<p><strong>c) Erweiterung: Zeitangabe</strong><br>Ergänze die Grammatik aus b), sodass optional eine vierstellige Uhrzeit (hh:mm) angehängt werden kann – bestehend aus Stunde und Minute, getrennt durch einen Doppelpunkt, z.&nbsp;B. <code>6. Dezember 2027 08:30</code>.</p>
+<p><strong>d) Reflexion: semantische Mehrdeutigkeit</strong><br>Eine alternative Schreibweise ist z.&nbsp;B. <code>6-12-2027</code>. Erkläre kurz, warum dieses Format <strong>semantisch mehrdeutig</strong> sein kann – besonders im internationalen Kontext (z.&nbsp;B. Europa vs. USA).</p>
+</details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.5.5: Leseausweise – EBNF in BNF übertragen <span class="niveau">AFB II</span></summary>
+<p>Die Schulbibliothek beschreibt ihre Ausweisnummern in EBNF:</p>
+<pre>ausweis   = buchstabe, [ "-" ], ziffer, { ziffer } ;
+buchstabe = "A" | "B" | "C" ;
+ziffer    = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;</pre>
+<ol type="a">
+<li>Gib je eine Ausweisnummer mit und ohne Bindestrich an.</li>
+<li>Übertrage die Grammatik in BNF, also ohne <code>[ ]</code> und <code>{ }</code>.</li>
+<li>Entscheide, ob <code>A-</code>, <code>B12</code>, <code>C-007</code> und <code>AB1</code> gültige Ausweisnummern sind.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.5.6: Listen wie in Python <span class="niveau">AFB II</span></summary>
+<p>Eine vereinfachte Grammatik für Listen aus Zahlen (ohne Leerzeichen):</p>
+<pre>&lt;liste&gt;    ::= "[" "]" | "[" &lt;elemente&gt; "]"
+&lt;elemente&gt; ::= &lt;zahl&gt; | &lt;zahl&gt; "," &lt;elemente&gt;
+&lt;zahl&gt;     ::= &lt;ziffer&gt; | &lt;ziffer&gt; &lt;zahl&gt;
+&lt;ziffer&gt;   ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"</pre>
+<ol type="a">
+<li>Leite <code>[1,2]</code> vollständig ab.</li>
+<li>Entscheide für <code>[]</code>, <code>[1,2,3]</code>, <code>[1,,2]</code>, <code>[12,3,]</code>, <code>[007]</code> und <code>[ 1]</code>, ob sie zur Sprache gehören.</li>
+<li>Python akzeptiert nicht genau dieselben Listen. Teste die Wörter aus b) in Python und beschreibe die Unterschiede zur Grammatik.</li>
+</ol>
+</details>
+</div>

@@ -1,0 +1,44 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.12.3: Passwörter sicher speichern <span class="niveau">AFB III</span></summary>
+                <ol type="a">
+                    <li>Ein Schulportal speichert die Passwörter als ungesalzene SHA-256-Hashwerte. Erläutere zwei Angriffe, die nach einem Datenleck möglich sind.</li>
+                    <li>Implementiere eine Funktion <code>speichere(passwort)</code>, die ein zufälliges Salt erzeugt und Salt und Hashwert zurückgibt, sowie <code>pruefe(passwort, salt, hashwert)</code>. Verwende die in Python eingebaute langsame Funktion <code>hashlib.scrypt</code>.</li>
+                    <li>Begründe, warum ein Angreifer mit dem Salt allein nichts anfangen kann, obwohl es offen in der Datenbank steht.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.12.4: Die vereinfachte Hashfunktion verbessern? <span class="niveau">AFB II</span></summary>
+                <p>Betrachte die vereinfachte Hashfunktion h(x) = (3 · x + 7) mod 12 aus dem Abschnitt oben.</p>
+                <ol type="a">
+                    <li>Berechne h(x) für x = 0, 1, …, 11 und gib alle Kollisionen an.</li>
+                    <li>Ersetze den Faktor 3 durch 5: h'(x) = (5 · x + 7) mod 12. Berechne erneut die Werte für x = 0 bis 11 und vergleiche.</li>
+                    <li>Zeige, dass man bei h' zu jedem Hashwert sofort ein passendes x berechnen kann. Bestimme so ein x mit h'(x) = 10.</li>
+                    <li>Beurteile, welche Eigenschaften einer kryptographischen Hashfunktion h' erfüllt und welche nicht.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.12.5: Downloads automatisch prüfen <span class="niveau">AFB II</span></summary>
+                <ol type="a">
+                    <li>Schreibe eine Python-Funktion <code>pruefe_datei(pfad, erwartet)</code>, die den SHA-256-Hashwert einer Datei berechnet und <code>True</code> zurückgibt, wenn er mit dem erwarteten Wert übereinstimmt. Die Datei soll in Blöcken von 4096 Byte gelesen werden, damit auch sehr große Dateien funktionieren. Groß- und Kleinschreibung des erwarteten Werts sollen keine Rolle spielen.</li>
+                    <li>Lege eine Datei <code>test.txt</code> an, die genau den Text <code>Hallo</code> enthält (ohne Zeilenumbruch), und teste (erwartete und tatsächliche Ausgabe):
+                        <ul>
+                            <li>mit dem Hashwert aus Beispiel 2 in Kleinbuchstaben → <code>True</code></li>
+                            <li>mit demselben Wert in Großbuchstaben (wie <code>Get-FileHash</code> ihn ausgibt) → <code>True</code></li>
+                            <li>nachdem du den Inhalt in <code>hallo</code> geändert hast → <code>False</code></li>
+                        </ul>
+                    </li>
+                    <li>Speichert ein Editor die Datei mit einem Zeilenumbruch am Ende, schlägt der erste Test fehl. Erkläre, warum.</li>
+                </ol>
+            </details>
+        </div>

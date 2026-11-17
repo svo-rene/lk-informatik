@@ -1,0 +1,34 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 4.3.3: Doppelter Cache, halbe Wartezeit? <span class="niveau">AFB III</span></summary>
+                <p>Ein Chiphersteller überlegt, den Cache eines Prozessors von 32&nbsp;KB auf 64&nbsp;KB zu verdoppeln. Die Marketingabteilung möchte mit „Doppelter Cache – halbe Wartezeit!“ werben. Messungen am Prototyp ergeben (<em>Annahmen</em>; der Arbeitsspeicher antwortet in 100&nbsp;ns, ein Fehlzugriff dauert insgesamt so lange wie ein Zugriff auf den Arbeitsspeicher):</p>
+                <table>
+                    <thead><tr><th></th><th>32-KB-Cache</th><th>64-KB-Cache</th></tr></thead>
+                    <tbody>
+                        <tr><td>Zugriffszeit des Caches</td><td>1,0&nbsp;ns</td><td>1,2&nbsp;ns (größerer Speicher, längere Leitungen)</td></tr>
+                        <tr><td>Trefferquote</td><td>90&nbsp;%</td><td>93&nbsp;%</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Berechne für beide Varianten die mittlere Zugriffszeit.</li>
+                    <li>Um wie viel Prozent sinkt die mittlere Zugriffszeit tatsächlich?</li>
+                    <li>Beurteile den Werbeslogan und gib an, welche Trefferquote der 64-KB-Cache bräuchte, damit der Slogan stimmt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 4.3.4: Fehler finden in einer Schülerlösung <span class="niveau">AFB III</span></summary>
+                <p>Aufgabe: „Ein L1-Cache antwortet in 1&nbsp;ns, der Arbeitsspeicher in 100&nbsp;ns, die Trefferquote beträgt 98&nbsp;%. Berechne die mittlere Zugriffszeit und gib an, wie viel schneller der Speicherzugriff durch den Cache wird.“ Jonas gibt diese Lösung ab:</p>
+                <ol>
+                    <li>Fehlzugriffsquote: 1 − 0,98 = 0,2</li>
+                    <li>mittlere Zugriffszeit: 0,98 · 1&nbsp;ns + 0,2 · 100&nbsp;ns = 20,98&nbsp;ns</li>
+                    <li>ohne Cache 100&nbsp;ns, also 100 − 20,98 = 79,02. „Der Cache macht den Speicherzugriff 79-mal schneller.“</li>
+                    <li>Fazit: „Bei 98&nbsp;% Trefferquote ist der Speicher praktisch so schnell wie der Cache.“</li>
+                </ol>
+                <p>Finde alle Fehler, korrigiere die Rechnung und beurteile Jonas' Fazit mit deinem korrigierten Ergebnis.</p>
+            </details>
+        </div>

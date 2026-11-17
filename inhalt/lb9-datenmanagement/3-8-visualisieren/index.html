@@ -1,0 +1,187 @@
+<p>
+CSV-Dateien sind reine Textdateien, die durch ein Trennzeichen (z.&nbsp;B. <code>;</code> oder <code>,</code>) strukturierte Daten enthalten. 
+Um diese Daten übersichtlich als Tabelle darzustellen, kannst du sie mit LibreOffice Calc öffnen und auswerten.
+</p>
+
+<h2>CSV-Datei in LibreOffice öffnen</h2>
+
+<ol>
+    <li>Starte <strong>LibreOffice Calc</strong>.
+    <p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+    </li>
+    <li>Wähle im Menü <code>Datei → Öffnen</code> und suche deine CSV-Datei.</li>
+    <li>Im Dialog <strong>Textimport</strong>:
+        <ul>
+            <li>Stelle den Zeichensatz auf <code>UTF-8</code>.</li>
+            <li>Wähle unter <em>Trennoptionen</em> „Getrennt“ und setze das Häkchen bei <code>Semikolon</code> (bzw. <code>Komma</code>, je nach Datei). Meist erkennt LibreOffice das Trennzeichen schon selbst, sonst stellst du es manuell ein.</li>
+            <li>Überprüfe die Vorschau.</li>
+        </ul>
+    </li>
+    <li>Klicke auf <strong>OK</strong>, um die Daten als Tabelle zu laden.</li>
+</ol>
+
+<figure>
+    <img src="../img/Import.png" width="400"> 
+    <figcaption>Screenshot: Dialog „Textimport“</figcaption>
+</figure>
+
+<h2>Typische Probleme beim Import</h2>
+
+<ul>
+    <li>Umlaute oder Sonderzeichen werden falsch dargestellt → Zeichensatz <code>UTF-8</code> prüfen.</li>
+    <li>Alle Daten stehen in einer Spalte → falsches Trennzeichen gewählt.</li>
+    <li>Zahlen mit Komma (z.&nbsp;B. 21,5) werden als Text erkannt → Erweiterte Zahlenerkennung, Zellformat ändern oder mit Punkt speichern.</li>
+</ul>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Doppelklick oder „Datei → Öffnen“?</summary>
+        <p>
+            LibreOffice zeigt den Dialog <em>Textimport</em> bei jeder CSV-Datei an – egal, ob du sie über
+            <code>Datei → Öffnen</code> oder per Doppelklick im Datei-Explorer öffnest. Beim Doppelklick musst du aber
+            sicher sein, dass die Datei wirklich mit LibreOffice und nicht mit Excel geöffnet wird: Excel zeigt keinen
+            Dialog und rät Trennzeichen und Zeichensatz selbst – dann stehen oft alle Daten in einer Spalte oder die
+            Umlaute sind kaputt. Der Weg über <code>Datei → Öffnen</code> in LibreOffice ist deshalb der sichere.
+        </p>
+    </details>
+</div>
+
+<h2>CSV-Daten als Diagramm darstellen</h2>
+
+<p>
+Nach dem erfolgreichen Import kannst du die Daten auch grafisch darstellen – z.&nbsp;B. mit einem Säulen- oder Kreisdiagramm.
+</p>
+
+<ol>
+    <li>Markiere die Zellen, die du darstellen willst (z.&nbsp;B. Produkte und Verkaufszahlen).</li>
+    <li>Klicke im Menü auf <strong>Einfügen → Diagramm</strong>.</li>
+    <li>Wähle einen geeigneten Diagrammtyp (z.&nbsp;B. <em>Säule</em>, <em>Kreis</em>, <em>Linie</em>).</li>
+    <li>Passe bei Bedarf Titel und Achsenbeschriftungen an.</li>
+    <li>Bestätige mit <strong>Fertigstellen</strong>.</li>
+</ol>
+
+<figure>
+    <img src="../img/diagramm.png" width="600"> 
+    <figcaption>Screenshot: fertiges Diagramm</figcaption>
+</figure>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Klassenarbeitspunkte als sortiertes Balkendiagramm</summary>
+    <p><strong>Ausgangssituation:</strong> Die Lehrkraft möchte die Ergebnisse aus <a href="../notebooks/klassenarbeit.csv" download>klassenarbeit.csv</a>
+       (<code>Name,Punkte</code>, 10 Schüler*innen, maximal 100 Punkte) auf einen Blick vergleichen.</p>
+    <ol>
+        <li><strong>Frage klären</strong> – Es werden Werte verschiedener Personen (Kategorien) verglichen, kein Verlauf und keine Anteile.
+            Also Säulen bzw. Balken; bei Namen als Beschriftung sind liegende Balken besser lesbar.</li>
+        <li><strong>Import</strong> – <code>Datei → Öffnen</code>, Zeichensatz UTF-8, Trennzeichen <em>Komma</em> (diese Datei weicht vom
+            Semikolon ab). Vorschau: zwei Spalten.</li>
+        <li><strong>Sortieren</strong> – Bereich markieren, <code>Daten → Sortieren</code> nach „Punkte“ absteigend. Ein sortiertes Diagramm
+            zeigt die Rangfolge sofort.</li>
+        <li><strong>Diagramm einfügen</strong> – A1:B11 markieren, <code>Einfügen → Diagramm → Balken</code>.</li>
+        <li><strong>Beschriften und Achse prüfen</strong> – Titel „Klassenarbeit: erreichte Punkte“, Achsentitel „Punkte (max. 100)“;
+            die Werteachse beginnt bei 0 und endet bei 100.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong> Zehn Balken, oben Jonas (93), dann Clara (91), Eva (88) … unten David (65).</p>
+    <p><strong>Kontrolle:</strong> Anzahl der Balken = Anzahl der Datenzeilen (10). Weil die Achse bei 0 beginnt, ist Jonas’ Balken
+       nur etwa 1,4-mal so lang wie Davids (93 : 65) – genau wie das Verhältnis der Punkte.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Ein Liniendiagramm aus Rohdaten – und warum es zuerst nichts zeigt</summary>
+    <p><strong>Ausgangssituation:</strong> <a href="../notebooks/messwerte.csv" download>messwerte.csv</a> enthält 72 stündliche Messungen
+       (1. bis 3. November 2023) mit Temperatur, Luftfeuchtigkeit und Luftdruck. Darin stecken dreimal <code>N/A</code> bei der Temperatur
+       sowie die Ausreißer 55.0&nbsp;°C (01.11., 07:00 Uhr) und −40.0&nbsp;°C (02.11., 03:00 Uhr). Gesucht ist ein Diagramm des Temperaturverlaufs.</p>
+    <ol>
+        <li><strong>Diagrammtyp</strong> – Verlauf über die Zeit, also Linie. Die Spalte „Zeitpunkt“ liefert die x-Achse.</li>
+        <li><strong>Import mit Komma als Trennzeichen</strong> – Die Zahlen stehen mit Punkt in der Datei. In einem deutsch eingestellten
+            LibreOffice muss unter „Sprache“ im Textimport „Englisch (USA)“ gewählt werden, sonst wird <code>6.8</code> als Datum oder
+            Text gelesen.</li>
+        <li><strong>Erstes Diagramm ansehen</strong> – Die Werteachse reicht wegen der Ausreißer von −40 bis 55. Alle echten Werte liegen
+            zwischen 2,3 und 6,8&nbsp;°C und erscheinen als fast flache Linie mit zwei riesigen Zacken. Das Diagramm zeigt vor allem die
+            Messfehler, nicht das Wetter.</li>
+        <li><strong>Bereinigen statt verstecken</strong> – Die Ausreißer werden nicht einfach aus dem Diagramm „herausgeschnitten“, sondern
+            nach der dokumentierten Regel aus Seite 3.5 behandelt (Zellen leeren oder durch den Mittelwert der Nachbarn ersetzen). Die
+            <code>N/A</code>-Zellen werden geleert; unter <code>Datenbereiche → Optionen</code> kann man wählen, ob Lücken angezeigt oder
+            überbrückt werden.</li>
+        <li><strong>Achse sinnvoll wählen</strong> – Bei einem Temperaturverlauf ist eine Achse von 0 bis 8&nbsp;°C angemessen: Hier geht es um
+            Veränderungen, nicht um Größenvergleiche von Säulen.</li>
+        <li><strong>Lesbarkeit</strong> – 72 Beschriftungen auf der x-Achse überlappen. Nur jede sechste Stunde beschriften oder die Achse
+            auf Datum/Uhrzeit-Format stellen.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong> Eine Linie zwischen 2,3 und 6,8&nbsp;°C, die am 1. November um 0 Uhr bei 6,8&nbsp;°C beginnt und am 3. November
+       um 23 Uhr bei 2,3&nbsp;°C endet, mit drei kleinen Lücken
+       (oder überbrückt) – und eine Fußnote: „2 Messfehler entfernt, 3 fehlende Werte“.</p>
+    <p><strong>Kontrolle:</strong> Minimum und Maximum der gezeichneten Linie mit <code>=MIN()</code> und <code>=MAX()</code> der bereinigten
+       Spalte vergleichen (2,3 und 6,8). Ein Diagramm ist erst fertig, wenn man aus ihm die Frage beantworten kann – hier: „Wie hat sich die
+       Temperatur entwickelt?“</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Diagramme in Beruf und Medien</summary>
+        <p>
+            Zahlen überzeugen erst, wenn man sie sieht: <strong>Data Analysts</strong> im Onlinehandel zeigen die Umsätze
+            je Produktgruppe als Säulen, Controlling-Abteilungen stellen Monatsverläufe als Linien dar, und
+            Datenjournalist*innen, etwa bei MDR oder Sächsischer Zeitung, bereiten Wahlergebnisse oder Wetterdaten grafisch
+            auf. Dabei gilt: Ein Diagramm kann auch täuschen, zum Beispiel wenn die y-Achse nicht bei 0 beginnt. Wer
+            beruflich Daten präsentiert, muss solche Verzerrungen vermeiden.
+        </p>
+    </details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p>
+        Der <strong>Diagrammtyp</strong> folgt aus der Frage: <strong>Säulen</strong> vergleichen Werte verschiedener
+        Kategorien (Verkäufe je Produkt), eine <strong>Linie</strong> zeigt einen Verlauf über die Zeit (Temperatur je Stunde),
+        ein <strong>Kreis</strong> zeigt Anteile an einem Ganzen (Verteilung von Antworten, zusammen 100&nbsp;%).
+        Jedes Diagramm braucht einen Titel, beschriftete Achsen und Einheiten.
+    </p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 3.8.1: CSV-Daten mit LibreOffice auswerten <span class="niveau">AFB II</span></summary>
+        <p>
+            Öffne die bereitgestellten CSV-Dateien mit LibreOffice Calc und stelle die Daten mithilfe von Diagrammen übersichtlich dar.
+        </p>
+    
+        <ol>
+            <li>Öffne die Datei <a href="../material/verkauf_produkte.csv" download>verkauf_produkte.csv</a> und erstelle ein <strong>Säulendiagramm</strong>, das die Verkaufszahlen je Produkt zeigt.</li>
+            <li>Öffne die Datei <a href="../material/temperatur_sensor.csv" download>temperatur_sensor.csv</a> und stelle den Temperaturverlauf über die Zeit als <strong>Liniendiagramm</strong> dar.</li>
+            <li>Öffne die Datei <a href="../material/feedback_umfrage.csv" download>feedback_umfrage.csv</a> und erstelle ein <strong>Kreisdiagramm</strong>, das die Verteilung der Antworten (z.&nbsp;B. „Zufrieden“, „Neutral“, „Unzufrieden“) zeigt.</li>
+        </ol>
+    
+        <p>
+            Achte beim Diagramm auf:
+        </p>
+            <ul>
+                <li>sinnvolle Achsenbeschriftungen,</li>
+                <li>klare Titel,</li>
+                <li>übersichtliche Darstellung.</li>
+            </ul>
+        <p>
+            Begründe zu jedem Diagramm in einem Satz, warum der Diagrammtyp zur Frage passt.
+        </p>
+    </details>
+    </div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 3.8.2: Das passende Diagramm wählen <span class="niveau">AFB I</span></summary>
+        <p>Die Schülervertretung hat verschiedene Daten gesammelt. Gib für jede Frage den passenden Diagrammtyp an, nenne, was auf die Achsen
+           bzw. in die Segmente kommt, und begründe deine Wahl in einem Satz.</p>
+        <ol>
+            <li>Wie viele Bücher hat die Schulbibliothek in jedem Monat des Schuljahres verliehen?</li>
+            <li>Welche Klasse hat beim Spendenlauf am meisten Geld gesammelt?</li>
+            <li>Wie verteilen sich die 240 Stimmen bei der Schulsprecherwahl auf die vier Kandidierenden?</li>
+            <li>Wie hat sich die Anzahl der Anmeldungen für die Informatik-AG von 2020 bis 2025 entwickelt?</li>
+        </ol>
+    </details>
+</div>

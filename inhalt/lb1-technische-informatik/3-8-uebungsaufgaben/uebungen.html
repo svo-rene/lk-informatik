@@ -1,0 +1,145 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.8.3: Gasbrenner-Sicherheitsschaltung <span class="niveau">AFB III</span></summary>
+<p>Die Gaszufuhr für einen Gasbrenner wird über zwei Handschalter freigegeben: Schalter A im Keller und Schalter B in der Küche. Gas kann fließen, solange mindestens einer der beiden Handschalter geschlossen ist. Ein Sicherheitsschalter C wird durch ein Thermoelement gesteuert, und zwar so, dass C geschlossen wird, wenn die Zündflamme erlischt. In diesem Fall muss die Gaszufuhr in jedem Fall unterbrochen werden.</p>
+<p>Zu entwerfen ist eine Schaltung, die eine Sperre X ansteuert. Ist X aktiviert, wird die Gaszufuhr unterbrochen. Wir nehmen folgende Kodierung vor:</p>
+<ul>
+<li><code>A</code>: Handschalter A (0 = geschlossen, 1 = geöffnet)</li>
+<li><code>B</code>: Handschalter B (0 = geschlossen, 1 = geöffnet)</li>
+<li><code>C</code>: Sicherheitsschalter C (0 = geschlossen: Zündflamme aus, 1 = geöffnet: Zündflamme brennt)</li>
+<li><code>X</code>: Sperre X (0 = Sperre nicht aktiviert, 1 = Sperre aktiviert)</li>
+</ul>
+<p>Dabei sind A, B und C die Eingangssignale, X ist das Ausgangssignal der Schaltung. Die Bedingung für eine Unterbrechung der Gaszufuhr (Aktivieren der Sperre X) lautet: <strong>Die Zündflamme ist ausgegangen oder beide Handschalter sind offen.</strong></p>
+<ol>
+<li>Stelle zu dieser Aufgabenstellung eine Wahrheitstabelle auf.</li>
+<li>Ermittle mithilfe dieser Tabelle die kanonische disjunktive Normalform (KDNF).</li>
+<li>Minimiere die KDNF durch Anwendung der Gesetze der booleschen Algebra (oder mit einem KV-Diagramm) und gib zu deinem minimierten logischen Ausdruck die entsprechende Schaltung an.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.8.4: Zwei Schaltnetze analysieren <span class="niveau">AFB II</span></summary>
+<p>Es sind zwei Schaltnetze gegeben. Für jedes Schaltnetz sollen die entsprechende Wahrheitstabelle und die boolesche Funktion aufgestellt werden.</p>
+<figure><img src="../img/aufgabe_4.jpg" width="500" alt="Zwei Schaltnetze mit je vier Eingängen: links vier ODER-Gatter und ein UND-Gatter, rechts vier UND-Gatter und ein ODER-Gatter"></figure>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.8.5: Von der Wahrheitstabelle zum Schaltnetz <span class="niveau">AFB II</span></summary>
+<p>Es ist die folgende Wahrheitstabelle gegeben. Gib die boolesche Funktion an (vereinfache, wenn möglich) und erstelle das Schaltnetz.</p>
+<table class="gitter">
+<thead>
+<tr><th>B</th><th>C</th><th>D</th><th>f</th></tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+</tbody>
+</table>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.8.6: Jury-Mehrheitsentscheid <span class="niveau">AFB II</span></summary>
+<p>Bei der Talentshow „Deutschland sucht den Super-Informatiker“ (DSDSI) entscheidet eine Jury aus drei Personen per Mehrheitsabstimmung, ob ein Kandidat weiterkommt oder nicht.</p>
+<ol>
+<li>Erstelle eine entsprechende Schalttabelle mit den Eingängen A, B, C und dem Ausgang f. Fülle sie mit allen möglichen Eingangskombinationen sowie dem passenden Ausgangswert f.</li>
+<li>Stelle die kanonische disjunktive Normalform auf.</li>
+<li>Finde einen möglichst kurzen Schaltterm, der die Schalttabelle aus Teil 1 beschreibt. Konstruiere mit diesem Schaltterm ein Schaltnetz.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.8.7: Paritätsbit <span class="niveau">AFB III</span></summary>
+<p>Bei der Übertragung von drei Datenbits A, B und C wird ein Paritätsbit P mitgeschickt. P ist 1, wenn die Anzahl der Einsen unter A, B und C ungerade ist.</p>
+<ol>
+<li>Erstelle die Schalttabelle und stelle die kanonische disjunktive Normalform auf.</li>
+<li>Entwirf ein Schaltnetz, das nur UND-, ODER- und NICHT-Gatter mit je höchstens zwei Eingängen verwendet.</li>
+<li>Entwirf eine zweite Lösung, die zuerst ein Teilschaltnetz für A XOR B baut und dieses wiederverwendet. Vergleiche die Anzahl der Gatter beider Lösungen.</li>
+<li>Beurteile, welche Übertragungsfehler ein einzelnes Paritätsbit erkennt und welche nicht.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.8.8: Ein Addierwerk, zwei Programme <span class="niveau">AFB II</span></summary>
+<p>Ein Mikrocontroller hat ein 8-Bit-Addierwerk aus acht verketteten Volladdierern. Das Ergebnis landet in einem 8-Bit-Register. Der Übertrag aus der höchsten Stelle wird als Flag C gespeichert. Zwei Programme nutzen dasselbe Addierwerk:</p>
+<ul>
+<li>Ein <strong>Schrittzähler</strong> deutet alle Bitmuster <em>vorzeichenlos</em> (0 bis 255).</li>
+<li>Eine <strong>Temperaturregelung</strong> deutet dieselben Bitmuster im <em>Zweierkomplement</em> (−128 bis 127).</li>
+</ul>
+<p>Berechne für jede Addition schriftlich mit Überträgen:</p>
+<ol>
+<li>1011 0110 + 0110 0111</li>
+<li>0101 1010 + 0011 1100</li>
+<li>1100 1000 + 1001 1100</li>
+</ol>
+<p>Gib jeweils an:</p>
+<ol type="a">
+<li>den Registerinhalt (8 Bit) und das Flag C,</li>
+<li>die Deutung von Summanden und Registerinhalt für beide Programme,</li>
+<li>für beide Programme, ob das Ergebnis im Register stimmt oder ein Überlauf vorliegt.</li>
+</ol>
+<p>Beschreibe abschließend, warum das Flag C für den Schrittzähler genügt, für die Temperaturregelung aber nicht.</p>
+<p class="tipp">Der Registerwert ist immer die Summe modulo 256. Ob er „stimmt“, hängt nur davon ab, wie das Programm die Bits deutet.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.8.9: Lüftung im Serverraum <span class="niveau">AFB III</span></summary>
+<p>Ein Lüfter im Serverraum (Ausgang f = 1: Lüfter läuft) wird von vier Sensoren gesteuert:</p>
+<ul>
+<li><code>A</code>: Temperatur zu hoch (1 = ja)</li>
+<li><code>B</code>: Luftfeuchte zu hoch (1 = ja)</li>
+<li><code>C</code>: Fenster offen (1 = offen)</li>
+<li><code>D</code>: Nachtbetrieb (1 = Nacht)</li>
+</ul>
+<p>Der Lüfter läuft genau dann, wenn mindestens eine dieser Regeln zutrifft:</p>
+<ol>
+<li>Das Fenster ist geschlossen und die Temperatur ist zu hoch.</li>
+<li>Das Fenster ist geschlossen, die Luftfeuchte ist zu hoch und es ist kein Nachtbetrieb.</li>
+<li>Notfall: Temperatur und Luftfeuchte sind zu hoch, das Fenster ist offen und es ist kein Nachtbetrieb.</li>
+</ol>
+<p>Bearbeite die folgenden Schritte:</p>
+<ol type="a">
+<li>Stelle die Wahrheitstabelle mit 16 Zeilen auf.</li>
+<li>Trage die Einsen in ein KV-Diagramm nach der Kursvorlage ein, also mit je einer Variablen pro Seite: oben A | ¬A, links B / ¬B, rechts ¬D / D / ¬D, unten ¬C | C | ¬C. Bilde möglichst große Gruppen und gib die minimale DNF an.</li>
+<li>Zwei Terme deiner DNF enthalten beide B ∧ ¬D. Klammere diesen inneren UND-Term aus.</li>
+<li>Entwirf eine Schaltung, die nur Gatter mit höchstens zwei Eingängen verwendet und mit höchstens 7 Gattern auskommt. Begründe, warum die nicht ausgeklammerte DNF dafür nicht reicht.</li>
+<li>Baue die Schaltung in LogicSim und teste sie an allen 16 Belegungen.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.8.10: Fehler finden – Toms KV-Lösung <span class="niveau">AFB III</span></summary>
+<p>Eine Funktion f(A,B,C,D) ist genau für die Zeilennummern <strong>1, 3, 5, 7, 9, 11</strong> gleich 1. Die Zeilennummer ist die Dualzahl ABCD, A ist das höchstwertige Bit. Tom hat folgende Lösung abgegeben:</p>
+<pre>1. Gruppe 1: Felder 1, 3, 5, 7       →  ¬A ∧ D
+2. Gruppe 2: Felder 9, 11            →  A ∧ ¬B ∧ C ∧ D
+3. f = (¬A ∧ D) ∨ (A ∧ ¬B ∧ C ∧ D)
+4. D ausklammern: f = D ∨ (¬A ∨ (A ∧ ¬B ∧ C))
+5. Die Schaltung braucht mindestens 6 Gatter.</pre>
+<ol>
+<li>Finde alle Fehler in Toms Lösung. Gib zu jedem Fehler an, welche Regel bzw. welches Gesetz verletzt ist, und widerlege ihn mit einer konkreten Belegung.</li>
+<li>Gib die minimale Funktion an. Zeichne dazu ein KV-Diagramm im Kursstil.</li>
+<li>Beurteile Toms Aussage in Zeile 5. Gib die kleinste Schaltung an, die nur UND-, ODER- und NICHT-Gatter verwendet.</li>
+</ol>
+</details>
+</div>

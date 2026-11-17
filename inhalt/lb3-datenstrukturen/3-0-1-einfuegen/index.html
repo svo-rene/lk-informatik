@@ -1,0 +1,222 @@
+<p>Im Kino sitzt eine Schulklasse lückenlos in Reihe 7, Platz 1 bis 20. Eine Nachzüglerin will unbedingt auf Platz 1 neben ihre Freundin. Dafür muss jede Person einen Platz weiter nach rechts rutschen – 20 Personen stehen auf, damit eine sitzen kann. Wäre sie zu Platz 21 gegangen, hätte niemand aufstehen müssen.</p>
+
+<p>Genau so arbeitet eine Python-Liste. Du hast sie in Klasse 11 ständig benutzt: <code>append</code>, <code>insert</code>, <code>pop</code>, <code>liste[i]</code>. Auf dieser Seite überlegst du, <strong>wie viel Arbeit</strong> hinter jedem dieser Befehle steckt. Daraus ergibt sich die Frage, mit der das ganze Kapitel „Datenstrukturen“ beginnt: Geht Einfügen auch ohne Rutschen?</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in vier kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee und den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe in Thonny mit.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Wie eine Python-Liste im Speicher liegt</a></li>
+            <li><a href="#schritt-2">Einfügen und Löschen: Wer muss rutschen?</a> – danach Aufgabe 3.0.1.1 und 3.0.1.2</li>
+            <li><a href="#schritt-3">Einfügen in eine sortierte Liste</a></li>
+            <li><a href="#schritt-4">Und wenn der Platz nicht reicht?</a> – danach Aufgabe 3.0.1.3</li>
+        </ol>
+
+<p>Zum Schluss findest du <a href="#idee">die Idee für dieses Kapitel</a> und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Wie eine Python-Liste im Speicher liegt</h2>
+
+<p>Eine Python-Liste belegt einen <strong>zusammenhängenden Speicherbereich</strong>. Die Plätze liegen lückenlos hintereinander, jeder Platz ist gleich groß (in Python 8&nbsp;Byte, denn jeder Platz enthält einen Verweis auf das eigentliche Objekt).</p>
+
+<pre><code>Index:     0      1      2      3      4
+         +------+------+------+------+------+
+liste →  |  3   |  8   |  12  |  20  |  25  |
+         +------+------+------+------+------+
+Adresse: 1000   1008   1016   1024   1032</code></pre>
+
+<p>Deshalb kann der Rechner die Adresse jedes Elements <strong>ausrechnen</strong>, statt es zu suchen:</p>
+
+<p style="text-align:center"><code>Adresse(i) = Startadresse + i · 8</code></p>
+
+<p><code>liste[4]</code> liegt also bei 1000 + 4 · 8 = 1032. Diese Rechnung dauert gleich lang, ob die Liste 5 oder 5 Millionen Elemente hat.</p>
+
+<p>Im Video siehst du diese Rechnung noch einmal und probierst in Thonny <code>liste[4]</code>, <code>append</code> und <code>pop()</code> aus. Achte darauf, bei welchen Befehlen kein einziges Element seinen Platz wechselt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-0-1-1_speicher_vorschau.png" src="../vid/3-0-1-1_speicher.mp4"></video><a href="../vid/3-0-1-1_speicher.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Wie liegt eine Python-Liste im Speicher? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Einfügen und Löschen →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Einfügen und Löschen: Wer muss rutschen?</h2>
+
+<p>Weil keine Lücken erlaubt sind, muss beim Einfügen an Position k jedes Element ab Position k <strong>einen Platz nach hinten</strong> rücken – von hinten beginnend, damit nichts überschrieben wird. Beim Löschen rücken alle Elemente hinter der Lücke einen Platz nach vorn.</p>
+
+<p>Im Video siehst du <code>insert(1, 5)</code> Platz für Platz und danach die Rechnung aus Beispiel 1 in Thonny. Achte darauf, in welcher Reihenfolge die Elemente rücken und wie man die Verschiebungen zählt.</p>
+
+<figure>
+            <img src="../img/skizze_array_python_liste.svg" width="450" alt="Python-Liste mit den Werten 3, 8, 12, 20, 25 an den Indizes 0 bis 4">
+            <figcaption>Abb. 1: Die Python-Liste liegt lückenlos im Speicher – die Adresse wird ausgerechnet, beim Einfügen vorn müssen alle Elemente rutschen.</figcaption>
+        </figure>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-0-1-2_rutschen_vorschau.png" src="../vid/3-0-1-2_rutschen.mp4"></video><a href="../vid/3-0-1-2_rutschen.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Warum kostet Einfügen O(n)? (ca. 1,5 min)</figcaption>
+        </figure>
+
+<pre><code>liste.insert(1, 5)        n = 5, k = 1
+
+vorher:   |  3 |  8 | 12 | 20 | 25 |    |
+                                     ↘          25 rückt von 4 nach 5
+                                ↘               20 rückt von 3 nach 4
+                           ↘                    12 rückt von 2 nach 3
+                      ↘                          8 rückt von 1 nach 2
+nachher:  |  3 |  5 |  8 | 12 | 20 | 25 |    →  4 Verschiebungen = n − k</code></pre>
+
+<table>
+            <thead><tr><th>Operation (Liste mit n Elementen)</th><th>Verschiebungen</th><th>Aufwand</th></tr></thead>
+            <tbody>
+                <tr><td><code>liste[i]</code> lesen oder überschreiben</td><td>0 (Adresse ausrechnen)</td><td>O(1)</td></tr>
+                <tr><td><code>liste.append(x)</code> – hinten anhängen</td><td>0</td><td>O(1) im Mittel (siehe unten)</td></tr>
+                <tr><td><code>liste.pop()</code> – letztes Element entfernen</td><td>0</td><td>O(1)</td></tr>
+                <tr><td><code>liste.insert(k, x)</code></td><td>n − k</td><td>O(n)</td></tr>
+                <tr><td><code>liste.insert(0, x)</code> – vorn einfügen</td><td>n (alle)</td><td>O(n)</td></tr>
+                <tr><td><code>liste.pop(k)</code> bzw. <code>del liste[k]</code></td><td>n − k − 1</td><td>O(n)</td></tr>
+                <tr><td><code>liste.pop(0)</code> – vorn entfernen</td><td>n − 1</td><td>O(n)</td></tr>
+                <tr><td><code>x in liste</code>, <code>liste.remove(x)</code></td><td>Suchen von vorn (bis zu n Vergleiche), bei <code>remove</code> zusätzlich Verschieben</td><td>O(n)</td></tr>
+            </tbody>
+        </table>
+
+<p>Zum Nachlesen steht die Rechnung aus dem Video in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Verschiebungen beim Einfügen und Löschen zählen</summary>
+            <p><strong>Ausgangssituation:</strong> <code>liste = [3, 8, 12, 20, 25]</code>, also n = 5. Nacheinander werden <code>liste.insert(1, 5)</code>, <code>liste.append(30)</code> und <code>liste.pop(0)</code> ausgeführt. Wie viele Elemente müssen jeweils verschoben werden?</p>
+            <ol>
+                <li><strong><code>insert(1, 5)</code>:</strong> Ab Position 1 rücken 8, 12, 20, 25 je einen Platz nach hinten, also n − k = 5 − 1 = <strong>4 Verschiebungen</strong>. Danach steht die 5 auf Platz 1. Die Liste ist <code>[3, 5, 8, 12, 20, 25]</code>, jetzt n = 6.</li>
+                <li><strong><code>append(30)</code>:</strong> Die 30 kommt auf den ersten freien Platz hinter dem Ende, <strong>0 Verschiebungen</strong>. Falls die Kapazität gerade erschöpft wäre, käme einmalig ein Umzug mit 6 Kopien dazu. Die Liste ist <code>[3, 5, 8, 12, 20, 25, 30]</code>, n = 7.</li>
+                <li><strong><code>pop(0)</code>:</strong> Die 3 wird entfernt, damit keine Lücke bleibt, rücken alle übrigen 6 Elemente einen Platz nach vorn: n − 1 = <strong>6 Verschiebungen</strong>.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>[5, 8, 12, 20, 25, 30]</code> nach insgesamt 4 + 0 + 6 = 10 Verschiebungen.</p>
+            <p><strong>Kontrolle:</strong> Am Ende stehen 5 + 1 + 1 − 1 = 6 Elemente in der Liste. Das passt.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-0-1-1">Aufgabe 3.0.1.1</a> – Verschiebungen für verschiedene Befehle zählen, und <a href="uebungen.html#a-3-0-1-2">Aufgabe 3.0.1.2</a> – was passiert, wenn man vorn einfügen in einer Schleife wiederholt.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Einfügen in eine sortierte Liste →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Einfügen in eine sortierte Liste</h2>
+
+<p>Eine Bestenliste ist absteigend sortiert. Eine neue Punktzahl muss an der richtigen Stelle eingefügt werden – alle kleineren Werte rücken dafür einen Platz nach hinten. Damit man die Verschiebungen sieht, schreiben wir das Einfügen selbst, statt <code>insert</code> zu benutzen. Achte im Video darauf, wie die freie Stelle <code>i</code> von hinten nach vorn wandert und warum die Schleife genau beim ersten größeren Wert anhält.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-0-1-3_einfuegen_sortiert_vorschau.png" src="../vid/3-0-1-3_einfuegen_sortiert.mp4"></video><a href="../vid/3-0-1-3_einfuegen_sortiert.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Einfügen in eine sortierte Liste – <code>einfuegen_sortiert</code> Schritt für Schritt (ca. 2 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen steht derselbe Code mit allen Erklärungen in Beispiel 2:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Die Bestenliste eines Online-Spiels</summary>
+            <p><strong>Ausgangssituation:</strong> Ein Online-Spiel führt eine Bestenliste mit 100&nbsp;000 Punktzahlen, absteigend sortiert. Nach jeder Runde wird die neue Punktzahl an der richtigen Stelle eingefügt. Das Entwicklungsteam will wissen, wie teuer das ist. Um die Verschiebungen sichtbar zu machen, schreibt es das Einfügen selbst, statt <code>insert</code> zu benutzen.</p>
+            <pre><code class="language-python">def einfuegen_sortiert(bestenliste, punkte):
+    """fügt punkte in die absteigend sortierte bestenliste ein
+    und gibt die Anzahl der Verschiebungen zurück"""
+    bestenliste.append(None)          # Liste um einen Platz verlängern
+    i = len(bestenliste) - 1          # i ist die freie Stelle, zuerst ganz hinten
+    verschiebungen = 0
+    while i &gt; 0 and bestenliste[i - 1] &lt; punkte:
+        bestenliste[i] = bestenliste[i - 1]   # kleinere Punktzahl rückt nach hinten
+        i = i - 1                             # die freie Stelle wandert nach vorn
+        verschiebungen = verschiebungen + 1
+    bestenliste[i] = punkte
+    return verschiebungen
+
+liste = [900, 750, 600, 400]
+print(einfuegen_sortiert(liste, 700), liste)   # 2 [900, 750, 700, 600, 400]</code></pre>
+            <p><strong>Ablauf für <code>einfuegen_sortiert([900, 750, 600, 400], 700)</code>:</strong></p>
+            <ol>
+                <li><strong>Platz schaffen:</strong> <code>append(None)</code> verlängert die Liste auf <code>[900, 750, 600, 400, None]</code>. Die freie Stelle ist i = 4. Das ist nötig, weil ein Array nicht über sein Ende hinaus beschrieben werden kann.</li>
+                <li><strong>i = 4:</strong> <code>bestenliste[3]</code> = 400 &lt; 700, also rückt 400 auf Platz 4. Die freie Stelle ist jetzt i = 3, 1 Verschiebung.</li>
+                <li><strong>i = 3:</strong> <code>bestenliste[2]</code> = 600 &lt; 700, also rückt 600 auf Platz 3, i = 2, 2 Verschiebungen.</li>
+                <li><strong>i = 2:</strong> <code>bestenliste[1]</code> = 750 &lt; 700 ist falsch. Die Schleife endet, denn alle Werte davor sind noch größer.</li>
+                <li><strong>Einsetzen:</strong> <code>bestenliste[2] = 700</code>. Ergebnis <code>[900, 750, 700, 600, 400]</code>, Rückgabe 2.</li>
+            </ol>
+            <p><strong>Hochrechnung für die echte Bestenliste:</strong></p>
+            <ul>
+                <li>Neuer Rekord (Platz 1): alle 100&nbsp;000 Einträge rücken nach hinten. Das ist der schlechteste Fall.</li>
+                <li>Schlechteste Punktzahl: 0 Verschiebungen. Das ist der beste Fall.</li>
+                <li>Landet eine Punktzahl im Durchschnitt in der Mitte, sind es etwa 50&nbsp;000 Verschiebungen, also O(n).</li>
+                <li><strong>Falle:</strong> Das Team könnte die richtige Stelle mit binärer Suche in etwa log₂(100&nbsp;000) ≈ 17 Vergleichen finden. Das Verschieben bleibt aber O(n). Das Einfügen in ein Array wird durch schnelleres Suchen <strong>nicht</strong> schneller als O(n).</li>
+            </ul>
+            <p><strong>Kontrolle mit Testfällen:</strong></p>
+            <table class="gitter">
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>liste = []; print(einfuegen_sortiert(liste, 50), liste)</code> (leere Liste)</td><td><code>0 [50]</code></td></tr>
+                    <tr><td><code>[900, 750, 600, 400]</code>, Punkte 1000</td><td><code>4 [1000, 900, 750, 600, 400]</code> – schlechtester Fall, alle rücken</td></tr>
+                    <tr><td><code>[900, 750, 600, 400]</code>, Punkte 100</td><td><code>0 [900, 750, 600, 400, 100]</code> – bester Fall</td></tr>
+                    <tr><td><code>[900, 750, 600, 400]</code>, Punkte 750 (Gleichstand)</td><td><code>2 [900, 750, 750, 600, 400]</code> – die neue 750 steht hinter der alten, weil <code>750 &lt; 750</code> falsch ist</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Und wenn der Platz nicht reicht? →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Und wenn der Platz nicht reicht?</h2>
+
+<p>Hinter dem letzten Element ist nicht unbegrenzt Platz frei, denn dort kann schon etwas anderes im Speicher liegen. Python reserviert deshalb einige Plätze mehr, als die Liste gerade braucht. Man unterscheidet die <strong>Länge</strong> (belegte Plätze) und die <strong>Kapazität</strong> (reservierte Plätze). Ist die Kapazität erschöpft, sucht Python einen größeren freien Bereich, <strong>kopiert alle n Elemente</strong> dorthin und gibt den alten Bereich frei. Dieser „Umzug“ kostet O(n).</p>
+
+<p>Trotzdem gilt <code>append</code> als O(1), weil Umzüge selten sind. Im einfachsten Modell verdoppelt sich die Kapazität bei jedem Umzug. Startet man mit Kapazität 1 und hängt 16 Elemente an, wird beim 2., 3., 5. und 9. Anhängen umgezogen. Dabei werden 1 + 2 + 4 + 8 = 15 Elemente kopiert – weniger als ein Kopiervorgang pro Anhängen. Man sagt: <code>append</code> ist <strong>im Mittel</strong> (amortisiert) O(1).</p>
+
+<p class="tipp">Python vergrößert in Wirklichkeit nicht um den Faktor 2, sondern um etwa ein Achtel. An der Aussage „im Mittel O(1)“ ändert das nichts, solange die Kapazität um einen festen Faktor wächst.</p>
+
+<p>Im Video siehst du einen solchen Umzug als Bild. Achte darauf, was beim Umzug kopiert wird und warum das trotzdem selten ins Gewicht fällt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-0-1-4_kapazitaet_vorschau.png" src="../vid/3-0-1-4_kapazitaet.mp4"></video><a href="../vid/3-0-1-4_kapazitaet.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Und wenn der Platz nicht reicht? Länge, Kapazität und Umzug (ca. 1 min)</figcaption>
+        </figure>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Umzüge selbst durchklicken</summary>
+                <p>Öffne im Kursmenü links die Seite <strong>Zeiger-Werkstatt</strong>. Dort gibt es den Modus <strong>Felder</strong>. Wähle als Start „Länge 6, Kapazität 8“ und hänge Schritt für Schritt an: So kontrollierst du Kurz geprüft 4. Mit „leer, Kapazität 1“ und 16 Anfügungen siehst du die Rechnung aus diesem Schritt (4 Umzüge, 15 kopierte Elemente). Vorne einfügen und vorne löschen kannst du dort auch ausprobieren.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-0-1-3">Aufgabe 3.0.1.3</a> – Umzüge beim Anhängen selbst zählen.</p>
+
+<h2 id="idee">Die Idee für dieses Kapitel</h2>
+
+<p>Alle teuren Operationen haben dieselbe Ursache: <strong>Die Elemente müssen lückenlos nebeneinander liegen.</strong> Was wäre, wenn jedes Element irgendwo im Speicher liegen dürfte und sich nur merkt, <em>wo das nächste liegt</em>? Dann würde Einfügen bedeuten: zwei Verweise umhängen, niemand muss rutschen. Der Preis: Die Adresse des k-ten Elements lässt sich nicht mehr ausrechnen. Diese Idee heißt <strong>verkettete Liste</strong> (Seite 3.1). Aus ihr entstehen später Stapel, Schlange, Baum und Graph.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Eine <strong>Python-Liste</strong> ist ein <strong>dynamisches Array</strong>: Die Elemente liegen lückenlos in einem zusammenhängenden Speicherbereich.<br>
+                <strong>Zugriff</strong> über den Index: O(1), weil die Adresse berechnet wird.<br>
+                <strong>Einfügen/Löschen am Ende:</strong> O(1) im Mittel.<br>
+                <strong>Einfügen/Löschen an Position k:</strong> O(n), weil n − k Elemente verschoben werden müssen; am Anfang ist es am teuersten.<br>
+                Wird eine O(n)-Operation in einer Schleife n-mal ausgeführt, entsteht O(n²): 0 + 1 + 2 + … + (n − 1) = n(n − 1)/2 Verschiebungen.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Adresse ausrechnen <span class="niveau">AFB I</span></summary>
+                <p>Eine Python-Liste beginnt an der Adresse 2000. An welcher Adresse liegt <code>liste[6]</code>? Dauert das Lesen von <code>liste[600000]</code> in einer sehr langen Liste länger als das Lesen von <code>liste[6]</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>2000 + 6 · 8 = 2048. Nein: Auch für <code>liste[600000]</code> wird die Adresse mit einer einzigen Rechnung bestimmt (2000 + 600000 · 8). Der Zugriff über den Index kostet immer O(1).</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Wer rückt wohin? <span class="niveau">AFB I</span></summary>
+                <p>Gegeben ist <code>zahlen = [10, 20, 30, 40, 50, 60]</code>. Es wird <code>zahlen.insert(2, 25)</code> ausgeführt. Welche Elemente rücken, in welcher Reihenfolge, und wie viele Verschiebungen sind es?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Es rücken 60, 50, 40 und 30 je einen Platz nach hinten – von hinten beginnend, sonst würde ein Wert überschrieben. Das sind n − k = 6 − 2 = 4 Verschiebungen. Danach ist <code>zahlen = [10, 20, 25, 30, 40, 50, 60]</code>.</p>
+                </details>
+            </details>
+        </div>

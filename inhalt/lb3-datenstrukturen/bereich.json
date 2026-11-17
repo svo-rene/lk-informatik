@@ -1,0 +1,35 @@
+{
+  "nr": "LB 2/3",
+  "titel": "Datenstrukturen",
+  "text": "Verkettete Listen, Schlange und Stapel, Bäume, Graphen, kürzeste Wege und Backtracking.",
+  "kapitel": [
+    {
+      "titel": "Listen, Schlange und Stapel",
+      "themen": [
+        "3-0-1-einfuegen",
+        "3-0-2-git-im-kurs",
+        "3-1-linkedlists",
+        "3-2-queue",
+        "3-3-stack"
+      ]
+    },
+    {
+      "titel": "Bäume",
+      "themen": [
+        "3-4-baum",
+        "3-5-bin-baum",
+        "3-6-traversierung",
+        "3-6b-backtracking-baum"
+      ]
+    },
+    {
+      "titel": "Graphen",
+      "themen": [
+        "3-7-graph",
+        "3-8-graph-code",
+        "3-9-dijkstra",
+        "3-10-backtracking"
+      ]
+    }
+  ]
+}

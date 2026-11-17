@@ -1,0 +1,40 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.6.6: Fehler finden – wo sind die Nullen? <span class="niveau">AFB III</span>
+                </summary>
+                <p>Gewünscht ist eine Liste <em>aller</em> 15 Nutzerinnen und Nutzer mit der Anzahl ihrer Ausleihen im November 2024 –
+                   wer im November nichts ausgeliehen hat, soll mit 0 erscheinen. Jana schreibt:</p>
+                <pre><code>SELECT Nutzer.Vorname, Nutzer.Nachname, COUNT(*) AS Anzahl
+FROM Nutzer
+LEFT JOIN Ausleihen ON Nutzer.NutzerID = Ausleihen.NutzerID
+WHERE Ausleihen.Ausleihdatum LIKE '2024-11%'
+GROUP BY Nutzer.NutzerID;</code></pre>
+                <ol>
+                    <li>Gib an, wie viele Zeilen die Abfrage liefert und welche Werte in <code>Anzahl</code> stehen.</li>
+                    <li>Erkläre, warum trotz LEFT JOIN niemand mit 0 erscheint.</li>
+                    <li>Jana verschiebt die Datumsbedingung mit <code>AND</code> in die ON-Klausel, lässt aber <code>COUNT(*)</code> stehen.
+                        Was liefert die Abfrage jetzt? Korrigiere den verbliebenen Fehler.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.6.7: Ergebnis prüfen – der Test sah gut aus <span class="niveau">AFB III</span>
+                </summary>
+                <p>Ben soll alle Bücher mit dem Nachnamen ihres Autors ausgeben. Er schreibt:</p>
+                <pre><code>SELECT Buecher.Titel, Autoren.Nachname
+FROM Buecher
+INNER JOIN Autoren ON Buecher.BuchID = Autoren.AutorID;</code></pre>
+                <p>Er prüft die ersten Zeilen („Faust – von Goethe“, „Die Räuber – Schiller“, „Der Zauberberg – Mann“) und ist zufrieden.</p>
+                <ol>
+                    <li>Erkläre den Fehler in der ON-Klausel und gib an, wie viele Zeilen die Abfrage liefert.</li>
+                    <li>Erkläre, warum Bens Stichprobe den Fehler nicht aufgedeckt hat, und beurteile seine Art zu testen.</li>
+                    <li>Korrigiere die Abfrage und gib an, woran man an der Zeilenzahl erkennen kann, dass sie stimmt.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,33 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.5.2: Ein Schlüssel zweimal verwendet <span class="niveau">AFB III</span></summary>
+                <p>Ein Agent hat aus Bequemlichkeit denselben Schlüssel zweimal benutzt. Du fängst die Geheimtexte <code>XWPCH</code> und <code>QXIEW</code> ab und weißt, dass die erste Nachricht HALLO lautet.</p>
+                <ol type="a">
+                    <li>Bestimme den Schlüssel und die zweite Nachricht.</li>
+                    <li>Zeige allgemein: Die Differenz der beiden Geheimtexte (mod 26) hängt nicht vom Schlüssel ab.</li>
+                    <li>Erkläre, welche Bedingung des One-Time-Pads verletzt wurde und warum das auch ohne bekannten Klartext gefährlich ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.5.3: One-Time-Pad mit XOR <span class="niveau">AFB II</span></summary>
+                <ol type="a">
+                    <li>Verschlüssele die Nachricht „OK“ (ASCII 0x4F, 0x4B) mit dem Schlüssel 0x9C, 0x2E von Hand. Gib den Geheimtext binär und hexadezimal an und mache die Probe.</li>
+                    <li>Schreibe eine Python-Funktion <code>xor_bytes(daten, schluessel)</code>, die zwei <code>bytes</code>-Objekte byteweise mit XOR (<code>^</code>) verknüpft. Ist der Schlüssel kürzer als die Daten, soll ein <code>ValueError</code> ausgelöst werden.</li>
+                    <li>Weise die Funktion mit Testfällen nach (Eingabe, erwartete Ausgabe, tatsächliche Ausgabe):
+                        <ul>
+                            <li><code>xor_bytes(b"OK", bytes([0x9C, 0x2E]))</code> → <code>b"\xd3e"</code>, also die Bytes 0xD3, 0x65</li>
+                            <li>zweimaliges Anwenden mit demselben Schlüssel liefert wieder <code>b"OK"</code></li>
+                            <li><code>xor_bytes(b"OK", bytes([0x9C]))</code> → <code>ValueError</code></li>
+                        </ul>
+                    </li>
+                    <li>Begründe, warum der Schlüssel nicht mit dem Modul <code>random</code>, sondern z.&nbsp;B. mit <code>secrets.token_bytes(n)</code> erzeugt werden sollte.</li>
+                </ol>
+            </details>
+        </div>

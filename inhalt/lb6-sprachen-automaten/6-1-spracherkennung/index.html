@@ -1,0 +1,128 @@
+<p>
+            Sprachassistenten wie Alexa, Siri usw. reagieren auf unsere Befehle – aber nur, wenn diese formal korrekt und vollständig sind. In diesem Lernbereich analysieren wir, wie Sprache und Befehle von Computern verarbeitet werden können und warum es sinnvoll ist, Sprache formal zu beschreiben.
+            Die Beschäftigung mit diesem Thema bildet zugleich die Grundlage für ein tieferes Verständnis von Mensch-Maschine-Interaktion: Nur wer die Strukturen hinter Sprache und deren maschineller Verarbeitung kennt, kann intelligente Systeme richtig einschätzen, bedienen – und programmieren.
+        </p>
+
+<h2>Beobachtung und Analyse</h2>
+
+<p>
+            Digitale Sprachsysteme erwarten bestimmte <strong>Strukturen</strong> in der Eingabe. Sie funktionieren nur, wenn diese Regeln eingehalten werden.
+        </p>
+
+<p>Wir unterscheiden zwischen natürlichen und formalen Sprachen:</p>
+
+<p>
+            <strong>Natürliche Sprachen</strong> wie Deutsch oder Englisch sind flexibel, mehrdeutig, historisch gewachsen und kontextabhängig. Menschen können unvollständige oder fehlerhafte Sätze oft trotzdem verstehen – Maschinen jedoch nicht.
+        </p>
+
+<p>
+            <strong>Formale Sprachen</strong> hingegen sind künstliche Sprachen und bestehen aus genau definierten Regeln, welche die erlaubten Ausdrücke festlegen. Programmiersprachen wie Python oder Java sind solche formalen Sprachen.
+            Jede Anweisung muss exakt der Grammatik dieser Sprache entsprechen – sonst wird sie vom Compiler bzw. Interpreter abgelehnt.
+        </p>
+
+<p>
+            Grammatiken helfen dabei, gültige Strukturen zu definieren. Sie beschreiben, wie aus Symbolen und Regeln komplexe Ausdrücke gebildet werden können. Um zu prüfen, ob eine Eingabe zur Sprache gehört, werden sogenannte <strong>Automaten</strong> eingesetzt.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Damit Alexa auf <strong>„Alexa, spiele Musik“</strong> reagiert, muss</p>
+            <ul>
+                <li>ein <strong>Startsignal</strong> vorhanden sein („Alexa“),</li>
+                <li>ein <strong>zulässiger Befehl</strong> folgen („spiele Musik“),</li>
+                <li>der Satz <strong>vollständig</strong> sein (Pause am Ende).</li>
+            </ul>
+            <p><strong>Prüfen der Eingabe „Alexa, spiele Musik“:</strong></p>
+            <ol>
+                <li><strong>Startsignal suchen:</strong> Das erste Wort ist „Alexa“, also das Aktivierungswort. Ab jetzt wertet das Gerät die Eingabe aus. <em>Warum?</em> Ohne Startsignal würde jedes Gespräch im Raum als Befehl gelten.</li>
+                <li><strong>Befehl prüfen:</strong> „spiele Musik“ steht in der Liste der bekannten Befehle (Verb „spiele“ + Objekt „Musik“). <em>Warum?</em> Nur einem bekannten Befehl kann das Gerät eine Aktion zuordnen.</li>
+                <li><strong>Vollständigkeit prüfen:</strong> Nach „Musik“ folgt eine Pause, der Satz ist abgeschlossen. <em>Warum?</em> Erst dann ist sicher, dass nichts mehr folgt (z.&nbsp;B. „… von Queen“).</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Alle drei Bedingungen sind erfüllt, die Eingabe ist zulässig und wird ausgeführt.</p>
+            <p><strong>Kontrolle:</strong> „Spiele Musik“ (ohne „Alexa“) scheitert an Schritt 1, „Alexa, spiele“ scheitert an Schritt 2, weil das Objekt fehlt.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> „Alexa, stelle einen Timer auf 10 Minuten“ hat die Struktur</p>
+            <p><code>Aktivierungswort , Befehl Objekt „auf“ Zahl Einheit</code></p>
+            <p>Die <em>Zahl</em> muss aus Ziffern oder Zahlwörtern bestehen, die <em>Einheit</em> aus einer festen Liste (Sekunden, Minuten, Stunden). „Stelle einen Timer auf grün“ ist zwar ein deutscher Satz, passt aber nicht zu dieser Struktur und wird abgelehnt. Genau solche Strukturregeln beschreiben wir später mit Grammatiken.</p>
+            <p><strong>Prüfen Schritt für Schritt:</strong></p>
+            <ol>
+                <li><strong>Zerlegen:</strong> Die Eingabe wird in Bausteine geteilt: „Alexa“ | Pause | „stelle“ | „einen Timer“ | „auf“ | „10“ | „Minuten“. <em>Warum?</em> Jeder Platz der Struktur wird einzeln geprüft.</li>
+                <li><strong>Bausteine mit der Struktur vergleichen:</strong> „Alexa“ = Aktivierungswort ✓, „stelle“ = Befehl ✓, „einen Timer“ = Objekt ✓, „auf“ = festes Wort ✓, „10“ = Zahl ✓, „Minuten“ steht in der Einheitenliste ✓. <em>Warum?</em> Die Eingabe ist nur zulässig, wenn <em>jeder</em> Platz passend belegt ist.</li>
+                <li><strong>Die Falle erkennen:</strong> Bei „Alexa, stelle einen Timer auf grün“ sind die ersten vier Plätze korrekt, aber „grün“ ist keine Zahl und die Einheit fehlt. <em>Warum?</em> Die Struktur prüft nicht, ob ein Satz „gutes Deutsch“ ist, sondern ob die Plätze richtig belegt sind.</li>
+                <li><strong>Sonderfall unvollständige Eingabe:</strong> „Alexa, stelle einen Timer auf 10“ – es fehlt nur die Einheit. Statt zu raten (10 Sekunden? 10 Minuten?), fragt das System nach. <em>Warum?</em> Es kennt die Struktur und weiß deshalb genau, <em>welcher</em> Baustein fehlt.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> „Alexa, stelle einen Timer auf 10 Minuten“ ist zulässig; „… auf grün“ wird abgelehnt; „… auf 10“ führt zu einer Rückfrage.</p>
+            <p><strong>Kontrolle:</strong> „Alexa, stelle einen Timer auf zehn Stunden“ ist ebenfalls zulässig (Zahlwort, Einheit aus der Liste).</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Sprache und Maschinen im Alltag und im Beruf</summary>
+                <p><strong>Alltag:</strong> Sprachassistenten, Navigationsgeräte im Auto oder automatische Telefonansagen („Sagen Sie ‚Rechnung‘ oder ‚Vertrag‘“) funktionieren nur, weil die zulässigen Eingaben genau festgelegt sind. Auch jedes Webformular prüft, ob z.&nbsp;B. eine Postleitzahl aus genau fünf Ziffern besteht.</p>
+                <p><strong>Beruf:</strong> Computerlinguistinnen und Softwareentwickler in der Sprachtechnologie entwerfen Grammatiken und Dialogmodelle für Sprachassistenten, Chatbots und Callcenter-Systeme. Solche Stellen gibt es bei großen IT-Firmen, aber auch in Forschung und Softwareunternehmen in Sachsen, z.&nbsp;B. rund um die TU Dresden.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Vertiefung: Grammatik, maschinelles Lernen, Chancen und Risiken</summary>
+                <div class="aufgabe">
+                    <details>
+                        <summary>Aufgabe 6.1.2: Grammatik vs. maschinelles Lernen bei Sprachassistenten <span class="niveau">AFB II</span></summary>
+                        <p>Beschreibe, an welcher Stelle im Prozess maschinelles Lernen eingesetzt wird und warum man trotzdem eine Grammatik im Hintergrund benötigt.</p>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/2RRT1YuyBCo"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </details>
+                </div>
+                <div class="aufgabe">
+                    <details>
+                        <summary>Aufgabe 6.1.3: Chancen und Risiken <span class="niveau">AFB III</span></summary>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/0guvxFpy55w?si=bW9FaDRr1rY7tDBU"
+                            title="Chancen und Risiken von Sprachassistenten" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                        <p>Notiere stichpunktartig:</p>
+                        <ul>
+                            <li>Welche Vorteile ergeben sich für Nutzerinnen und Nutzer durch Sprachsteuerung?</li>
+                            <li>Welche Probleme oder Gefahren werden im Video genannt?</li>
+                            <li>Wie sicher sind persönliche Daten im Umgang mit Sprachassistenten?</li>
+                        </ul>
+                        <p>Formuliere abschließend deine eigene Einschätzung: Würdest du selbst regelmäßig Sprachassistenten nutzen? Warum (nicht)?</p>
+                    </details>
+                </div>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Merke:</strong><br>
+                <strong>Natürliche Sprachen</strong> haben sich natürlich entwickelt und sind oft mehrdeutig.<br>
+                <strong>Formale Sprachen</strong> sind künstlich geschaffen und eindeutig durch Regeln definiert.<br>
+                Maschinen brauchen eine exakte Beschreibung der zulässigen Eingaben – diese liefern formale Grammatiken. Ob eine Eingabe zulässig ist, prüfen Automaten.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.1.1: Wie reagiert Alexa? <span class="niveau">AFB I/II</span></summary>
+                <ul>
+                    <li>Analysiert in Gruppen: Was genau muss gesagt werden, damit Alexa korrekt reagiert?</li>
+                    <li>Gibt es Beispiele, bei denen sie <strong>nicht</strong> bzw. falsch reagiert hat? Woran könnte das liegen?</li>
+                    <li>Beschreibt die notwendigen Schritte, damit ein Sprachassistent Sprache überhaupt verarbeiten kann.</li>
+                </ul>
+            </details>
+        </div>

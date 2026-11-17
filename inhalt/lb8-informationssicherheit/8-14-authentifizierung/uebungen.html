@@ -1,0 +1,42 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.14.3: Passwort oder Passkey? <span class="niveau">AFB III</span></summary>
+                <p>Die Schule will die Anmeldung am Schulportal umstellen. Zur Wahl stehen „Passwort + SMS-Code“ und „Passkey“. Vergleiche beide Verfahren im Hinblick auf Phishing, Datenlecks beim Anbieter und Benutzerfreundlichkeit und gib eine begründete Empfehlung.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.14.4: Das TOTP-Zeitfenster <span class="niveau">AFB II</span></summary>
+                <p>Bei TOTP berechnen App und Server den Code aus dem gemeinsamen Geheimnis und der Zeitschrittnummer T = ⌊Unixzeit / 30⌋ (Unixzeit = Sekunden seit dem 1.1.1970).</p>
+                <ol type="a">
+                    <li>Berechne T für die Unixzeit 1&nbsp;760&nbsp;000&nbsp;000 und gib an, wie viele Sekunden der Code dann noch gültig ist.</li>
+                    <li>Weil Uhren leicht abweichen, akzeptiert der Server auch die Codes des vorherigen und des nächsten Zeitschritts. Gib an, wie lange ein Code dann höchstens verwendbar ist.</li>
+                    <li>Ein Angreifer kennt das Passwort und rät sechsstellige Codes. Der Server erlaubt 3 Versuche pro Zeitschritt. Berechne die Trefferwahrscheinlichkeit für einen Zeitschritt und für einen ganzen Tag, wenn der Server nicht sperrt. Welche Gegenmaßnahme ist nötig?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.14.5: Challenge-Response programmieren <span class="niveau">AFB II</span></summary>
+                <p>Programmiere das Verfahren aus Beispiel 2 in Python.</p>
+                <ol type="a">
+                    <li>Schreibe <code>antwort(challenge, privat)</code> für das Gerät und eine Funktion <code>server_pruefe(challenge, antwort, oeffentlich, benutzt)</code>. Die Liste <code>benutzt</code> enthält alle bereits verwendeten Challenges; eine Challenge darf nur einmal akzeptiert werden.</li>
+                    <li>Schreibe <code>neue_challenge(n)</code>, die mit dem Modul <code>secrets</code> eine Zahl von 2 bis n − 2 wählt.</li>
+                    <li>Weise dein Programm mit diesen Testfällen nach (erwartete und tatsächliche Ausgabe), mit öffentlichem Schlüssel (3, 85) und privatem Schlüssel (43, 85):
+                        <ul>
+                            <li><code>antwort(7, (43, 85))</code> → <code>48</code></li>
+                            <li><code>server_pruefe(7, 48, (3, 85), [])</code> → <code>True</code></li>
+                            <li><code>server_pruefe(7, 48, (3, 85), [7])</code> → <code>False</code> (Replay)</li>
+                            <li><code>server_pruefe(10, 48, (3, 85), [7])</code> → <code>False</code></li>
+                        </ul>
+                    </li>
+                    <li>Erläutere, warum die Challenge zufällig und nicht z.&nbsp;B. fortlaufend (1, 2, 3, …) gewählt werden sollte.</li>
+                </ol>
+            </details>
+        </div>

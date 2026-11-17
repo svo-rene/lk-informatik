@@ -1,0 +1,26 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-3-8-5">
+            <details>
+                <summary>Aufgabe 3.8.5: Fehler finden – Stapel statt Schlange <span class="niveau">AFB III</span></summary>
+                <p>Tom nimmt in <code>bfs</code> statt der <code>Queue</code> eine einfache Liste (wie im Vergleich oben), vertippt sich aber:</p>
+                <pre><code class="language-python">        queue = [start]
+        ...
+        while len(queue) &gt; 0:
+            current = queue.pop()          # gemeint war queue.pop(0)</code></pre>
+                <ol>
+                    <li>Gib die Ausgabe von <code>g.bfs(0)</code> für den Beispielgraphen an und vergleiche sie mit der richtigen Reihenfolge [0, 1, 2, 4].</li>
+                    <li>Erkläre, welche Datenstruktur Tom jetzt tatsächlich verwendet und wie sich dadurch die Besuchsreihenfolge ändert.</li>
+                    <li>Tom baut denselben Fehler in <code>kuerzester_weg</code> ein. Im Beispielgraphen fällt nichts auf. Gib einen Graphen mit fünf Knoten an, bei dem seine Fassung nicht den Weg mit den wenigsten Kanten liefert, und begründe mit dem Ablauf.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="loesungswege">Lösungswege: So gehst du an eine Aufgabe heran</h2>
+
+<p>Jedes Video löst eine eigene Beispielaufgabe in fünf Schritten: <strong>1 Aufgabe</strong> genau lesen → <strong>2 Ansatz</strong> (welche Datenstruktur, welches Verfahren?) → <strong>3 Modell</strong> (welche Klassen, Methoden und Hilfsdaten?) → <strong>4 Lösungsweg</strong> (iterativ, rekursiv, Backtracking?) → <strong>5 Umsetzen und testen</strong>. Geh bei deinen eigenen Aufgaben genauso vor.</p>
+
+<figure style="max-width:800px">
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-8-lw1_etappen_vorschau.png" src="../vid/3-8-lw1_etappen.mp4"></video><a href="../vid/3-8-lw1_etappen.mp4">Video ansehen</a></div>
+            <figcaption>Lösungsweg: Graph – Hütten in höchstens k Etappen (Breitensuche, ca. 2 min)</figcaption>
+        </figure>

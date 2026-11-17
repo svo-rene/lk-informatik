@@ -1,0 +1,70 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.13.3: <span class="niveau">AFB III</span></summary>
+<p>Begründe, warum die Sprache L = {a<sup>n</sup>b<sup>n</sup>c<sup>n</sup> | n ≥ 1} nicht kontextfrei ist und somit nicht von einem PDA erkannt werden kann. Nutze das Pumping-Lemma für kontextfreie Sprachen (Hinweis oben).</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.13.4: Pumping-Lemma anwenden <span class="niveau">AFB III</span></summary>
+<p>Zeige mit dem Pumping-Lemma für reguläre Sprachen, dass die Sprache K aller korrekt geklammerten Ausdrücke über {(, )} nicht regulär ist.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.13.5: Grenzen des Lemmas <span class="niveau">AFB III</span></summary>
+<p>Ein Mitschüler sagt: „Ich habe für meine Sprache L gezeigt, dass sich jedes lange Wort aufpumpen lässt. Also ist L regulär.“ Nimm Stellung.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.13.6: <span class="niveau">AFB I</span></summary>
+<p>Welche Art von Automat bräuchtest du, um zu prüfen, ob in einem Programmcode alle Klammern korrekt geschlossen sind?</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.13.7: <span class="niveau">AFB I/II</span></summary>
+<p>Ordne die folgenden Sprachen den passenden Automatentypen zu:<br>a) (ab)*<br>b) a<sup>n</sup>b<sup>n</sup><br>c) a<sup>n</sup>b<sup>n</sup>c<sup>n</sup></p>
+</details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.13.8: Eine Turingmaschine hakt ab <span class="niveau">AFB II</span></summary>
+<p>Die folgende Turingmaschine arbeitet auf Wörtern über {a, b} mit dem Bandalphabet {a, b, X, Y, □}. Startzustand q0, akzeptierender Zustand q<sub>a</sub>. Gibt es für Zustand und gelesenes Zeichen keinen Eintrag, hält die Maschine und verwirft.</p>
+<table>
+<thead><tr><th>δ</th><th>a</th><th>b</th><th>X</th><th>Y</th><th>□</th></tr></thead>
+<tbody>
+<tr><td>q0</td><td>(q1, X, R)</td><td>–</td><td>–</td><td>(q3, Y, R)</td><td>–</td></tr>
+<tr><td>q1</td><td>(q1, a, R)</td><td>(q2, Y, L)</td><td>–</td><td>(q1, Y, R)</td><td>–</td></tr>
+<tr><td>q2</td><td>(q2, a, L)</td><td>–</td><td>(q0, X, R)</td><td>(q2, Y, L)</td><td>–</td></tr>
+<tr><td>q3</td><td>–</td><td>–</td><td>–</td><td>(q3, Y, R)</td><td>(q<sub>a</sub>, □, L)</td></tr>
+</tbody>
+</table>
+<ol type="a">
+<li>Gib die vollständige Konfigurationsfolge für <code>aabb</code> an.</li>
+<li>Simuliere <code>aab</code> und <code>abb</code> und gib an, wo und warum die Maschine anhält.</li>
+<li>Beschreibe die Arbeitsweise der Maschine in eigenen Worten und gib die akzeptierte Sprache an.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.13.9: Eine Turingmaschine zählt rückwärts <span class="niveau">AFB II/III</span></summary>
+<ol type="a">
+<li>Entwirf nach dem Vorbild von Beispiel 3 eine Turingmaschine, die eine Binärzahl n ≥ 1 um 1 verringert. Gib die Übergangstabelle an.</li>
+<li>Simuliere deine Maschine für 1010 und gib das Ergebnis an.</li>
+<li>Untersuche, was deine Maschine bei der Eingabe 0 tut, und beurteile, wie man mit diesem Fall umgehen sollte.</li>
+</ol>
+</details>
+</div>

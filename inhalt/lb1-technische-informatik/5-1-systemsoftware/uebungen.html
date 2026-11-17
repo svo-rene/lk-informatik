@@ -1,0 +1,81 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 5.1.3: Wer ist zuständig? <span class="niveau">AFB II</span>
+                </summary>
+                <p>Ordne jede Situation der Aufgabe des Betriebssystems zu, die dabei die Hauptrolle spielt (Prozess-, Speicher-, Datei- oder Geräteverwaltung, Rechte und Sicherheit, Schnittstellen). Begründe in je einem Satz. Bei manchen Situationen sind mehrere Aufgaben beteiligt, entscheide dich für die wichtigste.</p>
+                <ol type="a">
+                    <li>Ein Spiel stürzt ab. Der Browser daneben läuft weiter, als wäre nichts passiert.</li>
+                    <li>Du steckst eine neue Maus an, sie funktioniert sofort. Der neue Drucker will dagegen erst eine Installation.</li>
+                    <li>Eine Wetter-App fragt beim ersten Start, ob sie deinen Standort verwenden darf.</li>
+                    <li>Du hast ein Foto gelöscht und den Papierkorb geleert. Ein Datenrettungsprogramm findet es trotzdem wieder.</li>
+                    <li>Der Laptop wird beim Videoschnitt sehr langsam, die Anzeige zeigt 98 % Arbeitsspeicherbelegung, die SSD-Lampe blinkt dauernd.</li>
+                    <li>Nach einem Grafiktreiber-Update startet der Rechner nur noch mit Bluescreen.</li>
+                    <li>Dein Python-Programm ruft <code>open("daten.txt")</code> auf und bekommt den Inhalt der Datei, obwohl Python nicht weiß, in welchen Blöcken der SSD sie liegt.</li>
+                    <li>Auf dem Schulrechner kannst du keine Programme installieren, die Lehrkraft aber schon.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 5.1.4: Das passende System empfehlen <span class="niveau">AFB III</span>
+                </summary>
+                <p>Du berätst fünf Personen bei der Wahl ihres Betriebssystems. Vergleiche dafür zunächst Windows, macOS und Linux anhand der Kriterien <em>Preismodell, Verfügbarkeit (auf welcher Hardware), Anpassbarkeit, Benutzerfreundlichkeit, Sicherheit und Updates, typische Software</em> in einer Tabelle. Sprich dann für jede Situation eine begründete Empfehlung aus. Es gibt nicht immer nur eine richtige Antwort, aber eine gute Begründung.</p>
+                <ol type="a">
+                    <li>Deine Großmutter hat einen sieben Jahre alten PC mit Windows 10. Sie schreibt E-Mails, macht Videoanrufe und will nichts Neues kaufen.</li>
+                    <li>Die Schule soll 30 neue Laptops für den Informatikunterricht bekommen, mit kleinem Budget und einer Lehrkraft, die die Geräte nebenbei verwaltet.</li>
+                    <li>Eine Streamerin spielt aktuelle Spiele und schneidet Videos.</li>
+                    <li>Eine Schülerfirma braucht einen Server, auf dem ihre Webseite und eine Datenbank laufen, ohne laufende Kosten.</li>
+                    <li>Ein Fotograf arbeitet mit Kollegen zusammen, die alle Apple-Geräte nutzen, und will Dateien und Fotos ohne Umwege austauschen.</li>
+                </ol>
+                <p>Zum Schluss: Bei welcher der fünf Situationen war die Entscheidung am schwersten, und warum?</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 5.1.5: Debatte: Soll unsere Schule komplett auf Open Source umsteigen? <span class="niveau">AFB III</span>
+                </summary>
+                <p>Die Schulkonferenz diskutiert den Antrag, alle Schulrechner von Windows und Microsoft Office auf Linux und LibreOffice umzustellen. Bildet zwei Gruppen.</p>
+                <ol>
+                    <li><strong>Vorbereitung (beide Gruppen):</strong> Sammelt mindestens drei Vorteile und drei Nachteile von Open-Source-Software. Erklärt zu jedem Punkt, für wen er relevant ist: für Nutzerinnen und Nutzer, für Entwickler, für die Schule als Organisation.</li>
+                    <li><strong>Gruppe Pro</strong> vertritt den Antrag, <strong>Gruppe Contra</strong> lehnt ihn ab. Nutzt die Beispiele von dieser Seite (Heartbleed, xz, Schleswig-Holstein, München, Windows-10-Supportende) als Belege.</li>
+                    <li>Führt die Debatte: je zwei Minuten Eröffnung, dann freier Austausch, dann je ein Schlusswort.</li>
+                    <li>Schreibt anschließend einzeln eine begründete Stellungnahme von etwa zehn Sätzen, wie ihr selbst in der Schulkonferenz abstimmen würdet. Ihr dürft dabei zu einem anderen Ergebnis kommen als eure Gruppe.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 5.1.6: Warum ruckelt das Spiel? <span class="niveau">AFB II</span></summary>
+                <p>Mia spielt auf einem alten Laptop mit nur einem Kern. Gleichzeitig laufen ein Virenscan, ein Update-Download und der Browser mit einem Video. <em>Annahmen:</em> Alle vier Prozesse wollen ständig rechnen, das Betriebssystem teilt die Rechenzeit gleichmäßig in Zeitscheiben auf. Das Spiel braucht für jedes Bild 8&nbsp;ms Rechenzeit. Für flüssiges Spielen sind 60 Bilder pro Sekunde nötig.</p>
+                <ol>
+                    <li>Wie viele Millisekunden Rechenzeit pro Sekunde bekommt das Spiel, und wie viele Bilder pro Sekunde schafft es damit höchstens?</li>
+                    <li>Welchen Anteil der Rechenzeit müsste das Spiel mindestens bekommen, damit 60 Bilder pro Sekunde möglich sind?</li>
+                    <li>Mias neuer Laptop hat vier Kerne, jeder Prozess bekommt einen eigenen Kern. Wie viele Bilder pro Sekunde wären jetzt möglich?</li>
+                    <li>Viele Betriebssysteme haben einen „Spielmodus“, der Hintergrundprozesse wie Updates und Virenscans pausiert. Beschreibe mit deinen Zahlen, welche Aufgabe des Betriebssystems hier eingreift und welchen Preis das hat.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 5.1.7: Arbeitsspeicher voll – was nun? <span class="niveau">AFB II</span></summary>
+                <p>Ein Laptop hat 8&nbsp;GB Arbeitsspeicher. Gleichzeitig belegen (<em>Annahmen</em>): Betriebssystem und Dienste 2,5&nbsp;GB, Browser mit 20 Tabs 3&nbsp;GB, Videoschnittprogramm 4&nbsp;GB. Ein Zugriff auf den Arbeitsspeicher dauert 100&nbsp;ns, ein Zugriff auf die SSD 100&nbsp;µs (vgl. Speichertreppe in 4.1).</p>
+                <ol>
+                    <li>Wie viel muss das Betriebssystem mindestens auf die SSD auslagern?</li>
+                    <li>Angenommen, 1&nbsp;% aller Speicherzugriffe treffen auf ausgelagerte Daten. Berechne die mittlere Zugriffszeit und vergleiche mit 100&nbsp;ns.</li>
+                    <li>Wiederhole die Rechnung für 0,1&nbsp;%. Was folgt daraus für die Nutzerin, wenn sie selten genutzte Browser-Tabs offen lässt, aber gerade nur im Videoschnitt arbeitet?</li>
+                    <li>Beurteile drei Lösungen: (a) Browser-Tabs schließen, (b) Arbeitsspeicher auf 16&nbsp;GB aufrüsten, (c) neuen Laptop kaufen, weil „der Prozessor zu langsam ist“.</li>
+                </ol>
+                <p class="tipp">Mittlere Zugriffszeit = Anteil RAM · Zeit RAM + Anteil SSD · Zeit SSD. Rechne beide Zeiten vorher in ns um.</p>
+            </details>
+        </div>

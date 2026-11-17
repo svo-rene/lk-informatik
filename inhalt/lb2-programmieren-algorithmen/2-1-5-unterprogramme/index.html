@@ -1,0 +1,193 @@
+<h2>Was ist ein Unterprogramm?</h2>
+
+<p>Unterprogramme helfen dabei, …</p>
+
+<ul>
+            <li>… den Quellcode übersichtlicher zu gestalten,</li>
+            <li>… weniger Quellcode zu schreiben,</li>
+            <li>… denselben Code an verschiedenen Stellen im Programm wiederzuverwenden,</li>
+            <li>… das Programm leichter zu verändern,</li>
+            <li>… weniger Fehler zu erzeugen.</li>
+        </ul>
+
+<h2>Warum Unterprogramme verwenden?</h2>
+
+<p>
+            <strong>DRY</strong> steht für „Don't Repeat Yourself“. Nach diesem Prinzip vermeidet man in der Programmierung Redundanzen. Wenig redundanter Quellcode enthält weniger potenzielle Fehler und lässt sich auch im Nachhinein einfacher anpassen und aktuell halten.
+        </p>
+
+<h2>Erstellen von Funktionen</h2>
+
+<p>Sie werden in Python mit dem Schlüsselwort <code>def</code> definiert und enthalten eine <code>return</code>-Anweisung, die den Wert zurückgibt.</p>
+
+<pre><code class="language-python">def quadrat(x):
+    return x * x
+
+ergebnis = quadrat(4)   # der Rückgabewert 16 kann weiterverwendet werden</code></pre>
+
+<h2>Erstellen von Prozeduren</h2>
+
+<p>Sie werden ebenfalls mit <code>def</code> definiert, enthalten jedoch keine <code>return</code>-Anweisung mit Wert. Streng genommen gibt jede Python-Funktion ohne <code>return</code> automatisch den Wert <code>None</code> zurück.</p>
+
+<pre><code class="language-python">def gruesse(name):
+    print("Hallo,", name)
+
+gruesse("Lina")        # Ausgabe: Hallo, Lina
+x = gruesse("Tom")     # Ausgabe: Hallo, Tom – x hat den Wert None</code></pre>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Für einen Austausch mit einer Partnerschule in den USA soll eine Temperaturtabelle von Grad Celsius in Grad Fahrenheit entstehen. Die Umrechnung lautet F = C · 9 / 5 + 32.</p>
+            <pre><code class="language-python">def celsius_in_fahrenheit(c):          # Funktion: liefert einen Wert
+    return c * 9 / 5 + 32
+
+def drucke_tabelle(von, bis, schritt): # Prozedur: bewirkt eine Ausgabe
+    for c in range(von, bis + 1, schritt):
+        print(c, "°C =", celsius_in_fahrenheit(c), "°F")
+
+drucke_tabelle(-20, 40, 20)</code></pre>
+            <ol>
+                <li><strong>Aufruf der Prozedur:</strong> Die Argumente −20, 40 und 20 werden an die Parameter <code>von</code>, <code>bis</code> und <code>schritt</code> übergeben. <em>Warum:</em> Die Zuordnung erfolgt nach der Reihenfolge.</li>
+                <li><strong>Schleife:</strong> <code>range(-20, 41, 20)</code> liefert −20, 0, 20, 40. <em>Warum <code>bis + 1</code>:</em> <code>range</code> schließt die Obergrenze aus.</li>
+                <li><strong>Aufruf der Funktion:</strong> Für c = −20 rechnet <code>celsius_in_fahrenheit</code> −20 · 9 / 5 + 32 = −36.0 + 32 = −4.0 und gibt den Wert mit <code>return</code> zurück. Die Prozedur setzt ihn in die Ausgabe ein.</li>
+                <li><strong>Rückkehr:</strong> Nach dem <code>return</code> geht es an der Aufrufstelle weiter, also in der <code>print</code>-Zeile der Prozedur.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong></p>
+            <pre><code>-20 °C = -4.0 °F
+0 °C = 32.0 °F
+20 °C = 68.0 °F
+40 °C = 104.0 °F</code></pre>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>celsius_in_fahrenheit(100)</code></td><td><code>212.0</code></td><td>Siedepunkt von Wasser</td></tr>
+                    <tr><td><code>celsius_in_fahrenheit(0)</code></td><td><code>32.0</code></td><td>Randfall: Gefrierpunkt</td></tr>
+                    <tr><td><code>celsius_in_fahrenheit(-40)</code></td><td><code>-40.0</code></td><td>negative Zahl; Probe: einziger Wert, bei dem beide Skalen gleich sind</td></tr>
+                    <tr><td><code>celsius_in_fahrenheit("20")</code></td><td><code>TypeError</code></td><td>falscher Typ: <code>"20" * 9</code> ergibt einen langen Text, und den kann man nicht durch 5 teilen</td></tr>
+                    <tr><td><code>x = drucke_tabelle(0, 0, 1)</code></td><td>Ausgabe <code>0 °C = 32.0 °F</code>, <code>x</code> ist <code>None</code></td><td>Prozedur liefert keinen Wert</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Funktionen rufen andere Funktionen auf. Gesucht sind alle Primzahlen bis zu einer Grenze.</p>
+            <pre><code class="language-python">def ist_teiler(t, n):
+    return n % t == 0
+
+def ist_primzahl(n):
+    if n &lt; 2:
+        return False
+    for t in range(2, n):
+        if ist_teiler(t, n):
+            return False
+    return True
+
+def primzahlen_bis(grenze):
+    treffer = []
+    for n in range(2, grenze + 1):
+        if ist_primzahl(n):
+            treffer.append(n)
+    return treffer
+
+print(primzahlen_bis(20))   # [2, 3, 5, 7, 11, 13, 17, 19]</code></pre>
+            <ol>
+                <li><strong>Zerlegen in Teilaufgaben:</strong> „Ist t ein Teiler von n?“, „Ist n eine Primzahl?“ und „Sammle alle Primzahlen bis zur Grenze“. <em>Warum:</em> Jede Funktion hat genau eine Aufgabe und lässt sich einzeln testen.</li>
+                <li><strong>Aufrufhierarchie verfolgen</strong> für <code>ist_primzahl(9)</code>: t = 2 → <code>ist_teiler(2, 9)</code> liefert <code>False</code> (9 % 2 = 1). t = 3 → <code>ist_teiler(3, 9)</code> liefert <code>True</code>, also gibt <code>ist_primzahl</code> sofort <code>False</code> zurück. <em>Warum sofort:</em> <code>return</code> beendet die Funktion, auch mitten in der Schleife.</li>
+                <li><strong>Sonderfälle zuerst:</strong> Zahlen kleiner als 2 sind keine Primzahlen. Deshalb prüft die erste Zeile <code>n &lt; 2</code>. Ohne diese Prüfung wäre 1 eine „Primzahl“, weil <code>range(2, 1)</code> leer ist und direkt <code>return True</code> folgt.</li>
+                <li><strong>Zusammensetzen:</strong> <code>primzahlen_bis</code> ruft <code>ist_primzahl</code> für jede Zahl von 2 bis zur Grenze auf und sammelt die Treffer in einer Liste.</li>
+                <li><strong>Vorteil der Zerlegung:</strong> Soll die Primzahlprüfung schneller werden (es genügt, Teiler bis √n zu testen), ändert man nur <code>ist_primzahl</code>. Die anderen Funktionen bleiben unverändert (DRY).</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>[2, 3, 5, 7, 11, 13, 17, 19]</code>.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>primzahlen_bis(20)</code></td><td><code>[2, 3, 5, 7, 11, 13, 17, 19]</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>primzahlen_bis(2)</code></td><td><code>[2]</code></td><td>Randfall: kleinste Primzahl</td></tr>
+                    <tr><td><code>primzahlen_bis(1)</code></td><td><code>[]</code></td><td>Randfall: leere Liste</td></tr>
+                    <tr><td><code>ist_primzahl(1)</code></td><td><code>False</code></td><td>Sonderfall n &lt; 2</td></tr>
+                    <tr><td><code>ist_primzahl(-7)</code></td><td><code>False</code></td><td>negative Zahl</td></tr>
+                    <tr><td><code>ist_primzahl("7")</code></td><td><code>TypeError</code></td><td>falscher Typ: Text und Zahl lassen sich nicht mit <code>&lt;</code> vergleichen</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<h2>Funktionen aus Modulen importieren</h2>
+
+<p>Einige grundlegende Funktionen wie <code>print</code> oder <code>len</code> sind als eingebaute Funktionen (built-ins) immer verfügbar. Viele weitere Funktionen stehen in <strong>Modulen</strong>: entweder in Modulen der mitgelieferten Standardbibliothek wie <code>random</code> oder <code>math</code> oder in zusätzlich installierten Paketen wie <code>matplotlib</code>. Mit der folgenden Syntax importierst du ein Modul, um auf die enthaltenen Funktionen zugreifen zu können:</p>
+
+<pre><code class="language-python"># Zugriff auf alle enthaltenen Funktionen über den Modulnamen
+import math
+print(math.sqrt(16))      # Aufruf über die Punktnotation
+
+# alle Funktionen direkt importieren (unübersichtlich, besser vermeiden)
+from math import *
+print(sqrt(16))
+
+# Es können auch nur einzelne Funktionen eines Moduls importiert werden:
+from random import randint
+print(randint(1, 6))</code></pre>
+
+<p>Neben den Modulen der Standardbibliothek kannst du auch eigene Funktionen in Modulen speichern und importieren. Module sind eine flexible Möglichkeit, Code zu organisieren und zu strukturieren. Das erleichtert die Entwicklung und verbessert die Qualität des Codes.</p>
+
+<pre><code class="language-python"># Datei mein_modul.py
+def sag_hallo(name):
+    print("Hallo, " + name + "!")</code></pre>
+
+<pre><code class="language-python"># Datei hauptprogramm.py im selben Ordner
+import mein_modul
+
+mein_modul.sag_hallo("Python")</code></pre>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Bibliotheken statt Rad neu erfinden</summary>
+                <p>
+                    <strong>Alltag:</strong> Jede App, die dir das Wetter anzeigt, ruft Funktionen auf wie „hole Wetterdaten für Dresden“ – geschrieben hat sie meist jemand anderes und in einer Bibliothek bereitgestellt.<br><br>
+                    <strong>Beruf:</strong> In Softwarefirmen arbeiten Teams arbeitsteilig an Modulen: Ein Team entwickelt z.&nbsp;B. das Modul für die Zahlungsabwicklung, ein anderes nutzt nur dessen Funktionen. Gute Funktionsnamen, klare Parameter und eine Dokumentation (Docstring) sind deshalb im Berufsalltag genauso wichtig wie korrekter Code.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Ein <strong>Unterprogramm</strong> ist ein benannter, wiederverwendbarer Codeblock, der eine bestimmte Teilaufgabe erfüllt und über seinen Namen aufgerufen wird. Man unterscheidet <strong>Funktionen</strong> (liefern mit <code>return</code> einen Wert zurück) und <strong>Prozeduren</strong> (bewirken etwas, z.&nbsp;B. eine Ausgabe, ohne einen Wert zurückzugeben).
+            </p>
+        </div>
+
+<div class="merke">
+            <p>Funktionen sind Unterprogramme, die einen Wert zurückgeben.</p>
+        </div>
+
+<div class="merke">
+            <p>Prozeduren sind Unterprogramme, die keinen Wert zurückgeben.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.5.1: Funktionen und Prozeduren schreiben <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Erstelle eine Funktion <code>addiere(a, b)</code>, die zwei Zahlen addiert und das Ergebnis zurückgibt. Rufe die Funktion auf und gib das Ergebnis aus.</li>
+                    <li>Erstelle eine Prozedur <code>drucke_zufallszahl()</code>, die eine zufällige Zahl zwischen 1 und 100 erzeugt und ausgibt. (Hinweis: Du brauchst dafür das Modul <code>random</code> und daraus die Funktion <code>randint</code>.)</li>
+                    <li>Erstelle eine Funktion <code>zufallsliste()</code>, die eine Liste mit 100 zufälligen Zahlen zwischen 1 und 6 erstellt und zurückgibt.</li>
+                    <li>Erstelle eine Funktion <code>gerade(zahl)</code>, die überprüft, ob eine übergebene Zahl gerade ist, und <code>True</code> oder <code>False</code> zurückgibt.</li>
+                    <li>Erstelle eine Funktion <code>palindrom(text)</code>, die prüft, ob ein Text ein Palindrom ist, und das Ergebnis zurückgibt.</li>
+                    <li>Erstelle eine Funktion <code>pasch()</code>, die zwei Würfelzahlen zufällig erzeugt und prüft, ob es sich um einen Pasch handelt. Zurückgegeben wird, ob ein Pasch gewürfelt wurde (<code>True</code>) oder nicht (<code>False</code>).</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.5.2: Eigenes Modul <span class="niveau">AFB II</span></summary>
+                <p>Erstelle eine Funktion <code>sag_hallo(name)</code> und speichere das Programm als <code>mein_modul.py</code>. Erstelle eine zweite Datei im selben Ordner und importiere daraus die Funktion <code>sag_hallo()</code>. Erweitere das Modul um eine zweite Funktion und nutze sie ebenfalls.</p>
+            </details>
+        </div>

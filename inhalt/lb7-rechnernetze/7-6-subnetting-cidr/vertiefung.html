@@ -1,0 +1,26 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.6.6: Fehler finden – Masken und Gateways im Büro <span class="niveau">AFB III</span></summary>
+                <p>Ein kleiner Großhandel nutzt zwei Subnetze: das Büro 192.168.50.0/26 und das Lager 192.168.50.64/26. Der Router hat die Adressen 192.168.50.1 (Büro) und 192.168.50.65 (Lager). Die Geräte wurden von Hand konfiguriert:</p>
+                <table>
+                    <thead>
+                        <tr><th>Gerät</th><th>steht im</th><th>IP-Adresse</th><th>Subnetzmaske</th><th>Gateway</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>PC-1</td><td>Büro</td><td>192.168.50.20</td><td>255.255.255.192</td><td>192.168.50.1</td></tr>
+                        <tr><td>PC-2</td><td>Büro</td><td>192.168.50.70</td><td>255.255.255.192</td><td>192.168.50.1</td></tr>
+                        <tr><td>Drucker</td><td>Büro</td><td>192.168.50.30</td><td>255.255.255.0</td><td>192.168.50.1</td></tr>
+                        <tr><td>Laptop</td><td>Büro</td><td>192.168.50.63</td><td>255.255.255.192</td><td>192.168.50.1</td></tr>
+                        <tr><td>PC-3</td><td>Lager</td><td>192.168.50.90</td><td>255.255.255.192</td><td>192.168.50.1</td></tr>
+                        <tr><td>Scanner</td><td>Lager</td><td>192.168.50.100</td><td>255.255.255.224</td><td>192.168.50.65</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Prüfe jede Zeile mit der AND-Verknüpfung. Nenne bei jedem fehlerhaften Gerät den Fehler und korrigiere ihn.</li>
+                    <li>Beschreibe für den Drucker und den Scanner genau, welche Verbindungen trotz des Fehlers funktionieren und welche nicht. Begründe mit dem Ablauf „direkt zustellen oder an das Gateway?“.</li>
+                    <li>Die Chefin fragt, warum ein Fehler in der Maske „manchmal nichts ausmacht“. Beurteile diese Aussage.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,27 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.3.9: Fehler finden im Vigenère-Programm <span class="niveau">AFB III</span></summary>
+                <p>Mia hat die Vigenère-Verschlüsselung für Großbuchstaben programmiert:</p>
+                <pre><code class="language-python">def vigenere(text, schluessel):
+    ergebnis = ""
+    for i in range(len(text)):
+        z = text[i]
+        if z.isalpha():
+            k = ord(schluessel[i % len(schluessel)]) - ord("A")
+            ergebnis += chr(ord(z) - ord("A") + k + ord("A"))
+        else:
+            ergebnis += z
+    return ergebnis
+
+print(vigenere("HALLO WELT", "KEY"))</code></pre>
+                <p>Erwartet hat sie (wie im Vigenère-Beispiel von 8.2, Leerzeichen verbrauchen keinen Schlüsselbuchstaben) <code>REJVS UOPR</code>. Ausgegeben wird aber <code>REdVS aId^</code>.</p>
+                <ol type="a">
+                    <li>Das Programm enthält zwei Fehler. Finde sie und erkläre für jeden, an welcher Stelle der Ausgabe er sich zeigt.</li>
+                    <li>Berichtige das Programm.</li>
+                    <li>Weise die Korrektheit mit diesen Testfällen nach (Eingabe, erwartete Ausgabe, tatsächliche Ausgabe): <code>("HALLO WELT", "KEY")</code> → <code>REJVS UOPR</code>; <code>("XYZ", "B")</code> → <code>YZA</code>; <code>("INFORMATIK", "LK")</code> → <code>TXQYCWLDTU</code>.</li>
+                </ol>
+                <p class="tipp">Rechne die ersten Zeichen von Hand nach: An welcher Position steht das Leerzeichen, und welcher Schlüsselbuchstabe wird danach verwendet?</p>
+            </details>
+        </div>

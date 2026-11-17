@@ -1,0 +1,54 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.2.5: Fehler finden – Schaltjahr <span class="niveau">AFB III</span></summary>
+                <p>Ein Jahr ist ein Schaltjahr, wenn es durch 4 teilbar ist – außer es ist durch 100 teilbar. Ist es durch 400 teilbar, ist es doch ein Schaltjahr. Ein Mitschüler hat programmiert:</p>
+                <pre><code class="language-python">def ist_schaltjahr(jahr):
+    if jahr % 4 == 0:
+        return True
+    elif jahr % 100 == 0:
+        return False
+    elif jahr % 400 == 0:
+        return True
+    else:
+        return False</code></pre>
+                <p>Er hat mit 2024 und 2023 getestet und ist zufrieden.</p>
+                <ol>
+                    <li>Übernimm die Tabelle und fülle die Spalte „erwartete Ausgabe“ nach der Regel aus. Trage danach die tatsächliche Ausgabe ein.
+                        <table>
+                            <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>ist_schaltjahr(2024)</code></td><td></td><td></td></tr>
+                                <tr><td><code>ist_schaltjahr(2023)</code></td><td></td><td></td></tr>
+                                <tr><td><code>ist_schaltjahr(1900)</code></td><td></td><td></td></tr>
+                                <tr><td><code>ist_schaltjahr(2000)</code></td><td></td><td></td></tr>
+                                <tr><td><code>ist_schaltjahr(2100)</code></td><td></td><td></td></tr>
+                                <tr><td><code>ist_schaltjahr("2024")</code></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li>Nenne die Testfälle, die den Fehler entlarven. Begründe, warum die beiden <code>elif</code>-Zweige nie erreicht werden.</li>
+                    <li>Korrigiere die Funktion. Ungültige Eingaben (kein <code>int</code>) sollen <code>None</code> liefern.</li>
+                    <li>Begründe, warum das Jahr 2000 als Testfall für diesen Fehler nicht ausreicht.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.2.7: ggT durch Subtraktion <span class="niveau">AFB III</span></summary>
+                <p>Ein sehr alter Algorithmus berechnet den größten gemeinsamen Teiler zweier Zahlen a und b:</p>
+                <pre><code>solange a ≠ b:
+    wenn a &gt; b: a ← a − b
+    sonst:      b ← b − a
+gib a aus</code></pre>
+                <ol>
+                    <li>Führe den Algorithmus für a = 84 und b = 36 von Hand aus (Tabelle mit a und b nach jedem Schritt).</li>
+                    <li>Untersuche, was für a = 0, b = 5 und für a = −4, b = 6 passiert. Welche Eigenschaft eines Algorithmus ist verletzt?</li>
+                    <li>Begründe, dass der Algorithmus für alle positiven ganzen Zahlen a und b terminiert.</li>
+                    <li>Implementiere <code>ggt(a, b)</code> in Python. Sind a oder b keine positiven ganzen Zahlen, wird <code>None</code> zurückgegeben. Teste mit (84, 36), (7, 7), (17, 5), (1, 100), (0, 5) und (−4, 6) in einer Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe.</li>
+                    <li>Beurteile den Aufwand für ggt(1, 100) im Vergleich zu ggt(84, 36).</li>
+                </ol>
+            </details>
+        </div>

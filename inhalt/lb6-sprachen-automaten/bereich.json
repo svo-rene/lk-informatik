@@ -1,0 +1,47 @@
+{
+  "nr": "LB 6",
+  "titel": "Sprachen und Automaten",
+  "text": "Formale Sprachen, Grammatiken, endliche Automaten und Compiler.",
+  "kapitel": [
+    {
+      "titel": "Sprachen und Grammatiken",
+      "themen": [
+        "6-1-spracherkennung",
+        "6-2-formale-sprache",
+        "6-3-grammatik",
+        "6-4-woerter-ableiten",
+        "6-5-bnf",
+        "6-6-chomsky"
+      ]
+    },
+    {
+      "titel": "Endliche Automaten",
+      "themen": [
+        "6-7-dea",
+        "6-8-fangzustand",
+        "6-9-dea-nea",
+        "6-10-potenzmengenkonstruktion"
+      ]
+    },
+    {
+      "titel": "Grammatik und Automat",
+      "themen": [
+        "6-11-grammatik-automat",
+        "6-12-epsilon-regeln",
+        "6-13-grenzen-automaten"
+      ]
+    },
+    {
+      "titel": "Compiler",
+      "themen": [
+        "6-14-compiler"
+      ]
+    },
+    {
+      "titel": "Selbstcheck",
+      "themen": [
+        "6-15-selbstcheck"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.0.2.3: Commit-Nachrichten beurteilen <span class="niveau">AFB II</span></summary>
+                <p>So sieht die Commit-Liste einer Mitschülerin aus (neuester oben):</p>
+                <pre><code>Dateien nach 1_listen hochladen
+fix
+3.0.1.2 Variante A und B
+asdf
+Initial commit</code></pre>
+                <ol>
+                    <li>Beurteile jede Nachricht danach, ob man den Commit nach vier Wochen wiederfindet.</li>
+                    <li>Formuliere für die Commits „fix“ und „Dateien nach 1_listen hochladen“ bessere Nachrichten, wenn bekannt ist: Bei „fix“ wurde in Variante A das Zählen der Verschiebungen korrigiert, beim letzten Commit kam die Lösung zu 3.0.1.4 dazu.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.0.2.4: Einen Diff lesen <span class="niveau">AFB II</span></summary>
+                <p>Ein Commit mit der Nachricht „3.0.1.5: schneller“ zeigt diesen Diff:</p>
+                <pre><code>@@ -1,6 +1,8 @@
+ def entferne_negative(werte):
+-    for i in range(len(werte)):
+-        if werte[i] &lt; 0:
+-            werte.pop(i)
++    ergebnis = []
++    for w in werte:
++        if w &gt;= 0:
++            ergebnis.append(w)
++    return ergebnis
+
+ messung = [3, -1, -2, 5]</code></pre>
+                <ol>
+                    <li>Gib an, wie viele Zeilen entfernt und wie viele hinzugefügt wurden, und prüfe die Angaben der Kopfzeile <code>-1,6 +1,8</code>.</li>
+                    <li>Beschreibe in eigenen Worten, was sich am Verhalten der Funktion geändert hat. Gehe auch auf die Laufzeit ein.</li>
+                    <li>Die Zeile nach <code>messung = …</code> lautete in der alten Fassung <code>entferne_negative(messung)</code>. Erkläre, warum das Programm nach diesem Commit nicht mehr das gewünschte Ergebnis ausgibt, obwohl die Funktion jetzt richtig ist, und formuliere eine bessere Commit-Nachricht für einen Commit, der auch das behebt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.0.2.5: Einen alten Stand zurückholen <span class="niveau">AFB II</span></summary>
+                <p>Lade eine absichtlich fehlerhafte Fassung einer deiner Lösungen hoch (z.&nbsp;B. eine Zeile löschen) und committe sie mit der Nachricht „TEST: absichtlich fehlerhaft“. Hole danach den vorherigen Stand nach Schritt 7 zurück.</p>
+                <ol>
+                    <li>Notiere die SHA des fehlerhaften und des wiederhergestellten Commits.</li>
+                    <li>Öffne den Diff des wiederhergestellten Commits. Erkläre, warum er genau das Gegenteil des fehlerhaften Commits zeigt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.0.2.7: Fehler finden im Repository <span class="niveau">AFB II–III</span></summary>
+                <p>Die Startseite eines Repositorys sieht so aus:</p>
+                <pre><code>pauls-sachen                               (kein Etikett „Privat“)
+├── .gitignore
+├── README.md                              „Initial commit“
+├── Playlist.py                            „Dateien hochladen“
+├── playlist(1).py                         „Dateien hochladen“
+├── __pycache__/playlist.cpython-312.pyc   „Dateien hochladen“
+└── aufgabe 3.0.1.5 Lösung.py              „update“</code></pre>
+                <p>Nenne alle Abweichungen von den Regeln dieser Seite und gib für jede an, wie Paul sie behebt.</p>
+            </details>
+        </div>

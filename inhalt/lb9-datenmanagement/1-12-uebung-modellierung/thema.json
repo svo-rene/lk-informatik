@@ -1,0 +1,14 @@
+{
+  "nr": "1.12",
+  "titel": "Übungsaufgaben zur Modellierung von Datenbanken",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

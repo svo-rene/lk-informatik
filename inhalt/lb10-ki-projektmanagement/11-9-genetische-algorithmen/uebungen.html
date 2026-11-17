@@ -1,0 +1,68 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/11-9_genetischer_algorithmus.ipynb" download>11-9_genetischer_algorithmus.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (JupyterLite der Schule; falls nicht erreichbar: <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.9.3: Eigenes Anwendungsbeispiel <span class="niveau">AFB III</span></summary>
+                <p>Überlege dir ein eigenes Optimierungsproblem, das mit einem genetischen Algorithmus gelöst werden könnte (z.&nbsp;B. aus Sport, Schule, Alltag oder einem Spiel deiner Wahl). Skizziere:</p>
+                <ol>
+                    <li>wie ein Chromosom für dein Problem codiert werden könnte (z.&nbsp;B. als Bitstring oder Zahlenfolge),</li>
+                    <li>wie die Fitnessfunktion aussehen könnte, also wie gemessen wird, wie gut eine Lösung ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.9.4: Mit dem Notebook experimentieren <span class="niveau">AFB II</span></summary>
+                <p>Öffne das Notebook „Genetischer Algorithmus“ in JupyterLite (siehe Seite 10.4) und bearbeite die dort enthaltenen Aufgaben. Verändere insbesondere die Mutationsrate und beobachte, wie sich der Verlauf der besten Fitness über die Generationen im Diagramm verändert.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.9.5: Eine Generation von Hand – der Pausenkiosk <span class="niveau">AFB II</span></summary>
+                <p>Die Schülerfirma kauft für den Pausenkiosk ein. Das Einkaufsbudget beträgt 12&nbsp;€. Jedes Produkt wird entweder eingekauft (1) oder nicht (0); ein Chromosom besteht aus 5 Bits in der Reihenfolge P1 bis P5. Die Fitness ist der erwartete Gewinn; wird das Budget überschritten, ist die Fitness 0.</p>
+                <table>
+                    <thead>
+                        <tr><th>Produkt</th><th>Einkaufskosten in €</th><th>erwarteter Gewinn in €</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>P1 Brezeln</td><td>2</td><td>3</td></tr>
+                        <tr><td>P2 Muffins</td><td>3</td><td>5</td></tr>
+                        <tr><td>P3 Saft</td><td>4</td><td>6</td></tr>
+                        <tr><td>P4 Obstbecher</td><td>5</td><td>7</td></tr>
+                        <tr><td>P5 Sandwiches</td><td>6</td><td>9</td></tr>
+                    </tbody>
+                </table>
+                <p>Startpopulation: I1 = <code>1 1 0 0 1</code>, I2 = <code>0 1 1 0 0</code>, I3 = <code>1 0 1 1 0</code>, I4 = <code>1 0 0 0 1</code>.</p>
+                <p><strong>Selektion mit dem Roulette-Rad:</strong> Jedes Individuum erhält auf einem Glücksrad einen Abschnitt, dessen Anteil seinem Anteil an der Gesamtfitness entspricht: <code>Anteil = Fitness : Summe aller Fitnesswerte</code>. Die Abschnitte werden in der Reihenfolge I1 bis I4 auf einer Skala von 0 bis 100 hintereinandergelegt. Eine Zufallszahl zwischen 0 und 100 wählt das Individuum, in dessen Abschnitt sie fällt.</p>
+                <ol>
+                    <li>Berechne für jedes Individuum Kosten, Gewinn und Fitness sowie die Durchschnittsfitness der Startpopulation.</li>
+                    <li>Bestimme die Anteile am Roulette-Rad in % (auf zwei Nachkommastellen) und die Abschnitte auf der Skala von 0 bis 100.</li>
+                    <li>Der Zufallsgenerator liefert die Zahlen 12, 55, 71 und 40. Bestimme die vier ausgewählten Individuen. Die ersten beiden bilden Paar 1, die letzten beiden Paar 2.</li>
+                    <li>Führe ein Ein-Punkt-Crossover durch: Paar 1 nach Position 3, Paar 2 nach Position 1. Bei Kind 4 (zweites Kind von Paar 2) mutiert das zweite Bit.</li>
+                    <li>Berechne die Fitness der neuen Generation und vergleiche Durchschnittsfitness und beste Fitness mit der Startpopulation. Welches Individuum der Startpopulation hat keine Nachkommen? Erkläre, ob das am Roulette-Rad „gerecht“ ist.</li>
+                </ol>
+                <p class="tipp">Achte bei der Fitness auf den Grenzfall „Kosten genau 12&nbsp;€“: Das Budget ist dann nicht überschritten.</p>
+            </details>
+        </div>

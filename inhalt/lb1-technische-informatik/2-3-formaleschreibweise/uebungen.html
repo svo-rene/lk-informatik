@@ -1,0 +1,41 @@
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.3: Das automatische Garagentor <span class="niveau">AFB II</span></summary>
+                <p>In der Steuerung eines Garagentors findest du die Schließbedingung <strong>O ∧ (T ∨ Z) ∧ ¬L</strong> mit</p>
+                <ul>
+                    <li>O: „Das Tor ist offen.“</li>
+                    <li>T: „Die Schließtaste wurde gedrückt.“</li>
+                    <li>Z: „Das Tor ist seit mindestens 3 Minuten offen.“</li>
+                    <li>L: „Die Lichtschranke im Torbereich ist unterbrochen.“</li>
+                </ul>
+                <ol>
+                    <li>Beschreibe in einem verständlichen deutschen Satz, wann das Tor schließt, so dass ihn auch jemand ohne Logikkenntnisse versteht.</li>
+                    <li>Entscheide für die drei Situationen, ob das Tor schließt:
+                        <ol type="a">
+                            <li>Das Tor ist offen, jemand drückt die Schließtaste, die Lichtschranke ist frei, das Tor ist erst seit 1 Minute offen.</li>
+                            <li>Das Tor ist seit 5 Minuten offen, niemand drückt die Taste, eine Katze sitzt in der Lichtschranke.</li>
+                            <li>Das Tor ist geschlossen, jemand drückt die Schließtaste.</li>
+                        </ol>
+                    </li>
+                    <li>Gib an, wie viele Zeilen die vollständige Wahrheitstabelle hat, und bestimme ohne sie aufzuschreiben, in wie vielen Zeilen das Tor schließt. Begründe.</li>
+                    <li>Erläutere, welche Aufgabe der Teil ¬L hat und was passieren könnte, wenn ein Programmierer das ¬ vergisst.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.4: Klammer vergessen – der Ausleihautomat <span class="niveau">AFB II</span></summary>
+                <p>Am Ausleihautomaten der Stadtbibliothek gilt: „Ausleihe ist möglich, wenn das Konto nicht gesperrt ist und man entweder einen Bibliotheksausweis hat oder als Lehrkraft registriert ist.“ Mit G: „Konto gesperrt“, A: „Ausweis vorhanden“, L: „als Lehrkraft registriert“ hat ein Entwickler programmiert:</p>
+                <pre><code class="language-python">if not gesperrt and ausweis or lehrkraft:
+    ausleihe_freigeben()</code></pre>
+                <ol>
+                    <li>Gib die beabsichtigte Regel in formaler Schreibweise an.</li>
+                    <li>Python wertet <code>not</code> vor <code>and</code> vor <code>or</code> aus – genau wie ¬ vor ∧ vor ∨. Schreibe die Bedingung, die der Code tatsächlich prüft, in formaler Schreibweise mit vollständigen Klammern.</li>
+                    <li>Vergleiche beide Terme in einer gemeinsamen Wahrheitstabelle mit Hilfsspalten. Gib an, in welchen Zeilen sie sich unterscheiden, und beschreibe, wer davon profitiert.</li>
+                    <li>Korrigiere die Python-Zeile mit möglichst wenigen Zeichen.</li>
+                </ol>
+            </details>
+        </div>

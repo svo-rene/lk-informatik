@@ -1,0 +1,212 @@
+<p>
+            Das relationale Datenmodell ist eines der am häufigsten verwendeten Konzepte in der Datenbanktheorie und -praxis. Es wurde in den 1970er Jahren von Edgar F. Codd entwickelt und hat seitdem die Art und Weise, wie wir Daten organisieren und verwalten, revolutioniert.
+          </p>
+
+<h2>1. Tabellen, Datentypen und Schemata</h2>
+
+<p>Das relationale Datenbankmodell organisiert Daten in Tabellen und ist das am meisten verbreitete Datenbankmodell. Im Gegensatz zur Tabellenkalkulation bieten Datenbanken zahlreiche Vorteile, vor allem in Bezug auf den zeitgleichen Mehrbenutzerzugriff mit unterschiedlichen Zugriffsrechten, Redundanzvermeidung und Inkonsistenzvermeidung.</p>
+
+<h3>1.1. Wichtige Begriffe</h3>
+
+<p>Um relationale Datenbanken effektiv zu nutzen, ist es wichtig, die grundlegenden Konzepte und Begriffe zu verstehen.</p>
+
+<table>
+        <tr>
+            <th>Begriff</th>
+            <th>Erklärung</th>
+            <th>Beispiel</th>
+        </tr>
+        <tr>
+            <td>Tabellenname</td>
+            <td>Der eindeutige Bezeichner für eine Tabelle in der Datenbank</td>
+            <td>„Kunden“, „Bestellungen“, „Produkte“</td>
+        </tr>
+        <tr>
+            <td>Attribut</td>
+            <td>Eine Spalte in einer Tabelle, die eine bestimmte Eigenschaft beschreibt</td>
+            <td>„Nachname“, „Geburtsdatum“, „E-Mail“</td>
+        </tr>
+        <tr>
+            <td>Datensatz</td>
+            <td>Eine einzelne Zeile in einer Tabelle, die einen kompletten Satz von Attributwerten enthält</td>
+            <td>Ein vollständiger Kundendatensatz mit allen Attributen</td>
+        </tr>
+        <tr>
+            <td>Attributwert</td>
+            <td>Der spezifische Wert eines Attributs für einen bestimmten Datensatz</td>
+            <td>„Mustermann“ als Wert für das Attribut „Nachname“</td>
+        </tr>
+        <tr>
+            <td>Primärschlüssel</td>
+            <td>Ein Attribut oder eine Kombination von Attributen, die jeden Datensatz eindeutig identifizieren</td>
+            <td>„Kundennummer“ oder „Bestellnummer“</td>
+        </tr>
+        <tr>
+            <td>Fremdschlüssel</td>
+            <td>Ein Attribut, das auf den Primärschlüssel einer anderen Tabelle verweist</td>
+            <td>„Kundennummer“ in der Bestellungen-Tabelle, die auf die Kunden-Tabelle verweist</td>
+        </tr>
+        <tr>
+            <td>Relation</td>
+            <td>Eine Tabelle in der relationalen Datenbank, die eine Menge von zusammengehörigen Datensätzen darstellt</td>
+            <td>Die „Kunden“-Tabelle als Relation aller Kundendaten</td>
+        </tr>
+        <tr>
+            <td>Schema</td>
+            <td>Die logische Struktur der Datenbank, die Tabellen, Attribute und ihre Beziehungen zueinander definiert</td>
+            <td>Die Gesamtheit aller Tabellendefinitionen und ihrer Beziehungen in einer Datenbank</td>
+        </tr>
+    </table>
+
+<br>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+    <p><strong>Ausgangssituation:</strong> Die Schulbibliothek speichert ihre Bücher in dieser Tabelle:</p>
+    <table>
+        <thead><tr><th>BuchNr</th><th>Titel</th><th>Autor</th><th>Erscheinungsjahr</th></tr></thead>
+        <tbody>
+            <tr><td>101</td><td>Effi Briest</td><td>Fontane</td><td>1895</td></tr>
+            <tr><td>102</td><td>Homo Faber</td><td>Frisch</td><td>1957</td></tr>
+            <tr><td>103</td><td>Faust</td><td>Goethe</td><td>1808</td></tr>
+        </tbody>
+    </table>
+    <ol>
+        <li><strong>Relation und Tabellenname:</strong> Die ganze Tabelle ist eine Relation mit dem Namen <code>Buch</code>.</li>
+        <li><strong>Attribute:</strong> Die vier Spalten BuchNr, Titel, Autor und Erscheinungsjahr. <em>Warum Spalten?</em> Jede beschreibt eine Eigenschaft, die <em>jedes</em> Buch hat.</li>
+        <li><strong>Datensätze:</strong> drei Zeilen, je eine pro Buch. Ein Attributwert ist z.&nbsp;B. „Frisch“ für das Attribut Autor im Datensatz mit der BuchNr 102.</li>
+        <li><strong>Datentypen festlegen:</strong> BuchNr und Erscheinungsjahr sind ganze Zahlen (INT), Titel und Autor Zeichenketten (VARCHAR). <em>Warum?</em> Mit Jahreszahlen will man rechnen und vergleichen, mit Titeln nicht.</li>
+        <li><strong>Primärschlüssel wählen:</strong> BuchNr. <em>Warum nicht der Titel?</em> Die Bibliothek kann zwei Exemplare von „Faust“ besitzen – der Titel wäre dann nicht mehr eindeutig. Die Nummer wird dagegen für jedes Exemplar neu vergeben.</li>
+    </ol>
+    <p><strong>Ergebnis</strong> – das Relationenschema:</p>
+    <p><code>Buch(<u>BuchNr</u>:INT, Titel:VARCHAR(80), Autor:VARCHAR(50), Erscheinungsjahr:INT)</code></p>
+    <p><strong>Probe:</strong> Kein BuchNr-Wert kommt zweimal vor; jede Zeile lässt sich über ihre Nummer eindeutig ansprechen.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+    <p><strong>Ausgangssituation:</strong> Die Oberstufenverwaltung speichert die Halbjahrespunkte in der Tabelle <code>Belegung</code>.
+       Welcher Primärschlüssel ist richtig, und welche Fremdschlüssel gibt es?</p>
+    <table>
+        <thead><tr><th>SchuelerNr</th><th>Name</th><th>KursKuerzel</th><th>Halbjahr</th><th>Punkte</th></tr></thead>
+        <tbody>
+            <tr><td>17</td><td>Ben Kraus</td><td>inf1</td><td>12/1</td><td>11</td></tr>
+            <tr><td>17</td><td>Ben Kraus</td><td>inf1</td><td>12/2</td><td>13</td></tr>
+            <tr><td>17</td><td>Ben Kraus</td><td>ma2</td><td>12/1</td><td>9</td></tr>
+            <tr><td>23</td><td>Lea Vogt</td><td>inf1</td><td>12/1</td><td>14</td></tr>
+            <tr><td>31</td><td>Ben Kraus</td><td>ma2</td><td>12/1</td><td>7</td></tr>
+        </tbody>
+    </table>
+    <ol>
+        <li><strong>Einzelne Attribute prüfen.</strong> SchuelerNr (17 dreimal), Name, KursKuerzel und Halbjahr wiederholen sich schon in den Daten. Punkte sind hier zufällig verschieden, können sich aber jederzeit wiederholen. <em>Warum genügt der Blick auf die Daten nicht?</em> Daten zeigen nur, dass etwas <em>nicht</em> eindeutig ist; Eindeutigkeit muss man mit der Bedeutung begründen.</li>
+        <li><strong>Den Namen ausschließen.</strong> Es gibt zwei verschiedene Personen namens Ben Kraus (Nr. 17 und Nr. 31). Selbst (Name, KursKuerzel, Halbjahr) kommt doppelt vor: Ben Kraus, ma2, 12/1. Der Name ist als Schlüsselbestandteil ungeeignet.</li>
+        <li><strong>Paare prüfen.</strong> (SchuelerNr, KursKuerzel) wiederholt sich: 17/inf1 in 12/1 und 12/2. (SchuelerNr, Halbjahr) wiederholt sich: 17 in 12/1 mit inf1 und ma2. (KursKuerzel, Halbjahr) wiederholt sich: inf1/12/1 bei 17 und 23.</li>
+        <li><strong>Dreierkombination begründen.</strong> (SchuelerNr, KursKuerzel, Halbjahr) ist eindeutig – und zwar nicht nur in diesen Daten, sondern grundsätzlich: Eine Person bekommt in einem Kurs pro Halbjahr genau eine Punktzahl. Lässt man einen Bestandteil weg, entstehen Wiederholungen (Schritt 3). Der Schlüssel ist also auch <em>minimal</em>.</li>
+        <li><strong>Fremdschlüssel erkennen.</strong> SchuelerNr verweist auf eine Tabelle <code>Schueler</code>, KursKuerzel auf eine Tabelle <code>Kurs</code>. Der Name gehört eigentlich in <code>Schueler</code> – hier steht er redundant (siehe Seite 1.1 und 1.13).</li>
+    </ol>
+    <p><strong>Ergebnis:</strong></p>
+    <p><code>Belegung(<u>&uarr;SchuelerNr, &uarr;KursKuerzel, Halbjahr</u>, Name, Punkte)</code></p>
+    <p><strong>Probe und Falle:</strong> Auch (SchuelerNr, KursKuerzel, Halbjahr, Punkte) wäre eindeutig, enthält aber ein überflüssiges Attribut –
+       ein Primärschlüssel soll so klein wie möglich sein. Der Pfeil &uarr; für Fremdschlüssel wird auf Seite 1.11 genauer eingeführt.</p>
+            </details>
+        </div>
+
+<br>
+
+<h2>2. Komponenten des relationalen Datenmodells</h2>
+
+<h3>1. Entity-Relationship-Modell (ER-Modell)</h3>
+
+<p>
+            Das ER-Modell ist ein konzeptuelles Schema, das zur Darstellung der Struktur einer Datenbank verwendet wird. Es zeigt Entitäten (Objekte), ihre Attribute und die Beziehungen zwischen den Entitäten.
+          </p>
+
+<h3>2. Relationenmodell</h3>
+
+<p>
+            Das Relationenmodell ist die logische Umsetzung des ER-Modells in Tabellenform. Es definiert, wie die Daten tatsächlich in der Datenbank gespeichert werden.
+          </p>
+
+<h3>3. Normalisierung</h3>
+
+<p>
+            Die Normalisierung ist ein Prozess zur Optimierung der Datenbankstruktur. Sie hilft, Redundanzen zu vermeiden und die Datenintegrität zu gewährleisten.
+          </p>
+
+<p>Diese drei Komponenten arbeiten zusammen, um eine effiziente und effektive Datenbankstruktur zu schaffen.</p>
+
+<h2>ACID-Eigenschaften</h2>
+
+<p>
+            ACID ist ein Akronym für vier wichtige Eigenschaften von Datenbanktransaktionen im relationalen Modell:
+          </p>
+
+<ul>
+              <li><strong>Atomicity (Atomarität):</strong> Eine Transaktion wird entweder vollständig oder gar nicht ausgeführt.</li>
+              <li><strong>Consistency (Konsistenz):</strong> Eine Transaktion führt die Datenbank von einem konsistenten Zustand in einen anderen.</li>
+              <li><strong>Isolation (Isolation):</strong> Gleichzeitig ablaufende Transaktionen beeinflussen sich nicht gegenseitig.</li>
+              <li><strong>Durability (Dauerhaftigkeit):</strong> Einmal bestätigte Änderungen bleiben dauerhaft gespeichert.</li>
+          </ul>
+
+<div class="hinweis">
+              <details>
+                  <summary>
+                      Hinweis: ACID und Datenintegrität
+                  </summary>
+                  <p>
+                      Die ACID-Eigenschaften sind entscheidend für die Gewährleistung der Datenintegrität in relationalen Datenbanken. Sie stellen sicher, dass Datenbankoperationen zuverlässig und fehlertolerant sind, selbst in komplexen und konkurrierenden Umgebungen.
+                  </p>
+              </details>
+          </div>
+
+<h2>CRUD-Operationen</h2>
+
+<p>
+            CRUD steht für die vier grundlegenden Operationen, die in relationalen Datenbanken durchgeführt werden können:
+          </p>
+
+<ul>
+              <li><strong>Create (Erstellen):</strong> Neue Datensätze in die Datenbank einfügen</li>
+              <li><strong>Read (Lesen):</strong> Vorhandene Datensätze aus der Datenbank abrufen</li>
+              <li><strong>Update (Aktualisieren):</strong> Bestehende Datensätze in der Datenbank ändern</li>
+              <li><strong>Delete (Löschen):</strong> Datensätze aus der Datenbank entfernen</li>
+          </ul>
+
+<p>
+            Diese Operationen bilden die Grundlage für die Interaktion mit relationalen Datenbanken und werden typischerweise über SQL (Structured Query Language) ausgeführt.
+          </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke"><p>Jede Relation muss einen <span style="text-decoration: underline;">Prim&auml;rschl&uuml;ssel</span> haben. Der Prim&auml;rschl&uuml;ssel ist eindeutig (englisch &bdquo;unique&ldquo;): Jeder Wert des Prim&auml;rschl&uuml;ssels darf in der Relation nur einmal vorkommen. Er dient dazu, jeden Datensatz eindeutig zu identifizieren.</p></div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>
+                Aufgabe 1.2.1: <span class="niveau">AFB I</span>
+            </summary>
+            <iframe style="border: 0px; width: 600px; height: 500px;" src="https://learningapps.org/view20517450" allowfullscreen="allowfullscreen" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen"></iframe>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>
+                Aufgabe 1.2.2: ACID beim Kinoticket <span class="niveau">AFB II</span>
+            </summary>
+            <p>Beim Online-Kauf eines Kinotickets führt die Datenbank eine Transaktion aus: (1) Platz als belegt markieren,
+               (2) Betrag vom Guthabenkonto abbuchen, (3) Ticket mit QR-Code anlegen. Beschreibe zu jeder ACID-Eigenschaft,
+               was schiefgehen würde, wenn das System sie <em>nicht</em> einhielte, und nutze dafür jeweils eine der folgenden Situationen:</p>
+            <ol>
+                <li>Nach Schritt 2 stürzt der Server ab.</li>
+                <li>Zwei Personen klicken in derselben Sekunde auf den letzten freien Platz in Reihe 7.</li>
+                <li>Die Bestätigung „Kauf erfolgreich“ erscheint, kurz darauf fällt der Strom im Rechenzentrum aus.</li>
+                <li>Durch einen Programmfehler würde ein Ticket für einen Platz angelegt, den es im Saal gar nicht gibt.</li>
+            </ol>
+        </details>
+    </div>

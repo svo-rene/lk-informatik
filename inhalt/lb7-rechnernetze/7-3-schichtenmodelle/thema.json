@@ -1,0 +1,18 @@
+{
+  "nr": "7.3",
+  "titel": "Schichtenmodelle (OSI und TCP/IP)",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+<p>
+      In vielen Darstellungen deterministischer endlicher Automaten (DEA) werden fehlende Kanten
+      weggelassen. Formal bedeutet das eine <em>partielle</em> Übergangsfunktion. Alternativ kann man die
+      Übergangsfunktion <em>vollständig</em> (total) machen, indem man einen <strong>Fangzustand (Trap-Zustand)</strong>
+      ergänzt und alle fehlenden Übergänge dorthin leitet. Beide Sichtweisen sind in dem Sinne äquivalent,
+      dass sie dieselbe Sprache erkennen – der Fangzustand macht die Definition nur vollständig.
+    </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+      <p><strong>Ausgangssituation:</strong> Bezeichner (ein Buchstabe, danach Buchstaben oder Ziffern) über Σ = {b, z} (b = Buchstabe, z = Ziffer).</p>
+      <table>
+        <thead><tr><th>δ</th><th>b</th><th>z</th></tr></thead>
+        <tbody>
+          <tr><td>→ s</td><td>q</td><td>⊥</td></tr>
+          <tr><td>q (Endzustand)</td><td>q</td><td>q</td></tr>
+          <tr><td>⊥</td><td>⊥</td><td>⊥</td></tr>
+        </tbody>
+      </table>
+      <p>In der partiellen Darstellung fehlt nur die Kante s –z→ ⊥ samt Zustand ⊥. Beginnt die Eingabe mit einer Ziffer (z.&nbsp;B. <code>1abc</code>), landet der vollständige Automat im Fangzustand und kann dort bleiben – das Wort wird verworfen.</p>
+      <ol>
+        <li><strong>Fehlende Übergänge suchen:</strong> In der partiellen Fassung gibt es s –b→ q sowie q –b→ q und q –z→ q. Für (s, z) ist nichts festgelegt. <em>Warum?</em> Jedes Paar (Zustand, Zeichen) ohne Eintrag macht δ partiell.</li>
+        <li><strong>Fangzustand ergänzen:</strong> δ'(s, z) = ⊥, dazu δ'(⊥, b) = δ'(⊥, z) = ⊥; ⊥ ist kein Endzustand. <em>Warum?</em> Wer einmal in ⊥ ist, darf nicht mehr akzeptiert werden.</li>
+        <li><strong>Wörter prüfen:</strong> <code>bz</code> (z.&nbsp;B. „x1“): s –b→ q –z→ q ✓. <code>zbb</code> (z.&nbsp;B. „1ab“): s –z→ ⊥ –b→ ⊥ –b→ ⊥ ✗.</li>
+      </ol>
+      <p><strong>Ergebnis:</strong> Der vollständige DEA hat 3 Zustände und 3 · 2 = 6 Tabelleneinträge, alle definiert.</p>
+      <p><strong>Kontrolle:</strong> Der partielle Automat entscheidet gleich: Bei <code>zbb</code> bleibt er schon beim ersten Zeichen stecken und verwirft.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+      <p><strong>Ausgangssituation:</strong> Uhrzeit hh:mm über Σ = {0, …, 9, :}. Schon ein partieller DEA braucht sechs Zustände (Start, erste Ziffer, zweite Ziffer, Doppelpunkt, Minutenzehner, Minuteneiner). Für den vollständigen DEA müssten zu jedem Zustand alle 11 Zeichen einen Übergang haben – die meisten führen in den Fangzustand. Darum zeichnet man in der Praxis nur den partiellen Automaten und vereinbart: <em>fehlende Kante = Fangzustand</em>.</p>
+      <p><strong>Ausgearbeitet für gültige Uhrzeiten von 00:00 bis 23:59:</strong></p>
+      <ol>
+        <li><strong>Zustände festlegen:</strong> s (Start), a („Stundenzehner 0 oder 1“), b („Stundenzehner 2“), h („Stunde fertig“), d („Doppelpunkt gelesen“), m („Minutenzehner gelesen“), e (Endzustand). <em>Warum ein Zustand mehr als oben?</em> Nach einer 2 sind als zweite Stundenziffer nur 0 bis 3 erlaubt, nach 0 oder 1 alle Ziffern – das muss sich der Automat merken.</li>
+        <li><strong>Partielle Tabelle aufstellen</strong> (Ziffern mit gleichem Verhalten sind zu Spalten zusammengefasst, „–“ = kein Übergang):
+          <table>
+            <thead><tr><th>δ<sub>p</sub></th><th>0, 1</th><th>2</th><th>3</th><th>4, 5</th><th>6 – 9</th><th>:</th></tr></thead>
+            <tbody>
+              <tr><td>→ s</td><td>a</td><td>b</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+              <tr><td>a</td><td>h</td><td>h</td><td>h</td><td>h</td><td>h</td><td>–</td></tr>
+              <tr><td>b</td><td>h</td><td>h</td><td>h</td><td>–</td><td>–</td><td>–</td></tr>
+              <tr><td>h</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>d</td></tr>
+              <tr><td>d</td><td>m</td><td>m</td><td>m</td><td>m</td><td>–</td><td>–</td></tr>
+              <tr><td>m</td><td>e</td><td>e</td><td>e</td><td>e</td><td>e</td><td>–</td></tr>
+              <tr><td>e (Endzustand)</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Übergänge zählen:</strong> Definiert sind 3 (s) + 10 (a) + 4 (b) + 1 (h) + 6 (d) + 10 (m) + 0 (e) = 34 Übergänge. Der vollständige DEA hat 8 Zustände (mit ⊥) und braucht 8 · 11 = 88 Einträge. Davon führen 88 − 34 = 54 nach ⊥ (43 aus den sieben Zuständen, 11 Schleifen an ⊥). <em>Warum zählen?</em> Die Zahl zeigt, warum man den vollständigen Graphen nicht zeichnet.</li>
+        <li><strong>Wörter prüfen:</strong> <code>23:59</code>: s –2→ b –3→ h –:→ d –5→ m –9→ e ✓. <code>24:00</code>: s –2→ b –4→ ⊥ ✗ (die Falle: 4 ist nur nach 0 oder 1 erlaubt). <code>7:30</code>: s –7→ ⊥ ✗. <code>19:75</code>: s –1→ a –9→ h –:→ d –7→ ⊥ ✗.</li>
+      </ol>
+      <p><strong>Ergebnis:</strong> Partiell 7 Zustände und 34 Kanten; vollständig 8 Zustände und 88 Kanten, von denen mehr als die Hälfte (54) in den Fangzustand führt.</p>
+      <p><strong>Kontrolle:</strong> Der Automat akzeptiert 24 · 60 = 1&nbsp;440 Wörter: a und b liefern zusammen 2 · 10 + 4 = 24 Stunden, d und m zusammen 6 · 10 = 60 Minuten.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+      <details>
+        <summary>Praxisbezug: Der Fangzustand als Fehlerzustand</summary>
+        <p><strong>Alltag:</strong> Gibst du in ein Formularfeld für die Postleitzahl einen Buchstaben ein, meldet manche Webseite sofort einen Fehler – noch bevor du fertig bist. Der Prüfautomat ist in den Fangzustand geraten; weitere Zeichen können das Wort nicht mehr „retten“.</p>
+        <p><strong>Beruf:</strong> In Lexern von Compilern und in Protokollimplementierungen (z.&nbsp;B. in Netzwerkgeräten) entspricht der Fangzustand einem Fehlerzustand: Die Software bricht die Verarbeitung ab und erzeugt eine Fehlermeldung („unexpected character“) oder verwirft ein fehlerhaftes Datenpaket. Beim Testen von Steuerungssoftware prüfen Testingenieurinnen gezielt, ob alle unerlaubten Eingaben wirklich in diesen Zustand führen.</p>
+      </details>
+    </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+      <p>
+        <strong>Merke:</strong><br>
+        Ein DEA ist ein 5-Tupel <code>A = (Q, Σ, δ, q<sub>0</sub>, F)</code>. In vielen Lehrbüchern wird
+        <code>δ: Q × Σ → Q</code> als <em>totale</em> Funktion gefordert. Fehlen in einem Zustandsdiagramm
+        Übergänge, interpretieren wir das als <em>partielle</em> Funktion <code>δ<sub>p</sub></code>: Fehlt ein Übergang, wird das Wort verworfen.
+        Die Vervollständigung erhält man durch einen neuen, nicht akzeptierenden Fangzustand <code>⊥</code> mit
+        <code>δ'(q,a) = δ<sub>p</sub>(q,a)</code>, falls definiert, sonst <code>⊥</code>, und
+        <code>δ'(⊥,a) = ⊥</code> für alle <code>a ∈ Σ</code>. Für den neuen Automaten A' gilt dann <code>L(A) = L(A')</code>.
+      </p>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+      <details>
+        <summary>Aufgabe 6.8.1: Partielle Übergangsfunktion erkennen und vervollständigen <span class="niveau">AFB I</span></summary>
+        <p>
+          Gegeben sei ein Automat über <code>Σ = {a, b}</code> mit Startzustand <code>q0</code> und
+          Endzustandsmenge <code>F = {q1}</code>. Übergänge:
+        </p>
+        <table>
+          <thead><tr><th>δ</th><th>a</th><th>b</th></tr></thead>
+          <tbody>
+            <tr><td>q0</td><td>q1</td><td><em>—</em></td></tr>
+            <tr><td>q1</td><td>q1</td><td>q1</td></tr>
+          </tbody>
+        </table>
+        <ol>
+          <li>Ist die Übergangsfunktion total oder partiell? Begründe.</li>
+          <li>Erzeuge einen äquivalenten vollständigen DEA, indem du einen Fangzustand <code>⊥</code> ergänzt.
+              Gib die neue Übergangstabelle an.</li>
+        </ol>
+      </details>
+    </div>
+
+<div class="aufgabe">
+      <details>
+        <summary>Aufgabe 6.8.2: Sprache deuten – Was akzeptiert der Automat? <span class="niveau">AFB II</span></summary>
+        <p>
+          Beziehe dich auf den Automaten aus Aufgabe&nbsp;6.8.1 (vor und nach der Ergänzung des Fangzustands).
+          Entscheide für die Wörter <code>ε</code>, <code>a</code>, <code>b</code>, <code>ba</code>, <code>ab</code>, <code>bbb</code>, <code>aaab</code>,
+          ob sie akzeptiert werden.
+        </p>
+      </details>
+    </div>

@@ -1,0 +1,25 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-3-6b-4">
+            <details>
+                <summary>Aufgabe 3.6b.4: Fehler finden – geprüft wird zu spät <span class="niveau">AFB III</span></summary>
+                <p>Lisa hat <code>__tour</code> umgestellt, „weil man den Punkt ja sowieso erst einmal betreten muss“:</p>
+                <pre><code class="language-python">    def __tour(self, knoten, zeit, limit, weg):
+        zeit = zeit + knoten.minuten
+        weg.append(knoten.name)
+        if zeit &gt; limit:
+            return False
+        if not knoten.kinder:
+            return True
+        for kind in knoten.kinder:
+            if self.__tour(kind, zeit, limit, weg):
+                return True
+        weg.pop()
+        return False</code></pre>
+                <ol>
+                    <li>Gib an, was <code>netz.tour(40)</code> mit Lisas Fassung liefert. Verfolge dazu <code>weg</code> in einer Tabelle.</li>
+                    <li>Gib einen Wert für <code>limit</code> an, bei dem Lisas Fassung trotzdem das richtige Ergebnis liefert, und begründe.</li>
+                    <li>Korrigiere den Fehler auf zwei verschiedene Arten. Beurteile, welche Fassung besser zum Backtracking-Muster „prüfen, dann vorwärts“ passt.</li>
+                </ol>
+            </details>
+        </div>

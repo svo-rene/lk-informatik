@@ -1,0 +1,60 @@
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+            <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+            dieser Seite direkt ausführen und bearbeiten kannst:
+            <a href="../notebooks/3-5_bereinigen.ipynb" download>3-5_bereinigen.ipynb herunterladen</a>.
+            Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+            <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+            <ol>
+                <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+            </ol>
+            <p><strong>Wichtig:</strong> Das Notebook liest die Datei <a href="../notebooks/messwerte.csv" download>messwerte.csv</a> ein. Lade sie mit in den Dateibereich hoch, sonst meldet Python <code>FileNotFoundError</code>.</p>
+        </details>
+    </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.5.3: Alltagsmuster mit regulären Ausdrücken prüfen <span class="niveau">AFB II</span></summary>
+            <p>
+                Entwickle reguläre Ausdrücke für die folgenden vier Alltagsbeispiele und teste sie entweder
+                in Python (mit <code>re.fullmatch()</code>) oder in einem Editor mit Regex-Suche:
+            </p>
+            <ul>
+                <li>a) Eine Uhrzeit im Format HH:MM (z.&nbsp;B. 14:30)</li>
+                <li>b) Ein Datum im Format TT.MM.JJJJ (z.&nbsp;B. 24.12.2025)</li>
+                <li>c) Eine einfache E-Mail-Adresse (etwas@etwas.etwas)</li>
+                <li>d) Ein Produktcode für Verkaufsautomaten: genau drei Zeichen – zuerst <code>G</code> (Getränk)
+                    oder <code>S</code> (Snack), dann eine Ziffer von 1 bis 9, dann eine Ziffer von 0 bis 9
+                    (gültig: <code>G10</code>, <code>S31</code>; ungültig: <code>G01</code>, <code>X12</code>, <code>S3</code>).
+                    Dieses Format brauchst du auf Seite 3.6 wieder.</li>
+            </ul>
+        </details>
+    </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.5.4: Postleitzahl und Ort aus Adressen gewinnen <span class="niveau">AFB II</span></summary>
+            <p>Der Förderverein hat Adressen ehemaliger Schüler*innen in einer einzigen Spalte erfasst. Für einen Serienbrief werden
+               Postleitzahl und Ort getrennt gebraucht. Schreibe eine Funktion <code>plz_ort(adresse)</code>, die mit einem regulären
+               Ausdruck ein Paar <code>(plz, ort)</code> zurückgibt oder <code>None</code>, wenn keine gültige fünfstellige
+               Postleitzahl vor dem Ort am Ende der Adresse steht. Die Postleitzahl bleibt dabei ein Text.</p>
+            <table class="gitter">
+                <tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                <tr><td><code>"Schillerplatz 3, 01309 Dresden"</code></td><td><code>('01309', 'Dresden')</code></td><td></td></tr>
+                <tr><td><code>"Hauptstr. 12 04109 Leipzig"</code></td><td><code>('04109', 'Leipzig')</code></td><td></td></tr>
+                <tr><td><code>"Am Markt 1, 9111 Chemnitz"</code></td><td><code>None</code></td><td></td></tr>
+                <tr><td><code>"Berliner Str. 7a, 02826 Görlitz"</code></td><td><code>('02826', 'Görlitz')</code></td><td></td></tr>
+            </table>
+            <p>Erkläre außerdem, warum die Postleitzahl nicht mit <code>int()</code> in eine Zahl umgewandelt werden darf.</p>
+            <p class="tipp">Baue das Muster wie in Beispiel 1 schrittweise auf: fünf Ziffern, mindestens ein Leerzeichen, ein Wort, Ende des Textes.</p>
+        </details>
+    </div>

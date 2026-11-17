@@ -1,0 +1,63 @@
+<style>
+            /* Prompts auf dieser Seite umbrechen statt seitlich scrollen */
+            pre, pre code { white-space: pre-wrap; }
+        </style>
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<p>Diese Aufgaben sind zum &Uuml;ben und Vertiefen zu Hause gedacht.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.0b.4: Einen eigenen Lern-Assistenten entwerfen <span class="niveau">AFB III</span></summary>
+                <p>Entwirf einen Assistenten, der dir in einem anderen Fach beim Lernen hilft (z.&nbsp;B. Vokabeltrainer, Formel-Abfrage, Gedichtanalyse-Coach).</p>
+                <ol>
+                    <li>Lege Name, Beschreibung (ein Satz) und zwei Startkn&ouml;pfe fest.</li>
+                    <li>Schreibe einen Systemprompt mit Rolle, Kontext, Aufgabe, mindestens zwei Grenzen samt erlaubtem Ausweg und einer Regel f&uuml;r lange Chats. Begr&uuml;nde jede Grenze in einem Satz.</li>
+                    <li>Richte ihn als Gem, Claude-Projekt oder Mistral-Skill ein, teste ihn mit einer normalen Frage und zwei unterschiedlichen Mogelversuchen und beschreibe das Ergebnis.</li>
+                    <li>Beurteile, welche Grenze am leichtesten zu umgehen war, und erkl&auml;re, warum ein Systemprompt kein sicherer Schutz ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Weiterf&uuml;hrende Links</h2>
+
+<ul>
+            <li><a href="https://help.openai.com/de-de/articles/8096356-chatgpt-custom-instructions" target="_blank" rel="noopener">OpenAI-Hilfe: Benutzerdefinierte Anweisungen in ChatGPT</a> und <a href="https://help.openai.com/de-de/articles/11780217" target="_blank" rel="noopener">Lernmodus in ChatGPT</a></li>
+            <li><a href="https://support.google.com/gemini/answer/15146780?hl=de" target="_blank" rel="noopener">Gemini-Hilfe: Gems erstellen</a> und <a href="https://support.google.com/gemini/answer/16448384?hl=de" target="_blank" rel="noopener">Lerntools in Gemini-Apps</a></li>
+            <li><a href="https://support.claude.com/de/articles/9519177" target="_blank" rel="noopener">Claude-Hilfe: Projekte erstellen und verwalten</a></li>
+            <li><a href="https://docs.mistral.ai/vibe/work/skills" target="_blank" rel="noopener">Mistral-Dokumentation: Skills in Vibe</a> (englisch)</li>
+        </ul>
+
+<div class="hinweis">
+            <p>Diese Seite wurde mit Unterst&uuml;tzung von KI (Claude, Anthropic) erstellt und von der Lehrkraft gepr&uuml;ft. Bedienwege der KI-Anbieter: Stand Oktober 2026.</p>
+        </div>
+
+<script>
+            // Kopieren-Knopf f&uuml;r alle Bl&ouml;cke mit class="kopierbar"
+            document.querySelectorAll("pre.kopierbar").forEach(function (pre) {
+                var knopf = document.createElement("button");
+                knopf.type = "button";
+                knopf.textContent = "Kopieren";
+                knopf.style.cssText = "display:block;margin:-0.3em 0 1em auto;padding:0.2em 0.8em;cursor:pointer;";
+                knopf.addEventListener("click", function () {
+                    var text = pre.innerText;
+                    function fertig() {
+                        knopf.textContent = "Kopiert";
+                        setTimeout(function () { knopf.textContent = "Kopieren"; }, 1500);
+                    }
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(text).then(fertig, function () { markieren(pre); });
+                    } else {
+                        markieren(pre);
+                    }
+                });
+                pre.parentNode.insertBefore(knopf, pre.nextSibling);
+            });
+            function markieren(element) {
+                var bereich = document.createRange();
+                bereich.selectNodeContents(element);
+                var auswahl = window.getSelection();
+                auswahl.removeAllRanges();
+                auswahl.addRange(bereich);
+            }
+        </script>

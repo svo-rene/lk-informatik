@@ -1,0 +1,358 @@
+<p>Ein Getränkeautomat nimmt jede Münze an, nur nicht das 2-Euro-Stück mit einem bestimmten Prägejahr. Ein Online-Shop gewährt „ab 50 € versandkostenfrei“, berechnet aber bei genau 50,00 € trotzdem Versand. Solche Fehler fallen beim Ausprobieren selten auf, denn wer probiert schon genau diese Werte? <strong>Testen</strong> heißt: gezielt die Eingaben auswählen, bei denen Fehler am wahrscheinlichsten sind, und das Ergebnis automatisch prüfen lassen – nicht einmal, sondern nach jeder Änderung.</p>
+
+<p>Testfälle mit Eingabe, erwarteter und tatsächlicher Ausgabe kennst du aus vielen Aufgaben dieses Kurses. Auf dieser Seite lernst du, wie man Testfälle <strong>systematisch</strong> auswählt und sie als <strong>Testdatei</strong> neben das Modul legt, sodass jede Person im Team sie mit einem Klick laufen lassen kann. Im V-Modell (Seite 5.2) sind das <strong>Modultests</strong>.</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in vier kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) das Tafelbild bzw. den Code in Thonny mit den Testfällen rechts daneben, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe mit.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Welche Werte soll ich testen? Äquivalenzklassen und Grenzwerte</a> – danach Aufgabe 5.3.1</li>
+            <li><a href="#schritt-2">Tests mit <code>assert</code> in einer Testdatei</a></li>
+            <li><a href="#schritt-3">Einen <code>ValueError</code> erwarten</a></li>
+            <li><a href="#schritt-4">Alle Tests auf einmal: Testrunner, Zustand prüfen, Fehler finden</a> – danach Aufgabe 5.3.2 und 5.3.3</li>
+        </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Welche Werte soll ich testen? Äquivalenzklassen und Grenzwerte</h2>
+
+<p>Alle Eingaben auszuprobieren, ist unmöglich – man muss geschickt auswählen. Im Video siehst du an der Funktion <code>ist_unterpunktet</code> (weniger als 5 Punkte), wie man die Eingaben auf einem Zahlenstrahl in Klassen einteilt und an welchen Stellen man testet. Achte darauf, warum die Vertreter 2 und 10 einen Fehler im Code nicht finden, der Grenzwert 5 aber schon – und woher das erwartete Ergebnis kommt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-3-1_klassen_vorschau.png" src="../vid/5-3-1_klassen.mp4"></video><a href="../vid/5-3-1_klassen.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Welche Werte soll ich testen? (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Testfall und Spezifikation</h3>
+
+<p>Ein <strong>Testfall</strong> besteht aus einer Eingabe, dem <strong>erwarteten</strong> Ergebnis und dem <strong>tatsächlichen</strong> Ergebnis. Das erwartete Ergebnis stammt immer aus der <strong>Spezifikation</strong> (Aufgabenstellung, User Story, Akzeptanzkriterium) – nie aus dem Code. Wer das Erwartete aus dem Code abliest, prüft nur, ob der Code das tut, was er tut.</p>
+
+<p>Alle möglichen Eingaben zu testen, ist fast nie möglich. Schon eine Funktion mit einem <code>int</code>-Parameter hat unendlich viele Eingaben. Deshalb wählt man geschickt aus.</p>
+
+<h3>Äquivalenzklassen</h3>
+
+<p>Eingaben, die laut Spezifikation <strong>gleich behandelt</strong> werden, bilden eine <strong>Äquivalenzklasse</strong>. Es gibt gültige Klassen (normale Verarbeitung) und ungültige Klassen (Fehlermeldung, <code>ValueError</code>). Aus jeder Klasse genügt zunächst <strong>ein Vertreter</strong>, denn verhält sich das Programm für einen Wert der Klasse richtig, wird es das für die anderen vermutlich auch.</p>
+
+<h3>Grenzwertanalyse</h3>
+
+<p>Fehler stecken besonders oft an den <strong>Rändern</strong> der Klassen: <code>&lt;</code> statt <code>&lt;=</code>, <code>range(1, n)</code> statt <code>range(1, n + 1)</code>. Deshalb testet man an jeder Grenze den Wert <strong>direkt davor</strong> und <strong>direkt dahinter</strong> (bei ganzen Zahlen also den letzten Wert der einen und den ersten Wert der nächsten Klasse).</p>
+
+<p>Danach: <a href="uebungen.html#a-5-3-1">Aufgabe 5.3.1</a> – Äquivalenzklassen und Grenzwerte beim Lesewettbewerb.</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Tests mit <code>assert</code> in einer Testdatei →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Tests mit <code>assert</code> in einer Testdatei</h2>
+
+<p>Jetzt prüft Python die Testfälle selbst. Im Video lernst du <code>assert</code> erst in der Kommandozeile kennen, dann legt Thonny neben das Modul <code>kurshalbjahr.py</code> die Testdatei <code>test_kurshalbjahr.py</code>. Achte auf die Meldung beim ersten roten Test: Sie nennt Eingabe, Erwartung und tatsächliches Ergebnis – damit findest du den Fehler im Modul sofort. Kurz erklärt wird auch, wie <code>for punkte, erwartet in [(0, True), …]</code> die Paare auspackt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-3-2_assert_vorschau.png" src="../vid/5-3-2_assert.mp4"></video><a href="../vid/5-3-2_assert.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Wie prüft Python einen Test? (ca. 2 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Tests in Python mit <code>assert</code></h3>
+
+<p><code>assert bedingung, meldung</code> tut nichts, wenn die Bedingung wahr ist. Ist sie falsch, bricht Python mit <code>AssertionError: meldung</code> ab. Die Meldung schreibst du immer im Muster „erwartet …, tatsächlich …“, dann siehst du sofort, was schiefging:</p>
+
+<pre><code class="language-python">ergebnis = ist_unterpunktet(5)
+assert ergebnis == False, f"5 Punkte: erwartet False, tatsächlich {ergebnis}"</code></pre>
+
+<ul>
+            <li><strong>Testfunktionen:</strong> Zusammengehörige Prüfungen stehen in einer Funktion, deren Name mit <code>test_</code> beginnt, z.&nbsp;B. <code>def test_grenzen():</code>. Jede Testfunktion baut sich ihre Objekte selbst neu auf, damit kein Test vom anderen abhängt.</li>
+            <li><strong>Testdatei neben dem Modul:</strong> Zu <code>aufzug.py</code> gehört <code>test_aufzug.py</code> im selben Ordner. Sie importiert das Modul, enthält nur Tests und startet sie unter <code>if __name__ == "__main__":</code>. Das Modul selbst bleibt frei von Testcode.</li>
+        </ul>
+
+<p>Den vollständigen Ablauf aus dem Video – Klassen, Grenzen, Testdatei, Fehler – findest du in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Unterpunktet oder nicht? – Klassen, Grenzen, Testdatei</summary>
+            <p><strong>Ausgangssituation:</strong> In der Oberstufe gilt ein Kurshalbjahr mit weniger als 5 Punkten als <em>unterpunktet</em>. Punkte gibt es von 0 bis 15; andere Werte sind Tippfehler. Spezifikation der Funktion <code>ist_unterpunktet(punkte: int) -&gt; bool</code>: 0 bis 4 → <code>True</code>, 5 bis 15 → <code>False</code>, sonst <code>ValueError</code>. Jemand hat programmiert:</p>
+            <pre><code class="language-python"># kurshalbjahr.py
+def ist_unterpunktet(punkte: int) -&gt; bool:
+    if punkte &lt; 0 or punkte &gt; 15:
+        raise ValueError("Punkte müssen zwischen 0 und 15 liegen")
+    return punkte &lt;= 5</code></pre>
+            <ol>
+                <li><strong>Äquivalenzklassen bilden:</strong> U1 ungültig (unter 0), G1 gültig 0…4 → <code>True</code>, G2 gültig 5…15 → <code>False</code>, U2 ungültig (über 15). Warum: Innerhalb jeder Klasse verlangt die Spezifikation dasselbe Verhalten.</li>
+                <li><strong>Grenzwerte bestimmen:</strong> −1 | 0, 4 | 5, 15 | 16. Warum: Je zwei Werte an jeder der drei Grenzen, insgesamt sechs Tests statt unendlich vieler.</li>
+                <li><strong>Erwartete Werte aus der Spezifikation:</strong> −1 → ValueError, 0 → True, 4 → True, 5 → False, 15 → False, 16 → ValueError. Warum nicht aus dem Code: Der Code liefert bei 5 <code>True</code> – wer das abschreibt, findet den Fehler nie.</li>
+                <li><strong>Testdatei neben das Modul legen:</strong>
+                    <pre><code class="language-python"># test_kurshalbjahr.py
+from kurshalbjahr import ist_unterpunktet
+
+def wirft_value_error(funktion, *argumente) -&gt; bool:
+    try:
+        funktion(*argumente)
+    except ValueError:
+        return True
+    return False
+
+def test_gueltige_grenzen():
+    for punkte, erwartet in [(0, True), (4, True), (5, False), (15, False)]:
+        ergebnis = ist_unterpunktet(punkte)
+        assert ergebnis == erwartet, f"{punkte} Punkte: erwartet {erwartet}, tatsächlich {ergebnis}"
+
+def test_ungueltige_grenzen():
+    assert wirft_value_error(ist_unterpunktet, -1), "-1 Punkte: erwartet ValueError"
+    assert wirft_value_error(ist_unterpunktet, 16), "16 Punkte: erwartet ValueError"
+
+if __name__ == "__main__":
+    test_gueltige_grenzen()
+    test_ungueltige_grenzen()
+    print("Alle Tests bestanden.")</code></pre>
+                    Warum eine Schleife über Paare: Jeder neue Grenzwert ist eine Zeile mehr in der Liste, nicht ein neuer Block Code.</li>
+                <li><strong>Test starten:</strong> <code>test_kurshalbjahr.py</code> in Thonny ausführen. Die letzte Zeile der Ausgabe lautet:
+                    <pre><code>AssertionError: 5 Punkte: erwartet False, tatsächlich True</code></pre>
+                    Die Meldung zeigt den Fehler genau: Bei 5 Punkten stimmt das Ergebnis nicht. Ursache ist <code>&lt;= 5</code> statt <code>&lt; 5</code>.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Nach der Korrektur <code>return punkte &lt; 5</code> gibt die Testdatei „Alle Tests bestanden.“ aus.</p>
+            <p><strong>Kontrolle:</strong> Ein Vertreter aus der Mitte (z.&nbsp;B. 2 oder 10) hätte den Fehler nicht gefunden – beide liefern auch mit <code>&lt;= 5</code> das Richtige.</p>
+            </details>
+        </div>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Einen <code>ValueError</code> erwarten →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Einen <code>ValueError</code> erwarten</h2>
+
+<p>Für −1 und 16 verlangt die Spezifikation einen <code>ValueError</code>. Ruft ein Test die Funktion einfach auf, bricht er aber mit genau diesem Fehler ab. Im Video siehst du die Hilfsfunktion <code>wirft_value_error</code>, die den Fehler mit <code>try</code>/<code>except</code> abfängt und stattdessen <code>True</code> oder <code>False</code> liefert. Kurz erklärt werden <code>try</code>/<code>except</code> und <code>*argumente</code>.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-3-3_valueerror_vorschau.png" src="../vid/5-3-3_valueerror.mp4"></video><a href="../vid/5-3-3_valueerror.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Einen ValueError erwarten (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Fehler erwarten</h3>
+
+<p>Soll eine Eingabe einen <code>ValueError</code> auslösen, prüfst du das mit einer kleinen Hilfsfunktion:</p>
+
+<pre><code class="language-python">def wirft_value_error(funktion, *argumente) -&gt; bool:
+    """True, wenn der Aufruf funktion(*argumente) einen ValueError auslöst."""
+    try:
+        funktion(*argumente)
+    except ValueError:
+        return True
+    return False
+
+assert wirft_value_error(ist_unterpunktet, 16), "16 Punkte: erwartet ValueError"</code></pre>
+
+<p><code>*argumente</code> sammelt alle weiteren Argumente ein und reicht sie an die Funktion weiter. Du kannst auch eine Methode übergeben, z.&nbsp;B. <code>wirft_value_error(Aufzug().einsteigen, 0)</code>.</p>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Alle Tests auf einmal →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Alle Tests auf einmal – Testrunner, Zustand prüfen, Fehler finden</h2>
+
+<p>Der erste <code>AssertionError</code> beendet das Programm – die übrigen Tests laufen dann gar nicht mehr. Im Video testest du die Klasse <code>Aufzug</code> mit dem kleinen Testrunner von dieser Seite, der alle Tests nacheinander aufruft und am Ende zählt. Achte darauf, welche Tests rot werden, obwohl der Rückgabewert stimmt: Bei Methoden mit Nebenwirkung muss der Test auch den Zustand prüfen. Kurz erklärt wird, wie man Funktionen in eine Liste packt und mit <code>.__name__</code> ihren Namen bekommt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-3-4_testrunner_vorschau.png" src="../vid/5-3-4_testrunner.mp4"></video><a href="../vid/5-3-4_testrunner.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Alle Tests auf einmal – der Aufzug (ca. 2 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Alle Tests auf einmal</h3>
+
+<p>Ein <code>AssertionError</code> beendet das Programm beim ersten Fehler. Damit trotzdem alle Tests laufen und du eine Übersicht bekommst, nutzt du am Ende der Testdatei diesen kleinen Testrunner. Er ruft die Testfunktionen aus einer Liste nacheinander auf und fängt den <code>AssertionError</code> ab:</p>
+
+<pre><code class="language-python">if __name__ == "__main__":
+    tests = [test_normalfall, test_genau_630_kg, test_631_kg]
+    fehler = 0
+    for test in tests:
+        try:
+            test()
+            print("ok     ", test.__name__)
+        except AssertionError as meldung:
+            print("FEHLER ", test.__name__, "–", meldung)
+            fehler += 1
+    print(f"{len(tests) - fehler} von {len(tests)} Tests bestanden")</code></pre>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Der Aufzug – zwei Grenzen, ein Zustand und ein versteckter Fehler</summary>
+            <p><strong>Ausgangssituation:</strong> Für ein Simulationsprogramm des Schulaufzugs gibt es die Klasse <code>Aufzug</code>. Spezifikation: höchstens 8 Personen <em>und</em> höchstens 630&nbsp;kg. <code>einsteigen(gewicht_kg)</code> nimmt eine Person nur auf, wenn danach beide Grenzen eingehalten sind, und gibt dann <code>True</code> zurück. Sonst gibt sie <code>False</code> zurück und <strong>nichts ändert sich</strong>. Gewichte unter 1&nbsp;kg oder über 250&nbsp;kg sind Tippfehler (<code>ValueError</code>).</p>
+            <pre><code class="language-python"># aufzug.py  (Model)
+class Aufzug:
+    MAX_PERSONEN = 8
+    MAX_LAST_KG = 630
+
+    def __init__(self):
+        self.__personen = 0
+        self.__last_kg = 0
+
+    def personen(self) -&gt; int:
+        return self.__personen
+
+    def last(self) -&gt; int:
+        return self.__last_kg
+
+    def einsteigen(self, gewicht_kg: int) -&gt; bool:
+        if gewicht_kg &lt;= 0 or gewicht_kg &gt; 250:
+            raise ValueError("unmögliches Gewicht")
+        self.__personen += 1
+        self.__last_kg += gewicht_kg
+        if self.__personen &gt; Aufzug.MAX_PERSONEN or self.__last_kg &gt;= Aufzug.MAX_LAST_KG:
+            return False
+        return True</code></pre>
+            <ol>
+                <li><strong>Grenzen finden:</strong> Es gibt drei: das Gewicht einer Person (1…250), die Gesamtlast (630 erlaubt, 631 nicht) und die Personenzahl (8. Person erlaubt, 9. nicht). Warum alle drei: Jede Grenze ist eine eigene Stelle im Code, an der ein Vergleich falsch sein kann.</li>
+                <li><strong>Den Zustand mitprüfen:</strong> Bei einer abgelehnten Person genügt es nicht, <code>False</code> zu prüfen. Die Spezifikation sagt auch „nichts ändert sich“, also prüft der Test zusätzlich <code>personen()</code> bzw. <code>last()</code>. Warum: Methoden mit Nebenwirkung können das richtige Ergebnis zurückgeben und trotzdem den Zustand verderben.</li>
+                <li><strong>Testfälle aufstellen:</strong>
+                    <table class="gitter">
+                        <tr><th>Test</th><th>Aufrufe</th><th>erwartet</th></tr>
+                        <tr><td>Normalfall</td><td>70, 80, 65 kg</td><td>dreimal <code>True</code>, 3 Personen, 215 kg</td></tr>
+                        <tr><td>genau 630 kg</td><td>4 × 150 kg, dann 30 kg</td><td><code>True</code></td></tr>
+                        <tr><td>631 kg</td><td>4 × 150 kg, dann 31 kg</td><td><code>False</code>, Last bleibt 600</td></tr>
+                        <tr><td>9. Person</td><td>8 × 50 kg, dann 50 kg</td><td><code>False</code>, Personen bleiben 8</td></tr>
+                        <tr><td>Gewicht</td><td>0, 251, 250 kg</td><td>ValueError, ValueError, kein ValueError</td></tr>
+                    </table>
+                </li>
+                <li><strong>Testdatei schreiben</strong> (Hilfsfunktion <code>wirft_value_error</code> wie oben):
+                    <pre><code class="language-python"># test_aufzug.py
+from aufzug import Aufzug
+
+def wirft_value_error(funktion, *argumente) -&gt; bool:
+    try:
+        funktion(*argumente)
+    except ValueError:
+        return True
+    return False
+
+def test_normalfall():
+    a = Aufzug()
+    for gewicht in [70, 80, 65]:
+        assert a.einsteigen(gewicht) == True, f"{gewicht} kg: erwartet True"
+    assert a.personen() == 3, f"Personen: erwartet 3, tatsächlich {a.personen()}"
+    assert a.last() == 215, f"Last: erwartet 215, tatsächlich {a.last()}"
+
+def test_genau_630_kg():
+    a = Aufzug()
+    for gewicht in [150, 150, 150, 150]:
+        a.einsteigen(gewicht)
+    ergebnis = a.einsteigen(30)                 # danach genau 630 kg
+    assert ergebnis == True, f"bei 630 kg: erwartet True, tatsächlich {ergebnis}"
+
+def test_631_kg():
+    a = Aufzug()
+    for gewicht in [150, 150, 150, 150]:
+        a.einsteigen(gewicht)
+    ergebnis = a.einsteigen(31)                 # danach wären es 631 kg
+    assert ergebnis == False, f"bei 631 kg: erwartet False, tatsächlich {ergebnis}"
+    assert a.last() == 600, f"Last: erwartet 600, tatsächlich {a.last()}"
+
+def test_neunte_person():
+    a = Aufzug()
+    for i in range(8):
+        a.einsteigen(50)
+    ergebnis = a.einsteigen(50)
+    assert ergebnis == False, f"9. Person: erwartet False, tatsächlich {ergebnis}"
+    assert a.personen() == 8, f"Personen: erwartet 8, tatsächlich {a.personen()}"
+
+def test_unmoegliches_gewicht():
+    assert wirft_value_error(Aufzug().einsteigen, 0), "0 kg: erwartet ValueError"
+    assert wirft_value_error(Aufzug().einsteigen, 251), "251 kg: erwartet ValueError"
+    assert not wirft_value_error(Aufzug().einsteigen, 250), "250 kg: kein ValueError erwartet"
+
+if __name__ == "__main__":
+    tests = [test_normalfall, test_genau_630_kg, test_631_kg,
+             test_neunte_person, test_unmoegliches_gewicht]
+    fehler = 0
+    for test in tests:
+        try:
+            test()
+            print("ok     ", test.__name__)
+        except AssertionError as meldung:
+            print("FEHLER ", test.__name__, "–", meldung)
+            fehler += 1
+    print(f"{len(tests) - fehler} von {len(tests)} Tests bestanden")</code></pre>
+                </li>
+                <li><strong>Ausgabe lesen:</strong>
+                    <pre><code>ok      test_normalfall
+FEHLER  test_genau_630_kg – bei 630 kg: erwartet True, tatsächlich False
+FEHLER  test_631_kg – Last: erwartet 600, tatsächlich 631
+FEHLER  test_neunte_person – Personen: erwartet 8, tatsächlich 9
+ok      test_unmoegliches_gewicht
+2 von 5 Tests bestanden</code></pre>
+                    Zwei Ursachen: <code>&gt;= MAX_LAST_KG</code> lehnt genau 630&nbsp;kg ab (Grenzwertfehler). Und die Methode erhöht Personen und Last <em>vor</em> der Prüfung und nimmt das bei Ablehnung nicht zurück (Zustandsfehler). Die Falle: Beim 631-kg-Test und beim 9.-Person-Test ist der Rückgabewert <code>False</code> richtig – nur die Zustandsprüfung deckt den Fehler auf.</li>
+                <li><strong>Korrigieren:</strong> erst prüfen, dann ändern:
+                    <pre><code class="language-python">    def einsteigen(self, gewicht_kg: int) -&gt; bool:
+        if gewicht_kg &lt;= 0 or gewicht_kg &gt; 250:
+            raise ValueError("unmögliches Gewicht")
+        if self.__personen + 1 &gt; Aufzug.MAX_PERSONEN:
+            return False
+        if self.__last_kg + gewicht_kg &gt; Aufzug.MAX_LAST_KG:
+            return False
+        self.__personen += 1
+        self.__last_kg += gewicht_kg
+        return True</code></pre>
+                </li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Nach der Korrektur meldet der Testrunner „5 von 5 Tests bestanden“.</p>
+            <p><strong>Kontrolle:</strong> Der Normalfall war schon mit dem fehlerhaften Code grün. Ohne Grenzwerte und Zustandsprüfung hätte niemand die Fehler bemerkt. Die Testdatei bleibt im Repository: Ändert später jemand <code>einsteigen</code>, zeigen dieselben fünf Tests sofort, ob noch alles stimmt.</p>
+            </details>
+        </div>
+
+<h3>Fehler finden mit Tests</h3>
+
+<ol>
+            <li><strong>Test schreiben, der den Fehler zeigt</strong> (er muss zuerst <em>fehlschlagen</em>).</li>
+            <li><strong>Meldung lesen:</strong> Welche Eingabe, was erwartet, was tatsächlich?</li>
+            <li><strong>Ursache im Code suchen</strong>, meist an einem Vergleich, einer Schleifengrenze oder in der Reihenfolge „ändern, dann prüfen“.</li>
+            <li><strong>Korrigieren und alle Tests erneut laufen lassen</strong>, nicht nur den neuen. So merkst du, wenn die Korrektur an anderer Stelle etwas kaputt macht.</li>
+            <li><strong>Den Test behalten.</strong> Jeder gefundene Fehler wird ein Test, damit er nie unbemerkt zurückkommt.</li>
+        </ol>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Und was ist mit unittest und pytest?</summary>
+                <p>In der Praxis nutzt man Test-Werkzeuge wie <code>unittest</code> (in Python eingebaut) oder <code>pytest</code>. Sie finden alle Funktionen <code>test_…</code> automatisch, zählen die Ergebnisse und zeigen bei einem Fehler Erwartung und Ergebnis an – im Prinzip das, was unser kleiner Testrunner tut. Für den Kurs reichen <code>assert</code> und der Runner; sie laufen in Thonny ohne Installation.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-5-3-2">Aufgabe 5.3.2</a> – eine Testdatei schreiben und den Fehler finden, und <a href="uebungen.html#a-5-3-3">Aufgabe 5.3.3</a> – die Stempelkarte testen.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Testen als Beruf</summary>
+                <p><strong>Alltag:</strong> Jedes Mal, wenn eine Banking-App ein Update bekommt, laufen vorher Tausende automatischer Tests – auch für 0,00 €, für den höchsten erlaubten Betrag und für einen Cent darüber.</p>
+                <p><strong>Beruf:</strong> <strong>Softwaretesterinnen und -tester</strong> bzw. Fachleute für Qualitätssicherung entwerfen Testfälle aus Anforderungen, oft mit genau den Verfahren dieser Seite. Für den Einstieg gibt es international anerkannte Zertifikate (z.&nbsp;B. ISTQB Certified Tester). In vielen Teams schreiben auch die Entwicklerinnen und Entwickler selbst Modultests; ohne grüne Tests wird kein Pull Request übernommen.</p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>Testfälle wählt man systematisch: Die Eingaben werden in Äquivalenzklassen eingeteilt (gültige und ungültige), aus jeder Klasse kommt ein Vertreter, und an jeder Klassengrenze werden der Wert direkt davor und direkt dahinter getestet. Das erwartete Ergebnis stammt immer aus der Spezifikation. In Python stehen die Tests in einer eigenen Datei <code>test_&lt;modul&gt;.py</code> neben dem Modul, in Funktionen <code>test_…()</code> mit <code>assert bedingung, f"erwartet …, tatsächlich …"</code>. Erwartete Fehler prüft die Hilfsfunktion <code>wirft_value_error</code>, und ein kleiner Testrunner lässt alle Tests laufen und zählt die Fehler. Bei Methoden mit Nebenwirkung prüft ein guter Test auch den Zustand danach.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Testfall</strong> – Eingabe, erwartetes Ergebnis (aus der Spezifikation) und tatsächliches Ergebnis. Ein Test ist bestanden, wenn beide übereinstimmen.<br>
+            <strong>Äquivalenzklasse</strong> – Menge von Eingaben, die laut Spezifikation gleich behandelt werden; gültige und ungültige Klassen, aus jeder mindestens ein Vertreter.<br>
+            <strong>Grenzwertanalyse</strong> – an jeder Klassengrenze den Wert direkt davor und direkt dahinter testen, weil dort die meisten Fehler entstehen.</p>
+        </div>
+
+<div class="merke">
+            <p>Tests stehen in einer eigenen Datei <code>test_&lt;modul&gt;.py</code> neben dem Modul, in Funktionen <code>test_…()</code>, mit <code>assert bedingung, f"erwartet …, tatsächlich …"</code>.<br>
+            <strong>Achtung:</strong> <code>assert (bedingung, "meldung")</code> mit Klammern prüft ein Tupel – und ein nicht leeres Tupel ist immer wahr. Python warnt dann mit <code>SyntaxWarning: assertion is always true</code>.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Das Extraleben <span class="niveau">AFB I</span></summary>
+                <p>In einem Spiel gibt es ab 1000 Punkten ein Extraleben. Punkte sind ganze Zahlen ab 0; negative Werte sind ungültig (<code>ValueError</code>). Nenne die Äquivalenzklassen mit je einem Vertreter und alle Grenzwerte, die du testen würdest.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Drei Klassen: ungültig unter 0 (z.&nbsp;B. −5 → <code>ValueError</code>), gültig 0 bis 999 (z.&nbsp;B. 400 → kein Extraleben), gültig ab 1000 (z.&nbsp;B. 3000 → Extraleben). Grenzwerte: −1 | 0 und 999 | 1000. Eine obere Grenze gibt es laut Spezifikation nicht.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Wer hat den Fehler – Modul oder Test? <span class="niveau">AFB II</span></summary>
+                <p>Das Modul <code>kurshalbjahr.py</code> ist schon korrigiert (<code>return punkte &lt; 5</code>). Jemand ergänzt in der Testdatei die Zeile <code>assert ist_unterpunktet(4) == False, "4 Punkte: erwartet False"</code>. Was gibt Python aus? Wo steckt der Fehler, und was fehlt außerdem an der Meldung?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Python bricht ab mit <code>AssertionError: 4 Punkte: erwartet False</code>. Der Fehler steckt im Test: Laut Spezifikation sind 4 Punkte unterpunktet, erwartet ist also <code>True</code>. Der Meldung fehlt außerdem das „tatsächlich …“ – mit <code>f"…, tatsächlich {ergebnis}"</code> hätte man sofort gesehen, dass das Modul <code>True</code> liefert.</p>
+                </details>
+            </details>
+        </div>

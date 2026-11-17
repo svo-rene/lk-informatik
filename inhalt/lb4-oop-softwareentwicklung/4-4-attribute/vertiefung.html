@@ -1,0 +1,40 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-4-4-5">
+        <details>
+            <summary>Aufgabe 4.4.5: Fehler finden – die geteilte Warteliste <span class="niveau">AFB III</span></summary>
+            <p>Im Fahrradverleih der Stadt kann man sich an jeder Station auf eine Warteliste setzen lassen. Paul hat programmiert:</p>
+            <pre><code class="language-python">class Station:
+    warteliste = []
+
+    def __init__(self, ort):
+        self.ort = ort
+
+    def vormerken(self, name):
+        self.warteliste.append(name)
+
+bahnhof = Station("Bahnhof")
+schule = Station("Schule")
+bahnhof.vormerken("Ole")
+schule.vormerken("Mira")
+print(bahnhof.warteliste)
+print(schule.warteliste)
+print(Station.warteliste)</code></pre>
+            <ol>
+                <li>Gib die drei Ausgabezeilen an und erkläre, warum Ole am Bahnhof und Mira an der Schule auf derselben Liste stehen.</li>
+                <li>In Aufgabe 4.4.3 hat <code>self.stand += 1</code> ein <em>neues Instanzattribut</em> angelegt. Erkläre, warum <code>self.warteliste.append(name)</code> das nicht tut.</li>
+                <li>Korrigiere die Klasse, sodass jede Station ihre eigene Warteliste hat. Gib die Ausgaben der ersten beiden <code>print</code>-Anweisungen nach der Korrektur an und begründe, was die dritte <code>print</code>-Anweisung jetzt bewirkt.</li>
+                <li>Teste die korrigierte Klasse zusätzlich:
+                    <table class="gitter">
+                        <thead><tr><th>Anweisungen (im Anschluss an das korrigierte Programm, die dritte <code>print</code>-Anweisung gestrichen)</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>bahnhof.vormerken("Ida")</code><br><code>print(bahnhof.warteliste)</code></td><td><code>['Ole', 'Ida']</code></td><td></td></tr>
+                            <tr><td><code>print(schule.warteliste)</code></td><td><code>['Mira']</code></td><td></td></tr>
+                            <tr><td><code>print(Station("Markt").warteliste)</code></td><td><code>[]</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+            <p class="tipp">Tipp: Unterscheide genau zwischen „einer Variablen etwas Neues zuweisen“ (<code>=</code>, <code>+=</code>) und „ein vorhandenes Objekt verändern“ (<code>append</code>).</p>
+        </details>
+    </div>

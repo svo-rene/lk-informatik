@@ -1,0 +1,37 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-2-2-8-6">
+            <details>
+                <summary>Aufgabe 2.2.8.6: Fehler finden – zwei Fehler in der binären Suche <span class="niveau">AFB III</span></summary>
+                <pre><code class="language-python">def binaere_suche(liste, gesucht):
+    links = 0
+    rechts = len(liste) - 1
+    while links &lt; rechts:
+        mitte = (links + rechts) // 2
+        if liste[mitte] == gesucht:
+            return mitte
+        elif gesucht &lt; liste[mitte]:
+            rechts = mitte - 1
+        else:
+            links = mitte
+    return -1</code></pre>
+                <ol>
+                    <li>Verfolge den Ablauf für <code>([1, 3, 5], 3)</code>, <code>([1, 3, 5], 1)</code>, <code>([1, 3, 5], 5)</code> und <code>([7], 7)</code>. Lege eine Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe an.</li>
+                    <li>Beschreibe die beiden Fehler und ordne jedem Fehler die Testfälle zu, die ihn zeigen.</li>
+                    <li>Korrigiere die Funktion. Begründe, warum die Schleife danach in jedem Fall terminiert.</li>
+                </ol>
+                <p class="tipp">Einer der Testfälle endet nie. Unterbrich das Programm notfalls mit <kbd>Strg</kbd>&nbsp;+&nbsp;<kbd>C</kbd> bzw. mit dem Stopp-Knopf im Notebook.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-8-7">
+            <details>
+                <summary>Aufgabe 2.2.8.7: Lohnt sich das Sortieren? <span class="niveau">AFB III</span></summary>
+                <p>Das Schulverwaltungsprogramm einer Schule mit 1200 Schülerinnen und Schülern sucht Datensätze nach Namen. Bisher wird linear gesucht. Ein Entwickler schlägt vor, die Liste einmal zu sortieren (etwa n · log<sub>2</sub> n Vergleiche) und danach binär zu suchen.</p>
+                <ol>
+                    <li>Berechne für den schlechtesten Fall, ab wie vielen Suchen pro Tag sich der Vorschlag lohnt, wenn jeden Morgen neu sortiert werden muss.</li>
+                    <li>Im Laufe des Tages kommen neue Schüler hinzu. Beurteile, wie man die Liste sortiert hält, ohne jedes Mal komplett neu zu sortieren, und welchen Aufwand das Einfügen hat.</li>
+                    <li>Eine Mitschülerin meint: „Die binäre Suche ist gar kein richtiges Divide and Conquer, denn es wird nichts kombiniert.“ Nimm Stellung.</li>
+                </ol>
+            </details>
+        </div>

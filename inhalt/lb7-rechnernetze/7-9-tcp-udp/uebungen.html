@@ -1,0 +1,41 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.9.3: Zuverlässigkeit über UDP <span class="niveau">AFB III</span></summary>
+                <p>Das moderne Protokoll QUIC (Grundlage von HTTP/3) läuft über UDP, bietet aber trotzdem zuverlässige, geordnete und verschlüsselte Übertragung. Erläutere, wie das möglich ist, und beurteile, warum die Entwickler nicht einfach TCP verwendet haben.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.9.4: Wer spricht hier mit wem? <span class="niveau">AFB II</span></summary>
+                <p>Auf einem Laptop (192.168.178.23) zeigt <code>netstat -an</code> unter anderem diese Zeilen:</p>
+<pre>Proto  Lokale Adresse          Remoteadresse          Status
+TCP    0.0.0.0:22              0.0.0.0:0              ABHÖREN
+TCP    192.168.178.23:50311    198.51.100.7:443       HERGESTELLT
+TCP    192.168.178.23:50312    198.51.100.7:443       HERGESTELLT
+TCP    192.168.178.23:50320    203.0.113.25:993       HERGESTELLT
+TCP    192.168.178.23:50325    203.0.113.25:587       SYN_GESENDET
+UDP    0.0.0.0:68              *:*</pre>
+                <ol>
+                    <li>Gib für jede Zeile an, welcher Dienst bzw. welches Protokoll beteiligt ist und ob der Laptop dabei Client oder Server ist.</li>
+                    <li>Erkläre, wie der Laptop die Antworten der Zeilen 2 und 3 auseinanderhält, obwohl sie vom selben Server und Port kommen.</li>
+                    <li>Die Verbindung in Zeile 5 bleibt im Zustand „SYN gesendet“. Erkläre mit dem Drei-Wege-Handshake, was das bedeutet, und nenne eine mögliche Ursache.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.9.5: Vier Segmente, eins geht verloren <span class="niveau">AFB II</span></summary>
+                <p>Nach dem Handshake beginnen die Daten des Clients mit dem Byte Nummer 1. Der Client sendet vier Segmente zu je 1&nbsp;000 Byte direkt hintereinander. Das zweite Segment geht verloren, die anderen kommen in der gesendeten Reihenfolge an. Der Server bestätigt jedes ankommende Segment sofort.</p>
+                <ol>
+                    <li>Gib die Sequenznummern der vier Segmente an.</li>
+                    <li>Gib die Bestätigungsnummern an, die der Server nach jedem ankommenden Segment sendet, und erkläre, woran der Client den Verlust erkennt.</li>
+                    <li>Der Server hat die Segmente 3 und 4 zwischengespeichert. Welche Bestätigungsnummer sendet er, nachdem das wiederholte Segment 2 angekommen ist? Begründe mit der kumulativen Bestätigung.</li>
+                </ol>
+            </details>
+        </div>

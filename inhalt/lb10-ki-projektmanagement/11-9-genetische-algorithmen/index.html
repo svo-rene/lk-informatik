@@ -1,0 +1,166 @@
+<p>Genetische Algorithmen sind ein Optimierungsverfahren, das sich am Vorbild der biologischen Evolution orientiert. Die Grundidee stammt aus Charles Darwins Evolutionstheorie der natürlichen Selektion. Die bekannte Formulierung „Survival of the Fittest“ prägte der Philosoph Herbert Spencer (1864); Darwin übernahm sie später in sein Werk. „Fittest“ bedeutet dabei nicht „der Stärkste“, sondern „der am besten Angepasste“: In der Natur setzen sich diejenigen Individuen durch, die am besten an ihre Umgebung angepasst sind, und geben ihre Eigenschaften häufiger an die nächste Generation weiter. Diese Idee wird bei genetischen Algorithmen auf Optimierungsprobleme übertragen.</p>
+
+<p>Eingesetzt werden genetische Algorithmen vor allem bei Optimierungsproblemen mit einem riesigen Suchraum, bei denen es unmöglich ist, alle Lösungsmöglichkeiten einzeln durchzuprobieren. Statt einer festen Rechenvorschrift wird eine ganze Menge an möglichen Lösungen Schritt für Schritt „weiterentwickelt“, bis eine gute Lösung gefunden wird.</p>
+
+<h2>1. Grundbegriffe</h2>
+
+<p>Bevor der Ablauf eines genetischen Algorithmus erklärt werden kann, müssen einige zentrale Begriffe geklärt werden:</p>
+
+<ul>
+            <li><strong>Population:</strong> die Menge aller aktuell betrachteten Lösungskandidaten (auch Generation genannt).</li>
+            <li><strong>Individuum / Chromosom:</strong> eine einzelne Lösung innerhalb der Population. Ein Chromosom wird meist codiert, z.&nbsp;B. als Bitstring (Folge aus 0 und 1) oder als Zahlenfolge.</li>
+            <li><strong>Fitnessfunktion:</strong> eine Funktion, die bewertet, wie gut eine einzelne Lösung (ein Chromosom) das gegebene Problem löst. Je höher der Fitnesswert, desto besser die Lösung.</li>
+            <li><strong>Selektion:</strong> die Auswahl der Individuen, die sich „fortpflanzen“ dürfen. Individuen mit besserer Fitness werden bevorzugt ausgewählt, schlechtere haben eine geringere Chance.</li>
+            <li><strong>Crossover / Rekombination:</strong> Zwei ausgewählte Individuen („Eltern“) werden kombiniert, um ein oder zwei neue Individuen („Kinder“) zu erzeugen, die Eigenschaften von beiden Eltern erben.</li>
+            <li><strong>Mutation:</strong> eine kleine, zufällige Veränderung an einem Chromosom (z.&nbsp;B. das Umdrehen einer einzelnen 0 zu einer 1). Mutation sorgt für zusätzliche Vielfalt in der Population.</li>
+            <li><strong>Elitismus:</strong> Die besten Individuen einer Generation werden unverändert in die nächste übernommen. So kann die beste gefundene Lösung nicht durch Crossover oder Mutation verloren gehen.</li>
+        </ul>
+
+<h2>2. Ablauf eines genetischen Algorithmus</h2>
+
+<ol>
+            <li>Population zufällig initialisieren.</li>
+            <li>Fitness jedes Individuums berechnen; das beste bisher gefundene Individuum merken.</li>
+            <li>Individuen für die Fortpflanzung selektieren (bessere Fitness = höhere Chance, ausgewählt zu werden).</li>
+            <li>Crossover anwenden, um aus den selektierten Individuen neue Individuen zu erzeugen.</li>
+            <li>Mutation anwenden, um zufällige kleine Veränderungen einzubringen.</li>
+            <li>Neue Generation aus den erzeugten Individuen bilden (bei Elitismus zusätzlich die besten Individuen der alten Generation übernehmen).</li>
+            <li>Wiederholen ab Schritt 2, bis ein Abbruchkriterium erreicht ist (z.&nbsp;B. eine maximale Anzahl an Generationen oder eine ausreichend hohe Fitness).</li>
+        </ol>
+
+<h2>3. Beispiel von Hand: das Rucksackproblem</h2>
+
+<p>Beim Rucksackproblem (Knapsack-Problem) sollen Gegenstände mit unterschiedlichem Wert und Gewicht so in einen Rucksack gepackt werden, dass der Gesamtwert maximal wird, ohne eine maximale Gewichtsgrenze zu überschreiten. Gegeben seien folgende 4 Gegenstände und eine Gewichtsgrenze von 50:</p>
+
+<table>
+            <tr><th>Gegenstand</th><th>Wert</th><th>Gewicht</th></tr>
+            <tr><td>A</td><td>60</td><td>10</td></tr>
+            <tr><td>B</td><td>100</td><td>20</td></tr>
+            <tr><td>C</td><td>120</td><td>30</td></tr>
+            <tr><td>D</td><td>80</td><td>15</td></tr>
+        </table>
+
+<p>Ein Chromosom codiert, welche Gegenstände eingepackt werden: An Position 1 steht eine 1, wenn Gegenstand A eingepackt wird, sonst eine 0 (analog für B, C, D). Ein Chromosom besteht also aus 4 Bits in der Reihenfolge A, B, C, D.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Gegenstände und Gewichtsgrenze 50 wie in der Tabelle oben. Die Fitness eines Chromosoms ist der Gesamtwert der eingepackten Gegenstände; ist der Rucksack zu schwer, ist die Fitness 0. Bewertet werden zwei Chromosomen.</p>
+            <ol>
+                <li><strong>Was:</strong> Chromosom decodieren. – <em>warum:</em> Jedes Bit steht für einen Gegenstand; erst nach dem Decodieren weiß man, was im Rucksack ist.
+                    <br><strong>Beispiel Chromosom 1:</strong> <code>1 1 0 0</code> bedeutet: A und B werden eingepackt.</li>
+                <li><strong>Was:</strong> Wert und Gewicht der eingepackten Gegenstände addieren. – <em>warum:</em> Der Wert ist das, was maximiert werden soll; das Gewicht entscheidet, ob die Lösung überhaupt erlaubt ist.
+                    <br>Wert: 60 + 100 = 160. Gewicht: 10 + 20 = 30.</li>
+                <li><strong>Was:</strong> Gewichtsgrenze prüfen und Fitness festlegen. – <em>warum:</em> Nur erlaubte Lösungen dürfen ihren vollen Wert als Fitness erhalten.
+                    <br>30 ≤ 50, also erlaubt. <strong>Fitness = 160</strong>.</li>
+                <li><strong>Was:</strong> Dasselbe Verfahren für ein zweites Chromosom, bei dem die Grenze überschritten wird (Sonderfall). – <em>warum:</em> Ohne Strafe wäre dieses ungültige Chromosom mit 260 das „beste“ der beiden, und der Algorithmus würde gezielt zu schwere Rucksäcke züchten.
+                    <br><strong>Beispiel Chromosom 2:</strong> <code>1 0 1 1</code> bedeutet: A, C und D werden eingepackt.<br>
+                    Wert: 60 + 120 + 80 = 260. Gewicht: 10 + 30 + 15 = 55 (&gt; 50, also nicht erlaubt!). Da die Gewichtsgrenze überschritten wird, bekommt dieses Chromosom eine Strafe: <strong>Fitness = 0</strong> (statt 260).</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Chromosom 1 (<code>1 1 0 0</code>) hat die Fitness 160, Chromosom 2 (<code>1 0 1 1</code>) trotz des höheren Werts die Fitness 0.</p>
+            <p><strong>Kontrolle:</strong> Das Gewicht lässt sich auch bitweise berechnen: Chromosom 2 ergibt <code>1 · 10 + 0 · 20 + 1 · 30 + 1 · 15 = 55</code>, Chromosom 1 ergibt <code>1 · 10 + 1 · 20 + 0 · 30 + 0 · 15 = 30</code>.</p>
+            </details>
+        </div>
+
+<p>Auf diese Weise wird jedes Chromosom der Population bewertet. Chromosomen, die zu schwer sind, werden also automatisch schlecht bewertet und setzen sich in der Selektion seltener durch.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Crossover und Mutation. Die Eltern <code>1 1 0 0</code> (Fitness 160) und <code>0 0 1 1</code> (C und D: Wert 200, Gewicht 45, Fitness 200) wurden bei der Selektion ausgewählt und werden nach Position 1 gekreuzt (Ein-Punkt-Crossover).</p>
+            <ol>
+                <li><strong>Was:</strong> Fitness der Eltern bestätigen: <code>1 1 0 0</code> → A, B → 160 (Gewicht 30); <code>0 0 1 1</code> → C, D → 200 (Gewicht 45). – <em>warum:</em> Beide Eltern sind gültig und vergleichsweise gut – deshalb wurden sie ausgewählt; ihre Fitness ist der Maßstab für die Kinder.</li>
+                <li><strong>Was:</strong> Ein-Punkt-Crossover nach Position 1: Jedes Kind erhält das erste Bit von einem Elternteil und die Bits 2 bis 4 vom anderen. – <em>warum:</em> So erben die Kinder Eigenschaften beider Eltern.
+                    <ul>
+                        <li>Kind 1 = <code>1</code> | <code>0 1 1</code> = <code>1 0 1 1</code> → Gewicht 55 → Fitness 0</li>
+                        <li>Kind 2 = <code>0</code> | <code>1 0 0</code> = <code>0 1 0 0</code> → nur B → Fitness 100</li>
+                    </ul>
+                </li>
+                <li><strong>Was:</strong> Die Kinder bewerten und die Falle erkennen: Kind 1 (A, C, D) ist zu schwer, obwohl beide Eltern gültig waren. – <em>warum:</em> Crossover achtet nicht auf die Gewichtsgrenze; erst die Fitnessfunktion mit Strafe sorgt dafür, dass ungültige Kinder schlecht bewertet werden.</li>
+                <li><strong>Was:</strong> Mutation anwenden. Mutiert bei Kind 2 zufällig das letzte Bit, entsteht <code>0 1 0 1</code> (B und D: Wert 180, Gewicht 35, Fitness 180) – besser als beide Kinder vor der Mutation. – <em>warum:</em> Die Mutation bringt eine Kombination (B mit D) hervor, die keiner der Eltern enthielt; das ist neue Vielfalt.</li>
+                <li><strong>Was:</strong> Durchschnittsfitness vergleichen: Eltern <code>(160 + 200) : 2 = 180</code>, Kinder nach Crossover <code>(0 + 100) : 2 = 50</code>, Kinder nach Mutation <code>(0 + 180) : 2 = 90</code>. – <em>warum:</em> Der Vergleich zeigt, dass ein einzelner Fortpflanzungsschritt die Population auch verschlechtern kann; verbessert wird sie erst über viele Generationen durch die Selektion.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Crossover kann also gute Eigenschaften kombinieren, aber auch schlechte Kinder erzeugen; die Selektion sortiert diese wieder aus. Damit das beste Elternteil (Fitness 200) dabei nicht verloren geht, übernimmt man es mit Elitismus unverändert in die nächste Generation.</p>
+            <p><strong>Kontrolle:</strong> Crossover verteilt nur die vorhandenen Bits neu: An jeder Position haben die beiden Kinder zusammen dieselben Bits wie die beiden Eltern (Anzahl der Einsen: Eltern 2 + 2 = 4, Kinder 3 + 1 = 4). Erst die Mutation verändert diese Anzahl.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Wie wählt man die Mutationsrate?</summary>
+                <p>Die Mutationsrate gibt an, wie wahrscheinlich es ist, dass ein einzelnes Bit eines Chromosoms zufällig verändert wird. Ihre Wahl hat großen Einfluss auf das Verhalten des Algorithmus:</p>
+                <ul>
+                    <li>Ist die Mutationsrate <strong>zu hoch</strong>, verändern sich die Chromosomen zu stark und zu zufällig. Gute Lösungen werden immer wieder „kaputtgemacht“, der Algorithmus konvergiert kaum noch gegen eine gute Lösung (Elitismus mildert das ab).</li>
+                    <li>Ist die Mutationsrate <strong>zu niedrig</strong>, findet kaum noch Veränderung statt. Die Population bleibt dann leicht in einer suboptimalen Lösung stecken (einem sogenannten lokalen Optimum), ohne diese noch verlassen zu können.</li>
+                </ul>
+                <p>In der Praxis werden daher meist kleine Mutationsraten (z.&nbsp;B. 1&nbsp;% bis 5&nbsp;% pro Bit) verwendet und experimentell an das jeweilige Problem angepasst.</p>
+            </details>
+        </div>
+
+<h2>4. Vor- und Nachteile</h2>
+
+<h3>Vorteile</h3>
+
+<ul>
+            <li>gut geeignet für große, komplexe oder diskrete Suchräume, in denen ein vollständiges Durchprobieren nicht möglich ist</li>
+            <li>Es wird kein Gradient und keine Ableitung der Zielfunktion benötigt, im Gegensatz zu vielen anderen Optimierungsverfahren.</li>
+            <li>findet oft gute, wenn auch nicht zwingend optimale Lösungen</li>
+        </ul>
+
+<h3>Nachteile</h3>
+
+<ul>
+            <li>keine Garantie, die beste (optimale) Lösung zu finden</li>
+            <li>Viele Parameter müssen passend eingestellt werden (z.&nbsp;B. Populationsgröße, Mutationsrate, Anzahl der Generationen).</li>
+            <li>kann bei großen Populationen und vielen Generationen rechenintensiv sein</li>
+        </ul>
+
+<h2>5. Anwendungsbeispiele</h2>
+
+<ul>
+            <li><strong>Routenplanung / Problem des Handlungsreisenden:</strong> Finden möglichst kurzer Routen, die mehrere Orte besuchen.</li>
+            <li><strong>Rucksackproblem:</strong> optimale Auswahl von Gegenständen unter einer Gewichts- oder Kostengrenze (siehe Beispiel oben).</li>
+            <li><strong>Design-Optimierung:</strong> z.&nbsp;B. die Form von Bauteilen oder Antennen so optimieren, dass bestimmte Eigenschaften (Gewicht, Stabilität, Signalstärke) verbessert werden.</li>
+            <li><strong>Trainieren einfacher Spiel-KIs:</strong> z.&nbsp;B. das Verhalten einer KI in einem einfachen Spiel über Generationen hinweg weiterentwickeln.</li>
+        </ul>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Optimierung in Logistik und Technik</summary>
+                <p><strong>Alltag:</strong> Stundenpläne, Dienstpläne im Krankenhaus oder Lieferrouten für Paketdienste sind Optimierungsprobleme mit unvorstellbar vielen Möglichkeiten – hier helfen Heuristiken wie genetische Algorithmen.</p>
+                <p><strong>Beruf:</strong> Ingenieurinnen und Ingenieure sowie Operations-Research-Fachleute setzen evolutionäre Verfahren ein, um Bauteile leichter und stabiler zu machen, Fertigungsabläufe zu planen oder Fahrzeugflotten zu steuern. Die NASA ließ so eine Satellitenantenne entwerfen (siehe Links).</p>
+            </details>
+        </div>
+
+<h2>6. Praktische Umsetzung im Notebook</h2>
+
+<p>Im folgenden Jupyter-Notebook wird ein genetischer Algorithmus mit Elitismus in Python implementiert, der das oben besprochene Rucksackproblem löst. Du kannst dort den Ablauf aus Abschnitt 2 (Selektion, Crossover, Mutation) im Code nachvollziehen und selbst mit den Parametern experimentieren.</p>
+
+<p>Lade das folgende Notebook herunter: <a href="../notebooks/11-9_genetischer_algorithmus.ipynb" download="">Notebook „Genetischer Algorithmus“</a>.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Genetischer Algorithmus</strong> – Optimierungsverfahren, das eine Population von Lösungskandidaten über Generationen durch Selektion, Crossover und Mutation verbessert. Er liefert in der Regel keine garantiert optimale Lösung, sondern eine gute Näherungslösung. Dafür kann er auch bei sehr großen und komplexen Suchräumen eingesetzt werden, in denen ein vollständiges Durchprobieren aller Möglichkeiten praktisch nicht möglich wäre.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.9.1: Fitness von Hand berechnen <span class="niveau">AFB I</span></summary>
+                <p>Berechne von Hand die Fitness der folgenden zwei Chromosomen (Reihenfolge A, B, C, D), mit derselben Gewichtsgrenze von 50:</p>
+                <ul>
+                    <li>Chromosom 3: <code>0 1 1 0</code></li>
+                    <li>Chromosom 4: <code>1 1 0 1</code></li>
+                </ul>
+                <p>Gib jeweils den Gesamtwert, das Gesamtgewicht und die daraus resultierende Fitness an. Welches der beiden Chromosomen wäre in der Selektion im Vorteil?</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.9.2: Crossover und Mutation <span class="niveau">AFB II</span></summary>
+                <p>Kreuze die Eltern <code>1 1 0 1</code> und <code>0 1 1 0</code> per Ein-Punkt-Crossover nach Position 2. Berechne die Fitness beider Kinder. Welche Mutation (ein einzelnes Bit) würde das schlechtere Kind am stärksten verbessern? Erkläre, warum Elitismus hier sinnvoll ist.</p>
+            </details>
+        </div>

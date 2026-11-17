@@ -1,0 +1,138 @@
+<p>Beim Vigenère-Verfahren hilft eine einfache Häufigkeitsanalyse über den ganzen Geheimtext nicht weiter. Das liegt daran, dass Vigenère polyalphabetisch arbeitet: Aufeinanderfolgende Zeichen werden mit verschiedenen Schlüsselbuchstaben verschlüsselt, sodass sich die typischen Buchstabenhäufigkeiten der Sprache vermischen.</p>
+
+<p>Die Entschlüsselung des Vigenère-Verfahrens ist eine spannende Episode in der Geschichte der Kryptographie. Das Verfahren wurde im 16.&nbsp;Jahrhundert nach Blaise de Vigenère benannt und galt lange als sicher. Erst im 19.&nbsp;Jahrhundert gelang es dem britischen Mathematiker Charles Babbage, es zu brechen. Dieses Wissen wurde vom britischen Militär nicht veröffentlicht, um einen strategischen Vorteil zu behalten. Kurz nach Babbage veröffentlichte der preußische Offizier Friedrich Wilhelm Kasiski 1863 eine Methode zur Bestimmung der Länge des Schlüsselworts, die als Kasiski-Test bekannt wurde.</p>
+
+<h2>Grundlagen</h2>
+
+<p>Der Kasiski-Test macht sich den Fundamentalsatz der Arithmetik (Hauptsatz der Zahlentheorie) zunutze:</p>
+
+<div class="beispiel">
+            <p>
+                17 = 17 (17 ist selbst eine Primzahl; das Produkt besteht aus einem einzigen Faktor)<br>
+                42 = 2 · 3 · 7 (2, 3 und 7 sind Primzahlen)<br>
+                20 = 2 · 2 · 5 = 2² · 5. Die Darstellung 20 = 4 · 5 ist <em>keine</em> Primfaktorzerlegung, weil 4 = 2 · 2 keine Primzahl ist.
+            </p>
+        </div>
+
+<h2>Die Idee des Kasiski-Tests</h2>
+
+<p>Wenn wir <strong><em>wüssten</em></strong>, wie lang der Schlüssel ist (also aus wie vielen Buchstaben das Schlüsselwort der Vigenère-Verschlüsselung besteht), dann könnten wir für jeden ersten, zweiten, dritten, vierten usw. Buchstaben des Geheimtextes getrennt eine Häufigkeitsanalyse durchführen.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p>Klartext „computerraum“, Schlüssel „info“ (Länge 4), Codes a&nbsp;=&nbsp;0, …, z&nbsp;=&nbsp;25.</p>
+            <table class="gitter">
+                <tr><th>Position</th><td style="color:#cc0000;">1</td><td style="color:#339966;">2</td><td style="color:#3366ff;">3</td><td>4</td><td style="color:#cc0000;">5</td><td style="color:#339966;">6</td><td style="color:#3366ff;">7</td><td>8</td><td style="color:#cc0000;">9</td><td style="color:#339966;">10</td><td style="color:#3366ff;">11</td><td>12</td></tr>
+                <tr><th>Klartextzeichen</th><td style="color:#cc0000;">c</td><td style="color:#339966;">o</td><td style="color:#3366ff;">m</td><td>p</td><td style="color:#cc0000;">u</td><td style="color:#339966;">t</td><td style="color:#3366ff;">e</td><td>r</td><td style="color:#cc0000;">r</td><td style="color:#339966;">a</td><td style="color:#3366ff;">u</td><td>m</td></tr>
+                <tr><th>Klartextcode k</th><td style="color:#cc0000;">2</td><td style="color:#339966;">14</td><td style="color:#3366ff;">12</td><td>15</td><td style="color:#cc0000;">20</td><td style="color:#339966;">19</td><td style="color:#3366ff;">4</td><td>17</td><td style="color:#cc0000;">17</td><td style="color:#339966;">0</td><td style="color:#3366ff;">20</td><td>12</td></tr>
+                <tr><th>Schlüsselzeichen</th><td style="color:#cc0000;">i</td><td style="color:#339966;">n</td><td style="color:#3366ff;">f</td><td>o</td><td style="color:#cc0000;">i</td><td style="color:#339966;">n</td><td style="color:#3366ff;">f</td><td>o</td><td style="color:#cc0000;">i</td><td style="color:#339966;">n</td><td style="color:#3366ff;">f</td><td>o</td></tr>
+                <tr><th>Schlüsselcode s</th><td style="color:#cc0000;">8</td><td style="color:#339966;">13</td><td style="color:#3366ff;">5</td><td>14</td><td style="color:#cc0000;">8</td><td style="color:#339966;">13</td><td style="color:#3366ff;">5</td><td>14</td><td style="color:#cc0000;">8</td><td style="color:#339966;">13</td><td style="color:#3366ff;">5</td><td>14</td></tr>
+                <tr><th>Geheimtextcode g = (k + s) mod 26</th><td style="color:#cc0000;">10</td><td style="color:#339966;">1</td><td style="color:#3366ff;">17</td><td>3</td><td style="color:#cc0000;">2</td><td style="color:#339966;">6</td><td style="color:#3366ff;">9</td><td>5</td><td style="color:#cc0000;">25</td><td style="color:#339966;">13</td><td style="color:#3366ff;">25</td><td>0</td></tr>
+                <tr><th>Geheimtextzeichen</th><td style="color:#cc0000;">k</td><td style="color:#339966;">b</td><td style="color:#3366ff;">r</td><td>d</td><td style="color:#cc0000;">c</td><td style="color:#339966;">g</td><td style="color:#3366ff;">j</td><td>f</td><td style="color:#cc0000;">z</td><td style="color:#339966;">n</td><td style="color:#3366ff;">z</td><td>a</td></tr>
+            </table>
+            <p>Zum Beispiel: o + n = 14 + 13 = 27, 27 mod 26 = 1 = b; m + o = 12 + 14 = 26, 26 mod 26 = 0 = a.</p>
+            </details>
+        </div>
+
+<p>Alle <strong style="color:#cc0000;">roten</strong> Zeichen (also das 1., 5., 9., …) sind mit demselben Schlüsselbuchstaben „<strong>i</strong>“ verschlüsselt.<br>
+        Alle <strong style="color:#339966;">grünen</strong> Zeichen (das 2., 6., 10., …) sind mit „<strong>n</strong>“ verschlüsselt.<br>
+        Alle <strong style="color:#3366ff;">blauen</strong> Zeichen (das 3., 7., 11., …) sind mit „<strong>f</strong>“ verschlüsselt.<br>
+        Alle <strong>schwarzen</strong> Zeichen (das 4., 8., 12., …) sind mit „<strong>o</strong>“ verschlüsselt.</p>
+
+<p>Führt man nun z.&nbsp;B. für die Geheimtextzeichen Nummer 1, 5, 9, … eine Häufigkeitsanalyse durch, erhält man den jeweiligen Schlüsselbuchstaben – jede Gruppe ist ja nur eine Caesar-Verschlüsselung.</p>
+
+<hr>
+
+<h2>Wie erhält man die Schlüssellänge?</h2>
+
+<p>In langen, mit Vigenère verschlüsselten Texten kommt es immer wieder vor, dass gleiche Buchstabenfolgen im Klartext auf dieselbe Stelle im Schlüssel treffen. Dann entstehen auch im Geheimtext gleiche Buchstabenfolgen. Das geschieht genau dann, wenn der Abstand der beiden Stellen ein <strong>Vielfaches der Schlüssellänge</strong> ist.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p>Schlüssel „licht“; Leerzeichen verbrauchen keinen Schlüsselbuchstaben:</p>
+            <pre>Klartext:   wir werdauer waschfrauen wuerden wirklich weisse
+Schlüssel:  lic htlichtl ichtlichtli chtlich tlichtli chtlic
+Geheimtext: hqt dxclcbxc eczvsnthnpv ybxclgu ptzmsbnp ylbdag
+
+Klartext:   waesche waschen wenn wir wuessten wo warmes wasser waer
+Schlüssel:  htlicht lichtli chtl ich tlichtli ch tlicht lichtl icht
+Geheimtext: dtpaeox hiujapv ylgy eky pfmuzmpv yv plzoll hiuzxc eclk</pre>
+            <p>Im Geheimtext (ohne Leerzeichen) kommen die Folgen „PVY“, „XCL“, „BXC“ und „XCE“ mehrfach vor.</p>
+            <p>Zählt man die <strong><em>Abstände</em></strong> zwischen den Vorkommen von „PVY“, so sind das 35 und 15 Zeichen:</p>
+            <p><span class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</span></p>
+            <p>Für die anderen Zeichenketten „XCL“, „BXC“ und „XCE“ ergeben sich die Abstände 20, 15 und 75.</p>
+            <p>Jetzt wird der Fundamentalsatz angewandt: Wir zerlegen die Abstände in Primfaktoren und suchen die Faktoren, die in allen Abständen vorkommen:</p>
+            <pre>15 = 3 · <strong>5</strong>
+20 = 2 · 2 · <strong>5</strong>
+35 = <strong>5</strong> · 7
+75 = 3 · 5 · <strong>5</strong></pre>
+            <p>Gemeinsamer Teiler aller Abstände ist 5, also ggT(15, 20, 35, 75) = 5. Die Schlüssellänge ist deshalb <strong>vermutlich 5</strong> – und tatsächlich hat „licht“ fünf Buchstaben.</p>
+            <p><strong>Kontrolle:</strong> Weitere Wiederholungen im Geheimtext, etwa „HIU“ mit dem Abstand 30 = 2 · 3 · 5, enthalten ebenfalls den Faktor 5. <em>Falle:</em> Hätte man zusätzlich eine zufällige Wiederholung mit dem Abstand 18 gefunden, wäre der ggT aller Abstände 1. Man darf dann nicht „Schlüssellänge 1“ folgern, sondern nimmt den Teiler, der in fast allen Abständen vorkommt, und prüft ihn mit einer Häufigkeitsanalyse der Gruppen.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Periodische Schlüssel damals und heute</summary>
+                <p>
+                    <strong>Alltag:</strong> Vigenère-Rätsel tauchen heute in Escape-Rooms und beim Geocaching auf. Das Prinzip „kurzer Schlüssel, immer wiederholt“ steckt aber auch in schlecht programmierter Software, die Daten mit einem wiederholten XOR-Schlüssel „verschlüsselt“. Solche Verfahren lassen sich genau wie Vigenère mit Kasiski-Test und Häufigkeitsanalyse brechen.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> Malware-Analystinnen und -Analysten, etwa in einem Security Operations Center (SOC), stoßen regelmäßig auf Schadsoftware, die ihre Befehle mit einem wiederholten XOR-Schlüssel versteckt. Mit den Methoden von Kasiski finden sie die Schlüssellänge und machen die Befehle lesbar. Solche Aufgaben üben Schülerinnen, Schüler und Studierende auch in „Capture the Flag“-Wettbewerben, in denen Teams gegeneinander Verschlüsselungsrätsel knacken.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Fundamentalsatz der Arithmetik:</strong> Jede natürliche Zahl größer als 1 lässt sich – bis auf die Reihenfolge der Faktoren – eindeutig als Produkt von <strong>Primzahlen</strong> darstellen (Primfaktorzerlegung).<br>
+                Die Zahl 1 ist <em>keine</em> Primzahl; eine Primzahl hat genau zwei Teiler, nämlich 1 und sich selbst.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Kasiski-Test:</strong> Man sucht im Geheimtext Buchstabenfolgen (mindestens 3 Zeichen), die mehrfach vorkommen, und bestimmt ihre Abstände. Jeder Abstand ist (bis auf zufällige Treffer) ein Vielfaches der Schlüssellänge. Kandidaten für die Schlüssellänge sind deshalb die gemeinsamen <strong>Teiler</strong> der Abstände, vor allem ihr größter gemeinsamer Teiler (ggT) – <em>nicht</em> ihre Vielfachen.<br>
+                Kommen mehrere Primfaktoren in allen Abständen vor, ist die Schlüssellänge vermutlich ihr Produkt oder ein Teiler davon. Einzelne zufällige Wiederholungen können stören; dann zählt der Teiler, der in den meisten Abständen steckt.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.4.1: Vigenère-Entschlüsselung mit dem Kasiski-Test <span class="niveau">AFB I–III</span></summary>
+                <ol>
+                    <li>Begründe, warum die Sicherheit des Vigenère-Verfahrens mit steigender Schlüssellänge zunimmt und warum die verwendete Schlüssellänge nicht offen mitgeteilt werden sollte.</li>
+                    <li>Mit dem Kasiski-Test kann man Nachrichten, die mit dem Vigenère-Verfahren verschlüsselt wurden, ohne Kenntnis des Schlüssels entschlüsseln. Dazu muss zuerst die Länge des Schlüssels bestimmt werden: Man sucht nach sich wiederholenden Buchstabenfolgen, bestimmt ihren Abstand und zerlegt diese Zahl in ihre Primfaktoren. Die gemeinsamen Teiler der Abstände sind dann Kandidaten für die Schlüssellänge.
+                        <p><code>WZLQMOPGSVPDMQRXLFPIXZBZXFPCZESXYDLPWTTEDVYDQJEMQMOPLRVBFOZHTPCZIOKQQMLTHPIS<br>
+                        YXMWCFYNGIPHTMFDMTEFYMQPVYXPETXUQHDSYZKSPNQPFCBMXUPQQRJRTGFFTMEIOFHPDVMLQGI<br>
+                        PHGREPCZQBWUXWHCIEWFEYGISFHSMODFMREVUYOPYHFIFCXMWULYSPJNBQFSZNZMDSNYIICMOLBQZQR</code></p>
+                        <ol type="a">
+                            <li>Suche im Text nach Buchstabenfolgen, die mehrmals vorkommen, und zähle ihren Abstand (z.&nbsp;B. mit <a href="https://planetcalc.com/8550/">PlanetCalc</a>).<br>
+                            <em>Hinweis: Mögliche Buchstabenfolgen sind QMO, MOP, PCZ, XMW, GIP, IPH.</em></li>
+                            <li>Zerlege alle gefundenen Abstände in ihre Primfaktoren.</li>
+                            <li>Gib die vermutliche Schlüssellänge an.</li>
+                            <li>Entschlüssele den Text unter Angabe der Schlüssellänge auf dieser <a href="https://www.dcode.fr/vigenere-cipher">Webseite</a>.</li>
+                            <li>Zusatz: Eine ausführlichere Erklärung und die Umsetzung in Python findest du <span class="material-fehlt">hier (nur im Unterricht)</span>.</li>
+                        </ol>
+                    </li>
+                    <li>Ist der Schlüssel mindestens so lang wie der Klartext und echt zufällig, spricht man von einem One-Time-Pad. Lässt sich auch das One-Time-Pad mit dem Kasiski-Test knacken? Gib eine begründete Antwort.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.4.2: Schlüssellänge aus Abständen <span class="niveau">AFB I</span></summary>
+                <p>In einem Vigenère-Geheimtext wurden wiederholte Buchstabenfolgen mit den Abständen 28, 42, 70 und 56 gefunden.</p>
+                <ol type="a">
+                    <li>Zerlege die Abstände in Primfaktoren.</li>
+                    <li>Bestimme den ggT und gib die vermutliche Schlüssellänge an. Nenne weitere Kandidaten.</li>
+                </ol>
+            </details>
+        </div>

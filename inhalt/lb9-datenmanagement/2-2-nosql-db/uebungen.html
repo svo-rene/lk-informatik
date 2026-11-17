@@ -1,0 +1,49 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.2: Modell begründet auswählen <span class="niveau">AFB III</span></summary>
+                <p>
+                    Wähle für jedes Szenario das passende Datenmodell aus der Übersicht und begründe deine
+                    Wahl mit <em>einer</em> Eigenschaft des Modells. Es gibt jeweils mehr als eine
+                    vertretbare Antwort – entscheidend ist die Begründung.
+                </p>
+                <ol>
+                    <li>Eine Schulwebsite speichert Artikel, die je nach Typ ganz unterschiedliche Felder
+                        haben (Termin, Galerie, Aushang).</li>
+                    <li>Ein Onlineshop muss den Warenkorb während des Einkaufs zwischenspeichern und bei
+                        jedem Klick blitzschnell wieder ausliefern.</li>
+                    <li>Ein Bankinstitut sucht nach Konten, die über mehrere Zwischenstationen mit einem
+                        bereits auffälligen Konto verbunden sind.</li>
+                    <li>Ein Verein führt Buch über Mitgliedsbeiträge und muss am Jahresende korrekte Summen
+                        je Mitglied ausweisen.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.3: Die Schulbibliothek in drei Modellen <span class="niveau">AFB II</span></summary>
+                <p>Die Schulbibliothek hat folgende Daten:</p>
+                <table class="gitter">
+                    <tr><th>Buch</th><th>Titel</th><th>Autor</th></tr>
+                    <tr><td>B1</td><td>Tschick</td><td>Wolfgang Herrndorf</td></tr>
+                    <tr><td>B2</td><td>Momo</td><td>Michael Ende</td></tr>
+                </table>
+                <p>Lina (Schülernummer S7, Klasse 10b) hat B1 am 2025-09-01 ausgeliehen, Rückgabe bis 2025-09-29.
+                   Malik (S9, Klasse 9a) hat B2 am 2025-09-15 ausgeliehen, Rückgabe bis 2025-10-13.</p>
+                <ol>
+                    <li>Gib Linas Daten als JSON-Dokument einer Collection <code>schueler</code> an, die Ausleihen eingebettet.</li>
+                    <li>Lege Schlüssel-Wert-Paare an, mit denen ein Key-Value-Store die beiden Fragen „Welche Bücher hat S7?“ und
+                        „Wer hat B1?“ jeweils mit einem einzigen <code>GET</code> beantworten kann.</li>
+                    <li>Zeichne bzw. beschreibe die Daten als Graph (Knoten mit Eigenschaften, Kanten mit Eigenschaften) und gib eine
+                        Cypher-Abfrage an, die alle Titel liefert, die Lina ausgeliehen hat.</li>
+                    <li>Beschreibe für jedes der drei Modelle, wie die Frage „Welche Ausleihen sind am 2025-10-01 überfällig?“ beantwortet
+                        werden kann, und bestimme das Ergebnis.</li>
+                </ol>
+                <p class="tipp">Orientiere dich an Beispiel 1 und Beispiel 2. Beim Key-Value-Store brauchst du für jede Frage einen
+                   eigenen Schlüssel.</p>
+            </details>
+        </div>

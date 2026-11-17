@@ -1,0 +1,624 @@
+/* ==========================================================================
+   kurse.css – gemeinsames Stylesheet für alle Lernbereiche LK Informatik
+   Stand: 27.09.2026. Identische Kopie in jedem LB-Ordner.
+   Boxen funktionieren als class (empfohlen, mehrfach pro Seite erlaubt)
+   und als id (Altbestand):  <div class="merke">  bzw.  <div id="merke">
+   ========================================================================== */
+
+:root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --color-heading: #1d4ed8;
+    --color-text: #1f2430;
+    --color-merke: #d64545;
+    --color-merke-bg: #fdeceb;
+    --color-hinweis: #2f9e57;
+    --color-hinweis-bg: #e9f9ee;
+    --color-aufgabe: #b45309;
+    --color-aufgabe-bg: #fff7e6;
+    --color-loesung: #1d64d8;
+    --color-loesung-bg: #eaf1fd;
+    --color-praxis: #0f766e;
+    --color-praxis-bg: #e6f7f5;
+    --color-beispiel: #6b21a8;
+    --color-beispiel-bg: #f5effc;
+    --radius: 8px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: #ffffff;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    color: var(--color-heading);
+    line-height: 1.3;
+}
+
+h1 {
+    font-size: 1.8rem;
+    border-bottom: 3px solid var(--color-heading);
+    padding-bottom: 0.3em;
+    margin-bottom: 0.8em;
+}
+
+h2 {
+    font-size: 1.4rem;
+    margin-top: 1.6em;
+}
+
+h3 {
+    font-size: 1.15rem;
+    margin-top: 1.3em;
+}
+
+h4 {
+    font-size: 1.02rem;
+    margin-top: 1.2em;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0.8em 0;
+}
+
+li {
+    margin: 0.5em 0;
+}
+
+/* Tabellen */
+table, #table1 {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+}
+
+thead th, th {
+    background: #eef2ff;
+    font-weight: 600;
+}
+
+thead th {
+    border-bottom: 2px solid var(--color-heading);
+}
+
+th, td {
+    padding: 0.75em 1em;
+    text-align: left;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+tbody tr:hover {
+    background: #f1f6ff;
+}
+
+/* Wahrheitstabellen, KV-Diagramme u. Ä. zentriert und mit Gitter */
+table.gitter th, table.gitter td {
+    border: 1px solid #c9ced8;
+    text-align: center;
+}
+
+/* Bilder */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    margin: 1em 0.2em;
+}
+
+figure {
+    margin: 1.25rem 0;
+}
+
+figcaption {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-top: -0.4em;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 1rem auto;
+}
+
+.gallery img {
+    width: calc(50% - 10px);
+    max-width: 500px;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .gallery img {
+        width: 100%;
+    }
+}
+
+/* Merke / Hinweis / Aufgabe / Lösung / Praxisbezug / Beispiel – Boxen */
+#merke, .merke,
+#hinweis, .hinweis,
+#aufgabe, .aufgabe,
+#loesung, .loesung,
+#praxisbezug, .praxisbezug,
+#beispiel, .beispiel {
+    display: block;
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    border: none;
+    font-size: 1rem;
+}
+
+#merke, .merke {
+    background: var(--color-merke-bg);
+    border-left: 5px solid var(--color-merke);
+}
+
+#merke::before, .merke::before {
+    content: "Merke";
+    display: block;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-merke);
+    margin-bottom: 0.5em;
+}
+
+#hinweis, .hinweis {
+    background: var(--color-hinweis-bg);
+    border-left: 5px solid var(--color-hinweis);
+}
+
+#aufgabe, .aufgabe {
+    background: var(--color-aufgabe-bg);
+    border-left: 5px solid var(--color-aufgabe);
+}
+
+#loesung, .loesung {
+    background: var(--color-loesung-bg);
+    border-left: 5px solid var(--color-loesung);
+}
+
+#praxisbezug, .praxisbezug {
+    background: var(--color-praxis-bg);
+    border-left: 5px solid var(--color-praxis);
+}
+
+#beispiel, .beispiel {
+    background: var(--color-beispiel-bg);
+    border-left: 5px solid var(--color-beispiel);
+}
+
+#beispiel::before, .beispiel::before {
+    content: "Beispiel";
+    display: block;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-beispiel);
+    margin-bottom: 0.5em;
+}
+
+/* Aufklappbares Beispiel: <div class="beispiel klappbar"><details><summary>Beispiel 1 ...</summary>...</details></div> */
+.beispiel.klappbar::before {
+    display: none;
+}
+
+.beispiel.klappbar > details > summary {
+    color: var(--color-beispiel) !important;
+}
+
+.beispiel.klappbar > details[open] > summary {
+    margin-bottom: 0.75em !important;
+}
+
+#loesung > .ml-loesung-label, .loesung > .ml-loesung-label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-loesung);
+    margin-bottom: 0.5em;
+}
+
+/* Lösung innerhalb einer Aufgabenbox: <details class="loesung-details"> */
+details.loesung-details {
+    margin-top: 0.9em !important;
+    padding: 0.6em 0.9em !important;
+    background: var(--color-loesung-bg) !important;
+    border-left: 3px solid var(--color-loesung) !important;
+    border-radius: 6px;
+}
+
+details.loesung-details > summary {
+    color: var(--color-loesung) !important;
+}
+
+/* Aufklappbare Boxen */
+/* !important erzwingt unser Aussehen gegen OPALs eigene Standardformatierung von <details>/<summary> */
+details {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+summary {
+    cursor: pointer !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    list-style: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.6em !important;
+    border: none !important;
+    outline: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+summary::-webkit-details-marker {
+    display: none !important;
+}
+
+summary::before {
+    content: "▸";
+    display: inline-block;
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+}
+
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+details summary:hover {
+    opacity: 0.75;
+}
+
+details summary:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#hinweis summary, .hinweis summary {
+    color: var(--color-hinweis);
+}
+
+#aufgabe summary, .aufgabe summary {
+    color: var(--color-aufgabe);
+}
+
+#loesung summary, .loesung summary {
+    color: var(--color-loesung);
+}
+
+#praxisbezug summary, .praxisbezug summary {
+    color: var(--color-praxis);
+}
+
+/* Niveau-Kennzeichnung von Aufgaben: <span class="niveau">AFB II</span> */
+.niveau {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-aufgabe);
+    background: #fde9c8;
+    border-radius: 999px;
+    padding: 0.1em 0.7em;
+    margin-left: 0.4em;
+}
+
+/* Musterlösungen-Seite: Navigation und Aufgaben-Referenz */
+.ml-kapitel {
+    margin-top: 2.5em;
+    padding-top: 0.5em;
+    border-top: 2px solid #e2e2e2;
+}
+
+.ml-seite {
+    margin-top: 2em;
+}
+
+.ml-frage {
+    background: #f7f7f9;
+    border-radius: var(--radius);
+    padding: 0.9rem 1.15rem;
+    margin: 0.6em 0;
+}
+
+.ml-frage::before {
+    content: "Aufgabenstellung";
+    display: block;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 0.5em;
+}
+
+.ml-toc {
+    columns: 2;
+    column-gap: 2.5em;
+}
+
+.ml-toc li {
+    margin: 0.25em 0;
+    break-inside: avoid;
+}
+
+@media (max-width: 600px) {
+    .ml-toc {
+        columns: 1;
+    }
+}
+
+/* Musterlösungen: Lösungsweg in nummerierten Schritten */
+ol.schritte {
+    list-style: none;
+    counter-reset: schritt;
+    margin: 0.6em 0;
+    padding: 0;
+}
+
+ol.schritte > li {
+    counter-increment: schritt;
+    position: relative;
+    padding: 0.15em 0 0.15em 2.4em;
+    margin: 0.5em 0;
+    line-height: 1.55;
+}
+
+ol.schritte > li::before {
+    content: counter(schritt);
+    position: absolute;
+    left: 0;
+    top: 0.12em;
+    width: 1.6em;
+    height: 1.6em;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--color-loesung);
+    color: #fff;
+    font-size: 0.78em;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.tipp {
+    border-left: 3px solid var(--color-aufgabe);
+    background: var(--color-aufgabe-bg);
+    border-radius: 6px;
+    padding: 0.55em 0.9em;
+    margin: 0.9em 0 0;
+    font-size: 0.95rem;
+}
+
+.tipp::before {
+    content: "Tipp";
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-aufgabe);
+    margin-right: 0.6em;
+}
+
+/* Datei und Commits zu einer Aufgabe (Kurs Datenstrukturen, Seite 3.0.2):
+   <p class="git-datei"><strong>Datei:</strong> <code>1_listen/playlist.py</code> – neu anlegen<br>…</p> */
+.git-datei {
+    border-left: 3px solid #64748b;
+    background: #f1f5f9;
+    border-radius: 6px;
+    padding: 0.5em 0.9em;
+    margin: 0.7em 0 0.9em;
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.git-datei::before {
+    content: "Datei & Git";
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #475569;
+    margin-right: 0.6em;
+}
+
+/* Modellierungs-Beispiele: Sachtext, Relationenschema */
+.sachtext {
+    background: #f7f7f9;
+    border-left: 5px solid #6b7280;
+    border-radius: var(--radius);
+    padding: 0.9rem 1.15rem;
+    margin: 1.25rem 0;
+}
+
+.sachtext::before {
+    content: "Sachtext";
+    display: block;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 0.5em;
+}
+
+.sachtext p:first-of-type {
+    margin-top: 0;
+}
+
+.sachtext p:last-of-type {
+    margin-bottom: 0;
+}
+
+mark {
+    background: #fde68a;
+    color: inherit;
+    padding: 0 0.15em;
+    border-radius: 3px;
+}
+
+mark.bez {
+    background: #bfdbfe;
+}
+
+mark.kard {
+    background: #bbf7d0;
+}
+
+pre.schema {
+    background: #eef2ff;
+    border-left: 5px solid var(--color-heading);
+    font-size: 0.95em;
+    white-space: pre-wrap;
+}
+
+.beispiel-kopf {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-beispiel);
+    background: #f3e8ff;
+    border-radius: 999px;
+    padding: 0.15em 0.8em;
+    margin-left: 0.5em;
+    vertical-align: middle;
+}
+
+/* Selbstcheck-Seiten */
+.selfcheck-quelle {
+    font-size: 0.9rem;
+    color: #6b7280;
+    background: #f7f7f9;
+    border-radius: var(--radius);
+    padding: 0.8rem 1.1rem;
+    margin: 1.25rem 0;
+}
+
+.selfcheck-gruppe {
+    margin: 1.75em 0;
+}
+
+.selfcheck-gruppe h3 {
+    margin-bottom: 0.4em;
+}
+
+.selfcheck-liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.selfcheck-liste li {
+    margin: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.selfcheck-liste label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7em;
+    padding: 0.6em 0.2em;
+    cursor: pointer;
+}
+
+.selfcheck-liste input[type="checkbox"] {
+    margin-top: 0.3em;
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+    accent-color: var(--color-hinweis);
+}
+
+.selfcheck-liste .sc-ref {
+    color: #6b7280;
+    font-size: 0.85em;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* Inline-Code */
+code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    color: #0550ae;
+    background: #eef3fb;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* Mehrzeilige Code-Blöcke */
+pre {
+    background: #f5f2f0;
+    color: var(--color-text);
+    padding: 1em;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+    th, td {
+        padding: 0.5em 0.6em;
+        font-size: 0.9rem;
+    }
+}
+
+/* --- Prism.js Syntax-Highlighting (unverändert) --- */
+code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}
+pre[data-line]{position:relative;padding:1em 0 1em 3em}.line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}@media print{.line-highlight{-webkit-print-color-adjust:exact;color-adjust:exact}}.line-highlight:before,.line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}.line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}.line-numbers .line-highlight:after,.line-numbers .line-highlight:before{content:none}pre[id].linkable-line-numbers span.line-numbers-rows{pointer-events:all}pre[id].linkable-line-numbers span.line-numbers-rows>span:before{cursor:pointer}pre[id].linkable-line-numbers span.line-numbers-rows>span:hover:before{background-color:rgba(128,128,128,.2)}
+pre[class*=language-].line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}pre[class*=language-].line-numbers>code{position:relative;white-space:inherit}.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:0;font-size:100%;left:-3.8em;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.line-numbers-rows>span{display:block;counter-increment:linenumber}.line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}
+div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z-index:10;top:.3em;right:.2em;transition:opacity .3s ease-in-out;opacity:0}div.code-toolbar:hover>.toolbar{opacity:1}div.code-toolbar:focus-within>.toolbar{opacity:1}div.code-toolbar>.toolbar>.toolbar-item{display:inline-block}div.code-toolbar>.toolbar>.toolbar-item>a{cursor:pointer}div.code-toolbar>.toolbar>.toolbar-item>button{background:0 0;border:0;color:inherit;font:inherit;line-height:normal;overflow:visible;padding:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}div.code-toolbar>.toolbar>.toolbar-item>a,div.code-toolbar>.toolbar>.toolbar-item>button,div.code-toolbar>.toolbar>.toolbar-item>span{color:#bbb;font-size:.8em;padding:0 .5em;background:#f5f2f0;background:rgba(224,224,224,.2);box-shadow:0 2px 0 0 rgba(0,0,0,.2);border-radius:.5em}div.code-toolbar>.toolbar>.toolbar-item>a:focus,div.code-toolbar>.toolbar>.toolbar-item>a:hover,div.code-toolbar>.toolbar>.toolbar-item>button:focus,div.code-toolbar>.toolbar>.toolbar-item>button:hover,div.code-toolbar>.toolbar>.toolbar-item>span:focus,div.code-toolbar>.toolbar>.toolbar-item>span:hover{color:inherit;text-decoration:none}
+span.inline-color-wrapper{background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9ImdyYXkiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDBoMXYxSDB6TTEgMWgxdjFIMXoiLz48L3N2Zz4=);background-position:center;background-size:110%;display:inline-block;height:1.333ch;width:1.333ch;margin:0 .333ch;box-sizing:border-box;border:1px solid #fff;outline:1px solid rgba(0,0,0,.5);overflow:hidden}span.inline-color{display:block;height:120%;width:120%}

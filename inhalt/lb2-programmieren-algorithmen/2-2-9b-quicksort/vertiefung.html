@@ -1,0 +1,38 @@
+<script src="../sortierlabor.js" defer></script>
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-2-2-9b-4">
+            <details>
+                <summary>Aufgabe 2.2.9b.4: Fehler finden – Quicksort hört nicht auf <span class="niveau">AFB III</span></summary>
+                <pre><code class="language-python">def quicksort(liste):
+    if len(liste) &lt;= 1:
+        return liste
+    pivot = liste[len(liste) - 1]
+    kleiner = []
+    groesser = []
+    for x in liste:
+        if x &lt; pivot:
+            kleiner.append(x)
+        else:
+            groesser.append(x)
+    return quicksort(kleiner) + quicksort(groesser)</code></pre>
+                <ol>
+                    <li>Bestimme von Hand, was beim Aufruf <code>quicksort([3, 1])</code> passiert. Notiere die Aufrufe, bis du das Problem erkennst.</li>
+                    <li>Erkläre, warum das Programm mit einem <code>RecursionError</code> abbricht, und gib den kleinsten Testfall an, der den Fehler zeigt.</li>
+                    <li>Korrigiere das Programm auf zwei verschiedene Arten.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9b-6">
+            <details>
+                <summary>Aufgabe 2.2.9b.6: Welches Verfahren nimmst du? <span class="niveau">AFB III</span></summary>
+                <p>Entscheide dich jeweils für Insertionsort, Mergesort oder Quicksort (in place) und begründe mit Laufzeit, Speicher und Stabilität.</p>
+                <ol>
+                    <li>Eine Million zufällige Messwerte auf einem Gerät mit sehr wenig Arbeitsspeicher.</li>
+                    <li>Eine nach Namen geordnete Ergebnisliste soll nach Punkten sortiert werden, bei Gleichstand soll die alphabetische Reihenfolge bleiben.</li>
+                    <li>Ein Server sortiert Listen, die Nutzerinnen und Nutzer selbst hochladen. Manche laden absichtlich sortierte Listen hoch.</li>
+                    <li>Eine Highscore-Liste mit 20 Einträgen bekommt nach jedem Spiel einen neuen Eintrag am Ende.</li>
+                </ol>
+            </details>
+        </div>

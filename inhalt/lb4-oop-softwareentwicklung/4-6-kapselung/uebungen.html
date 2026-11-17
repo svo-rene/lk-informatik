@@ -1,0 +1,99 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 3: Der Setter entscheidet <span class="niveau">AFB I</span></summary>
+            <p>Mit der Klasse aus Beispiel 1: <code>k = Konto("Ben", 40)</code>, dann <code>k.set_kontostand(-1)</code>, <code>k.set_kontostand(0)</code> und <code>print(k.get_kontostand())</code>. Was wird insgesamt ausgegeben?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Zuerst <code>Kontostand darf nicht negativ sein.</code> (−1 wird abgewiesen, der Wert bleibt 40), dann <code>0</code>: Der Grenzfall 0 erfüllt <code>neuer_betrag &gt;= 0</code> und wird übernommen.</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-6-1">
+        <details>
+            <summary>Aufgabe 4.6.1: Sichtbarkeit erkennen <span class="niveau">AFB I–II</span></summary>
+            <p>Schau dir diesen Code an und beantworte die Fragen:</p>
+            <pre><code class="language-python">class Schueler:
+    def __init__(self, name, noten):
+        self.name = name
+        self._noten = noten</code></pre>
+            <ul>
+                <li>Welche Attribute sind öffentlich, welche geschützt?</li>
+                <li>Kann man <code>s1._noten</code> direkt von außen lesen? Sollte man es?</li>
+                <li>Wie würdest du <code>_noten</code> besser schützen?</li>
+            </ul>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-6-2">
+        <details>
+            <summary>Aufgabe 4.6.2: Temperatursensor schützen <span class="niveau">AFB II–III</span></summary>
+            <p>Erstelle eine Klasse <code>Temperatursensor</code> mit folgenden Eigenschaften:</p>
+            <ul>
+                <li><strong>öffentliches Attribut:</strong> <code>ort</code> (z.&nbsp;B. „Serverraum“)</li>
+                <li><strong>privates Attribut:</strong> <code>__temperatur</code> (in °C)</li>
+                <li>eine Methode <code>get_temperatur()</code>, um den aktuellen Wert auszulesen</li>
+                <li>eine Methode <code>set_temperatur()</code>, die nur Werte zwischen −50 und +150 erlaubt</li>
+            </ul>
+            <p><strong>Teste dein Programm:</strong></p>
+            <ul>
+                <li>Erzeuge einen Sensor für „Außenbereich“ mit 10 °C.</li>
+                <li>Versuche, die Temperatur von außen direkt mit <code>s.__temperatur = 900</code> zu setzen, und lies danach <code>get_temperatur()</code> aus. Was passiert und warum?</li>
+                <li>Setze die Temperatur mit <code>set_temperatur(900)</code> und danach mit <code>set_temperatur(23)</code>. Was passiert jeweils?</li>
+            </ul>
+        </details>
+    </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-4-6-3">
+        <details>
+            <summary>Aufgabe 4.6.3: Schließfach im Schwimmbad – UML in Code übersetzen <span class="niveau">AFB II</span></summary>
+            <p>Ein Schwimmbad ersetzt die Münzschlösser seiner Schließfächer durch Zahlenschlösser. Die Software dafür ist schon modelliert:</p>
+            <table class="gitter" aria-label="UML-Klassendiagramm Schliessfach">
+                <tr><th>Schliessfach</th></tr>
+                <tr><td>+ nummer: int<br>− __pin: str<br>− __offen: bool<br>− __fehlversuche: int</td></tr>
+                <tr><td>+ oeffnen(pin: str): bool<br>+ schliessen(): None<br>+ ist_offen(): bool<br>+ ist_gesperrt(): bool</td></tr>
+            </table>
+            <p>Regeln: Ein neues Fach ist geschlossen und hat 0 Fehlversuche. Mit der richtigen PIN öffnet es sich, und die Fehlversuche werden auf 0 gesetzt. Jede falsche PIN zählt als Fehlversuch. Ab 3 Fehlversuchen ist das Fach gesperrt und öffnet sich auch mit der richtigen PIN nicht mehr.</p>
+            <ol>
+                <li>Implementiere die Klasse in Python genau nach dem Diagramm (Konstruktor <code>__init__(nummer, pin)</code>).</li>
+                <li>Teste sie mit den folgenden Aufrufen, die nacheinander auf demselben Objekt <code>f = Schliessfach(17, "4711")</code> ausgeführt werden:</li>
+            </ol>
+            <table class="gitter">
+                <tr><th>Aufruf</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                <tr><td><code>print(f.oeffnen("1234"))</code></td><td>False</td><td></td></tr>
+                <tr><td><code>print(f.oeffnen("4711"), f.ist_offen())</code></td><td>True True</td><td></td></tr>
+                <tr><td><code>f.schliessen()</code>, dann dreimal <code>f.oeffnen("0000")</code>, dann <code>print(f.ist_gesperrt())</code></td><td>True</td><td></td></tr>
+                <tr><td><code>print(f.oeffnen("4711"))</code></td><td>False</td><td></td></tr>
+                <tr><td><code>print(f.__pin)</code></td><td><code>AttributeError</code></td><td></td></tr>
+            </table>
+            <p class="tipp">Überlege bei <code>oeffnen()</code> zuerst, in welcher Reihenfolge die Fälle „gesperrt“, „richtige PIN“ und „falsche PIN“ geprüft werden müssen.</p>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-6-5">
+        <details>
+            <summary>Aufgabe 4.6.5: Modelliere aus einem Sachtext – die Mensakarte <span class="niveau">AFB II</span></summary>
+            <p>Die Mensa deiner Schule stellt auf eine Guthabenkarte um:</p>
+            <blockquote>„Jede Karte hat eine aufgedruckte Kartennummer und gehört einer Schülerin oder einem Schüler. Aufgeladen wird am Automaten; pro Vorgang sind 5 bis 50 € möglich. Beim Bezahlen wird der Preis abgebucht, aber nur, wenn das Guthaben reicht. Damit niemand sein Guthaben an einem Tag aufbraucht, dürfen pro Tag höchstens 15 € ausgegeben werden. Um Mitternacht setzt das Kassensystem den Tageszähler zurück. Kartennummer und Guthaben sollen jederzeit angezeigt werden können.“</blockquote>
+            <ol>
+                <li>Bestimme die Attribute und lege für jedes die Sichtbarkeit fest. Begründe, welche privat sein müssen.</li>
+                <li>Bestimme die Methoden mit Parametern und Rückgabetyp und zeichne das Klassendiagramm mit Sichtbarkeiten.</li>
+                <li>Implementiere die Klasse <code>Mensakarte</code>. Rechne intern in Cent (ganze Zahlen), damit keine Rundungsfehler entstehen.</li>
+                <li>Teste nacheinander mit <code>k = Mensakarte("M-0815", "Lea")</code>:</li>
+            </ol>
+            <table class="gitter">
+                <tr><th>Aufruf</th><th>erwartete Rückgabe</th><th>Guthaben danach (Cent)</th><th>tatsächlich</th></tr>
+                <tr><td><code>k.aufladen(300)</code></td><td>False</td><td>0</td><td></td></tr>
+                <tr><td><code>k.aufladen(2000)</code></td><td>True</td><td>2000</td><td></td></tr>
+                <tr><td><code>k.bezahlen(380)</code></td><td>True</td><td>1620</td><td></td></tr>
+                <tr><td><code>k.bezahlen(450)</code></td><td>True</td><td>1170</td><td></td></tr>
+                <tr><td><code>k.bezahlen(800)</code></td><td>False (Tageslimit)</td><td>1170</td><td></td></tr>
+                <tr><td><code>k.bezahlen(670)</code></td><td>True (genau 15 € am Tag)</td><td>500</td><td></td></tr>
+                <tr><td><code>k.neuer_tag()</code>, dann <code>k.bezahlen(600)</code></td><td>False (Guthaben reicht nicht)</td><td>500</td><td></td></tr>
+                <tr><td><code>k.bezahlen(500)</code></td><td>True</td><td>0</td><td></td></tr>
+            </table>
+        </details>
+    </div>

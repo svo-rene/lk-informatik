@@ -1,0 +1,44 @@
+<p>
+            Auf dieser Seite übst du beide Richtungen der Modellierung: vom Sachverhalt zum ER-Modell und zum
+            Relationenmodell (Seiten 1.10 und 1.11) und umgekehrt vom fertigen Relationenmodell zurück zum ER-Modell.
+        </p>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.12.1: Kardinalitäten <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Notiere für jedes ERM in Leserichtung von links nach rechts und von rechts nach links einen Satz.</li>
+                    <li>Ergänze für jedes ERM die Kardinalität (nimm dabei deine Sätze aus 1. zu Hilfe).</li>
+                    <li>Ergänze 1–2 eigene Beispiele mit Kardinalität für das leere ERM.</li>
+                </ol>
+                <figure>
+                    <img src="../img/uebung_modellieren.png" width="800" alt="Fünf ER-Modelle ohne Kardinalitäten, eines davon leer">
+                    <figcaption>Abb. 1: ER-Modelle zum Ergänzen der Kardinalitäten</figcaption>
+                </figure>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.12.2: ERM Flughafen-Datenbank <span class="niveau">AFB II</span></summary>
+                <p>Einer Flughafen-Datenbank liegen folgende Fakten und Geschäftsregeln zugrunde:</p>
+                <ul>
+                    <li>Jede Fluggesellschaft hat ein Kürzel, einen Namen und einen Stammsitz.</li>
+                    <li>Jedes Flugzeug hat eine Seriennummer, einen Hersteller, einen Typ und eine Passagierkapazität.</li>
+                    <li>Jeder Abflug hat eine Nummer, eine Abflugzeit (Datum und Uhrzeit) und einen Zielort.</li>
+                    <li><em>Jede Fluggesellschaft hat mindestens ein Flugzeug (seit einem bestimmten Tag). Jedes Flugzeug wird von genau einer Fluggesellschaft betrieben.</em></li>
+                    <li><em>Für jeden Abflug wird genau ein Flugzeug eingesetzt. Flugzeuge sind (natürlich) wiederverwendbar.</em></li>
+                </ul>
+                <p><strong>Aufgaben:</strong></p>
+                <ol>
+                    <li>Entwickle ein ERM zu dieser Problemstellung.</li>
+                    <li>Die letzten beiden Punkte (kursiv) beschreiben die „Anzahl an Zuordnungen“ zwischen den Entitäten. Leite daraus die Kardinalitäten ab.</li>
+                    <li>Entwickle aus dem ERM ein Relationenmodell. Entscheide anhand der Kardinalitäten, wie viele Tabellen du benötigst.</li>
+                </ol>
+                <figure>
+                    <img src="../img/undraw_Airport_re_oqk1.png" width="400" alt="Illustration eines Flughafens">
+                </figure>
+            </details>
+        </div>

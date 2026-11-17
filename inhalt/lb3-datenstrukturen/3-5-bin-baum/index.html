@@ -1,0 +1,311 @@
+<p>Beim Zahlenraten „Ich denke mir eine Zahl zwischen 1 und 100“ fragst du geschickt „Ist sie größer als 50?“ – und halbierst so mit jeder Antwort die Möglichkeiten. Ein binärer Suchbaum speichert Daten genau so, dass jede Suche wie dieses Ratespiel abläuft.</p>
+
+<h2>Binärbaum</h2>
+
+<h3>Eigenschaften eines binären Baums</h3>
+
+<ul>
+            <li>Ein binärer Baum besteht aus Knoten und Kanten.</li>
+            <li>Ein Knoten hat höchstens zwei Kinder: einen linken und einen rechten Nachfolger.</li>
+            <li>Die Knoten sind hierarchisch angeordnet; jeder Knoten außer der Wurzel hat genau einen Elternknoten.</li>
+            <li>Knoten ohne Kinder heißen Blätter.</li>
+            <li>Ein Binärbaum der Höhe h hat höchstens 2<sup>h+1</sup> − 1 Knoten. Umgekehrt braucht ein Binärbaum mit n Knoten mindestens etwa log<sub>2</sub> n Ebenen.</li>
+        </ul>
+
+<hr>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in vier kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee und den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe in Thonny mit.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Was ist ein binärer Suchbaum?</a></li>
+            <li><a href="#schritt-2">Einfügen in den Suchbaum</a> – danach Aufgabe 3.5.1</li>
+            <li><a href="#schritt-3">Suchen im Suchbaum</a></li>
+            <li><a href="#schritt-4">Sortiert ausgeben – und wann der Suchbaum langsam wird</a> – danach Aufgabe 3.5.2 und 3.5.3</li>
+        </ol>
+
+<p class="git-datei"><strong>Zum Mittippen:</strong> <code>2_baeume/suchbaum.py</code> – neu anlegen.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.5 Schritt 2: Suchbaum mit einfuegen</code> · <code>3.5 Schritt 3: suchen ergänzt</code> (Regeln auf Seite 3.0.2)</p>
+
+<p>Danach findest du einen Praxisbezug und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Was ist ein binärer Suchbaum?</h2>
+
+<p>In einem Binärbaum hat jeder Knoten zwei Plätze: links und rechts. Ein binärer Suchbaum ordnet die Werte so, dass für <strong>jeden</strong> Knoten links nur Kleineres und rechts nur Größeres steht. Achte im Video darauf, dass die Regel für den <strong>gesamten</strong> Teilbaum gilt, nicht nur für die direkten Kinder.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-5-1_idee_vorschau.png" src="../vid/3-5-1_idee.mp4"></video><a href="../vid/3-5-1_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Was ist ein binärer Suchbaum? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/skizze_binaerer_suchbaum.svg" width="450" alt="Binärer Suchbaum mit 8, 3, 10, 1, 6, 14 und dem Suchweg zur 6">
+            <figcaption>Abb. 1: Suche nach 6: 6 &lt; 8 → links, 6 &gt; 3 → rechts – gefunden nach drei Vergleichen.</figcaption>
+        </figure>
+
+<p>Es genügt nicht, nur das direkte linke und rechte Kind zu prüfen. Der folgende Baum ist <strong>kein</strong> Suchbaum, obwohl bei jedem Knoten das linke Kind kleiner und das rechte größer ist: Die 12 steht im linken Teilbaum der 10, ist aber größer als 10.</p>
+
+<pre><code>        10
+       /  \
+      5    15
+       \
+        12      &lt;-- verletzt die Suchbaum-Eigenschaft</code></pre>
+
+<p>Zum Nachlesen: der Baum aus dem Video in Beispiel 1.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> ein binärer Suchbaum</summary>
+            <pre><code>        8
+       / \
+      3   10
+     / \    \
+    1   6    14</code></pre>
+            <p>Die Wurzel ist 8, das linke Kind 3, das rechte Kind 10. Das linke Kind von 3 ist 1, das rechte Kind von 3 ist 6. Das rechte Kind von 10 ist 14. Alle Werte links der 8 (1, 3, 6) sind kleiner als 8, alle rechts (10, 14) größer. Kleinster Wert: 1 (ganz links), größter Wert: 14 (ganz rechts). In-Order: 1, 3, 6, 8, 10, 14.</p>
+            </details>
+        </div>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Einfügen →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Einfügen in den Suchbaum</h2>
+
+<p>Ein neuer Wert wird immer als neues Blatt eingefügt. Den Platz findet man wie beim Zahlenraten: Bei jedem Knoten vergleichen – kleiner nach links, größer nach rechts – bis der passende Platz <code>None</code> ist. Im Video baust du den Baum aus Beispiel 1 mit den Klassen <code>Knoten</code> und <code>Suchbaum</code> auf. Die Verwaltungsklasse <code>Suchbaum</code> merkt sich die Wurzel im privaten Attribut <code>__wurzel</code> – wie <code>__head</code> bei der verketteten Liste. <code>einfuegen</code> ist <strong>rekursiv</strong>: Ist der passende Platz frei, kommt der neue Knoten dorthin, sonst ruft sich die Methode selbst mit diesem Kind auf. Achte darauf, welchen Knoten der Parameter <code>knoten</code> in jedem Aufruf hat.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-5-2_einfuegen_vorschau.png" src="../vid/3-5-2_einfuegen.mp4"></video><a href="../vid/3-5-2_einfuegen.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Einfügen in den Suchbaum – Schritt für Schritt (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>2_baeume/suchbaum.py</code> an und tippe den Code aus dem Video ab: die Klassen <code>Knoten</code> und <code>Suchbaum</code> und die Methode <code>einfuegen</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>b = Suchbaum()</code> · <code>b.einfuegen(8)</code>. Danach committen, z.&nbsp;B. <code>3.5 Schritt 2: Knoten, Suchbaum, einfuegen angelegt</code>.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Einfügen in der Zeiger-Werkstatt</summary>
+                <p>Öffne im Kursmenü links die Seite <strong>Zeiger-Werkstatt</strong>. In der Übung „3.5 Suchbaum: einfügen“ lässt du eine Variable <code>aktuell</code> im Baum aus Beispiel 1 selbst abwärts wandern (wie in der Schleifen-Fassung im Hinweis nach Beispiel 2) und hängst 7 und 12 an der richtigen Stelle an. Die Werkstatt sagt dir, wo ein Knoten falsch hängt.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-5-1">Aufgabe 3.5.1</a> – einen größeren Suchbaum von Hand aufbauen. Die In-Order-Reihenfolge, nach der dort auch gefragt ist, lernst du in Schritt 4 genauer kennen.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Suchen →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Suchen im Suchbaum</h2>
+
+<p>Suchen läuft genauso wie Einfügen: von der Wurzel abwärts, bei jedem Knoten links oder rechts. Bei jedem Vergleich fällt ein ganzer Teilbaum weg. Im Video siehst du eine erfolgreiche Suche (6) und eine erfolglose (7). <code>suchen</code> ist wie <code>einfuegen</code> rekursiv. Achte darauf, woran die Methode merkt, dass es einen Wert nicht gibt – und warum vor dem rekursiven Aufruf <code>return</code> steht.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-5-3_suchen_vorschau.png" src="../vid/3-5-3_suchen.mp4"></video><a href="../vid/3-5-3_suchen.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Suchen im Suchbaum (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/suchbaum.py</code> den Code aus dem Video: die Methode <code>suchen</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>b.suchen(6)</code> · <code>b.suchen(7)</code>. Danach committen, z.&nbsp;B. <code>3.5 Schritt 3: suchen ergänzt</code>.</p>
+
+<p>Zum Nachlesen steht der ganze Code aus den Videos 2–4 mit dem Ablauf von <code>einfuegen(6)</code> in Beispiel 2:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Einfügen und Suchen in Python</summary>
+            <pre><code class="language-python">class Knoten:
+    def __init__(self, wert):
+        self.wert = wert
+        self.links = None
+        self.rechts = None
+
+class Suchbaum:
+    def __init__(self):
+        self.__wurzel = None
+
+    def einfuegen(self, wert, knoten=None):
+        if self.__wurzel is None:          # leerer Baum
+            self.__wurzel = Knoten(wert)
+            return
+        if knoten is None:                 # Aufruf von außen:
+            knoten = self.__wurzel         # an der Wurzel starten
+        if wert &lt; knoten.wert:
+            if knoten.links is None:
+                knoten.links = Knoten(wert)
+            else:
+                self.einfuegen(wert, knoten.links)
+        elif wert &gt; knoten.wert:           # gleich: nichts tun
+            if knoten.rechts is None:
+                knoten.rechts = Knoten(wert)
+            else:
+                self.einfuegen(wert, knoten.rechts)
+
+    def suchen(self, wert, knoten=None):
+        if self.__wurzel is None:          # leerer Baum
+            return False
+        if knoten is None:                 # Aufruf von außen
+            knoten = self.__wurzel
+        if wert == knoten.wert:
+            return True
+        if wert &lt; knoten.wert:
+            if knoten.links is None:       # kein Kind: Wert fehlt
+                return False
+            return self.suchen(wert, knoten.links)
+        if knoten.rechts is None:
+            return False
+        return self.suchen(wert, knoten.rechts)
+
+    def in_order(self, knoten=None):
+        if self.__wurzel is None:          # leerer Baum
+            return []
+        if knoten is None:                 # Aufruf von außen:
+            knoten = self.__wurzel         # an der Wurzel starten
+        ergebnis = []
+        if knoten.links is not None:       # nur in vorhandene Kinder
+            ergebnis = ergebnis + self.in_order(knoten.links)
+        ergebnis.append(knoten.wert)
+        if knoten.rechts is not None:
+            ergebnis = ergebnis + self.in_order(knoten.rechts)
+        return ergebnis
+
+b = Suchbaum()
+for w in [8, 3, 10, 1, 6, 14]:
+    b.einfuegen(w)
+print(b.suchen(6), b.suchen(7))        # True False
+print(b.in_order())                    # [1, 3, 6, 8, 10, 14]</code></pre>
+            <p><strong>Ablauf von <code>einfuegen(6)</code></strong>, wenn 8, 3, 10 und 1 schon im Baum stehen:</p>
+            <ol>
+                <li>Aufruf von außen <code>b.einfuegen(6)</code>: <code>knoten</code> ist <code>None</code>, also startet die Methode an der Wurzel 8. 6 &lt; 8, links sitzt die 3 – <em>warum links:</em> Alle kleineren Werte gehören in den linken Teilbaum. Rekursiver Aufruf <code>self.einfuegen(6, knoten.links)</code>, der erste Aufruf wartet.</li>
+                <li>Im zweiten Aufruf ist <code>knoten</code> die 3. 6 &gt; 3, und der rechte Platz von 3 ist frei (<code>None</code>).</li>
+                <li>Neuer Knoten 6 wird rechtes Kind von 3. Der zweite Aufruf endet, danach der erste. Beim Einfügen sind also so viele Aufrufe gleichzeitig offen, wie der Weg Knoten hat.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> der Baum aus Beispiel 1. <strong>Probe:</strong> Die In-Order-Ausgabe ist aufsteigend sortiert.</p>
+            <table>
+                <thead><tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td>vorhandener Wert</td><td><code>b.suchen(6)</code></td><td><code>True</code> nach 3 Vergleichen (8, 3, 6)</td></tr>
+                    <tr><td>fehlender Wert</td><td><code>b.suchen(7)</code></td><td><code>False</code> (8, 3, 6, rechts von 6 kein Kind)</td></tr>
+                    <tr><td>Duplikat</td><td><code>b.einfuegen(8)</code>, danach <code>b.in_order()</code></td><td>unverändert <code>[1, 3, 6, 8, 10, 14]</code></td></tr>
+                    <tr><td>leerer Baum</td><td><code>Suchbaum().suchen(5)</code></td><td><code>False</code></td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Einfügen und Suchen gehen auch ohne Rekursion</summary>
+                <p>Weil Einfügen und Suchen immer nur <strong>einen</strong> Weg nach unten gehen, reicht auch eine Schleife. Eine Hilfsvariable <code>aktuell</code> wandert von der Wurzel abwärts:</p>
+                <pre><code class="language-python">    def einfuegen(self, wert):
+        if self.__wurzel is None:
+            self.__wurzel = Knoten(wert)
+            return
+        aktuell = self.__wurzel
+        while True:
+            if wert == aktuell.wert:
+                return                      # keine Duplikate
+            if wert &lt; aktuell.wert:
+                if aktuell.links is None:
+                    aktuell.links = Knoten(wert)
+                    return
+                aktuell = aktuell.links
+            else:
+                if aktuell.rechts is None:
+                    aktuell.rechts = Knoten(wert)
+                    return
+                aktuell = aktuell.rechts
+
+    def suchen(self, wert):
+        aktuell = self.__wurzel
+        while aktuell is not None:
+            if wert == aktuell.wert:
+                return True
+            if wert &lt; aktuell.wert:
+                aktuell = aktuell.links
+            else:
+                aktuell = aktuell.rechts
+        return False</code></pre>
+                <p><code>while True:</code> ist eine Schleife ohne Abbruchbedingung – sie endet erst, wenn <code>return</code> die Methode verlässt. Die Schleife merkt sich nur den aktuellen Knoten, es entstehen keine offenen Methodenaufrufe. Wann das wichtig wird, untersuchst du in Aufgabe 3.5.3.</p>
+            </details>
+        </div>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Sortiert ausgeben →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Sortiert ausgeben – und wann der Suchbaum langsam wird</h2>
+
+<p>Die Methode <code>in_order</code> besucht für jeden Knoten erst den linken Teilbaum, dann den Knoten, dann den rechten Teilbaum – bei einem Suchbaum kommen die Werte so sortiert heraus. Sie ist rekursiv wie <code>einfuegen</code> und <code>suchen</code>: Von außen rufst du <code>b.in_order()</code> ohne Knoten auf. Wie die Aufrufe genau ablaufen, zeigt dir Kursseite 3.6. Achte im Video außerdem darauf, was passiert, wenn man die Werte schon sortiert einfügt.</p>
+
+<p>Binäre Suchbäume werden häufig zum Suchen, Einfügen und sortierten Ausgeben von Daten verwendet. Ist der Baum ausgeglichen, liegen diese Operationen in O(log n); entartet er zu einer Kette, in O(n).</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-5-4_in_order_vorschau.png" src="../vid/3-5-4_in_order.mp4"></video><a href="../vid/3-5-4_in_order.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Sortiert ausgeben mit <code>in_order</code> – und wann der Suchbaum langsam wird (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/suchbaum.py</code> den Code aus dem Video: die Methode <code>in_order</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>b.in_order()</code>. Danach committen, z.&nbsp;B. <code>3.5 Schritt 4: in_order ergänzt</code>.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Es geht auch mit zwei Methoden</summary>
+                <p>Ebenso richtig ist eine öffentliche Methode ohne Knoten, die eine private Hilfsmethode an der Wurzel startet:</p>
+                <pre><code class="language-python">    def in_order(self):
+        ergebnis = []
+        self.__in_order(self.__wurzel, ergebnis)
+        return ergebnis
+
+    def __in_order(self, knoten, ergebnis):
+        if knoten is not None:
+            self.__in_order(knoten.links, ergebnis)
+            ergebnis.append(knoten.wert)
+            self.__in_order(knoten.rechts, ergebnis)</code></pre>
+                <p>Hier bedeutet <code>None</code> nur „kein Knoten“, die Hilfsmethode darf also mit <code>None</code> aufgerufen werden. Diese Form findest du zum Beispiel auf Kursseite 3.6b. Im Kurs schreiben wir rekursive Methoden als <strong>eine</strong> Methode mit <code>knoten=None</code>.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-5-2">Aufgabe 3.5.2</a> – die Suchbaum-Eigenschaft richtig prüfen, und <a href="uebungen.html#a-3-5-3">Aufgabe 3.5.3</a> – die Leserverwaltung der Stadtbibliothek.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Suchbäume in Bibliothek und Datenbank</summary>
+                <p>
+                    <strong>Alltag:</strong> Wenn du in der Stadtbibliothek deinen Leserausweis scannst, muss das System unter Zehntausenden Ausweisnummern in Sekundenbruchteilen deinen Datensatz finden. Ein Suchbaum mit 50 000 Einträgen braucht dafür bei guter Balance nur etwa 16 Vergleiche.<br><br>
+                    <strong>Beruf:</strong> Datenbanken nutzen dafür B-Bäume (siehe 3.4), die Programmiersprache Java verwendet in ihrer <code>TreeMap</code> einen Rot-Schwarz-Baum. Softwareentwicklerinnen und -entwickler müssen wissen, wann eine sortierte Eingabe einen einfachen Suchbaum entarten lässt – ein klassischer Fehler, der erst mit echten Daten auffällt.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Ein <strong>Binärbaum</strong> ist ein Baum, in dem jeder Knoten <strong>höchstens zwei Kinder</strong> hat, die als linkes und rechtes Kind unterschieden werden. Der oberste Knoten, von dem aus alle anderen Knoten erreichbar sind, heißt Wurzel.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                Ein <strong>binärer Suchbaum</strong> (BST, binary search tree) ist ein Binärbaum, bei dem für <strong>jeden</strong> Knoten gilt:<br>
+                – Alle Werte im <strong>gesamten linken Teilbaum</strong> sind kleiner als der Wert des Knotens.<br>
+                – Alle Werte im <strong>gesamten rechten Teilbaum</strong> sind größer als der Wert des Knotens.<br>
+                Daraus folgt: Der <strong>kleinste Wert</strong> steht im Knoten ganz links (von der Wurzel aus immer nach links gehen), der <strong>größte Wert</strong> ganz rechts. Eine In-Order-Traversierung (links – Knoten – rechts) gibt alle Werte aufsteigend sortiert aus.
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>Rekursive Methoden in der Verwaltungsklasse:</strong> Eine rekursive Methode von <code>Suchbaum</code> bekommt den Knoten als <strong>letzten Parameter mit dem Standardwert <code>None</code></strong>, z.&nbsp;B. <code>def einfuegen(self, wert, knoten=None)</code>. Von außen ruft man sie ohne Knoten auf – dann startet sie an der <code>__wurzel</code>. In sich selbst ruft sie sich mit einem Kind auf.</p>
+            <p><strong>Achtung:</strong> <code>None</code> bedeutet dann „von außen aufgerufen“. Deshalb steigt die Methode nur in Kinder ab, die <strong>nicht</strong> <code>None</code> sind. Ein Aufruf mit einem fehlenden Kind würde wieder an der Wurzel beginnen und nie enden (<code>RecursionError</code>).</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Links oder rechts? <span class="niveau">AFB I</span></summary>
+                <p>Betrachte den Baum aus Beispiel 1. Welche der Zahlen 2, 7, 9 und 12 dürften irgendwo im linken Teilbaum der 8 stehen? Welche davon dürften im rechten Teilbaum der 3 stehen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Im linken Teilbaum der 8 nur Werte kleiner als 8: 2 und 7. Der rechte Teilbaum der 3 liegt zugleich im linken Teilbaum der 8 – dort müssen Werte größer als 3 <em>und</em> kleiner als 8 sein: nur die 7.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Einen kleinen Suchbaum aufbauen <span class="niveau">AFB I</span></summary>
+                <p>Füge 5, 2, 8, 4 in dieser Reihenfolge in einen leeren Suchbaum ein und zeichne ihn. Mit welchen Knoten wird <code>einfuegen</code> nacheinander aufgerufen, bevor die 4 ihren Platz bekommt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>5 ist die Wurzel, 2 ihr linkes, 8 ihr rechtes Kind. Zwei Aufrufe: von außen mit <code>knoten</code> = 5 (4 &lt; 5, links ist die 2 → Aufruf mit der 2), dann mit <code>knoten</code> = 2 (4 &gt; 2, rechts ist frei). Die 4 wird rechtes Kind der 2.</p>
+                </details>
+            </details>
+        </div>

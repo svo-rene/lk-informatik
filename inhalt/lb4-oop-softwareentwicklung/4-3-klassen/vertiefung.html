@@ -1,0 +1,41 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-4-3-5">
+        <details>
+            <summary>Aufgabe 4.3.5: Fehler finden – das Schließfach <span class="niveau">AFB III</span></summary>
+            <p>Für die Schließfächer im Schulhaus hat Mira eine Klasse geschrieben. Nach dem Öffnen soll <code>Fach 17 (Ida): offen</code> erscheinen.</p>
+            <pre><code class="language-python">class Schliessfach:
+    def __init__(nummer, besitzer):
+        self.nummer = nummer
+        self.besitzer = besitzer
+        self.offen = False
+
+    def oeffnen(self):
+        offen = True
+
+    def status(self):
+        if self.offen:
+            return f"Fach {self.nummer} ({besitzer}): offen"
+        return f"Fach {self.nummer} ({besitzer}): zu"
+
+fach = Schliessfach(17, "Ida")
+fach.oeffnen
+print(fach.status())</code></pre>
+            <ol>
+                <li>Das Programm enthält vier Fehler. Zwei davon meldet Python mit einer Fehlermeldung, zwei bleiben „stumm“. Finde alle vier und erkläre jeweils, was Python an dieser Stelle tatsächlich macht.</li>
+                <li>Mira behebt die Fehler nacheinander in der Reihenfolge, in der Python sie meldet. Gib an, was das Programm nach jeder einzelnen Korrektur ausgibt.</li>
+                <li>Korrigiere die Klasse, ergänze eine Methode <code>schliessen()</code> und teste:
+                    <table class="gitter">
+                        <thead><tr><th>Aufrufe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>fach = Schliessfach(17, "Ida")</code><br><code>print(fach.status())</code></td><td><code>Fach 17 (Ida): zu</code></td><td></td></tr>
+                            <tr><td><code>fach.oeffnen()</code><br><code>print(fach.status())</code></td><td><code>Fach 17 (Ida): offen</code></td><td></td></tr>
+                            <tr><td><code>print(Schliessfach(3, "Ben").status())</code></td><td><code>Fach 3 (Ben): zu</code></td><td></td></tr>
+                            <tr><td><code>fach.schliessen()</code><br><code>print(fach.status())</code></td><td><code>Fach 17 (Ida): zu</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+            <p class="tipp">Tipp: Achte bei jeder Methode darauf, ob <code>self</code> in der Parameterliste steht und ob vor jedem Attribut <code>self.</code> steht. Und: Wird jede Methode wirklich aufgerufen?</p>
+        </details>
+    </div>

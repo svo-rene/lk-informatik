@@ -1,0 +1,14 @@
+{
+  "nr": "7.15",
+  "titel": "Filius-Praxis: DHCP",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

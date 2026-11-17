@@ -1,0 +1,144 @@
+<p>In der Aussagenlogik sind Normalformen spezielle Darstellungsformen von logischen Ausdrücken. Sie spielen eine wichtige Rolle, da sie komplexere Aussagen in eine standardisierte Form bringen, die einfacher zu analysieren und zu verarbeiten ist. Durch die Umwandlung von logischen Ausdrücken in Normalformen können wir logische Äquivalenzen, Widersprüche und Tautologien leichter erkennen. Zudem erleichtern sie die Anwendung von weiteren logischen Operationen und die Erstellung von Wahrheitstabellen.</p>
+
+<p>Bausteine der Normalformen sind <strong>Literale</strong>: eine Variable oder ihre Negation, also z.&nbsp;B. A oder ¬A.</p>
+
+<h2>Konjunktive Normalform (KNF)</h2>
+
+<p>Die konjunktive Normalform ist eine spezielle Form eines logischen Ausdrucks, bei der mehrere ODER-Terme durch UND-Verknüpfungen (∧) miteinander verbunden sind. Die KNF ist gegeben, wenn der Ausdruck als eine Konjunktion von Disjunktionen aufgebaut ist. Jeder Disjunktionsterm besteht nur aus Literalen, die mit ∨ verknüpft sind.</p>
+
+<div class="beispiel">
+<p>Beispiele (das Zeichen ∧ zwischen den Klammern darf weggelassen werden):</p>
+<ul>
+<li>f(A,B,C) = (A ∨ B ∨ C) (A ∨ ¬C)</li>
+<li>f(A,B,C) = (¬B ∨ ¬C) (A ∨ B) (¬A ∨ B ∨ ¬C)</li>
+</ul>
+</div>
+
+<h2>Disjunktive Normalform (DNF)</h2>
+
+<p>Die disjunktive Normalform ist ebenfalls eine spezielle Form eines logischen Ausdrucks, bei der mehrere UND-Terme durch ODER-Verknüpfungen (∨) miteinander verbunden sind. Die DNF ist gegeben, wenn der Ausdruck als eine Disjunktion von Konjunktionen aufgebaut ist. Jeder Konjunktionsterm beschreibt dabei eine Kombination von Literalen, bei der der gesamte Ausdruck wahr ist.</p>
+
+<div class="beispiel">
+<p>Beispiele:</p>
+<ul>
+<li>f(A,B,C) = ¬ABC ∨ AB ∨ A¬B</li>
+<li>f(A,B,C) = ¬A ∨ A¬C ∨ ¬BC ∨ ABC ∨ ¬AB</li>
+</ul>
+</div>
+
+<h2>Algorithmus zur Umformung in KNF oder DNF</h2>
+
+<p>Jede Funktion lässt sich in KNF oder DNF darstellen.<br>Um einen Term in KNF oder DNF zu bringen, kann man sich an folgenden Ablauf halten:</p>
+
+<ol>
+<li>Anwendung der De-Morgan’schen Regeln, bis die Negation nur noch bei den einzelnen Variablen steht.</li>
+<li>Anwendung des Distributivgesetzes, je nachdem, ob KNF oder DNF gewünscht wird.</li>
+<li>Anwendung des Idempotenzgesetzes, falls gleiche Terme auftreten.</li>
+<li>Zusammenfassen von immer wahren oder immer falschen Termen.</li>
+</ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> DNF direkt aus der Wahrheitstabelle</summary>
+<p>Für f(A,B) = A ⊕ B (XOR, „entweder … oder“) liest man die Zeilen mit f = 1 ab und verknüpft sie mit ODER:</p>
+<table class="gitter">
+<tr><th>A</th><th>B</th><th>f</th></tr>
+<tr><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td></tr>
+</table>
+<p>DNF: f = (¬A ∧ B) ∨ (A ∧ ¬B). Wie dieses Ablesen systematisch funktioniert, lernst du in 2.8.</p>
+<p><strong>Probe:</strong> Für A = B (Zeilen 00 und 11) enthält jeder der beiden Konjunktionsterme ein falsches Literal, f ist dort 0 – wie in der Tabelle.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> A ∨ ¬(A ∨ B ∨ C) ∧ (A ∨ ¬C) in KNF bringen. Wegen „∧ vor ∨“ lautet der Term mit Klammern A ∨ [¬(A ∨ B ∨ C) ∧ (A ∨ ¬C)].</summary>
+<table class="gitter">
+<tr>
+<th>Gegebene Aussage</th>
+<th>Schritt</th>
+<th>Zwischenergebnis</th>
+</tr>
+<tr>
+<td>A ∨ ¬(A ∨ B ∨ C) ∧ (A ∨ ¬C)</td>
+<td>De-Morgan’sche Regel</td>
+<td>A ∨ (¬A ∧ ¬B ∧ ¬C) ∧ (A ∨ ¬C)</td>
+</tr>
+<tr>
+<td>A ∨ (¬A ∧ ¬B ∧ ¬C) ∧ (A ∨ ¬C)</td>
+<td>Distributivgesetz (A ∨ … ausmultiplizieren)</td>
+<td>(A ∨ ¬A) ∧ (A ∨ ¬B) ∧ (A ∨ ¬C) ∧ (A ∨ A ∨ ¬C)</td>
+</tr>
+<tr>
+<td>(A ∨ ¬A) ∧ (A ∨ ¬B) ∧ (A ∨ ¬C) ∧ (A ∨ A ∨ ¬C)</td>
+<td>Idempotenzgesetz (A ∨ A = A, danach kommt (A ∨ ¬C) doppelt vor)</td>
+<td>(A ∨ ¬A) ∧ (A ∨ ¬B) ∧ (A ∨ ¬C)</td>
+</tr>
+<tr>
+<td>(A ∨ ¬A) ∧ (A ∨ ¬B) ∧ (A ∨ ¬C)</td>
+<td>(A ∨ ¬A) ist immer wahr</td>
+<td>(A ∨ ¬B) ∧ (A ∨ ¬C)</td>
+</tr>
+<tr>
+<td>(A ∨ ¬B) ∧ (A ∨ ¬C)</td>
+<td>KNF</td>
+<td>(A ∨ ¬B) (A ∨ ¬C)</td>
+</tr>
+</table>
+<p><strong>Probe:</strong> Mit dem Distributivgesetz ist (A ∨ ¬B) (A ∨ ¬C) = A ∨ (¬B ∧ ¬C) – das ist zugleich eine DNF. Für A = 1 sind Ausgangsterm und Ergebnis wahr; für A = 0 sind beide genau bei B = 0, C = 0 wahr. Die Wahrheitstabellen stimmen also in allen 8 Zeilen überein.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: Normalformen in Chipdesign und Software</summary>
+<p>Die Umwandlung in Normalformen ist nicht nur eine Fleißaufgabe. In der Praxis wird jede boolesche Funktion, die du vereinfachst, irgendwann als <strong>Schaltung aus echten Logikgattern</strong> gebaut (siehe Kapitel 3). Jeder zusätzliche Term bedeutet ein zusätzliches Gatter aus echten Transistoren auf einem Chip.</p>
+<p>Ein moderner Prozessor besteht aus mehreren <strong>Milliarden Transistoren</strong>. Wird eine Funktion nicht vereinfacht, kostet das bei der Massenproduktion realer Chips spürbar mehr Chipfläche, mehr Energieverbrauch und höhere Herstellungskosten – multipliziert mit Millionen produzierter Chips. Genau deshalb ist die Minimierung boolescher Funktionen (per Hand mit Gesetzen und Normalformen oder automatisiert mit Algorithmen wie Quine-McCluskey) ein zentraler Schritt im professionellen Chipdesign.</p>
+<p><strong>Berufsleben:</strong></p>
+<ul>
+<li><strong>Chipdesign mit EDA-Werkzeugen</strong>: Entwurfssoftware rechnet intern fast immer in Normalformen – in Dresden arbeiten Hunderte Ingenieur/innen in diesem Feld.</li>
+<li><strong>Verifikationsingenieur/in</strong>: nutzt SAT-Solver, die jede Frage zuerst in eine KNF übersetzen, um z.&nbsp;B. zu prüfen, ob ein Chip in irgendeinem Zustand falsch rechnen kann.</li>
+<li><strong>Datenbankentwickler/in</strong>: Datenbank-Optimierer formen komplexe <code>WHERE</code>-Bedingungen in Normalformen um, damit Abfragen schneller laufen.</li>
+</ul>
+</details>
+</div>
+
+<hr>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p>Die <strong>KNF</strong> ist eine Konjunktion (UND) von Disjunktionstermen. Ein Disjunktionsterm ist eine ODER-Verknüpfung von Literalen, z.&nbsp;B. (A ∨ ¬C).</p>
+</div>
+
+<div class="merke">
+<p>Die <strong>DNF</strong> ist eine Disjunktion (ODER) von Konjunktionstermen. Ein Konjunktionsterm ist eine UND-Verknüpfung von Literalen, z.&nbsp;B. ¬A B C.</p>
+<p><strong>Achtung:</strong> Die Begriffe <strong>Minterm</strong> (Konjunktionsterm) und <strong>Maxterm</strong> (Disjunktionsterm) verwendet man nur, wenn der Term <strong>alle</strong> Variablen der Funktion genau einmal enthält. In f(A,B,C) = ¬ABC ∨ AB ist ¬ABC ein Minterm, AB dagegen nicht (C fehlt). Das führt zu den kanonischen Normalformen in 2.8.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 2.7.1: Normalformen bilden <span class="niveau">AFB II</span></summary>
+<p>Gib die folgenden Funktionen in DNF und KNF an:</p>
+<ol>
+<li>f(A,B,C) = ¬(¬A ∨ B) ∨ C</li>
+<li>f(A,B,C) = ¬(A ∨ B) ∨ ¬(A ∨ C) ∨ C</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 2.7.2: Algorithmus anwenden <span class="niveau">AFB I</span></summary>
+<p>Wende den Algorithmus zur Umformung an. Gib zu jedem Schritt das verwendete Gesetz an.</p>
+<ol>
+<li>Bringe f(A,B,C) = ¬(A ∨ ¬B) ∨ (A ∧ ¬(B ∨ C)) in DNF.</li>
+<li>Bringe g(A,B,C) = ¬(A ∧ B) ∧ (A ∨ C) in KNF und in DNF.</li>
+</ol>
+</details>
+</div>

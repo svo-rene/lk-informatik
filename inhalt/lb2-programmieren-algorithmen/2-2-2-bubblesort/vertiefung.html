@@ -1,0 +1,50 @@
+<script src="../sortierlabor.js" defer></script>
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.2.5: Fehler finden – zwei fast richtige Bubblesorts <span class="niveau">AFB III</span></summary>
+                <pre><code class="language-python"># Variante A
+def bubblesort_a(liste):
+    n = len(liste)
+    for durchlauf in range(n - 1):
+        getauscht = False
+        for j in range(n - 1 - durchlauf):
+            if liste[j] &gt; liste[j + 1]:
+                temp = liste[j]
+                liste[j] = liste[j + 1]
+                liste[j + 1] = temp
+                getauscht = True
+            if not getauscht:
+                break
+    return liste
+
+# Variante B
+def bubblesort_b(liste):
+    n = len(liste)
+    for durchlauf in range(n - 1):
+        for j in range(n - durchlauf):
+            if liste[j] &gt; liste[j + 1]:
+                temp = liste[j]
+                liste[j] = liste[j + 1]
+                liste[j + 1] = temp
+    return liste</code></pre>
+                <ol>
+                    <li>Teste beide Varianten mit <code>[3, 2, 1]</code>, <code>[2, 1, 3]</code>, <code>[1, 3, 2]</code>, <code>[2, 1]</code> und <code>[]</code>. Bestimme die Ergebnisse zuerst von Hand und lege eine Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe an.</li>
+                    <li>Beschreibe den Fehler in jeder Variante und erkläre, warum manche Tests trotzdem erfolgreich sind.</li>
+                    <li>Gib für jede Variante den kleinsten Testfall an, der den Fehler zeigt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.2.6: Stabil oder nicht? <span class="niveau">AFB III</span></summary>
+                <ol>
+                    <li>Ersetze in Beispiel 2 die Bedingung <code>&gt;</code> durch <code>&gt;=</code>. Führe einen vollständigen Trace für <code>[["Ali", 3], ["Ben", 1], ["Cara", 3], ["Dana", 2]]</code> durch und gib die Anzahl der Vergleiche und Vertauschungen an.</li>
+                    <li>Beurteile das Ergebnis im Hinblick auf die Stabilität.</li>
+                    <li>Die Ergebnisliste soll nach Punkten sortiert sein und bei Gleichstand alphabetisch nach Namen. Beschreibe, wie du das mit zwei Sortierläufen eines stabilen Verfahrens erreichst, und begründe, warum die Reihenfolge der beiden Läufe entscheidend ist.</li>
+                    <li>Beurteile die Aussage: „Bubblesort liegt im besten Fall in O(n).“ Unter welcher Bedingung stimmt sie?</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,29 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.3.7: Fehler finden – Grammatik für Uhrzeiten <span class="niveau">AFB III</span></summary>
+<p>Tim gibt für Uhrzeiten im Format <code>hh:mm</code> (00:00 bis 23:59) diese Grammatik an:</p>
+<pre>G = (N, T, P, Uhrzeit) mit N = {Uhrzeit, Ziffer, ":"}, T = {0, 1, …, 9}
+Uhrzeit → Ziffer Ziffer ":" Ziffer Ziffer
+Ziffer  → "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"</pre>
+<ol type="a">
+<li>Finde den Fehler in der Angabe des 4-Tupels und begründe mit dem Merkkasten.</li>
+<li>Gib zwei Wörter an, die Tims Grammatik erzeugt, die aber keine gültigen Uhrzeiten sind.</li>
+<li>Gib eine korrigierte Grammatik an und zeige mit Ableitungen, dass <code>23:59</code> erzeugt wird, <code>24:00</code> aber nicht.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.3.8: Kursbezeichnungen im Stundenplan <span class="niveau">AFB III</span></summary>
+<p>Im Stundenplan eines Gymnasiums heißen die Kurse z.&nbsp;B. <code>11 INF LK1</code> oder <code>12 MA GK3</code>: Jahrgang (11 oder 12), Leerzeichen, Fach (DE, MA, EN, PH oder INF), Leerzeichen, Kursart (LK oder GK) und direkt dahinter eine Kursnummer von 1 bis 4.</p>
+<ol type="a">
+<li>Entwirf eine Grammatik G = (N, T, P, S) für alle Kursbezeichnungen.</li>
+<li>Leite <code>12 MA GK3</code> vollständig ab.</li>
+<li>Berechne die Anzahl der Wörter in L(G).</li>
+<li>Begründe mit deiner Grammatik, warum <code>11 INF LK 1</code> und <code>11 inf LK1</code> nicht zu L(G) gehören.</li>
+</ol>
+</details>
+</div>

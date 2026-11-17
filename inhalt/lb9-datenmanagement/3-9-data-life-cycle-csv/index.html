@@ -1,0 +1,181 @@
+<p>
+            In diesem Projekt durchläufst du alle fünf Phasen des Data Life Cycle von Seite 3.1 an einem eigenen Beispiel:
+            <strong>1. Erstellung</strong> (Umfrage erheben), <strong>2. Speicherung</strong> (CSV-Datei anlegen, einlesen, bereinigen und
+            sauber speichern), <strong>3. Nutzung</strong> (analysieren und visualisieren), <strong>4. Archivierung</strong> und
+            <strong>5. Löschung</strong>. Du gestaltest deine eigene kleine Umfrage, sammelst Daten in der Klasse und wertest sie mit
+            Python und LibreOffice Calc aus.
+        </p>
+
+<h2>1. Eigene Umfrage erstellen</h2>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Umfragen in Markt- und Meinungsforschung</summary>
+                <p>
+                    Genau diesen Ablauf – Fragebogen entwerfen, Daten erheben, bereinigen, auswerten, Ergebnis präsentieren und
+                    Rohdaten nach einer Frist löschen – durchlaufen Institute der Markt- und Meinungsforschung bei jeder Studie.
+                    <strong>Data Analysts</strong> und Marktforscher*innen, etwa in Leipziger und Dresdner Instituten oder in den
+                    Marketingabteilungen von Onlinehändlern, verbringen einen großen Teil ihrer Zeit mit der Bereinigung.
+                    Die <strong>DSGVO</strong> verlangt dabei, dass Antworten nur so lange personenbezogen gespeichert werden, wie
+                    es für den Zweck nötig ist.
+                </p>
+            </details>
+        </div>
+
+<h2>2. Daten mit Python einlesen</h2>
+
+<pre><code>import csv
+
+daten = []
+with open('umfrage.csv', newline='', encoding='utf-8') as file:
+    reader = csv.reader(file, delimiter=';')
+    next(reader)  # Kopfzeile überspringen
+    for zeile in reader:
+        daten.append(zeile)
+
+for eintrag in daten:
+    print(eintrag)
+</code></pre>
+
+<h2>3. Daten bereinigen</h2>
+
+<pre><code>def ist_zahl(text):
+    """True, wenn text eine ganze Zahl oder Dezimalzahl ist (z. B. '3', '7.5', '7,5')."""
+    try:
+        float(text.replace(',', '.'))
+        return True
+    except ValueError:
+        return False
+
+bereinigt = []
+
+for zeile in daten:
+    if len(zeile) == 3:
+        nr = zeile[0].strip()
+        wort = zeile[1].strip()
+        zahl = zeile[2].strip().replace(',', '.')   # Dezimalkomma in Punkt umwandeln
+
+        if wort and not ist_zahl(wort) and ist_zahl(zahl):
+            bereinigt.append([nr, wort, zahl])
+</code></pre>
+
+<p>
+            Warum nicht einfach <code>zahl.isdigit()</code>? <code>isdigit()</code> prüft, ob <em>alle Zeichen Ziffern</em>
+            sind. Bei <code>'7.5'</code> ist der Punkt keine Ziffer, also würde eine gültige Dezimalzahl aussortiert, ebenso
+            <code>'-3'</code>. Der Versuch, den Text mit <code>float()</code> umzuwandeln, erkennt dagegen alle Zahlen: Klappt
+            es, ist es eine Zahl; sonst meldet Python einen <code>ValueError</code>, den <code>try</code>/<code>except</code>
+            abfängt.
+        </p>
+
+<h2>4. Daten analysieren</h2>
+
+<pre><code>zaehler = {}
+for z in bereinigt:
+    antwort = z[1]
+    if antwort in zaehler:
+        zaehler[antwort] += 1
+    else:
+        zaehler[antwort] = 1
+
+zahlen = [float(z[2]) for z in bereinigt]
+durchschnitt = sum(zahlen) / len(zahlen)
+
+print("Antworten (Wort):", zaehler)
+print("Durchschnitt (Zahl):", round(durchschnitt, 1))
+</code></pre>
+
+<h2>5. Neue CSV-Datei speichern</h2>
+
+<pre><code>with open('umfrage_bereinigt.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file, delimiter=';')
+    writer.writerow(['Nr', 'Antwort_Wort', 'Antwort_Zahl'])
+    writer.writerows(bereinigt)
+</code></pre>
+
+<h2>7. Archivieren und Löschen (Phasen 4 und 5)</h2>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Was archiviert, was gelöscht wird
+                </summary>
+                <p>
+                    Sichere deine bereinigten Daten und dein Programm (z.&nbsp;B. zusammen als ZIP-Datei) und lösche die
+                    Rohdaten, sobald du sie nicht mehr brauchst – vor allem, wenn sie sensible Angaben enthalten.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                CSV steht für <em>Comma-Separated Values</em> und ist ein Textformat zur Speicherung tabellarischer Daten.<br>
+                Jede Zeile entspricht einem Datensatz, Spalten sind durch ein festgelegtes Trennzeichen voneinander getrennt – in Deutschland meist ein Semikolon, international ein Komma. In diesem Projekt verwenden wir wie auf Seite 3.3 das <strong>Semikolon</strong>.<br><br>
+                CSV-Dateien sind leicht lesbar, plattformunabhängig und können sowohl von Tabellenkalkulationen wie LibreOffice Calc als auch von Programmiersprachen wie Python einfach verarbeitet werden.<br>
+                Aufgrund ihrer Einfachheit sind sie besonders gut geeignet für Datenerfassung, -analyse und -austausch.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Datenschutz bei Umfragen:</strong> Namen, E-Mail-Adressen oder andere Angaben, mit denen man eine Person
+                erkennen kann, sind <em>personenbezogene Daten</em> im Sinne der DSGVO. Für eine Auswertung braucht man sie
+                fast nie. Erhebe deshalb nur, was du für deine Frage wirklich brauchst (<strong>Datenminimierung</strong>), und
+                ersetze Namen durch Nummern (<strong>Anonymisierung</strong>). Schon kleine Umfragen in der Klasse können sonst
+                Rückschlüsse auf einzelne Personen erlauben.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.9.1: Denk dir zwei Umfragefragen aus <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Überlege dir zwei Fragen:
+                </p>
+                    <ul>
+                        <li><strong>Frage 1:</strong> mit einer Antwort als <u>Wort</u> (z.&nbsp;B. Musikrichtung, Lieblingstier, Lieblingsspiel, Lieblingsverein, Lieblingsfarbe)</li>
+                        <li><strong>Frage 2:</strong> mit einer Antwort als <u>Zahl</u>, auch Dezimalzahlen sind erlaubt (z.&nbsp;B. Schuhgröße, Anzahl Haustiere, Schlafdauer in Stunden wie 7.5)</li>
+                    </ul>
+                <p>
+                    Erstelle in LibreOffice Calc eine Tabelle mit mindestens <strong>10 Datensätzen</strong> und den Spalten
+                    <code>Nr</code>, <code>Antwort_Wort</code>, <code>Antwort_Zahl</code>. Trage statt Namen nur eine laufende
+                    Nummer ein – so bleibt die Umfrage anonym (siehe Merkkasten unten).
+                </p>
+                <p>
+                    Baue absichtlich <strong>2–3 Fehler</strong> ein, z.&nbsp;B.:
+                </p>
+                    <ul>
+                        <li>eine leere Zelle</li>
+                        <li>Antworten vertauscht (Zahl bei Wort, Wort bei Zahl)</li>
+                        <li>Buchstaben in der Zahlenspalte</li>
+                    </ul>
+                <p>
+                    Speichere deine Datei als <code>umfrage.csv</code> (Zeichensatz UTF-8, Semikolon als Feldtrenner,
+                    Dezimalzahlen mit Punkt).
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.9.2: Wie funktioniert das Einlesen? <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Beschreibe in eigenen Worten:
+                </p>
+                    <ul>
+                        <li>Was genau passiert in der Schleife <code>for zeile in reader</code>?</li>
+                        <li>Was speichert die Liste <code>daten</code>?</li>
+                        <li>Wie sehen die einzelnen Elemente darin aus?</li>
+                    </ul>
+                <p>
+                    Tipp: Gib <code>print(daten)</code> oder <code>print(daten[0])</code> aus und analysiere, was darin steht.
+                </p>
+            </details>
+        </div>

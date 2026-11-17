@@ -1,0 +1,238 @@
+<p>„Mach mal eine App für unsere AG“ – so beginnen viele Softwareprojekte. Was genau die App können soll, wann sie fertig ist und wer das entscheidet, steht in diesem Satz nicht. Wer gleich losprogrammiert, baut oft am Bedarf vorbei. Wer dagegen erst monatelang plant, liefert vielleicht etwas, das inzwischen niemand mehr braucht. Ein <strong>Vorgehensmodell</strong> legt fest, in welchen Schritten Software entsteht und wann geprüft wird. <strong>Anforderungen</strong> beschreiben, was sie können muss – so genau, dass man es nachprüfen kann.</p>
+
+<p><strong>Das kennst du schon aus 10.2</strong> (Kurs „KI und Projektmanagement“): klassisches Projektmanagement mit Phasen (Wasserfall), Projektstrukturplan und Gantt-Diagramm, Scrum mit Rollen, Events und Artefakten, Kanban-Boards und User Stories nach dem Satzschema „Als … möchte ich …, um …“. Diese Seite ergänzt, was ihr für euer Softwareprojekt braucht: das <strong>V-Modell</strong>, den Vergleich der drei Modelle, <strong>Akzeptanzkriterien</strong>, die <strong>Definition of Done</strong> und das <strong>Schätzen</strong>.</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in vier kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) das Tafelbild Schritt für Schritt, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und zeichne mit.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Wasserfall und V-Modell: Wann wird was geprüft?</a> – danach Aufgabe 5.2.1</li>
+            <li><a href="#schritt-2">Scrum – und welches Modell passt?</a> – danach Aufgabe 5.2.2</li>
+            <li><a href="#schritt-3">User Story und Akzeptanzkriterien</a></li>
+            <li><a href="#schritt-4">Issue, Definition of Done und Velocity</a> – danach Aufgabe 5.2.3</li>
+        </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Wasserfall und V-Modell – wann wird was geprüft?</h2>
+
+<p>Beim Wasserfall laufen die Phasen nacheinander ab, getestet wird am Ende. Das V-Modell ordnet jeder Entwurfsstufe eine eigene Teststufe zu. Achte im Video darauf, wo im Wasserfall der Test steht und warum ein Rücksprung teuer ist – und im V-Modell darauf, welche Teststufe gegen welchen Entwurf prüft. Als Beispiel taucht die Klasse <code>Wahl</code> aus 5.1 auf.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-2-1_v_modell_vorschau.png" src="../vid/5-2-1_v_modell.mp4"></video><a href="../vid/5-2-1_v_modell.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Wasserfall und V-Modell (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Wasserfallmodell</h3>
+
+<p>Anforderungsanalyse → Entwurf → Implementierung → Test → Betrieb. Jede Phase endet mit einem Ergebnisdokument, erst dann beginnt die nächste. Getestet wird am Ende. Ein Rücksprung in eine frühere Phase ist teuer, denn alle folgenden Dokumente müssen angepasst werden.</p>
+
+<h3>Zum Nachlesen: V-Modell</h3>
+
+<p>Das V-Modell erweitert den Wasserfall um eine klare Zuordnung: Zu jeder <strong>Entwurfsstufe</strong> auf dem linken Ast gehört eine <strong>Teststufe</strong> auf dem rechten Ast, die gegen genau diesen Entwurf prüft. Die Tests werden schon beim Entwerfen geplant.</p>
+
+<table class="gitter">
+            <tr><th>Entwurfsstufe (links, von oben nach unten)</th><th>Teststufe (rechts, von unten nach oben)</th></tr>
+            <tr><td><strong>Anforderungsanalyse:</strong> Was will der Auftraggeber?</td><td><strong>Abnahmetest:</strong> Der Auftraggeber prüft das fertige System im echten Einsatz.</td></tr>
+            <tr><td><strong>Systementwurf:</strong> Was muss das Gesamtsystem leisten (Geräte, Antwortzeiten, Bedienung)?</td><td><strong>Systemtest:</strong> Das Entwicklerteam prüft das Gesamtsystem.</td></tr>
+            <tr><td><strong>Architekturentwurf:</strong> Aus welchen Modulen besteht es, wie arbeiten sie zusammen?</td><td><strong>Integrationstest:</strong> Arbeiten die Module richtig zusammen?</td></tr>
+            <tr><td><strong>Modulentwurf:</strong> Klassen, Attribute, Methodensignaturen (UML)</td><td><strong>Modultest:</strong> Arbeitet eine einzelne Klasse oder Methode richtig?</td></tr>
+            <tr><td colspan="2" style="text-align:center"><strong>Implementierung</strong> (Spitze des V)</td></tr>
+        </table>
+
+<pre><code>Anforderungsanalyse ─────────────────────────── Abnahmetest
+      Systementwurf ───────────────────── Systemtest
+         Architekturentwurf ───────── Integrationstest
+               Modulentwurf ───── Modultest
+                       Implementierung</code></pre>
+
+<p>Danach: <a href="uebungen.html#a-5-2-1">Aufgabe 5.2.1</a> – Tätigkeiten im V-Modell zuordnen.</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Scrum – und welches Modell passt? →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Scrum – und welches Modell passt?</h2>
+
+<p>Scrum kennst du aus 10.2. Im Video siehst du den Sprint-Zyklus noch einmal als Tafelbild und dann alle drei Modelle in einer Tabelle nebeneinander. Achte darauf, wann bei Scrum getestet wird, wann es etwas Nutzbares gibt und wer das Product Backlog ordnet. Am Ende steht eine Faustregel für die Wahl des Modells.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-2-2_scrum_vorschau.png" src="../vid/5-2-2_scrum.mp4"></video><a href="../vid/5-2-2_scrum.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Scrum – und welches Modell passt? (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Scrum</h3>
+
+<p>Das Produkt entsteht in Sprints von höchstens einem Monat. Jeder Sprint liefert ein nutzbares Inkrement, das die Definition of Done erfüllt. Anforderungen dürfen sich zwischen den Sprints ändern; der Product Owner ordnet das Product Backlog und muss erreichbar sein.</p>
+
+<h3>Zum Nachlesen: die drei Modelle im Vergleich</h3>
+
+<table class="gitter">
+            <tr><th>Merkmal</th><th>Wasserfall</th><th>V-Modell</th><th>Scrum</th></tr>
+            <tr><td>Anforderungen</td><td>zu Beginn vollständig</td><td>zu Beginn vollständig</td><td>wachsen und ändern sich im Product Backlog</td></tr>
+            <tr><td>Wann wird getestet?</td><td>in einer Phase am Ende</td><td>jede Stufe gegen ihren Entwurf, geplant von Anfang an</td><td>in jedem Sprint (Definition of Done)</td></tr>
+            <tr><td>Wann gibt es etwas Nutzbares?</td><td>am Ende</td><td>am Ende</td><td>nach jedem Sprint</td></tr>
+            <tr><td>Änderungen</td><td>teuer, per Änderungsantrag</td><td>teuer, per Änderungsantrag</td><td>zwischen den Sprints vorgesehen</td></tr>
+            <tr><td>Nachweise</td><td>Phasendokumente</td><td>lückenlos: jede Funktion gegen ihre Spezifikation getestet</td><td>Inkrement, Backlog, Tests – weniger Dokumente</td></tr>
+            <tr><td>passt bei</td><td>kleinen, klar beschriebenen Änderungen</td><td>sicherheitskritischen Systemen, Verträgen mit Prüfpflicht</td><td>unklaren oder sich ändernden Anforderungen, erreichbarem Auftraggeber</td></tr>
+        </table>
+
+<p>Danach: <a href="uebungen.html#a-5-2-2">Aufgabe 5.2.2</a> – Das passende Vorgehensmodell wählen.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: User Story und Akzeptanzkriterien →</a></p>
+
+<h2 id="schritt-3">Schritt 3: User Story und Akzeptanzkriterien</h2>
+
+<p>Eine User Story sagt, was jemand will – aber nicht, wann sie erfüllt ist. Dafür gibt es Akzeptanzkriterien im Muster Gegeben – Wenn – Dann. Im Video entstehen sie für das digitale AG-Brett aus Beispiel 1. Achte darauf, welche Daten in den Kriterien genannt werden, welche Grenzfälle dazukommen und woran man ein prüfbares Kriterium erkennt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-2-3_akzeptanzkriterien_vorschau.png" src="../vid/5-2-3_akzeptanzkriterien.mp4"></video><a href="../vid/5-2-3_akzeptanzkriterien.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: User Story und Akzeptanzkriterien (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: User Story, Akzeptanzkriterien, Definition of Done</h3>
+
+<p>Eine <strong>User Story</strong> kennst du aus 10.2: „Als &lt;Rolle&gt; möchte ich &lt;Ziel&gt;, um &lt;Nutzen&gt;.“ Für die Entwicklung reicht der Satz nicht, denn er sagt nicht, wann die Story fertig ist. Dafür gibt es zwei Werkzeuge:</p>
+
+<ul>
+            <li><strong>Akzeptanzkriterien</strong> gehören zu <em>einer</em> Story. Sie sind konkrete, prüfbare Bedingungen, oft im Muster <strong>Gegeben … Wenn … Dann …</strong>: <em>Gegeben</em> ist eine Ausgangslage, <em>wenn</em> eine Handlung passiert, <em>dann</em> gibt es ein beobachtbares Ergebnis. Mindestens ein Kriterium prüft einen Grenzfall oder eine falsche Eingabe.</li>
+            <li>Die <strong>Definition of Done (DoD)</strong> gilt für <em>alle</em> Stories, z.&nbsp;B. „Tests laufen fehlerfrei, eine zweite Person hat den Code im Pull Request geprüft, der Code ist in <code>main</code> übernommen“.</li>
+        </ul>
+
+<p>Gute Stories sind <strong>klein</strong> (passen in einen Sprint), haben <strong>für sich einen Nutzen</strong> und sind <strong>testbar</strong>. Ist ein Eintrag zu groß (ein sogenanntes <em>Epic</em>), wird er in mehrere Stories zerlegt – und zwar nach Nutzen, nicht nach Technik („Datenbank“, „Oberfläche“).</p>
+
+<p>Den ganzen Weg von der Story bis zum fertigen Issue findest du in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Von der User Story zum Issue – das digitale AG-Brett</summary>
+            <p><strong>Ausgangssituation:</strong> Die Schule will die Aushänge der Arbeitsgemeinschaften (AGs) durch eine Konsolen-App ersetzen. Im Product Backlog steht: „Als Schülerin möchte ich alle AGs eines Wochentags sehen, um eine AG zu finden, die in meinen Stundenplan passt.“ Jede AG hat Name, Wochentag, Uhrzeit, Raum und höchstens 20 Plätze.</p>
+            <ol>
+                <li><strong>Story prüfen:</strong> Rolle (Schülerin), Ziel (AGs eines Tages sehen) und Nutzen (passende AG finden) sind genannt. Die Story ist klein und für sich nützlich. Warum zuerst prüfen: Eine Story ohne Nutzen („Als Entwickler möchte ich eine Klasse AG“) gehört nicht ins Product Backlog.</li>
+                <li><strong>Normalfall als Kriterium:</strong> <em>Gegeben</em> sind dienstags die AGs Schach (14:00, Raum 104) und Theater (15:30, Aula). <em>Wenn</em> ich „Dienstag“ wähle, <em>dann</em> sehe ich genau diese zwei AGs, nach Uhrzeit sortiert, mit Uhrzeit und Raum. Warum so konkret: Mit genannten Daten kann jede Person nachprüfen, ob das Ergebnis stimmt.</li>
+                <li><strong>Grenzfall als Kriterium:</strong> <em>Gegeben</em> ist, dass freitags keine AG stattfindet. <em>Wenn</em> ich „Freitag“ wähle, <em>dann</em> erscheint „Am Freitag gibt es keine AG.“ und keine leere Liste. Warum: Gerade leere Ergebnisse vergisst man beim Programmieren.</li>
+                <li><strong>Zweiter Grenzfall:</strong> <em>Gegeben</em> ist die AG Schach mit 20 von 20 belegten Plätzen. <em>Wenn</em> ich „Dienstag“ wähle, <em>dann</em> steht bei Schach „(voll)“. Warum: Die Grenze 20 von 20 ist genau der Wert, an dem sich die Anzeige ändert.</li>
+                <li><strong>Issue schreiben:</strong> Titel kurz als Aufgabe, darunter Story und Kriterien als Aufgabenliste in Markdown (so wie in 10.3):
+                    <pre><code>Titel: AGs eines Wochentags anzeigen
+
+Als Schülerin möchte ich alle AGs eines Wochentags sehen,
+um eine AG zu finden, die in meinen Stundenplan passt.
+
+Akzeptanzkriterien:
+- [ ] Gegeben Schach (Di 14:00, R 104) und Theater (Di 15:30, Aula),
+      wenn ich "Dienstag" wähle, dann sehe ich beide, nach Uhrzeit sortiert.
+- [ ] Gegeben freitags keine AG, wenn ich "Freitag" wähle,
+      dann erscheint "Am Freitag gibt es keine AG."
+- [ ] Gegeben Schach mit 20/20 Plätzen, wenn ich "Dienstag" wähle,
+      dann steht bei Schach "(voll)".</code></pre>
+                </li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Ein Issue, das jede Person im Team gleich versteht. Wer es bearbeitet, weiß vorher, wann er fertig ist.</p>
+            <p><strong>Kontrolle:</strong> Jedes Kriterium lässt sich mit Ja oder Nein beantworten und später als Test schreiben (Seite 5.3). „Die Liste ist übersichtlich“ wäre dagegen kein Kriterium – darüber kann man nur streiten.</p>
+            </details>
+        </div>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Issue, Definition of Done und Velocity →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Issue, Definition of Done und Velocity</h2>
+
+<p>Story und Kriterien landen als Issue im Repository. Fertig ist die Story aber erst, wenn auch die Definition of Done des Teams erfüllt ist – und nur dann zählt sie für die Velocity. Achte im Video auf den Unterschied zwischen Akzeptanzkriterien und Definition of Done und auf die Falle am Sprintende im Beispiel des Schulsanitätsdienstes.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-2-4_definition_of_done_vorschau.png" src="../vid/5-2-4_definition_of_done.mp4"></video><a href="../vid/5-2-4_definition_of_done.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Wann ist eine Story fertig? (ca. 1 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Schätzen – kurz</h3>
+
+<ul>
+            <li><strong>Story Points (SP)</strong> schätzen den Aufwand einer Story <em>relativ</em> zu anderen (Umfang, Schwierigkeit, Unsicherheit), meist auf der Skala 1, 2, 3, 5, 8, 13. Größere Zahlen liegen weiter auseinander, weil große Aufgaben unsicherer sind.</li>
+            <li><strong>Planning Poker:</strong> Alle decken gleichzeitig eine Karte auf. Wer am höchsten und wer am niedrigsten geschätzt hat, begründet. Dann wird neu geschätzt, bis sich das Team einigt. Es wird kein Mittelwert gebildet, denn die Abweichung zeigt, dass jemand etwas weiß oder übersieht.</li>
+            <li><strong>Velocity:</strong> die Summe der SP aller Stories, die in einem Sprint <em>vollständig</em> fertig wurden (DoD erfüllt). Für die nächste Planung nimmt man den Mittelwert der letzten Sprints.</li>
+        </ul>
+
+<p>Zum Nachlesen: der ganze Weg vom Wunsch bis zur Sprintplanung mit der Falle am Sprintende in Beispiel 2.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Einsatzprotokoll für den Schulsanitätsdienst – vom Wunsch zur Sprintplanung</summary>
+            <p><strong>Ausgangssituation:</strong> Der Schulsanitätsdienst führt seine Einsatzprotokolle bisher auf Papier. Die Leiterin wünscht sich „etwas Digitales“. Was genau gebraucht wird, wissen die Sanitäterinnen und Sanitäter noch nicht; sie möchten bald etwas ausprobieren. Fest steht nur: Die Schulleitung verlangt, dass Daten über Verletzungen nur von Sanitätern eingesehen werden können, und will das vor dem Einsatz bestätigt sehen. Das Team hat in drei Übungssprints 11, 13 und 9 SP geschafft.</p>
+            <ol>
+                <li><strong>Vorgehensmodell wählen:</strong> Die Anforderungen sind unklar und sollen durch Ausprobieren wachsen, eine Ansprechpartnerin ist erreichbar → <strong>Scrum</strong>. Die Datenschutzforderung ist dagegen fest und muss nachgewiesen werden. Warum beides zusammenpasst: Diese Forderung wird zu einem Punkt der Definition of Done („Zugriff nur nach Anmeldung als Sanitäter, mit Test nachgewiesen“) und zu einem Abnahmetest mit der Schulleitung vor dem ersten echten Einsatz. Die Idee des V-Modells – jede Anforderung bekommt ihre Prüfung – lebt so im Sprint weiter.</li>
+                <li><strong>Epic zerlegen:</strong> „Als Sanitäter möchte ich Einsätze digital protokollieren“ ist zu groß. Das Team zerlegt nach Nutzen und schätzt mit Planning Poker:
+                    <table class="gitter">
+                        <tr><th>Story</th><th>„Als … möchte ich …, um …“</th><th>SP</th></tr>
+                        <tr><td>S1</td><td>Als Sanitäterin möchte ich einen Einsatz mit Datum, Uhrzeit, Ort und Art der Verletzung anlegen, um ihn nicht nachträglich aus dem Gedächtnis aufschreiben zu müssen.</td><td>5</td></tr>
+                        <tr><td>S2</td><td>Als Sanitäter möchte ich die Maßnahmen aus einer Liste auswählen, um schneller zu protokollieren.</td><td>3</td></tr>
+                        <tr><td>S3</td><td>Als Sanitäterin möchte ich vermerken, ob und wann die Eltern benachrichtigt wurden, um das später belegen zu können.</td><td>2</td></tr>
+                        <tr><td>S4</td><td>Als Leiterin möchte ich eine anonyme Monatsstatistik sehen, um Unfallschwerpunkte zu erkennen.</td><td>8</td></tr>
+                        <tr><td>S5</td><td>Als Leiterin möchte ich ein Protokoll als PDF ausgeben, um es der Unfallmeldung beizulegen.</td><td>5</td></tr>
+                    </table>
+                    Warum nach Nutzen: Schon S1 allein ist nützlich und lässt sich ausprobieren. „Datenbank anlegen“ wäre für die Sanitäter kein sichtbarer Fortschritt.</li>
+                <li><strong>Akzeptanzkriterien für S1</strong>, darunter Grenzfälle:
+                    <ul>
+                        <li><em>Gegeben</em> ich bin als Sanitäterin angemeldet, <em>wenn</em> ich Datum, Uhrzeit, Ort „Turnhalle“ und Verletzung „Prellung“ eingebe, <em>dann</em> steht der Einsatz mit diesen Daten oben in der Liste.</li>
+                        <li><em>Gegeben</em> das Feld „Ort“ ist leer, <em>wenn</em> ich speichere, <em>dann</em> erscheint „Ort fehlt“ und es wird nichts gespeichert.</li>
+                        <li><em>Gegeben</em> die eingegebene Uhrzeit liegt in der Zukunft, <em>wenn</em> ich speichere, <em>dann</em> erscheint „Uhrzeit liegt in der Zukunft“.</li>
+                    </ul>
+                    Warum Grenzfälle: Leere Pflichtfelder und unmögliche Werte sind die typischen Fehlerquellen.</li>
+                <li><strong>Sprint planen:</strong> Velocity = (11 + 13 + 9) : 3 = 11 SP. Das Team übernimmt Stories in der Reihenfolge des Backlogs, solange sie passen: S1 (5) → 5, S2 (3) → 8, S3 (2) → 10. S4 (8) würde 18 ergeben und passt nicht. Warum nicht 13 oder 9: Ein einzelner Sprint kann zufällig gut oder schlecht laufen, der Mittelwert ist verlässlicher.</li>
+                <li><strong>Falle am Sprintende:</strong> S1 und S2 sind fertig. Bei S3 ist der Code geschrieben, der Pull Request aber noch nicht geprüft. Die Velocity dieses Sprints ist <strong>8</strong>, nicht 10. Warum: S3 erfüllt die DoD nicht. Zählt man sie mit, plant das Team im nächsten Sprint zu viel ein, und die fehlende Arbeit (Review, Fehlerbehebung) fällt dann zusätzlich an.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Scrum mit einer DoD, die die Datenschutzforderung enthält; Sprint 1 mit S1–S3 (10 SP); gemessene Velocity 8 SP; S3 wandert zurück ins Product Backlog.</p>
+            <p><strong>Kontrolle:</strong> Jede Story hat Rolle, Ziel und Nutzen; jedes Kriterium ist mit Ja/Nein prüfbar; die eingeplanten 10 SP liegen nicht über der Velocity 11; gezählt werden nur Stories, die die DoD erfüllen.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-5-2-3">Aufgabe 5.2.3</a> – Akzeptanzkriterien schreiben – der Vertretungsplan.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Anforderungen und Vorgehensmodelle im Beruf</summary>
+                <p><strong>Alltag:</strong> Auch beim Handwerker gibt es „Akzeptanzkriterien“: Die Heizung gilt als repariert, wenn sie bei −10&nbsp;°C draußen das Wohnzimmer auf 21&nbsp;°C bringt – nicht, wenn der Monteur „alles erledigt“ hat.</p>
+                <p><strong>Beruf:</strong> <strong>Requirements Engineers</strong> und Product Owner formulieren Anforderungen so, dass Entwicklung und Test dasselbe darunter verstehen. In Branchen mit hohen Sicherheitsanforderungen – Medizintechnik, Bahn, Fahrzeugelektronik, auch bei Zulieferern in Sachsen – wird nach dem V-Modell oder ähnlichen Modellen gearbeitet, weil jede Funktion gegenüber Prüfstellen nachgewiesen werden muss. Für IT-Projekte des Bundes gibt es mit dem <em>V-Modell XT</em> sogar einen eigenen Standard. App- und Webentwicklung arbeitet dagegen meist agil.</p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>Der Wasserfall arbeitet Phasen nacheinander ab und testet am Ende. Das V-Modell ordnet jeder Entwurfsstufe eine Teststufe zu (Anforderungen ↔ Abnahmetest, System ↔ Systemtest, Architektur ↔ Integrationstest, Modul ↔ Modultest). Scrum liefert nach jedem Sprint ein nutzbares Inkrement und lässt Anforderungen zwischen den Sprints wachsen. Eine User Story nennt Rolle, Ziel und Nutzen; Akzeptanzkriterien im Muster Gegeben – Wenn – Dann machen sie prüfbar. Die Definition of Done gilt für jede Story – und nur Stories, die sie erfüllen, zählen für die Velocity.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>Ein <strong>Vorgehensmodell</strong> legt fest, in welchen Schritten Software entsteht und wann was geprüft wird – Wasserfall, V-Modell oder Scrum.<br>
+            <strong>Anforderungen</strong> müssen prüfbar sein: Eine User Story bekommt Akzeptanzkriterien, und jede Story muss die Definition of Done des Teams erfüllen, bevor sie als fertig gilt.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Vorgehensmodell</strong> – legt fest, in welchen Schritten Software entsteht und wann was geprüft wird.<br>
+            <strong>V-Modell</strong> – Erweiterung des Wasserfalls: Jeder Entwurfsstufe (Anforderungen, System, Architektur, Modul) ist eine Teststufe zugeordnet (Abnahme-, System-, Integrations-, Modultest), die gegen genau diesen Entwurf prüft.<br>
+            <strong>Faustregel:</strong> Anforderungen stabil und Nachweise nötig → V-Modell (bzw. Wasserfall bei kleinen Vorhaben). Anforderungen unklar oder im Wandel → agil, z.&nbsp;B. Scrum.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Akzeptanzkriterium</strong> – prüfbare Bedingung für <em>eine</em> User Story, z.&nbsp;B. im Muster Gegeben – Wenn – Dann.<br>
+            <strong>Definition of Done</strong> – gemeinsame Qualitätsregel des Teams, die <em>jede</em> Story erfüllen muss, bevor sie als fertig gilt. „Fast fertig“ gibt es nicht.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Welche Stufe? <span class="niveau">AFB I</span></summary>
+                <p>(a) Gegen welche Entwurfsstufe prüft der Integrationstest? (b) In welcher Entwurfsstufe wird festgelegt, dass die Klasse <code>Wahl</code> aus 5.1 eine Methode <code>gewinner(): str | None</code> hat? (c) Wer führt den Abnahmetest durch?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>(a) Gegen den Architekturentwurf: Arbeiten die Module so zusammen, wie es dort festgelegt ist? (b) Im Modulentwurf (Klassen, Attribute, Methodensignaturen). (c) Der Auftraggeber selbst – am fertigen System im echten Einsatz.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Richtig oder falsch? <span class="niveau">AFB I</span></summary>
+                <p>Entscheide und begründe kurz: (a) Bei Scrum wird erst am Ende des Projekts getestet. (b) Beim V-Modell gibt es nach jedem Sprint etwas Nutzbares. (c) Beim Wasserfall ist es teuer, eine Anforderung nachträglich zu ändern. (d) Bei Scrum dürfen sich die Anforderungen mitten im Sprint jederzeit ändern.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>(a) Falsch – jedes Inkrement muss die Definition of Done erfüllen, also wird in jedem Sprint getestet. (b) Falsch – das V-Modell kennt keine Sprints, Nutzbares gibt es erst am Ende. (c) Richtig – alle folgenden Phasendokumente müssen angepasst werden. (d) Falsch – Änderungen sind <em>zwischen</em> den Sprints vorgesehen, der Product Owner ordnet dann das Product Backlog neu.</p>
+                </details>
+            </details>
+        </div>

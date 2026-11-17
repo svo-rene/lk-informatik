@@ -1,0 +1,47 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.5.3: <span class="niveau">AFB II</span></summary>
+<p>Gegeben ist weiterhin die <a href="../material/verkaeufe.sql">Tabelle</a> „Verk&auml;ufe“ mit den Spalten „VerkaufID“, „Produkt“, „Menge“, „Preis“ und „Datum“. Schreibe eine SQL-Abfrage, die die Produkte und den Preis aller Verk&auml;ufe auflistet, deren Preis &uuml;ber dem Durchschnittspreis liegt. Benenne die Preisspalte in &bdquo;&Uuml;ber Durchschnitt&ldquo; um. Nutze dazu eine Subquery, wie du sie schon von Seite 1.4 (WHERE- und LIKE-Klauseln) kennst &ndash; nur dass der Vergleichswert diesmal aus <code>AVG()</code> statt aus einem einfachen Lookup kommt.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.5.4: <span class="niveau">AFB II</span></summary>
+<p>Verwende die gleiche Tabelle &bdquo;Verk&auml;ufe&ldquo;.</p>
+<ol>
+<li>Zeige die Anzahl der Verk&auml;ufe und den Gesamtumsatz f&uuml;r jedes Produkt an.</li>
+<li>Finde das Produkt mit dem h&ouml;chsten Durchschnittspreis.</li>
+<li>Berechne den Gesamtumsatz pro Tag und sortiere die Ergebnisse absteigend nach Umsatz.</li>
+</ol>
+</details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.5.5: Preissteigerungen aufdecken <span class="niveau">AFB II</span></summary>
+<p>Ein Verbraucherportal will wissen, bei welchen Produkten der Preis zwischen dem ersten und dem zweiten
+   Verkauf deutlich gestiegen ist. Schreibe eine Abfrage, die je Produkt den kleinsten Preis, den größten Preis
+   und die Differenz beider Preise (auf 2 Stellen gerundet, Name <code>Anstieg</code>) ausgibt – aber nur für
+   Produkte mit einem Anstieg von mehr als 40&nbsp;€. Sortiere nach dem Anstieg absteigend, bei Gleichstand
+   alphabetisch nach Produkt. Gib das Ergebnis an.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.5.6: Ergebnis vorhersagen <span class="niveau">AFB II</span></summary>
+<p>Sage das Ergebnis der folgenden Abfrage voraus, ohne sie auszuführen. Notiere dazu wie in Beispiel 9 die
+   Zwischenergebnisse nach WHERE, nach GROUP BY und nach HAVING. Prüfe erst danach im DB Browser.</p>
+<pre><code>SELECT Produkt, SUM(Menge) AS Stueck
+FROM Verkäufe
+WHERE Menge &gt;= 5
+GROUP BY Produkt
+HAVING COUNT(*) = 2
+ORDER BY Stueck DESC;</code></pre>
+</details>
+</div>

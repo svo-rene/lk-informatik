@@ -1,0 +1,147 @@
+<h2>Was sind Syntax und Semantik?</h2>
+
+<p><strong>Syntax</strong> beschreibt, wie ein Satz aufgebaut sein darf – welche Struktur er haben muss.<br><strong>Semantik</strong> beschreibt, was der Satz <em>bedeutet</em>.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel: natürliche Sprache</summary>
+<ul>
+<li>„Der Hund beißt den Mann.“ – syntaktisch korrekt, semantisch plausibel.</li>
+<li>„Hund der Mann beißt.“ – syntaktisch falsch (im Deutschen).</li>
+<li>„Der Apfel schläft grün.“ – syntaktisch korrekt, aber semantisch sinnlos.</li>
+</ul>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel: Programmiersprache (Python)</summary>
+<ul>
+<li><code>if x == 10: print("Zehn")</code> – syntaktisch und semantisch korrekt</li>
+<li><code>if == x 10:</code> – syntaktisch falsch – kein gültiger Ausdruck</li>
+<li><code>if 3 + 2 == 6: print("Richtig")</code> – syntaktisch korrekt, aber semantisch falsch: Der Ausdruck ist gültig, aber <code>3 + 2 == 6</code> ist <code>False</code>. Das Programm macht nicht, was gewünscht war.</li>
+</ul>
+            </details>
+        </div>
+
+<h2>Grundelemente einer Sprache</h2>
+
+<h3>1. Alphabet</h3>
+
+<p>Das Alphabet einer Sprache ist die Menge aller Symbole oder Zeichen, die in dieser Sprache verwendet werden können. In natürlichen Sprachen sind dies Buchstaben, Ziffern und Satzzeichen. In Programmiersprachen können auch spezielle Symbole wie <code>{</code>, <code>}</code>, <code>+</code>, <code>-</code> zum Alphabet gehören.</p>
+
+<h3>2. Wort</h3>
+
+<p>Im Alltag ist ein Wort eine durch Leerzeichen abgegrenzte Buchstabenfolge. In der Theorie der formalen Sprachen ist ein <strong>Wort</strong> dagegen <em>jede</em> endliche Folge von Zeichen aus dem Alphabet – auch <code>a+-}</code> oder die leere Folge. Ein ganzes Programm ist in diesem Sinn ein einziges (langes) Wort über dem Zeichenvorrat der Programmiersprache. Schlüsselwörter, Variablennamen oder Operatoren sind Teilwörter davon, die man später als <em>Token</em> bezeichnet.</p>
+
+<h3>3. Satz</h3>
+
+<p>Ein Satz ist eine Folge von Wörtern, die nach bestimmten Regeln angeordnet sind. In natürlichen Sprachen drückt ein Satz meist einen vollständigen Gedanken aus. In Programmiersprachen kann ein Satz eine Anweisung oder eine Deklaration sein.</p>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: „Satz“ in der Informatik</summary>
+<p>In der Informatik wird der Begriff „Satz“ oft durch „Ausdruck“ oder „Anweisung“ ersetzt, je nach Kontext und Programmiersprache.</p>
+</details>
+</div>
+
+<h2>Formale Definition</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> Σ = {a, b}. Dann ist Σ* = {ε, a, b, aa, ab, ba, bb, aaa, …}. Die Menge L = {w ∈ Σ* | w beginnt mit a} = {a, aa, ab, aaa, …} ist eine formale Sprache über Σ.</p>
+<ol>
+<li><strong>Σ* nach Längen ordnen:</strong> Länge 0: ε; Länge 1: a, b; Länge 2: aa, ab, ba, bb; Länge 3: aaa, aab, aba, abb, baa, bab, bba, bbb. <em>Warum?</em> So geht kein Wort verloren: Zu jeder Länge n gibt es genau 2<sup>n</sup> Wörter.</li>
+<li><strong>Bedingung prüfen:</strong> Aus jeder Längengruppe werden die Wörter genommen, deren erstes Zeichen a ist: a; aa, ab; aaa, aab, aba, abb. <em>Warum?</em> L enthält genau die Wörter aus Σ*, die die Bedingung erfüllen.</li>
+<li><strong>Grenzfälle klären:</strong> ε hat kein erstes Zeichen, also ε ∉ L. <code>ba</code> beginnt mit b, also ba ∉ L. <em>Warum?</em> Das leere Wort und Wörter, die „fast“ passen, sind die typischen Fehlerquellen.</li>
+</ol>
+<p><strong>Ergebnis:</strong> L ⊆ Σ*, und L ist unendlich, weil es zu jeder Länge n ≥ 1 passende Wörter gibt.</p>
+<p><strong>Kontrolle:</strong> Von den 2<sup>n</sup> Wörtern der Länge n ≥ 1 beginnt genau die Hälfte mit a, also gehören 2<sup>n−1</sup> zu L – für n = 3 sind das 4 Wörter, wie in Schritt 2.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+<p><strong>Ausgangssituation:</strong> Σ = {0, …, 9, A, …, F, #}. Die Sprache der RGB-Farbcodes ist L<sub>RGB</sub> = {#h<sub>1</sub>h<sub>2</sub>h<sub>3</sub>h<sub>4</sub>h<sub>5</sub>h<sub>6</sub> | h<sub>i</sub> ∈ {0, …, 9, A, …, F}}. Sie ist endlich (16<sup>6</sup> Wörter) und eine echte Teilmenge von Σ*: <code>#9900BB</code> ∈ L<sub>RGB</sub>, aber <code>99#00BB</code> ∉ L<sub>RGB</sub>.</p>
+<ol>
+<li><strong>Alphabet bestimmen:</strong> 10 Ziffern + 6 Buchstaben + # = 17 Zeichen. <em>Warum?</em> Nur Zeichen aus Σ dürfen in den Wörtern vorkommen; Kleinbuchstaben wie <code>b</code> gehören hier nicht dazu.</li>
+<li><strong>Bauplan der Wörter festhalten:</strong> Länge genau 7; Position 1 ist #, die Positionen 2 bis 7 sind Hexadezimalziffern. <em>Warum?</em> Mit diesem Bauplan lässt sich jedes Wort eindeutig prüfen.</li>
+<li><strong>Wörter zählen:</strong> Für jede der 6 Positionen gibt es 16 Möglichkeiten, also 16<sup>6</sup> = 16&nbsp;777&nbsp;216 Wörter (= 2<sup>24</sup>, daher „24-Bit-Farben“). <em>Warum?</em> Die Auswahl an den Positionen ist unabhängig voneinander (Produktregel).</li>
+<li><strong>Wörter prüfen:</strong> <code>#9900BB</code>: Länge 7, # vorn, sonst Hexziffern ✓. <code>99#00BB</code>: # an Position 3 ✗. <code>#C0FFE</code>: nur Länge 6 ✗. <code>#AB#123</code>: Länge 7 stimmt, # steht vorn, aber an Position 4 steht ein zweites # statt einer Hexziffer ✗ – die Falle: Richtige Länge und richtiger Anfang genügen nicht.</li>
+<li><strong>Echte Teilmenge begründen:</strong> L<sub>RGB</sub> ist endlich, Σ* ist unendlich; außerdem liegt z.&nbsp;B. <code>99#00BB</code> in Σ*, aber nicht in L<sub>RGB</sub>.</li>
+</ol>
+<p><strong>Ergebnis:</strong> L<sub>RGB</sub> ist eine endliche formale Sprache mit 16&nbsp;777&nbsp;216 Wörtern über einem Alphabet mit 17 Zeichen.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: formale Sprachen im Web und im Beruf</summary>
+<p><strong>Alltag:</strong> Farbcodes, Postleitzahlen, E-Mail-Adressen oder IBANs sind formale Sprachen. Ein Webformular lehnt „0123“ als Postleitzahl ab, weil das Wort nicht zur Sprache „genau fünf Ziffern“ gehört.</p>
+<p><strong>Beruf:</strong> Webentwicklerinnen und Mediengestalter arbeiten täglich mit solchen Formaten, etwa bei CSS-Farben oder bei der Eingabevalidierung in Webformularen. Die Prüfregeln werden meist als reguläre Ausdrücke formuliert, z.&nbsp;B. <code>^#[0-9A-Fa-f]{6}$</code> für einen Farbcode.</p>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Merke:</strong><br><strong>Syntax:</strong> Regeln zur Bildung korrekter Ausdrücke<br><strong>Semantik:</strong> Bedeutung der Ausdrücke</p>
+</div>
+
+<div class="merke">
+<p><strong>Merke: Alphabet, Wort, formale Sprache</strong></p>
+<ul>
+<li>Ein <strong>Alphabet</strong> Σ ist eine endliche, nichtleere Menge von Zeichen, z.&nbsp;B. Σ = {0, 1}.</li>
+<li>Ein <strong>Wort</strong> über Σ ist eine endliche Folge von Zeichen aus Σ. Seine Länge |w| ist die Anzahl der Zeichen, z.&nbsp;B. |0110| = 4.</li>
+<li>Das <strong>leere Wort</strong> ε hat die Länge 0: |ε| = 0.</li>
+<li><strong>Σ*</strong> ist die Menge <em>aller</em> Wörter über Σ einschließlich ε. Σ<sup>+</sup> = Σ* \ {ε} enthält alle nichtleeren Wörter.</li>
+<li>Eine <strong>formale Sprache</strong> L über Σ ist eine beliebige Teilmenge von Σ*: <strong>L ⊆ Σ*</strong>.</li>
+</ul>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.2.1: Syntax oder Semantik? <span class="niveau">AFB II</span></summary>
+<p>Entscheide bei den folgenden Ausdrücken, ob ein <strong>Syntaxverstoß</strong>, ein <strong>Semantikverstoß</strong> oder <strong>kein Verstoß</strong> vorliegt. Begründe deine Entscheidung.</p>
+<ol type="a">
+<li>„Der Tisch fliegt blau.“</li>
+<li>„Blume die schön ist.“</li>
+<li><code>for i in range(10)</code></li>
+<li><code>print("Hallo"</code></li>
+<li><code>print(3 + "Haus")</code></li>
+<li><code>if 5 &gt; 3:</code></li>
+<li><code>result = math.sqrt(-1)</code> (ohne vorherige Behandlung komplexer Zahlen)</li>
+<li><code>area = width * height</code> (bei <code>width = 5</code>, <code>height = "groß"</code>)</li>
+<li><code>(x + y) * (</code></li>
+<li>„Wir laufen über die Brücke.“</li>
+<li>„Zahlen sind Farben.“</li>
+<li><code>def add(x y): return x + y</code></li>
+<li><code>x = y == 5</code></li>
+<li><code>if name = "Anna":</code></li>
+</ol>
+<p>➤ Ergänze selbst ein Beispiel aus dem Alltag oder aus einer dir bekannten Programmiersprache.<br>➤ Diskutiere mit deinem Partner: Warum ist die Unterscheidung von Syntax und Semantik für Informatiksysteme entscheidend?</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.2.2: Analyse von Zeichenketten – Syntax oder Semantik? <span class="niveau">AFB II</span></summary>
+<p>Begründe, welche der folgenden Zeichenketten <strong>syntaktisch</strong> bzw. <strong>semantisch</strong> fehlerhaft sind. Orientiere dich dabei an den üblichen Notationsregeln aus der Chemie bzw. den Naturwissenschaften.</p>
+<p>a) Molekülformeln</p>
+<ul>
+<li>i) C<sup>4</sup>H</li>
+<li>ii) CH<sub>4</sub></li>
+<li>iii) C4H</li>
+</ul>
+<p>b) Schreibweise von Isotopen</p>
+<ul>
+<li>i) <sup>233</sup><sub>95</sub>U</li>
+<li>ii) <sup>92</sup><sub>235</sub>U</li>
+<li>iii) <sup>238</sup>U<sub>92</sub></li>
+</ul>
+</details>
+</div>

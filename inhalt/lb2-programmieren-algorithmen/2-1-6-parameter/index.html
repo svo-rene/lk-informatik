@@ -1,0 +1,150 @@
+<p>
+            Parameter sind die „Eingänge“ eines Unterprogramms. Beim Aufruf werden <strong>Argumente</strong> übergeben, zum Beispiel <code>verdopple(wert)</code>. Spannend ist die Frage: Kann das Unterprogramm dabei die Variable des Aufrufers verändern? Programmiersprachen beantworten das unterschiedlich.
+        </p>
+
+<h2>Referenzparameter (call by reference)</h2>
+
+<p>Beide Arten gibt es z.&nbsp;B. in Pascal (<code>var</code>-Parameter) oder C++ (<code>&amp;</code>-Parameter). In Python gibt es keine echten Referenzparameter.</p>
+
+<h2>Parameter in Python: call by sharing</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> neue Zuweisung – das Original bleibt gleich</p>
+            <pre><code class="language-python">def verdopple(zahl):
+    zahl = zahl * 2       # zahl zeigt jetzt auf ein neues int-Objekt
+    return zahl
+
+wert = 5
+verdopple(wert)
+print(wert)               # Ausgabe: 5 (wert zeigt weiterhin auf 5)
+print(verdopple(wert))    # Ausgabe: 10 (Rückgabewert)</code></pre>
+            <p>Zahlen, Texte und Tupel sind in Python <strong>unveränderlich</strong> (immutable). Bei ihnen verhält sich call by sharing deshalb wie ein Werteparameter.</p>
+            <p>Im <strong>Speicherbild</strong> stehen links die Namen, rechts die Objekte im Speicher. Ein Pfeil bedeutet „zeigt auf“.</p>
+            <ol>
+                <li><strong>Nach <code>wert = 5</code>:</strong>
+                    <pre><code>global      wert ──────► [int 5]</code></pre>
+                </li>
+                <li><strong>Beim Aufruf <code>verdopple(wert)</code>:</strong> Der Parameter <code>zahl</code> erhält eine Referenz auf <em>dasselbe</em> Objekt. Kopiert wird nichts.
+                    <pre><code>global      wert ──────┐
+                       ├──► [int 5]
+verdopple   zahl ──────┘</code></pre>
+                </li>
+                <li><strong>Nach <code>zahl = zahl * 2</code>:</strong> <code>zahl * 2</code> erzeugt ein <em>neues</em> Objekt 10, und nur <code>zahl</code> wird umgehängt. <em>Warum:</em> Ein <code>int</code>-Objekt lässt sich nicht verändern, jede Rechnung erzeugt ein neues Objekt.
+                    <pre><code>global      wert ──────► [int 5]
+verdopple   zahl ──────► [int 10]</code></pre>
+                </li>
+                <li><strong>Nach dem <code>return</code>:</strong> Der Name <code>zahl</code> verschwindet mit dem Funktionsaufruf. Der Rückgabewert 10 wird in Zeile 6 nicht gespeichert und geht verloren.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Ausgabe <code>5</code>, dann <code>10</code>. Wer das Ergebnis behalten will, muss es zuweisen: <code>wert = verdopple(wert)</code>.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>verdopple(5)</code></td><td><code>10</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>verdopple(0)</code></td><td><code>0</code></td><td>Randfall</td></tr>
+                    <tr><td><code>verdopple(-3)</code></td><td><code>-6</code></td><td>negative Zahl</td></tr>
+                    <tr><td><code>verdopple("ab")</code></td><td><code>'abab'</code></td><td>anderer Typ: kein Fehler, <code>*</code> wiederholt den Text</td></tr>
+                    <tr><td><code>l = [1]</code>, <code>verdopple(l)</code>, <code>print(l)</code></td><td>Rückgabe <code>[1, 1]</code>, Ausgabe <code>[1]</code></td><td>auch bei einer Liste erzeugt <code>*</code> ein neues Objekt; das Original bleibt</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Verändern und neu Zuweisen einer Liste im Vergleich</p>
+            <pre><code class="language-python">def aendere_liste(liste):
+    liste.append(42)      # verändert das gemeinsame Objekt
+
+def ersetze_liste(liste):
+    liste = [0, 0, 0]     # nur der Parameter zeigt auf eine neue Liste
+
+zahlen = [1, 2, 3]
+aendere_liste(zahlen)
+print(zahlen)             # [1, 2, 3, 42]
+ersetze_liste(zahlen)
+print(zahlen)             # [1, 2, 3, 42] – unverändert!</code></pre>
+            <ol>
+                <li><strong>Aufruf <code>aendere_liste(zahlen)</code>:</strong> <code>liste</code> und <code>zahlen</code> zeigen auf dieselbe Liste. <code>append</code> verändert dieses eine Objekt.
+                    <pre><code>global          zahlen ──┐
+                         ├──► [list 1, 2, 3, 42]
+aendere_liste   liste  ──┘</code></pre>
+                    <em>Warum sieht der Aufrufer die Änderung?</em> Es gibt nur ein Listenobjekt, und Listen sind <strong>veränderlich</strong> (mutable).</li>
+                <li><strong>Aufruf <code>ersetze_liste(zahlen)</code>:</strong> Zuerst zeigen wieder beide Namen auf dieselbe Liste. Dann erzeugt <code>[0, 0, 0]</code> eine neue Liste, und nur <code>liste</code> wird umgehängt.
+                    <pre><code>global          zahlen ──► [list 1, 2, 3, 42]
+ersetze_liste   liste  ──► [list 0, 0, 0]     (verschwindet nach dem Aufruf)</code></pre>
+                </li>
+                <li><strong>Falle <code>+=</code>:</strong> Bei Listen verändert <code>liste += [7]</code> das vorhandene Objekt (wie <code>extend</code>). <code>liste = liste + [7]</code> erzeugt dagegen eine neue Liste.
+                    <pre><code class="language-python">def anhaengen_a(liste):
+    liste += [7]              # verändert das gemeinsame Objekt
+
+def anhaengen_b(liste):
+    liste = liste + [7]       # neue Liste, nur lokal
+
+z = [1]
+anhaengen_a(z)
+print(z)                      # [1, 7]
+anhaengen_b(z)
+print(z)                      # [1, 7]</code></pre>
+                    <em>Warum ist das eine Falle?</em> Bei Zahlen sehen <code>x += 1</code> und <code>x = x + 1</code> gleich aus und verhalten sich gleich. Bei Listen verhalten sie sich unterschiedlich.</li>
+                <li><strong>Kontrolle mit <code>id</code>:</strong> <code>id(objekt)</code> liefert eine Kennnummer des Objekts. Gibt man <code>id(liste)</code> in der Funktion und <code>id(zahlen)</code> außerhalb aus, erscheint dieselbe Zahl. Nach <code>liste = [0, 0, 0]</code> ist sie verschieden.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Veränderungen am Objekt (<code>append</code>, <code>+=</code>, <code>liste[0] = …</code>) wirken nach außen. Neue Zuweisungen an den Parameter wirken nicht nach außen. Soll eine Funktion die übergebene Liste nicht verändern, arbeitet sie mit einer Kopie: <code>kopie = liste.copy()</code>.</p>
+            <table>
+                <thead><tr><th>Eingabe (vor dem Aufruf)</th><th>Aufruf</th><th>erwartete Ausgabe von <code>print(zahlen)</code></th></tr></thead>
+                <tbody>
+                    <tr><td><code>zahlen = [1, 2, 3]</code></td><td><code>aendere_liste(zahlen)</code></td><td><code>[1, 2, 3, 42]</code></td></tr>
+                    <tr><td><code>zahlen = []</code></td><td><code>aendere_liste(zahlen)</code></td><td><code>[42]</code> (Randfall leere Liste)</td></tr>
+                    <tr><td><code>zahlen = [1, 2, 3]</code></td><td><code>ersetze_liste(zahlen)</code></td><td><code>[1, 2, 3]</code></td></tr>
+                    <tr><td><code>zahlen = [1, 2, 3]</code></td><td><code>aendere_liste(zahlen.copy())</code></td><td><code>[1, 2, 3]</code> (nur die Kopie wurde verändert)</td></tr>
+                    <tr><td><code>zahlen = (1, 2, 3)</code></td><td><code>aendere_liste(zahlen)</code></td><td><code>AttributeError: 'tuple' object has no attribute 'append'</code> (Tupel sind unveränderlich)</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Nebenwirkungen vermeiden</summary>
+                <p>
+                    <strong>Alltag:</strong> Teilst du ein Online-Dokument per Link, arbeiten alle am <em>selben</em> Dokument – Änderungen sehen alle (wie <code>append</code> bei call by sharing). Schickst du dagegen eine Kopie als Anhang, bleibt dein Original unberührt (wie eine Kopie mit <code>copy()</code>).<br><br>
+                    <strong>Beruf:</strong> Unerwartete Änderungen an übergebenen Listen oder Objekten („Seiteneffekte“) gehören zu den häufigsten Fehlern in größeren Python-Projekten. In Code-Reviews achten Softwareentwicklerinnen und -entwickler deshalb darauf, dass Funktionen übergebene Daten nur dann verändern, wenn das im Namen oder in der Dokumentation klar erkennbar ist.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Werteparameter</strong> erhalten eine Kopie des übergebenen Werts. Änderungen am Parameter innerhalb des Unterprogramms wirken sich nicht auf die Variable des Aufrufers aus.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Referenzparameter</strong> erhalten einen Verweis auf die Variable des Aufrufers. Jede Änderung am Parameter – auch eine neue Zuweisung – verändert die Variable des Aufrufers.</p>
+        </div>
+
+<div class="merke">
+            <p>
+                Python übergibt an den Parameter immer eine <strong>Referenz auf das Objekt</strong>, kopiert wird dabei nichts. Man nennt das <strong>call by sharing</strong> (auch „call by object reference“). Daraus folgt:<br>
+                1. Wird dem Parameter ein <strong>neuer Wert zugewiesen</strong> (<code>zahl = zahl * 2</code>), zeigt nur der Parameter auf ein neues Objekt. Die Variable des Aufrufers bleibt unverändert.<br>
+                2. Wird ein <strong>veränderbares Objekt</strong> (Liste, Dictionary, eigenes Objekt) über den Parameter <strong>verändert</strong> (<code>liste.append(42)</code>), sieht der Aufrufer die Änderung, denn beide Namen zeigen auf dasselbe Objekt.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.6.1: Unveränderliche Argumente <span class="niveau">AFB I</span></summary>
+                <p>Erstelle eine Funktion <code>addiere(a, b)</code>, die zwei Zahlen entgegennimmt und ihre Summe zurückgibt. Rufe die Funktion auf und gib das Ergebnis aus.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.6.2: Liste in einer Funktion erweitern <span class="niveau">AFB II</span></summary>
+                <p>Erstelle eine Funktion <code>erweitere_liste(liste, element)</code>, die eine Liste und ein Element entgegennimmt und das Element an die Liste anhängt. Überprüfe, ob die Liste außerhalb der Funktion erweitert wurde, und erkläre das Ergebnis.</p>
+            </details>
+        </div>

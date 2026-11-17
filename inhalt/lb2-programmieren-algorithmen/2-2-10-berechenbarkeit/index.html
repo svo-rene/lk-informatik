@@ -1,0 +1,138 @@
+<p>Die Berechenbarkeitstheorie beschäftigt sich mit der Frage, welche Probleme du mit Algorithmen lösen kannst und wo die Grenzen dieser Lösbarkeit liegen. Diese Grenzen können technischer oder theoretischer Natur sein.</p>
+
+<h2>Technische Grenzen</h2>
+
+<p>Technische Grenzen der Berechenbarkeit ergeben sich aus den praktischen Einschränkungen von Rechenmaschinen, etwa Speicherplatz und Rechenzeit. Selbst wenn ein Problem theoretisch berechenbar ist, kann es praktisch unlösbar sein, wenn die benötigten Ressourcen die Kapazitäten heutiger oder vorstellbarer Computer übersteigen.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Ein vierstelliger PIN hat 10<sup>4</sup> = 10 000 Möglichkeiten – ein Computer probiert sie in Sekundenbruchteilen durch. Ein zufälliges Passwort aus 16 Zeichen (Groß- und Kleinbuchstaben, Ziffern) hat 62<sup>16</sup> ≈ 4,8 · 10<sup>28</sup> Möglichkeiten – selbst bei einer Billion (10<sup>12</sup>) Versuchen pro Sekunde würde das Durchprobieren etwa 1,5 Milliarden Jahre dauern.</summary>
+            <ol>
+                <li>Zeichenvorrat: 26 + 26 + 10 = 62 Zeichen. Jede der 16 Stellen kann unabhängig belegt werden, also 62<sup>16</sup> ≈ 4,8 · 10<sup>28</sup> Passwörter.</li>
+                <li>Zeit: 4,8 · 10<sup>28</sup> : 10<sup>12</sup> pro Sekunde ≈ 4,8 · 10<sup>16</sup> s.</li>
+                <li>Umrechnen: Ein Jahr hat etwa 3,15 · 10<sup>7</sup> s, also 4,8 · 10<sup>16</sup> : 3,15 · 10<sup>7</sup> ≈ 1,5 · 10<sup>9</sup> Jahre.</li>
+            </ol>
+            <p><strong>Kontrolle:</strong> Jede zusätzliche Stelle vervielfacht den Aufwand mit 62 – das ist exponentielles Wachstum. Ein tausendmal schnellerer Rechner wird schon durch zwei zusätzliche Stellen (62<sup>2</sup> = 3 844) mehr als ausgeglichen.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Das Schachspiel hat eine endliche, aber gewaltige Anzahl möglicher Spielverläufe (grob geschätzt 10<sup>120</sup>). Theoretisch ließe sich der optimale Zug in jeder Stellung durch Ausprobieren aller Möglichkeiten berechnen; praktisch ist das mit keiner denkbaren Technik umsetzbar.</summary>
+            </details>
+        </div>
+
+<h2>Theoretische Grenzen</h2>
+
+<p>Theoretische Grenzen betreffen die grundsätzliche Berechenbarkeit von Problemen, unabhängig von der verfügbaren Technik. Dabei spielen Entscheidungsprobleme und das Halteproblem eine wichtige Rolle.</p>
+
+<h3>Die Churchsche These</h3>
+
+<p>Um zu beweisen, dass ein Problem von <em>keinem</em> Algorithmus gelöst werden kann, braucht man eine genaue Definition von „Algorithmus“. Alan Turing beschrieb 1936 dafür ein einfaches mathematisches Maschinenmodell, die <strong>Turingmaschine</strong> (siehe Hinweis unten). Etwa gleichzeitig entwickelte Alonzo Church mit dem Lambda-Kalkül ein ganz anderes Modell – und beide Modelle erwiesen sich als gleich mächtig.</p>
+
+<h3>Entscheidungsprobleme</h3>
+
+<p>Ein Entscheidungsproblem ist eine Fragestellung, die für jede Eingabe mit Ja oder Nein beantwortet wird. Ein klassisches Beispiel ist die Frage, ob eine gegebene Zahl eine Primzahl ist. Ein Entscheidungsproblem heißt <strong>entscheidbar</strong>, wenn es einen Algorithmus gibt, der für jede Eingabe nach endlich vielen Schritten die richtige Antwort liefert.</p>
+
+<h3>Das Halteproblem</h3>
+
+<p>Das Halteproblem ist ein spezielles Entscheidungsproblem. Es fragt, ob ein gegebenes Programm bei einer bestimmten Eingabe irgendwann anhält oder unendlich weiterläuft. Alan Turing bewies, dass es keinen Algorithmus geben kann, der diese Frage für jedes beliebige Programm korrekt beantwortet. Wegen der Churchschen These gilt das nicht nur für Turingmaschinen, sondern für jedes denkbare Verfahren. Das zeigt eine grundsätzliche Grenze dessen auf, was mit Algorithmen entschieden werden kann.</p>
+
+<h2>Das P-vs.-NP-Problem</h2>
+
+<p>P steht für die Klasse der Entscheidungsprobleme, die sich effizient (in polynomialer Zeit) mit einer deterministischen Turingmaschine lösen lassen. NP umfasst Entscheidungsprobleme, bei denen sich eine vorgeschlagene Lösung effizient überprüfen lässt, auch wenn man nicht unbedingt weiß, wie man sie effizient findet (der Name kommt von „nichtdeterministisch polynomiell“).</p>
+
+<p>Die Frage, ob P = NP gilt, ist eines der großen ungelösten Probleme der Informatik. Sie hat weitreichende Folgen für die Sicherheit von Verschlüsselungsverfahren und die Effizienz von Algorithmen.</p>
+
+<p><strong>Beispiel für ein P-Problem:</strong> Das Sortieren einer Liste von Zahlen gelingt effizient in polynomialer Zeit, zum Beispiel mit Mergesort in O(n · log n).</p>
+
+<p><strong>Beispiel für ein NP-Problem:</strong> Das Problem des Handlungsreisenden (Travelling Salesman Problem, TSP) in seiner <strong>Entscheidungsvariante</strong> lautet: „Gibt es eine Rundreise durch alle Städte, die kürzer als k Kilometer ist?“ Wird eine Rundreise vorgeschlagen, lässt sich schnell prüfen, ob sie alle Städte besucht und kürzer als k ist: Man addiert die n Teilstrecken. Eine solche Rundreise zu <em>finden</em>, ist dagegen extrem aufwendig, wenn die Anzahl der Städte groß ist. Die Frage „Ist diese Route die kürzeste?“ lässt sich dagegen <em>nicht</em> einfach überprüfen – dafür müsste man sie mit allen anderen Routen vergleichen.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Turingmaschine</summary>
+                <h3>Aufbau</h3>
+                <ul>
+                    <li><strong>Band:</strong> ein unendlich langes Band, unterteilt in Felder, die Symbole enthalten können.</li>
+                    <li><strong>Lese-/Schreibkopf:</strong> bewegt sich entlang des Bandes, liest Symbole und kann sie ersetzen oder unverändert lassen.</li>
+                    <li><strong>Steuerwerk:</strong> eine Steuereinheit mit endlich vielen Zuständen, die abhängig vom gelesenen Symbol und vom aktuellen Zustand Aktionen ausführt.</li>
+                </ul>
+                <h3>Begriffe</h3>
+                <ul>
+                    <li><strong>Berechenbarkeit:</strong> Eine Funktion ist berechenbar, wenn eine Turingmaschine sie berechnen kann.</li>
+                    <li><strong>Entscheidbarkeit:</strong> Ein Problem ist entscheidbar, wenn eine Turingmaschine für jede Eingabe nach endlich vielen Schritten mit „ja“ oder „nein“ anhält.</li>
+                    <li><strong>Komplexitätstheorie:</strong> untersucht, wie der Ressourcenbedarf mit der Eingabegröße wächst.</li>
+                    <li><strong>Halteproblem:</strong> Es gibt keinen Algorithmus, der für jede Turingmaschine und jede Eingabe entscheidet, ob sie anhält.</li>
+                    <li><strong>Universelle Turingmaschine:</strong> kann jede andere Turingmaschine simulieren und damit jede berechenbare Funktion berechnen – das Vorbild heutiger programmierbarer Computer.</li>
+                </ul>
+                <figure>
+                    <img src="../img/turing1.png" width="600" alt="Schema einer Turingmaschine mit Band, Kopf und Steuerwerk">
+                    <figcaption>Abb. 1: Konzept einer Turingmaschine</figcaption>
+                </figure>
+                <p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+            </details>
+        </div>
+
+<h2>Ausblick Studium: Warum beschäftigt man sich mit P vs. NP?</h2>
+
+<p>Die Untersuchung der Frage „P = NP?“ ist grundlegend für das Verständnis der Grenzen von Algorithmen und Computern. Sie hilft zu bestimmen, welche Probleme effizient lösbar sind, und hat praktische Auswirkungen in vielen Bereichen wie Kryptographie, Netzwerkdesign und künstlicher Intelligenz. Ein Beweis von P = NP würde zu Algorithmen führen, die heute als praktisch unlösbar geltende Probleme effizient lösen – und damit auch viele heutige Verschlüsselungsverfahren unsicher machen.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Grenzen, die uns schützen – und herausfordern</summary>
+                <p>
+                    <strong>Alltag:</strong> Dass Online-Banking sicher ist, beruht darauf, dass bestimmte Probleme (etwa das Zerlegen sehr großer Zahlen in Primfaktoren) mit heutiger Technik praktisch nicht lösbar sind.<br><br>
+                    <strong>Beruf:</strong> Wegen des Halteproblems kann kein Werkzeug alle Fehler eines Programms automatisch finden. Entwicklerinnen und Entwickler von Analysewerkzeugen (z.&nbsp;B. für sicherheitskritische Software in der Automobil- oder Luftfahrtindustrie) arbeiten deshalb mit Näherungen: Ihre Werkzeuge melden „möglicherweise fehlerhaft“, und Menschen prüfen nach. In der Planung von Schichtdienstplänen oder Stundenplänen (z.&nbsp;B. für Schulen) setzen Softwarefirmen Heuristiken ein, weil das exakte Optimum zu aufwendig wäre.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Ob ein Problem <strong>praktisch lösbar</strong> ist, hängt nicht nur von seiner theoretischen Lösbarkeit ab, sondern vor allem vom Wachstum des Aufwands (Komplexität) und von den verfügbaren Rechenressourcen.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Churchsche These</strong> (Church-Turing-These): Alles, was intuitiv berechenbar ist – also sich überhaupt durch ein Verfahren Schritt für Schritt berechnen lässt –, kann auch von einer Turingmaschine berechnet werden.<br>
+                Die These ist nicht beweisbar, weil „intuitiv berechenbar“ kein mathematisch definierter Begriff ist. Sie wird aber dadurch gestützt, dass alle bekannten Berechnungsmodelle (Turingmaschine, Lambda-Kalkül, heutige Programmiersprachen) genau dieselben Funktionen berechnen können.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Theoretische Grenzen</strong> der Berechenbarkeit zeigen, dass es Probleme gibt, die prinzipiell von keinem Algorithmus gelöst werden können – unabhängig von der verfügbaren Rechenleistung. Das bekannteste <strong>unentscheidbare</strong> Problem ist das Halteproblem.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>P</strong> (polynomial time): Probleme, für die es einen Algorithmus gibt, der sie in polynomialer Zeit O(n<sup>k</sup>) löst. Sie gelten als praktisch lösbar.<br>
+                <strong>NP</strong> (nondeterministic polynomial time): Probleme, bei denen eine vorgeschlagene Lösung (ein „Zertifikat“) in polynomialer Zeit überprüft werden kann. Jedes Problem aus P liegt auch in NP. Die Zugehörigkeit zu NP bedeutet also nicht, dass es keine schnelle Lösungsmethode gibt, sondern nur, dass eine schnelle Überprüfung möglich ist.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.10.1: Grenzen einordnen <span class="niveau">AFB I–III</span></summary>
+                <ol>
+                    <li>Ordne ein, ob die Probleme entscheidbar sind und ob sie praktisch effizient lösbar sind: (a) Ist eine Zahl eine Primzahl? (b) Ist eine Liste sortiert? (c) Hält ein beliebiges Programm bei einer beliebigen Eingabe an? (d) Gibt es eine Rundreise durch 40 Städte, die kürzer als 5 000 km ist?</li>
+                    <li>Ein Programm soll einen Stundenplan erstellen und probiert dafür alle Verteilungen von k Kursen auf 30 Zeitfenster durch. Es schafft eine Milliarde Verteilungen pro Sekunde. Berechne die Laufzeit für k = 10 und k = 20.</li>
+                    <li>Beurteile, ob ein schnellerer Rechner das Problem aus 2 löst.</li>
+                    <li>Beschreibe zwei Möglichkeiten, wie man trotzdem zu einem brauchbaren Stundenplan kommt, und bewerte sie.</li>
+                    <li>Erkläre mit eigenen Worten, was die Churchsche These aussagt und warum man sie nicht beweisen kann.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.10.2: Prüfen oder finden? <span class="niveau">AFB II</span></summary>
+                <p>Eine Rundreise durch die Städte Dresden (D), Leipzig (L), Chemnitz (C) und Zwickau (Z) wird vorgeschlagen: D → L → Z → C → D mit den (gerundeten) Teilstrecken 115 km, 80 km, 40 km und 80 km. Prüfe, ob sie die Entscheidungsfrage „Gibt es eine Rundreise kürzer als 330 km?“ mit Ja beantwortet. Erläutere, warum dir diese Prüfung nicht verrät, ob es die kürzeste Rundreise ist.</p>
+            </details>
+        </div>

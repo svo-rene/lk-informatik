@@ -1,0 +1,227 @@
+<h2>1. Was ist lineare Regression?</h2>
+
+<p>Der Spam-Filter aus Seite 11.3 sagt eine <strong>Kategorie</strong> voraus: „Spam“ oder „kein Spam“. Man nennt das <strong>Klassifikation</strong>. Auch viele Verfahren, die du in den nächsten Kapiteln kennenlernst (Entscheidungsbäume, k-Nächste-Nachbarn), sind Klassifikationsverfahren. Die lineare Regression ist anders: Sie sagt keine Kategorie, sondern eine <strong>Zahl</strong> voraus, die theoretisch beliebig viele Werte annehmen kann. Man spricht deshalb von <strong>Regression</strong>.</p>
+
+<p>Beispiele für Vorhersagen einer Zahl:</p>
+
+<ul>
+            <li>Wie viele Punkte wird ein Schüler in der Klausur erreichen, wenn er eine bestimmte Anzahl Stunden gelernt hat?</li>
+            <li>Wie hoch wird der Verkaufspreis einer Immobilie mit einer bestimmten Wohnfläche sein?</li>
+            <li>Wie hoch wird die Temperatur morgen Mittag sein?</li>
+        </ul>
+
+<p>In diesem Kapitel begleitet uns ein durchgehendes Beispiel: Wir wollen aus der <strong>Lernzeit</strong> (in Stunden) die zu erwartende <strong>Klausurpunktzahl</strong> vorhersagen.</p>
+
+<h2>2. Die Gerade: y = m·x + b</h2>
+
+<p>Die lineare Regression geht davon aus, dass zwischen einer Eingabe x (z.&nbsp;B. Lernstunden) und einer Ausgabe y (z.&nbsp;B. Klausurpunkte) ein linearer, also geradliniger Zusammenhang besteht. Dieser Zusammenhang lässt sich durch eine Geradengleichung beschreiben:</p>
+
+<p><code>y = m · x + b</code></p>
+
+<ul>
+            <li><code>m</code> ist die <strong>Steigung</strong>: Um wie viel steigt (oder sinkt) y, wenn x um 1 zunimmt? Bei unserem Beispiel: Um wie viele Punkte verbessert sich die Klausur pro zusätzlicher Lernstunde?</li>
+            <li><code>b</code> ist der <strong>Achsenabschnitt</strong> (y-Achsenabschnitt): der Wert von y, wenn x = 0 ist. Bei unserem Beispiel: Wie viele Punkte werden ganz ohne Lernen im Schnitt erreicht?</li>
+        </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Einfaches Beispiel: Wäre m = 3 und b = 40, würde die Gerade lauten: <code>y = 3·x + 40</code>. Ein Schüler, der 5 Stunden lernt, würde dann eine Punktzahl von <code>3 · 5 + 40 = 55</code> vorhergesagt bekommen.</summary>
+            </details>
+        </div>
+
+<h2>3. Wie findet der Algorithmus die beste Gerade?</h2>
+
+<p>Durch eine Punktwolke aus echten Messwerten lassen sich unendlich viele Geraden legen. Der Algorithmus muss also entscheiden, welche Gerade „am besten passt“. Dazu wird für jeden Datenpunkt der <strong>Fehler</strong> (auch Residuum genannt) berechnet: der senkrechte Abstand zwischen dem tatsächlichen y-Wert und dem von der Gerade vorhergesagten y-Wert.</p>
+
+<p>Damit sich positive und negative Abweichungen nicht gegenseitig aufheben, werden die Fehler <strong>quadriert</strong> und anschließend aufsummiert. Man erhält so die <strong>Fehlerquadratsumme (Sum of Squared Errors, SSE)</strong>. Die Gerade mit der kleinsten Fehlerquadratsumme wird gewählt – daher der Name <strong>Methode der kleinsten Quadrate</strong>.</p>
+
+<p><code>SSE = Σ (y_tatsächlich − y_vorhergesagt)²</code></p>
+
+<h3>3.1 Beispielrechnung</h3>
+
+<div class="beispiel">
+            <p>Gegeben seien vier Datenpunkte (Lernstunden x, tatsächlich erreichte Punktzahl y):</p>
+            <table>
+                <thead>
+                    <tr><th>x (Stunden)</th><th>y (Punkte)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>3</td></tr>
+                    <tr><td>2</td><td>5</td></tr>
+                    <tr><td>3</td><td>6</td></tr>
+                    <tr><td>4</td><td>8</td></tr>
+                </tbody>
+            </table>
+            <p>Wir testen zunächst die Gerade <code>y = 1,5·x + 2</code>:</p>
+            <ul>
+                <li>x = 1: vorhergesagt 1,5·1 + 2 = 3,5 → tatsächlich 3 → Fehler = −0,5 → Quadrat = 0,25</li>
+                <li>x = 2: vorhergesagt 1,5·2 + 2 = 5 → tatsächlich 5 → Fehler = 0 → Quadrat = 0</li>
+                <li>x = 3: vorhergesagt 1,5·3 + 2 = 6,5 → tatsächlich 6 → Fehler = −0,5 → Quadrat = 0,25</li>
+                <li>x = 4: vorhergesagt 1,5·4 + 2 = 8 → tatsächlich 8 → Fehler = 0 → Quadrat = 0</li>
+            </ul>
+            <p><code>SSE = 0,25 + 0 + 0,25 + 0 = 0,5</code></p>
+            <p>Zum Vergleich testen wir die Gerade <code>y = 1·x + 3</code>:</p>
+            <ul>
+                <li>x = 1: vorhergesagt 4 → tatsächlich 3 → Fehler = −1 → Quadrat = 1</li>
+                <li>x = 2: vorhergesagt 5 → tatsächlich 5 → Fehler = 0 → Quadrat = 0</li>
+                <li>x = 3: vorhergesagt 6 → tatsächlich 6 → Fehler = 0 → Quadrat = 0</li>
+                <li>x = 4: vorhergesagt 7 → tatsächlich 8 → Fehler = 1 → Quadrat = 1</li>
+            </ul>
+            <p><code>SSE = 1 + 0 + 0 + 1 = 2</code></p>
+            <p>Da 0,5 kleiner ist als 2, passt die erste Gerade (<code>y = 1,5·x + 2</code>) besser zu den Datenpunkten.</p>
+        </div>
+
+<h3>3.2 Die optimale Gerade direkt berechnen</h3>
+
+<p>Der Algorithmus probiert allerdings nicht einzelne Geraden aus, sondern berechnet die Gerade mit der kleinsten Fehlerquadratsumme direkt mit zwei Formeln. Dabei sind x̄ und ȳ die Mittelwerte der x- bzw. y-Werte:</p>
+
+<p><code>m = Σ (x − x̄)·(y − ȳ) / Σ (x − x̄)²</code> &nbsp;und&nbsp; <code>b = ȳ − m · x̄</code></p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Gesucht ist die optimale Gerade für die vier Punkte aus 3.1: (1|3), (2|5), (3|6), (4|8).</p>
+            <ol>
+                <li><strong>Mittelwerte berechnen:</strong> x̄ = (1 + 2 + 3 + 4) / 4 = 2,5 und ȳ = (3 + 5 + 6 + 8) / 4 = 5,5 – <em>warum:</em> Beide Formeln arbeiten mit den Abweichungen vom Mittelwert.</li>
+                <li><strong>Zähler bilden:</strong> Σ (x − x̄)·(y − ȳ) = (−1,5)·(−2,5) + (−0,5)·(−0,5) + 0,5·0,5 + 1,5·2,5 = 3,75 + 0,25 + 0,25 + 3,75 = 8 – <em>warum:</em> Der Zähler misst, wie stark x und y gemeinsam steigen oder fallen.</li>
+                <li><strong>Nenner bilden:</strong> Σ (x − x̄)² = 2,25 + 0,25 + 0,25 + 2,25 = 5 – <em>warum:</em> Der Nenner misst die Streuung der x-Werte.</li>
+                <li><strong>Steigung und Achsenabschnitt:</strong> m = 8 / 5 = 1,6 und b = 5,5 − 1,6 · 2,5 = 1,5 – <em>warum:</em> Die Formel für b sorgt dafür, dass die Gerade durch den Schwerpunkt (x̄|ȳ) verläuft.</li>
+                <li><strong>Fehlermaß berechnen:</strong> Vorhersagen: 3,1; 4,7; 6,3; 7,9 → Fehler −0,1; 0,3; −0,3; 0,1 → <code>SSE = 0,01 + 0,09 + 0,09 + 0,01 = 0,2</code> – <em>warum:</em> Erst die SSE zeigt, wie gut die Gerade wirklich passt.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die optimale Gerade lautet also <code>y = 1,6·x + 1,5</code> mit SSE = 0,2.</p>
+            <p><strong>Kontrolle:</strong> Die SSE ist kleiner als bei beiden getesteten Geraden aus 3.1 (0,5 und 2) – und keine andere Gerade erreicht einen kleineren Wert. Außerdem liegt der Schwerpunkt auf der Geraden: 1,6 · 2,5 + 1,5 = 5,5 = ȳ.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Der Schulkiosk will vorhersagen, wie viele Eis er an einem Tag verkauft. Die Schülerfirma hat an fünf Tagen notiert:</p>
+            <table>
+                <thead>
+                    <tr><th>Höchsttemperatur x (°C)</th><th>14</th><th>18</th><th>22</th><th>26</th><th>30</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>verkaufte Eis y</td><td>20</td><td>28</td><td>34</td><td>44</td><td>50</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><strong>Mittelwerte:</strong> x̄ = 110 / 5 = 22 und ȳ = 176 / 5 = 35,2 – <em>warum:</em> Grundlage beider Formeln.</li>
+                <li><strong>Abweichungen tabellieren:</strong> x − x̄ = −8; −4; 0; 4; 8 und y − ȳ = −15,2; −7,2; −1,2; 8,8; 14,8 – <em>warum:</em> Eine Tabelle verhindert Vorzeichenfehler, die Hauptfehlerquelle bei dieser Rechnung.</li>
+                <li><strong>Summen:</strong> Σ (x − x̄)·(y − ȳ) = 121,6 + 28,8 + 0 + 35,2 + 118,4 = 304 und Σ (x − x̄)² = 64 + 16 + 0 + 16 + 64 = 160 – <em>warum:</em> Zähler und Nenner der Steigungsformel.</li>
+                <li><strong>Gerade bestimmen:</strong> m = 304 / 160 = 1,9 und b = 35,2 − 1,9 · 22 = −6,6, also <code>y = 1,9·x − 6,6</code> – <em>warum:</em> Methode der kleinsten Quadrate.</li>
+                <li><strong>Deuten:</strong> Pro Grad mehr verkauft der Kiosk im Mittel 1,9 Eis mehr – <em>warum:</em> Die Steigung ist die eigentlich interessante Aussage des Modells.</li>
+                <li><strong>Fehlermaß:</strong> Vorhersagen 20; 27,6; 35,2; 42,8; 50,4 → Fehler 0; 0,4; −1,2; 1,2; −0,4 → SSE = 0 + 0,16 + 1,44 + 1,44 + 0,16 = 3,2 – <em>warum:</em> Die Fehler sind klein, die Gerade passt gut.</li>
+                <li><strong>Vorhersage:</strong> Für 25&nbsp;°C: 1,9 · 25 − 6,6 = 40,9, also etwa 41 Eis – <em>warum:</em> 25&nbsp;°C liegt innerhalb des Datenbereichs (14–30&nbsp;°C), die Vorhersage ist daher vertrauenswürdig.</li>
+                <li><strong>Falle 1 – Extrapolation:</strong> Für 0&nbsp;°C ergäbe sich 1,9 · 0 − 6,6 = −6,6 Eis. Negative Verkaufszahlen sind unmöglich – <em>warum:</em> Außerhalb des Datenbereichs gilt der lineare Zusammenhang nicht mehr; b hat hier keine sinnvolle Bedeutung.</li>
+                <li><strong>Falle 2 – Ausreißer:</strong> Nimmt man einen sechsten Tag hinzu (28&nbsp;°C, nur 12 Eis, weil Wandertag war), liefert dieselbe Rechnung m ≈ 0,99 und b ≈ 8,58. Für 25&nbsp;°C sagt das Modell dann nur noch etwa 33 Eis voraus – <em>warum:</em> Durch das Quadrieren hat der große Fehler des Ausreißers enormes Gewicht und zieht die Gerade flach (vgl. Abschnitt 6).</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>y = 1,9·x − 6,6</code>; Vorhersage für 25&nbsp;°C: etwa 41 Eis. Untypische Tage (Wandertag, Ferien) sollte man vor dem Training aus den Daten entfernen oder gesondert erfassen, und Vorhersagen nur im Datenbereich treffen.</p>
+            <p><strong>Kontrolle:</strong> Schwerpunkt: 1,9 · 22 − 6,6 = 35,2 = ȳ ✓; die Fehler summieren sich zu 0 + 0,4 − 1,2 + 1,2 − 0,4 = 0 ✓ (das gilt für die Regressionsgerade immer).</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Warum quadrieren und nicht einfach den Betrag nehmen?</summary>
+                <p>Durch das Quadrieren werden große Fehler überproportional stark bestraft – ein Ausreißer mit Fehler 4 zählt (16) viel schwerer als vier kleine Fehler von je 1 (zusammen 4). Außerdem lässt sich die Fehlerquadratsumme mathematisch besonders einfach minimieren; daraus ergeben sich die beiden Formeln oben.</p>
+            </details>
+        </div>
+
+<h2>4. Gütemaß R² (Bestimmtheitsmaß)</h2>
+
+<p>Um zu beurteilen, wie gut eine Regressionsgerade insgesamt zu den Daten passt, verwendet man häufig das <strong>Bestimmtheitsmaß R²</strong>. Es liegt (normalerweise) zwischen 0 und 1:</p>
+
+<ul>
+            <li><strong>R² = 0:</strong> Das Modell erklärt die Daten überhaupt nicht – die Gerade sagt nicht besser vorher als einfach immer der Durchschnittswert.</li>
+            <li><strong>R² = 1:</strong> perfekte Vorhersage – alle Datenpunkte liegen exakt auf der Geraden.</li>
+            <li>Werte dazwischen, z.&nbsp;B. R² = 0,8, bedeuten, dass das Modell 80&nbsp;% der Streuung in den Daten erklären kann.</li>
+        </ul>
+
+<p>Eine genaue Herleitung der Formel ist an dieser Stelle nicht nötig – wichtig ist nur, den Wert richtig zu interpretieren: Je näher R² an 1 liegt, desto besser passt die Gerade zu den Daten.</p>
+
+<h2>5. Bezug zu Overfitting und Underfitting</h2>
+
+<p>Auch bei der linearen Regression gibt es die aus Seite 11.3 „KI-Systeme: Training und Optimierung“ bekannten Probleme Overfitting und Underfitting:</p>
+
+<ul>
+            <li><strong>Underfitting:</strong> Eine einfache Gerade kann komplizierte, geschwungene Zusammenhänge nicht abbilden. Sie erfasst die Muster in den Daten nur unzureichend.</li>
+            <li><strong>Overfitting:</strong> Ersetzt man die Gerade durch ein Polynom hoher Ordnung (z.&nbsp;B. Grad 8 statt Grad 1), schlängelt sich die Kurve durch jeden einzelnen Trainingspunkt. Das sieht auf den Trainingsdaten perfekt aus, versagt aber bei neuen, unbekannten Daten, weil das Modell sich jede Kleinigkeit der Trainingsdaten „gemerkt“ hat, statt das grundlegende Muster zu lernen. Dasselbe Phänomen begegnet dir später bei zu tiefen Entscheidungsbäumen (11.5).</li>
+        </ul>
+
+<h2>6. Vor- und Nachteile der linearen Regression</h2>
+
+<h3>Vorteile</h3>
+
+<ul>
+            <li>einfach zu verstehen, zu berechnen und zu interpretieren (Steigung und Achsenabschnitt haben eine klare Bedeutung)</li>
+            <li>wenig Rechenaufwand, funktioniert auch mit wenigen Datenpunkten</li>
+            <li>gut geeignet als erster Ansatz, um einen Zusammenhang grob abzuschätzen</li>
+        </ul>
+
+<h3>Nachteile</h3>
+
+<ul>
+            <li>funktioniert nur gut, wenn der tatsächliche Zusammenhang (annähernd) linear ist</li>
+            <li>Bei stark gekrümmten Zusammenhängen liefert eine Gerade schlechte Vorhersagen (Underfitting).</li>
+            <li>empfindlich gegenüber Ausreißern, da diese die Fehlerquadratsumme stark beeinflussen</li>
+        </ul>
+
+<h2>7. Anwendungsbeispiele</h2>
+
+<ul>
+            <li><strong>Immobilienpreis-Schätzung:</strong> Vorhersage des Verkaufspreises anhand von Wohnfläche, Lage oder Baujahr</li>
+            <li><strong>Umsatzprognose:</strong> Vorhersage des Umsatzes eines Unternehmens anhand von Werbeausgaben oder Kundenzahl</li>
+            <li><strong>Temperaturvorhersage:</strong> Schätzung der Temperatur anhand vergangener Messwerte oder der Jahreszeit</li>
+            <li><strong>Klausurpunktzahl:</strong> Vorhersage der Punktzahl anhand der investierten Lernzeit (unser Beispiel)</li>
+        </ul>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Prognosen im Beruf</summary>
+                <p><strong>Alltag:</strong> Die geschätzte Ankunftszeit deiner Navigations-App oder der Reichweitenrechner eines E-Autos beruhen auf Regressionsmodellen.</p>
+                <p><strong>Beruf:</strong> <strong>Data Scientists</strong> in Energieversorgern sagen z.&nbsp;B. den Strombedarf des nächsten Tages aus Temperatur und Wochentag voraus; im Handel wird der Absatz von Produkten prognostiziert, um die Lagerhaltung zu planen. Die lineare Regression ist dabei oft das erste Referenzmodell, an dem sich komplexere Verfahren messen lassen müssen.</p>
+            </details>
+        </div>
+
+<h2>8. Lineare Regression in Python</h2>
+
+<p>Im folgenden Jupyter-Notebook trainierst du selbst ein lineares Regressionsmodell, das aus der Lernzeit die Klausurpunktzahl vorhersagt. Du visualisierst die Datenpunkte und die berechnete Regressionsgerade und berechnest R², um die Güte des Modells zu beurteilen.</p>
+
+<p>Lade das folgende Notebook herunter: <a href="../notebooks/11-4_lineare_regression.ipynb" download="">Notebook „Lineare Regression“</a>.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>Klassifikation sagt eine Kategorie voraus (z.&nbsp;B. „bestanden“/„nicht bestanden“). Regression sagt eine kontinuierliche Zahl voraus (z.&nbsp;B. „87 Punkte“). Die lineare Regression ist das einfachste Regressionsverfahren.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Methode der kleinsten Quadrate</strong> – Von allen Geraden wird diejenige gewählt, bei der die Summe der quadrierten senkrechten Abstände zwischen Datenpunkten und Gerade (SSE) am kleinsten ist.</p>
+        </div>
+
+<div class="merke">
+            <p>Auch bei der linearen Regression gilt: Ein Modell soll das zugrunde liegende Muster erfassen, nicht das Rauschen der Trainingsdaten auswendig lernen. Ein höherer Polynomgrad ist nicht automatisch besser!</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.4.1: Fehlerquadratsumme von Hand berechnen <span class="niveau">AFB I</span></summary>
+                <p>Gegeben seien folgende Datenpunkte (Lernstunden x, Punktzahl y): (1, 4), (3, 7), (5, 9).</p>
+                <p>Berechne für die Gerade <code>y = 1,2·x + 3</code> für jeden der drei Punkte den vorhergesagten Wert, den Fehler und das Fehlerquadrat. Bilde anschließend die Fehlerquadratsumme (SSE).</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.4.3: Lineare Regression im Alltag <span class="niveau">AFB II</span></summary>
+                <p>Überlege dir ein eigenes Beispiel aus deinem Alltag, bei dem lineare Regression sinnvoll eingesetzt werden könnte.</p>
+                <ol>
+                    <li>Welche Größe (x) würdest du als Eingabe verwenden, welche Zahl (y) möchtest du vorhersagen?</li>
+                    <li>Erwartest du eher einen linearen Zusammenhang oder eher nicht? Begründe.</li>
+                    <li>Was könnte passieren, wenn du versuchst, einen eigentlich nichtlinearen Zusammenhang mit einer Geraden vorherzusagen?</li>
+                </ol>
+            </details>
+        </div>

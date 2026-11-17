@@ -1,0 +1,288 @@
+<p>Nachdem wir gelernt haben, wie man CSV-Dateien in Python einliest, beschäftigen wir uns jetzt mit der Verarbeitung dieser Daten. Typische Aufgaben sind:</p>
+
+<ul>
+<li>Bestimmte Werte gezielt ausgeben</li>
+<li>Berechnungen durchführen (z.&nbsp;B. schnellste Zeit finden)</li>
+<li>Daten filtern (z.&nbsp;B. nur Teilnehmende aus einer bestimmten Stadt)</li>
+</ul>
+
+<p>Als Beispiel nutzen wir die Ergebnisse einer Sportveranstaltung.</p>
+
+<h2>Beispiel: Sportveranstaltung</h2>
+
+<p>Angenommene CSV-Datei <code>sportveranstaltung.csv</code>:</p>
+
+<pre><code>Name;Verein;Zeit;Stadt
+Anna Müller;Lauftreff Dresden;42;Dresden
+Ben Schneider;SV Chemnitz;45;Chemnitz
+Clara Schulz;LG Leipzig;40;Leipzig
+David Lehmann;Lauftreff Dresden;39;Dresden
+Eva Kunze;LG Leipzig;44;Leipzig
+Finn Neumann;Lauftreff Dresden;38;Dresden
+</code></pre>
+
+<h2>Durchgerechnete Beispiele</h2>
+
+<p>
+    Die folgenden vier Beispiele arbeiten mit der Datei <a href="../notebooks/schueler.csv" download>schueler.csv</a> aus Seite 3.3
+    (Spalten <code>Name;Alter;Note</code>, 10 Datensätze). Sie zeigen die vier Grundmuster, die du in den Übungsaufgaben
+    auf die Sportdaten überträgst. Alle Beispiele beginnen mit demselben Einlesen:
+</p>
+
+<pre><code>import csv
+
+schueler = []
+with open('schueler.csv', newline='', encoding='utf-8-sig') as csvfile:
+    reader = csv.DictReader(csvfile, delimiter=';')
+    for row in reader:
+        schueler.append(row)</code></pre>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> Aus <code>schueler.csv</code> soll die Durchschnittsnote aller 10 Schüler*innen berechnet werden.
+   Nach dem Einlesen sind aber alle Werte Texte.</p>
+<h3>Beispiel 1: Texte in Zahlen umwandeln – int() und float()</h3>
+<pre><code>print(schueler[0])                       # {'Name': 'Anna', 'Alter': '17', 'Note': '1.3'}
+print(schueler[0]['Alter'] + '1')        # 171   – Text + Text wird aneinandergehängt!
+print(int(schueler[0]['Alter']) + 1)     # 18    – erst umwandeln, dann rechnen
+print(float(schueler[0]['Note']) * 2)    # 2.6
+
+summe = 0
+for s in schueler:
+    summe += float(s['Note'])
+print(round(summe / len(schueler), 2))   # 1.95  – Durchschnittsnote aller 10</code></pre>
+<p>
+    <code>int('1.3')</code> würde mit einem <code>ValueError</code> abbrechen, weil <code>'1.3'</code> keine ganze Zahl ist –
+    für Dezimalzahlen brauchst du <code>float()</code>. Steht in der Datei ein Dezimalkomma (<code>'1,3'</code>), musst du es
+    vorher ersetzen: <code>float(text.replace(',', '.'))</code>.
+</p>
+<p><strong>Vollständiges Programm für die Durchschnittsnote:</strong></p>
+<pre><code class="language-python">import csv
+
+schueler = []
+with open('schueler.csv', newline='', encoding='utf-8-sig') as csvfile:
+    reader = csv.DictReader(csvfile, delimiter=';')
+    for row in reader:
+        schueler.append(row)
+
+summe = 0
+for s in schueler:
+    summe += float(s['Note'])
+print(round(summe / len(schueler), 2))</code></pre>
+<ol>
+    <li><strong>Einlesen:</strong> 10 Dictionaries, z.&nbsp;B. <code>{'Name': 'Anna', 'Alter': '17', 'Note': '1.3'}</code>. <em>Warum DictReader?</em>
+        So greift man über den Spaltennamen <code>'Note'</code> zu statt über eine Positionsnummer.</li>
+    <li><strong>Summe mit 0 beginnen:</strong> <em>Warum 0?</em> 0 verändert die Summe nicht; jeder Wert wird in der Schleife dazugezählt.</li>
+    <li><strong>Jeden Notentext mit <code>float()</code> umwandeln und addieren:</strong> 1.3 + 2.0 + 1.7 + 3.0 + 1.0 + 2.3 + 1.5 + 2.7 + 1.9 + 2.1 = 19.5.
+        <em>Warum float?</em> Ohne Umwandlung würde <code>summe += '1.3'</code> einen <code>TypeError</code> auslösen (Zahl + Text).</li>
+    <li><strong>Durch die Anzahl teilen und runden:</strong> 19.5 / 10 = 1.95. <em>Warum <code>len(schueler)</code>?</em> So stimmt das Programm auch,
+        wenn die Datei mehr oder weniger Zeilen hat.</li>
+</ol>
+<p><strong>Ergebnis:</strong> Ausgabe <code>1.95</code>.</p>
+<table>
+    <thead><tr><th>Eingabe (Inhalt von schueler.csv)</th><th>erwartete Ausgabe</th></tr></thead>
+    <tbody>
+        <tr><td>die 10 Datensätze aus dem Material</td><td><code>1.95</code></td></tr>
+        <tr><td>nur <code>Anna;17;1.3</code> und <code>Ben;16;2.0</code></td><td><code>1.65</code></td></tr>
+        <tr><td>eine Note als <code>1,3</code> (Komma)</td><td><code>ValueError</code> &ndash; vorher <code>replace(',', '.')</code> einbauen</td></tr>
+    </tbody>
+</table>
+<p><strong>Kontrolle:</strong> Der Durchschnitt muss zwischen der besten (1.0) und der schlechtesten Note (3.0) liegen &ndash; 1.95 passt.</p>
+            </details>
+        </div>
+
+<h3>Beispiel 2: Den besten Wert finden</h3>
+
+<pre><code>beste = schueler[0]                      # Startwert: der erste Datensatz
+for s in schueler:
+    if float(s['Note']) &lt; float(beste['Note']):
+        beste = s
+print(beste['Name'], beste['Note'])      # Eva 1.0</code></pre>
+
+<p>
+    Weil bei Schulnoten die <em>kleinste</em> Zahl die beste ist, steht hier <code>&lt;</code>. Für den größten Wert – etwa die
+    längste Laufzeit – drehst du den Vergleich um. Kürzer geht es mit
+    <code>min(schueler, key=lambda s: float(s['Note']))</code>; die Schleife zeigt aber, was dabei passiert. Nach demselben
+    Prinzip sortiert <code>sorted(schueler, key=lambda s: float(s['Note']))</code> die ganze Liste von der besten zur
+    schlechtesten Note (mit <code>reverse=True</code> umgekehrt).
+</p>
+
+<h3>Beispiel 3: Filtern</h3>
+
+<pre><code>for s in schueler:
+    if float(s['Note']) &lt; 2.0:
+        print(s['Name'], s['Note'])
+# Ausgabe:
+# Anna 1.3
+# Clara 1.7
+# Eva 1.0
+# Greta 1.5
+# Jonas 1.9</code></pre>
+
+<p>
+    Häufiger Fehler: <code>if s['Note'] &lt; 2.0</code> ohne <code>float()</code> – dann vergleicht Python einen Text mit einer
+    Zahl und bricht mit einem <code>TypeError</code> ab.
+</p>
+
+<h3>Beispiel 4: Gruppieren und Zählen</h3>
+
+<pre><code>anzahl_je_alter = {}
+namen_je_alter = {}
+for s in schueler:
+    alter = s['Alter']
+    anzahl_je_alter[alter] = anzahl_je_alter.get(alter, 0) + 1   # zählen
+    if alter not in namen_je_alter:                              # gruppieren
+        namen_je_alter[alter] = []
+    namen_je_alter[alter].append(s['Name'])
+
+print(anzahl_je_alter)   # {'17': 5, '16': 5}
+print(namen_je_alter)    # {'17': ['Anna', 'Clara', 'Eva', 'Greta', 'Jonas'],
+                         #  '16': ['Ben', 'David', 'Finn', 'Hannah', 'Lena']}</code></pre>
+
+<p>
+    Beim ersten Vorkommen einer Gruppe gibt es den Schlüssel noch nicht. <code>.get(alter, 0)</code> liefert dann 0 statt
+    eines <code>KeyError</code> – dieselbe Technik wie auf Seite 2.3.
+</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 5 <span class="beispiel-kopf">komplex</span> Vereinswertung – alle vier Grundmuster in einem Programm</summary>
+    <p><strong>Ausgangssituation:</strong> Die Beispiele 1–4 zeigen die Grundmuster einzeln. Der Veranstalter des Laufs möchte aus
+       <a href="../notebooks/sportveranstaltung.csv" download>sportveranstaltung.csv</a> (10 Teilnehmende) eine Vereinswertung:
+       Vereine werden nach der durchschnittlichen Laufzeit sortiert, zu jedem Verein wird die schnellste Person genannt.
+       <strong>Sonderregel:</strong> Gewertet werden nur Vereine mit mindestens zwei Teilnehmenden.</p>
+    <pre><code class="language-python">import csv
+
+vereine = {}
+with open('sportveranstaltung.csv', newline='', encoding='utf-8') as csvfile:
+    reader = csv.DictReader(csvfile, delimiter=';')
+    for row in reader:
+        verein = row['Verein']
+        zeit = int(row['Zeit'])                       # Muster 1: umwandeln
+        if verein not in vereine:                     # Muster 4: gruppieren
+            vereine[verein] = []
+        vereine[verein].append((zeit, row['Name']))
+
+wertung = []
+nicht_gewertet = []
+for verein, laeufer in vereine.items():
+    if len(laeufer) &lt; 2:                             # Muster 3: filtern (Sonderregel)
+        nicht_gewertet.append(verein)
+        continue
+    zeiten = [z for z, n in laeufer]
+    schnitt = sum(zeiten) / len(zeiten)
+    bester = min(laeufer)                             # Muster 2: Extremwert
+    wertung.append((schnitt, verein, len(laeufer), bester))
+
+wertung.sort()
+platz = 1
+for schnitt, verein, anzahl, bester in wertung:
+    print(f"{platz}. {verein}: {anzahl} Teilnehmende, Schnitt {schnitt:.1f} min, "
+          f"Schnellste Person: {bester[1]} ({bester[0]} min)")
+    platz += 1
+print("Nicht gewertet:", ", ".join(nicht_gewertet))</code></pre>
+    <ol>
+        <li><strong>Einlesen, umwandeln und gruppieren</strong> – Für jeden Verein entsteht eine Liste von Paaren (Zeit, Name). Die Zeit steht
+            vorne, damit Python Paare später nach der Zeit vergleicht. Ergebnis nach der Schleife:
+            Lauftreff Dresden: (42, Anna Müller), (39, David Lehmann), (38, Finn Neumann), (43, Jonas Richter);
+            SV Chemnitz: (45, Ben Schneider), (47, Greta Hoffmann); LG Leipzig: (40, Clara Schulz), (44, Eva Kunze), (41, Hannah Fischer);
+            SV Zwickau: (46, Lena Scholz).</li>
+        <li><strong>Sonderfall filtern</strong> – SV Zwickau hat nur eine Teilnehmerin und kommt in die Liste <code>nicht_gewertet</code>.
+            <code>continue</code> springt sofort zum nächsten Verein.</li>
+        <li><strong>Durchschnitt je Verein</strong> – Dresden: (42 + 39 + 38 + 43) / 4 = 162 / 4 = 40,5; Chemnitz: 92 / 2 = 46,0;
+            Leipzig: 125 / 3 = 41,67.</li>
+        <li><strong>Schnellste Person</strong> – <code>min(laeufer)</code> vergleicht die Paare zuerst nach der Zeit, also z.&nbsp;B. in
+            Dresden (38, 'Finn Neumann').</li>
+        <li><strong>Sortieren</strong> – <code>wertung.sort()</code> sortiert die Tupel nach ihrem ersten Element, dem Durchschnitt:
+            40,5 &lt; 41,67 &lt; 46,0.</li>
+        <li><strong>Ausgeben</strong> – <code>:.1f</code> rundet für die Anzeige auf eine Nachkommastelle (41,666… wird 41.7).</li>
+    </ol>
+    <p><strong>Ergebnis:</strong></p>
+    <pre><code>1. Lauftreff Dresden: 4 Teilnehmende, Schnitt 40.5 min, Schnellste Person: Finn Neumann (38 min)
+2. LG Leipzig: 3 Teilnehmende, Schnitt 41.7 min, Schnellste Person: Clara Schulz (40 min)
+3. SV Chemnitz: 2 Teilnehmende, Schnitt 46.0 min, Schnellste Person: Ben Schneider (45 min)
+Nicht gewertet: SV Zwickau</code></pre>
+    <table class="gitter">
+        <tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr>
+        <tr><td>Durchschnitt mit Nachkomma</td><td>LG Leipzig: 40, 44, 41</td><td><code>Schnitt 41.7 min</code></td></tr>
+        <tr><td>Sonderregel</td><td>SV Zwickau mit 1 Teilnehmerin</td><td><code>Nicht gewertet: SV Zwickau</code></td></tr>
+        <tr><td>Reihenfolge</td><td>alle Vereine</td><td>Dresden vor Leipzig vor Chemnitz</td></tr>
+    </table>
+    <p><strong>Kontrolle:</strong> 4 + 3 + 2 gewertete plus 1 nicht gewertete Person ergeben die 10 Zeilen der Datei. Die Falle:
+       Ohne <code>int()</code> bricht <code>sum(zeiten)</code> mit einem <code>TypeError</code> ab, und <code>min</code> würde Texte
+       alphabetisch statt Zahlen vergleichen.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Auswertungen im Onlinehandel und bei Sportveranstaltungen</summary>
+        <p>
+            Genau diese vier Muster stecken hinter fast jeder Auswertung im Berufsalltag: Ein <strong>Data Analyst</strong>
+            im Onlinehandel wandelt Preise aus einem Export um, sucht den umsatzstärksten Artikel, filtert Bestellungen einer
+            Region und zählt Bestellungen je Kategorie. Zeitnahmefirmen bei Stadtläufen wie dem Dresden-Marathon erstellen
+            so Ergebnislisten je Altersklasse. Werden dabei Namen veröffentlicht, gilt die <strong>DSGVO</strong>: Die
+            Teilnehmenden müssen bei der Anmeldung eingewilligt haben.
+        </p>
+    </details>
+</div>
+
+<h2>Übungsaufgaben</h2>
+
+<p><a href="../notebooks/sportveranstaltung.csv" download="">sportveranstaltung.csv herunterladen</a></p>
+
+<h2>Weitere Funktionen zum Arbeiten mit Texten</h2>
+
+<h3>Beispiel: Teilnehmende mit bestimmtem Namensanfang finden</h3>
+
+<pre><code>for row in reader:
+    if row['Name'].startswith('A'):
+        print(row['Name'])     # Anna Müller</code></pre>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p>
+        <strong>Die vier Grundmuster der Datenverarbeitung:</strong>
+    </p>
+    <ol>
+        <li><strong>Umwandeln:</strong> Eingelesene Werte sind Texte. Vor dem Rechnen oder Vergleichen wandelst du sie mit
+            <code>int()</code> (ganze Zahl) oder <code>float()</code> (Dezimalzahl mit Punkt) um.</li>
+        <li><strong>Extremwert suchen:</strong> eine Merkvariable mit dem ersten Wert anlegen und in der Schleife jedes Mal
+            ersetzen, wenn ein größerer (bzw. kleinerer) Wert kommt.</li>
+        <li><strong>Filtern:</strong> in der Schleife mit <code>if</code> prüfen und nur passende Datensätze ausgeben oder sammeln.</li>
+        <li><strong>Gruppieren und Zählen:</strong> ein Dictionary als Zähler; Schlüssel ist die Gruppe, Wert die Anzahl
+            (oder eine Liste der Mitglieder).</li>
+    </ol>
+</div>
+
+<div class="merke">
+<p>Wichtige Methoden zum Arbeiten mit Text:</p>
+<ul>
+<li><code>startswith('Text')</code>: Pr&uuml;ft, ob ein Textanfang &uuml;bereinstimmt.</li>
+<li><code>endswith('Text')</code>: Pr&uuml;ft, ob ein Textende &uuml;bereinstimmt.</li>
+<li><code>'Teiltext' in Text</code>: Pr&uuml;ft, ob Teiltext enthalten ist.</li>
+<li><code>isdigit()</code>: Pr&uuml;ft, ob alle Zeichen eines Textes Ziffern sind (<code>'42'.isdigit()</code> ist <code>True</code>, <code>'7.5'.isdigit()</code> ist <code>False</code>).</li>
+<li><code>lower()</code>: Wandelt Text in Kleinbuchstaben um.</li>
+<li><code>upper()</code>: Wandelt Text in Gro&szlig;buchstaben um.</li>
+<li><code>strip()</code>: Entfernt Leerzeichen am Anfang und Ende.</li>
+<li><code>split()</code>: Zerlegt einen Text in Teile (z.&nbsp;B. Vorname, Nachname).</li>
+</ul>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.4.1: Langsamste Person finden <span class="niveau">AFB I</span></summary>
+<p>Lies die Datei als Dictionary ein und bestimme die Person mit der höchsten Laufzeit.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.4.2: Schnelle Läufer*innen finden <span class="niveau">AFB I</span></summary>
+<p>Lies die Datei als Liste ein und gib alle Teilnehmenden aus, die schneller als 42 Minuten gelaufen sind.</p>
+</details>
+</div>

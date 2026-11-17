@@ -1,0 +1,216 @@
+<h2>1. Was ist der k-Nächste-Nachbarn-Algorithmus?</h2>
+
+<p>Der k-Nächste-Nachbarn-Algorithmus (k-NN) ist ein einfacher, aber leistungsfähiger Algorithmus für Klassifikations- und Regressionsaufgaben im maschinellen Lernen. Er basiert auf dem Prinzip, dass ähnliche Dinge oft nahe beieinander liegen.</p>
+
+<h2>2. Wie funktioniert k-NN?</h2>
+
+<ol>
+            <li>Wähle einen Wert für k (die Anzahl der zu berücksichtigenden Nachbarn).</li>
+            <li>Berechne den Abstand zwischen dem neuen Datenpunkt und allen Trainingsdatenpunkten (wie genau das geht, siehst du in Abschnitt 3).</li>
+            <li>Wähle die k nächsten Nachbarn aus.</li>
+            <li>Für die Klassifikation: Führe eine Mehrheitsabstimmung durch. (Für die Regression: Bilde den Mittelwert der Zielwerte der k Nachbarn.)</li>
+        </ol>
+
+<figure>
+            <img src="../img/knn-erklaergrafik.svg" width="550" alt="Erklärungsgrafik zu k-NN">
+            <figcaption>Abb. 1: Der grüne Punkt wird basierend auf seinen nächsten Nachbarn klassifiziert.</figcaption>
+        </figure>
+
+<p>In diesem Beispiel siehst du einen neuen Datenpunkt (grün) und seine 3 nächsten Nachbarn innerhalb des gestrichelten Kreises. Basierend auf der Mehrheit dieser Nachbarn würde der neue Punkt als „blau“ klassifiziert werden. Wenn du k auf 5 änderst, würde der neue Punkt als „rot“ klassifiziert werden.</p>
+
+<h2>3. Wie wird der Abstand zwischen zwei Datenpunkten berechnet?</h2>
+
+<p>Im vorherigen Abschnitt stand: „Berechne den Abstand zwischen dem neuen Datenpunkt und allen Trainingsdatenpunkten.“ Aber wie macht man das konkret? Damit k-NN überhaupt entscheiden kann, welche Punkte „nah“ beieinander liegen, braucht der Algorithmus eine mathematische Formel für den Abstand zwischen zwei Punkten.</p>
+
+<h3>3.1 Der euklidische Abstand</h3>
+
+<p>Am häufigsten wird bei k-NN der <strong>euklidische Abstand</strong> verwendet – dieselbe Formel begegnet dir auch im Kapitel 11.7 k-Means-Clustering. Er entspricht der „Luftlinie“ zwischen zwei Punkten. Hat jeder Datenpunkt zwei Merkmale x und y, lautet die Formel:</p>
+
+<p><code>d = √((x₂ − x₁)² + (y₂ − y₁)²)</code></p>
+
+<p>Hat ein Datenpunkt mehr als zwei Merkmale (in der Praxis der Normalfall, z.&nbsp;B. Größe, Gewicht und Alter), wird die Formel einfach erweitert: Für jedes zusätzliche Merkmal kommt ein weiterer quadrierter Differenzterm unter der Wurzel hinzu.</p>
+
+<h3>3.2 Beispielrechnung</h3>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Zurück zum Beispiel aus Abschnitt 2: Jeder Punkt wird durch zwei Merkmale x und y beschrieben. Folgende sieben Trainingspunkte mit bekannter Klasse liegen vor:</p>
+            <table>
+                <thead>
+                    <tr><th>Punkt</th><th>x</th><th>y</th><th>Klasse</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>1</td><td>1</td><td>Rot</td></tr>
+                    <tr><td>P2</td><td>2</td><td>4</td><td>Rot</td></tr>
+                    <tr><td>P3</td><td>3</td><td>6</td><td>Rot</td></tr>
+                    <tr><td>P4</td><td>6</td><td>5</td><td>Blau</td></tr>
+                    <tr><td>P5</td><td>7</td><td>3</td><td>Blau</td></tr>
+                    <tr><td>P6</td><td>8</td><td>8</td><td>Blau</td></tr>
+                    <tr><td>P7</td><td>4</td><td>1</td><td>Rot</td></tr>
+                </tbody>
+            </table>
+            <p>Der neue, noch unklassifizierte Datenpunkt liegt bei (5, 5).</p>
+            <ol>
+                <li><strong>Abstände berechnen</strong> – <em>warum:</em> k-NN braucht den Abstand zu <em>allen</em> Trainingspunkten, um die nächsten zu finden. Wir berechnen den euklidischen Abstand zu jedem Trainingspunkt:
+            <ul>
+                <li>P1 (1, 1): d = √((5 − 1)² + (5 − 1)²) = √(16 + 16) = √32 ≈ 5,657</li>
+                <li>P2 (2, 4): d = √((5 − 2)² + (5 − 4)²) = √(9 + 1) = √10 ≈ 3,162</li>
+                <li>P3 (3, 6): d = √((5 − 3)² + (5 − 6)²) = √(4 + 1) = √5 ≈ 2,236</li>
+                <li>P4 (6, 5): d = √((5 − 6)² + (5 − 5)²) = √(1 + 0) = 1</li>
+                <li>P5 (7, 3): d = √((5 − 7)² + (5 − 3)²) = √(4 + 4) = √8 ≈ 2,828</li>
+                <li>P6 (8, 8): d = √((5 − 8)² + (5 − 8)²) = √(9 + 9) = √18 ≈ 4,243</li>
+                <li>P7 (4, 1): d = √((5 − 4)² + (5 − 1)²) = √(1 + 16) = √17 ≈ 4,123</li>
+            </ul>
+                </li>
+                <li><strong>Sortieren</strong> – <em>warum:</em> Die k nächsten Nachbarn stehen dann oben in der Liste. Sortiert nach aufsteigendem Abstand ergibt sich folgende Reihenfolge:
+            <table>
+                <thead>
+                    <tr><th>Rang</th><th>Punkt</th><th>Abstand</th><th>Klasse</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>P4</td><td>1,000</td><td>Blau</td></tr>
+                    <tr><td>2</td><td>P3</td><td>2,236</td><td>Rot</td></tr>
+                    <tr><td>3</td><td>P5</td><td>2,828</td><td>Blau</td></tr>
+                    <tr><td>4</td><td>P2</td><td>3,162</td><td>Rot</td></tr>
+                    <tr><td>5</td><td>P7</td><td>4,123</td><td>Rot</td></tr>
+                    <tr><td>6</td><td>P6</td><td>4,243</td><td>Blau</td></tr>
+                    <tr><td>7</td><td>P1</td><td>5,657</td><td>Rot</td></tr>
+                </tbody>
+            </table>
+                </li>
+                <li><strong>Mehrheitsentscheid</strong> – <em>warum:</em> Die Klasse, die unter den k Nachbarn am häufigsten vorkommt, wird vorhergesagt.
+            <p><strong>Für k = 3:</strong> Die 3 nächsten Nachbarn sind P4 (Blau), P3 (Rot) und P5 (Blau) → 2 × Blau, 1 × Rot → Mehrheit: <strong>Blau</strong>.</p>
+            <p><strong>Für k = 5:</strong> Die 5 nächsten Nachbarn sind P4 (Blau), P3 (Rot), P5 (Blau), P2 (Rot) und P7 (Rot) → 2 × Blau, 3 × Rot → Mehrheit: <strong>Rot</strong>.</p>
+                </li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Das bestätigt genau, was die Grafik in Abschnitt 2 zeigt: Mit k = 3 wird der neue Punkt als „Blau“ klassifiziert, mit k = 5 dagegen als „Rot“. An diesem durchgerechneten Beispiel siehst du sehr konkret, warum die Wahl von k das Ergebnis so stark beeinflussen kann.</p>
+            </details>
+        </div>
+
+<h3>3.3 Merkmale skalieren</h3>
+
+<p>Der Abstand hängt von den Maßeinheiten ab. Haben Merkmale sehr unterschiedliche Wertebereiche, bestimmt das Merkmal mit den größten Zahlen fast allein den Abstand.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Kundinnen werden durch Alter (Jahre) und Jahreseinkommen (€) beschrieben: A (20; 30.000), B (60; 31.000), C (22; 40.000). Ein Streamingdienst weiß: A und C haben das Gaming-Paket gebucht, B das Hörbuch-Paket. Welches Paket soll einer neuen Kundin N (22; 31.000) mit k = 1 empfohlen werden?</p>
+            <ol>
+                <li><strong>Unskaliert:</strong> d(A, B) = √(40² + 1000²) ≈ 1000,8 und d(A, C) = √(2² + 10000²) ≈ 10000,0. B gilt als viel „ähnlicher“ zu A als C, obwohl B 40 Jahre älter ist – das Alter spielt praktisch keine Rolle. – <em>warum dieser Schritt:</em> Er zeigt die Falle, bevor wir klassifizieren.</li>
+                <li><strong>Neue Kundin unskaliert einordnen:</strong> d(N, A) = √(2² + 1000²) ≈ 1000,0; d(N, B) = √(38² + 0²) = 38; d(N, C) = √(0² + 9000²) = 9000. Nächster Nachbar ist B → Empfehlung „Hörbuch-Paket“ – <em>warum fragwürdig:</em> Die 22-Jährige wird der 60-Jährigen zugeordnet, nur weil das Einkommen fast gleich ist.</li>
+                <li><strong>Min-Max-Skalierung</strong> auf den Bereich 0 bis 1: <code>x' = (x − min) / (max − min)</code>. Mit Alter 20–60 und Einkommen 30.000–40.000 wird A = (0; 0), B = (1; 0,1), C = (0,05; 1). Jetzt ist d(A, B) ≈ 1,005 und d(A, C) ≈ 1,001 – beide Merkmale gehen gleichwertig ein. – <em>warum:</em> Minimum und Maximum stammen aus den Trainingsdaten; die neue Kundin wird mit denselben Werten skaliert.</li>
+                <li><strong>Neue Kundin skalieren:</strong> Alter (22 − 20) / 40 = 0,05; Einkommen (31.000 − 30.000) / 10.000 = 0,1 → N = (0,05; 0,1) – <em>warum:</em> Abstände sind nur sinnvoll, wenn alle Punkte im selben Maßstab vorliegen.</li>
+                <li><strong>Skaliert einordnen:</strong> d(N, A) = √(0,05² + 0,1²) ≈ 0,112; d(N, B) = √(0,95² + 0²) = 0,95; d(N, C) = √(0² + 0,9²) = 0,9. Nächster Nachbar ist jetzt A → Empfehlung „Gaming-Paket“.</li>
+                <li><strong>Gegenprobe mit dem Manhattan-Abstand</strong> (Summe der Koordinatendifferenzen, siehe Seite 11.7, Abschnitt 2.2): d(N, A) = 0,05 + 0,1 = 0,15; d(N, B) = 0,95 + 0 = 0,95; d(N, C) = 0 + 0,9 = 0,9 → ebenfalls A – <em>warum:</em> So siehst du, dass das Ergebnis hier an der Skalierung hängt, nicht an der Wahl des Abstandsmaßes.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Ohne Skalierung „Hörbuch-Paket“, mit Skalierung „Gaming-Paket“. Erst nach der Skalierung bestimmen beide Merkmale die Nachbarschaft.</p>
+            <p><strong>Kontrolle:</strong> Plausibilitätsprüfung – N ist gleich alt wie C und fast gleich alt wie A und verdient fast so viel wie A und B. Dass A der nächste Nachbar ist, passt zu dieser Einschätzung.</p>
+            </details>
+        </div>
+
+<h3>3.4 Gleichstände</h3>
+
+<p>Bei der Mehrheitsabstimmung kann es unentschieden stehen, z.&nbsp;B. 2 : 2 bei k = 4. Übliche Lösungen sind:</p>
+
+<ul>
+            <li>Bei zwei Klassen ein <strong>ungerades k</strong> wählen – dann kann kein Gleichstand entstehen.</li>
+            <li><strong>Abstandsgewichtung:</strong> Nähere Nachbarn zählen stärker, z.&nbsp;B. mit dem Gewicht 1/d.</li>
+            <li>Bei Gleichstand k um 1 verringern und neu abstimmen, bis ein eindeutiges Ergebnis entsteht (dann entscheidet im Zweifel der nächste Nachbar).</li>
+        </ul>
+
+<p>Auch gleiche <em>Abstände</em> sind möglich (zwei Punkte liegen genau gleich weit entfernt); dann muss eine feste Regel festlegen, welcher Punkt zu den k Nachbarn zählt.</p>
+
+<h2>4. Vor- und Nachteile von k-NN</h2>
+
+<h3>Vorteile</h3>
+
+<ul>
+            <li>einfach zu verstehen und zu implementieren</li>
+            <li>keine Annahmen über die zugrunde liegende Datenverteilung; kein eigentliches Training nötig</li>
+            <li>kann sowohl für Klassifikation als auch für Regression verwendet werden</li>
+        </ul>
+
+<h3>Nachteile</h3>
+
+<ul>
+            <li>rechenintensiv für große Datensätze (für jede Vorhersage Abstand zu allen Trainingspunkten)</li>
+            <li>empfindlich gegenüber irrelevanten und unskalierten Merkmalen</li>
+            <li>Die Wahl von k kann die Leistung stark beeinflussen.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Die Wahl von k</summary>
+                <p>Die Wahl von k ist entscheidend. Ein zu kleines k kann zu Overfitting führen (einzelne Ausreißer bestimmen das Ergebnis), während ein zu großes k zu Underfitting führen kann (es wird fast immer die häufigste Klasse vorhergesagt). Ein gutes k wird mithilfe von Validierungsdaten gewählt (vgl. 11.3).</p>
+            </details>
+        </div>
+
+<h2>5. Anwendungsbeispiele</h2>
+
+<ul>
+            <li>Empfehlungssysteme (z.&nbsp;B. „Kunden, die dieses Produkt gekauft haben, kauften auch …“)</li>
+            <li>Bildklassifikation (z.&nbsp;B. Erkennung von Objekten in Bildern)</li>
+        </ul>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Ähnlichkeitssuche</summary>
+                <p><strong>Alltag:</strong> Die Funktion „Ähnliche Produkte“ in Online-Shops oder die Suche nach ähnlichen Fotos in deiner Galerie beruhen auf dem Prinzip der nächsten Nachbarn.</p>
+                <p><strong>Beruf:</strong> <strong>ML Engineers</strong> bauen Suchsysteme, die in Millionen von Datenpunkten in Sekundenbruchteilen die nächsten Nachbarn finden – etwa für Produktempfehlungen oder um zu einer Frage passende Textabschnitte für einen Chatbot herauszusuchen. Weil der naive Vergleich mit allen Punkten zu langsam wäre, nutzen sie spezielle Datenstrukturen und Näherungsverfahren.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>k-NN</strong> – klassifiziert einen neuen Datenpunkt anhand der k nächstgelegenen Punkte in den Trainingsdaten: Die Klasse, die unter diesen k Nachbarn am häufigsten vorkommt, wird vorhergesagt. Der Wert k ist ein Hyperparameter.</p>
+        </div>
+
+<div class="merke">
+            <p>k-NN berechnet für einen neuen Punkt den Abstand (meist den euklidischen Abstand) zu <em>allen</em> Trainingspunkten, sortiert diese nach Abstand und lässt die k nächsten per Mehrheitsentscheid über die Klasse abstimmen.</p>
+        </div>
+
+<div class="merke">
+            <p>Vor k-NN (und allen anderen abstandsbasierten Verfahren wie k-Means) müssen die Merkmale auf vergleichbare Wertebereiche gebracht werden, z.&nbsp;B. durch Min-Max-Skalierung oder Standardisierung (Mittelwert 0, Standardabweichung 1).</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.6.1: Abstände von Hand berechnen <span class="niveau">AFB I–II</span></summary>
+                <p>Ein kleines Klassifikationssystem soll Früchte anhand von zwei Merkmalen unterscheiden: <strong>Süße</strong> (x-Achse, Skala 0–10) und <strong>Säure</strong> (y-Achse, Skala 0–10). Bekannt sind bereits folgende Früchte:</p>
+                <table>
+                    <thead>
+                        <tr><th>Frucht</th><th>Süße (x)</th><th>Säure (y)</th><th>Klasse</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>F1</td><td>6</td><td>5</td><td>Apfel</td></tr>
+                        <tr><td>F2</td><td>6</td><td>6</td><td>Zitrone</td></tr>
+                        <tr><td>F3</td><td>5</td><td>7</td><td>Apfel</td></tr>
+                        <tr><td>F4</td><td>7</td><td>7</td><td>Zitrone</td></tr>
+                        <tr><td>F5</td><td>8</td><td>5</td><td>Zitrone</td></tr>
+                        <tr><td>F6</td><td>7</td><td>8</td><td>Apfel</td></tr>
+                        <tr><td>F7</td><td>5</td><td>9</td><td>Zitrone</td></tr>
+                    </tbody>
+                </table>
+                <p>Eine neue, noch unbekannte Frucht wurde bei (5, 5) gemessen.</p>
+                <ol>
+                    <li>Berechne den euklidischen Abstand von der neuen Frucht zu allen 7 bekannten Früchten (analog zur Beispielrechnung in Abschnitt 3.2).</li>
+                    <li>Sortiere die Früchte nach aufsteigendem Abstand.</li>
+                    <li>Bestimme die Klassifikation der neuen Frucht für k = 3 und für k = 5.</li>
+                    <li>Vergleiche die beiden Ergebnisse: Fällt dir etwas auf? Erkläre kurz, woran das liegt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.6.2: Skalierung und Gleichstand <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Bestimme für die Früchte aus Aufgabe 11.6.1 die Klassifikation für k = 4. Welches Problem tritt auf, und wie könntest du es lösen?</li>
+                    <li>Angenommen, die Säure würde statt auf einer Skala von 0–10 als pH-Wert-Differenz in Tausendstel gemessen (Werte zwischen 0 und 10.000). Was würde sich an der Klassifikation ändern, und was ist zu tun?</li>
+                </ol>
+            </details>
+        </div>

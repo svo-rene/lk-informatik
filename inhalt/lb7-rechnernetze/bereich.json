@@ -1,0 +1,47 @@
+{
+  "nr": "LB 7",
+  "titel": "Rechnernetze",
+  "text": "Schichtenmodelle, IP-Adressierung, Routing, DHCP, DNS und Netze in Filius selbst aufbauen.",
+  "kapitel": [
+    {
+      "titel": "Grundlagen",
+      "themen": [
+        "7-1-topologien",
+        "7-2-vermittlung-dienste",
+        "7-3-schichtenmodelle",
+        "7-4-netzzugangsschicht"
+      ]
+    },
+    {
+      "titel": "Internetschicht",
+      "themen": [
+        "7-5-ip-adressierung-routing",
+        "7-6-subnetting-cidr",
+        "7-7-dhcp",
+        "7-8-dns"
+      ]
+    },
+    {
+      "titel": "Transport- und Anwendungsschicht",
+      "themen": [
+        "7-9-tcp-udp",
+        "7-10-anwendungsschicht-protokolle"
+      ]
+    },
+    {
+      "titel": "Filius-Praxis",
+      "themen": [
+        "7-13-filius-gateway",
+        "7-14-filius-routingtabelle",
+        "7-15-filius-dhcp",
+        "7-16-filius-dns-web"
+      ]
+    },
+    {
+      "titel": "Projekt",
+      "themen": [
+        "7-17-aufgabenstellung"
+      ]
+    }
+  ]
+}

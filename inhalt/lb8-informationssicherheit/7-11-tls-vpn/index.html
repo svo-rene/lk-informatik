@@ -1,0 +1,120 @@
+<p>
+            Im WLAN am Bahnhof sitzen Dutzende Fremde im selben Funknetz wie du. Trotzdem kann niemand von ihnen mitlesen, wenn du dich bei deiner Bank anmeldest – dank des Schlosssymbols vor der Adresse. Wie der Browser mit einem Server, den er nie zuvor gesehen hat, über ein unsicheres Netz einen geheimen Schlüssel vereinbart, ist eine der schönsten Ideen der Informatik.
+        </p>
+
+<p>Transportverschlüsselung (Transportwegverschlüsselung) bezeichnet Verfahren zur sicheren Übertragung von Daten über ein Netz. Die Daten werden zwischen Sender und Empfänger verschlüsselt, um sie vor unbefugtem Zugriff, Abhören oder Manipulation während der Übertragung zu schützen. Zwei wesentliche Technologien sind TLS (Transport Layer Security) und VPN (Virtual Private Network).</p>
+
+<h2>Einordnung in das Schichtenmodell</h2>
+
+<p>TCP und UDP selbst verschlüsseln nicht (siehe Kurs „Rechnernetze“, Seite 7.9). <strong>TLS</strong> setzt oberhalb von TCP an: Die Anwendung übergibt ihre Daten an TLS, TLS verschlüsselt sie und übergibt sie an TCP. Im TCP/IP-Modell wird TLS deshalb meist der Anwendungsschicht zugerechnet, obwohl der Name „Transport Layer Security“ anderes vermuten lässt. HTTPS ist HTTP über TLS (Port 443). <strong>IPsec</strong>, das für viele VPNs genutzt wird, arbeitet dagegen auf der Internetschicht und verschlüsselt ganze IP-Pakete.</p>
+
+<h2>Transport Layer Security (TLS)</h2>
+
+<p>TLS ist ein Protokoll, das die sichere Kommunikation über ein Netz gewährleistet. Es wird am häufigsten im Web eingesetzt, um eine sichere Verbindung zwischen Browser und Webserver herzustellen, erkennbar an „https://“ in der Adresse. TLS verfolgt drei Ziele:</p>
+
+<ul>
+            <li><strong>Vertraulichkeit:</strong> Niemand außer den Kommunikationspartnern kann die Daten lesen.</li>
+            <li><strong>Integrität:</strong> Veränderungen an den Daten werden bemerkt.</li>
+            <li><strong>Authentizität:</strong> Der Client kann sicher sein, mit dem richtigen Server zu sprechen. In der Regel authentifiziert sich <em>nur der Server</em> mit einem Zertifikat; die Authentifizierung des Clients per Zertifikat ist optional (z.&nbsp;B. bei manchen Firmen-VPNs). Benutzer melden sich meist erst danach innerhalb der verschlüsselten Verbindung mit Passwort an (→ 7.12).</li>
+        </ul>
+
+<h3>Der TLS-Handshake (vereinfacht, TLS 1.3)</h3>
+
+<ol>
+            <li><strong>ClientHello:</strong> Der Client nennt die unterstützten TLS-Versionen und Verschlüsselungsverfahren, eine Zufallszahl, den gewünschten Servernamen und seinen öffentlichen Anteil für einen Diffie-Hellman-Schlüsselaustausch.</li>
+            <li><strong>ServerHello:</strong> Der Server wählt die Verfahren aus, sendet eine eigene Zufallszahl und seinen öffentlichen Diffie-Hellman-Anteil.</li>
+            <li><strong>Schlüsselvereinbarung per (EC)DHE:</strong> Beide berechnen aus ihrem eigenen geheimen Wert und dem öffentlichen Anteil der Gegenseite dasselbe gemeinsame Geheimnis. Dieses Geheimnis wird <em>nie</em> übertragen. (EC)DHE steht für (Elliptic Curve) Diffie-Hellman Ephemeral – „ephemeral“, weil für jede Verbindung neue, danach verworfene Werte verwendet werden.</li>
+            <li><strong>Server-Authentifizierung:</strong> Der Server sendet sein Zertifikat samt Zwischenzertifikaten und eine digitale Signatur über den bisherigen Handshake, die er mit seinem privaten Schlüssel erstellt.</li>
+            <li><strong>Prüfung durch den Client:</strong> Der Client prüft die <strong>Zertifikatskette</strong>: Das Serverzertifikat muss von einer Zwischenzertifizierungsstelle signiert sein, diese von einer weiteren, bis hin zu einem <strong>Root-Zertifikat</strong>, das im lokalen Zertifikatsspeicher von Betriebssystem oder Browser als vertrauenswürdig hinterlegt ist. Außerdem prüft er Gültigkeitszeitraum, Sperrstatus und ob der Domainname im Zertifikat zur aufgerufenen Adresse passt. Mit dem öffentlichen Schlüssel aus dem Zertifikat prüft er die Signatur des Servers – so weiß er, dass der Server den passenden privaten Schlüssel besitzt.</li>
+            <li><strong>Session-Keys:</strong> Aus dem gemeinsamen Geheimnis und den Handshake-Daten <strong>leiten</strong> beide Seiten mit einer Schlüsselableitungsfunktion dieselben symmetrischen Sitzungsschlüssel (Session-Keys) <strong>ab</strong>. Sie werden nicht ausgetauscht.</li>
+            <li><strong>Finished und Datenübertragung:</strong> Beide bestätigen mit einer Prüfsumme über den gesamten Handshake, dass nichts verändert wurde. Danach werden alle Daten mit einem schnellen symmetrischen Verfahren (z.&nbsp;B. AES-GCM oder ChaCha20-Poly1305) verschlüsselt und gegen Veränderung geschützt.</li>
+        </ol>
+
+<p>Weil für jede Verbindung neue Diffie-Hellman-Werte verwendet werden, kann ein Angreifer, der später den privaten Schlüssel des Servers stiehlt, früher mitgeschnittene Verbindungen trotzdem nicht entschlüsseln (<strong>Forward Secrecy</strong>). Der private Schlüssel des Servers dient nur zum Signieren, nicht zum Verschlüsseln der Sitzungsschlüssel.</p>
+
+<h3>SSL (abgelöst durch TLS)</h3>
+
+<p>SSL (Secure Sockets Layer) ist der Vorgänger von TLS. Es wurde entwickelt, um die Kommunikation zwischen Browser und Webserver zu verschlüsseln. Alle SSL-Versionen gelten heute als unsicher und sind abgeschaltet; aktuell sind TLS 1.2 und TLS 1.3. Der Begriff „SSL“ wird trotzdem noch oft verwendet, etwa bei „SSL-Zertifikat“, gemeint ist dann TLS.</p>
+
+<p>Auch SSL und ältere TLS-Versionen kannten schon die Schritte Handshake mit Aushandlung der Verfahren, Zertifikatsprüfung, Schlüsselaustausch und verschlüsselte Kommunikation. Beim damals verbreiteten RSA-Schlüsseltransport erzeugte der Client ein zufälliges Geheimnis und verschlüsselte es mit dem öffentlichen Schlüssel des Servers; einen eigenen privaten Schlüssel brauchte der Client dafür nicht. Nachteil: Wer später den privaten Serverschlüssel erbeutete, konnte alle alten Mitschnitte entschlüsseln. Deshalb erlaubt TLS 1.3 nur noch (EC)DHE.</p>
+
+<h2>Virtual Private Network (VPN)</h2>
+
+<p>Ein VPN baut eine verschlüsselte Verbindung (oft „Tunnel“ genannt) zwischen einem Gerät und einem entfernten Netz über das Internet auf. Benutzer können so Daten sicher übertragen, als wären sie direkt mit dem privaten Netz verbunden. VPNs werden für das Arbeiten im Homeoffice, zum Schutz der Privatsphäre in fremden Netzen oder zum Umgehen von Geoblocking und Zensur eingesetzt. Die Funktionsweise umfasst:</p>
+
+<ul>
+            <li><strong>Authentifizierung:</strong> Der VPN-Client authentifiziert sich beim VPN-Server, z.&nbsp;B. mit Benutzername und Passwort, Zertifikaten oder einem zweiten Faktor (→ 7.12).</li>
+            <li><strong>Verschlüsselte Verbindung:</strong> Nach erfolgreicher Authentifizierung wird ein verschlüsselter Tunnel zwischen Client und VPN-Server aufgebaut. Alle Daten, die durch diesen Tunnel laufen, sind auf dem Weg vor Zugriffen geschützt.</li>
+            <li><strong>IP-Adressmaskierung:</strong> Der VPN-Server kann dem Client eine IP-Adresse aus seinem Netz zuweisen. Nach außen erscheint dann die Adresse des VPN-Servers, die ursprüngliche IP-Adresse des Benutzers bleibt verborgen. Das erhöht die Anonymität und kann genutzt werden, um standortbezogene Einschränkungen zu umgehen.</li>
+        </ul>
+
+<p>Verbreitete VPN-Protokolle sind IPsec (Internetschicht), OpenVPN (baut auf TLS auf) und WireGuard.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation: Die Zertifikatskette im Browser.</strong> Du klickst beim Aufruf einer Webseite auf das Schlosssymbol und lässt dir das Zertifikat anzeigen.</p>
+            <ol>
+                <li><strong>Stufen ablesen:</strong> Meist siehst du drei Stufen: das Zertifikat für den Domainnamen der Seite, darüber ein Zwischenzertifikat der ausstellenden Zertifizierungsstelle (z.&nbsp;B. Let's Encrypt) und ganz oben das Root-Zertifikat (z.&nbsp;B. „ISRG Root X1“).</li>
+                <li><strong>Herkunft klären:</strong> Nur das Root-Zertifikat ist in deinem Betriebssystem bzw. Browser gespeichert; die übrigen schickt der Server im Handshake mit. <em>Warum genügt das?</em> Jede Stufe ist von der darüberliegenden signiert, der Browser prüft die Signaturen von oben nach unten.</li>
+                <li><strong>Serverzertifikat prüfen:</strong> Gültigkeitszeitraum und Domainname müssen zur aufgerufenen Adresse passen.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Das Vertrauen in die Webseite beruht auf dem Vertrauen in ein einziges vorinstalliertes Root-Zertifikat.<br>
+            <strong>Kontrolle:</strong> Fehlt ein Glied der Kette oder passt eine Signatur nicht, zeigt der Browser eine Warnung.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation: Diffie-Hellman mit kleinen Zahlen.</strong> Öffentlich vereinbart sind die Primzahl p = 19 und die Basis g = 2 (ein Erzeuger modulo 19).</p>
+            <ol>
+                <li>Client wählt geheim a = 7 und sendet A = g<sup>a</sup> mod p = 2<sup>7</sup> mod 19 = 128 mod 19 = <strong>14</strong>.</li>
+                <li>Server wählt geheim b = 11 und sendet B = 2<sup>11</sup> mod 19 = 2048 mod 19 = <strong>15</strong>.</li>
+                <li>Client berechnet B<sup>a</sup> mod p = 15<sup>7</sup> mod 19 schrittweise: 15<sup>2</sup> = 225 ≡ 16, 15<sup>4</sup> ≡ 16<sup>2</sup> = 256 ≡ 9, 15<sup>7</sup> = 15<sup>4</sup> · 15<sup>2</sup> · 15 ≡ 9 · 16 · 15 = 2160 ≡ <strong>13</strong>.</li>
+                <li>Server berechnet A<sup>b</sup> mod p = 14<sup>11</sup> mod 19: 14<sup>2</sup> = 196 ≡ 6, 14<sup>4</sup> ≡ 36 ≡ 17, 14<sup>8</sup> ≡ 17<sup>2</sup> = 289 ≡ 4, 14<sup>11</sup> = 14<sup>8</sup> · 14<sup>2</sup> · 14 ≡ 4 · 6 · 14 = 336 ≡ <strong>13</strong>.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Beide kennen jetzt das Geheimnis 13, übertragen wurden nur 19, 2, 14 und 15. Ein Lauscher müsste aus 14 = 2<sup>a</sup> mod 19 den Exponenten a berechnen (diskreter Logarithmus). Bei den in TLS verwendeten Zahlen mit Hunderten von Bit bzw. elliptischen Kurven ist das praktisch unmöglich. Aus dem Geheimnis werden anschließend die Session-Keys abgeleitet.<br>
+            <strong>Kontrolle:</strong> g<sup>a·b</sup> = 2<sup>77</sup>; wegen 2<sup>18</sup> ≡ 1 (mod 19) ist 2<sup>77</sup> ≡ 2<sup>5</sup> = 32 ≡ 13. ✓<br>
+            <strong>Falle:</strong> Ohne Zertifikat und Signatur könnte ein Angreifer in der Mitte sich als Server ausgeben und mit beiden Seiten getrennt Schlüssel vereinbaren – erst die Server-Authentifizierung verhindert das.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Hotspot, Homeoffice und abgelaufene Zertifikate</summary>
+                <p><strong>Alltag:</strong> Im offenen WLAN im Zug oder im Café schützt HTTPS den Inhalt deiner Verbindungen. Sichtbar bleibt aber, mit welchen Servern du sprichst (IP-Adressen, oft auch Domainnamen). Ein VPN verbirgt auch das vor dem Hotspot-Betreiber – verlagert das Vertrauen aber auf den VPN-Anbieter.</p>
+                <p><strong>Beruf:</strong> Administratorinnen und Administratoren stellen Mitarbeitenden VPN-Zugänge für das Homeoffice bereit und verwalten die Zertifikate der Firmenserver. Kostenlose Zertifikate von Let's Encrypt gelten nur wenige Monate und werden automatisch erneuert. Klappt das nicht, kommt das Ticket „Der Browser warnt: Verbindung nicht sicher“ – das Zertifikat ist abgelaufen. Manche Firmen installieren zudem ein eigenes Root-Zertifikat auf allen Dienstgeräten, damit ihre Firewall verschlüsselten Verkehr auf Schadsoftware prüfen kann (TLS-Inspektion).</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>TLS</strong> – Protokoll oberhalb von TCP, das Vertraulichkeit, Integrität und Server-Authentizität sichert. Der <strong>Server authentifiziert sich per Zertifikat</strong>, dessen Kette der Client bis zu einem vertrauenswürdigen <strong>Root-Zertifikat</strong> prüft. Das gemeinsame Geheimnis entsteht per <strong>(EC)DHE</strong>, ohne übertragen zu werden; daraus werden die symmetrischen <strong>Session-Keys abgeleitet</strong>.
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>VPN</strong> – verschlüsselter Tunnel über ein unsicheres Netz, durch den ein Gerät so arbeitet, als wäre es direkt mit einem entfernten privaten Netz verbunden. Der Schutz reicht nur bis zum VPN-Server; dahinter ist der Verkehr wieder so sicher wie ohne VPN.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.11.1: Was prüft der Browser? <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Nenne vier Dinge, die der Browser beim Serverzertifikat überprüft.</li>
+                    <li>Welche Seite authentifiziert sich beim Aufruf einer normalen HTTPS-Webseite per Zertifikat?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.11.2: Diffie-Hellman rechnen <span class="niveau">AFB II</span></summary>
+                <p>Öffentlich sind p = 23 und g = 5. Der Client wählt a = 4, der Server b = 3. Berechne A, B und das gemeinsame Geheimnis auf beiden Seiten. Erkläre, welche Werte ein Lauscher kennt und warum ihm das bei großen Zahlen nicht hilft.</p>
+            </details>
+        </div>

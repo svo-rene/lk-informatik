@@ -1,0 +1,167 @@
+<p>
+            Die Gesetze der Aussagenlogik sind grundlegende Regeln, die uns dabei helfen, Aussagen und logische Ausdrücke auf formale und konsistente Weise umzuformen und zu analysieren. Diese Gesetze ermöglichen es, komplexe logische Ausdrücke zu vereinfachen, logische Äquivalenzen zu zeigen und Schlussfolgerungen zu ziehen.
+        </p>
+
+<p>
+            In der folgenden Tabelle sind die wichtigsten Gesetze der Aussagenlogik aufgeführt, darunter das Idempotenzgesetz, das Kommutativgesetz, das Assoziativgesetz, das Absorptionsgesetz, das Distributivgesetz, die doppelte Negation und die De-Morgan’schen Regeln. Durch das Verständnis und die Anwendung dieser Gesetze können wir die logische Struktur von Aussagen besser erfassen und logische Argumente präzise formulieren.
+        </p>
+
+<hr>
+
+<h2>Vorrangregeln</h2>
+
+<p>
+            Wie in der Mathematik üblich, gibt es bestimmte Regeln für die Abarbeitung einer Formel. Diese lauten wie folgt:
+        </p>
+
+<hr>
+
+<h2>Vereinfachen mit den Gesetzen</h2>
+
+<p>Beim Vereinfachen formst du einen Term Schritt für Schritt mit den Gesetzen um und schreibst hinter jeden Schritt das verwendete Gesetz. So kann jeder deinen Weg nachprüfen.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Vereinfache A ∨ (¬A ∧ B).</summary>
+            <table class="gitter">
+                <tr><th>Schritt</th><th>Term</th><th>verwendetes Gesetz</th></tr>
+                <tr><td>0</td><td>A ∨ (¬A ∧ B)</td><td>Ausgangsterm</td></tr>
+                <tr><td>1</td><td>(A ∨ ¬A) ∧ (A ∨ B)</td><td>Distributivgesetz (∨ über ∧)</td></tr>
+                <tr><td>2</td><td>W ∧ (A ∨ B)</td><td>Komplement: A ∨ ¬A ↔ W</td></tr>
+                <tr><td>3</td><td><strong>A ∨ B</strong></td><td>neutrales Element: W ∧ X ↔ X</td></tr>
+            </table>
+            <p>Probe mit Worten: „A, oder wenn nicht A, dann B“ ist dasselbe wie „A oder B“.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Vereinfache ¬(¬A ∨ B) ∨ (A ∧ B) ∨ (¬A ∧ B).</summary>
+            <table class="gitter">
+                <tr><th>Schritt</th><th>Term</th><th>verwendetes Gesetz</th></tr>
+                <tr><td>0</td><td>¬(¬A ∨ B) ∨ (A ∧ B) ∨ (¬A ∧ B)</td><td>Ausgangsterm</td></tr>
+                <tr><td>1</td><td>(¬¬A ∧ ¬B) ∨ (A ∧ B) ∨ (¬A ∧ B)</td><td>De-Morgan’sche Regel</td></tr>
+                <tr><td>2</td><td>(A ∧ ¬B) ∨ (A ∧ B) ∨ (¬A ∧ B)</td><td>doppelte Negation</td></tr>
+                <tr><td>3</td><td>(A ∧ (¬B ∨ B)) ∨ (¬A ∧ B)</td><td>Distributivgesetz (A ausklammern)</td></tr>
+                <tr><td>4</td><td>(A ∧ W) ∨ (¬A ∧ B)</td><td>Komplement: ¬B ∨ B ↔ W</td></tr>
+                <tr><td>5</td><td>A ∨ (¬A ∧ B)</td><td>neutrales Element</td></tr>
+                <tr><td>6</td><td><strong>A ∨ B</strong></td><td>wie im einfachen Beispiel</td></tr>
+            </table>
+            <p>Aus drei Teiltermen mit fünf Operatoren ist ein einziges ODER geworden. Probe mit einer Wahrheitstabelle: Beide Terme sind nur für A = 0, B = 0 falsch.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span> Ausklammern mit innerem UND</summary>
+            <p>Eine Gewächshaus-Steuerung schaltet die Bewässerungspumpe nach drei Regeln ein. A: Automatik ist eingeschaltet, B: Regensensor meldet Regen, C: Boden ist trocken, D: Hitzewarnung. Die Programmiererin hat geschrieben:</p>
+            <p>P = (A ∧ ¬B ∧ C) ∨ (A ∧ ¬B ∧ D) ∨ (A ∧ ¬B ∧ ¬C)</p>
+            <p>Alle drei Teilterme haben denselben Anfang A ∧ ¬B. Dieser <strong>ganze Block</strong> wird ausgeklammert – nicht nur A.</p>
+            <ol>
+                <li><strong>Was:</strong> den gemeinsamen Block klammern: ((A ∧ ¬B) ∧ C) ∨ ((A ∧ ¬B) ∧ D) ∨ ((A ∧ ¬B) ∧ ¬C) – <em>warum:</em> Assoziativgesetz; erst jetzt sieht man, dass jeder Teilterm die Form X ∧ … mit X = A ∧ ¬B hat.</li>
+                <li><strong>Was:</strong> X ausklammern: (A ∧ ¬B) ∧ (C ∨ D ∨ ¬C) – <em>warum:</em> Distributivgesetz rückwärts gelesen: (X ∧ C) ∨ (X ∧ D) ∨ (X ∧ ¬C) ↔ X ∧ (C ∨ D ∨ ¬C). Die Klammer um A ∧ ¬B und die Klammer um den Rest sind Pflicht.</li>
+                <li><strong>Was:</strong> umsortieren: (A ∧ ¬B) ∧ ((C ∨ ¬C) ∨ D) – <em>warum:</em> Kommutativ- und Assoziativgesetz, damit C und ¬C nebeneinanderstehen.</li>
+                <li><strong>Was:</strong> (A ∧ ¬B) ∧ (W ∨ D) – <em>warum:</em> Komplement: C ∨ ¬C ↔ W.</li>
+                <li><strong>Was:</strong> (A ∧ ¬B) ∧ W – <em>warum:</em> dominantes Element: W ∨ D ↔ W.</li>
+                <li><strong>Was:</strong> A ∧ ¬B – <em>warum:</em> neutrales Element: X ∧ W ↔ X.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> P = A ∧ ¬B. Die Pumpe läuft also immer, wenn die Automatik an ist und es nicht regnet – Bodensensor und Hitzewarnung sind wirkungslos. Die dritte Regel war vermutlich ein Tippfehler.</p>
+            <p><strong>Falle:</strong> Wer nach Schritt 2 die Klammern weglässt und A ∧ ¬B ∧ C ∨ D ∨ ¬C schreibt, hat wegen „∧ vor ∨“ den Term (A ∧ ¬B ∧ C) ∨ D ∨ ¬C notiert. Der ist z.&nbsp;B. für A = 0, B = 0, C = 0, D = 0 wahr, der Ausgangsterm aber falsch.</p>
+            <p><strong>Probe:</strong> In der Wahrheitstabelle mit 16 Zeilen ist der Ausgangsterm genau in den 4 Zeilen mit A = 1, B = 0 wahr (ABCD = 1000, 1001, 1010, 1011) – genau dort ist auch A ∧ ¬B wahr.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Warum Vereinfachen bares Geld wert ist</summary>
+                <p><strong>Alltag:</strong> Jeder Term, den du vereinfachst, wird später als echte Schaltung aus Transistoren gebaut (Kapitel 3). Weniger Operatoren bedeuten weniger Chipfläche, weniger Energie und weniger Wärme – dein Smartphone-Akku hält länger. Bei Milliarden produzierter Chips ist das ein riesiger Effekt.</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Chipdesigner/in</strong>: nutzt Programme zur Logiksynthese, die boolesche Terme nach genau diesen Gesetzen automatisch umformen, bis die Schaltung möglichst klein und schnell ist.</li>
+                    <li><strong>Softwareentwickler/in für EDA-Werkzeuge</strong> (Electronic Design Automation): programmiert diese Optimierer – z.&nbsp;B. bei Firmen, die in Dresden Chipentwicklung und Entwurfswerkzeuge anbieten.</li>
+                    <li><strong>Softwareentwickler/in</strong>: vereinfacht verschachtelte <code>if</code>-Bedingungen mit De Morgan, damit Code lesbar bleibt: <code>not (a and b)</code> ist dasselbe wie <code>not a or not b</code>.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Äquivalente Terme:</strong> Zwei Terme sind äquivalent (T<sub>1</sub> ↔ T<sub>2</sub> ist eine Tautologie), wenn sie für jede Belegung der Variablen denselben Wahrheitswert haben. Äquivalente Terme dürfen gegeneinander ausgetauscht werden – das ist die Grundlage jeder Vereinfachung. W steht für „wahr“ (1), F für „falsch“ (0).</p>
+            <table class="gitter">
+                <tr>
+                    <th>Name</th>
+                    <th>Tautologie</th>
+                </tr>
+                <tr>
+                    <td>Idempotenzgesetz</td>
+                    <td>A ∧ A ↔ A<br>
+                    A ∨ A ↔ A</td>
+                </tr>
+                <tr>
+                    <td>Kommutativgesetz</td>
+                    <td>A ∧ B ↔ B ∧ A<br>
+                        A ∨ B ↔ B ∨ A</td>
+                </tr>
+                <tr>
+                    <td>Assoziativgesetz</td>
+                    <td>(A ∧ B) ∧ C ↔ A ∧ (B ∧ C)<br>
+                        (A ∨ B) ∨ C ↔ A ∨ (B ∨ C)</td>
+                </tr>
+                <tr>
+                    <td>Absorptionsgesetz</td>
+                    <td>A ∧ (A ∨ B) ↔ A<br>
+                        A ∨ (A ∧ B) ↔ A</td>
+                </tr>
+                <tr>
+                    <td>Distributivgesetz</td>
+                    <td>A ∧ (B ∨ C) ↔ (A ∧ B) ∨ (A ∧ C)<br>
+                        A ∨ (B ∧ C) ↔ (A ∨ B) ∧ (A ∨ C)</td>
+                </tr>
+                <tr>
+                    <td>doppelte Negation</td>
+                    <td>¬(¬A) ↔ A</td>
+                </tr>
+                <tr>
+                    <td>De-Morgan’sche Regeln</td>
+                    <td>¬(A ∧ B) ↔ ¬A ∨ ¬B<br>
+                        ¬(A ∨ B) ↔ ¬A ∧ ¬B</td>
+                </tr>
+                <tr>
+                    <td>Gesetze mit Wahr/Falsch</td>
+                    <td>A ∧ W ↔ A &nbsp;&nbsp; A ∨ F ↔ A &nbsp;(neutrales Element)<br>
+                        A ∨ W ↔ W &nbsp;&nbsp; A ∧ F ↔ F &nbsp;(dominantes Element)<br>
+                        A ∧ ¬A ↔ F &nbsp;&nbsp; A ∨ ¬A ↔ W &nbsp;(Komplement)</td>
+                </tr>
+            </table>
+        </div>
+
+<div class="merke">
+            <p><strong>Vorrangregeln:</strong></p>
+            <ol>
+                <li>Klammerausdrücke „()“ werden zuerst ausgewertet.</li>
+                <li>Die Negation „¬“ bindet stärker als das UND „∧“. Dieses bindet wiederum stärker als das ODER „∨“.</li>
+                <li>Das Zeichen für das UND „∧“ kann analog zum Malzeichen „·“ in der Mathematik weggelassen werden.</li>
+                <li>Folgen gleiche Verknüpfungen hintereinander, so wird der Term von links nach rechts ausgewertet.</li>
+            </ol>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.5.1: Gesetze nachweisen <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Weise mithilfe einer Wahrheitstabelle die Tautologie einer Form des Assoziativgesetzes nach.</li>
+                    <li>Weise mithilfe einer Wahrheitstabelle die Tautologie einer Form des Distributivgesetzes nach.</li>
+                    <li>Weise mithilfe einer Wahrheitstabelle die Tautologie einer Form der De-Morgan’schen Regeln nach.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.5.2: Gesetze zuordnen (LearningApps) <span class="niveau">AFB I</span></summary>
+                <iframe src="https://learningapps.org/view28335885" style="border:0px;width:100%;max-width:1000px;height:500px" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+            </details>
+        </div>

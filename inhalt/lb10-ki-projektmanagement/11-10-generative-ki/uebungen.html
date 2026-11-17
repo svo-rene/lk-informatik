@@ -1,0 +1,71 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/11-10_generative_ki_ngramm.ipynb" download>11-10_generative_ki_ngramm.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (JupyterLite der Schule; falls nicht erreichbar: <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.10.2: Diskussion – Hilfsmittel oder Täuschung? <span class="niveau">AFB III</span></summary>
+                <p>Diskutiert in der Gruppe: Wo verläuft für euch die Grenze zwischen „KI als sinnvolles Hilfsmittel beim Lernen nutzen“ und „sich mit KI-Hilfe um eigenes Verständnis drücken“? Findet mindestens zwei konkrete Beispiele für jede Seite.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.10.4: Ein Bigramm-Modell von Hand <span class="niveau">AFB II</span></summary>
+                <p>Ein Bigramm-Modell (wie in Beispiel 2) wird mit diesen fünf Sätzen trainiert. Satzzeichen sind eigene Tokens.</p>
+                <pre><code>ich mag mathe .
+ich mag informatik .
+ich mag informatik sehr .
+du magst mathe .
+du magst informatik .</code></pre>
+                <ol>
+                    <li>Stelle für die Wörter „mag“, „magst“ und „informatik“ eine Tabelle auf: Welche Wörter folgen jeweils wie oft, und mit welcher Wahrscheinlichkeit sagt das Modell sie vorher?</li>
+                    <li>Erzeuge ausgehend von „ich“ einen Satz, indem du immer das wahrscheinlichste nächste Wort wählst, bis „.“ erscheint.</li>
+                    <li>Das Modell wählt jetzt gewichtet zufällig (Sampling). Berechne die Wahrscheinlichkeit, dass es ausgehend von „ich“ genau den Satz „ich mag informatik sehr .“ erzeugt. Berechne ebenso die Wahrscheinlichkeiten der beiden anderen Sätze, die mit „ich“ beginnen können, und kontrolliere dein Ergebnis.</li>
+                    <li>Berechne die Wahrscheinlichkeit für „du magst informatik sehr .“ ausgehend von „du“. Prüfe, ob dieser Satz im Trainingstext vorkommt, und erkläre, was das für die Frage bedeutet, ob ein Sprachmodell „nur abschreibt“.</li>
+                </ol>
+                <p class="tipp">Die Wahrscheinlichkeit eines ganzen Satzes ergibt sich, wenn man die Wahrscheinlichkeiten aller einzelnen Auswahlschritte multipliziert (Pfadregel wie beim Baumdiagramm).</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.10.5: Wie Bias in den Text gelangt <span class="niveau">AFB II–III</span></summary>
+                <p>Ein kleines Sprachmodell für eine Bewerbungs-App soll Lebenslauf-Sätze vervollständigen. In seinen Trainingstexten kommen diese Fortsetzungen vor:</p>
+                <table>
+                    <thead>
+                        <tr><th>bisheriger Text</th><th>Fortsetzung</th><th>Anzahl im Trainingstext</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td rowspan="2">„… arbeitet in der Softwareentwicklung als“</td><td>„Informatiker“</td><td>160</td></tr>
+                        <tr><td>„Informatikerin“</td><td>40</td></tr>
+                        <tr><td rowspan="2">„… arbeitet im Krankenhaus als“</td><td>„Pflegerin“</td><td>135</td></tr>
+                        <tr><td>„Pfleger“</td><td>15</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Berechne die Wahrscheinlichkeiten, die das Modell aus diesen Häufigkeiten lernt.</li>
+                    <li>Die App erzeugt 1000 Texte mit „… arbeitet in der Softwareentwicklung als“. Gib an, wie viele davon (ungefähr) „Informatikerin“ enthalten, wenn das Modell (a) immer das wahrscheinlichste Wort wählt und (b) Sampling verwendet.</li>
+                    <li>Jemand meint: „Das Modell bildet doch nur die Wirklichkeit ab.“ Beurteile diese Aussage. Berücksichtige dabei dein Ergebnis aus Teil 2.</li>
+                    <li>Schlage zwei Maßnahmen vor, mit denen die Entwickler den Bias verringern könnten, und nenne zu einer Maßnahme einen möglichen Nachteil.</li>
+                </ol>
+            </details>
+        </div>

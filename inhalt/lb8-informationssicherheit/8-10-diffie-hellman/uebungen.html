@@ -1,0 +1,47 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.10.3: Diffie-Hellman implementieren <span class="niveau">AFB II</span></summary>
+                <p>Implementiere die Schlüsselvereinbarung mit dem Diffie-Hellman-Verfahren. Die geheimen Zahlen sollen mit dem Modul <code>secrets</code> zufällig gewählt werden.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.10.4: Man-in-the-Middle nachrechnen <span class="niveau">AFB III</span></summary>
+                <p>Es gilt p = 23 und g = 5. Alice wählt a = 6, Bob wählt b = 15.</p>
+                <ol type="a">
+                    <li>Berechne A, B und den gemeinsamen Schlüssel ohne Angreifer.</li>
+                    <li>Mallory wählt m = 13 und tauscht A und B jeweils gegen M aus. Berechne die Schlüssel, die Alice und Bob nun jeweils verwenden, und zeige, dass Mallory beide kennt.</li>
+                    <li>Beurteile, ob eine größere Primzahl p den Angriff aus b) verhindert, und nenne eine wirksame Gegenmaßnahme.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.10.5: Ist g ein Erzeuger? <span class="niveau">AFB II</span></summary>
+                <p>Alice und Bob wollen mit p = 13 arbeiten und überlegen, ob sie g = 2 oder g = 3 nehmen.</p>
+                <ol type="a">
+                    <li>Berechne die Potenzen g<sup>1</sup>, g<sup>2</sup>, …, g<sup>12</sup> modulo 13 für beide Basen.</li>
+                    <li>Entscheide, welche Basis ein Erzeuger ist.</li>
+                    <li>Alice und Bob verwenden trotzdem g = 3. Gib alle Werte an, die der gemeinsame Schlüssel s annehmen kann, und erläutere, was das für einen Angreifer bedeutet.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.10.6: Der Lauscher rechnet nach <span class="niveau">AFB II</span></summary>
+                <p>Eve hört einen Diffie-Hellman-Austausch mit p = 29 und g = 2 ab. Sie sieht A = 18 und B = 23.</p>
+                <ol type="a">
+                    <li>Bestimme durch systematisches Probieren Alices geheime Zahl a und berechne den gemeinsamen Schlüssel.</li>
+                    <li>Schreibe eine Python-Funktion <code>diskreter_log(g, A, p)</code>, die das kleinste a ≥ 1 mit g<sup>a</sup> mod p = A durch Probieren findet und <code>None</code> zurückgibt, wenn es keines gibt.</li>
+                    <li>Weise die Funktion mit Testfällen nach (erwartete und tatsächliche Ausgabe): <code>diskreter_log(2, 18, 29)</code> → dein Ergebnis aus a); <code>diskreter_log(2, 8, 11)</code> → <code>3</code>; <code>diskreter_log(3, 2, 13)</code> → <code>None</code>.</li>
+                    <li>Begründe, warum Eves Programm bei einer Primzahl mit 2048 Bit nicht mehr zum Ziel führt.</li>
+                </ol>
+            </details>
+        </div>

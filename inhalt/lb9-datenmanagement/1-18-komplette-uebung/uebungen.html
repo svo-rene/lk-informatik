@@ -1,0 +1,153 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.18.3: Die Datenbank im DB Browser anlegen – über die Oberfläche <span class="niveau">AFB II</span></summary>
+                <p>
+                    Setze dein Relationenmodell im DB Browser für SQLite um: Lege eine neue Datenbank
+                    <code>supermarkt.db</code> an und erstelle alle Tabellen mit Primär- und
+                    Fremdschlüsseln <strong>über die Oberfläche</strong>, also über den Dialog
+                    „Tabelle definieren“ – nicht per SQL. Füge anschließend zu jeder Tabelle mindestens
+                    vier Testdatensätze ein, ebenfalls über die Oberfläche.
+                </p>
+                <p>
+                    Sorge dafür, dass mindestens ein Produkt von <em>keinem</em> Lieferanten stammt oder nie
+                    verkauft wurde – solche Fälle brauchst du in Aufgabe 1.18.4.
+                </p>
+                <p>
+                    <strong>Zum Schluss:</strong> Lass dir anzeigen, welches SQL der DB Browser aus deinen
+                    Klicks erzeugt hat, und vergleiche es mit deinem Relationenmodell. Stimmen Datentypen,
+                    Primär- und Fremdschlüssel überein?
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.18.4: SQL-Abfragen zur eigenen Datenbank <span class="niveau">AFB II</span></summary>
+                <p>
+                    Nachdem du deine Datenbank erfolgreich erstellt hast, formuliere folgende Abfragen und
+                    führe sie im DB Browser aus:
+                </p>
+                <ul>
+                    <li><strong>Abfrage 1:</strong> Zeige alle Produkte an, die von einem bestimmten Lieferanten geliefert wurden.</li>
+                    <li><strong>Abfrage 2:</strong> Zeige alle Verkäufe an, die in einem bestimmten Zeitraum durchgeführt wurden.</li>
+                    <li><strong>Abfrage 3:</strong> Finde den Lieferanten, der die meisten verschiedenen Produkte liefert.</li>
+                    <li><strong>Abfrage 4:</strong> Zeige die Gesamtanzahl der Verkäufe für jedes Produkt an.</li>
+                    <li><strong>Abfrage 5:</strong> Zeige alle Produkte an, die noch <em>nie</em> verkauft wurden.</li>
+                </ul>
+                <p>
+                    Notiere zu jeder Abfrage, wie viele Zeilen zurückkommen – und ob das zu deinen Testdaten passt.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.18.5: Die vorhandene Datenbank einrichten und verstehen <span class="niveau">AFB I</span></summary>
+                <p>
+                    Lies die Datei <code>onlineshop_start.sql</code> in eine neue Datenbank
+                    <code>onlineshop.db</code> ein und verschaffe dir einen Überblick. Beantworte schriftlich:
+                </p>
+                <ol>
+                    <li>Wie viele Zeilen enthält jede der drei Tabellen?</li>
+                    <li>Wo steckt der einzige Fremdschlüssel – und welche Beziehung setzt er um?</li>
+                    <li>Gibt es Kundinnen oder Kunden ohne Bestellung? Schreibe die passende Abfrage.</li>
+                    <li>Eine wichtige Information lässt sich mit diesen drei Tabellen <em>nicht</em>
+                        beantworten: <em>Welche Produkte gehören zu einer Bestellung?</em> Erkläre, warum –
+                        und welche Art von Beziehung hier fehlt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.18.6: Die fehlende Relation ergänzen und aus der CSV füllen <span class="niveau">AFB II</span></summary>
+                <p>
+                    Die Datei <code>bestellpositionen.csv</code> enthält genau die fehlenden Daten. Sie ist
+                    mit Semikolon getrennt und sieht so aus:
+                </p>
+<pre><code>BestellNr;ProduktNr;Menge
+5001;109;1
+5001;102;1
+5002;109;1
+...</code></pre>
+                <ol>
+                    <li>Begründe, warum diese Daten eine <strong>eigene Relation</strong> brauchen und nicht
+                        einfach als Spalten in <code>Bestellung</code> passen.</li>
+                    <li>Lege die Zieltabelle <code>Bestellposition</code> mit passenden Datentypen,
+                        zusammengesetztem Primärschlüssel und beiden Fremdschlüsseln an.</li>
+                    <li>Importiere die CSV-Datei und übernimm die Daten in deine Zieltabelle.</li>
+                    <li>Kontrolliere: <code>SELECT COUNT(*) FROM Bestellposition;</code> muss
+                        <strong>20</strong> ergeben.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.18.7: Auswertungen über alle vier Tabellen <span class="niveau">AFB II</span></summary>
+                <p>
+                    Jetzt ist die Datenbank vollständig. Formuliere die folgenden Abfragen und notiere jeweils
+                    das Ergebnis:
+                </p>
+                <ul>
+                    <li><strong>Abfrage 1:</strong> Alle Bestellungen mit Kundenname und Datum.</li>
+                    <li><strong>Abfrage 2:</strong> Der Gesamtwert je Bestellung (Menge × Preis), absteigend
+                        sortiert. Welche Bestellung ist die teuerste?</li>
+                    <li><strong>Abfrage 3:</strong> Die Gesamtmenge je Produkt. Welches Produkt wurde am
+                        häufigsten bestellt?</li>
+                    <li><strong>Abfrage 4:</strong> Der Umsatz je Ort.</li>
+                    <li><strong>Abfrage 5:</strong> Alle Produkte, die nie bestellt wurden.</li>
+                    <li><strong>Zusatz:</strong> Der Gesamtumsatz des Shops. Zur Selbstkontrolle: Er beträgt
+                        <strong>1161,64 €</strong>.</li>
+                </ul>
+                <p>
+                    Überlege bei jeder Abfrage zuerst: Welche Tabellen brauche ich, und über welche Spalten
+                    hängen sie zusammen?
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.18.8: Eine eigene CSV-Datei anlegen und importieren <span class="niveau">AFB III</span></summary>
+                <p>
+                    Der Shop möchte Kundenbewertungen erfassen: Zu einer Bestellung gibt es eine Bewertung
+                    mit Sternen von 1 bis 5 und einem kurzen Kommentar.
+                </p>
+                <ol>
+                    <li>Überlege zuerst das Relationenschema: Welche Spalten braucht
+                        <code>Bewertung</code>, was ist der Primärschlüssel, was der Fremdschlüssel? Welche
+                        Kardinalität hat die Beziehung zu <code>Bestellung</code>?</li>
+                    <li>Erstelle eine Datei <code>bewertungen.csv</code> mit einer Kopfzeile und
+                        <strong>mindestens sechs</strong> Bewertungen. Verwende nur BestellNummern, die es in
+                        der Datenbank wirklich gibt (5001 bis 5012).</li>
+                    <li>Lege die Tabelle <code>Bewertung</code> an und importiere deine Datei nach demselben
+                        Verfahren wie in Aufgabe 1.18.6.</li>
+                    <li>Prüfe mit einer Abfrage, ob alle deine Bewertungen zu einer vorhandenen Bestellung
+                        gehören.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.18.9: Auswertung mit den eigenen Daten <span class="niveau">AFB III</span></summary>
+                <p>
+                    Formuliere drei Abfragen, die <strong>nur</strong> mit deiner neuen Tabelle möglich sind,
+                    zum Beispiel:
+                </p>
+                <ul>
+                    <li>Die durchschnittliche Sternezahl über alle Bewertungen.</li>
+                    <li>Die durchschnittliche Sternezahl je Ort – dafür brauchst du drei Tabellen.</li>
+                    <li>Alle Bestellungen mit weniger als drei Sternen, zusammen mit Kundenname und
+                        Bestellwert.</li>
+                </ul>
+                <p>
+                    <strong>Abschlussfrage:</strong> Deine Bewertungstabelle ist klein. Ab welcher Datenmenge
+                    wäre es ein Problem, dass du die CSV-Datei von Hand erstellt hast – und was würde man
+                    stattdessen tun?
+                </p>
+            </details>
+        </div>

@@ -1,0 +1,207 @@
+<p>Die Chomsky-Hierarchie ist ein Modell zur Klassifikation formaler Grammatiken und Sprachen anhand der Form ihrer Produktionsregeln. Sie hilft uns zu verstehen, welche Sprache durch welche Automaten erkannt werden kann und welche Grammatiktypen welche Ausdrucksstärke besitzen.</p>
+
+<h2>Überblick: Sprachtypen und Maschinen</h2>
+
+<table>
+<thead>
+<tr>
+<th>Typ</th>
+<th>Sprachklasse</th>
+<th>Grammatik</th>
+<th>Akzeptierender Automat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Typ 0</td>
+<td>rekursiv aufzählbar</td>
+<td>unbeschränkt</td>
+<td>Turingmaschine</td>
+</tr>
+<tr>
+<td>Typ 1</td>
+<td>kontextsensitive Sprache</td>
+<td>kontextsensitiv (monoton)</td>
+<td>linear beschränkte Turingmaschine (LBA)</td>
+</tr>
+<tr>
+<td>Typ 2</td>
+<td>kontextfreie Sprache</td>
+<td>kontextfrei</td>
+<td>(nichtdeterministischer) Kellerautomat</td>
+</tr>
+<tr>
+<td>Typ 3</td>
+<td>reguläre Sprache</td>
+<td>rechts- bzw. linkslinear</td>
+<td>endlicher Automat (DEA/NEA)</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Die vier Grammatiktypen im Detail</h2>
+
+<h3>Typ 3 – Reguläre Grammatik</h3>
+
+<p>Dies sind die einfachsten Grammatiken. Sie erzeugen reguläre Sprachen, die auch durch reguläre Ausdrücke beschrieben werden können.</p>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: ε-Regeln in regulären Grammatiken</summary>
+<p>Viele Schulbücher und Werkzeuge (z.&nbsp;B. FLACI) lassen bei regulären Grammatiken zusätzlich Regeln der Form A → ε für beliebige Nichtterminale zu. Die Klasse der erzeugbaren Sprachen bleibt dieselbe, denn solche Regeln lassen sich immer entfernen (siehe Kapitel 6.12). In den Aufgaben dieses Kurses sind beide Varianten zulässig, wenn du sie kenntlich machst.</p>
+</details>
+</div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel: S → aS | a<br>Diese Grammatik erzeugt die Sprache {a<sup>n</sup> | n ≥ 1}.<br>Anwendung: einfache Formatprüfungen, z.&nbsp;B. Postleitzahlen oder E-Mail-Format</summary>
+            </details>
+        </div>
+
+<h3>Typ 2 – Kontextfreie Grammatik</h3>
+
+<p>Diese Grammatiken erzeugen kontextfreie Sprachen. Mit ihnen wird die Syntax von Programmiersprachen beschrieben.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel: S → aSb | ab<br>Diese Grammatik erzeugt die Sprache {a<sup>n</sup>b<sup>n</sup> | n ≥ 1}.<br>Anwendung: Compiler, verschachtelte Ausdrücke (Klammern, <code>if</code> in <code>if</code>)</summary>
+            </details>
+        </div>
+
+<h3>Typ 1 – Kontextsensitive Grammatik</h3>
+
+<p>Diese Grammatiken erzeugen kontextsensitive Sprachen. Sie sind weniger mächtig als Typ 0, aber mächtiger als Typ 2.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel: Die Grammatik mit den Regeln</summary>
+<pre>S  → aSBC | aBC
+CB → BC
+aB → ab
+bB → bb
+bC → bc
+cC → cc</pre>
+<p>erzeugt die Sprache {a<sup>n</sup>b<sup>n</sup>c<sup>n</sup> | n ≥ 1}. Ableitung von <code>aabbcc</code>:</p>
+<p><code>S ⇒ aSBC ⇒ aaBCBC ⇒ aaBBCC ⇒ aabBCC ⇒ aabbCC ⇒ aabbcC ⇒ aabbcc</code><br>
+(Regeln der Reihe nach: S → aSBC, S → aBC, CB → BC, aB → ab, bB → bb, bC → bc, cC → cc)</p>
+<p>Idee: Zuerst werden gleich viele a, B und C erzeugt, dann sortiert CB → BC alle B vor die C, anschließend werden B und C von links nach rechts in Terminale umgewandelt.<br>
+Die Regel CB → BC ist monoton, hat aber nicht die Form αAβ → αγβ. Man kann sie durch CB → XB, XB → XC, XC → BC mit einem neuen Nichtterminal X ersetzen.<br>
+Anwendung: v.&nbsp;a. theoretisch, z.&nbsp;B. wenn drei Teile eines Wortes gleich lang sein müssen.</p>
+            </details>
+        </div>
+
+<h3>Typ 0 – Unbeschränkte Grammatik</h3>
+
+<p>Dies sind die mächtigsten Grammatiken. Sie können alle rekursiv aufzählbaren Sprachen erzeugen.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel:</summary>
+<ul>
+<li><strong>Grammatik:</strong> S → aSB | ε, aB → Ba, B → ε enthält verkürzende Regeln (B → ε) und ist deshalb nur vom Typ 0. (Die erzeugte Sprache {a<sup>n</sup> | n ≥ 0} ist trotzdem regulär – der Typ einer Grammatik sagt nur etwas über die Form ihrer Regeln aus.)</li>
+<li><strong>Sprache, die vom Typ 0, aber nicht vom Typ 1 ist:</strong> das Halteproblem H = {⟨M⟩#w | die Turingmaschine M hält bei Eingabe w}. Eine Turingmaschine kann alle Wörter von H aufzählen (rekursiv aufzählbar), aber H ist nicht entscheidbar. Da jede kontextsensitive Sprache entscheidbar ist, gehört H nicht zu Typ 1.</li>
+</ul>
+<p>Anwendung: theoretische Informatik, Berechenbarkeit und Entscheidbarkeit (siehe Kapitel 6.13)</p>
+            </details>
+        </div>
+
+<h2>Grammatiken einordnen – Schritt für Schritt</h2>
+
+<p>Beim Einordnen prüfst du die Bedingungen vom allgemeinsten Typ zum speziellsten: Ist keine Regel verkürzend (Typ 1)? Steht links immer genau ein Nichtterminal (Typ 2)? Haben alle Regeln die Form A → aB bzw. A → a, durchgehend rechts- oder durchgehend linkslinear (Typ 3)?</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> G = ({S, B}, {a, b, c}, P, S) mit P: S → aB, B → bB | cS | c.</p>
+<ol>
+<li><strong>Verkürzende Regeln?</strong> Jede linke Seite hat ein Symbol, jede rechte mindestens eins. <em>Warum?</em> Damit ist G mindestens vom Typ 1.</li>
+<li><strong>Linke Seiten prüfen:</strong> S, B, B, B – immer genau ein Nichtterminal. <em>Warum?</em> Damit ist G mindestens vom Typ 2.</li>
+<li><strong>Rechte Seiten prüfen:</strong> aB, bB, cS haben die Form „Terminal + Nichtterminal am Ende“, c ist ein einzelnes Terminal. Alle Regeln sind rechtslinear. <em>Warum?</em> Das ist genau die Typ-3-Bedingung.</li>
+<li><strong>ε-Regeln?</strong> Keine vorhanden, also keine Zusatzbedingung zu prüfen.</li>
+</ol>
+<p><strong>Ergebnis:</strong> G ist vom Typ 3 (regulär).</p>
+<p><strong>Kontrolle:</strong> S ⇒ aB ⇒ abB ⇒ abcS ⇒ abcaB ⇒ abcac – bei jeder Ableitung steht genau ein Nichtterminal ganz rechts, wie bei einem Automaten, der Zeichen für Zeichen liest.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+<p><strong>Ausgangssituation:</strong> G = ({S, A, B}, {a, b}, P, S) mit P: S → aA | ε, A → Bb | b, B → aB | a. Gesucht sind der Typ der Grammatik und der Typ der erzeugten Sprache.</p>
+<ol>
+<li><strong>Verkürzende Regeln?</strong> Nur S → ε. Sie ist erlaubt, weil S auf keiner rechten Seite vorkommt. <em>Warum?</em> Das ist die einzige zulässige Ausnahme ab Typ 1.</li>
+<li><strong>Linke Seiten prüfen:</strong> immer genau ein Nichtterminal → mindestens Typ 2.</li>
+<li><strong>Rechte Seiten prüfen – die Falle:</strong> S → aA und B → aB sind rechtslinear, A → Bb ist aber <em>linkslinear</em> (Nichtterminal vorn). Jede Regel für sich sieht „regulär“ aus, doch rechts- und linkslineare Regeln dürfen nicht gemischt werden. <em>Warum?</em> Durch das Mischen kann man Sprachen wie a<sup>n</sup>b<sup>n</sup> erzeugen, die nicht regulär sind.</li>
+<li><strong>Typ der Grammatik:</strong> G ist vom Typ 2, nicht vom Typ 3.</li>
+<li><strong>Sprache bestimmen:</strong> B erzeugt a<sup>k</sup> (k ≥ 1), also erzeugt A die Wörter b und a<sup>k</sup>b, kurz a<sup>j</sup>b mit j ≥ 0. Mit S → aA und S → ε folgt L(G) = {ε} ∪ {a<sup>n</sup>b | n ≥ 1}.</li>
+<li><strong>Reguläre Grammatik für dieselbe Sprache suchen:</strong> S → aA | ε, A → aA | b. Hier erzeugt A ebenfalls a<sup>j</sup>b, alle Regeln sind rechtslinear, S kommt rechts nicht vor.</li>
+</ol>
+<p><strong>Ergebnis:</strong> Die gegebene Grammatik ist vom Typ 2, die erzeugte <em>Sprache</em> ist aber regulär (Typ 3), denn es gibt eine Typ-3-Grammatik für sie.</p>
+<p><strong>Kontrolle:</strong> <code>aab</code> in G: S ⇒ aA ⇒ aBb ⇒ aab; in der neuen Grammatik: S ⇒ aA ⇒ aaA ⇒ aab. <code>b</code> ist in keiner der beiden Grammatiken ableitbar, denn jedes nichtleere Wort beginnt mit S → aA.</p>
+            </details>
+        </div>
+
+<p><iframe width="960" height="380" style="display: block; margin: 0 auto 0.5em auto;" src="../material/h5p/grammatik_klassen.html" frameborder="0" allowfullscreen="allowfullscreen"> </iframe></p>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: Welcher Typ steckt wo?</summary>
+<p><strong>Alltag:</strong> Die Suchfunktion mit regulären Ausdrücken in Editoren wie Notepad++ oder VS Code und die Prüfung von Formulareingaben (PLZ, Datum, Telefonnummer) arbeiten mit Typ-3-Sprachen. Die Klammerprüfung deiner Entwicklungsumgebung benötigt Typ 2.</p>
+<p><strong>Beruf:</strong> Im Compilerbau zerlegt ein Lexer den Quelltext mit regulären Sprachen (Typ 3) in Token, ein Parser prüft die Struktur mit einer kontextfreien Grammatik (Typ 2). Werkzeuge wie ANTLR erzeugen beides automatisch. Eigenschaften wie „Variable vor Benutzung deklariert“ gehen über Typ 2 hinaus und werden von der semantischen Analyse geprüft. Informatikerinnen und Informatiker in der Forschung (z.&nbsp;B. an der TU Dresden, Fakultät Informatik) untersuchen, welche Probleme überhaupt entscheidbar sind.</p>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Merke:</strong><br>Die Chomsky-Hierarchie besteht aus vier Ebenen (Typ 0 bis Typ 3). Je kleiner die Typnummer, desto weniger ist die Form der Regeln eingeschränkt und desto mehr Sprachen lassen sich beschreiben – gleichzeitig wird die Analyse schwieriger.<br>Für die <strong>Sprachklassen</strong> 𝓛<sub>i</sub> (Menge aller Sprachen vom Typ i) gilt die echte Inklusion:<br><code>𝓛<sub>3</sub> ⊊ 𝓛<sub>2</sub> ⊊ 𝓛<sub>1</sub> ⊊ 𝓛<sub>0</sub></code><br>Jede reguläre Sprache ist also kontextfrei, aber es gibt kontextfreie Sprachen, die nicht regulär sind (z.&nbsp;B. {a<sup>n</sup>b<sup>n</sup>}), usw.</p>
+<p>Eine Sprache ist vom Typ i, wenn es <em>eine</em> Grammatik vom Typ i gibt, die sie erzeugt. Eine Grammatik ordnet man dem speziellsten Typ zu, dessen Bedingungen alle ihre Regeln erfüllen.</p>
+</div>
+
+<div class="merke">
+<p><strong>Regeln für Typ 3 (rechtslinear):</strong><br>Alle Produktionsregeln haben die Form A → aB oder A → a, wobei A und B Nichtterminale sind und a ein Terminal ist. Zusätzlich ist die Regel S → ε erlaubt, sofern das Startsymbol S auf keiner rechten Seite vorkommt.<br>Linkslineare Grammatiken (A → Ba oder A → a) sind ebenfalls regulär; beide Formen dürfen aber nicht gemischt werden.</p>
+</div>
+
+<div class="merke">
+<p><strong>Regeln für Typ 2:</strong><br>Alle Produktionsregeln haben die Form A → γ, wobei A ein einzelnes Nichtterminal ist und γ eine beliebige (auch leere) Zeichenkette aus Terminalen und Nichtterminalen.</p>
+</div>
+
+<div class="merke">
+<p><strong>Regeln für Typ 1:</strong><br>Alle Produktionsregeln haben die Form αAβ → αγβ, wobei A ein Nichtterminal ist, α und β (möglicherweise leere) Zeichenketten aus Terminalen und Nichtterminalen sind und γ eine nichtleere Zeichenkette ist. A darf also nur im „Kontext“ α…β ersetzt werden. Die einzige Ausnahme ist die Regel S → ε, sofern S auf keiner rechten Seite vorkommt.</p>
+<p><strong>Gleichwertige Definition (monoton, „nicht verkürzend“):</strong> Alle Regeln α → β erfüllen |α| ≤ |β| (die rechte Seite ist nie kürzer als die linke), wieder mit der Ausnahme S → ε.<br>Beide Definitionen ergeben <strong>dieselbe Sprachklasse</strong>: Jede monotone Regel lässt sich durch mehrere kontextsensitive Regeln ersetzen. In den Aufgaben prüfen wir deshalb meist einfach, ob eine Regel verkürzend ist.</p>
+</div>
+
+<div class="merke">
+<p><strong>Regeln für Typ 0:</strong><br>Es gibt keine Einschränkungen für die Produktionsregeln. Sie haben die Form α → β, wobei α und β beliebige Zeichenketten aus Terminalen und Nichtterminalen sind und α mindestens ein Nichtterminal enthält. Insbesondere sind <strong>verkürzende</strong> Regeln wie AB → A oder aB → ε erlaubt.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.6.1: Grammatiken einordnen <span class="niveau">AFB II</span></summary>
+<p>Ordne die folgenden Grammatiken den entsprechenden Typen der Chomsky-Hierarchie zu und begründe deine Entscheidung:</p>
+<ol>
+<li>G1: S → aSb | ε</li>
+<li>G2: S → aA, A → aA | b</li>
+<li>G3: S → aSBC | aBC, CB → BC, aB → ab, bB → bb, bC → bc, cC → cc</li>
+<li>G4: AB → BA, S → aSBC | abc</li>
+<li>G5 = ({S, A, B, C, D}, {a, b, c, d}, P, S), wobei P folgende Produktionsregeln enthält: S → ABCD; A → aAB | a; B → bBC | b; C → cCD | c; D → d | Dd</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.6.2: Grammatik analysieren <span class="niveau">AFB II/III</span></summary>
+<p>Gegeben ist die Grammatik G = ({S, A, B}, {a, b}, P, S) mit den folgenden Produktionsregeln:</p>
+<pre>S → aB | bA
+A → a | aS | bAA
+B → b | bS | aBB</pre>
+<p>a) Entscheide <strong>begründet</strong>, welchem <strong>Chomsky-Typ</strong> diese Grammatik angehört.</p>
+<p>b) Überführe die Grammatik <strong>in eine Notation, die sich in FLACI importieren lässt</strong>.</p>
+<p>c) Gib die <strong>vollständige Ableitung</strong> des Worts <code>babbaa</code> an. Notiere jeden Ableitungsschritt.</p>
+<p>d) Entscheide <strong>begründet</strong>, ob das Wort <code>ababaabb</code> zur Sprache von G gehört. Falls ja, gib eine Ableitung an.</p>
+<p>e) Gib ein Wort über dem Alphabet <code>{a, b}</code> an, das <strong>nicht</strong> zur Sprache von G gehört. Begründe <strong>nachvollziehbar</strong>, warum keine gültige Ableitung existiert.</p>
+</details>
+</div>

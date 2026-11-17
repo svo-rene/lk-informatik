@@ -1,0 +1,41 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.3.5: Fehler finden – drei Fehler in fünf Zeilen <span class="niveau">AFB III</span></summary>
+            <p>Mia möchte aus <a href="../notebooks/schueler.csv" download>schueler.csv</a> alle Schüler*innen mit einer Note besser als 2,0
+               ausgeben. Ihr Programm bricht ab:</p>
+            <pre><code class="language-python">import csv
+with open('schueler.csv', encoding='utf-8') as f:
+    reader = csv.DictReader(f, delimiter=',')
+    for row in reader:
+        if row['Note'] &lt; 2.0:
+            print(row['Name'])</code></pre>
+            <ol>
+                <li>Bestimme ohne Computer, mit welcher Fehlermeldung das Programm abbricht, und erkläre die Ursache. Gib dazu an, wie das
+                    erste Dictionary <code>row</code> tatsächlich aussieht.</li>
+                <li>Mia behebt nur diesen Fehler. Sage den nächsten Fehler voraus.</li>
+                <li>Gib das korrigierte Programm an, ergänze den fehlenden empfohlenen Parameter und nenne die erwartete Ausgabe als Testfall.</li>
+            </ol>
+            <p class="tipp">Schau dir die Kopfzeile der Datei an und überlege, was der DictReader mit dem falschen Trennzeichen daraus macht.</p>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.3.6: Eine eigene kurze Umfrage planen <span class="niveau">AFB III</span></summary>
+            <p>Bevor Daten eingelesen werden, müssen sie zielgerichtet erfasst werden. Die Schülervertretung möchte wissen, wie zufrieden
+               die Oberstufe mit den Lernräumen der Schule ist, und bittet dich, eine kurze Online-Umfrage zu entwerfen, deren Ergebnis
+               später als CSV-Datei mit Python ausgewertet wird (vgl. Seite 3.9).</p>
+            <ol>
+                <li><strong>Ziel und Fragen:</strong> Formuliere die Leitfrage und vier bis sechs Fragen, die zur Leitfrage passen.</li>
+                <li><strong>Skalen:</strong> Lege für jede Frage den Antworttyp fest (z.&nbsp;B. Skala 1–5, Ja/Nein, Auswahlliste, Freitext) und
+                    begründe die Wahl im Hinblick auf die spätere Auswertung.</li>
+                <li><strong>Datenformat:</strong> Gib die Kopfzeile der CSV-Datei und zwei erfundene Beispielzeilen an. Lege Trennzeichen,
+                    Kodierung und die Darstellung fehlender Antworten fest.</li>
+                <li><strong>Datenschutz:</strong> Begründe, welche Angaben du bewusst <em>nicht</em> erhebst, wie die Teilnehmenden informiert
+                    werden und wann die Rohdaten gelöscht werden.</li>
+                <li><strong>Prüfen:</strong> Beurteile deinen Entwurf: Welche Verzerrungen (z.&nbsp;B. wer antwortet, wer nicht) sind zu erwarten?</li>
+            </ol>
+        </details>
+    </div>

@@ -1,0 +1,45 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+                    <details>
+                        <summary>
+                            Aufgabe 1.4.5: Fehler finden – drei Abfragen, drei Fehler <span class="niveau">AFB III</span>
+                        </summary>
+                        <p>Die Verwaltung hat drei Abfragen geschrieben. Keine liefert, was gemeint war. Gib jeweils an, was die
+                           Abfrage tatsächlich liefert (Anzahl der Zeilen, bei weniger als fünf Zeilen auch die Namen),
+                           erkläre den Fehler und korrigiere die Abfrage.</p>
+                        <ol>
+                            <li>Gemeint: alle mit dem Nachnamen Müller oder Schmidt, die einen Schnitt unter 3.0 haben.
+                                <pre><code>SELECT Vorname, Nachname, Notendurchschnitt
+FROM Studenten
+WHERE Nachname = 'Müller' OR Nachname = 'Schmidt' AND Notendurchschnitt &lt; 3.0;</code></pre></li>
+                            <li>Gemeint: alle, deren Vorname mit „L“ beginnt.
+                                <pre><code>SELECT Vorname, Nachname
+FROM Studenten
+WHERE Vorname = 'L%';</code></pre></li>
+                            <li>Gemeint: alle mit einem Schnitt zwischen 2.0 und 2.5, beide Grenzen eingeschlossen.
+                                <pre><code>SELECT Vorname, Nachname, Notendurchschnitt
+FROM Studenten
+WHERE Notendurchschnitt &gt; 2.0 AND Notendurchschnitt &lt; 2.5;</code></pre></li>
+                        </ol>
+                    </details>
+                </div>
+
+<div class="aufgabe">
+                    <details>
+                        <summary>
+                            Aufgabe 1.4.6: Wenn die Subquery mehr als einen Wert liefert <span class="niveau">AFB III</span>
+                        </summary>
+                        <p>Gesucht sind alle Studierenden, die denselben Nachnamen tragen wie eine Person mit dem Vornamen „Lisa“.
+                           Tom schreibt:</p>
+                        <pre><code>SELECT Vorname, Nachname
+FROM Studenten
+WHERE Nachname = (SELECT Nachname FROM Studenten WHERE Vorname = 'Lisa');</code></pre>
+                        <ol>
+                            <li>Führe zuerst nur die innere Abfrage aus. Was fällt dir auf?</li>
+                            <li>Führe dann die ganze Abfrage aus. SQLite meldet keinen Fehler. Erkläre das Ergebnis.</li>
+                            <li>Beurteile, ob Toms Abfrage korrekt ist, und verbessere sie mit einem Operator aus dem Hinweis
+                                „Zusätzliche SQL-Operatoren“. Gib das Ergebnis der verbesserten Abfrage an.</li>
+                        </ol>
+                    </details>
+                </div>

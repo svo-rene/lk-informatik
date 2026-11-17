@@ -1,0 +1,131 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Suchwege <span class="niveau">AFB I</span></summary>
+                <p>Gib für den Baum aus Beispiel 1 an, mit welchen Knoten <code>suchen</code> bei <code>b.suchen(10)</code> und bei <code>b.suchen(2)</code> nacheinander aufgerufen wird, und was jeweils zurückgegeben wird.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>suchen(10)</code>: Aufruf mit 8 (10 &gt; 8 → rechts), dann mit 10 – gefunden, <code>True</code>. <code>suchen(2)</code>: 8 (2 &lt; 8 → links), 3 (2 &lt; 3 → links), 1 (2 &gt; 1 → rechts, aber rechts von 1 ist kein Kind) – <code>False</code>, ohne weiteren Aufruf. Das Ergebnis wird über alle wartenden Aufrufe nach oben zurückgegeben.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Sortiert und entartet <span class="niveau">AFB I</span></summary>
+                <p>Gib die In-Order-Reihenfolge deines Baums aus Kurz geprüft 2 an. Wie hoch wird ein Suchbaum, in den man 1, 2, 3, 4 in dieser Reihenfolge einfügt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>In-Order: 2, 4, 5, 8 – aufsteigend sortiert. Bei 1, 2, 3, 4 hängt jeder Wert rechts am vorigen: eine Kette mit 4 Knoten und der Höhe 3.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-5-1">
+            <details>
+                <summary>Aufgabe 3.5.1: Suchbaum aufbauen <span class="niveau">AFB I</span></summary>
+                <p>Füge die Werte 15, 8, 20, 3, 11, 17, 25, 9 in dieser Reihenfolge in einen leeren binären Suchbaum ein. Zeichne den Baum, gib den kleinsten und den größten Wert an und notiere die In-Order-Reihenfolge.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-5-2">
+            <details>
+                <summary>Aufgabe 3.5.2: Suchbaum-Eigenschaft prüfen <span class="niveau">AFB II</span></summary>
+                <p>Eine Mitschülerin prüft die Suchbaum-Eigenschaft so: „Für jeden Knoten ist <code>links.wert &lt; wert &lt; rechts.wert</code>.“ Zeige an einem Beispiel, dass diese Prüfung nicht ausreicht, und beschreibe eine korrekte Prüfung.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-5-3">
+            <details>
+                <summary>Aufgabe 3.5.3: Leserverwaltung mit einem Suchbaum <span class="niveau">AFB II–III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>2_baeume/leserverwaltung.py</code> – neu anlegen; <code>leser.csv</code> und <code>leser_sortiert.csv</code> in denselben Ordner auf deinem Rechner, aber <strong>nicht</strong> hochladen<br><strong>Commits:</strong> nach Teil 2: <code>3.5.3 Teil 2: Klassen Leser, Knoten und Suchbaum</code> · nach Teil 3: <code>3.5.3 Teil 3: leser.csv eingelesen</code> · nach Teil 4 und 5: <code>3.5.3 Teil 4: gib_wert mit Fehlermeldungen, 4 Tests ok</code> · nach Teil 7: <code>3.5.3 Teil 7: einfuegen für sortierte Datei angepasst</code></p>
+                <p>Die Stadtbibliothek hat 50 000 Leserausweise. Die Datei <a href="../material/leser.csv">leser.csv</a> enthält pro Zeile Ausweisnummer, Nachname, Vorname, Wohnort und Geburtsjahr, getrennt durch Semikolon.</p>
+                <ol>
+                    <li>Modelliere die Klassen <code>Leser</code>, <code>Knoten</code> und <code>Suchbaum</code> als UML-Klassendiagramm. Alle Attribute sind privat.</li>
+                    <li>Implementiere die Klassen. Die Ausweisnummer ist der Schlüssel. Doppelte Nummern werden nicht eingefügt. Rekursive Methoden schreibst du als eine Methode mit dem Parameter <code>knoten=None</code> (siehe Merke in Schritt 4).</li>
+                    <li>Lies alle Datensätze aus der Datei ein und füge sie in den Baum ein.</li>
+                    <li>Schreibe eine Methode <code>gib_wert(nummer, feldname)</code>, die zum Beispiel für <code>gib_wert(327768, "Wohnort")</code> den Wohnort ausgibt. Unbekannte Nummern und Feldnamen sollen eine verständliche Meldung erzeugen.</li>
+                    <li>Weise die Funktion mit mindestens vier Testfällen nach, darunter zwei Fehlerfälle.</li>
+                    <li>Lade nun <a href="../material/leser_sortiert.csv">leser_sortiert.csv</a>. Die Nummern sind dort aufsteigend sortiert. Beschreibe, was mit einer rekursiven Einfügemethode passiert, und erkläre die Ursache.</li>
+                    <li>Ändere das Einfügen so, dass auch die sortierte Datei funktioniert. Beurteile die Laufzeit beider Dateien.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="primm">Code lesen, untersuchen, abwandeln</h2>
+
+<p>Bevor du selbst programmierst, liest du fertigen Code und findest heraus, was er tut. Das geht in fünf Schritten: <strong>Vorhersagen</strong> (auf Papier, ohne Rechner) → <strong>Ausführen</strong> → <strong>Untersuchen</strong> mit dem Debugger → <strong>Abwandeln</strong> → <strong>Fehler finden</strong>. Rechne mit etwa 25 Minuten. Wie der Debugger funktioniert, steht auf Kursseite 3.4 im Kasten „So debuggst du in Thonny“. Eine Vorhersage, die nicht stimmt, ist kein Fehler – sie zeigt dir genau, was du noch nicht verstanden hast.</p>
+
+<div class="aufgabe" id="primm-3-5">
+            <details open>
+                <summary>PRIMM 3.5: Was macht <code>raetsel</code>? <span class="niveau">AFB I–II</span></summary>
+                <p class="git-datei"><strong>Dateien:</strong> <a href="../material/primm_3-5_raetsel.py" download>primm_3-5_raetsel.py</a> und <a href="../material/primm_3-5_fehler.py" download>primm_3-5_fehler.py</a> in <code>2_baeume/</code> speichern – erst nach Schritt 1 öffnen.</p>
+                <p><strong>1 Vorhersagen</strong> (Papier, ohne Rechner): Was gibt das Programm aus? Zeichne dazu den Suchbaum und markiere, welche Knoten die Methode ansieht.</p>
+                <pre><code class="language-python">    def raetsel(self, grenze, knoten=None):
+        if self.__wurzel is None:
+            return 0
+        if knoten is None:
+            knoten = self.__wurzel
+        anzahl = 0
+        if knoten.links is not None:
+            anzahl = anzahl + self.raetsel(grenze, knoten.links)
+        if knoten.wert &lt; grenze:
+            anzahl = anzahl + 1
+            if knoten.rechts is not None:
+                anzahl = anzahl + self.raetsel(grenze, knoten.rechts)
+        return anzahl
+
+# Suchbaum aus Beispiel 1: 8, 3, 10, 1, 6, 14 eingefügt
+print(b.raetsel(7))</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>Ausgabe: <code>3</code>. Die Methode zählt die Werte, die kleiner als die Grenze sind (1, 3, 6). Von der 8 aus geht es nur nach links, weil rechts davon nur Werte ≥ 8 stehen.</p></details>
+                <p><strong>2 Ausführen:</strong> Öffne <code>primm_3-5_raetsel.py</code> in Thonny, starte mit <kbd>F5</kbd> und vergleiche mit deiner Vorhersage.</p>
+                <p><strong>3 Untersuchen</strong> mit dem Debugger (<kbd>Strg</kbd>&nbsp;+&nbsp;<kbd>F5</kbd>):</p>
+                <ol><li>Welche Knoten werden überhaupt besucht, welche nie?</li><li>Wie viele Aufrufe von <code>raetsel</code> gibt es insgesamt? Gibt es einen Aufruf mit einem fehlenden Kind?</li><li>Warum darf die Methode den rechten Teilbaum weglassen, wenn der Knoten nicht kleiner als die Grenze ist?</li></ol>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>1. Besucht werden 8, 3, 1 und 6, die 10 und die 14 nie. 2. Vier Aufrufe: 8 (von außen), 3, 1, 6. Mit einem fehlenden Kind wird nie aufgerufen, weil die Methode vorher <code>is not None</code> prüft – sonst würde sie wieder an der Wurzel beginnen. 3. Ist ein Knoten ≥ grenze, ist auch alles in seinem rechten Teilbaum ≥ grenze (Suchbaum-Eigenschaft) – dort kann nichts Kleineres liegen.</p></details>
+                <p><strong>4 Abwandeln:</strong></p>
+                <ol type="a"><li>Ändere die Methode so, dass sie zählt, wie viele Werte <em>größer</em> als <code>grenze</code> sind. Welcher Teilbaum darf jetzt wegfallen?</li><li>Ändere sie so, dass Werte kleiner <em>oder gleich</em> der Grenze gezählt werden. Teste mit <code>grenze = 6</code>.</li></ol>
+                <p><strong>5 Fehler finden:</strong> Die rekursive Suche findet 14, aber nicht 6. Gehe die Suche nach 6 mit <kbd>F7</kbd> Schritt für Schritt durch: Welchen Wert liefert der innerste Aufruf, und wo geht dieser Wert verloren? Korrigiere den Fehler.</p>
+                <pre><code class="language-python">    def suchen_rek(self, wert, knoten=None):
+        if self.__wurzel is None:
+            return False
+        if knoten is None:
+            knoten = self.__wurzel
+        if wert == knoten.wert:
+            return True
+        if wert &lt; knoten.wert:
+            if knoten.links is None:
+                return False
+            self.suchen_rek(wert, knoten.links)
+        else:
+            if knoten.rechts is None:
+                return False
+            return self.suchen_rek(wert, knoten.rechts)
+
+print(b.suchen_rek(14))    # True – richtig
+print(b.suchen_rek(6))     # None statt True</code></pre>
+                <p>Lösungen zu Schritt 4 und 5 stehen in der Musterlösung.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.5.5: Laufzeit im mittleren und im schlechtesten Fall <span class="niveau">AFB II</span></summary>
+                <p>Eine Messung mit dem iterativen Suchbaum liefert:</p>
+                <table>
+                    <thead><tr><th>Datei</th><th>Datensätze</th><th>Höhe des Baums</th><th>Vergleiche beim Einfügen aller Datensätze</th></tr></thead>
+                    <tbody>
+                        <tr><td>leser.csv (zufällige Reihenfolge)</td><td>50 000</td><td>35</td><td>953 994</td></tr>
+                        <tr><td>leser_sortiert.csv</td><td>5 000</td><td>4 999</td><td>12 497 500</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Bestimme die kleinstmögliche Höhe eines Binärbaums mit 50 000 Knoten und vergleiche sie mit der gemessenen Höhe 35.</li>
+                    <li>Bestätige den Wert 12 497 500 durch eine Rechnung. Wie viele Vergleiche braucht das Einfügen des i-ten sortierten Datensatzes?</li>
+                    <li>Berechne die Anzahl der Vergleiche, wenn alle 50 000 Datensätze sortiert eingefügt würden.</li>
+                    <li>Ein Vergleich samt Methodenaufrufen dauert in Python etwa 0,5 µs. Schätze die Ladezeiten für alle drei Fälle ab und ordne sie den Komplexitätsklassen O(n · log n) bzw. O(n²) zu.</li>
+                    <li>Gib an, wie viele Vergleiche eine erfolglose Suche in beiden Bäumen höchstens braucht.</li>
+                </ol>
+                <p class="tipp">1 + 2 + … + k = k · (k + 1) / 2</p>
+            </details>
+        </div>

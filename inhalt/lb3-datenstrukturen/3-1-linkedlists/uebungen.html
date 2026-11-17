@@ -1,0 +1,154 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebooks zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es mehrere Jupyter-Notebooks, in denen du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:</p>
+                <ul>
+                    <li><a href="../notebooks/3-1_a_verkettete_liste.ipynb" download>3-1_a_verkettete_liste.ipynb herunterladen</a> – Einführung: Knoten und verkettete Liste selbst implementieren</li>
+                    <li><a href="../notebooks/3-1_b_liste_vs_array.ipynb" download>3-1_b_liste_vs_array.ipynb herunterladen</a> – Vergleich Array und verkettete Liste</li>
+                    <li><a href="../notebooks/3-1_c_uebung_oop_und_linked_list.ipynb" download>3-1_c_uebung_oop_und_linked_list.ipynb herunterladen</a> – Übung: Bibliothek und Buchregal mit Klassen und verketteten Listen</li>
+                </ul>
+                <p>Die Notebooks ersetzen diese Seite nicht, sondern bieten dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Wie weit läuft current? <span class="niveau">AFB I</span></summary>
+                <p>Eine Liste hat 5 Knoten. Wie oft wird beim nächsten <code>append</code> die Zeile <code>current = current.next</code> ausgeführt? Und warum braucht <code>append</code> den Fall <code>if self.head is None</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>4-mal: <code>current</code> startet beim 1. Knoten und muss bis zum 5. weiterlaufen. Bei einer leeren Liste gibt es keinen letzten Knoten – <code>current</code> wäre <code>None</code> und <code>current.next</code> würde einen <code>AttributeError</code> auslösen. Deshalb wird der neue Knoten dann direkt zum <code>head</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Zwei Schleifen im Vergleich <span class="niveau">AFB I</span></summary>
+                <p>In <code>display</code> lautet die Schleife <code>while current is not None</code>, in <code>append</code> dagegen <code>while current.next is not None</code>. Erkläre den Unterschied in einem Satz.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>display</code> muss jeden Knoten verarbeiten, auch den letzten – also läuft <code>current</code> bis hinter das Ende (<code>None</code>). <code>append</code> muss <em>auf</em> dem letzten Knoten stehen bleiben, um dort anzuhängen.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Vertauschte Zeilen <span class="niveau">AFB II</span></summary>
+                <p>Ein Mitschüler schreibt in <code>insert_at_start</code> zuerst <code>self.head = neu</code> und danach <code>neu.next = self.head</code>. Zeichne, was mit der Liste 1 → 2 passiert, wenn er <code>insert_at_start(0)</code> aufruft.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nach <code>self.head = neu</code> zeigt <code>head</code> auf den neuen Knoten 0. Dann setzt <code>neu.next = self.head</code> den Verweis von 0 auf … 0 selbst. Die Knoten 1 und 2 sind nicht mehr erreichbar, und <code>display</code> würde endlos 0 ausgeben.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 6: Wo steht current? <span class="niveau">AFB I</span></summary>
+                <p>Die Liste ist 4 → 8 → 15. Auf welchem Knoten steht <code>current</code>, wenn <code>delete(15)</code> den Verweis umsetzt? Welcher Verweis ändert sich, und worauf zeigt er danach?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>current</code> steht auf dem Knoten 8, denn <code>current.next.data</code> ist dort 15. Das <code>next</code> von 8 zeigt danach auf <code>current.next.next</code>, also auf <code>None</code> – die 8 ist jetzt der letzte Knoten.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-1-1">
+            <details>
+                <summary>Aufgabe 3.1.1: Fehler finden <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/verkettete_liste.py</code> – weiterführen; füge die Methode zum Ausprobieren in deine Klasse <code>LinkedList</code> ein (<code>nextNode</code> heißt bei dir <code>next</code>)<br><strong>Commits:</strong> <code>3.1.1: fehlerhaftes print_ll zum Testen eingefügt</code> · nach der Korrektur: <code>3.1.1: print_ll korrigiert und getestet</code></p>
+                <p>Eine frühere Version der Ausgabemethode sah so aus:</p>
+                <pre><code class="language-python">def print_ll(self):
+    ll_str = ""
+    while self.head:
+        ll_str = ll_str + self.head.data + "---&gt;"
+        self.head = self.head.nextNode
+    print(ll_str)</code></pre>
+                <p>Erkläre, was nach einem Aufruf von <code>print_ll()</code> mit der Liste passiert, und korrigiere die Methode.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-1-2">
+            <details>
+                <summary>Aufgabe 3.1.2: Liste erweitern <span class="niveau">AFB II–III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/verkettete_liste.py</code> – weiterführen; Testfälle in <code>1_listen/test_verkettete_liste.py</code><br><strong>Commits:</strong> nach Teil 1: <code>3.1.2 Teil 1: laenge und enthaelt ergänzt, Tests ok</code> · nach Teil 2: <code>3.1.2 Teil 2: insert_after ergänzt, Tests ok</code> · nur wenn du Teil 3 programmierst: <code>3.1.2 Teil 3: append in O(1), alle Tests weiter ok</code></p>
+                <ol>
+                    <li>Ergänze die Methoden <code>laenge()</code> und <code>enthaelt(data)</code>.</li>
+                    <li>Ergänze <code>insert_after(ziel, data)</code>, die einen neuen Knoten hinter dem ersten Knoten mit dem Wert <code>ziel</code> einfügt.</li>
+                    <li>Das Anhängen mit <code>append</code> liegt in O(n). Schlage eine Änderung der Klasse vor, mit der es in O(1) gelingt, und beurteile den Nachteil.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-1-3">
+            <details>
+                <summary>Aufgabe 3.1.3: Verweise verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Zeichne die Liste nach folgenden Anweisungen als Kästchen mit Pfeilen: <code>ll = LinkedList(); ll.append("B"); ll.insert_at_start("A"); ll.append("C"); ll.delete("B")</code>. Gib an, worauf <code>ll.head</code> und <code>ll.head.next</code> zeigen.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.4: Gekapselte Playlist <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/playlist.py</code> – neu anlegen; die Klasse <code>Node</code> holst du mit <code>from verkettete_liste import Node</code>, Testfälle in <code>test_playlist.py</code><br><strong>Commits:</strong> <code>3.1.4: anhaengen, vorne_einfuegen und __len__ ergänzt</code> · <code>3.1.4: get mit IndexError ergänzt</code> · <code>3.1.4: __str__ ergänzt, alle 7 Tests ok</code></p>
+                <p>Für eine Musik-App soll eine Playlist als verkettete Liste gespeichert werden. Anders als in Beispiel 2 darf niemand von außen an den Verweisen „herumbasteln“: Die Attribute sind privat, und alle Änderungen laufen über Methoden.</p>
+                <p>Schreibe mit der Klasse <code>Node</code> aus Beispiel 1 eine Klasse <code>Playlist</code> mit</p>
+                <ul>
+                    <li>den privaten Attributen <code>__head</code> (erster Titel), <code>__tail</code> (letzter Titel) und <code>__anzahl</code>,</li>
+                    <li><code>anhaengen(titel)</code> in O(1) und <code>vorne_einfuegen(titel)</code> in O(1),</li>
+                    <li><code>__len__()</code>, damit <code>len(p)</code> die Anzahl der Titel liefert, ohne die Liste zu durchlaufen,</li>
+                    <li><code>get(index)</code>, die den Titel an Position <code>index</code> (ab 0) zurückgibt und bei einem ungültigen Index (auch bei negativen Zahlen) <code>raise IndexError("Index außerhalb der Playlist")</code> auslöst,</li>
+                    <li><code>__str__()</code>, die z.&nbsp;B. <code>Intro -&gt; Song A -&gt; Song B</code> bzw. bei leerer Playlist <code>(leer)</code> liefert.</li>
+                </ul>
+                <p>Begründe außerdem, warum <code>len(p)</code> in O(1), <code>get(index)</code> aber in O(n) liegt.</p>
+                <p>Teste deine Klasse mit diesen Testfällen (Fehlerfälle mit <code>try</code>/<code>except IndexError as e</code> abfangen und <code>print("IndexError:", e)</code> ausgeben):</p>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>p = Playlist(); print(len(p), p)</code></td><td><code>0 (leer)</code></td><td></td></tr>
+                        <tr><td><code>p.get(0)</code> bei leerer Playlist</td><td><code>IndexError: Index außerhalb der Playlist</code></td><td></td></tr>
+                        <tr><td><code>p.anhaengen("Song A"); print(len(p), p.get(0))</code></td><td><code>1 Song A</code></td><td></td></tr>
+                        <tr><td><code>p.anhaengen("Song B"); p.vorne_einfuegen("Intro"); print(len(p), p)</code></td><td><code>3 Intro -&gt; Song A -&gt; Song B</code></td><td></td></tr>
+                        <tr><td><code>print(p.get(2))</code></td><td><code>Song B</code></td><td></td></tr>
+                        <tr><td><code>p.get(3)</code> und <code>p.get(-1)</code></td><td>jeweils <code>IndexError: Index außerhalb der Playlist</code></td><td></td></tr>
+                        <tr><td><code>q = Playlist(); q.vorne_einfuegen("X"); q.anhaengen("Y"); print(q)</code></td><td><code>X -&gt; Y</code></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p class="tipp">Der letzte Testfall ist eine Falle: Wird in eine leere Playlist vorn eingefügt, ist der neue Titel zugleich der letzte. Was muss dann mit <code>__tail</code> passieren?</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.5: Playlist rückwärts abspielen <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/playlist.py</code> – weiterführen; Testfälle in <code>test_playlist.py</code> ergänzen<br><strong>Commits:</strong> nach Teil 2: <code>3.1.5 Teil 2: umkehren in-place ergänzt, 5 Tests ok</code></p>
+                <p>Die Musik-App bekommt den Knopf „rückwärts abspielen“. Die Playlist aus Aufgabe 3.1.4 soll dafür eine Methode <code>umkehren()</code> erhalten, die die Reihenfolge <strong>in-place</strong> umdreht: Es dürfen keine neuen Knoten und keine Python-Liste angelegt werden, nur die Verweise werden umgehängt. Die Methode soll in O(n) arbeiten.</p>
+                <ol>
+                    <li>Zeichne für die Playlist <code>A -&gt; B -&gt; C</code> ein Zeigerdiagramm, wie es nach dem Umkehren aussehen muss, einschließlich <code>__head</code> und <code>__tail</code>.</li>
+                    <li>Implementiere <code>umkehren()</code>. Du brauchst drei Hilfsvariablen: den vorherigen Knoten, den aktuellen Knoten und den nächsten Knoten.</li>
+                    <li>Zeichne das Zeigerdiagramm nach jedem Schleifendurchlauf für <code>A -&gt; B -&gt; C</code>.</li>
+                </ol>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td>leere Playlist: <code>p.umkehren(); print(p)</code></td><td><code>(leer)</code></td><td></td></tr>
+                        <tr><td>Playlist <code>A</code>: <code>p.umkehren(); print(p)</code></td><td><code>A</code></td><td></td></tr>
+                        <tr><td>Playlist <code>A -&gt; B -&gt; C</code>: <code>p.umkehren(); print(len(p), p)</code></td><td><code>3 C -&gt; B -&gt; A</code></td><td></td></tr>
+                        <tr><td>danach <code>p.anhaengen("D"); print(p)</code></td><td><code>C -&gt; B -&gt; A -&gt; D</code></td><td></td></tr>
+                        <tr><td>danach <code>print(p.get(0))</code></td><td><code>C</code></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p class="tipp">Merke dir in jedem Durchlauf zuerst den Nachfolger, bevor du den Verweis umdrehst – sonst ist der Rest der Liste verloren.</p>
+            </details>
+        </div>

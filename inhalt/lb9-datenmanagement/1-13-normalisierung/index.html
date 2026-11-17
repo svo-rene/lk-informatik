@@ -1,0 +1,330 @@
+<p>
+            In der Welt der relationalen Datenbanken spielt die Normalisierung eine zentrale Rolle. Sie ist ein Prozess zur Optimierung der Datenbankstruktur, um Redundanzen zu reduzieren und Anomalien zu vermeiden. Bevor wir uns mit der Normalisierung befassen, sollten wir zunächst verstehen, was Anomalien sind und warum sie problematisch sein können.
+        </p>
+
+<h2>Anomalien in Datenbanken</h2>
+
+<p>
+            Anomalien sind unerwünschte Nebeneffekte, die in schlecht strukturierten Datenbanken auftreten können. Es gibt drei Haupttypen von Anomalien:
+        </p>
+
+<ol>
+            <li><strong>Einfügeanomalie:</strong> Tritt auf, wenn es nicht möglich ist, bestimmte Informationen in die Datenbank einzufügen, ohne dass andere, nicht direkt damit zusammenhängende Daten ebenfalls vorhanden sind.</li>
+            <li><strong>Löschanomalie:</strong> Entsteht, wenn das Löschen bestimmter Daten unbeabsichtigt zum Verlust anderer, wichtiger Informationen führt.</li>
+            <li><strong>Änderungsanomalie:</strong> Tritt auf, wenn eine Änderung an einem Datensatz inkonsistente Zustände in der Datenbank verursacht, weil die gleiche Information an mehreren Stellen gespeichert ist.</li>
+        </ol>
+
+<h3>Beispiele für Anomalien</h3>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+        <p><strong>Ausgangssituation:</strong> Eine Schule speichert Schüler, Klasse und Klassenlehrkraft in einer einzigen Tabelle.
+           Prüfe, welche Anomalien auftreten können.</p>
+        <p>Betrachten wir folgende Tabelle einer Schuldatenbank:</p>
+
+        <table>
+            <thead>
+            <tr>
+                <th>SchülerID</th>
+                <th>Name</th>
+                <th>Klasse</th>
+                <th>Klassenlehrer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Max Mustermann</td>
+                <td>10a</td>
+                <td>Frau Schmidt</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Lisa Müller</td>
+                <td>10a</td>
+                <td>Frau Schmidt</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Tom Bauer</td>
+                <td>10b</td>
+                <td>Herr Vogt</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p>
+            Der eigentliche Auslöser steht schon in der Tabelle: <mark style="background:#fde68a">„10a“ und „Frau Schmidt“ stehen
+            doppelt</mark>. Diese Redundanz ist die Ursache aller drei Anomalien.
+        </p>
+
+        <p><strong>1. Einfügeanomalie</strong></p>
+        <p>
+            Es wird eine neue Klasse 11b mit Herrn Kern als Klassenlehrer eingerichtet – Schüler sind aber
+            noch keine zugeordnet. Man müsste die Zeile so einfügen:
+        </p>
+        <table>
+            <thead><tr><th>SchülerID</th><th>Name</th><th>Klasse</th><th>Klassenlehrer</th></tr></thead>
+            <tbody>
+                <tr><td><mark style="background:#fde68a">?</mark></td><td><mark style="background:#fde68a">?</mark></td><td>11b</td><td>Herr Kern</td></tr>
+            </tbody>
+        </table>
+        <p>
+            Das geht nicht: SchülerID ist der Primärschlüssel und darf nicht leer bleiben. Die
+            Klasseninformation lässt sich also gar nicht speichern, solange kein Schüler existiert –
+            obwohl sie mit dem Schüler eigentlich nichts zu tun hat.
+        </p>
+
+        <p><strong>2. Löschanomalie</strong></p>
+        <p>
+            Tom Bauer wechselt die Schule, seine Zeile wird gelöscht:
+        </p>
+        <table>
+            <thead><tr><th>SchülerID</th><th>Name</th><th>Klasse</th><th>Klassenlehrer</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Max Mustermann</td><td>10a</td><td>Frau Schmidt</td></tr>
+                <tr><td>2</td><td>Lisa Müller</td><td>10a</td><td>Frau Schmidt</td></tr>
+                <tr><td><s>3</s></td><td><s>Tom Bauer</s></td><td><mark style="background:#fde68a"><s>10b</s></mark></td><td><mark style="background:#fde68a"><s>Herr Vogt</s></mark></td></tr>
+            </tbody>
+        </table>
+        <p>
+            Mit Tom verschwindet nebenbei die einzige Information darüber, dass es eine Klasse 10b gibt und
+            wer sie leitet. Gelöscht werden sollte nur ein Schüler – verloren gehen zwei zusätzliche
+            Informationen.
+        </p>
+
+        <p><strong>3. Änderungsanomalie</strong></p>
+        <p>
+            Frau Schmidt heiratet und heißt nun Schmidt-Meyer. Wird die Änderung nur in Zeile 1 gemacht,
+            sieht die Tabelle so aus:
+        </p>
+        <table>
+            <thead><tr><th>SchülerID</th><th>Name</th><th>Klasse</th><th>Klassenlehrer</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Max Mustermann</td><td>10a</td><td><mark style="background:#fde68a">Frau Schmidt-Meyer</mark></td></tr>
+                <tr><td>2</td><td>Lisa Müller</td><td>10a</td><td><mark style="background:#fde68a">Frau Schmidt</mark></td></tr>
+                <tr><td>3</td><td>Tom Bauer</td><td>10b</td><td>Herr Vogt</td></tr>
+            </tbody>
+        </table>
+        <p>
+            Jetzt hat dieselbe Klasse 10a zwei verschiedene Klassenlehrerinnen – die Datenbank widerspricht
+            sich selbst. Bei drei Zeilen fällt das auf, bei 800 Schülern nicht mehr.
+        </p>
+
+        <p><strong>Das Vorgehen in vier Schritten – was und warum:</strong></p>
+        <ol>
+            <li><strong>Wiederholungen suchen:</strong> „10a – Frau Schmidt“ steht zweimal. <em>Warum zuerst?</em> Redundanz ist die
+                Ursache aller drei Anomalien; wo nichts doppelt steht, kann auch nichts auseinanderlaufen.</li>
+            <li><strong>Einfügen durchspielen:</strong> eine Klasse ohne Schüler anlegen → scheitert am leeren Primärschlüssel.
+                <em>Warum?</em> Die Tabelle beschreibt Schüler; eine Klasse kann nur „im Schlepptau“ eines Schülers existieren.</li>
+            <li><strong>Löschen durchspielen:</strong> den einzigen Schüler einer Klasse löschen → Klasse und Lehrkraft gehen mit verloren.
+                <em>Warum?</em> Die Angabe zur Klasse 10b steht nur in Toms Zeile.</li>
+            <li><strong>Ändern durchspielen:</strong> einen mehrfach gespeicherten Wert nur einmal ändern → Widerspruch.
+                <em>Warum?</em> Dieselbe Tatsache steht an zwei Stellen und muss überall gleich geändert werden.</li>
+        </ol>
+
+        <div class="hinweis">
+            <details>
+                <summary>Hinweis: Wie hier die Lösung aussieht</summary>
+                <p>
+                    Alle drei Anomalien verschwinden, sobald man die Tabelle in zwei Relationen aufteilt:
+                </p>
+                <pre class="schema">Schueler(<u>SchuelerID</u>, Name, &uarr;Klasse)
+Klasse(<u>Klasse</u>, Klassenlehrer)</pre>
+                <ul>
+                    <li><strong>Einfügen:</strong> Die Klasse 11b bekommt eine eigene Zeile in
+                        <code>Klasse</code> – ganz ohne Schüler.</li>
+                    <li><strong>Löschen:</strong> Toms Zeile verschwindet aus <code>Schueler</code>, die
+                        Klasse 10b bleibt in <code>Klasse</code> erhalten.</li>
+                    <li><strong>Ändern:</strong> Der Name der Klassenlehrerin steht nur noch an
+                        <em>einer</em> Stelle – ein Widerspruch ist gar nicht mehr möglich.</li>
+                </ul>
+                <p>
+                    Genau dieses Aufteilen ist die Normalisierung. Wie man systematisch dahin kommt, zeigen
+                    die Seiten 1.14 bis 1.16 – am Ende von Seite 1.16 findest du ein vollständiges
+                    Beispiel von der Ausgangstabelle bis zur 3. Normalform.
+                </p>
+            </details>
+        </div>
+        <p><strong>Ergebnis:</strong> Alle drei Anomalien treten auf. Ursache ist, dass die Zuordnung Klasse → Klassenlehrer in jeder
+           Schülerzeile wiederholt wird.</p>
+        <p><strong>Kontrolle:</strong> Nach der Aufteilung im Hinweis steht „10a – Frau Schmidt“ nur noch einmal (in <code>Klasse</code>), und
+           die drei Proben gelingen: 11b lässt sich ohne Schüler einfügen, nach Toms Löschung bleibt 10b erhalten, die Namensänderung
+           betrifft genau eine Zeile.</p>
+            </details>
+        </div>
+
+<p>Das Schulbeispiel oben ist der Grundfall: eine Redundanz, drei Anomalien. In echten Tabellen steckt dieselbe Information
+           oft an mehreren Stellen, und nicht jede Wiederholung ist ein Problem.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Eine Handballliga plant ihre Spiele in einer einzigen Tabelle
+               (Primärschlüssel: SpielNr).</p>
+            <table>
+                <thead><tr><th>SpielNr</th><th>Datum</th><th>Heim</th><th>HeimTrainer</th><th>Gast</th><th>GastTrainer</th><th>Halle</th><th>Adresse</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>2026-05-09</td><td>Füchse</td><td>Frau Ilg</td><td>Adler</td><td>Herr Sander</td><td>Sporthalle Nord</td><td>Nordstr. 4</td></tr>
+                    <tr><td>2</td><td>2026-05-09</td><td>Wölfe</td><td>Herr Brand</td><td>Füchse</td><td>Frau Ilg</td><td>Sporthalle Nord</td><td>Nordstr. 4</td></tr>
+                    <tr><td>3</td><td>2026-05-16</td><td>Adler</td><td>Herr Sander</td><td>Wölfe</td><td>Herr Brand</td><td>Turnhalle Süd</td><td>Parkweg 2</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><strong>Redundanz suchen – auch über Spaltengrenzen.</strong> „Füchse – Frau Ilg“ steht zweimal, einmal in den
+                    Heim-Spalten, einmal in den Gast-Spalten. Ebenso „Adler – Herr Sander“ und „Wölfe – Herr Brand“.
+                    „Sporthalle Nord – Nordstr. 4“ steht zweimal. <em>Warum ist das Redundanz?</em> Wer eine Mannschaft trainiert
+                    und wo eine Halle liegt, hängt nicht vom einzelnen Spiel ab.</li>
+                <li><strong>Falsche Verdächtige aussortieren.</strong> Das Datum 2026-05-09 steht ebenfalls zweimal. Das ist
+                    <em>keine</em> Redundanz: Es sind zwei verschiedene Spiele, die zufällig am selben Tag stattfinden. Ändert
+                    sich der Termin von Spiel 1, darf sich Spiel 2 nicht mitändern.</li>
+                <li><strong>Änderungsanomalie durchspielen.</strong> Die Füchse bekommen Herrn Kurz als Trainer. Geändert werden
+                    muss in Zeile 1 die Spalte <em>HeimTrainer</em> und in Zeile 2 die Spalte <em>GastTrainer</em>. Wer nur in der
+                    Heim-Spalte sucht, übersieht Zeile 2 – danach haben die Füchse zwei Trainer.</li>
+                <li><strong>Einfügeanomalie durchspielen.</strong> Die neue Mannschaft „Bären“ mit Trainerin Frau Oswald tritt der
+                    Liga bei, ihr erstes Spiel ist noch nicht angesetzt. Ohne SpielNr lässt sich keine Zeile anlegen – die Mannschaft
+                    kann nicht gespeichert werden.</li>
+                <li><strong>Löschanomalie durchspielen.</strong> Spiel 3 fällt aus und wird gelöscht. Damit verschwindet die einzige
+                    Information, dass es die Turnhalle Süd im Parkweg 2 gibt.</li>
+                <li><strong>Zerlegen.</strong> Alles, was zu einer Mannschaft gehört, und alles, was zu einer Halle gehört, bekommt eine
+                    eigene Relation. Das Spiel verweist <em>zweimal</em> auf <code>Team</code> – einmal als Heim-, einmal als Gastmannschaft.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong></p>
+            <pre class="schema">Team(<u>Team</u>, Trainer)
+Halle(<u>Halle</u>, Adresse)
+Spiel(<u>SpielNr</u>, Datum, &uarr;Heim, &uarr;Gast, &uarr;Halle)</pre>
+            <p><code>Team</code> enthält drei Zeilen (Füchse – Frau Ilg, Adler – Herr Sander, Wölfe – Herr Brand), <code>Halle</code> zwei,
+               <code>Spiel</code> drei Zeilen mit Datum und den drei Verweisen.</p>
+            <p><strong>Probe:</strong> Der Trainerwechsel ist jetzt eine Änderung an genau einer Stelle; die Bären bekommen eine Zeile in
+               <code>Team</code> ohne Spiel; nach dem Löschen von Spiel 3 bleibt die Turnhalle Süd in <code>Halle</code> erhalten. Über die
+               drei Fremdschlüssel lässt sich die Ausgangstabelle vollständig wiederherstellen.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>
+                    Praxisbezug: Wenn schlechte Datenstrukturen im echten Betrieb Chaos verursachen
+                </summary>
+                <p>
+                    Stell dir ein Krankenhaus vor, in dem Patientendaten wie Name, Adresse oder Diagnosen mehrfach in verschiedenen Abteilungen (Aufnahme, Labor, Station) getrennt und redundant gespeichert werden, ohne dass die Systeme miteinander abgeglichen sind. Ändert sich z.&nbsp;B. die Adresse eines Patienten nur an einer Stelle, entstehen widersprüchliche Datensätze - genau das Problem, das die Änderungsanomalie beschreibt. Solche unnormalisierten, redundanten Datenstrukturen führen in der Praxis zu Verwirrung, ineffizienten Arbeitsabläufen und im schlimmsten Fall zu Fehlern in der Patientenversorgung. Ähnliche Probleme treten auch bei Versandhändlern (doppelte Kundendatensätze im CRM) oder Behörden (widersprüchliche Adressdaten) auf, wenn Stammdaten nicht sauber normalisiert und gepflegt werden.
+                </p>
+                <p>
+                    <strong>Berufsfelder:</strong> Mit sauberer Datenstrukturierung und Normalisierung arbeiten sowohl IT-Berufe (Datenbankadministrator*in, Data Engineer, Data Quality Analyst, Fachinformatiker*in für Daten- und Prozessanalyse) als auch viele Nicht-IT-Berufe, die auf gepflegte Datenbestände angewiesen sind: Sachbearbeiter*innen in der öffentlichen Verwaltung, Mitarbeitende im Vertrieb, die CRM-Systeme pflegen, Personalabteilungen, die Mitarbeiterdaten verwalten, sowie medizinisches Verwaltungspersonal und Pflegekräfte, die mit Patientenakten arbeiten.
+                </p>
+                <p>
+                    <strong>Weiterlesen:</strong>
+                    <a href="https://www.krankenhaus-it.de/item.2848/veraltete-daten-und-datensilos-im-krankenhaus.html" target="_blank" rel="noopener">Veraltete Daten und Datensilos im Krankenhaus</a>
+                    &nbsp;|&nbsp;
+                    <a href="https://datanaut.eu/blog/doppelte-datensaetze-im-management-von-stammdaten" target="_blank" rel="noopener">Doppelte Datensätze im Management von Stammdaten</a>
+                </p>
+            </details>
+        </div>
+
+<h2>Normalisierung</h2>
+
+<p>
+            Die Normalisierung ist ein systematischer Prozess zur Umstrukturierung von Datenbanktabellen, um Anomalien zu beseitigen und die Datenintegrität zu verbessern. Es gibt verschiedene Normalformen, die schrittweise angewendet werden:
+        </p>
+
+<ul>
+            <li><strong>Erste Normalform (1NF):</strong> Alle Attribute enthalten nur atomare (nicht weiter zerlegbare) Werte.</li>
+            <li><strong>Zweite Normalform (2NF):</strong> Die Tabelle ist in 1NF und alle Nicht-Schlüssel-Attribute sind voll funktional abhängig vom Primärschlüssel.</li>
+            <li><strong>Dritte Normalform (3NF):</strong> Die Tabelle ist in 2NF und es gibt keine transitiven Abhängigkeiten von Nicht-Schlüssel-Attributen.</li>
+        </ul>
+
+<p>
+            Es gibt noch weitere Normalformen (wie die Boyce-Codd-Normalform, 4NF und 5NF), die in speziellen Fällen angewendet werden.
+        </p>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Wie weit normalisiert man?
+                </summary>
+                <p>
+                    Die Normalisierung bis zur dritten Normalform ist in den meisten Fällen ausreichend, um eine gute Datenbankstruktur zu erreichen. In der Praxis muss manchmal ein Kompromiss zwischen vollständiger Normalisierung und Performanz gefunden werden.
+                </p>
+            </details>
+        </div>
+
+<h2>Vorteile der Normalisierung</h2>
+
+<p>
+            Die Normalisierung bietet mehrere Vorteile:
+        </p>
+
+<ul>
+            <li>Reduzierung von Datenredundanz</li>
+            <li>Verbesserung der Datenintegrität</li>
+            <li>Vereinfachung von Datenaktualisierungen</li>
+            <li>Effizientere Datenbankstruktur</li>
+            <li>Erleichterung von Datenbankänderungen und -erweiterungen</li>
+        </ul>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Anomalien sind unerwünschte Effekte in Datenbanken, die zu Inkonsistenzen, Datenverlusten oder Problemen bei der Datenpflege führen können. Die drei Haupttypen sind Einfüge-, Lösch- und Änderungsanomalien. Sie entstehen oft durch redundante Datenspeicherung und mangelnde Strukturierung der Datenbank.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.13.1: <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Betrachte die folgende unnormalisierte Tabelle für eine Bibliothek:
+                </p>
+                <table border="1">
+                    <tr>
+                        <th>BuchID</th>
+                        <th>Titel</th>
+                        <th>Autor</th>
+                        <th>Ausleiher</th>
+                        <th>Ausleihdatum</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Das Kapital</td>
+                        <td>Karl Marx</td>
+                        <td>Anna Müller</td>
+                        <td>2023-05-15</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Das Kapital</td>
+                        <td>Karl Marx</td>
+                        <td>Max Schmidt</td>
+                        <td>2023-06-20</td>
+                    </tr>
+                </table>
+                <p>
+                    a) Identifiziere mögliche Anomalien in dieser Tabellenstruktur.<br>
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.13.2: Der Werkzeugverleih <span class="niveau">AFB I</span>
+                </summary>
+                <p>Ein Baumarkt verleiht Werkzeuge und notiert jede Ausleihe in dieser Tabelle (Primärschlüssel: AusleihNr):</p>
+                <table>
+                    <thead><tr><th>AusleihNr</th><th>Werkzeug</th><th>Tagespreis</th><th>Kunde</th><th>Telefon</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Bohrhammer</td><td>18.00</td><td>Herr Lutz</td><td>0341 5551</td></tr>
+                        <tr><td>2</td><td>Fliesenschneider</td><td>12.00</td><td>Frau Arndt</td><td>0341 5552</td></tr>
+                        <tr><td>3</td><td>Bohrhammer</td><td>18.00</td><td>Frau Arndt</td><td>0341 5552</td></tr>
+                    </tbody>
+                </table>
+                <p>Beschreibe zu jeder der drei Anomalien eine konkrete Situation im Baumarkt, in der sie auftritt, und gib an,
+                   welche Zeilen bzw. Werte davon betroffen sind.</p>
+            </details>
+        </div>

@@ -1,0 +1,52 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.17.3: Geräteverwaltung <span class="niveau">AFB II</span></summary>
+                <p>Gegeben ist folgende Tabelle über die Verwaltung von Geräten. Der Primärschlüssel ist die <strong>Gerätenummer</strong>.</p>
+                <table border="1">
+                    <tr>
+                        <th><u>Gerätenummer</u></th>
+                        <th>Gerätename</th>
+                        <th>Hersteller</th>
+                        <th>Herstelleradresse</th>
+                        <th>Anschaffungsdatum</th>
+                    </tr>
+                    <tr>
+                        <td>G001</td>
+                        <td>Bohrmaschine</td>
+                        <td>Werkzeuge GmbH</td>
+                        <td>Werkstraße 1, Berlin</td>
+                        <td>15.01.2020</td>
+                    </tr>
+                    <tr>
+                        <td>G002</td>
+                        <td>Schweißgerät</td>
+                        <td>Industrie AG</td>
+                        <td>Industriering 5, Hamburg</td>
+                        <td>20.03.2021</td>
+                    </tr>
+                </table>
+                <p><strong>Aufgabe:</strong> Bestimme die aktuelle Normalform der Tabelle und bringe sie dann in die nächsthöhere Normalform.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.17.4: Das Sportvereinsmodell aus Aufgabe 1.12.3 <span class="niveau">AFB III</span></summary>
+                <p>In Aufgabe 1.12.3 hast du aus diesem Relationenmodell eines Sportvereins ein ER-Modell erstellt:</p>
+                <ul>
+                    <li>MITGLIED (<u>mitglied_id</u>, name, vorname, geburtsjahr, ↑abteilung_id)</li>
+                    <li>ABTEILUNG (<u>abteilung_id</u>, bezeichnung, trainingsort, adresse_trainingsort)</li>
+                    <li>TRAINER (<u>trainer_id</u>, name, lizenzstufe)</li>
+                    <li>BETREUUNG (<u>↑trainer_id, ↑abteilung_id</u>, seit)</li>
+                    <li>WETTKAMPF (<u>wettkampf_id</u>, datum, ort)</li>
+                    <li>TEILNAHME (<u>↑mitglied_id, ↑wettkampf_id</u>, platzierung)</li>
+                </ul>
+                <p>Beispieldaten ABTEILUNG: (1, Leichtathletik, Sportpark Nord, Nordstraße 5), (2, Handball, Sportpark Nord, Nordstraße 5), (3, Schwimmen, Hallenbad, Badweg 1)</p>
+                <ol>
+                    <li>Bestimme mithilfe der Beispieldaten die höchste Normalform, die das Modell erfüllt, und begründe.</li>
+                    <li>Überführe das Modell in die dritte Normalform.</li>
+                </ol>
+            </details>
+        </div>

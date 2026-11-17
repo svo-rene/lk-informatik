@@ -1,0 +1,88 @@
+<p>Zwei Personen sitzen in verschiedenen Städten und können nur über eine Leitung kommunizieren, die jeder mithören kann. Trotzdem wollen sie sich auf einen geheimen Schlüssel für AES einigen. Whitfield Diffie und Martin Hellman zeigten 1976, dass das möglich ist.</p>
+
+<p>Die beiden Teilnehmer vereinbaren öffentlich zwei Zahlen, eine Basis g und einen Modul p. Danach wählt jeder eine geheime Zahl. Damit können beide einen gemeinsamen geheimen Schlüssel berechnen, der von beiden geheimen Zahlen abhängt, ohne dass dieser Schlüssel selbst über das Netz übertragen wird. Streng genommen wird also kein Schlüssel „ausgetauscht“, sondern gemeinsam <em>vereinbart</em>.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <ol>
+                <li>Öffentlich vereinbarte Zahlen: Basis g = 2, Modul p = 11. <i>g sollte kleiner als p und ein Erzeuger sein, d.&nbsp;h., die Potenzen von g durchlaufen alle Zahlen 1 bis p − 1. Günstig ist eine Primzahl p, für die auch (p − 1)/2 eine Primzahl ist (hier 5).</i></li>
+                <li>Alice wählt die geheime Zahl a = 3 und berechnet A = g<sup>a</sup> mod p = 2³ mod 11 = 8. Alice sendet A an Bob.</li>
+                <li>Bob wählt die geheime Zahl b = 4 und berechnet B = g<sup>b</sup> mod p = 2⁴ mod 11 = 5. Bob sendet B an Alice.</li>
+                <li>Alice berechnet den gemeinsamen Schlüssel s = B<sup>a</sup> mod p = 5³ mod 11 = 125 mod 11 = 4.</li>
+                <li>Bob berechnet den gemeinsamen Schlüssel s = A<sup>b</sup> mod p = 8⁴ mod 11 = 4096 mod 11 = 4.</li>
+            </ol>
+            <p>Nun besitzen Alice und Bob den gemeinsamen geheimen Schlüssel s = 4, ohne dass dieser über das Netz übertragen wurde.</p>
+            <p><strong>Kontrolle:</strong> s = g<sup>a·b</sup> mod p = 2<sup>12</sup> mod 11 = 4096 mod 11 = 4. ✓</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Anschauliche Erklärung mit Farben</summary>
+                <p>Alice und Bob einigen sich öffentlich auf eine Grundfarbe, z.&nbsp;B. Gelb. Jeder mischt heimlich seine Geheimfarbe hinein (Alice Rot, Bob Blau) und schickt das Gemisch dem anderen. Jeder mischt nun seine eigene Geheimfarbe in das erhaltene Gemisch. Beide erhalten dieselbe Farbe Gelb + Rot + Blau. Ein Lauscher sieht nur Gelb, Gelb-Rot und Gelb-Blau – und Farben kann man nicht entmischen (Einwegfunktion).</p>
+            </details>
+        </div>
+
+<h2>Die Schwachstelle: Man-in-the-Middle</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p>Mallory sitzt zwischen Alice und Bob (p = 11, g = 2) und kann Nachrichten abfangen und austauschen. Sie wählt die geheime Zahl m = 6 und berechnet M = 2⁶ mod 11 = 9.</p>
+            <ul>
+                <li>Alice sendet A = 8, Mallory fängt es ab und schickt Bob stattdessen M = 9.</li>
+                <li>Bob sendet B = 5, Mallory fängt es ab und schickt Alice stattdessen M = 9.</li>
+                <li>Alice berechnet 9³ mod 11 = 3, Mallory berechnet A<sup>m</sup> = 8⁶ mod 11 = 3.</li>
+                <li>Bob berechnet 9⁴ mod 11 = 5, Mallory berechnet B<sup>m</sup> = 5⁶ mod 11 = 5.</li>
+            </ul>
+            <p>Mallory teilt nun den Schlüssel 3 mit Alice und den Schlüssel 5 mit Bob. Sie entschlüsselt jede Nachricht, liest oder ändert sie und verschlüsselt sie für den anderen neu. Alice und Bob merken nichts.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Diffie-Hellman bei HTTPS und in Messengern</summary>
+                <p>
+                    <strong>Alltag:</strong> Jedes Mal, wenn dein Browser eine HTTPS-Verbindung mit TLS&nbsp;1.3 aufbaut, führt er einen Diffie-Hellman-Austausch auf elliptischen Kurven durch (<strong>ECDHE</strong>, das E am Ende steht für „ephemeral“, also kurzlebig). Für jede Verbindung werden neue geheime Zahlen gewählt. Selbst wenn später der private Schlüssel des Servers gestohlen wird, bleiben alte Verbindungen geheim („Forward Secrecy“). Signal und WhatsApp wiederholen den Austausch sogar ständig während eines Chats.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> Netzwerk- und Sicherheitsadministratorinnen konfigurieren Webserver so, dass nur sichere TLS-Versionen und Schlüsselaustauschverfahren erlaubt sind, und prüfen das mit Werkzeugen wie dem SSL-Test von Qualys. Die zulässigen Gruppen und Schlüssellängen legt in Deutschland die BSI-Richtlinie TR-02102-2 fest.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Ablauf des Diffie-Hellman-Verfahrens</strong></p>
+            <ol>
+                <li>Öffentlich: eine große Primzahl p und eine Basis g (ein Erzeuger modulo p).</li>
+                <li>Alice wählt geheim a und sendet A = g<sup>a</sup> mod p.</li>
+                <li>Bob wählt geheim b und sendet B = g<sup>b</sup> mod p.</li>
+                <li>Alice berechnet s = B<sup>a</sup> mod p, Bob berechnet s = A<sup>b</sup> mod p.</li>
+            </ol>
+            <p>Beide erhalten denselben Schlüssel, denn B<sup>a</sup> = (g<sup>b</sup>)<sup>a</sup> = g<sup>ab</sup> = (g<sup>a</sup>)<sup>b</sup> = A<sup>b</sup> (mod p). Ein Lauscher kennt p, g, A und B, müsste aber a aus A = g<sup>a</sup> mod p bestimmen. Dieses Problem des <strong>diskreten Logarithmus</strong> ist für große p praktisch unlösbar.</p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Diffie-Hellman schützt nur gegen passive Lauscher.</strong> Ohne Authentifizierung ist das Verfahren anfällig für einen <strong>Man-in-the-Middle-Angriff</strong>. Deshalb müssen die Werte A und B authentisch sein: In TLS signiert der Server seinen DH-Wert mit dem privaten Schlüssel seines Zertifikats (8.13); bei Signal und WhatsApp können Nutzer die Sicherheitsnummern vergleichen.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.10.1: Schlüssel in Partnerarbeit vereinbaren <span class="niveau">AFB I</span></summary>
+                <p>Erstellt in Partnerarbeit einen gemeinsamen Schlüssel. Startet mit p = 7 und g = 5. Jede Person wählt geheim eine Zahl zwischen 2 und 5, und ihr tauscht nur A bzw. B aus.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.10.2: Symmetrisch und asymmetrisch vergleichen <span class="niveau">AFB II</span></summary>
+                <p>Vergleiche symmetrische und asymmetrische Verschlüsselung hinsichtlich der folgenden Kriterien: Schlüsselmanagement, Performance, Sicherheit, Einsatzgebiete.</p>
+            </details>
+        </div>

@@ -1,0 +1,41 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.11.3: <span class="niveau">AFB III</span></summary>
+                <p>Überführe den DEA aus Aufgabe 6.7.5 (Wörter über {0, 1} ohne das Teilwort 11; Zustände A (Start, Endzustand), B (Endzustand), X (Fangzustand)) in eine reguläre Grammatik, die die Typ-3-Bedingung für S → ε einhält.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.11.4: Von der Grammatik über den NEA zum DEA <span class="niveau">AFB II</span></summary>
+                <p>Gegeben ist die reguläre Grammatik G mit S → 0S | 1S | 1A, A → 0 | 1.</p>
+                <ol type="a">
+                    <li>Konstruiere den zugehörigen endlichen Automaten und gib seine Übergangstabelle an.</li>
+                    <li>Wandle ihn mit der Potenzmengenkonstruktion in einen DEA um.</li>
+                    <li>Prüfe <code>0110</code> und <code>101</code> mit dem DEA und beschreibe die Sprache in Worten.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.11.5: Zählautomat als Grammatik <span class="niveau">AFB II</span></summary>
+                <p>Der folgende DEA akzeptiert genau die Wörter über {a, b}, in denen die Anzahl der a durch 3 teilbar ist (Startzustand r0, Endzustand r0):</p>
+                <table>
+                    <thead><tr><th>δ</th><th>a</th><th>b</th></tr></thead>
+                    <tbody>
+                        <tr><td>→ r0 (Endzustand)</td><td>r1</td><td>r0</td></tr>
+                        <tr><td>r1</td><td>r2</td><td>r1</td></tr>
+                        <tr><td>r2</td><td>r0</td><td>r2</td></tr>
+                    </tbody>
+                </table>
+                <ol type="a">
+                    <li>Überführe den DEA in eine streng reguläre Grammatik (Typ 3 mit der Bedingung für S → ε).</li>
+                    <li>Leite <code>abaa</code> und <code>b</code> ab.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,14 @@
+{
+  "nr": "1.17",
+  "titel": "Übungsaufgaben zu den Normalformen",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

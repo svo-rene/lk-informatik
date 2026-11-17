@@ -1,0 +1,268 @@
+<script src="../sortierlabor.js" defer></script>
+<p>Die Analyse der Laufzeit von Algorithmen ist ein wichtiger Bestandteil der Informatik. Sie hilft dabei, die Effizienz von Algorithmen zu verstehen und zu vergleichen – unabhängig davon, wie schnell der konkrete Rechner ist. Das wichtigste Werkzeug dafür ist die O-Notation (engl. Big-O-Notation).</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in vier kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und rechne oder tippe mit.</p>
+
+<ol class="schritte">
+            <li>Schritte zählen statt Sekunden messen</li>
+            <li>Schleifen in Schleifen zählen</li>
+            <li>Das Verdopplungsexperiment – danach Aufgabe 2.2.3.1</li>
+            <li>Was bedeutet O(n²) genau? – danach Aufgabe 2.2.3.2</li>
+        </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Schritte zählen statt Sekunden messen</h2>
+
+<p>Sekunden hängen vom Rechner ab, die Anzahl der Schritte nur vom Algorithmus und von der Eingabegröße n. Im Video zählst du in Thonny die Schritte der Funktion <code>summe</code> für die Liste [4, 8, 1] mit. Achte darauf, welche Anweisungen einmal zählen und welche so oft, wie die Schleife läuft.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-3-1_schritte_vorschau.png" src="../vid/2-2-3-1_schritte.mp4"></video><a href="../vid/2-2-3-1_schritte.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Schritte zählen statt Sekunden messen (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<p>Zum Nachlesen steht die Zählung mit dem Nachweis über die Definition in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Summe einer Liste</p>
+            <pre><code class="language-python">def summe(liste):
+    s = 0                 # 1 Schritt
+    for x in liste:       # n Durchläufe
+        s = s + x         # je 1 Schritt
+    return s              # 1 Schritt</code></pre>
+            <p>Insgesamt n + 2 Schritte, also O(n): Doppelt so viele Elemente bedeuten etwa doppelt so viel Zeit.</p>
+            <ol>
+                <li><strong>Schritte zählen:</strong> f(n) = 1 + n + 1 = n + 2. <em>Warum:</em> Die Anweisungen außerhalb der Schleife laufen einmal, der Schleifenrumpf n-mal.</li>
+                <li><strong>Definition anwenden:</strong> Gesucht sind c und n<sub>0</sub> mit n + 2 ≤ c · n für alle n ≥ n<sub>0</sub>. Mit c = 3 und n<sub>0</sub> = 1 gilt n + 2 ≤ 3n ⇔ 2 ≤ 2n ⇔ n ≥ 1. <em>Warum genügt das:</em> Die Definition verlangt nur <em>eine</em> passende Konstante.</li>
+                <li><strong>Deuten:</strong> Die Konstante +2 spielt für große n keine Rolle. Es bleibt lineares Wachstum.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> f(n) = n + 2 ∈ O(n). <strong>Probe:</strong> Für n = 10 gilt 12 ≤ 30, für n = 1 gilt 3 ≤ 3.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>summe([4, 8, 1])</code></td><td><code>13</code></td><td>Normalfall, 3 + 2 = 5 Schritte</td></tr>
+                    <tr><td><code>summe([])</code></td><td><code>0</code></td><td>leere Liste, 2 Schritte</td></tr>
+                    <tr><td><code>summe([5])</code></td><td><code>5</code></td><td>ein Element</td></tr>
+                    <tr><td><code>summe([-2, 7, 1])</code></td><td><code>6</code></td><td>negative Zahlen</td></tr>
+                    <tr><td><code>summe(["a"])</code></td><td><code>TypeError</code></td><td>falscher Typ: <code>0 + "a"</code> ist nicht definiert</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<h2 id="schritt-2">Schritt 2: Schleifen in Schleifen zählen</h2>
+
+<p>Steckt eine Schleife in einer anderen, zählt man, wie oft die innere Schleife insgesamt läuft. Im Video läuft Bubblesort ohne Abbruch mit der Liste [5, 2, 9, 1], und eine Zähler-Tabelle hält fest, wie oft verglichen wird. Achte darauf, dass die innere Schleife mit jedem Durchlauf von <code>i</code> kürzer wird – deshalb bilden die Vergleiche ein Dreieck.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-3-2_schleifen_vorschau.png" src="../vid/2-2-3-2_schleifen.mp4"></video><a href="../vid/2-2-3-2_schleifen.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Schleifen in Schleifen zählen (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Bubblesort als Pseudocode</h3>
+
+<p>Um die O-Notation besser zu verstehen, betrachten wir den Bubblesort-Algorithmus. Er vergleicht Elemente einer Liste wiederholt und vertauscht sie, bis die Liste sortiert ist.</p>
+
+<pre><code>Prozedur BubbleSort(arr):
+    n = Länge(arr)
+    für i von 0 bis n − 2:
+        für j von 0 bis n − i − 2:
+            wenn arr[j] &gt; arr[j + 1] dann:
+                tausche arr[j] und arr[j + 1]</code></pre>
+
+<p>Die Grenzen sind einschließlich gemeint. Die innere Schleife endet bei j = n − i − 2, damit <code>arr[j + 1]</code> höchstens auf das letzte Element <code>arr[n − 1]</code> zugreift. Die Anzahl der Vergleiche ist (n − 1) + (n − 2) + … + 1 = n · (n − 1) / 2 = ½n² − ½n. Das liegt in <strong>O(n²)</strong>.</p>
+
+<h2 id="schritt-3">Schritt 3: Das Verdopplungsexperiment</h2>
+
+<p>Ob die Rechnung n · (n − 1) / 2 stimmt, zeigt eine Messung: Man misst die Zeit für n und für 2n und bildet den Faktor. Im Video wird das Messprogramm in Thonny geschrieben; neu sind dabei <code>time.perf_counter()</code>, die Zufallszahlen mit <code>random.randint</code>, die per <code>append</code> in eine Liste kommen, und das Runden mit <code>round</code>. Achte darauf, welcher Faktor bei Verdopplung von n herauskommt – und warum er nicht vom Rechner abhängt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-3-3_verdopplung_vorschau.png" src="../vid/2-2-3-3_verdopplung.mp4"></video><a href="../vid/2-2-3-3_verdopplung.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Das Verdopplungsexperiment (ca. 2 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: die ganze Messreihe</h3>
+
+<p>Bei einem Test von Bubblesort mit verschiedenen Längen des zu sortierenden Arrays ergaben sich die folgenden Messwerte:</p>
+
+<table>
+            <tr><th>Anzahl n</th><td>2000</td><td>4000</td><td>6000</td><td>8000</td><td>10000</td><td>12000</td><td>14000</td><td>16000</td><td>18000</td><td>20000</td></tr>
+            <tr><th>Zeit in ms</th><td>178</td><td>646</td><td>1538</td><td>2739</td><td>4404</td><td>6067</td><td>8286</td><td>10826</td><td>13572</td><td>17332</td></tr>
+        </table>
+
+<figure>
+            <img src="../img/bubblesort.png" width="600" alt="Diagramm der gemessenen Laufzeiten von Bubblesort in Abhängigkeit von n">
+            <figcaption>Abb. 1: grafische Auswertung mit dem Modul matplotlib</figcaption>
+        </figure>
+
+<div class="hinweis">
+            <p><strong>Speichere deine Messversionen als einzelne Commits (siehe 2.1.8):</strong> Jede Änderung am Algorithmus wird ein eigener Commit in deinem Repository, die gemessenen Zeiten für n und 2n stehen in der Commit-Nachricht. So zeigt die Historie Algorithmus und Laufzeit gemeinsam.</p>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Installation von matplotlib</summary>
+                <p>
+                    Um Funktionen von matplotlib verwenden zu können, musst du das Paket zuerst installieren und dann in dein Programm importieren. In Thonny geht das über <strong>Extras → Pakete verwalten</strong> (engl. Tools → Manage packages): nach „matplotlib“ suchen und installieren. Alternativ gibst du in der Kommandozeile <code>pip install matplotlib</code> ein.<br>
+                    Zum Zeichnen importierst du das Untermodul <code>pyplot</code>:
+                </p>
+                <pre><code class="language-python">import matplotlib.pyplot as plt
+
+n = [2000, 4000, 6000, 8000, 10000]
+zeit = [178, 646, 1538, 2739, 4404]
+plt.plot(n, zeit, marker="o")
+plt.xlabel("Anzahl n")
+plt.ylabel("Zeit in ms")
+plt.show()</code></pre>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.3.1 – Messwerte auswerten.</p>
+
+<h2 id="schritt-4">Schritt 4: Was bedeutet O(n²) genau?</h2>
+
+<p>Bisher hieß es „wächst etwa wie n²“. Die Definition im Merke-Kasten oben macht das genau. Im Video wendest du sie auf <code>summe</code> und Bubblesort an und siehst, warum konstante Faktoren und kleinere Terme wegfallen. Achte auf die Falle: O ist eine obere Schranke – man gibt trotzdem immer die kleinste passende Klasse an.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-3-4_definition_vorschau.png" src="../vid/2-2-3-4_definition.mp4"></video><a href="../vid/2-2-3-4_definition.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Was bedeutet O(n²) genau? (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Definition, Nachweis und Messung</h3>
+
+<p>
+            Die O-Notation beschreibt, wie sich die Laufzeit verhält, wenn die Größe der Eingabe gegen unendlich strebt. Meist gibt man sie für den <strong>schlechtesten Fall</strong> (worst case) an, man kann sie aber genauso für den besten oder den mittleren Fall verwenden. Ein Algorithmus mit f(n) = 3n² + 5n + 2 Schritten liegt in O(n²), denn für n ≥ 1 gilt 3n² + 5n + 2 ≤ 10 · n².
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Für Bubblesort ohne Abbruch soll die Zugehörigkeit zu O(n²) mit der Definition nachgewiesen und mit den Messwerten oben überprüft werden.</p>
+            <ol>
+                <li><strong>Vergleiche zählen:</strong> f(n) = n(n − 1)/2 = ½n² − ½n (siehe oben).</li>
+                <li><strong>Obere Schranke nachweisen:</strong> Für alle n ≥ 1 gilt ½n² − ½n ≤ ½n², weil ½n ≥ 0 ist. Mit c = ½ und n<sub>0</sub> = 1 ist die Definition erfüllt, also f(n) ∈ O(n²). <em>Warum darf der Term −½n wegfallen:</em> Er verkleinert f nur, und eine obere Schranke darf größer sein.</li>
+                <li><strong>Falle „obere Schranke“:</strong> Nach der Definition gilt auch f(n) ∈ O(n³), denn n² ≤ n³ für n ≥ 1. Diese Aussage ist wahr, aber wenig hilfreich. Man gibt deshalb die <em>kleinste</em> passende Klasse an. Dass f nicht langsamer als quadratisch wächst, zeigt die Gegenrichtung: Für n ≥ 2 ist n − 1 ≥ n/2, also f(n) ≥ ¼n².</li>
+                <li><strong>Mit den Messwerten prüfen:</strong> Bei O(n²) gilt t ≈ c · n². Verdoppelt sich n, vervierfacht sich t.
+                    <table>
+                        <thead><tr><th>Verdopplung</th><th>Zeiten</th><th>Faktor</th></tr></thead>
+                        <tbody>
+                            <tr><td>2000 → 4000</td><td>178 ms → 646 ms</td><td>≈ 3,6</td></tr>
+                            <tr><td>6000 → 12000</td><td>1538 ms → 6067 ms</td><td>≈ 3,9</td></tr>
+                            <tr><td>8000 → 16000</td><td>2739 ms → 10826 ms</td><td>≈ 4,0</td></tr>
+                        </tbody>
+                    </table>
+                    <em>Warum ist der erste Faktor kleiner?</em> Bei kleinen n fallen Anteile, die nicht quadratisch wachsen (Funktionsaufruf, Schleifenverwaltung, Messungenauigkeit), stärker ins Gewicht. Je größer n, desto näher liegt der Faktor bei 4.</li>
+                <li><strong>Selbst messen:</strong> Für Laufzeitmessungen nimmt man <code>time.perf_counter()</code>. Diese Uhr ist genauer als <code>time.time()</code> und für Zeitdifferenzen gedacht.
+                    <pre><code class="language-python">import random
+import time
+
+def bubblesort(arr):
+    n = len(arr)
+    for i in range(n - 1):
+        for j in range(n - i - 1):
+            if arr[j] &gt; arr[j + 1]:
+                temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+
+for n in [2000, 4000, 8000]:
+    daten = []
+    for i in range(n):
+        daten.append(random.randint(1, 10**6))
+    start = time.perf_counter()
+    bubblesort(daten)
+    ms = round((time.perf_counter() - start) * 1000)
+    print("n =", n, "->", ms, "ms")</code></pre>
+                </li>
+            </ol>
+            <p><strong>Ergebnis:</strong> f(n) ∈ O(n²) mit c = ½, n<sub>0</sub> = 1. Die Messwerte bestätigen den Faktor ≈ 4 bei Verdopplung von n. Absolute Zeiten hängen vom Rechner ab, der Faktor nicht.</p>
+            <table>
+                <thead><tr><th>Eingabe <code>daten</code></th><th>erwartetes Ergebnis nach <code>bubblesort(daten)</code></th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[5, 2, 9, 1]</code></td><td><code>[1, 2, 5, 9]</code></td><td>Normalfall, 6 Vergleiche</td></tr>
+                    <tr><td><code>[]</code> bzw. <code>[7]</code></td><td><code>[]</code> bzw. <code>[7]</code></td><td>Randfälle, 0 Vergleiche</td></tr>
+                    <tr><td><code>[-3, -7, 0]</code></td><td><code>[-7, -3, 0]</code></td><td>negative Zahlen</td></tr>
+                    <tr><td><code>[1, "a"]</code></td><td><code>TypeError</code></td><td>falscher Typ</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.3.2 – Komplexität von Programmstücken bestimmen.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Skalierung</summary>
+                <p>
+                    <strong>Alltag:</strong> Eine App, die mit 100 Testnutzern flüssig läuft, kann mit 100 000 Nutzern unbenutzbar werden, wenn ein Teil davon in O(n²) arbeitet.<br><br>
+                    <strong>Beruf:</strong> Performance-Engineers und Backend-Entwicklerinnen messen Laufzeiten mit Profilern und schätzen mit der O-Notation ab, ob ein System auch bei zehnfacher Last noch reicht. Bei Online-Händlern oder Banken ist das wichtig, bevor sich zum Beispiel am „Black Friday“ die Zugriffe vervielfachen.
+                </p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+            Den Aufwand eines Algorithmus misst man in Schritten in Abhängigkeit von der Eingabegröße n. Anweisungen außerhalb von Schleifen zählen einmal, Schleifenrümpfe so oft, wie die Schleife läuft; bei geschachtelten Schleifen addiert man die Durchläufe der inneren Schleife. Die O-Notation fasst das Ergebnis zusammen: Konstante Faktoren und kleinere Terme fallen weg, angegeben wird die kleinste passende Klasse. Messungen bestätigen die Klasse über den Faktor bei Verdopplung von n – bei O(n²) etwa 4.
+        </p>
+
+<div class="hinweis" id="einschaetzen">
+            <details open>
+                <summary>Einschätzen: zurück zum Streamingdienst</summary>
+                <p>Die Messung im Messlabor ist ein Verdopplungsexperiment. So sieht eine Beispielmessung mit der Songliste aus: Bubblesort sortiert die ersten n Songs nach Streams, ein Zähler zählt die Vergleiche.</p>
+                <table>
+                    <thead><tr><th>n</th><th>Zeit</th><th>Vergleiche</th></tr></thead>
+                    <tbody>
+                        <tr><td>1 000</td><td>0,143 s</td><td>499 490</td></tr>
+                        <tr><td>2 000</td><td>0,585 s</td><td>1 998 810</td></tr>
+                        <tr><td>4 000</td><td>1,921 s</td><td>7 993 050</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Bestimme die Klasse aus den Faktoren bei Verdopplung.</li>
+                    <li>Bestimme eine Konstante c mit Zeit ≈ c · n² und sage damit die Zeit für 8 000 Songs und für 100 Millionen Songs voraus. Kontrolliere mit dem Hochrechner.</li>
+                    <li>Ein Mitschüler misst auf einem doppelt so schnellen Rechner. Was ändert sich: c, die Klasse oder beides?</li>
+                    <li>Bearbeite im Messlabor Teil 1–3: Vervollständige Bubblesort mit dem Vergleichszähler, führe das Verdopplungsexperiment durch und füge dein eigenes Verfahren aus 2.2.1 ein. Zu welcher Klasse gehört dein Verfahren?</li>
+                </ol>
+                <div class="sortierlabor" data-verfahren="hochrechner" data-n="4000" data-zeit="1,921" data-klasse="n2"></div>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Vergleiche: Faktor 4,0 und 4,0, Zeit: 4,1 und 3,3 – das passt zu O(n²); die Zeit schwankt stärker als die Zahl der Vergleiche. c ≈ 1,921 s / 4 000² ≈ 1,2 · 10<sup>−7</sup> s. Vorhersage: 8 000 Songs ≈ 1,2 · 10<sup>−7</sup> · 6,4 · 10<sup>7</sup> ≈ 7,7 s; 100 Millionen Songs ≈ 1,2 · 10<sup>−7</sup> · 10<sup>16</sup> ≈ 1,2 · 10<sup>9</sup> s ≈ 38 Jahre. Auf dem schnelleren Rechner halbiert sich c, die Klasse O(n²) bleibt: Aus 38 werden 19 Jahre. Genau das meint die O-Notation – konstante Faktoren werden weggelassen, weil sie an der Einschätzung „geht“ oder „geht nicht“ nichts ändern. Dein eigenes Verfahren: Wird die Zeit beim Verdoppeln etwa viermal so groß, gehört es ebenfalls zu O(n²) – das gilt für fast alle Verfahren aus dem Kartenspiel. Ob es etwas schneller oder langsamer als Bubblesort ist, ändert an der Klasse nichts.</p>
+                </details>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Die <strong>O-Notation</strong> gibt eine <strong>obere Schranke</strong> für das Wachstum einer Funktion an. Beschreibt f(n) die Anzahl der Schritte eines Algorithmus bei Eingabegröße n, dann bedeutet f(n) ∈ O(g(n)):<br>
+                Es gibt eine Konstante c &gt; 0 und eine Zahl n<sub>0</sub>, sodass f(n) ≤ c · g(n) für alle n ≥ n<sub>0</sub> gilt.<br>
+                Anschaulich: Für große n wächst f höchstens so schnell wie g. Konstante Faktoren und Terme niedrigerer Ordnung werden dabei weggelassen.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Schritte von summe <span class="niveau">AFB I</span></summary>
+                <p>Was gibt <code>summe([3, 1, 4, 1, 5, 9])</code> zurück, und wie viele Schritte braucht die Funktion dafür?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Rückgabe 23. Die Liste hat n = 6 Zahlen, also 1 + 6 + 1 = 8 Schritte.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Vergleiche im Dreieck <span class="niveau">AFB I</span></summary>
+                <p>Bubblesort ohne Abbruch sortiert eine Liste mit 7 Elementen. Wie viele Vergleiche macht die innere Schleife im Durchlauf i = 2, und wie viele Vergleiche sind es insgesamt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Bei i = 2 läuft <code>j</code> durch <code>range(7 - 2 - 1)</code> = <code>range(4)</code>, also 4 Vergleiche. Insgesamt 6 + 5 + 4 + 3 + 2 + 1 = 21 = 7 · 6 / 2 Vergleiche.</p>
+                </details>
+            </details>
+        </div>

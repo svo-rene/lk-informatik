@@ -1,0 +1,834 @@
+<style>
+            /* nur für den Simulator auf dieser Seite */
+            .dsim { border: 1px solid #c7d2fe; border-radius: 8px; padding: 1rem 1.1rem; margin: 1.25rem 0; background: #fbfcff; }
+            .dsim-zeile { display: flex; flex-wrap: wrap; gap: 0.6em 1.2em; align-items: center; margin: 0.4em 0; }
+            .dsim label { font-size: 0.95rem; }
+            .dsim select, .dsim textarea, .dsim button { font: inherit; font-size: 0.95rem; }
+            .dsim textarea { width: 100%; min-height: 3.2em; padding: 0.4em 0.6em; border: 1px solid #c9ced8; border-radius: 6px; font-family: Consolas, monospace; }
+            .dsim button { padding: 0.35em 0.9em; border: 1px solid #1d4ed8; border-radius: 6px; background: #fff; color: #1d4ed8; cursor: pointer; }
+            .dsim button.haupt { background: #1d4ed8; color: #fff; }
+            .dsim button:disabled { opacity: 0.4; cursor: default; }
+            .dsim-fehler { color: #b91c1c; font-size: 0.92rem; }
+            .dsim svg { display: block; width: 100%; height: auto; background: #fff; border: 1px solid #e2e2e2; border-radius: 6px; margin: 0.6em 0; touch-action: none; user-select: none; }
+            .dsim-meldung { background: #eef2ff; border-left: 4px solid #1d4ed8; border-radius: 6px; padding: 0.6em 0.9em; min-height: 3.4em; }
+            .dsim-meldung.warnung { background: #fdeceb; border-left-color: #d64545; }
+            .dsim-meldung.dran { background: #fff7e6; border-left-color: #b45309; }
+            .dsim-zaehler { font-size: 0.88rem; color: #6b7280; }
+            #dsim-tabelle { overflow-x: auto; }
+            .dsim table { margin: 0.8rem 0; }
+            .dsim table th, .dsim table td { padding: 0.35em 0.6em; text-align: center; white-space: nowrap; }
+            .dsim td.neu { background: #fde68a; }
+            .dsim tr.aktuell td { border-bottom: 2px solid #b45309; }
+            .dsim-code { display: grid; grid-template-columns: 3fr 2fr; gap: 0.8em; }
+            .dsim-code pre { margin: 0.4em 0; font-size: 0.82em; }
+            .dsim-code pre span { display: block; padding: 0 0.3em; border-radius: 3px; }
+            .dsim-code pre span.aktiv { background: #fde68a; }
+            .dsim-code pre span .nr { color: #9ca3af; display: inline-block; width: 2em; }
+            .dsim-ergebnis li { margin: 0.2em 0; }
+            @media (max-width: 700px) { .dsim-code { grid-template-columns: 1fr; } }
+        </style>
+<p>Auf Seite 3.9 hast du den Dijkstra-Algorithmus an einem Beispiel und im Code kennengelernt. Auf dieser Seite kannst du ihn selbst laufen lassen: Klick für Klick siehst du, welcher Knoten fertig wird, welche Kante gerade relaxiert wird und wie sich die Tabelle füllt. Gleichzeitig läuft der Python-Code von Seite 3.9 Zeile für Zeile mit. Du kannst auch eigene Graphen eingeben, zum Beispiel aus einer Aufgabe, und damit deine Tabelle kontrollieren.</p>
+
+        <div class="merke">
+            <p>
+                <strong>Dijkstra-Algorithmus</strong> (nur für nichtnegative Kantengewichte):<br>
+                1. Startknoten: Distanz 0, alle anderen Knoten: ∞. Alle Knoten sind offen.<br>
+                2. Der offene Knoten mit der kleinsten Distanz wird <strong>fertig</strong>. Seine Distanz ist jetzt endgültig.<br>
+                3. Für jede Kante zu einem offenen Nachbarn wird geprüft: Ist dist[u] + w &lt; dist[v], dann wird dist[v] = dist[u] + w und u wird als Vorgänger von v eingetragen (<strong>Relaxation</strong>).<br>
+                4. Die Schritte 2 und 3 werden wiederholt, bis alle Knoten fertig sind. Den Weg liest man rückwärts über die Vorgänger ab.
+            </p>
+        </div>
+
+        <h2>Dein Weg durch diese Seite</h2>
+        <ol class="schritte">
+            <li><a href="#simulator">Den Simulator kennenlernen</a> – Beispiel 2 von Seite 3.9 durchklicken, danach Kurz geprüft 1</li>
+            <li><a href="#simulator">Selbst entscheiden</a> – Modus „Ich wähle selbst“ am Übungsgraphen, danach Kurz geprüft 2 und Aufgabe 3.9.8</li>
+            <li><a href="#a-3-9-9">Eigene Lösungen kontrollieren</a> – Graphen aus Aufgaben eingeben (Aufgabe 3.9.9)</li>
+            <li><a href="#a-3-9-10">Grenzen des Verfahrens</a> – negatives Kantengewicht (Aufgabe 3.9.10) und ein eigener Graph (Aufgabe 3.9.11)</li>
+        </ol>
+
+        <h2 id="simulator">Der Simulator</h2>
+        <p>So bedienst du ihn: Wähle oben einen Graphen und den Startknoten. Mit <strong>Weiter</strong> machst du genau eine Aktion: einen Knoten fertig machen oder eine Kante relaxieren. Mit <strong>Zurück</strong> gehst du eine Aktion zurück. Gelb markierte Tabellenfelder haben sich in diesem Schritt geändert. Grüne Kanten zeigen die aktuellen Vorgänger, gestrichelt solange der Knoten noch offen ist. Die Knoten kannst du mit der Maus verschieben.</p>
+
+        <div class="dsim" id="dsim">
+            <div class="dsim-zeile">
+                <label>Graph:
+                    <select id="dsim-beispiel">
+                        <option value="b2">Beispiel 2 von Seite 3.9</option>
+                        <option value="uebung">Übungsgraph mit vielen Verbesserungen</option>
+                        <option value="negativ">Gerichteter Graph mit negativem Gewicht</option>
+                        <option value="eigen">Eigener Graph</option>
+                    </select>
+                </label>
+                <label>Start:
+                    <select id="dsim-start"></select>
+                </label>
+                <label><input type="checkbox" id="dsim-selbst"> Ich wähle selbst, welcher Knoten fertig wird</label>
+            </div>
+            <div class="dsim-zeile" style="display:block">
+                <label for="dsim-kanten">Kanten (ungerichtet: <code>A–B (4)</code>, gerichtet: <code>A→B (4)</code> oder <code>A&gt;B 4</code>):</label>
+                <textarea id="dsim-kanten" spellcheck="false"></textarea>
+                <button type="button" id="dsim-uebernehmen">Graph übernehmen</button>
+                <span class="dsim-fehler" id="dsim-fehler"></span>
+            </div>
+
+            <svg id="dsim-svg" viewBox="0 0 560 320" aria-label="Graph mit Distanzen"></svg>
+
+            <div class="dsim-zeile">
+                <button type="button" id="dsim-neu">⏮ Neu starten</button>
+                <button type="button" id="dsim-zurueck">◀ Zurück</button>
+                <button type="button" class="haupt" id="dsim-weiter">Weiter ▶</button>
+                <button type="button" id="dsim-ende">Bis zum Ende ⏭</button>
+                <span class="dsim-zaehler" id="dsim-zaehler"></span>
+            </div>
+            <div class="dsim-meldung" id="dsim-meldung" aria-live="polite"></div>
+
+            <div id="dsim-tabelle"></div>
+            <div id="dsim-ergebnis" class="dsim-ergebnis"></div>
+
+            <div class="hinweis">
+                <details open>
+                    <summary>Python-Code von Seite 3.9 mitverfolgen</summary>
+                    <div class="dsim-code">
+                        <pre id="dsim-code"></pre>
+                        <pre id="dsim-variablen"></pre>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="hinweis">
+            <details>
+                <summary>Hinweis: Eigene Graphen eingeben</summary>
+                <p>Schreibe die Kanten so, wie sie in den Aufgaben stehen, getrennt durch Kommas oder Zeilenumbrüche, z.&nbsp;B. <code>S–A (7), S–B (3), A–B (2)</code>. Ein Strich (<code>–</code> oder <code>-</code>) bedeutet eine ungerichtete Kante, ein Pfeil (<code>→</code>, <code>-&gt;</code> oder <code>&gt;</code>) eine gerichtete. Die Klammern um das Gewicht kannst du weglassen. Knotennamen bestehen aus Buchstaben oder Ziffern, z.&nbsp;B. <code>DD</code> oder <code>MEI</code>. Danach auf „Graph übernehmen“ klicken.</p>
+                <p>Haben zwei offene Knoten dieselbe kleinste Distanz, nimmt der Simulator wie der Python-Code den Knoten, der in der Kantenliste zuerst vorkommt. In einer Prüfung darfst du in diesem Fall jeden der beiden wählen. Im Modus „Ich wähle selbst“ zählen deshalb beide als richtig.</p>
+            </details>
+        </div>
+
+        <div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Übersprungene Kanten <span class="niveau">AFB I</span></summary>
+                <p>Klicke Beispiel 2 bis zu dem Moment durch, in dem B fertig wird. B hat die Nachbarn A, C und D. Welche Kanten werden danach wirklich relaxiert, und warum werden die anderen übersprungen? Welche Programmzeile sorgt dafür?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nur B–D wird relaxiert: D bekommt 3 + 5 = 8 &lt; 10, also 8 / B. A und C sind schon fertig, ihre Distanzen sind endgültig. Dafür sorgt die Bedingung <code>v not in fertig</code> in der Zeile <code>if v not in fertig and dist[u] + w &lt; dist[v]:</code>.</p>
+                </details>
+            </details>
+        </div>
+
+        <div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Wie oft wird verbessert? <span class="niveau">AFB I</span></summary>
+                <p>Wähle den Übungsgraphen mit Start S und schalte „Ich wähle selbst“ ein. Bevor du klickst: Wie oft wird eine Distanz <em>verbessert</em>, also ein schon eingetragener endlicher Wert durch einen kleineren ersetzt? Zähle dann im Simulator nach.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Viermal: A von 7 / S auf 5 / B, C von 10 / B auf 6 / A, D von 11 / A auf 8 / C und Z von 13 / C auf 11 / D. Fertig werden S (0), B (2), A (5), C (6), D (8), Z (11). Kürzester Weg nach Z: S → B → A → C → D → Z mit 2 + 3 + 1 + 2 + 3 = 11.</p>
+                </details>
+            </details>
+        </div>
+
+        <h2>Zusammenfassung</h2>
+        <p>Dijkstra macht in jedem Schritt genau eine Entscheidung: Der offene Knoten mit der kleinsten Distanz wird fertig. Danach werden nur noch Kanten zu offenen Nachbarn relaxiert. Eine Distanz kann sich also mehrmals verbessern, solange der Knoten offen ist, ändert sich aber nie mehr, wenn er fertig ist. Genau das geht bei negativen Kantengewichten schief: Ein Weg über eine negative Kante kann nachträglich kürzer sein als eine schon festgelegte Distanz.</p>
+
+        <h2>Aufgaben</h2>
+
+        <div class="aufgabe" id="a-3-9-8">
+            <details>
+                <summary>Aufgabe 3.9.8: Erst rechnen, dann klicken <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Übertrage den Übungsgraphen in deinen Hefter: <code>S–A (7), S–B (2), B–A (3), B–C (8), A–C (1), A–D (6), C–D (2), C–Z (7), D–Z (3)</code>. Bestimme mit dem Dijkstra-Algorithmus ab S die Tabelle „Distanz / Vorgänger“ wie in Beispiel 2 auf Seite 3.9.</li>
+                    <li>Lass den Simulator im Modus „Ich wähle selbst“ laufen und vergleiche nach jeder Zeile mit deiner Tabelle. Markiere jede Stelle, an der du dich verrechnet hast.</li>
+                    <li>Gib den kürzesten Weg nach Z an und mache die Probe.</li>
+                </ol>
+            </details>
+        </div>
+
+        <div class="aufgabe" id="a-3-9-9">
+            <details>
+                <summary>Aufgabe 3.9.9: Eigene Lösungen kontrollieren <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Gib den Graphen aus Aufgabe 3.9.1 in den Simulator ein und vergleiche das Ergebnis mit deiner Tabelle aus dem Hefter.</li>
+                    <li>Gib den Graphen aus Aufgabe 3.9.6 ein: <code>S–A (2), S–B (5), A–B (1), A–C (6), B–C (2), C–Z (1), B–Z (6)</code>. Vergleiche die Simulator-Tabelle Zeile für Zeile mit der Tabelle von Jonas. In welcher Zeile tritt der erste Unterschied auf, und in welchem Feld?</li>
+                    <li>Gib den Graphen aus Aufgabe 3.9.4 (Lieferfahrten) mit Kürzeln als Knotennamen ein, z.&nbsp;B. <code>DD–MEI (30)</code>. Prüfe deine Tabelle und die schnellste Route nach Chemnitz.</li>
+                </ol>
+                <p class="tipp">Rechne immer zuerst von Hand. Der Simulator ist zum Kontrollieren da – in der Klausur hast du ihn nicht.</p>
+            </details>
+        </div>
+
+        <div class="aufgabe" id="a-3-9-10">
+            <details>
+                <summary>Aufgabe 3.9.10: Wo Dijkstra sich irrt <span class="niveau">AFB II–III</span></summary>
+                <p>Wähle den gerichteten Graphen mit negativem Gewicht (A→B (4), A→C (5), C→B (−3), B→D (2)) mit Start A.</p>
+                <ol>
+                    <li>Klicke bis zum Ende. Notiere die Distanzen von Dijkstra und die richtigen Distanzen, die der Simulator darunter angibt.</li>
+                    <li>Gib die Aktion an, bei der der kürzere Weg nach B „übersehen“ wird, und die Programmzeile, die dafür verantwortlich ist.</li>
+                    <li>Ein Mitschüler schlägt vor, die Bedingung <code>v not in fertig</code> einfach zu streichen. Beurteile, ob dann für B und für D die richtigen Distanzen herauskommen.</li>
+                </ol>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>1. Dijkstra: A 0, B 4, C 5, D 6. Richtig: A 0, B 2, C 5, D 4.<br>
+                2. Nachdem C fertig geworden ist, wird die Kante C→B betrachtet: 5 + (−3) = 2 &lt; 4. B ist aber schon fertig, und die Bedingung <code>v not in fertig</code> in der Zeile <code>if v not in fertig and dist[u] + w &lt; dist[v]:</code> verhindert die Verbesserung.<br>
+                3. Ohne die Bedingung wird B auf 2 / C verbessert. D bleibt aber bei 6, denn die Kante B→D wurde schon relaxiert, als B fertig wurde, und wird nicht noch einmal betrachtet. Das Ergebnis bleibt also falsch. Bei negativen Gewichten braucht man den Algorithmus von Moore (Bellman-Ford), der alle Kanten mehrmals relaxiert.</p>
+                </details>
+            </details>
+        </div>
+
+        <h2>Übung und Vertiefung</h2>
+        <p>Diese Aufgabe ist zum Üben und Vertiefen zu Hause gedacht.</p>
+
+        <div class="aufgabe" id="a-3-9-11">
+            <details>
+                <summary>Aufgabe 3.9.11: Einen Graphen konstruieren <span class="niveau">AFB III</span></summary>
+                <p>Konstruiere einen ungerichteten Graphen mit Startknoten S und Zielknoten Z und höchstens 5 Knoten, bei dem gilt:</p>
+                <ol>
+                    <li>Die direkte Kante S–Z hat das Gewicht 10. Z bekommt also gleich im ersten Schritt den Eintrag 10 / S.</li>
+                    <li>Danach wird die Distanz von Z genau dreimal verbessert, bevor Z fertig wird.</li>
+                </ol>
+                <p>Rechne deinen Graphen zuerst von Hand mit einer Tabelle und prüfe ihn dann im Simulator. Erkläre, warum es mit nur 4 Knoten nicht geht.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Ein mögliches Beispiel: <code>S–Z (10), S–A (1), A–Z (8), A–B (1), B–Z (6), B–C (1), C–Z (4)</code>. Fertig werden S (0), A (1), B (2), C (3), Z (7). Z wird von 10 / S auf 9 / A, 8 / B und 7 / C verbessert.<br>
+                Begründung: Jede Verbesserung von Z entsteht, wenn ein anderer Knoten fertig wird und eine Kante zu Z hat. Außer S und Z braucht man also mindestens drei weitere Knoten, die vor Z fertig werden. Mit 4 Knoten gibt es nur zwei, also höchstens zwei Verbesserungen.</p>
+                </details>
+            </details>
+        </div>
+
+        <script>
+        (function () {
+            /* Dijkstra-Simulator: bildet den Python-Code von Seite 3.9 Aktion für Aktion nach.
+               Hinweis für OPAL: In diesem Skript keine schließenden body- oder html-Tags als Text schreiben,
+               sonst schneidet OPAL die Seite an dieser Stelle ab. */
+            var SVGNS = "http://www.w3.org/2000/svg";
+            var BREITE = 560, HOEHE = 320, RADIUS = 19;
+
+            var BEISPIELE = {
+                b2: {
+                    kanten: "A–B (4), A–C (2), B–C (1), B–D (5), C–D (8), C–E (10), D–E (2)",
+                    start: "A",
+                    pos: { A: [60, 170], B: [210, 70], C: [210, 270], D: [390, 70], E: [500, 210] }
+                },
+                uebung: {
+                    kanten: "S–A (7), S–B (2), B–A (3), B–C (8), A–C (1), A–D (6), C–D (2), C–Z (7), D–Z (3)",
+                    start: "S",
+                    pos: { S: [50, 170], A: [200, 70], B: [200, 270], C: [340, 170], D: [450, 70], Z: [510, 260] }
+                },
+                negativ: {
+                    kanten: "A→B (4), A→C (5), C→B (−3), B→D (2)",
+                    start: "A",
+                    pos: { A: [80, 170], B: [280, 70], C: [280, 270], D: [480, 70] }
+                }
+            };
+
+            var CODE = [
+                "def dijkstra(graph, start, dist, vorgaenger):",
+                "    # Vorbereitung: alle Distanzen unendlich, kein Vorgänger, noch nichts fertig",
+                "    for k in graph:",
+                "        dist[k] = float(\"inf\")",
+                "        vorgaenger[k] = None",
+                "    dist[start] = 0",
+                "    fertig = []",
+                "",
+                "    while len(fertig) < len(graph):",
+                "        # 1. unter den offenen Knoten den mit der kleinsten Distanz suchen",
+                "        u = None",
+                "        for k in graph:",
+                "            if k not in fertig:",
+                "                if u is None or dist[k] < dist[u]:",
+                "                    u = k",
+                "        # 2. u wird fertig: seine Distanz ist endgültig",
+                "        fertig.append(u)",
+                "        # 3. Kanten zu offenen Nachbarn relaxieren",
+                "        for v in graph[u]:",
+                "            w = graph[u][v]                  # Gewicht der Kante u–v",
+                "            if v not in fertig and dist[u] + w < dist[v]:",
+                "                dist[v] = dist[u] + w",
+                "                vorgaenger[v] = u"
+            ];
+
+            var el = function (id) { return document.getElementById(id); };
+            var G = null;            // { knoten: [], adj: {k: [{v, w}]}, kanten: [{a, b, w, gerichtet}], pos: {}, negativ }
+            var verlauf = [];        // Liste der Zustände, letzter = aktueller
+            var wahl = { anzahl: 0, richtig: 0, fehlversuch: false };
+
+            /* ---------- Graph einlesen ---------- */
+
+            function einlesen(text) {
+                var teile = text.split(/[,;\n]+/);
+                var g = { knoten: [], adj: {}, kanten: [], pos: {}, negativ: false };
+                var fehler = [];
+                var muster = /^([A-Za-zÄÖÜäöüß0-9_]+)\s*(->|→|>|–|—|-)\s*([A-Za-zÄÖÜäöüß0-9_]+)\s*\(?\s*([−-]?\s*\d+)\s*\)?$/;
+                function knoten(k) {
+                    if (g.adj[k] === undefined) { g.knoten.push(k); g.adj[k] = []; }
+                }
+                function setze(a, b, w) {
+                    var liste = g.adj[a];
+                    for (var i = 0; i < liste.length; i++) {
+                        if (liste[i].v === b) { liste[i].w = w; return; }
+                    }
+                    liste.push({ v: b, w: w });
+                }
+                for (var i = 0; i < teile.length; i++) {
+                    var t = teile[i].trim();
+                    if (t === "") continue;
+                    var m = muster.exec(t);
+                    if (!m) { fehler.push("„" + t + "“"); continue; }
+                    var a = m[1], b = m[3];
+                    var w = parseInt(m[4].replace("−", "-").replace(/\s/g, ""), 10);
+                    var gerichtet = m[2] === "->" || m[2] === "→" || m[2] === ">";
+                    if (a === b) { fehler.push("„" + t + "“ (Schleife)"); continue; }
+                    knoten(a); knoten(b);
+                    setze(a, b, w);
+                    if (!gerichtet) setze(b, a, w);
+                    if (w < 0) g.negativ = true;
+                    g.kanten.push({ a: a, b: b, w: w, gerichtet: gerichtet });
+                }
+                return { g: g, fehler: fehler };
+            }
+
+            function kreisLayout(g) {
+                var n = g.knoten.length;
+                for (var i = 0; i < n; i++) {
+                    var winkel = Math.PI + i * 2 * Math.PI / n;
+                    g.pos[g.knoten[i]] = [BREITE / 2 + 220 * Math.cos(winkel), HOEHE / 2 + 120 * Math.sin(winkel)];
+                }
+            }
+
+            function grafLaden(text, pos, start) {
+                var r = einlesen(text);
+                if (r.fehler.length > 0) {
+                    el("dsim-fehler").textContent = "Nicht verstanden: " + r.fehler.join(", ");
+                } else {
+                    el("dsim-fehler").textContent = "";
+                }
+                if (r.g.knoten.length === 0) {
+                    el("dsim-fehler").textContent = "Bitte mindestens eine Kante eingeben, z. B. A–B (3).";
+                    return;
+                }
+                G = r.g;
+                var allePos = pos !== null;
+                if (allePos) {
+                    for (var i = 0; i < G.knoten.length; i++) {
+                        if (!pos[G.knoten[i]]) allePos = false;
+                    }
+                }
+                if (allePos) {
+                    for (var k in pos) G.pos[k] = [pos[k][0], pos[k][1]];
+                } else {
+                    kreisLayout(G);
+                }
+                var auswahl = el("dsim-start");
+                auswahl.innerHTML = "";
+                for (var j = 0; j < G.knoten.length; j++) {
+                    var o = document.createElement("option");
+                    o.value = G.knoten[j];
+                    o.textContent = G.knoten[j];
+                    auswahl.appendChild(o);
+                }
+                auswahl.value = (start && G.adj[start] !== undefined) ? start : G.knoten[0];
+                neuStarten();
+            }
+
+            /* ---------- Zustände ---------- */
+
+            function zahl(d) { return d === Infinity ? "∞" : String(d); }
+            function eintrag(z, k) {
+                if (z.dist[k] === Infinity) return "∞";
+                return zahl(z.dist[k]) + " / " + (z.vor[k] === null ? "–" : z.vor[k]);
+            }
+
+            function kopie(z) {
+                var n = { phase: z.phase, u: z.u, ni: z.ni, kante: z.kante, meldung: z.meldung, art: z.art,
+                          code: z.code, dist: {}, vor: {}, fertig: z.fertig.slice(), zeilen: [], v: z.v, w: z.w };
+                for (var k in z.dist) { n.dist[k] = z.dist[k]; n.vor[k] = z.vor[k]; }
+                for (var i = 0; i < z.zeilen.length; i++) {
+                    var alt = z.zeilen[i], neu = { fertig: alt.fertig, zellen: {} };
+                    for (var k2 in alt.zellen) {
+                        neu.zellen[k2] = { t: alt.zellen[k2].t, fett: alt.zellen[k2].fett, neu: false };
+                    }
+                    n.zeilen.push(neu);
+                }
+                return n;
+            }
+
+            function startZustand() {
+                var start = el("dsim-start").value;
+                var z = { phase: "init", u: null, ni: 0, kante: null, dist: {}, vor: {}, fertig: [], zeilen: [],
+                          code: [3, 7], art: "", v: null, w: null };
+                var zeile = { fertig: "–", zellen: {} };
+                for (var i = 0; i < G.knoten.length; i++) {
+                    var k = G.knoten[i];
+                    z.dist[k] = Infinity;
+                    z.vor[k] = null;
+                }
+                z.dist[start] = 0;
+                for (var j = 0; j < G.knoten.length; j++) {
+                    zeile.zellen[G.knoten[j]] = { t: eintrag(z, G.knoten[j]), fett: false, neu: false };
+                }
+                z.zeilen.push(zeile);
+                z.meldung = "<strong>Vorbereitung:</strong> Der Startknoten " + start + " bekommt die Distanz 0, alle anderen ∞. Noch kein Knoten ist fertig.";
+                if (G.negativ) {
+                    z.meldung += " <strong>Achtung:</strong> Dieser Graph hat ein negatives Kantengewicht – dafür ist Dijkstra eigentlich nicht geeignet.";
+                    z.art = "warnung";
+                }
+                return z;
+            }
+
+            function offeneKnoten(z) {
+                var offen = [];
+                for (var i = 0; i < G.knoten.length; i++) {
+                    if (z.fertig.indexOf(G.knoten[i]) < 0) offen.push(G.knoten[i]);
+                }
+                return offen;
+            }
+
+            function kandidaten(z) {
+                var offen = offeneKnoten(z), min = Infinity, liste = [];
+                for (var i = 0; i < offen.length; i++) {
+                    if (z.dist[offen[i]] < min) min = z.dist[offen[i]];
+                }
+                for (var j = 0; j < offen.length; j++) {
+                    if (z.dist[offen[j]] === min) liste.push(offen[j]);
+                }
+                return liste;
+            }
+
+            // true, wenn als Nächstes ein Knoten fertig gemacht werden muss
+            function brauchtWahl(z) {
+                if (z.phase === "ende") return false;
+                if (z.phase !== "init" && z.ni < G.adj[z.u].length) return false;
+                return z.fertig.length < G.knoten.length;
+            }
+
+            function schritt(alt, gewaehlt) {
+                var z = kopie(alt);
+                z.kante = null; z.art = ""; z.v = null; z.w = null;
+                if (z.phase !== "ende" && !brauchtWahl(z)) {
+                    if (z.fertig.length === G.knoten.length && (z.phase === "init" || z.ni >= G.adj[z.u].length)) {
+                        return endZustand(z);
+                    }
+                    return relaxieren(z);
+                }
+                // nächsten Knoten fertig machen
+                var kand = kandidaten(z);
+                var u = gewaehlt ? gewaehlt : kand[0];
+                var offenText = [];
+                var offen = offeneKnoten(z);
+                for (var i = 0; i < offen.length; i++) offenText.push(offen[i] + " " + zahl(z.dist[offen[i]]));
+                var vorher = z.fertig.slice();
+                z.fertig.push(u);
+                z.u = u; z.ni = 0; z.phase = "fertig"; z.code = [9, 17];
+                var zeile = { fertig: u, zellen: {} };
+                for (var j = 0; j < G.knoten.length; j++) {
+                    var k = G.knoten[j];
+                    if (vorher.indexOf(k) >= 0) zeile.zellen[k] = { t: "–", fett: false, neu: false };
+                    else zeile.zellen[k] = { t: eintrag(z, k), fett: k === u, neu: false };
+                }
+                z.zeilen.push(zeile);
+                if (z.dist[u] === Infinity) {
+                    z.meldung = "Alle offenen Knoten haben die Distanz ∞. <strong>" + u + "</strong> wird fertig, ist vom Start aus aber <strong>nicht erreichbar</strong>.";
+                } else {
+                    z.meldung = "Offen: " + offenText.join(", ") + ". Die kleinste Distanz hat <strong>" + u + "</strong> (" + zahl(z.dist[u]) + ") → " + u + " ist <strong>fertig</strong>, die Distanz " + zahl(z.dist[u]) + " ist endgültig.";
+                    if (kand.length > 1) z.meldung += " (Gleichstand mit " + kand.filter(function (x) { return x !== u; }).join(", ") + " – beide Wahlen sind richtig.)";
+                }
+                if (G.adj[u].length === 0) z.meldung += " " + u + " hat keine ausgehenden Kanten.";
+                else z.meldung += " Jetzt werden seine Kanten betrachtet.";
+                return z;
+            }
+
+            function relaxieren(z) {
+                var u = z.u, kante = G.adj[u][z.ni];
+                var v = kante.v, w = kante.w, alt = z.dist[u] + w;
+                var gewicht = w < 0 ? "(" + w + ")" : String(w);
+                z.ni += 1;
+                z.phase = "relax";
+                z.kante = { a: u, b: v };
+                z.v = v; z.w = w;
+                var zeile = z.zeilen[z.zeilen.length - 1];
+                var name = "Kante " + u + (gerichtetVon(u, v) ? "→" : "–") + v + " (" + w + "): ";
+                if (z.fertig.indexOf(v) >= 0) {
+                    z.code = [19, 21];
+                    z.meldung = name + v + " ist schon fertig und wird <strong>übersprungen</strong>.";
+                    if (alt < z.dist[v]) {
+                        z.meldung += " <strong>Achtung:</strong> " + zahl(z.dist[u]) + " + " + gewicht + " = " + zahl(alt) + " wäre kleiner als " + zahl(z.dist[v]) + "! Wegen des negativen Gewichts übersieht Dijkstra diesen kürzeren Weg.";
+                        z.art = "warnung";
+                    }
+                } else if (alt < z.dist[v]) {
+                    var vorher = z.dist[v];
+                    z.dist[v] = alt;
+                    z.vor[v] = u;
+                    z.code = [19, 23];
+                    zeile.zellen[v] = { t: eintrag(z, v), fett: false, neu: true };
+                    if (vorher === Infinity) {
+                        z.meldung = name + v + " wird <strong>erstmals erreicht</strong>: " + zahl(z.dist[u]) + " + " + gewicht + " = " + alt + " &lt; ∞ → " + v + " bekommt " + alt + " / " + u + ".";
+                    } else {
+                        z.meldung = name + zahl(z.dist[u]) + " + " + gewicht + " = " + alt + " &lt; " + vorher + " → <strong>verbessert</strong>: " + v + " bekommt " + alt + " / " + u + ".";
+                    }
+                } else {
+                    z.code = [19, 21];
+                    if (z.dist[u] === Infinity) {
+                        z.meldung = name + "∞ + " + gewicht + " bleibt ∞ – keine Änderung.";
+                    } else {
+                        z.meldung = name + zahl(z.dist[u]) + " + " + gewicht + " = " + alt + " ist nicht kleiner als " + zahl(z.dist[v]) + " → <strong>keine Verbesserung</strong>, " + v + " behält " + eintrag(z, v) + ".";
+                    }
+                }
+                return z;
+            }
+
+            function endZustand(z) {
+                z.phase = "ende";
+                z.code = [9, 9];
+                z.meldung = "Alle Knoten sind fertig, die <code>while</code>-Bedingung ist falsch – der Algorithmus endet. Die grünen Kanten bilden die kürzesten Wege vom Start aus.";
+                if (G.negativ) z.art = "warnung";
+                return z;
+            }
+
+            function gerichtetVon(a, b) {
+                for (var i = 0; i < G.kanten.length; i++) {
+                    var k = G.kanten[i];
+                    if (k.a === a && k.b === b) return k.gerichtet;
+                    if (k.a === b && k.b === a && !k.gerichtet) return false;
+                }
+                return false;
+            }
+
+            /* ---------- Bellman-Ford (nur zum Vergleich bei negativen Gewichten) ---------- */
+
+            function mooreDistanzen(start) {
+                var d = {};
+                for (var i = 0; i < G.knoten.length; i++) d[G.knoten[i]] = Infinity;
+                d[start] = 0;
+                for (var runde = 0; runde < G.knoten.length; runde++) {
+                    var geaendert = false;
+                    for (var j = 0; j < G.knoten.length; j++) {
+                        var u = G.knoten[j];
+                        for (var m = 0; m < G.adj[u].length; m++) {
+                            var e = G.adj[u][m];
+                            if (d[u] + e.w < d[e.v]) { d[e.v] = d[u] + e.w; geaendert = true; }
+                        }
+                    }
+                    if (!geaendert) return d;
+                }
+                return null;   // negativer Zyklus
+            }
+
+            /* ---------- Zeichnen ---------- */
+
+            function svgEl(name, attr, eltern) {
+                var e = document.createElementNS(SVGNS, name);
+                for (var a in attr) e.setAttribute(a, attr[a]);
+                if (eltern) eltern.appendChild(e);
+                return e;
+            }
+
+            function pfeilspitzen(svg) {
+                var defs = svgEl("defs", {}, svg);
+                var farben = { grau: "#9ca3af", orange: "#b45309", gruen: "#2f9e57" };
+                for (var name in farben) {
+                    var m = svgEl("marker", { id: "dsim-pfeil-" + name, viewBox: "0 0 10 10", refX: "9", refY: "5",
+                                              markerWidth: "7", markerHeight: "7", orient: "auto-start-reverse" }, defs);
+                    svgEl("path", { d: "M0,0 L10,5 L0,10 z", fill: farben[name] }, m);
+                }
+            }
+
+            function istBaumKante(z, a, b, gerichtet) {
+                if (z.vor[b] === a) return b;
+                if (!gerichtet && z.vor[a] === b) return a;
+                return null;
+            }
+
+            function zeichnen() {
+                var z = verlauf[verlauf.length - 1];
+                var svg = el("dsim-svg");
+                while (svg.firstChild) svg.removeChild(svg.firstChild);
+                pfeilspitzen(svg);
+                var aktuelleZeile = z.zeilen[z.zeilen.length - 1];
+                var warten = el("dsim-selbst").checked && brauchtWahl(z);
+
+                for (var i = 0; i < G.kanten.length; i++) {
+                    var k = G.kanten[i];
+                    var p = G.pos[k.a], q = G.pos[k.b];
+                    var dx = q[0] - p[0], dy = q[1] - p[1], len = Math.sqrt(dx * dx + dy * dy) || 1;
+                    var ux = dx / len, uy = dy / len;
+                    var versatz = 0;
+                    if (k.gerichtet && G.adj[k.b].some(function (e) { return e.v === k.a; })) versatz = 7;
+                    var ox = -uy * versatz, oy = ux * versatz;
+                    var x1 = p[0] + ux * RADIUS + ox, y1 = p[1] + uy * RADIUS + oy;
+                    var x2 = q[0] - ux * (RADIUS + (k.gerichtet ? 3 : 0)) + ox, y2 = q[1] - uy * (RADIUS + (k.gerichtet ? 3 : 0)) + oy;
+
+                    var farbe = "#9ca3af", dicke = 2, strich = "", marker = "grau";
+                    var ziel = istBaumKante(z, k.a, k.b, k.gerichtet);
+                    if (ziel !== null) {
+                        farbe = "#2f9e57"; dicke = 4; marker = "gruen";
+                        if (z.fertig.indexOf(ziel) < 0) strich = "7 5";
+                    }
+                    var aktiv = z.kante && ((z.kante.a === k.a && z.kante.b === k.b) || (!k.gerichtet && z.kante.a === k.b && z.kante.b === k.a));
+                    if (aktiv) { farbe = "#b45309"; dicke = 5; strich = ""; marker = "orange"; }
+                    var linie = svgEl("line", { x1: x1, y1: y1, x2: x2, y2: y2, stroke: farbe, "stroke-width": dicke, "stroke-linecap": "round" }, svg);
+                    if (strich) linie.setAttribute("stroke-dasharray", strich);
+                    if (k.gerichtet) linie.setAttribute("marker-end", "url(#dsim-pfeil-" + marker + ")");
+
+                    var mx = (p[0] + q[0]) / 2 + ox * 2.2, my = (p[1] + q[1]) / 2 + oy * 2.2;
+                    var text = String(k.w).replace("-", "−");
+                    svgEl("rect", { x: mx - 6 - text.length * 4, y: my - 10, width: 12 + text.length * 8, height: 20, rx: 4,
+                                    fill: "#fff", stroke: aktiv ? "#b45309" : "none" }, svg);
+                    var t = svgEl("text", { x: mx, y: my + 5, "text-anchor": "middle", "font-size": "14", "font-weight": aktiv ? "700" : "400",
+                                            fill: k.w < 0 ? "#d64545" : "#1f2430" }, svg);
+                    t.textContent = text;
+                }
+
+                for (var j = 0; j < G.knoten.length; j++) {
+                    var name = G.knoten[j], pos = G.pos[name];
+                    var g = svgEl("g", { "data-knoten": name, style: "cursor:" + (warten ? "pointer" : "grab") }, svg);
+                    var fuell = "#ffffff", rand = "#6b7280", schrift = "#1f2430";
+                    if (z.fertig.indexOf(name) >= 0) { fuell = "#2f9e57"; rand = "#1f7a40"; schrift = "#ffffff"; }
+                    if (name === z.u && z.phase !== "ende") { fuell = "#b45309"; rand = "#7c3a06"; schrift = "#ffffff"; }
+                    if (z.kante && z.kante.b === name) { rand = "#b45309"; }
+                    var kreis = svgEl("circle", { cx: pos[0], cy: pos[1], r: RADIUS, fill: fuell, stroke: rand, "stroke-width": 3 }, g);
+                    if (warten && z.fertig.indexOf(name) < 0) kreis.setAttribute("stroke-dasharray", "5 3");
+                    var beschriftung = svgEl("text", { x: pos[0], y: pos[1] + 5, "text-anchor": "middle", "font-size": name.length > 2 ? "11" : "15",
+                                                       "font-weight": "700", fill: schrift }, g);
+                    beschriftung.textContent = name;
+                    // Distanz über dem Knoten
+                    var dText = zahl(z.dist[name]);
+                    var neu = aktuelleZeile.zellen[name] && aktuelleZeile.zellen[name].neu;
+                    svgEl("rect", { x: pos[0] - 6 - dText.length * 4.5, y: pos[1] - RADIUS - 24, width: 12 + dText.length * 9, height: 19, rx: 9,
+                                    fill: neu ? "#fde68a" : "#eef2ff", stroke: "#1d4ed8", "stroke-width": 1 }, g);
+                    var d = svgEl("text", { x: pos[0], y: pos[1] - RADIUS - 10, "text-anchor": "middle", "font-size": "13", "font-weight": "700", fill: "#1d4ed8" }, g);
+                    d.textContent = dText;
+                    knotenBedienung(g, name);
+                }
+            }
+
+            /* Knoten verschieben (Ziehen) oder anklicken (Modus „Ich wähle selbst“) */
+            function knotenBedienung(g, name) {
+                g.addEventListener("pointerdown", function (e) {
+                    var svg = el("dsim-svg");
+                    var matrix = svg.getScreenCTM().inverse();
+                    var startX = e.clientX, startY = e.clientY, gezogen = false;
+                    g.setPointerCapture(e.pointerId);
+                    function bewegen(ev) {
+                        if (Math.abs(ev.clientX - startX) + Math.abs(ev.clientY - startY) > 4) gezogen = true;
+                        if (!gezogen) return;
+                        var pt = svg.createSVGPoint();
+                        pt.x = ev.clientX; pt.y = ev.clientY;
+                        var p = pt.matrixTransform(matrix);
+                        G.pos[name] = [Math.max(RADIUS, Math.min(BREITE - RADIUS, p.x)), Math.max(RADIUS + 26, Math.min(HOEHE - RADIUS, p.y))];
+                        zeichnen();
+                    }
+                    function loslassen() {
+                        document.removeEventListener("pointermove", bewegen);
+                        document.removeEventListener("pointerup", loslassen);
+                        if (!gezogen) knotenGeklickt(name);
+                    }
+                    document.addEventListener("pointermove", bewegen);
+                    document.addEventListener("pointerup", loslassen);
+                });
+            }
+
+            function knotenGeklickt(name) {
+                var z = verlauf[verlauf.length - 1];
+                if (!el("dsim-selbst").checked || !brauchtWahl(z)) return;
+                if (z.fertig.indexOf(name) >= 0) {
+                    zeigeHinweis(name + " ist schon fertig. Wähle einen offenen Knoten.");
+                    wahl.fehlversuch = true;
+                    return;
+                }
+                if (kandidaten(z).indexOf(name) < 0) {
+                    zeigeHinweis("Noch nicht: " + name + " hat die Distanz " + zahl(z.dist[name]) + ". Es gibt einen offenen Knoten mit kleinerer Distanz.");
+                    wahl.fehlversuch = true;
+                    return;
+                }
+                wahl.anzahl += 1;
+                if (!wahl.fehlversuch) wahl.richtig += 1;
+                wahl.fehlversuch = false;
+                verlauf.push(schritt(z, name));
+                anzeigen();
+                el("dsim-meldung").innerHTML = "<strong>Richtig!</strong> " + el("dsim-meldung").innerHTML;
+            }
+
+            function zeigeHinweis(text) {
+                var m = el("dsim-meldung");
+                m.className = "dsim-meldung warnung";
+                m.innerHTML = text;
+            }
+
+            /* ---------- Tabelle, Code, Ergebnis ---------- */
+
+            function tabelle(z) {
+                var h = "<table><thead><tr><th>Schritt</th><th>fertig</th>";
+                for (var i = 0; i < G.knoten.length; i++) h += "<th>" + G.knoten[i] + "</th>";
+                h += "</tr></thead><tbody>";
+                for (var r = 0; r < z.zeilen.length; r++) {
+                    var zeile = z.zeilen[r];
+                    var aktuell = r === z.zeilen.length - 1 && z.phase !== "ende";
+                    h += "<tr" + (aktuell ? " class=\"aktuell\"" : "") + "><td>" + (r === 0 ? "Start" : r) + "</td><td>" + zeile.fertig + "</td>";
+                    for (var j = 0; j < G.knoten.length; j++) {
+                        var c = zeile.zellen[G.knoten[j]];
+                        var inhalt = c.fett ? "<strong>" + c.t + "</strong>" : c.t;
+                        h += "<td" + (c.neu && r === z.zeilen.length - 1 ? " class=\"neu\"" : "") + ">" + inhalt + "</td>";
+                    }
+                    h += "</tr>";
+                }
+                return h + "</tbody></table>";
+            }
+
+            function codeAnzeigen(z) {
+                var pre = el("dsim-code");
+                pre.innerHTML = "";
+                for (var i = 0; i < CODE.length; i++) {
+                    var s = document.createElement("span");
+                    var nr = document.createElement("span");
+                    nr.className = "nr";
+                    nr.textContent = String(i + 1);
+                    s.appendChild(nr);
+                    s.appendChild(document.createTextNode(CODE[i] || " "));
+                    if (i + 1 >= z.code[0] && i + 1 <= z.code[1]) s.className = "aktiv";
+                    pre.appendChild(s);
+                }
+            }
+
+            function pyWert(d) { return d === Infinity ? "inf" : String(d); }
+
+            function variablenAnzeigen(z) {
+                var teile = [];
+                for (var i = 0; i < G.knoten.length; i++) {
+                    teile.push("'" + G.knoten[i] + "': " + pyWert(z.dist[G.knoten[i]]));
+                }
+                var vorg = [];
+                for (var j = 0; j < G.knoten.length; j++) {
+                    var v = z.vor[G.knoten[j]];
+                    vorg.push("'" + G.knoten[j] + "': " + (v === null ? "None" : "'" + v + "'"));
+                }
+                var zeilen = [];
+                zeilen.push("u = " + (z.u === null ? "None" : "'" + z.u + "'"));
+                if (z.v !== null) zeilen.push("v = '" + z.v + "'   w = " + z.w);
+                zeilen.push("fertig = [" + z.fertig.map(function (k) { return "'" + k + "'"; }).join(", ") + "]");
+                zeilen.push("");
+                zeilen.push("dist = {");
+                for (var a = 0; a < teile.length; a++) zeilen.push("    " + teile[a] + ",");
+                zeilen.push("}");
+                zeilen.push("vorgaenger = {");
+                for (var b = 0; b < vorg.length; b++) zeilen.push("    " + vorg[b] + ",");
+                zeilen.push("}");
+                el("dsim-variablen").textContent = zeilen.join("\n");
+            }
+
+            function weg(z, ziel) {
+                var liste = [];
+                var k = ziel;
+                while (k !== null) {
+                    liste.unshift(k);
+                    k = z.vor[k];
+                }
+                return liste;
+            }
+
+            function ergebnis(z) {
+                if (z.phase !== "ende") return "";
+                var start = el("dsim-start").value;
+                var h = "<p><strong>Ergebnis:</strong></p><ul>";
+                for (var i = 0; i < G.knoten.length; i++) {
+                    var k = G.knoten[i];
+                    if (k === start) continue;
+                    if (z.dist[k] === Infinity) h += "<li>" + k + ": nicht erreichbar</li>";
+                    else h += "<li>Weg nach " + k + ": " + weg(z, k).join(" → ") + ", Länge " + zahl(z.dist[k]) + "</li>";
+                }
+                h += "</ul>";
+                if (G.negativ) {
+                    var richtig = mooreDistanzen(start);
+                    if (richtig === null) {
+                        h += "<p><strong>Achtung:</strong> Der Graph enthält einen negativen Zyklus – es gibt keine kürzesten Wege.</p>";
+                    } else {
+                        var falsch = [];
+                        for (var j = 0; j < G.knoten.length; j++) {
+                            var n = G.knoten[j];
+                            if (richtig[n] !== z.dist[n]) falsch.push(n + ": Dijkstra " + zahl(z.dist[n]) + ", richtig " + zahl(richtig[n]));
+                        }
+                        if (falsch.length > 0) h += "<p><strong>Falsch wegen des negativen Gewichts</strong> (richtige Werte nach Moore/Bellman-Ford): " + falsch.join("; ") + ".</p>";
+                        else h += "<p>Trotz des negativen Gewichts stimmen hier zufällig alle Distanzen. Garantiert ist das nicht.</p>";
+                    }
+                }
+                return h;
+            }
+
+            function anzeigen() {
+                var z = verlauf[verlauf.length - 1];
+                zeichnen();
+                var m = el("dsim-meldung");
+                var warten = el("dsim-selbst").checked && brauchtWahl(z);
+                m.className = "dsim-meldung" + (z.art === "warnung" ? " warnung" : (warten ? " dran" : ""));
+                m.innerHTML = z.meldung + (warten ? "<br><strong>Du bist dran:</strong> Klicke im Graphen auf den Knoten, der als Nächstes fertig wird. („Weiter“ zeigt die Lösung.)" : "");
+                el("dsim-tabelle").innerHTML = tabelle(z);
+                el("dsim-ergebnis").innerHTML = ergebnis(z);
+                codeAnzeigen(z);
+                variablenAnzeigen(z);
+                el("dsim-zurueck").disabled = verlauf.length <= 1;
+                el("dsim-weiter").disabled = z.phase === "ende";
+                el("dsim-ende").disabled = z.phase === "ende";
+                var zaehler = "Aktion " + (verlauf.length - 1);
+                if (el("dsim-selbst").checked && wahl.anzahl > 0) {
+                    zaehler += " · beim ersten Versuch richtig gewählt: " + wahl.richtig + " von " + wahl.anzahl;
+                }
+                el("dsim-zaehler").textContent = zaehler;
+            }
+
+            function neuStarten() {
+                verlauf = [startZustand()];
+                wahl = { anzahl: 0, richtig: 0, fehlversuch: false };
+                anzeigen();
+            }
+
+            function weiter() {
+                var z = verlauf[verlauf.length - 1];
+                if (z.phase === "ende") return;
+                var loesung = el("dsim-selbst").checked && brauchtWahl(z);
+                if (loesung) { wahl.anzahl += 1; wahl.fehlversuch = false; }
+                verlauf.push(schritt(z, null));
+                anzeigen();
+                if (loesung) el("dsim-meldung").innerHTML = "<strong>Lösung:</strong> " + el("dsim-meldung").innerHTML;
+            }
+
+            /* ---------- Bedienelemente ---------- */
+
+            function beispielLaden() {
+                var wahlBsp = el("dsim-beispiel").value;
+                if (wahlBsp === "eigen") {
+                    el("dsim-kanten").value = "";
+                    el("dsim-kanten").focus();
+                    el("dsim-fehler").textContent = "Gib deine Kanten ein und klicke auf „Graph übernehmen“.";
+                    return;
+                }
+                var b = BEISPIELE[wahlBsp];
+                el("dsim-kanten").value = b.kanten;
+                grafLaden(b.kanten, b.pos, b.start);
+            }
+
+            el("dsim-beispiel").addEventListener("change", beispielLaden);
+            el("dsim-uebernehmen").addEventListener("click", function () {
+                var wahlBsp = el("dsim-beispiel").value;
+                var b = BEISPIELE[wahlBsp];
+                var text = el("dsim-kanten").value;
+                if (b && b.kanten === text) grafLaden(text, b.pos, b.start);
+                else {
+                    el("dsim-beispiel").value = "eigen";
+                    grafLaden(text, null, null);
+                }
+            });
+            el("dsim-start").addEventListener("change", neuStarten);
+            el("dsim-selbst").addEventListener("change", function () { wahl = { anzahl: 0, richtig: 0, fehlversuch: false }; anzeigen(); });
+            el("dsim-neu").addEventListener("click", neuStarten);
+            el("dsim-zurueck").addEventListener("click", function () {
+                if (verlauf.length > 1) { verlauf.pop(); anzeigen(); }
+            });
+            el("dsim-weiter").addEventListener("click", weiter);
+            el("dsim-ende").addEventListener("click", function () {
+                var sicherung = el("dsim-selbst").checked;
+                el("dsim-selbst").checked = false;
+                var z = verlauf[verlauf.length - 1];
+                while (z.phase !== "ende") {
+                    z = schritt(z, null);
+                    verlauf.push(z);
+                }
+                el("dsim-selbst").checked = sicherung;
+                anzeigen();
+            });
+
+            beispielLaden();
+        })();
+        </script>

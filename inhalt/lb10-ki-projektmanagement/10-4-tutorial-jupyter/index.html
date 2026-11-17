@@ -1,0 +1,155 @@
+<h2>1. Jupyter Notebooks: ein essenzielles Werkzeug für Data Science</h2>
+
+<p>Jupyter Notebooks sind eine unverzichtbare Plattform für Data Science und maschinelles Lernen. Sie bieten eine interaktive Umgebung, in der du Code ausführen, Ergebnisse visualisieren und deine Analysen dokumentieren kannst.</p>
+
+<p>Hier sind einige Vorteile von Jupyter Notebooks für maschinelles Lernen:</p>
+
+<ul>
+            <li><strong>Interaktivität:</strong> Du kannst Code schrittweise ausführen und Ergebnisse sofort sehen.</li>
+            <li><strong>Integration:</strong> Code, Erklärungen und Visualisierungen können in einem Dokument kombiniert werden.</li>
+            <li><strong>Reproduzierbarkeit:</strong> Deine Analysen können leicht geteilt und von anderen nachvollzogen werden.</li>
+            <li><strong>Flexibilität:</strong> Unterstützung verschiedener Programmiersprachen, insbesondere Python.</li>
+        </ul>
+
+<h3>JupyterLite: deine Online-Entwicklungsumgebung</h3>
+
+<p>Starte JupyterLite auf dem Server der Schule: <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a>. Falls er einmal nicht erreichbar ist, nutze die öffentliche Variante unter <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>. JupyterLite läuft vollständig in deinem Browser – es ist keine Installation und kein Konto nötig.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Notebook am Ende herunterladen und ins Gruppenrepository hochladen!</summary>
+                <p>In JupyterLite musst du das Notebook am Ende herunterladen (Rechtsklick auf die Datei im Dateibereich → <em>Download</em>), weil die Plattform deine Ergebnisse nur im Browser speichert. Wird der Browserverlauf gelöscht oder arbeitest du an einem anderen Rechner, ist die Arbeit sonst weg.</p>
+                <p>Im KI-Projekt lädst du dein Notebook danach in euer Gruppenrepository auf <a href="https://git.inf7.eu" target="_blank" rel="noopener">git.inf7.eu</a> hoch: „Datei hinzufügen“ → „Datei hochladen“, mit einer aussagekräftigen Commit-Nachricht. Verwende dabei immer deinen eigenen Dateinamen, z.&nbsp;B. <code>modell_lena.ipynb</code>. Zum Weiterarbeiten lädst du die neueste Fassung aus dem Repository herunter und wieder in JupyterLite hoch. Wie das im Team funktioniert, steht auf Seite 10.3 „Versionsverwaltung mit Git“, Abschnitt 3.</p>
+            </details>
+        </div>
+
+<p>Diese Seite bündelt alle Notebooks des Kurses. Sie gehören jeweils zur passenden Theorie-Seite und bauen inhaltlich aufeinander auf – am besten bearbeitest du sie in der Reihenfolge, in der die zugehörigen Themen im Kurs behandelt werden.</p>
+
+<h3>Bevor du startest: So bedienst du ein Jupyter Notebook</h3>
+
+<p>Ein Jupyter Notebook besteht aus einzelnen <strong>Zellen</strong>, die untereinander angeordnet sind. Es gibt zwei Arten: <strong>Code-Zellen</strong> (grauer Hintergrund, enthalten ausführbaren Python-Code) und <strong>Text-Zellen</strong> (Markdown; enthalten Erklärungen und Aufgabenstellungen, teils mit Formeln oder Bildern).</p>
+
+<ol>
+            <li><strong>Notebook öffnen:</strong> Lade die <code>.ipynb</code>-Datei des jeweiligen Tutorials herunter (Links weiter unten bei den einzelnen Themen). Öffne anschließend JupyterLite (Link oben) und lade die heruntergeladene Datei über das Upload-Symbol (Pfeil nach oben) in der Dateiliste am linken Rand hoch. Ein Doppelklick auf den Dateinamen öffnet das Notebook.</li>
+            <li><strong>Zelle ausführen:</strong> Klicke in eine Zelle und drücke <code>Umschalt</code> + <code>Enter</code> (Shift+Enter), oder klicke oben in der Werkzeugleiste auf das Play-Symbol (▶). Der Code wird ausgeführt, das Ergebnis erscheint direkt unter der Zelle, und der Cursor springt automatisch zur nächsten Zelle.</li>
+            <li><strong>Reihenfolge beachten:</strong> Arbeite die Zellen immer von oben nach unten ab. Viele Zellen greifen auf Variablen oder Ergebnisse vorheriger Zellen zurück – überspringst du eine Zelle oder führst sie in falscher Reihenfolge aus, kann es zu Fehlermeldungen oder falschen Ergebnissen kommen.</li>
+        </ol>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Was bedeutet eine Zelle wie <code>%pip install scikit-learn</code>?</summary>
+                <p>Die Notebooks beginnen mit Zellen wie <code>%pip install scikit-learn</code>. <code>pip</code> ist das Werkzeug, mit dem Python-Bibliotheken (fertige, wiederverwendbare Softwarepakete wie scikit-learn oder pandas) nachinstalliert werden. Das Prozentzeichen <code>%</code> kennzeichnet einen sogenannten <em>Magic-Befehl</em>: Er wird vom Notebook selbst ausgeführt und installiert das Paket genau in die Umgebung, in der dein Notebook läuft. In JupyterLite ist das die einzige Variante, die funktioniert – die Schreibweise mit Ausrufezeichen (<code>!pip</code>) ruft eine Kommandozeile auf, die es im Browser nicht gibt. Führe diese Zellen einmal ganz am Anfang aus, bevor du mit dem restlichen Notebook weitermachst. Ist die Bibliothek schon vorhanden, passiert nichts Schlimmes.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Lösungen in den Notebooks</summary>
+                <p>Die Notebooks enthalten nur die Aufgaben. Die vollständigen Lösungsfassungen gibt deine Lehrkraft mit den Musterlösungen frei. Versuche die Aufgaben zuerst selbst und vergleiche erst danach. Zahlenwerte in den Lösungen stammen aus einer Beispielausführung mit festem Zufallsstartwert; kleine Abweichungen durch andere Bibliotheksversionen sind möglich.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Data Scientist</summary>
+                <p><strong>Alltag:</strong> Empfehlungen in Streaming-Diensten, Wettervorhersagen oder Fahrplanprognosen entstehen aus Datenanalysen, die oft genau so beginnen wie deine Notebooks: Daten laden, anschauen, bereinigen, Modell trainieren, auswerten.</p>
+                <p><strong>Beruf:</strong> <strong>Data Scientists</strong> verbringen einen großen Teil ihrer Zeit mit Datenaufbereitung und explorativer Analyse in Jupyter Notebooks und stellen die Ergebnisse Fachabteilungen vor. In Dresden und Leipzig forscht und bildet z.&nbsp;B. das KI-Kompetenzzentrum <strong>ScaDS.AI</strong> (Center for Scalable Data Analytics and Artificial Intelligence) in diesem Bereich aus; Data Scientists arbeiten außerdem in Industrie, Versicherungen, Energieversorgung und Verwaltung.</p>
+            </details>
+        </div>
+
+<h2>2. Tutorial: lineare Regression</h2>
+
+<p>Hier sagst du erstmals nicht eine Kategorie, sondern eine Zahl voraus: die Punktzahl einer Klausur anhand der gelernten Stunden. Gehört zur Seite 11.4 Lineare Regression.</p>
+
+<h2>3. Tutorial: Entscheidungsbaum-Analyse des Titanic-Datensatzes</h2>
+
+<p>Dieses Tutorial führt dich in die Grundlagen des überwachten Lernens ein. Du erstellst einen Entscheidungsbaum, um vorherzusagen, welche Passagiere die Titanic-Katastrophe überlebt haben könnten. Gehört zur Seite 11.5 Entscheidungsbäume.</p>
+
+<h3>Inhalte des Tutorials</h3>
+
+<ol>
+            <li>Daten laden und erkunden</li>
+            <li>Datenvisualisierung</li>
+            <li>Datenvorverarbeitung</li>
+            <li>Daten in Trainings- und Testdaten aufteilen</li>
+            <li>Entscheidungsbaum trainieren und die Baumtiefe per Kreuzvalidierung wählen</li>
+            <li>Modellauswertung auf den Testdaten</li>
+        </ol>
+
+<h2>4. Tutorial: k-Means-Clustering</h2>
+
+<p>In diesem Tutorial lernst du die Grundlagen des unüberwachten Lernens anhand des k-Means-Algorithmus. Wir verwenden den Iris-Datensatz, um die Schritte der Datenanalyse und des Clusterings zu demonstrieren. Gehört zur Seite 11.7 k-Means-Clustering.</p>
+
+<h3>Inhalt des Tutorials</h3>
+
+<ol>
+            <li>Laden und Erkunden des Iris-Datensatzes</li>
+            <li>Datenvisualisierung</li>
+            <li>Datenvorverarbeitung (Standardisierung)</li>
+            <li>k-Means-Clustering</li>
+            <li>Modellauswertung (Trägheit)</li>
+            <li>Visualisierung der Cluster mit PCA</li>
+        </ol>
+
+<h2>5. Tutorial: neuronale Netze – handgeschriebene Ziffern erkennen</h2>
+
+<p>In diesem Tutorial trainierst du ein kleines neuronales Netz (Multi-Layer-Perceptron), das handgeschriebene Ziffern erkennt – die klassische Einstiegsaufgabe für Deep Learning. Gehört zur Seite 11.8 Neuronale Netze.</p>
+
+<h2>6. Tutorial: genetischer Algorithmus – das Rucksackproblem lösen</h2>
+
+<p>Hier lässt du eine Population von Lösungen über mehrere Generationen „evolvieren“, um ein Optimierungsproblem zu lösen. Gehört zur Seite 11.9 Genetische Algorithmen.</p>
+
+<h2>7. Tutorial: generative KI – ein eigenes, winziges Sprachmodell bauen</h2>
+
+<p>Hier baust du ein sehr einfaches n-Gramm-Sprachmodell und erlebst dadurch konkret, was „Wahrscheinlichkeit für das nächste Wort“ bedeutet – das Grundprinzip hinter Chatbots wie ChatGPT oder Claude. Gehört zur Seite 11.10 Generative KI und Sprachmodelle.</p>
+
+<h2>Zusätzliche Ressourcen</h2>
+
+<ul>
+            <li><a href="https://scikit-learn.org/stable/modules/clustering.html#k-means" target="_blank" rel="noopener">scikit-learn-Dokumentation zu k-Means</a></li>
+            <li><a href="https://scikit-learn.org/stable/modules/tree.html" target="_blank" rel="noopener">scikit-learn-Dokumentation zu Entscheidungsbäumen</a></li>
+            <li><a href="https://scikit-learn.org/stable/modules/linear_model.html" target="_blank" rel="noopener">scikit-learn-Dokumentation zu linearer Regression</a></li>
+            <li><a href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html" target="_blank" rel="noopener">scikit-learn-Dokumentation zu neuronalen Netzen (MLP)</a></li>
+            <li><a href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank" rel="noopener">scikit-learn-Dokumentation zur Kreuzvalidierung</a></li>
+            <li><a href="https://www.kaggle.com/c/titanic" target="_blank" rel="noopener">Kaggle Titanic: Machine Learning from Disaster</a></li>
+        </ul>
+
+<h2>Weiterführende Links</h2>
+
+<ul>
+            <li><a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a>: JupyterLite auf dem Server der Schule – deine Standardumgebung für alle Notebooks dieses Kurses.</li>
+            <li><a href="https://docs.jupyter.org/en/latest/start/index.html" target="_blank" rel="noopener">Jupyter Documentation – Try Jupyter</a>: die offizielle Jupyter-Dokumentation mit einer kurzen Einführung, wie du Jupyter direkt im Browser ausprobieren kannst.</li>
+            <li><a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a>: eine kostenlose, cloudbasierte Alternative von Google. Achtung: Colab setzt ein Google-Konto voraus und speichert die Notebooks bei Google – nutze es im Unterricht nur nach Rücksprache mit deiner Lehrkraft (vgl. die Datenschutzhinweise in 10.3).</li>
+            <li><a href="https://www.dataquest.io/blog/jupyter-notebook-tutorial/" target="_blank" rel="noopener">How to Use Jupyter Notebook: A Beginner's Tutorial (Dataquest)</a>: ein ausführlicher Einsteiger-Artikel, der Zellen, Ausführung und den typischen Arbeitsablauf in Jupyter Notebooks anschaulich erklärt.</li>
+        </ul>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>Führe die Zellen eines Notebooks stets der Reihe nach von oben nach unten aus, am einfachsten mit Shift+Enter. Solltest du durcheinandergekommen sein, hilft es meist, über das Menü oben (z.&nbsp;B. „Run“ bzw. „Kernel“) den Kernel neu zu starten und alle Zellen von Anfang an neu auszuführen.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.4.1: Notebook „Lineare Regression“ <span class="niveau">AFB I–II</span></summary>
+                <ul>
+                    <li>Lade das <a href="../notebooks/11-4_lineare_regression.ipynb" download="">Notebook „Lineare Regression“</a> herunter.</li>
+                    <li>Führe die Codeblöcke Schritt für Schritt aus und bearbeite die Aufgaben darin.</li>
+                    <li>Experimentiere mit einem Polynom höheren Grades und beobachte, wie Overfitting entsteht.</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.4.2: Notebook „Titanic“ <span class="niveau">AFB II</span></summary>
+                <ul>
+                    <li>Lade das <a href="../notebooks/11-5_titanic.ipynb" download="">Notebook „Titanic“</a> und den <a href="../notebooks/titanic.csv" download="">Titanic-Datensatz</a> herunter, lade beide in JupyterLite hoch und öffne das Notebook.</li>
+                    <li>Führe den Code aus und beantworte die Fragen im Notebook.</li>
+                    <li>Experimentiere mit verschiedenen Baumtiefen und analysiere die Auswirkungen auf Trainings- und Validierungsgenauigkeit.</li>
+                    <li>Im KI-Projekt ist dieses Notebook das Pflicht-Notebook in KW 47: Speichere es als <code>titanic_&lt;vorname&gt;.ipynb</code> und lade es ins Gruppenrepository hoch (vgl. 10.5).</li>
+                </ul>
+            </details>
+        </div>

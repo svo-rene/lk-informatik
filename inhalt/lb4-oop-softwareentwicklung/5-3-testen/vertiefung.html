@@ -1,0 +1,43 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-5-3-5">
+            <details>
+                <summary>Aufgabe 5.3.5: Fehler finden – „Bei mir sind alle Tests grün“ <span class="niveau">AFB III</span></summary>
+                <p>Im Kopierraum kostet eine Seite 5 Cent, ab 100 Seiten kostet jede Seite nur 4 Cent. Weniger als eine Seite gibt es nicht (<code>ValueError</code>). Zu diesem Modul</p>
+                <pre><code class="language-python"># kopien.py
+def kopierkosten_cent(seiten: int) -&gt; int:
+    if seiten &gt; 100:
+        return seiten * 4
+    return seiten * 5</code></pre>
+                <p>gehört diese Testdatei. Sie gibt „Test bestanden“ aus:</p>
+                <pre><code class="language-python"># test_kopien.py
+from kopien import kopierkosten_cent
+
+def test_kosten():
+    assert(kopierkosten_cent(10) == 50, "10 Seiten falsch")
+    ergebnis = kopierkosten_cent(150)
+    assert ergebnis == kopierkosten_cent(150)
+    assert kopierkosten_cent(50) == 250
+    print("Test bestanden")
+
+test_kosten()</code></pre>
+                <ol>
+                    <li>Finde mindestens vier Schwächen der Testdatei und erkläre bei jeder, warum sie einen Fehler verbergen kann.</li>
+                    <li>Schreibe eine bessere Testdatei nach den Regeln dieser Seite. Gib ihre Ausgabe für das Modul oben an.</li>
+                    <li>Korrigiere das Modul.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-3-7">
+            <details>
+                <summary>Aufgabe 5.3.7: Testfälle bei zwei Bedingungen – der Kletterwald <span class="niveau">AFB III</span></summary>
+                <p>Ein Kletterwald berechnet Gruppenpreise: Kinder von 6 bis 11 Jahren zahlen 12&nbsp;€, alle ab 12 Jahren 18&nbsp;€. Kinder unter 6 dürfen nicht klettern. Ab 8 Personen gibt es 15&nbsp;% Rabatt auf den Gesamtpreis, abgerundet auf ganze Cent. Eine leere Gruppe ist ungültig. Die Funktion heißt <code>gruppenpreis_cent(alter: list[int]) -&gt; int</code>.</p>
+                <ol>
+                    <li>Bestimme die Äquivalenzklassen und Grenzwerte für das Alter und für die Gruppengröße.</li>
+                    <li>Jemand sagt: „Ich teste jede Bedingung einzeln mit einer Person bzw. einer Gruppe aus Erwachsenen. Das reicht.“ Beurteile das. Finde mindestens einen Fehler, den solche Tests übersehen würden.</li>
+                    <li>Stelle eine möglichst kleine Menge von Testfällen auf, die alle Grenzen abdeckt, mit erwarteten Ergebnissen in Cent. Begründe die Auswahl.</li>
+                    <li>Programmiere die Funktion und deine Tests in zwei Dateien und lass sie laufen.</li>
+                </ol>
+            </details>
+        </div>

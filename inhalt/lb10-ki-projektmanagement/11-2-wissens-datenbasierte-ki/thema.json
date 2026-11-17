@@ -1,0 +1,18 @@
+{
+  "nr": "11.2",
+  "titel": "Wissensbasierte und datenbasierte Ansätze in der KI",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

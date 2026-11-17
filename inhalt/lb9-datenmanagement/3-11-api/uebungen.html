@@ -1,0 +1,46 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/3-11_api.ipynb" download>3-11_api.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+                <p><strong>Einschränkung bei diesem Notebook:</strong> Anfragen ins Internet mit <code>requests</code> funktionieren in der Browser-Variante in der Regel nicht, weil die Umgebung keine echten Netzwerkverbindungen aufbauen darf. Für dieses Notebook ist eine lokale Installation die bessere Wahl.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.11.4: Wandertag planen mit der Tagesvorhersage <span class="niveau">AFB II</span></summary>
+                <p>Die Klasse plant einen Wandertag in der Sächsischen Schweiz. Mit dem Parameter
+                   <code>daily=temperature_2m_max,precipitation_sum</code> liefert Open-Meteo eine Tagesvorhersage. Eine Antwort sah so aus
+                   (als Text im Programm, damit du offline testen kannst):</p>
+                <pre><code>{"daily_units": {"temperature_2m_max": "°C", "precipitation_sum": "mm"},
+ "daily": {"time": ["2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12"],
+           "temperature_2m_max": [16.4, 14.9, 12.1, 13.8, 17.0],
+           "precipitation_sum": [0.0, 3.2, 11.5, 0.4, 0.0]}}</code></pre>
+                <ol>
+                    <li>Schreibe eine Funktion <code>regentage(daten, grenze=1.0)</code>, die die Daten aller Tage mit mindestens <code>grenze</code> mm Niederschlag als Liste zurückgibt.</li>
+                    <li>Schreibe eine Funktion <code>bester_tag(daten)</code>, die unter den Tagen mit weniger als 1.0 mm Niederschlag den wärmsten zurückgibt (Datum und Temperatur).</li>
+                    <li>Gib die durchschnittliche Höchsttemperatur und die Niederschlagssumme der fünf Tage jeweils auf eine Nachkommastelle gerundet mit Einheit aus.</li>
+                </ol>
+                <table class="gitter">
+                    <tr><th>Aufruf</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                    <tr><td><code>regentage(daten)</code></td><td><code>['2026-10-09', '2026-10-10']</code></td><td></td></tr>
+                    <tr><td><code>regentage(daten, 0.1)</code></td><td><code>['2026-10-09', '2026-10-10', '2026-10-11']</code></td><td></td></tr>
+                    <tr><td><code>bester_tag(daten)</code></td><td><code>('2026-10-12', 17.0)</code></td><td></td></tr>
+                    <tr><td>Durchschnitt / Summe</td><td><code>14.8 °C</code> / <code>15.1 mm</code></td><td></td></tr>
+                </table>
+                <p class="tipp">Die Listen <code>time</code>, <code>temperature_2m_max</code> und <code>precipitation_sum</code> sind parallel: Der i-te Wert gehört zum i-ten Datum. <code>zip</code> hilft.</p>
+            </details>
+        </div>

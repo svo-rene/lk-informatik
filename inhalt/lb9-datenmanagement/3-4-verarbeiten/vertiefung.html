@@ -1,0 +1,49 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+  <details>
+    <summary>Aufgabe 3.4.15: Ranglisten beim Sportfest <span class="niveau">AFB III</span></summary>
+
+    <p>Die Datei <a href="../material/sportfest.csv">sportfest.csv</a> enthält pro Zeile Name, Klasse, Disziplin und Punkte. Jede Schülerin und jeder Schüler hat drei Zeilen: für Sprint, Weitsprung und Wurf. Einige Namen enthalten versehentlich Leerzeichen am Anfang oder Ende.</p>
+    <ol>
+      <li>Vergleiche zwei Datenstrukturen, in denen du die Daten für die Auswertung speichern könntest.</li>
+      <li>Lies die Datei ein und bereinige die Namen.</li>
+      <li>Berechne für jede Person die Gesamtpunkte.</li>
+      <li>Gib für eine eingegebene Klasse eine Rangliste aus. Bei gleicher Punktzahl teilen sich die Personen einen Platz, der nächste Platz wird übersprungen.</li>
+      <li>Bestimme die Klasse mit dem höchsten Durchschnitt.</li>
+      <li>Schreibe Testfälle, die auch einen Gleichstand und einen Namen mit Leerzeichen prüfen.</li>
+    </ol>
+  </details>
+</div>
+
+<div class="aufgabe">
+  <details>
+    <summary>Aufgabe 3.4.17: Ergebnis prüfen – die Stadtauswertung <span class="niveau">AFB III</span></summary>
+    <p>Jonas soll für den Lauf die Durchschnittszeit je Stadt und die schnellste Person bestimmen. Sein Programm läuft ohne Fehlermeldung:</p>
+    <pre><code class="language-python">import csv
+
+summen = {}
+anzahl = {}
+beste_zeit = '100'
+beste_person = ''
+with open('sportveranstaltung.csv', newline='', encoding='utf-8') as csvfile:
+    reader = csv.DictReader(csvfile, delimiter=';')
+    for row in reader:
+        stadt = row['Stadt']
+        summen[stadt] = summen.get(stadt, 0) + int(row['Zeit'])
+        anzahl[stadt] = 1
+        if row['Zeit'] &lt; beste_zeit:
+            beste_zeit = row['Zeit']
+            beste_person = row['Name']
+
+for stadt in summen:
+    print(stadt, summen[stadt] / anzahl[stadt])
+print('Schnellste Person:', beste_person, beste_zeit)</code></pre>
+    <ol>
+      <li>Bestimme ohne Computer die vollständige Ausgabe des Programms für <code>sportveranstaltung.csv</code>.</li>
+      <li>Vergleiche mit den Ergebnissen, die du von Hand erwartest, und erkläre die beiden Fehler.</li>
+      <li>Korrigiere das Programm. Gib die richtige Ausgabe an, wobei die Durchschnitte auf eine Nachkommastelle gerundet werden sollen.</li>
+      <li>Beurteile, warum gerade solche Fehler ohne Fehlermeldung gefährlich sind, und leite eine Regel für das Testen ab.</li>
+    </ol>
+  </details>
+</div>

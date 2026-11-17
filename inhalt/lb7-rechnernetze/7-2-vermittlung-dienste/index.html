@@ -1,0 +1,202 @@
+<p>
+            Wenn du eine WhatsApp-Nachricht schickst, läuft sie über die Server von Meta. Eine Bitcoin-Überweisung dagegen wird von tausenden gleichberechtigten Rechnern geprüft, und OPAL oder LernSax laufen in Rechenzentren, die du nie gesehen hast. Diese Seite klärt, wie Netzwerkdienste organisiert sein können (zentral, dezentral, Client-Server, Peer-to-Peer, Cloud) und wie Daten überhaupt durch ein Netz vermittelt werden.
+        </p>
+
+<h2>Zentrale und dezentrale Netzwerkdienste</h2>
+
+<p>Netzwerkdienste ermöglichen die Kommunikation und den Datenaustausch über Netze. Je nachdem, wie Datenverarbeitung und -speicherung organisiert sind, unterscheidet man zentrale und dezentrale Dienste.</p>
+
+<h3>Zentrale Netzwerkdienste</h3>
+
+<p>Zentrale Netzwerkdienste verlassen sich auf einen oder mehrere zentrale Server, die Daten verarbeiten, speichern und an Clients weiterleiten. Beispiele:</p>
+
+<ul>
+            <li><strong>Messenger-Dienste</strong> wie WhatsApp oder Telegram: Nachrichten laufen über die Server des Anbieters.</li>
+            <li><strong>E-Mail</strong>, z.&nbsp;B. Gmail oder Outlook: E-Mails werden auf den Servern des Anbieters gespeichert.</li>
+            <li><strong>DHCP:</strong> Ein DHCP-Server vergibt im lokalen Netz zentral die IP-Adressen (→ 7.7).</li>
+            <li><strong>Domain Name System (DNS):</strong> übersetzt Domainnamen in IP-Adressen. DNS ist streng hierarchisch organisiert und hat mit der Root-Zone eine zentrale Spitze; der Betrieb ist aber auf sehr viele Server weltweit verteilt. DNS ist daher ein Mischfall aus zentraler Verwaltung und verteiltem Betrieb (→ 7.8).</li>
+        </ul>
+
+<h3>Dezentrale Netzwerkdienste</h3>
+
+<p>Dezentrale Netzwerkdienste verteilen Datenverarbeitung und Speicherung auf viele Rechner, sodass es keinen einzelnen Ausfallpunkt gibt. Ein prominentes Beispiel ist die <strong>Blockchain</strong>: Sie wird für Kryptowährungen wie Bitcoin genutzt, aber auch für andere Anwendungen, bei denen Transaktionen fälschungssicher protokolliert werden sollen.</p>
+
+<h2>Client-Server-Prinzip</h2>
+
+<p>Das Client-Server-Prinzip beschreibt die Rollen, die Computer bzw. Programme in einem Netz einnehmen. Ein <strong>Server</strong> stellt Ressourcen wie Dateien, Datenbanken, Anwendungen oder Dienste bereit. Ein <strong>Client</strong> baut eine Verbindung zu einem Server auf und nutzt dessen Ressourcen: Er sendet eine Anfrage (Request), und der Server antwortet mit den angeforderten Daten (Response). Die Kommunikation läuft im Internet über das Internetprotokoll (IP).</p>
+
+<p>Ein typisches Beispiel ist das World Wide Web: Webbrowser sind Clients, die auf Webserver zugreifen, um Webseiten abzurufen. Ein Client kann auf einem Desktop-PC, Laptop, Smartphone oder einem anderen netzwerkfähigen Gerät laufen. Ein Server kann ein eigens dafür konfigurierter Rechner sein oder einfach ein Programm, das auf einem vorhandenen Computer läuft.</p>
+
+<p><strong>Vorteile</strong> des Client-Server-Prinzips sind die zentrale Verwaltung der Ressourcen, die Skalierbarkeit und die Möglichkeit, die Leistung des Servers gezielt zu optimieren. <strong>Nachteil:</strong> Fällt der Server aus, können die Clients nicht mehr auf die Ressourcen zugreifen.</p>
+
+<figure>
+            <img src="../img/scp.png" width="600" alt="Mehrere Clients greifen auf einen zentralen Server zu">
+            <figcaption>Abb. 1: Client-Server-Prinzip</figcaption>
+        </figure>
+
+<h2>Peer-to-Peer-Prinzip (P2P)</h2>
+
+<p>Beim Peer-to-Peer-Prinzip ist jeder Teilnehmer ein gleichwertiger Knoten (Peer), der direkt mit anderen Teilnehmern kommuniziert, ohne dass ein zentraler Server erforderlich ist. Jeder Peer ist gleichzeitig Client und Server.</p>
+
+<p>P2P-Netze werden häufig für Filesharing verwendet: Benutzer laden Dateien direkt von anderen Benutzern herunter, statt sie von einem zentralen Server zu beziehen. Auch Kryptowährungen nutzen das P2P-Prinzip, um Transaktionen direkt zwischen den Teilnehmern abzuwickeln, ohne dass eine zentrale Kontrollinstanz wie eine Bank erforderlich ist.</p>
+
+<p>Das P2P-Prinzip bietet Skalierbarkeit, Flexibilität und Widerstandsfähigkeit gegen Ausfälle, da das Netz ohne zentrale Komponente weiterarbeiten kann. Allerdings ist es schwieriger, die Sicherheit und die Integrität der Daten zu gewährleisten, weil sich die Aktivitäten aller Knoten kaum überwachen und kontrollieren lassen.</p>
+
+<figure>
+            <img src="../img/p2p.png" width="600" alt="Mehrere gleichberechtigte Rechner sind direkt miteinander verbunden">
+            <figcaption>Abb. 2: Peer-to-Peer</figcaption>
+        </figure>
+
+<h2>Cloud-Dienste</h2>
+
+<p>Beim <strong>Cloud-Computing</strong> mietet man Rechenleistung, Speicher oder fertige Anwendungen bei einem Anbieter und nutzt sie über das Internet. Technisch ist das meist ein Client-Server-Prinzip, bei dem die Server in großen Rechenzentren des Anbieters stehen. Man unterscheidet grob:</p>
+
+<ul>
+            <li><strong>IaaS</strong> (Infrastructure as a Service): virtuelle Server und Speicher; um Betriebssystem und Software kümmert sich der Kunde.</li>
+            <li><strong>PaaS</strong> (Platform as a Service): eine fertige Plattform, z.&nbsp;B. für Datenbanken oder Webanwendungen.</li>
+            <li><strong>SaaS</strong> (Software as a Service): fertige Anwendung im Browser, z.&nbsp;B. ein Online-Office oder eine Lernplattform.</li>
+        </ul>
+
+<figure>
+            <img src="../img/client-server.png" width="600" alt="Übersicht über Clients und verschiedene Server in einem Netz">
+            <figcaption>Abb. 3: Zusammenspiel von Clients und Servern in Netzen</figcaption>
+        </figure>
+
+<h2>Vermittlungsverfahren in Netzen</h2>
+
+<p>Vermittlungsverfahren bestimmen, wie Daten durch ein Netz vom Sender zum Empfänger gelangen. Man unterscheidet Leitungsvermittlung, Nachrichtenvermittlung und Paketvermittlung.</p>
+
+<h3>Leitungsvermittlung</h3>
+
+<p>Vor der Übertragung wird eine durchgehende Verbindung (Leitung bzw. Kanal) zwischen Sender und Empfänger geschaltet. Sie bleibt für die gesamte Dauer der Kommunikation reserviert, auch wenn gerade niemand spricht. Klassisches Beispiel ist das alte analoge Telefonnetz. Vorteil: garantierte Bandbreite und gleichbleibende Verzögerung. Nachteil: Die reservierten Ressourcen sind oft ungenutzt.</p>
+
+<h3>Nachrichtenvermittlung</h3>
+
+<p>Die gesamte Nachricht wird als Ganzes von Knoten zu Knoten weitergereicht. Jeder Zwischenknoten speichert die komplette Nachricht, bevor er sie weiterleitet (Store-and-Forward). Das Verfahren wird heute kaum noch verwendet, weil es bei großen Datenmengen ineffizient ist und die Zwischenknoten viel Speicher brauchen.</p>
+
+<h3>Paketvermittlung</h3>
+
+<p>Die Paketvermittlung teilt Nachrichten in kleinere Pakete auf. Die Pakete verschiedener Verbindungen teilen sich die Leitungen; die Zwischenknoten können ein Paket schon weiterleiten, während das nächste noch ankommt. Das erhöht die Auslastung und Effizienz des Netzes. Es gibt zwei Varianten:</p>
+
+<ul>
+            <li><strong>Datagrammprinzip (verbindungslos):</strong> Jedes Paket trägt die vollständige Zieladresse und wird unabhängig von den anderen weitergeleitet; Pakete können verschiedene Wege nehmen und in anderer Reihenfolge ankommen. So arbeitet IP im Internet (genauer → 7.9).</li>
+            <li><strong>Virtuelle Verbindung (verbindungsorientiert):</strong> Vor der Übertragung wird ein fester Weg durch das Netz festgelegt, dem alle Pakete folgen; es werden aber keine Leitungen exklusiv reserviert. Beispiele sind ältere Netze wie X.25 und ATM sowie heute MPLS in Providernetzen.</li>
+        </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: Telefonat und Paketdienst <span class="beispiel-kopf">einfach</span></summary>
+            <p>Ein klassisches Telefonat reserviert eine Leitung, solange telefoniert wird – auch in Gesprächspausen (Leitungsvermittlung). Ein Umzug per Paketdienst verschickt den Hausrat in vielen einzelnen Paketen mit derselben Zieladresse; sie können verschiedene Verteilzentren durchlaufen und in beliebiger Reihenfolge ankommen (Datagrammprinzip).</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: Warum Pakete schneller sind <span class="beispiel-kopf">komplex</span></summary>
+            <p>Eine Nachricht von 10&nbsp;Mbit soll über 3 Leitungen (2 Zwischenknoten) mit je 10&nbsp;Mbit/s übertragen werden. Laufzeiten und Header werden vernachlässigt.</p>
+            <ul>
+                <li><strong>Nachrichtenvermittlung:</strong> Jeder Knoten muss die ganze Nachricht empfangen (1&nbsp;s), bevor er sie weiterschickt. Gesamtzeit 3 · 1&nbsp;s = <strong>3&nbsp;s</strong>.</li>
+                <li><strong>Paketvermittlung</strong> mit 1&nbsp;000 Paketen zu je 10&nbsp;kbit: Ein Paket braucht pro Leitung 1&nbsp;ms. Das erste Paket ist nach 3&nbsp;ms am Ziel, danach folgt jede Millisekunde ein weiteres. Gesamtzeit (1&nbsp;000 + 3 − 1) · 1&nbsp;ms = <strong>1,002&nbsp;s</strong>.</li>
+            </ul>
+            <p><strong>Probe:</strong> Setzt man in die Formel (Paketzahl + Leitungen − 1) · Zeit pro Paket nur ein einziges Paket mit 10&nbsp;Mbit ein, ergibt sich (1 + 3 − 1) · 1&nbsp;s = 3&nbsp;s – genau der Wert der Nachrichtenvermittlung.</p>
+            <p>Die Zwischenknoten arbeiten bei der Paketvermittlung parallel wie an einem Fließband. In der Realität kommen Header und Warteschlangen dazu, der Vorteil bleibt aber bestehen.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: LernSax, Updates und die Frage „eigener Server oder Cloud?“</summary>
+                <p><strong>Alltag:</strong> OPAL und LernSax sind Cloud-Dienste für sächsische Schulen: Du bist mit deinem Browser der Client, die Server stehen im Rechenzentrum des Betreibers. Windows-Updates werden dagegen teilweise per P2P verteilt: Rechner im selben Netz geben bereits geladene Update-Teile an ihre Nachbarn weiter und entlasten so die Internetleitung.</p>
+                <p><strong>Beruf:</strong> Fachinformatikerinnen und Fachinformatiker für Systemintegration entscheiden in Firmen, Schulen und Verwaltungen regelmäßig, ob ein Dienst im eigenen Serverraum oder in der Cloud betrieben wird. Sie vergleichen Kosten, Verfügbarkeit und Datenschutz (Serverstandort, Auftragsverarbeitungsvertrag nach DSGVO). Kommunale IT-Dienstleister in Sachsen, etwa Lecos in Leipzig, betreiben dafür eigene Rechenzentren für Städte und Schulen.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>Zentrale Netzwerkdienste sind effizient und einfach zu verwalten. Der zentrale Server ist aber ein Single Point of Failure, und der Betreiber hat Zugriff auf alle Daten (Datenschutz).</p>
+        </div>
+
+<div class="merke">
+            <p>Dezentrale Dienste erhöhen die Ausfallsicherheit und können den Datenschutz verbessern, sind aber aufwendiger zu verwalten und zu koordinieren.</p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Client</strong> – ein Programm bzw. Gerät, das Dienste, Ressourcen oder Daten von einem Server anfordert und empfängt.<br>
+                <strong>Server</strong> – ein Programm bzw. Gerät, das Dienste, Ressourcen oder Daten für Clients im Netz bereitstellt, z.&nbsp;B. Web-, E-Mail-, Datei- oder Datenbankserver.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Internet und WWW sind nicht dasselbe.</strong> Das <strong>Internet</strong> ist der weltweite Verbund von Rechnernetzen, die über IP kommunizieren. Das <strong>World Wide Web</strong> ist nur einer der Dienste, die über das Internet laufen (Webseiten per HTTP/HTTPS). E-Mail, DNS, Online-Spiele oder Videotelefonie nutzen ebenfalls das Internet, gehören aber nicht zum WWW.
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>Peer-to-Peer (P2P)</strong> – Netzarchitektur, bei der alle Teilnehmer gleichwertige Peers sind, die direkt miteinander kommunizieren und jeweils sowohl Dienste anbieten als auch nutzen.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Cloud-Dienst</strong> – über das Internet bereitgestellte IT-Ressource, die ein externer Anbieter betreibt. Man gewinnt Verfügbarkeit und Skalierbarkeit, gibt aber Kontrolle über Daten und Betrieb ab.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Leitungsvermittlung</strong> reserviert einen Kanal für die ganze Verbindung, <strong>Paketvermittlung</strong> teilt die Leitungen zwischen vielen Paketen auf. Paketvermittlung nach dem Datagrammprinzip ist das Rückgrat des Internets und ermöglicht eine flexible und effiziente Datenübertragung.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.2.1: Dienste einordnen <span class="niveau">AFB I</span></summary>
+                <p>Ordne jeweils zu: zentral oder dezentral? Client-Server oder Peer-to-Peer?</p>
+                <ol type="a">
+                    <li>Aufruf einer Webseite im Browser</li>
+                    <li>Filesharing mit BitTorrent</li>
+                    <li>Bitcoin-Überweisung</li>
+                    <li>Abruf von E-Mails bei einem Mailanbieter</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.2.2: Clients und Server in Filius <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Lade <a href="../material/client-server.fls" download="">die Filius-Netzwerkdatei client-server.fls</a> herunter und öffne sie in Filius.</li>
+                    <li>Einrichtung des Netzes:
+                        <ul>
+                            <li>Wechsle in den Aktionsmodus. Jetzt sollten alle Computer im Heimnetz automatisch eine IP-Adresse zugewiesen bekommen.</li>
+                            <li>Öffne den Rechner „Webserver filius.de“. Wähle bei der Software-Installation den Webserver aus und installiere ihn.</li>
+                        </ul>
+                        <figure>
+                            <img src="../img/scp2.png" width="300" alt="Filius-Dialog Software-Installation mit ausgewähltem Webserver">
+                            <figcaption>Abb. 4: Installation des Webservers</figcaption>
+                        </figure>
+                        <ul>
+                            <li>Wähle das Webserverprogramm aus und starte den Webserver.</li>
+                        </ul>
+                        <figure>
+                            <img src="../img/scp3.png" width="300" alt="Filius-Fenster des Webservers mit Start-Schaltfläche">
+                            <figcaption>Abb. 5: Starten des Webservers</figcaption>
+                        </figure>
+                        <ul>
+                            <li>Öffne auf dem Desktop eines Laptops den Webbrowser und gib die Adresse filius.de ein.</li>
+                        </ul>
+                        <figure>
+                            <img src="../img/scp1.png" width="300" alt="Filius-Webbrowser auf einem Laptop mit der Adresse filius.de">
+                            <figcaption>Abb. 6: Webbrowser auf einem der Laptops</figcaption>
+                        </figure>
+                    </li>
+                    <li>Untersuche den DNS-Rechner. Beende zum Test den DNS-Dienst auf dem DNS-Server und versuche erneut, die Filius-Webseite von einem Laptop aus zu erreichen. Beschreibe eine Möglichkeit, wie du die Webseite auch ohne DNS aufrufen kannst.
+                        <figure>
+                            <img src="../img/scp4.png" width="300" alt="Filius-Fenster des DNS-Servers mit Start- und Stopp-Schaltfläche">
+                            <figcaption>Abb. 7: Starten und Beenden des DNS-Servers</figcaption>
+                        </figure>
+                    </li>
+                    <li>Beschreibe, wer in diesem Netz Dienste anbietet (Server) und wer Dienste in Anspruch nimmt (Client).</li>
+                </ol>
+            </details>
+        </div>

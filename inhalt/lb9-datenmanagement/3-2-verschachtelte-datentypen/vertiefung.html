@@ -1,0 +1,32 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.2.6: Daten filtern <span class="niveau">AFB III</span>
+                </summary>
+                <p>
+                    Nutze das Dictionary aus Aufgabe 3.2.5 mit den Klassen und Schüler*innen.<br>
+                    Gib die Namen aller Schüler*innen aus, die in ihrer Notenliste mindestens eine Eins haben.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.2.8: Fehler finden – Einsen zählen <span class="niveau">AFB III</span></summary>
+                <p>Für die Zeugniskonferenz soll gezählt werden, wie viele Einsen <em>insgesamt</em> in der Struktur <code>schule</code>
+                   (Abschnitt 4 oben) vergeben wurden. Erwartet wird 3. Tim hat geschrieben:</p>
+                <pre><code class="language-python">einsen = 0
+for klasse in schule:
+    for person in klasse:
+        if 1 in person["noten"]:
+            einsen += 1
+print(einsen)</code></pre>
+                <ol>
+                    <li>Das Programm bricht mit einem <code>TypeError</code> ab. Erkläre, welchen Wert <code>person</code> im ersten Durchlauf hat und warum der Fehler entsteht.</li>
+                    <li>Tim korrigiert nur diesen Fehler. Bestimme, welche Zahl sein Programm dann ausgibt, und erkläre den zweiten, „stillen“ Fehler.</li>
+                    <li>Gib das vollständig korrigierte Programm an und ergänze einen Testfall mit einer Klasse ohne Schüler*innen.</li>
+                </ol>
+            </details>
+        </div>

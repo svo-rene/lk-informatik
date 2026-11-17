@@ -1,0 +1,217 @@
+<p>
+            In vielen Programmiersprachen lassen sich Datentypen ineinander verschachteln, um komplexe Strukturen abzubilden. Besonders in Python sind geschachtelte Listen und Dictionaries sehr mächtig und weit verbreitet.
+        </p>
+
+<h2>1. Listen in Listen</h2>
+
+<p>
+            Eine Liste kann andere Listen enthalten. Dies erlaubt z.&nbsp;B. die Darstellung von Tabellen oder Matrizen.
+        </p>
+
+<pre><code>matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+print(matrix[1])      # [4, 5, 6]  – die zweite Zeile (Zählung ab 0)
+print(matrix[1][2])   # 6          – darin das dritte Element</code></pre>
+
+<p>Der erste Index wählt die innere Liste, der zweite das Element darin – wie Zeile und Spalte einer Tabelle.</p>
+
+<h2>2. Listen in Dictionaries</h2>
+
+<p>
+            Ein Dictionary kann Listen als Werte enthalten. Dies ist praktisch, wenn mehreren Kategorien mehrere Elemente zugeordnet werden sollen.
+        </p>
+
+<pre><code>noten = {"Anna": [2, 1, 3], "Ben": [3, 2, 2]}
+
+print(noten["Anna"])      # [2, 1, 3]
+print(noten["Anna"][0])   # 2 – Annas erste Note</code></pre>
+
+<h2>3. Dictionaries in Dictionaries</h2>
+
+<p>
+            Auch Dictionaries können verschachtelt werden, z.&nbsp;B. zur Modellierung komplexer Objekte.
+        </p>
+
+<pre><code>personen = {
+    "anna": {"alter": 16, "klasse": "10A"},
+    "ben": {"alter": 15, "klasse": "9B"}
+}</code></pre>
+
+<h2>4. Alles gemixt</h2>
+
+<p>
+            Die Kombination aller Strukturen erlaubt es, realitätsnahe Datenmodelle zu erstellen.
+        </p>
+
+<pre><code>schule = {
+    "10A": [{"name": "Anna", "noten": [2, 1, 3]},
+            {"name": "Carla", "noten": [1, 1, 2]}],
+    "9B":  [{"name": "Ben", "noten": [3, 2, 2]}]
+}
+
+# Zugriff Schritt für Schritt: Klasse -> Liste -> Person -> Notenliste -> Note
+print(schule["10A"][1]["name"])       # Carla
+print(schule["10A"][1]["noten"][2])   # 2
+
+# Komplexeres Beispiel: Durchschnitt jeder Person in allen Klassen
+for klasse, personen in schule.items():
+    for person in personen:
+        schnitt = sum(person["noten"]) / len(person["noten"])
+        print(klasse, person["name"], round(schnitt, 2))
+# Ausgabe:
+# 10A Anna 2.0
+# 10A Carla 1.33
+# 9B Ben 2.33</code></pre>
+
+<p>
+            Lies einen verschachtelten Zugriff immer von links nach rechts: Jede eckige Klammer geht eine Ebene tiefer.
+            Bei einer Liste steht darin eine Position (<code>[1]</code>), bei einem Dictionary ein Schlüssel
+            (<code>["name"]</code>).
+        </p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Bestellungen im Onlineshop</summary>
+                <p>
+                    Eine Bestellung in einem Onlineshop ist genau so eine verschachtelte Struktur: ein Dictionary mit Kundendaten,
+                    darin eine Liste von Artikeln, und jeder Artikel ist wieder ein Dictionary mit Name, Preis und Menge.
+                    <strong>Backend-Entwickler*innen</strong> und <strong>Data Analysts</strong> arbeiten täglich mit solchen
+                    Daten, wenn sie Bestellungen aus einer API abrufen und etwa den Warenwert je Bestellung berechnen. Weil in
+                    solchen Strukturen oft Namen und Adressen stecken, gilt die <strong>DSGVO</strong>: Für eine Umsatzauswertung
+                    werden die personenbezogenen Teile vorher entfernt.
+                </p>
+            </details>
+        </div>
+
+<h2>Warum ist das wichtig?</h2>
+
+<p>
+            In der realen Softwareentwicklung werden Daten oft in komplexer Form gespeichert, z.&nbsp;B. als JSON. Das Verständnis von geschachtelten Datentypen ist essenziell für:
+        </p>
+
+<ul>
+            <li>Datenanalyse</li>
+            <li>Webentwicklung (z.&nbsp;B. REST APIs)</li>
+            <li>Arbeit mit Datenbanken</li>
+            <li>Machine Learning</li>
+        </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Zugriff Ebene für Ebene – der Stundenplan</summary>
+            <p><strong>Ausgangssituation:</strong> Ein Stundenplan ist ein Dictionary: Schlüssel ist der Wochentag, Wert die Liste der Fächer.</p>
+            <pre><code class="language-python">stundenplan = {
+    "Mo": ["Mathe", "Deutsch", "Informatik"],
+    "Di": ["Englisch", "Sport"]
+}
+print(stundenplan["Mo"])
+print(stundenplan["Mo"][2])
+print(len(stundenplan["Di"]))
+stundenplan["Di"].append("Physik")
+print(stundenplan["Di"])
+print(stundenplan["Mo"][2][0])</code></pre>
+            <ol>
+                <li><strong><code>stundenplan["Mo"]</code></strong> – Das äußere Objekt ist ein Dictionary, also steht in der Klammer ein Schlüssel.
+                    Ergebnis ist die ganze Liste <code>['Mathe', 'Deutsch', 'Informatik']</code>.</li>
+                <li><strong><code>stundenplan["Mo"][2]</code></strong> – Die zweite Klammer wirkt auf diese Liste, also steht darin eine Position.
+                    Position 2 ist das dritte Element: <code>Informatik</code>.</li>
+                <li><strong><code>len(stundenplan["Di"])</code></strong> – <code>len</code> zählt die Elemente der inneren Liste: 2.</li>
+                <li><strong><code>append</code> auf der inneren Liste</strong> – Die Liste im Dictionary wird direkt verändert; eine neue
+                    Zuweisung ist nicht nötig.</li>
+                <li><strong><code>stundenplan["Mo"][2][0]</code></strong> – Auch ein String hat Positionen. Die dritte Klammer liefert den ersten
+                    Buchstaben von „Informatik“.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong></p>
+            <pre><code>['Mathe', 'Deutsch', 'Informatik']
+Informatik
+2
+['Englisch', 'Sport', 'Physik']
+I</code></pre>
+            <p><strong>Kontrolle:</strong> Schreibe bei jedem Zugriff unter jede Klammer, welchen Typ das Zwischenergebnis hat:
+               dict &rarr; list &rarr; str. Passt der Klammerinhalt nicht zum Typ (z.&nbsp;B. <code>stundenplan[0]</code>), gibt es einen Fehler.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Warenwert einer Bestellung – mit fehlendem Feld</summary>
+            <p><strong>Ausgangssituation:</strong> Ein Onlineshop liefert eine Bestellung als verschachtelte Struktur (vgl. Praxisbezug). Bei
+               einem Artikel fehlt das Feld <code>menge</code>; laut Shop-Regel gilt dann die Menge 1. Gesucht sind die Zahl der Positionen
+               und der Warenwert.</p>
+            <pre><code class="language-python">bestellung = {
+    "nr": 5003,
+    "kunde": {"name": "Lea Kraus", "ort": "Pirna"},
+    "artikel": [
+        {"name": "USB-Stick", "preis": 8.49, "menge": 2},
+        {"name": "Maus", "preis": 24.95, "menge": 1},
+        {"name": "Collegeblock", "preis": 2.49}
+    ]
+}
+
+summe = 0
+for posten in bestellung["artikel"]:
+    menge = posten.get("menge", 1)        # fehlt die Menge, gilt 1
+    summe += posten["preis"] * menge
+print(bestellung["kunde"]["name"], "-", len(bestellung["artikel"]), "Positionen")
+print(f"Warenwert: {summe:.2f} €")</code></pre>
+            <ol>
+                <li><strong>Struktur analysieren</strong> – <code>bestellung</code> ist ein dict; <code>"kunde"</code> enthält wieder ein dict,
+                    <code>"artikel"</code> eine Liste von dicts. Für die Summe muss man also über die Liste laufen.</li>
+                <li><strong>Schleife über <code>bestellung["artikel"]</code></strong> – <code>posten</code> ist in jedem Durchlauf ein Artikel-Dictionary.</li>
+                <li><strong>Durchlauf 1:</strong> 8.49 · 2 = 16.98, Summe 16.98.</li>
+                <li><strong>Durchlauf 2:</strong> 24.95 · 1 = 24.95, Summe 41.93.</li>
+                <li><strong>Durchlauf 3 – die Falle:</strong> Beim Collegeblock fehlt <code>menge</code>. Mit <code>posten["menge"]</code> bräche das
+                    Programm mit <code>KeyError: 'menge'</code> ab. <code>posten.get("menge", 1)</code> liefert stattdessen 1. Summe 44.42.</li>
+                <li><strong>Ausgabe formatieren</strong> – Kommazahlen sind intern nicht immer exakt; <code>:.2f</code> zeigt genau zwei Nachkommastellen.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong></p>
+            <pre><code>Lea Kraus - 3 Positionen
+Warenwert: 44.42 €</code></pre>
+            <table class="gitter">
+                <tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr>
+                <tr><td>Bestellung wie oben</td><td>3 Artikel, einer ohne Menge</td><td><code>Warenwert: 44.42 €</code></td></tr>
+                <tr><td>leere Bestellung</td><td><code>"artikel": []</code></td><td><code>Warenwert: 0.00 €</code></td></tr>
+                <tr><td>nur ein Artikel ohne Menge</td><td><code>[{"name": "Maus", "preis": 24.95}]</code></td><td><code>Warenwert: 24.95 €</code></td></tr>
+            </table>
+            <p><strong>Kontrolle:</strong> Überschlag 2 · 8,50 + 25 + 2,50 = 44,50 – das berechnete Ergebnis 44,42 liegt passend knapp darunter.
+               Für eine reine Umsatzauswertung würde man den Teil <code>"kunde"</code> gar nicht erst mitverarbeiten (Datenminimierung).</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Geschachtelte (verschachtelte) Datentypen</strong> sind Listen oder Dictionaries, deren Elemente
+                selbst wieder Listen oder Dictionaries sind. Auf ein inneres Element greifst du mit mehreren
+                Klammern hintereinander zu, z.&nbsp;B. <code>schule["10A"][0]["noten"][1]</code>. Geschachtelte Strukturen
+                helfen dabei, komplexe Daten realitätsnah abzubilden, und sind die Grundlage für die Arbeit mit JSON und APIs
+                (Seiten 3.10 und 3.11).
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.2.1: Grundlagen <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Erstelle eine Liste mit drei Listen, die jeweils drei Zahlen enthalten. Gib das mittlere Element der zweiten Liste aus.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.2.2: Summenberechnung <span class="niveau">AFB I–II</span>
+                </summary>
+                <p>
+                    Gegeben ist eine Liste von Listen. Die Liste speichert die Tagesumsätze in Euro. Jede Teilliste steht für einen Einkauf und speichert die Einzelposten des Einkaufs:<br>
+                    <code>umsätze = [[10.5, 20.0], [5.5, 7.0, 3.0], [12.0]]</code><br>
+                    Gib die Umsätze der einzelnen Einkäufe und den Gesamtumsatz aus.
+                </p>
+            </details>
+        </div>

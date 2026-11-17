@@ -1,0 +1,209 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Kein Sieger ohne Stimmen <span class="niveau">AFB I–II</span></summary>
+                <p>Nach <code>w = Wahl(["Ella", "Jonas"])</code> wird ohne eine einzige Stimme <code>print(w.gewinner())</code> aufgerufen. Was wird ausgegeben? Begründe mit dem Code von <code>gewinner()</code>. Und warum steht die Meldung „ungültige Stimme“ nicht in der Klasse <code>Wahl</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Ausgabe <code>None</code>: <code>hoechste</code> ist 0, beide Namen haben 0 Stimmen, also enthält <code>beste</code> zwei Namen – das ist ein Gleichstand. Die Meldung ist Darstellung und gehört nicht ins Model. Das Model gibt nur <code>False</code> zurück; was angezeigt wird, entscheidet der Controller bzw. die View. So lässt sich die Klasse ohne Konsole benutzen und prüfen.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Pfeile für den Notenrechner <span class="niveau">AFB I–II</span></summary>
+                <p>Ein Team baut drei Module: <code>notenrechner.py</code> mit der Klasse <code>Notenrechner</code> (berechnet Durchschnitte), <code>tabelle.py</code> (gibt die Noten als Tabelle aus) und <code>main.py</code> (liest die Noten ein). Ordne jedes Modul Model, View oder Controller zu und gib alle Pfeile „A importiert B“ an. Welches Modul importiert nichts?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Model: <code>notenrechner.py</code>, View: <code>tabelle.py</code>, Controller: <code>main.py</code>. Pfeile: <code>main.py</code> → <code>notenrechner.py</code>, <code>main.py</code> → <code>tabelle.py</code>, <code>tabelle.py</code> → <code>notenrechner.py</code> (für den Typhinweis bzw. die Methodenaufrufe). Das Model <code>notenrechner.py</code> importiert nichts.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-1-1">
+            <details>
+                <summary>Aufgabe 5.1.1: Programmeinstieg verstehen <span class="niveau">AFB I–II</span></summary>
+                <p>Die Datei <code>werkzeug.py</code> enthält <code>print("A")</code> und darunter <code>if __name__ == "__main__": print("B")</code>. Die Datei <code>main.py</code> enthält <code>import werkzeug</code> und darunter <code>print("C")</code>. Gib die Ausgabe an, wenn (a) <code>werkzeug.py</code> und (b) <code>main.py</code> gestartet wird. Begründe.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-1-2">
+            <details>
+                <summary>Aufgabe 5.1.2: Wer importiert wen? – Pausenverkauf der Schülerfirma <span class="niveau">AFB II</span></summary>
+                <p>Die Schülerfirma verkauft in der Hofpause Brezeln und Äpfel. Ein Mitglied hat das Programm schon auf vier Module verteilt:</p>
+                <pre><code class="language-python"># artikel.py
+class Artikel:
+    def __init__(self, name: str, preis_cent: int):
+        self.name = name
+        self.__preis_cent = preis_cent
+
+    def get_preis(self) -&gt; int:
+        return self.__preis_cent</code></pre>
+                <pre><code class="language-python"># lager.py
+from artikel import Artikel
+
+class Lager:
+    def __init__(self):
+        self.__artikel: dict[str, Artikel] = {}
+        self.__bestand: dict[str, int] = {}
+        self.__kasse_cent = 0
+
+    def einlagern(self, artikel: Artikel, anzahl: int) -&gt; None:
+        self.__artikel[artikel.name] = artikel
+        self.__bestand[artikel.name] = self.__bestand.get(artikel.name, 0) + anzahl
+
+    def anzahl(self, name: str) -&gt; int:
+        return self.__bestand.get(name, 0)
+
+    def get_kasse(self) -&gt; int:
+        return self.__kasse_cent
+
+    def verkaufen(self, name: str) -&gt; None:
+        if self.anzahl(name) &gt; 0:
+            self.__bestand[name] -= 1
+            self.__kasse_cent += self.__artikel[name].get_preis()
+        else:
+            print(f"{name} ist ausverkauft!")
+
+    def nachbestellen(self) -&gt; None:
+        for name in self.__bestand:
+            if self.__bestand[name] == 0:
+                menge = int(input(f"Wie viele {name} nachbestellen? "))
+                self.__bestand[name] = menge
+
+l = Lager()
+print("Lager-Test:", l.anzahl("Brezel"))</code></pre>
+                <pre><code class="language-python"># anzeige.py
+from lager import Lager
+
+def zeige_bestand(lager: Lager, namen: list[str]) -&gt; None:
+    for name in namen:
+        print(f"{name}: {lager.anzahl(name)} Stück")
+    print(f"Kasse: {lager.get_kasse() / 100:.2f} €")</code></pre>
+                <pre><code class="language-python"># main.py
+from artikel import Artikel
+from lager import Lager
+from anzeige import zeige_bestand
+
+def main() -&gt; None:
+    lager = Lager()
+    lager.einlagern(Artikel("Brezel", 80), 2)
+    lager.einlagern(Artikel("Apfel", 50), 1)
+    lager.verkaufen("Apfel")
+    lager.verkaufen("Apfel")
+    lager.verkaufen("Brezel")
+    zeige_bestand(lager, ["Brezel", "Apfel"])
+
+if __name__ == "__main__":
+    main()</code></pre>
+                <ol type="a">
+                    <li>Zeichne ein Diagramm, in dem jedes Modul ein Kasten ist und ein Pfeil von A nach B bedeutet „A importiert B“. Ordne jedes Modul Model, View oder Controller zu.</li>
+                    <li>Gib die vollständige Ausgabe beim Start von <code>main.py</code> an. Erkläre, woher die erste Zeile kommt.</li>
+                    <li>Finde drei Stellen, an denen gegen MVC oder gegen den kontrollierten Programmeinstieg verstoßen wird, und gib jeweils eine Verbesserung an.</li>
+                    <li>Schreibe <code>verkaufen</code> so um, dass das Model nichts mehr ausgibt, und passe <code>main.py</code> an, sodass die Meldung „Apfel ist ausverkauft!“ weiterhin erscheint.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-1-3">
+            <details>
+                <summary>Aufgabe 5.1.3: Ein Programm in Module zerlegen – Weitsprung beim Sportfest <span class="niveau">AFB II–III</span></summary>
+                <p>Beim Sportfest werden die Weitsprung-Ergebnisse bisher mit diesem Programm ausgewertet. Jede Person hat drei Versuche. Weiten unter 0&nbsp;m oder über 10&nbsp;m sind Tippfehler und zählen nicht.</p>
+                <pre><code class="language-python"># weitsprung.py – alles in einer Datei
+class Springer:
+    def __init__(self, name: str):
+        self.name = name
+        self.versuche = []
+
+    def versuch(self, weite: float) -&gt; None:
+        if weite &lt; 0 or weite &gt; 10:
+            print("ungültige Weite")
+        else:
+            self.versuche.append(weite)
+
+    def bester(self) -&gt; float:
+        return max(self.versuche)
+
+teilnehmer = []
+anzahl = int(input("Wie viele Springer? "))
+for i in range(anzahl):
+    s = Springer(input("Name: "))
+    for nr in range(3):
+        s.versuch(float(input(f"Versuch {nr + 1} in m: ")))
+    teilnehmer.append(s)
+for s in teilnehmer:
+    print(s.name, s.bester())</code></pre>
+                <ol>
+                    <li>Starte das Programm in Thonny mit zwei Personen. Gib bei der zweiten Person dreimal eine ungültige Weite ein. Beschreibe, was passiert, und erkläre die Ursache.</li>
+                    <li>Zerlege das Programm in <code>springer.py</code> (Model), <code>ansicht.py</code> (View) und <code>main.py</code> (Controller). Das Model gibt nichts aus, <code>versuche</code> ist privat, <code>versuch()</code> gibt <code>True</code> oder <code>False</code> zurück und <code>bester()</code> liefert <code>None</code>, wenn es keinen gültigen Versuch gibt.</li>
+                    <li>Die View gibt eine <strong>Rangliste</strong> aus: Platz, Name und beste Weite mit zwei Nachkommastellen, die Weiteste zuerst. Personen ohne gültigen Versuch stehen am Ende ohne Platz.</li>
+                    <li>Teste mit den Eingaben 3, Pia (5.12, −3, 4.98), Tom (12, 13, 11), Lou (4.30, 5.05, 4.2):</li>
+                </ol>
+                <table class="gitter">
+                    <tr><th>Prüfung</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                    <tr><td>Meldungen während der Eingabe</td><td>viermal „ungültige Weite“</td><td></td></tr>
+                    <tr><td>Rangliste</td><td><code>1. Pia: 5.12 m</code>, <code>2. Lou: 5.05 m</code>, Tom ohne Platz mit „kein gültiger Versuch“</td><td></td></tr>
+                    <tr><td><code>springer.py</code> direkt starten</td><td>nur die Ausgaben eines Selbsttests unter <code>if __name__ == "__main__":</code> (falls du einen geschrieben hast)</td><td></td></tr>
+                </table>
+                <p class="tipp">Zum Sortieren: <code>sorted(liste, key=f, reverse=True)</code> sortiert nach dem Wert, den die Funktion <code>f</code> für jedes Element liefert. Schreibe eine kleine Funktion, die für Personen ohne gültigen Versuch <code>-1.0</code> zurückgibt.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-5-1-4">
+            <details>
+                <summary>Aufgabe 5.1.4: Ergebnis prüfen – in welcher Reihenfolge wird geladen? <span class="niveau">AFB II</span></summary>
+                <p>Für ein kleines Malprogramm gibt es drei Dateien im selben Ordner:</p>
+                <pre><code class="language-python"># farben.py
+print("farben geladen")
+GRUEN = "grün"
+
+def mische(a: str, b: str) -&gt; str:
+    return a + "-" + b
+
+if __name__ == "__main__":
+    print(mische("rot", "blau"))</code></pre>
+                <pre><code class="language-python"># pinsel.py
+import farben
+print("pinsel geladen")
+
+class Pinsel:
+    def __init__(self):
+        self.__farbe = farben.GRUEN
+
+    def malen(self) -&gt; str:
+        return f"malt {self.__farbe}"
+
+print(Pinsel().malen())</code></pre>
+                <pre><code class="language-python"># main.py
+import farben
+from pinsel import Pinsel
+print("main startet")
+p = Pinsel()
+print(p.malen())
+print(farben.mische("gelb", farben.GRUEN))</code></pre>
+                <ol type="a">
+                    <li>Gib die Ausgabe an, wenn (1) <code>main.py</code>, (2) <code>farben.py</code> und (3) <code>pinsel.py</code> gestartet wird. Prüfe danach in Thonny.</li>
+                    <li>Erkläre, warum „farben geladen“ beim Start von <code>main.py</code> nur einmal erscheint, obwohl <code>farben</code> zweimal importiert wird.</li>
+                    <li>Gib an, welche Zeile in <code>pinsel.py</code> nicht in ein Klassen-Modul gehört, und verbessere sie.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-1-5">
+            <details>
+                <summary>Aufgabe 5.1.5: Die View austauschen <span class="niveau">AFB II</span></summary>
+                <p>Die Klassenlehrerin möchte das Wahlergebnis aus Beispiel 2 als Balken sehen. Schreibe ein zweites View-Modul <code>ansicht_balken.py</code> mit einer Funktion <code>zeige_ergebnis(wahl: Wahl) -&gt; None</code>, die für jede Person so viele <code>#</code> ausgibt, wie sie Stimmen hat. <code>wahl.py</code> darf nicht verändert werden, in <code>main.py</code> ändert sich nur eine Importzeile.</p>
+                <p>Test mit den Eingaben Mats, Ella, Mats, Jonas, Mats, Ela und dann leer:</p>
+                <table class="gitter">
+                    <tr><th>erwartete Ausgabe nach der Eingabe</th><th>tatsächliche Ausgabe</th></tr>
+                    <tr><td><pre><code>Ergebnis der Klassensprecherwahl
+  Ella  # 1
+  Jonas # 1
+  Mats  ### 3
+Gewählt ist Mats.</code></pre></td><td></td></tr>
+                </table>
+                <p>Begründe, warum die Wahl-Logik dabei nicht noch einmal getestet werden muss.</p>
+            </details>
+        </div>

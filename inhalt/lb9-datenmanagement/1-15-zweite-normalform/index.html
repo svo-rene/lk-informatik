@@ -1,0 +1,272 @@
+<p>
+            Die zweite Normalform (2NF) baut auf der ersten Normalform auf und geht einen Schritt weiter in Richtung einer optimalen Datenbankstruktur. Sie befasst sich mit der Abhängigkeit von Nicht-Schlüssel-Attributen vom Primärschlüssel.
+        </p>
+
+<h2>Definition der zweiten Normalform</h2>
+
+<p>
+            Eine volle funktionale Abhängigkeit bedeutet, dass ein Attribut vom gesamten Primärschlüssel abhängt und nicht nur von einem Teil davon.
+        </p>
+
+<p>
+                Die 2NF ist nur relevant, wenn der Primärschlüssel aus mehreren Attributen besteht (zusammengesetzter Schlüssel). Besteht der Primärschlüssel nur aus einem Attribut, ist eine Relation in der 1NF automatisch auch in der 2NF.
+            </p>
+
+<h2>Beispiel für eine Verletzung der 2NF</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+        <p><strong>Ausgangssituation:</strong> Eine Hochschule speichert Kursbuchungen mit Kursdaten und Noten in einer Tabelle,
+           die schon in der 1NF ist. Sie soll in die 2NF gebracht werden.</p>
+        <p>Betrachten wir folgende Tabelle „Kursbuchungen“:</p>
+    
+        <table border="1">
+            <tr>
+                <th>MatrikelNr</th>
+                <th>KursID</th>
+                <th>KursName</th>
+                <th>Lehrperson</th>
+                <th>Note</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>CS101</td>
+                <td>Einführung in die Informatik</td>
+                <td>Dr. Müller</td>
+                <td>2,0</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>CS101</td>
+                <td>Einführung in die Informatik</td>
+                <td>Dr. Müller</td>
+                <td>1,7</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>MA201</td>
+                <td>Lineare Algebra</td>
+                <td>Prof. Schmidt</td>
+                <td>2,3</td>
+            </tr>
+        </table>
+    
+        <p>
+            In dieser Tabelle ist der Primärschlüssel die Kombination aus (MatrikelNr, KursID). Die Attribute KursName und Lehrperson hängen jedoch nur von KursID ab, nicht vom gesamten Primärschlüssel. Dies verletzt die 2NF.
+        </p>
+    
+        <p>Um die Tabelle in die 2NF zu überführen, teilen wir sie in zwei Tabellen auf:</p>
+    
+        <p>Tabelle „Kurse“:</p>
+        <table border="1">
+            <tr>
+                <th>KursID</th>
+                <th>KursName</th>
+                <th>Lehrperson</th>
+            </tr>
+            <tr>
+                <td>CS101</td>
+                <td>Einführung in die Informatik</td>
+                <td>Dr. Müller</td>
+            </tr>
+            <tr>
+                <td>MA201</td>
+                <td>Lineare Algebra</td>
+                <td>Prof. Schmidt</td>
+            </tr>
+        </table>
+    
+        <p>Tabelle „Kursbuchungen“:</p>
+        <table border="1">
+            <tr>
+                <th>MatrikelNr</th>
+                <th>KursID</th>
+                <th>Note</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>CS101</td>
+                <td>2,0</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>CS101</td>
+                <td>1,7</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>MA201</td>
+                <td>2,3</td>
+            </tr>
+        </table>
+
+        <p><strong>Die Schritte – was und warum:</strong></p>
+        <ol>
+            <li><strong>Primärschlüssel bestimmen:</strong> (MatrikelNr, KursID). <em>Warum?</em> Eine Person belegt mehrere Kurse, ein Kurs hat
+                mehrere Personen &ndash; erst das Paar ist eindeutig.</li>
+            <li><strong>Abhängigkeiten jedes Nicht-Schlüssel-Attributs prüfen:</strong> KursID → KursName, KursID → Lehrperson, aber
+                (MatrikelNr, KursID) → Note. <em>Warum diese Frage?</em> Die 2NF verlangt, dass jedes Attribut vom <em>ganzen</em> Schlüssel abhängt.</li>
+            <li><strong>Teilabhängige Attribute auslagern:</strong> KursName und Lehrperson wandern mit ihrem Schlüsselteil KursID in die neue
+                Tabelle „Kurse“. <em>Warum mit KursID?</em> KursID wird dort Primärschlüssel und bleibt in „Kursbuchungen“ als Fremdschlüssel stehen,
+                damit die Verbindung erhalten bleibt.</li>
+            <li><strong>Rest behalten:</strong> In „Kursbuchungen“ bleiben MatrikelNr, KursID und Note. <em>Warum?</em> Die Note hängt voll vom
+                zusammengesetzten Schlüssel ab.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> <code>Kurse(<u>KursID</u>, KursName, Lehrperson)</code> und
+           <code>Kursbuchungen(<u>MatrikelNr, &uarr;KursID</u>, Note)</code>.</p>
+        <p><strong>Kontrolle:</strong> „Einführung in die Informatik – Dr. Müller“ stand vorher zweimal, jetzt einmal. Verbindet man beide Tabellen
+           wieder über KursID (Join), entstehen genau die 3 Ausgangszeilen &ndash; die Zerlegung ist verlustfrei.</p>
+            </details>
+        </div>
+
+<p>Das Beispiel mit den Kursbuchungen ist der Grundfall: ein zusammengesetzter Schlüssel, ein Schlüsselteil mit
+           abhängigen Attributen. Mit der Schreibweise für funktionale Abhängigkeiten lässt sich auch ein größerer Fall
+           sauber durcharbeiten. <code>A → B</code> heißt: Kennt man den Wert von A, steht der Wert von B fest.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Eine Softwarefirma erfasst, wer in welchem Projekt mitarbeitet. Jede Person kann in
+               mehreren Projekten arbeiten und hat je Projekt eine eigene Rolle und eine eigene Stundenzahl.</p>
+            <table>
+                <thead><tr><th>MitarbNr</th><th>Name</th><th>ProjektNr</th><th>Projektname</th><th>Budget</th><th>Rolle</th><th>Stunden</th></tr></thead>
+                <tbody>
+                    <tr><td>7</td><td>Kim Roth</td><td>P1</td><td>Webshop</td><td>40000</td><td>Leitung</td><td>120</td></tr>
+                    <tr><td>7</td><td>Kim Roth</td><td>P2</td><td>App</td><td>25000</td><td>Entwicklung</td><td>60</td></tr>
+                    <tr><td>9</td><td>Jan Ebert</td><td>P1</td><td>Webshop</td><td>40000</td><td>Entwicklung</td><td>200</td></tr>
+                    <tr><td>12</td><td>Ole Behr</td><td>P2</td><td>App</td><td>25000</td><td>Test</td><td>80</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><strong>1NF prüfen.</strong> Jede Zelle enthält genau einen Wert – erfüllt.</li>
+                <li><strong>Primärschlüssel bestimmen.</strong> MitarbNr (7 doppelt) und ProjektNr (P1 doppelt) scheiden allein aus.
+                    (MitarbNr, ProjektNr) ist eindeutig und fachlich begründet: Eine Person ist in einem Projekt nur einmal eingetragen.</li>
+                <li><strong>Funktionale Abhängigkeiten notieren.</strong> Für jedes Nicht-Schlüssel-Attribut fragen: Welcher Teil des Schlüssels genügt?
+                    <ul>
+                        <li><code>MitarbNr → Name</code> (Kim Roth heißt in jedem Projekt Kim Roth)</li>
+                        <li><code>ProjektNr → Projektname, Budget</code> (P1 ist immer der Webshop mit 40000)</li>
+                        <li><code>{MitarbNr, ProjektNr} → Rolle, Stunden</code></li>
+                    </ul>
+                    <em>Warum gehört die Rolle zum ganzen Schlüssel?</em> Die Daten zeigen es: Kim Roth ist in P1 „Leitung“, in P2
+                    „Entwicklung“ – die MitarbNr allein legt die Rolle also nicht fest. Und in P1 haben Kim und Jan verschiedene Rollen –
+                    die ProjektNr allein genügt auch nicht.</li>
+                <li><strong>Partielle Abhängigkeiten auslagern.</strong> Name hängt nur von MitarbNr ab, Projektname und Budget nur von ProjektNr –
+                    das verletzt die 2NF. Jede Gruppe wandert mit ihrem Schlüsselteil in eine eigene Relation.</li>
+                <li><strong>Rest behalten.</strong> In der ursprünglichen Relation bleiben der Schlüssel (jetzt zwei Fremdschlüssel) und die voll
+                    abhängigen Attribute Rolle und Stunden.</li>
+            </ol>
+            <p><strong>Ergebnis (2NF):</strong></p>
+            <pre class="schema">Mitarbeiter(<u>MitarbNr</u>, Name)
+Projekt(<u>ProjektNr</u>, Projektname, Budget)
+Mitarbeit(<u>&uarr;MitarbNr, &uarr;ProjektNr</u>, Rolle, Stunden)</pre>
+            <p><code>Mitarbeiter</code> hat 3 Zeilen, <code>Projekt</code> 2 Zeilen, <code>Mitarbeit</code> 4 Zeilen.</p>
+            <p><strong>Probe und Falle:</strong> Kim Roth und „Webshop – 40000“ stehen nur noch einmal; über die Fremdschlüssel in
+               <code>Mitarbeit</code> entstehen beim Zusammensetzen wieder genau die 4 Ausgangszeilen. Die Falle lauert bei Rolle und
+               Stunden: Wer sie vorschnell zu <code>Mitarbeiter</code> legt, kann für Kim Roth nur noch <em>eine</em> Rolle speichern und
+               verliert Information. Deshalb jede Abhängigkeit an den Daten prüfen, bevor man auslagert.</p>
+            </details>
+        </div>
+
+<h2>Vorteile der zweiten Normalform</h2>
+
+<ul>
+            <li>Reduzierung von Datenredundanz</li>
+            <li>Verbesserung der Datenintegrität</li>
+            <li>Effizienzsteigerung bei Datenbankoperationen</li>
+            <li>Vereinfachung von Datenaktualisierungen</li>
+        </ul>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            Eine Relation befindet sich in der zweiten Normalform, wenn:
+        </p>
+    
+        <ol>
+            <li>sie sich in der ersten Normalform befindet und</li>
+            <li>jedes Nicht-Schlüssel-Attribut voll funktional vom Primärschlüssel abhängig ist.</li>
+        </ol>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.15.1: <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Gegeben ist folgende Tabelle „Bestellungen“.                 
+                        Der Primärschlüssel ist hier die Kombination aus (BestellNr, ProduktID).
+                </p>
+                <table border="1">
+                    <tr>
+                        <th>BestellNr</th>
+                        <th>ProduktID</th>
+                        <th>ProduktName</th>
+                        <th>Kategorie</th>
+                        <th>Menge</th>
+                        <th>Preis</th>
+                    </tr>
+                    <tr>
+                        <td>1001</td>
+                        <td>P1</td>
+                        <td>Laptop</td>
+                        <td>Elektronik</td>
+                        <td>2</td>
+                        <td>1200</td>
+                    </tr>
+                    <tr>
+                        <td>1001</td>
+                        <td>P2</td>
+                        <td>Maus</td>
+                        <td>Zubehör</td>
+                        <td>3</td>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>P1</td>
+                        <td>Laptop</td>
+                        <td>Elektronik</td>
+                        <td>1</td>
+                        <td>1200</td>
+                    </tr>
+                </table>
+                <ol>
+                    <li>Erkläre, warum diese Tabelle nicht der 2NF entspricht.</li>
+                    <li>Überführe die Tabelle in die 2NF.</li>
+                    <li>Begründe, welche Vorteile deine neue Struktur bietet.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.15.2: Zwei Tabellen – zweimal 2NF? <span class="niveau">AFB II</span>
+                </summary>
+                <p>Prüfe für beide Tabellen, ob sie in der 2NF sind. Notiere dazu die funktionalen Abhängigkeiten.</p>
+                <p><strong>Tabelle A</strong> „Ausleihe“ (Primärschlüssel: AusleihNr):</p>
+                <table>
+                    <thead><tr><th>AusleihNr</th><th>BuchID</th><th>Titel</th><th>LeserNr</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>B4</td><td>Momo</td><td>17</td></tr>
+                        <tr><td>2</td><td>B9</td><td>Krabat</td><td>17</td></tr>
+                        <tr><td>3</td><td>B4</td><td>Momo</td><td>22</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>Tabelle B</strong> „Prüfung“ (Primärschlüssel: (SchuelerNr, Fach)); jedes Fach hat genau eine prüfende Lehrkraft:</p>
+                <table>
+                    <thead><tr><th>SchuelerNr</th><th>Fach</th><th>Name</th><th>Pruefer</th><th>Note</th></tr></thead>
+                    <tbody>
+                        <tr><td>3</td><td>Mathe</td><td>Ida Kühn</td><td>Herr Abel</td><td>2</td></tr>
+                        <tr><td>3</td><td>Bio</td><td>Ida Kühn</td><td>Frau Rost</td><td>1</td></tr>
+                        <tr><td>8</td><td>Mathe</td><td>Leo Graf</td><td>Herr Abel</td><td>3</td></tr>
+                    </tbody>
+                </table>
+                <p>Überführe die Tabelle, die nicht in der 2NF ist, in die 2NF.</p>
+            </details>
+        </div>

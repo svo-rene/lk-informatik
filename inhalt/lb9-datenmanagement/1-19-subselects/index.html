@@ -1,0 +1,359 @@
+<p>
+            Subselects (auch Unterabfragen oder verschachtelte SELECTs genannt) kennst du bereits: Auf Seite 1.4
+            (WHERE- und LIKE-Klauseln) hast du sie für einfache Lookups genutzt, auf Seite 1.5 (Aggregatfunktionen) in
+            Kombination mit <code>AVG()</code> und auf Seite 1.8 (CRUD) für DELETE/UPDATE. Hier vertiefen wir das Thema und
+            lernen weitere Einsatzmöglichkeiten kennen, z.&nbsp;B. mit <code>IN</code> und verschachtelten
+            Subqueries.
+        </p>
+
+<h2>Die Beispieldatenbank</h2>
+
+<p>
+            Alle Beispiele und Aufgaben auf dieser Seite arbeiten mit derselben Datenbank:
+            <a href="../material/schueler.sql" download="">schueler.sql</a>. Sie besteht aus drei kleinen
+            Tabellen, die du hier vollständig siehst – so kannst du bei jedem Beispiel selbst nachrechnen.
+        </p>
+
+<table>
+            <thead><tr><th colspan="2">klasse</th></tr><tr><th>id</th><th>name</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>10A</td></tr>
+                <tr><td>2</td><td>10B</td></tr>
+                <tr><td>3</td><td>9C</td></tr>
+            </tbody>
+        </table>
+
+<table>
+            <thead><tr><th colspan="3">schueler</th></tr><tr><th>id</th><th>name</th><th>klasse_id</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Anna Müller</td><td>1</td></tr>
+                <tr><td>2</td><td>Lukas Schulz</td><td>1</td></tr>
+                <tr><td>3</td><td>Felix Test</td><td>1</td></tr>
+                <tr><td>4</td><td>Marie Becker</td><td>2</td></tr>
+                <tr><td>5</td><td>Tom Schneider</td><td>2</td></tr>
+                <tr><td>6</td><td>Sarah Müller</td><td>3</td></tr>
+                <tr><td>7</td><td>Leon Koch</td><td>3</td></tr>
+                <tr><td>8</td><td>Anna Müller</td><td>3</td></tr>
+            </tbody>
+        </table>
+
+<table>
+            <thead><tr><th colspan="3">note</th></tr><tr><th>id</th><th>schueler_id</th><th>wert</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>1</td><td>1.7</td></tr>
+                <tr><td>2</td><td>1</td><td>2.3</td></tr>
+                <tr><td>3</td><td>2</td><td>2.0</td></tr>
+                <tr><td>4</td><td>3</td><td>3.0</td></tr>
+                <tr><td>5</td><td>4</td><td>1.3</td></tr>
+                <tr><td>6</td><td>4</td><td>1.0</td></tr>
+                <tr><td>7</td><td>5</td><td>3.7</td></tr>
+                <tr><td>8</td><td>6</td><td>2.7</td></tr>
+                <tr><td>9</td><td>7</td><td>2.0</td></tr>
+                <tr><td>10</td><td>8</td><td>1.7</td></tr>
+            </tbody>
+        </table>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+        <h2>Beispiel 1: Ein Subselect Schritt für Schritt</h2>
+
+        <p>
+            <strong>Die Frage:</strong> Wie heißen alle Schüler*innen der Klasse „10A“?<br>
+            Das Problem: In der Tabelle <code>schueler</code> steht gar nicht „10A“, sondern nur eine
+            <code>klasse_id</code>. Die passende id muss also erst aus der Tabelle <code>klasse</code>
+            geholt werden.
+        </p>
+
+        <div class="merke">
+            <p>
+                <strong>Ein Subselect liest man immer von innen nach außen.</strong> Die innere Abfrage wird
+                zuerst ausgeführt; ihr Ergebnis wird dann an ihrer Stelle in die äußere Abfrage eingesetzt.
+            </p>
+        </div>
+
+        <p><strong>Schritt 1 – die innere Abfrage allein ausführen.</strong> Das kannst du im DB Browser
+           wörtlich so machen: markiere den inneren Teil und lass nur ihn laufen.</p>
+
+        <pre><code>SELECT id
+FROM klasse
+WHERE name = '10A';</code></pre>
+
+        <p>Ergebnis:</p>
+        <table><thead><tr><th>id</th></tr></thead><tbody><tr><td>1</td></tr></tbody></table>
+
+        <p><strong>Schritt 2 – das Ergebnis gedanklich einsetzen.</strong> Die äußere Abfrage sieht also
+           in Wirklichkeit so aus:</p>
+
+        <pre><code>SELECT name
+FROM schueler
+WHERE klasse_id = 1;</code></pre>
+
+        <p><strong>Schritt 3 – beides zusammensetzen.</strong> Statt die 1 fest hineinzuschreiben, setzt man
+           die innere Abfrage in Klammern ein. Das ist der eigentliche Vorteil: Die Abfrage funktioniert
+           auch dann noch, wenn die 10A irgendwann eine andere id bekommt.</p>
+
+        <pre><code>SELECT name
+FROM schueler
+WHERE klasse_id = (
+    SELECT id
+    FROM klasse
+    WHERE name = '10A'
+);</code></pre>
+
+        <p>Ergebnis:</p>
+        <table>
+            <thead><tr><th>name</th></tr></thead>
+            <tbody>
+                <tr><td>Anna Müller</td></tr>
+                <tr><td>Lukas Schulz</td></tr>
+                <tr><td>Felix Test</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Die drei Schritte kurz – was und warum:</strong></p>
+        <ol>
+            <li><strong>Innere Abfrage:</strong> liefert die id der Klasse „10A“, nämlich 1. <em>Warum zuerst?</em> Die äußere Abfrage braucht diesen Wert für ihre Bedingung.</li>
+            <li><strong>Einsetzen:</strong> <code>WHERE klasse_id = 1</code>. <em>Warum <code>=</code>?</em> Die innere Abfrage liefert genau einen Wert, weil der Klassenname eindeutig ist.</li>
+            <li><strong>Äußere Abfrage:</strong> sucht in <code>schueler</code> alle Zeilen mit <code>klasse_id</code> 1. <em>Warum in Klammern?</em> So wird der Wert bei jeder Ausführung neu ermittelt, statt fest im Code zu stehen.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> 3 Zeilen &ndash; Anna Müller, Lukas Schulz, Felix Test (Tabelle oben).</p>
+        <p><strong>Kontrolle:</strong> In der Tabelle <code>schueler</code> haben genau die ids 1, 2 und 3 die <code>klasse_id</code> 1. Die zweite
+           „Anna Müller“ (id 8) gehört zur 9C und erscheint deshalb zu Recht nicht. Gegenprobe mit einem Join:
+           <code>SELECT schueler.name FROM schueler JOIN klasse ON schueler.klasse_id = klasse.id WHERE klasse.name = '10A';</code>
+           liefert dieselben 3 Namen.</p>
+            </details>
+        </div>
+
+<h2>Beispiel 2: Wenn die innere Abfrage mehrere Werte liefert – IN statt =</h2>
+
+<p>
+            <strong>Die Frage:</strong> Wie heißen alle Schüler*innen der Klassen „10A“ und „10B“?
+        </p>
+
+<p>Schritt 1, die innere Abfrage, liefert jetzt <em>zwei</em> Zeilen:</p>
+
+<pre><code>SELECT id
+FROM klasse
+WHERE name IN ('10A', '10B');</code></pre>
+
+<table><thead><tr><th>id</th></tr></thead><tbody><tr><td>1</td></tr><tr><td>2</td></tr></tbody></table>
+
+<p>
+            Ein <code>=</code> vergleicht aber immer nur mit <em>einem</em> Wert. Für mehrere Werte braucht
+            man <code>IN</code> – zu lesen als „ist einer von diesen“:
+        </p>
+
+<pre><code>SELECT name
+FROM schueler
+WHERE klasse_id IN (
+    SELECT id
+    FROM klasse
+    WHERE name IN ('10A', '10B')
+);</code></pre>
+
+<p>Ergebnis:</p>
+
+<table>
+            <thead><tr><th>name</th></tr></thead>
+            <tbody>
+                <tr><td>Anna Müller</td></tr>
+                <tr><td>Lukas Schulz</td></tr>
+                <tr><td>Felix Test</td></tr>
+                <tr><td>Marie Becker</td></tr>
+                <tr><td>Tom Schneider</td></tr>
+            </tbody>
+        </table>
+
+<h2>Beispiel 3: Subselect mit einer Aggregatfunktion</h2>
+
+<p>
+            <strong>Die Frage:</strong> Wer hat die beste Note in der Datenbank? Die beste Note ist die
+            kleinste Zahl – aber welche das ist, weiß man vorher nicht. Genau dafür sind Subselects gemacht.
+        </p>
+
+<p>Schritt 1 – die innere Abfrage allein:</p>
+
+<pre><code>SELECT MIN(wert)
+FROM note;</code></pre>
+
+<table><thead><tr><th>MIN(wert)</th></tr></thead><tbody><tr><td>1.0</td></tr></tbody></table>
+
+<p>Schritt 2 – dieses Zwischenergebnis als Vergleichswert einsetzen:</p>
+
+<pre><code>SELECT s.name, n.wert
+FROM schueler s
+JOIN note n ON n.schueler_id = s.id
+WHERE n.wert = (
+    SELECT MIN(wert)
+    FROM note
+);</code></pre>
+
+<p>Ergebnis:</p>
+
+<table>
+            <thead><tr><th>name</th><th>wert</th></tr></thead>
+            <tbody><tr><td>Marie Becker</td><td>1.0</td></tr></tbody>
+        </table>
+
+<p>
+            Warum nicht in einem Schritt? Die Tabelle <code>note</code> enthält keine Namen, du bräuchtest also
+            ohnehin einen JOIN: <code>SELECT s.name, MIN(n.wert) FROM schueler s JOIN note n ON n.schueler_id = s.id;</code>
+            Diese Abfrage ist nach dem SQL-Standard sogar falsch, denn neben einer Aggregatfunktion darf ohne
+            <code>GROUP BY</code> keine normale Spalte stehen. Viele Datenbanksysteme melden deshalb einen Fehler.
+            SQLite führt sie zwar aus und zeigt bei <code>MIN</code> und <code>MAX</code> die passende Zeile an,
+            aber immer nur <em>eine</em> – hätten zwei Personen die Note 1.0, fiele eine unter den Tisch. Das
+            Subselect findet dagegen alle Treffer und funktioniert in jedem Datenbanksystem.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 4 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Für eine Ehrung sucht die Schulleitung alle Schüler*innen, deren
+               <em>persönlicher</em> Notendurchschnitt besser ist als der Durchschnitt <em>aller</em> Noten der Schule.
+               Ausgegeben werden Klasse, Name und persönlicher Schnitt, bester Schnitt zuerst.</p>
+            <pre><code>SELECT k.name AS klasse, s.name, ROUND(AVG(n.wert), 2) AS schnitt
+FROM schueler s
+JOIN klasse k ON s.klasse_id = k.id
+JOIN note n   ON n.schueler_id = s.id
+GROUP BY s.id
+HAVING AVG(n.wert) &lt; (SELECT AVG(wert) FROM note)
+ORDER BY schnitt ASC, s.name ASC;</code></pre>
+            <ol>
+                <li><strong>Innere Abfrage zuerst.</strong> <code>SELECT AVG(wert) FROM note</code> liefert
+                    (1.7 + 2.3 + 2.0 + 3.0 + 1.3 + 1.0 + 3.7 + 2.7 + 2.0 + 1.7) / 10 = 21.4 / 10 = <strong>2.14</strong>.
+                    <em>Warum ein Subselect?</em> Der Vergleichswert muss aus derselben Tabelle berechnet werden, ohne
+                    dass er vorher bekannt ist.</li>
+                <li><strong>FROM und JOIN.</strong> Drei Tabellen werden verbunden: <code>schueler</code> mit
+                    <code>klasse</code> (für den Klassennamen) und mit <code>note</code> (für die Werte). Es entstehen
+                    10 Zeilen, eine je Note.</li>
+                <li><strong>GROUP BY s.id.</strong> Je Person ein Stapel. <em>Warum nicht nach dem Namen?</em> Es gibt
+                    zwei verschiedene Personen namens „Anna Müller“ (id 1 in der 10A, id 8 in der 9C). Nach Namen
+                    gruppiert würden ihre Noten zu einem Schnitt von 1.9 vermischt.
+                    <table>
+                        <thead><tr><th>s.id</th><th>Name</th><th>Klasse</th><th>Noten</th><th>AVG</th><th>&lt; 2.14?</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>Anna Müller</td><td>10A</td><td>1.7; 2.3</td><td>2.0</td><td>ja</td></tr>
+                            <tr><td>2</td><td>Lukas Schulz</td><td>10A</td><td>2.0</td><td>2.0</td><td>ja</td></tr>
+                            <tr><td>3</td><td>Felix Test</td><td>10A</td><td>3.0</td><td>3.0</td><td>nein</td></tr>
+                            <tr><td>4</td><td>Marie Becker</td><td>10B</td><td>1.3; 1.0</td><td>1.15</td><td>ja</td></tr>
+                            <tr><td>5</td><td>Tom Schneider</td><td>10B</td><td>3.7</td><td>3.7</td><td>nein</td></tr>
+                            <tr><td>6</td><td>Sarah Müller</td><td>9C</td><td>2.7</td><td>2.7</td><td>nein</td></tr>
+                            <tr><td>7</td><td>Leon Koch</td><td>9C</td><td>2.0</td><td>2.0</td><td>ja</td></tr>
+                            <tr><td>8</td><td>Anna Müller</td><td>9C</td><td>1.7</td><td>1.7</td><td>ja</td></tr>
+                        </tbody>
+                    </table></li>
+                <li><strong>HAVING mit Subselect.</strong> Verglichen wird der Schnitt eines <em>Stapels</em>, also
+                    <code>HAVING</code> und nicht <code>WHERE</code>. Fünf Stapel bleiben übrig.</li>
+                <li><strong>SELECT und ORDER BY.</strong> Gerundeter Schnitt, aufsteigend; bei Gleichstand (2.0) alphabetisch.</li>
+            </ol>
+            <p><strong>Ergebnis (5 Zeilen):</strong></p>
+            <table>
+                <thead><tr><th>klasse</th><th>name</th><th>schnitt</th></tr></thead>
+                <tbody>
+                    <tr><td>10B</td><td>Marie Becker</td><td>1.15</td></tr>
+                    <tr><td>9C</td><td>Anna Müller</td><td>1.7</td></tr>
+                    <tr><td>10A</td><td>Anna Müller</td><td>2.0</td></tr>
+                    <tr><td>9C</td><td>Leon Koch</td><td>2.0</td></tr>
+                    <tr><td>10A</td><td>Lukas Schulz</td><td>2.0</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Falle und Probe:</strong> Wer <code>WHERE n.wert &lt; (SELECT AVG(wert) FROM note)</code>
+               schreibt, filtert einzelne <em>Noten</em> statt Durchschnitte: Felix, Tom und Sarah fielen zwar heraus,
+               aber Anna Müller (10A) bekäme mit nur ihrer 1.7 einen Schnitt von 1.7 – ein geschöntes Ergebnis.
+               Probe: Der Gesamtschnitt 2.14 liegt zwischen dem besten (1.15) und dem schlechtesten (3.7)
+               persönlichen Schnitt, wie es sein muss.</p>
+            </details>
+        </div>
+
+<h2>Wann verwendet man Subselects?</h2>
+
+<ul>
+            <li>Wenn ein Zwischenergebnis zur Filterung notwendig ist</li>
+            <li>Wenn man keine JOINs verwenden möchte oder kann</li>
+            <li>Zur Verbesserung der Lesbarkeit bei einfachen Abfragen</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Wann lieber JOINs?
+                </summary>
+                <p>
+                    JOINs sind in der Regel performanter als Subselects, wenn mehrere Tabellen miteinander
+                    verbunden werden müssen und größere Datenmengen beteiligt sind.
+                </p>
+                <p>
+                    Faustregel: Brauchst du <em>Spalten aus beiden Tabellen</em> im Ergebnis, nimm einen
+                    JOIN. Brauchst du aus der zweiten Tabelle nur einen <em>Vergleichswert</em>, ist ein
+                    Subselect meist besser lesbar. Beispiel 1 ließe sich auch als JOIN schreiben:
+                </p>
+                <pre><code>SELECT s.name
+FROM schueler s
+JOIN klasse k ON s.klasse_id = k.id
+WHERE k.name = '10A';</code></pre>
+                <p>Beide Abfragen liefern dasselbe Ergebnis.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Subselects in Onlinehandel und Datenbankadministration</summary>
+                <p>
+                    „Zeige alle Kund*innen, die mehr ausgegeben haben als der Durchschnitt“ oder „alle Artikel, die teurer
+                    sind als der günstigste Artikel der Konkurrenz“ – solche Fragen stellen <strong>Data Analysts</strong>
+                    im Onlinehandel täglich, und sie lassen sich nur mit einem Subselect in einer Abfrage beantworten.
+                    In der <strong>Datenbankadministration</strong> sind Subselects beim Aufräumen wichtig, etwa um alle
+                    Bestellungen von gelöschten Konten zu entfernen. Auch hier gilt: erst die innere Abfrage allein prüfen,
+                    dann das DELETE ausführen.
+                </p>
+            </details>
+        </div>
+
+<h2>Übungsaufgaben</h2>
+
+<p>Für alle Übungsaufgaben wird die oben gezeigte Datenbank verwendet: <a href="../material/schueler.sql" download="">schueler.sql</a></p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Subselects liefern ein Ergebnis, das von der übergeordneten SQL-Anweisung weiterverarbeitet wird.
+                Sie können in SELECT-, FROM- oder WHERE-Klauseln verwendet werden.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Achtung, tückischer Fehler:</strong> Schreibt man in diesem Fall <code>=</code> statt
+                <code>IN</code>, meldet SQLite <em>keinen</em> Fehler. Es nimmt stillschweigend nur den
+                ersten Wert der inneren Abfrage und liefert nur die drei Namen aus der 10A. Der Fehler fällt
+                also nicht durch eine Fehlermeldung auf, sondern nur dadurch, dass zu wenige Zeilen
+                herauskommen. Prüfe deshalb bei jedem Subselect: <em>Kann die innere Abfrage mehr als eine
+                Zeile liefern?</em> Wenn ja, gehört dort ein <code>IN</code> hin.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.19.1: Subselect <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Gib die Namen aller Schüler*innen der Klasse „10B“ aus. Nutze ein Subselect.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.19.2: Subselect <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Gib die Namen aller Klassen aus, in denen Schüler*innen mit dem Nachnamen „Müller“ sind.
+                </p>
+            </details>
+        </div>

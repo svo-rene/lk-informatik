@@ -1,0 +1,18 @@
+{
+  "nr": "11.6",
+  "titel": "k-Nächste-Nachbarn-Algorithmus (k-NN)",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

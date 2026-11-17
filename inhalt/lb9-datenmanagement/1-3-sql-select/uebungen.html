@@ -1,0 +1,46 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.3.3: <span class="niveau">AFB II</span></summary>
+<p>Importiere die Tabelle <a href="../material/studenten_tabelle.sql">&bdquo;Studenten&ldquo;</a> (Studierende einer Hochschule) mit den Spalten &bdquo;StudentID&ldquo;, &bdquo;Vorname&ldquo;, &bdquo;Nachname&ldquo;, &bdquo;Geburtsdatum&ldquo; und &bdquo;Notendurchschnitt&ldquo; in den DB Browser.</p>
+<p>Schreibe eine SQL-Abfrage, die</p>
+<ol>
+<li>alle Studierenden auflistet,</li>
+<li>nach Notendurchschnitt sortiert (beste Noten zuerst),</li>
+<li>bei gleichem Notendurchschnitt nach Nachnamen alphabetisch sortiert und</li>
+<li>nur Vorname, Nachname und Notendurchschnitt anzeigt.</li>
+</ol>
+</details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.3.4: Ergebnis vorhersagen <span class="niveau">AFB II</span></summary>
+<p>Bevor du eine Abfrage ausführst, solltest du ungefähr wissen, was herauskommen muss. Sage für den Ausschnitt
+   mit den 5 Zeilen oben das Ergebnis dieser Abfrage voraus: Spaltenüberschriften, Werte und Reihenfolge.</p>
+<pre><code>SELECT Nachname AS Name,
+       Notendurchschnitt AS Schnitt,
+       2026 - CAST(substr(Geburtsdatum, 1, 4) AS INTEGER) AS Lebensjahre
+FROM Studenten
+ORDER BY Lebensjahre ASC, Schnitt DESC;</code></pre>
+<p class="tipp">Arbeite in der Reihenfolge FROM → SELECT → ORDER BY und notiere nach dem SELECT eine Zwischentabelle.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.3.5: Listen für das Prüfungsamt <span class="niveau">AFB II</span></summary>
+<p>Das Prüfungsamt braucht zwei Listen aus der vollständigen Tabelle <code>Studenten</code>
+   (<a href="../material/studenten_tabelle.sql">studenten_tabelle.sql</a>, 51 Zeilen). Schreibe die Abfragen,
+   führe sie im DB Browser aus und beantworte die Fragen.</p>
+<ol>
+<li>Eine Teilnehmerliste mit Nachname und Vorname, alphabetisch nach Nachname, bei gleichem Nachnamen nach Vorname.
+    Welche drei Personen stehen auf den Plätzen 26 bis 28?</li>
+<li>Eine Jahrgangsliste mit Vorname, Nachname und dem Geburtsjahr als Zahl unter dem Namen <code>Jahrgang</code>,
+    älteste Jahrgänge zuerst, innerhalb eines Jahrgangs nach Nachname. Wer steht auf den ersten drei Plätzen?</li>
+</ol>
+</details>
+</div>

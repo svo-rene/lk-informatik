@@ -1,0 +1,76 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.6.5: Fehler finden – ein fehlerhaftes k-NN-Programm <span class="niveau">AFB III</span></summary>
+                <p>Jonas hat k-NN in Python programmiert. Beim Test mit den Daten aus Beispiel 1 stürzt sein Programm ab.</p>
+                <pre><code class="language-python">import math
+
+def abstand(p, q):
+    return math.sqrt((p[0] - q[0]) + (p[1] - q[1]))
+
+def knn(trainingsdaten, punkt, k):
+    liste = []
+    for (x, y, klasse) in trainingsdaten:
+        liste.append((abstand((x, y), punkt), klasse))
+    liste.sort(reverse=True)
+    stimmen = {}
+    for i in range(k):
+        klasse = liste[i][1]
+        stimmen[klasse] = stimmen.get(klasse, 0) + 1
+    beste = None
+    for klasse in stimmen:
+        if beste is None or stimmen[klasse] &gt; stimmen[beste]:
+            beste = klasse
+    return beste
+
+daten = [(1, 1, "Rot"), (2, 4, "Rot"), (3, 6, "Rot"), (6, 5, "Blau"),
+         (7, 3, "Blau"), (8, 8, "Blau"), (4, 1, "Rot")]
+print(knn(daten, (5, 5), 3))</code></pre>
+                <ol>
+                    <li>Finde die beiden Fehler. Erkläre jeweils, welche Auswirkung der Fehler hat, und korrigiere ihn.</li>
+                    <li>Teste das korrigierte Programm mit folgenden Fällen und trage die tatsächliche Ausgabe ein:
+                        <table>
+                            <thead>
+                                <tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>knn(daten, (5, 5), 1)</code></td><td><code>Blau</code></td><td></td></tr>
+                                <tr><td><code>knn(daten, (5, 5), 3)</code></td><td><code>Blau</code></td><td></td></tr>
+                                <tr><td><code>knn(daten, (5, 5), 5)</code></td><td><code>Rot</code></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li>Bei k = 4 steht es 2 : 2. Welche Klasse gibt das korrigierte Programm aus? Begründe am Code, welche Gleichstandsregel aus Abschnitt 3.4 es dadurch (zufällig) umsetzt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.6.6: Das richtige k wählen <span class="niveau">AFB III</span></summary>
+                <p>Ein Team hat k-NN für eine Bilderkennung (zwei Klassen, 1.000 Trainingsbilder) mit verschiedenen k getestet:</p>
+                <table>
+                    <thead>
+                        <tr><th>k</th><th>1</th><th>3</th><th>7</th><th>15</th><th>501</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Accuracy Trainingsdaten</td><td>100&nbsp;%</td><td>94&nbsp;%</td><td>89&nbsp;%</td><td>84&nbsp;%</td><td>62&nbsp;%</td></tr>
+                        <tr><td>Accuracy Validierungsdaten</td><td>78&nbsp;%</td><td>86&nbsp;%</td><td>88&nbsp;%</td><td>83&nbsp;%</td><td>60&nbsp;%</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Erkläre, warum die Trainings-Accuracy bei k = 1 zwangsläufig 100&nbsp;% beträgt.</li>
+                    <li>Deute die Werte bei k = 501. Was sagt das Modell hier vermutlich für jedes Bild vorher?</li>
+                    <li>Empfiehl begründet ein k. Verwende die Begriffe Overfitting und Underfitting. Begründe auch, warum im Test nur ungerade Werte vorkommen.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Weiterführende Links</h2>
+
+<ul>
+            <li><a href="https://www.youtube.com/watch?v=HVXime0nQeI" target="_blank" rel="noopener">StatQuest: K-nearest neighbors, Clearly Explained</a> (Video, Englisch) – Josh Starmer erklärt k-NN in seinem bekannten, sehr anschaulichen Erklärstil noch einmal von Grund auf.</li>
+            <li><a href="https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/" target="_blank" rel="noopener">GeeksforGeeks: K-Nearest Neighbour (KNN) Algorithm</a> – vertiefender Artikel mit der euklidischen Abstandsformel, Python-Beispielcode und einer Übersicht realer Einsatzgebiete wie Empfehlungssysteme und Spracherkennung.</li>
+            <li><a href="https://www.w3schools.com/python/python_ml_knn.asp" target="_blank" rel="noopener">W3Schools: K-nearest neighbors (Python ML)</a> – interaktives Tutorial, das genau wie unser Beispiel zeigt, wie unterschiedliche Werte für k (z.&nbsp;B. k = 1 vs. k = 5) zu unterschiedlichen Klassifikationsergebnissen führen können.</li>
+        </ul>

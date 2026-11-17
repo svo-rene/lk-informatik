@@ -1,0 +1,62 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.9.6: Strafe null oder Strafterm? <span class="niveau">AFB III</span></summary>
+                <p>Ein genetischer Algorithmus für das Rucksackproblem aus Abschnitt 3 (Gewichtsgrenze 50) startet zufällig mit dieser Population, in der drei von vier Individuen zu schwer sind:</p>
+                <p><code>1 0 1 1</code>, <code>1 1 1 0</code>, <code>0 1 1 1</code>, <code>1 0 0 0</code></p>
+                <p>Zwei Fitnessfunktionen stehen zur Auswahl:</p>
+                <ul>
+                    <li><strong>Regel A</strong> (wie auf dieser Seite): Fitness = Gesamtwert, bei Überschreitung der Grenze Fitness = 0.</li>
+                    <li><strong>Regel B</strong> (Strafterm): Fitness = Gesamtwert − 10 · (Gewicht − 50), wenn die Grenze überschritten ist (aber nicht kleiner als 0), sonst Gesamtwert.</li>
+                </ul>
+                <ol>
+                    <li>Berechne für jedes Individuum Wert, Gewicht und Fitness nach Regel A und nach Regel B. Gib jeweils die Anteile am Roulette-Rad (siehe Aufgabe 11.9.5) in % an.</li>
+                    <li>Beschreibe, wie die nächste Generation bei Regel A mit Roulette-Rad-Selektion aussieht, und erkläre, warum hier weder Selektion noch Crossover weiterhelfen. Welcher Schritt des Algorithmus kann die Population noch verändern?</li>
+                    <li>Beurteile Regel B: Nenne einen Vorteil gegenüber Regel A und zeige an der Population, welches Risiko entsteht, wenn der Algorithmus mit Elitismus einfach das Individuum mit der höchsten Fitness als Ergebnis ausgibt.</li>
+                    <li>Schlage eine Verbesserung vor, die die Vorteile beider Regeln verbindet, und begründe sie.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.9.7: Fehler finden – „Mein Algorithmus findet nur Fitness 0“ <span class="niveau">AFB III</span></summary>
+                <p>Tom hat für das Rucksackproblem aus Abschnitt 3 eine Fitnessfunktion und ein Crossover programmiert. Sein genetischer Algorithmus meldet in jeder Generation als beste Fitness 0.</p>
+<pre><code class="language-python">werte = [60, 100, 120, 80]
+gewichte = [10, 20, 30, 15]
+grenze = 50
+
+def fitness(chromosom):
+    wert = 0
+    gewicht = 0
+    for i in range(len(chromosom)):
+        if chromosom[i] == 1:
+            wert = wert + werte[i]
+        gewicht = gewicht + gewichte[i]
+    if gewicht &gt; grenze:
+        return 0
+    return wert
+
+def crossover(eltern1, eltern2, position):
+    kind1 = eltern1[:position] + eltern2[position:]
+    kind2 = eltern2[:position] + eltern2[position:]
+    return kind1, kind2
+
+print(fitness([1, 1, 0, 0]))
+print(fitness([0, 0, 0, 0]))
+print(crossover([1, 1, 0, 0], [0, 0, 1, 1], 1))</code></pre>
+                <ol>
+                    <li>Lege eine Tabelle mit den Spalten Aufruf, erwartete Ausgabe und tatsächliche Ausgabe für die drei <code>print</code>-Aufrufe an. Gehe den Code dazu gedanklich durch.</li>
+                    <li>Finde die beiden Fehler, erkläre ihre Wirkung und gib die korrigierten Zeilen an. Erkläre, warum der erste Fehler dazu führt, dass der Algorithmus nur Fitness 0 findet.</li>
+                    <li>Der Test <code>fitness([0, 0, 0, 0])</code> liefert das erwartete Ergebnis, obwohl die Funktion fehlerhaft ist. Erkläre, warum. Ergänze zwei weitere Testfälle (Eingabe, erwartete Ausgabe) für die korrigierte Funktion, darunter einen, der den Grenzfall „Gewicht genau 50“ prüft.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Weiterführende Links</h2>
+
+<ul>
+            <li><a href="https://www.youtube.com/watch?v=9zfeTw-uFCw" target="_blank" rel="noopener">9.1: Genetic Algorithm: Introduction – The Nature of Code (YouTube)</a>: eine anschauliche, bekannte Einführung in genetische Algorithmen von Daniel Shiffman (The Coding Train), die die Grundbegriffe direkt an einem programmierten Beispiel zeigt.</li>
+            <li><a href="https://jpl.nasa.gov/nmp/st5/TECHNOLOGY/antenna.html" target="_blank" rel="noopener">Evolved Antenna (NASA/JPL, offizielle Seite)</a>: ein reales, verblüffendes Anwendungsbeispiel: Für die 2006 gestartete Mission ST5 ließ die NASA eine Satellitenantenne von einem evolutionären Algorithmus „erfinden“ – ihre ungewöhnliche Form hätte kein Mensch so entworfen, trotzdem erfüllte sie die Anforderungen besser als herkömmliche Entwürfe.</li>
+        </ul>

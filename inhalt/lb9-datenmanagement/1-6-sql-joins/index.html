@@ -1,0 +1,358 @@
+<p>
+            SQL-Joins sind eine leistungsstarke Funktion in relationalen Datenbanken, die es ermöglicht, Daten aus mehreren Relationen basierend auf verwandten Attributen (oft Primär- und Fremdschlüssel) zu kombinieren. Joins sind entscheidend für die effiziente Abfrage und Analyse von Daten in komplexen Datenbankstrukturen.
+        </p>
+
+<ul>
+        <li>JOINs verbinden Daten aus verschiedenen Tabellen basierend auf Beziehungen (meist Fremdschlüssel).</li>
+        <li>INNER JOIN zeigt nur übereinstimmende Datensätze aus beiden Tabellen.</li>
+        <li>LEFT JOIN zeigt alle Datensätze aus der linken Tabelle, auch wenn es keine Übereinstimmung in der rechten Tabelle gibt.</li>
+        <li>Die Wahl des richtigen JOIN-Typs hängt von den Anforderungen der Abfrage ab.</li>
+    </ul>
+
+<h2>Wiederholung: Primär- und Fremdschlüssel</h2>
+
+<p><strong>Primärschlüssel:</strong> Ein Primärschlüssel ist ein Feld oder eine Kombination von Feldern, die jeden Datensatz in einer Tabelle eindeutig identifizieren. Er muss eindeutig sein und darf nicht NULL sein.</p>
+
+<p><strong>Fremdschlüssel:</strong> Ein Fremdschlüssel ist ein Feld in einer Tabelle, das auf den Primärschlüssel einer anderen Tabelle verweist. Er stellt Beziehungen zwischen Tabellen her.</p>
+
+<h3>Bedeutung für Joins</h3>
+
+<p>
+            Primär- und Fremdschlüssel sind für Joins aus folgenden Gründen wichtig:
+        </p>
+
+<ol>
+            <li>Sie definieren die Beziehungen zwischen Relationen.</li>
+            <li>Sie bilden die Basis für die Verknüpfung von Relationen in Join-Operationen.</li>
+            <li>Sie gewährleisten die referentielle Integrität der Daten bei der Kombination von Informationen aus verschiedenen Relationen.</li>
+        </ol>
+
+<h2>1. INNER JOIN</h2>
+
+<p>INNER JOIN verknüpft zwei Tabellen basierend auf einer Bedingung und gibt nur die Zeilen zurück, die in beiden Tabellen übereinstimmen.</p>
+
+<pre><code>SELECT *
+    FROM Tabelle1
+    INNER JOIN Tabelle2 ON Tabelle1.Spalte = Tabelle2.Spalte;</code></pre>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+        <h3>Detailliertes Beispiel: INNER JOIN</h3>
+
+        <p><strong>Ausgangssituation:</strong> Für jede mitarbeitende Person sollen Name, Abteilungsname und Standort
+           in einer Liste stehen. Die Angaben sind auf zwei Tabellen verteilt.</p>
+        <p> Es werden zwei Tabellen verwendet: „Mitarbeiter“ und „Abteilungen“.</p>
+    
+        <h4>Tabelle: Mitarbeiter</h4>
+        <table>
+            <tr>
+                <th>MitarbeiterID</th>
+                <th>Name</th>
+                <th>AbteilungID</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Anna Schmidt</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Max Mustermann</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Laura Müller</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Tom Wagner</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Sarah Koch</td>
+                <td>NULL</td>
+            </tr>
+        </table>
+    
+        <h4>Tabelle: Abteilungen</h4>
+        <table>
+            <tr>
+                <th>AbteilungID</th>
+                <th>AbteilungName</th>
+                <th>Standort</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Entwicklung</td>
+                <td>Berlin</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Marketing</td>
+                <td>Hamburg</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Vertrieb</td>
+                <td>München</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Personalwesen</td>
+                <td>Frankfurt</td>
+            </tr>
+        </table>
+    
+        <h4>INNER JOIN Abfrage</h4>
+        <p>Nun wollen wir einen INNER JOIN durchführen, um die Mitarbeitenden mit ihren Abteilungsinformationen zu verknüpfen:</p>
+    
+        <pre><code>SELECT Mitarbeiter.MitarbeiterID, Mitarbeiter.Name, 
+           Abteilungen.AbteilungName, Abteilungen.Standort
+    FROM Mitarbeiter
+    INNER JOIN Abteilungen ON Mitarbeiter.AbteilungID = Abteilungen.AbteilungID;</code></pre>
+
+        <p><strong>Ergebnis</strong> &ndash; Sarah Koch fehlt, weil ihre AbteilungID NULL ist und deshalb keinen Partner findet:</p>
+        <table>
+            <tr>
+                <th>MitarbeiterID</th>
+                <th>Name</th>
+                <th>AbteilungName</th>
+                <th>Standort</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Anna Schmidt</td>
+                <td>Entwicklung</td>
+                <td>Berlin</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Max Mustermann</td>
+                <td>Marketing</td>
+                <td>Hamburg</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Laura Müller</td>
+                <td>Entwicklung</td>
+                <td>Berlin</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Tom Wagner</td>
+                <td>Vertrieb</td>
+                <td>München</td>
+            </tr>
+        </table>
+        <ol>
+            <li><strong>Verknüpfungsspalte finden:</strong> <code>Mitarbeiter.AbteilungID</code> ist Fremdschlüssel und verweist auf den
+                Primärschlüssel <code>Abteilungen.AbteilungID</code>. <em>Warum?</em> Nur über dieses Spaltenpaar gehören Zeilen beider Tabellen inhaltlich zusammen.</li>
+            <li><strong>Zeilen paaren (ON):</strong> Für jede Mitarbeiterzeile wird die Abteilungszeile mit derselben AbteilungID gesucht:
+                Anna (1) → Entwicklung, Max (2) → Marketing, Laura (1) → Entwicklung, Tom (3) → Vertrieb, Sarah (NULL) → kein Partner.
+                <em>Warum hat Sarah keinen Partner?</em> <code>NULL = 1</code> ist nie wahr, NULL ist mit keinem Wert gleich.</li>
+            <li><strong>INNER behält nur Paare:</strong> Die Zeile von Sarah Koch fällt weg, ebenso die Abteilung Personalwesen (4), auf die niemand verweist.
+                <em>Warum?</em> Ein INNER JOIN gibt nur Zeilen aus, die in beiden Tabellen einen Partner haben.</li>
+            <li><strong>Spalten auswählen:</strong> Aus jedem Paar werden MitarbeiterID, Name, AbteilungName und Standort ausgegeben.
+                <em>Warum mit Tabellenname davor?</em> <code>AbteilungID</code> gibt es in beiden Tabellen; der Präfix macht eindeutig, welche gemeint ist.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> die Tabelle oben mit 4 Zeilen.</p>
+        <p><strong>Kontrolle:</strong> 5 Mitarbeitende, davon 1 ohne Abteilung → 5 − 1 = 4 Zeilen. Entwicklung erscheint zweimal,
+           weil zwei Personen auf AbteilungID 1 verweisen: Eine Abteilung kann im Ergebnis mehrfach vorkommen, eine Person höchstens einmal
+           (jede Person hat nur einen Fremdschlüsselwert).</p>
+            </details>
+        </div>
+
+<h2>2. LEFT JOIN (oder LEFT OUTER JOIN)</h2>
+
+<p>
+            Mit dem LEFT JOIN erhältst du alle Tupel aus der linken Relation und die übereinstimmenden Tupel aus der rechten Relation. Wenn es keine Übereinstimmung gibt, bekommst du NULL-Werte für die Attribute der rechten Relation.
+        </p>
+
+<p>
+            Allgemein:
+        </p>
+
+<pre><code>SELECT Kunden.Name, Bestellungen.BestellNr
+FROM Kunden
+LEFT JOIN Bestellungen ON Kunden.KundenID = Bestellungen.KundenID;</code></pre>
+
+<h3>Detailliertes Beispiel: LEFT JOIN</h3>
+
+<p>Mit denselben Tabellen wie oben. Sarah Koch hat keine Abteilung (<code>NULL</code>) und fehlte deshalb beim INNER JOIN.</p>
+
+<pre><code>SELECT Mitarbeiter.MitarbeiterID, Mitarbeiter.Name,
+       Abteilungen.AbteilungName, Abteilungen.Standort
+FROM Mitarbeiter
+LEFT JOIN Abteilungen ON Mitarbeiter.AbteilungID = Abteilungen.AbteilungID;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; alle fünf Mitarbeitenden erscheinen; wo es keinen Partner gibt, stehen NULL-Werte:</p>
+
+<table>
+            <tr><th>MitarbeiterID</th><th>Name</th><th>AbteilungName</th><th>Standort</th></tr>
+            <tr><td>1</td><td>Anna Schmidt</td><td>Entwicklung</td><td>Berlin</td></tr>
+            <tr><td>2</td><td>Max Mustermann</td><td>Marketing</td><td>Hamburg</td></tr>
+            <tr><td>3</td><td>Laura Müller</td><td>Entwicklung</td><td>Berlin</td></tr>
+            <tr><td>4</td><td>Tom Wagner</td><td>Vertrieb</td><td>München</td></tr>
+            <tr><td>5</td><td>Sarah Koch</td><td>NULL</td><td>NULL</td></tr>
+        </table>
+
+<p>Die Abteilung <em>Personalwesen</em> taucht in keinem der beiden Ergebnisse auf: Sie steht in der <em>rechten</em> Tabelle und hat keinen Mitarbeitenden. Um sie zu sehen, müsstest du die Tabellen im LEFT JOIN vertauschen (<code>FROM Abteilungen LEFT JOIN Mitarbeiter …</code>).</p>
+
+<p>Die beiden detaillierten Beispiele oben sind die Grundfälle mit zwei Tabellen. In der Praxis liegen die
+           gesuchten Angaben oft in drei Tabellen, und die Ergebnisse sollen zusätzlich gruppiert werden.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Die Datenbank <a href="../material/kurs.sql">kurs.sql</a> enthält
+               die Tabellen <code>Schueler(s_id, name, vorname)</code>, <code>Kurs(k_id, name)</code> und die
+               Verbindungstabelle <code>Kursnote(k_id, s_id, note)</code>. Die Oberstufenberatung möchte wissen: „Wer hat in
+               den Kernfächern Mathematik, Deutsch und Englisch <em>mindestens zwei</em> Noten, und wie lautet der
+               Durchschnitt dieser Kernfachnoten? Die besten zuerst.“</p>
+            <pre><code>SELECT Schueler.name, Schueler.vorname,
+       COUNT(*) AS Kernfaecher,
+       ROUND(AVG(Kursnote.note), 2) AS Schnitt
+FROM Schueler
+INNER JOIN Kursnote ON Schueler.s_id = Kursnote.s_id
+INNER JOIN Kurs     ON Kursnote.k_id = Kurs.k_id
+WHERE Kurs.name IN ('Mathematik', 'Deutsch', 'Englisch')
+GROUP BY Schueler.s_id
+HAVING COUNT(*) &gt;= 2
+ORDER BY Schnitt ASC;</code></pre>
+            <ol>
+                <li><strong>FROM und JOIN – Tabellen verbinden.</strong> Die Namen stehen in <code>Schueler</code>, die
+                    Fachnamen in <code>Kurs</code>, die Noten in <code>Kursnote</code>. <code>Kursnote</code> ist das
+                    Bindeglied: Sie enthält beide Fremdschlüssel. Deshalb wird erst <code>Schueler</code> mit
+                    <code>Kursnote</code> über <code>s_id</code> verbunden und dann das Zwischenergebnis mit <code>Kurs</code>
+                    über <code>k_id</code>. Es entstehen 10 Zeilen, eine je Eintrag in <code>Kursnote</code>.</li>
+                <li><strong>Spaltennamen eindeutig machen.</strong> Sowohl <code>Schueler</code> als auch <code>Kurs</code>
+                    haben eine Spalte <code>name</code>. Ohne Tabellennamen davor bricht SQLite mit
+                    <code>ambiguous column name: name</code> ab. <em>Warum?</em> Nach dem Join gibt es zwei Spalten
+                    gleichen Namens, und SQLite kann nicht raten, welche gemeint ist.</li>
+                <li><strong>WHERE – nur Kernfächer.</strong> Von den 10 Zeilen bleiben 6:
+                    <table>
+                        <thead><tr><th>Schueler.name</th><th>vorname</th><th>Kurs.name</th><th>note</th></tr></thead>
+                        <tbody>
+                            <tr><td>Müller</td><td>Lisa</td><td>Mathematik</td><td>2.3</td></tr>
+                            <tr><td>Schmidt</td><td>Max</td><td>Mathematik</td><td>1.7</td></tr>
+                            <tr><td>Müller</td><td>Lisa</td><td>Deutsch</td><td>1.3</td></tr>
+                            <tr><td>Fischer</td><td>Anna</td><td>Deutsch</td><td>2</td></tr>
+                            <tr><td>Schmidt</td><td>Max</td><td>Englisch</td><td>1</td></tr>
+                            <tr><td>Weber</td><td>Tim</td><td>Englisch</td><td>2.7</td></tr>
+                        </tbody>
+                    </table>
+                    Sophie Meyer hat nur Biologie und Geschichte und ist schon jetzt verschwunden. (Die Noten 2.0 und 1.0 aus der SQL-Datei speichert SQLite als ganze Zahlen 2 und 1.)</li>
+                <li><strong>GROUP BY – je Person ein Stapel.</strong> Gruppiert wird nach <code>Schueler.s_id</code>, nicht nach
+                    dem Namen. <em>Warum?</em> Zwei Personen könnten gleich heißen; der Primärschlüssel trennt sie sicher.
+                    Stapel: Müller (2.3; 1.3), Schmidt (1.7; 1.0), Fischer (2.0), Weber (2.7).</li>
+                <li><strong>HAVING – mindestens zwei Kernfächer.</strong> Fischer und Weber haben nur je eine Kernfachnote
+                    und fallen heraus.</li>
+                <li><strong>SELECT und ORDER BY.</strong> Schnitt Schmidt: (1.7 + 1.0) / 2 = 1.35; Müller: (2.3 + 1.3) / 2 = 1.8.
+                    Aufsteigend sortiert, denn die kleinere Note ist die bessere.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong></p>
+            <table>
+                <thead><tr><th>name</th><th>vorname</th><th>Kernfaecher</th><th>Schnitt</th></tr></thead>
+                <tbody>
+                    <tr><td>Schmidt</td><td>Max</td><td>2</td><td>1.35</td></tr>
+                    <tr><td>Müller</td><td>Lisa</td><td>2</td><td>1.8</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Falle und Probe:</strong> Wer auch Sophie Meyer mit 0 Kernfächern sehen will, denkt an einen
+               LEFT JOIN. Steht die Fachbedingung dann aber im <code>WHERE</code>, verschwindet Sophie trotzdem wieder:
+               Ihre aufgefüllten NULL-Werte erfüllen <code>Kurs.name IN (…)</code> nicht. Probe: Die 6 Zeilen nach dem
+               WHERE entsprechen genau den Einträgen von <code>Kursnote</code> mit <code>k_id</code> 1, 2 oder 3.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Joins in Onlineshop und Datenbankadministration</summary>
+                <p>In einem Onlineshop liegen Kund*innen, Bestellungen und Artikel in getrennten Tabellen. Eine Rechnung entsteht erst durch einen Join über alle drei. <strong>Data Analysts</strong> nutzen LEFT JOINs gezielt, um Lücken zu finden, etwa „Kund*innen ohne Bestellung im letzten Jahr“ für eine Rückgewinnungsaktion. In der <strong>Datenbankadministration</strong> spielt die Performance eine Rolle: Joins über Millionen Zeilen sind nur schnell, wenn die Fremdschlüsselspalten einen Index haben.</p>
+            </details>
+        </div>
+
+<p>
+            Verwendung: Den LEFT JOIN kannst du gut nutzen, wenn du alle Datensätze aus einer Haupttabelle sehen möchtest, unabhängig davon, ob es entsprechende Datensätze in der verknüpften Tabelle gibt.
+        </p>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Weitere JOIN-Arten
+                </summary>
+        
+            <p>Neben INNER JOIN und LEFT JOIN gibt es noch weitere JOIN-Arten in SQL, die in fortgeschrittenen Szenarien nützlich sein können:</p>
+            <ul>
+                <li><strong>RIGHT JOIN:</strong> Ähnlich wie LEFT JOIN, aber behält alle Datensätze aus der rechten Tabelle. In der Praxis wird oft stattdessen ein LEFT JOIN mit umgekehrter Tabellenreihenfolge verwendet.</li>
+                <li><strong>FULL OUTER JOIN:</strong> Kombiniert die Ergebnisse von LEFT und RIGHT JOIN. Zeigt alle Datensätze aus beiden Tabellen, auch wenn es keine Übereinstimmung gibt.</li>
+                <li><strong>CROSS JOIN:</strong> Erzeugt ein kartesisches Produkt, d.&nbsp;h. jede Zeile der ersten Tabelle wird mit jeder Zeile der zweiten Tabelle kombiniert. Wird selten verwendet und kann zu sehr großen Ergebnismengen führen.</li>
+            </ul>
+
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            Eigenschaften eines Primärschlüssels:<br>
+            - Eindeutigkeit: Jeder Wert muss einzigartig (unique) sein.<br>
+            - Nicht NULL: Es muss immer ein Wert eingetragen sein.<br>
+            - Unveränderlichkeit: Der Wert sollte sich nicht ändern.
+        </p>
+    </div>
+
+<div class="merke">
+            <p><strong>INNER JOIN</strong> liefert nur Zeilen, die in <em>beiden</em> Tabellen einen passenden Partner haben.
+               <strong>LEFT JOIN</strong> liefert <em>alle</em> Zeilen der linken Tabelle; fehlt der Partner rechts, werden dessen Spalten mit NULL aufgefüllt.
+               Die Verknüpfungsbedingung nach <code>ON</code> verbindet fast immer einen Fremdschlüssel mit dem Primärschlüssel, auf den er verweist.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.6.1: <span class="niveau">AFB II</span>
+                </summary>
+            <p>Gegeben sind folgende Tabellen:</p>
+            <h4>Schüler</h4>
+            <table>
+                <tr><th>SchülerID</th><th>Name</th><th>KlassenID</th></tr>
+                <tr><td>1</td><td>Anna</td><td>1</td></tr>
+                <tr><td>2</td><td>Ben</td><td>1</td></tr>
+                <tr><td>3</td><td>Clara</td><td>2</td></tr>
+                <tr><td>4</td><td>David</td><td>3</td></tr>
+            </table>
+            <h4>Klassen</h4>
+            <table>
+                <tr><th>KlassenID</th><th>Klassenname</th></tr>
+                <tr><td>1</td><td>10A</td></tr>
+                <tr><td>2</td><td>10B</td></tr>
+                <tr><td>3</td><td>11A</td></tr>
+            </table>
+            <p>Schreibe eine SQL-Abfrage mit INNER JOIN, die eine Liste aller Schüler*innen mit ihren Klassennamen erstellt.</p>
+
+            </details>
+        </div>
+
+<div class="aufgabe">
+            
+            <details>
+                <summary>
+                    Aufgabe 1.6.2: <span class="niveau">AFB II</span>
+                </summary>
+            <p>Verwende die gleichen Tabellen wie in Aufgabe 1.6.1 und füge eine weitere Schülerin hinzu:</p>
+            <table>
+                <tr><th>SchülerID</th><th>Name</th><th>KlassenID</th></tr>
+                <tr><td>5</td><td>Eva</td><td>NULL</td></tr>
+            </table>
+            <p>Schreibe eine SQL-Abfrage mit LEFT JOIN, die alle Schüler*innen und ihre Klassen anzeigt, auch wenn jemand keiner Klasse zugeordnet ist.</p>
+
+            </details>
+        </div>

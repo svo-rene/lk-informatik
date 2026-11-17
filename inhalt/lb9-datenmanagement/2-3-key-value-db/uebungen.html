@@ -1,0 +1,83 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/2-3_key-value_db.ipynb" download>2-3_key-value_db.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.3: <span class="niveau">AFB II</span></summary>
+                <p>
+                    Schreibe ein Python-Programm, das eine einfache Bücherverwaltung erstellt. In dieser Key-Value-Datenbank sollen die Buchtitel die Schlüssel sein, und zu jedem Buch soll es weitere Informationen (Autor, Erscheinungsjahr und Verfügbarkeit) geben. Dein Programm sollte:
+                </p>
+                <ul>
+                    <li>Ein Dictionary anlegen, das mindestens drei Bücher enthält.</li>
+                    <li>Einen neuen Buchtitel zur Sammlung hinzufügen.</li>
+                    <li>Die Verfügbarkeit eines Buches ändern (z.&nbsp;B. von „verfügbar“ auf „ausgeliehen“).</li>
+                    <li>Den Autor und das Erscheinungsjahr eines bestimmten Buches anzeigen.</li>
+                </ul>
+                <p>
+                    Erweitere das Programm, um die Daten der Bücher auf einfache Weise anzuzeigen und zu aktualisieren.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.4: <span class="niveau">AFB III</span></summary>
+                <p>
+                    Ein Onlineshop möchte auswerten, wie oft jede Produktkategorie bestellt wurde. Gegeben ist
+                    eine Liste von Bestellungen:
+                    <code>bestellungen = ["Buch", "Elektronik", "Buch", "Kleidung", "Buch", "Elektronik"]</code>.
+                    Erstelle daraus ein Dictionary, das für jede Kategorie zählt, wie oft sie vorkommt, und gib
+                    das Ergebnis aus. Nutze dafür <code>.get()</code> mit einem Standardwert, um das Zählen ohne
+                    if-Abfrage zu lösen.
+                </p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.5: Guthaben in der Schulmensa <span class="niveau">AFB II</span></summary>
+                <p>Die Schulmensa speichert das Guthaben der Schüler*innen in einem Key-Value-Store. Die Schlüssel folgen dem Muster
+                   <code>"schueler:&lt;nummer&gt;:guthaben"</code>, die Werte sind Beträge in <strong>Cent</strong> (ganze Zahlen).
+                   Simuliere den Store mit einem Python-Dictionary <code>store = {}</code> und schreibe drei Funktionen:</p>
+                <ul>
+                    <li><code>guthaben(nr)</code> gibt das Guthaben zurück, für unbekannte Nummern 0.</li>
+                    <li><code>aufladen(nr, cent)</code> erhöht das Guthaben.</li>
+                    <li><code>bezahlen(nr, cent)</code> zieht den Betrag ab und gibt <code>True</code> zurück – aber nur, wenn das
+                        Guthaben reicht. Sonst bleibt alles unverändert und die Funktion gibt <code>False</code> zurück.</li>
+                </ul>
+                <p>Prüfe dein Programm mit diesen Testfällen (in dieser Reihenfolge) und trage die tatsächliche Ausgabe ein:</p>
+                <table class="gitter">
+                    <tr><th>Aufruf</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                    <tr><td><code>aufladen(17, 1000)</code>, dann <code>guthaben(17)</code></td><td>1000</td><td></td></tr>
+                    <tr><td><code>bezahlen(17, 350)</code></td><td>True</td><td></td></tr>
+                    <tr><td><code>guthaben(17)</code></td><td>650</td><td></td></tr>
+                    <tr><td><code>bezahlen(17, 700)</code></td><td>False</td><td></td></tr>
+                    <tr><td><code>guthaben(17)</code></td><td>650</td><td></td></tr>
+                    <tr><td><code>guthaben(99)</code></td><td>0</td><td></td></tr>
+                    <tr><td><code>bezahlen(99, 100)</code></td><td>False</td><td></td></tr>
+                    <tr><td><code>print(store)</code></td><td><code>{'schueler:17:guthaben': 650}</code></td><td></td></tr>
+                </table>
+                <p>Begründe außerdem, warum die Beträge in Cent als ganze Zahlen und nicht in Euro als Kommazahlen gespeichert werden,
+                   und erkläre, warum die Frage „Wer hat weniger als 2&nbsp;€ Guthaben?“ für einen Key-Value-Store schwierig ist.</p>
+                <p class="tipp">Probiere in Python einmal <code>print(0.1 + 0.2)</code> aus.</p>
+            </details>
+        </div>

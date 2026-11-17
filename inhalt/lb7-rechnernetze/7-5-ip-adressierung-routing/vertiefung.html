@@ -1,0 +1,36 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<p>Die Aufgaben 7.5.4 bis 7.5.6 beziehen sich auf das Netz eines Unternehmens mit drei Standorten in Dresden, Freiberg und Meißen. NAT bleibt außer Betracht.</p>
+
+<pre class="schema">LAN A 192.168.10.0/24        LAN B 192.168.20.0/24        LAN C 192.168.30.0/24
+        |                            |                            |
+   eth0 192.168.10.1            eth2 192.168.20.1            eth1 192.168.30.1
+      [R1]                         [R2]                         [R3]
+   eth1 10.0.0.1 ---------- eth0 10.0.0.2
+                                eth1 10.0.0.5 ---------- eth0 10.0.0.6
+                                                             eth2 203.0.113.2 ---- 203.0.113.1 Internetanbieter
+
+Transfernetze: 10.0.0.0/30 (R1–R2), 10.0.0.4/30 (R2–R3), 203.0.113.0/30 (R3–Anbieter)</pre>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.5.5: Fehler finden – die Konfiguration nach dem Umbau <span class="niveau">AFB III</span></summary>
+                <p>Nach einem Umbau gehen beim IT-Dienstleister Beschwerden ein. Der Auszug aus der Dokumentation lautet:</p>
+                <table>
+                    <thead>
+                        <tr><th>Nr.</th><th>Gerät</th><th>Konfiguration</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>PC-17 in LAN B</td><td>IP 192.168.20.17, Maske 255.255.255.0, Gateway 192.168.2.1</td></tr>
+                        <tr><td>2</td><td>R1</td><td>Default-Route 0.0.0.0/0 über Next Hop 192.168.10.1</td></tr>
+                        <tr><td>3</td><td>R2</td><td>Route 192.168.10.0/24 über Next Hop 10.0.0.5, Schnittstelle eth1</td></tr>
+                        <tr><td>4</td><td>R3</td><td>statt zwei Einzelrouten nur noch 192.168.0.0/19 über Next Hop 10.0.0.5</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Finde in jeder Zeile den Fehler bzw. das Problem und beschreibe, welches Symptom die Nutzerinnen und Nutzer bemerken.</li>
+                    <li>Gib für jede Zeile eine korrekte Konfiguration an.</li>
+                    <li>Zeile 4 funktioniert für LAN A und LAN B scheinbar. Weise nach, welche Adressen die Route abdeckt, und beurteile, was mit einem Paket an 192.168.5.5 geschieht.</li>
+                </ol>
+            </details>
+        </div>

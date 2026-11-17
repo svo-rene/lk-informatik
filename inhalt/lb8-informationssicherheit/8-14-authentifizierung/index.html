@@ -1,0 +1,125 @@
+<p>Du entsperrst dein Handy per Fingerabdruck, meldest dich mit Passwort im Schulportal an und bestätigst eine Überweisung mit einem Code aus der Banking-App. Jedes Mal prüft ein System, ob du wirklich du bist.</p>
+
+<p>Authentifizierung ist der Vorgang, bei dem die behauptete Identität einer Person (oder eines Geräts) überprüft wird. Erst danach wird entschieden, was sie tun darf.</p>
+
+<h2>Die drei Faktoren</h2>
+
+<p>Es gibt drei verschiedene Wege, auf denen sich eine Person authentifizieren kann:</p>
+
+<ul>
+            <li><strong>Wissen:</strong> Die Person weiß etwas, z.&nbsp;B. ein Passwort oder eine PIN.</li>
+            <li><strong>Besitz:</strong> Die Person besitzt einen bestimmten Gegenstand, z.&nbsp;B. einen Schlüssel, eine Bankkarte, ein Smartphone oder einen Sicherheitsschlüssel.</li>
+            <li><strong>Sein (Merkmal):</strong> Die Person wird über ein körperliches oder verhaltensbezogenes (biometrisches) Merkmal erkannt, z.&nbsp;B. Fingerabdruck, Gesicht, Iris.</li>
+        </ul>
+
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<p>Jeder Faktor hat für sich Vor- und Nachteile: Passwörter können vergessen, erraten oder abgefischt werden, Gegenstände können verloren gehen oder gestohlen werden, biometrische Merkmale können gefälscht werden und lassen sich – anders als ein Passwort – nicht ändern. Um die Nachteile auszugleichen, verwendet man eine <strong>Zwei-Faktor-Authentifizierung</strong> (2FA), die gleichzeitig zwei der drei Faktoren benutzt.</p>
+
+<h2>Einmalpasswörter</h2>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Einmalpasswort ist nicht One-Time-Pad</summary>
+                <p>Einmalpasswörter heißen englisch One-Time Passwords und werden ebenfalls mit OTP abgekürzt. Sie haben aber nichts mit dem Verschlüsselungsverfahren One-Time-Pad (8.5) zu tun. Wir schreiben deshalb „Einmalpasswort“.</p>
+            </details>
+        </div>
+
+<p>Ein <strong>Einmalpasswort</strong> gilt nur für eine Anmeldung oder einen kurzen Zeitraum. Verbreitet ist das zeitbasierte Verfahren <strong>TOTP</strong> (Time-based One-Time Password), das Authenticator-Apps verwenden: Bei der Einrichtung speichern Server und App ein gemeinsames Geheimnis (oft per QR-Code übertragen). Beide berechnen alle 30 Sekunden aus diesem Geheimnis und der aktuellen Uhrzeit mit einem HMAC (einem MAC auf Basis einer Hashfunktion, 8.12) einen sechsstelligen Code. Stimmen die Codes überein, besitzt der Nutzer offenbar das Gerät mit dem Geheimnis – ein Besitzfaktor.</p>
+
+<h2>Passkeys (FIDO2)</h2>
+
+<p><strong>Passkeys</strong> ersetzen das Passwort durch ein Schlüsselpaar. Bei der Registrierung erzeugt dein Gerät für jede Webseite ein eigenes Schlüsselpaar; der Server speichert nur den öffentlichen Schlüssel. Beim Anmelden schickt der Server eine zufällige Zahl (Challenge), das Gerät signiert sie mit dem privaten Schlüssel, nachdem du es per Fingerabdruck, Gesicht oder PIN entsperrt hast. Der Server prüft die Signatur mit dem gespeicherten öffentlichen Schlüssel (siehe 8.13).</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Du hebst am Geldautomaten Geld ab.</p>
+            <ol>
+                <li><strong>Karte einstecken:</strong> Die Bankkarte ist ein Gegenstand, den du besitzt – Faktor <strong>Besitz</strong>.</li>
+                <li><strong>PIN eingeben:</strong> Die PIN ist etwas, das du weißt – Faktor <strong>Wissen</strong>.</li>
+                <li><strong>Kategorien vergleichen:</strong> Besitz und Wissen sind verschiedene Kategorien. <em>Warum wichtig?</em> Nur dann ist es echte 2FA.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> eine klassische Zwei-Faktor-Authentifizierung.<br>
+            <strong>Kontrolle:</strong> Wer nur die Karte findet, kommt ohne PIN nicht an das Geld; nach drei falschen Versuchen wird die Karte gesperrt. Wer nur die PIN kennt, hat keine Karte.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation (Challenge-Response mit Passkey):</strong> Beim Server ist dein öffentlicher Schlüssel (e, n) = (3, 85) gespeichert. Dein Gerät besitzt den zugehörigen privaten Schlüssel d = 43 (Mini-RSA mit 85 = 5 · 17).</p>
+            <ol>
+                <li><strong>Challenge:</strong> Der Server sendet die zufällige Zahl 7. <em>Warum zufällig?</em> Die Antwort soll nur für genau diese Anmeldung gelten.</li>
+                <li><strong>Signieren auf dem Gerät</strong> (nach Freigabe per Fingerabdruck oder PIN): 7<sup>43</sup> mod 85. Schrittweise: 7² = 49, 7⁴ = 2401 ≡ 21, 7⁸ ≡ 21² = 441 ≡ 16, 7¹⁶ ≡ 256 ≡ 1, 7³² ≡ 1. Wegen 43 = 32 + 8 + 2 + 1 ist 7<sup>43</sup> ≡ 1 · 16 · 49 · 7 = 5488 ≡ <strong>48</strong>. Das Gerät sendet 48.</li>
+                <li><strong>Prüfen beim Server</strong> mit dem öffentlichen Schlüssel: 48³ mod 85: 48² = 2304 ≡ 9, 9 · 48 = 432 ≡ 7. Das ist die Challenge – du bist angemeldet.</li>
+                <li><strong>Nächste Anmeldung:</strong> Der Server sendet eine neue Challenge, z.&nbsp;B. 10; die richtige Antwort ist dann 20 (Probe: 20³ = 8000 ≡ 10).</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Der Server weiß, dass das Gerät den privaten Schlüssel besitzt, ohne dass ein Geheimnis übertragen oder beim Server gespeichert wurde.<br>
+            <strong>Falle:</strong> Ein Angreifer, der die Antwort 48 mitgeschnitten hat, kann sie nicht wiederverwenden, denn zur Challenge 10 passt sie nicht (kein Replay-Angriff). Das gilt aber nur, wenn der Server jede Challenge nur einmal ausgibt.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Sicher anmelden im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Aktiviere für E-Mail, Cloud und soziale Netzwerke die Zwei-Faktor-Authentifizierung oder Passkeys – das E-Mail-Konto ist besonders wichtig, weil man darüber alle anderen Passwörter zurücksetzen kann. Ein Passwort-Manager erzeugt für jeden Dienst ein eigenes, langes Zufallspasswort und füllt es nur auf der echten Webseite aus. Ob deine Adresse in einem Datenleck steckt, zeigt <em>Have I Been Pwned</em>. SMS-Codes sind besser als nichts, lassen sich aber abfangen oder durch eine betrügerisch beschaffte Ersatz-SIM-Karte umleiten.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> Spezialistinnen und Spezialisten für Identity- und Access-Management (IAM) planen, wie sich Tausende Beschäftigte eines Unternehmens anmelden und welche Rechte sie erhalten. IT-Sicherheitsbeauftragte setzen dabei Empfehlungen des BSI um, das im IT-Grundschutz Mehr-Faktor-Authentifizierung für kritische Zugänge fordert. Wer so etwas beruflich machen möchte, kann z.&nbsp;B. an der TU Dresden Informatik mit Schwerpunkt IT-Sicherheit studieren oder eine Ausbildung zur Fachinformatikerin bzw. zum Fachinformatiker für Systemintegration machen.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Identifikation – Authentifizierung – Autorisierung</strong>
+            </p>
+            <ol>
+                <li><strong>Identifikation:</strong> Der Benutzer gibt an, wer er ist, z.&nbsp;B. durch seinen Benutzernamen.</li>
+                <li><strong>Authentifizierung:</strong> Das System prüft diese Angabe, indem es einen Nachweis (Passwort, Karte, Fingerabdruck …) mit gespeicherten Informationen vergleicht.</li>
+                <li><strong>Autorisierung:</strong> Nach erfolgreicher Authentifizierung wird festgelegt, auf welche Ressourcen und Dienste der Benutzer zugreifen und welche Aktionen er ausführen darf.</li>
+            </ol>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Zwei-Faktor-Authentifizierung</strong> (allgemein Multi-Faktor-Authentifizierung, MFA) verlangt Nachweise aus <strong>zwei verschiedenen</strong> Kategorien. Zwei Passwörter oder Passwort plus Sicherheitsfrage sind <em>keine</em> 2FA, weil beides „Wissen“ ist. Ein Angreifer müsste bei echter 2FA z.&nbsp;B. dein Passwort kennen <em>und</em> dein Handy besitzen.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Passkeys sind phishing-resistent:</strong> Der private Schlüssel verlässt das Gerät nie, und das Gerät signiert nur für die Domain, für die der Passkey angelegt wurde. Auf einer gefälschten Seite wie „meinebank-login.com“ gibt es schlicht keinen passenden Passkey. Beim Server gibt es kein Geheimnis, das gestohlen werden könnte – nur öffentliche Schlüssel.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.14.1: Faktoren zuordnen <span class="niveau">AFB I</span></summary>
+                <p>Ordne jedem Anmeldeverfahren die verwendeten Faktoren zu und entscheide, ob es sich um eine Zwei-Faktor-Authentifizierung handelt.</p>
+                <ol type="a">
+                    <li>Passwort und Antwort auf die Sicherheitsfrage „Name deines ersten Haustiers“</li>
+                    <li>Bankkarte und PIN am Geldautomaten</li>
+                    <li>Passwort und sechsstelliger Code aus einer Authenticator-App</li>
+                    <li>Entsperren des Handys per Fingerabdruck</li>
+                    <li>Passkey auf dem Handy, freigegeben per Gesichtserkennung</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.14.2: Einmalpasswort und Passwortspeicherung <span class="niveau">AFB II</span></summary>
+                <ol type="a">
+                    <li>Erläutere, warum ein abgefangener TOTP-Code einem Angreifer deutlich weniger nützt als ein abgefangenes Passwort.</li>
+                    <li>Ein Angreifer ruft an: „Hier ist der Support deiner Bank. Nenn mir bitte zur Bestätigung den Code, den du gleich per SMS bekommst.“ Erläutere, warum 2FA hier nicht schützt, und leite eine Verhaltensregel ab.</li>
+                    <li>Begründe, warum ein Dienst dein Passwort nicht im Klartext, sondern nur als gesalzenen, langsamen Hash (8.12) speichern sollte, während er für TOTP das gemeinsame Geheimnis im Klartext kennen muss.</li>
+                </ol>
+            </details>
+        </div>

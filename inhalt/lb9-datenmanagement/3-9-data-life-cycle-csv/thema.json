@@ -1,0 +1,14 @@
+{
+  "nr": "3.9",
+  "titel": "Datenlebenszyklus mit CSV – Eigene Umfrage gestalten und auswerten",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

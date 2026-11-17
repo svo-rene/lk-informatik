@@ -1,0 +1,40 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.19.9: Fehler finden – NOT IN und die leere Ergebnismenge <span class="niveau">AFB III</span>
+                </summary>
+                <p>Zum Halbjahr wird eine neue Klasse angelegt und eine neue Schülerin aufgenommen, deren Klasse noch nicht feststeht:</p>
+                <pre><code>INSERT INTO klasse (name) VALUES ('11A');
+INSERT INTO schueler (name, klasse_id) VALUES ('Mia Neu', NULL);</code></pre>
+                <p>Die Sekretärin möchte wissen, welche Klassen noch keine Schüler*innen haben, und schreibt:</p>
+                <pre><code>SELECT name
+FROM klasse
+WHERE id NOT IN (SELECT klasse_id FROM schueler);</code></pre>
+                <ol>
+                    <li>Welches Ergebnis erwartest du, welches liefert SQLite tatsächlich?</li>
+                    <li>Erkläre den Unterschied, indem du die Bedingung für die Klasse 11A Schritt für Schritt auswertest.</li>
+                    <li>Korrigiere die Abfrage und beurteile, warum dieser Fehler im Alltag besonders gefährlich ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.19.10: JOIN oder Subselect? <span class="niveau">AFB III</span>
+                </summary>
+                <p>Gesucht sind die Namen aller Schüler*innen mit mindestens einer Note besser als 2.0. Drei Vorschläge liegen vor:</p>
+                <pre><code>-- Vorschlag A
+SELECT s.name FROM schueler s JOIN note n ON n.schueler_id = s.id WHERE n.wert &lt; 2.0;
+
+-- Vorschlag B
+SELECT DISTINCT s.name FROM schueler s JOIN note n ON n.schueler_id = s.id WHERE n.wert &lt; 2.0;
+
+-- Vorschlag C
+SELECT name FROM schueler WHERE id IN (SELECT schueler_id FROM note WHERE wert &lt; 2.0);</code></pre>
+                <p>Bestimme jeweils das Ergebnis, beurteile, welcher Vorschlag die Frage korrekt beantwortet, und begründe mit
+                   der Faustregel aus dem Hinweis „Wann lieber JOINs?“.</p>
+            </details>
+        </div>

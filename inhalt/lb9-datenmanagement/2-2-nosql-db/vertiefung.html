@@ -1,0 +1,37 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.4: Datenbankmodelle für eine Mitfahr-App beurteilen <span class="niveau">AFB III</span></summary>
+                <p>Ein Schülerprojekt entwickelt die App „ElbRide“, mit der Schüler*innen aus dem Umland Fahrgemeinschaften zur
+                   Schule bilden. Die App hat vier Anforderungen:</p>
+                <ol>
+                    <li>Profile: Fahrer*innen geben Auto, Sitzplätze und Führerscheindatum an, Mitfahrer*innen nur Name, Klasse und Wohnort.</li>
+                    <li>Anmeldung: Bei jedem Seitenaufruf wird ein Sitzungsschlüssel geprüft; er verfällt nach 30 Minuten.</li>
+                    <li>Vertrauen: Die App schlägt bevorzugt Fahrer*innen vor, die „Freunde von Freunden“ sind.</li>
+                    <li>Abrechnung: Am Monatsende wird jeder Person der exakte Anteil an den Spritkosten berechnet.</li>
+                </ol>
+                <p>Entscheide für jede Anforderung begründet, welches Datenbankmodell (relational, Dokument, Key-Value, Graph) du
+                   wählen würdest und wie es sich bei einer Netzwerkpartition verhalten sollte (CP oder AP). Beurteile anschließend den
+                   Vorschlag eines Teammitglieds: „Wir nehmen für alles eine einzige MongoDB, das ist einfacher.“ Gehe dabei auch auf den
+                   Schutz der Daten Minderjähriger ein.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.5: Fehler finden – drei Abfragen, die nicht tun, was sie sollen <span class="niveau">AFB III</span></summary>
+                <p>Jonas betreut die Datenbanken der Community-App. Er beschwert sich über drei Abfragen:</p>
+                <ol>
+                    <li>Im Key-Value-Store liegen Schlüssel wie <code>nutzer:1:stadt</code> &rarr; <code>"Dresden"</code>. Um alle Nutzer
+                        aus Dresden zu finden, tippt er <code>GET nutzer:*:stadt</code> und erhält <code>(nil)</code>.</li>
+                    <li>In MongoDB liefert <code>db.nutzer.find({ Stadt: "Dresden" })</code> kein einziges Dokument, obwohl Anna
+                        und Emil in Dresden wohnen. Eine Fehlermeldung gibt es nicht.</li>
+                    <li>Er möchte wissen, wen Anna kennt, und schreibt in Cypher:
+                        <code>MATCH (a:Person {name: 'Anna'})&lt;-[:KENNT]-(x) RETURN x.name;</code> Als Ergebnis erscheint „Dana“, aber
+                        weder Ben noch Emil.</li>
+                </ol>
+                <p>Erkläre jeweils die Ursache, gib eine korrigierte Lösung an und leite ab, welche Eigenschaft des jeweiligen
+                   Datenmodells hinter dem Fehler steckt.</p>
+            </details>
+        </div>

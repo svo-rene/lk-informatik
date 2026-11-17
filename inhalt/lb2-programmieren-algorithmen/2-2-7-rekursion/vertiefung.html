@@ -1,0 +1,48 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-2-2-7-4">
+            <details>
+                <summary>Aufgabe 2.2.7.4: Warum die rekursive Fibonacci-Funktion exponentiell ist <span class="niveau">AFB III</span></summary>
+                <pre><code class="language-python">def fib(n):
+    if n &lt; 2:
+        return n
+    return fib(n - 1) + fib(n - 2)</code></pre>
+                <ol>
+                    <li>Zeichne den vollständigen Aufrufbaum für <code>fib(4)</code>. Markiere Teilbäume, die mehrfach berechnet werden.</li>
+                    <li>A(n) sei die Anzahl aller Aufrufe beim Berechnen von <code>fib(n)</code>. Stelle eine Rekursionsgleichung für A(n) auf und berechne A(0) bis A(10).</li>
+                    <li>Begründe mit der Gleichung, dass A(n) ≤ 2<sup>n+1</sup> gilt, die Laufzeit also in O(2<sup>n</sup>) liegt, und dass A(n) ≥ 2<sup>(n−1)/2</sup> gilt, die Laufzeit also tatsächlich exponentiell wächst.</li>
+                    <li>Die Rekursionstiefe von <code>fib(n)</code> ist nur n. Erkläre, wie das zu exponentiell vielen Aufrufen passt.</li>
+                    <li>Miss mit <code>time.perf_counter()</code> die Zeit für <code>fib(20)</code>, <code>fib(22)</code>, <code>fib(24)</code> und <code>fib(26)</code>. Gib den Faktor an, um den die Zeit wächst, wenn n um 2 steigt.</li>
+                    <li>Schreibe eine iterative Fassung <code>fib_iterativ(n)</code> in O(n) und teste beide Fassungen mit n = 0, 1, 2, 10 und 20. Bei negativen oder nicht ganzzahligen n soll <code>fib_iterativ</code> <code>None</code> zurückgeben.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-7-5">
+            <details>
+                <summary>Aufgabe 2.2.7.5: Fehler finden – drei kaputte Rekursionen <span class="niveau">AFB III</span></summary>
+                <pre><code class="language-python"># A: soll x hoch n berechnen (n ≥ 0)
+def potenz(x, n):
+    if n == 1:
+        return x
+    return x * potenz(x, n - 1)
+
+# B: soll die Summe einer Liste berechnen
+def summe_liste(liste):
+    if len(liste) == 0:
+        return 0
+    return liste[0] + summe_liste(liste)
+
+# C: soll 3, 2, 1, Start! ausgeben
+def countdown(n):
+    if n == 0:
+        print("Start!")
+    print(n)
+    countdown(n - 1)</code></pre>
+                <ol>
+                    <li>Lege für jede Funktion eine Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe an. Verwende <code>potenz(2, 3)</code>, <code>potenz(2, 0)</code>, <code>summe_liste([])</code>, <code>summe_liste([4])</code> und <code>countdown(3)</code>.</li>
+                    <li>Benenne jeweils, welche der beiden Bedingungen für eine korrekte Rekursion verletzt ist: Basisfall vorhanden und erreichbar, Problem wird in jedem Schritt kleiner.</li>
+                    <li>Korrigiere alle drei Funktionen.</li>
+                </ol>
+            </details>
+        </div>

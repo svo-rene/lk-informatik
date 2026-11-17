@@ -1,0 +1,355 @@
+<p>
+    Die Vererbung ist ein zentrales Konzept der objektorientierten Programmierung (OOP). Sie ermöglicht es, gemeinsame Eigenschaften und gemeinsames Verhalten in einer Oberklasse zu definieren, damit Unterklassen diese wiederverwenden oder anpassen können.
+</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in drei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Rechts im Video siehst du das Speicherbild mit Objekten und Klassen. Halte die Videos ruhig an und tippe mit.</p>
+
+<ol class="schritte">
+    <li><a href="#schritt-1">Eine Unterklasse bilden</a> – danach Aufgabe 4.10.1</li>
+    <li><a href="#schritt-2"><code>super().__init__</code> Schritt für Schritt</a> – danach Aufgabe 4.10.2 und 4.10.3</li>
+    <li><a href="#schritt-3">Überschreiben: Wo sucht Python eine Methode?</a> – danach Aufgabe 4.10.4 und 4.10.5</li>
+</ol>
+
+<p>Zum Schluss findest du ein komplexes Beispiel, den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Eine Unterklasse bilden</h2>
+
+<p>Wenn mehrere Klassen dieselben Attribute haben, steht derselbe Code mehrmals im Programm. Vererbung löst das: Das Gemeinsame kommt einmal in eine Oberklasse, die Unterklassen erben es. Achte im Video auf den „ist-ein“-Test und darauf, welcher Konstruktor läuft, wenn die Unterklasse gar keinen eigenen hat. Neu ist <code>isinstance</code>, das wird kurz erklärt.</p>
+
+<figure>
+    <div class="lp-video"><video controls preload="none" poster="../vid/4-10-1_unterklasse_vorschau.png" src="../vid/4-10-1_unterklasse.mp4"></video><a href="../vid/4-10-1_unterklasse.mp4">Video ansehen</a></div>
+    <figcaption>Video 1: Wie bildet man eine Unterklasse? (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+</figure>
+
+<h3>Zum Nachlesen: Vererbung in UML</h3>
+
+<p>
+    In der UML wird Vererbung durch einen Pfeil mit nicht ausgefüllter (weißer) dreieckiger Spitze dargestellt. Der Pfeil zeigt von der Unterklasse zur Oberklasse.
+</p>
+
+<figure>
+    <img src="../img/uml_vererbung.png" width="600" alt="UML-Klassendiagramm mit Vererbungspfeilen von Unterklassen zur Oberklasse">
+    <figcaption>Abb. 1: UML-Darstellung von Vererbung</figcaption>
+</figure>
+
+<h3>Zum Nachlesen: Abgrenzung zu anderen Beziehungen</h3>
+
+<p>Vererbung ist eine Spezialisierungsbeziehung zwischen Klassen. Sie unterscheidet sich von Beziehungen zwischen Objekten wie Assoziation, Aggregation oder Komposition.</p>
+
+<table>
+    <tr>
+        <th>Beziehung</th>
+        <th>Definition</th>
+        <th>Beispiel</th>
+        <th>Lebensdauer</th>
+        <th>Verbindung</th>
+    </tr>
+    <tr>
+        <td>Assoziation</td>
+        <td>Ein Objekt kennt ein anderes.</td>
+        <td>Lehrer kennt Fach</td>
+        <td>beide unabhängig</td>
+        <td>🔹 locker</td>
+    </tr>
+    <tr>
+        <td>Aggregation</td>
+        <td>Ein Objekt enthält andere – diese leben aber eigenständig weiter.</td>
+        <td>Schulklasse enthält Schüler</td>
+        <td>Teil lebt auch ohne Ganzes</td>
+        <td>🔸 mittel</td>
+    </tr>
+    <tr>
+        <td>Komposition</td>
+        <td>Ein Objekt besteht aus anderen – sie können nicht ohne es existieren.</td>
+        <td>Auto enthält Motor</td>
+        <td>Teil endet mit dem Ganzen</td>
+        <td>🔴 stark</td>
+    </tr>
+    <tr>
+        <td><strong>Vererbung</strong></td>
+        <td><strong>Eine Klasse ist eine Spezialisierung einer anderen.</strong></td>
+        <td><code>Hund</code> ist ein <code>Tier</code></td>
+        <td><em>keine Verbindung zwischen Objekten</em></td>
+        <td>⚪ Klassenebene</td>
+    </tr>
+</table>
+
+<p>Danach: <a href="uebungen.html#a-4-10-1">Aufgabe 4.10.1</a> – Klassendiagramm Musikinstrumente.</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: super().__init__ Schritt für Schritt →</a></p>
+
+<h2 id="schritt-2">Schritt 2: <code>super().__init__</code> Schritt für Schritt</h2>
+
+<p>
+    Eine Unterklasse erbt auch den Konstruktor der Oberklasse. Definiert sie <strong>keinen eigenen</strong> <code>__init__</code>, wird automatisch der Konstruktor der Oberklasse verwendet. Definiert sie einen <strong>eigenen</strong> <code>__init__</code>, überschreibt dieser den geerbten – dann muss der Konstruktor der Oberklasse mit <code>super().__init__()</code> ausdrücklich aufgerufen werden, damit auch deren Attribute gesetzt werden.
+</p>
+
+<p>Im Video entsteht <code>Auto("VW", 5)</code> Zeile für Zeile. Achte auf die gelbe Zeile: Erst beginnt <code>Auto.__init__</code>, dann läuft <code>Fahrzeug.__init__</code>, dann geht es in <code>Auto.__init__</code> weiter. <code>self</code> zeigt die ganze Zeit auf dasselbe Objekt. Am Ende zeigt <code>vars(auto)</code> alle Attribute des Objekts.</p>
+
+<figure>
+    <div class="lp-video"><video controls preload="none" poster="../vid/4-10-2_super_init_vorschau.png" src="../vid/4-10-2_super_init.mp4"></video><a href="../vid/4-10-2_super_init.mp4">Video ansehen</a></div>
+    <figcaption>Video 2: super().__init__ Schritt für Schritt (ca. 2 min)</figcaption>
+</figure>
+
+<p>Zum Nachlesen steht der Code aus dem Video mit Erklärung und Testfällen in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Konstruktor erben oder überschreiben</summary>
+    <p><strong>Ausgangssituation:</strong> Ein Verleih hat Fahrräder und Autos. Alle Fahrzeuge haben eine Marke, Autos zusätzlich eine Anzahl Türen.</p>
+    <pre><code class="language-python">class Fahrzeug:
+    def __init__(self, marke):
+        self.marke = marke
+
+class Fahrrad(Fahrzeug):          # kein eigener Konstruktor
+    pass
+
+class Auto(Fahrzeug):
+    def __init__(self, marke, tueren):   # eigener Konstruktor überschreibt den geerbten
+        super().__init__(marke)          # Attribute der Oberklasse setzen
+        self.tueren = tueren
+
+rad = Fahrrad("Diamant")           # Konstruktor von Fahrzeug wird verwendet
+auto = Auto("VW", 5)
+print(rad.marke)     # Ausgabe: Diamant
+print(auto.marke)    # Ausgabe: VW
+print(auto.tueren)   # Ausgabe: 5</code></pre>
+    <ol>
+        <li><strong>Gemeinsames in die Oberklasse:</strong> <code>marke</code> haben alle, also setzt sie der Konstruktor von <code>Fahrzeug</code>. Warum: Der Code dafür steht so nur an einer Stelle.</li>
+        <li><strong><code>Fahrrad("Diamant")</code>:</strong> <code>Fahrrad</code> hat keinen eigenen <code>__init__</code>. Python sucht ihn deshalb in der Oberklasse und führt <code>Fahrzeug.__init__</code> aus, also wird <code>marke = "Diamant"</code> gesetzt.</li>
+        <li><strong><code>Auto("VW", 5)</code>:</strong> <code>Auto</code> hat einen eigenen <code>__init__</code>, der den geerbten überschreibt. Dort setzt <code>super().__init__(marke)</code> zuerst die Marke, danach wird <code>tueren = 5</code> ergänzt. Warum <code>super()</code>: Ohne diesen Aufruf würde der Code der Oberklasse gar nicht ausgeführt.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong> Ausgaben <code>Diamant</code>, <code>VW</code>, <code>5</code>.</p>
+    <p><strong>Kontrolle:</strong></p>
+    <table class="gitter">
+        <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+        <tr><td><code>print(isinstance(auto, Fahrzeug))</code></td><td>True (ein Auto <em>ist ein</em> Fahrzeug)</td></tr>
+        <tr><td><code>print(hasattr(rad, "tueren"))</code></td><td>False (nur Autos haben Türen)</td></tr>
+        <tr><td><code>Fahrrad()</code></td><td><code>TypeError</code>: Der geerbte Konstruktor verlangt <code>marke</code>.</td></tr>
+    </table>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-4-10-2">Aufgabe 4.10.2</a> – Unterklasse bilden, dann <a href="uebungen.html#a-4-10-3">Aufgabe 4.10.3</a> – Initialisierung beschreiben.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Überschreiben – wo sucht Python eine Methode? →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Überschreiben – wo sucht Python eine Methode?</h2>
+
+<p>Eine Unterklasse erbt alle Methoden der Oberklasse. Sie kann:</p>
+
+<ul>
+    <li>die Methoden unverändert verwenden,</li>
+    <li>die Methoden überschreiben (neues Verhalten definieren),</li>
+    <li>die Methoden erweitern (mit <code>super()</code> die Methode der Oberklasse aufrufen und Eigenes ergänzen).</li>
+</ul>
+
+<p>Im Video siehst du alle drei Fälle mit <code>Tier</code>, <code>Katze</code> und <code>Hund</code>. Achte rechts auf die Klassenkästen: Rot ist die Klasse, in der Python gerade erfolglos sucht, grün die Klasse, in der die Methode gefunden wird. Python sucht immer zuerst in der Klasse des Objekts und erst dann eine Klasse weiter oben.</p>
+
+<figure>
+    <div class="lp-video"><video controls preload="none" poster="../vid/4-10-3_ueberschreiben_vorschau.png" src="../vid/4-10-3_ueberschreiben.mp4"></video><a href="../vid/4-10-3_ueberschreiben.mp4">Video ansehen</a></div>
+    <figcaption>Video 3: Wo sucht Python eine Methode? (ca. 2 min)</figcaption>
+</figure>
+
+<h3>Zum Nachlesen: Verwendung ohne Überschreiben</h3>
+
+<pre><code class="language-python">class Tier:
+    def sprich(self):
+        print("Ein Tier macht ein Geräusch.")
+
+class Katze(Tier):
+    pass
+
+k = Katze()
+k.sprich()   # Ausgabe: Ein Tier macht ein Geräusch.</code></pre>
+
+<h3>Zum Nachlesen: Methode überschreiben</h3>
+
+<pre><code class="language-python">class Hund(Tier):
+    def sprich(self):
+        print("Der Hund bellt.")
+
+h = Hund()
+h.sprich()   # Ausgabe: Der Hund bellt.</code></pre>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Überschreiben und Polymorphie</summary>
+        <p>
+            Das Überschreiben von Methoden in Unterklassen ist ein zentrales Beispiel für <strong>Polymorphie</strong> (siehe 4.11): Objekte reagieren unterschiedlich auf die gleiche Botschaft (z.&nbsp;B. <code>sprich()</code>), je nachdem, zu welcher Klasse sie gehören.
+        </p>
+    </details>
+</div>
+
+<h3>Zum Nachlesen: Methode erweitern mit <code>super()</code></h3>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Kurzbeispiel: Methode der Oberklasse aufrufen und ergänzen</summary>
+    <pre><code class="language-python">class Katze(Tier):
+    def sprich(self):
+        super().sprich()
+        print("Die Katze miaut.")
+
+k = Katze()
+k.sprich()
+# Ausgabe:
+# Ein Tier macht ein Geräusch.
+# Die Katze miaut.</code></pre>
+    <p>So wird die Methode der Oberklasse aufgerufen und durch eigenes Verhalten ergänzt.</p>
+            </details>
+        </div>
+
+<p>Private Methoden mit <code>__name</code> werden zwar ebenfalls vererbt, sind aber wegen der Namensumbenennung in der Unterklasse nicht unter diesem Namen aufrufbar.</p>
+
+<p>Danach: <a href="uebungen.html#a-4-10-4">Aufgabe 4.10.4</a> – Code analysieren, dann <a href="uebungen.html#a-4-10-5">Aufgabe 4.10.5</a> – Methode überschreiben und erweitern.</p>
+
+<h2>Alles zusammen: Beispiel 2</h2>
+
+<p>Das folgende Beispiel verbindet alle drei Schritte: Vererbung entwerfen, Konstruktoren mit <code>super().__init__</code>, Methoden überschreiben und erweitern.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Medien der Schulbibliothek – Vererbung entwerfen, überschreiben und erweitern</summary>
+    <p><strong>Ausgangssituation:</strong> Die Schulbibliothek verleiht Bücher und DVDs. Beide haben einen Titel, eine Signatur und sind verfügbar oder verliehen. Bücher haben eine Autorin bzw. einen Autor und dürfen 28 Tage ausgeliehen werden. DVDs haben eine Altersfreigabe (FSK) und dürfen nur 7 Tage ausgeliehen werden. Außerdem gibt es Regale, in denen Medien stehen.</p>
+    <svg viewBox="0 0 560 320" width="560" role="img" aria-label="UML-Klassendiagramm: Buch und DVD erben von Medium" style="max-width: 100%; height: auto; font-family: sans-serif; font-size: 13px;">
+        <rect x="180" y="10" width="200" height="130" fill="#ffffff" stroke="#222222"/>
+        <text x="280" y="30" text-anchor="middle" font-weight="bold" fill="#222222">Medium</text>
+        <line x1="180" y1="40" x2="380" y2="40" stroke="#222222"/>
+        <text x="188" y="58" fill="#222222">+ titel: str</text>
+        <text x="188" y="74" fill="#222222">+ signatur: str</text>
+        <text x="188" y="90" fill="#222222">+ ausgeliehen: bool</text>
+        <line x1="180" y1="98" x2="380" y2="98" stroke="#222222"/>
+        <text x="188" y="116" fill="#222222">+ leihfrist(): int</text>
+        <text x="188" y="132" fill="#222222">+ beschreibung(): str</text>
+        <rect x="20" y="200" width="220" height="90" fill="#ffffff" stroke="#222222"/>
+        <text x="130" y="220" text-anchor="middle" font-weight="bold" fill="#222222">Buch</text>
+        <line x1="20" y1="230" x2="240" y2="230" stroke="#222222"/>
+        <text x="28" y="248" fill="#222222">+ autor: str</text>
+        <line x1="20" y1="258" x2="240" y2="258" stroke="#222222"/>
+        <text x="28" y="276" fill="#222222">+ beschreibung(): str</text>
+        <rect x="320" y="200" width="220" height="104" fill="#ffffff" stroke="#222222"/>
+        <text x="430" y="220" text-anchor="middle" font-weight="bold" fill="#222222">DVD</text>
+        <line x1="320" y1="230" x2="540" y2="230" stroke="#222222"/>
+        <text x="328" y="248" fill="#222222">+ fsk: int</text>
+        <line x1="320" y1="258" x2="540" y2="258" stroke="#222222"/>
+        <text x="328" y="276" fill="#222222">+ leihfrist(): int</text>
+        <text x="328" y="292" fill="#222222">+ beschreibung(): str</text>
+        <polyline points="130,200 130,172 430,172 430,200" fill="none" stroke="#222222"/>
+        <line x1="280" y1="172" x2="280" y2="155" stroke="#222222"/>
+        <polygon points="280,140 270,155 290,155" fill="#ffffff" stroke="#222222"/>
+    </svg>
+    <p style="text-align: center;"><em>Abb. 2: Buch und DVD erben von Medium (leere Dreiecksspitze an der Oberklasse)</em></p>
+    <pre><code class="language-python">class Medium:
+    def __init__(self, titel: str, signatur: str):
+        self.titel: str = titel
+        self.signatur: str = signatur
+        self.ausgeliehen: bool = False
+
+    def leihfrist(self) -&gt; int:
+        return 28                                   # Tage
+
+    def beschreibung(self) -&gt; str:
+        status = "verliehen" if self.ausgeliehen else "verfügbar"
+        return f"[{self.signatur}] {self.titel} ({status})"
+
+
+class Buch(Medium):
+    def __init__(self, titel: str, signatur: str, autor: str):
+        super().__init__(titel, signatur)
+        self.autor: str = autor
+
+    def beschreibung(self) -&gt; str:                  # erweitern
+        return super().beschreibung() + f", von {self.autor}"
+
+
+class DVD(Medium):
+    def __init__(self, titel: str, signatur: str, fsk: int):
+        super().__init__(titel, signatur)
+        self.fsk: int = fsk
+
+    def leihfrist(self) -&gt; int:                     # überschreiben
+        return 7
+
+    def beschreibung(self) -&gt; str:                  # erweitern
+        return super().beschreibung() + f", FSK {self.fsk}"
+
+
+b = Buch("Die Welle", "B-204", "Morton Rhue")
+d = DVD("Elbsandstein-Doku", "D-017", 0)
+d.ausgeliehen = True
+for m in [b, d]:
+    print(m.beschreibung(), "-", m.leihfrist(), "Tage")</code></pre>
+    <ol>
+        <li><strong>Gemeinsamkeiten sammeln:</strong> Titel, Signatur, Status, Leihfrist und Beschreibung haben beide Medienarten. Sie kommen in die Oberklasse <code>Medium</code>. Warum: Eine Änderung, z.&nbsp;B. ein neues Attribut „Standort“, ist dann nur an einer Stelle nötig.</li>
+        <li><strong>„ist-ein“-Test durchführen:</strong> „Ein Buch ist ein Medium“ und „eine DVD ist ein Medium“ stimmen, also ist Vererbung richtig. <strong>Falle:</strong> „Ein Regal ist ein Medium“ stimmt nicht. Ein Regal <em>hat</em> Medien, das ist eine Aggregation (<code>Regal</code> mit einer Liste von <code>Medium</code>-Objekten) und keine Unterklasse. Würde <code>Regal</code> von <code>Medium</code> erben, hätte jedes Regal sinnlos eine Signatur und eine Leihfrist.</li>
+        <li><strong>Konstruktoren der Unterklassen:</strong> Beide rufen zuerst <code>super().__init__(titel, signatur)</code> auf und ergänzen dann ihr eigenes Attribut. Warum: Ohne den Aufruf fehlen <code>titel</code>, <code>signatur</code> und <code>ausgeliehen</code>; <code>b.beschreibung()</code> bräche dann mit <code>AttributeError: 'Buch' object has no attribute 'ausgeliehen'</code> ab.</li>
+        <li><strong>Überschreiben:</strong> <code>DVD.leihfrist()</code> ersetzt die geerbte Methode vollständig und liefert 7. <code>Buch</code> überschreibt <code>leihfrist()</code> nicht und erbt deshalb 28.</li>
+        <li><strong>Erweitern:</strong> <code>beschreibung()</code> ruft in beiden Unterklassen erst die Oberklassenmethode auf und hängt dann etwas an. Ablauf für <code>d</code>: <code>DVD.beschreibung</code> → <code>super().beschreibung()</code> liefert „[D-017] Elbsandstein-Doku (verliehen)“ (weil <code>ausgeliehen</code> True ist) → angehängt wird „, FSK 0“.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong></p>
+    <pre><code>[B-204] Die Welle (verfügbar), von Morton Rhue - 28 Tage
+[D-017] Elbsandstein-Doku (verliehen), FSK 0 - 7 Tage</code></pre>
+    <p><strong>Kontrolle:</strong></p>
+    <table class="gitter">
+        <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+        <tr><td><code>print(isinstance(d, Medium), isinstance(b, DVD))</code></td><td>True False</td></tr>
+        <tr><td><code>print(Medium("Atlas", "A-001").beschreibung())</code></td><td>[A-001] Atlas (verfügbar)</td></tr>
+        <tr><td><code>print(b.leihfrist())</code></td><td>28 (geerbt)</td></tr>
+    </table>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Vererbung in Frameworks</summary>
+        <p>
+            <strong>Alltag:</strong> In einem Carsharing- oder Bikesharing-Angebot haben alle Fahrzeuge eine Nummer, einen Standort und einen Preis – E-Scooter zusätzlich einen Akkustand. Genau diese Struktur bildet eine Oberklasse <code>Fahrzeug</code> mit Unterklassen ab.<br><br>
+            <strong>Beruf:</strong> Viele Frameworks funktionieren über Vererbung: In der Spieleentwicklung erben Spielfiguren von einer Klasse des Game-Engines, in Web-Frameworks wie Django erben Datenmodelle von <code>models.Model</code>. Entwicklerinnen und Entwickler ergänzen dann nur noch ihre speziellen Attribute und Methoden. Gleichzeitig gilt im Beruf die Regel „Komposition vor Vererbung“: Zu tiefe Vererbungshierarchien machen Software schwer wartbar.
+        </p>
+    </details>
+</div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+    Vererbung ist eine „ist-ein“-Beziehung zwischen Klassen: Gemeinsames steht einmal in der Oberklasse, Unterklassen erben es und ergänzen Eigenes. Hat eine Unterklasse einen eigenen Konstruktor, ruft sie mit <code>super().__init__(…)</code> den Konstruktor der Oberklasse für dasselbe Objekt auf. Bei einem Methodenaufruf sucht Python zuerst in der Klasse des Objekts und dann Schritt für Schritt weiter oben. So kann eine Unterklasse Methoden unverändert erben, überschreiben oder mit <code>super()</code> erweitern.
+</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p>
+        <strong>Vererbung</strong> ist eine „ist-ein“-Beziehung zwischen Klassen: Eine <strong>Unterklasse</strong> (abgeleitete Klasse) übernimmt alle Attribute und Methoden ihrer <strong>Oberklasse</strong> (Basisklasse) und kann eigene ergänzen oder geerbte Methoden überschreiben. In Python schreibt man <code>class Unterklasse(Oberklasse):</code>.
+    </p>
+</div>
+
+<div class="merke">
+    <p>
+        Überschreibt eine Unterklasse den Konstruktor, werden die Attribute der Oberklasse nur gesetzt, wenn <code>super().__init__(…)</code> aufgerufen wird. Ohne eigenen Konstruktor ist kein Aufruf nötig. Unterklassen können zusätzliche Attribute ergänzen.
+    </p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 1: Ist-ein oder nicht? <span class="niveau">AFB I</span></summary>
+        <p>Passt Vererbung bei den Paaren „Kreis – Form“ und „Rad – Fahrrad“? Und was gibt <code>isinstance(rad, Auto)</code> für <code>rad = Fahrrad("Diamant")</code> aus?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>„Ein Kreis ist eine Form“ stimmt, also kann <code>Kreis</code> von <code>Form</code> erben. „Ein Rad ist ein Fahrrad“ stimmt nicht – ein Fahrrad <em>hat</em> Räder, das ist eine Komposition, keine Vererbung. <code>isinstance(rad, Auto)</code> ergibt <code>False</code>: Fahrrad und Auto sind beide Fahrzeuge, aber ein Fahrrad ist kein Auto.</p>
+        </details>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 2: Welcher Konstruktor läuft? <span class="niveau">AFB I</span></summary>
+        <p>Welcher Konstruktor läuft bei <code>Fahrrad("Puky")</code>, und was gibt <code>vars(Fahrrad("Puky"))</code> aus? Und welcher Name verweist beim Aufruf <code>x = Auto("Opel", 3)</code> während <code>Fahrzeug.__init__</code> auf das neue Objekt – <code>x</code> oder <code>self</code>?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>Fahrrad hat keinen eigenen <code>__init__</code>, also läuft <code>Fahrzeug.__init__</code>. Ausgabe: <code>{'marke': 'Puky'}</code>. Während <code>Fahrzeug.__init__</code> läuft, verweist <code>self</code> auf das neue Auto-Objekt – dasselbe wie <code>self</code> in <code>Auto.__init__</code>. <code>x</code> verweist erst darauf, wenn der Konstruktor ganz fertig ist.</p>
+        </details>
+    </details>
+</div>

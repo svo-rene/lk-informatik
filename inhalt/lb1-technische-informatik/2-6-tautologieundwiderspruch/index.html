@@ -1,0 +1,126 @@
+<p>„Die Sonne scheint oder die Sonne scheint nicht.“ – Kann dieser Satz jemals falsch sein? Manche zusammengesetzten Aussagen haben immer denselben Wahrheitswert, egal wie die einzelnen Aussagen belegt sind. Diese Extremfälle haben eigene Namen.</p>
+
+<h2>Tautologie</h2>
+
+<p>
+            Eine Tautologie ist eine Aussage, die unabhängig von den gegebenen Bedingungen oder Situationen immer wahr ist. Es ist unmöglich, dass sie jemals falsch wird.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Tautologie: Die Aussage „Die Sonne scheint oder die Sonne scheint nicht.“ ist eine Tautologie.</summary>
+
+            <table class="gitter">
+                <tr>
+                    <th>Sonne scheint (A)</th>
+                    <th>Sonne scheint nicht (¬A)</th>
+                    <th>A ODER ¬A</th>
+                </tr>
+                <tr><td>1 (true)</td><td>0 (false)</td><td>1 (true)</td></tr>
+                <tr><td>0 (false)</td><td>1 (true)</td><td>1 (true)</td></tr>
+            </table>
+
+            <p>
+                Die Wahrheitstabelle zeigt, dass die Aussage „Die Sonne scheint oder die Sonne scheint nicht“ in jeder Zeile den Wahrheitswert „wahr“ (1) besitzt. Egal ob die Sonne scheint (wahr) oder nicht (falsch), die Aussage bleibt immer wahr. Somit ist es eine Tautologie.
+            </p>
+            </details>
+        </div>
+
+<hr>
+
+<h2>Widerspruch</h2>
+
+<p>
+            Ein Widerspruch ist eine Aussage, die unabhängig von den gegebenen Bedingungen oder Situationen immer falsch ist. Es ist unmöglich, dass sie jemals wahr wird.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">einfach</span> Widerspruch: Die Aussage „Die Sonne scheint und die Sonne scheint nicht.“ ist ein Widerspruch.</summary>
+
+            <table class="gitter">
+                <tr>
+                    <th>Sonne scheint (A)</th>
+                    <th>Sonne scheint nicht (¬A)</th>
+                    <th>A UND ¬A</th>
+                </tr>
+                <tr><td>1 (true)</td><td>0 (false)</td><td>0 (false)</td></tr>
+                <tr><td>0 (false)</td><td>1 (true)</td><td>0 (false)</td></tr>
+            </table>
+
+            <p>
+                Die Wahrheitstabelle zeigt, dass die Aussage „Die Sonne scheint und die Sonne scheint nicht“ in jeder Zeile den Wahrheitswert „falsch“ (0) besitzt. Es ist unmöglich, dass die Sonne gleichzeitig scheint und nicht scheint, daher ist die Aussage immer falsch. Somit ist es ein Widerspruch.
+            </p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span> Eine Schlussregel als Tautologie</summary>
+            <p>„Wenn A gilt und aus A die Aussage B folgt, dann gilt auch B.“ Formal: (A ∧ (A → B)) → B. Ist das immer wahr?</p>
+            <table class="gitter">
+                <tr><th>A</th><th>B</th><th>A → B</th><th>A ∧ (A → B)</th><th>(A ∧ (A → B)) → B</th></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+            <p>Die letzte Spalte enthält nur Einsen: eine Tautologie. Diese Schlussregel („Modus ponens“) verwendest du ständig, z.&nbsp;B.: „Wenn es regnet, ist die Straße nass. Es regnet. Also ist die Straße nass.“</p>
+            <p><strong>Probe mit den Gesetzen aus 2.5</strong> (ohne Tabelle):</p>
+            <ol>
+                <li><strong>Was:</strong> ¬(A ∧ (¬A ∨ B)) ∨ B – <em>warum:</em> Implikation zweimal ersetzen: X → Y ↔ ¬X ∨ Y (2.4).</li>
+                <li><strong>Was:</strong> ¬((A ∧ ¬A) ∨ (A ∧ B)) ∨ B – <em>warum:</em> Distributivgesetz.</li>
+                <li><strong>Was:</strong> ¬(F ∨ (A ∧ B)) ∨ B, also ¬(A ∧ B) ∨ B – <em>warum:</em> Komplement A ∧ ¬A ↔ F, dann neutrales Element.</li>
+                <li><strong>Was:</strong> ¬A ∨ ¬B ∨ B – <em>warum:</em> De-Morgan’sche Regel.</li>
+                <li><strong>Was:</strong> ¬A ∨ W, also W – <em>warum:</em> Komplement ¬B ∨ B ↔ W, dann dominantes Element.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Der Term lässt sich zu W umformen – auch so ist die Tautologie nachgewiesen.</p>
+            </details>
+        </div>
+
+<hr>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Wozu Tautologien und Widersprüche gut sind</summary>
+                <p><strong>Alltag:</strong> Tautologien begegnen dir als leere Versprechen („Morgen regnet es oder es regnet nicht.“ – immer wahr, aber ohne Information). Widersprüche entstehen in schlecht formulierten Regeln: „Du darfst nur mitfahren, wenn du älter als 18 und jünger als 16 bist.“ – diese Bedingung erfüllt niemand.</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Formale Verifikation</strong>: Ein Beweisassistent prüft, ob eine Sicherheitsanforderung an eine Software eine Tautologie ist, also in jedem Fall erfüllt wird – eingesetzt z.&nbsp;B. bei Bahnsignaltechnik, Luftfahrt und Chipdesign.</li>
+                    <li><strong>Compilerbau</strong>: Ein Compiler erkennt „toten Code“, der wegen einer widersprüchlichen Bedingung wie <code>if (x &gt; 5 &amp;&amp; x &lt; 3)</code> nie ausgeführt wird, und warnt die Entwickler/innen.</li>
+                    <li><strong>Softwaretester/in</strong>: findet Bedingungen, die immer wahr sind (Tautologie) und deshalb eine Prüfung wirkungslos machen – ein typischer Befund in Code-Reviews.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Tautologie:</strong> ein Ausdruck, der für <strong>jede</strong> Belegung seiner Variablen wahr (1) ist. In der Wahrheitstabelle steht in der Ergebnisspalte überall 1.</p>
+            <p><strong>Widerspruch</strong> (Kontradiktion): ein Ausdruck, der für jede Belegung seiner Variablen falsch (0) ist. In der Ergebnisspalte steht überall 0.</p>
+            <p>Alle anderen Ausdrücke sind <strong>erfüllbar</strong>, aber nicht allgemeingültig: Sie sind für manche Belegungen wahr und für andere falsch.</p>
+            <p>Zusammenhang: Ist T eine Tautologie, dann ist ¬T ein Widerspruch – und umgekehrt. Zwei Terme T<sub>1</sub> und T<sub>2</sub> sind genau dann äquivalent, wenn T<sub>1</sub> ↔ T<sub>2</sub> eine Tautologie ist (→ Gesetze in 2.5).</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.6.1: Tautologie nachweisen <span class="niveau">AFB I</span></summary>
+                <p>Gegeben sind die Aussagen A und B.</p>
+                <p>Zeige durch eine Wahrheitstabelle, dass die Aussage „A UND (A ODER B) ist äquivalent zu A“, also (A ∧ (A ∨ B)) ↔ A, eine Tautologie ist.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.6.2: Tautologie, Widerspruch oder erfüllbar? <span class="niveau">AFB II</span></summary>
+                <p>Entscheide mit einer Wahrheitstabelle, ob der Ausdruck eine Tautologie, ein Widerspruch oder nur erfüllbar ist.</p>
+                <ol>
+                    <li>(A ∨ B) ∧ ¬A ∧ ¬B</li>
+                    <li>(A → B) ∨ (B → A)</li>
+                    <li>A ∧ ¬B</li>
+                </ol>
+                <p>4. Begründe ohne Tabelle: Wenn T eine Tautologie ist, ist ¬T ein Widerspruch.</p>
+            </details>
+        </div>

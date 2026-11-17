@@ -1,0 +1,22 @@
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 3.7.4: Wetterdaten mit SQL auswerten <span class="niveau">AFB II</span></summary>
+        <p>Für eine Präsentation im Geografieunterricht sollen die Messungen aus
+           <a href="../notebooks/wetterdaten.csv" download>wetterdaten.csv</a> (<code>Datum;Ort;Temperatur;Luftfeuchtigkeit</code>)
+           mit SQL ausgewertet werden. Importiere die Datei als Tabelle <code>Wetter</code> und formuliere Abfragen für:</p>
+        <ol>
+            <li>die Anzahl der Messungen und die Durchschnittstemperatur je Ort, absteigend nach Durchschnitt sortiert,</li>
+            <li>alle Tage, an denen es in Dresden mindestens 22&nbsp;°C warm war, mit Datum und Temperatur,</li>
+            <li>den Ort mit der niedrigsten durchschnittlichen Luftfeuchtigkeit.</li>
+        </ol>
+        <table class="gitter">
+            <tr><th>Testfall</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+            <tr><td>Abfrage 1</td><td>Dresden 8 / 21.875, Leipzig 4 / 19.0, Chemnitz 4 / 17.25</td><td></td></tr>
+            <tr><td>Abfrage 2</td><td>5 Zeilen, die erste (nach Datum sortiert) ist 2024-04-03 mit 22</td><td></td></tr>
+            <tr><td>Abfrage 3</td><td>Dresden</td><td></td></tr>
+        </table>
+        <p class="tipp">Prüfe nach dem Import die Datentypen. Mit <code>CAST(Temperatur AS INTEGER)</code> bist du auf der sicheren Seite.</p>
+    </details>
+</div>

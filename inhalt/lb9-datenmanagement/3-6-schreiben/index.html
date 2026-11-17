@@ -1,0 +1,250 @@
+<p>
+    Das Speichern von Daten im CSV-Format ist eine zentrale Methode, um strukturierte Informationen systemübergreifend weiterzugeben, zu archivieren oder automatisiert auszuwerten.
+</p>
+
+<h2>Daten mit csv.writer() als csv-Datei speichern</h2>
+
+<p>
+    Das folgende Beispiel zeigt, wie mehrere strukturierte Datensätze mithilfe des Moduls <code>csv</code> in eine neue CSV-Datei geschrieben werden. Die Daten werden als Liste von Zeilen definiert und anschließend vollständig exportiert.
+</p>
+
+<pre><code>import csv  
+daten = [  
+    ["Name", "Alter", "Note"],   # Kopfzeile (Spaltenüberschriften)
+    ["Anna", "17", "1.3"],       # Erste Datenzeile
+    ["Ben", "16", "2.0"]         # Zweite Datenzeile
+]
+
+with open("ausgabe.csv", "w", newline="", encoding="utf-8") as datei:
+    writer = csv.writer(datei, delimiter=";") # Erzeuge ein CSV-Schreibobjekt mit Semikolon als Trennzeichen
+    writer.writerows(daten) # Schreibe alle Datenzeilen auf einmal in die Datei
+</code></pre>
+
+<div class="hinweis">
+<details>
+    <summary>Hinweis: Warum <code>newline=""</code> und <code>utf-8</code>?</summary>
+    <p>
+        Das <code>csv</code>-Modul schreibt jedes Zeilenende selbst als <code>\r\n</code>. Ohne <code>newline=""</code> würde Python unter Windows daraus zusätzlich <code>\r\r\n</code> machen – beim Öffnen erscheint dann nach jedem Datensatz eine Leerzeile. <br>
+        <code>utf-8</code> sichert die Darstellung von Umlauten und Sonderzeichen.
+    </p>
+</details>
+</div>
+
+<h2>Daten mit csv.DictWriter() als csv-Datei schreiben</h2>
+
+<p>
+    In diesem Beispiel werden strukturierte Datensätze in Form von Dictionaries in eine CSV-Datei geschrieben. Durch die Verwendung von Spaltennamen können die Daten gezielt und übersichtlich gespeichert werden.
+</p>
+
+<pre><code>import csv
+
+daten = [
+    {"Name": "Anna", "Alter": "17", "Note": "1.3"},
+    {"Name": "Ben", "Alter": "16", "Note": "2.0"}
+]
+
+with open("ausgabe_dict.csv", "w", newline="", encoding="utf-8") as datei:
+    feldnamen = ["Name", "Alter", "Note"]  # Definiere die Reihenfolge der Spalten
+
+    writer = csv.DictWriter(datei, fieldnames=feldnamen, delimiter=";")# Erzeuge ein CSV-Schreibobjekt mit Spaltennamen
+    writer.writeheader()# Schreibe zuerst die Kopfzeile
+    writer.writerows(daten)# Schreibe alle Dictionaries in die Datei
+</code></pre>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Dateien schreiben, bestehende Dateien ändern</summary>
+        <p>
+        Der Modus <code>"r"</code> steht für <em>read</em> – Datei wird nur gelesen.<br>
+        Der Modus <code>"w"</code> steht für <em>write</em> – Datei wird neu geschrieben (bestehende Inhalte werden gelöscht).<br>
+        Der Modus <code>"a"</code> steht für <em>append</em> – neue Inhalte werden am Ende der Datei angehängt.
+    </p>
+</details>
+</div>
+
+<h2>Einzelne Zeilen gezielt schreiben</h2>
+
+<p>
+    Neben dem Schreiben ganzer Tabellen kann es sinnvoll sein, einzelne Ergebnisse oder aggregierte Daten schrittweise in eine CSV-Datei zu schreiben – etwa zur Dokumentation von Berechnungen oder zur Protokollierung.
+</p>
+
+<h3>Beispiel: Einzelwerte in CSV speichern</h3>
+
+<pre><code>import csv
+
+# Beispielwerte einer Temperaturauswertung
+anzahl_messungen = 120
+durchschnitt = 21.7
+maximum = 34.5
+minimum = 15.2
+
+with open("auswertung_temperatur.csv", mode="w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file, delimiter=";")
+
+    writer.writerow(["Anzahl Messungen", anzahl_messungen])
+    writer.writerow(["Durchschnittstemperatur (°C)", durchschnitt])
+
+    writer.writerow([])  # Leerzeile zur Trennung
+    writer.writerow(["Maximale Temperatur (°C)", maximum])
+    writer.writerow(["Minimale Temperatur (°C)", minimum])
+</code></pre>
+
+<h3>Beispiel: Dictionary in CSV speichern</h3>
+
+<pre><code>import csv
+
+statistik = {16: 3, 17: 5, 18: 2}
+
+with open("schueler_nach_alter.csv", "w", newline="", encoding="utf-8") as datei:
+    writer = csv.writer(datei, delimiter=";")
+    writer.writerow(["Alter", "Anzahl"])
+
+    for alter, anzahl in statistik.items():
+        writer.writerow([alter, anzahl])
+</code></pre>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Gefilterte Daten in eine neue Datei schreiben</summary>
+    <p><strong>Ausgangssituation:</strong> Aus <a href="../notebooks/schueler.csv" download>schueler.csv</a> (Spalten <code>Name;Alter;Note</code>)
+       sollen alle Schüler*innen mit einer Note besser als 2,0 in die Datei <code>gute_noten.csv</code> geschrieben werden – nur mit Name und Note.</p>
+    <pre><code class="language-python">import csv
+
+ergebnis = []
+with open('schueler.csv', newline='', encoding='utf-8') as datei:
+    for zeile in csv.DictReader(datei, delimiter=';'):
+        if float(zeile['Note']) &lt; 2.0:
+            ergebnis.append({'Name': zeile['Name'], 'Note': zeile['Note']})
+
+with open('gute_noten.csv', 'w', newline='', encoding='utf-8') as datei:
+    writer = csv.DictWriter(datei, fieldnames=['Name', 'Note'], delimiter=';')
+    writer.writeheader()
+    writer.writerows(ergebnis)
+
+print(len(ergebnis), "Datensätze geschrieben")</code></pre>
+    <ol>
+        <li><strong>Lesen und filtern</strong> – Die Note wird nur für den Vergleich in eine Zahl umgewandelt. Gespeichert wird der Originaltext,
+            damit in der neuen Datei genau dasselbe steht wie in der alten.</li>
+        <li><strong>Nur benötigte Spalten übernehmen</strong> – Jedes neue Dictionary enthält nur <code>Name</code> und <code>Note</code>
+            (Datenminimierung: Das Alter braucht der Empfänger nicht).</li>
+        <li><strong>Datei mit <code>'w'</code> öffnen</strong> – Eine vorhandene Datei gleichen Namens wird überschrieben; das Programm
+            kann also beliebig oft laufen, ohne dass sich Zeilen doppeln.</li>
+        <li><strong>Kopfzeile, dann Daten</strong> – <code>writeheader()</code> schreibt die Feldnamen, <code>writerows()</code> alle Dictionaries.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong> Auf der Konsole steht <code>5 Datensätze geschrieben</code>. Die Datei <code>gute_noten.csv</code> enthält:</p>
+    <pre><code>Name;Note
+Anna;1.3
+Clara;1.7
+Eva;1.0
+Greta;1.5
+Jonas;1.9</code></pre>
+    <p><strong>Kontrolle:</strong> Die Datei mit <code>csv.DictReader</code> wieder einlesen: 5 Datensätze, der erste ist
+       <code>{'Name': 'Anna', 'Note': '1.3'}</code>. Ben (2.0) fehlt zu Recht, weil 2.0 &lt; 2.0 falsch ist.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Eine kleine Pipeline: einlesen, zusammenfassen, für Excel schreiben</summary>
+    <p><strong>Ausgangssituation:</strong> Aus <a href="../notebooks/wetterdaten.csv" download>wetterdaten.csv</a> (16 Messungen aus Dresden,
+       Leipzig und Chemnitz) soll eine Zusammenfassung je Ort entstehen: Anzahl der Messungen, mittlere und höchste Temperatur. Die Datei
+       soll sich in einem deutschen Excel per Doppelklick richtig öffnen – mit Umlauten und Dezimalkomma.</p>
+    <pre><code class="language-python">import csv
+
+orte = {}
+with open('wetterdaten.csv', newline='', encoding='utf-8') as datei:
+    for zeile in csv.DictReader(datei, delimiter=';'):
+        orte.setdefault(zeile['Ort'], []).append(int(zeile['Temperatur']))
+
+with open('wetter_zusammenfassung.csv', 'w', newline='', encoding='utf-8-sig') as datei:
+    writer = csv.writer(datei, delimiter=';')
+    writer.writerow(['Ort', 'Messungen', 'Mittel', 'Maximum'])
+    for ort, temps in orte.items():
+        mittel = sum(temps) / len(temps)
+        writer.writerow([ort, len(temps), f"{mittel:.1f}".replace('.', ','), max(temps)])</code></pre>
+    <ol>
+        <li><strong>Einlesen und gruppieren</strong> – <code>setdefault</code> legt für jeden neuen Ort eine leere Liste an und hängt die
+            Temperatur an. Ergebnis: Dresden [18, 20, 22, 21, 23, 24, 22, 25], Leipzig [16, 19, 20, 21], Chemnitz [15, 17, 18, 19].</li>
+        <li><strong>Zusammenfassen</strong> – Dresden: 175 / 8 = 21,875; Leipzig: 76 / 4 = 19,0; Chemnitz: 69 / 4 = 17,25.</li>
+        <li><strong>Runden – die Falle</strong> – <code>f"{17.25:.1f}"</code> ergibt <code>17.2</code>, nicht 17.3. Liegt ein Wert <em>genau</em>
+            auf der Mitte, rundet Python zur geraden Ziffer („Banker’s Rounding“). 21,875 liegt dagegen nicht auf der Mitte und wird zu 21.9.</li>
+        <li><strong>Dezimalkomma für Excel</strong> – Python schreibt Zahlen mit Punkt. Ein deutsches Excel würde <code>21.9</code> als Datum
+            oder Text deuten. Deshalb wird der formatierte Text mit <code>replace('.', ',')</code> umgewandelt. Das Semikolon als Trennzeichen
+            ist nötig, weil das Komma jetzt in den Zahlen vorkommt.</li>
+        <li><strong>Kodierung <code>utf-8-sig</code></strong> – Sie schreibt das BOM an den Dateianfang. Daran erkennt Excel, dass die Datei UTF-8
+            ist, und zeigt Umlaute richtig an. Beim Einlesen in Python braucht man dann ebenfalls <code>utf-8-sig</code> (Seite 3.3).</li>
+        <li><strong>Modus <code>'w'</code></strong> – Mit <code>'a'</code> würde bei jedem Programmlauf erneut eine Kopfzeile samt Daten angehängt.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong> Inhalt von <code>wetter_zusammenfassung.csv</code>:</p>
+    <pre><code>Ort;Messungen;Mittel;Maximum
+Dresden;8;21,9;25
+Leipzig;4;19,0;21
+Chemnitz;4;17,2;19</code></pre>
+    <table class="gitter">
+        <tr><th>Testfall</th><th>erwartete Ausgabe</th></tr>
+        <tr><td>Summe der Messungen</td><td>8 + 4 + 4 = 16 = Zeilen der Eingabedatei</td></tr>
+        <tr><td>Mittelwert genau auf der Mitte (Chemnitz)</td><td><code>17,2</code></td></tr>
+        <tr><td>ganzzahliger Mittelwert (Leipzig)</td><td><code>19,0</code> (mit Nachkommastelle)</td></tr>
+    </table>
+    <p><strong>Kontrolle:</strong> Die Zahl der Messungen muss in Summe die Zeilenzahl der Eingabe ergeben. Wer kaufmännisch runden muss
+       (Rechnungen), nutzt statt <code>float</code> das Modul <code>decimal</code>.</p>
+            </details>
+        </div>
+
+<h2>Grundaufgaben: Ergebnisse exportieren</h2>
+
+<div class="praxisbezug">
+<details>
+    <summary>Praxisbezug: Berichte automatisch erzeugen</summary>
+    <p>
+        In vielen Firmen entstehen Berichte nicht mehr per Hand: Ein Python-Skript liest nachts die Rohdaten, bereinigt sie
+        und schreibt die Ergebnisse als CSV, die morgens automatisch in Excel oder einem Dashboard erscheinen. So arbeiten
+        etwa <strong>Data Engineers</strong> bei Stadtwerken, die Zählerstände auswerten, oder <strong>Data Analysts</strong>
+        im Onlinehandel, die tägliche Verkaufszahlen je Produkt ausgeben. Beim Export personenbezogener Daten gilt die
+        <strong>DSGVO</strong>: In eine Auswertung gehören nur die Spalten, die der Empfänger wirklich braucht.
+    </p>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p>
+        <code>writerow()</code> schreibt genau eine einzelne Zeile in die CSV-Datei.<br>
+        <code>writerows()</code> schreibt mehrere Zeilen auf einmal.<br>
+        Nutze <code>writerow()</code> bei Schleifen oder Einzelergebnissen, <code>writerows()</code> bei kompletten Datensätzen.
+    </p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 3.6.3: Ergebnisliste exportieren <span class="niveau">AFB I</span></summary>
+        <p>Die Informatik-AG hat einen Programmierwettbewerb ausgewertet:
+           <code>ergebnisse = [("Anna", 85), ("Ben", 72), ("Clara", 91)]</code>.
+           Schreibe die Daten mit <code>csv.writer</code> in die Datei <code>wettbewerb.csv</code>: Semikolon als Trennzeichen,
+           Kopfzeile <code>Name;Punkte</code>.</p>
+        <table class="gitter">
+            <tr><th>Testfall</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+            <tr><td>Inhalt von <code>wettbewerb.csv</code></td><td>4 Zeilen: <code>Name;Punkte</code>, <code>Anna;85</code>, <code>Ben;72</code>, <code>Clara;91</code></td><td></td></tr>
+            <tr><td>Programm zweimal ausführen</td><td>weiterhin genau 4 Zeilen</td><td></td></tr>
+        </table>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 3.6.4: Umwandeln und ergänzen <span class="niveau">AFB II</span></summary>
+        <p>Die Datei <a href="../notebooks/klassenarbeit.csv" download>klassenarbeit.csv</a> ist mit Komma getrennt. Die Schulsoftware erwartet
+           aber Semikolons und zusätzlich eine Spalte <code>Bestanden</code> (<code>ja</code> ab 70 Punkten, sonst <code>nein</code>).
+           Lies die Datei ein und schreibe <code>klassenarbeit_bewertet.csv</code> mit den Spalten <code>Name;Punkte;Bestanden</code>.
+           Gib außerdem aus, wie viele bestanden haben.</p>
+        <table class="gitter">
+            <tr><th>Testfall</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+            <tr><td>Zeile für David (65 Punkte)</td><td><code>David;65;nein</code></td><td></td></tr>
+            <tr><td>Grenzfall 70 Punkte (selbst ergänzen)</td><td><code>ja</code></td><td></td></tr>
+            <tr><td>Konsolenausgabe</td><td><code>8 von 10 bestanden</code></td><td></td></tr>
+        </table>
+    </details>
+</div>

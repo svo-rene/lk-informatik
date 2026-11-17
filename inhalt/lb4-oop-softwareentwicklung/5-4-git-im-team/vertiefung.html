@@ -1,0 +1,35 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-5-4-6">
+            <details>
+                <summary>Aufgabe 5.4.6: Beurteile – „Kein Konflikt, also alles gut“ <span class="niveau">AFB III</span></summary>
+                <p>Ben benennt in Branch <code>16-getter</code> in <code>runde.py</code> die Methode <code>punkte()</code> in <code>get_punkte()</code> um und passt alle Aufrufe in <code>main.py</code> an. Gleichzeitig schreibt Mia in Branch <code>17-zwischenstand</code> in <code>ansicht.py</code> eine neue Funktion:</p>
+                <pre><code class="language-python">def zeige_stand(runde: Runde) -&gt; None:
+    print(f"Punkte: {runde.punkte()}")</code></pre>
+                <p>Beide PRs zeigen keinen Konflikt, beide Reviews sind positiv, beide werden gemergt. Danach bricht das Programm ab mit</p>
+                <pre><code>AttributeError: 'Runde' object has no attribute 'punkte'</code></pre>
+                <ol>
+                    <li>Erkläre, warum Git keinen Konflikt gemeldet hat, obwohl die beiden Änderungen nicht zusammenpassen.</li>
+                    <li>Beurteile die Aussage „Kein Konflikt, also alles gut“.</li>
+                    <li>Entwickle mindestens drei Maßnahmen für eure Gruppe, die so einen Fehler vor dem Merge sichtbar machen. Gehe auch darauf ein, was ein Reviewer vor dem Zustimmen tun sollte, wenn sich <code>main</code> seit der Abzweigung geändert hat.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-4-7">
+            <details>
+                <summary>Aufgabe 5.4.7: Arbeitsteilung ohne Konflikte entwerfen <span class="niveau">AFB III</span></summary>
+                <p>Eine Dreiergruppe (Lea, Tim, Ilka) plant Sprint 2 des Kopfrechentrainers. Vorhanden sind <code>aufgabe.py</code>, <code>runde.py</code>, <code>bestenliste.py</code>, je mit Testdatei, sowie <code>ansicht.py</code>, <code>main.py</code> und <code>README.md</code>. Im Sprint-Backlog stehen:</p>
+                <ul>
+                    <li>#20 Aufgaben mit Division (nur ganzzahlige Ergebnisse) – betrifft <code>aufgabe.py</code></li>
+                    <li>#21 Schwierigkeitsstufen leicht/mittel/schwer – betrifft <code>aufgabe.py</code>, <code>runde.py</code>, Menü</li>
+                    <li>#22 Bestenliste je Schwierigkeitsstufe – betrifft <code>bestenliste.py</code>, Anzeige</li>
+                    <li>#23 Startanleitung und Bedienung in der README</li>
+                </ul>
+                <ol>
+                    <li>Verteile die Issues so, dass keine Datei im Sprint von zwei Personen geändert wird. Wo das nicht geht, lege fest, wie ihr vorgeht (Reihenfolge der PRs, verantwortliche Person, Aufteilung in kleinere Issues).</li>
+                    <li>Begründe, warum #20 und #21 besonders konfliktträchtig sind, und schlage eine Lösung vor.</li>
+                    <li>Beurteile den Vorschlag von Tim: „Wir arbeiten alle auf einem gemeinsamen Branch <code>sprint2</code> und mergen ihn am Ende einmal nach <code>main</code>.“</li>
+                </ol>
+            </details>
+        </div>

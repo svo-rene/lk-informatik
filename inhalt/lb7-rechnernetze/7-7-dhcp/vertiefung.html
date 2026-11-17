@@ -1,0 +1,30 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.7.9: Fehler finden – ein falsch eingerichteter DHCP-Server <span class="niveau">AFB III</span></summary>
+                <p>Für das Netz 10.1.4.0/23 (Router 10.1.4.1, DNS-Server 10.1.4.2) wurde ein DHCP-Server so eingerichtet:</p>
+<pre>Adressbereich:  10.1.4.1 bis 10.1.5.255
+Subnetzmaske:   255.255.255.0
+Gateway:        10.1.6.1
+DNS-Server:     10.1.4.2
+Lease:          8 Stunden</pre>
+                <ol>
+                    <li>Finde die vier Fehler. Erkläre bei jedem, welches Symptom ein Client zeigt, der seine Konfiguration von diesem Server erhält.</li>
+                    <li>Gib eine korrigierte Konfiguration an. Halte die Adressen bis 10.1.4.19 für Geräte mit fester Adresse frei.</li>
+                    <li>Ein Client erhält 10.1.5.30. Beurteile, ob er mit der fehlerhaften Maske den Router erreicht, und begründe mit der AND-Verknüpfung.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.7.10: Ein fremder DHCP-Server im Schulnetz <span class="niveau">AFB III</span></summary>
+                <p>Ein Schüler bringt seinen alten Heimrouter mit und steckt ihn mit einem LAN-Anschluss in eine Netzwerkdose im Computerraum. Kurz darauf melden mehrere Laptops: „Kein Internet“. Bei ihnen zeigt <code>ipconfig</code> die Adresse 192.168.178.25 mit dem Gateway 192.168.178.1, während das Schulnetz 10.20.0.0/16 verwendet.</p>
+                <ol>
+                    <li>Erkläre mit dem DORA-Ablauf, warum nur ein Teil der Laptops betroffen ist.</li>
+                    <li>Beurteile, welche Gefahr entstünde, wenn ein Angreifer absichtlich einen eigenen DHCP-Server mit funktionierendem Internetzugang einschleust, der sich selbst als Gateway und DNS-Server einträgt.</li>
+                    <li>Schlage zwei Maßnahmen vor, mit denen die Schule das Problem verhindern oder schnell finden kann.</li>
+                </ol>
+            </details>
+        </div>

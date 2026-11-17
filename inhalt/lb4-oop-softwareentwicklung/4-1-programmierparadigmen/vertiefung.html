@@ -1,0 +1,50 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 4.1.5: Ein Smart Home – welches Paradigma wofür? <span class="niveau">AFB III</span></summary>
+            <p>Familie Krause lässt ihr Haus zum Smart Home umbauen. Die Software soll</p>
+            <ol type="a">
+                <li>für jedes Gerät (Lampe, Thermostat, Rollladen) den aktuellen Zustand speichern und Befehle wie „einschalten“ oder „auf 21&nbsp;°C stellen“ entgegennehmen,</li>
+                <li>aus den Temperaturmesswerten einer Woche alle Fehlmessungen über 40&nbsp;°C entfernen und den Durchschnitt der übrigen Werte bilden,</li>
+                <li>Regeln auswerten wie „Wenn in einem Raum ein Fenster offen ist und dort die Heizung läuft, dann gib eine Warnung aus“ – die Familie möchte später selbst neue Regeln ergänzen,</li>
+                <li>werktags um 6:30 Uhr nacheinander die Rollläden hochfahren, die Kaffeemaschine einschalten, 10 Minuten warten und dann das Licht im Flur dimmen.</li>
+            </ol>
+            <p>Schlage für jedes Teilproblem ein passendes Paradigma vor. Begründe deine Wahl mit Eigenschaften des Paradigmas und nenne jeweils eine Grenze oder einen Nachteil deiner Wahl. Beurteile abschließend, ob das gesamte System in nur einer Sprache geschrieben werden könnte.</p>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 4.1.6: Fehler finden – ist das wirklich funktional? <span class="niveau">AFB III</span></summary>
+            <p>Jonas programmiert für die Mensa eine Rabattaktion: Alle Preise (in Cent) werden um 10&nbsp;% gesenkt (abgerundet auf ganze Cent), außerdem soll die Gesamtersparnis berechnet werden. Er sagt: „Mein Programm ist funktional, ich benutze doch <code>map</code>.“</p>
+            <pre><code class="language-python">rabatt_summe = 0
+
+def mit_rabatt(preis):
+    global rabatt_summe
+    rabatt_summe = rabatt_summe + preis // 10
+    return preis - preis // 10
+
+preise = [250, 320, 180]
+print(list(map(mit_rabatt, preise)))
+print(rabatt_summe)
+print(list(map(mit_rabatt, preise)))
+print(rabatt_summe)</code></pre>
+            <ol>
+                <li>Gib die vier Ausgabezeilen an.</li>
+                <li>Beurteile Jonas’ Aussage. Benenne genau die Stelle, die gegen das funktionale Paradigma verstößt, und erkläre, welches Problem die Ausgabe sichtbar macht.</li>
+                <li>Schreibe eine rein funktionale Lösung mit zwei Funktionen <code>rabattpreis(preis)</code> und <code>rabatt_gesamt(preise)</code> und teste sie:
+                    <table class="gitter">
+                        <thead><tr><th>Aufruf</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>print(list(map(rabattpreis, [250, 320, 180])))</code></td><td><code>[225, 288, 162]</code></td><td></td></tr>
+                            <tr><td><code>print(rabattpreis(99))</code></td><td><code>90</code></td><td></td></tr>
+                            <tr><td><code>print(rabattpreis(5))</code></td><td><code>5</code></td><td></td></tr>
+                            <tr><td><code>print(rabatt_gesamt([250, 320, 180]))</code> (zweimal hintereinander)</td><td><code>75</code> und <code>75</code></td><td></td></tr>
+                            <tr><td><code>print(rabatt_gesamt([]))</code></td><td><code>0</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+        </details>
+    </div>

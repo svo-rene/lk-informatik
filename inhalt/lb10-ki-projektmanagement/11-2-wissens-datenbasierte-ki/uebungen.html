@@ -1,0 +1,59 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.2.3: Welcher Ansatz passt? <span class="niveau">AFB II</span></summary>
+                <p>Entscheide und begründe, ob hier ein datenbasierter oder ein wissensbasierter KI-Ansatz besser geeignet ist:</p>
+                <ol>
+                    <li>ein System zur Diagnose seltener Krankheiten</li>
+                    <li>ein Empfehlungssystem für einen Streaming-Dienst</li>
+                    <li>ein Schachcomputer</li>
+                    <li>ein System zur Erkennung von Spam-E-Mails</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.2.4: Gewächshaus-Steuerung <span class="niveau">AFB II</span></summary>
+                <p>Eine Gärtnerei steuert ihr Gewächshaus mit einem regelbasierten System. Die Wissensbasis enthält diese Regeln:</p>
+                <ul>
+                    <li><strong>R1:</strong> Wenn Bodenfeuchte &lt; 25&nbsp;%, dann Boden = trocken.</li>
+                    <li><strong>R2:</strong> Wenn Boden = trocken und Wassertank &gt; 10&nbsp;%, dann Bewässerung = nötig.</li>
+                    <li><strong>R3:</strong> Wenn Bewässerung = nötig und Sonne = stark, dann Bewässerungszeitpunkt = abends.</li>
+                    <li><strong>R4:</strong> Wenn Bewässerung = nötig und Sonne = schwach, dann Bewässerungszeitpunkt = sofort.</li>
+                    <li><strong>R5:</strong> Wenn Temperatur &gt; 30&nbsp;°C, dann Schattierung = ausfahren.</li>
+                    <li><strong>R6:</strong> Wenn Wassertank &lt; 50&nbsp;%, dann Meldung = Tank nachfüllen.</li>
+                </ul>
+                <p>Um 13 Uhr misst das System: Bodenfeuchte = 18&nbsp;%, Wassertank = 40&nbsp;%, Sonne = stark, Temperatur = 31&nbsp;°C.</p>
+                <ol>
+                    <li>Führe die Vorwärtsverkettung wie in Beispiel 2 Durchgang für Durchgang durch. Gib für jeden Durchgang an, welche Regeln feuern und welche Fakten neu hinzukommen.</li>
+                    <li>Gib alle Empfehlungen an, die das System am Ende ausgibt, und die Regelkette, mit der es die Bewässerungsempfehlung begründet.</li>
+                    <li>Am nächsten Tag beträgt die Bodenfeuchte 30&nbsp;%, alle anderen Werte sind gleich. Beschreibe, was sich am Ergebnis ändert.</li>
+                    <li>Erläutere, warum die Gärtnerin der Empfehlung dieses Systems leichter vertrauen kann als der eines neuronalen Netzes, das dieselbe Entscheidung aus Messdaten gelernt hat.</li>
+                </ol>
+                <p class="tipp">Prüfe in jedem Durchgang nur die Fakten, die zu Beginn des Durchgangs schon bekannt sind. Neue Fakten werden erst im nächsten Durchgang verwendet.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.2.6: KI bei den Stadtwerken <span class="niveau">AFB II</span></summary>
+                <p>Bei einem Praktikum in den Stadtwerken lernst du sechs Software-Systeme kennen:</p>
+                <ol type="a">
+                    <li>Eine Prüfsoftware markiert jede Stromrechnung zur manuellen Kontrolle, deren Verbrauch mehr als dreimal so hoch ist wie im Vorjahr.</li>
+                    <li>Ein Programm sagt den Stromverbrauch der Stadt für den nächsten Tag vorher. Es wurde mit den Verbrauchs- und Wetterdaten der letzten fünf Jahre trainiert, bei denen der tatsächliche Verbrauch jeweils bekannt ist.</li>
+                    <li>Ein Programm teilt die Gewerbekunden nach ihrem Lastverlauf über den Tag in Gruppen ein. Welche Gruppen es geben soll, war vorher nicht festgelegt.</li>
+                    <li>Die Steuerung eines großen Batteriespeichers probiert aus, wann sie lädt und entlädt, und wird über die eingesparten Stromkosten „belohnt“.</li>
+                    <li>An der Störungs-Hotline führt ein von erfahrenen Technikern erstellter Fragenkatalog durch das Gespräch („Ist nur Ihre Wohnung betroffen?“ – ja/nein – …).</li>
+                    <li>Ein Programm berechnet für das Ablese-Team die kürzeste Route durch alle Straßen eines Bezirks.</li>
+                </ol>
+                <ol>
+                    <li>Ordne jedes System dem wissensbasierten oder dem datenbasierten Ansatz zu. Gib bei wissensbasierten Systemen die Art (Abschnitte 1.1 bis 1.4), bei datenbasierten die Lernmethode an.</li>
+                    <li>Begründe jede Zuordnung mit einem Merkmal aus der Beschreibung.</li>
+                    <li>Wähle ein System aus, bei dem eine Kombination beider Ansätze sinnvoll wäre, und beschreibe, wie sie aussehen könnte.</li>
+                </ol>
+            </details>
+        </div>

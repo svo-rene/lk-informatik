@@ -1,0 +1,32 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+                <details>
+                    <summary>Aufgabe 3.7.5: Überlauf-Flag entwerfen <span class="niveau">AFB III</span></summary>
+                    <p>Das Addierwerk aus Aufgabe 3.7.4 soll zusätzlich ein Überlauf-Flag V für das Zweierkomplement bekommen. Ein Überlauf liegt vor, wenn zwei Zahlen mit gleichem Vorzeichen addiert werden und das Ergebnis das andere Vorzeichen hat. Als Eingänge stehen zunächst nur die Vorzeichenbits A<sub>3</sub>, B<sub>3</sub> und S<sub>3</sub> zur Verfügung.</p>
+                    <ol>
+                        <li>Stelle die Wahrheitstabelle für V(A<sub>3</sub>, B<sub>3</sub>, S<sub>3</sub>) auf.</li>
+                        <li>Trage V in ein KV-Diagramm im Kursstil ein (A = A<sub>3</sub>, B = B<sub>3</sub>, C = S<sub>3</sub>). Begründe, warum sich nichts zusammenfassen lässt, und gib V an.</li>
+                        <li>Entwirf die Schaltung mit NICHT-, UND- und ODER-Gattern (UND mit bis zu drei Eingängen). Beschreibe die Verdrahtung in Textform und gib die Gatteranzahl an.</li>
+                        <li>Eine Entwicklerin schlägt stattdessen V = C<sub>3</sub> ⊕ C<sub>4</sub> vor, also nur ein XOR-Gatter. Weise mit einer Wahrheitstabelle über A<sub>3</sub>, B<sub>3</sub>, C<sub>3</sub> nach, dass beide Lösungen übereinstimmen.</li>
+                        <li>Beurteile, welche der beiden Lösungen man in ein Addierwerk einbauen sollte.</li>
+                    </ol>
+                    <p>Baue beide Varianten in LogicSim auf und vergleiche ihre Ausgänge für alle Belegungen.</p>
+                    <p class="tipp">In der höchsten Stufe gilt S<sub>3</sub> = A<sub>3</sub> ⊕ B<sub>3</sub> ⊕ C<sub>3</sub> und C<sub>4</sub> = (A<sub>3</sub> ∧ B<sub>3</sub>) ∨ (A<sub>3</sub> ∧ C<sub>3</sub>) ∨ (B<sub>3</sub> ∧ C<sub>3</sub>).</p>
+                </details>
+            </div>
+
+<div class="aufgabe">
+                <details>
+                    <summary>Aufgabe 3.7.7: Fehler finden – der „vereinfachte“ Volladdierer <span class="niveau">AFB III</span></summary>
+                    <p>Mia hat den Volladdierer „vereinfacht“, um Gatter zu sparen:</p>
+                    <p><code>S' = (A ⊕ B) ∨ C<sub>in</sub></code> &nbsp;&nbsp; <code>C<sub>out</sub>' = (A ∧ B) ∨ C<sub>in</sub></code></p>
+                    <p>Sie hat vier dieser Volladdierer zu einem 4-Bit-Addierer verkettet und mit 0101 + 0010, 1000 + 0110 und 0001 + 0100 getestet. Alle Ergebnisse stimmten.</p>
+                    <ol>
+                        <li>Vergleiche Mias Funktionen mit dem Volladdierer in einer Wahrheitstabelle. Gib alle Zeilen an, in denen S' oder C<sub>out</sub>' falsch ist.</li>
+                        <li>Erkläre, welcher Denkfehler hinter Mias Vereinfachung steckt.</li>
+                        <li>Berechne mit Mias Addierer 0011 + 0001 Stufe für Stufe. Gib Registerinhalt und Carry-Flag an und vergleiche mit dem richtigen Ergebnis.</li>
+                        <li>Begründe, warum alle drei Tests von Mia trotzdem richtige Ergebnisse geliefert haben, und beurteile ihre Testauswahl.</li>
+                    </ol>
+                </details>
+            </div>

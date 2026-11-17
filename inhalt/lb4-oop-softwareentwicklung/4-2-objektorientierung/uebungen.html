@@ -1,0 +1,76 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 3: Ein anderer Tag <span class="niveau">AFB I</span></summary>
+            <p>Am nächsten Tag steht die Uhr auf schritte = 9 300, der Rekord ist inzwischen rekord = 12 481, die Liste des Handys ist leer. Die Uhr zählt einen Schritt. Welche Botschaften werden verschickt, und welche Werte haben danach schritte, rekord und benachrichtigungen?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Nur <code>uhr.schritt_zaehlen()</code>: schritte wird 9 301. Die Prüfung 9 301 &gt; 12 481 ist falsch, also bleibt rekord = 12 481 und es wird <em>keine</em> Botschaft an das Handy geschickt; benachrichtigungen bleibt <code>[]</code>.</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-2-1">
+        <details>
+            <summary>Aufgabe 4.2.1: Attribut oder Methode? <span class="niveau">AFB I</span></summary>
+            <p>Ordne für ein Objekt „Smartphone“ zu: Akkustand, anrufen, Hersteller, Foto aufnehmen, Speicherplatz, lauter stellen, Lautstärke.</p>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-2-2">
+        <details>
+            <summary>Aufgabe 4.2.2: Denk in Objekten <span class="niveau">AFB II</span></summary>
+            <p>Suche dir ein System aus deinem Alltag aus (z.&nbsp;B. Schule, Fahrrad, Smartwatch). Überlege:</p>
+            <ul>
+                <li>Welche Objekte gibt es?</li>
+                <li>Was sind deren Attribute?</li>
+                <li>Welche Methoden könnten sie haben?</li>
+                <li>Welche Objekte schicken sich Botschaften?</li>
+            </ul>
+            <p>Zeichne für zwei Objekte ein Objektdiagramm oder schreibe eine Liste.</p>
+        </details>
+    </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-4-2-3">
+        <details>
+            <summary>Aufgabe 4.2.3: Modelliere die Schulbibliothek <span class="niveau">AFB II</span></summary>
+            <p>Lies den Ausschnitt aus einem Gespräch mit der Bibliothekarin:</p>
+            <p><em>„In unserer Schulbibliothek steht das Buch ‚Tschick‘ von Wolfgang Herrndorf mit der Signatur D-204. Es ist zurzeit an Jonas aus der 11b ausgeliehen und muss bis zum 21.10. zurückgegeben werden. Jonas darf die Leihfrist einmal um zwei Wochen verlängern. Ich, Frau Lindner, kann Bücher ausleihen, zurücknehmen und beschädigte Bücher sperren. Jonas hat gerade 3 Bücher ausgeliehen. Die Bibliothek ist montags bis freitags von 7:30 bis 15:00 Uhr geöffnet.“</em></p>
+            <ol>
+                <li>Bestimme mindestens drei Objekte und gib sie in der Form <code>objektname : Klasse</code> an.</li>
+                <li>Zeichne die Objektdiagramme für das Buch und für Jonas mit allen Attributwerten, die sich aus dem Text ergeben.</li>
+                <li>Bestimme für jedes deiner Objekte passende Methoden. Entscheide begründet, an welches Objekt die Botschaft „Leihfrist verlängern“ gehen sollte.</li>
+                <li>Jonas verlängert die Leihfrist. Gib an, welche Attributwerte des Buchs sich ändern, und zeichne das Objektdiagramm danach.</li>
+            </ol>
+            <p class="tipp">Tipp: Substantive werden oft zu Objekten oder Attributen, Verben zu Methoden. Nicht jedes Substantiv gehört aber zu <em>diesen</em> Objekten.</p>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-2-4">
+        <details>
+            <summary>Aufgabe 4.2.4: Zustände an der Kinokasse verfolgen <span class="niveau">AFB II</span></summary>
+            <p>An der Kinokasse arbeiten zwei Objekte zusammen. Vor Beginn des Kartenverkaufs gilt:</p>
+            <table class="gitter">
+                <thead><tr><th><u>saal3 : Kinosaal</u></th><th><u>kasse1 : Kasse</u></th></tr></thead>
+                <tbody>
+                    <tr><td>film = "Dune"<br>plaetze_frei = 120</td><td>einnahmen = 0</td></tr>
+                </tbody>
+            </table>
+            <p>Nacheinander werden diese Botschaften verschickt (Beträge in Euro):</p>
+            <ol>
+                <li><code>saal3.reservieren(4)</code></li>
+                <li><code>kasse1.kassieren(36)</code></li>
+                <li><code>saal3.ist_ausverkauft()</code></li>
+                <li><code>saal3.stornieren(1)</code></li>
+                <li><code>kasse1.erstatten(9)</code></li>
+                <li><code>saal3.reservieren(200)</code></li>
+            </ol>
+            <ol type="a">
+                <li>Gib in einer Tabelle nach jeder Botschaft die Attributwerte beider Objekte an.</li>
+                <li>Gib an, welche Botschaften den Zustand eines Objekts verändern und welche nur eine Auskunft liefern. Welche Antwort liefert Botschaft 3?</li>
+                <li>Botschaft 6 ist ein Sonderfall. Beschreibe, wie sich das Objekt <code>saal3</code> sinnvollerweise verhalten sollte, und begründe.</li>
+            </ol>
+        </details>
+    </div>

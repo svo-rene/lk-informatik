@@ -1,0 +1,32 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.12.3: Vom Relationenmodell zum ERM <span class="niveau">AFB II</span></summary>
+                <p>Ein Sportverein verwaltet seine Daten mit folgendem Relationenmodell:</p>
+                <ul>
+                    <li>MITGLIED (<u>mitglied_id</u>, name, vorname, geburtsjahr, ↑abteilung_id)</li>
+                    <li>ABTEILUNG (<u>abteilung_id</u>, bezeichnung, trainingsort, adresse_trainingsort)</li>
+                    <li>TRAINER (<u>trainer_id</u>, name, lizenzstufe)</li>
+                    <li>BETREUUNG (<u>↑trainer_id, ↑abteilung_id</u>, seit)</li>
+                    <li>WETTKAMPF (<u>wettkampf_id</u>, datum, ort)</li>
+                    <li>TEILNAHME (<u>↑mitglied_id, ↑wettkampf_id</u>, platzierung)</li>
+                </ul>
+                <ol>
+                    <li>Überführe das Relationenmodell in ein ER-Modell in Chen-Notation mit Kardinalitäten.</li>
+                    <li>Begründe für jede Relation, ob sie im ERM zu einer Entität oder zu einer Beziehung wird.</li>
+                </ol>
+                <p><em>Mit diesem Modell arbeitest du in Aufgabe 1.17.4 weiter, sobald du die Normalformen kennst.</em></p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.12.4: ERM aus einer Datenbank <span class="niveau">AFB III</span></summary>
+                <ol>
+                    <li>Importiere <a href="../material/freizeitpark.sql">freizeitpark.sql</a> in den DB Browser (Datei &gt; Importieren &gt; Datenbank aus SQL-Datei). Zeichne aus den Tabellen und Fremdschlüsseln ein ER-Modell mit Kardinalitäten.</li>
+                    <li>Die Tabelle <code>bookings</code> verweist entweder auf eine Attraktion oder auf eine Show. Bewerte diesen Entwurf und schlage eine Alternative vor.</li>
+                    <li>Die Tabelle <code>visitors</code> enthält <code>age</code> und <code>year_of_birth</code>. Beurteile, ob das sinnvoll ist.</li>
+                </ol>
+            </details>
+        </div>

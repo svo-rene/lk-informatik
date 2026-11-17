@@ -1,0 +1,96 @@
+<p>Symmetrische Verfahren sind schnell, haben aber ein Schlüsselverteilungsproblem. Asymmetrische Verfahren lösen dieses Problem, sind aber langsam. Hybride Verschlüsselung kombiniert die Vorteile beider: Sie nutzt die Effizienz der symmetrischen Verschlüsselung für die eigentlichen Daten und die asymmetrische Kryptographie für den sicheren Austausch des Schlüssels.</p>
+
+<h2>Vorteile</h2>
+
+<ul>
+            <li>sicherer Schlüsselaustausch durch das asymmetrische Verfahren – ohne vorher vereinbartes Geheimnis,</li>
+            <li>Effizienz durch symmetrische Datenverschlüsselung,</li>
+            <li>gute Skalierbarkeit: Für eine Nachricht an mehrere Empfänger wird der Sitzungsschlüssel einfach für jeden Empfänger einzeln verschlüsselt, die Daten nur einmal.</li>
+        </ul>
+
+<h2>Einsatz</h2>
+
+<p>Beispiele für hybride Verschlüsselungssysteme sind TLS (z.&nbsp;B. bei HTTPS), IPsec (VPN), PGP und S/MIME (E-Mail) sowie Messenger wie Signal.</p>
+
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation (E-Mail mit PGP):</strong> Alice schreibt Bob eine verschlüsselte E-Mail mit einem großen Anhang.</p>
+            <ol>
+                <li><strong>Sitzungsschlüssel erzeugen:</strong> Ihr Programm erzeugt einen zufälligen AES-Schlüssel (z.&nbsp;B. 256 Bit). <em>Warum zufällig und neu?</em> So ist jede E-Mail unabhängig geschützt.</li>
+                <li><strong>Daten symmetrisch verschlüsseln:</strong> Mit dem AES-Schlüssel werden Text und Anhang verschlüsselt. <em>Warum symmetrisch?</em> AES ist auch für große Datenmengen schnell.</li>
+                <li><strong>Sitzungsschlüssel asymmetrisch verschlüsseln:</strong> Den AES-Schlüssel verschlüsselt das Programm mit Bobs <em>öffentlichem</em> Schlüssel. <em>Warum?</em> So muss vorher kein Geheimnis ausgetauscht werden.</li>
+                <li><strong>Versenden:</strong> Beides wird zusammen verschickt.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Bob entschlüsselt mit seinem privaten Schlüssel den AES-Schlüssel und damit Text und Anhang.<br>
+            <strong>Kontrolle:</strong> Ein Lauscher sieht nur zwei Geheimtexte; ohne Bobs privaten Schlüssel kommt er weder an den AES-Schlüssel noch an die Daten.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation (HTTPS mit TLS&nbsp;1.3):</strong> Dein Browser ruft eine Webseite auf, deren Server er vorher nie kontaktiert hat.</p>
+            <ol>
+                <li><strong>Schlüsselvereinbarung:</strong> Browser und Server vereinbaren per ECDHE (Diffie-Hellman auf elliptischen Kurven) ein gemeinsames Geheimnis, aus dem die Sitzungsschlüssel abgeleitet werden. <em>Unterschied zu Beispiel 1:</em> Hier wird kein Schlüssel verschlüsselt verschickt, sondern gemeinsam berechnet (8.10).</li>
+                <li><strong>Authentifizierung:</strong> Der Server signiert seinen Teil des Austauschs mit dem privaten Schlüssel seines Zertifikats; der Browser prüft die Signatur und das Zertifikat (8.13). <em>Warum?</em> Ohne diesen Schritt wäre ein Man-in-the-Middle-Angriff möglich.</li>
+                <li><strong>Datenübertragung:</strong> Danach werden alle Daten mit AES-GCM oder ChaCha20 verschlüsselt.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Asymmetrische Verfahren sorgen hier für Schlüsselaustausch und Authentizität, das symmetrische Verfahren für Vertraulichkeit und Integrität der Daten.<br>
+            <strong>Falle:</strong> „Hybrid“ heißt nicht zwingend, dass der Sitzungsschlüssel mit RSA verschlüsselt wird. In TLS&nbsp;1.3 übernimmt Diffie-Hellman den Schlüsselaustausch und RSA bzw. ECC nur noch das Signieren.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Hybride Verfahren im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Jede HTTPS-Seite mit Schloss-Symbol, jedes Firmen-VPN im Homeoffice und jeder Signal- oder WhatsApp-Chat arbeitet hybrid. Klickst du auf das Schloss und dann auf „Verbindung ist sicher“, zeigt der Browser meist „TLS&nbsp;1.3“, „X25519“ (der Schlüsselaustausch) und „AES_128_GCM“ (die Datenverschlüsselung).
+                </p>
+                <p>
+                    <strong>Beruf:</strong> SOC-Analystinnen und -Analysten (Security Operations Center) überwachen rund um die Uhr den Netzverkehr eines Unternehmens. Weil fast alles hybrid verschlüsselt ist, sehen sie meist keine Inhalte, sondern werten Metadaten aus: Wer baut wann Verbindungen zu welchen Servern auf, mit welchen Zertifikaten? Auffällige Muster können auf Schadsoftware hindeuten. SOCs betreiben z.&nbsp;B. große IT-Dienstleister, Energieversorger und Behörden – auch in Sachsen.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Hybrides Verfahren:</strong>
+            </p>
+            <ol>
+                <li>Der Absender erzeugt einen zufälligen symmetrischen <strong>Sitzungsschlüssel</strong> k.</li>
+                <li>Er verschlüsselt die <strong>Daten symmetrisch</strong> mit k (z.&nbsp;B. AES-GCM).</li>
+                <li>Er verschlüsselt <strong>k asymmetrisch</strong> mit dem öffentlichen Schlüssel des Empfängers – oder beide vereinbaren k per Diffie-Hellman.</li>
+                <li>Der Empfänger gewinnt k mit seinem privaten Schlüssel zurück und entschlüsselt damit die Daten.</li>
+            </ol>
+            <p>Asymmetrisch wird also nur der kurze Schlüssel behandelt, symmetrisch die großen Datenmengen.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.11.1: Hybride Verfahren anwenden <span class="niveau">AFB II–III</span></summary>
+                <ol>
+                    <li>Alice will Bob eine große Datei vertraulich senden. Beschreibe Schritt für Schritt, wie das mit einem hybriden Verfahren abläuft. Gib jeweils an, welcher Schlüssel benutzt wird.</li>
+                    <li>In einer Gruppe von 30 Personen soll jede mit jeder vertraulich kommunizieren. Berechne, wie viele Schlüssel ein rein symmetrisches und wie viele ein asymmetrisches Verfahren braucht.</li>
+                    <li>Begründe, warum man in der Praxis weder rein symmetrisch noch rein asymmetrisch verschlüsselt.</li>
+                    <li>Beurteile, welche Schwachstelle bleibt, wenn Bobs öffentlicher Schlüssel nicht durch ein Zertifikat bestätigt ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.11.2: Lohnt sich hybrid? <span class="niveau">AFB II</span></summary>
+                <p>Ein Video von 2&nbsp;GB soll verschlüsselt werden. Nimm an, dass AES 1&nbsp;GB pro Sekunde schafft und RSA 1000-mal langsamer ist. Ein AES-Schlüssel ist 32&nbsp;Byte lang.</p>
+                <ol type="a">
+                    <li>Schätze die Zeit für eine rein asymmetrische und für eine hybride Verschlüsselung ab.</li>
+                    <li>Das Video soll an 5 Personen gehen. Beschreibe, was sich beim hybriden Verfahren ändert und was gleich bleibt.</li>
+                </ol>
+            </details>
+        </div>

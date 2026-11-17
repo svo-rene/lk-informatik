@@ -1,0 +1,188 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/3-4_baeume.ipynb" download>3-4_baeume.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Die Regel anwenden <span class="niveau">AFB I</span></summary>
+                <p>Ein Knoten X hat drei Kinder. Ihre Teilbäume haben die Höhen 2, 0 und 4. Wie hoch ist der Teilbaum mit der Wurzel X? Was liefert <code>hoehe</code> für einen Knoten ohne Kinder – und was würde ohne die Zeile <code>if not knoten.kinder</code> bei einem Blatt passieren?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>1 + 4 = 5, denn die größte Höhe der Kinder ist 4. Für einen Knoten ohne Kinder liefert <code>hoehe</code> 0. Ohne die Abbruchbedingung liefe die Schleife bei einem Blatt gar nicht, <code>groesste</code> bliebe 0 und das Ergebnis wäre 1 + 0 = 1 – jedes Blatt hätte die Höhe 1, alle Höhen wären um 1 zu groß.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Den Aufrufstapel selbst führen <span class="niveau">AFB II</span></summary>
+                <p>Verfolge <code>hoehe(b)</code> für den Baum aus Beispiel 1 auf Papier. Welche Aufrufe entstehen in welcher Reihenfolge, und was gibt jeder zurück? Wie viele Aufrufe sind höchstens gleichzeitig offen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>hoehe(B)</code> startet und ruft <code>hoehe(E)</code> auf → 0 (Blatt). Dann <code>hoehe(F)</code> → 0 (Blatt). Danach rechnet <code>hoehe(B)</code>: Die größte Höhe der Kinder ist 0, also 1 + 0 = 1. Höchstens 2 Aufrufe sind gleichzeitig offen: <code>hoehe(B)</code> und eines seiner Kinder.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Was ändert sich? <span class="niveau">AFB I</span></summary>
+                <p>Was liefert <code>anzahl_blaetter(b)</code> für den Baum aus Beispiel 1? Was würde <code>anzahl_blaetter(a)</code> liefern, wenn in der Abbruchbedingung <code>return 0</code> statt <code>return 1</code> stünde?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>anzahl_blaetter(b)</code> ist 2 (E und F). Mit <code>return 0</code> liefert jedes Blatt 0, und jede Summe aus Nullen ist wieder 0 – das Ergebnis wäre immer 0.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-4-1">
+            <details>
+                <summary>Aufgabe 3.4.1: Begriffe anwenden <span class="niveau">AFB I</span></summary>
+                <pre><code>            Schule
+          /   |    \
+     Mathe  Info   Sport
+             / \
+          LK    GK
+          |
+        Kurs11</code></pre>
+                <p>Bestimme Wurzel, Blätter, die Geschwister von Info, die Tiefe von LK, die Höhe des Baums und die Anzahl der Ebenen.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-4-2">
+            <details>
+                <summary>Aufgabe 3.4.2: Baum oder nicht? <span class="niveau">AFB II</span></summary>
+                <p>Entscheide und begründe, ob es sich um einen Baum handelt: (a) die Ordnerstruktur eines USB-Sticks, (b) das Straßennetz von Dresden, (c) ein Stammbaum, der nur die Mütter einträgt (jede Person hat höchstens eine eingetragene Mutter), (d) ein Freundeskreis in einem sozialen Netzwerk.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-4-3">
+            <details>
+                <summary>Aufgabe 3.4.3: Rekursive Baumfunktionen <span class="niveau">AFB II–III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>2_baeume/baum.py</code> – weiterführen<br><strong>Commits:</strong> nach Teil 1: <code>3.4.3 Teil 1: anzahl_knoten rekursiv, Beispielbaum ok</code> · nach Teil 2: <code>3.4.3 Teil 2: ausgeben eingerückt</code></p>
+                <ol>
+                    <li>Ergänze zur Klasse <code>Knoten</code> eine rekursive Funktion <code>anzahl_knoten(knoten)</code>.</li>
+                    <li>Schreibe eine Funktion <code>ausgeben(knoten, tiefe=0)</code>, die den Baum eingerückt wie ein Dateiverzeichnis ausgibt.</li>
+                    <li>Begründe, warum ein Baum mit n Knoten genau n − 1 Kanten hat.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="primm">Code lesen, untersuchen, abwandeln</h2>
+
+<p>Bevor du selbst programmierst, liest du fertigen Code und findest heraus, was er tut. Das geht in fünf Schritten: <strong>Vorhersagen</strong> (auf Papier, ohne Rechner) → <strong>Ausführen</strong> → <strong>Untersuchen</strong> mit dem Debugger → <strong>Abwandeln</strong> → <strong>Fehler finden</strong>. Rechne mit etwa 25 Minuten. Eine Vorhersage, die nicht stimmt, ist kein Fehler – sie zeigt dir genau, was du noch nicht verstanden hast.</p>
+
+<div class="hinweis" id="thonny-debugger">
+            <details>
+                <summary>So debuggst du in Thonny</summary>
+                <figure style="max-width:800px">
+                    <div class="lp-video"><video controls preload="none" poster="../vid/3-4-debug_thonny_vorschau.png" src="../vid/3-4-debug_thonny.mp4"></video><a href="../vid/3-4-debug_thonny.mp4">Video ansehen</a></div>
+                    <figcaption>Video: So debuggst du in Thonny – Schritt für Schritt durch <code>raetsel</code> (ca. 1,5 min, echte Thonny-Aufnahmen; deine Ansicht kann andere Farben, Sprache und Schriftgröße haben)</figcaption>
+                </figure>
+                <ol>
+                    <li><strong>Starten:</strong> Statt F5 drückst du <kbd>Strg</kbd>&nbsp;+&nbsp;<kbd>F5</kbd> (Menü <em>Ausführen → Aktuelles Skript debuggen</em>, englisch <em>Run → Debug current script</em>). Das Programm hält vor der ersten Anweisung an.</li>
+                    <li><strong>Schritt über</strong> (<kbd>F6</kbd>): führt die markierte Zeile aus, ohne in aufgerufene Funktionen hineinzugehen.</li>
+                    <li><strong>Schritt hinein</strong> (<kbd>F7</kbd>): geht in den Funktionsaufruf hinein. Bei Rekursion öffnet Thonny für jeden Aufruf ein eigenes Fenster – so siehst du den Aufrufstapel.</li>
+                    <li><strong>Fortsetzen</strong> (<kbd>F8</kbd>): läuft bis zum nächsten Haltepunkt. Einen Haltepunkt setzt du mit einem Klick auf die Zeilennummer.</li>
+                    <li><strong>Variablen ansehen:</strong> Menü <em>Ansicht → Variablen</em> (<em>View → Variables</em>). In jedem Aufruf-Fenster stehen außerdem die lokalen Variablen dieses Aufrufs.</li>
+                </ol>
+                <p>Tipp: Beim Fehlersuchen erst überlegen, welchen Wert eine Variable an einer Stelle haben <em>sollte</em>, dann nachsehen, welchen sie <em>hat</em>. Die erste Stelle, an der beides nicht übereinstimmt, ist der Fehler.</p>
+                <p>In den PRIMM-Vorlagen hat <code>Knoten</code> zusätzlich eine Methode <code>__repr__</code>. Sie sorgt nur dafür, dass der Debugger einen Knoten als <code>Knoten('A')</code> anzeigt statt als <code>&lt;__main__.Knoten object at 0x…&gt;</code>. Du kannst sie in deine eigenen Klassen übernehmen.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="primm-3-4">
+            <details open>
+                <summary>PRIMM 3.4: Was macht <code>raetsel</code>? <span class="niveau">AFB I–II</span></summary>
+                <p class="git-datei"><strong>Dateien:</strong> <a href="../material/primm_3-4_raetsel.py" download>primm_3-4_raetsel.py</a> und <a href="../material/primm_3-4_fehler.py" download>primm_3-4_fehler.py</a> in <code>2_baeume/</code> speichern – erst nach Schritt 1 öffnen.</p>
+                <p><strong>1 Vorhersagen</strong> (Papier, ohne Rechner): Was gibt das Programm aus? Schreibe auch auf, in welcher Reihenfolge die Knoten besucht werden.</p>
+                <pre><code class="language-python">def raetsel(knoten):
+    if knoten.kinder == []:
+        return knoten.wert
+    ergebnis = &quot;&quot;
+    for kind in knoten.kinder:
+        ergebnis = ergebnis + raetsel(kind)
+    return ergebnis
+
+# Baum: A hat die Kinder B und C, B hat D und E, C hat F
+print(raetsel(a))</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>Ausgabe: <code>DEF</code>. Die Funktion hängt die Werte aller Blätter von links nach rechts aneinander; die inneren Knoten A, B und C liefern selbst nichts, sie sammeln nur. Besucht werden A, B, D, E, C, F.</p></details>
+                <p><strong>2 Ausführen:</strong> Öffne <code>primm_3-4_raetsel.py</code> in Thonny, starte mit <kbd>F5</kbd> und vergleiche mit deiner Vorhersage.</p>
+                <p><strong>3 Untersuchen</strong> mit dem Debugger (<kbd>Strg</kbd>&nbsp;+&nbsp;<kbd>F5</kbd>):</p>
+                <ol><li>Wie viele Aufrufe von <code>raetsel</code> gibt es insgesamt?</li><li>Wie viele Aufrufe sind höchstens gleichzeitig offen? Bei welchen Knoten ist das der Fall?</li><li>Welchen Wert hat <code>ergebnis</code> im Aufruf für B, kurz bevor er zurückkehrt?</li></ol>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>1. Sechs Aufrufe – einer je Knoten. 2. Höchstens drei, z. B. <code>raetsel(A)</code> → <code>raetsel(B)</code> → <code>raetsel(D)</code>; in Thonny siehst du dann drei Aufruf-Fenster übereinander. 3. <code>"DE"</code>.</p></details>
+                <p><strong>4 Abwandeln:</strong></p>
+                <ol type="a"><li>Ändere die Funktion so, dass sie alle Knoten in Pre-Order-Reihenfolge aneinanderhängt, also <code>"ABDECF"</code> liefert.</li><li>Ändere sie so, dass die Blätter mit Komma getrennt erscheinen: <code>"D, E, F"</code>. Tipp: Lass die Funktion eine Liste zurückgeben und verbinde erst am Ende.</li></ol>
+                <p><strong>5 Fehler finden:</strong> Die Funktion soll die Blätter zählen, liefert aber 1. Setze einen Haltepunkt in die Zeile <code>anzahl = anzahl_blaetter(kind)</code> und beobachte <code>anzahl</code> im Aufruf für A. Finde und korrigiere den Fehler.</p>
+                <pre><code class="language-python">def anzahl_blaetter(knoten):
+    anzahl = 0
+    for kind in knoten.kinder:
+        anzahl = anzahl_blaetter(kind)
+    if knoten.kinder == []:
+        return 1
+    return anzahl
+
+print(anzahl_blaetter(a))      # erwartet: 3, ausgegeben wird 1</code></pre>
+                <p>Lösungen zu Schritt 4 und 5 stehen in der Musterlösung.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.4.4: Vereinsstruktur mit der Klasse Tree <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>2_baeume/verein.py</code> – neu anlegen; <code>baum_einfuehrung_2.py</code> herunterladen und unter diesem Namen speichern<br><strong>Commits:</strong> zuerst unverändert: <code>3.4.4: Ausgangsfassung baum_einfuehrung_2.py übernommen</code> · nach Teil 1: <code>3.4.4 Teil 1: Vereinsstruktur aufgebaut</code> · nach Teil 2: <code>3.4.4 Teil 2: tiefe(name) ergänzt</code> · nach Teil 3 und 4: <code>3.4.4 Teil 3: blaetter ergänzt, Tests ok</code></p>
+                <p>Der Sportverein „Blau-Weiß Pirna“ verwaltet seine Struktur mit dem Programm <a href="../material/baum_einfuehrung_2.py" download>baum_einfuehrung_2.py</a>. Unter dem Vorstand gibt es die Bereiche Jugend, Breitensport und Kasse. Zur Jugend gehören Fußball und Handball, zum Breitensport gehört Turnen, zu Fußball gehören die Mannschaften U13 und U15.</p>
+                <ol>
+                    <li>Baue die Struktur mit <code>add_root</code> und <code>add_child</code> auf und gib sie mit <code>print_tree</code> aus.</li>
+                    <li>Ergänze die Methode <code>tiefe(name)</code>, die die Tiefe des Knotens mit diesem Namen zurückgibt, bzw. <code>-1</code>, wenn es ihn nicht gibt.</li>
+                    <li>Ergänze die Methode <code>blaetter()</code>, die die Namen aller Blätter als Liste zurückgibt.</li>
+                    <li>Weise beide Methoden mit Testfällen nach (Eingabe, erwartete Ausgabe, tatsächliche Ausgabe), darunter ein Name, den es nicht gibt.</li>
+                </ol>
+                <p class="tipp">Gib der Hilfsmethode die aktuelle Tiefe als Parameter mit, genau wie <code>__print_tree(current_node, depth)</code>.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-4-7">
+            <details>
+                <summary>Aufgabe 3.4.7: Wo liegt die Datei? – einen Weg im Baum zurückgeben <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>2_baeume/dateipfad.py</code> – neu anlegen, Klasse <code>Knoten</code> wie in Beispiel 2<br><strong>Commits:</strong> nach Teil 2: <code>3.4.7 Teil 2: dateipfad ergänzt</code> · nach Teil 3: <code>3.4.7 Teil 3: vier Tests ok</code></p>
+                <p>Ein Ordnerbaum ist mit der Klasse <code>Knoten</code> gespeichert: Ordner und Dateien sind Knoten, der Inhalt eines Ordners steht in <code>kinder</code>.</p>
+                <pre><code class="language-python">schule = Knoten("Schule")
+informatik = Knoten("Informatik")
+mathe = Knoten("Mathe")
+bilder = Knoten("Bilder")
+schule.kind_hinzufuegen(informatik)
+schule.kind_hinzufuegen(mathe)
+schule.kind_hinzufuegen(bilder)
+schule.kind_hinzufuegen(Knoten("Archiv"))
+
+informatik.kind_hinzufuegen(Knoten("projekt.py"))
+informatik.kind_hinzufuegen(Knoten("notizen.txt"))
+mathe.kind_hinzufuegen(Knoten("analysis.pdf"))
+
+klassenfahrt = Knoten("Klassenfahrt")
+bilder.kind_hinzufuegen(klassenfahrt)
+klassenfahrt.kind_hinzufuegen(Knoten("foto1.jpg"))</code></pre>
+                <ol>
+                    <li>Zeichne den Baum. Gib die Knoten in der Reihenfolge an, in der eine Suche „erst der Knoten, dann der Reihe nach alle Kinder“ sie ansieht, bis sie <code>foto1.jpg</code> findet.</li>
+                    <li>Schreibe eine Funktion <code>dateipfad(knoten, name)</code>, die den Weg von <code>knoten</code> bis zum ersten Knoten mit dem Namen <code>name</code> als Text mit <code>/</code> zurückgibt, zum Beispiel <code>"Schule/Bilder/Klassenfahrt/foto1.jpg"</code>. Gibt es keinen solchen Knoten, liefert sie <code>None</code>. Tipp: Wie bei <code>hoehe</code> setzt du das Ergebnis aus dem Ergebnis eines Kindes zusammen – aber nur das erste Kind, das etwas findet, zählt.</li>
+                    <li>Teste mit einer tief liegenden Datei, mit der Wurzel selbst, mit einem leeren Ordner (<code>"Archiv"</code>) und mit einem Namen, den es nicht gibt. Trage jeweils erwartete und tatsächliche Ausgabe ein.</li>
+                    <li>Eine Mitschülerin schreibt <code>return None</code> in die Schleife, direkt unter die Prüfung des ersten Kindes. Für welche Dateien liefert ihre Funktion trotzdem das Richtige, für welche nicht? Gib einen Testfall an, der den Fehler aufdeckt.</li>
+                </ol>
+            </details>
+        </div>

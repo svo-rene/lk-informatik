@@ -1,0 +1,174 @@
+<p>Handy ins Wasser gefallen, Laptop gestohlen, Festplatte defekt oder alle Dateien von Erpressersoftware verschlüsselt – ohne Sicherung sind Fotos, Facharbeit und Firmendaten dann verloren. Datensicherung dient vor allem dem Schutzziel <strong>Verfügbarkeit</strong>.</p>
+
+<h2>Datensicherungsmethoden</h2>
+
+<p>
+            Datensicherung ist ein kritischer Teil der Datenverwaltung: Sie schützt Daten vor Verlust durch Hardwareausfälle, Softwarefehler, Datenbeschädigung, Schadsoftware oder andere unvorhergesehene Ereignisse. Es gibt verschiedene Sicherungsmethoden mit unterschiedlichen Vorteilen.
+        </p>
+
+<h3>Komplettsicherung (Vollsicherung)</h3>
+
+<p>
+            Bei einer Komplettsicherung werden alle ausgewählten Daten kopiert und gespeichert. Im Fall eines Datenverlusts ist die Wiederherstellung einfach und schnell, da alle Daten aus einem einzigen Sicherungssatz wiederhergestellt werden. Nachteil: hoher Speicher- und Zeitbedarf.
+        </p>
+
+<p>Beispiel: wöchentliche Komplettsicherung aller Dateien auf einem Unternehmensserver.</p>
+
+<h3>Differenzielle Sicherung</h3>
+
+<p>
+            Die differenzielle Sicherung speichert alle Daten, die sich seit der <strong>letzten Vollsicherung</strong> geändert haben. Zur Wiederherstellung benötigt man die letzte Vollsicherung und die letzte differenzielle Sicherung.
+        </p>
+
+<p>Beispiel: Täglich wird differenziell gesichert; jede Sicherung enthält alle Änderungen seit der Vollsicherung am Wochenende.</p>
+
+<h3>Inkrementelle Sicherung</h3>
+
+<p>
+            Die inkrementelle Sicherung speichert ebenfalls nur Änderungen, bezieht sich aber auf die <strong>letzte Sicherung beliebigen Typs</strong>. Das spart Speicherplatz und Sicherungszeit, erfordert bei einer Wiederherstellung jedoch die Vollsicherung und alle inkrementellen Sicherungen seit dieser.
+        </p>
+
+<p>Beispiel: tägliche inkrementelle Sicherung, die jeweils nur die Änderungen des Vortages speichert.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Sportverein hat 200&nbsp;GB Daten. Pro Tag ändern sich etwa 5&nbsp;GB (jeden Tag andere Dateien). Sonntags wird voll gesichert, montags bis samstags jeweils abends zusätzlich. Am Donnerstagmorgen fällt der Server aus. Vergleiche inkrementelle und differenzielle Sicherung.</p>
+            <ol>
+                <li><strong>Inkrementell – Speicherbedarf:</strong> Jede Sicherung enthält nur die Änderungen seit der <em>letzten Sicherung</em>: Mo 5&nbsp;GB, Di 5&nbsp;GB, Mi 5&nbsp;GB, zusammen 15&nbsp;GB zusätzlich zur Vollsicherung.</li>
+                <li><strong>Inkrementell – Wiederherstellung:</strong> Vollsicherung vom Sonntag, dann Mo, Di und Mi <em>in dieser Reihenfolge</em> zurückspielen. <em>Warum alle?</em> Jede Teilsicherung baut auf der vorherigen auf.</li>
+                <li><strong>Differenziell – Speicherbedarf:</strong> Jede Sicherung enthält alle Änderungen seit der <em>letzten Vollsicherung</em>: Mo 5&nbsp;GB, Di 10&nbsp;GB, Mi 15&nbsp;GB, zusammen 30&nbsp;GB.</li>
+                <li><strong>Differenziell – Wiederherstellung:</strong> Vollsicherung vom Sonntag und nur die Mittwochssicherung. <em>Warum genügt das?</em> Sie enthält bereits alle Änderungen von Mo bis Mi.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Inkrementell braucht weniger Speicher (15 statt 30&nbsp;GB), differenziell eine einfachere Wiederherstellung (2 statt 4 Sicherungen). In beiden Fällen ist der Stand von Mittwochabend wiederhergestellt; verloren sind nur die Änderungen vom Donnerstagmorgen.<br>
+            <strong>Falle:</strong> Ist die inkrementelle Dienstagssicherung beschädigt, kommt man nur bis zum Stand von Montagabend, denn die Kette ist unterbrochen. Bei der differenziellen Sicherung spielt eine defekte Dienstagssicherung keine Rolle.</p>
+            </details>
+        </div>
+
+<h2>RAID-Systeme</h2>
+
+<p>
+            RAID steht für „Redundant Array of Independent Disks“: Mehrere Festplatten werden zu einem Verbund zusammengeschaltet, um Ausfallsicherheit und/oder Geschwindigkeit zu erhöhen. Je nach Bedarf wählt man unterschiedliche RAID-Level.
+        </p>
+
+<h3>Wichtige RAID-Level</h3>
+
+<ul>
+            <li>
+                <strong>RAID 0 (Striping):</strong> Die Daten werden gleichmäßig auf zwei oder mehr Festplatten verteilt, ohne Redundanz. Das maximiert die Geschwindigkeit, da parallel gelesen und geschrieben wird. Fällt aber eine einzige Festplatte aus, sind alle Daten verloren.
+            </li>
+            <li>
+                <strong>RAID 1 (Mirroring):</strong> Jede Festplatte im Verbund ist eine exakte Kopie der anderen. Fällt eine aus, bleiben die Daten auf den anderen erhalten. Das bietet hohe Ausfallsicherheit und schnelleres Lesen, halbiert aber bei zwei Platten die nutzbare Kapazität.
+            </li>
+            <li>
+                <strong>RAID 5 (Striping mit Parität):</strong> Dieses Level braucht mindestens drei Festplatten und verteilt Daten und Paritätsinformationen auf alle Platten. Paritätsinformationen sind Daten, mit denen sich der Inhalt eines oder mehrerer Datenblöcke überprüfen und bei Bedarf wiederherstellen lässt. Fällt eine Festplatte aus, werden ihre Daten aus den übrigen rekonstruiert. Bei n Platten ist die Kapazität von n − 1 Platten nutzbar.
+            </li>
+            <li>
+                <strong>RAID 6 (Striping mit doppelter Parität):</strong> ähnlich wie RAID 5, jedoch mit zwei Paritätsblöcken pro Streifen, verteilt über alle Platten (mindestens vier). RAID 6 übersteht den Ausfall von zwei Festplatten, zulasten der Schreibgeschwindigkeit und mit zusätzlichem Speicherbedarf (nutzbar: n − 2 Platten).
+            </li>
+            <li>
+                <strong>RAID 10 (1+0):</strong> kombiniert Mirroring und Striping. Die Daten werden über gespiegelte Plattenpaare verteilt. RAID 10 bietet schnelle Lese- und Schreibzugriffe und hohe Verfügbarkeit, braucht mindestens vier Festplatten und eignet sich für kritische Anwendungen wie Datenbanken.
+            </li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Erklärung von Paritätsbits</summary>
+                <p>
+                    Ein Paritätsbit ist ein zusätzliches Bit, das zu einer Gruppe von Datenbits hinzugefügt wird, um zu überprüfen, ob die Daten korrekt übertragen oder gespeichert wurden. Das Paritätsbit wird so gesetzt, dass die Gesamtanzahl der Einsen entweder gerade (gerade Parität) oder ungerade (ungerade Parität) ist.
+                </p>
+                <h3>Wie funktioniert ein Paritätsbit?</h3>
+                <p>
+                    Um ein Paritätsbit zu berechnen, zählt man die Einsen in der Datengruppe. Je nach verwendeter Parität setzt man das Paritätsbit so, dass die Gesamtanzahl der Einsen gerade bzw. ungerade ist.
+                </p>
+                <ul>
+                    <li><strong>Gerade Parität:</strong> Das Paritätsbit wird auf 1 gesetzt, wenn die Anzahl der Einsen ungerade ist, damit die Gesamtzahl der Einsen gerade wird.</li>
+                    <li><strong>Ungerade Parität:</strong> Das Paritätsbit wird auf 1 gesetzt, wenn die Anzahl der Einsen gerade ist, damit die Gesamtzahl der Einsen ungerade wird.</li>
+                </ul>
+                <h3>Wie erkennt man Fehler mit einem Paritätsbit?</h3>
+                <p>
+                    Beim Empfangen oder Lesen der Daten zählt man erneut die Einsen, einschließlich des Paritätsbits. Passt die Anzahl nicht zur vereinbarten Parität, ist ein Fehler aufgetreten. Wird z.&nbsp;B. gerade Parität erwartet und die Anzahl der Einsen ist ungerade, weiß man, dass die Daten fehlerhaft sind.
+                </p>
+                <div class="beispiel">
+                    <p>Die ursprünglichen Daten sind 1101, es wird gerade Parität verwendet:</p>
+                    <ul>
+                        <li>Die Anzahl der Einsen in 1101 ist 3, also ungerade.</li>
+                        <li>Um eine gerade Anzahl zu erreichen, wird das Paritätsbit auf 1 gesetzt; die Gesamtanzahl der Einsen ist nun 4.</li>
+                        <li>Wird die Folge 11011 (einschließlich Paritätsbit) mit einem Fehler übertragen und kommt als 10011 an, zählt man 3 Einsen. Das ist ungerade und zeigt einen Fehler an.</li>
+                        <li>Kommt sie mit zwei Fehlern als 10111 an, zählt man 4 Einsen – der Fehler bleibt unbemerkt.</li>
+                    </ul>
+                </div>
+                <p>
+                    Ein Paritätsbit erkennt jede <strong>ungerade</strong> Anzahl von Bitfehlern. Eine <strong>gerade</strong> Anzahl von Fehlern (2, 4, …) bleibt unerkannt, weil sich die Parität dabei nicht ändert. Korrigieren kann ein einzelnes Paritätsbit nichts, denn es verrät nicht, welches Bit falsch ist. Bei RAID 5 ist das anders: Dort weiß man, welche Platte ausgefallen ist, und kann ihre Daten aus den übrigen Platten und der Parität berechnen.
+                </p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Vorüberlegung:</strong> Für die Daten 1101 lautet das Paritätsbit bei gerader Parität 1 (siehe Hinweis oben).</p>
+            <p><strong>Ausgangssituation (Rekonstruktion bei RAID 5):</strong> Drei Datenplatten enthalten in einem Streifen D1 = 1011, D2 = 0110, D3 = 1100; eine vierte Platte enthält die Parität P.</p>
+            <ol>
+                <li><strong>Parität berechnen:</strong> Die Parität ist das bitweise XOR: P = 1011 XOR 0110 XOR 1100 = 1101 XOR 1100 = 0001. <em>Warum XOR?</em> Jedes Bit von P ist genau das gerade Paritätsbit der entsprechenden Datenbits.</li>
+                <li><strong>Ausfall:</strong> Platte 2 fällt aus. Der Controller weiß, <em>welche</em> Platte fehlt – anders als bei einem einzelnen Paritätsbit, das nur einen Fehler meldet.</li>
+                <li><strong>Rekonstruieren:</strong> D2 = D1 XOR D3 XOR P = 1011 XOR 1100 XOR 0001 = 0111 XOR 0001 = <strong>0110</strong>.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Daten von Platte 2 sind vollständig wiederhergestellt.<br>
+            <strong>Kontrolle:</strong> D1 XOR D2 XOR D3 XOR P muss in jedem Bit 0 ergeben: 1011 XOR 0110 XOR 1100 XOR 0001 = 0000. ✓<br>
+            <strong>Falle:</strong> Fallen zwei Platten aus, kennt man nur noch das XOR der beiden fehlenden Blöcke – das reicht nicht. Dafür braucht man RAID 6.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Datensicherung im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Beim Elbhochwasser 2002 und 2013 standen in Dresden und anderen sächsischen Städten Keller und Serverräume unter Wasser – wer seine Sicherungen im selben Gebäude aufbewahrte, verlor alles. Für dich heißt die 3-2-1-Regel z.&nbsp;B.: Fotos auf dem Handy, eine Kopie auf einer externen Festplatte, die nur zum Sichern angeschlossen wird, und eine in einem Cloudspeicher.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> Systemadministratorinnen und -administratoren entwerfen Datensicherungskonzepte, überwachen die nächtlichen Sicherungen und üben regelmäßig die Wiederherstellung. Sie orientieren sich am BSI-IT-Grundschutz (Baustein „CON.3 Datensicherungskonzept“). Nach Ransomware-Angriffen auf Kliniken, Stadtverwaltungen und Hochschulen in Deutschland entschied oft allein eine funktionierende Offline-Sicherung darüber, ob der Betrieb nach Tagen oder erst nach Monaten wieder lief.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>3-2-1-Regel:</strong> Halte mindestens <strong>3</strong> Kopien deiner Daten (Original und zwei Sicherungen) auf <strong>2</strong> verschiedenen Speichermedien, davon <strong>1</strong> Kopie an einem anderen Ort (außer Haus oder in der Cloud).<br>
+                Gegen Erpressersoftware muss mindestens eine Sicherung zusätzlich <strong>offline</strong> oder unveränderlich sein, und die Wiederherstellung muss regelmäßig getestet werden.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>RAID ist keine Datensicherung.</strong> RAID schützt vor dem Ausfall einzelner Festplatten und hält das System am Laufen. Versehentliches Löschen, Schadsoftware, Brand oder Diebstahl betreffen aber alle Platten des Verbunds gleichzeitig – jede Änderung wird ja sofort auf alle Platten übernommen.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.15.1: Parität und RAID-Kapazität <span class="niveau">AFB I–II</span></summary>
+                <ol type="a">
+                    <li>Bestimme das Paritätsbit für 1001011 bei gerader und bei ungerader Parität.</li>
+                    <li>Mit gerader Parität wurde 10111 gesendet (vier Datenbits und das Paritätsbit). Angekommen ist 11111. Prüfe, ob der Fehler erkannt wird. Wie sieht es aus, wenn 11101 ankommt?</li>
+                    <li>Ein Server hat vier Festplatten zu je 4&nbsp;TB. Berechne die nutzbare Kapazität bei RAID 0, RAID 5, RAID 6 und RAID 10 und gib an, wie viele Plattenausfälle jeweils sicher verkraftet werden.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.15.2: Sicherungskonzept für eine Arztpraxis <span class="niveau">AFB II–III</span></summary>
+                <p>Eine Arztpraxis speichert Patientendaten auf einem Server im selben Netz wie die Arbeitsplätze. Jede Nacht wird auf eine ständig angeschlossene USB-Festplatte gesichert. Der Server hat zwei gespiegelte Festplatten (RAID 1).</p>
+                <ol>
+                    <li>Ein Mitarbeiter öffnet einen Mailanhang mit Schadsoftware, die alle erreichbaren Dateien verschlüsselt. Beurteile, welche Daten danach noch nutzbar sind.</li>
+                    <li>Erläutere, warum RAID 1 hier nicht hilft, obwohl die Daten doppelt vorhanden sind.</li>
+                    <li>Entwirf ein neues Konzept mit mindestens drei Maßnahmen. Begründe jede Maßnahme mit einem Schutzziel.</li>
+                    <li>Die Praxis hat 500&nbsp;GB Daten, pro Tag ändern sich 10&nbsp;GB. Montags wird voll gesichert. Berechne für Dienstag bis Freitag den Speicherbedarf bei inkrementeller und bei differenzieller Sicherung. Gib an, welche Sicherungen man bei einem Ausfall am Freitagabend jeweils zurückspielen muss.</li>
+                </ol>
+            </details>
+        </div>

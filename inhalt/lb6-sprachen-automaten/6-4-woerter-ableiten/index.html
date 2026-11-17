@@ -1,0 +1,80 @@
+<p>Das Ableiten von Wörtern ist ein zentraler Bestandteil beim Umgang mit formalen Grammatiken. Dabei wird ausgehend vom Startsymbol schrittweise eine Zeichenkette erzeugt, indem in jedem Schritt ein Nichtterminal ersetzt wird.</p>
+
+<p>Der Ableitungsprozess beginnt immer mit dem Startsymbol der Grammatik. Ziel ist es, durch wiederholte Regelanwendung eine Zeichenkette zu erzeugen, die nur aus Terminalsymbolen besteht.</p>
+
+<h2>Beispielhafte Ableitung</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> Gegeben sei die Grammatik G mit den Regeln<br><code>S → aB</code><br><code>B → bB</code><br><code>B → c</code><br>Die Ableitung des Wortes <code>abbc</code> zeigt jede Ersetzung:</p>
+<ol>
+<li><code>S ⇒ aB</code><br><em>Wir beginnen mit dem Startsymbol <strong>S</strong>. Laut Regel <code>S → aB</code> wird daraus <code>aB</code>.</em></li>
+<li><code>aB ⇒ abB</code><br><em>Das <strong>B</strong> wird nach der Regel <code>B → bB</code> ersetzt. Wir erhalten <code>abB</code>.</em></li>
+<li><code>abB ⇒ abbB</code><br><em>Erneut wird <strong>B</strong> durch <code>bB</code> ersetzt, wir bekommen <code>abbB</code>.</em></li>
+<li><code>abbB ⇒ abbc</code><br><em>Abschließend wird <strong>B</strong> durch <code>c</code> ersetzt. Nun enthält die Zeichenkette nur noch Terminale: <code>abbc</code>.</em></li>
+</ol>
+<p><strong>Ergebnis:</strong> Die vollständige Ableitung lautet also:<br><code>S ⇒ aB ⇒ abB ⇒ abbB ⇒ abbc</code><br>Das Wort <code>abbc</code> gehört somit zur Sprache, die durch diese Grammatik erzeugt wird.</p>
+<p><strong>Kontrolle:</strong> Für <code>abb</code> gibt es keine Ableitung: Jedes B verschwindet nur über B → c, deshalb endet jedes Wort von G auf c.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+<p><strong>Ausgangssituation:</strong> G mit den Regeln <code>S → AB</code>, <code>A → aA | a</code>, <code>B → bBc | bc</code>. Für das Wort <code>aabbcc</code> gibt es mehrere Ableitungen, weil nach dem ersten Schritt zwei Nichtterminale zur Auswahl stehen:</p>
+<ul>
+<li>Linksableitung (immer das linke Nichtterminal zuerst):<br><code>S ⇒ AB ⇒ aAB ⇒ aaB ⇒ aabBc ⇒ aabbcc</code></li>
+<li>Rechtsableitung (immer das rechte Nichtterminal zuerst):<br><code>S ⇒ AB ⇒ AbBc ⇒ Abbcc ⇒ aAbbcc ⇒ aabbcc</code></li>
+</ul>
+<p><strong>So findest du die Linksableitung:</strong></p>
+<ol>
+<li><strong>Zielwort zerlegen:</strong> <code>aabbcc</code> = <code>aa</code> | <code>bbcc</code>. Der a-Teil muss aus A, der Rest aus B entstehen, denn S → AB ist die einzige Startregel. <em>Warum?</em> So weißt du vorher, wie oft welche Regel nötig ist.</li>
+<li><strong>A bearbeiten:</strong> zwei a ⇒ einmal A → aA, dann A → a: <code>AB ⇒ aAB ⇒ aaB</code>. <em>Warum?</em> A → a beendet den a-Teil; vorher würde ein a fehlen.</li>
+<li><strong>B bearbeiten:</strong> zwei b und zwei c ⇒ einmal B → bBc, dann B → bc: <code>aaB ⇒ aabBc ⇒ aabbcc</code>. <em>Warum?</em> Jede B-Regel erzeugt gleich viele b und c, das b steht links, das c rechts vom B.</li>
+<li><strong>Falle beachten:</strong> Die Rechtsableitung ersetzt zuerst B. Dadurch steht in den Zwischenschritten noch A vorn (<code>Abbcc</code>). Beide Ableitungen benutzen dieselben Regeln – nur in anderer Reihenfolge.</li>
+</ol>
+<p><strong>Ergebnis:</strong> Beide Ableitungen gehören zum selben Ableitungsbaum. Die Grammatik erzeugt L(G) = {a<sup>m</sup>b<sup>n</sup>c<sup>n</sup> | m, n ≥ 1}.</p>
+<p><strong>Kontrolle:</strong> <code>aabbc</code> ist nicht ableitbar, weil B immer gleich viele b und c erzeugt.</p>
+            </details>
+        </div>
+
+<p><iframe width="960" height="380" style="display: block; margin: 0 auto 0.5em auto;" src="../material/h5p/grammatiken_h5p.html" frameborder="0" allowfullscreen="allowfullscreen"> </iframe></p>
+
+<div class="hinweis" style="margin-top: 0;">
+<details>
+<summary>Hinweis: mehrere Ableitungen</summary>
+<p>Es kann mehrere gültige Ableitungen für ein Wort geben. Die Reihenfolge, in der die Produktionsregeln angewendet werden, kann variieren. Gibt es für ein Wort sogar zwei verschiedene <em>Ableitungsbäume</em>, heißt die Grammatik <strong>mehrdeutig</strong> – für Programmiersprachen ist das unerwünscht.</p>
+</details>
+</div>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: Ableiten im Compiler und in der Entwicklungsumgebung</summary>
+<p><strong>Alltag:</strong> Wenn deine Entwicklungsumgebung eine fehlende Klammer rot unterstreicht, hat im Hintergrund ein Parser versucht, deinen Quelltext aus der Grammatik der Programmiersprache abzuleiten – und ist gescheitert.</p>
+<p><strong>Beruf:</strong> Compilerentwicklerinnen und Entwickler von Werkzeugen (z.&nbsp;B. für Visual Studio Code, IntelliJ oder Codeanalyse-Tools) arbeiten mit Ableitungs- bzw. Syntaxbäumen, um Fehler zu melden, Code automatisch zu formatieren oder umzubauen (Refactoring).</p>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Merke:</strong><br>Bei einer formalen Grammatik besteht eine <strong>Ableitung</strong> aus einer Folge von Ersetzungsschritten. In jedem Schritt wird ein Nichtterminal durch die rechte Seite einer passenden Produktionsregel ersetzt.<br>
+Schreibweise: Der Regelpfeil <strong>→</strong> steht in den Produktionsregeln, der Ableitungspfeil <strong>⇒</strong> zwischen zwei aufeinanderfolgenden Zeichenketten einer Ableitung. Ein Wort w gehört zu L(G), wenn es eine Ableitung S ⇒ … ⇒ w gibt und w nur aus Terminalen besteht.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.4.1: <span class="niveau">AFB I</span></summary>
+<p>Gegeben sei die Grammatik G mit den Produktionsregeln:<br>S → AB<br>A → aA | ε<br>B → bB | b<br><br>Leite das Wort <code>aabb</code> ab.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.4.2: <span class="niveau">AFB I</span></summary>
+<p>Gegeben sei die Grammatik G mit den Produktionsregeln:<br>S → aSb | ab<br><br>Leite das Wort <code>aaabbb</code> ab.</p>
+</details>
+</div>

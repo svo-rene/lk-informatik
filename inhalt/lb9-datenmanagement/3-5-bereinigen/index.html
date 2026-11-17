@@ -1,0 +1,353 @@
+<p>
+        In der Informatik ist es häufig notwendig, Daten zu bereinigen, bevor sie weiterverarbeitet oder analysiert werden können, weil zum Beispiel Sensoren fehlerhafte Werte liefern oder Daten unvollständig sind.
+    </p>
+
+<div class="hinweis">
+        <details>
+        <summary>
+            Verfälschungen vermeiden:
+        </summary>
+        <p>
+            Beim Bereinigen von Daten darfst du keine persönlichen Annahmen oder Wertungen einbringen. 
+            Verwende nur nachvollziehbare, objektive Methoden wie den Mittelwert oder benachbarte Messwerte.
+            Die ursprüngliche Bedeutung der Daten soll erhalten bleiben – sonst kann die Analyse verfälscht werden.
+        </p>
+    </details>
+    </div>
+
+<h2>1. CSV-Datei einlesen</h2>
+
+<p>
+        Mit dem <code>csv</code>-Modul kannst du eine Tabelle mit Messwerten zeilenweise einlesen.
+    </p>
+
+<pre><code class="language-python">import csv  # Modul zum Arbeiten mit CSV-Dateien
+
+def einlesen_datei(pfad):
+    daten = []
+    with open(pfad, newline='', encoding='utf-8') as datei:
+        reader = csv.DictReader(datei)  # jede Zeile wird als Wörterbuch eingelesen
+        for zeile in reader:
+            daten.append(zeile)
+    return daten
+
+messwerte = einlesen_datei("messwerte.csv")
+print("Anzahl der Datensätze:", len(messwerte))</code></pre>
+
+<h2>2. Fehlende Werte löschen</h2>
+
+<p>
+        Wenn Temperaturwerte fehlen (z.&nbsp;B. <code>"N/A"</code> oder leer), entfernen wir die ganze Zeile.
+    </p>
+
+<pre><code class="language-python">def entferne_fehlende(daten, spalte):
+    neue_daten = []
+    geloescht = 0  # Zähler für gelöschte Zeilen
+    for eintrag in daten:
+        wert = eintrag[spalte]
+        if wert != "N/A" and wert.strip() != "":
+            neue_daten.append(eintrag)
+        else:
+            geloescht += 1  # eine ungültige Zeile wurde übersprungen
+    print(f"{geloescht} Zeilen wurden wegen fehlender Werte in '{spalte}' entfernt.")
+    return neue_daten
+
+messwerte = entferne_fehlende(messwerte, "Temperatur")</code></pre>
+
+<h2>3. Unrealistische Werte ersetzen</h2>
+
+<p>
+        Werte unter −30&nbsp;°C oder über 50&nbsp;°C gelten in diesem Kurs als unrealistisch (dieselben Grenzen gelten auf Seite 3.6).
+        Wir ersetzen sie hier durch den Mittelwert aus dem vorherigen und dem nächsten Messwert. Liegt ein Ausreißer ganz am
+        Anfang oder Ende der Messreihe, hat er nur einen Nachbarn und bleibt in dieser einfachen Variante unverändert.
+    </p>
+
+<pre><code class="language-python">def ersetze_unrealistische(messwerte, spalte, min_wert, max_wert):
+    for i in range(len(messwerte)):
+        wert = float(messwerte[i][spalte])
+        if wert < min_wert or wert > max_wert:
+            if i > 0 and i < len(messwerte) - 1:
+                vorher = float(messwerte[i - 1][spalte])
+                nachher = float(messwerte[i + 1][spalte])
+                ersatz = (vorher + nachher) / 2
+                messwerte[i][spalte] = ersatz  # Wert durch Mittelwert der Nachbarn ersetzen
+
+ersetze_unrealistische(messwerte, "Temperatur", -30, 50)
+print("Unrealistische Werte ersetzt.")</code></pre>
+
+<h2>4. Statistik berechnen</h2>
+
+<p>
+        Für jeden Tag berechnen wir: Durchschnitt, Minimum und Maximum der Temperatur.
+    </p>
+
+<pre><code class="language-python">def temperatur_statistik(daten):
+    tage = {}
+    for eintrag in daten:
+        tag = eintrag["Zeitpunkt"].split(" ")[0]  # Datum extrahieren
+        temperatur = float(eintrag["Temperatur"])
+        if tag not in tage:
+            tage[tag] = []
+        tage[tag].append(temperatur)
+
+    for tag in tage:
+        werte = tage[tag]
+        durchschnitt = sum(werte) / len(werte)
+        print(f"{tag}: Mittel = {durchschnitt:.1f}°C, Min = {min(werte):.1f}°C, Max = {max(werte):.1f}°C")
+
+temperatur_statistik(messwerte)</code></pre>
+
+<div class="praxisbezug">
+        <details>
+            <summary>Praxisbezug: Datenbereinigung im Beruf</summary>
+            <p>
+                In der Praxis sind Rohdaten fast nie sauber: Sensoren fallen aus und liefern „N/A“, Formulare werden
+                falsch ausgefüllt, beim Export verrutschen Spalten. <strong>Data Analysts</strong> schätzen, dass sie einen
+                großen Teil ihrer Arbeitszeit mit dem Bereinigen verbringen, bevor überhaupt ausgewertet wird. Bei
+                Wetterdiensten wie dem Deutschen Wetterdienst werden Messwerte automatisch auf Plausibilität geprüft –
+                mit Grenzwerten wie auf dieser Seite. Wichtig ist, jede Bereinigung zu dokumentieren: Wer Ausreißer
+                ersetzt, verändert die Daten und muss das offenlegen.
+            </p>
+        </details>
+    </div>
+
+<h2>5. Reguläre Ausdrücke (Wiederholung)</h2>
+
+<p>
+        Reguläre Ausdrücke (kurz Regex) kennst du bereits aus Klassenstufe 10 (Sprachen): Es handelt sich um
+        Suchmuster, mit denen du Text nach bestimmten Regeln durchsuchen, überprüfen oder ersetzen kannst –
+        zum Beispiel um zu prüfen, ob eine Eingabe einem bestimmten Format entspricht. In Python steht dafür
+        das Modul <code>re</code> zur Verfügung; in vielen Texteditoren (z.&nbsp;B. Visual Studio Code) kannst
+        du reguläre Ausdrücke auch direkt in der Suchfunktion nutzen.
+    </p>
+
+<p>Auf dieser Seite werden folgende Sonderzeichen verwendet:</p>
+
+<table border="1">
+        <thead>
+            <tr>
+                <th>Zeichen</th>
+                <th>Bedeutung</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>^</code></td>
+                <td>Anfang des Textes</td>
+            </tr>
+            <tr>
+                <td><code>$</code></td>
+                <td>Ende des Textes</td>
+            </tr>
+            <tr>
+                <td><code>\d</code></td>
+                <td>eine Ziffer (0–9)</td>
+            </tr>
+            <tr>
+                <td><code>\w</code></td>
+                <td>ein Wortzeichen (Buchstabe, Ziffer oder Unterstrich)</td>
+            </tr>
+            <tr>
+                <td><code>+</code></td>
+                <td>das vorangehende Zeichen ein- oder mehrmals</td>
+            </tr>
+            <tr>
+                <td><code>{n}</code></td>
+                <td>das vorangehende Zeichen genau n-mal</td>
+            </tr>
+            <tr>
+                <td><code>[...]</code></td>
+                <td>eines der Zeichen innerhalb der eckigen Klammern</td>
+            </tr>
+            <tr>
+                <td><code>\.</code></td>
+                <td>ein tatsächlicher Punkt (ohne den Backslash würde ein Punkt „irgendein Zeichen“ bedeuten)</td>
+            </tr>
+        </tbody>
+    </table>
+
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: ^ und $</summary>
+            <p>
+                <code>^</code> und <code>$</code> legen fest, dass das Muster am Anfang bzw. Ende des gesamten
+                Textes stehen muss. Bei <code>re.fullmatch()</code> muss ohnehin der komplette Text passen –
+                <code>^</code> und <code>$</code> sind hier also nicht zwingend nötig, machen aber deutlich,
+                dass keine zusätzlichen Zeichen davor oder danach erlaubt sein sollen. Bei
+                <code>re.search()</code> ohne <code>^</code>/<code>$</code> reicht es dagegen, wenn das Muster
+                irgendwo im Text vorkommt.
+            </p>
+        </details>
+    </div>
+
+<pre><code class="language-python">import re
+
+muster = r"^\d{5}$"  # genau 5 Ziffern
+text = "01067"
+
+if re.fullmatch(muster, text):
+    print("Gültige Postleitzahl")
+else:
+    print("Ungültige Postleitzahl")</code></pre>
+
+<h3>Werte aus Text herausziehen und vereinheitlichen</h3>
+
+<p>
+        Reguläre Ausdrücke prüfen nicht nur, sie holen auch Teile aus einem Text heraus (<code>re.search(...).group()</code>,
+        <code>re.findall()</code>) oder ersetzen sie (<code>re.sub()</code>). So lassen sich uneinheitlich erfasste Daten
+        bereinigen:
+    </p>
+
+<pre><code class="language-python">import re
+
+adresse = "Schillerplatz 3, 01309 Dresden"
+treffer = re.search(r"\d{5}", adresse)          # erste Folge aus genau 5 Ziffern
+print(treffer.group())                          # 01309
+
+text = "Messung 1: 21,5 °C – Messung 2: 22,1 °C"
+werte = re.findall(r"\d+,\d", text)             # alle Dezimalzahlen mit Komma
+print(werte)                                    # ['21,5', '22,1']
+zahlen = [float(w.replace(",", ".")) for w in werte]
+print(zahlen)                                   # [21.5, 22.1]
+
+telefon = "0351 / 123-45 67"
+print(re.sub(r"\D", "", telefon))               # 03511234567</code></pre>
+
+<p>
+        <code>\D</code> steht für „keine Ziffer“; <code>re.sub(r"\D", "", telefon)</code> entfernt also alle Leerzeichen,
+        Schrägstriche und Bindestriche, sodass jede Telefonnummer im selben Format gespeichert wird.
+    </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Ein Muster Schritt für Schritt aufbauen – Messwerte aus Freitext</summary>
+        <p><strong>Ausgangssituation:</strong> In einer Tabelle wurden Temperaturen von Hand eingetragen, jede*r anders:
+           <code>"21,5 °C"</code>, <code>" 22.1C"</code>, <code>"23°C"</code>, <code>"N/A"</code>, <code>"-3,0 °C"</code>, <code>"ca. 19"</code>.
+           Daraus sollen Zahlen werden; wo keine Zahl steht, soll <code>None</code> stehen.</p>
+        <ol>
+            <li><strong>Erster Versuch <code>\d+</code></strong> – „eine oder mehrere Ziffern“. Bei <code>"21,5 °C"</code> findet
+                <code>re.search</code> nur <code>21</code>: Die Nachkommastelle fehlt.</li>
+            <li><strong>Dezimaltrenner ergänzen: <code>\d+[.,]\d+</code></strong> – Ziffern, dann Punkt <em>oder</em> Komma, dann Ziffern. Jetzt
+                passt <code>21,5</code> und <code>22.1</code>, aber <code>"23°C"</code> liefert keinen Treffer mehr, weil dort kein Trenner steht.</li>
+            <li><strong>Nachkommateil optional machen: <code>\d+([.,]\d+)?</code></strong> – Die runden Klammern fassen den Nachkommateil zu einer
+                Gruppe zusammen, das <code>?</code> dahinter heißt „null- oder einmal“. Jetzt passen <code>21,5</code>, <code>22.1</code> und <code>23</code>.</li>
+            <li><strong>Vorzeichen ergänzen: <code>-?\d+([.,]\d+)?</code></strong> – Ohne <code>-?</code> würde aus <code>"-3,0 °C"</code> der Wert
+                <code>3,0</code>: ein stiller Fehler mit vertauschtem Vorzeichen.</li>
+            <li><strong>Treffer umwandeln</strong> – Komma durch Punkt ersetzen, dann <code>float()</code>.</li>
+        </ol>
+        <pre><code class="language-python">import re
+
+rohwerte = ["21,5 °C", " 22.1C", "23°C", "N/A", "-3,0 °C", "ca. 19"]
+muster = r"-?\d+([.,]\d+)?"
+
+bereinigt = []
+for roh in rohwerte:
+    treffer = re.search(muster, roh)
+    if treffer:
+        bereinigt.append(float(treffer.group().replace(",", ".")))
+    else:
+        bereinigt.append(None)
+print(bereinigt)</code></pre>
+        <p><strong>Ergebnis:</strong> <code>[21.5, 22.1, 23.0, None, -3.0, 19.0]</code></p>
+        <p><strong>Kontrolle:</strong> Jeder Rohwert muss genau einen Eintrag in der Ergebnisliste haben (6 Rohwerte, 6 Einträge), und
+           <code>"N/A"</code> darf nicht zu einer Zahl werden. <code>treffer.group()</code> liefert immer den <em>ganzen</em> Treffer, auch
+           wenn das Muster Klammern enthält.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Uneinheitliche Datumsangaben vereinheitlichen</summary>
+        <p><strong>Ausgangssituation:</strong> Bei der Anmeldung zum Sportfest wurde das Datum frei eingetippt:
+           <code>"3.5.2025"</code>, <code>" 03.05.25"</code>, <code>"2025-05-03"</code>, <code>"5/3/2025"</code>, <code>"5.13.2025"</code>.
+           Alle Angaben sollen in das Format JJJJ-MM-TT (ISO 8601) gebracht werden, das sich richtig sortieren lässt. Was sich nicht
+           sicher deuten lässt, wird <code>None</code> und später von Hand geprüft.</p>
+        <pre><code class="language-python">import re
+
+def datum_iso(text):
+    text = text.strip()                                    # Leerzeichen am Rand entfernen
+    t = re.fullmatch(r"(\d{1,2})\.(\d{1,2})\.(\d{4}|\d{2})", text)
+    if t:
+        tag, monat, jahr = int(t.group(1)), int(t.group(2)), t.group(3)
+        if not (1 &lt;= tag &lt;= 31 and 1 &lt;= monat &lt;= 12):     # Regex prüft keine Bereiche
+            return None
+        if len(jahr) == 2:
+            jahr = "20" + jahr
+        return f"{jahr}-{monat:02d}-{tag:02d}"
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", text):          # schon im Zielformat
+        return text
+    return None
+
+for d in ["3.5.2025", " 03.05.25", "2025-05-03", "5/3/2025", "5.13.2025"]:
+    print(repr(d), "->", datum_iso(d))</code></pre>
+        <ol>
+            <li><strong>Leerzeichen entfernen</strong> – <code>strip()</code> zuerst, sonst scheitert <code>fullmatch</code> an <code>" 03.05.25"</code>.</li>
+            <li><strong>Muster mit Gruppen</strong> – <code>(\d{1,2})</code> erlaubt ein- oder zweistellige Tage und Monate, <code>\.</code> ist der
+                echte Punkt, <code>(\d{4}|\d{2})</code> ein vier- <em>oder</em> zweistelliges Jahr. Die drei Klammern liefern
+                <code>t.group(1)</code> bis <code>t.group(3)</code>.</li>
+            <li><strong>„3.5.2025“:</strong> Gruppen 3, 5, 2025 → <code>2025-05-03</code>. <code>:02d</code> füllt mit führender Null auf.</li>
+            <li><strong>„ 03.05.25“:</strong> zweistelliges Jahr → „20“ davor → <code>2025-05-03</code>. Falle: Bei Geburtsdaten wäre „98“
+                dann 2098 – für solche Daten darf man das Jahrhundert nicht raten.</li>
+            <li><strong>„2025-05-03“:</strong> passt nicht zum ersten Muster, aber zum ISO-Muster und bleibt unverändert.</li>
+            <li><strong>„5/3/2025“:</strong> Schrägstriche passen zu keinem Muster → <code>None</code>. Das ist Absicht: Ob 5. März oder 3. Mai
+                gemeint ist (amerikanische Schreibweise), lässt sich nicht entscheiden.</li>
+            <li><strong>„5.13.2025“:</strong> passt formal zum Muster, aber Monat 13 gibt es nicht. Reguläre Ausdrücke prüfen nur die Form,
+                nicht die Bedeutung – deshalb die zusätzliche Bereichsprüfung → <code>None</code>.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong></p>
+        <pre><code>'3.5.2025' -&gt; 2025-05-03
+' 03.05.25' -&gt; 2025-05-03
+'2025-05-03' -&gt; 2025-05-03
+'5/3/2025' -&gt; None
+'5.13.2025' -&gt; None</code></pre>
+        <p><strong>Kontrolle:</strong> Die ersten drei Eingaben meinen denselben Tag und ergeben denselben Text – genau das ist das Ziel der
+           Vereinheitlichung. Die Bereichsprüfung ist bewusst grob: Ein Datum wie 31.02. würde noch durchgelassen; dafür wäre das Modul
+           <code>datetime</code> nötig.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            Bereinigen bedeutet fehlerhafte, unvollständige oder widersprüchliche Daten zu erkennen und durch sinnvolle Ersatzwerte oder Korrekturen zu verbessern – damit die anschließende Analyse zuverlässige Ergebnisse liefert.
+        </p>
+    </div>
+
+<div class="merke">
+        <p>
+            Ein regulärer Ausdruck beschreibt ein Muster aus normalen Zeichen und Sonderzeichen
+            (z.&nbsp;B. <code>\d</code> für eine Ziffer, <code>+</code> für „ein- oder mehrmals“), mit dem
+            geprüft werden kann, ob ein Text diesem Muster entspricht.
+        </p>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.5.1: <span class="niveau">AFB II</span></summary>
+            <p>
+                Lade dir die Beispieldatei <a href="../notebooks/messwerte.csv" download>messwerte.csv</a> herunter und speichere sie im selben Ordner wie dein Python-Programm. <br>
+                Lies die Datei <code>messwerte.csv</code> ein, entferne Zeilen mit fehlenden Temperaturwerten, ersetze unrealistische Werte (unter -30 °C oder über 50 °C),
+                und gib die Temperaturstatistik pro Tag auf der Konsole aus.
+            </p>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.5.2: Erste einfache Prüfungen <span class="niveau">AFB I</span></summary>
+            <p>
+                Schreibe für jedes der folgenden Alltagsbeispiele eine <code>re.search()</code>-Abfrage, die
+                prüft, ob ein bestimmtes Zeichen oder Muster in einem Text vorkommt:
+            </p>
+            <ul>
+                <li>a) Enthält ein Text das Zeichen <code>@</code> (z.&nbsp;B. um grob zu prüfen, ob es sich um
+                    eine E-Mail-Adresse handeln könnte)?</li>
+                <li>b) Enthält ein Satz ein Ausrufezeichen <code>!</code> oder ein Fragezeichen <code>?</code>?</li>
+                <li>c) Beginnt ein Name mit einem Großbuchstaben?</li>
+                <li>d) Besteht eine Eingabe nur aus Ziffern (z.&nbsp;B. eine Hausnummer ohne Zusatz)?</li>
+            </ul>
+        </details>
+    </div>

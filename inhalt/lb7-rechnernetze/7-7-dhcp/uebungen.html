@@ -1,0 +1,77 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.7.3: Adressbereich und Leihzeit <span class="niveau">AFB II</span></summary>
+                <ol type="a">
+                    <li>Warum verfügt ein DHCP-Server nur über einen begrenzten Bereich von IP-Adressen, die er vergeben kann?</li>
+                    <li>Welche Funktion erfüllt die Leihzeit (Lease)?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.7.4: Ohne Request? <span class="niveau">AFB II</span></summary>
+                <p>Welches Problem könnte auftreten, wenn der DHCP-Server nicht auf den DHCP-Request wartet und stattdessen annimmt, dass jedes DHCP-Offer automatisch angenommen wird?</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.7.5: Race Condition <span class="niveau">AFB III</span></summary>
+                <p>Recherchiere, was in der Informatik unter einer „Race Condition“ verstanden wird, und erkläre den Zusammenhang zum DHCP-Acknowledgement.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.7.6: DHCP-Server in Filius einrichten <span class="niveau">AFB II</span></summary>
+                <p>Meist werden IP-Adressen nicht statisch vergeben (ein Endgerät hat immer die gleiche IP-Adresse), sondern dynamisch: Sobald das Gerät dem Netz beitritt, bekommt es eine IP-Adresse aus einem bestimmten Adressbereich. Diese Aufgabe übernimmt ein DHCP-Server. Er vergibt IP-Adressen aus vorgegebenen Adressbereichen an die Clients, die sich an ihn wenden.</p>
+                <ol>
+                    <li>Öffne das Programm Filius.</li>
+                    <li>Lege ein Netz mit 4 Clients an, die über einen Switch verbunden sind. Um Server und Clients gut unterscheiden zu können, verwenden wir für Clients das Laptop-Symbol und für Server den stationären Rechner.</li>
+                    <li>Wähle einen Client aus und aktiviere die Einstellungen „IP-Adresse als Name verwenden“ und „DHCP zur Konfiguration verwenden“. Wiederhole das für alle Clients.
+                        <figure>
+                            <img src="../img/dhcp1.png" width="300" alt="Filius-Einstellungen mit aktivierten Optionen IP-Adresse als Name verwenden und DHCP zur Konfiguration verwenden">
+                            <figcaption>Abb. 3: Einstellungen für die Clients</figcaption>
+                        </figure>
+                    </li>
+                    <li>Füge dem Netz einen stationären Rechner hinzu und gib ihm die IP-Adresse 192.168.0.1 und den Namen „DHCP-Server“.</li>
+                    <li>Konfiguriere diesen Rechner als DHCP-Server, der IP-Adressen im Bereich von 192.168.0.2 bis 192.168.0.10 vergibt.
+                        <figure>
+                            <img src="../img/dhcp2.png" width="400" alt="Filius-Dialog DHCP-Server einrichten mit Adress-Untergrenze, Adress-Obergrenze, Netzmaske, Gateway und DNS-Server">
+                            <figcaption>Abb. 4: Menü für die Einstellungen des DHCP-Servers</figcaption>
+                        </figure>
+                    </li>
+                    <li>Bestimme, wie viele Endgeräte in unserem Netz maximal mit IP-Adressen ausgestattet werden können.</li>
+                    <li>Begründe kurz, warum die Vergabe der IP-Adressen erst bei 192.168.0.2 beginnt.</li>
+                    <li>Überprüfe die Verbindungen in deinem Netz mithilfe des Befehls <code>ping</code>.</li>
+                    <li>Speichere das Projekt unter dem Namen „dhcp.fls“ und lade es in deinen Informatik-Ordner hoch. Zusätzlich kannst du einen Screenshot in deinen Hefter einfügen.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.7.7: Was stimmt hier nicht? <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>In Abb. 1 wird die IP-Adresse 77.872.67.54 angezeigt. Erkläre, warum das keine gültige IPv4-Adresse ist.</li>
+                    <li>Ein Laptop zeigt nach dem Verbinden die Adresse 169.254.13.7 an. Was ist passiert?</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.7.8: Das Gäste-WLAN eines Cafés <span class="niveau">AFB II</span></summary>
+                <p>Ein Café in der Dresdner Neustadt betreibt ein Gäste-WLAN im Netz 192.168.40.0/26. Der Router hat 192.168.40.1; die Adressen .2 bis .9 sind für Kasse, Drucker und Access Points reserviert. Der DHCP-Server soll alle übrigen Adressen vergeben. Am Tag kommen etwa 150 Gäste mit Handy, die meisten bleiben eine bis zwei Stunden; höchstens 40 sind gleichzeitig da.</p>
+                <ol>
+                    <li>Gib den Adressbereich (Pool) des DHCP-Servers an und berechne, wie viele Adressen er enthält.</li>
+                    <li>Der Router ist auf eine Lease von 24 Stunden eingestellt. Erkläre, was im Laufe eines Tages passiert, und gib an, ab etwa dem wievielten Gast keine Adresse mehr vergeben werden kann.</li>
+                    <li>Schlage eine sinnvolle Lease-Dauer vor und begründe sie. Nenne einen Nachteil einer sehr kurzen Lease.</li>
+                </ol>
+            </details>
+        </div>

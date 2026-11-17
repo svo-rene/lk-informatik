@@ -1,0 +1,321 @@
+/* seite.css – Rahmen der Kurswebseite (Kopf, Seitenleiste, Reiter).
+   Die Gestaltung der Inhalte (Merke, Aufgabe, Beispiel …) steht in inhalt.css. */
+
+:root {
+    --leiste-breite: 300px;
+    --kopf-hoehe: 56px;
+    --rand: #e2e8f0;
+    --flaeche: #f8fafc;
+    --akzent: #1d4ed8;
+    --akzent-hell: #dbeafe;
+    --gedaempft: #64748b;
+}
+
+html { scroll-padding-top: calc(var(--kopf-hoehe) + 12px); }
+
+body {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+}
+
+/* ---------- Kopf ---------- */
+.kopf {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    height: var(--kopf-hoehe);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px;
+    background: #fff;
+    border-bottom: 1px solid var(--rand);
+}
+.marke {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #0f172a;
+    text-decoration: none;
+}
+.marke-zeichen {
+    display: inline-block;
+    background: var(--akzent);
+    color: #fff;
+    font-family: Consolas, monospace;
+    font-size: 0.8rem;
+    padding: 3px 6px;
+    border-radius: 6px;
+    margin-right: 6px;
+    vertical-align: 2px;
+}
+.menue-knopf {
+    display: none;
+    font: inherit;
+    border: 1px solid var(--rand);
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+/* ---------- Rahmen ---------- */
+.rahmen {
+    display: grid;
+    grid-template-columns: var(--leiste-breite) minmax(0, 1fr);
+    min-height: calc(100vh - var(--kopf-hoehe));
+}
+
+.leiste {
+    position: sticky;
+    top: var(--kopf-hoehe);
+    height: calc(100vh - var(--kopf-hoehe));
+    overflow-y: auto;
+    background: var(--flaeche);
+    border-right: 1px solid var(--rand);
+    padding: 14px 10px 40px;
+    font-size: 0.92rem;
+}
+.suche input {
+    width: 100%;
+    font: inherit;
+    padding: 7px 10px;
+    border: 1px solid var(--rand);
+    border-radius: 8px;
+    background: #fff;
+    margin-bottom: 10px;
+}
+.leiste a {
+    display: block;
+    color: #1e293b;
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    line-height: 1.35;
+}
+.leiste a:hover { background: #eef2f7; }
+.leiste a.aktiv { background: var(--akzent-hell); color: #1e3a8a; font-weight: 600; }
+.leiste-start { font-weight: 600; margin-bottom: 6px; }
+.leiste details.lb { border-top: 1px solid var(--rand); padding: 2px 0; }
+.leiste details.lb > summary {
+    padding: 8px 10px;
+    font-weight: 600;
+    color: #0f172a;
+    border-radius: 6px;
+}
+.leiste details.lb > summary:hover { background: #eef2f7; }
+.leiste details.lb > summary::before { content: "▸"; color: var(--gedaempft); margin-right: 6px; }
+.leiste details.lb[open] > summary::before { content: "▾"; }
+.lb-nr {
+    display: inline-block;
+    min-width: 3.6em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--akzent);
+}
+.lb-uebersicht { font-style: italic; color: var(--gedaempft) !important; }
+.leiste .kap {
+    margin: 10px 10px 2px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gedaempft);
+}
+.leiste ul { list-style: none; margin: 0; padding: 0; }
+.leiste li { margin: 0; }
+.t-nr { color: var(--gedaempft); font-variant-numeric: tabular-nums; margin-right: 2px; }
+.leiste a.aktiv .t-nr { color: inherit; }
+.leiste .versteckt { display: none; }
+
+/* ---------- Hauptbereich ---------- */
+.haupt {
+    max-width: 920px;
+    width: 100%;
+    padding: 24px 40px 60px;
+}
+.pfad { font-size: 0.85rem; color: var(--gedaempft); margin: 0 0 6px; }
+.pfad a { color: var(--gedaempft); }
+.h1-nr { color: var(--gedaempft); font-weight: 600; margin-right: 4px; }
+.unterzeile { font-size: 1.1rem; color: #475569; margin-top: -0.4em; }
+
+.reiter {
+    position: sticky;
+    top: var(--kopf-hoehe);
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    background: #fff;
+    border-bottom: 2px solid var(--rand);
+    margin: 0 0 1.5em;
+    padding-top: 6px;
+}
+.reiter a {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    color: #334155;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: -2px;
+}
+.reiter a:hover { background: var(--flaeche); }
+.reiter a.aktiv {
+    background: #fff;
+    border-color: var(--rand);
+    border-bottom: 2px solid #fff;
+    color: var(--akzent);
+}
+.zusatz-marke, .marke-klein {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: #ede9fe;
+    color: #5b21b6;
+    vertical-align: 2px;
+}
+.marke-klein { margin-left: 6px; background: #f1f5f9; color: #475569; }
+.marke-klein.m-vertiefung { background: #fef3c7; color: #92400e; }
+.marke-klein.m-zusatz { background: #ede9fe; color: #5b21b6; }
+
+.seiteninhalt > h2:first-child { margin-top: 0.5em; }
+
+.weiter-kasten {
+    margin: 2.5em 0 1em;
+    padding: 1em 1.2em;
+    border: 1px solid var(--rand);
+    border-radius: 10px;
+    background: var(--flaeche);
+}
+.weiter-kasten p { margin: 0 0 0.5em; }
+.weiter-link {
+    display: inline-block;
+    margin: 0 8px 6px 0;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: var(--akzent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+.weiter-link:hover { background: #1e40af; }
+
+.blaettern {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 2.5em;
+    padding-top: 1em;
+    border-top: 1px solid var(--rand);
+    font-size: 0.92rem;
+}
+.blaettern a { text-decoration: none; color: var(--akzent); }
+.blaettern .vor { text-align: right; }
+
+.bild-fehlt, .material-fehlt {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--gedaempft);
+    border: 1px dashed #cbd5e1;
+    border-radius: 6px;
+    padding: 0.5em 0.8em;
+    background: var(--flaeche);
+}
+.material-fehlt { display: inline; padding: 0 0.3em; }
+
+.lp-video { max-width: 800px; margin: 0.8em 0; }
+.lp-video video, .seiteninhalt video {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: #1d3557;
+    border-radius: 6px;
+}
+
+/* ---------- Startseite ---------- */
+.held { padding: 1.5em 0 0.5em; }
+.held h1 { border: none; font-size: 2.2rem; margin-bottom: 0.2em; }
+.aufbau {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+.aufbau-teil {
+    border: 1px solid var(--rand);
+    border-radius: 10px;
+    padding: 0.9em 1em;
+    background: var(--flaeche);
+}
+.aufbau-teil p { margin: 0.4em 0 0; font-size: 0.93rem; }
+.aufbau-kopf { font-weight: 700; color: var(--akzent); }
+.karten {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 14px;
+}
+.karte {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 1em 1.1em;
+    border: 1px solid var(--rand);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+.karte:hover { border-color: var(--akzent); box-shadow: 0 4px 14px rgba(29, 78, 216, 0.12); }
+.karte-nr { font-size: 0.78rem; font-weight: 700; color: var(--akzent); }
+.karte-titel { font-size: 1.15rem; font-weight: 700; color: #0f172a; }
+.karte-text { font-size: 0.9rem; color: #475569; flex: 1; }
+.karte-fuss { font-size: 0.8rem; color: var(--gedaempft); margin-top: 6px; }
+
+.themenliste { list-style: none; padding: 0; }
+.themenliste li { padding: 6px 0; border-bottom: 1px solid #f1f5f9; }
+.themenliste a { text-decoration: none; font-weight: 600; }
+
+.fuss {
+    border-top: 1px solid var(--rand);
+    padding: 16px 20px;
+    font-size: 0.85rem;
+    color: var(--gedaempft);
+    text-align: center;
+}
+.fuss a { color: var(--gedaempft); }
+
+/* ---------- Schmale Bildschirme ---------- */
+@media (max-width: 900px) {
+    .menue-knopf { display: inline-block; white-space: nowrap; flex: none; }
+    .marke { font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .rahmen { display: block; }
+    .leiste {
+        display: none;
+        position: fixed;
+        z-index: 30;
+        top: var(--kopf-hoehe);
+        left: 0;
+        width: min(340px, 90vw);
+        box-shadow: 4px 0 20px rgba(15, 23, 42, 0.15);
+    }
+    .leiste.offen { display: block; }
+    .haupt { padding: 16px 16px 48px; }
+    .aufbau { grid-template-columns: 1fr; }
+    .reiter a { padding: 7px 10px; }
+    .blaettern { flex-direction: column; }
+    .blaettern .vor { text-align: left; }
+}
+
+@media print {
+    .kopf, .leiste, .reiter, .blaettern, .weiter-kasten, .fuss { display: none !important; }
+    .rahmen { display: block; }
+    .haupt { padding: 0; max-width: none; }
+}

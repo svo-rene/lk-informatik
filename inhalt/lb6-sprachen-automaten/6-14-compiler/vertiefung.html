@@ -1,0 +1,37 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.14.7: Fehler finden – ein Scanner, der hängt <span class="niveau">AFB III</span></summary>
+<p>Emil hat die Funktion <code>scanne</code> abgetippt. <code>zeichenklasse</code> und <code>OPERATOREN</code> stimmen mit Beispiel 3 überein. Seine Tests <code>"x+1;"</code> und <code>"(a*b)"</code> laufen fehlerfrei.</p>
+<pre><code class="language-python">def scanne(text):
+    tokens = []
+    i = 0
+    while i &lt; len(text):
+        klasse = zeichenklasse(text[i])
+        if klasse == "leer":
+            pass
+        elif klasse == "operator":
+            tokens.append((OPERATOREN[text[i]], text[i]))
+            i = i + 1
+        elif klasse == "ziffer":
+            start = i
+            while zeichenklasse(text[i]) == "ziffer":
+                i = i + 1
+            tokens.append(("ZAHL", text[start:i]))
+        elif klasse == "buchstabe":
+            start = i
+            while i &lt; len(text) and zeichenklasse(text[i]) in ("buchstabe", "ziffer"):
+                i = i + 1
+            tokens.append(("BEZEICHNER", text[start:i]))
+        else:
+            tokens.append(("FEHLER", text[i]))
+            i = i + 1
+    return tokens</code></pre>
+<ol type="a">
+<li>Beschreibe, was bei den Eingaben <code>"a + b"</code> und <code>"x=42"</code> passiert, und erkläre die Ursache jeweils an der betroffenen Programmzeile.</li>
+<li>Korrigiere beide Fehler.</li>
+<li>Begründe, warum Emils Tests die Fehler nicht gefunden haben, und gib drei Arten von Testfällen an, die bei einem Scanner nie fehlen sollten.</li>
+</ol>
+</details>
+</div>

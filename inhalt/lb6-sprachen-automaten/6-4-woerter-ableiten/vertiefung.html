@@ -1,0 +1,27 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.4.8: Eine mehrdeutige Grammatik für Rechenausdrücke <span class="niveau">AFB III</span></summary>
+<p>Ein Taschenrechner-Programm verwendet die Grammatik E → E + E | E * E | z (z steht für eine Zahl).</p>
+<ol type="a">
+<li>Gib für <code>z + z * z</code> zwei verschiedene Linksableitungen an und zeichne die beiden zugehörigen Ableitungsbäume.</li>
+<li>Setze für die drei z der Reihe nach 2, 3 und 4 ein und werte beide Bäume aus (ein Teilbaum wird ausgerechnet, bevor sein Ergebnis weiterverwendet wird).</li>
+<li>Beurteile, ob diese Grammatik für einen Compiler geeignet ist.</li>
+</ol>
+<p class="tipp">Lies dazu den Hinweis „mehrere Ableitungen“ oben noch einmal.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.4.9: Ergebnis prüfen – Ableitungen kontrollieren <span class="niveau">AFB III</span></summary>
+<p>Zur Grammatik aus Aufgabe 6.4.5 (S → zA, A → aA | aB, B → z | bB) haben Mitschüler diese Behauptungen aufgeschrieben. Prüfe jede Ableitung Schritt für Schritt. Entscheide, ob die Ableitung korrekt ist und ob das Wort tatsächlich zu L(G) gehört.</p>
+<ol>
+<li>„<code>zabz</code> ∈ L(G), denn S ⇒ zA ⇒ zaB ⇒ zabB ⇒ zabz.“</li>
+<li>„<code>zbz</code> ∈ L(G), denn S ⇒ zA ⇒ zB ⇒ zbB ⇒ zbz.“</li>
+<li>„<code>zaab</code> ∈ L(G), denn S ⇒ zA ⇒ zaA ⇒ zaaB ⇒ zaabB.“</li>
+<li>„<code>zaz</code> ∈ L(G), denn S ⇒ zA ⇒ zaA ⇒ zaz.“</li>
+</ol>
+</details>
+</div>

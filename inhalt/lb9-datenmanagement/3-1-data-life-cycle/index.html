@@ -1,0 +1,161 @@
+<p>
+            Der Datenlebenszyklus (englisch <em>Data Life Cycle</em>) beschreibt die Phasen, die Daten von der Erstellung
+            bis zur Löschung durchlaufen. Wer diese Phasen bewusst plant, holt den größten Nutzen aus den Daten und hält
+            zugleich Datenschutz und Speicherkosten im Griff. Mit wachsendem Datenvolumen wird dieses
+            Datenlebenszyklus-Management (DLM) immer wichtiger.
+        </p>
+
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>
+                    Praxisbezug: Der Datenlebenszyklus im Alltag – vom Fitness-Tracker bis zur Personalakte
+                </summary>
+                <p>
+                    Ein alltägliches Beispiel für den kompletten Data Life Cycle ist ein Fitness-Tracker: Beim Sport werden Herzfrequenz,
+                    Standort und Schlafdaten erfasst (Phase 1), anschließend in der App bzw. in der Cloud des Herstellers gespeichert und
+                    strukturiert (Phase 2). Die Daten werden genutzt, um Trainingsauswertungen zu erstellen oder mit Ärzten geteilt zu
+                    werden (Phase 3). Ältere Trainingsdaten wandern irgendwann ins Archiv, etwa für Jahresstatistiken (Phase 4), und wenn
+                    das Nutzerkonto gelöscht wird, müssen auch alle personenbezogenen Daten fristgerecht und vollständig gelöscht werden
+                    (Phase 5). Genau dieser letzte Schritt ist in der Praxis oft der komplizierteste: Firmen müssen abwägen, welche Daten
+                    sie aus rechtlichen Gründen (z.&nbsp;B. Rechnungen, Buchhaltung) noch aufbewahren müssen und welche personenbezogenen Daten
+                    sie nach DSGVO löschen müssen – dafür werden in Unternehmen sogenannte Löschkonzepte mit „Löschklassen“ erstellt.
+                </p>
+                <p>
+                    <strong>Berufsfelder:</strong> Mit dem Datenlebenszyklus arbeiten sowohl klassische IT-Berufe wie Data Engineers,
+                    Data-Governance-Manager*innen oder Datenbankadministrator*innen als auch Berufsfelder außerhalb der Informatik:
+                    Datenschutzbeauftragte, Archivar*innen, die Compliance- bzw. Rechtsabteilung eines Unternehmens sowie
+                    Buchhalter*innen, die gesetzliche Aufbewahrungsfristen einhalten müssen.
+                </p>
+                <p>
+                    <strong>Weiterlesen:</strong>
+                    <a href="https://heydata.eu/magazin/loeschfristen-dsgvo/" target="_blank" rel="noopener">Löschfristen nach DSGVO: Pflichten &amp; Best Practices</a>
+                    und
+                    <a href="https://www.ironmountain.com/de/resources/general-articles/e/explore-the-five-stages-of-data-lifecycle-management" target="_blank" rel="noopener">Data Lifecycle Management in fünf Phasen</a>
+                </p>
+            </details>
+        </div>
+
+<h2>Phase 1: Datenerstellung</h2>
+
+<p>
+            In dieser Phase entstehen Daten aus verschiedenen Quellen wie Webanwendungen, IoT-Geräten 
+            oder Umfragen. Teilweise werden hier auch bereits Daten nach Relevanz gefiltert.
+        </p>
+
+<h2>Phase 2: Datenspeicherung</h2>
+
+<p>Die Daten werden dauerhaft und strukturiert abgelegt. Dazu gehören:</p>
+
+<ul>
+            <li><strong>Bereinigung der Daten:</strong> Entfernen von Duplikaten und Korrektur von Inkonsistenzen.</li>
+            <li><strong>Behandlung fehlender Werte:</strong> Ersetzen, schätzen oder löschen.</li>
+            <li><strong>Strukturierung:</strong> (Grobe Faustregel) Verwendung von relationalen Datenbanken für strukturierte und NoSQL-Datenbanken 
+                für unstrukturierte Daten.</li>
+            <li><strong>Datenschutz:</strong> Maßnahmen wie Verschlüsselung und DSGVO-Konformität sind essenziell.</li>
+            <li><strong>Backups:</strong> Schutz vor Datenverlust oder Angriffen.</li>
+        </ul>
+
+<h2>Phase 3: Nutzung und Weitergabe</h2>
+
+<p>
+            Daten werden in dieser Phase für verschiedene Anwendungen genutzt: Datenanalyse, Data Mining, 
+            maschinelles Lernen oder Dashboards. Rechte und Zugriffsregelungen für Nutzer*innen sind hier zentral.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Die Notenliste einer Lehrkraft</summary>
+            <p>
+                <strong>Einfaches Beispiel – die Notenliste einer Lehrkraft:</strong> Noten entstehen bei Tests (1), werden in
+                der Schulverwaltungssoftware gespeichert (2), fürs Zeugnis ausgewertet und den Eltern mitgeteilt (3), nach dem
+                Schuljahr in der Schülerakte archiviert (4) und nach Ablauf der gesetzlichen Aufbewahrungsfrist gelöscht (5).
+            </p>
+            <p><strong>Kontrolle:</strong> Jede der fünf Phasen kommt genau einmal vor, und die Reihenfolge stimmt: Gelöscht werden
+               kann erst, was vorher archiviert war und dessen Frist abgelaufen ist.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Ein Onlineshop</summary>
+            <p>
+                <strong>Komplexeres Beispiel – ein Onlineshop:</strong> Bei jeder Bestellung entstehen Kundendaten, Artikel und
+                Zahlungsdaten (1). Sie landen in einer relationalen Datenbank, Zahlungsdaten verschlüsselt, mit nächtlichem
+                Backup (2). Die Logistik nutzt Adresse und Artikel, das Marketing wertet anonymisierte Verkaufszahlen aus, der
+                Zahlungsdienstleister bekommt nur die Zahlungsdaten (3). Rechnungen müssen nach Handels- und Steuerrecht bis
+                zu zehn Jahre archiviert werden (4). Das Kundenkonto wird auf Wunsch gelöscht (Art.&nbsp;17 DSGVO) – aber nicht
+                die Rechnungen, solange die Aufbewahrungsfrist läuft (5). Hier widersprechen sich Löschpflicht und
+                Aufbewahrungspflicht, und das Unternehmen muss beides sauber trennen.
+            </p>
+            <p><strong>Ergebnis:</strong> Nicht alle Daten einer Bestellung durchlaufen den Zyklus gleich schnell. Das Kundenkonto
+               (Marketingdaten, Passwort, Adresse) kann sofort gelöscht werden, die Rechnung erst nach Ablauf der Frist. Das
+               Unternehmen braucht deshalb für jede Datenart eine eigene Löschregel.</p>
+            <p><strong>Kontrolle:</strong> Für jede Datenart prüfen: Wozu wird sie gebraucht (Zweck)? Wer bekommt sie (Weitergabe)?
+               Bis wann muss sie aufbewahrt werden (Frist)? Fehlt eine der drei Antworten, ist der Lebenszyklus nicht vollständig geplant.</p>
+            </details>
+        </div>
+
+<h2>Phase 4: Datenarchivierung</h2>
+
+<p>
+            Für rechtliche Zwecke oder spätere Wiederherstellung sollten Daten sicher archiviert werden. Eine klare 
+            Strategie definiert Aufbewahrungszeiträume und Speicherorte.
+        </p>
+
+<h2>Phase 5: Datenlöschung</h2>
+
+<p>
+            Sobald Daten nicht mehr benötigt werden oder die Aufbewahrungsfrist überschritten ist, müssen sie sicher 
+            gelöscht werden. Dies schafft Speicherplatz für aktive Daten.
+        </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Der <strong>Data Life Cycle</strong> besteht in diesem Kurs aus fünf Phasen:
+                <strong>1. Erstellung</strong> (Daten entstehen oder werden erhoben) – <strong>2. Speicherung</strong>
+                (Daten werden strukturiert abgelegt, bereinigt und gesichert) – <strong>3. Nutzung und Weitergabe</strong>
+                (Daten werden ausgewertet, visualisiert und geteilt) – <strong>4. Archivierung</strong> (nicht mehr aktiv
+                genutzte Daten werden sicher aufbewahrt) – <strong>5. Löschung</strong> (Daten werden unwiderruflich
+                entfernt, sobald Zweck und Aufbewahrungsfristen erfüllt sind). Auf Seite 3.9 durchläufst du alle fünf
+                Phasen mit einer eigenen Umfrage.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.1: <span class="niveau">AFB II–III</span></summary>
+                <ol>
+                    <li>Erkläre den Data Life Cycle von Anfang bis Ende an einem selbst gewählten Beispiel.</li>
+                    <li>
+                        Welche Standardformate sind heutzutage aktuell für den Austausch von Daten und wie sind diese Formate aufgebaut?
+                    </li>
+                    <li>Recherchiere, welche Rechte die DSGVO dir in Bezug auf deine Daten gibt, und nenne drei davon.</li>
+                    <li>
+                        Positioniere dich zu dieser Aussage: „Und am Ende löschen wir Daten, die wir nicht mehr brauchen, einfach. Das ist technisch einfach umzusetzen.“
+                    </li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.1.2: Phasen zuordnen – die AG-Anmeldung <span class="niveau">AFB I</span></summary>
+                <p>Die Schule organisiert die Anmeldung zu den Arbeitsgemeinschaften (AGs) online. Ordne jedes Ereignis einer Phase
+                   des Data Life Cycle zu und begründe kurz.</p>
+                <ol type="a">
+                    <li>Die AG-Leiterin der Robotik-AG bekommt die Liste ihrer Teilnehmenden.</li>
+                    <li>Nach dem Schuljahr wird die Teilnehmerliste in das Schulverwaltungsarchiv verschoben.</li>
+                    <li>Schüler*innen füllen ein Online-Formular mit Name, Klasse und Wunsch-AG aus.</li>
+                    <li>Doppelte Anmeldungen werden entfernt, die Daten landen in einer Tabelle.</li>
+                    <li>Zwei Jahre nach Schuljahresende werden die archivierten Listen vernichtet.</li>
+                    <li>Für die Schulkonferenz wird gezählt, wie viele Anmeldungen es je Klassenstufe gab.</li>
+                    <li>Jede Nacht wird eine Sicherungskopie der Tabelle angelegt.</li>
+                </ol>
+            </details>
+        </div>

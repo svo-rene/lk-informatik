@@ -1,0 +1,300 @@
+<h2>1. Von der Idee zum funktionierenden Modell</h2>
+
+<p>Die Entwicklung eines KI-Systems, das überwachtes maschinelles Lernen verwendet, folgt einem strukturierten Prozess. Dieser Prozess hilft dabei, die Klassifikationsgenauigkeit zu optimieren und die Praxistauglichkeit des Systems bereits während der Entwicklung zu beurteilen.</p>
+
+<h3>Schritte zur Entwicklung eines KI-Systems</h3>
+
+<ol>
+            <li>Daten erfassen, strukturieren und aufteilen</li>
+            <li>Entwicklung, Training und Validierung des KI-Systems</li>
+            <li>Testen des KI-Systems</li>
+        </ol>
+
+<h2>2. Daten erfassen, strukturieren und aufteilen</h2>
+
+<p>Der erste Schritt bei der Entwicklung eines KI-Systems ist die Vorbereitung der Daten.</p>
+
+<h3>2.1 Datenaufbereitung</h3>
+
+<ul>
+            <li>Sammeln einer ausreichenden Menge repräsentativer Daten</li>
+            <li>Strukturieren der Daten in Tabellenform</li>
+            <li>Aussortieren oder Ergänzen unvollständiger bzw. fehlerhafter Datensätze</li>
+            <li>Codierung der Daten in geeignete Formate (z.&nbsp;B. Zahlenwerte)</li>
+        </ul>
+
+<h3>2.2 Datenaufteilung</h3>
+
+<p>Die vorhandenen Datensätze werden zufällig auf drei Gruppen verteilt:</p>
+
+<ul>
+            <li><strong>Trainingsdaten:</strong> der größte Anteil, verwendet zum Training des Systems</li>
+            <li><strong>Validierungsdaten:</strong> verwendet zur Bewertung verschiedener Hyperparameter</li>
+            <li><strong>Testdaten:</strong> reserviert zur finalen Überprüfung der Klassifikationsgenauigkeit</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Wozu die Aufteilung?</summary>
+                <p>Die Aufteilung der Daten hilft, Overfitting zu erkennen und die tatsächliche Leistung des Systems auf unbekannten Daten ehrlich zu beurteilen. Bei kleinen Datensätzen ersetzt man die feste Validierungsmenge oft durch eine <strong>Kreuzvalidierung</strong>: Die Trainingsdaten werden z.&nbsp;B. in 5 Teile zerlegt, und jeder Teil dient einmal als Validierungsmenge (siehe Titanic-Notebook in 10.4).</p>
+            </details>
+        </div>
+
+<figure>
+            <img src="../img/data-split-svg.svg" width="550" alt="Aufteilung eines Datensatzes in Trainings-, Validierungs- und Testdaten">
+            <figcaption>Abb. 1: Aufteilung der Daten</figcaption>
+        </figure>
+
+<div class="hinweis">
+            <details>
+                <summary>Vorschau: Overfitting und Underfitting</summary>
+                <p>Im Hinweis oben und in den folgenden Aufgaben tauchen die Begriffe <strong>Overfitting</strong> und <strong>Underfitting</strong> schon auf, bevor sie in Abschnitt 4 ausführlich erklärt werden. Damit du sie schon jetzt anwenden kannst, hier vorab das Wichtigste:</p>
+                <ul>
+                    <li><strong>Overfitting (Überanpassung):</strong> Das Modell hat sich die Trainingsdaten quasi „eingeprägt“, statt die allgemeinen Muster dahinter zu lernen. Man erkennt es daran, dass die Trainingsgenauigkeit sehr hoch ist, die Validierungs- und Testgenauigkeit aber deutlich niedriger liegen.</li>
+                    <li><strong>Underfitting (Unteranpassung):</strong> Das Modell ist zu einfach, um die Muster in den Daten überhaupt zu erfassen. Man erkennt es daran, dass Trainings-, Validierungs- und Testgenauigkeit alle drei eher niedrig sind und nah beieinander liegen.</li>
+                </ul>
+                <p>Wie man beide Probleme genauer erkennt und vermeidet, erfährst du ausführlich in Abschnitt 4.</p>
+            </details>
+        </div>
+
+<h2>3. Entwicklung, Training und Validierung des KI-Systems</h2>
+
+<p>In dieser Phase wird das eigentliche KI-System entwickelt und trainiert.</p>
+
+<h3>3.1 Hyperparameter</h3>
+
+<p>Hyperparameter sind Einstellungen, die vor dem eigentlichen Lernprozess festgelegt werden müssen – im Unterschied zu den Werten, die das Modell selbst beim Training lernt. Ein einfaches Beispiel: Bei einem Verfahren, das eine feste Anzahl an Gruppen bilden soll, müsste vorab festgelegt werden, wie viele Gruppen das sein sollen – so eine Einstellung ist ein Hyperparameter.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Vorschau: Hyperparameter in den nächsten Kapiteln</summary>
+                <p>In den folgenden Kapiteln lernst du mehrere konkrete Algorithmen kennen, bei denen genau solche Hyperparameter vorkommen, z.&nbsp;B. die Anzahl der Cluster-Zentren beim k-Means-Algorithmus, die maximale Baumtiefe bei Entscheidungsbäumen oder der Wert k beim k-Nächste-Nachbarn-Algorithmus. Du musst diese Begriffe jetzt noch nicht kennen – merk dir nur das Grundprinzip: Hyperparameter werden vor dem Training festgelegt und mithilfe der Validierungsdaten angepasst.</p>
+            </details>
+        </div>
+
+<h3>3.2 Training und Validierung</h3>
+
+<ol>
+            <li>Training des Systems mit den Trainingsdaten</li>
+            <li>Überprüfung der Leistung mit den Validierungsdaten</li>
+            <li>Anpassung der Hyperparameter basierend auf den Validierungsergebnissen</li>
+            <li>Wiederholung des Prozesses mit verschiedenen Hyperparameterwerten</li>
+        </ol>
+
+<h2>4. Overfitting und Underfitting</h2>
+
+<p>Zwei häufige Probleme beim Training von KI-Systemen sind Overfitting und Underfitting.</p>
+
+<figure>
+            <img src="../img/overfitting-underfitting-svg.svg" width="650" alt="Vergleich von Underfitting, guter Anpassung und Overfitting">
+            <figcaption>Abb. 2: Underfitting, gute Anpassung und Overfitting</figcaption>
+        </figure>
+
+<h3>4.1 Underfitting</h3>
+
+<p>Underfitting (Unteranpassung) tritt auf, wenn das Modell zu einfach ist und die zugrundeliegenden Muster in den Daten nicht ausreichend erfasst. Da das Modell die Muster gar nicht richtig lernt, schneidet es überall schlecht ab: Trainings-, Validierungs- und Testgenauigkeit sind alle eher niedrig und liegen nah beieinander.</p>
+
+<h3>4.2 Overfitting</h3>
+
+<p>Overfitting (Überanpassung) bedeutet, dass das Modell zu komplex ist und sich zu stark an die Trainingsdaten anpasst (sie quasi „auswendig lernt“). Dadurch generalisiert es schlechter, d.&nbsp;h., es lässt sich schlechter auf unbekannte Fälle übertragen. Typisches Erkennungsmerkmal: Die Trainingsgenauigkeit ist sehr hoch, die Validierungs- und Testgenauigkeit liegen aber deutlich darunter.</p>
+
+<h3>4.3 Overfitting und Underfitting vermeiden</h3>
+
+<p>Um ein möglichst ausgewogenes Modell zu erhalten, gibt es verschiedene Strategien:</p>
+
+<ul>
+            <li><strong>Gegen Overfitting:</strong>
+                <ul>
+                    <li>Mehr und vielfältigere Trainingsdaten sammeln, damit das Modell echte Muster statt Einzelfälle lernt.</li>
+                    <li>Das Modell vereinfachen (weniger Komplexität), damit es weniger Spielraum hat, sich Einzelheiten der Trainingsdaten einzuprägen.</li>
+                    <li>Regularisierung einsetzen: Verfahren, die das Modell während des Trainings „bestrafen“, wenn es zu komplex wird (die genaue Umsetzung lernst du bei den konkreten Algorithmen).</li>
+                    <li>Training frühzeitig beenden (Early Stopping), sobald die Validierungsgenauigkeit nicht mehr steigt, obwohl die Trainingsgenauigkeit weiter zunimmt.</li>
+                </ul>
+            </li>
+            <li><strong>Gegen Underfitting:</strong>
+                <ul>
+                    <li>Ein komplexeres Modell wählen, das mehr Muster abbilden kann.</li>
+                    <li>Länger bzw. mit mehr Durchläufen trainieren.</li>
+                    <li>Zusätzliche, aussagekräftigere Merkmale (Features) in den Daten berücksichtigen.</li>
+                </ul>
+            </li>
+        </ul>
+
+<h2>5. Testen des KI-Systems</h2>
+
+<p>Der letzte Schritt ist das Testen des optimierten Systems mit den zurückbehaltenen Testdaten.</p>
+
+<h3>5.1 Konfusionsmatrix</h3>
+
+<p>Eine Konfusionsmatrix ist ein wichtiges Werkzeug zur Visualisierung und Bewertung der Leistung eines Klassifikationsmodells. Sie zeigt, wie gut das Modell die verschiedenen Klassen vorhersagen kann.</p>
+
+<figure>
+            <img src="../img/confusion-matrix-svg.svg" width="400" alt="Aufbau einer Konfusionsmatrix mit TP, FP, FN und TN">
+            <figcaption>Abb. 3: Aufbau einer Konfusionsmatrix</figcaption>
+        </figure>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Betrachten wir ein Beispiel eines KI-Systems, das E-Mails als Spam oder Nicht-Spam klassifiziert:</p>
+            <ul>
+                <li><strong>TP (True Positives):</strong> 300 E-Mails wurden korrekt als Spam erkannt.</li>
+                <li><strong>FP (False Positives):</strong> 50 Nicht-Spam-E-Mails wurden fälschlicherweise als Spam klassifiziert.</li>
+                <li><strong>FN (False Negatives):</strong> 100 Spam-E-Mails wurden fälschlicherweise als Nicht-Spam klassifiziert.</li>
+                <li><strong>TN (True Negatives):</strong> 550 Nicht-Spam-E-Mails wurden korrekt als Nicht-Spam erkannt.</li>
+            </ul>
+            <ol>
+                <li><strong>Was:</strong> Die positive Klasse festlegen: „Spam“ ist positiv, „Nicht-Spam“ negativ. – <em>warum:</em> Nur so ist eindeutig, was „True Positive“ oder „False Negative“ bedeutet; Precision und Recall beziehen sich immer auf die positive Klasse.</li>
+                <li><strong>Was:</strong> Die vier Werte in die Konfusionsmatrix eintragen (Zeilen: tatsächliche Klasse, Spalten: Vorhersage). – <em>warum:</em> In der Matrix sieht man auf einen Blick, wo das Modell richtig liegt (Diagonale) und welche Fehlerart wie oft vorkommt.
+                    <table>
+                        <thead>
+                            <tr><th></th><th>Vorhergesagt: Spam</th><th>Vorhergesagt: kein Spam</th><th>Summe</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Tatsächlich: Spam</td><td>TP = 300</td><td>FN = 100</td><td>400</td></tr>
+                            <tr><td>Tatsächlich: kein Spam</td><td>FP = 50</td><td>TN = 550</td><td>600</td></tr>
+                            <tr><td>Summe</td><td>350</td><td>650</td><td>1000</td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li><strong>Was:</strong> Zeilen- und Spaltensummen bilden. – <em>warum:</em> Die Zeilensumme „tatsächlich Spam“ (400) ist der Nenner des Recalls, die Spaltensumme „vorhergesagt Spam“ (350) der Nenner der Precision, die Gesamtsumme (1000) der Nenner der Accuracy.</li>
+                <li><strong>Was:</strong> Die Metriken mit den Formeln aus der folgenden Tabelle berechnen. – <em>warum:</em> Jede Metrik beantwortet eine andere Frage an das Modell; erst zusammen ergeben sie ein vollständiges Bild.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Accuracy = 850 / 1000 = 85&nbsp;%, Precision = 300 / 350 ≈ 85,7&nbsp;%, Recall = 300 / 400 = 75&nbsp;% (Rechenwege in der Tabelle unten). In Worten: Jede vierte Spam-Mail (100 von 400) landet trotzdem im Posteingang.</p>
+            <p><strong>Kontrolle:</strong> TP + FP + FN + TN = 300 + 50 + 100 + 550 = 1000, es fehlt also keine E-Mail. Alle Metriken liegen zwischen 0 und 1.</p>
+            </details>
+        </div>
+
+<p>Basierend auf dieser Konfusionsmatrix können wir wichtige Metriken berechnen:</p>
+
+<table>
+            <tr>
+                <th>Metrik</th>
+                <th>Beschreibung</th>
+                <th>Formel</th>
+                <th>Beispielberechnung</th>
+                <th>Ergebnis</th>
+            </tr>
+            <tr>
+                <td><strong>1. Genauigkeit (Accuracy)</strong></td>
+                <td>Gibt an, wie viele der Vorhersagen insgesamt korrekt waren.</td>
+                <td>(TP + TN) / (TP + FP + FN + TN)</td>
+                <td>(300 + 550) / (300 + 50 + 100 + 550)</td>
+                <td>850 / 1000 = 0,85 bzw. 85&nbsp;%</td>
+            </tr>
+            <tr>
+                <td><strong>2. Präzision (Precision)</strong></td>
+                <td>Gibt an, wie viele der als positiv (Spam) klassifizierten E-Mails tatsächlich Spam waren.</td>
+                <td>TP / (TP + FP)</td>
+                <td>300 / (300 + 50)</td>
+                <td>300 / 350 ≈ 0,857 bzw. 85,7&nbsp;%</td>
+            </tr>
+            <tr>
+                <td><strong>3. Sensitivität (Recall)</strong></td>
+                <td>Gibt an, wie viele der tatsächlichen Spam-E-Mails korrekt erkannt wurden.</td>
+                <td>TP / (TP + FN)</td>
+                <td>300 / (300 + 100)</td>
+                <td>300 / 400 = 0,75 bzw. 75&nbsp;%</td>
+            </tr>
+        </table>
+
+<p>Je nach Anwendungsfall kann es wichtiger sein, eine bestimmte Metrik zu optimieren. Bei der Spam-Erkennung möchte man beispielsweise eine hohe Präzision, um zu vermeiden, dass wichtige E-Mails fälschlicherweise als Spam markiert werden. In medizinischen Tests könnte hingegen eine hohe Sensitivität wichtiger sein, um möglichst alle Krankheitsfälle zu erkennen.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Start-up hat ein KI-Modell entwickelt, das auf Röntgenbildern eine seltene Lungenerkrankung erkennen soll. Im Testdatensatz mit 1000 Personen sind 20 tatsächlich erkrankt (2&nbsp;%). Das Modell erreicht im Test diese Werte: TP = 15, FN = 5, FP = 45, TN = 935. Ein Mitbewerber wirbt mit einer Genauigkeit von 98&nbsp;% für sein Modell – es stellt sich heraus, dass es <em>jedes</em> Bild als „gesund“ einstuft.</p>
+            <ol>
+                <li><strong>Was:</strong> Konfusionsmatrix aufstellen, „erkrankt“ ist die positive Klasse. – <em>warum:</em> Das Modell soll Erkrankte finden; Precision und Recall müssen sich auf diese Klasse beziehen.
+                    <table>
+                        <thead>
+                            <tr><th></th><th>Vorhergesagt: erkrankt</th><th>Vorhergesagt: gesund</th><th>Summe</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Tatsächlich: erkrankt</td><td>TP = 15</td><td>FN = 5</td><td>20</td></tr>
+                            <tr><td>Tatsächlich: gesund</td><td>FP = 45</td><td>TN = 935</td><td>980</td></tr>
+                            <tr><td>Summe</td><td>60</td><td>940</td><td>1000</td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li><strong>Was:</strong> Accuracy berechnen: (15 + 935) / 1000 = 950 / 1000 = 95&nbsp;%. – <em>warum:</em> Das ist der Wert, mit dem man das Modell auf den ersten Blick mit dem des Mitbewerbers vergleichen würde.</li>
+                <li><strong>Was:</strong> Recall berechnen: 15 / (15 + 5) = 15 / 20 = 75&nbsp;%. – <em>warum:</em> Bei einer Krankheit zählt vor allem, wie viele der Erkrankten gefunden werden; drei von vier werden erkannt.</li>
+                <li><strong>Was:</strong> Precision berechnen: 15 / (15 + 45) = 15 / 60 = 25&nbsp;%. – <em>warum:</em> Sie zeigt, wie verlässlich ein positiver Befund ist: Nur jeder vierte Alarm betrifft wirklich eine erkrankte Person. Weil es so viele Gesunde gibt, fallen schon wenige Fehlalarme pro Gesundem stark ins Gewicht.</li>
+                <li><strong>Was:</strong> F1-Score berechnen (Formel aus Aufgabe 11.3.5): 2 · 0,25 · 0,75 / (0,25 + 0,75) = 0,375 / 1 = 0,375. – <em>warum:</em> Der F1-Score fasst Precision und Recall in einem Wert zusammen und ist nur hoch, wenn beide hoch sind.</li>
+                <li><strong>Was:</strong> Das Modell des Mitbewerbers („immer gesund“) nachrechnen: TP = 0, FN = 20, FP = 0, TN = 980. Accuracy = 980 / 1000 = 98&nbsp;%, Recall = 0 / 20 = 0&nbsp;%. – <em>warum:</em> Hier liegt die Falle: Bei <strong>unausgewogenen Klassen</strong> erreicht ein Modell, das nur die häufige Klasse vorhersagt, automatisch eine hohe Accuracy, ohne einen einzigen Krankheitsfall zu erkennen. Die Precision ist sogar undefiniert (0 / 0), weil das Modell nie „erkrankt“ vorhersagt.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Das eigene Modell hat die niedrigere Accuracy (95&nbsp;% statt 98&nbsp;%), ist aber das einzig brauchbare: Es findet 75&nbsp;% der Erkrankten, das Modell des Mitbewerbers keinen. Weil die Precision nur 25&nbsp;% beträgt, eignet es sich als Vorauswahl (Screening), nach der ein positiver Befund ärztlich überprüft wird, nicht als endgültige Diagnose.</p>
+            <p><strong>Kontrolle:</strong> 15 + 5 + 45 + 935 = 1000. Faustregel: Bei unausgewogenen Klassen zuerst den Anteil der häufigsten Klasse bestimmen (hier 98&nbsp;%). Eine Accuracy, die nicht deutlich darüber liegt, sagt nichts über die Qualität des Modells aus.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: ML Engineer</summary>
+                <p><strong>Alltag:</strong> Wenn dein E-Mail-Programm eine wichtige Nachricht im Spam-Ordner versteckt, hast du einen False Positive erlebt.</p>
+                <p><strong>Beruf:</strong> <strong>ML Engineers</strong> (Machine-Learning-Ingenieurinnen und -Ingenieure) bringen Modelle in den laufenden Betrieb. Sie legen fest, welche Metrik für den Einsatz entscheidend ist, überwachen sie im Betrieb (die Daten ändern sich mit der Zeit!) und trainieren nach, wenn die Leistung sinkt. In der Medizintechnik muss die Leistung eines KI-Modells zudem gegenüber Behörden mit unabhängigen Testdaten nachgewiesen werden – der Sepsis-Fall unter den Links zeigt, warum.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>Qualitativ hochwertige und gut strukturierte Daten sind die Grundlage für ein erfolgreiches KI-System!</p>
+        </div>
+
+<div class="merke">
+            <p>Man erkennt Overfitting und Underfitting oft schon an den drei Genauigkeitswerten:</p>
+            <ul>
+                <li><strong>Underfitting:</strong> alle drei Werte niedrig und nah beieinander</li>
+                <li><strong>Overfitting:</strong> Trainingsgenauigkeit hoch, Validierungs- und Testgenauigkeit deutlich niedriger</li>
+                <li><strong>gute Anpassung:</strong> alle drei Werte hoch und nah beieinander</li>
+            </ul>
+        </div>
+
+<div class="merke">
+            <p>Das Ziel ist es, ein ausgewogenes Modell zu finden, das weder unter- noch überangepasst ist!</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Konfusionsmatrix</strong> – Tabelle, die für jede Kombination aus tatsächlicher und vorhergesagter Klasse die Anzahl der Fälle angibt. Bei zwei Klassen unterscheidet man TP, FP, FN und TN. Sie hilft, verschiedene Arten von Fehlern zu identifizieren und die Gesamtleistung des Systems zu beurteilen.</p>
+        </div>
+
+<div class="merke">
+            <ul>
+                <li>Eine hohe Genauigkeit bedeutet, dass das Modell insgesamt gute Vorhersagen macht.</li>
+                <li>Eine hohe Präzision bedeutet: Wenn das Modell etwas als positiv (z.&nbsp;B. Spam) klassifiziert, stimmt das mit hoher Wahrscheinlichkeit.</li>
+                <li>Eine hohe Sensitivität bedeutet, dass das Modell einen großen Teil der tatsächlich positiven Fälle (z.&nbsp;B. Spam) erkennt.</li>
+            </ul>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.3.1: Daten aufteilen <span class="niveau">AFB II</span></summary>
+                <p>Du hast einen Datensatz mit 10.000 Beispielen für ein Bildklassifizierungsproblem.</p>
+                <ol>
+                    <li>Wie würdest du diese Daten in Trainings-, Validierungs- und Testdaten aufteilen? Gib prozentuale Anteile an und begründe deine Entscheidung.</li>
+                    <li>Warum ist es wichtig, einen separaten Testdatensatz zu haben, der nicht für das Training oder die Validierung verwendet wird?</li>
+                    <li>Was könnte passieren, wenn du die Testdaten wiederholt verwendest, um dein Modell zu verbessern?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.3.2: Hautkrebs-Erkennung bewerten <span class="niveau">AFB II–III</span></summary>
+                <p>Du entwickelst ein KI-Modell zur Erkennung von Hautkrebs auf Basis von Hautbildern. Nach dem Training stellst du Folgendes fest:</p>
+                <ul>
+                    <li>Trainingsgenauigkeit: 99&nbsp;%</li>
+                    <li>Validierungsgenauigkeit: 85&nbsp;%</li>
+                    <li>Testgenauigkeit: 84&nbsp;%</li>
+                </ul>
+                <p>Beantworte folgende Fragen:</p>
+                <ol>
+                    <li>Liegt hier ein Fall von Overfitting, Underfitting oder einer guten Anpassung vor? Begründe deine Antwort.</li>
+                    <li>Welche Schritte würdest du unternehmen, um die Leistung des Modells zu verbessern?</li>
+                    <li>Wie würdest du vorgehen, wenn du feststellst, dass dein Modell besonders schlecht bei der Erkennung von Hautkrebs bei Menschen mit dunkler Hautfarbe ist?</li>
+                </ol>
+            </details>
+        </div>

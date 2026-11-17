@@ -1,0 +1,236 @@
+<p>Dieser Leitfaden begleitet euch durch das Projekt aus Seite 5.5. Er sagt, was in welchem Sprint fertig sein soll, wie ihr zurückblickt und euch verbessert, wie das README aussieht, wann eine Story „fertig“ ist und wie am Ende bewertet wird. Druckt euch die Checklisten aus oder kopiert sie in ein Issue – dann seht ihr jederzeit, was noch fehlt.</p>
+
+<h2>1. Der Ablauf im Überblick</h2>
+
+<table class="gitter">
+            <tr><th>Phase</th><th>Dauer</th><th>Was passiert</th><th>Ergebnis im Repository</th></tr>
+            <tr><td>Sprint 0: Start</td><td>2 Std.</td><td>Gruppe und Thema, Repository anlegen, User Stories mit Akzeptanzkriterien, Klassendiagramm, Zuständigkeiten</td><td>README mit Ziel und Team, Issues, Board, <code>docs/klassendiagramm.md</code></td></tr>
+            <tr><td>Sprint 1: Modell</td><td>4–5 Std.</td><td>Model-Klassen mit Tests, je Klasse ein Branch und ein Pull Request mit Review</td><td>Klassen-Module, Testdateien, erste gemergte Pull Requests</td></tr>
+            <tr><td>Retrospektive 1</td><td>15 min</td><td>Was lief gut, was ändern wir?</td><td>Eintrag in <code>docs/retrospektiven.md</code></td></tr>
+            <tr><td>Sprint 2: Ablauf</td><td>4–5 Std.</td><td>View (<code>ansicht.py</code>) und Controller (<code>main.py</code>), weitere Stories, Tests ergänzen</td><td>lauffähiges Programm</td></tr>
+            <tr><td>Retrospektive 2</td><td>15 min</td><td>wie oben, dazu: Hat unsere Vereinbarung aus Retro 1 gewirkt?</td><td>zweiter Eintrag</td></tr>
+            <tr><td>Sprint 3: Abschluss</td><td>3 Std.</td><td>Fehler beheben, aufräumen, README fertig</td><td>Release <code>v1.0</code></td></tr>
+            <tr><td>Code-Review-Gespräch</td><td>10 min je Gruppe</td><td>Jedes Mitglied erklärt einen eigenen Pull Request und beantwortet eine Frage zum Code. <strong>Keine Präsentation.</strong></td><td>–</td></tr>
+        </table>
+
+<p><strong>In jeder Stunde:</strong> Zu Beginn ein <strong>Daily</strong> von höchstens drei Minuten (wie in 10.2): Was habe ich seit letzter Stunde geschafft? Was mache ich heute? Wo hänge ich fest? Danach Board ansehen und offene Pull Requests reviewen, <em>bevor</em> ihr Neues anfangt. Am Ende der Stunde: alles hochgeladen, Board aktuell?</p>
+
+<p><strong>Rollen:</strong> Die Lehrkraft ist Product Owner und Ansprechpartnerin für fachliche Fragen. In der Gruppe übernimmt je Sprint eine Person die Rolle des Scrum Masters: Sie achtet auf die Regeln aus Seite 5.5, moderiert das Daily und die Retrospektive und meldet Hindernisse (z.&nbsp;B. „Mein Konto hat keine Schreibrechte“) sofort der Lehrkraft. Die Rolle wechselt mit jedem Sprint.</p>
+
+<h2>2. Aufbau des Repositorys</h2>
+
+<p>Alle Python-Dateien liegen im obersten Ordner, damit die Importe ohne Pakete funktionieren. Dokumente kommen nach <code>docs/</code>.</p>
+
+<pre><code>fahrgemeinschaften/
+├── README.md                  Ziel, Start, Bedienung, Team, Stand
+├── .gitignore                 Vorlage "Python"
+├── docs/
+│   ├── klassendiagramm.md
+│   └── retrospektiven.md
+├── fahrt.py                   Model         (Person A)
+├── test_fahrt.py              Tests dazu    (Person A)
+├── kleinbusfahrt.py           Model         (Person B)
+├── test_kleinbusfahrt.py      Tests dazu    (Person B)
+├── fahrtenboerse.py           Model         (Person C)
+├── test_fahrtenboerse.py      Tests dazu    (Person C)
+├── ansicht.py                 View          (je Sprint eine verantwortliche Person)
+└── main.py                    Controller    (je Sprint eine verantwortliche Person)</code></pre>
+
+<h2>3. Die Definition of Done des Kurses</h2>
+
+<p>„Fast fertig“ zählt nicht. Eine Story, bei der der Review fehlt, bleibt im Board in „In Progress“ und wandert in den nächsten Sprint.</p>
+
+<h2>4. Checklisten je Sprint</h2>
+
+<h3>Sprint 0: Start (2 Std.)</h3>
+
+<ul>
+            <li>☐ Thema und Ersatzthema gewählt und der Lehrkraft gemeldet (Aufgabe 5.5.1)</li>
+            <li>☐ Repository angelegt, wie die Lehrkraft es vorgibt (selbst angelegt oder in der Kurs-Organisation): <strong>privat</strong>, mit README und <code>.gitignore</code> „Python“; Name in Kleinbuchstaben mit Bindestrichen, z.&nbsp;B. <code>fahrgemeinschaften</code></li>
+            <li>☐ alle Gruppenmitglieder mit Schreibrechten eingetragen, die Lehrkraft ebenfalls (Einstellungen → „Mitarbeiter“)</li>
+            <li>☐ jedes Mitglied hat sich angemeldet und sieht „Datei hinzufügen“</li>
+            <li>☐ jede User Story als Issue mit Akzeptanzkriterien als Aufgabenliste (Aufgabe 5.5.2); Label <code>Sprint 1</code> bzw. <code>Sprint 2</code>, Schätzung in Story Points im Titel oder als Label</li>
+            <li>☐ Board unter „Projekte“ mit der Vorlage „Einfaches Kanban“, alle Issues zugeordnet</li>
+            <li>☐ <code>docs/klassendiagramm.md</code> mit Klassendiagramm und Zuständigkeit je Klasse (Aufgabe 5.5.3)</li>
+            <li>☐ README nach der Vorlage in Abschnitt 6 begonnen: Ziel, Team, Zuständigkeiten</li>
+            <li>☐ README und Klassendiagramm kamen bereits als <strong>Pull Request mit Review</strong> – die erste Übung im Ablauf</li>
+        </ul>
+
+<figure>
+            <img src="../img/git_29_projekt_vorlage.jpg" width="500" alt="Formular Neues Projekt mit Titel, Vorlage Einfaches Kanban und Kartenvorschau">
+            <figcaption>Bild 1: Ein Board unter „Projekte“ mit der Vorlage „Einfaches Kanban“ anlegen (wie in 10.3).</figcaption>
+        </figure>
+
+<h3>Sprint 1: Modell (4–5 Std.)</h3>
+
+<ul>
+            <li>☐ Jede Person baut <strong>ihre</strong> Model-Klasse(n) mit Testdatei – eigener Branch je Issue, z.&nbsp;B. <code>3-fahrt-eintragen</code></li>
+            <li>☐ zuerst die Tests aus den Akzeptanzkriterien ableiten (Seite 5.3, Aufgabe 5.3.6), dann die Methode schreiben</li>
+            <li>☐ kleine Pull Requests: lieber eine Methode mit Tests als die ganze Klasse auf einmal</li>
+            <li>☐ jeder Pull Request hat ein Review mit mindestens einem konkreten Kommentar oder einer Freigabe von einer anderen Person</li>
+            <li>☐ Klassen, die andere Klassen benutzen (z.&nbsp;B. <code>Fahrtenboerse</code> nutzt <code>Fahrt</code>), werden erst begonnen, wenn die benutzte Klasse in <code>main</code> ist – oder ihr legt vorab die Schnittstelle (Methodennamen und Typen) im Klassendiagramm fest</li>
+            <li>☐ Board aktuell, Issues mit „Schließt #…“ geschlossen</li>
+            <li>☐ am Sprintende: alle Testdateien laufen auf dem Stand von <code>main</code></li>
+        </ul>
+
+<h3>Retrospektive (je 15 min nach Sprint 1 und 2)</h3>
+
+<ol>
+            <li><strong>Sammeln (5 min):</strong> Jede Person schreibt für sich je bis zu drei Punkte zu „Das lief gut“, „Das hat gestört“, „Das probieren wir aus“.</li>
+            <li><strong>Besprechen (5 min):</strong> Reihum vorlesen, Gleiches zusammenfassen. Es geht um die Zusammenarbeit und den Ablauf, nicht um Schuld.</li>
+            <li><strong>Vereinbaren (5 min):</strong> Genau <strong>eine</strong> konkrete, überprüfbare Vereinbarung für den nächsten Sprint, z.&nbsp;B. „Jeder offene Pull Request wird am Anfang der nächsten Stunde reviewt“ – nicht „Wir kommunizieren besser“.</li>
+            <li><strong>Festhalten:</strong> Die Person in der Scrum-Master-Rolle trägt die Punkte und die Vereinbarung in <code>docs/retrospektiven.md</code> ein (per Pull Request). In Retro 2 prüft ihr zuerst: Hat die Vereinbarung aus Retro 1 gewirkt?</li>
+        </ol>
+
+<p class="tipp">Gute Fragen für die Retrospektive: Wie lange lagen Pull Requests ungeprüft? Gab es Konflikte oder überschriebene Änderungen – warum? Haben wir die Definition of Done eingehalten oder „fast fertige“ Stories als fertig gezählt? Wie gut passte unsere Schätzung?</p>
+
+<h3>Sprint 2: Ablauf (4–5 Std.)</h3>
+
+<ul>
+            <li>☐ verantwortliche Person für <code>main.py</code> und für <code>ansicht.py</code> festgelegt; Wünsche der anderen kommen als Kommentar ins Issue</li>
+            <li>☐ <code>main.py</code> mit Menü und <code>if __name__ == "__main__":</code>, alle Ein- und Ausgaben in View bzw. Controller</li>
+            <li>☐ weitere Stories umgesetzt, Model-Tests ergänzt</li>
+            <li>☐ jede Person hat mindestens einen Pull Request <em>gestellt</em> und mindestens einen <em>reviewt</em></li>
+            <li>☐ Vereinbarung aus Retrospektive 1 umgesetzt</li>
+            <li>☐ am Sprintende: Programm über <code>main.py</code> mit allen bisher fertigen Stories durchgespielt</li>
+        </ul>
+
+<h3>Sprint 3: Abschluss (3 Std.)</h3>
+
+<ul>
+            <li>☐ gefundene Fehler als Issues erfasst, behoben – je Fehler ein Test, der ihn vorher gezeigt hätte</li>
+            <li>☐ aufgeräumt: keine auskommentierten Altlasten, keine Testausgaben im Model, keine überflüssigen Dateien oder Branches</li>
+            <li>☐ Klassendiagramm passt zum Code</li>
+            <li>☐ README vollständig (Abschnitt 6)</li>
+            <li>☐ offene Stories bewusst in „Nicht geschafft“ im README genannt statt halb eingebaut</li>
+            <li>☐ Release erstellt: Reiter „Releases“ → „Neues Release“, Tag <code>v1.0</code> auf <code>main</code>, Titel „Version 1.0“, kurze Beschreibung, veröffentlichen</li>
+        </ul>
+
+<h2>5. Code-Review-Gespräch statt Präsentation</h2>
+
+<p>Am Ende steht kein Vortrag mit Folien, sondern ein Gespräch wie in einem echten Entwicklungsteam: Die Lehrkraft sitzt mit eurer Gruppe am Rechner, das Repository ist geöffnet. Etwa 10 Minuten je Gruppe.</p>
+
+<ol>
+            <li><strong>Eigener Pull Request (je Person etwa 2 Minuten):</strong> Jede Person öffnet einen eigenen, gemergten Pull Request – die Lehrkraft kann auch einen anderen auswählen – und erklärt: Welches Issue setzt er um? Was macht der Code, an einem konkreten Aufruf erklärt? Welche Tests gibt es, warum diese Grenzwerte? Was hat das Review verändert?</li>
+            <li><strong>Eine Frage zum Code der Gruppe (je Person etwa 1 Minute):</strong> Die Lehrkraft zeigt auf eine Stelle im Code einer <em>anderen</em> Person, z.&nbsp;B.:
+                <ul>
+                    <li>„Was passiert hier, wenn die Liste leer ist?“</li>
+                    <li>„Warum ist dieses Attribut privat? Was wäre, wenn nicht?“</li>
+                    <li>„Welche Methode wird in dieser Zeile aufgerufen, wenn das Objekt eine Unterklasse ist?“</li>
+                    <li>„Warum steht diese Ausgabe in <code>ansicht.py</code> und nicht in der Klasse?“</li>
+                    <li>„Welcher Test würde fehlschlagen, wenn hier <code>&lt;=</code> statt <code>&lt;</code> stünde?“</li>
+                </ul>
+            </li>
+            <li><strong>Kurzer Abschluss:</strong> Was würdet ihr mit einer Woche mehr Zeit tun?</li>
+        </ol>
+
+<p class="tipp">Vorbereitung: Lest vorher die Pull Requests der anderen noch einmal. Wer jedes Review ernst genommen hat, kann auch Fragen zum Code der anderen beantworten. Auswendig lernen hilft nicht – verstehen schon.</p>
+
+<h2>6. README-Vorlage</h2>
+
+<p>Die README ist die Startseite eures Repositorys. Kopiert diese Vorlage in Sprint 0 und füllt sie bis Sprint 3 vollständig aus.</p>
+
+<pre><code># Fahrgemeinschaften zum Auswärtsspiel
+
+Projekt im Kurs „OOP und Softwareentwicklung“, Thema 4 (Stufe ★★)
+
+## Ziel
+Ein bis zwei Sätze: Wer nutzt das Programm wofür?
+
+## Team und Zuständigkeiten
+| Person | Model-Klassen | weitere Verantwortung |
+|---|---|---|
+| Lea | Fahrt | main.py in Sprint 2 |
+| Tim | Kleinbusfahrt | ansicht.py in Sprint 2 |
+| Ilka | Fahrtenboerse | README, Retrospektiven |
+
+## Starten
+1. Repository als ZIP herunterladen und entpacken.
+2. `main.py` in Thonny öffnen und starten.
+
+## Bedienung
+Menü, Eingaben und ein kurzer Beispielablauf.
+
+## Tests
+Jede Datei `test_….py` einzeln in Thonny starten. Stand: alle Tests bestanden (Datum).
+
+## Umgesetzte User Stories
+- [x] #1 Fahrt anbieten
+- [x] #2 freie Fahrten an einem Datum
+- [ ] #6 Spieler ohne Mitfahrt (nicht geschafft)
+
+## Nicht geschafft / bekannte Fehler
+…
+
+## Klassendiagramm
+siehe `docs/klassendiagramm.md`</code></pre>
+
+<h2>7. Bewertung</h2>
+
+<p>Ist das Projekt benotet, gilt diese Aufteilung. Ist es eine Übung, bekommt ihr dieselben Bereiche als Rückmeldung ohne Note.</p>
+
+<table class="gitter">
+            <tr><th>Bereich</th><th>Anteil</th><th>Woran erkennbar</th></tr>
+            <tr><td><strong>Gruppenprodukt</strong></td><td>40&nbsp;%</td><td>Programm läuft über <code>main.py</code> und erfüllt die umgesetzten Stories; sinnvolle Klassen (Kapselung, Beziehungen, Vererbung oder Polymorphie, wo sie passt); MVC-Trennung; Tests decken Grenzwerte ab; README vollständig</td></tr>
+            <tr><td><strong>Eigener Anteil</strong></td><td>30&nbsp;%</td><td>eigene Commits und Pull Requests (Umfang und Qualität des eigenen Codes), Qualität der eigenen Reviews, erledigte Issues – im Repository einzeln nachvollziehbar (Aktivität je Person auf git.inf7.eu)</td></tr>
+            <tr><td><strong>Code-Review-Gespräch</strong></td><td>30&nbsp;%</td><td>eigenen Code erklären, Entscheidungen begründen, eine Frage zum Code der Gruppe beantworten</td></tr>
+        </table>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Wie wird der eigene Anteil sichtbar?</summary>
+                <ul>
+                    <li>Jede Person lädt ihre Arbeit <strong>selbst</strong> hoch und stellt ihre Pull Requests selbst. Ein Commit zählt für die Person, die ihn erzeugt hat.</li>
+                    <li>Habt ihr zu zweit an einem Rechner gearbeitet, nennt die Commit-Nachricht beide: <code>#4 Fahrt: Kostenanteil (mit Tim)</code>.</li>
+                    <li>Auch Reviews sind Arbeit: Ein Kommentar mit Zeile, Problem und Vorschlag zählt; ein „passt“ ohne Begründung kaum.</li>
+                    <li>Ein Commit kurz vor Schluss mit dem ganzen Projekt („alles hochgeladen“) zeigt keinen nachvollziehbaren Anteil.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2>8. Wenn es hakt</h2>
+
+<table class="gitter">
+            <tr><th>Problem</th><th>Was tun?</th></tr>
+            <tr><td>Ein Pull Request wartet seit Tagen auf ein Review.</td><td>Im Daily ansprechen; Regel: offene Pull Requests werden vor neuer Arbeit geprüft.</td></tr>
+            <tr><td>Der Pull Request zeigt einen Konflikt.</td><td>Wie in Beispiel 2 auf Seite 5.4: neuer Branch vom aktuellen <code>main</code>, Änderung dort einbauen, alten Pull Request mit Begründung schließen. Ursache in der Retrospektive klären.</td></tr>
+            <tr><td>Versehentlich direkt auf <code>main</code> gespeichert.</td><td>Nicht verstecken: im Daily sagen, die Änderung nachträglich von einer anderen Person prüfen lassen (Kommentar am Commit), künftig vor dem Speichern die Option prüfen.</td></tr>
+            <tr><td>Ein zweiter Branch mit zweitem Pull Request ist entstanden.</td><td>Vor dem Speichern nicht auf den eigenen Branch gewechselt (Seite 5.4, Browser-Schritt 4). Überzähligen Pull Request schließen.</td></tr>
+            <tr><td>Ein Mitglied fehlt längere Zeit.</td><td>Seine Issues im Board neu zuweisen, Lehrkraft informieren; bereits gemergte Arbeit bleibt ihm zugeordnet.</td></tr>
+            <tr><td>Wir schaffen nicht alle Stories.</td><td>Product Owner (Lehrkraft) fragen, welche Story wegfallen kann. Lieber weniger Stories vollständig nach der Definition of Done als alle halb.</td></tr>
+        </table>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>Eine User Story ist erst <strong>fertig</strong>, wenn alle Punkte erfüllt sind:</p>
+            <ol>
+                <li>Alle Akzeptanzkriterien des Issues sind erfüllt und abgehakt.</li>
+                <li>Zu jeder neuen oder geänderten Model-Methode gibt es Tests mit Grenzwerten in <code>test_….py</code>; alle Testdateien laufen fehlerfrei.</li>
+                <li>Das Model enthält kein <code>print</code> und kein <code>input</code>; Attribute sind privat, öffentliche Methoden haben Typhinweise.</li>
+                <li>Die Änderung kam über einen Pull Request mit Issue-Nummer im Titel und in den Commit-Nachrichten.</li>
+                <li>Eine andere Person hat den Pull Request geprüft (Kommentar oder Freigabe) und dabei die Tests selbst gestartet.</li>
+                <li>Der Pull Request ist in <code>main</code> gemergt, der Branch gelöscht, das Issue geschlossen, die Karte steht auf „Done“.</li>
+                <li><code>main.py</code> startet auf dem Stand von <code>main</code> ohne Fehler.</li>
+            </ol>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 5.6.1: Sprint 0 durchführen <span class="niveau">AFB I–II</span></summary>
+                <p>Arbeitet die Checkliste „Sprint 0“ ab. Haltet in einem Issue „Sprint 0“ als Aufgabenliste fest, was erledigt ist. Am Ende der zweiten Stunde zeigt ihr der Lehrkraft das Board und die README.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 5.6.2: Retrospektive durchführen und dokumentieren <span class="niveau">AFB II–III</span></summary>
+                <ol>
+                    <li>Führt nach Sprint 1 eine Retrospektive nach Abschnitt 4 durch und tragt sie in <code>docs/retrospektiven.md</code> ein.</li>
+                    <li>Wertet dafür auch euer Repository aus: Wie viele Pull Requests gab es, wie lange lagen sie im Durchschnitt bis zum Review, wie viele Stories erfüllen die Definition of Done vollständig? Wie hoch ist eure Velocity, und wie passt sie zu eurer Schätzung?</li>
+                    <li>Formuliert eine überprüfbare Vereinbarung und legt fest, woran ihr in Retrospektive 2 erkennt, ob sie gewirkt hat.</li>
+                </ol>
+            </details>
+        </div>

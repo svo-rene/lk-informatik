@@ -1,0 +1,280 @@
+<p>Du drückst den Einschaltknopf. Der Bildschirm bleibt ein paar Sekunden schwarz, dann erscheint ein Logo, dann der Sperrbildschirm. Zehn Sekunden, in denen scheinbar nichts passiert. Tatsächlich laufen in dieser Zeit mehrere Programme nacheinander an, die sich gegenseitig die Kontrolle übergeben, bis am Ende das Betriebssystem den Rechner übernommen hat. Ohne diese Programme wäre dein Laptop ein sehr teurer Heizlüfter: Der Prozessor aus Kapitel 4 kann zwar Befehle ausführen, aber er weiß nicht, was eine Datei ist, was WLAN ist oder welches der 200 laufenden Programme gerade den Bildschirm bekommen soll.</p>
+
+<p>Software, die genau diese Vermittlung zwischen Hardware und Anwendungen übernimmt, heißt <strong>Systemsoftware</strong>. Ihr wichtigster Vertreter ist das <strong>Betriebssystem</strong>.</p>
+
+<h2>Die ersten zehn Sekunden: der Bootvorgang</h2>
+
+<p>Beim Einschalten ist der Arbeitsspeicher leer. Der Prozessor beginnt trotzdem sofort mit dem Von-Neumann-Zyklus und holt seinen ersten Befehl von einer fest eingebauten Adresse. Dort liegt ein kleiner Speicherchip mit der <strong>Firmware</strong>. Von da an reicht ein Programm das nächste weiter, wie bei einer Staffel:</p>
+
+<table>
+            <thead>
+                <tr><th>Schritt</th><th>Was läuft</th><th>Was passiert</th><th>Woran du es erkennst</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><strong>Firmware</strong> (früher BIOS, heute UEFI)</td>
+                    <td>Prüft die Hardware (Arbeitsspeicher da? Tastatur da?), initialisiert die Grundfunktionen und sucht ein Laufwerk, auf dem ein Betriebssystem liegt.</td>
+                    <td>Hersteller-Logo, manchmal ein Piepton; mit einer Taste wie F2 oder Entf kommst du hier ins Einstellungsmenü.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>Bootloader</strong> (Boot-Programm)</td>
+                    <td>Ein winziges Programm auf dem Laufwerk. Es weiß, wo der Kern des Betriebssystems liegt, lädt ihn in den Arbeitsspeicher und übergibt ihm die Kontrolle.</td>
+                    <td>Bei mehreren installierten Systemen erscheint hier ein Auswahlmenü.</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><strong>Betriebssystem-Kern</strong> (Kernel)</td>
+                    <td>Übernimmt den Prozessor, richtet die Speicherverwaltung ein, lädt die Treiber für die vorhandene Hardware und startet die Systemdienste.</td>
+                    <td>Kreisel oder Ladebalken, Windows-, Apple- oder Linux-Logo.</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><strong>Treiber</strong></td>
+                    <td>Für jedes Gerät (Grafikkarte, WLAN-Chip, Touchpad, Drucker) ein Übersetzer, der die allgemeinen Befehle des Kerns in die Sprache genau dieses Geräts umsetzt.</td>
+                    <td>Bildschirm springt auf die richtige Auflösung, WLAN-Symbol erscheint.</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><strong>Systemdienste und Oberfläche</strong></td>
+                    <td>Anmeldung, Fenster, Startmenü oder Dock, Netzwerkverbindung, Hintergrunddienste wie Updates und Virenschutz.</td>
+                    <td>Sperrbildschirm, dann Desktop.</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><strong>Anwendungen</strong></td>
+                    <td>Erst jetzt startest du Browser, Spiele, Office.</td>
+                    <td>Du arbeitest.</td>
+                </tr>
+            </tbody>
+        </table>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Was die Fehlermeldung „No bootable device“ bedeutet
+                </summary>
+                <p>
+                    Diese Meldung kommt von der Firmware in Schritt 1. Sie hat kein Laufwerk gefunden, auf dem ein Bootloader liegt. Ursachen: SSD defekt, falsche Boot-Reihenfolge in den Einstellungen, oder jemand hat versehentlich das Systemlaufwerk gelöscht. Wenn du diese Meldung siehst, weißt du also sofort: Das Betriebssystem ist noch gar nicht gestartet, das Problem liegt davor. Genauso ist ein Bluescreen unter Windows oder eine Kernel Panic unter Linux und macOS eine Meldung des Kerns aus Schritt 3: Der Kern hat einen Fehler entdeckt, den er nicht mehr sicher beheben kann, und gibt lieber auf, als Daten zu zerstören.
+                </p>
+            </details>
+        </div>
+
+<h2>Der Softwarestack: Wer spricht mit wem?</h2>
+
+<p>Nach dem Start bleibt diese Ordnung erhalten. Man stellt sie als Schichten dar, den <strong>Softwarestack</strong>. Jede Schicht darf nur mit ihren direkten Nachbarn reden. Ein Browser spricht nie direkt mit der Grafikkarte, sondern bittet das Betriebssystem, und das reicht die Bitte an den Treiber weiter.</p>
+
+<table>
+            <tbody>
+                <tr><td style="background-color:#e3f2fd;"><strong>Nutzerin / Nutzer</strong></td><td>klickt, tippt, wischt</td></tr>
+                <tr><td style="background-color:#e8f5e9;"><strong>Anwendungssoftware</strong></td><td>Browser, Spiel, Python-Programm, Office, Messenger</td></tr>
+                <tr><td style="background-color:#fff9c4;"><strong>Betriebssystem: Oberfläche und Dienste</strong></td><td>Fenster, Dateimanager, Anmeldung, Updates, Kommandozeile</td></tr>
+                <tr><td style="background-color:#ffe0b2;"><strong>Betriebssystem: Kern (Kernel)</strong></td><td>Prozess-, Speicher-, Datei- und Geräteverwaltung, Rechte</td></tr>
+                <tr><td style="background-color:#ffccbc;"><strong>Treiber</strong></td><td>ein Übersetzer pro Gerät</td></tr>
+                <tr><td style="background-color:#d7ccc8;"><strong>Firmware</strong> (UEFI/BIOS)</td><td>Grundfunktionen, Start</td></tr>
+                <tr><td style="background-color:#cfd8dc;"><strong>Hardware</strong></td><td>Prozessor, Arbeitsspeicher, SSD, Bildschirm, WLAN-Chip (Kapitel 4)</td></tr>
+            </tbody>
+        </table>
+
+<p>Der Vorteil dieser Ordnung: Ein Spieleentwickler muss nicht wissen, welche der hunderten Grafikkarten in deinem PC steckt. Er sagt dem Betriebssystem „zeichne dieses Dreieck“, und der passende Treiber macht daraus die Befehle für genau deine Karte. Ohne Schichten müsste jedes Programm für jede Hardware neu geschrieben werden.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Warum ein einziger fehlerhafter Treiber 8,5 Millionen Rechner lahmlegen konnte
+                </summary>
+                <p>
+                    Am 19. Juli 2024 fielen weltweit Flughafen-Anzeigen, Krankenhaus-Systeme, Supermarktkassen und Fernsehsender aus. Millionen Windows-Rechner starteten nur noch mit einem Bluescreen. Die Ursache war kein Hackerangriff, sondern ein fehlerhaftes Update der Sicherheitssoftware CrowdStrike. Diese Software läuft als Treiber <strong>direkt im Kern</strong> des Betriebssystems, damit sie Angriffe früh erkennen kann. Genau das machte den Fehler so verheerend: Ein Absturz in einer Anwendung beendet nur diese Anwendung. Ein Absturz im Kern reißt das ganze System mit, und zwar bei jedem Neustart wieder. Microsoft schätzte die Zahl der betroffenen Geräte auf rund 8,5 Millionen. Die Behebung erforderte an vielen Rechnern einen Techniker vor Ort, der im abgesicherten Modus eine Datei löschte.
+                </p>
+                <p>
+                    Die Lehre für die Informatik: Je tiefer eine Software im Stack sitzt, desto mehr kann sie, und desto mehr kann sie zerstören. Deshalb dürfen normale Programme nicht in den Kern, und deshalb prüfen Betriebssysteme heute, ob Treiber signiert sind. Hintergrund im <a href="https://de.wikipedia.org/wiki/CrowdStrike#Weltweite_IT-St%C3%B6rung_2024" target="_blank">Wikipedia-Artikel zur IT-Störung 2024</a>.
+                </p>
+            </details>
+        </div>
+
+<h2>Was ein Betriebssystem den ganzen Tag tut</h2>
+
+<p>Ein Betriebssystem ist vor allem ein <strong>Schiedsrichter</strong>: Viele Programme wollen gleichzeitig den Prozessor, den Speicher, den Bildschirm und das Netzwerk. Das Betriebssystem teilt zu, trennt und schützt. Seine Kernaufgaben, jeweils mit einer Situation, die du kennst:</p>
+
+<table>
+            <thead>
+                <tr><th>Aufgabe</th><th>Was das Betriebssystem tut</th><th>Wo du es im Alltag merkst</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Prozessverwaltung</strong></td>
+                    <td>Jedes laufende Programm ist ein <em>Prozess</em>. Das Betriebssystem gibt jedem Prozess abwechselnd für wenige Millisekunden einen Prozessorkern (<em>Zeitscheiben</em>) und wechselt dann zum nächsten. Weil das tausende Male pro Sekunde passiert, wirkt es, als liefe alles gleichzeitig.</td>
+                    <td>Du hast 40 Browser-Tabs, Spotify und Discord offen, aber nur 8 Kerne. Trotzdem ruckelt nichts. Hängt ein Programm, kannst du es im Task-Manager „abschießen“, ohne dass der Rest leidet.</td>
+                </tr>
+                <tr>
+                    <td><strong>Speicherverwaltung</strong></td>
+                    <td>Jeder Prozess bekommt einen eigenen, abgeschotteten Bereich im Arbeitsspeicher und glaubt, er hätte den Rechner für sich allein. Wird der Arbeitsspeicher knapp, lagert das Betriebssystem selten genutzte Teile auf die SSD aus (<em>Auslagerung</em>, engl. Swapping).</td>
+                    <td>Ein abgestürztes Spiel kann deine ungespeicherte Hausarbeit im Textprogramm nicht beschädigen. Mit zu wenig Arbeitsspeicher wird alles zäh, weil ständig ausgelagert wird (erinnere dich an die Speichertreppe aus 4.1: SSD statt RAM heißt Tage statt Minuten).</td>
+                </tr>
+                <tr>
+                    <td><strong>Dateiverwaltung</strong></td>
+                    <td>Eine SSD kennt nur nummerierte Blöcke. Das Betriebssystem baut daraus Dateien mit Namen, Ordner, Größe und Änderungsdatum. Diese Ordnung heißt <em>Dateisystem</em> (z.&nbsp;B. NTFS, APFS, ext4, FAT32).</td>
+                    <td>„Löschen“ entfernt meist nur den Eintrag im Inhaltsverzeichnis, die Blöcke bleiben, bis sie überschrieben werden. Deshalb können Datenrettungsprogramme gelöschte Fotos zurückholen, und deshalb solltest du ein Gerät vor dem Verkauf richtig löschen (siehe Seite 5.2).</td>
+                </tr>
+                <tr>
+                    <td><strong>Geräteverwaltung</strong></td>
+                    <td>Über Treiber spricht das Betriebssystem mit jeder Hardware. Für Gerätefamilien mit festgelegtem Standard (USB-Tastaturen, USB-Sticks, Mäuse) bringt es fertige Treiber mit.</td>
+                    <td>Der Fünf-Euro-USB-Stick funktioniert sofort. Der neue Drucker oder das Grafiktablett will erst einen Treiber vom Hersteller.</td>
+                </tr>
+                <tr>
+                    <td><strong>Rechte und Sicherheit</strong></td>
+                    <td>Nutzerkonten, Passwörter, Zugriffsrechte auf Dateien und Geräte. Programme laufen im eingeschränkten <em>Nutzermodus</em>, nur der Kern läuft im <em>Kernmodus</em> mit vollem Zugriff.</td>
+                    <td>„Möchten Sie zulassen, dass diese App Änderungen an Ihrem Gerät vornimmt?“ Auf dem Smartphone: „Darf diese App auf Kamera und Standort zugreifen?“ Das ist das Betriebssystem, das seine Schiedsrichterrolle ernst nimmt.</td>
+                </tr>
+                <tr>
+                    <td><strong>Schnittstellen</strong></td>
+                    <td>Nach oben eine Bedienoberfläche (grafisch oder Kommandozeile) für Menschen und eine Programmierschnittstelle (<em>Systemaufrufe</em>) für Programme.</td>
+                    <td>Wenn dein Python-Programm <code>print("Hallo")</code> ausführt, bittet der Interpreter das Betriebssystem per Systemaufruf, den Text in das Fenster zu schreiben. Python selbst weiß nicht, wie man Pixel setzt.</td>
+                </tr>
+            </tbody>
+        </table>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Was kosten Zeitscheiben?</summary>
+        <p>Vier Prozesse wollen dauerhaft rechnen, es gibt nur einen Kern. Das Betriebssystem vergibt reihum Zeitscheiben von 10&nbsp;ms. <em>Annahme:</em> Jeder Wechsel von einem Prozess zum nächsten (Register sichern, nächsten Prozess laden) kostet 0,1&nbsp;ms, in denen niemand rechnet.</p>
+        <ol>
+          <li><strong>Was:</strong> Dauer einer Runde: 4 · (10&nbsp;ms + 0,1&nbsp;ms) = 40,4&nbsp;ms. – <em>warum:</em> Jeder der vier Prozesse ist einmal dran, und vor jedem Einsatz steht ein Wechsel.</li>
+          <li><strong>Was:</strong> Wie oft kommt jeder Prozess pro Sekunde dran? 1000&nbsp;ms / 40,4&nbsp;ms ≈ 24,8-mal. – <em>warum:</em> So oft „wacht“ jedes Programm pro Sekunde auf, das genügt für flüssiges Arbeiten.</li>
+          <li><strong>Was:</strong> längste Wartezeit eines Prozesses: 3 · 10,1&nbsp;ms = 30,3&nbsp;ms. – <em>warum:</em> Nach seiner Zeitscheibe muss ein Prozess warten, bis die drei anderen fertig sind.</li>
+          <li><strong>Was:</strong> Anteil der verlorenen Zeit: 0,1 / 10,1 ≈ 1&nbsp;%. – <em>warum:</em> Pro 10,1&nbsp;ms wird 0,1&nbsp;ms nur verwaltet, nicht gerechnet.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Jeder Prozess rechnet etwa 25-mal pro Sekunde für 10&nbsp;ms und wartet höchstens 30,3&nbsp;ms. Der Verwaltungsaufwand liegt bei rund 1&nbsp;%.</p>
+        <p><strong>Probe:</strong> 24,75 Runden · 4 Prozesse · 10&nbsp;ms = 990&nbsp;ms Rechenzeit, dazu 24,75 · 4 · 0,1&nbsp;ms = 9,9&nbsp;ms für Wechsel, zusammen ≈ 1000&nbsp;ms.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Zeitscheiben Schritt für Schritt – und wie lang sie sein sollten</summary>
+        <p>Drei Prozesse starten gleichzeitig auf einem Kern: A braucht insgesamt 30&nbsp;ms Rechenzeit, B 10&nbsp;ms, C 20&nbsp;ms. Das Betriebssystem vergibt reihum (A, B, C, A, …) Zeitscheiben von 10&nbsp;ms; die Wechselzeit wird zunächst vernachlässigt. Wann ist welcher Prozess fertig? Danach: Was ändert sich, wenn man die Zeitscheibe auf 1&nbsp;ms verkürzt und jeder Wechsel 0,1&nbsp;ms kostet?</p>
+        <ol>
+          <li><strong>Was:</strong> Ablauf als Zeitleiste notieren:
+            <table class="gitter">
+              <tr><th>Zeit (ms)</th><th>0–10</th><th>10–20</th><th>20–30</th><th>30–40</th><th>40–50</th><th>50–60</th></tr>
+              <tr><th>Prozess</th><td>A</td><td>B</td><td>C</td><td>A</td><td>C</td><td>A</td></tr>
+              <tr><th>Rest danach</th><td>A: 20</td><td>B: 0 ✔</td><td>C: 10</td><td>A: 10</td><td>C: 0 ✔</td><td>A: 0 ✔</td></tr>
+            </table>
+            – <em>warum:</em> Ein fertiger Prozess scheidet aus der Runde aus; der nächste in der Reihe ist dran.</li>
+          <li><strong>Was:</strong> Fertigstellungszeiten ablesen: B nach 20&nbsp;ms, C nach 50&nbsp;ms, A nach 60&nbsp;ms. – <em>warum (die Falle):</em> B braucht nur 10&nbsp;ms Rechenzeit, ist aber erst nach 20&nbsp;ms fertig, weil A vorher drankam. Rechenzeit und Wartezeit addieren sich.</li>
+          <li><strong>Was:</strong> Verwaltungsanteil bei 1&nbsp;ms Zeitscheibe: 0,1 / (1 + 0,1) ≈ 9,1&nbsp;% statt 0,1 / 10,1 ≈ 1&nbsp;% bei 10&nbsp;ms. – <em>warum:</em> Je kürzer die Scheibe, desto öfter wird gewechselt.</li>
+          <li><strong>Was:</strong> längste Wartezeit bis zur nächsten Zeitscheibe bei drei Prozessen: 2 · 1,1&nbsp;ms = 2,2&nbsp;ms statt 2 · 10,1&nbsp;ms = 20,2&nbsp;ms. – <em>warum:</em> Kurze Scheiben machen das System reaktionsschneller, z.&nbsp;B. bei Mausbewegungen.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Fertig sind B nach 20&nbsp;ms, C nach 50&nbsp;ms, A nach 60&nbsp;ms. Die Länge der Zeitscheibe ist ein Kompromiss: Kurze Scheiben bedeuten schnelle Reaktion, aber viel verlorene Zeit für Wechsel. Lange Scheiben bedeuten wenig Verwaltungsaufwand, aber spürbare Verzögerungen.</p>
+        <p><strong>Probe:</strong> Die Zeitleiste ist 60&nbsp;ms lang, und 30 + 10 + 20 = 60&nbsp;ms Rechenzeit; ohne Wechselkosten gibt es keine Lücke.</p>
+            </details>
+        </div>
+
+<h2>Betriebssysteme im Vergleich</h2>
+
+<p>Auf dem Schreibtisch kennst du vor allem <strong>Windows</strong>, <strong>macOS</strong> und <strong>Linux</strong>, auf dem Smartphone <strong>Android</strong> und <strong>iOS</strong>. Die Unterschiede liegen weniger im Kern (alle erledigen die Aufgaben aus der Tabelle oben) als in Fragen wie: Wer darf den Quellcode sehen? Auf welcher Hardware läuft es? Wie viel darf man verändern? Wer trägt die Verantwortung, wenn etwas schiefgeht?</p>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Linux ist überall, nur nicht auf dem Schreibtisch
+                </summary>
+                <p>
+                    Auf Laptops wirkt Linux wie ein Nischenprodukt mit wenigen Prozent Marktanteil. Tatsächlich ist es das meistgenutzte Betriebssystem der Welt: Der <a href="https://de.wikipedia.org/wiki/Linux_(Kernel)" target="_blank">Linux-Kernel</a> steckt in Android und damit in Milliarden Smartphones, im Steam Deck (SteamOS), in den meisten Webservern und Cloud-Rechenzentren, in praktisch allen Supercomputern, in Fernsehern, Routern, Autos und sogar im Mars-Helikopter Ingenuity der NASA. Auch die Spielkonsolen von Sony basieren auf einem freien Unix-System (FreeBSD).
+                </p>
+                <p>
+                    Der Grund: Der Quellcode ist offen (<strong>Open Source</strong>). Jeder Hersteller darf ihn anpassen, auf seine Hardware zuschneiden und ohne Lizenzgebühr ausliefern. Und weil tausende Fachleute weltweit den Code lesen, werden viele Sicherheitslücken gefunden, ohne dass man auf einen einzelnen Hersteller angewiesen ist.
+                </p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Wenn das Betriebssystem stirbt, bevor die Hardware es tut
+                </summary>
+                <p>
+                    Am 14. Oktober 2025 endete der Support für Windows 10. Seitdem gibt es für dieses System ohne kostenpflichtige Verlängerung keine Sicherheitsupdates mehr. Das Problem: Windows 11 stellt Hardwareanforderungen (etwa einen Sicherheitschip TPM 2.0 und relativ neue Prozessoren), die viele voll funktionsfähige Rechner nicht erfüllen. Schätzungen gingen 2025 von mehreren hundert Millionen betroffenen PCs weltweit aus.
+                </p>
+                <p>
+                    Damit entscheidet die Systemsoftware darüber, wann Hardware zu Elektroschrott wird, ein Thema, das auf Seite 5.2 weitergeht. Eine Alternative für solche Geräte ist der Umstieg auf eine Linux-Distribution, die auch auf älterer Hardware läuft und weiter Updates bekommt. Kampagnen wie <a href="https://endof10.org/de/" target="_blank">„End of 10“</a> bieten dafür Hilfe an.
+                </p>
+            </details>
+        </div>
+
+<h2>Open Source: Offener Code als Prinzip</h2>
+
+<p>Bei <strong>Open-Source-Software</strong> ist der Quellcode öffentlich. Jeder darf ihn lesen, verändern und weitergeben, meist kostenlos. Bei <strong>proprietärer Software</strong> (Windows, macOS, die meisten Spiele) bleibt der Code Geschäftsgeheimnis des Herstellers. Beide Modelle haben handfeste Vor- und Nachteile, und die Praxis ist voller Überraschungen:</p>
+
+<ul>
+            <li><strong>Viele Augen sehen mehr:</strong> Offener Code kann von jedem geprüft werden. Das ist ein echter Sicherheitsvorteil, aber kein Automatismus. Die Lücke <em>Heartbleed</em> in der weltweit genutzten Verschlüsselungsbibliothek OpenSSL blieb 2014 über zwei Jahre unentdeckt, obwohl der Code offen war. Es hatte einfach niemand genau genug hingesehen.</li>
+            <li><strong>Abhängigkeit von Freiwilligen:</strong> 2024 wurde entdeckt, dass ein Angreifer über Jahre das Vertrauen des einzigen, überlasteten Betreuers des Komprimierungsprogramms <em>xz</em> gewonnen hatte und eine Hintertür einbaute, die fast in alle großen Linux-Systeme gelangt wäre. Entdeckt wurde sie von einem Entwickler, dem auffiel, dass eine Anmeldung eine halbe Sekunde länger dauerte als sonst. Ohne offenen Code hätte er die Ursache nie finden können.</li>
+            <li><strong>Kontrolle und Unabhängigkeit:</strong> Staaten und Behörden setzen zunehmend auf Open Source, um nicht von einzelnen Konzernen abhängig zu sein. Schleswig-Holstein stellt seit 2024 seine Landesverwaltung auf LibreOffice und Linux um. München hatte mit dem Projekt LiMux schon 2004 damit begonnen, wechselte 2017 zurück zu Windows und verfolgt seit 2020 wieder eine Open-Source-Strategie. Der Streit darüber zeigt: Es geht nicht nur um Technik, sondern um Geld, Gewohnheit und Politik.</li>
+        </ul>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Systemsoftware im Berufsleben</summary>
+                <p><strong>Alltag:</strong> Jedes Update, jede Frage „Darf diese App auf deinen Standort zugreifen?“ und jeder Neustart nach einem Absturz ist Arbeit des Betriebssystems. Wer den Softwarestack versteht, kann Fehler viel schneller eingrenzen: Firmware, Kern, Treiber oder Anwendung?</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Fachinformatiker/in für Systemintegration</strong> bzw. <strong>Systemadministrator/in</strong>: installiert und aktualisiert Betriebssysteme auf Hunderten Rechnern gleichzeitig, verwaltet Nutzerrechte und reagiert auf Ausfälle wie den CrowdStrike-Fall – z.&nbsp;B. bei kommunalen IT-Dienstleistern, die in Sachsen die Schul- und Verwaltungsrechner betreuen.</li>
+                    <li><strong>Kernel- und Treiberentwickler/in</strong>: schreibt die Software, die Hardware und Betriebssystem verbindet – bei Chip- und Geräteherstellern oder in Open-Source-Projekten wie dem Linux-Kernel.</li>
+                    <li><strong>IT-Sicherheitsanalyst/in</strong>: prüft, welche Programme mit welchen Rechten laufen, und entdeckt Schwachstellen wie die Hintertür in <em>xz</em>.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Merke:</strong><br>
+                <strong>Systemsoftware</strong> ist die Software, die den Betrieb eines Computers überhaupt erst ermöglicht: Firmware, Betriebssystem und Treiber. Sie verwaltet die Hardware (Prozessor, Speicher, Geräte), stellt Anwendungsprogrammen einheitliche Schnittstellen bereit und sorgt dafür, dass sich viele Programme und Nutzer einen Rechner teilen können, ohne sich zu stören.<br>
+                <strong>Anwendungssoftware</strong> (Browser, Spiele, Office, Python) löst dagegen Aufgaben der Nutzer und setzt auf der Systemsoftware auf.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 5.1.1: Expedition in den Task-Manager <span class="niveau">AFB II</span>
+                </summary>
+                <p>Öffne die Prozessübersicht deines Geräts: unter Windows den Task-Manager (Strg + Umschalt + Esc), unter macOS die Aktivitätsanzeige, unter Linux zum Beispiel den Systemmonitor oder <code>top</code> im Terminal. Auf dem Smartphone findest du Vergleichbares unter Einstellungen bei Akku oder Speicher.</p>
+                <ol>
+                    <li>Zähle, wie viele Prozesse gerade laufen, und notiere, wie viele Kerne dein Prozessor hat. Erkläre, wie es möglich ist, dass deutlich mehr Prozesse laufen, als Kerne vorhanden sind.</li>
+                    <li>Finde die drei Prozesse mit dem größten Arbeitsspeicherverbrauch. Welcher davon überrascht dich? Recherchiere, wozu er gehört.</li>
+                    <li>Finde mindestens zwei Prozesse, die du nicht selbst gestartet hast. Zu welcher Schicht des Softwarestacks gehören sie vermutlich, und wer hat sie gestartet?</li>
+                    <li>Sortiere nach Prozessorauslastung und beobachte eine Minute lang, wie die Werte springen. Erkläre die Beobachtung mit dem Begriff Zeitscheibe.</li>
+                    <li>Öffne zehn weitere Browser-Tabs mit Videos. Beschreibe, was sich in der Übersicht ändert, und begründe, welche Aufgabe des Betriebssystems gerade besonders gefordert ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 5.1.2: Der Bootvorgang in der falschen Reihenfolge <span class="niveau">AFB II</span>
+                </summary>
+                <p>Die folgenden Ereignisse passieren zwischen dem Drücken des Einschaltknopfs und dem ersten Klick im Browser, aber sie sind durcheinandergeraten:</p>
+                <ul>
+                    <li>Der WLAN-Treiber wird geladen und die Verbindung zum Heimnetz aufgebaut.</li>
+                    <li>Die Firmware prüft, ob Arbeitsspeicher vorhanden ist.</li>
+                    <li>Der Browser fordert vom Betriebssystem ein Fenster an.</li>
+                    <li>Der Kern des Betriebssystems wird in den Arbeitsspeicher geladen.</li>
+                    <li>Der Sperrbildschirm erscheint und fragt nach dem Passwort.</li>
+                    <li>Der Prozessor holt seinen ersten Befehl von einer fest eingebauten Adresse.</li>
+                    <li>Der Bootloader wird von der SSD gelesen.</li>
+                    <li>Der Kern richtet für jeden Prozess einen eigenen Speicherbereich ein.</li>
+                </ul>
+                <ol>
+                    <li>Bringe die Ereignisse in die richtige Reihenfolge und ordne jedes der passenden Schicht des Softwarestacks zu.</li>
+                    <li>An welcher Stelle würde die Meldung „No bootable device“ erscheinen, und welche Schritte fänden dann nicht mehr statt?</li>
+                    <li>Deine Freundin will zwei Betriebssysteme auf einem Laptop installieren und beim Start auswählen können. Welche Schicht muss dafür ein Auswahlmenü anbieten? Begründe.</li>
+                    <li>Erkläre, warum der Prozessor aus Kapitel 4 ohne die Firmware gar nicht wüsste, wo er anfangen soll, obwohl er den Von-Neumann-Zyklus perfekt beherrscht.</li>
+                </ol>
+            </details>
+        </div>

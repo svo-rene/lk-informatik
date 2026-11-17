@@ -1,0 +1,480 @@
+<h2>1. Warum Versionsverwaltung – und was jetzt neu ist</h2>
+
+<p>Stell dir vor, deine Projektgruppe arbeitet gemeinsam an einem KI-Projekt. Am Ende des Tages liegen auf dem gemeinsamen Laufwerk Dateien wie <code>modell.ipynb</code>, <code>modell_neu.ipynb</code>, <code>modell_neu_v2.ipynb</code> und schließlich <code>modell_endgueltig_FINAL_wirklich.ipynb</code>. Niemand weiß mehr genau, welche Fassung die aktuelle ist, wer welchen Teil geschrieben hat und ob die Änderungen von gestern noch enthalten sind. Im schlimmsten Fall speichert ein Teammitglied seine Fassung und überschreibt damit versehentlich die Arbeit eines anderen.</p>
+
+<p>Eine <strong>Versionsverwaltung</strong> (englisch: version control) löst genau dieses Problem: Sie speichert jeden Änderungsstand eines Projekts nachvollziehbar ab, zeigt, wer was wann geändert hat, und hält jeden früheren Stand wiederherstellbar bereit. Das mit Abstand verbreitetste Werkzeug dafür ist <strong>Git</strong>. Git wird in nahezu jedem professionellen Softwareprojekt eingesetzt und ist fester Bestandteil des Lehrplans für den Leistungskurs Informatik.</p>
+
+<p><strong>Was du schon kannst:</strong> Den Einstieg in Git kennst du aus dem Programmierblock (siehe Kurs „Programmieren und Algorithmen“, Seite 2.1.8). Dort hast du auf git.inf7.eu ein <em>eigenes</em> Repository angelegt, Dateien über die Weboberfläche hochgeladen, Commits mit Commit-Nachrichten erzeugt, die Historie gelesen und zwei Versionen einer Datei verglichen. Die ausführliche, bebilderte Anleitung zu allen Schaltflächen findest du dort.</p>
+
+<p><strong>Was auf dieser Seite neu ist:</strong> Im KI-Projekt arbeitet ihr zu dritt in <em>einem gemeinsamen</em> Gruppenrepository. Damit das ohne Chaos funktioniert, braucht ihr klare Regeln: Wer bearbeitet welche Datei? Wie sehen gute Commit-Nachrichten aus? Wie plant ihr eure Aufgaben mit Issues und einem Kanban-Board? Und wie lest ihr aus der Historie ab, was im Team passiert ist?</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Kurz wiederholt: die wichtigsten Handgriffe auf git.inf7.eu</summary>
+                <ul>
+                    <li><strong>Datei hochladen:</strong> Repository → „Datei hinzufügen ▾“ → „Datei hochladen“ → Datei in das Feld ziehen → im Kasten „Änderungen committen“ eine eigene Nachricht in die erste Zeile schreiben → „Direkt in den Branch ‚main‘ einchecken.“ ausgewählt lassen → „Änderungen committen“.</li>
+                    <li><strong>Neue Version:</strong> dieselbe Datei mit <em>genau demselben Namen</em> erneut hochladen. Ein anderer Name ergibt eine zweite Datei.</li>
+                    <li><strong>Im Browser bearbeiten:</strong> Datei öffnen → Stift → „Vorschau“ bzw. „Vorschau der Änderungen“ prüfen → committen.</li>
+                    <li><strong>Historie:</strong> „… Commits“ auf der Repository-Seite (alle Commits) bzw. „Verlauf“ in der Dateiansicht (nur diese Datei).</li>
+                    <li><strong>Vergleichen:</strong> Klick auf eine SHA → rot <code>-</code> entfernt, grün <code>+</code> hinzugefügt.</li>
+                    <li><strong>Alter Stand:</strong> Commit-Liste → „An diesem Punkt im Verlauf anzeigen“; zurück über die Branch-Auswahl <code>main</code>.</li>
+                    <li><strong>Herunterladen:</strong> Dateiansicht → Pfeil (Herunterladen) oder „Originalformat“.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2>2. Grundbegriffe</h2>
+
+<p>Die ersten vier Begriffe kennst du schon, die übrigen kommen für die Teamarbeit dazu:</p>
+
+<ul>
+            <li><strong>Repository (kurz: Repo):</strong> der „Projektordner“, in dem Git alle Dateien und die gesamte Historie aller Änderungen speichert. Euer Gruppenrepository liegt auf git.inf7.eu.</li>
+            <li><strong>Commit:</strong> ein gespeicherter Änderungsstand, vergleichbar mit einem Speicherpunkt in einem Videospiel. Jeder Commit hat eine <strong>Commit-Nachricht</strong>, eine Autorin bzw. einen Autor, einen Zeitpunkt und eine Kennung (SHA).</li>
+            <li><strong>Historie:</strong> die Liste aller Commits, die neuesten oben. Für jede einzelne Datei kannst du dir auch nur ihre eigene Historie anzeigen lassen („Verlauf“).</li>
+            <li><strong>Versionen vergleichen (Diff):</strong> die Gegenüberstellung zweier Stände einer Datei. Entfernte Zeilen sind mit <code>-</code> (meist rot), hinzugefügte mit <code>+</code> (meist grün) markiert.</li>
+            <li><strong>Mitarbeiter:</strong> Personen, die ein Repository in den Einstellungen unter „Mitarbeiter“ eingetragen hat. Mit Schreibrechten dürfen sie Dateien hochladen und Commits erzeugen.</li>
+            <li><strong>Issue:</strong> ein Eintrag im Repository, der eine Aufgabe, eine User Story oder einen Fehler beschreibt. Ein Issue hat eine Nummer (z.&nbsp;B. <code>#4</code>), kann einer Person zugewiesen, mit Labels versehen, kommentiert und geschlossen werden.</li>
+            <li><strong>Projekt (Board):</strong> ein Kanban-Board im Repository. Die Karten sind Issues, die ihr zwischen Spalten wie „Backlog“, „To Do“, „In Progress“ und „Done“ verschiebt (vgl. 10.2).</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Und was ist mit Push, Pull, Branch und Merge?</summary>
+                <p>Wer Git auf dem eigenen Rechner installiert hat, erzeugt Commits zunächst lokal und überträgt sie mit <code>git push</code> auf den Server; mit <code>git pull</code> holt man die Commits der anderen. Ihr arbeitet über die Weboberfläche: Beim Hochladen entsteht der Commit direkt auf dem Server, Push und Pull braucht ihr deshalb nicht.</p>
+                <p><strong>Branches</strong> (parallele Entwicklungslinien), <strong>Pull-Requests</strong> und das Zusammenführen mit <strong>Merge</strong> einschließlich Merge-Konflikten lernst du später im Lernbereich Softwareentwicklung kennen (Ausblick in Abschnitt 9). Im KI-Projekt arbeiten alle im Hauptbranch <code>main</code>, und die Regeln aus Abschnitt 3 sorgen dafür, dass ihr euch nicht in die Quere kommt.</p>
+            </details>
+        </div>
+
+<h2>3. Euer Gruppenrepository auf git.inf7.eu</h2>
+
+<p>Wir nutzen den Git-Server <a href="https://git.inf7.eu" target="_blank" rel="noopener">git.inf7.eu</a>. Er läuft mit der freien Software <strong>Forgejo</strong> und wird vom Verein Neue Informatik e.V. für den Informatikunterricht betrieben. Du meldest dich dort mit deinem Zugang zu beste.schule an. Eine private E-Mail-Adresse oder ein Konto bei einem fremden Anbieter brauchst du nicht.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Die Bilder auf dieser Seite</summary>
+                <p>Die Bilder sind echte Bildschirmfotos von git.inf7.eu (Forgejo 16.0.5, deutsche Oberfläche). Das Beispiel-Repository heißt dort <code>test-anleitung</code>, und wo der Benutzername der Lehrkraft zu sehen ist, steht bei dir dein Benutzername. Einige Beschriftungen sind englisch geblieben, z.&nbsp;B. die Spaltennamen „To Do“ und „In Progress“ im Board. Mit neuen Versionen können sich Beschriftungen leicht ändern; sucht dann nach dem sinngemäß passenden Eintrag.</p>
+            </details>
+        </div>
+
+<h3>3.0 Anmelden (kompakt)</h3>
+
+<ol>
+            <li><code>git.inf7.eu</code> öffnen → oben rechts <strong>„Anmelden“</strong> → unten <strong>„Anmelden mit inf7.eu“</strong>. Die Felder für Benutzername und Passwort darüber benutzt du nicht (Bild 1).</li>
+            <li>Auf <code>auth.inf7.eu</code> das Feld leer lassen und <strong>„Continue with beste.schule“</strong> klicken (Bild 2).</li>
+            <li>Bei beste.schule wie gewohnt mit Benutzername bzw. E-Mail und Passwort anmelden (Bild 3).</li>
+            <li>Nur beim ersten Mal: Die Erlaubnisanfrage zeigt, welche Angaben übertragen werden (E-Mail-Adresse, Klassen, gekürzter Name mit Initialen, Rolle, Schule; „OpenID Connect“ ist das Anmeldeverfahren). Mit <strong>„Erlauben“</strong> bestätigen (Bild 4).</li>
+            <li>Du landest auf deiner Übersicht. Merke dir deinen <strong>Benutzernamen</strong> (oben links unter dem Logo): Wer das Gruppenrepository anlegt, braucht ihn, um dich einzutragen.</li>
+        </ol>
+
+<figure>
+            <img src="../img/git_02_forgejo_anmelden.jpg" alt="Anmeldeseite von Forgejo mit Feldern Benutzername und Passwort und unten der Schaltfläche Anmelden mit inf7.eu" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 1: Anmeldeseite von git.inf7.eu – richtig ist „Anmelden mit inf7.eu“. (Die Startseite mit dem Link „Anmelden“ siehst du in Bild 5.)</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_03_auth_inf7.jpg" alt="Seite auth.inf7.eu mit Feld E-Mail oder Anmeldename und den Schaltflächen Anmelden und Continue with beste.schule" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 2: auth.inf7.eu – weiter mit „Continue with beste.schule“.</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_04_beste_schule_login.jpg" alt="Anmeldeseite von beste.schule mit Benutzername oder E-Mail, Passwort und Anmelden" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 3: Anmeldung bei beste.schule. Nur hier gibst du dein Passwort ein.</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_05_erlaubnis.jpg" alt="Erlaubnisanfrage mit Liste: Deine E-Mail-Adresse, Deine Klassen, OpenID Connect aktivieren, Ein gekürzter Name mit Initialen, Ihre Rolle in der Schule, Deine Schule; Schaltflächen Erlauben und Abbrechen" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 4: Die Erlaubnisanfrage bei der ersten Anmeldung.</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_01_startseite.jpg" alt="Startseite git.inf7.eu, Git-Server für den Informatikunterricht, oben rechts Anmelden" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 5: Die Startseite von git.inf7.eu. Für jede Schule gibt es eine Organisation, die Klassen und Kurse sind darin als Teams angelegt.</figcaption>
+        </figure>
+
+<h3>3.1 Das Repository anlegen</h3>
+
+<p>Ein Gruppenrepository legt genau <strong>eine</strong> Person an. Eure Lehrkraft sagt euch, welcher der beiden Wege gilt:</p>
+
+<table>
+            <thead><tr><th></th><th>Weg A: ein Gruppenmitglied legt an</th><th>Weg B: die Lehrkraft legt an</th></tr></thead>
+            <tbody>
+                <tr><td>Besitzer</td><td>das eigene Konto des Gruppenmitglieds</td><td>die Organisation der Schule (Bild 6)</td></tr>
+                <tr><td>Wer trägt die anderen ein?</td><td>das Gruppenmitglied über Einstellungen → „Mitarbeiter“ (Bild 8)</td><td>die Lehrkraft</td></tr>
+                <tr><td>Was ihr tut</td><td>Schritte 1–4 unten</td><td>nur Schritt 4; das Repository erscheint bei euch, sobald ihr eingetragen seid</td></tr>
+            </tbody>
+        </table>
+
+<figure>
+            <img src="../img/git_34_besitzer_organisation.jpg" alt="Formular Neues Repository mit geöffneter Auswahl Besitzer: das eigene Konto und darunter die Organisation der Schule" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 6: Weg B – Lehrkräfte können als Besitzer statt ihres eigenen Kontos die Organisation der Schule wählen.</figcaption>
+        </figure>
+
+<ol>
+            <li><strong>Neues Repository:</strong> „+“ → „Neues Repository“. Name z.&nbsp;B. <code>ki-projekt-weinsorten</code> (Kleinbuchstaben, Bindestriche, keine Umlaute). <strong>„In privates Repository umwandeln“ ankreuzen.</strong> Eine Beschreibung in einem Satz eintragen.
+                <figure>
+                    <img src="../img/git_08_formular_name_privat.jpg" alt="Formular Neues Repository mit Besitzer, Repository-Name, angekreuztem Kästchen In privates Repository umwandeln und Beschreibung" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 7: Das Formular „Neues Repository“. Der Haken bei „In privates Repository umwandeln“ ist Pflicht.</figcaption>
+                </figure>
+            </li>
+            <li><strong>Initialisieren:</strong> weiter unten „Repository initialisieren“ ankreuzen, bei „.gitignore“ die Vorlage „Python“ wählen, „Lizenz“ leer lassen, dann „Repository erstellen“. So gibt es sofort eine <code>README.md</code> und einen ersten Commit.</li>
+            <li><strong>Mitarbeiter eintragen:</strong> im neuen Repository Reiter „…“ → <strong>Einstellungen</strong> → links <strong>„Mitarbeiter“</strong>. Im Feld „Benutzer suchen …“ den Benutzernamen eines Gruppenmitglieds eingeben, aus der Liste wählen und <strong>„Mitarbeiter hinzufügen“</strong> klicken. Für jedes Gruppenmitglied wiederholen. Danach lassen sich die Rechte der Mitarbeiter in der Regel in dieser Liste einstellen: Gruppenmitglieder brauchen <strong>Schreibrechte</strong>, sonst können sie nichts hochladen. Trag auch die Lehrkraft ein, wenn sie es verlangt.
+                <figure>
+                    <img src="../img/git_33_mitarbeiter.jpg" alt="Einstellungen eines Repositorys mit linker Liste Repository, Einheiten, Mitarbeiter, Webhooks, Branches, Tags, Deploy-Schlüssel, LFS, Aktionen; rechts Feld Benutzer suchen und Schaltfläche Mitarbeiter hinzufügen" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 8: Einstellungen → „Mitarbeiter“. So kommen die anderen in euer privates Gruppenrepository.</figcaption>
+                </figure>
+                <p class="tipp">Findet die Suche eine Person nicht, hat sie sich vermutlich noch nie auf git.inf7.eu angemeldet. Sie meldet sich einmal an, dann klappt es.</p>
+            </li>
+            <li><strong>Kontrolle durch alle:</strong> Jedes Gruppenmitglied meldet sich an und prüft, ob das Repository unter „Repositorys“ in der Übersicht erscheint und ob es „Datei hinzufügen“ sieht. Neben dem Namen muss „Privat“ stehen.</li>
+        </ol>
+
+<h3>3.2 Die Regeln für das Gruppenrepository</h3>
+
+<p><strong>Und immer: vor dem Bearbeiten den neuesten Stand holen.</strong> Sieh vor jeder Arbeitsphase in die Commit-Liste: Hat seit deinem letzten Herunterladen jemand die Datei geändert, die du bearbeiten willst? Wenn ja, lade sie neu herunter. Beim Hochladen wird eine gleichnamige Datei nämlich vollständig ersetzt – Git führt dabei nichts zusammen und warnt auch nicht (siehe Beispiel 2).</p>
+
+<p><strong>Warum eigene Notebooks?</strong> Ein Jupyter-Notebook ist intern eine lange JSON-Textdatei, die neben dem Code auch alle Ausgaben, Grafiken und Ausführungszähler speichert. Arbeiten zwei Personen an derselben <code>.ipynb</code>-Datei, lassen sich ihre Fassungen kaum zusammenführen, und beim Hochladen ersetzt die zweite Fassung einfach die erste. Mit eigenen Notebooks kann das nicht passieren. Außerdem belegt die Historie dann eindeutig, wer welches Modell trainiert und getestet hat. Genau das braucht ihr im KI-Projekt, denn dort trainiert und testet jede Person ein eigenes Modell (vgl. 10.5).</p>
+
+<p>Ein typisches Gruppenrepository sieht so aus:</p>
+
+<pre><code>ki-projekt-weinsorten/
+├── README.md               Ziel, Daten, Vorgehen, Ergebnis, Reflexion (verantwortlich: Tom)
+├── plan.md                 PSP, Gantt Soll/Ist, Risiken, Rollen (verantwortlich: Ali)
+├── titanic_lena.ipynb      Pflicht-Notebook aus KW 47, je Person
+├── titanic_tom.ipynb
+├── titanic_ali.ipynb
+├── modell_lena.ipynb       eigenes Projektmodell, je Person
+├── modell_tom.ipynb
+├── modell_ali.ipynb
+├── kanban/                 Screenshots des Boards am Ende jedes Sprints
+└── praesentation/          Folien als PDF</code></pre>
+
+<p>Die Zuständigkeiten gehören gleich oben in die <code>README.md</code>, damit jede Person sie auf der Startseite des Repositorys sieht:</p>
+
+<pre><code># KI-Projekt Weinsorten
+
+Gruppe: Lena, Tom, Ali (Kurs Informatik)
+
+## Zuständigkeiten
+| Datei            | verantwortlich |
+|------------------|----------------|
+| README.md        | Tom            |
+| plan.md          | Ali            |
+| modell_lena.ipynb, titanic_lena.ipynb | Lena |
+| modell_tom.ipynb, titanic_tom.ipynb   | Tom  |
+| modell_ali.ipynb, titanic_ali.ipynb   | Ali  |
+
+## Ziel
+…</code></pre>
+
+<h3>3.3 Der Arbeitsablauf mit JupyterLite</h3>
+
+<ol>
+            <li><strong>Neueste Fassung holen:</strong> Öffne dein eigenes Notebook im Gruppenrepository und lade es über den Pfeil (Herunterladen) in der Dateiansicht herunter. So arbeitest du sicher mit dem Stand, der auf dem Server liegt.</li>
+            <li><strong>Bearbeiten:</strong> Öffne <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a>, lade die Datei in den Dateibereich hoch und arbeite darin (vgl. 10.4).</li>
+            <li><strong>Herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich → <em>Download</em>. JupyterLite speichert nur im Browser, deshalb ist dieser Schritt Pflicht. Prüfe den Dateinamen: Hat der Browser eine Zahl angehängt (<code>modell_lena(1).ipynb</code>), benennst du die Datei vor dem Hochladen zurück.</li>
+            <li><strong>Hochladen:</strong> Im Gruppenrepository „Datei hinzufügen ▾“ → „Datei hochladen“ wählen und die Datei hineinziehen. Eine gleichnamige Datei wird dabei durch deine neue Fassung ersetzt, die alte bleibt in der Historie erhalten.</li>
+            <li><strong>Committen:</strong> Commit-Nachricht in die erste Zeile des Kastens „Änderungen committen“ eintragen. Die Auswahl <strong>„Direkt in den Branch ‚main‘ einchecken.“</strong> bleibt so, wie sie ist; die zweite Möglichkeit („Einen neuen Branch für diesen Commit erstellen und einen Pull-Request starten.“) wählst du <em>nicht</em>. „Signed-off-by“ und „Commit-E-Mail“ (eine automatische noreply-Adresse) lässt du unverändert. Dann „Änderungen committen“.
+                <figure>
+                    <img src="../img/git_14_commit_optionen.jpg" alt="Kasten Änderungen committen mit Commit-Nachricht, optionaler Beschreibung, Kästchen Signed-off-by, ausgewählter Option Direkt in den Branch main einchecken, Option neuer Branch, Feld Commit-E-Mail und Schaltflächen" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 9: Der Kasten „Änderungen committen“. Richtig ist die voreingestellte Option „Direkt in den Branch ‚main‘ einchecken.“</figcaption>
+                </figure>
+            </li>
+            <li><strong>Kontrollieren:</strong> Klick auf „… Commits“: Steht dein Commit oben? Falls nicht, das Hochladen wiederholen.</li>
+        </ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Lena hat in KW 47 das Pflicht-Notebook zum Titanic-Datensatz bearbeitet. Sie hat die Baumtiefe per Kreuzvalidierung gewählt (Tiefe 4) und eine Testgenauigkeit von 0,80 erreicht. Das Notebook soll jetzt ins Gruppenrepository.</p>
+            <ol>
+                <li><strong>Was:</strong> In JupyterLite das Notebook speichern und über Rechtsklick → <em>Download</em> herunterladen. – <em>warum:</em> JupyterLite speichert die Datei nur im Speicher des Browsers. Wird der Verlauf gelöscht oder ein anderer Rechner benutzt, ist die Arbeit weg.</li>
+                <li><strong>Was:</strong> Den Dateinamen prüfen bzw. ändern auf <code>titanic_lena.ipynb</code>. – <em>warum:</em> Hieße die Datei bei allen <code>11-5_titanic.ipynb</code>, würde jeder Upload das Notebook der anderen ersetzen (Regel 1).</li>
+                <li><strong>Was:</strong> Auf git.inf7.eu das Gruppenrepository öffnen, „Datei hinzufügen“ → „Datei hochladen“ wählen und die Datei in das Feld „Dateien zum Hochladen hier ablegen oder klicken.“ ziehen. – <em>warum:</em> Der Upload über die Weboberfläche erzeugt einen Commit direkt auf dem Server. Eine Installation ist nicht nötig.</li>
+                <li><strong>Was:</strong> Als Commit-Nachricht eintragen: <code>Titanic: Tiefe 4 per Kreuzvalidierung gewählt, Test 0,80</code>, „Direkt in den Branch ‚main‘ einchecken.“ ausgewählt lassen und „Änderungen committen“ klicken. – <em>warum:</em> Die Nachricht sagt, <em>was</em> erreicht wurde, ohne dass man die Datei öffnen muss. Die Voreinstellung ist richtig; die Option „neuer Branch“ würde einen Pull-Request nach sich ziehen, den ihr im Projekt nicht nutzt.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> In der Commit-Liste des Repositorys steht oben ein neuer Commit mit Lenas Benutzernamen, Datum bzw. Zeitangabe und der Nachricht. Im Dateibereich liegt <code>titanic_lena.ipynb</code>, daneben steht die Commit-Nachricht.</p>
+            <p><strong>Kontrolle:</strong> Lena klickt die SHA des Commits an. Angezeigt wird „1 geänderte Dateien …“, nämlich ihre eigene. Ändert sie später die Baumtiefe und lädt erneut hoch, zeigt der Vergleich der beiden Commits die geänderte Codezeile in den <code>"source"</code>-Zeilen des JSON-Textes.</p>
+            </details>
+        </div>
+
+<h2>4. Gute Commit-Nachrichten</h2>
+
+<p>Die Historie ist nur so gut wie ihre Commit-Nachrichten. In einem halben Jahr – oder bei der Vorstellung eures Projekts – willst du ohne Öffnen der Dateien erkennen können, was in welchem Commit passiert ist.</p>
+
+<ul>
+            <li><strong>Kurz und konkret:</strong> eine Zeile, höchstens etwa 60 Zeichen. <em>Was</em> wurde geändert, bei Bedarf mit dem Ergebnis. Einzelheiten gehören in das Feld „Eine ausführlichere (optionale) Beschreibung hinzufügen …“.</li>
+            <li><strong>Ein Thema pro Commit:</strong> Wer zwei unabhängige Dinge erledigt hat, lädt sie in zwei Commits hoch.</li>
+            <li><strong>Bezug zum Issue:</strong> Mit <code>#7</code> in der Nachricht verweist du auf Issue Nummer 7. Forgejo verknüpft den Commit dann in der Regel mit diesem Issue. Schreibst du <code>closes #7</code> in die Nachricht, sollte Forgejo das Issue beim Commit automatisch schließen – probiert es aus und kontrolliert, ob es geklappt hat.</li>
+            <li><strong>Gemeinsame Arbeit sichtbar machen:</strong> Habt ihr zu zweit an einem Rechner gearbeitet, nennt beide Namen, z.&nbsp;B. <code>(mit Ali)</code>.</li>
+            <li><strong>Den Vorschlag nicht übernehmen:</strong> Forgejo schlägt Texte wie „Dateien nach … hochladen“ oder „README.md aktualisiert“ vor. Die sagen nichts über den Inhalt.</li>
+        </ul>
+
+<table>
+            <tr><th>schwach</th><th>besser</th></tr>
+            <tr><td><code>Update modell_tom.ipynb</code></td><td><code>k-NN: k = 5 per Validierung gewählt (0,91 statt 0,87)</code></td></tr>
+            <tr><td><code>fertig</code></td><td><code>Konfusionsmatrix der Testdaten ergänzt (#7)</code></td></tr>
+            <tr><td><code>Änderungen</code></td><td>zwei Commits: <code>Min-Max-Skalierung vor k-NN eingebaut</code> und <code>Tests: drei eigene Testfälle ergänzt</code></td></tr>
+        </table>
+
+<h2>5. Aufgaben planen mit Issues und Board (Kanban)</h2>
+
+<p>Euer Kanban-Board führt ihr direkt im Gruppenrepository. Dann liegen Planung, Code und Historie an einem Ort. Kurz im Überblick:</p>
+
+<ol>
+            <li><strong>Issues anlegen:</strong> Jede Aufgabe bzw. User Story (vgl. 10.2) wird ein Issue. Der Titel benennt die Aufgabe, die Beschreibung enthält ein <strong>Akzeptanzkriterium</strong> („fertig, wenn …“). Das Issue wird einer Person zugewiesen und bekommt bei Bedarf ein Label, z.&nbsp;B. <code>Sprint 1</code>, oder einen Meilenstein, z.&nbsp;B. <code>Zwischenabgabe KW 49</code>.</li>
+            <li><strong>Board anlegen:</strong> Unter <strong>„Projekte“</strong> legt ihr ein Projekt mit der Vorlage „Einfaches Kanban“ an und ordnet ihm die Issues als Karten zu.</li>
+            <li><strong>Arbeiten:</strong> Wer eine Aufgabe beginnt, schiebt die Karte nach „In Progress“. Wer fertig ist, schiebt sie nach „Done“ und schließt das Issue.</li>
+            <li><strong>Verlauf sichern:</strong> Das Board zeigt immer nur den aktuellen Stand. Deshalb lädt die verantwortliche Person am Ende jedes Sprints einen Screenshot des Boards in den Ordner <code>kanban/</code> hoch, z.&nbsp;B. <code>kanban/sprint1_KW48.png</code>. Diese Screenshots bilden den Kanban-Verlauf, der zur Projektdokumentation gehört (vgl. 10.6).</li>
+        </ol>
+
+<h3>5.1 Ein Issue als User Story anlegen</h3>
+
+<ol>
+            <li>Reiter <strong>„Issues“</strong> → <strong>„Neues Issue“</strong>.</li>
+            <li><strong>Titel:</strong> kurz und als Aufgabe formuliert, z.&nbsp;B. „Insertion Sort implementieren und Laufzeit vergleichen“.</li>
+            <li><strong>Beschreibung</strong> im Reiter „Verfassen“: die User Story nach dem Satzschema aus 10.2 und darunter das Akzeptanzkriterium als <strong>Aufgabenliste</strong>. In Markdown schreibst du dafür <code>- [ ]</code> vor jeden Punkt:
+                <pre><code>Als Entwickler*in möchte ich Insertion Sort mit Bubblesort V2 vergleichen,
+damit ich das schnellere Verfahren wählen kann.
+
+Fertig, wenn:
+- [ ] insertion_sort() mit 3 Testfällen
+- [ ] Laufzeit für n=1000 und n=2000 in der Commit-Nachricht</code></pre>
+                Die Werkzeugleiste über dem Textfeld hilft beim Formatieren: Überschrift, fett, kursiv, Zitat, Code, Link, Aufzählung, nummerierte Liste, Aufgabenliste, Einrückung, Tabelle, @-Erwähnung einer Person und Querverweis auf ein anderes Issue. Unter dem Textfeld kannst du Dateien anhängen („Dateien zum Hochladen hier ablegen oder klicken.“).
+                <p class="tipp"><strong>Stolperstein:</strong> Drückst du in einer Liste <kbd>Enter</kbd>, setzt der Editor <code>- [ ]</code> in der nächsten Zeile automatisch fort. Tippe es dann nicht noch einmal, sonst steht es doppelt da. Kontrolliere im Reiter „Vorschau“.</p>
+            </li>
+            <li>Reiter <strong>„Vorschau“</strong>: Die Aufgabenliste erscheint als Kästchen.
+                <figure>
+                    <img src="../img/git_27_issue_vorschau.jpg" alt="Formular Neues Issue im Reiter Vorschau: Titel, User Story, Fertig wenn und zwei leere Kästchen; rechts Seitenleiste mit Branch/Tag, Labels, Meilenstein, Projekte, Zuständige mit Mir selbst zuweisen; Schaltfläche Issue erstellen" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 10: Neues Issue in der Vorschau. Rechts die Seitenleiste.</figcaption>
+                </figure>
+            </li>
+            <li><strong>Seitenleiste rechts</strong> (jeweils über das Zahnrad):
+                <table>
+                    <thead><tr><th>Eintrag</th><th>Bedeutung im Projekt</th></tr></thead>
+                    <tbody>
+                        <tr><td>„Kein Branch/Tag angegeben“</td><td>bezieht das Issue auf einen Branch; bleibt bei euch leer</td></tr>
+                        <tr><td>„Labels“</td><td>farbige Etiketten, z.&nbsp;B. <code>Sprint 1</code> oder <code>Daten</code></td></tr>
+                        <tr><td>„Meilenstein“</td><td>ein Termin, zu dem mehrere Issues fertig sein sollen, z.&nbsp;B. <code>Zwischenabgabe KW 49</code></td></tr>
+                        <tr><td>„Projekte“</td><td>ordnet das Issue einem Board zu (Abschnitt 5.3)</td></tr>
+                        <tr><td>„Zuständige“</td><td>wer die Aufgabe übernimmt. „Mir selbst zuweisen“ trägt dich selbst ein.</td></tr>
+                    </tbody>
+                </table>
+            </li>
+            <li><strong>„Issue erstellen“</strong> klicken. Das Issue bekommt eine Nummer (<code>#1</code>) und das grüne Etikett „Offen“. Mit „Bearbeiten“ änderst du den Titel, mit „Neues Issue“ legst du das nächste an. Darunter ist Platz für Kommentare: Hier besprecht ihr Fragen zur Aufgabe und Änderungswünsche (Regel 2).
+                <figure>
+                    <img src="../img/git_28_issue_erstellt.jpg" alt="Erstelltes Issue Insertion Sort implementieren und Laufzeit vergleichen #1 mit grünem Etikett Offen, Schaltflächen Bearbeiten und Neues Issue, Beschreibung mit Aufgabenliste und darunter Kommentarfeld mit Werkzeugleiste" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 11: Das erstellte Issue <code>#1</code>. Darunter das Kommentarfeld mit Werkzeugleiste.</figcaption>
+                </figure>
+            </li>
+        </ol>
+
+<h3>5.2 Das Board anlegen</h3>
+
+<ol>
+            <li>Reiter <strong>„Projekte“</strong> → <strong>„Neues Projekt“</strong>.</li>
+            <li><strong>Titel</strong> eintragen, z.&nbsp;B. „Kanban KI-Projekt“; die <strong>Beschreibung</strong> ist optional.</li>
+            <li>Bei <strong>„Vorlage“</strong> <strong>„Einfaches Kanban“</strong> wählen. Die anderen Möglichkeiten: „Ohne“ (leeres Board, alle Spalten selbst anlegen) und „Bug-Triage“ (Spalten für Fehlermeldungen).</li>
+            <li><strong>„Kartenvorschau“</strong> legt fest, was auf den Karten zu sehen ist; „Bilder und Text“ kann bleiben.</li>
+            <li><strong>„Projekt erstellen“</strong>. In der Projektliste lässt sich das Projekt später bearbeiten, schließen oder löschen.</li>
+        </ol>
+
+<figure>
+            <img src="../img/git_29_projekt_vorlage.jpg" alt="Formular Neues Projekt mit Titel Kanban Sortierprojekt, leerer Beschreibung, Vorlage Einfaches Kanban und Kartenvorschau Bilder und Text" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 12: Ein neues Projekt mit der Vorlage „Einfaches Kanban“.</figcaption>
+        </figure>
+
+<h3>5.3 Issues auf das Board bringen</h3>
+
+<ol>
+            <li>Das Issue öffnen und in der Seitenleiste bei <strong>„Projekte“</strong> auf das <strong>Zahnrad</strong> klicken.</li>
+            <li>Unter „Offene Projekte“ das Board anklicken. Den Eintrag „Projekte löschen“ darüber nicht anklicken – er dient vermutlich dazu, die Zuordnung wieder zu entfernen.</li>
+            <li>Das Issue erscheint als Karte in der ersten Spalte <strong>„Backlog“</strong>. Die Karte zeigt Titel, Nummer und den Zähler der Aufgabenliste, z.&nbsp;B. „0 / 2“.</li>
+        </ol>
+
+<figure>
+            <img src="../img/git_30_issue_projekt_zuordnen.jpg" alt="Issue #1, in der Seitenleiste ist das Menü Projekte geöffnet mit Suchfeld Projekt filtern, Eintrag Projekte löschen und unter Offene Projekte Kanban Sortierprojekt" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 13: Zahnrad bei „Projekte“ → das Board unter „Offene Projekte“ wählen.</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_31_board.jpg" alt="Board Kanban Sortierprojekt mit Schaltflächen Bearbeiten, Schließen, Löschen, Neue Spalte, oben Labels, Meilensteine und Neues Issue; Spalten Backlog mit einer Karte, To Do und In Progress leer" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 14: Das Board. Die Karte liegt zuerst in „Backlog“, sie zeigt den Zähler „0 / 2“ der Aufgabenliste.</figcaption>
+        </figure>
+
+<h3>5.4 Mit dem Board arbeiten</h3>
+
+<ul>
+            <li><strong>Karte verschieben:</strong> Karte mit der Maus in die nächste Spalte ziehen. Die Zahl im Spaltenkopf zählt die Karten.</li>
+            <li><strong>Spalten:</strong> Die Vorlage „Einfaches Kanban“ legt „Backlog“, „To Do“ und „In Progress“ an; weiter rechts folgt vermutlich „Done“ (zur Seite scrollen). Mit „Neue Spalte“ ergänzt ihr eigene Spalten, über „…“ im Spaltenkopf lassen sie sich bearbeiten.</li>
+            <li><strong>Oben auf der Board-Seite:</strong> „Labels“ und „Meilensteine“ verwalten, „Neues Issue“ direkt aus dem Board anlegen; „Bearbeiten“, „Schließen“, „Löschen“ betreffen das ganze Board – Vorsicht mit „Löschen“.</li>
+            <li><strong>Aufgabenliste abhaken:</strong> Im Issue lassen sich die Kästchen der Aufgabenliste in der Regel direkt anklicken; der Zähler auf der Karte zählt mit.</li>
+            <li><strong>Fertig:</strong> Karte nach „Done“, Issue schließen (im Issue unter dem Kommentarfeld) oder per Commit-Nachricht mit <code>closes #1</code> (Abschnitt 4).</li>
+        </ul>
+
+<figure>
+            <img src="../img/git_32_board_in_progress.jpg" alt="Dasselbe Board, die Karte Insertion Sort implementieren und Laufzeit vergleichen liegt jetzt in der Spalte In Progress" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 15: Die Karte wurde nach „In Progress“ gezogen.</figcaption>
+        </figure>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation: eine verschwundene Änderung.</strong> Ali ist für <code>plan.md</code> verantwortlich. Am Montag lautet der Gantt-Teil der Datei:</p>
+            <pre><code>| Arbeitspaket      | Soll  | Ist   |
+| Daten erkunden    | KW 48 |       |
+| Modell trainieren | KW 49 |       |
+## Risiken
+- Datensatz zu klein → zweiten Datensatz prüfen</code></pre>
+            <p>Am Dienstag lädt Ali die Datei um 10:00 Uhr herunter, trägt beim ersten Paket in der Ist-Spalte „KW 48“ ein und lädt sie um 10:10 Uhr wieder hoch. Tom hatte <code>plan.md</code> schon am Montag heruntergeladen, ergänzt darin ein Risiko und lädt seine Fassung um 10:20 Uhr hoch. Am Nachmittag fehlt Alis Ist-Eintrag.</p>
+            <ol>
+                <li><strong>Was:</strong> die Datei <code>plan.md</code> öffnen und auf „Verlauf“ klicken. Er zeigt drei Commits: Montag Ali „Gantt (Soll) angelegt“, Dienstag 10:10 Ali „Gantt: Ist für KW 48 eingetragen“, Dienstag 10:20 Tom „Risiko Krankheit ergänzt“. – <em>warum:</em> Der Verlauf verrät, wann die Änderung zuletzt noch vorhanden war und wer danach hochgeladen hat.</li>
+                <li><strong>Was:</strong> auf die SHA von Toms Commit klicken. Forgejo vergleicht ihn mit dem vorherigen Stand („Ursprung“):
+                    <pre><code>-| Daten erkunden    | KW 48 | KW 48 |
++| Daten erkunden    | KW 48 |       |
+ | Modell trainieren | KW 49 |       |
+ ## Risiken
+ - Datensatz zu klein → zweiten Datensatz prüfen
++- Krankheit eines Mitglieds → Notebooks täglich hochladen</code></pre>
+                    – <em>warum:</em> Der Vergleich zeigt zwei Änderungen: Tom hat eine Zeile hinzugefügt, und scheinbar hat er Alis Eintrag gelöscht. Tatsächlich hat er ihn nie gesehen. Seine Datei beruhte auf dem Stand vom Montag. Beim Hochladen wird die Datei vollständig durch die hochgeladene Fassung ersetzt, Git führt dabei nichts zusammen.</li>
+                <li><strong>Was:</strong> Ali lädt die aktuelle Fassung (mit Toms Risiko) herunter, trägt seinen Ist-Wert erneut ein und lädt sie mit der Nachricht <code>plan.md: Ist KW 48 wiederhergestellt (durch Upload überschrieben)</code> hoch. Gleichwertig: Er öffnet <code>plan.md</code> im Browser mit dem Stift, trägt den Wert ein und prüft unter „Vorschau der Änderungen“, dass nur diese eine Zeile geändert wird. – <em>warum:</em> Richtig ist nur die Kombination beider Änderungen. Würde Ali einfach seine Fassung von 10:10 Uhr erneut hochladen, verschwände jetzt Toms Risiko.</li>
+                <li><strong>Was:</strong> die Ursache abstellen: Tom hat Regel 2 verletzt. Künftig schreibt er Änderungswünsche als Kommentar in ein Issue, und nur Ali ändert <code>plan.md</code>. Außerdem lädt Ali vor jeder Bearbeitung die neueste Fassung herunter. – <em>warum:</em> Arbeiten mehrere Personen an derselben Datei und laden ganze Dateien hoch, gewinnt immer der letzte Upload.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>plan.md</code> enthält beide Änderungen, und die Historie dokumentiert, was passiert ist.</p>
+            <p><strong>Kontrolle:</strong> Der Vergleich des neuen Commits mit Toms Commit zeigt nur eine geänderte Zeile (Ist-Wert ergänzt) und keine weiteren Löschungen. <strong>Falle:</strong> Git warnt beim Hochladen nicht und meldet keinen Konflikt. Verloren ist trotzdem nichts, denn jeder frühere Stand bleibt in der Historie abrufbar. Man muss ihn aber bemerken und gezielt zurückholen.</p>
+            </details>
+        </div>
+
+<h2>6. Die Historie als Beleg der Einzelanteile</h2>
+
+<p>Im KI-Projekt muss sichtbar sein, was jede Person beigetragen hat. Die Historie liefert dafür Belege:</p>
+
+<ul>
+            <li><strong>Commit-Liste</strong> (Klick auf „… Commits“): Spalte „Autor“ zeigt für jeden Commit, wer ihn erzeugt hat, „Datum“ wann. Mit „Commits suchen …“ findet ihr Commits über Wörter aus der Nachricht, z.&nbsp;B. eine Issue-Nummer.</li>
+            <li><strong>Verlauf einer Datei</strong> (Dateiansicht → „Verlauf“): z.&nbsp;B. alle Commits an <code>modell_lena.ipynb</code> – der Weg von Lenas Modell.</li>
+            <li><strong>Blame</strong> (Dateiansicht → „Blame“): wer welche Zeile zuletzt geändert hat; bei Notebooks wegen des JSON-Formats mühsam, bei <code>README.md</code> und <code>plan.md</code> gut lesbar.</li>
+            <li><strong>Reiter „Aktivität“:</strong> ein Überblick, was in letzter Zeit im Repository passiert ist.</li>
+            <li><strong>Issues und Board:</strong> wer welche Aufgabe übernommen („Zuständige“) und abgeschlossen hat.</li>
+        </ul>
+
+<figure>
+            <img src="../img/git_23_commit_liste.jpg" alt="Commit-Liste mit 4 Commits, Spalten Autor, SHA1, Nachricht, Datum; oben Suchfeld Commits suchen mit Auswahl Dieser Branch" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 16: Die Commit-Liste. In einem Gruppenrepository stehen in der Spalte „Autor“ verschiedene Benutzernamen.</figcaption>
+        </figure>
+
+<p>Die Historie zeigt allerdings nur, wer <em>hochgeladen</em> hat (siehe Abschnitt 8). Deshalb gilt: oft hochladen (Regel 4), bei gemeinsamer Arbeit beide Namen in die Nachricht, und die Anteile zusätzlich in der Reflexion der <code>README.md</code> beschreiben.</p>
+
+<h2>7. Warum ein eigener Git-Server für den Unterricht?</h2>
+
+<p><strong>GitHub</strong> (ein US-amerikanisches Unternehmen, gehört zu Microsoft) ist die bekannteste Plattform für Repositories im Internet – in vielen Schulen aber aus Datenschutzgründen nicht einsetzbar: Jede Schülerin und jeder Schüler müsste einen eigenen Account mit E-Mail-Adresse anlegen, und die Daten lägen bei einem außereuropäischen Anbieter. Der Server <strong>git.inf7.eu</strong> löst das: Ihr meldet euch mit eurem Schulzugang über beste.schule an, übertragen werden nur die Angaben aus der Erlaubnisanfrage (Bild 4), und eure Projekte liegen auf einem Server, der eigens für den Informatikunterricht betrieben wird.</p>
+
+<p>Auch hier gilt: Ins Repository gehören keine Passwörter oder Zugangsdaten, keine personenbezogenen Daten anderer (z.&nbsp;B. Umfragen mit Namen) und keine fremden urheberrechtlich geschützten Dateien. Alles, was ihr einmal committet habt, bleibt in der Historie – auch wenn ihr die Datei später löscht. Und das Gruppenrepository ist immer <strong>privat</strong>.</p>
+
+<h2>8. Grenzen von Git</h2>
+
+<p>Wie jedes Werkzeug hat auch Git Vor- und Nachteile:</p>
+
+<table>
+            <tr>
+                <th>Vorteile</th>
+                <th>Grenzen</th>
+            </tr>
+            <tr>
+                <td>Nachvollziehbarkeit: Jede Änderung ist Person und Zeitpunkt zugeordnet</td>
+                <td>Die Historie zeigt, <em>wer hochgeladen</em> hat, nicht, wer nachgedacht hat (Arbeit zu zweit an einem Rechner, Absprachen, Recherche)</td>
+            </tr>
+            <tr>
+                <td>Gemeinsame Arbeit an einem Ort, ohne Dateien per Mail oder Stick zu verschicken</td>
+                <td>Bei Notebooks und Binärdateien (Bilder, PDF, Präsentationen) sind Vergleiche schwer lesbar und Zusammenführen kaum möglich</td>
+            </tr>
+            <tr>
+                <td>Alte Stände bleiben erhalten und sind wiederherstellbar</td>
+                <td>Ändern mehrere Personen dieselbe Datei, muss von Hand zusammengeführt werden – beim Hochladen ganzer Dateien bemerkt das niemand automatisch</td>
+            </tr>
+        </table>
+
+<h2>9. Ausblick: Branches und Pull-Requests</h2>
+
+<p>Im Kasten „Änderungen committen“ habt ihr die Option „Einen <strong>neuen Branch</strong> für diesen Commit erstellen und einen Pull-Request starten.“ gesehen, und das Repository hat die Reiter „Pull-Requests“ und die Anzeige „1 Branch“. Das steckt dahinter:</p>
+
+<ul>
+            <li>Ein <strong>Branch</strong> ist ein Nebenzweig der Historie. Man ändert dort, ohne <code>main</code> zu berühren.</li>
+            <li>Ein <strong>Pull-Request</strong> ist der Antrag, die Änderungen eines Branches nach <code>main</code> zu übernehmen. Andere sehen sich den Diff an, kommentieren und stimmen zu; erst dann wird zusammengeführt (Merge).</li>
+            <li>Ändern zwei Branches dieselben Zeilen, entsteht ein <strong>Merge-Konflikt</strong>, den man von Hand auflöst. Bei Textdateien wie <code>.py</code> und <code>.md</code> geht das gut, bei Notebooks kaum.</li>
+        </ul>
+
+<p>So arbeiten Softwarefirmen. Im KI-Projekt nutzt ihr das noch <strong>nicht</strong>: Alle committen direkt in <code>main</code>, und die Regeln aus Abschnitt 3.2 verhindern, dass zwei Personen dieselbe Datei ändern. Branches und Pull-Requests lernst du im Lernbereich Softwareentwicklung kennen.</p>
+
+<h2>10. Häufige Fehler im Team</h2>
+
+<table>
+            <thead><tr><th>Problem</th><th>Ursache und Lösung</th></tr></thead>
+            <tbody>
+                <tr><td>Ein Gruppenmitglied sieht das Repository nicht.</td><td>Es ist noch nicht als Mitarbeiter eingetragen oder hat sich noch nie angemeldet. Einmal anmelden lassen, dann unter Einstellungen → „Mitarbeiter“ eintragen (Abschnitt 3.1).</td></tr>
+                <tr><td>Ein Gruppenmitglied sieht das Repository, aber kein „Datei hinzufügen“.</td><td>Es hat nur Leserechte, oder es sieht gerade einen alten Stand (SHA statt <code>main</code> in der Branch-Auswahl). Rechte in der Mitarbeiter-Liste prüfen bzw. zu <code>main</code> wechseln.</td></tr>
+                <tr><td>Eine Änderung ist verschwunden.</td><td>Jemand hat eine ältere Fassung derselben Datei hochgeladen (Beispiel 2). Im Verlauf der Datei nachsehen und beide Änderungen in einem neuen Commit zusammenführen.</td></tr>
+                <tr><td>Es gibt plötzlich <code>modell_lena(1).ipynb</code>.</td><td>Der Browser hat beim Herunterladen eine Zahl angehängt. Überzählige Datei löschen, Datei mit richtigem Namen neu hochladen.</td></tr>
+                <tr><td>Im Issue steht <code>- [ ] - [ ]</code>.</td><td>Der Editor hat die Aufgabenliste nach <kbd>Enter</kbd> schon fortgesetzt. Issue mit „Bearbeiten“ korrigieren.</td></tr>
+                <tr><td>Das Issue erscheint nicht auf dem Board.</td><td>Es ist dem Projekt noch nicht zugeordnet: im Issue Zahnrad bei „Projekte“ → Board wählen (Abschnitt 5.3).</td></tr>
+                <tr><td>Versehentlich „neuen Branch … Pull-Request“ gewählt.</td><td>Die Änderung liegt nicht in <code>main</code>. Pull-Request abbrechen, die Datei noch einmal mit „Direkt in den Branch ‚main‘ einchecken.“ hochladen; im Zweifel die Lehrkraft fragen.</td></tr>
+                <tr><td>Ein Commit fehlt in der Liste.</td><td>Seite neu laden. Fehlt er weiter, das Hochladen wiederholen.</td></tr>
+            </tbody>
+        </table>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Git im Berufsalltag</summary>
+                <p><strong>Alltag:</strong> Die Versionsgeschichte in Online-Dokumenten („Version von gestern wiederherstellen“) folgt derselben Idee wie Git.</p>
+                <p><strong>Beruf:</strong> In Softwareentwicklung, Data Science und Forschung ist Git Standard. Ein <strong>ML Engineer</strong> versioniert damit Trainingsskripte und Konfigurationen, damit sich jedes Modell später exakt reproduzieren lässt, und plant die Arbeit des Teams in Issues und Boards. Viele Unternehmen und Forschungseinrichtungen betreiben dafür eigene GitLab- oder Forgejo-Server, damit Quellcode und Daten im eigenen Haus bleiben – genau wie der Server, den ihr nutzt.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Versionsverwaltung</strong> – dokumentiert jeden Änderungsstand eines Projekts. Sie macht nachvollziehbar, wer wann was geändert hat, hält alle früheren Stände wiederherstellbar bereit und ermöglicht es mehreren Personen, gemeinsam an einem Projekt zu arbeiten.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Regel 1 – Jede Person arbeitet in ihrem eigenen Notebook.</strong> Der Dateiname enthält den Vornamen, z.&nbsp;B. <code>modell_lena.ipynb</code> oder <code>titanic_lena.ipynb</code>. Nur Lena lädt diese Datei hoch.</p>
+            <p><strong>Regel 2 – Jede gemeinsame Datei hat genau eine verantwortliche Person.</strong> <code>README.md</code> (Projektbeschreibung) pflegt z.&nbsp;B. Tom, <code>plan.md</code> (Projektstrukturplan, Gantt-Diagramm mit Soll und Ist, Risiken) pflegt z.&nbsp;B. Ali. Wer dort etwas geändert haben möchte, schreibt es als Kommentar in ein Issue.</p>
+            <p><strong>Regel 3 – Jeder Commit bekommt eine aussagekräftige Nachricht</strong> (Abschnitt 4).</p>
+            <p><strong>Regel 4 – Lieber oft hochladen als selten.</strong> Mindestens am Ende jeder Arbeitsphase, damit nichts im Browser verloren geht und die Historie euren Weg zeigt.</p>
+        </div>
+
+<div class="merke">
+            <p>Git (die Versionsverwaltung selbst) und GitHub (ein Anbieter, der Repositories im Internet hostet) sind zwei verschiedene Dinge. Forgejo ist eine freie Software, mit der man einen solchen Dienst selbst betreiben kann – so wie auf git.inf7.eu oder beim gemeinnützigen Verein hinter Codeberg.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.3.1: Das Gruppenrepository einrichten <span class="niveau">AFB I</span></summary>
+                <p>Richtet euer Gruppenrepository für das KI-Projekt ein (Abschnitt 3):</p>
+                <ol>
+                    <li>Meldet euch alle auf <a href="https://git.inf7.eu" target="_blank" rel="noopener">git.inf7.eu</a> über „Anmelden mit inf7.eu“ → „Continue with beste.schule“ an und tauscht eure Benutzernamen aus.</li>
+                    <li>Eine Person legt das private Repository an (falls eure Lehrkraft es nicht schon vorbereitet hat) und trägt die anderen unter Einstellungen → „Mitarbeiter“ mit Schreibrechten ein. Alle prüfen, ob sie „Datei hinzufügen“ sehen.</li>
+                    <li>Legt fest, wer <code>README.md</code> und wer <code>plan.md</code> verantwortet. Die Person für <code>README.md</code> ergänzt die Datei mit Projekttitel, Gruppenmitgliedern und diesen Zuständigkeiten.</li>
+                    <li>Jede Person lädt ihr Titanic-Notebook als <code>titanic_&lt;vorname&gt;.ipynb</code> mit einer aussagekräftigen Commit-Nachricht hoch.</li>
+                </ol>
+                <p>Notiere zum Schluss, welche Commits die Commit-Liste jetzt zeigt, und erkläre in zwei Sätzen, warum jede Person einen eigenen Dateinamen verwendet.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.3.2: Commit-Nachrichten verbessern <span class="niveau">AFB II</span></summary>
+                <p>In einem Gruppenrepository stehen diese Commits. Daneben steht, was tatsächlich geändert wurde:</p>
+                <table>
+                    <tr><th>Nachricht</th><th>tatsächliche Änderung</th></tr>
+                    <tr><td><code>Update modell_tom.ipynb</code></td><td>Tom hat k bei k-NN von 3 auf 5 geändert, weil die Validierungsgenauigkeit damit von 0,87 auf 0,91 stieg.</td></tr>
+                    <tr><td><code>fertig</code></td><td>Ali hat die Konfusionsmatrix der Testdaten ergänzt. Das war Issue #7.</td></tr>
+                    <tr><td><code>asdf</code></td><td>Mia hat in <code>plan.md</code> die Ist-Spalte für KW 49 ausgefüllt.</td></tr>
+                    <tr><td><code>Änderungen</code></td><td>Lena hat in ihrem Notebook eine Skalierung eingebaut und im Abschnitt „Tests“ am Ende des Notebooks drei Testfälle ergänzt.</td></tr>
+                    <tr><td><code>Alle Dateien hochgeladen</code></td><td>Ben hat <code>modell_ben.ipynb</code>, seine Folien in <code>praesentation/</code> und einen Screenshot des Boards in einem Upload hochgeladen.</td></tr>
+                </table>
+                <ol type="a">
+                    <li>Formuliere für jede Zeile eine bessere Commit-Nachricht.</li>
+                    <li>Entscheide für jede Zeile, ob es besser gewesen wäre, die Änderung auf mehrere Commits aufzuteilen, und begründe.</li>
+                </ol>
+            </details>
+        </div>

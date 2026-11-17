@@ -1,0 +1,66 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.2.3: Spaltentransposition <span class="niveau">AFB II</span></summary>
+                <p>Wir nehmen <strong>genau 3 Spalten</strong>. Schreibe den Text zeilenweise in eine Tabelle und lies dann <em>spaltenweise</em> ab.</p>
+                <p><strong>Beispiel:</strong> Text „HALLOWELT“ → Tabelle (3 Spalten):</p>
+                <pre>H  A  L
+L  O  W
+E  L  T</pre>
+                <p>Spaltenweise lesen: 1. Spalte „HLE“, 2. Spalte „AOL“, 3. Spalte „LWT“ → Geheimtext: <code>HLEAOLLWT</code></p>
+                <ol type="a">
+                    <li>Schreibe <code>verschluesseln_spalten(text)</code> für 3 Spalten.</li>
+                    <li>Schreibe <code>entschluesseln_spalten(geheim)</code> für 3 Spalten.</li>
+                    <li>Wenn am Ende Zeichen fehlen, fülle mit <code>X</code> auf.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.2.4: Expansion (Füllzeichen einfügen) <span class="niveau">AFB II</span></summary>
+                <p>Zwischen je zwei Buchstaben kommt ein Füllzeichen, z.&nbsp;B. <code>X</code>.</p>
+                <p><strong>Beispiel:</strong> „HALLO“ mit Füllzeichen „X“ → „HXAXLXLXO“</p>
+                <ol type="a">
+                    <li>Schreibe <code>expandieren(text, fuell)</code>.</li>
+                    <li>Schreibe <code>komprimieren(text)</code>, das jedes zweite Zeichen (beginnend beim ersten) übernimmt.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.2.5: Abgefangene Nachrichten einordnen <span class="niveau">AFB II</span></summary>
+                <p>Ein Funkamateur hat vier Nachrichten abgefangen. Er weiß, dass alle vier den Klartext <code>INFORMATIK</code> übermitteln, aber mit verschiedenen Verfahren.</p>
+                <ol type="a">
+                    <li><code>IFRAINOMTK</code></li>
+                    <li><code>PUMVYTHAPR</code></li>
+                    <li><code>IONOSUAUQK</code></li>
+                    <li>„Ich nehme Fahrrad oder Roller, morgen auch Tante Ina kommt.“</li>
+                </ol>
+                <p>Ordne jede Nachricht einem Verfahren der Übersicht (Abb.&nbsp;1) zu, begründe die Zuordnung und bestimme, wo möglich, den Schlüssel.</p>
+                <p class="tipp">Gehe vor wie in Beispiel 2: Buchstabenbestand vergleichen, Muster prüfen, Verschiebungen berechnen. Achtung bei c): Manche Buchstaben bleiben unverändert – was bedeutet das für den Schlüssel?</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.2.6: Versteckte Botschaft auslesen <span class="niveau">AFB II</span></summary>
+                <p>Bei einem <em>Akrostichon</em> ergeben die Anfangsbuchstaben der Wörter eine versteckte Nachricht.</p>
+                <ol type="a">
+                    <li>Schreibe eine Python-Funktion <code>finde(text)</code>, die die Anfangsbuchstaben aller Wörter als Großbuchstaben zurückgibt. Mehrere Leerzeichen hintereinander dürfen nicht stören.</li>
+                    <li>Weise die Funktion mit diesen Testfällen nach und notiere jeweils die tatsächliche Ausgabe:
+                        <table class="gitter">
+                            <tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr>
+                            <tr><td><code>"Tim rief Ella für fünf Euro nachmittags"</code></td><td><code>"TREFFEN"</code></td></tr>
+                            <tr><td><code>"  Hallo   Welt "</code></td><td><code>"HW"</code></td></tr>
+                            <tr><td><code>""</code></td><td><code>""</code></td></tr>
+                        </table>
+                    </li>
+                    <li>Ordne das Verfahren in die Übersicht ein und beurteile seine Sicherheit mithilfe des Kerckhoffs-Prinzips.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,14 @@
+{
+  "nr": "5.6",
+  "titel": "Projekt-Leitfaden",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

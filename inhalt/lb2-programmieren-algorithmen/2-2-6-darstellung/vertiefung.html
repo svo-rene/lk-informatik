@@ -1,0 +1,36 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.6.6: Fehler finden im Struktogramm <span class="niveau">AFB III</span></summary>
+                <p>Das Struktogramm beschreibt eine lineare Suche:</p>
+                <pre><code>┌──────────────────────────────────────────────┐
+│ Eingabe: liste, x                            │
+├──────────────────────────────────────────────┤
+│ i ← 0                                        │
+├──────────────────────────────────────────────┤
+│ solange i &lt; Länge(liste) und liste[i] ≠ x    │
+│   ┌──────────────────────────────────────────┤
+│   │ i ← i + 1                                │
+├───┴──────────────────────────────────────────┤
+│ Ausgabe: „gefunden an Position“, i           │
+└──────────────────────────────────────────────┘</code></pre>
+                <ol>
+                    <li>Bestimme die Ausgabe für liste = [4, 8, 1] mit x = 8, mit x = 5 sowie für die leere Liste mit x = 5. Lege eine Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe an.</li>
+                    <li>Beschreibe den Fehler und korrigiere das Struktogramm.</li>
+                    <li>Ein Mitschüler setzt die Schleifenbedingung in Python als <code>while liste[i] != x and i &lt; len(liste):</code> um. Gib an, bei welchen Testfällen das Programm abstürzt, und begründe mit der Auswertungsreihenfolge von <code>and</code>.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.6.7: Zahlenraten ohne Sprung darstellen <span class="niveau">AFB III</span></summary>
+                <p>Beim Zahlenraten aus Aufgabe 2.1.2.2 endet die Schleife, wenn die Zahl erraten wurde oder 7 Versuche verbraucht sind. Viele Lösungen verwenden dafür <code>break</code>. Struktogramme kennen keine Sprünge, deshalb müssen beide Abbruchgründe in die Schleifenbedingung.</p>
+                <ol>
+                    <li>Erstelle ein Struktogramm mit einer kopfgesteuerten Schleife, deren Bedingung beide Abbruchgründe enthält. Verwende eine Variable <code>erraten</code>.</li>
+                    <li>Damit sich das Programm testen lässt, werden die Tipps nicht eingegeben, sondern als Liste übergeben. Implementiere <code>rateversuche(geheim, tipps)</code> nach deinem Struktogramm. Die Funktion gibt die Anzahl der Versuche bis zum Treffer zurück. Wurde nach 7 Versuchen oder am Ende der Liste nicht getroffen, gibt sie <code>None</code> zurück. Teste mit <code>(42, [50, 25, 42])</code>, <code>(42, [])</code>, <code>(1, [1])</code>, <code>(42, [1, 2, 3, 4, 5, 6, 7, 42])</code> und <code>(42, [42, 42])</code>.</li>
+                    <li>Beurteile, welche Darstellung (Pseudocode, Struktogramm oder PAP) am besten geeignet ist (a) für ein Gespräch mit einer Spieleentwicklerin ohne Programmierkenntnisse, (b) für die Umsetzung in Python und (c) für die Suche nach einem Fehler in der Abbruchbedingung.</li>
+                </ol>
+            </details>
+        </div>

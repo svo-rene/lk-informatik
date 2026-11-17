@@ -1,0 +1,33 @@
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.11.3: Hybrid im Kleinen <span class="niveau">AFB II</span></summary>
+                <p>Ein Spielzeugmodell des hybriden Verfahrens: Als symmetrisches Verfahren dient Caesar, der Sitzungsschlüssel k ist die Verschiebung. Bob hat den öffentlichen RSA-Schlüssel (e, n) = (5, 91) und den privaten Schlüssel d = 29. Alice wählt zufällig k = 7 und will Bob <code>KINO UM ACHT</code> schicken.</p>
+                <ol type="a">
+                    <li>Verschlüssele die Nachricht symmetrisch mit k.</li>
+                    <li>Verschlüssele den Sitzungsschlüssel k mit Bobs öffentlichem Schlüssel.</li>
+                    <li>Führe Bobs Entschlüsselung vollständig durch: zuerst den Sitzungsschlüssel (fortgesetztes Quadrieren), dann die Nachricht.</li>
+                    <li>Alice will dieselbe Nachricht auch an Clara schicken. Gib an, was sie zusätzlich berechnen muss und was gleich bleibt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.11.5: Hybrid programmieren <span class="niveau">AFB II</span></summary>
+                <p>Setze das Spielzeugmodell aus Aufgabe 8.11.3 in Python um. Für Caesar kannst du deine Funktionen aus 8.3.2 verwenden, für RSA <code>pow(x, e, n)</code>.</p>
+                <ol type="a">
+                    <li>Schreibe <code>hybrid_verschluesseln(text, k, oeffentlich)</code>, die das Paar (verschlüsselter Sitzungsschlüssel, Geheimtext) zurückgibt, und <code>hybrid_entschluesseln(k_geheim, geheimtext, privat)</code>.</li>
+                    <li>Weise die Funktionen mit Testfällen nach (erwartete und tatsächliche Ausgabe):
+                        <ul>
+                            <li><code>hybrid_verschluesseln("HALLO", 11, (5, 91))</code> → <code>(72, "SLWWZ")</code></li>
+                            <li><code>hybrid_entschluesseln(72, "SLWWZ", (29, 91))</code> → <code>"HALLO"</code></li>
+                            <li>Ver- und anschließendes Entschlüsseln von <code>"KINO UM ACHT"</code> mit k = 7 liefert den Ausgangstext.</li>
+                        </ul>
+                    </li>
+                    <li>Erweitere das Programm so, dass k mit <code>secrets.randbelow</code> zufällig gewählt wird. Begründe, warum k = 0 ausgeschlossen werden sollte.</li>
+                    <li>Beurteile, welche beiden Bausteine du in einer echten Anwendung austauschen müsstest, und wodurch.</li>
+                </ol>
+            </details>
+        </div>

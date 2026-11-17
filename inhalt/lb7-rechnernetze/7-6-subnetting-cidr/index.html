@@ -1,0 +1,180 @@
+<p>
+            Warum darf dein Laptop zu Hause 192.168.178.23 heißen und der Drucker 192.168.178.40, aber nicht 192.168.179.40? Und wie teilt eine Schule ihr Netz so auf, dass das Verwaltungsnetz vom Schülernetz getrennt ist? Die Antwort steckt in der Subnetzmaske – und in ein wenig Binärrechnung.
+        </p>
+
+<h2>Subnetze</h2>
+
+<p>Ein Subnetz (Subnetzwerk) ist ein logisch abgegrenzter Teil eines IP-Netzes. Die Aufteilung eines Netzes in Subnetze ermöglicht eine effizientere Verwaltung und Organisation des Netzwerkverkehrs: Broadcasts bleiben im eigenen Subnetz, und ein Router oder eine Firewall zwischen den Subnetzen kann regeln, wer wen erreichen darf. Subnetze werden durch eine Subnetzmaske definiert, die angibt, welcher Teil der IP-Adresse das Netz kennzeichnet und welcher Teil den Host (das Endgerät im Netz) identifiziert.</p>
+
+<h2>Subnetzmaske</h2>
+
+<p>Eine Subnetzmaske ist eine 32-Bit-Zahl, die festlegt, wie eine IP-Adresse in Netzanteil und Hostanteil aufgeteilt wird. Sie besteht aus einer ununterbrochenen Folge von Einsen (Netzanteil), gefolgt von Nullen (Hostanteil). Das ist sowohl für die Zustellung im lokalen Netz (LAN) als auch für das Routing über größere Entfernungen (WAN) entscheidend.</p>
+
+<h2>Funktion der Subnetzmaske: die AND-Verknüpfung</h2>
+
+<p>Die Subnetzmaske <strong>kennzeichnet</strong> den Netzanteil der IP-Adresse. Verknüpft man IP-Adresse und Maske bitweise mit AND (1 AND 1 = 1, sonst 0), bleiben genau die Bits des Netzanteils stehen, alle Hostbits werden 0: Das Ergebnis ist die <strong>Netzadresse</strong>. Setzt man dagegen alle Hostbits auf 1, erhält man die <strong>Broadcast-Adresse</strong>. Zwei Hosts liegen im selben Subnetz, wenn die AND-Verknüpfung für beide dieselbe Netzadresse ergibt.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: 192.168.1.1 mit der Maske 255.255.255.0 <span class="beispiel-kopf">einfach</span></summary>
+            <p>Die ersten drei Byte der Maske sind 255 (alle Bits 1), das letzte ist 0. Netzadresse ist daher 192.168.1.0. In diesem Subnetz gibt es 256 Adressen, davon 254 nutzbare Hostadressen: 192.168.1.1 bis 192.168.1.254.</p>
+            <ul>
+                <li>192.168.1.0 ist die Netzadresse, die das gesamte Netz bezeichnet und keinem einzelnen Host zugewiesen werden kann.</li>
+                <li>192.168.1.255 ist die Broadcast-Adresse, über die Nachrichten an alle Geräte im Netz gesendet werden.</li>
+                <li>Adressen außerhalb von 192.168.1.1 bis 192.168.1.254 sind in diesem Subnetz nicht möglich.</li>
+            </ul>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: 192.168.10.77/27 binär <span class="beispiel-kopf">komplex</span></summary>
+            <p>/27 bedeutet 27 Einsen, die Maske ist also 255.255.255.224. Interessant ist nur das letzte Byte, weil die ersten drei Bytes der Maske 255 sind:</p>
+<pre>IP-Adresse   192.168.10. 77   →  ...00001010.010 01101
+Maske        255.255.255.224  →  ...11111111.111 00000
+AND          192.168.10. 64   →  ...00001010.010 00000   = Netzadresse
+Hostbits = 1 192.168.10. 95   →  ...00001010.010 11111   = Broadcast-Adresse</pre>
+            <p>Das Subnetz 192.168.10.64/27 hat 2<sup>5</sup> = 32 Adressen: Netzadresse .64, Hosts .65 bis .94 (30 Hosts), Broadcast .95. Der Rechner 192.168.10.100 liegt <strong>nicht</strong> in diesem Subnetz: 100 = 011&nbsp;00100, AND ergibt 011&nbsp;00000 = 96, also Netz 192.168.10.96.</p>
+            </details>
+        </div>
+
+<h2>CIDR-Schreibweise</h2>
+
+<p>CIDR steht für Classless Inter-Domain Routing. Es ist eine Methode zur Vergabe von IP-Adressen und zur Verwaltung von Routen, die die Adresszuweisung flexibler macht. Frühere, klassenbasierte Verfahren (Classful Networking) gaben feste Netzgrößen vor (Klasse A: /8, B: /16, C: /24). CIDR erlaubt dagegen Adressblöcke beliebiger Größe. Dazu wird die IP-Adresse mit einer Präfixlänge kombiniert, die das Netz festlegt.</p>
+
+<p>Zum Beispiel beschreibt 192.168.1.0/24 ein Netz, bei dem die ersten 24 Bit das Netzpräfix bilden und die letzten 8 Bit (von insgesamt 32 Bit) für die Hostadressierung genutzt werden. Das ergibt 256 Adressen, von denen eine für das Netz selbst und eine für den Broadcast reserviert ist; es bleiben 254 nutzbare Adressen für Geräte.</p>
+
+<p>CIDR verbessert die Ausnutzung der IP-Adressen und verkleinert die Routingtabellen im Internet. Durch die variable Länge der Netzpräfixe können Netze genau die Größe haben, die sie benötigen, statt an die festen Größen der Klassen gebunden zu sein. Das spart den knappen IPv4-Adressraum und erleichtert das Zusammenfassen von Routen (Aggregation), wodurch die Routingtabellen der Internet-Router deutlich weniger Einträge brauchen.</p>
+
+<h3>Subnetzmaske angeben</h3>
+
+<p>Die Subnetzmaske für das Netz 192.168.1.0/24 ist 255.255.255.0. Man erhält sie, indem man die Präfixlänge (hier 24) als 24 aufeinanderfolgende Einsen schreibt, gefolgt von Nullen bis zum Ende der 32 Bit. In dezimaler Darstellung entspricht jeder 8-Bit-Block (ein Byte) einem Wert zwischen 0 und 255, wobei 255 lauter Einsen (11111111) bedeutet. Ein 24-Bit-Präfix ergibt deshalb 255.255.255.0: Die ersten drei Byte sind voll, das letzte Byte ist leer und steht für die Hostadressen im Subnetz.</p>
+
+<table class="gitter">
+            <thead>
+                <tr><th>Präfix</th><th>/24</th><th>/25</th><th>/26</th><th>/27</th><th>/28</th><th>/29</th><th>/30</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>letztes Byte der Maske</td><td>0</td><td>128</td><td>192</td><td>224</td><td>240</td><td>248</td><td>252</td></tr>
+                <tr><td>Adressen</td><td>256</td><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td></tr>
+                <tr><td>nutzbare Hosts</td><td>254</td><td>126</td><td>62</td><td>30</td><td>14</td><td>6</td><td>2</td></tr>
+            </tbody>
+        </table>
+
+<h3>Ein Netz in gleich große Subnetze unterteilen</h3>
+
+<p>Um das Netz 192.168.1.0/24 in 4 Subnetze zu unterteilen, musst du zwei zusätzliche Bits des Hostanteils für die Netzadressierung verwenden (2<sup>2</sup> = 4). Dadurch steigt die Präfixlänge von /24 auf /26. Die vier Subnetze haben jeweils die Subnetzmaske 255.255.255.192 und 2<sup>32−26</sup> = 2<sup>6</sup> = 64 Adressen. Die erste Adresse jedes Subnetzes ist die Netzadresse, die letzte die Broadcast-Adresse, die Adressen dazwischen sind für Hosts nutzbar.</p>
+
+<table>
+            <thead>
+                <tr><th>Subnetz</th><th>Netzadresse</th><th>Hostadressen</th><th>Broadcast-Adresse</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>192.168.1.0/26</td><td>192.168.1.1 bis 192.168.1.62</td><td>192.168.1.63</td></tr>
+                <tr><td>2</td><td>192.168.1.64/26</td><td>192.168.1.65 bis 192.168.1.126</td><td>192.168.1.127</td></tr>
+                <tr><td>3</td><td>192.168.1.128/26</td><td>192.168.1.129 bis 192.168.1.190</td><td>192.168.1.191</td></tr>
+                <tr><td>4</td><td>192.168.1.192/26</td><td>192.168.1.193 bis 192.168.1.254</td><td>192.168.1.255</td></tr>
+            </tbody>
+        </table>
+
+<h2>VLSM: Subnetze unterschiedlicher Größe</h2>
+
+<p>Selten brauchen alle Abteilungen gleich viele Adressen. Mit <strong>VLSM</strong> (Variable Length Subnet Mask) teilt man einen Adressblock in Subnetze mit <em>unterschiedlichen</em> Präfixlängen auf. Vorgehen:</p>
+
+<ol>
+            <li>Für jedes Subnetz den Bedarf bestimmen: Geräte + 1 Adresse für das Gateway (Router).</li>
+            <li>Die Subnetze nach Größe absteigend sortieren.</li>
+            <li>Für jedes Subnetz die kleinste Größe 2<sup>h</sup> wählen, für die 2<sup>h</sup> − 2 ≥ Bedarf gilt (Präfix = 32 − h).</li>
+            <li>Die Subnetze der Reihe nach vergeben. Jedes Subnetz beginnt an einer Adresse, die ein Vielfaches seiner Größe ist; weil man mit dem größten anfängt, ist das automatisch erfüllt.</li>
+        </ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3: VLSM für eine kleine Firma <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Block 172.16.0.0/24. Vertrieb 50 Geräte, Entwicklung 20 Geräte, eine Router-Verbindung (2 Adressen).</p>
+            <ol>
+                <li><strong>Bedarf bestimmen:</strong> Vertrieb 50 + 1 = 51, Entwicklung 20 + 1 = 21 (je eine Adresse für das Gateway); die Router-Verbindung braucht genau 2 Adressen, ein zusätzliches Gateway gibt es dort nicht.</li>
+                <li><strong>Absteigend sortieren:</strong> 51, 21, 2 – so beginnt jedes Subnetz automatisch an einer passenden Grenze.</li>
+                <li><strong>Größen wählen:</strong> 51 Hosts: 2<sup>5</sup> − 2 = 30 reicht nicht, 2<sup>6</sup> − 2 = 62 reicht → 64 Adressen, /26. 21 Hosts: 2<sup>4</sup> − 2 = 14 reicht nicht, 2<sup>5</sup> − 2 = 30 reicht → 32 Adressen, /27. 2 Hosts: 2<sup>2</sup> − 2 = 2 → 4 Adressen, /30.</li>
+                <li><strong>Der Reihe nach vergeben:</strong> Vertrieb ab 172.16.0.0 (bis .63). Entwicklung ab .64 – 64 ist ein Vielfaches von 32 (bis .95). Router-Link ab .96 – 96 ist ein Vielfaches von 4 (bis .99).</li>
+            </ol>
+            <table>
+                <thead>
+                    <tr><th>Subnetz</th><th>Bedarf</th><th>Präfix</th><th>Netz</th><th>Hosts</th><th>Broadcast</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Vertrieb</td><td>50 + 1 = 51</td><td>/26 (62)</td><td>172.16.0.0</td><td>.1 bis .62</td><td>.63</td></tr>
+                    <tr><td>Entwicklung</td><td>20 + 1 = 21</td><td>/27 (30)</td><td>172.16.0.64</td><td>.65 bis .94</td><td>.95</td></tr>
+                    <tr><td>Router-Link</td><td>2</td><td>/30 (2)</td><td>172.16.0.96</td><td>.97 und .98</td><td>.99</td></tr>
+                </tbody>
+            </table>
+            <p>Frei bleibt 172.16.0.100 bis 172.16.0.255. Mit festen /26-Netzen hätte die Router-Verbindung allein 64 Adressen verbraucht.</p>
+            <p><strong>Probe:</strong> Die Bereiche .0–.63, .64–.95 und .96–.99 schließen lückenlos aneinander an und überschneiden sich nicht. Verbraucht sind 64 + 32 + 4 = 100 Adressen, frei bleiben 256 − 100 = 156 (.100 bis .255).</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 4: Subnetze mit VLANs auf einem gemeinsamen Switch <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Worum geht es?</strong> In der Firma aus Beispiel 3 sitzen Vertrieb und Entwicklung auf derselben Etage und hängen am selben Switch. Damit die beiden Subnetze trotzdem getrennt bleiben, teilt man den Switch in <strong>VLANs</strong> (Virtual LANs) auf: Jeder Port wird einem VLAN zugeordnet, und der Switch leitet Frames – auch Broadcasts – nur zwischen Ports desselben VLANs weiter. Ein VLAN verhält sich also wie ein eigener, getrennter Switch. Üblich ist: ein VLAN = ein Subnetz. Zwischen den VLANs vermittelt ein Router.</p>
+            <p><strong>Ausgangssituation:</strong> Ports 1–12 gehören zu VLAN 10 (Vertrieb, 172.16.0.0/26), Ports 13–20 zu VLAN 20 (Entwicklung, 172.16.0.64/27). Port 24 führt zum Router. Über diesen einen Port laufen die Frames beider VLANs; jeder Frame trägt dort eine Markierung mit seiner VLAN-Nummer (ein „getaggter“ Port, auch Trunk genannt). Der Router hat dafür zwei virtuelle Schnittstellen (→ 7.5): 172.16.0.1 im VLAN 10 und 172.16.0.65 im VLAN 20.</p>
+            <ol>
+                <li><strong>Broadcast im Vertrieb:</strong> Ein Vertriebs-PC an Port 3 sendet eine ARP-Anfrage. Der Switch flutet sie nur an die Ports 1–12 und (getaggt) an Port 24, nicht an die Ports 13–20. Die Entwicklung bekommt den Broadcast nicht mit – genau das soll ein eigenes Subnetz leisten.</li>
+                <li><strong>Vertrieb → Entwicklung:</strong> PC 172.16.0.20 will 172.16.0.70 erreichen. Er rechnet 172.16.0.70 AND 255.255.255.192 = 172.16.0.64 ≠ 172.16.0.0, das Ziel liegt also in einem anderen Netz. Er schickt das Paket an sein Gateway 172.16.0.1.</li>
+                <li><strong>Der Router vermittelt:</strong> Der Frame geht mit der Markierung VLAN 10 über Port 24 zum Router. Der Router findet 172.16.0.64/27 als direkt angeschlossenes Netz an seiner VLAN-20-Schnittstelle und schickt einen neuen Frame mit der Markierung VLAN 20 zurück. Der Switch stellt ihn an den Port des Ziels zu.</li>
+                <li><strong>Was bringt das?</strong> Der Verkehr zwischen den Abteilungen läuft zwangsläufig über den Router; dort kann eine Regel festlegen, wer wen erreichen darf. Wechselt ein Mitarbeiter den Platz, ändert man nur die VLAN-Zuordnung des Ports, statt Kabel umzustecken.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Ein physischer Switch, zwei logisch getrennte Netze. Auch wenn beide Rechner am selben Switch hängen, läuft ihr Verkehr über den Router.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: FRITZ!Box-Netz und IP-Plan in der Firma</summary>
+                <p><strong>Alltag:</strong> Die FRITZ!Box nutzt ab Werk das Netz 192.168.178.0/24 mit der Maske 255.255.255.0. Deshalb beginnen alle Adressen im Heimnetz mit 192.168.178 – ein Gerät mit 192.168.179.40 läge in einem anderen Subnetz und wäre nur über einen Router erreichbar. Genau das nutzt der Gastzugang: Gäste bekommen Adressen aus einem eigenen Subnetz und können deine Geräte nicht sehen.</p>
+                <p><strong>Beruf:</strong> Wer als Fachinformatikerin oder Fachinformatiker für Systemintegration ein Firmennetz aufbaut, erstellt zuerst einen IP-Adressplan: Welche Abteilung bekommt welches Subnetz, wo stehen Drucker und Server mit festen Adressen, wie viel Reserve bleibt? Subnetting-Aufgaben gehören deshalb auch zur IHK-Abschlussprüfung dieses Ausbildungsberufs.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Subnetz</strong> – logisch abgegrenzter Teil eines IP-Netzes, in dem alle Hosts denselben Netzanteil haben. Subnetze verbessern Übersicht, Leistung (weniger Broadcasts) und Sicherheit, indem sie große Netze in kleinere Segmente aufteilen.</p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Netzadresse = IP-Adresse AND Subnetzmaske.</strong> Die erste Adresse eines Subnetzes ist die Netzadresse, die letzte die Broadcast-Adresse; beide sind nicht für Hosts nutzbar. Ein Subnetz mit Präfixlänge p hat 2<sup>32−p</sup> Adressen und 2<sup>32−p</sup> − 2 nutzbare Hostadressen.
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>Präfixlänge</strong> – gibt in der CIDR-Schreibweise an, wie viele Bits der Adresse zum Netzpräfix gehören, und legt damit die Größe des Netzes fest (z.&nbsp;B. /24 = 24 Bit Netzanteil, 8 Bit Hostanteil).</p>
+        </div>
+
+<div class="merke">
+            <p><strong>VLSM</strong> – Aufteilung eines Adressblocks in Subnetze verschiedener Größe. Man vergibt vom größten zum kleinsten Subnetz und wählt jeweils die kleinste Blockgröße, die Geräte, Gateway, Netz- und Broadcast-Adresse aufnimmt.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.6.1: Masken und Präfixe <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Gib die Subnetzmaske für /20, /27 und /30 an.</li>
+                    <li>Gib die Präfixlänge zur Maske 255.255.255.128 an.</li>
+                    <li>Wie viele Adressen und wie viele nutzbare Hosts hat ein /20-Netz?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.6.2: Netzadresse per AND <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Bestimme für 10.4.37.200/21 binär die Netzadresse, die Broadcast-Adresse, den Bereich der Hostadressen und die Anzahl nutzbarer Hosts.</li>
+                    <li>Liegt der Rechner 10.4.40.1 im selben Subnetz? Begründe mit der AND-Verknüpfung.</li>
+                </ol>
+            </details>
+        </div>

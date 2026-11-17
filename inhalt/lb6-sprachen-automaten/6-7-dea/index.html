@@ -1,0 +1,316 @@
+<p>
+            Endliche Automaten sind grundlegende Modelle der theoretischen Informatik und spielen eine zentrale Rolle im Verständnis von Berechnungsmodellen. Sie stellen abstrakte Maschinen dar, die mit einer begrenzten Menge an Speicher arbeiten und Eingaben Zeichen für Zeichen verarbeiten.
+        </p>
+
+<p>
+            Diese theoretischen Modelle finden vielfältige praktische Anwendungen in verschiedenen Bereichen der Informatik:
+        </p>
+
+<ul>
+            <li>Compilerbau: bei der lexikalischen Analyse zur Tokenerkennung</li>
+            <li>Textverarbeitung: für effizientes Suchen mit Mustern (Pattern Matching)</li>
+            <li>Netzwerktechnik: zur Modellierung von Kommunikationsprotokollen</li>
+            <li>Steuerungstechnik: Ampeln, Aufzüge, Automaten</li>
+            <li>Hardwaredesign: zur Modellierung sequenzieller Schaltkreise</li>
+        </ul>
+
+<h2>Grundlagen endlicher Automaten</h2>
+
+<p>Ein endlicher Automat besteht aus:</p>
+
+<ul>
+            <li>einer endlichen Menge von Zuständen,</li>
+            <li>einem Anfangszustand (Startzustand),</li>
+            <li>einer Menge von Endzuständen (akzeptierenden Zuständen),</li>
+            <li>einem Eingabealphabet,</li>
+            <li>einer Übergangsfunktion, die für einen Zustand und ein Eingabesymbol den nächsten Zustand festlegt.</li>
+        </ul>
+
+<h2>Deterministische endliche Automaten (DEA)</h2>
+
+<p>
+            Ein deterministischer endlicher Automat (DEA) ist eine spezielle Form des endlichen Automaten. Bei einem DEA gibt es für jeden Zustand und jedes Eingabesymbol genau einen Folgezustand.
+        </p>
+
+<h3>1. Übergangsgraph (Zustandsübergangsdiagramm)</h3>
+
+<p>
+            Zustände werden als Kreise, Endzustände als doppelte Kreise dargestellt. Ein
+            Pfeil ohne Ursprung markiert den Startzustand; Pfeile tragen die gelesenen Symbole.
+        </p>
+
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Vollständigkeit und Fangzustand (Trap-Zustand)</summary>
+                <p>
+                    Ein DEA heißt <em>vollständig</em>, wenn für jeden Zustand und jedes Zeichen ein
+                    Übergang existiert. Fehlt ein Übergang, ergänzt man einen
+                    <em>Fangzustand (Trap-Zustand)</em>, in den alle „unpassenden“
+                    Eingaben führen und aus dem es nur noch Schleifen auf sich selbst gibt (siehe Kapitel 6.8).
+                </p>
+            </details>
+        </div>
+
+<h3>2. Formale Definition</h3>
+
+<ul>
+            <li><strong>Q</strong> – endliche Zustandsmenge</li>
+            <li><strong>Σ</strong> – Eingabealphabet</li>
+            <li><strong>δ</strong> – Übergangsfunktion <code>Q × Σ → Q</code></li>
+            <li><strong>q<sub>0</sub></strong> – Startzustand</li>
+            <li><strong>F</strong> – Menge der Endzustände</li>
+        </ul>
+
+<p>
+            Zur Veranschaulichung wird die Übergangsfunktion oft in Form einer Tabelle dargestellt. In dieser Übergangstabelle sind die Zustände in den Zeilen und die Eingabesymbole in den Spalten angeordnet. Die Zellen enthalten den jeweils resultierenden Zustand nach Anwendung des Symbols im entsprechenden Zustand.
+        </p>
+
+<h3>3. Prüfen von Wörtern</h3>
+
+<ol>
+            <li>Setze den aktuellen Zustand auf <code>q<sub>0</sub></code>.</li>
+            <li>Lies das nächste Zeichen <code>a</code>. Nutze die Tabelle bzw. den Graphen, um <code>q ← δ(q,a)</code> zu bestimmen.</li>
+            <li>Wiederhole Schritt&nbsp;2, bis das Wort vollständig gelesen ist.</li>
+            <li>Akzeptiere, falls <code>q ∈ F</code>; sonst verwirf das Wort.</li>
+        </ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> DEA über Σ = {a, b}, der alle Wörter akzeptiert, die auf <code>ab</code> enden. Zustände: s (Start, „nichts Passendes“), p („endet auf a“), e (Endzustand, „endet auf ab“).</p>
+            <table>
+                <thead><tr><th>δ</th><th>a</th><th>b</th></tr></thead>
+                <tbody>
+                    <tr><td>→ s</td><td>p</td><td>s</td></tr>
+                    <tr><td>p</td><td>p</td><td>e</td></tr>
+                    <tr><td>e (Endzustand)</td><td>p</td><td>s</td></tr>
+                </tbody>
+            </table>
+            <p>Prüfen von <code>baab</code>: s –b→ s –a→ p –a→ p –b→ e. e ∈ F, also wird <code>baab</code> akzeptiert. <code>aba</code> endet in p und wird verworfen.</p>
+            <p><strong>Die Prüfung von <code>baab</code> Schritt für Schritt:</strong></p>
+            <ol>
+                <li><strong>Start:</strong> q = s. <em>Warum?</em> Jede Prüfung beginnt im Startzustand, noch ist nichts gelesen.</li>
+                <li><strong>b lesen:</strong> Zeile s, Spalte b: q = δ(s, b) = s. <em>Warum?</em> Ein b ohne vorheriges a beginnt kein „ab“.</li>
+                <li><strong>a lesen:</strong> δ(s, a) = p. <em>Warum?</em> Das Wort endet jetzt auf a – das könnte der Anfang von „ab“ sein.</li>
+                <li><strong>a lesen:</strong> δ(p, a) = p. <em>Warum?</em> Es endet weiterhin auf a; das vorherige a spielt keine Rolle mehr.</li>
+                <li><strong>b lesen:</strong> δ(p, b) = e. <em>Warum?</em> Die letzten beiden Zeichen sind a, b.</li>
+                <li><strong>Entscheidung:</strong> Das Wort ist zu Ende, q = e ∈ F → akzeptiert.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Zustandsfolge s, s, p, p, e – <code>baab</code> wird akzeptiert.</p>
+            <p><strong>Kontrolle:</strong> <code>aba</code>: s –a→ p –b→ e –a→ p. Der Automat war zwischendurch in e, entscheidend ist aber nur der Zustand <em>nach dem letzten Zeichen</em>: p ∉ F → verworfen.</p>
+            </details>
+        </div>
+
+<h3>4. Konstruktion eines DEA</h3>
+
+<p>Der Entwurf von endlichen Automaten ist in der Praxis oft mit einem bestimmten Anwendungskontext verbunden. Einige Regeln helfen dabei:</p>
+
+<ul>
+            <li>Der Ausdruck kann beliebig oft (auch nullmal) wiederholt werden (regulärer Ausdruck „*“) → Schleife auf den Zustand selbst.</li>
+            <li>Der Ausdruck kann beliebig oft wiederholt werden, muss aber mindestens einmal vorkommen (regulärer Ausdruck „+“) → Übergang zu einem anderen Zustand und anschließend Schleife auf diesen Zustand.</li>
+            <li>Der Oder-Operator (regulärer Ausdruck „|“) → mehrere Zeichen des Eingabealphabets am Übergang zum nächsten Zustand.</li>
+            <li>Der Ausdruck kann einmal oder keinmal vorkommen (regulärer Ausdruck „?“) → Der Folgezustand kann übersprungen werden. Steht er am Ende, können zwei Endzustände existieren.</li>
+        </ul>
+
+<p>Bei <strong>Zählbedingungen</strong> („gerade Anzahl“, „Anzahl durch 3 teilbar“) hilft eine andere Frage: <em>Was muss sich der Automat über das bisher Gelesene merken?</em> Jede mögliche Antwort wird ein Zustand.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Prüfsystem für Bitfolgen soll genau die Wörter über Σ = {0, 1} akzeptieren, die eine <strong>gerade Anzahl von Nullen</strong> und eine <strong>ungerade Anzahl von Einsen</strong> enthalten (z.&nbsp;B. 1, 001, 10101).</p>
+            <ol>
+                <li><strong>Gedächtnis festlegen:</strong> Der Automat muss nicht die Anzahlen kennen, sondern nur, ob sie gerade (g) oder ungerade (u) sind – und zwar für Nullen <em>und</em> Einsen gleichzeitig. Das ergibt 2 · 2 = 4 Zustände: gg, ug, gu, uu (erster Buchstabe: Nullen, zweiter: Einsen). <em>Warum?</em> Nur die Parität entscheidet; damit genügen endlich viele Zustände, obwohl die Wörter beliebig lang sind.</li>
+                <li><strong>Startzustand:</strong> gg, denn vor dem ersten Zeichen gibt es 0 Nullen und 0 Einsen – beides gerade.</li>
+                <li><strong>Übergänge:</strong> Eine 0 kippt nur den ersten Buchstaben (g ↔ u), eine 1 nur den zweiten. <em>Warum?</em> Eine gelesene 0 ändert die Anzahl der Einsen nicht.</li>
+                <li><strong>Endzustand:</strong> gu (Nullen gerade, Einsen ungerade) – nur dieser eine Zustand.</li>
+                <li><strong>Die Falle:</strong> Es liegt nahe, zwei kleine Automaten (je 2 Zustände für Nullen bzw. Einsen) nacheinander zu durchlaufen. Das geht nicht, weil Nullen und Einsen gemischt vorkommen. Der Automat muss beide Bedingungen <em>gleichzeitig</em> verfolgen – deshalb die Paare als Zustände.</li>
+            </ol>
+            <table>
+                <thead><tr><th>δ</th><th>0</th><th>1</th></tr></thead>
+                <tbody>
+                    <tr><td>→ gg</td><td>ug</td><td>gu</td></tr>
+                    <tr><td>ug</td><td>gg</td><td>uu</td></tr>
+                    <tr><td>gu (Endzustand)</td><td>uu</td><td>gg</td></tr>
+                    <tr><td>uu</td><td>gu</td><td>ug</td></tr>
+                </tbody>
+            </table>
+            <figure>
+                <svg viewBox="0 0 380 280" width="380" role="img" aria-label="Übergangsgraph mit vier Zuständen gg, ug, gu, uu; Nullen wechseln waagerecht, Einsen senkrecht; gu ist Endzustand">
+                    <defs>
+                        <marker id="pf67b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                            <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                    <g stroke="#333" stroke-width="1.6" fill="none" marker-end="url(#pf67b)">
+                        <line x1="18" y1="70" x2="62" y2="70"/>
+                        <line x1="115" y1="62" x2="264" y2="62"/>
+                        <line x1="265" y1="78" x2="116" y2="78"/>
+                        <line x1="115" y1="202" x2="264" y2="202"/>
+                        <line x1="265" y1="218" x2="116" y2="218"/>
+                        <line x1="82" y1="95" x2="82" y2="184"/>
+                        <line x1="98" y1="185" x2="98" y2="96"/>
+                        <line x1="282" y1="95" x2="282" y2="184"/>
+                        <line x1="298" y1="185" x2="298" y2="96"/>
+                    </g>
+                    <g stroke="#333" stroke-width="1.6" fill="#fff">
+                        <circle cx="90" cy="70" r="26"/>
+                        <circle cx="290" cy="70" r="26"/>
+                        <circle cx="90" cy="210" r="26"/>
+                        <circle cx="90" cy="210" r="21"/>
+                        <circle cx="290" cy="210" r="26"/>
+                    </g>
+                    <g font-family="sans-serif" font-size="15" text-anchor="middle" fill="#222">
+                        <text x="90" y="75">gg</text>
+                        <text x="290" y="75">ug</text>
+                        <text x="90" y="215">gu</text>
+                        <text x="290" y="215">uu</text>
+                        <text x="190" y="55">0</text>
+                        <text x="190" y="95">0</text>
+                        <text x="190" y="195">0</text>
+                        <text x="190" y="235">0</text>
+                        <text x="68" y="145">1</text>
+                        <text x="112" y="145">1</text>
+                        <text x="268" y="145">1</text>
+                        <text x="312" y="145">1</text>
+                    </g>
+                </svg>
+                <figcaption>Abb. 2: Übergangsgraph zu Beispiel 2 (Doppelkreis = Endzustand gu)</figcaption>
+            </figure>
+            <p><strong>Ergebnis:</strong> DEA = ({gg, ug, gu, uu}, {0, 1}, δ, gg, {gu}) mit der Tabelle oben.</p>
+            <p><strong>Kontrolle (Zustandsfolgen):</strong></p>
+            <ul>
+                <li><code>10101</code>: gg –1→ gu –0→ uu –1→ ug –0→ gg –1→ gu ✓ (2 Nullen, 3 Einsen)</li>
+                <li><code>0110</code>: gg –0→ ug –1→ uu –1→ ug –0→ gg ✗ (2 Nullen, 2 Einsen)</li>
+                <li>ε: bleibt in gg ✗ (0 Einsen sind nicht ungerade); <code>1</code>: gg –1→ gu ✓</li>
+            </ul>
+            </details>
+        </div>
+
+<h3>Eigenschaften von DEAs</h3>
+
+<ul>
+            <li>Determinismus: Für jeden Zustand und jedes Eingabesymbol gibt es genau einen Folgezustand.</li>
+            <li>Endlichkeit: Die Anzahl der Zustände ist endlich.</li>
+            <li>Akzeptanz: Ein Wort wird akzeptiert, wenn der Automat nach Verarbeitung aller Symbole in einem Endzustand ist.</li>
+        </ul>
+
+<h3>5. Einen DEA in Python simulieren</h3>
+
+<p>Die Übergangstabelle lässt sich direkt in ein Programm übertragen: Ein <code>dict</code> ordnet jedem Zustand ein weiteres <code>dict</code> zu, das für jedes Zeichen den Folgezustand enthält – Zeile und Spalte der Tabelle werden zu zwei Schlüsseln. Das Prüfverfahren aus Abschnitt 3 wird zu einer Schleife.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">Programmierung</span></summary>
+            <p><strong>Ausgangssituation:</strong> Der DEA aus Beispiel 2 (gerade Anzahl 0, ungerade Anzahl 1) soll als Python-Programm Wörter prüfen und die Zustandsfolge ausgeben.</p>
+<pre><code class="language-python"># DEA aus Beispiel 2: gerade Anzahl 0 und ungerade Anzahl 1
+# Übergangstabelle: delta[zustand][zeichen] = Folgezustand
+delta = {
+    "gg": {"0": "ug", "1": "gu"},
+    "ug": {"0": "gg", "1": "uu"},
+    "gu": {"0": "uu", "1": "gg"},
+    "uu": {"0": "gu", "1": "ug"},
+}
+start = "gg"
+endzustaende = {"gu"}
+
+
+def zustandsfolge(wort):
+    # liefert die Liste der durchlaufenen Zustände,
+    # bei einem Zeichen ohne Übergang None (wie ein Fangzustand)
+    zustand = start
+    folge = [zustand]
+    for zeichen in wort:
+        if zeichen not in delta[zustand]:
+            return None
+        zustand = delta[zustand][zeichen]
+        folge.append(zustand)
+    return folge
+
+
+def akzeptiert(wort):
+    folge = zustandsfolge(wort)
+    if folge is None:
+        return False
+    return folge[-1] in endzustaende
+
+
+# Testfälle: (Eingabe, erwartete Ausgabe)
+tests = [
+    ("", False),
+    ("1", True),
+    ("001", True),
+    ("0110", False),
+    ("10101", True),
+    ("102", False),
+]
+for wort, erwartet in tests:
+    ergebnis = akzeptiert(wort)
+    print(repr(wort), erwartet, ergebnis, "ok" if ergebnis == erwartet else "FEHLER")
+
+print(zustandsfolge("10101"))</code></pre>
+            <ol>
+                <li><strong>Tabelle als dict:</strong> <code>delta["gu"]["0"]</code> liefert <code>"uu"</code> – genau der Eintrag in Zeile gu, Spalte 0. <em>Warum?</em> So bleibt das Programm eine 1:1-Kopie der Tabelle und ist leicht zu prüfen.</li>
+                <li><strong>Ablauf für <code>"001"</code>:</strong> zustand = gg, folge = [gg]; Zeichen 0 → ug; Zeichen 0 → gg; Zeichen 1 → gu. folge = [gg, ug, gg, gu], der letzte Zustand gu liegt in <code>endzustaende</code> → <code>True</code>.</li>
+                <li><strong>Unbekannte Zeichen:</strong> Bei <code>"102"</code> gibt es in Zustand uu keinen Übergang für <code>"2"</code>. Die Funktion gibt <code>None</code> zurück, <code>akzeptiert</code> liefert <code>False</code>. <em>Warum?</em> Das entspricht der Vereinbarung „fehlende Kante = Fangzustand“ (Kapitel 6.8).</li>
+                <li><strong>Testen:</strong> Jeder Testfall enthält Eingabe und erwartete Ausgabe; das Programm vergleicht mit der tatsächlichen Ausgabe. <em>Warum?</em> So fällt ein Tippfehler in der Tabelle sofort auf.</li>
+            </ol>
+            <p><strong>Ergebnis (Ausgabe des Programms):</strong></p>
+<pre>'' False False ok
+'1' True True ok
+'001' True True ok
+'0110' False False ok
+'10101' True True ok
+'102' False False ok
+['gg', 'gu', 'uu', 'ug', 'gg', 'gu']</pre>
+            <p><strong>Kontrolle:</strong> Die letzte Zeile stimmt mit der von Hand bestimmten Zustandsfolge für 10101 in Beispiel 2 überein. Für einen anderen DEA musst du nur <code>delta</code>, <code>start</code> und <code>endzustaende</code> austauschen.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Automaten in Programmen, Netzen und Formularen</summary>
+                <p><strong>Alltag:</strong> Ein Getränke- oder Fahrkartenautomat, eine Ampelsteuerung oder das Eingabefeld für eine Postleitzahl verhalten sich wie endliche Automaten: Sie merken sich nur ihren aktuellen Zustand („5 Ziffern gelesen“, „Geld reicht“). Die Validierung in Webformularen mit regulären Ausdrücken (HTML-Attribut <code>pattern</code>) wird intern als Automat ausgeführt.</p>
+                <p><strong>Beruf:</strong> Netzwerkingenieurinnen beschreiben Protokolle wie TCP als Protokollautomaten (Zustände wie LISTEN, SYN-RECEIVED, ESTABLISHED). Embedded-Entwickler, z.&nbsp;B. in der sächsischen Halbleiter- und Automobilindustrie (Infineon, Bosch, VW in Dresden und Zwickau), programmieren Steuergeräte als Zustandsautomaten. Regex-Engines in Programmiersprachen und Editoren übersetzen reguläre Ausdrücke in Automaten.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Merke:</strong><br>
+                Ein endlicher Automat kann überprüfen, ob eine Zeichenkette zu einer Sprache gehört.<br>
+                Endliche Automaten können sich nur eine begrenzte Menge an Information „merken“ – nämlich den aktuellen Zustand. Sie eignen sich daher besonders gut für Probleme, bei denen nur eine begrenzte Vorgeschichte relevant ist.
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>Merke:</strong><br>
+                Ein DEA ist ein 5-Tupel <code>(Q, Σ, δ, q<sub>0</sub>, F)</code>, wobei</p>
+            <ul>
+                <li>Q eine endliche Menge von Zuständen ist,</li>
+                <li>Σ das Eingabealphabet ist,</li>
+                <li>δ: Q × Σ → Q die Übergangsfunktion ist,</li>
+                <li>q<sub>0</sub> ∈ Q der Startzustand ist,</li>
+                <li>F ⊆ Q die Menge der Endzustände ist.</li>
+            </ul>
+            <p><strong>Akzeptanz:</strong> Ein Wort wird akzeptiert, wenn sich der Automat nach dem letzten Zeichen in einem Zustand aus <code>F</code> befindet. Die Menge aller akzeptierten Wörter ist die Sprache L(A) des Automaten.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.1: <span class="niveau">AFB I</span></summary>
+                <p>Öffne FLACI und erstelle den abgebildeten Automaten DEA 1.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.7.2: <span class="niveau">AFB I</span></summary>
+                <p>Erstelle eine formale Definition des abgebildeten Automaten DEA 1.</p>
+            </details>
+        </div>

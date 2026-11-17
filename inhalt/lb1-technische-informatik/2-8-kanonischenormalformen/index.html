@@ -1,0 +1,138 @@
+<p>
+            Die <strong>kanonische disjunktive Normalform (KDNF)</strong> und die <strong>kanonische konjunktive Normalform (KKNF)</strong> sind spezielle Darstellungsformen von booleschen Funktionen in der Aussagenlogik. Sie bieten sich an, um Funktionen in einer standardisierten Form darzustellen. Der Begriff <strong>kanonisch</strong> bedeutet in diesem Zusammenhang <strong>eindeutig</strong> bzw. <strong>normiert</strong>: Zu jeder booleschen Funktion gibt es genau eine KDNF und genau eine KKNF (abgesehen von der Reihenfolge der Terme). Zwei Terme beschreiben deshalb genau dann dieselbe Funktion, wenn ihre KDNF übereinstimmen.<br> Beide haben unterschiedliche Anwendungsbereiche:
+        </p>
+
+<h2>KDNF</h2>
+
+<p>
+            Die KDNF ist eine Form, bei der alle möglichen Kombinationen von Variablen, die zu einem „wahren“ Ergebnis führen, als ODER-verknüpfte Terme dargestellt werden. Jeder dieser Terme stellt eine Möglichkeit dar, wie die Funktion „wahr“ sein kann. Dies ist besonders nützlich, wenn man einen schnellen Überblick darüber haben möchte, unter welchen Umständen eine Aussage wahr ist. Außerdem kann sie dazu verwendet werden, komplizierte logische Ausdrücke zu vereinfachen oder zu minimieren, beispielsweise durch Anwendung des Quine-McCluskey-Algorithmus.
+        </p>
+
+<h2>KKNF</h2>
+
+<p>
+            Die KKNF, bei der alle möglichen Kombinationen von Variablen, die zu einem „falschen“ Ergebnis führen, als UND-verknüpfte Terme dargestellt werden, hat eine analoge Verwendung wie die KDNF, jedoch im Hinblick auf die „falschen“ Zustände einer Funktion. Sie bietet einen schnellen Überblick darüber, unter welchen Umständen eine Aussage falsch ist. Sie wird oft in der Informatik und in mathematischen Beweisen verwendet, insbesondere in Bereichen wie der Aussagenlogik und der booleschen Algebra.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> f(A, B) = A ∨ B</summary>
+            <table class="gitter">
+                <tr><th>A</th><th>B</th><th>f</th><th>Minterm</th><th>Maxterm</th></tr>
+                <tr><td>0</td><td>0</td><td>0</td><td>–</td><td>(A ∨ B)</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td>¬AB</td><td>–</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td><td>A¬B</td><td>–</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td><td>AB</td><td>–</td></tr>
+            </table>
+            <p>KDNF (3 Minterme): f = ¬AB ∨ A¬B ∨ AB &nbsp;|&nbsp; KKNF (1 Maxterm, weil nur eine Zeile 0 liefert): f = (A ∨ B)</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> KDNF und KKNF einer Funktion mit drei Variablen</summary>
+            <p>
+                Wir wollen die KDNF und die KKNF der Funktion <strong>f(A, B, C) = A ∧ (B ∨ C)</strong> bilden.
+            </p>
+
+            <ol>
+                <li>
+                    Wir erstellen eine Wahrheitstabelle mit allen beteiligten Variablen.
+                </li>
+                <li>
+                    Für die <strong>KDNF</strong> betrachten wir alle Zeilen, die als Ergebnis <strong>1</strong> liefern, und notieren die Variablen als Konjunktionsterme. Die Variablen, die hierbei als <strong>0</strong> eingegangen sind, negieren wir.
+                </li>
+                <li>
+                    Für die <strong>KKNF</strong> betrachten wir alle Zeilen, die als Ergebnis <strong>0</strong> liefern, und notieren die Variablen als Disjunktionsterme. Die Variablen, die hierbei als <strong>1</strong> eingegangen sind, negieren wir.
+                </li>
+            </ol>
+
+            <table class="gitter">
+                <tr><th>A</th><th>B</th><th>C</th><th>f(A, B, C)</th><th>Minterme</th><th>Maxterme</th></tr>
+                <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>–</td><td>(A ∨ B ∨ C)</td></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>–</td><td>(A ∨ B ∨ ¬C)</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>–</td><td>(A ∨ ¬B ∨ C)</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>–</td><td>(A ∨ ¬B ∨ ¬C)</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>–</td><td>(¬A ∨ B ∨ C)</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>A¬BC</td><td>–</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>AB¬C</td><td>–</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>ABC</td><td>–</td></tr>
+            </table>
+
+            <p>
+                <strong>KDNF:</strong> f(A, B, C) = (A¬BC) ∨ (AB¬C) ∨ (ABC)
+            </p>
+            <p>
+                <strong>KKNF:</strong> f(A, B, C) = (A ∨ B ∨ C) (A ∨ B ∨ ¬C) (A ∨ ¬B ∨ C) (A ∨ ¬B ∨ ¬C) (¬A ∨ B ∨ C)
+            </p>
+            <p><strong>Probe:</strong> 3 Minterme + 5 Maxterme = 8 Zeilen – jede Zeile wurde genau einmal verwendet. Außerdem muss sich die KDNF wieder zu A ∧ (B ∨ C) vereinfachen lassen (Ausklammern mit innerem UND):</p>
+            <ol>
+                <li><strong>Was:</strong> (A ∧ ¬B ∧ C) ∨ ((A ∧ B) ∧ (¬C ∨ C)) – <em>warum:</em> Assoziativ- und Distributivgesetz: AB¬C und ABC haben den gemeinsamen Block A ∧ B.</li>
+                <li><strong>Was:</strong> (A ∧ ¬B ∧ C) ∨ (A ∧ B) – <em>warum:</em> Komplement ¬C ∨ C ↔ W, neutrales Element.</li>
+                <li><strong>Was:</strong> A ∧ ((¬B ∧ C) ∨ B) – <em>warum:</em> Distributivgesetz (A ausklammern).</li>
+                <li><strong>Was:</strong> A ∧ ((B ∨ ¬B) ∧ (B ∨ C)) = A ∧ (B ∨ C) – <em>warum:</em> Kommutativ- und Distributivgesetz, Komplement, neutrales Element.</li>
+            </ol>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Vollständige Standardisierung der Funktionen</summary>
+                <p>
+                    Um immer eine gleiche Form der Funktion zu haben, verwendet man die KKNF oder KDNF. Jedoch kann nun noch die Reihenfolge der Terme unterschiedlich sein.<br>
+                    Für die vollständige Standardisierung fehlt nun noch eine Regel für die Reihenfolge der einzelnen Terme. Diese sieht wie folgt aus:
+                </p>
+                <ol>
+                    <li>Notieren der Funktion in KKNF oder KDNF.</li>
+                    <li>Jede Variable wird als „1“ notiert und jede negierte Variable als „0“.</li>
+                    <li>Die so entstandenen Terme aus Binärzahlen werden ihrer Größe nach sortiert.</li>
+                    <li>Den Termen werden wieder die ursprünglichen Variablen zugeordnet.</li>
+                </ol>
+                <p><strong>Beispiel:</strong></p>
+                <pre>
+(A¬BC) ∨ (ABC)  ∨ (AB¬C)
+  101  ∨  111   ∨   110
+  101  ∨  110   ∨   111
+(A¬BC) ∨ (AB¬C) ∨  (ABC)
+                </pre>
+            </details>
+        </div>
+
+<hr>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Vom Papier zur Schaltung</summary>
+                <p><strong>Alltag:</strong> Alarm- und Zugangsanlagen in Museen, Banken oder Rechenzentren bestehen aus genau solchen Verknüpfungen von Sensoren und Schlüsselschaltern. Wie wichtig lückenlose Sicherheitstechnik ist, hat der Einbruch in das Grüne Gewölbe in Dresden 2019 gezeigt.</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Elektroniker/in für Gebäudesystemintegration bzw. Sicherheitstechnik</strong>: plant und programmiert Einbruchmelde- und Zutrittsanlagen und legt fest, welche Kombination von Sensoren und Schaltern welchen Zustand auslöst.</li>
+                    <li><strong>Chipdesigner/in</strong>: Der Quine-McCluskey-Algorithmus, der eine KDNF automatisch minimiert, ist Bestandteil echter Chipentwurfssoftware.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Die <strong>KDNF</strong> ist die Disjunktion von <strong>Mintermen</strong>. Ein Minterm ist ein Konjunktionsterm, in dem <strong>jede</strong> Variable genau einmal vorkommt (negiert oder nicht negiert). Jeder Minterm gehört zu genau einer Zeile der Wahrheitstabelle mit f = 1.
+                <br>
+                Die <strong>KKNF</strong> ist die Konjunktion von <strong>Maxtermen</strong>. Ein Maxterm ist ein Disjunktionsterm, in dem jede Variable genau einmal vorkommt. Jeder Maxterm gehört zu genau einer Zeile mit f = 0.
+                <br>
+                <strong>Kanonisch</strong> heißt: eindeutig bzw. normiert – zu jeder Funktion gibt es genau eine KDNF und genau eine KKNF.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.8.2: Abstimmung in der Jury <span class="niveau">AFB I</span></summary>
+                <p>Bei einem Schulwettbewerb stimmen drei Jurymitglieder A, B und C per Knopfdruck ab (1 = Ja). Ein Beitrag kommt weiter (f = 1), wenn mindestens zwei Mitglieder mit Ja stimmen.</p>
+                <ol>
+                    <li>Erstelle die Wahrheitstabelle.</li>
+                    <li>Gib die KDNF und die KKNF an.</li>
+                </ol>
+            </details>
+        </div>

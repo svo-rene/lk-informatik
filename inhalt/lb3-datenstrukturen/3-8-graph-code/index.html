@@ -1,0 +1,300 @@
+<p>
+            In dieser Implementierung stellen wir den Graphen als <strong>Liste von Listen</strong> dar: Jeder Index der Hauptliste steht für einen Knoten (0, 1, 2, …), die zugehörige Unterliste enthält seine Nachbarknoten. Das ist eine Adjazenzliste (siehe 3.7).
+        </p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in vier kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe in Thonny mit.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Die Klasse <code>Graph</code> und <code>add_edge</code></a></li>
+            <li><a href="#schritt-2">Breitensuche Schritt für Schritt (Tafelbild)</a> – danach Aufgabe 3.8.1</li>
+            <li><a href="#schritt-3">Die Methode <code>bfs</code> in Thonny</a> – danach Aufgabe 3.8.2</li>
+            <li><a href="#schritt-4"><code>bfs</code> Schritt für Schritt im Speicherbild</a> – danach Aufgabe 3.8.3</li>
+        </ol>
+
+<p class="git-datei"><strong>Zum Mittippen:</strong> <code>3_graphen/graph.py</code> – neu anlegen, weiter in den Aufgaben 3.8.3 und 3.8.6.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.8 Schritt 1: Graph mit add_edge</code> · <code>3.8 Schritt 3: bfs ergänzt, Beispiel ok</code> (Regeln auf Seite 3.0.2)</p>
+
+<p>Am Ende findest du ein weiterführendes Beispiel (kürzester Weg mit BFS), den Praxisbezug und alle Aufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Die Klasse <code>Graph</code> und <code>add_edge</code></h2>
+
+<p>Die Knoten heißen hier einfach 0, 1, 2, …; deshalb reicht eine Liste von Listen: <code>self.graph[u]</code> ist die Nachbarliste von Knoten u. Im Video legst du einen Graphen mit 5 Knoten an und trägst Kante für Kante ein. Achte darauf, dass jede ungerichtete Kante in <em>zwei</em> Nachbarlisten landet und in welcher Reihenfolge die Nachbarn in einer Liste stehen.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-8-1_klasse_graph_vorschau.png" src="../vid/3-8-1_klasse_graph.mp4"></video><a href="../vid/3-8-1_klasse_graph.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Die Klasse <code>Graph</code> und <code>add_edge</code> (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>3_graphen/graph.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>Graph</code> und die Methode <code>add_edge</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>g = Graph(5)</code> · <code>g.add_edge(0, 1)</code>. Danach committen, z.&nbsp;B. <code>3.8 Schritt 1: Graph, add_edge angelegt</code>.</p>
+
+<p>Zum Nachlesen: Matrix und Liste im Vergleich.</p>
+
+<h3>Darstellungen im Vergleich</h3>
+
+<h4>Adjazenzmatrix oder Adjazenzliste?</h4>
+
+<table>
+            <thead><tr><th></th><th>Adjazenzmatrix</th><th>Adjazenzliste</th></tr></thead>
+            <tbody>
+                <tr><td>Speicherbedarf</td><td>n² Einträge, unabhängig von der Kantenzahl</td><td>n + Anzahl der Kanten</td></tr>
+                <tr><td>Prüfen, ob Kante u–v existiert</td><td>O(1)</td><td>O(Grad von u), Nachbarliste durchsuchen</td></tr>
+                <tr><td>Alle Nachbarn von u durchlaufen</td><td>O(n), ganze Zeile prüfen</td><td>O(Grad von u)</td></tr>
+                <tr><td>geeignet für</td><td>kleine oder dicht besetzte Graphen</td><td>große, dünn besetzte Graphen (z.&nbsp;B. Straßennetze)</td></tr>
+            </tbody>
+        </table>
+
+<figure>
+            <img src="../img/skizze_adjazenzliste_und_breitensuche.svg" width="450" alt="Adjazenzliste der Knoten 0, 1, 2 und Besuchsreihenfolge der Breitensuche">
+            <figcaption>Abb. 1: Adjazenzliste – zu jedem Knoten die Liste seiner Nachbarn; die Breitensuche ab 0 besucht 0, 1, 2, 4.</figcaption>
+        </figure>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Adjazenzliste als Liste oder als Dictionary?</summary>
+                <p>Die Adjazenzliste kann in Python auf zwei Arten gespeichert werden. Beide haben denselben Speicherbedarf von der Größenordnung n + Kanten.</p>
+                <h3>Liste von Listen: <code>graph[0] = [1, 2]</code></h3>
+                <ul>
+                    <li><strong>Vorteile:</strong> einfach und schnell, wenn die Knoten fortlaufend von 0 bis n − 1 nummeriert sind; Zugriff auf die Nachbarliste eines Knotens über den Index in O(1).</li>
+                    <li><strong>Nachteile:</strong> Knoten müssen in Zahlen übersetzt werden (z.&nbsp;B. 0 = „Dresden“); Löschen eines Knotens verschiebt die Nummern aller folgenden Knoten.</li>
+                </ul>
+                <h3>Dictionary: <code>graph["Dresden"] = ["Leipzig", "Chemnitz"]</code></h3>
+                <ul>
+                    <li><strong>Vorteile:</strong> Knoten dürfen beliebige Namen (hashbare Objekte) haben; Zugriff auf die Nachbarliste über den Namen ebenfalls im Mittel in O(1); Knoten lassen sich leicht hinzufügen und entfernen. Mit einem inneren Dictionary lassen sich auch Gewichte speichern: <code>graph["Dresden"]["Leipzig"] = 115</code>.</li>
+                    <li><strong>Nachteile:</strong> etwas mehr Speicher und Verwaltungsaufwand pro Eintrag als bei einer einfachen Liste.</li>
+                </ul>
+                <h3>Fazit</h3>
+                <p>Für Übungen mit nummerierten Knoten reicht die Liste von Listen. In echten Anwendungen mit benannten Knoten wird meist ein Dictionary verwendet.</p>
+            </details>
+        </div>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Breitensuche Schritt für Schritt →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Breitensuche Schritt für Schritt</h2>
+
+<p>Die Breitensuche besucht erst alle Nachbarn des Startknotens, dann deren Nachbarn und so weiter – Ebene für Ebene. Entdeckte Knoten warten in einer Schlange (Queue, siehe 3.2): Wer zuerst entdeckt wird, kommt zuerst dran. Achte im Video auf die Farben – rot wird gerade bearbeitet, orange wartet in der Schlange, grün ist fertig – und darauf, wann ein Nachbar übersprungen wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-8-2_breitensuche_idee_vorschau.png" src="../vid/3-8-2_breitensuche_idee.mp4"></video><a href="../vid/3-8-2_breitensuche_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Breitensuche Schritt für Schritt (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen derselbe Ablauf als Tabelle:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Ablauf von <code>g.bfs(0)</code></summary>
+            <table>
+                <thead><tr><th>entnommen</th><th>neu entdeckt</th><th>Schlange danach</th></tr></thead>
+                <tbody>
+                    <tr><td>0</td><td>1, 2</td><td>[1, 2]</td></tr>
+                    <tr><td>1</td><td>4 (0 und 2 schon entdeckt)</td><td>[2, 4]</td></tr>
+                    <tr><td>2</td><td>–</td><td>[4]</td></tr>
+                    <tr><td>4</td><td>–</td><td>[]</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-8-1">Aufgabe 3.8.1</a> – Breitensuche von Hand im Beispielgraphen.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Die Methode bfs in Thonny →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Die Methode <code>bfs</code> in Thonny</h2>
+
+<p>Im Code braucht die Breitensuche drei Dinge: eine Liste <code>visited</code> (schon entdeckt?), die Schlange <code>queue</code> und die Liste <code>reihenfolge</code>. Im Video tippst du die Methode und probierst <code>[False] * n</code> und die Schlange mit <code>enqueue</code>, <code>dequeue</code> und <code>is_empty</code> in der Kommandozeile aus.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-8-3_bfs_code_vorschau.png" src="../vid/3-8-3_bfs_code.mp4"></video><a href="../vid/3-8-3_bfs_code.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Breitensuche in Thonny – die Methode <code>bfs</code> und mit der Queue aus 3.2 (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>3_graphen/graph.py</code> den Code aus dem Video: die Methode <code>bfs</code>. Starte mit F5 und vergleiche die Ausgabe mit dem Video. Danach committen, z.&nbsp;B. <code>3.8 Schritt 3: bfs ergänzt</code>.</p>
+
+<p>Zum Nachlesen der vollständige Code:</p>
+
+<h3>Einfache Implementierung eines Graphen</h3>
+
+<p>Für die Breitensuche verwenden wir die Schlange <code>Queue</code> aus Seite 3.2: <code>enqueue</code> stellt hinten an, <code>dequeue</code> nimmt vorn heraus, <code>is_empty</code> prüft, ob noch jemand wartet – alles in O(1). Lege dazu deine Datei <code>queue_knoten.py</code> aus <code>1_listen</code> in den Ordner <code>3_graphen</code> (oder lade sie herunter: <a href="../material/queue_knoten.py" download>queue_knoten.py</a>). Stehen in deiner Datei unten noch Testzeilen, müssen sie unter <code>if __name__ == "__main__":</code> stehen – sonst laufen sie bei jedem <code>import</code> mit (Abschnitt „import“ auf Seite 3.2). Warum keine einfache Liste? Das zeigt der <a href="#vergleich-schlange">Vergleich</a> unter Beispiel 2.</p>
+
+<pre><code class="language-python">from queue_knoten import Queue   # Schlange aus Seite 3.2
+
+class Graph:
+    def __init__(self, size):
+        # Graph mit size Knoten (0 bis size-1) als Adjazenzliste
+        self.size = size
+        self.graph = []
+        for i in range(size):
+            self.graph.append([])
+
+    def add_edge(self, u, v):
+        # ungerichteter Graph: Kante in beide Richtungen eintragen
+        self.graph[u].append(v)
+        self.graph[v].append(u)
+
+    def bfs(self, start):
+        # Breitensuche vom Startknoten aus; gibt die Besuchsreihenfolge zurück
+        visited = [False] * self.size
+        queue = Queue()
+        queue.enqueue(start)
+        visited[start] = True
+        reihenfolge = []
+
+        while not queue.is_empty():
+            current = queue.dequeue()   # vorderstes Element entnehmen
+            reihenfolge.append(current)
+            for neighbor in self.graph[current]:
+                if not visited[neighbor]:  # noch nicht entdeckt
+                    visited[neighbor] = True
+                    queue.enqueue(neighbor)
+        return reihenfolge
+
+
+# Beispiel der Verwendung
+g = Graph(5)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 2)
+g.add_edge(2, 4)
+g.add_edge(1, 4)
+print(g.bfs(0))   # [0, 1, 2, 4] – Knoten 3 ist nicht erreichbar</code></pre>
+
+<p>Danach: <a href="uebungen.html#a-3-8-2">Aufgabe 3.8.2</a> – dieselbe Klasse mit einem Dictionary und Städtenamen.</p>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: bfs Schritt für Schritt →</a></p>
+
+<h2 id="schritt-4">Schritt 4: <code>bfs</code> Schritt für Schritt im Speicherbild</h2>
+
+<p>Jetzt läuft <code>g.bfs(0)</code> Zeile für Zeile. Rechts siehst du <code>visited</code>, die Schlange <code>queue</code>, <code>reihenfolge</code> und den gerade bearbeiteten Knoten <code>current</code>. Achte darauf, dass ein Knoten schon beim <em>Einreihen</em> als besucht markiert wird – und warum die Schleife endet.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-8-4_bfs_schritte_vorschau.png" src="../vid/3-8-4_bfs_schritte.mp4"></video><a href="../vid/3-8-4_bfs_schritte.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: <code>bfs</code> Schritt für Schritt (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p>Danach: <a href="uebungen.html#a-3-8-3">Aufgabe 3.8.3</a> – eine rekursive Tiefensuche im Vergleich.</p>
+
+<h2>Weiterführend: kürzester Weg mit BFS</h2>
+
+<p>Weil die Breitensuche Ebene für Ebene vorgeht, kann man mit ihr den Weg mit den wenigsten Kanten finden. Dazu merkt man sich zu jedem Knoten, von wo aus er entdeckt wurde.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> kürzester Weg (wenigste Kanten) mit BFS und Vorgängerliste</summary>
+            <pre><code class="language-python">def kuerzester_weg(g, start, ziel):
+    vorgaenger = [None] * g.size
+    visited = [False] * g.size
+    queue = Queue()
+    queue.enqueue(start)
+    visited[start] = True
+    while not queue.is_empty():
+        current = queue.dequeue()
+        if current == ziel:
+            break
+        for n in g.graph[current]:
+            if not visited[n]:
+                visited[n] = True
+                vorgaenger[n] = current
+                queue.enqueue(n)
+    if not visited[ziel]:
+        return None                    # Ziel nicht erreichbar
+    weg = []
+    k = ziel
+    while k is not None:               # rückwärts über die Vorgänger bis zum Start
+        weg.insert(0, k)               # vorn einfügen, dann stimmt die Reihenfolge
+        k = vorgaenger[k]
+    return weg
+
+print(kuerzester_weg(g, 0, 4))   # [0, 1, 4]</code></pre>
+            <p><strong>Ablauf von <code>kuerzester_weg(g, 0, 4)</code>:</strong></p>
+            <ol>
+                <li>0 wird entnommen, 1 und 2 werden entdeckt: <code>vorgaenger[1] = 0</code>, <code>vorgaenger[2] = 0</code>. <em>Warum merken:</em> Jeder Knoten wird genau einmal entdeckt, und zwar über einen kürzesten Weg – diesen Vorgänger braucht man später für den Rückweg.</li>
+                <li>1 wird entnommen, 4 wird entdeckt: <code>vorgaenger[4] = 1</code>. 0 und 2 sind schon entdeckt und werden nicht überschrieben.</li>
+                <li>2 wird entnommen, keine neuen Nachbarn. Danach wird 4 entnommen – das Ziel, die Schleife bricht ab.</li>
+                <li>Rückweg über die Vorgänger: 4 → 1 → 0. Der Start 0 hat keinen Vorgänger (<code>None</code>), dort endet die Schleife. Weil jeder Knoten mit <code>insert(0, k)</code> <em>vorn</em> eingefügt wird, steht am Ende <code>[0, 1, 4]</code> da. <em>Warum vorn einfügen:</em> Die Vorgänger zeigen vom Ziel zurück zum Start, der Weg soll aber beim Start beginnen.</li>
+            </ol>
+            <p><strong>Probe:</strong> 0–1 und 1–4 sind Kanten; einen Weg mit nur einer Kante gibt es nicht, weil 4 kein Nachbar von 0 ist.</p>
+            <table>
+                <thead><tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td>Normalfall</td><td><code>kuerzester_weg(g, 0, 4)</code></td><td><code>[0, 1, 4]</code></td></tr>
+                    <tr><td>Start = Ziel</td><td><code>kuerzester_weg(g, 0, 0)</code></td><td><code>[0]</code></td></tr>
+                    <tr><td>nicht erreichbar</td><td><code>kuerzester_weg(g, 0, 3)</code></td><td><code>None</code></td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="hinweis" id="vergleich-schlange">
+            <details>
+                <summary>Vergleich: Queue aus 3.2 oder einfache Liste als Schlange?</summary>
+                <p>Bis vor Kurzem stand in <code>bfs</code> eine Python-Liste als Schlange. Jetzt nehmen wir die <code>Queue</code> aus Seite 3.2. Beide Fassungen liefern dieselbe Reihenfolge – der Unterschied liegt in der Laufzeit.</p>
+                <p><strong>Fassung mit Liste:</strong></p>
+                <pre><code class="language-python">    def bfs_liste(self, start):
+        visited = [False] * self.size
+        queue = [start]
+        visited[start] = True
+        reihenfolge = []
+        while len(queue) &gt; 0:
+            current = queue.pop(0)       # vorn entnehmen: alle anderen rücken nach
+            reihenfolge.append(current)
+            for neighbor in self.graph[current]:
+                if not visited[neighbor]:
+                    visited[neighbor] = True
+                    queue.append(neighbor)
+        return reihenfolge</code></pre>
+                <table>
+                    <thead><tr><th></th><th>Liste mit <code>append</code> und <code>pop(0)</code></th><th><code>Queue</code> aus 3.2 (<code>enqueue</code>, <code>dequeue</code>)</th></tr></thead>
+                    <tbody>
+                        <tr><td>Laufzeit je Entnahme</td><td>O(n): Alle übrigen Einträge rücken eine Stelle nach vorn.</td><td>O(1): Nur <code>__head</code> wird umgesetzt.</td></tr>
+                        <tr><td>ganze Breitensuche</td><td>bis O(Knoten²), wenn die Schlange lang wird</td><td>O(Knoten + Kanten)</td></tr>
+                        <tr><td>Aufwand</td><td>keine Zusatzdatei, sofort hingeschrieben – auch auf Papier</td><td>braucht <code>queue_knoten.py</code> im Ordner und eine Import-Zeile</td></tr>
+                        <tr><td>Lesbarkeit</td><td>Man muss wissen, dass <code>pop(0)</code> „vorn“ bedeutet.</td><td>Die Namen sagen, was passiert: hinten anstellen, vorn entnehmen.</td></tr>
+                        <tr><td>Fehlerquelle</td><td>Wer versehentlich <code>pop()</code> schreibt, hat einen Stapel (Aufgabe 3.8.5).</td><td>Es gibt nur die Operationen einer Schlange (Kapselung).</td></tr>
+                        <tr><td>im Debugger</td><td>Der ganze Inhalt ist auf einen Blick sichtbar.</td><td>Man sieht nur ein <code>Queue</code>-Objekt; den Inhalt erreicht man über <code>__head</code> und <code>next</code>.</td></tr>
+                        <tr><td>kleine Graphen</td><td>oft sogar schneller (das Nachrücken läuft intern in C)</td><td>etwas langsamer, weil jeder Knoten ein eigenes Objekt ist</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>Fazit:</strong> Für kleine Beispiele ist die Liste bequem. Die Aussage „Laufzeit O(Knoten + Kanten)“ stimmt aber nur mit einer Schlange, die vorn in O(1) entnimmt – also mit der <code>Queue</code> aus 3.2. In der Praxis nimmt man in Python dafür <code>collections.deque</code> (siehe 3.2).</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Breitensuche im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> „Kontakte zweiten Grades“ in beruflichen Netzwerken wie LinkedIn sind genau die Knoten, die eine Breitensuche in der zweiten Ebene findet. Auch das „Füllen“-Werkzeug in Malprogrammen breitet sich per BFS über benachbarte Pixel aus.<br><br>
+                    <strong>Beruf:</strong> Netzwerktechnikerinnen und -techniker nutzen Breitensuche, um herauszufinden, welche Geräte nach dem Ausfall eines Routers noch erreichbar sind. In der Spieleentwicklung finden Figuren auf Rasterkarten mit BFS (oder dem verwandten A*-Algorithmus) ihren Weg.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Eine <strong>Adjazenzliste</strong> speichert zu jedem Knoten die Liste seiner Nachbarn. Sie braucht Speicher proportional zu Knoten + Kanten und eignet sich besonders für dünn besetzte Graphen. Die <strong>Breitensuche (BFS)</strong> besucht die Knoten mithilfe einer Schlange Ebene für Ebene; in ungewichteten Graphen findet sie dadurch die Wege mit den wenigsten Kanten. Mit einer Schlange, die vorn in O(1) entnimmt (Queue aus 3.2), ist ihre Laufzeit O(Knoten + Kanten).
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Nachbarlisten vorhersagen <span class="niveau">AFB I</span></summary>
+                <p>Was steht in <code>g.graph</code> nach <code>g = Graph(3)</code>, <code>g.add_edge(0, 2)</code> und <code>g.add_edge(2, 1)</code>? Warum wäre <code>[[]] * 3</code> statt der Komprehension keine gute Idee? (Probiere es aus: <code>a = [[]] * 3</code>, <code>a[0].append(1)</code>, <code>a</code>.)</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[[2], [2], [0, 1]]</code>. <code>[[]] * 3</code> enthält dreimal <em>dieselbe</em> Liste: Nach <code>a[0].append(1)</code> ist <code>a</code> gleich <code>[[1], [1], [1]]</code>. Die Komprehension erzeugt für jeden Knoten eine eigene Liste.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Breitensuche an einem Viereck <span class="niveau">AFB I</span></summary>
+                <p>Ein Graph hat die Nachbarlisten 0: [1, 3] · 1: [0, 2] · 2: [1, 3] · 3: [0, 2]. Führe die Breitensuche ab 0 von Hand aus: Notiere nach jedem Entnehmen die Schlange. In welcher Reihenfolge werden die Knoten besucht?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>0 entnommen → Schlange [1, 3]; 1 entnommen → [3, 2]; 3 entnommen → [2] (0 und 2 sind schon entdeckt); 2 entnommen → []. Reihenfolge: 0, 1, 3, 2.</p>
+                </details>
+            </details>
+        </div>

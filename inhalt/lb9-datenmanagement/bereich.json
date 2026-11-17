@@ -1,0 +1,63 @@
+{
+  "nr": "LB 9",
+  "titel": "Datenmanagement",
+  "text": "Relationale Datenbanken und SQL, Modellierung und Normalformen, NoSQL und Datenverarbeitung mit Python.",
+  "kapitel": [
+    {
+      "titel": "Relationale Datenbanken",
+      "themen": [
+        "1-1-datenbanken",
+        "1-2-relationale-db",
+        "1-3-sql-select",
+        "1-4-sql-where",
+        "1-5-sql-aggregation",
+        "1-6-sql-joins",
+        "1-7-db-browser",
+        "1-8-crud",
+        "1-9-sql-uebung",
+        "1-10-erm",
+        "1-11-1-11-1-db-browser-eigene-tabellen",
+        "1-11-relationenmodell",
+        "1-12-uebung-modellierung",
+        "1-13-normalisierung",
+        "1-14-erste-normalform",
+        "1-15-zweite-normalform",
+        "1-16-dritte-normalform",
+        "1-17-uebung-normalformen",
+        "1-18-komplette-uebung",
+        "1-19-subselects",
+        "1-20-sql-uebung",
+        "1-21-selbstcheck"
+      ]
+    },
+    {
+      "titel": "NoSQL",
+      "themen": [
+        "2-1-cap",
+        "2-2-nosql-db",
+        "2-3-key-value-db",
+        "2-4-selbstcheck"
+      ]
+    },
+    {
+      "titel": "Datenverarbeitung mit Python",
+      "themen": [
+        "3-1-data-life-cycle",
+        "3-2-verschachtelte-datentypen",
+        "3-3-einlesen",
+        "3-4-verarbeiten",
+        "3-5-bereinigen",
+        "3-6-schreiben",
+        "3-7-csv-in-dbbrowser",
+        "3-8-visualisieren",
+        "3-9-data-life-cycle-csv",
+        "3-10-json",
+        "3-11-api",
+        "3-12-uebung-erm-daten-verarbeiten",
+        "3-13-datenmanagement-vertiefung",
+        "3-14-iug",
+        "3-15-selbstcheck"
+      ]
+    }
+  ]
+}

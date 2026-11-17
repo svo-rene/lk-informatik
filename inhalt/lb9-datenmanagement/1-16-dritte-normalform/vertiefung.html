@@ -1,0 +1,37 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.16.4: Fehler finden – Abhängigkeiten und Zerlegung <span class="niveau">AFB III</span>
+                </summary>
+                <p>Eine Schule speichert <code>Schueler(<u>SchuelerNr</u>, Name, KlassenNr, Klassenraum, Klassenlehrer, LehrerTelefon)</code>.
+                   Jede Klasse hat einen festen Raum und eine Klassenleitung; ein Raum kann am Nachmittag auch von einer AG genutzt
+                   werden. Tim hat notiert:</p>
+                <ul>
+                    <li>Abhängigkeiten: (a) <code>Name → SchuelerNr</code>, (b) <code>KlassenNr → Klassenraum, Klassenlehrer</code>,
+                        (c) <code>Klassenlehrer → LehrerTelefon</code>, (d) <code>SchuelerNr → KlassenNr</code></li>
+                    <li>Seine 3NF-Zerlegung:</li>
+                </ul>
+                <pre class="schema">Schueler(<u>SchuelerNr</u>, Name)
+Klasse(<u>KlassenNr</u>, Klassenraum, Klassenlehrer, LehrerTelefon)</pre>
+                <p>Beurteile jede Abhängigkeit und die Zerlegung. Finde mindestens drei Fehler, begründe sie und gib die korrekte 3NF an.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.16.5: PLZ und Ort – muss das wirklich getrennt werden? <span class="niveau">AFB III</span>
+                </summary>
+                <p>Im durchgerechneten Beispiel der Musikschule wurde <code>PLZ → Ort</code> angenommen und eine eigene Relation
+                   <code>Ort(<u>PLZ</u>, Ort)</code> gebildet. Lena wendet ein: „In der Praxis macht das kaum jemand. Außerdem gibt es
+                   Postleitzahlen, die für mehrere kleine Gemeinden gelten, und Städte wie Dresden haben viele Postleitzahlen.“</p>
+                <ol>
+                    <li>Prüfe, was Lenas Einwand für die Abhängigkeiten <code>PLZ → Ort</code> und <code>Ort → PLZ</code> bedeutet.</li>
+                    <li>Beurteile, ob die Relation <code>Ort(PLZ, Ort)</code> in einer Schulverwaltung sinnvoll ist. Wäge dabei Redundanz,
+                        Anomalien und Pflegeaufwand gegeneinander ab.</li>
+                    <li>Formuliere eine allgemeine Regel, wann man eine formal mögliche Zerlegung bewusst unterlässt.</li>
+                </ol>
+            </details>
+        </div>

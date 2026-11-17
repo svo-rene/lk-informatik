@@ -1,0 +1,47 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.3.8: 99,2&nbsp;% Genauigkeit – ein gutes Modell? <span class="niveau">AFB III</span></summary>
+                <p>Ein Zahlungsdienstleister bewirbt sein KI-Modell zur Betrugserkennung mit dem Satz: „Unser Modell erkennt Kartenbetrug mit 99,2&nbsp;% Genauigkeit!“ Im technischen Anhang findest du die Testergebnisse für 10.000 Kartenzahlungen, von denen 50 Betrugsfälle waren. Dazu gibt es ein zweites Modell B, das intern getestet wurde:</p>
+                <table>
+                    <thead>
+                        <tr><th>Modell</th><th>TP</th><th>FN</th><th>FP</th><th>TN</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>A (beworben)</td><td>10</td><td>40</td><td>40</td><td>9910</td></tr>
+                        <tr><td>B</td><td>40</td><td>10</td><td>360</td><td>9590</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Prüfe die Werbeaussage für Modell A nach.</li>
+                    <li>Berechne die Accuracy eines „Modells“, das jede Zahlung als „kein Betrug“ einstuft, und vergleiche sie mit Modell A.</li>
+                    <li>Berechne Accuracy, Precision und Recall für beide Modelle und deute die Werte in Worten (z.&nbsp;B. „Von … Betrugsfällen werden … erkannt“).</li>
+                    <li>Bei einem Betrugsverdacht wird die Zahlung angehalten und die Kundin oder der Kunde per App um Bestätigung gebeten. Beurteile, welches Modell der Dienstleister einsetzen sollte. Berechne zusätzlich den F1-Score beider Modelle und erkläre, warum er hier allein keine gute Entscheidungsgrundlage ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.3.9: Fehler im Projektprotokoll <span class="niveau">AFB III</span></summary>
+                <p>Eine Projektgruppe entwickelt ein Modell, das auf Fotos von Leergut erkennt, ob es sich um eine Glasflasche, eine PET-Flasche oder eine Dose handelt. In ihrem Protokoll steht:</p>
+                <blockquote>
+                    <p>„Wir haben 3000 Fotos gemacht, darunter nur 150 Dosen. Die Fotos haben wir nach Aufnahmedatum sortiert: Die ersten 2100 (aufgenommen im Juni bei Sonnenlicht) sind Trainingsdaten, die nächsten 450 Validierungsdaten und die letzten 450 (aufgenommen im Dezember bei Lampenlicht) Testdaten. Weil wir viele Flaschen mehrmals aus verschiedenen Winkeln fotografiert haben, kommen dieselben Flaschen in allen drei Mengen vor. Wir haben zwölf verschiedene Baumtiefen ausprobiert und jeweils die Testgenauigkeit berechnet. Die beste Tiefe erreichte 96&nbsp;% Testgenauigkeit. Damit ist bewiesen, dass unser Modell im Pfandautomaten 96&nbsp;% aller Leergut-Stücke richtig erkennt.“</p>
+                </blockquote>
+                <ol>
+                    <li>Berechne die Anteile der drei Datenmengen in Prozent.</li>
+                    <li>Finde mindestens vier methodische Fehler im Protokoll. Erkläre für jeden Fehler, wie er das Ergebnis verfälscht.</li>
+                    <li>Beschreibe ein korrigiertes Vorgehen von der Datenaufteilung bis zur Angabe der Genauigkeit.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Weiterführende Links</h2>
+
+<ul>
+            <li><a href="https://www.youtube.com/watch?v=EuBBz3bI-aA" target="_blank" rel="noopener">StatQuest: Machine Learning Fundamentals – Bias and Variance</a> – kurzes, sehr anschauliches Erklärvideo (Englisch) des bekannten YouTube-Kanals StatQuest zu genau den Konzepten hinter Overfitting und Underfitting.</li>
+            <li><a href="https://www.youtube.com/watch?v=Kdsp6soqA7o" target="_blank" rel="noopener">StatQuest: Machine Learning Fundamentals – The Confusion Matrix</a> – ebenfalls von StatQuest, erklärt die Konfusionsmatrix Schritt für Schritt anhand eines einfachen Beispiels.</li>
+            <li><a href="https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall" target="_blank" rel="noopener">Google Machine Learning Crash Course: Accuracy, Precision, Recall</a> – frei zugänglicher Kurstext von Google mit weiteren Beispielen und Formeln, ebenfalls anhand einer Spam-Klassifikation.</li>
+            <li><a href="https://www.techtarget.com/healthtechanalytics/news/366590054/Epic-Sepsis-Model-Predictions-May-Have-Limited-Clinical-Utility" target="_blank" rel="noopener">Epic Sepsis Model: Wenn ein KI-Modell in der Praxis versagt</a> – ein realer Fall aus der Medizin: Ein weit verbreitetes KI-Modell zur Sepsis-Früherkennung zeigte bei unabhängiger Überprüfung (externe Validierung) deutlich schlechtere Ergebnisse als erwartet – ein gutes Beispiel dafür, warum sorgfältige Bewertung mit unabhängigen Daten so wichtig ist.</li>
+        </ul>

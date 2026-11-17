@@ -1,0 +1,132 @@
+<p>
+            Wenn zwei Funktionen jeweils eine Variable <code>summe</code> benutzen, stören sie sich dann gegenseitig? Die Antwort liefert der <strong>Gültigkeitsbereich</strong> (engl. scope) einer Variablen.
+        </p>
+
+<h2>Lokale Variablen</h2>
+
+<p>
+            Lokale Variablen entstehen, wenn einem Namen <strong>innerhalb einer Funktion</strong> ein Wert zugewiesen wird (auch Parameter sind lokal). Sie existieren nur während des Funktionsaufrufs und sind nur innerhalb dieser Funktion zugänglich.
+        </p>
+
+<h2>Globale Variablen</h2>
+
+<p>
+            Globale Variablen entstehen durch eine Zuweisung <strong>außerhalb aller Funktionen</strong>, also auf der obersten Ebene des Programms (Modulebene). Sie können überall im Programm gelesen werden.
+        </p>
+
+<h2>Beispiele</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Variablen aus <code>if</code> und <code>for</code> gelten auch danach</p>
+            <pre><code class="language-python">for i in range(3):
+    quadrat = i * i
+if quadrat &gt; 0:
+    meldung = "positiv"
+print(i, quadrat, meldung)   # 2 4 positiv – kein eigener Gültigkeitsbereich</code></pre>
+            <ol>
+                <li><strong>Schleife:</strong> i nimmt nacheinander 0, 1, 2 an, <code>quadrat</code> wird 0, 1, 4. <em>Warum gibt es die Namen danach noch?</em> Eine Schleife bildet in Python keinen eigenen Gültigkeitsbereich. <code>i</code> und <code>quadrat</code> behalten ihren letzten Wert.</li>
+                <li><strong>Verzweigung:</strong> 4 &gt; 0 ist wahr, also entsteht <code>meldung</code> im <code>if</code>-Block – ebenfalls auf der obersten Ebene.</li>
+                <li><strong>Ausgabe:</strong> <code>2 4 positiv</code>.</li>
+                <li><strong>Falle:</strong> Eine Variable existiert erst, wenn die Zuweisung tatsächlich <em>ausgeführt</em> wurde. Läuft die Schleife gar nicht oder ist die Bedingung falsch, fehlt der Name.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Variablen, die in <code>for</code>- oder <code>if</code>-Blöcken entstehen, sind danach im selben Bereich gültig – aber nur, wenn der Block ausgeführt wurde.</p>
+            <table>
+                <thead><tr><th>Eingabe (Schleife)</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>range(3)</code></td><td><code>2 4 positiv</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>range(1)</code></td><td><code>NameError: name 'meldung' is not defined</code></td><td>quadrat = 0, die Bedingung ist falsch, <code>meldung</code> entsteht nie</td></tr>
+                    <tr><td><code>range(0)</code></td><td><code>NameError: name 'quadrat' is not defined</code></td><td>Schleife läuft nicht; der Fehler tritt schon in der <code>if</code>-Zeile auf</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> lokale, globale und mit <code>global</code> gekennzeichnete Variablen</p>
+            <pre><code class="language-python">global_var_1 = 5
+global_var_2 = 10
+
+def irgendeine_funktion():
+    local_var = 5
+    global global_var_1          # global_var_1 soll die globale Variable sein
+    global_var_1 = "neuer Wert"  # verändert die globale Variable
+    global_var_2 = "neuer Wert"  # erzeugt eine NEUE lokale Variable
+
+irgendeine_funktion()
+# print(local_var)   &lt;-- würde einen NameError auslösen
+print("global_var_1:", global_var_1)   # global_var_1: neuer Wert
+print("global_var_2:", global_var_2)   # global_var_2: 10</code></pre>
+            <ol>
+                <li><strong>Modulebene:</strong> <code>global_var_1</code> und <code>global_var_2</code> werden außerhalb jeder Funktion zugewiesen. Sie sind also global.</li>
+                <li><strong>Python entscheidet vor dem Ausführen:</strong> Beim Übersetzen der Funktion sieht Python die Zuweisungen an <code>local_var</code> und <code>global_var_2</code>. Beide Namen gelten deshalb in der <em>ganzen</em> Funktion als lokal. <code>global_var_1</code> ist durch <code>global</code> ausdrücklich ausgenommen.</li>
+                <li><strong>Aufruf:</strong> <code>local_var</code> entsteht im Speicherbereich des Aufrufs. <code>global_var_1</code> wird global auf „neuer Wert“ gesetzt. Eine <em>lokale</em> <code>global_var_2</code> erhält „neuer Wert“, die globale bleibt 10.</li>
+                <li><strong>Nach dem Aufruf:</strong> Der lokale Bereich wird aufgelöst. <code>local_var</code> und die lokale <code>global_var_2</code> gibt es nicht mehr.</li>
+                <li><strong>Suchreihenfolge beim Lesen:</strong> Wird ein Name nur gelesen, sucht Python zuerst lokal, dann global, zuletzt bei den eingebauten Namen wie <code>print</code> oder <code>len</code>.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>global_var_1: neuer Wert</code> und <code>global_var_2: 10</code>.</p>
+            <table>
+                <thead><tr><th>Änderung bzw. Anweisung nach dem Aufruf</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>print(global_var_1, global_var_2)</code></td><td><code>neuer Wert 10</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>print(local_var)</code></td><td><code>NameError: name 'local_var' is not defined</code></td><td>lokale Variable existiert nur während des Aufrufs</td></tr>
+                    <tr><td>Zeile <code>global global_var_1</code> löschen</td><td><code>global_var_1: 5</code></td><td>dann entsteht auch hier nur eine lokale Variable</td></tr>
+                    <tr><td>Funktion zweimal aufrufen</td><td>unverändert <code>neuer Wert</code> und <code>10</code></td><td>jeder Aufruf erzeugt seine lokalen Variablen neu</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Warum globale Variablen sparsam einsetzen?</summary>
+                <p>Funktionen, die globale Variablen verändern, sind schwer zu testen und zu verstehen, weil ihr Verhalten vom Rest des Programms abhängt. Besser: Werte als Parameter übergeben und mit <code>return</code> zurückgeben.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Gültigkeitsbereiche im Team</summary>
+                <p>
+                    <strong>Alltag:</strong> Eine Notiz auf deinem eigenen Block (lokal) sieht nur du; eine Nachricht an der Pinnwand im Flur (global) können alle lesen – und im schlimmsten Fall überschreiben.<br><br>
+                    <strong>Beruf:</strong> In großen Projekten mit vielen Entwicklerinnen und Entwicklern sind globale Variablen oft durch Programmierrichtlinien verboten oder auf Konstanten beschränkt (z.&nbsp;B. <code>MAX_SPIELER = 4</code>). Werkzeuge zur statischen Code-Analyse wie Pylint melden Zuweisungen an globale Variablen automatisch als Warnung.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>Eine <strong>lokale Variable</strong> ist nur innerhalb der Funktion sichtbar, in der ihr ein Wert zugewiesen wurde. In Python bilden nur Funktionen (sowie Klassen und Module) einen eigenen Gültigkeitsbereich – <code>if</code>-Blöcke und Schleifen dagegen <strong>nicht</strong>.</p>
+        </div>
+
+<div class="merke">
+            <p>Eine <strong>globale Variable</strong> ist im gesamten Programm lesbar. Soll eine Funktion ihr einen neuen Wert zuweisen, muss sie in der Funktion mit <code>global name</code> gekennzeichnet werden. Ohne diese Angabe erzeugt eine Zuweisung in der Funktion eine neue lokale Variable gleichen Namens.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.7.1: Ausgaben erklären <span class="niveau">AFB II</span></summary>
+                <p>In der folgenden Abbildung siehst du Codebeispiele und ihre Ausgaben. Analysiere den Code. Markiere lokale und globale Variablen und erkläre die Ausgaben.</p>
+                <figure>
+                    <img src="../img/globale_lokale_Variablen.png" alt="Vier Codebeispiele zu lokalen und globalen Variablen mit ihren Ausgaben" width="800">
+                    <figcaption>Abb. 1: Codebeispiele zu lokalen und globalen Variablen</figcaption>
+                </figure>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.7.2: Fehler beim Tauschen <span class="niveau">AFB II–III</span></summary>
+                <p>Gegeben ist folgendes Programm: <a href="../material/lokale_globale_variablen_fehlerhaft.py" download="lokale_globale_variablen_fehlerhaft.py">lokale_globale_variablen_fehlerhaft.py</a></p>
+                <ol>
+                    <li>Das Programm zum Tauschen von zwei Zahlenwerten liefert beim Ausführen eine Fehlermeldung. Erkläre, warum.</li>
+                    <li>Verändere das Programm so, dass es korrekt arbeitet, ohne das Schlüsselwort <code>global</code> zu verwenden.</li>
+                </ol>
+            </details>
+        </div>

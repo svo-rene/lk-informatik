@@ -1,0 +1,289 @@
+<p>
+            In dieser Übung gehst du den ganzen Weg zweimal – aber von zwei Seiten. In <strong>Teil A</strong>
+            baust du eine Datenbank von der ersten Idee bis zur fertigen Abfrage komplett selbst. In
+            <strong>Teil B</strong> ist die Datenbank schon da, aber unvollständig: Du ergänzt eine fehlende
+            Relation und füllst sie aus einer CSV-Datei. In <strong>Teil C</strong> legst du eigene Daten an
+            und spielst sie ein.
+        </p>
+
+<h2>Teil A – Eine Datenbank komplett selbst bauen</h2>
+
+<p>
+            Szenario: Ein Supermarkt möchte Produkte, Lieferanten und Verkäufe verwalten. Du beginnst bei
+            null und arbeitest dich in vier Schritten bis zur auswertbaren Datenbank vor.
+        </p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Datenbank und Tabellen Schritt für Schritt über die Oberfläche anlegen</summary>
+                <ol>
+                    <li><strong>Datenbank anlegen:</strong> <em>Datei → Neue Datenbank …</em>, Dateinamen
+                        vergeben und speichern.</li>
+                    <li><strong>Der Dialog „Tabelle definieren“ öffnet sich von selbst</strong> – genau den
+                        brauchst du jetzt. Trage oben den Tabellennamen ein.</li>
+                    <li><strong>Reihenfolge beachten:</strong> Beginne mit den Tabellen <em>ohne</em>
+                        Fremdschlüssel. Ein Fremdschlüssel kann nur auf eine Tabelle zeigen, die es schon
+                        gibt.</li>
+                    <li><strong>Für jede Spalte auf „Feld hinzufügen“</strong> klicken, den Namen eintippen
+                        und den Datentyp aus der Liste wählen: <code>INTEGER</code> für ganze Zahlen,
+                        <code>TEXT</code> für Namen und Datumsangaben, <code>REAL</code> für Preise.</li>
+                    <li><strong>Primärschlüssel setzen:</strong> Häkchen in der Spalte <em>PK</em>
+                        (Schlüsselsymbol). Bei einer reinen Zählnummer zusätzlich <em>AI</em> – dann vergibt
+                        SQLite die Nummer beim Einfügen selbst.</li>
+                    <li><strong>Pflichtfelder kennzeichnen:</strong> Häkchen bei <em>NN</em> (not null) für
+                        alles, was nie leer sein darf.</li>
+                    <li><strong>Fremdschlüssel eintragen:</strong> in der Spalte <em>Fremdschlüssel</em> die
+                        Zieltabelle und die Zielspalte auswählen.</li>
+                    <li><strong>Mit OK bestätigen</strong> und für die nächste Tabelle
+                        <em>Tabelle erstellen</em> anklicken.</li>
+                    <li><strong>Daten eintragen:</strong> Reiter <em>Daten durchsuchen</em>, oben die Tabelle
+                        auswählen, auf <em>Datensatz einfügen</em> klicken und die Werte direkt in die Zellen
+                        tippen. Auch hier gilt: erst die Haupttabelle, dann die abhängige.</li>
+                    <li><strong>Unbedingt <em>Änderungen schreiben</em> klicken.</strong> Ohne diesen Klick
+                        ist beim Schließen alles weg.</li>
+                </ol>
+                <p>
+                    <strong>Kontrolle:</strong> Im Reiter <em>Datenbankstruktur</em> lässt sich jede Tabelle
+                    aufklappen. Dort siehst du Spalten, Datentypen und Schlüssel auf einen Blick – und über
+                    <em>Datei → Exportieren → Datenbank nach SQL-Datei …</em> auch die
+                    <code>CREATE TABLE</code>-Befehle, die der DB Browser aus deinen Klicks erzeugt hat.
+                </p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Oberfläche oder SQL? Wann sich welcher Weg lohnt</summary>
+                <p>
+                    Beide Wege führen zum selben Ergebnis – in der Datenbank steht am Ende dasselbe. Es sind
+                    zwei Bedienungen für dieselbe Sache:
+                </p>
+                <table>
+                    <thead><tr><th></th><th>Über die Oberfläche</th><th>Per SQL</th></tr></thead>
+                    <tbody>
+                        <tr><td>Tempo bei wenigen Tabellen</td><td>meist schneller</td><td>mehr Tipparbeit</td></tr>
+                        <tr><td>Fehlerquellen</td><td>keine Syntaxfehler möglich, Datentypen stehen als Auswahlliste bereit</td><td>ein vergessenes Komma oder eine falsche Klammer bricht alles ab</td></tr>
+                        <tr><td>Wiederholbarkeit</td><td>jeder Schritt muss neu geklickt werden</td><td>der Befehl lässt sich speichern, kopieren und erneut ausführen</td></tr>
+                        <tr><td>Dokumentation</td><td>schwer nachvollziehbar</td><td>der Befehl <em>ist</em> die Dokumentation</td></tr>
+                        <tr><td>Zusammengesetzte Schlüssel</td><td>machbar (mehrere PK-Häkchen), aber unübersichtlich</td><td>klar und in einer Zeile</td></tr>
+                    </tbody>
+                </table>
+                <div class="merke">
+                    <p>
+                        <strong>Für Klausur und Abitur:</strong> Steht in der Aufgabenstellung nicht
+                        ausdrücklich „mit SQL“, „formulieren Sie den SQL-Befehl“ oder „geben Sie die Abfrage
+                        an“, darfst du den Weg über die Oberfläche gehen – und der ist beim Anlegen von
+                        Tabellen und beim Eingeben von Daten oft der schnellere und sicherere. Verlangt die
+                        Aufgabe dagegen ausdrücklich SQL, muss der Befehl auch dastehen.
+                    </p>
+                    <p>
+                        Bei <em>Abfragen</em> ist es umgekehrt: Dort wird fast immer der SQL-Befehl verlangt,
+                        weil er zeigt, wie du zum Ergebnis gekommen bist.
+                    </p>
+                </div>
+                <p>
+                    Dieselbe Struktur wie in der Anleitung oben, nur als SQL – so sieht es aus, wenn der
+                    DB Browser deine Klicks übersetzt:
+                </p>
+<pre><code>CREATE TABLE Lieferant (
+    LieferantNr INTEGER PRIMARY KEY,
+    Name        TEXT NOT NULL,
+    Telefon     TEXT
+);
+
+CREATE TABLE Produkt (
+    ProduktNr   INTEGER PRIMARY KEY,
+    Bezeichnung TEXT NOT NULL,
+    Preis       REAL,
+    LieferantNr INTEGER,
+    FOREIGN KEY (LieferantNr) REFERENCES Lieferant (LieferantNr)
+);</code></pre>
+                <p>
+                    Praktischer Tipp: Lege die Tabellen über die Oberfläche an und exportiere anschließend
+                    das erzeugte SQL. Dann hast du beides – die schnelle Bedienung <em>und</em> eine
+                    Dokumentation, die du abgeben kannst.
+                </p>
+            </details>
+        </div>
+
+<h2>Teil B – Eine vorhandene Datenbank erweitern</h2>
+
+<p>
+            Im Berufsalltag baut man selten bei null an. Meistens existiert eine Datenbank bereits, und es
+            kommen Daten dazu – oft als CSV-Datei aus einem anderen System. Genau das übt Teil B.
+        </p>
+
+<p>
+            <strong>Material zum Herunterladen:</strong><br>
+            <a href="../material/onlineshop_start.sql" download>onlineshop_start.sql</a> – die
+            Ausgangsdatenbank mit drei gefüllten Relationen<br>
+            <a href="../material/bestellpositionen.csv" download>bestellpositionen.csv</a> – die Daten,
+            die noch fehlen
+        </p>
+
+<p>Die Ausgangsdatenbank enthält diese drei Relationen:</p>
+
+<pre class="schema">Kunde(<u>KundenNr</u>, Name, Ort)
+Produkt(<u>ProduktNr</u>, Bezeichnung, Preis)
+Bestellung(<u>BestellNr</u>, Datum, &uarr;KundenNr)</pre>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Eine <code>.sql</code>-Datei Schritt für Schritt in den DB Browser laden</summary>
+                <ol>
+                    <li>Datei über den Link oben <strong>herunterladen</strong> und merken, in welchem Ordner
+                        sie liegt.</li>
+                    <li>Im DB Browser <em>Datei → Neue Datenbank …</em>, als Namen <code>onlineshop.db</code>
+                        wählen, den Dialog „Tabelle definieren“ mit <em>Abbrechen</em> schließen.</li>
+                    <li><em>Datei → Importieren → Datenbank aus SQL-Datei …</em> und die heruntergeladene
+                        Datei auswählen.<br>
+                        <em>Alternativ:</em> Die <code>.sql</code>-Datei mit einem Texteditor öffnen, alles
+                        markieren, kopieren, im Reiter <em>SQL ausführen</em> einfügen und
+                        <kbd>F5</kbd> drücken. Das Ergebnis ist dasselbe.</li>
+                    <li><strong>Kontrolle:</strong> Reiter <em>Datenbankstruktur</em> – es müssen drei
+                        Tabellen erscheinen: Kunde, Produkt, Bestellung.</li>
+                    <li>Reiter <em>Daten durchsuchen</em>: Sind die Tabellen gefüllt?</li>
+                    <li><em>Änderungen schreiben</em> klicken.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: CSV-Daten Schritt für Schritt in eine bestehende Datenbank übernehmen</summary>
+                <p>
+                    Gibst du im Importdialog einen <em>neuen</em> Tabellennamen an, legt der CSV-Import des DB
+                    Browsers eine neue Tabelle mit lauter Textspalten an – ohne Schlüssel und ohne Datentypen.
+                    Trägst du dagegen den Namen einer bestehenden Tabelle ein, fragt DB Browser, ob die Daten dort
+                    angehängt werden sollen; dann gelten deren Datentypen und Schlüssel. Sicherer und besser
+                    nachvollziehbar ist trotzdem der Weg in zwei Schritten: erst in eine Hilfstabelle importieren,
+                    prüfen und dann in die richtige Tabelle umfüllen.
+                </p>
+                <ol>
+                    <li><strong>Zieltabelle anlegen.</strong> Hier stehen die Datentypen und Schlüssel, die
+                        der Import nicht liefern kann. Das geht über die Oberfläche genauso wie per SQL – in
+                        der Oberfläche setzt du das PK-Häkchen einfach bei <em>beiden</em> Spalten
+                        BestellNr und ProduktNr, das ergibt den zusammengesetzten Primärschlüssel. Weil das
+                        im Dialog schnell unübersichtlich wird, ist SQL hier ausnahmsweise der bequemere Weg:
+<pre><code>CREATE TABLE Bestellposition (
+    BestellNr INTEGER,
+    ProduktNr INTEGER,
+    Menge     INTEGER NOT NULL,
+    PRIMARY KEY (BestellNr, ProduktNr),
+    FOREIGN KEY (BestellNr) REFERENCES Bestellung (BestellNr),
+    FOREIGN KEY (ProduktNr) REFERENCES Produkt (ProduktNr)
+);</code></pre></li>
+                    <li><strong>CSV importieren:</strong> <em>Datei → Importieren → Tabelle aus CSV-Datei …</em>,
+                        die Datei auswählen.</li>
+                    <li><strong>Im Importdialog einstellen:</strong>
+                        <ul>
+                            <li>Tabellenname: <code>import_positionen</code> (bewusst <em>nicht</em>
+                                Bestellposition – das ist die Hilfstabelle)</li>
+                            <li>Feldtrenner: <code>;</code></li>
+                            <li>Häkchen bei „Spaltennamen in erster Zeile“</li>
+                        </ul>
+                        In der Vorschau müssen drei getrennte Spalten zu sehen sein. Steht alles in
+                        <em>einer</em> Spalte, ist das Trennzeichen falsch eingestellt.</li>
+                    <li><strong>Daten umfüllen</strong> – <code>CAST</code> macht aus dem importierten Text
+                        echte Zahlen:
+<pre><code>INSERT INTO Bestellposition (BestellNr, ProduktNr, Menge)
+SELECT CAST(BestellNr AS INTEGER),
+       CAST(ProduktNr AS INTEGER),
+       CAST(Menge     AS INTEGER)
+FROM import_positionen;</code></pre></li>
+                    <li><strong>Hilfstabelle entfernen:</strong> <code>DROP TABLE import_positionen;</code></li>
+                    <li><strong>Kontrollieren</strong> und <em>Änderungen schreiben</em> nicht vergessen.</li>
+                </ol>
+                <p>
+                    Warum der Umweg? Würde man die CSV unter einem neuen Namen direkt als Tabelle importieren,
+                    stünden dort Zeichenketten statt Zahlen. <code>SUM(Menge)</code> rechnet zwar trotzdem richtig,
+                    weil SQLite Text beim Rechnen in Zahlen umwandelt. Aber Vergleiche und Sortierung laufen
+                    alphabetisch: „10“ käme vor „9“, und <code>WHERE Menge &gt; 5</code> würde „10“ nicht finden,
+                    weil Text mit Text verglichen wird. Außerdem prüft die Hilfstabelle keine Schlüssel, sodass
+                    doppelte oder falsche Nummern unbemerkt blieben.
+                </p>
+            </details>
+        </div>
+
+<h2>Teil C – Eigene Daten dazulegen</h2>
+
+<p>
+            Bis hierher kamen alle Daten von außen. Jetzt erhebst du selbst welche, bringst sie in die
+            richtige Form und spielst sie ein – das ist der Weg, den auch echte Daten nehmen.
+        </p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Eine CSV-Datei Schritt für Schritt richtig anlegen</summary>
+                <p><strong>Weg 1 – mit LibreOffice Calc oder Excel (empfohlen):</strong></p>
+                <ol>
+                    <li><strong>Erste Zeile = Spaltennamen.</strong> Kurz, ohne Leerzeichen und ohne Umlaute:
+                        <code>BestellNr</code>, <code>Sterne</code>, <code>Kommentar</code>.</li>
+                    <li><strong>Ab Zeile 2 die Daten</strong> – eine Zeile je Datensatz, keine Leerzeilen
+                        dazwischen.</li>
+                    <li><strong>Zahlen ohne Einheiten</strong> schreiben: <code>4</code>, nicht
+                        <code>4 Sterne</code>. Kommazahlen mit <strong>Punkt</strong>, nicht mit Komma.
+                        Datumsangaben im Format <code>JJJJ-MM-TT</code>.</li>
+                    <li><em>Datei → Speichern unter …</em>, als Dateityp <strong>Text CSV</strong> wählen und
+                        „Aktuelles Format beibehalten“ bestätigen.</li>
+                    <li>Im Exportdialog einstellen: Zeichensatz <strong>Unicode (UTF-8)</strong>,
+                        Feldtrennzeichen <strong>;</strong>, Texttrennzeichen <strong>"</strong>.</li>
+                    <li><strong>Gegenlesen:</strong> Öffne die fertige Datei mit einem Texteditor. Du musst
+                        genau das sehen:
+<pre><code>BestellNr;Sterne;Kommentar
+5001;5;schnell geliefert
+5003;3;Verpackung war beschaedigt</code></pre></li>
+                </ol>
+                <p><strong>Weg 2 – direkt im Texteditor:</strong> Bei so kleinen Dateien oft der schnellste
+                   Weg. Text wie oben eintippen, dann <em>Speichern unter …</em> mit der Endung
+                   <code>.csv</code> und der Kodierung UTF-8.</p>
+                <p><strong>Die drei häufigsten Fehler:</strong></p>
+                <ul>
+                    <li><strong>Semikolon im Text.</strong> Steht in einem Kommentar ein Semikolon, zerreißt
+                        es die Zeile. Setze solche Texte in Anführungszeichen – oder vermeide das Zeichen.</li>
+                    <li><strong>Falsche Kodierung.</strong> Ohne UTF-8 werden aus Umlauten beim Import
+                        Zeichenfolgen wie <code>Ã¼</code>.</li>
+                    <li><strong>Leerzeile am Dateiende.</strong> Sie wird als leerer Datensatz importiert.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Das ERM dient zur grafischen Darstellung von Datenbankstrukturen. Es hilft dabei, Beziehungen zwischen Entitäten zu visualisieren.
+                Das Relationenmodell stellt diese Beziehungen in Tabellenform dar, während Normalformen die Struktur der Tabellen optimieren und Redundanzen vermeiden.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.18.1: ERM für ein Supermarkt-Verwaltungssystem <span class="niveau">AFB II</span></summary>
+                <p>
+                    Erstelle ein ERM für ein Supermarkt-Verwaltungssystem, das Informationen zu Produkten, Lieferanten und Verkäufen enthält.
+                    Überlege dir, welche Entitäten und Attribute benötigt werden und wie die Beziehungen untereinander aussehen könnten.
+                </p>
+                <p>
+                    Achte besonders darauf, welche Angabe erst durch die <em>Kombination</em> aus Verkauf und
+                    Produkt entsteht – sie gehört an die Beziehung, nicht an eine der beiden Entitäten
+                    (siehe Seite 1.10).
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 1.18.2: Relationenmodell ableiten <span class="niveau">AFB II</span></summary>
+                <p>
+                    Leite aus deinem ERM ein Relationenmodell ab: Jede Entität wird eine Relation, jede m:n-Beziehung eine zusätzliche Verbindungsrelation. Achte dabei auf die Schlüsselattribute und
+                    definiere Primär- und Fremdschlüssel für die Tabellen.
+                </p>
+                <p>
+                    Gegenprobe mit der Faustformel von Seite 1.11: Anzahl der Relationen = Anzahl der
+                    Entitäten + Anzahl der m:n-Beziehungen.
+                </p>
+            </details>
+        </div>

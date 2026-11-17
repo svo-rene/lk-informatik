@@ -1,0 +1,249 @@
+<p>
+    In der objektorientierten Programmierung kommunizieren Objekte miteinander über sogenannte <strong>Botschaften</strong>. Eine Botschaft ist dabei ein <strong>Methodenaufruf</strong> an ein Objekt.
+</p>
+
+<pre><code class="language-python">app.sende_nachricht()</code></pre>
+
+<p>
+    Das Objekt <code>app</code> erhält die Botschaft <code>sende_nachricht</code> und reagiert darauf. Wie genau es reagiert, hängt von seiner konkreten Klasse ab.
+</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in zwei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1,5–2 min, ohne Ton) die Idee und den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe mit.</p>
+
+<ol class="schritte">
+    <li><a href="#schritt-1">Gleiche Botschaft, anderes Verhalten</a> – danach Aufgabe 4.11.1</li>
+    <li><a href="#schritt-2">Eine Schleife über verschiedene Objekte</a> – danach Aufgabe 4.11.2 und 4.11.3</li>
+</ol>
+
+<p>Zum Schluss findest du ein komplexes Beispiel, den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Gleiche Botschaft, anderes Verhalten</h2>
+
+<p>
+    Der Begriff <strong>Polymorphie</strong> bedeutet „Vielgestaltigkeit“. In der OOP beschreibt er, dass unterschiedliche Objekte auf die gleiche Botschaft unterschiedlich reagieren können. Dadurch kann man Objekte verschiedener Klassen <em>einheitlich</em> ansprechen, ohne ihre konkrete Umsetzung zu kennen.
+</p>
+
+<p>Im Video bekommen ein WhatsApp- und ein Signal-Objekt dieselbe Botschaft <code>sende_nachricht()</code>. Achte rechts darauf, in welcher Klasse Python die Methode findet – und dass die Fassung der Oberklasse <code>Messenger</code> gar nicht erreicht wird.</p>
+
+<figure>
+    <div class="lp-video"><video controls preload="none" poster="../vid/4-11-1_botschaft_vorschau.png" src="../vid/4-11-1_botschaft.mp4"></video><a href="../vid/4-11-1_botschaft.mp4">Video ansehen</a></div>
+    <figcaption>Video 1: Gleiche Botschaft, anderes Verhalten (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+</figure>
+
+<p>Danach: <a href="uebungen.html#a-4-11-1">Aufgabe 4.11.1</a> – Medien abspielen.</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Eine Schleife über verschiedene Objekte →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Eine Schleife über verschiedene Objekte</h2>
+
+<p>Besonders häufig wird Polymorphie in Schleifen oder Funktionen genutzt, die mit unterschiedlichen Objekten arbeiten, ohne deren genaue Klasse zu kennen.</p>
+
+<pre><code class="language-python">def nachrichten_testen(liste):
+    for app in liste:
+        app.sende_nachricht()</code></pre>
+
+<p>Der Code bleibt übersichtlich und muss nicht angepasst werden, wenn neue App-Typen hinzukommen.</p>
+
+<p>Im Video läuft die Schleife aus Beispiel 1 Durchlauf für Durchlauf. Achte darauf, worauf <code>app</code> gerade verweist und welche Methode deshalb gelb markiert ist – die Programmzeile <code>app.sende_nachricht()</code> bleibt immer dieselbe. Am Ende wird <code>isinstance</code> kurz erklärt.</p>
+
+<figure>
+    <div class="lp-video"><video controls preload="none" poster="../vid/4-11-2_schleife_vorschau.png" src="../vid/4-11-2_schleife.mp4"></video><a href="../vid/4-11-2_schleife.mp4">Video ansehen</a></div>
+    <figcaption>Video 2: Eine Schleife über verschiedene Objekte (ca. 1,5 min)</figcaption>
+</figure>
+
+<p>Zum Nachlesen steht der Code aus beiden Videos mit Erklärung und Testfällen in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Messenger-Apps</summary>
+    <p><strong>Ausgangssituation:</strong> Ein Programm soll über mehrere Messenger dieselbe Nachricht verschicken. Jeder Messenger verschickt anders.</p>
+    <pre><code class="language-python">class Messenger:
+    def sende_nachricht(self):
+        print("Nachricht wird gesendet ...")
+
+class WhatsApp(Messenger):
+    def sende_nachricht(self):
+        print("WhatsApp sendet eine Nachricht mit Lesebestätigung.")
+
+class Signal(Messenger):
+    def sende_nachricht(self):
+        print("Signal sendet eine verschlüsselte Nachricht.")
+
+class Discord(Messenger):
+    def sende_nachricht(self):
+        print("Discord postet die Nachricht in einen Channel.")
+
+apps = [WhatsApp(), Signal(), Discord()]
+for app in apps:
+    app.sende_nachricht()
+
+# Ausgabe:
+# WhatsApp sendet eine Nachricht mit Lesebestätigung.
+# Signal sendet eine verschlüsselte Nachricht.
+# Discord postet die Nachricht in einen Channel.</code></pre>
+    <p>Obwohl immer dieselbe Botschaft <code>sende_nachricht()</code> gesendet wird, verhält sich jede App anders. Genau das bezeichnet man als <strong>Polymorphie</strong>.</p>
+    <ol>
+        <li><strong>Gemeinsame Botschaft festlegen:</strong> Die Oberklasse <code>Messenger</code> definiert <code>sende_nachricht()</code>. Warum: Damit steht fest, dass <em>jeder</em> Messenger diese Botschaft versteht.</li>
+        <li><strong>In jeder Unterklasse überschreiben:</strong> <code>WhatsApp</code>, <code>Signal</code> und <code>Discord</code> liefern jeweils ihre eigene Umsetzung.</li>
+        <li><strong>Erster Schleifendurchlauf:</strong> <code>app</code> verweist auf ein <code>WhatsApp</code>-Objekt. Python sucht <code>sende_nachricht</code> zuerst in <code>WhatsApp</code>, findet sie dort und führt sie aus. Die Methode der Oberklasse wird nicht erreicht.</li>
+        <li><strong>Weitere Durchläufe:</strong> Dieselbe Zeile <code>app.sende_nachricht()</code> führt nun <code>Signal.sende_nachricht</code> bzw. <code>Discord.sende_nachricht</code> aus. Welche Methode läuft, entscheidet sich erst zur Laufzeit am konkreten Objekt.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong> drei unterschiedliche Ausgabezeilen aus einer einzigen Programmzeile (siehe Kommentar im Code).</p>
+    <p><strong>Kontrolle:</strong></p>
+    <table class="gitter">
+        <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+        <tr><td><code>Messenger().sende_nachricht()</code></td><td>Nachricht wird gesendet ...</td></tr>
+        <tr><td><code>class Threema(Messenger): pass</code>, dann <code>Threema().sende_nachricht()</code></td><td>Nachricht wird gesendet ... (nicht überschrieben, also geerbt)</td></tr>
+    </table>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-4-11-2">Aufgabe 4.11.2</a> – Erweiterbar programmieren, dann <a href="uebungen.html#a-4-11-3">Aufgabe 4.11.3</a> – Code analysieren.</p>
+
+<h2>Alles zusammen: Beispiel 2</h2>
+
+<p>Das folgende Beispiel zeigt, wie Polymorphie eine <code>if</code>-Kette über die Klassen überflüssig macht.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Flächen verschiedener Formen – ohne <code>if</code>-Kette</summary>
+    <p><strong>Ausgangssituation:</strong> Ein Programm für einen Fliesenleger soll die Gesamtfläche einer Liste verschiedener Formen berechnen. Später sollen weitere Formen dazukommen, ohne die Berechnung umzuschreiben. Das Klassendiagramm:</p>
+    <svg viewBox="0 0 560 230" width="560" role="img" aria-label="UML-Klassendiagramm: Rechteck und Kreis erben von Form" style="max-width: 100%; height: auto; font-family: sans-serif; font-size: 13px;">
+        <rect x="190" y="10" width="180" height="70" fill="#ffffff" stroke="#222222"/>
+        <text x="280" y="30" text-anchor="middle" font-weight="bold" fill="#222222">Form</text>
+        <line x1="190" y1="40" x2="370" y2="40" stroke="#222222"/>
+        <line x1="190" y1="50" x2="370" y2="50" stroke="#222222"/>
+        <text x="198" y="68" fill="#222222">+ flaeche(): float</text>
+        <rect x="40" y="140" width="200" height="84" fill="#ffffff" stroke="#222222"/>
+        <text x="140" y="160" text-anchor="middle" font-weight="bold" fill="#222222">Rechteck</text>
+        <line x1="40" y1="170" x2="240" y2="170" stroke="#222222"/>
+        <text x="48" y="188" fill="#222222">+ a: float, + b: float</text>
+        <line x1="40" y1="196" x2="240" y2="196" stroke="#222222"/>
+        <text x="48" y="214" fill="#222222">+ flaeche(): float</text>
+        <rect x="320" y="140" width="200" height="84" fill="#ffffff" stroke="#222222"/>
+        <text x="420" y="160" text-anchor="middle" font-weight="bold" fill="#222222">Kreis</text>
+        <line x1="320" y1="170" x2="520" y2="170" stroke="#222222"/>
+        <text x="328" y="188" fill="#222222">+ r: float</text>
+        <line x1="320" y1="196" x2="520" y2="196" stroke="#222222"/>
+        <text x="328" y="214" fill="#222222">+ flaeche(): float</text>
+        <polyline points="140,140 140,112 420,112 420,140" fill="none" stroke="#222222"/>
+        <line x1="280" y1="112" x2="280" y2="95" stroke="#222222"/>
+        <polygon points="280,80 270,95 290,95" fill="#ffffff" stroke="#222222"/>
+    </svg>
+    <p style="text-align: center;"><em>Abb. 1: Rechteck und Kreis überschreiben flaeche() der Oberklasse Form</em></p>
+    <pre><code class="language-python">import math
+
+class Form:
+    def flaeche(self) -&gt; float:
+        raise NotImplementedError("Jede Form muss flaeche() umsetzen")
+
+class Rechteck(Form):
+    def __init__(self, a, b):
+        self.a, self.b = a, b
+    def flaeche(self):
+        return self.a * self.b
+
+class Kreis(Form):
+    def __init__(self, r):
+        self.r = r
+    def flaeche(self):
+        return math.pi * self.r ** 2
+
+formen = [Rechteck(3, 4), Kreis(1), Rechteck(2, 2)]
+print(round(sum(f.flaeche() for f in formen), 2))   # 19.14
+
+# ohne Polymorphie bräuchte man:
+# if type(f) == Rechteck: ... elif type(f) == Kreis: ...
+# und müsste diese Stelle bei jeder neuen Form ändern.</code></pre>
+    <ol>
+        <li><strong>Schnittstelle in der Oberklasse:</strong> <code>Form.flaeche()</code> löst <code>NotImplementedError</code> aus. Warum: Eine „Form an sich“ hat keine Fläche. Die Methode legt nur fest, dass jede Unterklasse <code>flaeche()</code> anbieten muss.</li>
+        <li><strong>Überschreiben in den Unterklassen:</strong> <code>Rechteck</code> rechnet a · b, <code>Kreis</code> rechnet π · r².</li>
+        <li><strong>Polymorpher Aufruf:</strong> Im Generatorausdruck <code>f.flaeche() for f in formen</code> erhält jedes Objekt dieselbe Botschaft. Werte: Rechteck(3, 4) → 12, Kreis(1) → 3.14159…, Rechteck(2, 2) → 4.</li>
+        <li><strong>Summieren und runden:</strong> 12 + 3.14159… + 4 = 19.14159…, <code>round(…, 2)</code> ergibt 19.14.</li>
+        <li><strong>Erweitern ohne Änderung:</strong> Eine neue Klasse <code>Dreieck(Form)</code> mit eigener <code>flaeche()</code> kann sofort in die Liste; die Summenzeile bleibt gleich. <strong>Falle:</strong> Vergisst die neue Klasse <code>flaeche()</code>, wird die Methode der Oberklasse geerbt, und die Summe bricht mit <code>NotImplementedError: Jede Form muss flaeche() umsetzen</code> ab. Der Fehler fällt also auf, statt still eine falsche Fläche zu liefern.</li>
+    </ol>
+    <p><strong>Ergebnis:</strong> Ausgabe <code>19.14</code>.</p>
+    <p><strong>Kontrolle:</strong></p>
+    <table class="gitter">
+        <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+        <tr><td><code>print(Rechteck(3, 4).flaeche())</code></td><td>12</td></tr>
+        <tr><td><code>print(Kreis(1).flaeche())</code></td><td>3.141592653589793</td></tr>
+        <tr><td><code>print(round(sum(f.flaeche() for f in []), 2))</code></td><td>0 (leere Liste)</td></tr>
+        <tr><td><code>Form().flaeche()</code></td><td><code>NotImplementedError</code></td></tr>
+    </table>
+            </details>
+        </div>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Schnittstellen und „Duck Typing“</summary>
+        <p>
+            Wenn verschiedene Klassen dieselbe Methode besitzen, spricht man von einer gemeinsamen <strong>Schnittstelle</strong>. Eine Schnittstelle beschreibt also, <em>was</em> ein Objekt können muss – nicht, <em>wie</em> es das umsetzt.<br>
+            In Python funktioniert Polymorphie sogar ohne gemeinsame Oberklasse: Es genügt, dass das Objekt die aufgerufene Methode besitzt („Wenn es watschelt wie eine Ente und quakt wie eine Ente, ist es eine Ente“ – <strong>Duck Typing</strong>). Im Projekt (siehe Kurs „Softwareentwicklung“, Seite 4.12) nutzt du Schnittstellen, um deine Klassen austauschbar zu machen.
+        </p>
+    </details>
+</div>
+
+<h2>Warum ist Polymorphie so wichtig?</h2>
+
+<ul>
+    <li><strong>Austauschbarkeit:</strong> Objekte können ersetzt werden, ohne den restlichen Code zu ändern.</li>
+    <li><strong>Erweiterbarkeit:</strong> Neue Klassen lassen sich leicht hinzufügen.</li>
+    <li><strong>Übersichtlichkeit:</strong> Der Code arbeitet mit allgemeinen Begriffen statt mit Spezialfällen.</li>
+</ul>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Polymorphie überall</summary>
+        <p>
+            <strong>Alltag:</strong> Die Taste „Teilen“ auf deinem Smartphone sendet immer dieselbe Botschaft – ob das Ziel ein Messenger, ein E-Mail-Programm oder die Cloud ist, entscheidet das jeweilige Objekt.<br><br>
+            <strong>Beruf:</strong> Druckertreiber, Zahlungsanbieter im Onlineshop (PayPal, Kreditkarte, Rechnung) oder Sensoren in der Industrie werden über gemeinsame Schnittstellen angesprochen. Softwareentwicklerinnen und -entwickler können so einen neuen Zahlungsanbieter einbauen, indem sie nur eine neue Klasse schreiben – der restliche Shop bleibt unverändert. Das spart in großen Projekten viel Test- und Wartungsaufwand.
+        </p>
+    </details>
+</div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+    Objekte reagieren auf Botschaften, also auf Methodenaufrufe. Polymorphie heißt: Dieselbe Botschaft löst bei Objekten verschiedener Klassen unterschiedliches Verhalten aus, weil jede Unterklasse die Methode auf ihre Weise überschreibt. Welche Fassung läuft, entscheidet Python erst beim Ausführen am konkreten Objekt. Deshalb kann eine einzige Schleife Objekte verschiedener Klassen gleich behandeln – und eine neue Klasse lässt sich ergänzen, ohne die Schleife zu ändern.
+</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p>
+        Eine <strong>Botschaft</strong> ist ein gezielter Aufruf an ein Objekt (ein Methodenaufruf).<br>
+        Ein <strong>Ereignis</strong> ist ein Auslöser von außen (z.&nbsp;B. Klick, Tastendruck, eingehende Nachricht), auf den das Programm mit einer Botschaft an ein Objekt reagiert.<br>
+        <em>Beides führt dazu, dass ein Objekt reagiert.</em>
+    </p>
+</div>
+
+<div class="merke">
+    <p>
+        <strong>Polymorphie</strong> bedeutet: <em>gleiche Botschaft – unterschiedliches Verhalten</em>, abhängig von der Klasse des Objekts. Erst zur Laufzeit wird entschieden, welche Methode ausgeführt wird (dynamisches Binden).
+    </p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 1: Wer antwortet? <span class="niveau">AFB I</span></summary>
+        <p>Was geben <code>d = Discord()</code> und dann <code>d.sende_nachricht()</code> aus, und in welcher Klasse findet Python die Methode? Was gibt <code>m = Messenger()</code> und <code>m.sende_nachricht()</code> aus?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p><code>Discord postet die Nachricht in einen Channel.</code> – Python findet <code>sende_nachricht</code> schon in <code>Discord</code>. Ein Objekt der Oberklasse selbst benutzt die Fassung von <code>Messenger</code>: <code>Nachricht wird gesendet ...</code></p>
+        </details>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Kurz geprüft 2: Eine Schleife, drei Objekte <span class="niveau">AFB I</span></summary>
+        <p>Zu den Klassen aus Beispiel 1 kommt <code>class Threema(Messenger): pass</code>. Was gibt die Schleife <code>for app in [Signal(), Threema(), Signal()]:</code> mit <code>app.sende_nachricht()</code> aus? Und was ergibt <code>isinstance(Threema(), Messenger)</code>?</p>
+        <details class="loesung-details"><summary>Lösung zeigen</summary>
+        <p>Drei Zeilen: <code>Signal sendet eine verschlüsselte Nachricht.</code>, <code>Nachricht wird gesendet ...</code> (Threema überschreibt nichts, Python findet die Methode erst in <code>Messenger</code>) und noch einmal <code>Signal sendet eine verschlüsselte Nachricht.</code> <code>isinstance(Threema(), Messenger)</code> ergibt <code>True</code>.</p>
+        </details>
+    </details>
+</div>

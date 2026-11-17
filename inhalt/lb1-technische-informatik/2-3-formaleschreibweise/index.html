@@ -1,0 +1,162 @@
+<p>
+            „Zutritt, wenn volljährig UND Ausweis UND (Ticket ODER VIP)“ – das ist ganz schön lang. Mit Symbolen wird daraus <strong>A ∧ B ∧ (C ∨ D)</strong>: kürzer, eindeutig und so, dass man damit rechnen kann.
+        </p>
+
+<p>
+            Eine formale Sprache ist eine spezielle Art von Sprache, die strenge Regeln für die Kombination von Symbolen und die Bildung von Ausdrücken hat. Diese Regeln werden oft durch eine Grammatik definiert.
+        </p>
+
+<p>
+            Die booleschen Operatoren sind logische Verknüpfungen wie „und“, „oder“ und „nicht“, die in der booleschen Algebra verwendet werden. Eine formale Darstellung der booleschen Operatoren ist nützlich, weil sie es ermöglicht, komplexe logische Ausdrücke präzise und eindeutig zu formulieren. Dadurch können wir logische Probleme analysieren und lösen, wie zum Beispiel das Finden der Wahrheitswerte von Aussagen oder die Überprüfung von logischen Argumentationen.
+        </p>
+
+<p>
+            Eine formale Darstellung der booleschen Operatoren bringt auch Klarheit und Verständlichkeit in den Ausdruck von logischen Aussagen und erleichtert es, diese Aussagen zu definieren, zu überprüfen und zu interpretieren. Sie ermöglicht uns auch, logische Aussagen mathematisch zu behandeln und mit ihnen zu rechnen, indem wir die Regeln der booleschen Algebra anwenden.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Wahrheitstabelle für ¬A ∧ B</summary>
+            <p>Zuerst wird die Hilfsspalte ¬A berechnet, dann die UND-Verknüpfung mit B.</p>
+            <table class="gitter">
+                <tr><th>A</th><th>B</th><th>¬A</th><th>¬A ∧ B</th></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+            </table>
+            <p><strong>Ergebnis:</strong> ¬A ∧ B ist nur für A = 0, B = 1 wahr. Wegen „¬ vor ∧“ bezieht sich das ¬ nur auf A, nicht auf den ganzen Ausdruck.</p>
+            </details>
+        </div>
+
+<p>
+            Um reale Schaltungen zu bauen, müssen mehrere logische Operatoren kombiniert werden. Um die Ausgabe einer solchen Kombination zu ermitteln, können wir Wahrheitstabellen verwenden. Dazu ist es notwendig, die gegebene Aussage in ihre einzelnen Bestandteile zu zerlegen. Folge dazu diesen Schritten:
+        </p>
+
+<ol>
+            <li><strong>Anzahl der Variablen bestimmen:</strong> Finde heraus, wie viele verschiedene Variablen in der Aussage verwendet werden, und erstelle eine Tabelle mit allen möglichen Kombinationen dieser Variablen.</li>
+            <li><strong>Aussage zerlegen:</strong> Zerlege die Aussage in ihre einzelnen logischen Verknüpfungen und notiere die Zwischenergebnisse in separaten Spalten der Tabelle.</li>
+            <li><strong>Schrittweise Zusammenfassung:</strong> Fasse die einzelnen Zwischenergebnisse schrittweise zusammen, bis du die endgültige Ausgabe erhältst.</li>
+        </ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> A ∧ (B ∨ C)</summary>
+
+        <ol>
+            <li><strong>Anzahl der Variablen bestimmen:</strong>
+                <ul>
+                    <li>Die Aussage enthält drei Variablen: A, B und C.</li>
+                    <li>Wir erstellen eine Tabelle mit allen 2<sup>3</sup> = 8 möglichen Kombinationen dieser Variablen:</li>
+                </ul>
+                <table class="gitter">
+                    <thead>
+                        <tr><th>A</th><th>B</th><th>C</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>0</td><td>1</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>1</td></tr>
+                        <tr><td>1</td><td>0</td><td>0</td></tr>
+                        <tr><td>1</td><td>0</td><td>1</td></tr>
+                        <tr><td>1</td><td>1</td><td>0</td></tr>
+                        <tr><td>1</td><td>1</td><td>1</td></tr>
+                    </tbody>
+                </table>
+            </li>
+            <li><strong>Aussage zerlegen und schrittweise zusammenfassen:</strong>
+                <ul>
+                    <li>Zerlege die Aussage in ihre Verknüpfungen.</li>
+                    <li>Berechne zunächst B ∨ C für jede Zeile der Tabelle.</li>
+                    <li>Berechne anschließend A ∧ (B ∨ C) auf Grundlage der Ergebnisse von B ∨ C.</li>
+                </ul>
+                <table class="gitter">
+                    <thead>
+                        <tr><th>A</th><th>B</th><th>C</th><th>B ∨ C</th><th>A ∧ (B ∨ C)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                        <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                        <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                        <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                    </tbody>
+                </table>
+            </li>
+        </ol>
+        <p><strong>Ergebnis:</strong> A ∧ (B ∨ C) ist in 3 von 8 Zeilen wahr: Wenn A = 1 ist und mindestens eine der Variablen B, C den Wert 1 hat.</p>
+        <p><strong>Probe (Falle Klammer):</strong> Ohne Klammer würde A ∧ B ∨ C wegen „∧ vor ∨“ als (A ∧ B) ∨ C gelesen. In der Zeile A = 0, B = 0, C = 1 ergibt das 1 statt 0 – die Klammer verändert also das Ergebnis.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Formale Sprache – wozu?</summary>
+                <p><strong>Alltag:</strong> Jede Programmiersprache hat ihre eigene formale Schreibweise für dieselben drei Operatoren: In Python schreibst du <code>and</code>, <code>or</code>, <code>not</code>, in Java oder JavaScript <code>&amp;&amp;</code>, <code>||</code>, <code>!</code>. Die Bedeutung ist immer dieselbe wie bei ∧, ∨ und ¬.</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Chipdesign</strong>: Schaltungen werden in Hardwarebeschreibungssprachen wie VHDL oder Verilog als boolesche Formeln notiert und dann automatisch in Gatter übersetzt – Alltag für Entwickler/innen in der Halbleiterbranche rund um Dresden.</li>
+                    <li><strong>Formale Verifikation</strong>: Ingenieur/innen beweisen mit Software-Werkzeugen, dass z.&nbsp;B. ein Stellwerk der Bahn oder eine Flugzeugsteuerung in keiner der möglichen Eingabekombinationen einen gefährlichen Zustand erreicht.</li>
+                    <li><strong>Mathematische Logik und Philosophie</strong>: Argumentationen werden formalisiert, um Fehlschlüsse zu entdecken.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Formale Schreibweise:</strong> Ein boolescher Ausdruck (Term) besteht aus Variablen (A, B, C, …), die nur die Werte 0 und 1 annehmen, und den Verknüpfungszeichen ∧, ∨ und ¬. Es gilt die Bindungsstärke <strong>¬ vor ∧ vor ∨</strong>; Klammern werden zuerst ausgewertet.</p>
+            <table class="gitter">
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Formale Bezeichnung</th>
+                        <th>Formale Darstellung</th>
+                        <th>in Python</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>UND</td><td>Konjunktion</td><td>A ∧ B</td><td><code>a and b</code></td></tr>
+                    <tr><td>ODER</td><td>Disjunktion</td><td>A ∨ B</td><td><code>a or b</code></td></tr>
+                    <tr><td>NICHT</td><td>Negation</td><td>¬A</td><td><code>not a</code></td></tr>
+                </tbody>
+            </table>
+            <p>Bei n Variablen hat die Wahrheitstabelle <strong>2<sup>n</sup> Zeilen</strong> (2 Variablen → 4, 3 Variablen → 8, 4 Variablen → 16).</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.1: Wahrheitstabellen für Terme <span class="niveau">AFB II</span></summary>
+                <p>Erstelle eine Wahrheitstabelle für die folgenden Terme.</p>
+                <ol>
+                    <li>¬A ∨ B</li>
+                    <li>(A ∨ ¬B) ∧ (¬A ∨ B)</li>
+                    <li>A ∧ (¬B ∨ C)</li>
+                    <li>(¬A ∧ B) ∨ (B ∧ C)</li>
+                    <li>(A ∧ B) ∨ (¬A ∧ ¬C) ∨ (B ∧ ¬C)</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.2: Mähroboter – Sätze formalisieren <span class="niveau">AFB I</span></summary>
+                <p>Ein Mähroboter wertet drei Aussagen aus: R: „Es regnet.“, A: „Der Akkustand liegt über 20&nbsp;%.“, N: „Es ist Nacht.“</p>
+                <ol>
+                    <li>Übersetze in die formale Schreibweise und in Python:
+                        <ul>
+                            <li>„Der Roboter mäht, wenn es nicht regnet und der Akkustand über 20&nbsp;% liegt.“</li>
+                            <li>„Der Roboter fährt zur Ladestation, wenn der Akkustand nicht über 20&nbsp;% liegt oder es regnet.“</li>
+                        </ul>
+                    </li>
+                    <li>Die Herstellerin ergänzt die Mähregel zu ¬N ∧ ¬R ∧ A. Beschreibe die neue Regel in einem deutschen Satz.</li>
+                    <li>Gib an, wie viele Zeilen die Wahrheitstabelle zu ¬N ∧ ¬R ∧ A hat und in wie vielen davon der Roboter mäht.</li>
+                </ol>
+            </details>
+        </div>

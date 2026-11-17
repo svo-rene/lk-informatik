@@ -1,0 +1,50 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>
+                Aufgabe 1.10.8: Fehler finden – die Fahrschule <span class="niveau">AFB III</span>
+            </summary>
+            <div class="sachtext">
+                <p>
+                  Eine Fahrschule beschäftigt Fahrlehrkräfte (Personalnummer, Name) und besitzt Fahrzeuge (Kennzeichen, Modell).
+                  Jede Fahrlehrkraft hat genau ein eigenes Fahrzeug, jedes Fahrzeug gehört genau einer Fahrlehrkraft.
+                  Fahrschülerinnen und Fahrschüler (Schülernummer, Name, Geburtsdatum) werden von genau einer Fahrlehrkraft
+                  ausgebildet; eine Fahrlehrkraft bildet mehrere Fahrschüler aus. Fahrschüler legen Prüfungen ab
+                  (Prüfungsnummer, Art, z.&nbsp;B. „Theorie Klasse B“). Ein Fahrschüler legt mehrere Prüfungen ab, und dieselbe
+                  Prüfung wird von vielen Fahrschülern abgelegt. Zu jeder abgelegten Prüfung werden das Datum und das Ergebnis gespeichert.
+                </p>
+            </div>
+            <p>Lena hat dazu folgendes ER-Modell beschrieben:</p>
+            <ul>
+                <li>Entitäten: Fahrlehrkraft (<u>Personalnummer</u>, Name), Fahrzeug (<u>Kennzeichen</u>, Modell, Personalnummer),
+                    Fahrschüler (<u>Schülernummer</u>, Name, Geburtsdatum, Ergebnis), Prüfung (<u>Prüfungsnummer</u>, Art, Datum)</li>
+                <li>Fahrlehrkraft <em>hat</em> Fahrzeug: 1:n</li>
+                <li>Fahrschüler <em>wird ausgebildet von</em> Fahrlehrkraft: 1 bei Fahrschüler, n bei Fahrlehrkraft</li>
+                <li>Fahrschüler <em>legt ab</em> Prüfung: m:n</li>
+            </ul>
+            <p>Finde mindestens vier Fehler, begründe jeden mit einer Stelle im Sachtext und gib das korrigierte Modell an.</p>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>
+                Aufgabe 1.10.9: Eine Entität oder zwei? <span class="niveau">AFB III</span>
+            </summary>
+            <p>
+              Ein Sportverein speichert zu jedem Mitglied Name, Adresse und Beitragsklasse. Neu sollen für Mitglieder, die an
+              Wettkämpfen teilnehmen, auch Daten aus der sportärztlichen Untersuchung gespeichert werden (Datum, Ergebnis,
+              Befundbericht als längerer Text). Das betrifft etwa ein Fünftel der Mitglieder. Zwei Vorschläge liegen vor:
+            </p>
+            <ol>
+                <li>Die drei neuen Angaben werden zusätzliche Attribute der Entität <em>Mitglied</em>.</li>
+                <li>Es gibt eine eigene Entität <em>Untersuchung</em>, die über eine 1:1-Beziehung mit <em>Mitglied</em> verbunden ist.</li>
+            </ol>
+            <p>
+              Beurteile beide Vorschläge mithilfe der Kriterien aus dem Hinweis „Woran erkenne ich eine 1:1-Beziehung“ und
+              gib eine begründete Empfehlung. Überlege zusätzlich: Was ändert sich an deiner Empfehlung, wenn der Verein
+              <em>jede jährliche</em> Untersuchung aufbewahren möchte?
+            </p>
+        </details>
+    </div>

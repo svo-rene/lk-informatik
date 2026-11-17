@@ -1,0 +1,14 @@
+{
+  "nr": "7.16",
+  "titel": "Filius-Praxis: DNS, Webserver und Einstellungen über DHCP",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

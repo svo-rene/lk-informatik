@@ -1,0 +1,451 @@
+<p>
+            Die dritte Normalform (3NF) ist ein weiterer Schritt zur Optimierung der Datenbankstruktur. Sie baut auf der zweiten Normalform auf und adressiert das Problem der transitiven Abhängigkeiten.
+        </p>
+
+<h2>Definition der dritten Normalform</h2>
+
+<p>
+                Eine transitive Abhängigkeit liegt vor, wenn ein Nicht-Schlüssel-Attribut von einem anderen Nicht-Schlüssel-Attribut abhängt, das wiederum vom Primärschlüssel abhängt.
+            </p>
+
+<h2>Beispiel für eine Verletzung der 3NF</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+        <p><strong>Ausgangssituation:</strong> Eine Firma speichert zu jeder mitarbeitenden Person auch die Abteilung und deren Leitung.
+           Die Tabelle hat einen einteiligen Primärschlüssel (MitarbeiterID) und ist damit schon in der 2NF.</p>
+        <p>Betrachten wir folgende Tabelle „Mitarbeiter“:</p>
+    
+        <table border="1">
+            <tr>
+                <th>MitarbeiterID</th>
+                <th>Name</th>
+                <th>Abteilung</th>
+                <th>AbteilungsLeiter</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Max Mustermann</td>
+                <td>Verkauf</td>
+                <td>Anna Schmidt</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Lisa Müller</td>
+                <td>Verkauf</td>
+                <td>Anna Schmidt</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Tom Schulz</td>
+                <td>IT</td>
+                <td>Peter Meyer</td>
+            </tr>
+        </table>
+    
+        <p>
+            In dieser Tabelle hängt das Attribut AbteilungsLeiter transitiv vom Primärschlüssel ab: MitarbeiterID → Abteilung → AbteilungsLeiter. Dies verletzt die 3NF.
+        </p>
+    
+        <p>Um die Tabelle in die 3NF zu überführen, teilen wir sie in zwei Tabellen auf:</p>
+    
+        <p>Tabelle „Mitarbeiter“:</p>
+        <table border="1">
+            <tr>
+                <th>MitarbeiterID</th>
+                <th>Name</th>
+                <th>Abteilung</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Max Mustermann</td>
+                <td>Verkauf</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Lisa Müller</td>
+                <td>Verkauf</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Tom Schulz</td>
+                <td>IT</td>
+            </tr>
+        </table>
+    
+        <p>Tabelle „Abteilungen“:</p>
+        <table border="1">
+            <tr>
+                <th>Abteilung</th>
+                <th>AbteilungsLeiter</th>
+            </tr>
+            <tr>
+                <td>Verkauf</td>
+                <td>Anna Schmidt</td>
+            </tr>
+            <tr>
+                <td>IT</td>
+                <td>Peter Meyer</td>
+            </tr>
+        </table>
+
+        <p><strong>Die Schritte – was und warum:</strong></p>
+        <ol>
+            <li><strong>2NF sicherstellen:</strong> Der Schlüssel MitarbeiterID ist einteilig, also gibt es keine partiellen Abhängigkeiten.
+                <em>Warum zuerst?</em> Die 3NF setzt die 2NF voraus.</li>
+            <li><strong>Abhängigkeiten zwischen Nicht-Schlüssel-Attributen suchen:</strong> Abteilung → AbteilungsLeiter („Verkauf – Anna Schmidt“
+                steht zweimal). <em>Warum dort suchen?</em> Genau solche Abhängigkeiten machen eine Kette MitarbeiterID → Abteilung → AbteilungsLeiter.</li>
+            <li><strong>Das abhängige Paar auslagern:</strong> Abteilung und AbteilungsLeiter bilden die neue Tabelle „Abteilungen“ mit Primärschlüssel
+                Abteilung. <em>Warum mit Abteilung?</em> Die Abteilung bestimmt die Leitung, also ist sie der Schlüssel der neuen Tabelle.</li>
+            <li><strong>Fremdschlüssel stehen lassen:</strong> Abteilung bleibt in „Mitarbeiter“. <em>Warum?</em> Sonst wüsste man nicht mehr, wer in welcher
+                Abteilung arbeitet.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> <code>Mitarbeiter(<u>MitarbeiterID</u>, Name, &uarr;Abteilung)</code> und
+           <code>Abteilungen(<u>Abteilung</u>, AbteilungsLeiter)</code>.</p>
+        <p><strong>Kontrolle:</strong> „Anna Schmidt“ steht nur noch einmal. Ein Leitungswechsel im Verkauf betrifft genau eine Zeile.
+           Über Abteilung lassen sich beide Tabellen wieder zu den 3 Ausgangszeilen verbinden.</p>
+            </details>
+        </div>
+
+<h2>Vorteile der dritten Normalform</h2>
+
+<ul>
+            <li>Weitere Reduzierung von Datenredundanz</li>
+            <li>Verbesserte Datenintegrität und -konsistenz</li>
+            <li>Vereinfachung von Datenaktualisierungen</li>
+            <li>Flexiblere Datenbankstruktur für zukünftige Änderungen</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Weitere Normalformen
+                </summary>
+                <p>
+                    In der Praxis ist die Normalisierung bis zur 3NF oft ausreichend für die meisten Anwendungen. Weitere Normalformen (wie BCNF, 4NF, 5NF) existieren, werden aber seltener angewendet.
+                </p>
+            </details>
+        </div>
+
+<h2>Alles zusammen: von der Ausgangstabelle bis zur 3. Normalform</h2>
+
+<p>
+            Auf den Seiten 1.14 bis 1.16 hatte jede Normalform ihr eigenes Beispiel. In einer Klausur bekommt
+            man aber <em>eine</em> Tabelle und soll sie in <em>einem Durchgang</em> bis zur 3. Normalform
+            bringen. Genau das wird hier einmal komplett vorgeführt.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+        <p><strong>Ausgangssituation:</strong> Eine Tabelle, die gleichzeitig gegen die 1NF (je nach Aufgabenstellung), die 2NF und an zwei
+           Stellen gegen die 3NF verstößt (zwei transitive Abhängigkeiten: SchuelerNr → PLZ → Ort und KursNr → LehrerNr → Lehrer).</p>
+        <h3>Die Ausgangstabelle</h3>
+
+        <p>
+            Eine Musikschule verwaltet ihre Kursanmeldungen bisher in einer einzigen Tabelle. Ausgewertet
+            werden soll unter anderem, <strong>welche Kurse an einem bestimmten Wochentag stattfinden</strong>.
+        </p>
+
+        <table>
+            <thead><tr><th>SchuelerNr</th><th>Name</th><th>PLZ</th><th>Ort</th><th>KursNr</th><th>Kursname</th><th>Termin</th><th>LehrerNr</th><th>Lehrer</th></tr></thead>
+            <tbody>
+                <tr><td>101</td><td>Anna Berger</td><td>01099</td><td>Dresden</td><td>K1</td><td>Gitarre</td><td><mark style="background:#fde68a">Mo 16:00</mark></td><td>L7</td><td>Herr Voigt</td></tr>
+                <tr><td>101</td><td>Anna Berger</td><td>01099</td><td>Dresden</td><td>K3</td><td>Chor</td><td><mark style="background:#fde68a">Do 17:30</mark></td><td>L4</td><td>Frau Alt</td></tr>
+                <tr><td>102</td><td>Ben Kaufmann</td><td>01445</td><td>Radebeul</td><td>K1</td><td>Gitarre</td><td><mark style="background:#fde68a">Mo 16:00</mark></td><td>L7</td><td>Herr Voigt</td></tr>
+                <tr><td>103</td><td>Clara Nowak</td><td>01099</td><td>Dresden</td><td>K2</td><td>Klavier</td><td><mark style="background:#fde68a">Di 15:00</mark></td><td>L7</td><td>Herr Voigt</td></tr>
+                <tr><td>103</td><td>Clara Nowak</td><td>01099</td><td>Dresden</td><td>K3</td><td>Chor</td><td><mark style="background:#fde68a">Do 17:30</mark></td><td>L4</td><td>Frau Alt</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Schritt 1: In die 1. Normalform</h3>
+
+        <p>
+            In der Spalte <em>Termin</em> stehen zwei Angaben in einer Zelle: Wochentag und Uhrzeit. Ob das
+            die 1NF verletzt, hängt – wie auf Seite 1.14 beschrieben – von der Aufgabenstellung ab. Und die verlangt hier ausdrücklich eine Auswertung
+            <em>nach Wochentag</em>. Also muss die Spalte zerlegt werden.
+        </p>
+
+        <table>
+            <thead><tr><th>SchuelerNr</th><th>Name</th><th>PLZ</th><th>Ort</th><th>KursNr</th><th>Kursname</th><th>Wochentag</th><th>Uhrzeit</th><th>LehrerNr</th><th>Lehrer</th></tr></thead>
+            <tbody>
+                <tr><td>101</td><td>Anna Berger</td><td>01099</td><td>Dresden</td><td>K1</td><td>Gitarre</td><td><mark style="background:#fde68a">Mo</mark></td><td><mark style="background:#fde68a">16:00</mark></td><td>L7</td><td>Herr Voigt</td></tr>
+                <tr><td>101</td><td>Anna Berger</td><td>01099</td><td>Dresden</td><td>K3</td><td>Chor</td><td><mark style="background:#fde68a">Do</mark></td><td><mark style="background:#fde68a">17:30</mark></td><td>L4</td><td>Frau Alt</td></tr>
+                <tr><td>102</td><td>Ben Kaufmann</td><td>01445</td><td>Radebeul</td><td>K1</td><td>Gitarre</td><td><mark style="background:#fde68a">Mo</mark></td><td><mark style="background:#fde68a">16:00</mark></td><td>L7</td><td>Herr Voigt</td></tr>
+                <tr><td>103</td><td>Clara Nowak</td><td>01099</td><td>Dresden</td><td>K2</td><td>Klavier</td><td><mark style="background:#fde68a">Di</mark></td><td><mark style="background:#fde68a">15:00</mark></td><td>L7</td><td>Herr Voigt</td></tr>
+                <tr><td>103</td><td>Clara Nowak</td><td>01099</td><td>Dresden</td><td>K3</td><td>Chor</td><td><mark style="background:#fde68a">Do</mark></td><td><mark style="background:#fde68a">17:30</mark></td><td>L4</td><td>Frau Alt</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Schritt 2: Den Primärschlüssel bestimmen</h3>
+
+        <ul>
+            <li><strong>SchuelerNr allein?</strong> Nein – die 101 kommt zweimal vor.</li>
+            <li><strong>KursNr allein?</strong> Nein – K1 kommt zweimal vor.</li>
+            <li><strong>Beide zusammen?</strong> Ja. Die Kombination (101, K1) gibt es genau einmal, und
+                jedes Kind kann sich zu einem Kurs nur einmal anmelden.</li>
+        </ul>
+
+        <p>
+            Der Primärschlüssel ist also die Kombination <strong>(SchuelerNr, KursNr)</strong>. Weil er
+            zusammengesetzt ist, kann die 2NF überhaupt verletzt sein – bei einem einteiligen Schlüssel
+            wäre Schritt 3 automatisch erfüllt.
+        </p>
+
+        <h3>Schritt 3: In die 2. Normalform</h3>
+
+        <p>Jetzt wird für jede Nicht-Schlüsselspalte gefragt: Wovon hängt sie wirklich ab?</p>
+
+        <table>
+            <thead><tr><th>Spalte</th><th>hängt ab von</th><th>Bewertung</th></tr></thead>
+            <tbody>
+                <tr><td>Name, PLZ, Ort</td><td>nur von <strong>SchuelerNr</strong></td><td>partielle Abhängigkeit – verletzt 2NF</td></tr>
+                <tr><td>Kursname, Wochentag, Uhrzeit, LehrerNr, Lehrer</td><td>nur von <strong>KursNr</strong></td><td>partielle Abhängigkeit – verletzt 2NF</td></tr>
+            </tbody>
+        </table>
+
+        <p>
+            Erkennbar ist das auch ohne Theorie, direkt an den Daten: „Anna Berger“ steht zweimal da,
+            obwohl sich an der Person nichts ändert – sie hängt eben nicht von der KursNr ab. Alle Spalten,
+            die zum selben Schlüsselteil gehören, wandern gemeinsam in eine eigene Relation:
+        </p>
+
+        <p><strong>Schueler</strong></p>
+        <table>
+            <thead><tr><th>SchuelerNr</th><th>Name</th><th>PLZ</th><th>Ort</th></tr></thead>
+            <tbody>
+                <tr><td>101</td><td>Anna Berger</td><td>01099</td><td>Dresden</td></tr>
+                <tr><td>102</td><td>Ben Kaufmann</td><td>01445</td><td>Radebeul</td></tr>
+                <tr><td>103</td><td>Clara Nowak</td><td>01099</td><td>Dresden</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Kurs</strong></p>
+        <table>
+            <thead><tr><th>KursNr</th><th>Kursname</th><th>Wochentag</th><th>Uhrzeit</th><th>LehrerNr</th><th>Lehrer</th></tr></thead>
+            <tbody>
+                <tr><td>K1</td><td>Gitarre</td><td>Mo</td><td>16:00</td><td>L7</td><td>Herr Voigt</td></tr>
+                <tr><td>K2</td><td>Klavier</td><td>Di</td><td>15:00</td><td>L7</td><td>Herr Voigt</td></tr>
+                <tr><td>K3</td><td>Chor</td><td>Do</td><td>17:30</td><td>L4</td><td>Frau Alt</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Anmeldung</strong> – hier bleibt nur der Schlüssel übrig; er hält fest, wer zu welchem
+           Kurs angemeldet ist:</p>
+        <table>
+            <thead><tr><th>&uarr;SchuelerNr</th><th>&uarr;KursNr</th></tr></thead>
+            <tbody>
+                <tr><td>101</td><td>K1</td></tr>
+                <tr><td>101</td><td>K3</td></tr>
+                <tr><td>102</td><td>K1</td></tr>
+                <tr><td>103</td><td>K2</td></tr>
+                <tr><td>103</td><td>K3</td></tr>
+            </tbody>
+        </table>
+
+        <pre class="schema">Schueler(<u>SchuelerNr</u>, Name, PLZ, Ort)
+Kurs(<u>KursNr</u>, Kursname, Wochentag, Uhrzeit, LehrerNr, Lehrer)
+Anmeldung(<u>&uarr;SchuelerNr, &uarr;KursNr</u>)</pre>
+
+        <h3>Schritt 4: In die 3. Normalform</h3>
+
+        <p>
+            Jetzt wird in jeder der drei Relationen gesucht, ob ein Nicht-Schlüssel-Attribut von einem
+            anderen Nicht-Schlüssel-Attribut abhängt. Zwei Stellen fallen auf:
+        </p>
+
+        <ul>
+            <li>In <strong>Schueler</strong>: Der <em>Ort</em> hängt nicht wirklich an der SchuelerNr,
+                sondern an der <em>PLZ</em> – wer 01099 hat, wohnt in Dresden. Sichtbar wird das daran, dass
+                „01099 – Dresden“ in zwei Zeilen identisch wiederholt wird.</li>
+            <li>In <strong>Kurs</strong>: Der Name der Lehrkraft hängt an der <em>LehrerNr</em>, nicht am
+                Kurs. „L7 – Herr Voigt“ steht zweimal da.</li>
+        </ul>
+
+        <p><strong>Die transitiven Abhängigkeiten Schritt für Schritt – was und warum:</strong></p>
+        <ol>
+            <li><strong>Kette aufschreiben:</strong> SchuelerNr → PLZ und PLZ → Ort, also SchuelerNr → PLZ → Ort; ebenso
+                KursNr → LehrerNr → Lehrer. <em>Warum als Kette?</em> Ort und Lehrer hängen vom Schlüssel nur <em>über</em> ein
+                Nicht-Schlüssel-Attribut ab &ndash; genau das verbietet die 3NF.</li>
+            <li><strong>Gegenrichtung prüfen:</strong> PLZ → SchuelerNr gilt nicht (01099 gehört zu Anna und Clara), LehrerNr → KursNr auch nicht
+                (L7 hat K1 und K2). <em>Warum wichtig?</em> Nur dann ist die PLZ bzw. LehrerNr ein echtes Zwischenglied und kein zweiter Schlüssel.</li>
+            <li><strong>Das Ende der Kette mit seinem Bestimmer auslagern:</strong> (PLZ, Ort) wird Relation <em>Ort</em>, (LehrerNr, Lehrer) wird
+                Relation <em>Lehrkraft</em>. <em>Warum zusammen?</em> Der Bestimmer wird Primärschlüssel der neuen Relation.</li>
+            <li><strong>Bestimmer als Fremdschlüssel zurücklassen:</strong> PLZ bleibt in <em>Schueler</em>, LehrerNr in <em>Kurs</em>.
+                <em>Warum?</em> Nur so lässt sich die Kette über einen Join wieder herstellen.</li>
+            <li><strong>Neue Relationen erneut prüfen:</strong> In <em>Ort</em>, <em>Lehrkraft</em> und <em>Anmeldung</em> gibt es kein
+                weiteres Nicht-Schlüssel-Attribut, von dem etwas abhängt. <em>Warum?</em> Eine Auslagerung kann neue Ketten sichtbar machen; erst
+                wenn keine mehr da ist, ist die 3NF erreicht.</li>
+        </ol>
+
+        <p>Beide Paare werden ausgelagert; zurück bleibt jeweils nur der Fremdschlüssel:</p>
+
+        <p><strong>Ort</strong></p>
+        <table>
+            <thead><tr><th>PLZ</th><th>Ort</th></tr></thead>
+            <tbody>
+                <tr><td>01099</td><td>Dresden</td></tr>
+                <tr><td>01445</td><td>Radebeul</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Schueler</strong></p>
+        <table>
+            <thead><tr><th>SchuelerNr</th><th>Name</th><th>&uarr;PLZ</th></tr></thead>
+            <tbody>
+                <tr><td>101</td><td>Anna Berger</td><td>01099</td></tr>
+                <tr><td>102</td><td>Ben Kaufmann</td><td>01445</td></tr>
+                <tr><td>103</td><td>Clara Nowak</td><td>01099</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Lehrkraft</strong></p>
+        <table>
+            <thead><tr><th>LehrerNr</th><th>Name</th></tr></thead>
+            <tbody>
+                <tr><td>L4</td><td>Frau Alt</td></tr>
+                <tr><td>L7</td><td>Herr Voigt</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Kurs</strong></p>
+        <table>
+            <thead><tr><th>KursNr</th><th>Kursname</th><th>Wochentag</th><th>Uhrzeit</th><th>&uarr;LehrerNr</th></tr></thead>
+            <tbody>
+                <tr><td>K1</td><td>Gitarre</td><td>Mo</td><td>16:00</td><td>L7</td></tr>
+                <tr><td>K2</td><td>Klavier</td><td>Di</td><td>15:00</td><td>L7</td></tr>
+                <tr><td>K3</td><td>Chor</td><td>Do</td><td>17:30</td><td>L4</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Das Ergebnis</h3>
+
+        <pre class="schema">Ort(<u>PLZ</u>, Ort)
+Schueler(<u>SchuelerNr</u>, Name, &uarr;PLZ)
+Lehrkraft(<u>LehrerNr</u>, Name)
+Kurs(<u>KursNr</u>, Kursname, Wochentag, Uhrzeit, &uarr;LehrerNr)
+Anmeldung(<u>&uarr;SchuelerNr, &uarr;KursNr</u>)</pre>
+
+        <p>
+            <strong>Kontrolle (Schritt 5):</strong> „Dresden“ steht jetzt genau einmal, „Herr Voigt“ ebenfalls.
+            Eine neue Lehrkraft lässt sich eintragen, bevor sie einen Kurs hat; wird der letzte Kurs gelöscht,
+            bleibt die Lehrkraft erhalten; und ein Namenswechsel muss nur an einer Stelle gemacht werden.
+            Alle drei Anomalien aus Seite 1.13 sind damit beseitigt.
+            Umgekehrt lässt sich die Ausgangstabelle über die Fremdschlüssel jederzeit wieder
+            zusammensetzen – es ist keine Information verloren gegangen.
+        </p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Vier Fehler, die in Klausuren immer wieder vorkommen</summary>
+                <ul>
+                    <li><strong>Den Schlüssel geraten.</strong> Wer (SchuelerNr, KursNr) nicht als
+                        zusammengesetzten Schlüssel erkennt, findet die partiellen Abhängigkeiten nicht –
+                        Schritt 2 ist der wichtigste Schritt.</li>
+                    <li><strong>Zu früh aufgehört.</strong> Nach der Aufteilung in Schritt 3 sieht die
+                        Tabelle schon viel besser aus. Trotzdem stecken die transitiven Abhängigkeiten noch
+                        drin. Prüfe nach jedem Schritt jede neue Relation erneut.</li>
+                    <li><strong>Den Fremdschlüssel vergessen.</strong> Wird <code>PLZ</code> ausgelagert,
+                        muss die PLZ in <code>Schueler</code> stehen bleiben – sonst weiß niemand mehr, wo
+                        Anna wohnt.</li>
+                    <li><strong>Attribute verloren.</strong> Zähle am Ende nach: Die Ausgangstabelle hatte
+                        nach Schritt 1 zehn Spalten. Im Ergebnis stehen SchuelerNr, Name, PLZ, Ort, KursNr,
+                        Kursname, Wochentag, Uhrzeit, LehrerNr und der Lehrername – alle zehn sind
+                        untergebracht, einige davon als Fremdschlüssel.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            Eine Relation befindet sich in der dritten Normalform, wenn:
+        </p>
+    
+        
+        <ol>
+            <li>sie sich in der zweiten Normalform befindet und</li>
+            <li>kein Nicht-Schlüssel-Attribut transitiv vom Primärschlüssel abhängt.</li>
+        </ol>
+        </div>
+
+<div class="merke">
+            <p><strong>Das Vorgehen in fünf Schritten</strong></p>
+            <ol>
+                <li><strong>1NF prüfen:</strong> Steht in jeder Zelle nur ein Wert? Wenn nein: Spalte
+                    zerlegen oder Zeilen vervielfachen.</li>
+                <li><strong>Primärschlüssel bestimmen:</strong> Welche Spalte oder Spaltenkombination
+                    identifiziert eine Zeile eindeutig? Ohne diesen Schritt sind die nächsten beiden nicht
+                    machbar.</li>
+                <li><strong>2NF prüfen (nur bei zusammengesetztem Schlüssel):</strong> Hängt ein Attribut
+                    schon von einem <em>Teil</em> des Schlüssels ab? Alle Attribute, die zum selben
+                    Schlüsselteil gehören, wandern gemeinsam in eine neue Relation.</li>
+                <li><strong>3NF prüfen:</strong> Hängt ein Attribut von einem anderen
+                    <em>Nicht-Schlüssel-Attribut</em> ab? Dann diese beiden gemeinsam auslagern.</li>
+                <li><strong>Kontrolle:</strong> Steht jetzt jede Information nur noch an einer Stelle? Und
+                    lassen sich die Ausgangsdaten über die Fremdschlüssel wieder vollständig zusammenbauen?</li>
+            </ol>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.16.1: <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Gegeben ist folgende Tabelle „Buchbestellungen“:
+                </p>
+                <table border="1">
+                    <tr>
+                        <th>BestellNr</th>
+                        <th>KundenID</th>
+                        <th>KundenName</th>
+                        <th>BuchID</th>
+                        <th>BuchTitel</th>
+                        <th>Autor</th>
+                        <th>Preis</th>
+                    </tr>
+                    <tr>
+                        <td>1001</td>
+                        <td>K1</td>
+                        <td>Anna Müller</td>
+                        <td>B1</td>
+                        <td>Das Kapital</td>
+                        <td>Karl Marx</td>
+                        <td>25.00</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>K2</td>
+                        <td>Tom Schmidt</td>
+                        <td>B2</td>
+                        <td>1984</td>
+                        <td>George Orwell</td>
+                        <td>15.00</td>
+                    </tr>
+                    <tr>
+                        <td>1003</td>
+                        <td>K1</td>
+                        <td>Anna Müller</td>
+                        <td>B2</td>
+                        <td>1984</td>
+                        <td>George Orwell</td>
+                        <td>15.00</td>
+                    </tr>
+                </table>
+                <p>
+                    Aufgaben:
+                </p>
+                <ol>
+                    <li>Erkläre, warum diese Tabelle nicht der 3NF entspricht.</li>
+                    <li>Überführe die Tabelle in die 3NF.</li>
+                    <li>Beschreibe, welche Probleme durch die Überführung in die 3NF gelöst werden.</li>
+                </ol>
+            </details>
+        </div>

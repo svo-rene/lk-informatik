@@ -1,0 +1,40 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.3.3: Genauigkeit beurteilen <span class="niveau">AFB III</span></summary>
+<ol>
+<li>Wandle 0,3 mit 6 Bit Bruchteil in eine binäre Festkommazahl um. Berechne, welchen Dezimalwert dein Ergebnis tatsächlich hat, und gib die Abweichung an.</li>
+<li>Prüfe, welche der folgenden Zahlen sich mit endlich vielen Bits <strong>exakt</strong> darstellen lassen: 0,5 &nbsp;&middot;&nbsp; 0,4 &nbsp;&middot;&nbsp; 0,375 &nbsp;&middot;&nbsp; 0,6 &nbsp;&middot;&nbsp; 0,8125. Begründe deine Entscheidung jeweils mit dem Nenner des Bruchs.</li>
+<li>Ein Programm addiert 100-mal den Wert 0,1 und vergleicht das Ergebnis anschließend mit 10. Erkläre, warum dieser Vergleich fehlschlagen kann, und schlage eine bessere Lösung vor.</li>
+</ol>
+</details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.3.4: Wertebereich eines Thermostats <span class="niveau">AFB II</span></summary>
+        <p>Ein Raumthermostat speichert die Temperatur als vorzeichenlose Festkommazahl in einem 8-Bit-Register: <strong>5 Bit</strong> für den Ganzzahlteil, <strong>3 Bit</strong> für den Bruchteil. Werte, die nicht exakt darstellbar sind, werden nach dem dritten Nachkommabit abgeschnitten.</p>
+        <ol>
+            <li>Bestimme den kleinsten Abstand zwischen zwei darstellbaren Werten sowie den kleinsten und den größten darstellbaren Wert.</li>
+            <li>Stelle 21,5 °C und 22,7 °C in diesem Format dar. Gib jeweils den gespeicherten Wert und die Abweichung an.</li>
+            <li>Beschreibe, wie groß der Fehler durch das Abschneiden in diesem Format höchstens werden kann, und begründe.</li>
+            <li>Eine Kollegin schlägt vor, die 8 Bit stattdessen in 4 Bit Ganzzahlteil und 4 Bit Bruchteil aufzuteilen, „weil es dann genauer wird“. Beurteile den Vorschlag für ein Thermostat, das Temperaturen von 5 °C bis 30 °C verarbeiten muss.</li>
+        </ol>
+        <p class="tipp">Tipp: Der größte Wert entsteht, wenn alle Bits 1 sind. Der kleinste Abstand ist der Stellenwert des letzten Nachkommabits.</p>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.3.5: Die Uhr, die falsch geht <span class="niveau">AFB II</span></summary>
+        <p>Eine Steuerung erhöht alle 0,1&nbsp;Sekunden eine Zeitvariable um 0,1. Die 0,1 ist als binäre Festkommazahl mit <strong>8 Bit Bruchteil</strong> gespeichert (abgeschnitten, siehe Beispiel 3).</p>
+        <ol>
+            <li>Berechne, um wie viele Sekunden die Zeitvariable nach einer Stunde Betrieb von der tatsächlichen Zeit abweicht. Gib an, ob sie vor- oder nachgeht.</li>
+            <li>Die Entwickler erhöhen den Bruchteil auf 16 Bit. Der gespeicherte Wert ist dann 0,0999908447265625. Berechne die Abweichung nach einer Stunde und nach 100 Stunden.</li>
+            <li>Beurteile, ob mehr Bits das Problem lösen, und beschreibe eine Lösung, bei der überhaupt kein Rundungsfehler entsteht.</li>
+        </ol>
+    </details>
+</div>

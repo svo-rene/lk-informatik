@@ -1,0 +1,18 @@
+{
+  "nr": "6.8",
+  "titel": "Partielle Übergangsfunktion und Fangzustand (Trap-Zustand)",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

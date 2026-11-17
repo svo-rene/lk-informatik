@@ -1,0 +1,109 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/2-2-8_divide_and_conquer.ipynb" download>2-2-8_divide_and_conquer.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser das JupyterLite der Schule <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (alternativ <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Ein Wert, der fehlt <span class="niveau">AFB I</span></summary>
+                <p>Suche die 40 in [2, 5, 8, 12, 16, 23, 38]. Notiere für jeden Aufruf <code>links</code>, <code>rechts</code> und <code>mitte</code>. Woran erkennt die Funktion, dass die 40 fehlt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>(0, 6, mitte 3: 12) → (4, 6, mitte 5: 23) → (6, 6, mitte 6: 38) → (7, 6): <code>links &gt; rechts</code>, der Bereich ist leer, der Basisfall gibt −1 zurück. 4 Aufrufe, 3 Vergleichsrunden.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Vier Millionen Einträge <span class="niveau">AFB I</span></summary>
+                <p>Eine sortierte Liste hat 4 000 000 Einträge, der gesuchte Wert kommt nicht vor. Wie viele Vergleiche braucht die lineare Suche, wie viele Runden die binäre Suche höchstens?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Linear: 4 000 000 Vergleiche. Binär: Zwei Millionen brauchen 21 Runden, die doppelte Menge nur eine mehr – also 22 Runden (log<sub>2</sub> 4 000 000 ≈ 21,9, abgerundet 21, plus 1).</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Drei Zahlen teilen <span class="niveau">AFB I</span></summary>
+                <p>Wie teilt <code>maximum</code> die Liste [8, 2, 5]? Welche Teillisten entstehen insgesamt, und wie viele Vergleiche finden beim Kombinieren statt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>mitte</code> = 3 // 2 = 1 → [8] und [2, 5]; [2, 5] wird in [2] und [5] geteilt. Kombinieren: 2 &gt; 5? Nein → 5; dann 8 &gt; 5? Ja → 8. Zwei Vergleiche, also n − 1.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-8-1">
+            <details>
+                <summary>Aufgabe 2.2.8.1: Binäre Suche von Hand <span class="niveau">AFB I</span></summary>
+                <p>Führe die binäre Suche nach 16 und nach 9 in der Liste [2, 5, 8, 12, 16, 23, 38] von Hand durch. Notiere jeweils <code>links</code>, <code>rechts</code> und <code>mitte</code>.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-8-2">
+            <details>
+                <summary>Aufgabe 2.2.8.2: Drei Schritte erkennen <span class="niveau">AFB II</span></summary>
+                <p>Benenne im Beispiel <code>maximum(liste)</code> die Schritte Teilen, Herrschen und Kombinieren. Zeichne den Aufrufbaum für <code>maximum([7, 3, 19, 4])</code>.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-8-3">
+            <details>
+                <summary>Aufgabe 2.2.8.3: Schnelles Potenzieren <span class="niveau">AFB III</span></summary>
+                <p>Implementiere <code>potenz(x, n)</code> nach der Regel: x<sup>0</sup> = 1; für gerades n gilt x<sup>n</sup> = (x<sup>n/2</sup>)²; für ungerades n gilt x<sup>n</sup> = x · x<sup>n−1</sup>. Vergleiche die Anzahl der Multiplikationen mit der naiven Lösung für n = 1024 und beurteile, ob es sich um Divide and Conquer handelt.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-2-2-8-4">
+            <details>
+                <summary>Aufgabe 2.2.8.4: Binäre Suche im Adressbuch <span class="niveau">AFB II</span></summary>
+                <p>Ein Adressbuch enthält 15 alphabetisch sortierte Nachnamen (Index 0 bis 14):</p>
+                <pre><code>Adam, Becker, Braun, Fischer, Hahn, Klein, Koch, Lange,
+Meyer, Neumann, Richter, Schmidt, Schulz, Wagner, Weber</code></pre>
+                <ol>
+                    <li>Führe die binäre Suche nach „Schulz“ und nach „Müller“ von Hand durch. Notiere für jede Runde links, rechts, mitte, den Namen an der Stelle mitte und die Entscheidung.</li>
+                    <li>Gib an, wie viele Runden bei 15 Namen höchstens nötig sind, wie viele bei 16 Namen und wie viele bei einer Million Namen.</li>
+                    <li>Python vergleicht Texte Zeichen für Zeichen nach dem Zeichencode. Erkläre damit, warum „Müller“ &gt; „Mustermann“ gilt, und beschreibe, welches Problem das für ein deutsches Adressbuch bedeutet.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-8-5">
+            <details>
+                <summary>Aufgabe 2.2.8.5: Zahlenraten mit Strategie <span class="niveau">AFB II</span></summary>
+                <p>Im Spiel „Ich denke mir eine Zahl zwischen 1 und 1000“ rät der Computer immer die Mitte des verbleibenden Bereichs.</p>
+                <ol>
+                    <li>Schreibe eine Funktion <code>rate_zahl(geheim, unten, oben)</code>, die die Anzahl der Rateversuche zurückgibt. Mitte: <code>(unten + oben) // 2</code>. Liegt <code>geheim</code> nicht im Bereich, gibt sie <code>None</code> zurück.</li>
+                    <li>Bestimme die erwarteten Ausgaben von Hand und teste dann:
+                        <table>
+                            <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>rate_zahl(500, 1, 1000)</code></td><td></td><td></td></tr>
+                                <tr><td><code>rate_zahl(1, 1, 1000)</code></td><td></td><td></td></tr>
+                                <tr><td><code>rate_zahl(1000, 1, 1000)</code></td><td></td><td></td></tr>
+                                <tr><td><code>rate_zahl(7, 7, 7)</code></td><td></td><td></td></tr>
+                                <tr><td><code>rate_zahl(0, 1, 1000)</code></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li>Begründe, dass nie mehr als 10 Versuche nötig sind. Wie viele wären es bei Zahlen zwischen 1 und 1 000 000?</li>
+                </ol>
+            </details>
+        </div>

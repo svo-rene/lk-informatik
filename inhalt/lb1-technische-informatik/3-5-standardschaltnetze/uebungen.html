@@ -1,0 +1,44 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.5.2: Multiplexer und Demultiplexer entwerfen <span class="niveau">AFB III</span></summary>
+            <ol>
+                <li>Gib an, wie viele Steuereingänge ein Multiplexer mit 8 Dateneingängen braucht, und begründe.</li>
+                <li>Stelle die Wahrheitstabelle eines 1:2-Demultiplexers mit Eingang E, Steuereingang S und den Ausgängen Y0, Y1 auf.</li>
+                <li>Erweitere den Demultiplexer auf vier Ausgänge Y0 bis Y3. Gib die Funktionen für alle vier Ausgänge an.</li>
+                <li>Ein Multiplexer und ein Demultiplexer sollen vier Sensoren über <strong>eine</strong> gemeinsame Leitung an vier Anzeigen übertragen. Erkläre, wie das funktioniert und was beide Seiten dafür gemeinsam kennen müssen.</li>
+            </ol>
+        </details>
+    </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.5.3: Bühnenlicht mit Freigabeschalter <span class="niveau">AFB II</span></summary>
+            <p>Im Schultheater steuert ein Wahlschalter S, wer die Bühnenlampe Y bedient: Bei S = 0 gibt das Programm des Lichtpults das Signal D0 vor, bei S = 1 der Handtaster der Regie mit dem Signal D1. Zusätzlich hat der Hausmeister einen Freigabeschalter F. Ist F = 0, bleibt die Lampe immer aus, egal was S, D0 und D1 melden.</p>
+            <ol>
+                <li>Stelle die Wahrheitstabelle mit den Eingängen F, S, D0, D1 und dem Ausgang Y auf (16 Zeilen).</li>
+                <li>Trage die Funktion in ein KV-Diagramm für vier Variablen im Kursstil ein. Benenne dabei A = F, B = S, C = D0 und D = D1. Bilde die Gruppen und lies die minimierte Funktion ab.</li>
+                <li>Klammere F aus und zeige mit dem Distributivgesetz, dass die Schaltung ein 2:1-Multiplexer mit zusätzlichem Freigabeeingang ist.</li>
+                <li>Gib je eine Schaltung für die abgelesene Form und für die ausgeklammerte Form an. Verwende nur NICHT-, UND- und ODER-Gatter mit höchstens zwei Eingängen. Beschreibe die Verdrahtung in Textform und vergleiche die Gatteranzahl.</li>
+            </ol>
+            <p>Baue die sparsamere Schaltung in LogicSim auf und teste sie mit allen 16 Belegungen.</p>
+            <p class="tipp">Beim Ausklammern bleibt das innere UND erhalten: (F ∧ X) ∨ (F ∧ Z) = F ∧ (X ∨ Z), wobei X und Z selbst UND-Terme sein dürfen.</p>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.5.5: Fehler im 4:1-Multiplexer finden <span class="niveau">AFB II</span></summary>
+            <p>Tom hat für einen 4:1-Multiplexer diese Funktion aufgestellt und in LogicSim aufgebaut:</p>
+            <p><code>Y = (¬S1 ∧ ¬S0 ∧ D0) ∨ (¬S1 ∧ S0 ∧ D1) ∨ (S1 ∧ ¬S0 ∧ D2) ∨ (S1 ∧ ¬S0 ∧ D3)</code></p>
+            <p>Er hat nur getestet, ob bei jeder Steuerkombination eine 1 am gewählten Eingang durchkommt, wenn alle anderen Dateneingänge 0 sind. Dabei ist ihm nichts aufgefallen, außer dass bei S1 S0 = 11 „irgendwas komisch“ war.</p>
+            <ol>
+                <li>Finde den Fehler in Toms Funktion und korrigiere ihn.</li>
+                <li>Gib zwei Belegungen an, bei denen Toms Schaltung ein falsches Ergebnis liefert: eine, bei der Y = 1 statt 0 herauskommt, und eine, bei der Y = 0 statt 1 herauskommt.</li>
+                <li>Beschreibe einen Testplan für einen 4:1-Multiplexer, der mit acht Testfällen auskommt und solche Fehler sicher aufdeckt. Begründe, warum Toms Testidee allein nicht genügt.</li>
+            </ol>
+        </details>
+    </div>

@@ -1,0 +1,23 @@
+{
+  "nr": "3.9",
+  "titel": "Kürzeste Wege: Moore und Dijkstra",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    },
+    {
+      "datei": "dijkstra-simulator.html",
+      "titel": "Dijkstra-Simulator",
+      "zusatz": true
+    }
+  ]
+}

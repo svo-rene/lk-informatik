@@ -1,0 +1,133 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 3: Liste mit zwei Namen <span class="niveau">AFB I–II</span></summary>
+            <p>Was geben die letzten drei Zeilen aus?</p>
+            <pre><code class="language-python">a = [5]
+b = a
+b.append(7)
+c = [5, 7]
+print(a)
+print(a is b)
+print(a is c)</code></pre>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p><code>[5, 7]</code>, <code>True</code>, <code>False</code>. <code>a</code> und <code>b</code> sind zwei Namen für dieselbe Liste, deshalb sieht man die 7 auch über <code>a</code>. <code>c</code> hat zwar dieselben Werte, ist aber eine eigene, neue Liste.</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-4-1">
+        <details>
+            <summary>Aufgabe 4.4.1: Spieler-Statistik <span class="niveau">AFB I</span></summary>
+            <p>Erstelle eine Klasse <code>Spieler</code> mit den Attributen:</p>
+            <ul>
+                <li><code>name</code> (Instanzattribut)</li>
+                <li><code>anzahl_spieler</code> (Klassenattribut)</li>
+            </ul>
+            <p>Der Konstruktor soll <code>anzahl_spieler</code> bei jedem neuen Objekt um 1 erhöhen. Erzeuge drei Objekte und gib am Ende die Gesamtzahl aus.</p>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-4-2">
+        <details>
+            <summary>Aufgabe 4.4.2: Bücher mit Steuer <span class="niveau">AFB II</span></summary>
+            <p>Erstelle eine Klasse <code>Buch</code> mit:</p>
+            <ul>
+                <li><code>titel</code> und <code>preis_netto</code> als Instanzattributen</li>
+                <li><code>mwst</code> (Mehrwertsteuer) als Klassenattribut – z.&nbsp;B. 7&nbsp;%</li>
+            </ul>
+            <p>➤ Erzeuge mindestens zwei Bücher und gib für jedes den Titel und den Bruttopreis aus.<br>
+            ➤ Ändere danach den Mehrwertsteuersatz und zeige, wie sich das auf die Ausgabe des Preises auswirkt.</p>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-4-3">
+        <details>
+            <summary>Aufgabe 4.4.3: Ausgaben vorhersagen <span class="niveau">AFB III</span></summary>
+            <pre><code class="language-python">class Zaehler:
+    stand = 0
+    def __init__(self):
+        self.stand += 1
+
+a = Zaehler()
+b = Zaehler()
+print(a.stand, b.stand, Zaehler.stand)</code></pre>
+            <p>Sage die Ausgabe vorher, erkläre sie und korrigiere den Code so, dass er die Anzahl der erzeugten Objekte zählt.</p>
+        </details>
+    </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-4-4-4">
+        <details>
+            <summary>Aufgabe 4.4.4: Mensakarten modellieren <span class="niveau">AFB II</span></summary>
+            <p>Der Förderverein beschreibt das neue Bezahlsystem der Mensa:</p>
+            <p><em>„Jede Mensakarte hat eine Kartennummer und ein Guthaben in Cent. Ein Mittagessen kostet für alle 350 Cent; die Schulleitung kann den Preis zum Halbjahr für alle ändern. Man kann eine Karte aufladen und damit ein Essen kaufen – aber nur, wenn das Guthaben reicht. Die Mensa möchte außerdem wissen, wie viele Karten bisher ausgegeben wurden.“</em></p>
+            <ol>
+                <li>Entscheide für jedes Attribut, ob es ein Instanz- oder ein Klassenattribut sein muss, und begründe.</li>
+                <li>Zeichne das Klassendiagramm (Klassenattribute unterstrichen).</li>
+                <li>Implementiere die Klasse <code>Mensakarte</code>. <code>essen_kaufen()</code> zieht den Preis ab und gibt <code>True</code> zurück, wenn das Guthaben reicht; sonst bleibt das Guthaben unverändert und die Methode gibt <code>False</code> zurück.</li>
+                <li>Teste deine Klasse mit diesen Anweisungen in genau dieser Reihenfolge:
+                    <table class="gitter">
+                        <thead><tr><th>Anweisungen</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>k1 = Mensakarte(101, 1000)</code><br><code>k2 = Mensakarte(102, 300)</code><br><code>print(Mensakarte.anzahl_karten)</code></td><td><code>2</code></td><td></td></tr>
+                            <tr><td><code>print(k1.essen_kaufen(), k1.guthaben)</code></td><td><code>True 650</code></td><td></td></tr>
+                            <tr><td><code>print(k2.essen_kaufen(), k2.guthaben)</code></td><td><code>False 300</code></td><td></td></tr>
+                            <tr><td><code>Mensakarte.essenspreis = 280</code><br><code>print(k2.essen_kaufen(), k2.guthaben)</code></td><td><code>True 20</code></td><td></td></tr>
+                            <tr><td><code>print(k1.essen_kaufen(), k1.guthaben)</code></td><td><code>True 370</code></td><td></td></tr>
+                            <tr><td><code>k2.aufladen(500)</code><br><code>print(k2.guthaben)</code></td><td><code>520</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-4-6">
+        <details>
+            <summary>Aufgabe 4.4.6: Ergebnis prüfen an der Kinokasse <span class="niveau">AFB II</span></summary>
+            <p>Die Software der Kinokasse verwendet diese Klasse (Preise in Euro):</p>
+            <pre><code class="language-python">class Ticket:
+    grundpreis = 9
+    verkauft = 0
+
+    def __init__(self, film, ermaessigt):
+        self.film = film
+        self.ermaessigt = ermaessigt
+        Ticket.verkauft += 1
+
+    def preis(self):
+        if self.ermaessigt:
+            return self.grundpreis - 2
+        return self.grundpreis
+
+t1 = Ticket("Dune", False)
+t2 = Ticket("Dune", True)
+t3 = Ticket("Wicked", False)
+print(t1.preis(), t2.preis(), t3.preis(), Ticket.verkauft)
+Ticket.grundpreis = 10
+t3.grundpreis = 12
+print(t1.preis(), t2.preis(), t3.preis())
+t2.verkauft = 0
+print(Ticket.verkauft, t1.verkauft, t2.verkauft)
+Ticket.grundpreis = 11
+print(t1.preis(), t3.preis())</code></pre>
+            <ol>
+                <li>Sage die vier Ausgabezeilen vorher, <em>bevor</em> du das Programm ausführst. Trage sie in die Tabelle ein und vergleiche dann mit der tatsächlichen Ausgabe.
+                    <table class="gitter">
+                        <thead><tr><th>Ausgabezeile</th><th>deine Vorhersage</th><th>tatsächliche Ausgabe</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td></td><td></td></tr>
+                            <tr><td>2</td><td></td><td></td></tr>
+                            <tr><td>3</td><td></td><td></td></tr>
+                            <tr><td>4</td><td></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>Erkläre jede Zeile mit der Regel, in welcher Reihenfolge Python ein Attribut sucht.</li>
+                <li>Zwei Anweisungen im Programm sind vermutlich Programmierfehler. Benenne sie und begründe, welche unerwünschte Wirkung sie haben.</li>
+            </ol>
+        </details>
+    </div>

@@ -1,0 +1,82 @@
+<p>
+        Du kannst jetzt jede Schaltung analysieren, synthetisieren und vereinfachen. Manche Bausteine braucht man aber so oft, dass niemand sie jedes Mal neu erfindet: Sie haben eigene Namen und werden fertig verwendet.
+    </p>
+
+<p>
+        Standardschaltnetze sind grundlegende Schaltungen in der digitalen Elektronik,
+        die häufig in der technischen Informatik und Elektrotechnik verwendet werden.
+        Der Sinn von Standardschaltnetzen liegt darin, dass sie uns helfen, komplexe Aufgaben durch einfache, standardisierte und wiederverwendbare Bausteine zu lösen. Sie machen das Design und die Herstellung digitaler Geräte einfacher, schneller und zuverlässiger.
+    </p>
+
+<h2>Beispiele für Standardschaltnetze</h2>
+
+<ul>
+        <li><strong>Multiplexer</strong>: Ein Schaltkreis, der eine von mehreren Eingangsleitungen auswählt und diese an eine einzelne Ausgangsleitung weiterleitet. Multiplexer sind in vielen digitalen Systemen wichtig, da sie es ermöglichen, mehrere Datenquellen effizient zu verwalten und zu steuern.</li>
+        <li><strong>Demultiplexer</strong>: Das Gegenteil eines Multiplexers. Ein Demultiplexer nimmt ein Signal von einer Eingangsleitung und leitet es auf eine von mehreren Ausgangsleitungen weiter.</li>
+        <li><strong>Addierer</strong>: Schaltungen, die zur Addition von Binärzahlen verwendet werden, wie Halbaddierer und Volladdierer.</li>
+    </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Der 2:1-Multiplexer</summary>
+        <p>Ein Multiplexer mit zwei Dateneingängen D0, D1 braucht <strong>einen</strong> Steuereingang S. Bei S = 0 wird D0 durchgeschaltet, bei S = 1 wird D1 durchgeschaltet:</p>
+        <p><code>Y = (¬S ∧ D0) ∨ (S ∧ D1)</code></p>
+        <table class="gitter">
+            <tr><th>S</th><th>Y</th></tr>
+            <tr><td>0</td><td>D0</td></tr>
+            <tr><td>1</td><td>D1</td></tr>
+        </table>
+        <p>Man vergleicht das gern mit einer Weiche bei der Bahn: S stellt die Weiche, und nur ein Gleis führt zum Ausgang.</p>
+        <p><strong>Probe:</strong> S = 1, D0 = 1, D1 = 0 eingesetzt: (¬1 ∧ 1) ∨ (1 ∧ 0) = (0 ∧ 1) ∨ 0 = 0. Das ist genau der Wert von D1 – der Wert von D0 kommt nicht durch. Die Schaltung braucht 4 Gatter: ein NICHT-Gatter für ¬S, zwei UND-Gatter und ein ODER-Gatter.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> 4:1-Multiplexer und 1:2-Demultiplexer</summary>
+        <p>Für vier Dateneingänge D0 bis D3 braucht man 2 Steuereingänge S1 S0 (2<sup>2</sup> = 4). Jeder Dateneingang bekommt ein UND-Gatter, das nur bei „seiner“ Steuerkombination 1 liefern kann:</p>
+        <p><code>Y = (¬S1 ∧ ¬S0 ∧ D0) ∨ (¬S1 ∧ S0 ∧ D1) ∨ (S1 ∧ ¬S0 ∧ D2) ∨ (S1 ∧ S0 ∧ D3)</code></p>
+        <p>Beispiel: S1 S0 = 10 (dezimal 2) → nur der dritte Term kann wahr werden, also Y = D2. Die Steuereingänge bilden damit eine <strong>Binärzahl</strong>, die die Nummer des gewählten Eingangs angibt.</p>
+        <p>Der <strong>1:2-Demultiplexer</strong> macht den umgekehrten Weg: Ein Eingang E wird abhängig von S auf einen von zwei Ausgängen gelegt:</p>
+        <p><code>Y0 = ¬S ∧ E</code> &nbsp;&nbsp; <code>Y1 = S ∧ E</code></p>
+        <p><strong>Probe:</strong> S1 S0 = 11, D3 = 1, alle anderen Dateneingänge 0: Nur im vierten Term stehen keine negierten Steuerbits, er ergibt 1 ∧ 1 ∧ 1 = 1, alle anderen Terme enthalten ¬S1 oder ¬S0 und sind 0. Also Y = 1 = D3 ✓. Setzt man stattdessen D3 = 0 und D0 = D1 = D2 = 1, muss Y = 0 herauskommen – so prüft man, dass wirklich <em>nur</em> der gewählte Eingang durchkommt.</p>
+            </details>
+        </div>
+
+<p>Im Folgenden wollen wir uns vertiefend mit dem Halb- und Volladdierer beschäftigen.</p>
+
+<div class="praxisbezug">
+        <details>
+            <summary>Praxisbezug: Standardbausteine im Alltag</summary>
+            <p><strong>Alltag:</strong> Ein HDMI-Umschalter am Fernseher, der zwischen Spielkonsole und Receiver wählt, ist ein Multiplexer. Im Arbeitsspeicher wählen Multiplexer und Demultiplexer (Decoder) über die Adresse genau die Speicherzelle aus, die gelesen oder beschrieben wird. Und Telefon- sowie Internetleitungen übertragen viele Gespräche gleichzeitig, indem sie sie zeitlich verschachteln (Zeitmultiplex).</p>
+            <p><strong>Berufsleben:</strong></p>
+            <ul>
+                <li><strong>Chip-Layout-Ingenieur/in</strong>: platziert Standardzellen wie Multiplexer, Addierer und Flipflops aus einer Bibliothek auf dem Chip und verbindet sie – statt jedes Gatter einzeln zu zeichnen.</li>
+                <li><strong>Nachrichtentechniker/in</strong>: plant Übertragungssysteme, in denen viele Signale über eine Leitung oder eine Funkfrequenz laufen, z.&nbsp;B. im Mobilfunk – ein Forschungsschwerpunkt der TU Dresden.</li>
+            </ul>
+        </details>
+    </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p><strong>Standardschaltnetze</strong> sind häufig benötigte Schaltnetze mit festgelegter Funktion, die als fertige Bausteine wiederverwendet werden.</p>
+        <table class="gitter">
+            <tr><th>Baustein</th><th>Funktion</th></tr>
+            <tr><td>Multiplexer (MUX)</td><td>wählt mit <strong>Steuereingängen</strong> eine von mehreren Dateneingangsleitungen aus und schaltet sie auf den Ausgang durch. Mit n Steuereingängen kann man zwischen 2<sup>n</sup> Dateneingängen wählen.</td></tr>
+            <tr><td>Demultiplexer (DEMUX)</td><td>leitet ein Eingangssignal abhängig von den Steuereingängen auf eine von 2<sup>n</sup> Ausgangsleitungen; alle anderen Ausgänge sind 0.</td></tr>
+            <tr><td>Addierer</td><td>addiert Bits bzw. Binärzahlen (Halbaddierer, Volladdierer, siehe 3.6 und 3.7).</td></tr>
+        </table>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.5.1: Welcher Baustein ist das? <span class="niveau">AFB II</span></summary>
+            <p>Analysiere das folgende Schaltnetz. Um welches Standardschaltnetz handelt es sich?</p>
+            <figure>
+                <img src="../img/Multiplexer.png" width="500" alt="Schaltnetz mit drei Eingängen, einem NICHT-Gatter, zwei UND-Gattern und einem ODER-Gatter">
+            </figure>
+        </details>
+    </div>

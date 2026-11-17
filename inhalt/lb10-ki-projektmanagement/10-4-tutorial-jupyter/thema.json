@@ -1,0 +1,14 @@
+{
+  "nr": "10.4",
+  "titel": "Maschinelles Lernen: Tutorials mit Jupyter",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

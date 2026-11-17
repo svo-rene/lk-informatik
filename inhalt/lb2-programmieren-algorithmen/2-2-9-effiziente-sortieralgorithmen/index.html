@@ -1,0 +1,336 @@
+<script src="../sortierlabor.js" defer></script>
+<p>
+            In den vorherigen Stunden hast du einfache Sortieralgorithmen wie Bubblesort und Insertionsort kennengelernt. Dabei wurde dir auch bewusst, dass diese Algorithmen bei größeren Datenmengen ineffizient sind.
+        </p>
+
+<p>
+            Die Algorithmen, die du bisher kennengelernt hast, gehören zur Komplexitätsklasse O(n²). Für kleine Datenmengen ist das noch in Ordnung, bei großen Datenmengen dauert das Sortieren aber sehr lange. Daher braucht man effizientere Verfahren mit besserer Zeitkomplexität.
+        </p>
+
+<p>
+            Mergesort ist ein effizienter Sortieralgorithmus mit einer garantierten Zeitkomplexität von O(n · log n) – im besten, mittleren und schlechtesten Fall. Er basiert auf dem Divide-and-Conquer-Prinzip und sortiert zuverlässig auch große Datenmengen.
+        </p>
+
+<h2>Die Idee in einem Bild</h2>
+
+<p>Stell dir vor, 8 Personen sollen 8 Karten sortieren. Die erste Person teilt den Stapel und gibt je eine Hälfte an zwei andere weiter, diese teilen wieder – bis jede Person nur noch <strong>eine Karte</strong> hat. Eine einzelne Karte ist sortiert, da gibt es nichts zu tun. Jetzt geht es zurück: Je zwei Personen legen ihre sortierten Stapel zu einem sortierten Stapel zusammen, indem sie immer nur die beiden <strong>vorderen</strong> Karten vergleichen. Am Ende hält die erste Person alle 8 Karten sortiert in der Hand.</p>
+
+<ul>
+            <li><strong>Teilen</strong> kostet keinen einzigen Vergleich – es wird nur halbiert.</li>
+            <li><strong>Zusammenführen</strong> ist die eigentliche Arbeit – aber sie ist billig, weil beide Stapel schon sortiert sind.</li>
+            <li>Bei 8 Karten gibt es nur 3 Ebenen (8 → 4 → 2 → 1), bei 1 000 Karten nur 10, bei einer Million 20. Auf jeder Ebene wird jede Karte nur einmal angefasst.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Mit den Karten: Station Mergesort</summary>
+                <p>Holt eure Zahlenkarten aus 2.2.1 wieder heraus. Es gelten die bekannten Regeln, mit einer Änderung: Jetzt ist eine <strong>zweite Reihe</strong> erlaubt – das ist der zusätzliche Speicher, den Mergesort braucht.</p>
+                <ol>
+                    <li><strong>Teilen:</strong> Teilt die 8 verdeckten Karten in zwei Hälften, gebt jede Hälfte weiter und teilt, bis jede Hälfte nur noch eine Karte hat.</li>
+                    <li><strong>Zusammenführen:</strong> Zwei sortierte Stapel liegen verdeckt nebeneinander, die kleinste Karte vorn. Aufgedeckt werden <strong>nur die beiden vorderen Karten</strong>. Die kleinere kommt in die Ergebnisreihe (1 Strich V). Ist ein Stapel leer, kommt der Rest des anderen ohne Vergleich dahinter.</li>
+                    <li>Zählt die Vergleiche für 8 und für 16 Karten und vergleicht mit eurem Verfahren aus 2.2.1 (Aufgabe 2.2.9.8).</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in fünf kurzen Schritten. Zuerst lernst du das Herzstück kennen, das Zusammenführen zweier sortierter Listen (<code>merge</code>), danach das ganze Verfahren. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und rechne oder tippe mit.</p>
+
+<ol class="schritte">
+            <li>Zwei sortierte Listen zusammenführen</li>
+            <li>merge in Python</li>
+            <li>merge Schritt für Schritt</li>
+            <li>Mergesort: Teilen und Zusammenführen – danach Aufgabe 2.2.9.1</li>
+            <li>Mergesort in Python – danach Aufgabe 2.2.9.2</li>
+        </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Divide and Conquer</summary>
+                <p>
+                    Viele effiziente Algorithmen nutzen das Prinzip „Teile und herrsche“ (Divide and Conquer, siehe 2.2.8): Das Problem wird in kleinere Teilprobleme zerlegt, diese werden rekursiv gelöst, und die Teillösungen werden zu einer Gesamtlösung kombiniert.
+                </p>
+            </details>
+        </div>
+
+<h2 id="schritt-1">Schritt 1: Zwei sortierte Listen zusammenführen</h2>
+
+<p>Mergesort beruht auf einer einfachen Beobachtung: Zwei Listen, die <em>schon sortiert</em> sind, lassen sich schnell zu einer sortierten Liste zusammenführen. Man vergleicht nur die vorderen, noch nicht übernommenen Elemente und nimmt das kleinere. Im Video siehst du das an [3, 8] und [2, 5]. Achte auf die beiden Zeiger <code>i</code> und <code>j</code> und darauf, was passiert, wenn eine Liste aufgebraucht ist.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-1_merge_idee_vorschau.png" src="../vid/2-2-9-1_merge_idee.mp4"></video><a href="../vid/2-2-9-1_merge_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Wie führt man zwei sortierte Listen zusammen? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<h3>Jetzt du: Welche Zahl kommt als Nächstes?</h3>
+
+<p>Im Sortierlabor entscheidest du bei jedem Vergleich, welche der beiden vorderen Zahlen ins Ergebnis kommt. Mit „Neue Zufallslisten“ bekommst du neue Aufgaben, du kannst aber auch selbst zwei sortierte Listen eintippen. Achte darauf, ab wann keine Vergleiche mehr nötig sind.</p>
+
+<div class="sortierlabor" data-verfahren="mergeteil" data-links="3, 8" data-rechts="2, 5" data-vorhersage="ja" data-code="nein"></div>
+
+<p>Zum Nachlesen steht derselbe Ablauf als Tabelle in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Zusammenführen (Merge) der sortierten Listen [3, 8] und [2, 5]: Vergleiche die jeweils ersten Elemente und nimm das kleinere: 2 → 3 → 5 → 8. Ergebnis: [2, 3, 5, 8].</p>
+            <table>
+                <thead><tr><th>Schritt</th><th>links[i]</th><th>rechts[j]</th><th>Vergleich</th><th>ergebnis danach</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>3</td><td>2</td><td>3 ≤ 2? nein → rechts nehmen</td><td>[2]</td></tr>
+                    <tr><td>2</td><td>3</td><td>5</td><td>3 ≤ 5? ja → links nehmen</td><td>[2, 3]</td></tr>
+                    <tr><td>3</td><td>8</td><td>5</td><td>8 ≤ 5? nein → rechts nehmen</td><td>[2, 3, 5]</td></tr>
+                    <tr><td>4</td><td>8</td><td>–</td><td>rechts ist leer → Rest von links anhängen</td><td>[2, 3, 5, 8]</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><strong>Nur die Anfänge vergleichen:</strong> Beide Listen sind sortiert. Das kleinste noch nicht übernommene Element steht deshalb immer vorn in einer der beiden Listen.</li>
+                <li><strong>Rest anhängen:</strong> Ist eine Liste leer, kann der Rest der anderen ohne weitere Vergleiche angehängt werden, denn er ist bereits sortiert und größer.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> [2, 3, 5, 8] nach 3 Vergleichen. <strong>Kontrolle:</strong> Beim Zusammenführen von a und b Elementen sind höchstens a + b − 1 Vergleiche nötig, hier 2 + 2 − 1 = 3.</p>
+            <table>
+                <thead><tr><th>Eingabe <code>merge(links, rechts)</code></th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>([3, 8], [2, 5])</code></td><td><code>[2, 3, 5, 8]</code></td><td>Normalfall, 3 Vergleiche</td></tr>
+                    <tr><td><code>([1, 2], [7, 9])</code></td><td><code>[1, 2, 7, 9]</code></td><td>bester Fall, 2 Vergleiche</td></tr>
+                    <tr><td><code>([], [4, 6])</code></td><td><code>[4, 6]</code></td><td>leere Liste, 0 Vergleiche</td></tr>
+                    <tr><td><code>([1], [1])</code></td><td><code>[1, 1]</code></td><td>gleiche Werte</td></tr>
+                    <tr><td><code>([-4, 0], [-5])</code></td><td><code>[-5, -4, 0]</code></td><td>negative Zahlen</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<h2 id="schritt-2">Schritt 2: merge in Python</h2>
+
+<p>Die Funktion <code>merge</code> setzt das Zusammenführen mit zwei Zeigern <code>i</code> und <code>j</code> um. Darin stecken drei Python-Bausteine, die im Video an kleinen Beispielen in der Kommandozeile gezeigt werden: die Mehrfachzuweisung <code>i = j = 0</code>, eine <code>while</code>-Bedingung mit <code>and</code> und der Rest einer Liste mit <code>links[i:]</code>, der mit <code>extend</code> angehängt wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-2_merge_code_vorschau.png" src="../vid/2-2-9-2_merge_code.mp4"></video><a href="../vid/2-2-9-2_merge_code.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: merge in Python (ca. 2 min)</figcaption>
+        </figure>
+
+<h2 id="schritt-3">Schritt 3: merge Schritt für Schritt</h2>
+
+<p>Jetzt läuft <code>merge([3, 8], [2, 5])</code> in Thonny. Im Speicherbild zeigen <code>i</code> und <code>j</code> auf die Elemente, die gerade verglichen werden, übernommene Elemente werden grau. Achte darauf, welcher Teil der <code>while</code>-Bedingung am Ende falsch wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-3_merge_schritte_vorschau.png" src="../vid/2-2-9-3_merge_schritte.mp4"></video><a href="../vid/2-2-9-3_merge_schritte.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: merge Schritt für Schritt (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Jetzt du: merge im Code mitverfolgen</h3>
+
+<p>Hier läuft <code>merge</code> Zeile für Zeile. Rechts siehst du <code>i</code>, <code>j</code> und <code>ergebnis</code>. Gib danach <code>2, 4</code> und <code>1, 9</code> ein und vergleiche mit deiner Lösung von Kurz geprüft 3.</p>
+
+<div class="sortierlabor" data-verfahren="mergeteil" data-links="3, 8" data-rechts="2, 5" data-fein="ja"></div>
+
+<h2 id="schritt-4">Schritt 4: Mergesort – Teilen und Zusammenführen</h2>
+
+<p>Mergesort nutzt <code>merge</code> immer wieder: Die Liste wird so lange halbiert, bis nur noch Listen mit einem Element übrig sind. Diese sind sortiert, und von unten nach oben werden je zwei sortierte Teillisten zusammengeführt. Im Video siehst du das an der Liste [38, 27, 43, 3, 9, 82, 10] aus Beispiel 2. Achte darauf, wie viele Vergleiche auf jeder Ebene anfallen.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-4_teilen_vorschau.png" src="../vid/2-2-9-4_teilen.mp4"></video><a href="../vid/2-2-9-4_teilen.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Mergesort – Teilen und Zusammenführen (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Jetzt du: Den Baum wachsen sehen</h3>
+
+<p>Das Sortierlabor zeichnet jeden Aufruf von <code>mergesort</code> als Kasten. Gestrichelt: Die Liste wurde geteilt und wartet auf ihre Hälften. Gelb: Hier wird gerade zusammengeführt – die leeren Plätze füllen sich von links. Grün: sortiert. Der blaue Rahmen zeigt den Aufruf, der gerade läuft. Bei jedem Vergleich sagst du vorher, welche Zahl ins Ergebnis kommt.</p>
+
+<div class="sortierlabor" data-verfahren="merge" data-liste="38, 27, 43, 3, 9, 82, 10" data-vorhersage="ja" data-code="nein"></div>
+
+<p class="tipp">Gib eine Liste mit 16 Zahlen ein oder nimm die Zahlen deines Kartensatzes. Zähle die Ebenen. Wie viele Ebenen wären es bei 32 Zahlen?</p>
+
+<p>Die vollständige Rechnung mit allen merge-Schritten steht in Beispiel 2 (Schritt 5).</p>
+
+<p>Danach: Aufgabe 2.2.9.1 – Mergesort von Hand.</p>
+
+<h2 id="schritt-5">Schritt 5: Mergesort in Python</h2>
+
+<p>Die Funktion <code>mergesort</code> ist kurz: ein Basisfall, zweimal Teilen mit Rekursion, einmal <code>merge</code>. Neu sind die ganzzahlige Division <code>//</code> und das Slicing <code>liste[:mitte]</code> und <code>liste[mitte:]</code>. Achte am Ende des Videos auf die Falle: <code>mergesort</code> sortiert die übergebene Liste nicht selbst, sondern gibt eine neue zurück.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-5_code_vorschau.png" src="../vid/2-2-9-5_code.mp4"></video><a href="../vid/2-2-9-5_code.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Mergesort in Python (ca. 2 min)</figcaption>
+        </figure>
+
+<h3>Jetzt du: Rekursion und Aufrufstapel beobachten</h3>
+
+<p>Jetzt läuft der ganze Code. Rechts unten steht der <strong>Aufrufstapel</strong>: Jeder Aufruf von <code>mergesort</code> wartet dort, bis seine beiden Hälften zurückkommen. Beobachte: Der Stapel wird nie höher als die Zahl der Ebenen + 1 – deshalb droht hier kein <code>RecursionError</code>. Und: In Zeile 19 und 20 wird nur geteilt, verglichen wird ausschließlich in <code>merge</code> (Zeile 5).</p>
+
+<div class="sortierlabor" data-verfahren="merge" data-liste="6, 2, 5, 1, 4"></div>
+
+<h3>Zum Verstehen: Warum ist Mergesort so viel schneller?</h3>
+
+<p>Auf jeder Ebene des Baums werden alle n Zahlen genau einmal in eine neue Liste übernommen, dafür reichen höchstens n Vergleiche. Die Zahl der Ebenen ist die Antwort auf die Frage „Wie oft kann ich n halbieren, bis 1 übrig bleibt?“, also log<sub>2</sub> n. Zusammen sind das höchstens etwa n · log<sub>2</sub> n Vergleiche.</p>
+
+<table>
+            <thead><tr><th>n</th><th>Ebenen log<sub>2</sub> n</th><th>Mergesort höchstens ≈ n · log<sub>2</sub> n</th><th>Bubblesort schlechtester Fall n · (n − 1) / 2</th></tr></thead>
+            <tbody>
+                <tr><td>8</td><td>3</td><td>24</td><td>28</td></tr>
+                <tr><td>16</td><td>4</td><td>64</td><td>120</td></tr>
+                <tr><td>1 024</td><td>10</td><td>10 240</td><td>523 776</td></tr>
+                <tr><td>1 048 576</td><td>20</td><td>≈ 21 Millionen</td><td>≈ 550 Milliarden</td></tr>
+            </tbody>
+        </table>
+
+<p>Bei 8 Karten merkt man den Unterschied kaum, bei einer Million ist Mergesort rund 25 000-mal schneller. Im Wettrennen unten siehst du es selbst.</p>
+
+<p>Zum Nachlesen: der vollständige Code, alle Teillisten und die Vergleiche in Beispiel 2.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Mergesort für [38, 27, 43, 3, 9, 82, 10]</p>
+            <pre><code>Teilen (mitte = len // 2):
+               [38, 27, 43]               [3, 9, 82, 10]
+               [38]   [27, 43]            [3, 9]    [82, 10]
+               [38]   [27] [43]           [3] [9]   [82] [10]
+Zusammenführen:
+               [38]   [27, 43]            [3, 9]    [10, 82]
+               [27, 38, 43]               [3, 9, 10, 82]
+               [3, 9, 10, 27, 38, 43, 82]</code></pre>
+            <pre><code class="language-python">def merge(links, rechts):
+    ergebnis = []
+    i = j = 0
+    while i &lt; len(links) and j &lt; len(rechts):
+        if links[i] &lt;= rechts[j]:       # &lt;= hält Mergesort stabil
+            ergebnis.append(links[i])
+            i = i + 1
+        else:
+            ergebnis.append(rechts[j])
+            j = j + 1
+    ergebnis.extend(links[i:])          # Rest anhängen
+    ergebnis.extend(rechts[j:])
+    return ergebnis
+
+def mergesort(liste):
+    if len(liste) &lt;= 1:                 # Basisfall
+        return liste
+    mitte = len(liste) // 2
+    links = mergesort(liste[:mitte])    # Teilen und Herrschen
+    rechts = mergesort(liste[mitte:])
+    return merge(links, rechts)         # Kombinieren
+
+print(mergesort([38, 27, 43, 3, 9, 82, 10]))
+# [3, 9, 10, 27, 38, 43, 82]</code></pre>
+            <ol>
+                <li><strong>Teilen bis zum Basisfall:</strong> mitte = 7 // 2 = 3 → [38, 27, 43] und [3, 9, 82, 10]. Weiter halbieren, bis nur noch Listen mit einem Element übrig sind. <em>Warum:</em> Eine Liste mit höchstens einem Element ist sortiert, dort endet die Rekursion.</li>
+                <li><strong>Zusammenführen und Vergleiche zählen:</strong>
+                    <table>
+                        <thead><tr><th>merge</th><th>Ergebnis</th><th>Vergleiche</th></tr></thead>
+                        <tbody>
+                            <tr><td>[27] + [43]</td><td>[27, 43]</td><td>1</td></tr>
+                            <tr><td>[38] + [27, 43]</td><td>[27, 38, 43]</td><td>2</td></tr>
+                            <tr><td>[3] + [9]</td><td>[3, 9]</td><td>1</td></tr>
+                            <tr><td>[82] + [10]</td><td>[10, 82]</td><td>1</td></tr>
+                            <tr><td>[3, 9] + [10, 82]</td><td>[3, 9, 10, 82]</td><td>2</td></tr>
+                            <tr><td>[27, 38, 43] + [3, 9, 10, 82]</td><td>[3, 9, 10, 27, 38, 43, 82]</td><td>6</td></tr>
+                            <tr><td colspan="2"><strong>Summe</strong></td><td><strong>13</strong></td></tr>
+                        </tbody>
+                    </table>
+                    Zum Vergleich: Bubblesort bräuchte ohne Abbruch 7 · 6 / 2 = 21 Vergleiche.</li>
+                <li><strong>Warum O(n · log n)?</strong> Es entstehen ⌈log<sub>2</sub> 7⌉ = 3 Ebenen. Auf jeder Ebene wird jedes Element höchstens einmal in eine neue Liste übernommen, das sind höchstens n Schritte pro Ebene.</li>
+                <li><strong>Stabilität:</strong> In <code>merge</code> steht <code>&lt;=</code>. Bei gleichen Werten wird zuerst das Element aus der <em>linken</em> Teilliste genommen, und das stand ursprünglich weiter vorn. Mit <code>&lt;</code> wäre Mergesort nicht mehr stabil.</li>
+                <li><strong>Bester und schlechtester Fall:</strong> Ein merge von a und b Elementen braucht mindestens min(a, b) und höchstens a + b − 1 Vergleiche. Die Gesamtzahl schwankt also nur in engen Grenzen. Auch eine bereits sortierte Liste kostet O(n log n), im Unterschied zu Insertionsort und Bubblesort mit Abbruch.</li>
+                <li><strong>Falle „sortiert die Funktion meine Liste?“:</strong> <code>mergesort</code> arbeitet mit Kopien (<code>liste[:mitte]</code>) und gibt eine <em>neue</em> Liste zurück. Nach <code>zahlen = [3, 1, 2]</code> und <code>mergesort(zahlen)</code> ist <code>zahlen</code> immer noch <code>[3, 1, 2]</code>. Richtig ist <code>zahlen = mergesort(zahlen)</code> (siehe call by sharing, 2.1.6).</li>
+                <li><strong>Rekursionstiefe:</strong> Nur etwa log<sub>2</sub> n + 1 Aufrufe sind gleichzeitig offen, bei einer Million Elementen etwa 21. Anders als bei <code>sum_recursion</code> aus 2.2.7 droht kein <code>RecursionError</code>.</li>
+                <li><strong>Laufzeit messen:</strong>
+                    <pre><code class="language-python">import random
+import time
+
+for n in [10000, 20000, 40000, 80000]:
+    daten = []
+    for i in range(n):
+        daten.append(random.randint(1, 10**6))
+    start = time.perf_counter()
+    mergesort(daten)
+    ms = round((time.perf_counter() - start) * 1000)
+    print(n, ms, "ms")</code></pre>
+                    Beispielwerte eines Schulrechners: 31 ms; 66 ms; 141 ms; 302 ms. Bei Verdopplung von n steigt die Zeit um den Faktor ≈ 2,1. Das ist etwas mehr als 2, weil log<sub>2</sub>(2n) = log<sub>2</sub> n + 1 ist. Bubblesort hätte den Faktor 4 und bräuchte für n = 80 000 bereits mehrere Minuten.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> [3, 9, 10, 27, 38, 43, 82] mit 13 Vergleichen. Mergesort ist stabil, liegt immer in O(n log n) und braucht zusätzlichen Speicher.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe <code>mergesort</code></th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[38, 27, 43, 3, 9, 82, 10]</code></td><td><code>[3, 9, 10, 27, 38, 43, 82]</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>[]</code></td><td><code>[]</code></td><td>leere Liste: Basisfall</td></tr>
+                    <tr><td><code>[5]</code></td><td><code>[5]</code></td><td>ein Element</td></tr>
+                    <tr><td><code>[3, -1, 3, 0]</code></td><td><code>[-1, 0, 3, 3]</code></td><td>negative Zahlen und Duplikate</td></tr>
+                    <tr><td><code>["b", "a"]</code></td><td><code>['a', 'b']</code></td><td>Texte</td></tr>
+                    <tr><td><code>[1, "a"]</code></td><td><code>TypeError</code></td><td>falscher Typ: <code>1 &lt;= "a"</code> ist nicht definiert</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.9.2 – Mergesort erarbeiten, implementieren und testen.</p>
+
+<h2>Wettrennen: Mergesort gegen die einfachen Verfahren</h2>
+
+<p>Alle Verfahren sortieren gleichzeitig dieselbe Liste. Ein Zeittakt ist ein Vergleich. Probiere verschiedene Startreihenfolgen aus. Mit dem Knopf unten zählt das Labor die Vergleiche für n = 8 bis 512 und zeichnet sie als Diagramm. Quicksort lernst du auf der nächsten Seite kennen.</p>
+
+<div class="sortierlabor" data-verfahren="rennen"></div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Sortieren großer Datenmengen</summary>
+                <p>
+                    <strong>Alltag:</strong> Wenn ein Streamingdienst Millionen Titel nach Beliebtheit ordnet oder deine Fotos-App Tausende Bilder nach Datum sortiert, stecken O(n · log n)-Verfahren dahinter. Mit O(n²) würde das Minuten statt Millisekunden dauern.<br><br>
+                    <strong>Beruf:</strong> Datenbanksysteme sortieren Tabellen, die nicht in den Arbeitsspeicher passen, mit „externem Mergesort“: Sie sortieren handliche Stücke im Arbeitsspeicher, schreiben sie auf die Festplatte und führen sie anschließend zusammen. Datenbankadministratorinnen und -administratoren beobachten solche Sortiervorgänge, um langsame Abfragen zu beschleunigen.
+                </p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+            Mergesort teilt die Liste so lange in Hälften, bis nur noch Listen mit höchstens einem Element übrig sind, und führt die sortierten Teillisten mit <code>merge</code> wieder zusammen. <code>merge</code> vergleicht dabei immer nur die vorderen Elemente zweier sortierter Listen und hängt am Ende den Rest an. Weil es etwa log<sub>2</sub> n Ebenen gibt und auf jeder Ebene höchstens n Elemente bewegt werden, liegt Mergesort immer in O(n · log n). Er ist stabil, braucht aber zusätzlichen Speicher und gibt eine neue Liste zurück.
+        </p>
+
+<div class="hinweis" id="einschaetzen">
+            <details open>
+                <summary>Einschätzen: zurück zum Streamingdienst</summary>
+                <p>Jetzt kommt die entscheidende Frage: Schafft Mergesort die Charts mit 100 Millionen Songs in einer Nacht? Füge deinen Mergesort in Teil 5 des Messlabors ein (<a href="../notebooks/2-2-3_einfuehrung_komplexitaet.ipynb" download>Notebook von Seite 2.2.3</a>) – in <code>merge</code> wird nur der Vergleich zu <code>kommt_vor</code>, an der Stoppuhr musst du nichts ändern. Vergleiche ihn im Diagramm mit Bubblesort und miss ihn dann für 12 500, 25 000 und 50 000 Songs. Trage den größten Messwert in den Hochrechner ein (Klasse O(n · log n)). Zum Vergleich: Bubblesort hätte für 50 000 Songs weit über eine Minute gebraucht.</p>
+                <div class="sortierlabor" data-verfahren="hochrechner" data-n="50000" data-zeit="0,209" data-klasse="nlogn"></div>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Beispielmessung mit der Songliste (mit Vergleichszähler): 12 500 Songs 0,041 s (154 501 Vergleiche), 25 000 Songs 0,091 s (334 100), 50 000 Songs 0,209 s (718 216). Faktor bei Verdopplung ≈ 2,2 – etwas mehr als 2, wie bei n · log n erwartet. Hochgerechnet auf 100 Millionen Songs: etwa 12 Minuten. Die Charts passen also locker in eine Nacht, Bubblesort hätte Jahrzehnte gebraucht. Gleiche Daten, gleicher Rechner, gleiche Messung – nur ein Verfahren aus einer besseren Klasse.</p>
+                <p>Achtung bei <code>stoppe</code>: Mergesort gibt eine neue Liste zurück, statt die übergebene zu sortieren. Für die Zeitmessung ist das egal. Wer das Ergebnis braucht, schreibt <code>sortiert = mergesort(streams)</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Mergesort</strong> teilt die zu sortierende Liste in zwei Hälften, sortiert beide Hälften rekursiv und führt die sortierten Hälften anschließend zusammen (engl. <em>merge</em>). Eine Liste mit höchstens einem Element ist bereits sortiert (Basisfall).<br>
+                Laufzeit: Es entstehen etwa log<sub>2</sub> n Ebenen, und auf jeder Ebene werden beim Zusammenführen insgesamt n Elemente bewegt. Das ergibt <strong>O(n · log n)</strong>. Mergesort braucht zusätzlichen Speicher für die Teillisten (O(n)).
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Zusammenführen von Hand <span class="niveau">AFB I</span></summary>
+                <p>Führe [1, 6] und [2, 3, 9] zusammen. In welcher Reihenfolge werden die Zahlen übernommen, und wie viele Vergleiche sind nötig?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>1 ≤ 2 → 1; 6 ≤ 2? nein → 2; 6 ≤ 3? nein → 3; 6 ≤ 9 → 6. Jetzt ist die linke Liste leer, die 9 wird ohne Vergleich angehängt: [1, 2, 3, 6, 9] nach 4 Vergleichen (höchstens 2 + 3 − 1 = 4).</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Slicing und extend <span class="niveau">AFB I</span></summary>
+                <p>Was liefern <code>[4, 7, 9][1:]</code> und <code>[4, 7, 9][3:]</code>? Wie sieht <code>a</code> nach <code>a = [1]</code> und <code>a.extend([5, 6])</code> aus?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[7, 9]</code> (ab Position 1) und <code>[]</code> (ab Position 3 gibt es nichts mehr). Danach ist <code>a</code> = <code>[1, 5, 6]</code>.</p>
+                </details>
+            </details>
+        </div>

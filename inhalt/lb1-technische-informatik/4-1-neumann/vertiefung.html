@@ -1,0 +1,46 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 4.1.9: Acht Kerne am selben Bus <span class="niveau">AFB III</span></summary>
+        <p>Ein Händler wirbt: „8 Kerne mit je 3&nbsp;GHz – achtmal so viel Leistung wie ein Einkerner!“ Für eine Überschlagsrechnung gelten diese <em>Annahmen</em>:</p>
+        <ul>
+            <li>Jeder Kern kann pro Takt einen Befehl ausführen und braucht dafür im Mittel 8 Byte aus dem Arbeitsspeicher (Befehl und Daten zusammen).</li>
+            <li>Der Speicherbus ist 64 Bit breit und überträgt 3,2 Milliarden Mal pro Sekunde (3200&nbsp;MT/s).</li>
+        </ul>
+        <ol>
+            <li>Berechne die Bandbreite des Speicherbusses in GB/s (1&nbsp;GB = 10<sup>9</sup> Byte).</li>
+            <li>Berechne, wie viele Byte pro Sekunde ein Kern und wie viele alle acht Kerne bei voller Auslastung benötigen.</li>
+            <li>Wie viele Befehle pro Sekunde schaffen die acht Kerne zusammen höchstens, wenn alle Daten über diesen Bus müssen? Wie viele „volle“ Kerne entspricht das?</li>
+            <li>Der Prozessor hat einen Cache. Bestimme, welcher Anteil der Zugriffe mindestens aus dem Cache bedient werden muss, damit der Bus die acht Kerne nicht mehr ausbremst.</li>
+            <li>Beurteile den Werbeslogan. Beziehe dich dabei auf den Von-Neumann-Flaschenhals und auf deine Ergebnisse.</li>
+        </ol>
+        <p class="tipp">„Beurteile“ heißt: Aussage an Kriterien messen (hier: deine Zahlen und den Flaschenhals), Stärken und Schwächen nennen und zu einem begründeten Urteil kommen.</p>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 4.1.10: Fehler finden im Maschinencode <span class="niveau">AFB III</span></summary>
+        <p>Lea soll für den Mini-Rechner ein Programm schreiben, das die Zahl in Zelle 20 verdreifacht, das Ergebnis in Zelle 21 speichert und ausgibt. In Zelle 20 steht 100. Ihre Abgabe:</p>
+        <table>
+            <thead><tr><th>Adresse</th><th>Assembler</th><th>Maschinencode</th></tr></thead>
+            <tbody>
+                <tr><td>0</td><td>LOAD 20</td><td>011 10100</td></tr>
+                <tr><td>1</td><td>ADD 20</td><td>011 10100</td></tr>
+                <tr><td>2</td><td>ADD 20</td><td>011 10100</td></tr>
+                <tr><td>3</td><td>STORE 21</td><td>010 10100</td></tr>
+                <tr><td>4</td><td>OUT</td><td>111 00000</td></tr>
+                <tr><td>5</td><td>HLT</td><td>000 00000</td></tr>
+                <tr><td>20</td><td>Zahl 100</td><td>0110 0100</td></tr>
+            </tbody>
+        </table>
+        <p>Dazu schreibt sie: „Akku nach den Zyklen 1 bis 3: 100, 200, 300. Ausgabe: 300.“</p>
+        <ol>
+            <li>Finde alle Fehler in Leas Abgabe (Maschinencode und Ablauf) und korrigiere sie.</li>
+            <li>Einer der Fehler im Maschinencode fällt beim ersten Programmlauf nicht auf, wenn der Akku beim Start 0 ist. Erkläre, welcher es ist und in welcher Situation er doch Schaden anrichtet.</li>
+            <li>Nimm an, der Fehler aus Teil 2 ist korrigiert und nur der zweite Fehler im Maschinencode bleibt. Beschreibe, was er im Speicher anrichtet und was ausgegeben wird, wenn man das Programm ohne Neuladen der Daten ein zweites Mal startet.</li>
+            <li>Bis zu welchem Wert in Zelle 20 liefert das korrigierte Programm das mathematisch richtige Ergebnis?</li>
+        </ol>
+    </details>
+</div>

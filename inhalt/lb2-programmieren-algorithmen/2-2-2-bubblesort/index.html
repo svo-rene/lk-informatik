@@ -1,0 +1,322 @@
+<script src="../sortierlabor.js" defer></script>
+<p>
+            In 2.2.1 hast du mit den Zahlenkarten dein eigenes Sortierverfahren entwickelt, als Pseudocode aufgeschrieben und programmiert. Ab jetzt lernst du die bekannten Verfahren kennen – und vergleichst sie mit deinem. Vielleicht hast du eines davon schon selbst erfunden.
+        </p>
+
+<p>
+            Der <strong>Bubblesort-Algorithmus</strong> eignet sich gut als erstes bekanntes Verfahren, da man ihn relativ einfach implementieren kann. Er heißt „Bubblesort“, weil große Zahlen wie Luftblasen aufsteigen: Sie „wandern“ beim Sortieren Schritt für Schritt nach rechts, bis sie an der richtigen Stelle angekommen sind.
+        </p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in fünf kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–1,5 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und rechne oder tippe mit.</p>
+
+<ol class="schritte">
+            <li>Die Idee: Nachbarn vergleichen und tauschen</li>
+            <li>Durchläufe und Abbruch</li>
+            <li>Bubblesort in Python</li>
+            <li>Bubblesort Schritt für Schritt – danach Aufgabe 2.2.2.1</li>
+            <li>Wie aufwendig ist Bubblesort? – danach Aufgabe 2.2.2.2</li>
+        </ol>
+
+<p>Zum Schluss findest du eine Zusammenfassung, den Praxisbezug und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Die Idee – Nachbarn vergleichen und tauschen</h2>
+
+<p>Bubblesort braucht nur eine einzige Regel, die immer wieder angewendet wird:</p>
+
+<ol>
+            <li>Gehe die Liste von links nach rechts durch.</li>
+            <li>Vergleiche immer zwei <strong>benachbarte</strong> Elemente.</li>
+            <li>Falls das linke Element größer ist als das rechte, vertausche sie.</li>
+            <li>Wiederhole das, bis du am Ende der Liste angekommen bist.</li>
+            <li>Dann fängst du wieder vorne an – so lange, bis ein ganzer Durchlauf <strong>keine Vertauschung mehr</strong> enthält. Erst dann ist die Liste sortiert.</li>
+        </ol>
+
+<p>Im Video siehst du den ersten Durchlauf für die Liste 5, 2, 9, 3, 4, 6. Achte darauf, wohin die größte Zahl wandert.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-2-1_idee_vorschau.png" src="../vid/2-2-2-1_idee.mp4"></video><a href="../vid/2-2-2-1_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Wie funktioniert Bubblesort? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<h3>Jetzt du: Sag vorher, was passiert</h3>
+
+<p>Im Sortierlabor sortiert Bubblesort die Liste aus dem Video. Der Vorhersage-Modus ist eingeschaltet: Bei jedem Vergleich entscheidest <em>du</em>, ob getauscht wird. Erst dann zeigt das Labor, was passiert. Achte auf die Zahl, die nach rechts wandert, und auf die grünen Karten am Ende.</p>
+
+<div class="sortierlabor" data-verfahren="bubble" data-liste="5, 2, 9, 3, 4, 6" data-vorhersage="ja" data-code="nein"></div>
+
+<p class="tipp">Mit „Mischen“ bekommst du neue Zahlen, mit „Absteigend“ den schlechtesten Fall. Du kannst auch eigene Zahlen eintippen, zum Beispiel die Zahlen deiner Karten aus 2.2.1. Wer mag, spielt Bubblesort danach mit 8 Karten aus seinem Kartensatz nach: Es dürfen immer nur zwei Nachbarn aufgedeckt werden.</p>
+
+<h2 id="schritt-2">Schritt 2: Durchläufe und Abbruch</h2>
+
+<p>Ein Durchlauf reicht meistens nicht. Nach jedem Durchlauf steht eine Zahl mehr am Ende fest, deshalb wird der nächste Durchlauf um einen Vergleich kürzer. Achte im Video auf den Moment, in dem Bubblesort aufhört: Ein Durchlauf ganz ohne Tausch zeigt, dass die Liste sortiert ist.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-2-2_durchlaeufe_vorschau.png" src="../vid/2-2-2-2_durchlaeufe.mp4"></video><a href="../vid/2-2-2-2_durchlaeufe.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Durchläufe und Abbruch (ca. 1 min)</figcaption>
+        </figure>
+
+<h2 id="schritt-3">Schritt 3: Bubblesort in Python</h2>
+
+<p>Im Programm wird aus der Regel eine doppelte Schleife: Die äußere zählt die Durchläufe, die innere geht die Nachbarpaare durch. Zwei Bausteine sind dabei wichtig: der Tausch und die kürzer werdende Schleife <code>range(n - 1 - durchlauf)</code>.</p>
+
+<p><strong>Tauschen mit Hilfsvariable:</strong> Schreibt man einfach <code>liste[j] = liste[j + 1]</code>, ist der alte Wert von <code>liste[j]</code> verloren. Deshalb merkt man ihn sich zuerst in <code>temp</code> – wie beim Tauschen zweier Gläser mit einem dritten, leeren Glas:</p>
+
+<pre><code class="language-python">temp = liste[j]             # alten Wert merken
+liste[j] = liste[j + 1]     # rechten Wert nach links
+liste[j + 1] = temp         # gemerkten Wert nach rechts</code></pre>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-2-3_code_vorschau.png" src="../vid/2-2-2-3_code.mp4"></video><a href="../vid/2-2-2-3_code.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Bubblesort in Python (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h2 id="schritt-4">Schritt 4: Bubblesort Schritt für Schritt</h2>
+
+<p>Jetzt läuft das Programm in Thonny mit der Liste [3, 1, 2]. Rechts im Speicherbild siehst du, worauf <code>j</code> gerade zeigt und welche Werte <code>durchlauf</code> und <code>getauscht</code> haben. Achte darauf, dass <code>liste</code> in der Funktion und <code>zahlen</code> außerhalb dieselbe Liste sind.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-2-4_schritte_vorschau.png" src="../vid/2-2-2-4_schritte.mp4"></video><a href="../vid/2-2-2-4_schritte.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Bubblesort Schritt für Schritt (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Jetzt du: Den Code im Sortierlabor mitverfolgen</h3>
+
+<p>Hier läuft derselbe Code wie im Video. Die gelbe Zeile ist die Zeile, die gerade ausgeführt wird. Rechts siehst du die Variablen, gelb hinterlegt sind die, die sich gerade geändert haben. Schalte „Jede Codezeile einzeln“ ein, wenn du wirklich jede Zuweisung sehen willst. Probiere danach eine schon sortierte Liste: Wann greift das <code>break</code>?</p>
+
+<div class="sortierlabor" data-verfahren="bubble" data-liste="3, 1, 2" data-fein="ja"></div>
+
+<p>Zum Nachlesen steht der vollständige Ablauf mit Trace, Code und Testfällen in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> unsortierte Liste 5, 2, 9, 3, 4, 6 – erster Durchlauf</p>
+            <ol>
+                <li>Vergleiche 5 und 2 → 5 &gt; 2 → tauschen: 2, 5, 9, 3, 4, 6</li>
+                <li>Vergleiche 5 und 9 → 5 &lt; 9 → nichts tun</li>
+                <li>Vergleiche 9 und 3 → tauschen: 2, 5, 3, 9, 4, 6</li>
+                <li>Vergleiche 9 und 4 → tauschen: 2, 5, 3, 4, 9, 6</li>
+                <li>Vergleiche 9 und 6 → tauschen: 2, 5, 3, 4, 6, 9</li>
+            </ol>
+            <p>Nach diesem Durchlauf steht die größte Zahl (9) am Ende. Der zweite Durchlauf ergibt 2, 3, 4, 5, 6, 9. Der dritte Durchlauf vertauscht nichts mehr – die Liste ist sortiert.</p>
+            <p><strong>Ablauf-Trace</strong> (Zustand nach jedem Durchlauf; der Durchlauf k vergleicht nur noch die ersten n − k Paare, weil hinten schon k Elemente richtig stehen):</p>
+            <table>
+                <thead><tr><th>Durchlauf</th><th>Liste danach</th><th>Vergleiche</th><th>Vertauschungen</th></tr></thead>
+                <tbody>
+                    <tr><td>Start</td><td>5, 2, 9, 3, 4, 6</td><td>–</td><td>–</td></tr>
+                    <tr><td>1</td><td>2, 5, 3, 4, 6, <strong>9</strong></td><td>5</td><td>4</td></tr>
+                    <tr><td>2</td><td>2, 3, 4, 5, <strong>6, 9</strong></td><td>4</td><td>2 (5↔3, 5↔4)</td></tr>
+                    <tr><td>3</td><td>2, 3, 4, 5, 6, 9</td><td>3</td><td>0 → Abbruch</td></tr>
+                    <tr><td><strong>Summe</strong></td><td></td><td><strong>12</strong></td><td><strong>6</strong></td></tr>
+                </tbody>
+            </table>
+            <p><strong>Kontrolle:</strong> Jede Vertauschung beseitigt genau eine Fehlstellung, also ein Paar, das falsch herum steht. Die Startliste hat 6 Fehlstellungen: (5, 2), (5, 3), (5, 4), (9, 3), (9, 4), (9, 6). Das passt zu 6 Vertauschungen. Ohne Abbruch wären es 5 + 4 + 3 + 2 + 1 = 15 Vergleiche gewesen.</p>
+            <p><strong>Implementierung mit vorzeitigem Abbruch:</strong></p>
+            <pre><code class="language-python">def bubblesort(liste):
+    n = len(liste)
+    for durchlauf in range(n - 1):
+        getauscht = False
+        # die letzten 'durchlauf' Elemente stehen schon richtig
+        for j in range(n - 1 - durchlauf):
+            if liste[j] &gt; liste[j + 1]:
+                temp = liste[j]
+                liste[j] = liste[j + 1]
+                liste[j + 1] = temp
+                getauscht = True
+        if not getauscht:      # kein Tausch: Liste ist sortiert
+            break
+    return liste
+
+print(bubblesort([5, 2, 9, 3, 4, 6]))   # [2, 3, 4, 5, 6, 9]</code></pre>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[5, 2, 9, 3, 4, 6]</code></td><td><code>[2, 3, 4, 5, 6, 9]</code></td><td>Normalfall, siehe Trace</td></tr>
+                    <tr><td><code>[]</code></td><td><code>[]</code></td><td>leere Liste: <code>range(-1)</code> ist leer</td></tr>
+                    <tr><td><code>[7]</code></td><td><code>[7]</code></td><td>ein Element: <code>range(0)</code> ist leer</td></tr>
+                    <tr><td><code>[3, -1, 0, -5]</code></td><td><code>[-5, -1, 0, 3]</code></td><td>negative Zahlen</td></tr>
+                    <tr><td><code>[2, 2, 1]</code></td><td><code>[1, 2, 2]</code></td><td>doppelte Werte</td></tr>
+                    <tr><td><code>["Ute", "Al"]</code></td><td><code>['Al', 'Ute']</code></td><td>Texte werden alphabetisch verglichen</td></tr>
+                    <tr><td><code>[3, "a"]</code></td><td><code>TypeError</code></td><td>falscher Typ: Zahl und Text sind nicht vergleichbar</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.2.1 – Bubblesort selbst implementieren und testen.</p>
+
+<h2 id="schritt-5">Schritt 5: Wie aufwendig ist Bubblesort?</h2>
+
+<p>Wie viel Arbeit Bubblesort macht, hängt davon ab, wie die Liste am Anfang aussieht. Im Video zählst du die Vergleiche im schlechtesten Fall (absteigend sortiert) und im besten Fall (schon sortiert). Achte darauf, was mit der Anzahl der Vergleiche passiert, wenn sich die Länge der Liste verdoppelt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-2-5_aufwand_vorschau.png" src="../vid/2-2-2-5_aufwand.mp4"></video><a href="../vid/2-2-2-5_aufwand.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Wie aufwendig ist Bubblesort? (ca. 1 min)</figcaption>
+        </figure>
+
+<h3>Jetzt du: Den besten und den schlechtesten Fall zählen</h3>
+
+<p>Gib im Labor eine Liste mit 8 Zahlen ein, einmal aufsteigend (<code>1, 2, 3, 4, 5, 6, 7, 8</code>) und einmal absteigend (<code>8, 7, 6, 5, 4, 3, 2, 1</code>). Lies unten die Vergleiche und Vertauschungen ab, wenn Bubblesort fertig ist („Abspielen“ oder ein paar Mal „Weiter“). Passt das zu n · (n − 1) / 2?</p>
+
+<div class="sortierlabor" data-verfahren="bubble" data-liste="8, 7, 6, 5, 4, 3, 2, 1" data-code="nein"></div>
+
+<h3>Zum Nachlesen: Rechnung und Laufzeitmessung</h3>
+
+<p>
+            Im schlechtesten Fall (absteigend sortierte Liste) vergleicht der erste Durchlauf n − 1 Paare, der zweite n − 2 usw. Insgesamt sind das (n − 1) + (n − 2) + … + 1 = n · (n − 1) / 2 Vergleiche. Bei n = 1 000 sind das 499 500 Vergleiche, bei n = 10 000 schon fast 50 Millionen: Verzehnfacht sich n, verhundertfacht sich die Arbeit. Diesen Zusammenhang untersuchst du auf den nächsten Seiten genauer.
+        </p>
+
+<p>
+            Ob die Rechnung stimmt, zeigt eine <strong>Laufzeitmessung</strong>. <code>time.perf_counter()</code> liefert den Stand einer sehr genauen Uhr in Sekunden. Aussagekräftig ist nur die Differenz zweier Aufrufe.
+        </p>
+
+<pre><code class="language-python">import random
+import time
+
+for n in [1000, 2000, 4000]:
+    zahlen = []
+    for i in range(n):
+        zahlen.append(random.randint(1, 100000))
+    start = time.perf_counter()
+    bubblesort(zahlen)
+    dauer = time.perf_counter() - start
+    print(n, round(dauer, 3), "s")</code></pre>
+
+<p>Beispielmessung auf einem Schulrechner (die Werte schwanken von Lauf zu Lauf und von Rechner zu Rechner):</p>
+
+<table>
+            <thead><tr><th>n</th><th>Zeit (zufällige Zahlen)</th><th>Faktor bei Verdopplung</th></tr></thead>
+            <tbody>
+                <tr><td>1 000</td><td>0,052 s</td><td>–</td></tr>
+                <tr><td>2 000</td><td>0,215 s</td><td>≈ 4,1</td></tr>
+                <tr><td>4 000</td><td>0,871 s</td><td>≈ 4,1</td></tr>
+            </tbody>
+        </table>
+
+<p>
+            Bei doppeltem n steigt die Zeit etwa auf das Vierfache, denn (2n)² = 4n². Das bestätigt das quadratische Wachstum. Mit einer bereits sortierten Liste endet Bubblesort nach einem Durchlauf. Dann verdoppelt sich die Zeit nur noch, wenn n verdoppelt wird (bester Fall).
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Beim Schulsportfest sollen Ergebnisse nach Punkten aufsteigend sortiert werden. Wer bei Punktgleichheit früher gemeldet wurde, soll vorn bleiben. Das Verfahren muss also <strong>stabil</strong> sein: Elemente mit gleichem Sortierschlüssel behalten ihre ursprüngliche Reihenfolge. Zusätzlich werden Vergleiche und Vertauschungen gezählt.</p>
+            <pre><code class="language-python">def bubblesort_punkte(liste):
+    vergleiche = 0
+    tausche = 0
+    n = len(liste)
+    for durchlauf in range(n - 1):
+        getauscht = False
+        for j in range(n - 1 - durchlauf):
+            vergleiche = vergleiche + 1
+            if liste[j][1] &gt; liste[j + 1][1]:     # nur die Punkte vergleichen, strikt &gt;
+                temp = liste[j]
+                liste[j] = liste[j + 1]
+                liste[j + 1] = temp
+                tausche = tausche + 1
+                getauscht = True
+        if not getauscht:
+            break
+    return [vergleiche, tausche]          # zwei Zahlen in einer Liste zurückgeben
+
+ergebnisse = [["Ali", 3], ["Ben", 1], ["Cara", 3], ["Dana", 2]]
+print(bubblesort_punkte(ergebnisse))   # [6, 3]
+print(ergebnisse)   # [['Ben', 1], ['Dana', 2], ['Ali', 3], ['Cara', 3]]</code></pre>
+            <ol>
+                <li><strong>Schlüssel festlegen:</strong> Jeder Eintrag ist eine kleine Liste [Name, Punkte]. Verglichen wird nur <code>liste[j][1]</code>, also die Punkte. <em>Warum:</em> Sortiert wird nach den Punkten, der Name wird nur „mitgenommen“.</li>
+                <li><strong>Durchlauf 1</strong> (3 Vergleiche): Ali 3 / Ben 1 → tauschen; Ali 3 / Cara 3 → <em>nicht</em> tauschen, weil 3 &gt; 3 falsch ist; Cara 3 / Dana 2 → tauschen. Ergebnis: Ben 1, Ali 3, Dana 2, Cara 3 (2 Vertauschungen).</li>
+                <li><strong>Durchlauf 2</strong> (2 Vergleiche): Ben 1 / Ali 3 → nein; Ali 3 / Dana 2 → tauschen. Ergebnis: Ben 1, Dana 2, Ali 3, Cara 3 (1 Vertauschung).</li>
+                <li><strong>Durchlauf 3</strong> (1 Vergleich): Ben 1 / Dana 2 → nein. Keine Vertauschung, also Abbruch.</li>
+                <li><strong>Stabilität prüfen:</strong> Ali stand vor Cara und steht weiterhin vor Cara. <em>Warum:</em> Bubblesort tauscht nur Nachbarn, und zwar nur bei <code>&gt;</code>. Zwei gleiche Punktzahlen springen deshalb nie übereinander. Mit <code>&gt;=</code> würden gleiche Nachbarn vertauscht, und das Verfahren wäre <strong>nicht mehr stabil</strong>.</li>
+                <li><strong>Bester und schlechtester Fall:</strong> Bei einer schon sortierten Liste genügt ein Durchlauf mit n − 1 Vergleichen und 0 Vertauschungen: <strong>O(n)</strong>. Bei absteigender Sortierung sind n · (n − 1) / 2 Vergleiche und ebenso viele Vertauschungen nötig: <strong>O(n²)</strong>. Für n = 4 sind das 3 bzw. 6 Vergleiche.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> 6 Vergleiche, 3 Vertauschungen; Reihenfolge Ben, Dana, Ali, Cara. <strong>Kontrolle:</strong> Die Liste hat 3 Fehlstellungen (Ali/Ben, Ali/Dana, Cara/Dana), also 3 Vertauschungen.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe <code>[vergleiche, tausche]</code></th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[["Ali", 3], ["Ben", 1], ["Cara", 3], ["Dana", 2]]</code></td><td><code>[6, 3]</code></td><td>Normalfall mit Gleichstand</td></tr>
+                    <tr><td><code>[["A", 1], ["B", 2], ["C", 3], ["D", 4]]</code></td><td><code>[3, 0]</code></td><td>bester Fall</td></tr>
+                    <tr><td><code>[["A", 4], ["B", 3], ["C", 2], ["D", 1]]</code></td><td><code>[6, 6]</code></td><td>schlechtester Fall</td></tr>
+                    <tr><td><code>[]</code></td><td><code>[0, 0]</code></td><td>leere Liste</td></tr>
+                    <tr><td><code>[["A", -2], ["B", -5]]</code></td><td><code>[1, 1]</code></td><td>negative Punkte</td></tr>
+                    <tr><td><code>[3, 1]</code></td><td><code>TypeError</code></td><td>falscher Typ: <code>3[1]</code> ist bei einer Zahl nicht möglich</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.2.2 – Vergleiche und Vertauschungen zählen.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Warum niemand Bubblesort produktiv einsetzt</summary>
+                <p>
+                    <strong>Alltag:</strong> Beim Aufräumen eines Bücherregals tauschst du intuitiv benachbarte Bücher – bei zehn Büchern klappt das, bei einer ganzen Bibliothek nicht mehr.<br><br>
+                    <strong>Beruf:</strong> In Bewerbungsgesprächen für Softwareentwicklung wird oft gefragt, warum Bubblesort langsam ist und welches Verfahren man stattdessen nutzt. In echter Software verwendet man die eingebauten, optimierten Sortierfunktionen wie Pythons <code>sorted()</code> (Timsort, O(n log n)).
+                </p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+            Bubblesort ist ein sehr einfacher, aber langsamer Sortieralgorithmus. Er eignet sich gut, um das Denken in eindeutigen Schritten zu üben und zu verstehen, wie man Algorithmen formuliert und analysiert. Später lernst du schnellere Verfahren wie Mergesort und Quicksort kennen.
+        </p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Wie erzeuge ich Listen mit Zufallszahlen?</summary>
+                <p>Damit du Bubblesort testen kannst, brauchst du unsortierte Listen. In Python geht das so:</p>
+                <pre><code class="language-python">import random
+
+# 10 Zufallszahlen zwischen 1 und 100
+liste10 = []
+for i in range(10):
+    liste10.append(random.randint(1, 100))
+print(liste10)
+
+# 100 Zufallszahlen
+liste100 = []
+for i in range(100):
+    liste100.append(random.randint(1, 100))
+
+# 1000 Zufallszahlen
+liste1000 = []
+for i in range(1000):
+    liste1000.append(random.randint(1, 1000))</code></pre>
+                <p>Probiere aus, wie lange dein Bubblesort bei 10, 100 oder sogar 1000 Zahlen braucht. So merkst du, warum Bubblesort für große Datenmengen nicht geeignet ist.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Bubblesort</strong> vergleicht wiederholt benachbarte Elemente und vertauscht sie, wenn sie in falscher Reihenfolge stehen. Nach dem k-ten Durchlauf stehen die k größten Elemente an ihrer endgültigen Position am Ende der Liste.<br>
+                Laufzeit: im schlechtesten und im mittleren Fall <strong>O(n²)</strong>, im besten Fall (bereits sortierte Liste, Abbruch nach einem Durchlauf ohne Tausch) <strong>O(n)</strong>. Für große Listen ist Bubblesort deshalb ungeeignet, zum Üben des schrittweisen Denkens aber ideal.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Ein Durchlauf von Hand <span class="niveau">AFB I</span></summary>
+                <p>Führe den ersten Durchlauf für die Liste 4, 1, 3, 2 durch. Wie sieht die Liste danach aus, und wie oft wurde getauscht?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>4/1 tauschen → 1, 4, 3, 2; 4/3 tauschen → 1, 3, 4, 2; 4/2 tauschen → 1, 3, 2, 4. Drei Vertauschungen, die 4 steht am Ende.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Wann ist Schluss? <span class="niveau">AFB I</span></summary>
+                <p>Wie viele Durchläufe, Vergleiche und Vertauschungen braucht Bubblesort mit Abbruch für die Liste 1, 3, 2, 4?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Durchlauf 1: 1/3 nein, 3/2 tauschen (→ 1, 2, 3, 4), 3/4 nein – 3 Vergleiche, 1 Tausch. Durchlauf 2: 1/2 nein, 2/3 nein – 2 Vergleiche, kein Tausch, also Abbruch. Insgesamt 2 Durchläufe, 5 Vergleiche, 1 Vertauschung.</p>
+                </details>
+            </details>
+        </div>

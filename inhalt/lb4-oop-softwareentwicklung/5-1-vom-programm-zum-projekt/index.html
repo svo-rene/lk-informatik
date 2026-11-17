@@ -1,0 +1,439 @@
+<p>
+            In den letzten Stunden hast du mit Klassen gearbeitet. Du hast Objekte erzeugt, Methoden geschrieben und Vererbung genutzt. Jetzt gehen wir den nächsten Schritt: <strong>Wie baut man aus Klassen ein ganzes Softwaresystem?</strong>
+        </p>
+
+<p>
+            Die Messenger-App auf deinem Handy bekommt alle paar Wochen ein Update. Dabei wird nicht das ganze Programm neu geschrieben: Ein Team ändert die Darstellung der Chats, ein anderes die Verschlüsselung – gleichzeitig und ohne sich gegenseitig zu stören. Das gelingt nur, weil die Software in viele kleine Teile mit klaren Aufgaben zerlegt ist. Genau das lernst du auf dieser Seite im Kleinen: ein Programm in <strong>Module</strong> aufteilen, sie mit <code>import</code> verbinden und nach dem Muster <strong>MVC</strong> ordnen.
+        </p>
+
+<h2>Warum Objektorientierung?</h2>
+
+<p>
+            Objektorientierung hilft dir, reale Probleme als Modell aus Objekten darzustellen. Statt nur einzelne Funktionen zu schreiben, strukturierst du dein Programm.
+        </p>
+
+<p>Vier Grundprinzipien sind für die OOP wichtig:</p>
+
+<ul>
+            <li><strong>Kapselung:</strong> Daten und Methoden gehören zusammen in eine Klasse; der Zugriff von außen erfolgt nur über Methoden.</li>
+            <li><strong>Abstraktion:</strong> Ein Objekt zeigt nur das, was von außen wichtig ist.</li>
+            <li><strong>Vererbung:</strong> Gemeinsame Eigenschaften werden in einer Basisklasse gebündelt.</li>
+            <li><strong>Polymorphie:</strong> Gleiche Methoden können unterschiedlich umgesetzt werden.</li>
+        </ul>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in vier kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) den Code in Thonny – mit mehreren Dateien in Reitern – und rechts ein Tafelbild, wer wen importiert. Danach prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe mit: Lege dazu alle Dateien eines Beispiels im selben Ordner an.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Ein Programm – mehrere Dateien: Module und <code>import</code></a></li>
+            <li><a href="#schritt-2">Warum <code>if __name__ == "__main__":</code>?</a> – danach Aufgabe 5.1.1</li>
+            <li><a href="#schritt-3">MVC: Wer macht was? – das Model</a></li>
+            <li><a href="#schritt-4">View, Controller – wer importiert wen?</a> – danach Aufgabe 5.1.2 und 5.1.3</li>
+        </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Ein Programm – mehrere Dateien</h2>
+
+<p>Kleine Programme passen in eine Datei, größere werden darin unübersichtlich. Deshalb verteilt man die Klassen auf mehrere Dateien – jede Python-Datei ist ein <strong>Modul</strong> – und verbindet sie mit <code>import</code>. Im Video entsteht der Fuhrpark aus Beispiel 1 in drei Dateien. Achte auf die Reiter oben im Editor und im Tafelbild auf die Pfeile „importiert“. Kurz erklärt werden die beiden Schreibweisen <code>from fahrzeug import Fahrzeug</code> und <code>import fahrzeug</code>.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-1-1_module_vorschau.png" src="../vid/5-1-1_module.mp4"></video><a href="../vid/5-1-1_module.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Ein Programm – mehrere Dateien (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Wenn Programme größer werden …</h3>
+
+<p>Kleine Programme kann man noch komplett in eine Datei schreiben. Bei größeren Projekten entsteht so aber schnell Chaos.</p>
+
+<h4>Monolithisches Programm</h4>
+
+<p>In einem monolithischen Programm steht alles in einer Datei:</p>
+
+<pre><code>- Klassen
+- Eingaben
+- Berechnungen
+- Ausgaben
+- Hilfsfunktionen</code></pre>
+
+<p>Das funktioniert – aber:</p>
+
+<ul>
+            <li>Der Code wird unübersichtlich.</li>
+            <li>Fehler sind schwer zu finden.</li>
+            <li>Erweiterungen machen alles komplizierter.</li>
+            <li>Im Team bearbeiten alle dieselbe Datei und überschreiben sich gegenseitig die Änderungen.</li>
+        </ul>
+
+<h3>Zum Nachlesen: Struktur eines sauberen Projekts</h3>
+
+<p>Statt alles in eine Datei zu schreiben, nutzt du mehrere Module:</p>
+
+<pre><code>projekt/
+│
+├── fahrzeug.py
+├── auto.py
+├── motorrad.py
+└── main.py</code></pre>
+
+<ul>
+            <li>eine Klasse pro Datei</li>
+            <li>Importe verbinden die Module</li>
+            <li><code>main.py</code> startet das Programm</li>
+        </ul>
+
+<p class="tipp">Später kommt zu jedem Modul eine Testdatei mit demselben Namen und dem Vorsatz <code>test_</code> dazu, z.&nbsp;B. <code>test_auto.py</code> neben <code>auto.py</code> (Seite 5.3).</p>
+
+<h3>Zum Nachlesen: Wie verbindet man die Dateien?</h3>
+
+<p>Damit Python weiß, dass es Klassen aus anderen Dateien nutzen soll, verwendet man <strong>Importe</strong>. Beispiel in <code>auto.py</code>:</p>
+
+<pre><code class="language-python">from fahrzeug import Fahrzeug</code></pre>
+
+<p>Das bedeutet:</p>
+
+<ul>
+            <li>Python sucht die Datei <code>fahrzeug.py</code> (im selben Ordner).</li>
+            <li>Dort wird die Klasse <code>Fahrzeug</code> geladen.</li>
+            <li>Die Klasse kann nun verwendet werden.</li>
+        </ul>
+
+<p>Es gibt zwei Schreibweisen: <code>from fahrzeug import Fahrzeug</code> holt nur den Namen <code>Fahrzeug</code>, du schreibst danach <code>Fahrzeug("VW")</code>. <code>import fahrzeug</code> holt das ganze Modul, du schreibst dann <code>fahrzeug.Fahrzeug("VW")</code>. Ein Modul wird pro Programmlauf nur <strong>einmal</strong> ausgeführt, auch wenn es mehrere andere Module importieren.</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Warum <code>if __name__ == "__main__":</code>? →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Warum <code>if __name__ == "__main__":</code>?</h2>
+
+<p>Jedes Modul kann man direkt starten oder importieren – und beim Import führt Python den Code auf oberster Ebene aus. Damit ein Selbsttest in <code>fahrzeug.py</code> nicht bei jedem Import mitläuft, steht er unter <code>if __name__ == "__main__":</code>. Im Video startest du nacheinander <code>fahrzeug.py</code>, <code>main.py</code> und <code>auto.py</code>. Achte in der Tabelle rechts darauf, welchen Wert <code>__name__</code> jeweils hat, und auf die Reihenfolge, in der die Module geladen werden.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-1-2_programmeinstieg_vorschau.png" src="../vid/5-1-2_programmeinstieg.mp4"></video><a href="../vid/5-1-2_programmeinstieg.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Warum if __name__ == "__main__"? (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Warum braucht man main.py?</h3>
+
+<p>Wenn du mit mehreren Python-Dateien arbeitest, ist jede Datei zunächst ein eigenes <strong>Modul</strong>. Ein Modul kann</p>
+
+<ul>
+            <li>direkt gestartet werden</li>
+            <li>oder von einer anderen Datei importiert werden.</li>
+        </ul>
+
+<h4>Das Problem</h4>
+
+<p>Angenommen, in einer Datei steht einfach:</p>
+
+<pre><code class="language-python">print("Programm startet")</code></pre>
+
+<p>Dann passiert Folgendes:</p>
+
+<ul>
+            <li>Startest du die Datei direkt, erscheint die Ausgabe.</li>
+            <li>Importierst du die Datei, erscheint die Ausgabe ebenfalls.</li>
+        </ul>
+
+<p>Das bedeutet: Code wird beim Import automatisch ausgeführt. Genau das wollen wir bei Klassen-Dateien nicht.</p>
+
+<h4>Die Lösung: kontrollierter Programmeinstieg</h4>
+
+<p>Deshalb nutzt man in Python folgende Struktur:</p>
+
+<pre><code class="language-python">def main():
+    print("Programm startet")
+
+if __name__ == "__main__":
+    main()</code></pre>
+
+<h4>Was passiert hier?</h4>
+
+<p><code>__name__</code> ist eine besondere Variable, die Python automatisch setzt.</p>
+
+<ul>
+            <li>Wird die Datei direkt gestartet, hat <code>__name__</code> den Wert <code>"__main__"</code>.</li>
+            <li>Wird die Datei importiert, hat <code>__name__</code> den Namen des Moduls (z.&nbsp;B. <code>"fahrzeug"</code>).</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Warum ist das wichtig?</summary>
+                <p>Beim Import sollen nur Klassen und Funktionen geladen werden – aber kein Programm automatisch starten. Diese Abfrage verhindert genau das.</p>
+            </details>
+        </div>
+
+<p>Den Fuhrpark aus beiden Videos mit allen drei Dateien und der Kontrolltabelle findest du in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Drei Module für einen Fuhrpark – Import und Programmeinstieg</summary>
+            <p><strong>Ausgangssituation:</strong> Die Klassen <code>Fahrzeug</code> und <code>Auto</code> sollen in eigenen Dateien stehen. <code>main.py</code> erzeugt zwei Objekte und gibt ihre Beschreibung aus. Alle drei Dateien liegen im selben Ordner.</p>
+            <pre><code class="language-python"># fahrzeug.py
+class Fahrzeug:
+    def __init__(self, marke: str):
+        self.marke = marke
+
+    def beschreibung(self) -&gt; str:
+        return f"Fahrzeug der Marke {self.marke}"
+
+if __name__ == "__main__":        # nur beim direkten Start
+    print(Fahrzeug("Test").beschreibung())</code></pre>
+            <pre><code class="language-python"># auto.py  (Model)
+from fahrzeug import Fahrzeug
+
+class Auto(Fahrzeug):
+    def __init__(self, marke: str, tueren: int):
+        super().__init__(marke)
+        self.tueren = tueren
+
+    def beschreibung(self) -&gt; str:
+        return super().beschreibung() + f" mit {self.tueren} Türen"</code></pre>
+            <pre><code class="language-python"># main.py  (Controller, View über print)
+from fahrzeug import Fahrzeug
+from auto import Auto
+
+def main():
+    fuhrpark = [Fahrzeug("Simson"), Auto("VW", 5)]
+    for f in fuhrpark:
+        print(f.beschreibung())     # polymorpher Aufruf
+
+if __name__ == "__main__":
+    main()</code></pre>
+            <ol>
+                <li><strong>Klassen auf Dateien verteilen:</strong> Jede Klasse bekommt eine eigene Datei, der Dateiname ist der Klassenname in Kleinbuchstaben. Warum: Wer <code>Auto</code> sucht, findet sie sofort in <code>auto.py</code>, und zwei Personen können gleichzeitig an verschiedenen Klassen arbeiten.</li>
+                <li><strong>Abhängigkeit durch Import ausdrücken:</strong> <code>Auto</code> erbt von <code>Fahrzeug</code>, also steht in <code>auto.py</code> ganz oben <code>from fahrzeug import Fahrzeug</code>. Warum: Ohne Import kennt Python in <code>auto.py</code> den Namen <code>Fahrzeug</code> nicht und meldet <code>NameError</code>.</li>
+                <li><strong>Selbsttest schützen:</strong> Die Testzeile in <code>fahrzeug.py</code> steht unter <code>if __name__ == "__main__":</code>. Warum: Startest du <code>fahrzeug.py</code> direkt, siehst du „Fahrzeug der Marke Test“. Beim Import durch <code>auto.py</code> oder <code>main.py</code> ist <code>__name__</code> dort <code>"fahrzeug"</code>, die Zeile wird übersprungen.</li>
+                <li><strong>Ablauf von <code>main.py</code> verfolgen:</strong> Python führt zuerst <code>fahrzeug.py</code> aus (Klasse wird definiert, keine Ausgabe), dann <code>auto.py</code>. Dessen Import von <code>fahrzeug</code> löst nichts Neues aus, weil das Modul schon geladen ist. Danach läuft <code>main()</code>: Die Schleife ruft für jedes Objekt <code>beschreibung()</code> auf – beim <code>Auto</code> die überschriebene Fassung.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Ausgabe beim Start von <code>main.py</code>:</p>
+            <pre><code>Fahrzeug der Marke Simson
+Fahrzeug der Marke VW mit 5 Türen</code></pre>
+            <p><strong>Kontrolle:</strong></p>
+            <table class="gitter">
+                <tr><th>gestartete Datei</th><th>Ausgabe</th></tr>
+                <tr><td><code>fahrzeug.py</code></td><td>Fahrzeug der Marke Test</td></tr>
+                <tr><td><code>auto.py</code></td><td>keine (nur Definitionen)</td></tr>
+                <tr><td><code>main.py</code></td><td>die beiden Zeilen oben, <em>ohne</em> „Fahrzeug der Marke Test“</td></tr>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-5-1-1">Aufgabe 5.1.1</a> – Programmeinstieg verstehen.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: MVC – wer macht was? →</a></p>
+
+<h2 id="schritt-3">Schritt 3: MVC – wer macht was?</h2>
+
+<p>Eine bekannte Softwarearchitektur trennt drei Aufgaben: Das <strong>Model</strong> rechnet, die <strong>View</strong> zeigt an, der <strong>Controller</strong> steuert. Im Video geht es um das Model der Klassensprecherwahl aus Beispiel 2: Erst siehst du einen Entwurf mit einer typischen Falle, dann die fertige Klasse <code>Wahl</code>. Achte darauf, warum <code>stimme_abgeben</code> <code>True</code> oder <code>False</code> zurückgibt und wie man das Model ganz ohne Tastatur in der Kommandozeile prüft. Rechts siehst du das Objekt mit seinem Dictionary der Stimmen.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-1-3_mvc_vorschau.png" src="../vid/5-1-3_mvc.mp4"></video><a href="../vid/5-1-3_mvc.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: MVC – wer macht was? (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: MVC – Model View Controller</h3>
+
+<p>Eine bekannte Softwarearchitektur ist das MVC-Modell.</p>
+
+<ul>
+            <li><strong>Model:</strong> enthält die Daten und die Logik (z.&nbsp;B. Klassen)</li>
+            <li><strong>View:</strong> stellt Daten dar (z.&nbsp;B. grafische Oberfläche oder Konsolenausgabe)</li>
+            <li><strong>Controller:</strong> steuert den Ablauf und verarbeitet Eingaben</li>
+        </ul>
+
+<h3>Was wir im Projekt umsetzen – und was nicht</h3>
+
+<p>Im Projekt am Ende dieses Kurses (Seiten 5.5 und 5.6) verwendest du eine vereinfachte MVC-Struktur:</p>
+
+<ul>
+            <li><strong>Model:</strong> deine Klassen (z.&nbsp;B. Fahrzeuge)</li>
+            <li><strong>Controller:</strong> <code>main.py</code></li>
+            <li><strong>View:</strong> Konsolenausgabe mit <code>print()</code>, gesammelt in einem eigenen Modul (z.&nbsp;B. <code>ansicht.py</code>)</li>
+        </ul>
+
+<p>Eine grafische Benutzeroberfläche (GUI) entwickeln wir bewusst nicht.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Warum keine GUI?</summary>
+                <p>
+                    Die Entwicklung grafischer Oberflächen gehört zum sogenannten Frontend-Bereich. In diesem Projekt liegt der Schwerpunkt auf Modellierung, objektorientierter Struktur, sauberer Architektur und Wiederverwendbarkeit. Die Benutzeroberfläche ist hier zweitrangig.
+                </p>
+            </details>
+        </div>
+
+<p>Den vollständigen Code der Klasse <code>Wahl</code> findest du in Beispiel 2 bei Schritt 4.</p>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: View, Controller – wer importiert wen? →</a></p>
+
+<h2 id="schritt-4">Schritt 4: View, Controller – wer importiert wen?</h2>
+
+<p>Jetzt kommen die beiden anderen Module der Klassensprecherwahl dazu: die View <code>ansicht.py</code> und der Controller <code>main.py</code>. Im Video läuft eine ganze Wahl mit einer ungültigen Stimme und endet mit einem Gleichstand. Achte darauf, welches Modul die Meldungen ausgibt und in welche Richtung die Importpfeile zeigen. Kurz erklärt wird die Formatierung <code>{name:&lt;10}</code> und <code>{…:&gt;3}</code> im f-String.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/5-1-4_importe_vorschau.png" src="../vid/5-1-4_importe.mp4"></video><a href="../vid/5-1-4_importe.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: View, Controller – wer importiert wen? (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen: alle drei Module, die Falle im ersten Entwurf und der Programmlauf in Beispiel 2.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Klassensprecherwahl nach MVC – mit Falle und Sonderfall</summary>
+            <p><strong>Ausgangssituation:</strong> Für die Klassensprecherwahl soll ein Programm die Stimmen auszählen. Kandidaten sind Ella, Jonas und Mats. Jede Stimme wird als Name eingetippt, eine leere Eingabe beendet die Wahl. Falsch geschriebene Namen zählen als ungültig. Haben zwei Personen gleich viele Stimmen und liegen vorn, ist eine Stichwahl nötig.</p>
+            <p>Ein erster Entwurf der Klasse enthielt diese Methode:</p>
+            <pre><code class="language-python">    def stimme_abgeben(self, name: str) -&gt; None:
+        if name in self.__stimmen:
+            self.__stimmen[name] += 1
+        else:
+            print("ungültige Stimme")       # Ausgabe im Model</code></pre>
+            <p>Das Team verteilt das Programm auf drei Module:</p>
+            <pre><code class="language-python"># wahl.py  (Model)
+class Wahl:
+    def __init__(self, kandidaten: list[str]):
+        self.__stimmen: dict[str, int] = {}
+        for name in kandidaten:
+            self.__stimmen[name] = 0
+        self.__ungueltig = 0
+
+    def stimme_abgeben(self, name: str) -&gt; bool:
+        if name in self.__stimmen:
+            self.__stimmen[name] += 1
+            return True
+        self.__ungueltig += 1
+        return False
+
+    def get_kandidaten(self) -&gt; list[str]:
+        return list(self.__stimmen)
+
+    def stimmen(self, name: str) -&gt; int:
+        return self.__stimmen[name]
+
+    def get_ungueltig(self) -&gt; int:
+        return self.__ungueltig
+
+    def gewinner(self) -&gt; str | None:
+        hoechste = max(self.__stimmen.values())
+        beste = []
+        for name in self.__stimmen:
+            if self.__stimmen[name] == hoechste:
+                beste.append(name)
+        if len(beste) == 1:
+            return beste[0]
+        return None          # Gleichstand: Stichwahl nötig</code></pre>
+            <pre><code class="language-python"># ansicht.py  (View)
+from wahl import Wahl
+
+def zeige_ergebnis(wahl: Wahl) -&gt; None:
+    print("Ergebnis der Klassensprecherwahl")
+    for name in wahl.get_kandidaten():
+        print(f"  {name:&lt;10}{wahl.stimmen(name):&gt;3}")
+    print(f"  {'ungültig':&lt;10}{wahl.get_ungueltig():&gt;3}")
+    sieger = wahl.gewinner()
+    if sieger is None:
+        print("Gleichstand – Stichwahl nötig")
+    else:
+        print(f"Gewählt ist {sieger}.")</code></pre>
+            <pre><code class="language-python"># main.py  (Controller)
+from wahl import Wahl
+from ansicht import zeige_ergebnis
+
+def main() -&gt; None:
+    wahl = Wahl(["Ella", "Jonas", "Mats"])
+    eingabe = input("Stimme (leer = Ende): ")
+    while eingabe != "":
+        if not wahl.stimme_abgeben(eingabe):
+            print("ungültige Stimme")
+        eingabe = input("Stimme (leer = Ende): ")
+    zeige_ergebnis(wahl)
+
+if __name__ == "__main__":
+    main()</code></pre>
+            <ol>
+                <li><strong>Falle im Entwurf erkennen:</strong> Der erste Entwurf gibt im Model mit <code>print</code> aus und liefert nichts zurück. Warum das schlecht ist: Der Controller erfährt nicht, ob die Stimme gezählt wurde. Und wer die Klasse später in einer App mit Bildschirm benutzt, bekommt Meldungen in eine Konsole, die niemand sieht.</li>
+                <li><strong>Model mit Rückgabewert:</strong> <code>stimme_abgeben</code> gibt jetzt <code>True</code> oder <code>False</code> zurück und zählt ungültige Stimmen selbst mit. Warum: Das Model kennt die Regeln (wer ist Kandidat?), die Meldung „ungültige Stimme“ formuliert der Controller. So lässt sich die Klasse auch ohne Tastatur prüfen: <code>Wahl(["Ella", "Jonas", "Mats"]).stimme_abgeben("ella")</code> liefert <code>False</code>, denn Python unterscheidet Groß- und Kleinschreibung.</li>
+                <li><strong>Sonderfall Gleichstand im Model lösen:</strong> <code>gewinner()</code> sammelt alle Namen mit der höchsten Stimmenzahl. Nur wenn es genau einer ist, wird er zurückgegeben, sonst <code>None</code>. Warum im Model: Ob jemand gewählt ist, ist eine Regel der Wahl, keine Frage der Darstellung. Der Rückgabetyp <code>str | None</code> zwingt die View, den Fall zu behandeln.</li>
+                <li><strong>View nur für die Darstellung:</strong> <code>ansicht.py</code> fragt die Daten über öffentliche Methoden ab und formatiert sie. <code>{name:&lt;10}</code> füllt den Namen links auf 10 Zeichen auf, <code>{…:&gt;3}</code> setzt die Zahl rechtsbündig in 3 Stellen. Warum: Die Darstellung lässt sich ändern, ohne <code>wahl.py</code> anzufassen.</li>
+                <li><strong>Importrichtung prüfen:</strong> <code>main.py</code> importiert Model und View, <code>ansicht.py</code> importiert das Model, <code>wahl.py</code> importiert nichts. Warum: Das Model hängt von niemandem ab. Würde es umgekehrt die View importieren, wäre es nicht mehr ohne sie benutzbar.</li>
+                <li><strong>Ablauf an einer Eingabe:</strong> Eingaben Ella, Mats, Ella, Mats, Lisa und dann leer. „Lisa“ ist kein Kandidat, also <code>False</code> und die Meldung. Am Ende haben Ella und Mats je 2 Stimmen.</li>
+            </ol>
+            <p><strong>Ergebnis</strong> (Konsole beim Start von <code>main.py</code>):</p>
+            <pre><code>Stimme (leer = Ende): Ella
+Stimme (leer = Ende): Mats
+Stimme (leer = Ende): Ella
+Stimme (leer = Ende): Mats
+Stimme (leer = Ende): Lisa
+ungültige Stimme
+Stimme (leer = Ende):
+Ergebnis der Klassensprecherwahl
+  Ella        2
+  Jonas       0
+  Mats        2
+  ungültig    1
+Gleichstand – Stichwahl nötig</code></pre>
+            <p><strong>Kontrolle:</strong> Mit einer weiteren Stimme für Ella vor der leeren Eingabe lautet die letzte Zeile „Gewählt ist Ella.“ (Ella 3, Mats 2). Die Summe aller Stimmen (gültig + ungültig) ist gleich der Zahl der nicht leeren Eingaben.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-5-1-2">Aufgabe 5.1.2</a> – Wer importiert wen? – Pausenverkauf der Schülerfirma, und <a href="uebungen.html#a-5-1-3">Aufgabe 5.1.3</a> – Ein Programm in Module zerlegen.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Arbeiten wie im Entwicklungsteam</summary>
+                <p>
+                    <strong>Alltag:</strong> Jede App auf deinem Handy ist aus Hunderten Modulen aufgebaut; ein Update tauscht oft nur einzelne davon aus.<br><br>
+                    <strong>Beruf:</strong> In Softwarefirmen – von Start-ups bis zu großen IT-Dienstleistern in Dresden und Leipzig – arbeiten mehrere Entwicklerinnen und Entwickler gleichzeitig an einem Projekt. Das klappt nur, wenn der Code in Module aufgeteilt ist, jede Datei eine klare Aufgabe hat und über Versionsverwaltung wie Git zusammengeführt wird. Ausbildungsberufe wie Fachinformatiker/-in für Anwendungsentwicklung oder ein Informatikstudium, z.&nbsp;B. an der TU Dresden oder der HTW Dresden, bereiten genau darauf vor.
+                </p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+            Größere Programme verteilt man auf Module: eine Klasse pro Datei, verbunden mit <code>from modul import Name</code> oder <code>import modul</code>. Beim Import führt Python den Code eines Moduls einmal aus; was nur beim direkten Start laufen soll, steht unter <code>if __name__ == "__main__":</code>. Nach MVC enthält das Model Daten und Logik ohne <code>print</code> und <code>input</code>, die View stellt dar, der Controller (<code>main.py</code>) steuert Eingaben und Ablauf. Importiert wird nur in eine Richtung: Controller → View und Model, View → Model; das Model importiert nichts.
+        </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                OOP macht Programme strukturierbar, erweiterbar und wartbar. Genau das brauchst du bei größeren Projekten.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <code>main.py</code> steuert den Ablauf.<br>
+                Klassen-Dateien enthalten nur die Logik.<br>
+                <code>if __name__ == "__main__":</code> sorgt dafür, dass ein Programm nur beim direkten Start ausgeführt wird.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>MVC</strong> trennt Logik (Model), Darstellung (View) und Ablaufsteuerung (Controller). Dadurch bleibt Software übersichtlich, und einzelne Teile lassen sich austauschen – z.&nbsp;B. die Konsolenausgabe gegen eine grafische Oberfläche, ohne die Klassen zu ändern.<br>
+                Faustregel: Im Model steht <strong>kein</strong> <code>print</code> und <strong>kein</strong> <code>input</code>. Methoden des Models geben Ergebnisse mit <code>return</code> zurück; was davon wie angezeigt wird, entscheidet die View.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Zwei Schreibweisen <span class="niveau">AFB I</span></summary>
+                <p>In der Datei <code>zahlen.py</code> steht die Klasse <code>Bruch</code>. In <code>main.py</code> im selben Ordner soll <code>Bruch(1, 2)</code> erzeugt werden. Gib beide möglichen Importzeilen an und jeweils, wie der Aufruf dann geschrieben wird. Was meldet Python, wenn die Importzeile ganz fehlt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>from zahlen import Bruch</code> → <code>Bruch(1, 2)</code>. <code>import zahlen</code> → <code>zahlen.Bruch(1, 2)</code> (Modulname davor). Ohne Import kennt Python den Namen <code>Bruch</code> in <code>main.py</code> nicht und meldet <code>NameError: name 'Bruch' is not defined</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Welchen Wert hat <code>__name__</code>? <span class="niveau">AFB I</span></summary>
+                <p>Gib an, welchen Wert <code>__name__</code> <em>innerhalb von</em> <code>auto.py</code> hat, wenn du (a) <code>auto.py</code> direkt startest und (b) <code>main.py</code> startest. Warum erscheint beim direkten Start von <code>auto.py</code> keine Ausgabe?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>(a) <code>"__main__"</code>, (b) <code>"auto"</code> – der Modulname. <code>auto.py</code> enthält nur einen Import und eine Klassendefinition, aber keinen Aufruf von <code>print</code> auf oberster Ebene. Beim Import von <code>fahrzeug</code> ist dort <code>__name__</code> gleich <code>"fahrzeug"</code>, der Selbsttest läuft also auch nicht.</p>
+                </details>
+            </details>
+        </div>

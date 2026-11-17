@@ -1,0 +1,199 @@
+<p>Nicht alle formalen Sprachen lassen sich durch endliche Automaten erkennen. Ein zentrales Beispiel sind korrekt geschachtelte Klammerausdrücke, wie sie in Programmiersprachen oder mathematischen Termen vorkommen. Während einfache Muster durch reguläre Grammatiken und endliche Automaten beschrieben werden können, benötigen geschachtelte Strukturen mächtigere Modelle wie Kellerautomaten.</p>
+
+<h2>1. Was sind die Grenzen von Automaten?</h2>
+
+<h3>1.1 Endliche Automaten (EA)</h3>
+
+<p>Endliche Automaten verfügen nur über endlichen Speicher (ihre Zustände) und können daher bestimmte Sprachmuster nicht verarbeiten:</p>
+
+<ul>
+<li><strong>Zählprobleme:</strong> Ein EA kann nicht <em>unbeschränkt</em> zählen, wie oft ein bestimmtes Zeichen vorkommt. Zählen bis zu einer festen Grenze oder modulo einer festen Zahl (z.&nbsp;B. „gerade Anzahl von a“, „Anzahl durch 3 teilbar“) ist dagegen möglich – dafür genügen endlich viele Zustände.</li>
+<li><strong>Verschachtelte Strukturen:</strong> Sprachen wie {a<sup>n</sup>b<sup>n</sup> | n ≥ 1} oder korrekt geklammerte Ausdrücke sind nicht erkennbar.</li>
+<li><strong>Palindrome:</strong> Ein EA kann nicht prüfen, ob ein beliebig langes Wort ein Palindrom ist.</li>
+</ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> „Gerade Anzahl von a“ kann ein DEA mit zwei Zuständen erkennen (gerade/ungerade, Kapitel 6.7). „Gleich viele a wie b“ dagegen nicht: Der Automat müsste sich die Differenz merken, und die kann beliebig groß werden.</p>
+<ol>
+<li><strong>Was muss gespeichert werden? (gerade Anzahl a)</strong> Nur eine von zwei Möglichkeiten: „bisher gerade“ oder „bisher ungerade“. <em>Warum genügt das?</em> Jedes weitere a wechselt einfach zwischen den beiden Möglichkeiten; die genaue Anzahl wird nie gebraucht.</li>
+<li><strong>Was muss gespeichert werden? (gleich viele a wie b)</strong> Die Differenz „Anzahl a minus Anzahl b“. Nach <code>aaa</code> ist sie 3, nach <code>aaaaaaa</code> ist sie 7 – und für jede Differenz muss der Rest des Wortes anders aussehen (genau 3 bzw. genau 7 b mehr).</li>
+<li><strong>Zustände zählen:</strong> Im ersten Fall genügen 2 Zustände. Im zweiten Fall bräuchte jede der unendlich vielen möglichen Differenzen einen eigenen Zustand.</li>
+</ol>
+<p><strong>Ergebnis:</strong> Zählen <em>modulo</em> einer festen Zahl ist regulär, unbeschränktes Zählen nicht.</p>
+<p><strong>Kontrolle:</strong> Auch „Anzahl der a durch 3 teilbar“ ist regulär (3 Zustände), „mehr a als b“ dagegen nicht – wieder müsste die Differenz gespeichert werden.</p>
+            </details>
+        </div>
+
+<h3>1.2 Kellerautomaten (PDA)</h3>
+
+<p>Kellerautomaten (engl. pushdown automaton) besitzen zusätzlich einen Stapelspeicher und sind in der Lage, kontextfreie Sprachen zu erkennen – jedoch nicht alle denkbaren Sprachen.</p>
+
+<ul>
+<li>Sie können <em>nicht alle</em> kontextsensitiven Sprachen erkennen (die kontextfreien Sprachen sind ja selbst auch kontextsensitiv).</li>
+<li>Sprachen wie {a<sup>n</sup>b<sup>n</sup>c<sup>n</sup> | n ≥ 1} oder {ww | w ∈ {a, b}*} sind zu komplex.</li>
+<li>Der Keller erlaubt nur Zugriff auf das oberste Element: Eine gespeicherte Anzahl wird beim Vergleichen „verbraucht“. Zwei Anzahlen unabhängig voneinander zu speichern und später beide zu vergleichen, gelingt deshalb nicht.</li>
+</ul>
+
+<h2>2. Das Pumping-Lemma für reguläre Sprachen</h2>
+
+<p>Wie beweist man, dass eine Sprache <em>nicht</em> regulär ist? Die Beweisidee aus Aufgabe 6.13.1 lässt sich verallgemeinern: Liest ein DEA mit n Zuständen ein Wort mit mindestens n Zeichen, muss er einen Zustand zweimal besuchen – er durchläuft eine Schleife. Diese Schleife kann man beliebig oft wiederholen („aufpumpen“) oder weglassen, und der Automat akzeptiert trotzdem.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+<p><strong>L = {a<sup>n</sup>b<sup>n</sup> | n ≥ 1} ist nicht regulär.</strong></p>
+<ol>
+<li>Annahme: L ist regulär. Dann gibt es eine Pumping-Länge n.</li>
+<li>Wähle z = a<sup>n</sup>b<sup>n</sup>. Es gilt z ∈ L und |z| = 2n ≥ n.</li>
+<li>Sei z = uvw eine beliebige Zerlegung mit |uv| ≤ n und |v| ≥ 1. Da die ersten n Zeichen von z alle a sind, bestehen u und v nur aus a: v = a<sup>k</sup> mit k ≥ 1.</li>
+<li>Pumpe mit i = 0: uw = a<sup>n−k</sup>b<sup>n</sup>. Weil k ≥ 1, enthält dieses Wort weniger a als b, also uw ∉ L.</li>
+<li>Das widerspricht Bedingung 3. Also ist die Annahme falsch: L ist nicht regulär.</li>
+</ol>
+<p>(Mit i = 2 geht es genauso: uv<sup>2</sup>w = a<sup>n+k</sup>b<sup>n</sup> ∉ L.)</p>
+<p><strong>Die Falle:</strong> Man darf die Zerlegung u, v, w <em>nicht</em> selbst wählen – das Lemma garantiert nur, dass es <em>irgendeine</em> passende Zerlegung gibt. Deshalb argumentiert Schritt 3 für <em>jede</em> Zerlegung mit |uv| ≤ n. Selbst wählen darf man nur das Wort z und das i.</p>
+<p><strong>Kontrolle am konkreten Fall n = 3:</strong> z = aaabbb. Mögliche v (in den ersten drei Zeichen): a, aa, aaa, jeweils mit beliebigem u davor. Mit i = 0 entsteht aabbb, abbb oder bbb – kein Wort liegt in L.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: Pumping-Lemma für kontextfreie Sprachen</summary>
+<p>Auch für kontextfreie Sprachen gibt es ein Pumping-Lemma: Ist L kontextfrei, dann gibt es ein n ≥ 1, sodass sich jedes z ∈ L mit |z| ≥ n zerlegen lässt als z = u v w x y mit |vwx| ≤ n, |vx| ≥ 1 und u v<sup>i</sup> w x<sup>i</sup> y ∈ L für alle i ≥ 0. Hier werden also <em>zwei</em> Teile gleichzeitig gepumpt – das entspricht einem Nichtterminal, das sich im Ableitungsbaum wiederholt. Damit zeigt man z.&nbsp;B., dass {a<sup>n</sup>b<sup>n</sup>c<sup>n</sup>} nicht kontextfrei ist (Aufgabe 6.13.3).</p>
+</details>
+</div>
+
+<h2>3. Die Chomsky-Hierarchie und Automaten-Grenzen</h2>
+
+<table>
+<thead>
+<tr>
+<th>Sprachklasse</th>
+<th>Automatentyp</th>
+<th>Beispielsprache</th>
+<th>Kann erkennen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Typ 3 (regulär)</td>
+<td>endlicher Automat</td>
+<td>(ab)*</td>
+<td>einfache Muster, Zählen modulo n</td>
+</tr>
+<tr>
+<td>Typ 2 (kontextfrei)</td>
+<td>Kellerautomat</td>
+<td>a<sup>n</sup>b<sup>n</sup></td>
+<td>verschachtelte Strukturen</td>
+</tr>
+<tr>
+<td>Typ 1 (kontextsensitiv)</td>
+<td>linear beschränkter Automat</td>
+<td>a<sup>n</sup>b<sup>n</sup>c<sup>n</sup></td>
+<td>komplexere Abhängigkeiten; alle Typ-1-Sprachen sind entscheidbar</td>
+</tr>
+<tr>
+<td>Typ 0 (rekursiv aufzählbar)</td>
+<td>Turingmaschine</td>
+<td>Halteproblem H</td>
+<td>Sprachen, deren Wörter eine Turingmaschine bestätigen kann; bei Wörtern außerhalb darf sie endlos laufen</td>
+</tr>
+</tbody>
+</table>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: Inklusion der Klassen</summary>
+<p>Jede höhere Sprachklasse umfasst alle niedrigeren. Was ein Kellerautomat erkennt, erkennt auch eine Turingmaschine – umgekehrt gilt das jedoch nicht.</p>
+</details>
+</div>
+
+<h3>Eine Turingmaschine bei der Arbeit</h3>
+
+<p>Eine Turingmaschine (Definition in Kapitel 6.9) liest und schreibt auf einem Band, das nach beiden Seiten beliebig verlängert werden kann. Ihren Zustand notiert man als <strong>Konfiguration</strong>: Bandinhalt, wobei der aktuelle Zustand direkt vor dem Zeichen steht, auf dem der Lese-/Schreibkopf gerade steht. □ bezeichnet das Leersymbol. Ein Rechenschritt wird mit ⊢ notiert; gibt es für Zustand und gelesenes Zeichen keinen Übergang, hält die Maschine.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">Turingmaschine</span></summary>
+<p><strong>Ausgangssituation:</strong> Eine Turingmaschine soll eine Binärzahl um 1 erhöhen. Der Kopf steht zu Beginn auf der ersten Ziffer, Startzustand q0, Haltezustand q2.</p>
+<table>
+<thead><tr><th>δ</th><th>0</th><th>1</th><th>□</th></tr></thead>
+<tbody>
+<tr><td>q0 (nach rechts laufen)</td><td>(q0, 0, R)</td><td>(q0, 1, R)</td><td>(q1, □, L)</td></tr>
+<tr><td>q1 (Übertrag addieren)</td><td>(q2, 1, L)</td><td>(q1, 0, L)</td><td>(q2, 1, L)</td></tr>
+<tr><td>q2 (Haltezustand)</td><td>–</td><td>–</td><td>–</td></tr>
+</tbody>
+</table>
+<p><strong>Konfigurationsfolge für 1011 (= 11):</strong></p>
+<ol>
+<li><code>q0 1011 ⊢ 1 q0 011 ⊢ 10 q0 11 ⊢ 101 q0 1 ⊢ 1011 q0 □</code> – In q0 läuft der Kopf über alle Ziffern nach rechts, ohne etwas zu ändern. <em>Warum?</em> Addiert wird an der letzten Stelle; die findet die Maschine erst am ersten Leerfeld.</li>
+<li><code>⊢ 101 q1 1</code> – Am Leerfeld kehrt sie um und wechselt nach q1 („1 ist noch zu addieren“).</li>
+<li><code>⊢ 10 q1 10 ⊢ 1 q1 000</code> – Jede 1 wird zu 0, der Übertrag wandert nach links. <em>Warum?</em> 1 + 1 = 10<sub>2</sub>: Die Stelle wird 0, der Übertrag 1 bleibt.</li>
+<li><code>⊢ q2 1100</code> – Die erste 0 wird zu 1, der Übertrag ist verbraucht, die Maschine hält in q2.</li>
+</ol>
+<p><strong>Ergebnis:</strong> Auf dem Band steht 1100 = 12. Die Maschine brauchte 8 Schritte.</p>
+<p><strong>Sonderfall (die Falle):</strong> Bei 11 (= 3) gibt es keine 0, die den Übertrag aufnimmt:<br>
+<code>q0 11 ⊢ 1 q0 1 ⊢ 11 q0 □ ⊢ 1 q1 1 ⊢ q1 10 ⊢ q1 □00 ⊢ q2 □100</code><br>
+Der Eintrag δ(q1, □) = (q2, 1, L) schreibt die neue führende 1 links vor die Zahl. Ergebnis 100 = 4 ✓. Ohne diesen Eintrag würde die Maschine in q1 anhalten und 00 hinterlassen.</p>
+            </details>
+        </div>
+
+<h2>4. Das Halteproblem – eine absolute Grenze</h2>
+
+<p>Selbst Turingmaschinen haben Grenzen. Das bekannteste Beispiel ist das <strong>Halteproblem</strong>:</p>
+
+<p>Alan Turing bewies 1936, dass das Halteproblem unentscheidbar ist. Das zeigt: Es gibt prinzipiell unlösbare Probleme.</p>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: Grenzen in der Softwarepraxis</summary>
+<p><strong>Alltag:</strong> Mit einem regulären Ausdruck kannst du in einem Editor nicht zuverlässig prüfen, ob alle HTML-Tags oder Klammern korrekt geschachtelt sind – dafür braucht es einen echten Parser mit Stapelspeicher.</p>
+<p><strong>Beruf:</strong> Compiler verwenden endliche Automaten zur Erkennung von Schlüsselwörtern (z.&nbsp;B. <code>if</code>, <code>while</code>) und Kellerautomaten (Parser) für die Syntaxprüfung, etwa von Klammerausdrücken. Wegen des Halteproblems kann kein Werkzeug zur statischen Codeanalyse (z.&nbsp;B. SonarQube, Linter in der Entwicklungsumgebung) garantiert alle Endlosschleifen oder Fehler finden. Qualitätsingenieurinnen und Softwaretester wissen deshalb: Solche Werkzeuge liefern Warnungen und Näherungen, Tests bleiben unverzichtbar.</p>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Merke:</strong><br>Endliche Automaten erkennen genau die regulären Sprachen. Sprachen mit beliebig tief geschachtelten Strukturen – wie korrekt geklammerte Ausdrücke – sind <em>nicht</em> regulär.</p>
+</div>
+
+<div class="merke">
+<p><strong>Merke: Pumping-Lemma für reguläre Sprachen</strong><br>
+Ist L eine reguläre Sprache, dann gibt es eine Zahl n ≥ 1 (die Pumping-Länge, z.&nbsp;B. die Zustandszahl eines DEA für L), sodass sich <strong>jedes</strong> Wort z ∈ L mit |z| ≥ n so in drei Teile z = u v w zerlegen lässt, dass gilt:</p>
+<ol>
+<li>|uv| ≤ n (die Schleife liegt in den ersten n Zeichen),</li>
+<li>|v| ≥ 1 (die Schleife ist nicht leer),</li>
+<li>u v<sup>i</sup> w ∈ L für <strong>alle</strong> i ≥ 0 (v darf beliebig oft wiederholt oder weggelassen werden).</li>
+</ol>
+<p><strong>Anwendung (Widerspruchsbeweis):</strong> Um zu zeigen, dass L <em>nicht</em> regulär ist, nimmt man an, L sei regulär mit Pumping-Länge n. Dann wählt man geschickt ein Wort z ∈ L mit |z| ≥ n und zeigt, dass für <em>jede</em> erlaubte Zerlegung z = uvw ein i existiert mit uv<sup>i</sup>w ∉ L.<br>
+Achtung: Das Lemma ist nur eine notwendige Bedingung. Man kann damit nie beweisen, dass eine Sprache regulär ist.</p>
+</div>
+
+<div class="merke">
+<p><strong>Das Halteproblem:</strong><br>Es ist unmöglich, einen Algorithmus zu schreiben, der für jede beliebige Turingmaschine und jede Eingabe entscheidet, ob sie anhält oder endlos läuft.</p>
+<p><strong>Entscheidbar vs. rekursiv aufzählbar:</strong></p>
+<ul>
+<li>Eine Sprache L ist <strong>entscheidbar</strong>, wenn es eine Turingmaschine gibt, die bei <em>jeder</em> Eingabe anhält und korrekt „ja“ (w ∈ L) oder „nein“ (w ∉ L) antwortet.</li>
+<li>L ist <strong>rekursiv aufzählbar</strong> (Typ 0, semi-entscheidbar), wenn eine Turingmaschine bei jedem w ∈ L anhält und „ja“ sagt; bei w ∉ L darf sie aber endlos laufen.</li>
+<li>Jede entscheidbare Sprache ist rekursiv aufzählbar, aber nicht umgekehrt: Das Halteproblem ist rekursiv aufzählbar (man simuliert die Maschine und wartet, ob sie hält), aber nicht entscheidbar.</li>
+</ul>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.13.1: <span class="niveau">AFB II</span></summary>
+<p>Beschreibe, warum ein endlicher Automat die Sprache L = {a<sup>n</sup>b<sup>n</sup> | n ≥ 1} nicht erkennen kann.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.13.2: <span class="niveau">AFB I</span></summary>
+<p>Gib eine Sprache an, die ein EA erkennen kann, und begründe deine Auswahl.</p>
+</details>
+</div>

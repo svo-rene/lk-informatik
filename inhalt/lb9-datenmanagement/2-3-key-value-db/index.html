@@ -1,0 +1,329 @@
+<p>
+            Eine Key-Value-Datenbank ist eine einfache Form einer Datenbank, die Daten als Paare von Schlüssel (Key) und Wert (Value) speichert. Dies ist ähnlich wie bei einem Dictionary in Python. Jeder Schlüssel ist eindeutig und kann verwendet werden, um einen zugehörigen Wert abzurufen oder zu setzen.
+        </p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Warenkorb, Sitzung, Cache</summary>
+                <p>
+                    Legst du im Onlineshop etwas in den Warenkorb, merkt sich der Shop das oft in einer Key-Value-Datenbank
+                    wie Redis: Schlüssel ist deine Sitzungs-ID, Wert ist der Inhalt des Warenkorbs. So kann jede Seite
+                    in Millisekunden darauf zugreifen. <strong>Backend-Entwickler*innen</strong> und
+                    <strong>Datenbankadministrator*innen</strong> setzen Redis außerdem als Cache vor langsame
+                    relationale Datenbanken, damit häufig abgefragte Daten nicht jedes Mal neu berechnet werden müssen.
+                    Weil Sitzungsdaten personenbezogen sein können, bekommen sie nach <strong>DSGVO</strong> eine
+                    Ablaufzeit: Redis löscht sie mit <code>EXPIRE</code> automatisch nach einer festgelegten Zeit.
+                </p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: So sieht eine echte Key-Value-Datenbank aus
+                </summary>
+                <p>
+                    Das Python-Dictionary auf dieser Seite ist ein vereinfachtes Modell, um das Prinzip zu verstehen.
+                    In der echten Welt übernimmt diese Aufgabe z.&nbsp;B. <strong>Redis</strong> – eine sehr schnelle,
+                    weit verbreitete Key-Value-Datenbank. Im offiziellen
+                    <a href="https://redis.io/try/sandbox/" target="_blank" rel="noopener">Redis Playground</a>
+                    kannst du direkt im Browser echte Redis-Befehle wie <code>SET</code>, <code>GET</code> oder
+                    <code>HSET</code> ausprobieren – ganz ohne Installation oder Anmeldung.
+                </p>
+            </details>
+        </div>
+
+<h2>Was ist ein Python-Dictionary?</h2>
+
+<p>
+            Ein <strong>Dictionary</strong> in Python ist eine Datenstruktur, die eine Sammlung von Schlüssel-Wert-Paaren speichert. Jeder Schlüssel ist eindeutig und wird verwendet, um auf einen entsprechenden Wert zuzugreifen. Dies funktioniert ähnlich wie ein echtes Wörterbuch, bei dem man ein Wort (den Schlüssel) nachschlägt und dessen Definition (den Wert) erhält.
+        </p>
+
+<h3>Dictionaries in Python</h3>
+
+<p>
+            Ein Dictionary in Python wird mit geschweiften Klammern <code>{ }</code> erstellt, und die Daten werden als Paare von Schlüssel und Wert darin abgelegt. Hier ist ein Beispiel:
+        </p>
+
+<pre><code># Ein einfaches Dictionary
+benutzer = {
+    'Name': 'Alice',
+    'Alter': 25,
+    'Beruf': 'Entwicklerin'
+}
+
+# Zugriff auf Werte über den Schlüssel
+print("Name:", benutzer['Name'])
+print("Alter:", benutzer['Alter'])
+
+# Wert ändern
+benutzer['Alter'] = 26
+print("Aktualisiertes Alter:", benutzer['Alter'])
+
+# Ein neues Schlüssel-Wert-Paar hinzufügen
+benutzer['Stadt'] = 'Berlin'
+print("Stadt hinzugefügt:", benutzer['Stadt'])
+
+# Schlüssel-Wert-Paar löschen
+del benutzer['Beruf']
+print("Beruf entfernt:", benutzer)</code></pre>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Wichtige Dictionary-Methoden</summary>
+                <p>
+                    Python-Dictionaries bieten viele nützliche Methoden, um mit Key-Value-Daten zu arbeiten. Hier sind die wichtigsten
+                    (angewendet auf <code>benutzer</code> nach dem Beispiel oben):
+                </p>
+                <ul>
+                    <li><code>get()</code>: ruft den Wert zu einem Schlüssel ab, ohne dass ein Fehler auftritt, wenn der Schlüssel nicht existiert.
+                    <pre><code>wert = benutzer.get('Name', 'Unbekannt')</code></pre>
+                    <p>Wenn der Schlüssel 'Name' vorhanden ist, wird der zugehörige Wert zurückgegeben. Wenn nicht, wird 'Unbekannt' als Standardwert zurückgegeben.</p></li>
+
+                    <li><code>keys()</code>: gibt alle Schlüssel im Dictionary zurück.
+                    <pre><code>alle_schluessel = list(benutzer.keys())</code></pre>
+                    <p>Ergebnis: <code>['Name', 'Alter', 'Stadt']</code>.</p></li>
+
+                    <li><code>values()</code>: gibt alle Werte im Dictionary zurück, ohne die zugehörigen Schlüssel.
+                    <pre><code>alle_werte = list(benutzer.values())</code></pre>
+                    <p>Ergebnis: <code>['Alice', 26, 'Berlin']</code>.</p></li>
+
+                    <li><code>items()</code>: gibt alle Schlüssel-Wert-Paare gleichzeitig zurück &ndash; besonders praktisch zum Durchlaufen (Iterieren) eines Dictionarys.
+                    <pre><code>for schluessel, wert in benutzer.items():
+    print(schluessel, "->", wert)</code></pre></li>
+
+                    <li><code>len()</code>: gibt die Anzahl der gespeicherten Schlüssel-Wert-Paare zurück.
+                    <pre><code>anzahl = len(benutzer)   # 3</code></pre></li>
+                </ul>
+            </details>
+        </div>
+
+<h3>Über ein Dictionary iterieren</h3>
+
+<p>
+            Mit einer <code>for</code>-Schleife kannst du alle Schlüssel eines Dictionarys der Reihe nach durchgehen und darüber auf die zugehörigen Werte zugreifen – hier mit dem Dictionary <code>benutzer</code> von oben:
+        </p>
+
+<pre><code>for schluessel in benutzer:
+    print(schluessel, benutzer[schluessel])</code></pre>
+
+<p>
+            Ausgabe: <code>Name Alice</code>, <code>Alter 26</code>, <code>Stadt Berlin</code> – je eine Zeile.
+            Das ist genau das Muster, das du gleich in den Übungsaufgaben brauchst.
+        </p>
+
+<h3>Dictionaries vs. Listen: Wo liegt der Vorteil?</h3>
+
+<p>
+            Eine Liste eignet sich gut, wenn du gleichartige Elemente in einer bestimmten Reihenfolge speichern willst (z.&nbsp;B. alle Namen einer Klasse). Willst du aber zu einem <strong>eindeutigen Namen</strong> gezielt einen Wert nachschlagen, ist ein Dictionary die bessere Wahl:
+        </p>
+
+<pre><code># Mit einer Liste musst du dir die Reihenfolge merken:
+benutzer_liste = ["Alice", 25, "Entwicklerin"]
+print(benutzer_liste[1])   # 25 - aber was war an Position 1 nochmal?
+
+# Mit einem Dictionary greifst du über einen aussagekräftigen Namen zu:
+benutzer_dict = {"Name": "Alice", "Alter": 25, "Beruf": "Entwicklerin"}
+print(benutzer_dict["Alter"])   # 25 - sofort klar, was gemeint ist</code></pre>
+
+<h2>Verschachtelte Dictionaries</h2>
+
+<p>
+            Ein <strong>verschachteltes Dictionary</strong> ist ein Dictionary, bei dem die Werte selbst wieder Dictionaries sein können. Dies ist nützlich, wenn man komplexere Datenstrukturen wie mehrere Benutzer und deren jeweilige Informationen speichern möchte. Hier ist ein Beispiel, wie man mehrere Benutzer mit ihren jeweiligen Altersangaben und Berufen speichern kann:
+        </p>
+
+<h3>Mehrere Benutzer in einem verschachtelten Dictionary speichern</h3>
+
+<pre><code># Ein Dictionary, das mehrere Benutzer speichert
+benutzer_db = {
+    'Alice': {'Alter': 25, 'Beruf': 'Entwicklerin'},
+    'Bob': {'Alter': 30, 'Beruf': 'Designer'},
+    'Clara': {'Alter': 22, 'Beruf': 'Lehrerin'}
+}
+
+# Zugriff auf die Daten eines Benutzers
+print("Alices Alter:", benutzer_db['Alice']['Alter'])
+print("Bobs Beruf:", benutzer_db['Bob']['Beruf'])
+
+# Alter von Clara ändern
+benutzer_db['Clara']['Alter'] = 23
+print("Claras aktualisiertes Alter:", benutzer_db['Clara']['Alter'])
+
+# Einen neuen Benutzer hinzufügen
+benutzer_db['David'] = {'Alter': 28, 'Beruf': 'Ingenieur'}
+print("Neuer Benutzer hinzugefügt:", benutzer_db['David'])
+
+# Beruf von Bob löschen
+del benutzer_db['Bob']['Beruf']
+print("Bobs Beruf gelöscht:", benutzer_db['Bob'])</code></pre>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Ein Punktezähler wie <code>INCR</code> in Redis</summary>
+            <p><strong>Ausgangssituation:</strong> Eine Lern-App vergibt Punkte. Wie mit dem Redis-Befehl <code>INCR</code> soll ein
+               Zähler je Nutzer erhöht werden, auch wenn es den Nutzer noch gar nicht gibt.</p>
+            <pre><code class="language-python">punkte = {}
+
+def punkte_erhoehen(nutzer, anzahl=1):
+    punkte[nutzer] = punkte.get(nutzer, 0) + anzahl
+    return punkte[nutzer]
+
+print(punkte_erhoehen("anna"))
+print(punkte_erhoehen("anna", 10))
+print(punkte_erhoehen("ben"))
+print(punkte.get("clara", 0))
+print(punkte)</code></pre>
+            <ol>
+                <li><strong>Leeres Dictionary anlegen</strong> – Es ist der „Key-Value-Store“. Schlüssel ist der Nutzername, Wert die Punktzahl.</li>
+                <li><strong>Erster Aufruf mit „anna“</strong> – Den Schlüssel gibt es noch nicht. <code>punkte.get("anna", 0)</code> liefert
+                    deshalb den Standardwert 0 statt eines <code>KeyError</code>. 0&nbsp;+&nbsp;1 = 1 wird gespeichert und zurückgegeben.</li>
+                <li><strong>Zweiter Aufruf mit 10 Punkten</strong> – Jetzt existiert der Schlüssel: 1&nbsp;+&nbsp;10 = 11.</li>
+                <li><strong>Aufruf mit „ben“</strong> – Neuer Schlüssel, wieder Start bei 0, Ergebnis 1.</li>
+                <li><strong>Nur lesen für „clara“</strong> – <code>get</code> mit Standardwert liefert 0, legt aber <em>keinen</em> Schlüssel an.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Ausgabe lautet</p>
+            <pre><code>1
+11
+1
+0
+{'anna': 11, 'ben': 1}</code></pre>
+            <p><strong>Kontrolle:</strong> Im Dictionary stehen nur zwei Schlüssel – „clara“ fehlt, weil nur gelesen wurde. Genau so verhält
+               sich Redis: <code>GET</code> auf einen unbekannten Schlüssel ändert nichts.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Ein Cache vor einer langsamen Datenbank</summary>
+            <p><strong>Ausgangssituation:</strong> Ein Onlineshop fragt Preise aus einer langsamen relationalen Datenbank ab. Häufig
+               gefragte Preise sollen deshalb in einem Key-Value-Cache zwischengespeichert werden (so wird Redis in der Praxis oft
+               eingesetzt). Gezählt wird, wie oft der Cache hilft (Treffer) und wie oft doch die Datenbank gefragt werden muss
+               (Fehlgriff). Die Datenbank wird hier durch ein Dictionary simuliert.</p>
+            <pre><code class="language-python">datenbank = {"P1": 19.99, "P2": 5.49, "P3": 12.00}   # die "langsame" Datenbank
+cache = {}
+statistik = {"treffer": 0, "fehlgriffe": 0}
+
+def preis_holen(produkt):
+    if produkt in cache:                  # 1. zuerst im Cache nachsehen
+        statistik["treffer"] += 1
+        return cache[produkt]
+    statistik["fehlgriffe"] += 1          # 2. sonst die Datenbank fragen
+    preis = datenbank.get(produkt)        #    None, wenn es das Produkt nicht gibt
+    if preis is not None:
+        cache[produkt] = preis            # 3. für das nächste Mal merken
+    return preis
+
+def preis_aendern(produkt, neuer_preis):
+    datenbank[produkt] = neuer_preis
+    cache.pop(produkt, None)              # 4. veralteten Cache-Eintrag entfernen
+
+for p in ["P1", "P2", "P1", "P9", "P1"]:
+    print(p, preis_holen(p))
+print(statistik)
+preis_aendern("P1", 17.99)
+print("P1", preis_holen("P1"))
+print(statistik)</code></pre>
+            <ol>
+                <li><strong>„P1“ (erste Anfrage)</strong> – nicht im Cache, also Fehlgriff. Die Datenbank liefert 19.99; der Preis wird im Cache abgelegt.</li>
+                <li><strong>„P2“</strong> – ebenso Fehlgriff, 5.49 kommt in den Cache.</li>
+                <li><strong>„P1“ (zweite Anfrage)</strong> – jetzt im Cache: Treffer, die Datenbank wird nicht gefragt.</li>
+                <li><strong>„P9“ – der Sonderfall</strong> – gibt es nicht. <code>datenbank.get("P9")</code> liefert <code>None</code>. Dieser Wert
+                    wird bewusst <em>nicht</em> gecacht, sonst bliebe ein später angelegtes Produkt P9 unsichtbar.</li>
+                <li><strong>„P1“ (dritte Anfrage)</strong> – Treffer. Stand: 2 Treffer, 3 Fehlgriffe.</li>
+                <li><strong>Preisänderung – die Falle</strong> – Der Preis von P1 sinkt auf 17.99. Würde nur die Datenbank geändert, lieferte
+                    der Cache weiter 19.99: Cache und Datenbank wären inkonsistent. Deshalb entfernt <code>preis_aendern</code> den
+                    Cache-Eintrag (<code>pop</code> mit Standardwert <code>None</code>, damit es auch ohne Eintrag keinen Fehler gibt).
+                    Die nächste Anfrage ist ein Fehlgriff und holt den neuen Preis.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Ausgabe lautet</p>
+            <pre><code>P1 19.99
+P2 5.49
+P1 19.99
+P9 None
+P1 19.99
+{'treffer': 2, 'fehlgriffe': 3}
+P1 17.99
+{'treffer': 2, 'fehlgriffe': 4}</code></pre>
+            <table class="gitter">
+                <tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr>
+                <tr><td>Cache-Treffer</td><td><code>preis_holen("P1")</code> zum zweiten Mal</td><td>19.99, Treffer +1</td></tr>
+                <tr><td>unbekanntes Produkt</td><td><code>preis_holen("P9")</code></td><td><code>None</code>, nichts im Cache</td></tr>
+                <tr><td>nach Preisänderung</td><td><code>preis_aendern("P1", 17.99)</code>, dann <code>preis_holen("P1")</code></td><td>17.99 (nicht 19.99)</td></tr>
+            </table>
+            <p><strong>Kontrolle:</strong> Treffer und Fehlgriffe zusammen ergeben die Zahl der Anfragen: 2&nbsp;+&nbsp;3 = 5 Anfragen in der
+               Schleife, danach 2&nbsp;+&nbsp;4 = 6. Das Problem aus Schritt 6 ist dasselbe wie beim CAP-Theorem (Seite 2.1): Zwei Kopien
+               derselben Daten müssen gleich gehalten werden.</p>
+            </details>
+        </div>
+
+<h2>Ausblick: Key-Value-Datenbanken in der Praxis und JSON</h2>
+
+<p>
+    In der Realität werden Key-Value-Datenbanken häufig in groß angelegten Anwendungen verwendet. Sie arbeiten oft mit 
+    <strong>JSON</strong> (JavaScript Object Notation), einem Datenformat, das der Struktur von Python-Dictionaries sehr ähnlich ist. 
+    Viele moderne NoSQL-Datenbanken verarbeiten Daten im JSON-Format oder in einem sehr ähnlichen Format: <strong>Couchbase</strong> speichert JSON-Dokumente, <strong>DynamoDB</strong> speichert Datensätze mit verschachtelten Attributen, die sich direkt als JSON ein- und auslesen lassen. <strong>Redis</strong> speichert als Werte zunächst nur Zeichenketten, Listen, Hashes und Mengen; JSON-Dokumente mit Zugriff auf einzelne Felder kann Redis erst mit dem Modul <strong>RedisJSON</strong> (in neueren Redis-Versionen mitgeliefert). Ohne dieses Modul legt man JSON als einfache Zeichenkette ab. 
+    Ein JSON-Objekt sieht fast genauso aus wie ein Python-Dictionary:
+</p>
+
+<pre><code>{
+  "Name": "Alice",
+  "Alter": 25,
+  "Beruf": "Entwicklerin"
+}</code></pre>
+
+<p>
+    JSON ist besonders beliebt, weil es leichtgewichtig ist und einfach zwischen verschiedenen Programmiersprachen übertragen werden kann. 
+    Es eignet sich perfekt für Web-APIs, mobile Apps und Datenbanken, die schnell und flexibel sein müssen.
+</p>
+
+<p>
+    In großen Projekten verwendet man spezialisierte Key-Value-Datenbanken, die große Datenmengen speichern und schnell darauf zugreifen können. 
+    <strong>Python</strong> kann mit diesen Datenbanken interagieren, indem es z.&nbsp;B. JSON verwendet (siehe Seite 3.10). Auch wenn <strong>XML</strong> (ein weiteres Datenformat) in einigen Anwendungen genutzt wird, 
+    ist JSON heutzutage viel häufiger, da es kompakter und einfacher zu verwenden ist.
+</p>
+
+<p>
+    Diese modernen Technologien sind darauf ausgelegt, enorme Mengen von Schlüssel-Wert-Daten effizient zu verarbeiten und in verteilten Systemen zu speichern, 
+    was für große Webanwendungen oder mobile Apps unerlässlich ist.
+</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Eine <strong>Key-Value-Datenbank</strong> speichert jeden Datensatz als Paar aus einem eindeutigen
+                Schlüssel und einem Wert. Gelesen und geschrieben wird immer über den Schlüssel; im Wert selbst wird
+                nicht gesucht. Das macht sie besonders schnell für einfache Zugriffe, zum Beispiel bei Konfigurationen,
+                Sitzungsdaten oder Caches.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                Nutze eine <strong>Liste</strong> für geordnete Sammlungen gleichartiger Elemente. Nutze ein <strong>Dictionary</strong>, wenn du Werte über einen eindeutigen, aussagekräftigen Schlüssel nachschlagen willst &ndash; das ist genau das Prinzip einer Key-Value-Datenbank.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.1: <span class="niveau">AFB I</span></summary>
+                <p>
+                    Erstelle ein Dictionary <code>telefonbuch</code>, das zu drei Namen deiner Wahl jeweils eine
+                    Telefonnummer speichert (noch ohne Verschachtelung, also z.&nbsp;B.
+                    <code>{"Anna": "0351 111111", ...}</code>). Gib die Nummer einer Person direkt aus, ändere
+                    anschließend eine Nummer, füge eine weitere Person hinzu und gib zum Schluss alle Einträge
+                    mit einer Schleife aus.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.3.2: <span class="niveau">AFB II</span></summary>
+                <p>
+                    Erstelle ein Programm, das mehrere Benutzer mit ihrem Alter und ihrem Beruf in einer Key-Value-Datenbank (einem verschachtelten Dictionary) speichert. Füge mindestens einen weiteren Benutzer hinzu, ändere das Alter eines bestehenden Benutzers und lösche den Beruf eines Benutzers. Gib danach alle Benutzer und ihre Informationen aus.
+                </p>
+            </details>
+        </div>

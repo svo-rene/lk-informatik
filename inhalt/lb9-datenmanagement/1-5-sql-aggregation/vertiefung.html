@@ -1,0 +1,34 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.5.7: Fehler finden – SQLite meckert nicht <span class="niveau">AFB III</span></summary>
+<p>Beide Abfragen laufen ohne Fehlermeldung, liefern aber nicht das Gewünschte. Erkläre jeweils, was die
+   Abfrage tatsächlich berechnet, und korrigiere sie.</p>
+<ol>
+<li>Gewünscht: Wie viele Mäuse wurden insgesamt verkauft?
+<pre><code>SELECT COUNT(Menge) AS VerkaufteMaeuse
+FROM Verkäufe
+WHERE Produkt = 'Maus';</code></pre></li>
+<li>Gewünscht: je Produkt die verkaufte Stückzahl und das Datum des Verkaufs.
+<pre><code>SELECT Produkt, Datum, SUM(Menge) AS Stueck
+FROM Verkäufe
+GROUP BY Produkt;</code></pre></li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.5.8: Welcher Durchschnittspreis ist der richtige? <span class="niveau">AFB III</span></summary>
+<p>In einem Bericht steht: „Der durchschnittliche Verkaufspreis lag bei 325,74&nbsp;€.“ Die Zahl stammt aus
+   <code>AVG(Preis)</code> (Beispiel 4). Ein Kollege widerspricht: „Pro verkauftem Stück haben wir im Schnitt viel
+   weniger eingenommen.“</p>
+<ol>
+<li>Berechne den durchschnittlichen Erlös pro verkauftem Stück mit einer SQL-Abfrage.</li>
+<li>Erkläre, warum beide Zahlen so weit auseinanderliegen.</li>
+<li>Beurteile, welche Zahl für welche Frage die richtige ist, und formuliere den Satz im Bericht so um, dass er
+    nicht missverstanden werden kann.</li>
+</ol>
+</details>
+</div>

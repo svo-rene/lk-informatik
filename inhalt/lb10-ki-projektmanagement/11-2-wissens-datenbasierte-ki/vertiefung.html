@@ -1,0 +1,45 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.2.5: Fehler im Prolog-Stammbaum <span class="niveau">AFB III</span></summary>
+                <p>Mia hat den Stammbaum aus Beispiel 1 um eine Generation erweitert. Mit der Anfrage <code>?- grosselternteil(anna, Wer).</code> möchte sie <code>Wer = clara</code> erhalten, mit <code>?- grosselternteil(ben, Wer).</code> die Antwort <code>Wer = david</code>. Ihr Programm funktioniert aber nicht:</p>
+                <pre><code>Elternteil(anna, ben).
+elternteil(ben, Clara).
+elternteil(clara, david)
+grosselternteil(X, Z) :- elternteil(X, Y), elternteil(X, Z).</code></pre>
+                <ol>
+                    <li>Finde alle vier Fehler. Gib für jeden Fehler die Zeile an und erkläre, warum es ein Fehler ist.</li>
+                    <li>Unterscheide dabei Fehler in der Schreibweise (Syntax) von Fehlern, bei denen das Programm zwar läuft, aber falsche Schlüsse zieht.</li>
+                    <li>Erkläre, was die zweite Zeile für Prolog bedeutet und welche Antwort deshalb die Anfrage <code>?- elternteil(ben, tim).</code> liefern würde.</li>
+                    <li>Schreibe das korrigierte Programm auf.</li>
+                </ol>
+                <p class="tipp">Lies im Hinweis „Prolog“ noch einmal nach, was Groß- und Kleinschreibung bedeuten. Für den logischen Fehler hilft es, die Regel in Worten vorzulesen.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.2.7: Schadensmeldungen automatisch prüfen <span class="niveau">AFB III</span></summary>
+                <p>Eine Kfz-Versicherung erhält täglich mehrere tausend Schadensmeldungen. Bisher prüfen Sachbearbeiterinnen und Sachbearbeiter jede Meldung von Hand. Künftig soll ein KI-System zwei Fragen vorab beantworten:</p>
+                <ul>
+                    <li><strong>Frage A:</strong> Ist der Schaden laut Vertrag überhaupt versichert (Vertrag gültig, Schadensart abgedeckt, Meldefrist eingehalten)?</li>
+                    <li><strong>Frage B:</strong> Gibt es Hinweise auf Versicherungsbetrug?</li>
+                </ul>
+                <p>Die IT-Abteilung schlägt vor, für beide Fragen ein einziges neuronales Netz mit allen Schadensmeldungen der letzten zehn Jahre zu trainieren.</p>
+                <ol>
+                    <li>Beurteile den Vorschlag getrennt für Frage A und Frage B. Beziehe dich auf die Stärken und Schwächen beider Ansätze aus Abschnitt 3.</li>
+                    <li>Entwirf eine bessere Lösung, bei der beide Ansätze zusammenarbeiten, und beschreibe, an welcher Stelle weiterhin ein Mensch entscheiden sollte.</li>
+                    <li>Nenne ein Risiko deines Entwurfs und eine Maßnahme dagegen.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Weiterführende Links</h2>
+
+<ul>
+            <li><a href="https://www.datacamp.com/blog/what-is-symbolic-ai" target="_blank" rel="noopener">What is Symbolic AI? (DataCamp, englisch)</a> – ein verständlicher Artikel, der wissensbasierte (symbolische) KI noch einmal klar von datenbasiertem maschinellem Lernen abgrenzt, gut zur Vertiefung von Abschnitt 3.</li>
+            <li><a href="https://de.wikipedia.org/wiki/Prolog_(Programmiersprache)" target="_blank" rel="noopener">Prolog (Programmiersprache) – Wikipedia</a> – mehr Hintergrundwissen und weitere Beispiele (u.&nbsp;a. Stammbäume, Einsteins Rätsel) zur logikbasierten Programmiersprache aus dem Hinweis-Kasten oben.</li>
+            <li><a href="https://studyflix.de/informatik/reinforcement-learning-8509" target="_blank" rel="noopener">Reinforcement Learning einfach erklärt (Studyflix, mit Video)</a> – erklärt bestärkendes Lernen noch einmal mit Video und Beispielen wie autonomem Fahren, passend zu Abschnitt 2.3.</li>
+            <li><a href="https://www.it-talents.de/it-wissen/supervised-unsupervised-learning/" target="_blank" rel="noopener">Was ist Supervised und Unsupervised Learning? (IT-Talents)</a> – ein Artikel mit einem anschaulichen Hund-Katze-Beispiel, gute Wiederholung für Aufgabe 11.2.1.</li>
+        </ul>

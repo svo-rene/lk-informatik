@@ -1,0 +1,42 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.8.5: Fehler finden <span class="niveau">AFB III</span></summary>
+                <p>Jonas hat zu dieser Wahrheitstabelle KDNF und KKNF bestimmt:</p>
+                <table class="gitter">
+                    <tr><th>A</th><th>B</th><th>C</th><th>f</th></tr>
+                    <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                    <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                </table>
+                <p>KDNF: f = (¬A ∧ ¬B ∧ C) ∨ (¬A ∧ B ∧ C) ∨ (A ∧ ¬B ∧ ¬C) ∨ (A ∧ B ∧ C)</p>
+                <p>KKNF: f = (A ∨ B ∨ C) ∧ (A ∨ ¬B ∨ C) ∧ (A ∨ ¬B ∨ C) ∧ (¬A ∨ ¬B ∨ C)</p>
+                <ol>
+                    <li>Prüfe beide Formen. Finde den Fehler, erkläre, welche Bildungsregel Jonas verwechselt hat, und korrigiere ihn.</li>
+                    <li>Gib eine Belegung an, bei der Jonas’ KKNF einen falschen Wert liefert.</li>
+                    <li>Beurteile die Aussage: „Kommt in einer KKNF derselbe Maxterm zweimal vor, ist sicher ein Fehler passiert.“</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.8.6: Sind die Lösungen gleich? <span class="niveau">AFB III</span></summary>
+                <p>Zwei Teams haben für dieselbe Anforderung an eine Steuerung unterschiedliche Terme abgegeben:</p>
+                <ul>
+                    <li>Team 1: T<sub>1</sub> = (A ∧ B) ∨ (¬A ∧ C)</li>
+                    <li>Team 2: T<sub>2</sub> = (A ∧ B) ∨ (¬A ∧ C) ∨ (B ∧ C)</li>
+                </ul>
+                <ol>
+                    <li>Entscheide mithilfe der KDNF, ob beide Terme dieselbe Funktion beschreiben.</li>
+                    <li>Beurteile, welcher Term für den Bau einer Schaltung besser geeignet ist.</li>
+                    <li>Begründe, warum der Vergleich über die KDNF immer funktioniert, ein Vergleich der ursprünglichen Terme „auf einen Blick“ dagegen nicht.</li>
+                </ol>
+            </details>
+        </div>

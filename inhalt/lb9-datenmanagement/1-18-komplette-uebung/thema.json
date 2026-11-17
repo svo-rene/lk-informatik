@@ -1,0 +1,14 @@
+{
+  "nr": "1.18",
+  "titel": "Übung: ERM, Relationenmodell und Normalformen",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

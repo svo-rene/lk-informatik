@@ -1,0 +1,133 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebooks zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es mehrere Jupyter-Notebooks, in denen du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:</p>
+                <ul>
+                    <li><a href="../notebooks/3-3_a_stack.ipynb" download>3-3_a_stack.ipynb herunterladen</a> – Stapel mit Liste und als verkettete Liste</li>
+                    <li><a href="../notebooks/3-3_b_uebung_stapel_schlange.ipynb" download>3-3_b_uebung_stapel_schlange.ipynb herunterladen</a> – Übungen: Schlange, Klammerprüfung, Minimum, Rückwärtslesen</li>
+                </ul>
+                <p>Die Notebooks ersetzen diese Seite nicht, sondern bieten dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Knoten zeichnen <span class="niveau">AFB I</span></summary>
+                <p>In Thonny wird eingegeben: <code>s = Stack()</code>, <code>s.push(1)</code>, <code>s.push(2)</code>, <code>s.push(3)</code>. Zeichne die Knoten mit <code>__head</code>. Was liefert danach <code>s.pop()</code>, und worauf zeigt <code>__head</code> dann?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>__head</code> → [3|•] → [2|•] → [1|None]: Der zuletzt aufgelegte Knoten ist der erste. <code>s.pop()</code> liefert 3, danach zeigt <code>__head</code> auf den Knoten mit der 2.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Den Stapel verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Verfolge <code>klammern_ok("[(x)]")</code> mit Papier: Wie sieht der Stapel nach jedem Zeichen aus, und was gibt die Funktion zurück?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[</code>: Stapel [ · <code>(</code>: Stapel [, ( (oben) · <code>x</code>: übersprungen · <code>)</code>: <code>pop</code> liefert (, passt, Stapel [ · <code>]</code>: <code>pop</code> liefert [, passt, Stapel leer. Am Ende ist der Stapel leer: <code>True</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Drei Fehlerarten <span class="niveau">AFB I</span></summary>
+                <p>Alle drei Aufrufe liefern <code>False</code>: <code>klammern_ok("(]")</code>, <code>klammern_ok(")(")</code>, <code>klammern_ok("([]")</code>. Gib für jeden an, bei welchem Zeichen bzw. an welcher Stelle der Funktion das <code>False</code> entsteht.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>"(]"</code>: bei <code>]</code> liefert <code>pop</code> die <code>(</code>, erwartet wird <code>[</code> – passt nicht. <code>")("</code>: schon beim ersten Zeichen ist der Stapel leer, <code>s.is_empty()</code> ist <code>True</code>. <code>"([]"</code>: <code>[</code> und <code>]</code> passen, aber am Ende liegt noch <code>(</code> auf dem Stapel – <code>return s.is_empty()</code> liefert <code>False</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-3-1">
+            <details>
+                <summary>Aufgabe 3.3.1: LIFO nachvollziehen <span class="niveau">AFB I</span></summary>
+                <p>Ein leerer Stapel erhält die Operationen push(4), push(7), push(2), pop(), push(9), top(), pop(), pop(). Gib nach jeder Operation den Inhalt (oben rechts) und die Rückgabewerte an.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-3-2">
+            <details>
+                <summary>Aufgabe 3.3.2: Text umkehren und Undo <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/umkehren_undo.py</code> – neu anlegen; die Klasse <code>Stack</code> holst du mit <code>from stack_knoten import Stack</code><br><strong>Commits:</strong> nach Teil 1: <code>3.3.2 Teil 1: umkehren(text) mit Stack</code> · nach Teil 2: <code>3.3.2 Teil 2: Undo-Simulation, Text wieder „Hallo“</code></p>
+                <ol>
+                    <li>Schreibe mit der Klasse <code>Stack</code> eine Funktion <code>umkehren(text)</code>, die einen Text rückwärts zurückgibt.</li>
+                    <li>Simuliere einen einfachen Texteditor: Die Eingaben „Hallo“, „ “, „Welt“ werden an einen Text angehängt und jeweils auf einen Undo-Stack gelegt. Zweimal „Rückgängig“ soll den Text wieder auf „Hallo“ setzen.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-3-3">
+            <details>
+                <summary>Aufgabe 3.3.3: Stapel oder Schlange? <span class="niveau">AFB III</span></summary>
+                <p>Entscheide und begründe, ob ein Stapel oder eine Schlange besser geeignet ist: (a) Anfragen an eine Hotline, (b) die Zurück-Taste im Browser, (c) Prüfen, ob in einem HTML-Dokument alle Tags korrekt geschlossen sind, (d) die Reihenfolge, in der ein Navi Kreuzungen „schichtweise“ vom Startpunkt aus untersucht.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.3.4: Taschenrechner mit Postfix-Notation <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/postfix.py</code> – neu anlegen; die Klasse <code>Stack</code> holst du mit <code>from stack_knoten import Stack</code><br><strong>Commits:</strong> <code>3.3.4 Teil 2: postfix_auswerten für gültige Ausdrücke, Tests 1–5 ok</code> · <code>3.3.4 Teil 2: Fehlermeldungen ergänzt, alle 8 Tests ok</code></p>
+                <p>Manche Taschenrechner und viele Compiler werten Rechenausdrücke in der <strong>Postfix-Notation</strong> (umgekehrte polnische Notation) aus: Der Operator steht <em>hinter</em> seinen beiden Operanden. Aus <code>(3 + 4) * 2</code> wird <code>3 4 + 2 *</code>. Klammern sind dann überflüssig.</p>
+                <p>Auswertung mit einem Stapel: Zahlen werden aufgelegt. Bei einem Operator werden die zwei obersten Zahlen genommen – zuerst der <em>rechte</em> Operand b, dann der linke a –, und das Ergebnis a&nbsp;op&nbsp;b wird wieder aufgelegt. Am Ende liegt genau eine Zahl auf dem Stapel: das Ergebnis.</p>
+                <ol>
+                    <li>Zeichne den Stapelinhalt nach jedem Token für <code>5 1 2 + 4 * + 3 -</code>.</li>
+                    <li>Schreibe mit der Klasse <code>Stack</code> aus Beispiel 2 eine Funktion <code>postfix_auswerten(ausdruck)</code> für ganze Zahlen und die Operatoren <code>+ - * /</code>. Die Tokens sind durch Leerzeichen getrennt (<code>ausdruck.split()</code>). Fehlerhafte Ausdrücke sollen eine <code>ValueError</code> mit den Meldungen <code>"leerer Ausdruck"</code>, <code>"zu wenige Operanden"</code> bzw. <code>"zu viele Operanden"</code> auslösen.</li>
+                </ol>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>postfix_auswerten("3 4 + 2 *")</code></td><td><code>14</code></td><td></td></tr>
+                        <tr><td><code>postfix_auswerten("5 1 2 + 4 * + 3 -")</code></td><td><code>14</code></td><td></td></tr>
+                        <tr><td><code>postfix_auswerten("8 2 -")</code></td><td><code>6</code></td><td></td></tr>
+                        <tr><td><code>postfix_auswerten("8 2 /")</code></td><td><code>4.0</code></td><td></td></tr>
+                        <tr><td><code>postfix_auswerten("7")</code> (ein Element)</td><td><code>7</code></td><td></td></tr>
+                        <tr><td><code>postfix_auswerten("")</code></td><td><code>ValueError: leerer Ausdruck</code></td><td></td></tr>
+                        <tr><td><code>postfix_auswerten("3 +")</code></td><td><code>ValueError: zu wenige Operanden</code></td><td></td></tr>
+                        <tr><td><code>postfix_auswerten("2 3 4 +")</code></td><td><code>ValueError: zu viele Operanden</code></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p class="tipp">Prüfe die Operatoren mit <code>token in ("+", "-", "*", "/")</code>. Mit <code>token in "+-*/"</code> würde z.&nbsp;B. auch der Text <code>"+-"</code> als Operator durchgehen.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.3.5: Rückgängig und Wiederholen im Zeichenprogramm <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/zeichenprogramm.py</code> – neu anlegen; die Klasse <code>Stack</code> holst du mit <code>from stack_knoten import Stack</code><br><strong>Commits:</strong> <code>3.3.5: zeichne und rueckgaengig ergänzt</code> · <code>3.3.5: wiederholen und bild ergänzt, alle 6 Tests ok</code></p>
+                <p>Ein einfaches Zeichenprogramm merkt sich alle gezeichneten Formen. <kbd>Strg</kbd> + <kbd>Z</kbd> nimmt die zuletzt gezeichnete Form zurück, <kbd>Strg</kbd> + <kbd>Y</kbd> stellt die zuletzt zurückgenommene Form wieder her (siehe Praxisbezug oben).</p>
+                <p>Schreibe eine Klasse <code>Zeichenprogramm</code> mit den privaten Attributen <code>__undo</code> und <code>__redo</code> (zwei Objekte der Klasse <code>Stack</code> aus Beispiel 2). Die sichtbaren Formen sind genau die Formen auf <code>__undo</code>, die unterste zuerst gezeichnet.</p>
+                <ul>
+                    <li><code>zeichne(form)</code> legt die Form auf <code>__undo</code>. Eine neue Zeichenaktion macht alle bisher zurückgenommenen Aktionen ungültig, <code>__redo</code> wird geleert.</li>
+                    <li><code>rueckgaengig()</code> verschiebt die oberste Form von <code>__undo</code> nach <code>__redo</code> und gibt sie zurück; gibt es nichts zurückzunehmen, wird <code>None</code> zurückgegeben.</li>
+                    <li><code>wiederholen()</code> macht das Umgekehrte; gibt es nichts, wird <code>None</code> zurückgegeben.</li>
+                    <li><code>bild()</code> gibt eine <strong>neue</strong> Python-Liste der sichtbaren Formen zurück (zuerst gezeichnete vorn). Sie darf nur die Methoden von <code>Stack</code> benutzen, und <code>__undo</code> muss danach unverändert sein.</li>
+                </ul>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe (nacheinander)</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>p = Zeichenprogramm(); print(p.rueckgaengig(), p.bild())</code></td><td><code>None []</code></td><td></td></tr>
+                        <tr><td><code>p.zeichne("Kreis"); p.zeichne("Rechteck"); p.zeichne("Linie"); print(p.bild())</code></td><td><code>['Kreis', 'Rechteck', 'Linie']</code></td><td></td></tr>
+                        <tr><td><code>print(p.rueckgaengig()); print(p.rueckgaengig()); print(p.bild())</code></td><td><code>Linie</code>, <code>Rechteck</code>, <code>['Kreis']</code></td><td></td></tr>
+                        <tr><td><code>print(p.wiederholen()); print(p.bild())</code></td><td><code>Rechteck</code>, <code>['Kreis', 'Rechteck']</code></td><td></td></tr>
+                        <tr><td><code>p.zeichne("Stern"); print(p.wiederholen()); print(p.bild())</code></td><td><code>None</code>, <code>['Kreis', 'Rechteck', 'Stern']</code></td><td></td></tr>
+                        <tr><td><code>b = p.bild(); b.append("Hack"); print(p.bild())</code></td><td><code>['Kreis', 'Rechteck', 'Stern']</code></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p class="tipp">Für <code>bild()</code>: Stapele alle Formen von <code>__undo</code> auf einen Hilfsstapel um – dabei dreht sich die Reihenfolge – und lege sie beim Zurückstapeln wieder auf <code>__undo</code>.</p>
+            </details>
+        </div>

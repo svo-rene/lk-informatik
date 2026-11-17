@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 320 170" width="600" height="319">
+<title>Verkettete Liste</title>
+<style>
+text{font-family:"Segoe UI",Calibri,Arial,sans-serif;font-size:18px;fill:#1f2430}
+.mi{text-anchor:middle}.re{text-anchor:end}.m{font-family:Consolas,"Courier New",monospace}.b{font-weight:700}
+.s{font-size:14px;fill:#5b6472}.tr{fill:#d64545}.tg{fill:#2f9e57}.tb{fill:#1d4ed8}
+.k{fill:#fff;stroke:#1d4ed8;stroke-width:2.5}.k2{fill:#eef2ff;stroke:#1d4ed8;stroke-width:2.5}
+.hl{fill:#fdeceb;stroke:#d64545;stroke-width:2.5}.gr{fill:#e9f9ee;stroke:#2f9e57;stroke-width:2.5}
+.am{fill:#fff7e6;stroke:#b45309;stroke-width:2.5}.grau{fill:#eef0f4;stroke:#9aa3b2;stroke-width:2}
+.ln{fill:none;stroke:#1f2430;stroke-width:2.5}
+.pf{fill:none;stroke:#1d4ed8;stroke-width:2.5;marker-end:url(#pf)}
+.pfr{fill:none;stroke:#d64545;stroke-width:2.5;marker-end:url(#pfr)}
+.pfg{fill:none;stroke:#2f9e57;stroke-width:2.5;marker-end:url(#pfg)}
+.gestr{stroke-dasharray:7 6}
+</style>
+<defs>
+<marker id="pf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.4" markerHeight="4.4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker>
+<marker id="pfr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.4" markerHeight="4.4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d64545"/></marker>
+<marker id="pfg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.4" markerHeight="4.4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f9e57"/></marker>
+</defs><rect x="-10" y="-10" width="320" height="170" fill="#fff"/>
+
+<text class="s mi" x="32" y="36">head</text>
+<line class="pf" x1="32" y1="41" x2="32" y2="53"/>
+<rect class="k" x="10" y="55" width="45" height="36"/><rect class="k2" x="55" y="55" width="25" height="36"/>
+<text class="mi" x="32" y="79">A</text>
+<line class="pf" x1="70" y1="73" x2="108" y2="73"/>
+<rect class="k" x="110" y="55" width="45" height="36"/><rect class="k2" x="155" y="55" width="25" height="36"/>
+<text class="mi" x="132" y="79">B</text>
+<line class="pf" x1="170" y1="73" x2="208" y2="73"/>
+<rect class="k" x="210" y="55" width="45" height="36"/><rect class="grau" x="255" y="55" width="25" height="36"/>
+<text class="mi" x="232" y="79">C</text>
+<text class="s mi" x="150" y="125">Daten + Verweis next, Ende None</text>
+
+</svg>

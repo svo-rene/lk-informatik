@@ -1,0 +1,44 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.9.7: Noten verschlüsselt – und trotzdem lesbar <span class="niveau">AFB III</span></summary>
+                <p>Ein Notenserver verschlüsselt jede Note (1 bis 6) einzeln mit „Schulbuch-RSA“ und dem öffentlichen Schlüssel (e, n) = (3, 55) der Schulleitung. In der Datenbank stehen die Geheimtexte:</p>
+                <table class="gitter">
+                    <tr><th>Schüler</th><td>A</td><td>B</td><td>C</td><td>D</td></tr>
+                    <tr><th>Geheimtext</th><td>9</td><td>51</td><td>1</td><td>27</td></tr>
+                </table>
+                <ol type="a">
+                    <li>Zeige, dass ein Angreifer alle Noten ermitteln kann, ohne den privaten Schlüssel zu kennen und ohne n zu faktorisieren.</li>
+                    <li>Erläutere, welche Eigenschaften des Schulbuch-RSA er dabei ausnutzt. Gehe auch auf den Geheimtext 1 ein.</li>
+                    <li>Würde ein Modul mit 4096 Bit den Angriff verhindern? Begründe und beurteile, wie zufälliges Padding (OAEP) hilft.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.9.8: Fehler finden – der Test war doch grün <span class="niveau">AFB III</span></summary>
+                <p>Paul hat RSA programmiert und ist zufrieden, weil sein Test die richtige Zahl liefert:</p>
+                <pre><code class="language-python">from math import gcd
+
+def schluessel(p, q, e):
+    n = p * q
+    phi = (p - 1) * (q - 1)
+    if gcd(e, phi) != 1:
+        raise ValueError("e unzulässig")
+    d = pow(e, -1, n)
+    return (e, n), (d, n)
+
+oeff, priv = schluessel(5, 11, 3)
+c = 9 ** 3 % 55
+print(c, c ** priv[0] % 55)     # Ausgabe: 14 9  -> "funktioniert!"</code></pre>
+                <ol type="a">
+                    <li>Finde den Fehler in der Schlüsselerzeugung und berechne Pauls falsches d sowie das richtige d.</li>
+                    <li>Teste Pauls Programm von Hand mit m = 2 und zeige, dass es versagt.</li>
+                    <li>Erkläre, warum der Test mit m = 9 trotzdem das richtige Ergebnis liefert. Was folgt daraus für das Testen?</li>
+                    <li>Verbessere das Programm und gib eine sinnvolle Menge von Testfällen an (Eingabe, erwartete Ausgabe).</li>
+                </ol>
+                <p class="tipp">Zu c): Es gilt m<sup>e·d</sup> mod n. Überlege, welche Potenzen von 9 modulo 55 sich wiederholen.</p>
+            </details>
+        </div>

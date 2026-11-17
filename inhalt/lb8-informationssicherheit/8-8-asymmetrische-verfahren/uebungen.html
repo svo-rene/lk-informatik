@@ -1,0 +1,24 @@
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.8.3: Leicht hin, schwer zurück <span class="niveau">AFB II</span></summary>
+                <ol type="a">
+                    <li>Berechne 3<sup>13</sup> mod 17 durch fortgesetztes Quadrieren: Bestimme 3<sup>2</sup>, 3<sup>4</sup> und 3<sup>8</sup> modulo 17 und setze 3<sup>13</sup> daraus zusammen. Zähle die Multiplikationen.</li>
+                    <li>Jetzt umgekehrt: Gesucht ist x mit 3<sup>x</sup> mod 17 = 12, ohne dass du das Ergebnis aus a) benutzt. Beschreibe, wie du vorgehen musst, und gib an, wie viele Versuche du schlimmstenfalls brauchst.</li>
+                    <li>Schätze den Aufwand beider Richtungen für einen Modul mit 2048 Bit ab (Hinweis: Für das Quadrieren braucht man etwa so viele Schritte, wie der Exponent Bits hat). Erläutere, warum man von einer Einwegfunktion spricht.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.8.4: Faktorisieren durch Probieren <span class="niveau">AFB II</span></summary>
+                <ol type="a">
+                    <li>Schreibe eine Python-Funktion <code>faktorisiere(n)</code>, die für eine ungerade Zahl n den kleinsten Teiler t ≥ 3 durch Probedivision sucht und das Paar <code>(t, n // t)</code> zurückgibt. Ist n eine Primzahl, wird <code>None</code> zurückgegeben. Es genügt, Teiler bis √n zu prüfen.</li>
+                    <li>Weise die Funktion mit Testfällen nach (erwartete und tatsächliche Ausgabe): <code>faktorisiere(33)</code> → <code>(3, 11)</code>, <code>faktorisiere(221)</code> → <code>(13, 17)</code>, <code>faktorisiere(253)</code> → <code>(11, 23)</code>, <code>faktorisiere(97)</code> → <code>None</code>.</li>
+                    <li>Begründe, warum es reicht, bis √n zu suchen.</li>
+                    <li>Ein RSA-Modul hat 2048 Bit, seine beiden Primfaktoren haben je etwa 1024 Bit. Schätze ab, wie lange die Probedivision mit 10<sup>12</sup> Divisionen pro Sekunde dauert. Was folgt daraus für die Sicherheit von RSA?</li>
+                </ol>
+            </details>
+        </div>

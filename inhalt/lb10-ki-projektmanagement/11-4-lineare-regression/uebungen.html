@@ -1,0 +1,72 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/11-4_lineare_regression.ipynb" download>11-4_lineare_regression.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (JupyterLite der Schule; falls nicht erreichbar: <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.4.2: Optimale Gerade berechnen <span class="niveau">AFB III</span></summary>
+                <p>Berechne mit den Formeln aus Abschnitt 3.2 die optimale Regressionsgerade für die Punkte aus Aufgabe 11.4.1 und ihre Fehlerquadratsumme. Vergleiche mit dem Ergebnis von Aufgabe 11.4.1.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.4.4: Notebook bearbeiten <span class="niveau">AFB II</span></summary>
+                <p>Öffne das Notebook „Lineare Regression“ in JupyterLite (siehe Seite 10.4) und bearbeite alle enthaltenen Aufgaben. Achte besonders darauf, wie sich die Regressionsgerade verändert, wenn du sie mit einem Polynom hohen Grades vergleichst.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.4.5: Wie lange hält der Akku? <span class="niveau">AFB II</span></summary>
+                <p>Mia notiert an vier Schultagen, wie viele Stunden ihr Bildschirm bis 14 Uhr eingeschaltet war (x) und wie viel Prozent Akku dann noch übrig waren (y): (1|80), (2|66), (3|50), (4|36).</p>
+                <ol>
+                    <li>Berechne die Regressionsgerade mit den Formeln aus Abschnitt 3.2 und ihre Fehlerquadratsumme.</li>
+                    <li>Deute m und b im Sachzusammenhang.</li>
+                    <li>Sage den Akkustand für 2,5 Stunden Bildschirmzeit vorher.</li>
+                    <li>Nach wie vielen Stunden wäre der Akku laut Modell leer? Beurteile, wie verlässlich diese Vorhersage ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.4.8: Regression selbst programmieren <span class="niveau">AFB II</span></summary>
+                <p>Schreibe in Python (ohne Bibliotheken) zwei Funktionen:</p>
+                <ul>
+                    <li><code>regression(xs, ys)</code> gibt Steigung <code>m</code> und Achsenabschnitt <code>b</code> nach den Formeln aus Abschnitt 3.2 zurück.</li>
+                    <li><code>sse(xs, ys, m, b)</code> gibt die Fehlerquadratsumme zurück.</li>
+                </ul>
+                <p>Teste mit folgenden Fällen und trage jeweils die tatsächliche Ausgabe ein (auf 4 Stellen gerundet):</p>
+                <table>
+                    <thead>
+                        <tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>regression([1, 2, 3, 4], [3, 5, 6, 8])</code></td><td><code>(1.6, 1.5)</code></td><td></td></tr>
+                        <tr><td><code>sse([1, 2, 3, 4], [3, 5, 6, 8], 1.6, 1.5)</code></td><td><code>0.2</code></td><td></td></tr>
+                        <tr><td><code>regression([1, 3, 5], [4, 7, 9])</code></td><td><code>(1.25, 2.9167)</code></td><td></td></tr>
+                        <tr><td><code>regression([1, 2, 3, 4], [80, 66, 50, 36])</code></td><td>selbst berechnen (Aufgabe 11.4.5)</td><td></td></tr>
+                    </tbody>
+                </table>
+                <p class="tipp">Was passiert, wenn alle x-Werte gleich sind, z.&nbsp;B. <code>regression([2, 2, 2], [1, 2, 3])</code>? Fange diesen Fall ab.</p>
+            </details>
+        </div>

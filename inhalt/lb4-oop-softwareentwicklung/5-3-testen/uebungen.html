@@ -1,0 +1,187 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Was liefert die Hilfsfunktion? <span class="niveau">AFB I</span></summary>
+                <p>Was liefern <code>wirft_value_error(ist_unterpunktet, 0)</code> und <code>wirft_value_error(ist_unterpunktet, 99)</code>? Welchen Wert hat <code>argumente</code> jeweils innerhalb der Hilfsfunktion?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Bei 0 gibt es keinen Fehler (0 Punkte sind gültig), also <code>False</code>; <code>argumente</code> ist das Tupel <code>(0,)</code>. Bei 99 löst <code>ist_unterpunktet</code> einen <code>ValueError</code> aus, <code>except</code> fängt ihn ab, Ergebnis <code>True</code>; <code>argumente</code> ist <code>(99,)</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Richtige Antwort, falscher Zustand <span class="niveau">AFB II</span></summary>
+                <p>Mit der <em>fehlerhaften</em> Klasse <code>Aufzug</code> aus Beispiel 2 wird ausgeführt: <code>a = Aufzug()</code>, dann <code>a.einsteigen(250)</code>, <code>a.einsteigen(250)</code>, <code>a.einsteigen(200)</code>. Was liefert der dritte Aufruf, und welche Werte haben danach <code>a.last()</code> und <code>a.personen()</code>? Was ergäbe sich mit der korrigierten Methode?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Fehlerhaft: Der dritte Aufruf liefert <code>False</code> (700 ≥ 630) – das ist richtig. Trotzdem sind <code>a.last()</code> = 700 und <code>a.personen()</code> = 3, weil vor der Prüfung erhöht wurde. Korrigiert: ebenfalls <code>False</code>, aber <code>a.last()</code> = 500 und <code>a.personen()</code> = 2. Nur ein Test, der auch den Zustand prüft, sieht den Unterschied.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-3-1">
+            <details>
+                <summary>Aufgabe 5.3.1: Äquivalenzklassen und Grenzwerte – der Lesewettbewerb <span class="niveau">AFB I–II</span></summary>
+                <p>Beim Lesewettbewerb der Unterstufe gibt es für jedes gelesene Buch Punkte nach seiner Seitenzahl: unter 100 Seiten 1 Punkt, 100 bis 299 Seiten 2 Punkte, ab 300 Seiten 3 Punkte. Seitenzahlen unter 1 oder über 2000 sind Tippfehler (<code>ValueError</code>). Die Funktion heißt <code>lesepunkte(seiten: int) -&gt; int</code>.</p>
+                <ol type="a">
+                    <li>Gib alle Äquivalenzklassen an, kennzeichne gültige und ungültige und nenne je einen Vertreter.</li>
+                    <li>Gib alle Werte an, die bei der Grenzwertanalyse getestet werden, jeweils mit erwartetem Ergebnis.</li>
+                    <li>Begründe, warum die Vertreter aus a) allein nicht ausreichen.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-3-2">
+            <details>
+                <summary>Aufgabe 5.3.2: Eine Testdatei schreiben und den Fehler finden <span class="niveau">AFB II</span></summary>
+                <p>So hat ein Mitschüler <code>lesepunkte</code> aus Aufgabe 5.3.1 programmiert:</p>
+                <pre><code class="language-python"># lesepunkte.py
+def lesepunkte(seiten: int) -&gt; int:
+    if seiten &lt; 1 or seiten &gt;= 2000:
+        raise ValueError("Seitenzahl ungültig")
+    if seiten &lt;= 100:
+        return 1
+    elif seiten &lt; 300:
+        return 2
+    return 3</code></pre>
+                <ol>
+                    <li>Speichere das Modul in Thonny und lege daneben <code>test_lesepunkte.py</code> an: eine Testfunktion für die Vertreter, eine für die gültigen Grenzwerte, eine für die ungültigen Grenzwerte (mit <code>wirft_value_error</code>) und den Testrunner. Alle Meldungen im Muster „erwartet …, tatsächlich …“.</li>
+                    <li>Führe die Tests aus und notiere die Ausgabe.</li>
+                    <li>Korrigiere das Modul, bis alle Tests bestehen. Notiere, wie viele Fehler es gab und durch welchen Test du jeden gefunden hast.</li>
+                </ol>
+                <p class="tipp">Wenn du in einer Testfunktion mehrere Grenzwerte in einer Schleife prüfst und einer davon einen <code>ValueError</code> auslöst, bricht der Test mit einer Fehlermeldung ab. Fange das mit <code>try</code>/<code>except ValueError</code> ab und setze dann <code>ergebnis = "ValueError"</code>.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-3-3">
+            <details>
+                <summary>Aufgabe 5.3.3: Eine Klasse testen – die Stempelkarte <span class="niveau">AFB II–III</span></summary>
+                <p>Das Schülercafé gibt Stempelkarten aus: Für jedes Getränk gibt es einen Stempel, höchstens 10. Eine volle Karte (genau 10 Stempel) kann gegen ein Gratisgetränk eingelöst werden; danach hat sie wieder 0 Stempel. Auf eine volle Karte kommt kein weiterer Stempel.</p>
+                <pre><code class="language-python"># stempelkarte.py
+class Stempelkarte:
+    MAX_STEMPEL = 10
+
+    def __init__(self):
+        self.__stempel = 0
+
+    def get_stempel(self) -&gt; int:
+        return self.__stempel
+
+    def stempeln(self) -&gt; bool:
+        if self.__stempel &lt;= Stempelkarte.MAX_STEMPEL:
+            self.__stempel += 1
+            return True
+        return False
+
+    def ist_voll(self) -&gt; bool:
+        return self.__stempel == Stempelkarte.MAX_STEMPEL
+
+    def einloesen(self) -&gt; bool:
+        if self.ist_voll():
+            self.__stempel = 0
+            return True
+        return False</code></pre>
+                <ol>
+                    <li>Lege eine Tabelle der Testfälle an (Ausgangszustand, Aufruf, erwartete Rückgabe, erwarteter Zustand danach). Berücksichtige die Grenzen 9/10/11 Stempel und das Einlösen einer nicht vollen Karte.</li>
+                    <li>Schreibe <code>test_stempelkarte.py</code>. Tipp: Eine Hilfsfunktion <code>karte_mit(anzahl: int) -&gt; Stempelkarte</code>, die eine Karte mit der gewünschten Zahl von Stempeln liefert, spart viele Zeilen.</li>
+                    <li>Führe die Tests aus, finde den Fehler und korrigiere ihn.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-5-3-4">
+            <details>
+                <summary>Aufgabe 5.3.4: Ergebnis prüfen – Schaltjahre <span class="niveau">AFB II</span></summary>
+                <p>Ein Jahr ist ein Schaltjahr, wenn es durch 4 teilbar ist – außer es ist durch 100 teilbar. Durch 400 teilbare Jahre sind aber wieder Schaltjahre (2000 ja, 1900 nein).</p>
+                <pre><code class="language-python"># kalender.py
+def ist_schaltjahr(jahr: int) -&gt; bool:
+    return jahr % 4 == 0 and jahr % 100 != 0</code></pre>
+                <pre><code class="language-python"># test_kalender.py
+from kalender import ist_schaltjahr
+
+def test_normales_jahr():
+    assert ist_schaltjahr(2023) == False, "2023: erwartet False, tatsächlich True"
+
+def test_vielfaches_von_4():
+    ergebnis = ist_schaltjahr(2024)
+    assert ergebnis == True, f"2024: erwartet True, tatsächlich {ergebnis}"
+
+def test_jahrhundert():
+    ergebnis = ist_schaltjahr(1900)
+    assert ergebnis == False, f"1900: erwartet False, tatsächlich {ergebnis}"
+
+def test_vierhundert():
+    ergebnis = ist_schaltjahr(2000)
+    assert ergebnis == True, f"2000: erwartet True, tatsächlich {ergebnis}"
+
+if __name__ == "__main__":
+    tests = [test_normales_jahr, test_vielfaches_von_4, test_jahrhundert, test_vierhundert]
+    fehler = 0
+    for test in tests:
+        try:
+            test()
+            print("ok     ", test.__name__)
+        except AssertionError as meldung:
+            print("FEHLER ", test.__name__, "–", meldung)
+            fehler += 1
+    print(f"{len(tests) - fehler} von {len(tests)} Tests bestanden")</code></pre>
+                <ol type="a">
+                    <li>Sage die vollständige Ausgabe von <code>test_kalender.py</code> vorher, ohne das Programm zu starten. Prüfe danach in Thonny.</li>
+                    <li>Korrigiere <code>ist_schaltjahr</code>.</li>
+                    <li>Die Meldung in <code>test_normales_jahr</code> ist anders gebaut als die anderen. Erkläre, warum sie irreführend sein kann.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-3-6">
+            <details>
+                <summary>Aufgabe 5.3.6: Von Akzeptanzkriterien zu Tests – das AG-Brett <span class="niveau">AFB II</span></summary>
+                <p>In Beispiel 1 auf Seite 5.2 stehen drei Akzeptanzkriterien für das digitale AG-Brett. Das Team hat dazu zwei Model-Klassen geschrieben:</p>
+                <pre><code class="language-python"># ag.py  (Model)
+class AG:
+    MAX_PLAETZE = 20
+
+    def __init__(self, name: str, tag: str, uhrzeit: str, raum: str):
+        self.name = name
+        self.tag = tag
+        self.uhrzeit = uhrzeit          # "HH:MM"
+        self.raum = raum
+        self.__belegt = 0
+
+    def anmelden(self) -&gt; bool:
+        if self.__belegt &lt; AG.MAX_PLAETZE:
+            self.__belegt += 1
+            return True
+        return False
+
+    def ist_voll(self) -&gt; bool:
+        return self.__belegt == AG.MAX_PLAETZE</code></pre>
+                <pre><code class="language-python"># ag_brett.py  (Model)
+from ag import AG
+
+def uhrzeit_von(ag: AG) -&gt; str:
+    return ag.uhrzeit
+
+class AGBrett:
+    def __init__(self):
+        self.__ags: list[AG] = []
+
+    def hinzufuegen(self, ag: AG) -&gt; None:
+        self.__ags.append(ag)
+
+    def ags_am(self, tag: str) -&gt; list[AG]:
+        treffer = []
+        for ag in self.__ags:
+            if ag.tag == tag:
+                treffer.append(ag)
+        return sorted(treffer, key=uhrzeit_von)</code></pre>
+                <ol>
+                    <li>Schreibe <code>test_ag_brett.py</code> mit je einer Testfunktion pro Akzeptanzkriterium. Füge die AGs absichtlich <em>nicht</em> in der Reihenfolge der Uhrzeit hinzu. Die Ausgabe „Am Freitag gibt es keine AG.“ ist Sache der View – prüfe im Model, dass <code>ags_am("Freitag")</code> eine leere Liste liefert.</li>
+                    <li>Ergänze einen Test für die 21. Anmeldung bei einer vollen AG.</li>
+                    <li>Die Uhrzeit ist als Text gespeichert. Finde eine Eingabe, bei der die Sortierung falsch wäre, und schreibe einen Test dafür. Wie könnte das Team das verhindern?</li>
+                </ol>
+            </details>
+        </div>

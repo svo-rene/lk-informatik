@@ -1,0 +1,257 @@
+<p>In 3.6b hast du im Wegenetz eine Tour gesucht: vorwärts gehen, bei einer Sackgasse zurück, den nächsten Weg probieren. Dort lag der Baum fertig im Speicher. Auf dieser Seite geht es weiter – erst in einem Graphen, in dem es Kreise gibt, dann bei Belegungsproblemen wie Klausurplan, Sudoku oder N-Damen. Dort ist gar kein Baum gespeichert: Der Baum der Möglichkeiten entsteht erst beim Suchen.</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in zwei Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und zeichne oder tippe mit.</p>
+
+<ol class="schritte">
+            <li>Vom Baum zum Graphen: <code>find_path</code> – danach Aufgabe 3.10.1</li>
+            <li>Belegungsprobleme: Klausurtermine planen – danach Aufgabe 3.10.2</li>
+        </ol>
+
+<p class="git-datei"><strong>Zum Mittippen:</strong> <code>3_graphen/wegsuche.py</code> (Schritt 1, weiter in 3.10.1) und <code>3_graphen/klausurplan.py</code> (Schritt 2, weiter in 3.10.6) – neu anlegen.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.10 Schritt 1: find_path rekursiv</code> · <code>3.10 Schritt 2: Klausurplan mit Backtracking</code> (Regeln auf Seite 3.0.2)</p>
+
+<p>Am Ende findest du den Praxisbezug und alle weiteren Aufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Vom Baum zum Graphen – <code>find_path</code></h2>
+
+<p>Im Baum führt zu jedem Knoten genau ein Weg. In einem Graphen gibt es Kreise: Von 0 kommt man zu 1 und von 1 wieder zu 0. Eine Suche, die einfach jeden Nachbarn probiert, liefe dort endlos im Kreis. <code>find_path</code> überspringt deshalb alle Knoten, die schon im Pfad sind – sonst ist es dieselbe Suche wie in 3.6b. Achte im Video außerdem darauf, warum <code>path + [start]</code> eine <em>neue</em> Liste erzeugt: In 3.6b wurde stattdessen mit <code>append</code> und <code>pop</code> zurückgenommen.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-10-1_find_path_vorschau.png" src="../vid/3-10-1_find_path.mp4"></video><a href="../vid/3-10-1_find_path.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Vom Baum zum Graphen – <code>find_path</code> in Thonny (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>3_graphen/wegsuche.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>Graph</code> und die Methoden <code>add_edge</code> und <code>find_path</code>. Starte mit F5 und vergleiche die Ausgabe mit dem Video. Danach committen, z.&nbsp;B. <code>3.10 Schritt 1: Graph, add_edge, find_path angelegt</code>.</p>
+
+<p>Zum Nachlesen:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> einen Weg im Graphen finden</summary>
+        <p>Gegeben ist ein <strong>ungerichteter</strong>, ungewichteter Graph. Wir wollen <strong>einen</strong> Weg von einem Startknoten zu einem Zielknoten finden. Die Tiefensuche liefert dabei den ersten Weg, den sie findet – das ist <strong>nicht unbedingt der kürzeste</strong>.</p>
+
+        <pre><code>Adjazenzmatrix (symmetrisch, da ungerichtet):
+
+   0  1  2  3  4
+0  0  1  1  0  0
+1  1  0  0  0  0
+2  1  0  0  1  1
+3  0  0  1  0  1
+4  0  0  1  1  0
+
+Adjazenzliste (in der Reihenfolge, in der die Kanten eingefügt werden):
+
+0: [1, 2]
+1: [0]
+2: [0, 3, 4]
+3: [2, 4]
+4: [3, 2]</code></pre>
+
+        <pre><code class="language-python">class Graph:
+    def __init__(self, size):
+        self.size = size
+        self.graph = []
+        for i in range(size):
+            self.graph.append([])
+
+    def add_edge(self, u, v):
+        # ungerichtet: Kante in beide Richtungen eintragen
+        self.graph[u].append(v)
+        self.graph[v].append(u)
+
+    def find_path(self, start, end, path=None):
+        if path is None:
+            path = []
+        path = path + [start]              # neuer Pfad, der alte bleibt erhalten
+        if start == end:
+            return path                    # Ziel erreicht
+        for neighbor in self.graph[start]:
+            if neighbor not in path:       # keine Kreise laufen
+                new_path = self.find_path(neighbor, end, path)
+                if new_path is not None:
+                    return new_path        # Lösung nach oben durchreichen
+        return None                        # Sackgasse: zurück (Backtracking)
+
+# Beispiel der Verwendung
+num_nodes = 5
+g = Graph(num_nodes)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(2, 3)
+g.add_edge(3, 4)
+g.add_edge(2, 4)
+
+start_node = 0
+end_node = 4
+path = g.find_path(start_node, end_node)
+
+if path is not None:
+    print("Pfad von", start_node, "nach", end_node, "ist", path)
+else:
+    print("Kein Pfad von", start_node, "nach", end_node, "gefunden.")
+# Ausgabe: Pfad von 0 nach 4 ist [0, 2, 3, 4]</code></pre>
+
+        <p>Die Suche probiert zuerst den Nachbarn 1 – eine Sackgasse – und kehrt zurück. Über 2 geht sie weiter zu 3 und von dort zu 4. Der kürzere Weg [0, 2, 4] wird nicht gefunden, weil 3 in der Nachbarliste von 2 vor 4 steht. Den Weg mit den wenigsten Kanten liefert die Breitensuche (siehe 3.8).</p>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 3.10.1 – alle Aufrufe von <code>find_path(0, 4)</code> notieren.</p>
+
+<h2 id="schritt-2">Schritt 2: Belegungsprobleme – der Baum entsteht beim Suchen</h2>
+
+<p>Viele Rätsel und Planungsaufgaben bestehen darin, freie Plätze so zu belegen, dass Regeln eingehalten werden. Beispiele sind Damen auf einem Schachbrett, Ziffern in einem Sudoku oder Farben auf einer Landkarte. Hier ist kein Baum gespeichert: Jede Entscheidung („Mathe schreibt am Montag“) ist ein Schritt nach unten in einem gedachten Baum aller Möglichkeiten. Backtracking löst solche Aufgaben immer nach demselben Muster – es ist das Muster aus <code>__tour</code> in 3.6b: prüfen, setzen, rekursiv weiter, zurücknehmen.</p>
+
+<figure>
+            <img src="../img/skizze_backtracking.svg" width="450" alt="Entscheidungsbaum mit zwei Sackgassen, einem Rücksprung und einer Lösung">
+            <figcaption>Abb. 1: Führt eine Entscheidung in eine Sackgasse (X), geht der Algorithmus zur letzten Entscheidung zurück und probiert die nächste Möglichkeit.</figcaption>
+        </figure>
+
+<pre><code class="language-python">def loese(zustand):
+    platz = naechster_freier_platz(zustand)
+    if platz is None:
+        return True                      # alles belegt
+    for kandidat in kandidaten(platz):
+        if ist_zulaessig(zustand, platz, kandidat):
+            setze(zustand, platz, kandidat)
+            if loese(zustand):
+                return True
+            entferne(zustand, platz)     # Rücknahme
+    return False                         # Sackgasse</code></pre>
+
+<p>Im Video wird das Muster an Beispiel 2 angewendet: Fünf Kurse bekommen Klausurtermine, Kurse mit gemeinsamen Schülerinnen und Schülern dürfen nicht am selben Tag schreiben. Achte darauf, wo die erste Sackgasse auftritt, welche Einträge zurückgenommen werden und warum die Ursache weiter vorn liegt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-10-2_klausurtermine_vorschau.png" src="../vid/3-10-2_klausurtermine.mp4"></video><a href="../vid/3-10-2_klausurtermine.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Backtracking – Klausurtermine planen (ca. 2 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen mit Programm und Ablauftabelle:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Klausurtermine planen</summary>
+            <p><strong>Ausgangssituation:</strong> Fünf Kurse sollen ihre Klausur in derselben Woche schreiben, zur Verfügung stehen nur Montag, Dienstag und Mittwoch. Zwei Kurse, die gemeinsame Schülerinnen oder Schüler haben, stehen „in Konflikt“ und dürfen nicht am selben Tag schreiben. Mathematik (Ma) schreiben alle, außerdem gibt es Konflikte zwischen Physik (Ph) und Deutsch (De), Informatik (Inf) und Englisch (En) sowie Deutsch und Englisch. Das ist ein Belegungsproblem: Die <strong>Plätze</strong> sind die Kurse, die <strong>Kandidaten</strong> die Tage, die <strong>Regel</strong> lautet „kein Konfliktkurs am selben Tag“. Als Graph betrachtet: Kurse sind Knoten, Konflikte sind Kanten, und benachbarte Knoten brauchen verschiedene „Farben“.</p>
+            <pre><code class="language-python">KONFLIKTE = {
+    "Ma":  ["Ph", "Inf", "De", "En"],
+    "Ph":  ["Ma", "De"],
+    "Inf": ["Ma", "En"],
+    "De":  ["Ma", "Ph", "En"],
+    "En":  ["Ma", "Inf", "De"],
+}
+TERMINE = ["Mo", "Di", "Mi"]
+aufrufe = 0
+
+def termin_erlaubt(plan, kurs, termin):
+    # Prüffunktion: Hat ein Konfliktkurs schon diesen Termin?
+    for anderer in KONFLIKTE[kurs]:
+        if anderer in plan and plan[anderer] == termin:
+            return False
+    return True
+
+def plane(kurse, i, plan):
+    global aufrufe
+    aufrufe += 1
+    if i == len(kurse):
+        return True                       # alle Kurse haben einen Termin
+    kurs = kurse[i]
+    for termin in TERMINE:
+        if termin_erlaubt(plan, kurs, termin):
+            plan[kurs] = termin           # setzen
+            if plane(kurse, i + 1, plan):
+                return True
+            del plan[kurs]                # Rücknahme
+    return False                          # Sackgasse: zurück zum vorigen Kurs
+
+plan = {}
+print(plane(["Ma", "Ph", "Inf", "De", "En"], 0, plan), aufrufe)
+print(plan)
+# True 8
+# {'Ma': 'Mo', 'Ph': 'Di', 'Inf': 'Mi', 'De': 'Mi', 'En': 'Di'}</code></pre>
+            <p><strong>Ablauf</strong> (Reihenfolge Ma, Ph, Inf, De, En):</p>
+            <table>
+                <thead><tr><th>Aufruf</th><th>Kurs</th><th>geprüft</th><th>Aktion</th><th>Plan danach</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>Ma</td><td>Mo ✓</td><td>setzen</td><td>Ma Mo</td></tr>
+                    <tr><td>2</td><td>Ph</td><td>Mo ✗ (Ma), Di ✓</td><td>setzen</td><td>Ma Mo, Ph Di</td></tr>
+                    <tr><td>3</td><td>Inf</td><td>Mo ✗ (Ma), Di ✓</td><td>setzen</td><td>… Inf Di</td></tr>
+                    <tr><td>4</td><td>De</td><td>Mo ✗ (Ma), Di ✗ (Ph), Mi ✓</td><td>setzen</td><td>… Inf Di, De Mi</td></tr>
+                    <tr><td>5</td><td>En</td><td>Mo ✗ (Ma), Di ✗ (Inf), Mi ✗ (De)</td><td><strong>Sackgasse</strong>, <code>False</code></td><td>unverändert</td></tr>
+                    <tr><td>(4)</td><td>De</td><td>kein Tag mehr übrig</td><td><strong>Rücknahme</strong> De, <code>False</code></td><td>Ma Mo, Ph Di, Inf Di</td></tr>
+                    <tr><td>(3)</td><td>Inf</td><td>Mi ✓</td><td><strong>Rücknahme</strong> Inf Di, neu Inf Mi</td><td>Ma Mo, Ph Di, Inf Mi</td></tr>
+                    <tr><td>6</td><td>De</td><td>Mo ✗, Di ✗, Mi ✓ (kein Konflikt mit Inf)</td><td>setzen</td><td>… De Mi</td></tr>
+                    <tr><td>7</td><td>En</td><td>Mo ✗ (Ma), Di ✓</td><td>setzen</td><td>… En Di</td></tr>
+                    <tr><td>8</td><td>–</td><td><code>i == 5</code></td><td>Lösung, <code>True</code></td><td>vollständig</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><em>Was:</em> Jeder Kurs bekommt den ersten Tag, den die Prüffunktion erlaubt. <em>Warum:</em> Die Prüfung vor dem Setzen verhindert, dass ungültige Teilpläne weiter ausgebaut werden.</li>
+                <li><em>Was:</em> Bei Englisch passt kein Tag, der Aufruf meldet <code>False</code>. <em>Warum:</em> Die Ursache liegt weiter vorn – Informatik am Dienstag blockiert zusammen mit Mathe und Deutsch alle drei Tage.</li>
+                <li><em>Was:</em> Deutsch hat keine Alternative und wird mit <code>del</code> zurückgenommen, Informatik probiert den nächsten Tag. <em>Warum:</em> Ohne Rücknahme stünde Deutsch noch mit einem veralteten Termin im Plan und könnte spätere Prüfungen verfälschen (siehe Aufgabe 3.10.7).</li>
+                <li><em>Was:</em> Mit Informatik am Mittwoch gelingt der Rest ohne weitere Sackgasse.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Montag Ma; Dienstag Ph und En; Mittwoch Inf und De – nach 8 Aufrufen und 2 Rücknahmen. <strong>Probe:</strong> Alle sieben Konfliktpaare (Ma–Ph, Ma–Inf, Ma–De, Ma–En, Ph–De, Inf–En, De–En) liegen an verschiedenen Tagen.</p>
+            <p><strong>Beschleunigungsmaßnahmen beurteilen:</strong></p>
+            <ul>
+                <li><strong>Reihenfolge nach Anzahl der Konflikte</strong> (Ma 4, De 3, En 3, Ph 2, Inf 2): Mit der Liste <code>["Ma", "De", "En", "Ph", "Inf"]</code> findet <code>plane</code> die Lösung Ma Mo, De Di, En Mi, Ph Mi, Inf Di nach 6 Aufrufen ohne jede Rücknahme. Stark eingeschränkte Kurse zuerst zu planen, deckt Konflikte früh auf. Das ist eine Faustregel, keine Garantie.</li>
+                <li><strong>Vorausschau:</strong> Nach jedem Setzen prüfen, ob jeder noch offene Kurs mindestens einen erlaubten Tag hat. Im Beispiel wäre schon nach „Inf Di, De Mi“ erkennbar, dass für Englisch nichts übrig bleibt. Jeder Aufruf kostet dann mehr Prüfarbeit, dafür wird der Suchbaum kleiner – bei großen Plänen lohnt sich das meist.</li>
+                <li><strong>Grenzen:</strong> Beide Maßnahmen verkleinern den Suchbaum, ändern aber nichts daran, dass er im schlechtesten Fall exponentiell mit der Zahl der Kurse wächst (siehe 2.2.10).</li>
+            </ul>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 3.10.2 – das N-Damen-Problem nach demselben Muster.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Rätsel, Stundenpläne und Chipdesign</summary>
+                <p>
+                    <strong>Alltag:</strong> Sudoku-Apps prüfen mit Backtracking, ob ein Rätsel genau eine Lösung hat, und erzeugen daraus neue Rätsel. Auch die Planung eines Turniers, bei dem kein Team zweimal hintereinander spielen soll, ist ein Belegungsproblem.<br><br>
+                    <strong>Beruf:</strong> Stundenplan- und Dienstplansoftware für Schulen, Kliniken oder Verkehrsbetriebe verwendet Backtracking kombiniert mit geschickten Regeln („Constraint Programming“). In der Halbleiterindustrie – etwa in den Dresdner Chipfabriken – werden bei der Verdrahtung von Chips und der Belegung von Maschinen ähnliche Such- und Optimierungsverfahren eingesetzt.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Backtracking</strong> ist ein Verfahren zur systematischen Suche nach Lösungen kombinatorischer Probleme: Man trifft schrittweise Entscheidungen, springt zurück, sobald eine Entscheidung in eine Sackgasse führt, und erforscht die nächste Alternative, bis eine gültige Lösung gefunden oder ausgeschlossen ist. Backtracking ist eine Tiefensuche im Baum aller möglichen Entscheidungen.
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>Backtracking-Muster für Belegungsprobleme:</strong><br>
+            1. Wähle den nächsten freien Platz. Gibt es keinen mehr, ist eine Lösung gefunden.<br>
+            2. Probiere nacheinander alle Kandidaten für diesen Platz.<br>
+            3. Prüfe, ob der Kandidat die Regeln verletzt. Nur zulässige Kandidaten werden gesetzt.<br>
+            4. Löse den Rest rekursiv. Klappt das, ist man fertig.<br>
+            5. Klappt es nicht, nimm den Kandidaten wieder zurück und probiere den nächsten.<br>
+            6. Passt kein Kandidat, melde einen Misserfolg an die aufrufende Ebene zurück.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Zweimal zurück <span class="niveau">AFB I</span></summary>
+                <p>Ein Graph hat die Nachbarlisten 0: [1, 3] · 1: [0, 2] · 2: [1] · 3: [0]. Gesucht ist ein Weg von 0 nach 3; die Nachbarn werden in der Reihenfolge der Liste probiert und Knoten im Pfad übersprungen. Notiere die Pfade, die nacheinander entstehen. Wo wird zurückgegangen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>[0] → [0, 1] → [0, 1, 2]. Von 2 aus ist nur 1 erreichbar, und die ist schon im Pfad: Sackgasse, zurück zu 1. Auch 1 hat keine weitere Möglichkeit: zurück zu 0. Dann [0, 3] – Ziel. Zurückgegangen wird also zweimal.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Neue Liste oder dieselbe? <span class="niveau">AFB I</span></summary>
+                <p>Was gibt <code>print(a, path)</code> aus? Überlege erst, dann probiere es in Thonny aus. Warum verwendet <code>find_path</code> <code>path = path + [start]</code> und nicht <code>path.append(start)</code>?</p>
+                <pre><code class="language-python">path = [0]
+a = path + [1]
+path.append(5)
+print(a, path)</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[0, 1] [0, 5]</code> – <code>+</code> erzeugt eine neue Liste, <code>append</code> ändert die vorhandene. Mit <code>append</code> würden alle Aufrufe dieselbe Liste verändern: Nach einer Sackgasse stünde der Knoten noch im Pfad des Aufrufers.</p>
+                </details>
+            </details>
+        </div>

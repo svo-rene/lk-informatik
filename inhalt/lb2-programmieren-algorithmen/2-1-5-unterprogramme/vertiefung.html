@@ -1,0 +1,43 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.5.6: Fehler finden – drei Fehler in zwei Unterprogrammen <span class="niveau">AFB III</span></summary>
+                <pre><code class="language-python">def mittelwert(liste):
+    summe = 0
+    for x in liste:
+        summe = summe + x
+        return summe / len(liste)
+
+def bewerte(liste):
+    m = mittelwert(liste)
+    if m &gt;= 5:
+        print("bestanden")
+    else:
+        print("nicht bestanden")
+
+ergebnis = bewerte([3, 9, 6])
+print("Ergebnis:", ergebnis)</code></pre>
+                <ol>
+                    <li>Gib die tatsächliche Ausgabe des Programms an und vergleiche sie mit der beabsichtigten.</li>
+                    <li>Fülle eine Testtabelle (Eingabe | erwartete Ausgabe | tatsächliche Ausgabe) für <code>mittelwert</code> mit <code>[3, 9, 6]</code>, <code>[6]</code>, <code>[-2, 2]</code> und <code>[]</code>.</li>
+                    <li>Erkläre, warum der Test mit <code>[6]</code> den Hauptfehler nicht aufdeckt.</li>
+                    <li>Beschreibe alle drei Fehler und korrigiere das Programm so, dass <code>ergebnis</code> den Text „bestanden“ bzw. „nicht bestanden“ enthält und eine leere Liste nicht zum Absturz führt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.5.7: Eigenes Modul für CSV-Dateien <span class="niveau">AFB III</span></summary>
+                <p>In vielen Programmen dieses Kurses werden CSV-Dateien gelesen (siehe Seite 2.1.4). Statt den Lesecode jedes Mal neu zu schreiben, soll ein Modul <code>csv_werkzeug.py</code> entstehen.</p>
+                <ol>
+                    <li>Entwirf die Funktion <code>lade_spalte(dateiname, spalte)</code>. Sie liefert die Werte der Spalte mit dem Index <code>spalte</code> als Liste von Texten, ohne Kopfzeile und ohne Leerzeilen. Ist die Spaltennummer in einer Zeile zu groß, wird diese Zeile übersprungen. Fehlt die Datei, gibt die Funktion <code>None</code> zurück.</li>
+                    <li>Entwirf die Prozedur <code>speichere_tabelle(dateiname, kopf, zeilen)</code>. Dabei ist <code>kopf</code> eine Liste von Spaltennamen und <code>zeilen</code> eine Liste von Listen.</li>
+                    <li>Importiere beide Unterprogramme in einem Hauptprogramm. Lies die Punkte aus <code>punkte.csv</code> (Beispiel 3 auf Seite 2.1.4) und speichere eine Tabelle mit Name und Punkten.</li>
+                    <li>Lege eine Testtabelle mit mindestens vier Fällen an, darunter eine fehlende Datei und eine zu große Spaltennummer.</li>
+                    <li>Beurteile, ob <code>lade_spalte</code> bei einer fehlenden Datei besser <code>None</code> oder eine leere Liste zurückgeben sollte.</li>
+                </ol>
+                <p class="tipp">Eine fehlende Datei fängst du so ab: <code>try:</code> … <code>except FileNotFoundError:</code> <code>return None</code>.</p>
+            </details>
+        </div>

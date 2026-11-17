@@ -1,0 +1,300 @@
+<p>In diesem Lernbereich arbeitest du sowohl theoretisch als auch praktisch mit den Grundlagen von Rechnernetzen. Du erstellst dazu ein eigenes Lerndokument (PDF) und setzt die Inhalte mit der Simulationssoftware &bdquo;Filius&ldquo; um. Zus&auml;tzlich planst du im Team ein Netzwerkprojekt. Ziel ist es, ein fundiertes Verst&auml;ndnis f&uuml;r Netzwerktechnologien, Adressierung, Routing, Dienste und Sicherheit zu entwickeln.</p>
+
+<p>Gruppengr&ouml;&szlig;e: 1&ndash;3 Personen</p>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: Wo finde ich was?</summary>
+<ul>
+<li>A. Schichtenmodell: 7.3 (OSI, TCP/IP, hybrides Modell), Einzelschichten in 7.4, 7.5, 7.9 und 7.10</li>
+<li>B. Topologien und &Uuml;bertragungsmedien: 7.1; Dienste und Vermittlungsverfahren: 7.2; Protokolle HTTP/HTTPS, SMTP/POP3/IMAP, FTP: 7.10</li>
+<li>C. IP-Adressen (IPv4, IPv6), Routingtabellen: 7.5; DHCP: 7.7</li>
+<li>D. CIDR, Subnetting, VLSM: 7.6; DNS: 7.8</li>
+<li>E. Authentifizierung: 7.12; Transportverschl&uuml;sselung (TLS, VPN): 7.11 (siehe Kurs „Informationssicherheit“, Seite 7.11 bzw. 7.12)</li>
+<li>Filius: 7.13 (P1, Gateway), 7.14 (P6, Routingtabellen), 7.15 (P2, DHCP), 7.16 (P3/P4, DNS und Webserver); Fehlersuche: Aufgabe 7.5.3</li>
+</ul>
+</details>
+</div>
+
+<h2>Theorie &ndash; Dein Lerndokument</h2>
+
+<p>Erstelle ein fortlaufendes Lerndokument mit eigenen Erkl&auml;rungen, Skizzen, Zusammenfassungen und Beispielen. Dieses gibst du am Ende als PDF ab. Behandle dabei die folgenden Themen:</p>
+
+<h3>A. Schichtenmodell (OSI und TCP/IP)</h3>
+
+<ul>
+<li>Erkl&auml;re den Aufbau des <strong>OSI-Modells</strong> mit 7 Schichten.</li>
+<li>Vergleiche es mit dem <strong>TCP/IP-Modell</strong>.</li>
+<li>Wof&uuml;r sind diese Schichtenmodelle gut?</li>
+</ul>
+
+<h3>B. Aufbau von Rechnernetzen</h3>
+
+<ul>
+<li>Netztopologien: Baum, Stern, Ring, Bus, vermaschte Topologie &ndash; jeweils physisch und logisch, mit Vor- und Nachteilen</li>
+<li>&Uuml;bertragungsmedien: Funk, Kupferkabel, Lichtwellenleiter &ndash; Unterschiede, Einsatzgebiete</li>
+<li>Dienste: zentralisierte (z. B. DHCP, Messenger, E-Mail, DNS) vs. dezentralisierte (z. B. Blockchain)</li>
+<li>Protokolle: HTTP/HTTPS, SMTP/POP3/IMAP, FTP</li>
+<li>Vermittlungsverfahren: Nachrichtenvermittlung, Paketvermittlung, Datagrammprinzip</li>
+</ul>
+
+<h3>C. Adressierung und Routing</h3>
+
+<ul>
+<li>IP-Adressen: IPv4 und IPv6 (Schwerpunkt IPv4), Netzanteil und Hostanteil</li>
+<li>Routingtabellen: Aufbau, Funktionsweise</li>
+<li>Adressvergabe: manuell vs. dynamisch per DHCP</li>
+</ul>
+
+<h3>D. Netzwerksegmentierung &amp; Namen</h3>
+
+<ul>
+<li>CIDR, Subnetting, VLSM &ndash; Grundlagen und Anwendung</li>
+<li>VLANs &ndash; Trennung von Netzbereichen</li>
+<li>DNS &ndash; Aufbau, Namensaufl&ouml;sung</li>
+</ul>
+
+<h3>E. Sicherheit in Rechnernetzen</h3>
+
+<ul>
+<li>Identifikation und Authentifizierung: RADIUS, Zwei-Faktor-Verfahren, biometrische Verfahren</li>
+<li>Sicherheitsrisiken in Netzwerken und Schutzma&szlig;nahmen</li>
+</ul>
+
+<h2>Praxis &ndash; &Uuml;bungen mit Filius</h2>
+
+<p>Die folgenden Aufgaben bearbeitest du mit der Software &bdquo;Filius&ldquo;. Jede &Uuml;bung besteht aus:</p>
+
+<ul>
+<li>Aufbau des Netzwerks</li>
+<li>Konfiguration der Ger&auml;te und Dienste</li>
+<li>Test und Analyse (z. B. mit Ping oder Browser)</li>
+<li>Dokumentation mit Screenshots und kurzen Erkl&auml;rungen</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<h3>P1 &ndash; Erste Schritte: Ping &amp; einfache Adressierung</h3>
+
+<ul>
+<li>Verbinde zwei Clients direkt &uuml;ber ein Netzwerkkabel.</li>
+<li>Vergib IP-Adressen manuell.</li>
+<li>Teste die Verbindung mit dem Ping-Befehl.</li>
+</ul>
+
+<h3>P2 &ndash; DHCP</h3>
+
+<ul>
+<li>Verbinde vier Clients mit einem DHCP-Server.</li>
+<li>Richte den DHCP-Server ein.</li>
+<li>Teste die automatische Adressvergabe.</li>
+<li>Stelle den Ablauf DISCOVER &rarr; OFFER &rarr; REQUEST &rarr; ACK dar.</li>
+<li>Zeige die SAT (Source Address Table) des Switches und erkl&auml;re ARP.</li>
+</ul>
+
+<h3>P3 &ndash; DNS</h3>
+
+<ul>
+<li>Richte einen DNS-Server ein.</li>
+<li>Lege einen A-Record f&uuml;r <code>schule.local</code> an.</li>
+<li>Teste die Namensaufl&ouml;sung mit Ping oder im Browser.</li>
+</ul>
+
+<h3>P4 &ndash; Webserver</h3>
+
+<ul>
+<li>Richte einen Webserver mit einer einfachen HTML-Seite ein.</li>
+<li>&Auml;ndere das Design leicht (z. B. Hintergrundfarbe).</li>
+<li>Greife per IP-Adresse und per Domain auf den Server zu.</li>
+<li>Belege, dass die Webseite unverschl&uuml;sselt &uuml;bertragen wird.</li>
+</ul>
+
+<h3>P5 &ndash; Mailserver</h3>
+
+<ul>
+<li>Richte einen Mailserver ein.</li>
+<li>Erstelle Konten, versende und empfange Nachrichten.</li>
+<li>Erkl&auml;re die Unterschiede zwischen SMTP, POP3 und IMAP.</li>
+</ul>
+
+<h3>P6 &ndash; Routing mit mehreren Subnetzen</h3>
+
+<ul>
+<li>Baue ein Netz mit zwei Routern und zwei Subnetzen auf.</li>
+<li>Deaktiviere automatisches Routing und konfiguriere Routingtabellen manuell.</li>
+<li>Erkl&auml;re die Eintr&auml;ge der Weiterleitungstabellen.</li>
+</ul>
+
+<h3>P7 &ndash; Komplexes Netz</h3>
+
+<ul>
+<li>Plane ein Netz mit drei Subnetzen (z. B. Verwaltung, Sch&uuml;ler, Internet).</li>
+<li>Trenne Sch&uuml;ler- und Verwaltungsnetz per VLAN oder Routing.</li>
+<li>Stelle sicher, dass beide ins Internet gelangen, aber sich nicht gegenseitig erreichen.</li>
+</ul>
+
+<h3>P8 &ndash; Topologie und Routerausfall</h3>
+
+<ul>
+<li>Baue ein Netz, bei dem Daten zwischen Anna und Bob den k&uuml;rzesten Weg nehmen.</li>
+<li>Simuliere den Ausfall von Router 3.</li>
+<li>Stelle die Funktion durch ge&auml;nderte Routingtabellen wieder her.</li>
+</ul>
+
+<figure><img src="../img/p8.png" width="600">
+<figcaption>Rechnernetz zu P8</figcaption>
+</figure>
+
+<h3>P9 &ndash; IP-Adressen und Netzmasken</h3>
+
+<ul>
+<li>Baue ein Netz mit Netzmaske 255.255.224.0 auf.</li>
+<li>Untersuche, welche Ger&auml;te miteinander kommunizieren k&ouml;nnen.</li>
+<li>Erweitere das Netz um zwei Vermittlungsrechner und einen Webserver im Subnetz 255.255.255.252.</li>
+<li>Stelle durch Routing sicher, dass alle Ger&auml;te kommunizieren k&ouml;nnen.</li>
+</ul>
+
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<p>Ein bis drei der praktischen Aufgaben (P1&ndash;P9) werden dir bzw. deinem Team zugewiesen. Zu diesen erstellt ihr vertiefende Erkl&auml;rvideos &ndash; mit oder ohne Ton. Alternativ k&ouml;nnt ihr eure Schritte auch als Text oder Pr&auml;sentation dokumentieren.</p>
+
+<h2>Miniprojekt &ndash; Netzplanung f&uuml;r Schule oder Start-up</h2>
+
+<p>Entwickle eine vollst&auml;ndige Netzstruktur f&uuml;r zwei bis drei Abteilungen. Dokumentiere folgende Aspekte:</p>
+
+<ul>
+<li>Topologie-Skizze, Wahl der &Uuml;bertragungsmedien</li>
+<li>Logische Segmentierung mit VLSM und VLANs</li>
+<li>Einrichtung von DNS, Mailserver, Webserver, Proxy/Firewall</li>
+<li>Sicherheitskonzept (z. B. Zugriffsbeschr&auml;nkungen, Authentifizierung)</li>
+</ul>
+
+<p>Stelle dein Ergebnis als grafische &Uuml;bersicht (also eine Art &bdquo;Poster&ldquo; oder Infografik) dar.</p>
+
+<h2>Hinweise zur Arbeit</h2>
+
+<ul>
+<li>In der Theorie: Fachbegriffe korrekt definieren, mit eigenen Worten erkl&auml;ren und mit Beispielen belegen.</li>
+<li>In der Praxis: Beginne mit einfachen Szenarien (z. B. Ping) und steigere die Komplexit&auml;t Schritt f&uuml;r Schritt.</li>
+<li>Dokumentiere auch Fehler und deren L&ouml;sungen &ndash; das hilft beim Verst&auml;ndnis.</li>
+<li>Arbeitet im Team: Eine Person baut auf, eine testet, eine dokumentiert. Kontrolliert euch gegenseitig.</li>
+</ul>
+
+<h2>Bewertungsmatrix</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Teilbereich</th>
+      <th>Kriterium</th>
+      <th>Punkte</th>
+      <th>Beschreibung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- A-Teil -->
+    <tr>
+      <td colspan="4"><strong>A-Teil</strong></td>
+    </tr>
+    <tr>
+      <td>A-Teil</td>
+      <td>Vollständigkeit &amp; fachliche Korrektheit</td>
+      <td>8</td>
+      <td>
+        Alle geforderten Inhalte sind vorhanden. Kleinere Lücken führen zu Abzügen.<br>
+        Durchgehend fachlich korrekt. Kleinere Fehler führen zu Abzügen.
+      </td>
+    </tr>
+    <tr>
+      <td>A-Teil</td>
+      <td>Übersichtlichkeit / Merke + Beispiele</td>
+      <td>4</td>
+      <td>Übersichtlich, klare Zusammenfassung und passende Beispiele.</td>
+    </tr>
+
+    <!-- B-Teil Dokumentation -->
+    <tr>
+      <td colspan="4"><strong>B-Teil – Dokumentation</strong></td>
+    </tr>
+    <tr>
+      <td>B-Teil Dokumentation</td>
+      <td>Vollständigkeit und fachliche Korrektheit</td>
+      <td>10</td>
+      <td>
+        Alle Arbeitsschritte dokumentiert. Kleinere Lücken führen zu Abzügen.<br>
+        Durchgehend fachlich korrekt. Fehler führen zu Abzügen.
+      </td>
+    </tr>
+    <tr>
+      <td>B-Teil Dokumentation</td>
+      <td>Nachvollziehbarkeit &amp; Test der Funktionsfähigkeit</td>
+      <td>10</td>
+      <td>
+        Arbeitsschritte logisch und verständlich dargestellt.<br>
+        Alle Netze getestet und Ergebnisse dokumentiert.
+      </td>
+    </tr>
+
+    <!-- B-Teil Videos -->
+    <tr>
+      <td colspan="4"><strong>B-Teil – Videos</strong></td>
+    </tr>
+    <tr>
+      <td>B-Teil Videos</td>
+      <td>Nachvollziehbarkeit / Erklärung &amp; Test der Funktionsfähigkeit</td>
+      <td>6</td>
+      <td>
+        Aufbau wird klar erklärt, Struktur nachvollziehbar.<br>
+        Funktionsfähigkeit wird klar gezeigt.
+      </td>
+    </tr>
+    <tr>
+      <td>B-Teil Videos</td>
+      <td>Fachliche Korrektheit</td>
+      <td>3</td>
+      <td>Fachlich korrekt dargestellt. Fehler führen zu Abzügen.</td>
+    </tr>
+    <tr>
+      <td>B-Teil Videos</td>
+      <td>Qualität der Aufnahme</td>
+      <td>3</td>
+      <td>Ton und Bild klar verständlich.</td>
+    </tr>
+
+    <!-- C-Teil -->
+    <tr>
+      <td colspan="4"><strong>C-Teil (hilfsmittelfreier Teil)</strong></td>
+    </tr>
+    <tr>
+      <td>C-Teil</td>
+      <td>Beschreibung des Aufbaus</td>
+      <td>3</td>
+      <td>Detaillierte, klare Beschreibung.</td>
+    </tr>
+    <tr>
+      <td>C-Teil</td>
+      <td>Kennzeichnung der logischen Segmentierung</td>
+      <td>5</td>
+      <td>Segmentierung korrekt und klar gekennzeichnet.</td>
+    </tr>
+    <tr>
+      <td>C-Teil</td>
+      <td>Schrittfolge für Einrichtung / Ablauf der Dienste</td>
+      <td>5</td>
+      <td>Vollständig und in logischer Reihenfolge dargestellt.</td>
+    </tr>
+    <tr>
+      <td>C-Teil</td>
+      <td>Beschreibung von Sicherheitskonzepten</td>
+      <td>3</td>
+      <td>Klare, zutreffende Konzepte beschrieben.</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2"><strong>Gesamt</strong></td>
+      <td>60</td>
+      <td></td>
+    </tr>
+  </tfoot>
+</table>

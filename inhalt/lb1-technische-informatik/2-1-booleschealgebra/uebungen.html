@@ -1,0 +1,45 @@
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.3: Ausleihregeln der Schulbibliothek <span class="niveau">AFB II</span></summary>
+                <p>Die Schulbibliothek soll ein Ausleihprogramm bekommen. In der Bibliotheksordnung steht:</p>
+                <p><em>„Bücher dürfen ausgeliehen werden, wenn du einen gültigen Schülerausweis vorzeigst und nicht schon fünf oder mehr Bücher ausgeliehen hast. Wer überfällige Bücher hat, darf nichts ausleihen, es sei denn, die Bibliothekarin erteilt eine Ausnahme. Präsenzexemplare werden grundsätzlich nicht verliehen.“</em></p>
+                <ol>
+                    <li>Zerlege den Text in einzelne Aussagen, die das Programm eindeutig mit wahr oder falsch beantworten kann. Gib jeder Aussage einen Buchstaben (A, B, C, …) und formuliere sie so, dass sie wahr ist, wenn die beschriebene Situation vorliegt.</li>
+                    <li>Formuliere die Ausleihbedingung mit den Wörtern UND, ODER, NICHT und deinen Buchstaben. Setze Klammern, wo der Text es verlangt.</li>
+                    <li>Entscheide mit deiner Bedingung, ob ausgeliehen werden darf:
+                        <ul>
+                            <li>Lena: Ausweis gültig, 3 Bücher ausgeliehen, 1 Buch überfällig, keine Ausnahme, normales Buch</li>
+                            <li>Tom: Ausweis gültig, 5 Bücher ausgeliehen, nichts überfällig, normales Buch</li>
+                            <li>Mia: Ausweis gültig, 2 Bücher ausgeliehen, 1 Buch überfällig, Ausnahme erteilt, normales Buch</li>
+                        </ul>
+                    </li>
+                    <li>Beschreibe, welche Rolle die Formulierung „es sei denn“ in der Bedingung spielt und wo sie in deiner Bedingung auftaucht.</li>
+                </ol>
+                <p class="tipp">„Es sei denn“ hebt ein Verbot unter einer Bedingung wieder auf. Überlege, ob dafür UND oder ODER passt.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.4: Lüftung im Schulgewächshaus <span class="niveau">AFB II</span></summary>
+                <p>Die Lüftungsklappe des Schulgewächshauses wird von einem Mikrocontroller gesteuert. Im Programm steht die Bedingung</p>
+                <pre><code class="language-python">if temperatur &gt; 28 and not regen:
+    klappe_oeffnen()</code></pre>
+                <p>Der Sensor-Log eines Tages:</p>
+                <table class="gitter">
+                    <tr><th>Uhrzeit</th><th>temperatur (°C)</th><th>regen</th></tr>
+                    <tr><td>08:00</td><td>19</td><td>False</td></tr>
+                    <tr><td>12:00</td><td>31</td><td>False</td></tr>
+                    <tr><td>15:00</td><td>30</td><td>True</td></tr>
+                    <tr><td>18:00</td><td>28</td><td>False</td></tr>
+                </table>
+                <ol>
+                    <li>Begründe, warum <code>temperatur &gt; 28</code> für sich genommen keine Aussage ist, und gib an, wodurch daraus eine Aussage wird.</li>
+                    <li>Bestimme für jede Uhrzeit den Wahrheitswert von <code>temperatur &gt; 28</code>, von <code>regen</code> und von der gesamten Bedingung. Gib an, wann die Klappe geöffnet wird.</li>
+                    <li>Die Gärtnerin sagt: „Bei 28 Grad soll schon gelüftet werden.“ Beschreibe, was sich am Programm ändern muss und welche Uhrzeit des Logs dann anders ausgewertet wird.</li>
+                    <li>Ein Mitschüler schlägt vor, den Sensor nur einmal morgens um 08:00 Uhr abzufragen, „um Strom zu sparen“. Beurteile den Vorschlag mithilfe des zeitlichen Aspekts von Aussagen.</li>
+                </ol>
+            </details>
+        </div>

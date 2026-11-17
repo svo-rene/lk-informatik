@@ -1,0 +1,206 @@
+<p>
+    Du kennst jetzt zwei Werkzeuge, um mit Daten aus CSV-Dateien zu arbeiten: Python (Einlesen, Bereinigen,
+    Schreiben) und SQL in DB Browser (Tabellen anlegen, Abfragen, Filtern). In der Praxis kombiniert man beides.
+    Es gibt drei typische Wege, wie Rohdaten am Ende als saubere Tabelle in einer Datenbank landen.
+</p>
+
+<h2>1. Rohdaten importieren und mit SQL filtern</h2>
+
+<p>
+    Importiere <a href="../notebooks/messwerte.csv" download>messwerte.csv</a> unverändert über „Datei“ &gt; „Importieren“ &gt;
+    „Tabelle aus CSV-Datei“ als Tabelle <code>Messwerte</code> (Achtung: Diese Datei ist mit Komma getrennt). Die Datei enthält fehlende Werte
+    (<code>N/A</code>) und einen unrealistischen Ausreißer (55,0&nbsp;°C) – genau wie in der Python-Übung.
+    Beim CSV-Import erkennt DB Browser Spalten mit gemischtem Inhalt oft als <code>TEXT</code>. Für einen
+    Zahlenvergleich musst du die Spalte deshalb mit <code>CAST(... AS REAL)</code> in eine Zahl umwandeln.
+</p>
+
+<pre>
+SELECT *
+FROM Messwerte
+WHERE Temperatur != 'N/A'
+  AND CAST(Temperatur AS REAL) BETWEEN -30 AND 50;
+</pre>
+
+<div class="hinweis">
+    <details>
+        <summary>
+            Hinweis: Wann lohnt sich dieser Weg?
+        </summary>
+        <p>
+            Dieser Weg ist schnell, wenn die Filterregel einfach ist (z.&nbsp;B. ein gültiger Wertebereich).
+            Für komplexere Bereinigungen – wie das Ersetzen von Ausreißern durch den Mittelwert der
+            Nachbarwerte – ist Python besser geeignet, weil sich so etwas in SQL nur sehr umständlich
+            formulieren lässt.
+        </p>
+    </details>
+</div>
+
+<h2>2. Erst mit Python bereinigen, dann importieren</h2>
+
+<p>
+    Von Seite 3.6 kennst du die Komplexaufgabe zur Sensorüberwachung, bei der du
+    <code>sensordaten.csv</code> bereinigst und als <code>sensordaten_bereinigt.csv</code> speicherst. Diese
+    bereits bereinigte Datei kannst du jetzt als Tabelle <code>Sensordaten</code> importieren. Weil fehlende
+    Werte und Ausreißer schon vorher entfernt bzw. ersetzt wurden, brauchst du beim Abfragen keine
+    Sicherheitsbedingungen mehr und kannst dich direkt auf die eigentliche Auswertung konzentrieren.
+</p>
+
+<pre>
+SELECT Typ, AVG(Temperatur) AS Durchschnittstemperatur
+FROM Sensordaten
+GROUP BY Typ;
+</pre>
+
+<h2>3. In der Tabellenkalkulation vorbereiten, dann importieren</h2>
+
+<p>
+    Nicht jede Bereinigung erfordert Programmierung. Für eine überschaubare Datenmenge kannst du eine CSV-Datei
+    auch wie auf Seite 3.8 in LibreOffice Calc öffnen, dort nicht benötigte Spalten löschen oder
+    offensichtlich fehlerhafte Zeilen von Hand entfernen und die reduzierte Tabelle anschließend über
+    „Datei“ &gt; „Speichern unter“ erneut als CSV sichern (achte auf die UTF-8-Kodierung und das richtige
+    Trennzeichen). Diese neue, schlankere CSV-Datei importierst du danach in DB Browser.
+</p>
+
+<div class="hinweis">
+    <details>
+        <summary>
+            Hinweis: Welcher Weg passt wann?
+        </summary>
+        <p>
+            SQL-Filterung eignet sich für einfache, klar formulierbare Bedingungen. Python-Bereinigung eignet
+            sich, wenn die Bereinigung automatisiert, wiederholbar oder bei großen Datenmengen nötig ist.
+            Die Tabellenkalkulation eignet sich für kleine, überschaubare Datensätze, die du einmalig von Hand
+            durchsehen kannst – dafür ist dieser Weg nicht automatisierbar und bei jeder neuen Datenlieferung
+            müsstest du ihn wiederholen.
+        </p>
+    </details>
+</div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Verkaufszahlen importieren und auswerten</summary>
+    <p><strong>Ausgangssituation:</strong> Der Schulkiosk liefert <a href="../material/verkauf_produkte.csv" download>verkauf_produkte.csv</a>
+       mit den Spalten <code>Produkt;Verkäufe</code> (5 Produkte). Gesucht sind die Produkte nach Verkaufszahl absteigend und die Gesamtzahl der Verkäufe.</p>
+    <ol>
+        <li><strong>Datei vorher ansehen</strong> – im Texteditor: Trennzeichen Semikolon, Kopfzeile vorhanden, Umlaut im Spaltennamen.</li>
+        <li><strong>Importieren</strong> – „Datei“ &gt; „Importieren“ &gt; „Tabelle aus CSV-Datei“, Tabellenname <code>Verkauf</code>,
+            „Spaltennamen in erster Zeile“ anhaken, Trennzeichen <code>;</code>, Kodierung UTF-8. Die Vorschau im Dialog muss zwei
+            Spalten zeigen.</li>
+        <li><strong>Struktur prüfen</strong> – Im Reiter „Datenbankstruktur“ nachsehen, welchen Typ <code>Verkäufe</code> bekommen hat.
+            Steht dort <code>TEXT</code>, muss für Zahlenvergleiche und Sortierung umgewandelt werden.</li>
+        <li><strong>Abfragen</strong> – Spaltennamen mit Umlaut setzt man sicherheitshalber in doppelte Anführungszeichen.</li>
+    </ol>
+<pre>
+SELECT Produkt, CAST("Verkäufe" AS INTEGER) AS Anzahl
+FROM Verkauf
+ORDER BY Anzahl DESC;
+
+SELECT SUM(CAST("Verkäufe" AS INTEGER)) AS Gesamt
+FROM Verkauf;
+</pre>
+    <p><strong>Ergebnis:</strong> Cola 120, Schokoriegel 110, Wasser 95, Chips 78, Saft 60; Gesamt 463.</p>
+    <p><strong>Kontrolle:</strong> 120 + 110 + 95 + 78 + 60 = 463. Ohne <code>CAST</code> würde eine Textspalte zeichenweise sortiert:
+       <code>95, 78, 60, 120, 110</code> – weil „9“ als Zeichen größer ist als „1“.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> CSV-Lieferung in eine bestehende Datenbank einbinden</summary>
+    <p><strong>Ausgangssituation:</strong> Die Onlineshop-Datenbank aus Kapitel 1 (Seite 1.18, Datei
+       <a href="../material/onlineshop_start.sql" download>onlineshop_start.sql</a>) enthält Kunden, Produkte und Bestellungen, aber
+       keine Bestellpositionen. Diese kommen als CSV-Lieferung: <a href="../material/bestellpositionen.csv" download>bestellpositionen.csv</a>
+       (<code>BestellNr;ProduktNr;Menge</code>, 20 Zeilen). Gesucht ist der Umsatz je Produkt, absteigend sortiert – und zwar für
+       <em>alle</em> Produkte, auch solche ohne Verkauf.</p>
+    <ol>
+        <li><strong>Datenbank aufbauen</strong> – Neue Datenbank anlegen, <code>onlineshop_start.sql</code> im Reiter „SQL ausführen“ laden
+            und ausführen. Danach gibt es 8 Kunden, 10 Produkte und 12 Bestellungen.</li>
+        <li><strong>CSV in dieselbe Datenbank importieren</strong> – als Tabelle <code>Bestellposition</code>, Kopfzeile anhaken, Trennzeichen
+            Semikolon. Kontrolle: <code>SELECT COUNT(*) FROM Bestellposition;</code> liefert 20.</li>
+        <li><strong>Datentypen bedenken</strong> – Werden die Spalten als <code>TEXT</code> angelegt, vergleicht SQLite in einem JOIN zwar
+            automatisch die Zahl 103 mit dem Text '103' (die INTEGER-Spalte <code>ProduktNr</code> erzwingt einen Zahlvergleich). Für
+            Rechnungen und Sortierungen ist ein ausdrückliches <code>CAST</code> aber sicherer und für Leser*innen klarer.</li>
+        <li><strong>Sonderfall: Produkte ohne Verkauf</strong> – Ein <code>JOIN</code> ließe die Kabeltrommel (110) weg, weil sie in keiner Position
+            vorkommt. <code>LEFT JOIN</code> behält jedes Produkt; <code>COALESCE(..., 0)</code> macht aus der fehlenden Summe eine 0.</li>
+        <li><strong>Runden</strong> – Kommazahlen werden intern binär gespeichert, deshalb wird die Summe mit <code>ROUND(..., 2)</code> auf Cent gerundet.</li>
+    </ol>
+<pre>
+SELECT p.Bezeichnung,
+       COALESCE(SUM(CAST(b.Menge AS INTEGER)), 0) AS Stueck,
+       ROUND(COALESCE(SUM(CAST(b.Menge AS INTEGER) * p.Preis), 0), 2) AS Umsatz
+FROM Produkt p
+LEFT JOIN Bestellposition b ON CAST(b.ProduktNr AS INTEGER) = p.ProduktNr
+GROUP BY p.ProduktNr
+ORDER BY Umsatz DESC;
+</pre>
+    <p><strong>Ergebnis:</strong></p>
+    <table class="gitter">
+        <tr><th>Bezeichnung</th><th>Stueck</th><th>Umsatz</th></tr>
+        <tr><td>Monitor 24 Zoll</td><td>3</td><td>447.0</td></tr>
+        <tr><td>Webcam</td><td>6</td><td>267.0</td></tr>
+        <tr><td>Headset</td><td>2</td><td>119.8</td></tr>
+        <tr><td>Dockingstation</td><td>1</td><td>119.0</td></tr>
+        <tr><td>Funkmaus</td><td>4</td><td>78.0</td></tr>
+        <tr><td>USB-Stick 64 GB</td><td>5</td><td>49.95</td></tr>
+        <tr><td>Tastatur</td><td>1</td><td>29.99</td></tr>
+        <tr><td>Mauspad</td><td>4</td><td>26.0</td></tr>
+        <tr><td>Notebooktasche</td><td>1</td><td>24.9</td></tr>
+        <tr><td>Kabeltrommel</td><td>0</td><td>0.0</td></tr>
+    </table>
+    <p><strong>Kontrolle:</strong> Die Stückzahlen ergeben zusammen 27 – genau die Summe der Spalte <code>Menge</code> in der CSV
+       (<code>SELECT SUM(Menge) FROM Bestellposition;</code>). Der Gesamtumsatz beträgt 1161,64&nbsp;€. Stimmt die Kontrollsumme nicht,
+       wurden beim Import Zeilen verloren oder doppelt eingelesen.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Datenimport im Berufsalltag</summary>
+        <p>
+            In Unternehmen kommen Daten ständig als CSV-Lieferung an: Kassensysteme melden Tagesumsätze, Lieferanten schicken
+            Preislisten, Sensoren in der Produktion schreiben Messprotokolle. <strong>Datenbankadministrator*innen</strong> und
+            <strong>Data Engineers</strong> entscheiden dann genau wie auf dieser Seite, ob die Rohdaten direkt importiert und
+            per SQL gefiltert oder vorher mit einem Skript bereinigt werden. Diesen immer gleichen Ablauf nennt man
+            <em>ETL</em> (Extract, Transform, Load): Daten holen, umwandeln, in die Datenbank laden.
+        </p>
+    </details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p>
+        Drei Wege von der Rohdaten-CSV zur ausgewerteten Datenbanktabelle:<br>
+        1. Rohdaten unbereinigt importieren, Bereinigung und Filterung per SQL erledigen.<br>
+        2. Erst mit Python bereinigen (wie auf Seite 3.5) und die bereinigte CSV
+        importieren.<br>
+        3. In einer Tabellenkalkulation (z.&nbsp;B. LibreOffice Calc) unnötige Spalten/Zeilen entfernen, als neue
+        CSV speichern und diese importieren.
+    </p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 3.7.1: Rohdaten direkt filtern <span class="niveau">AFB II</span></summary>
+        <p>
+            Importiere <code>messwerte.csv</code> unbereinigt als Tabelle <code>Messwerte</code>. Schreibe eine
+            SQL-Abfrage, die nur die Zeilen mit einer gültigen Temperatur zwischen -30&nbsp;°C und 50&nbsp;°C
+            anzeigt, und sortiere das Ergebnis nach <code>Zeitpunkt</code>.
+        </p>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 3.7.2: Bereits bereinigte Daten auswerten <span class="niveau">AFB II</span></summary>
+        <p>
+            Bearbeite (falls noch nicht geschehen) die Komplexaufgabe zur Sensorüberwachung von
+            Seite 3.6 und importiere deine <code>sensordaten_bereinigt.csv</code> als
+            Tabelle <code>Sensordaten</code>. Formuliere eine SQL-Abfrage, die die durchschnittliche Temperatur
+            je Sensortyp ausgibt. Überlege: Brauchst du hier noch eine WHERE-Bedingung zur Bereinigung? Warum
+            (nicht)?
+        </p>
+    </details>
+</div>

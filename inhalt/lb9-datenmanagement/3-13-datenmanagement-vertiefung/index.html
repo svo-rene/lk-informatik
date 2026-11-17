@@ -1,0 +1,357 @@
+<p>Nachdem du einen Überblick über das Datenmanagement erhalten hast, werden wir nun tiefer in die einzelnen Aspekte eintauchen.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>
+                    Praxisbezug: Der H&amp;M-Fall – wenn Personalgespräche zur Datenschutzverletzung werden
+                </summary>
+                <p>
+                    Im Servicecenter des Modekonzerns H&amp;M in Nürnberg wurden über Jahre hinweg sogenannte
+                    „Welcome Back Talks“ geführt: Nach jedem Urlaub oder jeder Krankheit befragten Vorgesetzte
+                    ihre Mitarbeitenden zu Reiseeindrücken, Krankheitssymptomen, Diagnosen und familiären
+                    Problemen. Diese sehr sensiblen Informationen wurden systematisch protokolliert und waren am
+                    Ende für bis zu 50 Führungskräfte im Konzern einsehbar. Der Hamburgische Beauftragte für
+                    Datenschutz und Informationsfreiheit wertete dies 2020 als schwere Missachtung des
+                    Beschäftigtendatenschutzes und verhängte gegen H&amp;M ein Bußgeld von rund 35,3 Millionen
+                    Euro – zum damaligen Zeitpunkt das höchste DSGVO-Bußgeld in Deutschland. Das Beispiel zeigt,
+                    dass Datenschutzverstöße nicht nur bei Hackerangriffen oder Cloud-Diensten entstehen, sondern
+                    auch in ganz alltäglichen Situationen wie einem Mitarbeitergespräch.
+                </p>
+                <p>
+                    <strong>Berufsfelder:</strong> Mit solchen Fällen befassen sich sowohl IT-Berufe als auch
+                    Berufe außerhalb der Informatik. In der IT sind es z.&nbsp;B. IT-Security-Spezialist*innen
+                    (sichere Speicherung und Zugriffsschutz sensibler Personaldaten) und Data Engineers mit
+                    Datenschutz-Fokus (technische Umsetzung von Zugriffsrechten, Löschkonzepten und
+                    Protokollierung). Außerhalb der Informatik sind es u.&nbsp;a. Datenschutzbeauftragte
+                    (Prüfung, ob eine Datenverarbeitung rechtlich zulässig ist), Compliance-Manager*innen
+                    (Einhaltung interner und gesetzlicher Vorgaben im gesamten Unternehmen), die Personalabteilung
+                    bzw. HR (die solche Gespräche führt und Personaldaten verwaltet) sowie das Justiziariat bzw.
+                    die Rechtsabteilung (rechtliche Bewertung und Vertretung gegenüber Aufsichtsbehörden).
+                </p>
+                <p>
+                    <strong>Weiterlesen:</strong>
+                    <a href="https://netzpolitik.org/2020/dsgvo-verstoss-hm-kassiert-35-millionen-euro-strafe/" target="_blank" rel="noopener">DSGVO-Verstoß: H&amp;M kassiert 35 Millionen Euro Strafe</a>
+                    –
+                    <a href="https://www.lto.de/recht/nachrichten/n/datenschutzbeauftragter-hamburg-bussgeld-h-und-m-35-millionen-euro" target="_blank" rel="noopener">Datenschutzverstöße: 35 Millionen Euro Bußgeld für H&amp;M</a>
+                </p>
+            </details>
+        </div>
+
+<h2>1. Problemstellung des Datenmanagements in verschiedenen Bereichen</h2>
+
+<p>
+            Datenmanagement ist kein Thema, das nur in der Informatik eine Rolle spielt – in fast jedem
+            gesellschaftlichen Bereich werden heute große Mengen an Daten erfasst, ausgewertet und weitergegeben.
+            Dabei ergeben sich je nach Bereich ganz unterschiedliche Chancen und Probleme.
+        </p>
+
+<ul>
+            <li>
+                <strong>Behörden (Open Data):</strong> Verwaltungen veröffentlichen zunehmend Daten wie
+                Verkehrszahlen, Wetterdaten oder Statistiken frei zugänglich (Open Data), um Transparenz zu
+                schaffen und Weiterverwendung durch Bürger oder Unternehmen zu ermöglichen. Gleichzeitig müssen
+                personenbezogene Daten (z.&nbsp;B. Melderegister, Steuerdaten) besonders geschützt werden – hier
+                steht Transparenz im Konflikt mit Persönlichkeitsrechten.
+            </li>
+            <li>
+                <strong>Werbung:</strong> Unternehmen werten das Nutzungsverhalten in sozialen Netzwerken und auf
+                Webseiten aus (z.&nbsp;B. Klicks, Verweildauer, Standort), um Werbung gezielt auf einzelne
+                Personen zuzuschneiden (Targeting). Das wirft Fragen auf, wie viel Tracking akzeptabel ist und ob
+                Nutzer wirklich wissen, welche Daten über sie gesammelt werden.
+            </li>
+            <li>
+                <strong>Medizin:</strong> Patienten- und Forschungsdaten gehören zu den sensibelsten
+                personenbezogenen Daten überhaupt, ermöglichen aber bei der Auswertung großer Datenmengen auch
+                medizinischen Fortschritt (z.&nbsp;B. Erkennen von Krankheitsmustern, Medikamentenentwicklung).
+                Hier steht der Schutz der Privatsphäre dem gesellschaftlichen Nutzen gegenüber.
+            </li>
+            <li>
+                <strong>Soziale Netzwerke (Nutzungsverhalten):</strong> Plattformen speichern, wem du folgst, was
+                du likest und wie lange du welche Inhalte ansiehst, um deinen Feed durch Empfehlungsalgorithmen zu
+                personalisieren. Das kann zu Filterblasen führen, in denen du vor allem Inhalte siehst, die deine
+                bestehende Meinung bestätigen.
+            </li>
+            <li>
+                <strong>Internet of Things:</strong> Vernetzte Alltagsgegenstände (Smart-Home-Geräte, Wearables,
+                Fahrzeuge) erzeugen kontinuierlich große Datenmengen (Big Data), die oft automatisiert
+                ausgewertet und in eine Cloud übertragen werden. Das ermöglicht praktische Funktionen, schafft
+                aber auch neue Sicherheitsrisiken, wenn diese Geräte unzureichend geschützt sind.
+            </li>
+        </ul>
+
+<h2>2. Datenquellen und ihre Beurteilung</h2>
+
+<p>Bei der Arbeit mit Daten ist es wichtig, die Qualität und Verlässlichkeit der Quellen zu beurteilen. Dabei spielen folgende Faktoren eine Rolle:</p>
+
+<ul>
+            <li>
+                <strong>Verlässlichkeit von Selbstauskünften:</strong> Beruhen Daten auf Selbstauskünften (z.&nbsp;B.
+                Umfragen), können sie ungenau oder beschönigt sein, weil Befragte bewusst oder unbewusst nicht
+                wahrheitsgemäß antworten.
+            </li>
+            <li>
+                <strong>Repräsentativität:</strong> Eine Datenerhebung ist nur dann aussagekräftig für eine größere
+                Gruppe, wenn die erfassten Personen oder Fälle deren Zusammensetzung widerspiegeln.
+            </li>
+            <li>
+                <strong>Fehlende gesellschaftliche Gruppen:</strong> Wenn bestimmte Gruppen in einem Datensatz
+                kaum oder gar nicht vorkommen (z.&nbsp;B. weil sie das Erhebungsverfahren nicht erreicht), verzerrt
+                das die Ergebnisse und Schlussfolgerungen.
+            </li>
+            <li>
+                <strong>Urheber:</strong> Wer hat die Daten erhoben und veröffentlicht, und welches Interesse
+                könnte diese Person oder Institution an bestimmten Ergebnissen haben?
+            </li>
+            <li>
+                <strong>BIAS:</strong> Eine systematische Verzerrung von Daten oder Auswertungen, die zu falschen
+                oder unfairen Schlussfolgerungen führen kann.
+            </li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Vertiefung zu Bias</summary>
+                <p>
+                    Verschiedene Arten von Bias (z.&nbsp;B. Sampling Bias, Measurement Bias, Algorithmic Bias) mit
+                    konkreten Beispielen findest du ausführlich auf Seite 3.14 (Daten in der Gesellschaft).
+                </p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Eine Datenquelle beurteilen – „92 % lieben das Mensaessen“</summary>
+            <p><strong>Ausgangssituation:</strong> Die Schülerzeitung titelt: „92&nbsp;% finden das Mensaessen gut!“ Grundlage ist eine Online-Umfrage,
+               die der Mensabetreiber in seinem Newsletter verschickt hat. Die Schule hat 900 Schüler*innen, geantwortet haben 50; man konnte
+               mehrfach abstimmen.</p>
+            <ol>
+                <li><strong>Urheber prüfen</strong> – Der Mensabetreiber hat ein Interesse an einem guten Ergebnis. Das macht die Zahl nicht falsch,
+                    verlangt aber besondere Vorsicht.</li>
+                <li><strong>Repräsentativität prüfen</strong> – 50 von 900 sind etwa 5,6&nbsp;%. Befragt wurden nur Newsletter-Abonnent*innen, also
+                    vor allem regelmäßige Mensagäste.</li>
+                <li><strong>Fehlende Gruppen benennen</strong> – Wer die Mensa meidet (vielleicht gerade wegen des Essens), bekommt den Newsletter
+                    nicht und fehlt in den Daten.</li>
+                <li><strong>Verlässlichkeit der Antworten</strong> – Selbstauskunft ohne Kontrolle; Mehrfachabstimmung erlaubt, dass wenige
+                    Begeisterte das Ergebnis bestimmen.</li>
+                <li><strong>Bias benennen</strong> – Das ist ein Stichprobenfehler (Sampling Bias): Die Stichprobe ist systematisch anders
+                    zusammengesetzt als die Schülerschaft.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Aussage gilt bestenfalls für „46 von 50 Antworten aus dem Newsletter“, nicht für „die Schüler*innen“.
+               Eine faire Überschrift wäre: „Unter 50 Newsletter-Leser*innen sind die meisten zufrieden“.</p>
+            <p><strong>Kontrolle:</strong> 92&nbsp;% von 50 sind 46 Antworten. Bei erlaubter Mehrfachabstimmung können das auch deutlich weniger Personen sein.</p>
+            </details>
+        </div>
+
+<h2>3. Datenschutz und ethische Überlegungen</h2>
+
+<p>Im Umgang mit Daten spielen ethische Fragen eine wichtige Rolle. Die deutsche und europäische Datenschutzgesetzgebung beruht unter anderem auf folgenden Grundsätzen:</p>
+
+<ul>
+            <li>
+                <strong>Datenminimierung:</strong> Es sollen nur so viele personenbezogene Daten erhoben werden,
+                wie für den jeweiligen Zweck unbedingt nötig sind. Die DSGVO spricht von <em>Datenminimierung</em>;
+                das ältere deutsche Bundesdatenschutzgesetz nannte denselben Gedanken <em>Datensparsamkeit</em>.
+            </li>
+            <li>
+                <strong>Erforderlichkeit:</strong> Jede Datenerhebung muss durch einen konkreten,
+                nachvollziehbaren Zweck begründet sein.
+            </li>
+            <li>
+                <strong>Zweckbindung:</strong> Einmal erhobene Daten dürfen nur für den Zweck verwendet werden,
+                für den sie ursprünglich erhoben wurden – nicht ohne Weiteres für andere Zwecke.
+            </li>
+            <li>
+                <strong>Recht auf informationelle Selbstbestimmung:</strong> Jeder Mensch hat grundsätzlich das
+                Recht, selbst zu bestimmen, wer welche Daten über ihn erhebt, speichert und verwendet.
+            </li>
+        </ul>
+
+<h2>4. Große, sich ständig ändernde Datenmengen verarbeiten</h2>
+
+<p>
+            Bei Big Data (Seite 3.14) reicht es nicht, ein Programm „irgendwie“ richtig zu schreiben: Wenn Millionen Datensätze
+            gespeichert sind und jede Sekunde neue dazukommen, entscheidet das Verfahren darüber, ob eine Antwort in Millisekunden oder
+            in Stunden kommt. Drei algorithmische Prinzipien kehren dabei immer wieder.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">einfach</span> Hashing – Ausweisnummern direkt finden</summary>
+            <p><strong>Ausgangssituation:</strong> Die Schulbibliothek speichert die Ausweisnummern 1013, 2027, 3550, 4021, 5117 und 6048 in einer
+               Hashtabelle mit 10 Fächern. Die Hashfunktion lautet <code>h(k) = k mod 10</code> (Rest bei Division durch 10). Gesucht wird
+               Nummer 5117.</p>
+            <ol>
+                <li><strong>Fach berechnen</strong> – 1013 → 3, 2027 → 7, 3550 → 0, 4021 → 1, 5117 → 7, 6048 → 8.</li>
+                <li><strong>Kollision behandeln</strong> – 2027 und 5117 landen beide in Fach 7. Das Fach enthält deshalb eine kleine Liste
+                    <code>[2027, 5117]</code> (Verkettung).</li>
+                <li><strong>Suchen</strong> – h(5117) = 7, also nur Fach 7 ansehen: Vergleich mit 2027 (nein), mit 5117 (ja) – 2 Vergleiche.</li>
+                <li><strong>Mit linearer Suche vergleichen</strong> – In einer unsortierten Liste steht 5117 an Position 5, also 5 Vergleiche. Bei einer
+                    Million Ausweisen wären es im Mittel 500&nbsp;000 Vergleiche, mit Hashing bei gut verteilten Fächern weiterhin nur wenige.</li>
+                <li><strong>Dynamik</strong> – Eine neue Nummer 7032 kommt einfach in Fach 2; nichts muss umsortiert werden. Eine sortierte Liste
+                    mit binärer Suche wäre zwar auch schnell beim Suchen, müsste aber bei jedem Einfügen Elemente verschieben.</li>
+            </ol>
+            <pre><code class="language-python">faecher = [[] for _ in range(10)]
+for nr in [1013, 2027, 3550, 4021, 5117, 6048]:
+    faecher[nr % 10].append(nr)
+print(faecher)
+print(5117 in faecher[5117 % 10])</code></pre>
+            <p><strong>Ergebnis:</strong></p>
+            <pre><code>[[3550], [4021], [], [1013], [], [], [], [2027, 5117], [6048], []]
+True</code></pre>
+            <p><strong>Kontrolle:</strong> Sechs Nummern, sechs Einträge in den Fächern. Eine Hashfunktion ist nur gut, wenn sie die Schlüssel
+               gleichmäßig verteilt – sonst wird ein Fach zur langen Liste (siehe Aufgabe 3.13.5).</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span> Datenstrom – gleitender Mittelwert ohne alles zu speichern</summary>
+            <p><strong>Ausgangssituation:</strong> Ein Temperatursensor im Schulgewächshaus sendet jede Stunde einen Wert, Tag und Nacht, jahrelang.
+               Angezeigt werden soll der Mittelwert der <em>letzten drei</em> Messungen, der kurze Schwankungen glättet. Der Mikrocontroller hat
+               kaum Speicher – alle Werte aufzuheben ist ausgeschlossen. Zum Testen dienen die 8 Werte aus
+               <a href="../material/temperatur_sensor.csv" download>temperatur_sensor.csv</a>: 18.5, 19.8, 21.0, 22.3, 23.5, 24.2, 24.0, 23.1.</p>
+            <pre><code class="language-python">import csv
+from collections import deque
+
+FENSTER = 3
+fenster = deque()          # Warteschlange: vorne alt, hinten neu
+summe = 0.0
+
+with open('temperatur_sensor.csv', newline='', encoding='utf-8') as datei:
+    for zeile in csv.DictReader(datei, delimiter=';'):
+        wert = float(zeile['Temperatur'])
+        fenster.append(wert)               # neuen Wert hinten anhängen
+        summe += wert
+        if len(fenster) &gt; FENSTER:
+            summe -= fenster.popleft()     # ältesten Wert vorne entfernen
+        if len(fenster) == FENSTER:
+            print(zeile['Zeit'][11:], f"{summe / FENSTER:.1f}")</code></pre>
+            <ol>
+                <li><strong>Datenstruktur wählen</strong> – Eine <code>deque</code> (double-ended queue) erlaubt schnelles Anhängen hinten und Entfernen
+                    vorne. Sie enthält nie mehr als 4 Werte, kurz bevor der älteste entfernt wird.</li>
+                <li><strong>Laufende Summe statt neu addieren</strong> – Bei jedem Schritt kommt ein Wert dazu und einer fällt weg. Statt jedes Mal
+                    alle Fensterwerte zu addieren, wird die Summe nur angepasst: <em>neu dazu, alt weg</em>. Der Aufwand pro Wert ist konstant.</li>
+                <li><strong>Anlaufphase</strong> – Nach dem 1. und 2. Wert ist das Fenster noch nicht voll; es wird nichts ausgegeben. Das ist der
+                    Sonderfall am Anfang jedes Datenstroms.</li>
+                <li><strong>10:00 Uhr</strong> – Fenster [18.5, 19.8, 21.0], Summe 59.3, Mittel 19.77 → Ausgabe 19.8.</li>
+                <li><strong>11:00 Uhr</strong> – 22.3 kommt dazu, 18.5 fällt weg: Summe 59.3 + 22.3 − 18.5 = 63.1, Mittel 21.03 → 21.0. Genauso weiter.</li>
+                <li><strong>Die Falle</strong> – Vergisst man <code>summe -= fenster.popleft()</code>, wächst die Summe immer weiter, und der „Mittelwert“
+                    steigt Stunde für Stunde, obwohl die Temperatur fällt. Ein solcher Fehler fällt erst bei einem Testfall mit bekanntem Ergebnis auf.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong></p>
+            <pre><code>10:00 19.8
+11:00 21.0
+12:00 22.3
+13:00 23.3
+14:00 23.9
+15:00 23.8</code></pre>
+            <table class="gitter">
+                <tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr>
+                <tr><td>konstante Werte</td><td>20, 20, 20, 20</td><td>zweimal 20.0</td></tr>
+                <tr><td>zu kurzer Strom</td><td>nur 2 Werte</td><td>keine Ausgabe</td></tr>
+                <tr><td>Sensordatei</td><td>8 Werte (oben)</td><td>6 Ausgaben, erste 19.8, letzte 23.8</td></tr>
+            </table>
+            <p><strong>Kontrolle:</strong> Bei 8 Werten und Fenstergröße 3 gibt es 8 − 3 + 1 = 6 Mittelwerte. Die letzte Zeile von Hand:
+               (24.2 + 24.0 + 23.1) / 3 = 71.3 / 3 ≈ 23.77 → 23.8. Der Speicherbedarf ist für 8 oder 8 Millionen Werte derselbe.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 4 <span class="beispiel-kopf">komplex</span> MapReduce – Wörter zählen auf mehreren Rechnern</summary>
+            <p><strong>Ausgangssituation:</strong> Eine Suchmaschine will zählen, wie oft jedes Wort in Milliarden Webseiten vorkommt. Im Kleinen:
+               drei Dokumente, verteilt auf zwei Rechner. Rechner A hat D1 „Daten sind wertvoll“ und D2 „Daten schützen Daten“, Rechner B hat
+               D3 „Schutz ist wertvoll“.</p>
+            <ol>
+                <li><strong>Map (jeder Rechner für sich)</strong> – Jedes Wort wird klein geschrieben und als Paar (Wort, 1) ausgegeben.
+                    A: (daten,1) (sind,1) (wertvoll,1) (daten,1) (schützen,1) (daten,1). B: (schutz,1) (ist,1) (wertvoll,1).
+                    Kein Rechner braucht die Daten der anderen.</li>
+                <li><strong>Shuffle (umverteilen)</strong> – Alle Paare mit demselben Wort müssen beim selben Rechner landen. Regel z.&nbsp;B.: Wörter mit
+                    Anfangsbuchstabe a–m an Reduzierer 1, n–z an Reduzierer 2. Reduzierer 1 erhält daten: [1, 1, 1], ist: [1]; Reduzierer 2 erhält
+                    sind: [1], wertvoll: [1, 1], schützen: [1], schutz: [1].</li>
+                <li><strong>Reduce (zusammenfassen)</strong> – Jeder Reduzierer summiert die Listen seiner Wörter: daten 3, ist 1, sind 1, wertvoll 2,
+                    schützen 1, schutz 1.</li>
+                <li><strong>Die Falle: Datenqualität</strong> – „schützen“ und „schutz“ werden als verschiedene Wörter gezählt, „wertvoll.“ mit Punkt wäre
+                    ein weiteres Wort. Vor dem Map-Schritt muss bereinigt werden (Satzzeichen entfernen, z.&nbsp;B. mit <code>re.sub</code>, Seite 3.5).</li>
+                <li><strong>Warum es skaliert</strong> – Map und Reduce laufen auf allen Rechnern gleichzeitig. Doppelt so viele Dokumente bei doppelt so
+                    vielen Rechnern dauern ungefähr gleich lang.</li>
+            </ol>
+            <p>Dasselbe Verfahren auf einem Rechner simuliert:</p>
+            <pre><code class="language-python">dokumente = ["Daten sind wertvoll", "Daten schützen Daten", "Schutz ist wertvoll"]
+
+def map_phase(text):
+    return [(wort, 1) for wort in text.lower().split()]
+
+def shuffle_phase(paare):
+    gruppen = {}
+    for wort, eins in paare:
+        gruppen.setdefault(wort, []).append(eins)
+    return gruppen
+
+def reduce_phase(wort, einsen):
+    return (wort, sum(einsen))
+
+alle_paare = []
+for d in dokumente:                 # in echt: parallel auf vielen Rechnern
+    alle_paare.extend(map_phase(d))
+gruppen = shuffle_phase(alle_paare)
+print(gruppen)
+print([reduce_phase(w, e) for w, e in gruppen.items()])</code></pre>
+            <p><strong>Ergebnis:</strong></p>
+            <pre><code>{'daten': [1, 1, 1], 'sind': [1], 'wertvoll': [1, 1], 'schützen': [1], 'schutz': [1], 'ist': [1]}
+[('daten', 3), ('sind', 1), ('wertvoll', 2), ('schützen', 1), ('schutz', 1), ('ist', 1)]</code></pre>
+            <p><strong>Kontrolle:</strong> Die drei Dokumente haben 3 + 3 + 3 = 9 Wörter; die Summe aller Zählerstände ist 3 + 1 + 2 + 1 + 1 + 1 = 9.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Personenbezogene Daten</strong> sind alle Angaben, die sich einer bestimmten oder bestimmbaren Person
+                zuordnen lassen – auch eine Kartennummer oder IP-Adresse, wenn man über sie die Person ermitteln kann. Die
+                <strong>DSGVO</strong> (Art.&nbsp;5) verlangt für ihre Verarbeitung unter anderem: Rechtmäßigkeit (z.&nbsp;B.
+                Einwilligung oder gesetzliche Grundlage), <strong>Zweckbindung</strong>, <strong>Datenminimierung</strong>
+                (nur so viele Daten wie für den Zweck nötig), Richtigkeit, <strong>Speicherbegrenzung</strong> (löschen,
+                sobald der Zweck erfüllt ist) sowie Integrität und Vertraulichkeit (Schutz vor unbefugtem Zugriff).
+            </p>
+        </div>
+
+<div class="merke">
+            <ul>
+                <li><strong>Hashing und Index:</strong> Statt alle Datensätze zu durchsuchen, berechnet eine Hashfunktion aus dem Schlüssel direkt
+                    den Speicherplatz („Fach“). Suchen und Einfügen kosten dann fast unabhängig von der Datenmenge nur wenige Schritte – auch
+                    wenn ständig neue Daten hinzukommen. Python-Dictionaries und Key-Value-Datenbanken (Seite 2.3) arbeiten so; Datenbanken
+                    legen für häufig gesuchte Spalten einen Index an.</li>
+                <li><strong>Datenstromverarbeitung:</strong> Kommen die Daten als endloser Strom (Sensoren, Klicks), sieht man jeden Wert nur einmal an
+                    und speichert nur eine kleine Zusammenfassung (Zähler, Summe, die letzten <em>k</em> Werte). Der Speicherbedarf bleibt
+                    gleich, egal wie lange der Strom läuft.</li>
+                <li><strong>Verteiltes Verarbeiten (MapReduce):</strong> Die Daten werden auf viele Rechner verteilt. Jeder bearbeitet seinen Teil
+                    (<em>Map</em>), die Zwischenergebnisse werden nach Schlüssel sortiert und verteilt (<em>Shuffle</em>) und dann zusammengefasst
+                    (<em>Reduce</em>). Mehr Daten heißt einfach: mehr Rechner.</li>
+            </ul>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.13.1: Datenmanagement in einem Bereich deiner Wahl <span class="niveau">AFB II</span></summary>
+                <p>
+                    Wähle einen der oben genannten Bereiche (oder einen eigenen, z.&nbsp;B. Schule, Sport,
+                    öffentlicher Nahverkehr) und recherchiere ein konkretes Beispiel, bei dem dort große Mengen an
+                    Daten erfasst und ausgewertet werden. Beschreibe kurz, welchen Nutzen die Datenerfassung hat
+                    und welches Problem oder Risiko dabei entstehen könnte.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.13.2: DSGVO und Bundesdatenschutzgesetz <span class="niveau">AFB I</span></summary>
+                <p>
+                    Recherchiere, was die Datenschutz-Grundverordnung (DSGVO) und das Bundesdatenschutzgesetz
+                    besagen. Nenne jeweils mindestens zwei zentrale Regelungen.
+                </p>
+            </details>
+        </div>

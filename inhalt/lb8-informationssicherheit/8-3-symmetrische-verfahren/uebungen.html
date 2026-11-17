@@ -1,0 +1,83 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.3.3: Brute Force Caesar-Verschlüsselung implementieren <span class="niveau">AFB II–III</span></summary>
+                <ol type="a">
+                    <li>Implementiere eine Funktion, die alle möglichen Schlüssel für die Caesar-Verschlüsselung ausprobiert und die resultierenden Klartexte in einer Liste zurückgibt. <a href="../material/2c.py" download>Hier</a> findest du bereits Funktionen zum Ver- und Entschlüsseln. Du kannst aber auch deine eigenen aus Aufgabe 8.3.2 verwenden.</li>
+                    <li>Die Suche nach dem Schlüssel könnte bereits abgebrochen werden, wenn die Entschlüsselung einen sinnvollen Klartext liefert. Ergänze deine Funktion aus a) um eine Abbruchbedingung, sodass sie nur den richtigen Klartext zurückgibt. Du kannst davon ausgehen, dass der Text mindestens einen der folgenden Ausdrücke enthält: „Guten Tag“, „Hi“, „Hallo“, „Grüße“.</li>
+                    <li>Bei der Caesar-Verschlüsselung wird das Geheimtextalphabet gegenüber dem Klartextalphabet nur verschoben. Damit ergeben sich je nach Zeichensatz z.&nbsp;B. 26 (nur Großbuchstaben) oder 128 (7-Bit-ASCII) Möglichkeiten. Man kann aber auch jedem Klartextbuchstaben einen beliebigen anderen, noch nicht vergebenen Geheimtextbuchstaben zuordnen. Berechne, wie viele Schlüssel sich dann ergeben, wenn nur Großbuchstaben bzw. alle 7-Bit-ASCII-Zeichen verwendet werden.</li>
+                    <li>Vergleiche die Laufzeit einer Methode, die für c) Brute Force benutzt, mit einer Methode, die die Chiffre über eine Häufigkeitsanalyse entschlüsselt.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.3.4: Brute Force Schlüsselwort <span class="niveau">AFB II</span></summary>
+                <p>Die Anzahl möglicher Schlüssel bestimmt, wie leicht ein Schlüssel durch Ausprobieren erraten werden kann. Gibt es nur wenige Schlüssel, brauchen schnelle Rechner nur wenige Sekunden. Um ein unbefugtes Entschlüsseln möglichst lange zu verhindern, müssen also besonders viele Schlüssel möglich sein. Das erhöht oft den Rechenaufwand.</p>
+                <ul>
+                    <li>Bestimme, wie viele verschiedene Schlüssel bei einer Auswahl aus 26 Zeichen (z.&nbsp;B. Alphabet in Klein- oder Großbuchstaben) und Passwortlängen von 6, 10 bzw. 20 Zeichen möglich sind.</li>
+                    <li>Bestimme, wie lange ein Computer jeweils zum Ausprobieren aller möglichen Schlüssel braucht, wenn er pro Sekunde 10&nbsp;000 bzw. 500&nbsp;000 Schlüssel testet.</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.3.5: Vigenère-Quadrat <span class="niveau">AFB I</span></summary>
+                <p>Löse das folgende <a href="../material/vs_aa_vigenere-verschluesselung.pdf">Arbeitsblatt</a>, indem du mit dem Vigenère-Quadrat arbeitest.<br>
+                Öffne anschließend das folgende <a href="../material/vigenere.py" download>Programm</a>. Versuche, den Code nachzuvollziehen, und ergänze Kommentare.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.3.6: Affine Chiffre <span class="niveau">AFB II–III</span></summary>
+                <p>Bei der affinen Chiffre wird jeder Buchstabe mit dem Index x (A&nbsp;=&nbsp;0, …, Z&nbsp;=&nbsp;25) zu <code>(a · x + b) mod 26</code> verschlüsselt. Der Schlüssel ist das Zahlenpaar (a, b).</p>
+                <ol>
+                    <li>Verschlüssele INFORMATIK mit a&nbsp;=&nbsp;5 und b&nbsp;=&nbsp;8 von Hand.</li>
+                    <li>Ordne das Verfahren in die kryptographischen Verfahren ein und begründe.</li>
+                    <li>Zum Entschlüsseln braucht man eine Zahl a' mit (a · a') mod 26 = 1. Bestimme a' für a&nbsp;=&nbsp;5 und gib die Entschlüsselungsformel an.</li>
+                    <li>Zeige, dass a&nbsp;=&nbsp;13 unzulässig ist. Welche Werte für a sind erlaubt?</li>
+                    <li>Implementiere Ver- und Entschlüsselung. Leer- und Satzzeichen bleiben erhalten. Unzulässige Schlüssel werden abgelehnt.</li>
+                    <li>Weise die Funktion mit Testfällen nach, auch für einen unzulässigen Schlüssel.</li>
+                    <li>Berechne die Anzahl möglicher Schlüssel und beurteile die Sicherheit. Beschreibe, wie ein Angreifer mit zwei bekannten Klartextbuchstaben den Schlüssel findet.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.3.7: Häufigkeitsanalyse automatisieren <span class="niveau">AFB II</span></summary>
+                <p>In Aufgabe 8.3.1 hast du die Buchstaben gezählt und den Schlüssel von Hand bestimmt. Das soll jetzt ein Programm übernehmen. Als Ausgangspunkt kannst du das <a href="../material/count_letters.py" download>Zählprogramm</a> verwenden.</p>
+                <ol type="a">
+                    <li>Schreibe eine Funktion <code>haeufigkeiten(text)</code>, die ein Dictionary mit der Anzahl jedes Buchstabens A–Z zurückgibt. Groß- und Kleinschreibung werden nicht unterschieden, andere Zeichen werden ignoriert.</li>
+                    <li>Schreibe eine Funktion <code>caesar_knacken(geheim)</code>, die annimmt, dass der häufigste Buchstabe für E steht, und den Schlüssel (0 bis 25) zurückgibt.</li>
+                    <li>Teste mit diesen Fällen und notiere jeweils die tatsächliche Ausgabe:
+                        <table class="gitter">
+                            <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+                            <tr><td><code>haeufigkeiten("Hallo")</code></td><td><code>{"H": 1, "A": 1, "L": 2, "O": 1}</code></td></tr>
+                            <tr><td><code>caesar_knacken(</code>Geheimtext aus 8.3.1<code>)</code></td><td><code>5</code></td></tr>
+                            <tr><td><code>caesar_knacken("Kdoor Dqqd")</code></td><td><code>3</code> (Klartext: „Hallo Anna“)</td></tr>
+                        </table>
+                    </li>
+                    <li>Ein Testfall schlägt fehl. Erkläre die Ursache und beschreibe, wie man das Verfahren robuster machen kann.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.3.8: Großer Schlüsselraum – trotzdem unsicher? <span class="niveau">AFB II–III</span></summary>
+                <p>Ein Angreifer kann pro Sekunde 10<sup>6</sup> Vigenère-Schlüssel ausprobieren.</p>
+                <ol type="a">
+                    <li>Berechne die Anzahl möglicher Schlüssel und die Zeit für eine vollständige Brute-Force-Suche, wenn das Schlüsselwort aus genau 5 zufälligen Buchstaben besteht.</li>
+                    <li>Der Angreifer kennt die Schlüssellänge nicht, weiß aber, dass sie höchstens 10 beträgt. Berechne die Anzahl der Schlüssel, die er schlimmstenfalls testen muss, und die Zeit dafür.</li>
+                    <li>Mit dem Kasiski-Test (8.4) findet der Angreifer die Schlüssellänge 10 heraus. Schätze ab, wie viele Verschiebungen er danach höchstens noch untersuchen muss.</li>
+                    <li>Beurteile die Aussage: „Ein Verfahren mit 10<sup>14</sup> Schlüsseln ist sicher.“</li>
+                </ol>
+            </details>
+        </div>

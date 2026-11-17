@@ -1,0 +1,14 @@
+{
+  "nr": "3.8",
+  "titel": "Übungsaufgaben",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

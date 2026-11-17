@@ -1,0 +1,56 @@
+{
+  "nr": "LB 10/11",
+  "titel": "KI und Projektmanagement",
+  "text": "Wie Sprachmodelle funktionieren, Projektmanagement, maschinelles Lernen und KI in der Gesellschaft.",
+  "kapitel": [
+    {
+      "titel": "KI-Kickstart",
+      "themen": [
+        "11-0-kickstart-sprachmodelle",
+        "11-0b-ki-als-lernpartner"
+      ]
+    },
+    {
+      "titel": "KI-Grundlagen",
+      "themen": [
+        "11-1-begriff-ki",
+        "11-2-wissens-datenbasierte-ki",
+        "11-3-ki-modelle-optimieren"
+      ]
+    },
+    {
+      "titel": "Projektmanagement",
+      "themen": [
+        "10-1-grundlagen",
+        "10-2-klassisch-vs-agil",
+        "10-3-versionsverwaltung-git"
+      ]
+    },
+    {
+      "titel": "KI-Projekt",
+      "themen": [
+        "10-4-tutorial-jupyter",
+        "10-5-ki-projektmanagement",
+        "10-6-ki-projekt-dokumentation"
+      ]
+    },
+    {
+      "titel": "Maschinelles Lernen",
+      "themen": [
+        "11-4-lineare-regression",
+        "11-5-entscheidungsbaum",
+        "11-6-k-naechster-nachbar",
+        "11-7-k-means",
+        "11-8-neuronale-netze",
+        "11-9-genetische-algorithmen"
+      ]
+    },
+    {
+      "titel": "Generative KI und Gesellschaft",
+      "themen": [
+        "11-10-generative-ki",
+        "11-11-ki-und-gesellschaft"
+      ]
+    }
+  ]
+}

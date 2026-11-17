@@ -1,0 +1,384 @@
+<h2>Die WHERE-Klausel</h2>
+
+<p>Die WHERE-Klausel in SQL wird verwendet, um Datensätze zu filtern und nur diejenigen zurückzugeben, die bestimmte Bedingungen erfüllen. Sie ist ein wesentlicher Bestandteil vieler SQL-Abfragen und ermöglicht es, präzise Datenabfragen durchzuführen.</p>
+
+<p>Wir sprechen von einer <strong>Selektion</strong>, wenn wir aus einer Tabelle ausgewählte Zeilen anzeigen lassen. </p>
+
+<h3>Verwendung von Vergleichsoperatoren in WHERE</h3>
+
+<p>In der WHERE-Klausel können verschiedene Vergleichsoperatoren verwendet werden:</p>
+
+<ul>
+            <li><code>=</code> (gleich)</li>
+            <li><code>></code> (größer als)  | <code> <</code> (kleiner als)</li>
+            <li><code>>=</code> (größer oder gleich) |
+            <code><=</code> (kleiner oder gleich)</li>
+            <li><code><></code> oder <code>!=</code> (ungleich)</li>
+        </ul>
+
+<p>Sowie die logischen Operatoren <code>AND, OR, NOT</code> verwendet werden.</p>
+
+<h3>Beispiele für WHERE-Klauseln:</h3>
+
+<p>Alle Mitarbeiter aus der Vertriebsabteilung <br>
+    <code>SELECT * FROM mitarbeiter WHERE abteilung = 'Vertrieb'</code> <br>
+    <br>
+    Alle IT-Mitarbeiter mit einem Gehalt von 60.000 oder mehr<br><code>
+    SELECT * FROM mitarbeiter WHERE abteilung = 'IT' AND gehalt >= 60000</code></p>
+
+<h3>Durchgerechnet an der Tabelle aus 1.3</h3>
+
+<p>Damit sichtbar wird, was <code>WHERE</code> tatsächlich tut, arbeiten wir wieder mit dem
+           Ausschnitt der Tabelle <code>Studenten</code> von Seite 1.3:</p>
+
+<table>
+        <thead><tr><th>StudentID</th><th>Vorname</th><th>Nachname</th><th>Notendurchschnitt</th></tr></thead>
+        <tbody>
+        <tr><td>1</td><td>Max</td><td>Mustermann</td><td>2.75</td></tr>
+        <tr><td>2</td><td>Anna</td><td>Schmidt</td><td>1.8</td></tr>
+        <tr><td>3</td><td>Lisa</td><td>Müller</td><td>3.5</td></tr>
+        <tr><td>4</td><td>Jonas</td><td>Bauer</td><td>2.9</td></tr>
+        <tr><td>5</td><td>Mia</td><td>Klein</td><td>1.5</td></tr>
+        </tbody>
+        </table>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+        <p><strong>Ausgangssituation:</strong> Gesucht sind alle Studierenden aus dem Ausschnitt oben, deren
+           Notendurchschnitt besser als 2.0 ist (also kleiner als 2.0).</p>
+        <h4>Beispiel 1: Ein Vergleich</h4>
+        <pre><code>SELECT Vorname, Nachname, Notendurchschnitt
+FROM Studenten
+WHERE Notendurchschnitt &lt; 2.0;</code></pre>
+        <p><strong>Ergebnis</strong> – aus fünf Zeilen bleiben zwei übrig. Die Spaltenzahl bleibt gleich,
+           die Zeilenzahl sinkt. Genau das ist eine <em>Selektion</em>:</p>
+        <table>
+        <thead><tr><th>Vorname</th><th>Nachname</th><th>Notendurchschnitt</th></tr></thead>
+        <tbody>
+        <tr><td>Anna</td><td>Schmidt</td><td>1.8</td></tr>
+        <tr><td>Mia</td><td>Klein</td><td>1.5</td></tr>
+        </tbody>
+        </table>
+        <ol>
+        <li><strong>FROM Studenten:</strong> Alle 5 Zeilen liegen bereit. <em>Warum?</em> Die Bedingung braucht Zeilen, die sie prüfen kann.</li>
+        <li><strong>WHERE Notendurchschnitt &lt; 2.0:</strong> Die Bedingung wird Zeile für Zeile geprüft:
+            2.75 nein, 1.8 ja, 3.5 nein, 2.9 nein, 1.5 ja. <em>Warum zeilenweise?</em> <code>WHERE</code> entscheidet
+            für jeden Datensatz einzeln, ob er im Ergebnis bleibt.</li>
+        <li><strong>SELECT Vorname, Nachname, Notendurchschnitt:</strong> Von den übrig gebliebenen Zeilen werden
+            drei Spalten ausgegeben. <em>Warum erst jetzt?</em> Die Spaltenauswahl kommt nach dem Aussortieren.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> die Tabelle oben mit 2 Zeilen (Anna Schmidt, Mia Klein).</p>
+        <p><strong>Kontrolle:</strong> Jede Ergebniszeile erfüllt die Bedingung (1.8 &lt; 2.0 und 1.5 &lt; 2.0), keine
+           aussortierte Zeile hätte sie erfüllt. Ein Wert von genau 2.0 käme mit <code>&lt;</code> nicht ins Ergebnis,
+           erst mit <code>&lt;=</code>. In der vollständigen Tabelle
+           (<a href="../material/studenten_tabelle.sql">studenten_tabelle.sql</a>, 51 Zeilen) liefert dieselbe Abfrage 13 Zeilen.</p>
+            </details>
+        </div>
+
+<h4>Beispiel 2: Zwei Bedingungen mit AND</h4>
+
+<pre><code>SELECT Vorname, Nachname, Notendurchschnitt
+FROM Studenten
+WHERE Notendurchschnitt &lt; 3.0 AND Nachname LIKE 'M%';</code></pre>
+
+<p><strong>Ergebnis</strong> – nur eine Zeile. Lisa Müller beginnt zwar auch mit M, hat aber 3.5.
+           Bei <code>AND</code> müssen <em>beide</em> Bedingungen zutreffen:</p>
+
+<table>
+        <thead><tr><th>Vorname</th><th>Nachname</th><th>Notendurchschnitt</th></tr></thead>
+        <tbody><tr><td>Max</td><td>Mustermann</td><td>2.75</td></tr></tbody>
+        </table>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Wann <code>OR</code>, wann <code>AND</code>?</summary>
+                <p>
+                  In der Alltagssprache sagt man „alle Studierenden mit Nachname Müller und Schmidt“ – gemeint
+                  sind beide. In SQL wäre <code>Nachname = 'Müller' AND Nachname = 'Schmidt'</code> aber
+                  immer leer, denn eine Zeile kann nicht zwei Nachnamen haben. Richtig ist hier
+                  <code>OR</code>:
+                </p>
+                <pre><code>WHERE Nachname = 'Müller' OR Nachname = 'Schmidt'</code></pre>
+                <p>
+                  Entscheidend ist nicht, ob die Bedingungen dieselbe Spalte betreffen, sondern die Frage:
+                  <strong>Muss eine einzelne Zeile alle Bedingungen gleichzeitig erfüllen?</strong> Dann
+                  <code>AND</code> – die Treffermenge wird kleiner. Reicht eine der Bedingungen, dann
+                  <code>OR</code> – die Treffermenge wird größer. So ist <code>Notendurchschnitt &gt;= 1.5 AND
+                  Notendurchschnitt &lt;= 2.5</code> richtig, obwohl beide Bedingungen dieselbe Spalte betreffen:
+                  Gesucht ist ein Bereich, und jede Zeile muss beide Grenzen einhalten (Kurzform:
+                  <code>BETWEEN 1.5 AND 2.5</code>). Für mehrere mögliche Werte einer Spalte gibt es die
+                  Kurzform <code>WHERE Nachname IN ('Müller', 'Schmidt')</code>.
+                </p>
+            </details>
+        </div>
+
+<h2>Die LIKE-Klausel</h2>
+
+<p>Die LIKE-Klausel ist ein spezieller Operator, der in Verbindung mit WHERE verwendet wird, um Muster in Textfeldern zu suchen. Sie ist besonders nützlich für Teilzeichenfolgensuche oder wenn der exakte Wert nicht bekannt ist.</p>
+
+<h3>Syntax der LIKE-Klausel</h3>
+
+<pre><code>SELECT spalte1, spalte2, ...
+    FROM tabelle
+    WHERE spaltenname LIKE muster;</code></pre>
+
+<h3>Platzhalter in LIKE</h3>
+
+<p>LIKE verwendet zwei Hauptplatzhalter:</p>
+
+<ul>
+            <li><code>%</code> - Steht für null, ein oder mehrere Zeichen</li>
+            <li><code>_</code> - Steht für genau ein Zeichen</li>
+        </ul>
+
+<h3>Beispiele für die Verwendung von LIKE</h3>
+
+<table>
+            <tr>
+                <th>Muster</th>
+                <th>Beschreibung</th>
+            </tr>
+            <tr>
+                <td><code>LIKE 'a%'</code></td>
+                <td>Findet alle Werte, die mit 'a' beginnen</td>
+            </tr>
+            <tr>
+                <td><code>LIKE '%a'</code></td>
+                <td>Findet alle Werte, die mit 'a' enden</td>
+            </tr>
+            <tr>
+                <td><code>LIKE '%or%'</code></td>
+                <td>Findet alle Werte, die 'or' an beliebiger Stelle enthalten</td>
+            </tr>
+            <tr>
+                <td><code>LIKE '_r%'</code></td>
+                <td>Findet alle Werte, die 'r' an zweiter Stelle haben</td>
+            </tr>
+            <tr>
+                <td><code>LIKE '%ei%'</code></td>
+                <td>Findet alle Werte, die 'ei' irgendwo enthalten</td>
+            </tr>
+            <tr>
+                <td><code>LIKE 'a_%'</code></td>
+                <td>Findet alle Werte, die mit 'a' beginnen und mindestens 2 Zeichen lang sind</td>
+            </tr>
+        </table>
+
+<p>Alle Mitarbeiter, deren Nachname mit 'M' beginnt <br>
+            <code>SELECT * FROM mitarbeiter WHERE nachname LIKE 'M%'</code> <br>
+            <br>
+            Alle Mitarbeiter, deren Nachname genau 5 Buchstaben hat<br><code>
+                SELECT * FROM mitarbeiter WHERE nachname LIKE '_____'</code></p>
+
+<h3>LIKE durchgerechnet – wieder an der Tabelle Studenten</h3>
+
+<h4>Beispiel 3: Das Prozentzeichen</h4>
+
+<pre><code>SELECT Vorname, Nachname
+FROM Studenten
+WHERE Nachname LIKE 'M%';</code></pre>
+
+<p><strong>Ergebnis:</strong> Mustermann und Müller. Das <code>%</code> steht für beliebig viele
+           weitere Zeichen – auch für gar keines.</p>
+
+<h4>Beispiel 4: Der Unterstrich</h4>
+
+<pre><code>SELECT Vorname, Nachname
+FROM Studenten
+WHERE Nachname LIKE '_a%';</code></pre>
+
+<p><strong>Ergebnis:</strong> nur <b>Jonas Bauer</b>. Gesucht ist ein beliebiges erstes Zeichen,
+           dann ein „a“, dann beliebig viel. Mustermann hat an zweiter Stelle ein „u“, Klein ein „l“.</p>
+
+<p>Beispiel 1 ist der einfachste Fall einer Selektion. Das folgende Beispiel verbindet WHERE, LIKE,
+           AND/OR und ORDER BY und zeigt die häufigste Falle beim Kombinieren von Bedingungen.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 5 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Für ein Mentoring-Programm sucht die Hochschule in der
+               <em>vollständigen</em> Tabelle <code>Studenten</code> (51 Zeilen) alle Studierenden aus dem jüngsten
+               Jahrgang 2002 oder dem ältesten Jahrgang 1998, die einen Notendurchschnitt <em>besser als</em> 2.0
+               haben. Ausgegeben werden Vorname, Nachname und Notendurchschnitt, beste Note zuerst.</p>
+            <ol>
+                <li><strong>Die Bedingungen einzeln formulieren.</strong> Ein Geburtsdatum hat die Form
+                    <code>'2002-04-18'</code>, der Jahrgang steckt in den ersten vier Zeichen. Also:
+                    <code>Geburtsdatum LIKE '2002%'</code> bzw. <code>Geburtsdatum LIKE '1998%'</code>.
+                    „Besser als 2.0“ heißt <code>Notendurchschnitt &lt; 2.0</code>. <em>Warum <code>&lt;</code> und nicht
+                    <code>&lt;=</code>?</em> „Besser als“ schließt die 2.0 selbst aus.</li>
+                <li><strong>Verknüpfungen bestimmen.</strong> Eine einzelne Zeile kann nicht in beiden Jahren geboren
+                    sein, zwischen den Jahrgängen steht also <code>OR</code>. Die Note muss <em>zusätzlich</em>
+                    stimmen, also <code>AND</code>.</li>
+                <li><strong>Klammern setzen.</strong> <code>AND</code> bindet stärker als <code>OR</code> – so wie
+                    Punkt- vor Strichrechnung. Ohne Klammern liest SQLite
+                    <code>A OR B AND C</code> als <code>A OR (B AND C)</code>. Gemeint ist aber
+                    <code>(A OR B) AND C</code>.</li>
+                <li><strong>FROM und WHERE ausführen.</strong> Aus den 51 Zeilen gehören 13 zu den Jahrgängen 2002 und
+                    1998. Davon bleiben die Zeilen mit einem Schnitt unter 2.0:
+                    <table>
+                        <thead><tr><th>Vorname</th><th>Nachname</th><th>Geburtsdatum</th><th>Notendurchschnitt</th><th>bleibt?</th></tr></thead>
+                        <tbody>
+                            <tr><td>Mia</td><td>Klein</td><td>2002-04-18</td><td>1.5</td><td>ja</td></tr>
+                            <tr><td>Amelie</td><td>Keller</td><td>2002-02-14</td><td>1.6</td><td>ja</td></tr>
+                            <tr><td>Johanna</td><td>Wolff</td><td>2002-01-25</td><td>1.9</td><td>ja</td></tr>
+                            <tr><td>Alina</td><td>Kruger</td><td>2002-10-11</td><td>2</td><td>nein, 2 ist nicht kleiner als 2.0</td></tr>
+                            <tr><td>Marie</td><td>König</td><td>1998-07-04</td><td>1.85</td><td>ja</td></tr>
+                            <tr><td colspan="5">… 8 weitere Zeilen der beiden Jahrgänge mit Schnitt 2.75 bis 3.7: nein</td></tr>
+                        </tbody>
+                    </table></li>
+                <li><strong>SELECT und ORDER BY.</strong> Drei Spalten ausgeben und nach
+                    <code>Notendurchschnitt ASC</code> sortieren, weil die kleinste Zahl die beste Note ist.</li>
+            </ol>
+            <pre><code>SELECT Vorname, Nachname, Notendurchschnitt
+FROM Studenten
+WHERE (Geburtsdatum LIKE '2002%' OR Geburtsdatum LIKE '1998%')
+  AND Notendurchschnitt &lt; 2.0
+ORDER BY Notendurchschnitt ASC;</code></pre>
+            <p><strong>Ergebnis (4 Zeilen):</strong></p>
+            <table>
+                <thead><tr><th>Vorname</th><th>Nachname</th><th>Notendurchschnitt</th></tr></thead>
+                <tbody>
+                    <tr><td>Mia</td><td>Klein</td><td>1.5</td></tr>
+                    <tr><td>Amelie</td><td>Keller</td><td>1.6</td></tr>
+                    <tr><td>Marie</td><td>König</td><td>1.85</td></tr>
+                    <tr><td>Johanna</td><td>Wolff</td><td>1.9</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Probe mit der Falle:</strong> Lässt man die Klammern weg, liefert dieselbe Abfrage
+               <em>10</em> Zeilen: alle 9 Personen des Jahrgangs 2002 – auch Tom Seidel mit 3.7 – und zusätzlich
+               Marie König. Ein Ergebnis mit Noten über 2.0 zeigt sofort, dass die Verknüpfung nicht stimmt.
+               Kontrolliere deshalb bei jeder Abfrage mit <code>AND</code> und <code>OR</code>, ob jede Ergebniszeile
+               wirklich alle Bedingungen erfüllt.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+                    <details>
+                        <summary>
+                            Hinweis: Zusätzliche SQL-Operatoren
+                        </summary>            
+                    <p><strong>1. IN:</strong> Diese Klausel ermöglicht es, mehrere mögliche Werte für eine Spalte anzugeben. Sie ist eine Abkürzung, um mehrere OR-Bedingungen zu vermeiden.
+                    <br>Beispiel: <code>SELECT * FROM Tabelle WHERE Spalte IN ('Wert1', 'Wert2', 'Wert3');</code>
+                    <br>Dieser Befehl wählt alle Einträge aus, bei denen der Wert der Spalte entweder 'Wert1', 'Wert2' oder 'Wert3' ist.</p>
+            
+                    <p><strong>2. BETWEEN:</strong> Diese Klausel wird verwendet, um einen Bereich von Werten auszuwählen. Sie ist inklusiv, das heißt, die angegebenen Grenzwerte werden eingeschlossen.
+                    <br>Beispiel: <code>SELECT * FROM Tabelle WHERE Spalte BETWEEN Wert1 AND Wert2;</code>
+                    <br>Dieser Befehl wählt alle Einträge aus, bei denen der Wert in der Spalte zwischen Wert1 und Wert2 liegt (einschließlich dieser Werte).</p>
+            
+                    <p><strong>3. IS NULL:</strong> Diese Klausel findet Zeilen, in denen in der angegebenen Spalte <em>kein Wert</em> eingetragen ist. <code>NULL</code> bedeutet „unbekannt bzw. nicht vorhanden“ und ist etwas anderes als ein leerer Text <code>''</code> oder die Zahl 0.
+                    <br>Beispiel: <code>SELECT * FROM Tabelle WHERE Spalte IS NULL;</code>
+                    <br>Dieser Befehl wählt alle Einträge aus, bei denen in der Spalte kein Wert vorhanden ist. Ein leerer Text wird damit <em>nicht</em> gefunden – dafür brauchst du <code>WHERE Spalte = ''</code>. Umgekehrt findet <code>= NULL</code> nie etwas, weil ein Vergleich mit NULL immer „unbekannt“ ergibt.</p>
+                    </details>
+                </div>
+
+<div class="praxisbezug">
+                    <details>
+                        <summary>Praxisbezug: Filtern von Nutzerdaten und die DSGVO</summary>
+                        <p>
+                            Wenn du im Onlineshop nach „Schuhe, Größe 42, unter 80 €“ filterst, erzeugt die Seite im
+                            Hintergrund eine WHERE-Klausel mit mehreren AND-Bedingungen. Im Berufsleben schreiben
+                            <strong>Data Analysts</strong> solche Filter täglich, etwa um alle Kundinnen und Kunden einer
+                            Region für eine Marketingaktion auszuwählen. Bei Nutzerdaten wie in InstaHub gilt dabei die
+                            <strong>DSGVO</strong>: Abgefragt werden dürfen nur die Spalten, die für den Zweck wirklich
+                            nötig sind (Datenminimierung). Eine Abfrage wie Teilaufgabe k) – E-Mail-Adressen
+                            Minderjähriger – wäre in einem echten Unternehmen nur mit klarer Rechtsgrundlage zulässig,
+                            etwa für den Jugendschutz.
+                        </p>
+                    </details>
+                </div>
+
+<h2>Verschachtelte Abfragen (Subqueries) – eine erste Einführung</h2>
+
+<p>
+                    Manchmal kennst du den Vergleichswert für eine WHERE-Bedingung nicht direkt, sondern musst ihn
+                    erst selbst per SQL ermitteln. Dafür kannst du eine komplette <code>SELECT</code>-Abfrage in
+                    Klammern innerhalb der WHERE-Klausel schreiben. Das nennt man eine <strong>Subquery</strong>
+                    (oder verschachtelte Abfrage).
+                </p>
+
+<p>
+                    Beispiel mit der Tabelle „Produkte“ (ProduktID, Produktname, Preis, Kategorie): Wir wollen alle
+                    Produkte finden, die in derselben Kategorie sind wie das Produkt „Laptop“ – kennen die
+                    Kategorie selbst aber nicht.
+                </p>
+
+<pre><code>SELECT Produktname, Kategorie
+FROM Produkte
+WHERE Kategorie = (SELECT Kategorie FROM Produkte WHERE Produktname = 'Laptop');</code></pre>
+
+<p>
+                    Zuerst liefert die innere Abfrage die Kategorie von „Laptop“ (z.&nbsp;B. „Elektronik“). Die
+                    äußere Abfrage sucht dann alle Produkte mit genau dieser Kategorie.
+                </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Die grundlegende Syntax einer WHERE-Anweisung lautet:<br>
+                SELECT spalte1, spalte2, ...<br>
+                    FROM tabelle <br>
+                    WHERE bedingung;
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+              Der Unterschied in einem Satz: <code>_</code> steht für <strong>genau ein</strong> Zeichen,
+              <code>%</code> für <strong>beliebig viele</strong> – auch null.
+            </p>
+            <p>
+              Häufiger Fehler: <code>WHERE Nachname = 'M%'</code>. Mit <code>=</code> sind
+              <code>%</code> und <code>_</code> ganz normale Zeichen, die Abfrage sucht dann wörtlich nach
+              dem Nachnamen „M%“ und liefert nichts. Platzhalter wirken nur zusammen mit <code>LIKE</code>.
+            </p>
+        </div>
+
+<div class="merke">
+                    <p>
+                        Die Subquery in Klammern wird zuerst ausgeführt. Ihr Ergebnis wird anschließend von der
+                        äußeren Abfrage für den Vergleich verwendet:<br>
+                        SELECT spalte1, ...<br>
+                        FROM tabelle<br>
+                        WHERE spalte = (SELECT spalte FROM tabelle WHERE bedingung);
+                    </p>
+                </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+                    <details>
+                        <summary>
+                            Aufgabe 1.4.1: <span class="niveau">AFB II</span>
+                        </summary>
+                        <p>
+                            Führe Suchaufträge für die folgenden Informationen durch und notiere dir die SQL-Befehle, die du verwendet hast. Nutze dafür ausschließlich den Bereich SQL in InstaHub und schau vorher im Schema nach, wie die Tabellen und Spalten heißen.<br>
+                            a) Nutzernamen, die mit E beginnen.<br>
+                            b) Nutzernamen und E-Mail-Adressen von Nutzern, die Justus heißen.<br>
+                            c) Datensätze von Nutzern, die in Deutschland wohnen.<br>
+                            d) Foto-IDs, die nach dem 20.09.2017 hochgeladen wurden.<br>
+                            e) Alle Datensätze von nicht aktivierten Nutzerkonten.<br>
+                            f) Die Foto-IDs, die als Tier getaggt sind.<br>
+                            g) ID und Nutzer-ID von Fotos, die im PNG-Format hochgeladen wurden.<br>
+                            h) Namen, Geschlecht und Geburtstage von Nutzern, die in Leipzig wohnen.<br>
+                            i) Datum und Uhrzeit, wann der Nutzer mit ID 110 dem Nutzer mit der ID 39 gefolgt ist.<br>
+                            j) Foto-ID und URL von Fotos ohne Bildbeschreibung.<br>
+                            k) Alle E-Mail-Adressen von Nutzern, die nicht volljährig sind.
+                        </p>
+                    </details>
+                </div>
+
+<div class="aufgabe">
+                    <details>
+                        <summary>
+                            Aufgabe 1.4.2: <span class="niveau">AFB II</span>
+                        </summary>
+                        <p>
+                            Gegeben ist weiterhin die Tabelle „Produkte“ mit den Spalten „ProduktID“, „Produktname“,
+                            „Preis“ und „Kategorie“. Schreibe eine SQL-Abfrage, die alle Produkte auflistet, die in
+                            der gleichen Kategorie sind wie das Produkt „Schreibtischlampe“. Nutze dafür eine
+                            Subquery.
+                        </p>
+                    </details>
+                </div>

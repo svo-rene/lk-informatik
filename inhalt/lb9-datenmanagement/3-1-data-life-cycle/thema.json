@@ -1,0 +1,18 @@
+{
+  "nr": "3.1",
+  "titel": "Arbeit mit Daten: Der Data Life Cycle",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

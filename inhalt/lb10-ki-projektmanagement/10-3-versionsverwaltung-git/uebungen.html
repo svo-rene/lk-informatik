@@ -1,0 +1,56 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.3.3: Das Kanban-Board für den ersten Sprint <span class="niveau">AFB II</span></summary>
+                <p>Legt in eurem Gruppenrepository ein Projekt mit der Vorlage „Einfaches Kanban“ an (Abschnitt 5.2). Es muss mindestens die Spalten „To Do“, „In Progress“ und „Done“ haben. Formuliert für den ersten Sprint mindestens vier Issues, davon mindestens zwei als User Story nach dem Satzschema aus 10.2. Jedes Issue bekommt ein Akzeptanzkriterium als Aufgabenliste (<code>- [ ]</code>) und eine zuständige Person und wird dem Board zugeordnet. Achtet darauf, dass jede Person mindestens ein Issue zu ihrem eigenen Modell hat. Begründet in zwei bis drei Sätzen, in welcher Reihenfolge ihr die Issues angeht.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.3.4: Die Historie lesen <span class="niveau">AFB II</span></summary>
+                <p>Die Gruppe „Weinsorten“ (Ben, Ella, Finn) trainiert mit dem Wein-Datensatz aus scikit-learn drei verschiedene Modelle. Ihre Historie (älteste Commits oben):</p>
+                <table>
+                    <tr><th>Nr.</th><th>Zeitpunkt</th><th>Person</th><th>Commit-Nachricht</th><th>geänderte Dateien</th></tr>
+                    <tr><td>1</td><td>23.11. 08:12</td><td>Ella</td><td><code>README: Projektbeschreibung und Datensatz angelegt</code></td><td>README.md</td></tr>
+                    <tr><td>2</td><td>23.11. 08:40</td><td>Finn</td><td><code>plan.md: PSP und Gantt (Soll) angelegt</code></td><td>plan.md</td></tr>
+                    <tr><td>3</td><td>24.11. 14:05</td><td>Ben</td><td><code>Wein: Daten erkundet, 178 Proben, 3 Klassen</code></td><td>modell_ben.ipynb</td></tr>
+                    <tr><td>4</td><td>26.11. 19:30</td><td>Ben</td><td><code>k-NN ohne Skalierung: Validierung 0,72</code></td><td>modell_ben.ipynb</td></tr>
+                    <tr><td>5</td><td>27.11. 09:02</td><td>Ella</td><td><code>Entscheidungsbaum Tiefe 3 trainiert (#4)</code></td><td>modell_ella.ipynb</td></tr>
+                    <tr><td>6</td><td>30.11. 21:47</td><td>Ben</td><td><code>k-NN mit Min-Max-Skalierung: Validierung 0,94 (#5)</code></td><td>modell_ben.ipynb</td></tr>
+                    <tr><td>7</td><td>01.12. 07:55</td><td>Finn</td><td><code>Update modell_finn.ipynb</code></td><td>modell_finn.ipynb</td></tr>
+                    <tr><td>8</td><td>02.12. 10:15</td><td>Finn</td><td><code>plan.md: Ist für KW 48 und 49 eingetragen</code></td><td>plan.md</td></tr>
+                </table>
+                <ol type="a">
+                    <li>Beschreibe Bens Arbeitsweg anhand der Historie. Gib an, welche zwei Commits du vergleichen musst, um die Codeänderung für die Skalierung zu sehen.</li>
+                    <li>Ben behauptet am 3.12.: „Ella hat seit dem 27.11. nichts mehr gemacht.“ Beurteile, was die Historie dazu aussagen kann und was nicht.</li>
+                    <li>Erkläre, was an Commit 7 problematisch ist und wie man trotzdem herausfindet, was Finn geändert hat.</li>
+                    <li>Die Zwischenabgabe ist am Freitag, dem 4.12. Gib an, welche Fassung von <code>modell_ella.ipynb</code> die Lehrkraft dann sieht, wenn bis dahin kein weiterer Commit kommt. Gib außerdem an, wie viele Tage die Ist-Spalte für KW 48 in <code>plan.md</code> fehlte, wenn KW 48 am Freitag, dem 27.11., endete.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.3.6: Eine verlorene Änderung zurückholen <span class="niveau">AFB II</span></summary>
+                <p>Ella verantwortet in der Gruppe „Weinsorten“ die <code>README.md</code>. Commit A (Montag) enthielt:</p>
+                <pre><code># Weinsorten erkennen
+Datensatz: load_wine (scikit-learn), 178 Proben, 13 Merkmale
+Verfahren: Entscheidungsbaum (Ella), k-NN (Ben), neuronales Netz (Finn)</code></pre>
+                <p>Am Dienstag lädt Ella eine neue Fassung hoch (Commit B), am Mittwoch Ben (Commit C). Der Vergleich von B mit C zeigt:</p>
+                <pre><code> # Weinsorten erkennen
+-Datensatz: load_wine (scikit-learn), 178 Proben, 13 Merkmale
++Datensatz: load_wine (scikit-learn), 178 Proben, 13 Merkmale, 3 Klassen (59/71/48)
+ Verfahren: Entscheidungsbaum (Ella), k-NN (Ben), neuronales Netz (Finn)
+-Ergebnis bisher: Baum 0,89 (Validierung)</code></pre>
+                <ol type="a">
+                    <li>Arbeite durch Vergleich mit Commit A heraus, welche Änderung Ella in B und welche Ben in C tatsächlich vorgenommen hat. Erkläre, warum die letzte Zeile verschwunden ist, obwohl Ben sie nicht löschen wollte.</li>
+                    <li>Gib den Inhalt der <code>README.md</code> an, der beide Änderungen enthält.</li>
+                    <li>Beschreibe die Schritte in Forgejo, mit denen Ella den richtigen Stand herstellt, und formuliere die Commit-Nachricht.</li>
+                    <li>Nenne die Regel, die Ben verletzt hat, und beschreibe, wie er seine Ergänzung stattdessen hätte einbringen sollen.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,90 @@
+<p>
+            Du entsperrst dein Handy mit dem Gesicht, meldest dich bei OPAL mit Benutzername und Passwort an und bestätigst eine Online-Zahlung in der Banking-App. Jedes Mal will ein System wissen: Wer bist du – und kannst du das beweisen?
+        </p>
+
+<p>Identifizierung und Authentifizierung sind zwei wesentliche Sicherheitsprozesse in der Informationstechnik. Bei der <strong>Identifizierung</strong> gibt ein Benutzer oder System an, wer er ist, meist durch einen Benutzernamen oder eine andere eindeutige Kennung. Die <strong>Authentifizierung</strong> überprüft, ob diese Angabe stimmt, typischerweise durch ein Passwort, biometrische Merkmale oder einen anderen Nachweis. Erst danach folgt die <strong>Autorisierung</strong>: Welche Rechte hat die geprüfte Person?</p>
+
+<h2>RADIUS</h2>
+
+<p>RADIUS (Remote Authentication Dial-In User Service) ist ein Netzwerkprotokoll für die Authentifizierung, Autorisierung und Abrechnung (Accounting, zusammen „AAA“) von Benutzern, die auf ein Netz zugreifen wollen. Ein zentraler RADIUS-Server bearbeitet die Anmeldeanfragen vieler Netzwerkgeräte, etwa von WLAN-Access-Points, Switches oder VPN-Servern; diese Geräte heißen aus Sicht von RADIUS „Clients“. Typische Einsatzbereiche sind die Anmeldung per VPN oder im WLAN mit WPA2/WPA3-Enterprise (IEEE 802.1X): Jeder Benutzer meldet sich mit eigenen Zugangsdaten an statt mit einem gemeinsamen WLAN-Passwort. Der RADIUS-Server prüft die Anmeldedaten (z.&nbsp;B. Benutzername und Passwort oder ein Zertifikat) und erlaubt den Zugriff nach festgelegten Richtlinien.</p>
+
+<h2>Zwei-Faktor-Authentifizierung (2FA)</h2>
+
+<p>Die Zwei-Faktor-Authentifizierung kombiniert zwei Faktoren <em>verschiedener</em> Art, um die Identität eines Benutzers zu bestätigen. Typisch ist etwas, das der Benutzer weiß (ein Passwort), und etwas, das er besitzt (ein Smartphone mit einer Authenticator-App, die alle 30 Sekunden einen neuen Code erzeugt, oder einen per SMS gesendeten Code). 2FA bietet eine zusätzliche Sicherheitsebene gegenüber der reinen Passwort-Anmeldung, da ein Angreifer beide Faktoren erbeuten muss, um unbefugt Zugang zu erlangen. SMS-Codes gelten dabei als schwächer als App-Codes oder Hardware-Sicherheitsschlüssel, weil SMS abgefangen oder auf eine andere SIM-Karte umgeleitet werden können.</p>
+
+<h2>Authentifizierung mit biometrischen Merkmalen</h2>
+
+<p>Biometrische Authentifizierung nutzt unverwechselbare körperliche oder verhaltensbezogene Merkmale einer Person, z.&nbsp;B. Fingerabdruck-, Gesichts-, Iris- oder Stimmerkennung. Sie wird häufig für den Zugriff auf Geräte wie Smartphones und Laptops sowie für sicherheitskritische Anwendungen wie Bankdienstleistungen verwendet. Sie ist bequem und bietet eine hohe Sicherheit, weil biometrische Merkmale schwer zu fälschen sind. Allerdings wirft sie Datenschutzfragen auf: Biometrische Merkmale sind dauerhaft mit einer Person verbunden und lassen sich – anders als ein Passwort – nach einem Datenleck nicht ändern. Nach der DSGVO gehören biometrische Daten zu den besonders geschützten Daten.</p>
+
+<p>Während RADIUS eine netzwerkzentrierte Lösung zur Erhöhung der Sicherheit ist, verbessern die Zwei-Faktor-Authentifizierung und die biometrische Authentifizierung die Sicherheit durch physische Geräte bzw. einzigartige persönliche Merkmale.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation: Anmeldung bei OPAL.</strong></p>
+            <ol>
+                <li><strong>Identifizierung:</strong> Du gibst deinen Benutzernamen ein und behauptest damit, wer du bist.</li>
+                <li><strong>Authentifizierung:</strong> Du gibst dein Passwort ein – ein Nachweis mit dem Faktor Wissen. OPAL vergleicht ihn mit den gespeicherten Daten.</li>
+                <li><strong>Autorisierung:</strong> OPAL zeigt dir danach nur die Kurse, für die du freigeschaltet bist.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Alle drei Schritte laufen nacheinander ab; die Autorisierung setzt eine erfolgreiche Authentifizierung voraus.<br>
+            <strong>Kontrolle:</strong> Wird zusätzlich ein Code aus einer App abgefragt, ist das 2FA mit Wissen und Besitz.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation: eduroam an der TU Dresden.</strong> Studierende aus Leipzig besuchen die TU Dresden und verbinden ihren Laptop mit dem WLAN „eduroam“.</p>
+            <ol>
+                <li>Der Laptop meldet sich beim Access Point mit <code>name@uni-leipzig.de</code> an (IEEE 802.1X). Der Access Point lässt zunächst nur Anmeldeverkehr durch.</li>
+                <li>Der Access Point (RADIUS-Client) leitet die Anfrage an den RADIUS-Server der TU Dresden weiter.</li>
+                <li>Dieser erkennt am Teil nach dem @, dass er nicht zuständig ist, und leitet die Anfrage über den eduroam-Verbund an den RADIUS-Server der Universität Leipzig weiter.</li>
+                <li>Der Leipziger Server prüft die Zugangsdaten über einen verschlüsselten Tunnel und antwortet mit „Access-Accept“ oder „Access-Reject“.</li>
+                <li>Bei „Access-Accept“ schaltet der Access Point den Zugang frei; der Laptop bekommt per DHCP eine Adresse (siehe Kurs „Rechnernetze“, Seite 7.7).</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die TU Dresden sieht das Passwort nie – geprüft wird dort, wo das Konto verwaltet wird.<br>
+            <strong>Falle:</strong> Der Access Point in Dresden entscheidet nicht selbst über die Anmeldung; er setzt nur die Antwort des RADIUS-Servers um.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Face-ID, Banking-App und das Firmen-WLAN</summary>
+                <p><strong>Alltag:</strong> Beim Entsperren des Handys mit Fingerabdruck oder Gesicht bleibt das biometrische Merkmal auf dem Gerät; dem Onlinedienst wird nur bestätigt, dass die Prüfung erfolgreich war. Beim Online-Banking ist für Zahlungen eine starke Kundenauthentifizierung mit zwei Faktoren vorgeschrieben, z.&nbsp;B. Passwort plus Freigabe in der Banking-App.</p>
+                <p><strong>Beruf:</strong> Administratorinnen und Administratoren richten in Firmen RADIUS-Server und 802.1X ein, damit sich jedes Gerät und jede Person im WLAN und am Netzwerkanschluss einzeln anmelden – verlässt jemand die Firma, wird nur sein Konto gesperrt, statt das WLAN-Passwort für alle zu ändern. Ein häufiges Ticket im IT-Support: „Ich habe ein neues Handy, und die Authenticator-App ist weg – ich komme nicht mehr ins System.“ Dafür braucht es sichere Verfahren zur Wiederherstellung, z.&nbsp;B. vorab ausgedruckte Notfallcodes.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Identifizierung</strong> – Angabe einer Identität („Ich bin anna.muster“).<br>
+                <strong>Authentifizierung</strong> – Nachweis, dass die Angabe stimmt, durch einen oder mehrere Faktoren: <strong>Wissen</strong> (Passwort, PIN), <strong>Besitz</strong> (Smartphone, Chipkarte, Sicherheitsschlüssel) oder <strong>Sein</strong> (biometrisches Merkmal).<br>
+                <strong>Autorisierung</strong> – Zuteilung von Rechten an die authentifizierte Identität.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.12.1: Faktoren einordnen <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Ordne den Faktoren Wissen, Besitz oder Sein zu: PIN, Fingerabdruck, Bankkarte, Passwort, Code aus einer Authenticator-App, Gesichtserkennung, Hardware-Sicherheitsschlüssel.</li>
+                    <li>Eine Webseite verlangt Passwort und zusätzlich eine Sicherheitsfrage („Name deines ersten Haustiers?“). Ist das eine Zwei-Faktor-Authentifizierung? Begründe.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.12.2: WLAN mit Einzelanmeldung <span class="niveau">AFB II</span></summary>
+                <p>Die Schule stellt ihr WLAN von einem gemeinsamen Passwort (WPA2-Personal) auf eine Anmeldung per RADIUS (WPA2/WPA3-Enterprise) um.</p>
+                <ol>
+                    <li>Beschreibe den Ablauf, wenn sich ein Tablet mit dem neuen WLAN verbindet. Nenne dabei die beteiligten Geräte und ihre Rollen.</li>
+                    <li>Erläutere zwei Vorteile gegenüber dem gemeinsamen Passwort.</li>
+                </ol>
+            </details>
+        </div>

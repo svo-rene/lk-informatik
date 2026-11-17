@@ -1,0 +1,179 @@
+<p>
+      Ein nichtdeterministischer endlicher Automat (NEA) ist oft leichter zu entwerfen als ein DEA. Für die Umsetzung in einem Programm ist aber ein DEA praktischer: Bei jedem Zeichen steht eindeutig fest, welcher Zustand folgt, und der Computer muss nicht mehrere Wege gleichzeitig verfolgen. Die <strong>Potenzmengenkonstruktion</strong> wandelt jeden NEA in einen gleichwertigen DEA um.
+    </p>
+
+<h2>Das Verfahren</h2>
+
+<ol>
+      <li><strong>Startmenge:</strong> Der Startzustand des DEA ist die Menge {Startzustand des NEA} (beim ε-NEA: deren ε-Hülle).</li>
+      <li><strong>Übergänge bilden:</strong> Für jeden bisher gefundenen DEA-Zustand M und jedes Symbol x vereinigt man die Folgezustände aller Zustände aus M: δ<sub>D</sub>(M, x) = ⋃<sub>q ∈ M</sub> δ<sub>N</sub>(q, x) (beim ε-NEA anschließend die ε-Hülle bilden).</li>
+      <li><strong>Neue Mengen</strong> werden zu neuen DEA-Zuständen. Man wiederholt Schritt 2, bis keine neuen Mengen mehr entstehen. Nur die erreichbaren Mengen werden aufgeschrieben.</li>
+      <li><strong>Endzustände:</strong> Alle Mengen, die einen NEA-Endzustand enthalten, sind Endzustände des DEA.</li>
+      <li>Entsteht die leere Menge ∅, ist sie der Fangzustand (Trap-Zustand) des DEA.</li>
+    </ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+      <p><strong>Ausgangssituation:</strong> Der NEA aus Aufgabe 6.9.1 (Wörter, die mit 1 beginnen und mit 1 enden) hat die Übergänge δ(q0, 1) = {q1, q2}, δ(q1, 0) = {q1}, δ(q1, 1) = {q1, q2}; Endzustand q2.</p>
+      <ol>
+        <li><strong>Startmenge {q0}:</strong> mit 0: q0 hat keinen 0-Übergang → ∅; mit 1: {q1, q2} (neu). <em>Warum?</em> Jede neue Menge wird ein neuer DEA-Zustand.</li>
+        <li><strong>{q1, q2}:</strong> mit 0: δ(q1, 0) ∪ δ(q2, 0) = {q1} ∪ ∅ = {q1} (neu); mit 1: {q1, q2} ∪ ∅ = {q1, q2}. <em>Warum?</em> Man vereinigt die Folgezustände <em>aller</em> Elemente der Menge.</li>
+        <li><strong>{q1}:</strong> mit 0: {q1}; mit 1: {q1, q2}. Keine neue Menge.</li>
+        <li><strong>∅:</strong> führt mit jedem Zeichen nach ∅ – der Fangzustand.</li>
+        <li><strong>Endzustände markieren:</strong> Nur {q1, q2} enthält q2.</li>
+      </ol>
+      <table>
+        <thead><tr><th>DEA-Zustand</th><th>0</th><th>1</th><th>akzeptierend?</th></tr></thead>
+        <tbody>
+          <tr><td>→ {q0}</td><td>∅</td><td>{q1, q2}</td><td>nein</td></tr>
+          <tr><td>{q1, q2}</td><td>{q1}</td><td>{q1, q2}</td><td><strong>ja</strong></td></tr>
+          <tr><td>{q1}</td><td>{q1}</td><td>{q1, q2}</td><td>nein</td></tr>
+          <tr><td>∅ (Fangzustand)</td><td>∅</td><td>∅</td><td>nein</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Ergebnis:</strong> Ein DEA mit 4 Zuständen, Endzustand {q1, q2}.</p>
+      <p><strong>Kontrolle:</strong> <code>101</code>: {q0} –1→ {q1, q2} –0→ {q1} –1→ {q1, q2} ✓. <code>10</code>: endet in {q1} ✗. <code>0</code>: endet in ∅ ✗.</p>
+            </details>
+        </div>
+
+<h2>Komplexeres Beispiel: vorletztes Zeichen A</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+    <p>
+      Gegeben ist ein <strong>NEA</strong> über Σ = {A, B} mit den Zuständen S₀, S₁, S₂, Startzustand S₀ und
+      einzigem Endzustand S₂. Die Sprache besteht aus allen Wörtern, deren
+      <strong>vorletztes Zeichen A</strong> ist (Länge mindestens 2).
+    </p>
+
+    <h3>Übergangsfunktion des NEA</h3>
+    <table>
+      <thead>
+        <tr><th>δ<sub>N</sub></th><th>A</th><th>B</th><th>Bemerkung</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>→ S₀</td><td>{S₀, S₁}</td><td>{S₀}</td><td>Bei A „rät“ der NEA, ob dies das vorletzte Zeichen ist.</td></tr>
+        <tr><td>S₁</td><td>{S₂}</td><td>{S₂}</td><td>Ein beliebiges letztes Zeichen folgt.</td></tr>
+        <tr><td>S₂ (Endzustand)</td><td>∅</td><td>∅</td><td>keine Folgezustände</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Berechnung der Übergänge</h3>
+    <p><strong>Z₀ = {S₀}</strong> (Startzustand des DEA)</p>
+    <ul>
+      <li>Bei A: S₀ → {S₀, S₁} ⇒ neuer Zustand <strong>Z₁ = {S₀, S₁}</strong></li>
+      <li>Bei B: S₀ → {S₀} ⇒ Z₀ (bereits vorhanden)</li>
+    </ul>
+    <p><strong>Z₁ = {S₀, S₁}</strong></p>
+    <ul>
+      <li>Bei A: S₀ → {S₀, S₁}, S₁ → {S₂} ⇒ neuer Zustand <strong>Z₂ = {S₀, S₁, S₂}</strong></li>
+      <li>Bei B: S₀ → {S₀}, S₁ → {S₂} ⇒ neuer Zustand <strong>Z₃ = {S₀, S₂}</strong></li>
+    </ul>
+    <p><strong>Z₂ = {S₀, S₁, S₂}</strong></p>
+    <ul>
+      <li>Bei A: {S₀, S₁} ∪ {S₂} ∪ ∅ ⇒ Z₂</li>
+      <li>Bei B: {S₀} ∪ {S₂} ∪ ∅ ⇒ Z₃</li>
+    </ul>
+    <p><strong>Z₃ = {S₀, S₂}</strong></p>
+    <ul>
+      <li>Bei A: {S₀, S₁} ∪ ∅ ⇒ Z₁</li>
+      <li>Bei B: {S₀} ∪ ∅ ⇒ Z₀</li>
+    </ul>
+
+    <h3>Ergebnis-DEA</h3>
+    <table>
+      <thead>
+        <tr><th>DEA-Zustand</th><th>repräsentierte NEA-Menge</th><th>A</th><th>B</th><th>akzeptierend?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>→ Z₀</td><td>{S₀}</td><td>Z₁</td><td>Z₀</td><td>nein</td></tr>
+        <tr><td>Z₁</td><td>{S₀, S₁}</td><td>Z₂</td><td>Z₃</td><td>nein</td></tr>
+        <tr><td>Z₂</td><td>{S₀, S₁, S₂}</td><td>Z₂</td><td>Z₃</td><td><strong>ja</strong> (enthält S₂)</td></tr>
+        <tr><td>Z₃</td><td>{S₀, S₂}</td><td>Z₁</td><td>Z₀</td><td><strong>ja</strong> (enthält S₂)</td></tr>
+      </tbody>
+    </table>
+    <p>Der DEA hat 4 Zustände (statt 3 im NEA) und 2 Endzustände. Jeder Übergang ist eindeutig bestimmt; er akzeptiert dieselbe Sprache wie der NEA. Die Zustände lassen sich deuten: Z₀ „die letzten beiden Zeichen sind BB“, Z₁ „…BA“, Z₂ „…AA“, Z₃ „…AB“.</p>
+
+    <h3>Kontrolle</h3>
+    <ul>
+      <li><strong>AA:</strong> Z₀ –A→ Z₁ –A→ Z₂ ✓ (akzeptiert)</li>
+      <li><strong>AB:</strong> Z₀ –A→ Z₁ –B→ Z₃ ✓ (akzeptiert)</li>
+      <li><strong>BA:</strong> Z₀ –B→ Z₀ –A→ Z₁ ✗ (nicht akzeptiert, das vorletzte Zeichen ist B)</li>
+      <li><strong>BAA:</strong> Z₀ –B→ Z₀ –A→ Z₁ –A→ Z₂ ✓ (akzeptiert)</li>
+      <li><strong>ABBA:</strong> … –B→ Z₀ –A→ Z₁ ✗ (vorletztes Zeichen ist B)</li>
+    </ul>
+
+    <h3>Vollständige Potenzmengentabelle</h3>
+    <p>Zur Kontrolle kann man die Übergänge für <em>alle</em> 2<sup>3</sup> = 8 Teilmengen von {S₀, S₁, S₂} aufschreiben. Die Konstruktion oben hat davon nur die erreichbaren Mengen erzeugt.</p>
+    <table>
+      <thead>
+        <tr><th>Teilmenge</th><th>A</th><th>B</th><th>akzeptierend?</th><th>von {S₀} erreichbar?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>∅</td><td>∅</td><td>∅</td><td>nein</td><td>nein</td></tr>
+        <tr><td>{S₀}</td><td>{S₀, S₁}</td><td>{S₀}</td><td>nein</td><td>ja (Z₀)</td></tr>
+        <tr><td>{S₁}</td><td>{S₂}</td><td>{S₂}</td><td>nein</td><td>nein</td></tr>
+        <tr><td>{S₂}</td><td>∅</td><td>∅</td><td>ja</td><td>nein</td></tr>
+        <tr><td>{S₀, S₁}</td><td>{S₀, S₁, S₂}</td><td>{S₀, S₂}</td><td>nein</td><td>ja (Z₁)</td></tr>
+        <tr><td>{S₀, S₂}</td><td>{S₀, S₁}</td><td>{S₀}</td><td>ja</td><td>ja (Z₃)</td></tr>
+        <tr><td>{S₁, S₂}</td><td>{S₂}</td><td>{S₂}</td><td>ja</td><td>nein</td></tr>
+        <tr><td>{S₀, S₁, S₂}</td><td>{S₀, S₁, S₂}</td><td>{S₀, S₂}</td><td>ja</td><td>ja (Z₂)</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Beobachtung:</strong> Jede erreichbare Menge enthält S₀, weil S₀ für A und B eine Schleife hat. Deshalb kommt hier – anders als in Beispiel 1 – kein Fangzustand ∅ vor. Die vier nicht erreichbaren Mengen lässt man im fertigen DEA weg; sie ändern die Sprache nicht.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+      <details>
+        <summary>Hinweis: Zustandsexplosion</summary>
+        <p>
+          Die Potenzmengenkonstruktion funktioniert für <strong>jeden</strong> NEA. Der DEA kann aber exponentiell groß werden: Für „das n-letzte Zeichen ist A“ genügt ein NEA mit n + 1 Zuständen, jeder DEA braucht jedoch mindestens 2<sup>n</sup> Zustände (vgl. Aufgabe 6.9.6).
+        </p>
+      </details>
+    </div>
+
+<div class="praxisbezug">
+      <details>
+        <summary>Praxisbezug: Potenzmengenkonstruktion in Lexern und Suchmaschinen</summary>
+        <p><strong>Alltag:</strong> Suchst du in einem Editor mit einem regulären Ausdruck, merkt die Suche nicht, dass im Hintergrund ein NEA simuliert oder vorab in einen DEA umgewandelt wurde – sie ist einfach schnell.</p>
+        <p><strong>Beruf:</strong> Lexer-Generatoren im Compilerbau (flex, ANTLR) führen genau diese Konstruktion aus und erzeugen daraus eine Übergangstabelle, die der fertige Lexer abarbeitet. Die Regex-Bibliothek RE2 von Google simuliert die Zustandsmengen „on the fly“ und garantiert so eine Laufzeit, die nur linear mit der Eingabelänge wächst – wichtig für Server, die Eingaben aus dem Internet prüfen.</p>
+      </details>
+    </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+      <p>
+        <strong>Merke:</strong><br>
+        Zu jedem NEA gibt es einen äquivalenten DEA, der dieselbe Sprache akzeptiert. Die
+        <strong>Potenzmengenkonstruktion</strong> (engl. subset construction) liefert ihn: Jeder DEA-Zustand steht für eine <em>Menge</em>
+        von NEA-Zuständen – nämlich alle Zustände, in denen der NEA nach dem bisher gelesenen Wort sein könnte.
+        Akzeptierend sind alle Mengen, die mindestens einen Endzustand des NEA enthalten.
+        Da es bei n NEA-Zuständen 2<sup>n</sup> Teilmengen gibt, hat der DEA höchstens 2<sup>n</sup> Zustände.
+      </p>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+      <details>
+        <summary>Aufgabe 6.10.1: Wörter prüfen (DEA) <span class="niveau">AFB I</span></summary>
+        <p>
+          Entscheide mit dem obigen Ergebnis-DEA, ob die folgenden Wörter akzeptiert werden:
+          <code>AB</code>, <code>AAA</code>, <code>BAB</code>, <code>BAA</code>, <code>BBBB</code>.
+        </p>
+      </details>
+    </div>
+
+<div class="aufgabe">
+      <details>
+        <summary>Aufgabe 6.10.2: Potenzmengenkonstruktion nachvollziehen <span class="niveau">AFB II</span></summary>
+        <p>
+          Rekonstruiere die DEA-Tabelle ausgehend vom NEA (oben) Schritt für Schritt, ohne nachzusehen:
+          1) Starte mit {S₀}. 2) Bestimme Z₁, Z₂, Z₃. 3) Markiere die akzeptierenden Zustände.
+        </p>
+      </details>
+    </div>

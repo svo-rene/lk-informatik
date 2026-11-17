@@ -1,0 +1,34 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.10.5: Fehler finden – ungültiges JSON <span class="niveau">AFB III</span></summary>
+                <p>Ein Mitschüler hat die Konfigurationsdatei für seinen Discord-Bot von Hand geschrieben. <code>json.load</code> meldet bei jeder der
+                   folgenden Varianten einen <code>JSONDecodeError</code>:</p>
+                <ol>
+                    <li><code>{'prefix': '!', 'aktiv': true}</code></li>
+                    <li><code>{"prefix": "!", "aktiv": True}</code></li>
+                    <li><code>{"prefix": "!", "kanaele": ["allgemein", "hausaufgaben",]}</code></li>
+                    <li><code>{"prefix": "!", "aktiv": true // Bot einschalten }</code></li>
+                </ol>
+                <p>Außerdem schreibt er zum Einlesen <code>daten = json.load('{"prefix": "!"}')</code> und wundert sich über einen
+                   <code>AttributeError</code>.</p>
+                <p>Finde in jedem Fall den Fehler, korrigiere ihn und erkläre, welcher Unterschied zwischen Python und JSON bzw. zwischen
+                   <code>load</code> und <code>loads</code> dahintersteckt. Leite eine Regel ab, wie man solche Fehler vermeidet.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.10.6: Ein JSON-Format für den Vertretungsplan entwerfen <span class="niveau">AFB III</span></summary>
+                <p>Die Schüler-App soll den Vertretungsplan als JSON vom Schulserver laden. Für einen Tag gibt es mehrere Änderungen; jede betrifft eine
+                   Klasse bzw. einen Kurs, eine Stunde (oder mehrere), ein Fach und eine Art (Vertretung, Ausfall, Raumänderung). Eine Vertretung hat
+                   eine Lehrkraft und einen Raum, ein Ausfall nicht.</p>
+                <ol>
+                    <li>Entwirf ein JSON-Dokument für den 12.03.2027 mit mindestens vier Änderungen unterschiedlicher Art.</li>
+                    <li>Gib die Python-Zugriffe an, mit denen die App (a) alle Ausfälle der Klasse 10b und (b) den Raum der ersten Änderung ermittelt.</li>
+                    <li>Beurteile, ob CSV für diesen Zweck ebenso gut geeignet wäre, und begründe, welche Angaben aus Datenschutzgründen nicht in die
+                        öffentlich abrufbare Datei gehören.</li>
+                </ol>
+            </details>
+        </div>

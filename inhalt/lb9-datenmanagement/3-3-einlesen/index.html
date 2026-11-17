@@ -1,0 +1,337 @@
+<p>
+        Im Unterricht beschäftigen wir uns damit, wie man Daten automatisiert mit Python einlesen kann.
+        Daten stammen in der Praxis oft aus verschiedenen Quellen, zum Beispiel:
+    </p>
+
+<ul>
+            <li>Öffentliche Datenbanken und Open-Data-Portale</li>
+            <li>Exportdateien aus Programmen wie Excel oder Datenbanken</li>
+            <li>Messungen und Sensoren (z.&nbsp;B. Wetterdaten)</li>
+            <li>Online-APIs</li>
+        </ul>
+
+<p>
+        Für den Unterricht konzentrieren wir uns auf <strong>CSV-Dateien</strong> (Comma-Separated Values).
+        CSV-Dateien sind einfach zu erstellen, vorzubereiten und zu analysieren.
+        Das ist besonders wichtig, da
+    </p>
+
+<ul>
+            <li>vorgefertigte Übungsdateien genutzt werden können</li>
+            <li>CSV auch im Abitur geprüft werden kann, ohne dass Internetzugriff notwendig ist</li>
+            <li>CSV-Dateien auch in der Realität ein häufig genutztes Format sind.</li>
+        </ul>
+
+<div class="praxisbezug">
+        <details>
+            <summary>Praxisbezug: CSV als Austauschformat im Beruf</summary>
+            <p>
+                Ob Kontoauszug aus dem Onlinebanking, Notenliste aus der Schulverwaltung oder Bestellexport aus einem
+                Onlineshop – fast jedes Programm kann Daten als CSV exportieren. <strong>Data Analysts</strong> und
+                <strong>Fachinformatiker*innen für Daten- und Prozessanalyse</strong> schreiben deshalb täglich kleine
+                Python-Skripte, die solche Exporte automatisch einlesen, statt sie von Hand in Excel zu kopieren. Typische
+                Stolpersteine im Berufsalltag sind genau die Parameter auf dieser Seite: falsches Trennzeichen, falsche
+                Kodierung oder ein unsichtbares BOM-Zeichen am Dateianfang.
+            </p>
+        </details>
+    </div>
+
+<h2>CSV-Dateien als Listen einlesen</h2>
+
+<p>
+        Eine CSV-Datei kann zeilenweise eingelesen und jede Zeile in eine Liste umgewandelt werden:
+    </p>
+
+<pre><code>import csv
+
+with open('daten.csv', newline='', encoding='utf-8') as csvfile:
+    reader = csv.reader(csvfile, delimiter=';')
+    for row in reader:
+        print(row)</code></pre>
+
+<p>Hier passiert Folgendes:</p>
+
+<ul>
+        <li><code>open()</code> öffnet die Datei zum Lesen.</li>
+        <li><code>csv.reader()</code> wandelt jede Zeile in eine Liste um.</li>
+        <li><code>for row in reader</code> geht Zeile für Zeile durch die Datei.</li>
+    </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+    <h3>Beispiel</h3>
+    <p>Angenommen, die Datei <code>schueler.csv</code> enthält:</p>
+
+    <pre><code>Name;Alter;Note
+Anna;17;1.3
+Ben;16;2.0
+…</code></pre>
+
+    <p>Dann ergibt sich in Python beim Einlesen als Liste (hier die ersten drei Zeilen):</p>
+
+    <pre><code>['Name', 'Alter', 'Note']
+['Anna', '17', '1.3']
+['Ben', '16', '2.0']</code></pre>
+
+    <p>Jede Zeile wird zu einer Liste von Texten (Strings).</p>
+
+    <p><strong>Vollständiges Programm</strong> (die Datei <a href="../notebooks/schueler.csv" download>schueler.csv</a> liegt im selben Ordner wie das Programm):</p>
+    <pre><code class="language-python">import csv
+
+with open('schueler.csv', newline='', encoding='utf-8') as csvfile:
+    reader = csv.reader(csvfile, delimiter=';')
+    zeilen = list(reader)
+
+print(zeilen[0])          # Kopfzeile
+print(zeilen[1])          # erster Datensatz
+print(len(zeilen) - 1)    # Anzahl der Datensätze ohne Kopfzeile</code></pre>
+    <ol>
+        <li><strong>Datei öffnen:</strong> <code>open(…, newline='', encoding='utf-8')</code>. <em>Warum diese Parameter?</em> Das <code>csv</code>-Modul
+            wertet Zeilenenden selbst aus, und UTF-8 sorgt dafür, dass Umlaute richtig ankommen.</li>
+        <li><strong>Reader anlegen:</strong> <code>csv.reader(csvfile, delimiter=';')</code>. <em>Warum das Semikolon?</em> Die Datei trennt die Spalten mit
+            <code>;</code>; mit dem Standard-Komma bliebe jede Zeile ein einziges Feld.</li>
+        <li><strong>Alle Zeilen in eine Liste übernehmen:</strong> <code>list(reader)</code>. <em>Warum?</em> Danach ist die Datei geschlossen, und man kann
+            mit Index (<code>zeilen[1]</code>) und <code>len()</code> auf die Daten zugreifen.</li>
+        <li><strong>Ausgeben:</strong> Die Kopfzeile steht in <code>zeilen[0]</code>, der erste Datensatz in <code>zeilen[1]</code>. <em>Warum <code>- 1</code>?</em>
+            Die Kopfzeile ist kein Datensatz.</li>
+    </ol>
+    <p><strong>Ergebnis</strong> für die Datei mit 11 Zeilen (Kopfzeile + 10 Datensätze):</p>
+    <pre><code>['Name', 'Alter', 'Note']
+['Anna', '17', '1.3']
+10</code></pre>
+    <p><strong>Testfälle und Kontrolle:</strong></p>
+    <table>
+        <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+        <tbody>
+            <tr><td><code>schueler.csv</code> wie im Material</td><td>Kopfzeile, <code>['Anna', '17', '1.3']</code>, <code>10</code></td></tr>
+            <tr><td>Datei nur mit der Kopfzeile</td><td>Kopfzeile, dann <code>IndexError</code> bei <code>zeilen[1]</code> &ndash; eine leere Datei muss man vorher abfangen</td></tr>
+            <tr><td>dieselbe Datei, aber <code>delimiter</code> vergessen</td><td><code>['Name;Alter;Note']</code> &ndash; eine Liste mit nur <em>einem</em> Element verrät das falsche Trennzeichen</td></tr>
+        </tbody>
+    </table>
+    <p>Beachte: <code>'17'</code> und <code>'1.3'</code> stehen in Anführungszeichen &ndash; es sind Texte, keine Zahlen. Die Umwandlung folgt auf Seite 3.4.</p>
+            </details>
+        </div>
+
+<h2>CSV-Dateien als Dictionaries einlesen</h2>
+
+<p>
+        Wenn die CSV-Datei eine Kopfzeile mit Spaltennamen hat, können wir die Daten direkt als Wörterbücher laden:
+    </p>
+
+<pre><code>import csv
+
+with open('daten.csv', newline='', encoding='utf-8') as csvfile:
+    reader = csv.DictReader(csvfile, delimiter=';')
+    for row in reader:
+        print(row)</code></pre>
+
+<p>Hier passiert Folgendes:</p>
+
+<ul>
+        <li><code>csv.DictReader()</code> erstellt für jede Zeile ein Dictionary, wobei die Spaltennamen als Schlüssel verwendet werden.</li>
+        <li>Jede Ausgabe ist ein Wörterbuch, für <code>schueler.csv</code> z.&nbsp;B. <code>{'Name': 'Anna', 'Alter': '17', 'Note': '1.3'}</code>.</li>
+    </ul>
+
+<h3>Beispiel</h3>
+
+<p>Angenommen, die Datei <code>produkte.csv</code> enthält:</p>
+
+<pre><code>Produkt;Preis
+Taschenrechner;19.99
+USB-Stick;8.49
+…</code></pre>
+
+<p>Dann ergibt sich in Python beim Einlesen als Dictionary (hier die ersten beiden Datensätze):</p>
+
+<pre><code>{'Produkt': 'Taschenrechner', 'Preis': '19.99'}
+{'Produkt': 'USB-Stick', 'Preis': '8.49'}</code></pre>
+
+<p>Jede Zeile wird zu einem Wörterbuch (<code>dict</code>), wobei die Spaltennamen als Schlüssel verwendet werden.</p>
+
+<h2>Wichtige Parameter beim Einlesen von CSV-Dateien</h2>
+
+<p>Damit das Einlesen problemlos funktioniert, sollten folgende Parameter genau beachtet werden:</p>
+
+<ul>
+        <li>
+            <strong>newline=''</strong>:<br>
+            Schaltet die automatische Umwandlung von Zeilenenden durch <code>open()</code> ab und überlässt sie dem
+            <code>csv</code>-Modul. Das ist nötig, weil das <code>csv</code>-Modul Zeilenenden selbst auswertet: Nur so
+            werden Felder, die in Anführungszeichen einen Zeilenumbruch enthalten, richtig gelesen. Beim
+            <em>Schreiben</em> verhindert <code>newline=''</code> unter Windows zusätzliche Leerzeilen zwischen den
+            Datensätzen (siehe Seite 3.6).
+        </li>
+        <li>
+            <strong>encoding='utf-8'</strong>:<br>
+            Sorgt für korrekte Darstellung von Umlauten und Sonderzeichen. Speichern Excel oder LibreOffice eine Datei als
+            „CSV UTF-8“, steht am Dateianfang oft ein unsichtbares Zeichen, das <em>Byte Order Mark</em> (BOM). Mit
+            <code>'utf-8'</code> landet es im ersten Spaltennamen (<code>'\ufeffName'</code> statt <code>'Name'</code>),
+            und <code>row['Name']</code> meldet einen <code>KeyError</code>. Dann hilft <code>encoding='utf-8-sig'</code>:
+            Es entfernt das BOM und funktioniert auch bei Dateien ohne BOM. Stammt eine Datei von einem älteren
+            Windows-Programm und die Umlaute sind kaputt, hilft oft <code>encoding='cp1252'</code>.
+        </li>
+        <li>
+            <strong>delimiter</strong>:<br>
+            Gibt an, welches Zeichen die Werte trennt. In Deutschland häufig das Semikolon („;“), manchmal auch das Komma („,“).
+        </li>
+    </ul>
+
+<div class="hinweis">
+        <details>
+            <summary>
+                Hinweis: Das richtige Trennzeichen
+            </summary>
+            <p>
+                Beim Einlesen von CSV-Dateien ist das richtige Trennzeichen (<code>delimiter</code>) sehr wichtig! In Deutschland wird oft das Semikolon („;“) statt des Kommas („,“) verwendet, weil wir das Komma als Dezimaltrennzeichen benutzen. Die Dateien in diesem Kurs verwenden meist das Semikolon und den Punkt als Dezimaltrennzeichen (<code>1.3</code>). Schau dir eine unbekannte Datei deshalb immer zuerst in einem Texteditor an. Ist das Trennzeichen falsch eingestellt, landet die ganze Zeile in einem einzigen Listenelement, z.&nbsp;B. <code>['Name,Punkte']</code>.
+            </p>
+        </details>
+    </div>
+
+<h2>Dateinamen und Pfadangaben</h2>
+
+<p>
+        Beim Öffnen einer Datei muss der Dateiname exakt angegeben werden. Liegt die Datei im gleichen Ordner wie dein Python-Programm, reicht der Dateiname alleine:
+    </p>
+
+<pre><code>with open('schueler.csv', newline='', encoding='utf-8') as csvfile:</code></pre>
+
+<p>
+        Liegt die Datei in einem Unterordner (z.&nbsp;B. „downloads“), musst du den Pfad ergänzen:
+    </p>
+
+<pre><code>with open('downloads/schueler.csv', newline='', encoding='utf-8') as csvfile:</code></pre>
+
+<p>
+        Achtung: Bei Windows sind Backslashes (<code>\</code>) üblich. In Python sollte man Pfade entweder mit Schrägstrich (<code>/</code>) schreiben oder doppelte Backslashes verwenden:
+    </p>
+
+<pre><code>with open('downloads\\schueler.csv', newline='', encoding='utf-8') as csvfile:</code></pre>
+
+<p>
+        Oder besser: immer den Schrägstrich <code>/</code> verwenden. Python versteht das auf allen Systemen!
+    </p>
+
+<h2>Komplexeres Beispiel: Einlesen und gleich umwandeln</h2>
+
+<p>
+        Meist will man die Daten nicht nur anzeigen, sondern weiterverarbeiten. Dann wandelt man beim Einlesen gleich die
+        Zahlenspalten um und sammelt alle Datensätze in einer Liste:
+    </p>
+
+<pre><code>import csv
+
+schueler = []
+with open('schueler.csv', newline='', encoding='utf-8-sig') as csvfile:
+    reader = csv.DictReader(csvfile, delimiter=';')
+    for row in reader:
+        row['Alter'] = int(row['Alter'])      # Text '17'  -> Zahl 17
+        row['Note'] = float(row['Note'])      # Text '1.3' -> Zahl 1.3
+        schueler.append(row)
+
+print(len(schueler), "Datensätze eingelesen")
+print(schueler[0])</code></pre>
+
+<p>
+        Ausgabe mit der Kursdatei <code>schueler.csv</code>: <code>10 Datensätze eingelesen</code> und
+        <code>{'Name': 'Anna', 'Alter': 17, 'Note': 1.3}</code> – jetzt ohne Anführungszeichen um die Zahlen, man kann
+        also mit ihnen rechnen (Seite 3.4).
+    </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Eine Einleseroutine, die das falsche Trennzeichen bemerkt</summary>
+        <p><strong>Ausgangssituation:</strong> Die einfachen Beispiele oben zeigen das Einlesen im Normalfall. Die Datei
+           <a href="../notebooks/klassenarbeit.csv" download>klassenarbeit.csv</a> soll mit derselben Funktion eingelesen werden wie
+           die übrigen Kursdateien – also zunächst mit Semikolon. Sie ist aber mit Komma getrennt. Die Funktion soll das selbst bemerken,
+           statt stillschweigend Unsinn zu liefern, und die Punkte gleich als Zahlen bereitstellen.</p>
+        <pre><code class="language-python">import csv
+
+def einlesen(dateiname, trennzeichen):
+    with open(dateiname, newline='', encoding='utf-8-sig') as csvfile:
+        reader = csv.reader(csvfile, delimiter=trennzeichen)
+        kopf = next(reader)                      # Kopfzeile lesen
+        if len(kopf) == 1:                       # nur eine Spalte? Trennzeichen falsch!
+            print("Warnung: nur eine Spalte erkannt:", kopf)
+            return None
+        daten = []
+        for row in reader:
+            daten.append({'Name': row[0], 'Punkte': int(row[1])})
+        return daten
+
+ergebnis = einlesen('klassenarbeit.csv', ';')
+print(ergebnis)
+ergebnis = einlesen('klassenarbeit.csv', ',')
+print(len(ergebnis), "Datensätze")
+print(ergebnis[0])
+summe = 0
+for d in ergebnis:
+    summe += d['Punkte']
+print("Summe:", summe, "Durchschnitt:", summe / len(ergebnis))</code></pre>
+        <ol>
+            <li><strong>Datei mit <code>utf-8-sig</code> öffnen</strong> – So stört ein eventuell vorhandenes BOM den ersten Spaltennamen nicht.
+                Bei Dateien ohne BOM ändert sich nichts.</li>
+            <li><strong>Kopfzeile mit <code>next(reader)</code> lesen</strong> – Sie wird nicht als Datensatz gebraucht, verrät aber, wie viele
+                Spalten der Reader erkennt.</li>
+            <li><strong>Erster Aufruf mit <code>';'</code></strong> – Die Kopfzeile <code>Name,Punkte</code> enthält kein Semikolon. Der Reader
+                liefert deshalb eine Liste mit <em>einem</em> Element: <code>['Name,Punkte']</code>. Die Prüfung schlägt an, die Funktion
+                gibt eine Warnung aus und liefert <code>None</code>. Ohne diese Prüfung käme es später bei <code>row[1]</code> zu einem
+                <code>IndexError</code>, dessen Ursache schwer zu erkennen wäre.</li>
+            <li><strong>Zweiter Aufruf mit <code>','</code></strong> – Jetzt hat die Kopfzeile zwei Spalten. Jede weitere Zeile wird zu einem
+                Dictionary; <code>int(row[1])</code> macht aus dem Text <code>'85'</code> die Zahl 85.</li>
+            <li><strong>Plausibilität prüfen</strong> – Anzahl der Datensätze, erster Datensatz und eine Summe zeigen schnell, ob alles
+                vollständig und richtig umgewandelt wurde.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong></p>
+        <pre><code>Warnung: nur eine Spalte erkannt: ['Name,Punkte']
+None
+10 Datensätze
+{'Name': 'Anna', 'Punkte': 85}
+Summe: 796 Durchschnitt: 79.6</code></pre>
+        <table class="gitter">
+            <tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr>
+            <tr><td>falsches Trennzeichen</td><td><code>einlesen('klassenarbeit.csv', ';')</code></td><td>Warnung, Rückgabe <code>None</code></td></tr>
+            <tr><td>richtiges Trennzeichen</td><td><code>einlesen('klassenarbeit.csv', ',')</code></td><td>Liste mit 10 Dictionaries</td></tr>
+            <tr><td>Zahlen umgewandelt</td><td><code>ergebnis[0]['Punkte'] + 1</code></td><td><code>86</code> (nicht <code>'851'</code>)</td></tr>
+        </table>
+        <p><strong>Kontrolle:</strong> Von Hand: 85 + 72 + 91 + 65 + 88 + 77 + 82 + 69 + 93 + 74 = 796, geteilt durch 10 ergibt 79,6.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>
+            Eine <strong>CSV-Datei</strong> ist eine Textdatei, in der jede Zeile einen Datensatz enthält und die Werte
+            durch ein Trennzeichen (in Deutschland meist <code>;</code>, international meist <code>,</code>) getrennt sind.
+            Python liest sie mit dem Modul <code>csv</code>: <code>csv.reader</code> liefert jede Zeile als <strong>Liste</strong>,
+            <code>csv.DictReader</code> als <strong>Dictionary</strong> mit den Spaltennamen der Kopfzeile als Schlüssel.
+            Alle eingelesenen Werte sind zunächst <strong>Texte (Strings)</strong> – auch Zahlen.
+        </p>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>
+                Aufgabe 3.3.1: Einlesen als Liste <span class="niveau">AFB I</span>
+            </summary>
+            <p>
+                Lade die Datei <a href="../notebooks/schueler.csv" download>schueler.csv</a> herunter.<br>
+                Lies die Datei als Liste ein und gib alle Namen zeilenweise auf der Konsole aus (ohne die Kopfzeile).
+            </p>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>
+                Aufgabe 3.3.2: Einlesen als Dictionary <span class="niveau">AFB I</span>
+            </summary>
+            <p>
+                Lade die Datei <a href="../notebooks/produkte.csv" download>produkte.csv</a> herunter.<br>
+                Lies die Datei als Dictionary ein und gib die Namen aller Produkte auf der Konsole aus.
+            </p>
+        </details>
+    </div>

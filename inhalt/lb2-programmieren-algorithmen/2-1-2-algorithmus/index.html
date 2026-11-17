@@ -1,0 +1,179 @@
+<p>
+            <strong>Wiederholung:</strong> Ein Algorithmus ist eine präzise Handlungsvorschrift zur Lösung eines Problems. Er besteht aus einer endlichen Folge eindeutig beschriebener Schritte, die in einer festgelegten Reihenfolge ausgeführt werden. Ein Kochrezept oder die Anleitung für einen Pizzateig sind alltägliche Beispiele – allerdings sind sie selten wirklich eindeutig („eine Prise Salz“).
+        </p>
+
+<p>
+            <strong>Neu:</strong> In der Oberstufe wird der Algorithmusbegriff präzisiert. Zu den bekannten Eigenschaften Endlichkeit, Eindeutigkeit und Ausführbarkeit kommen weitere, genauer gefasste Voraussetzungen hinzu.
+        </p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Nicht jedes Programm erfüllt alle Eigenschaften</summary>
+                <p>
+                    Ein Betriebssystem oder ein Webserver soll absichtlich <em>nicht</em> terminieren. Ein Programm, das mit <code>random</code> würfelt, ist nicht determiniert. Solche Verfahren sind trotzdem nützlich; man spricht dann von einem erweiterten Algorithmusbegriff, bei dem einzelne Eigenschaften bewusst gelockert werden.
+                </p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Der Algorithmus „Addiere die Zahlen von 1 bis n“ soll auf alle sechs Eigenschaften geprüft werden.</p>
+            <pre><code class="language-python">def summe_bis(n):
+    s = 0
+    for i in range(1, n + 1):
+        s = s + i
+    return s
+
+print(summe_bis(4))     # 10</code></pre>
+            <ol>
+                <li><strong>Finitheit:</strong> Die Beschreibung besteht aus wenigen Zeilen. Sie ist also endlich lang.</li>
+                <li><strong>Dynamische Finitheit:</strong> Während der Ausführung gibt es nur die drei Variablen <code>n</code>, <code>s</code> und <code>i</code>. Es kommt kein Speicher hinzu, egal wie lange die Schleife läuft.</li>
+                <li><strong>Ausführbarkeit:</strong> Jeder Schritt ist eine Addition oder Zuweisung. Das kann der Rechner immer ausführen.</li>
+                <li><strong>Terminierung:</strong> Die <code>for</code>-Schleife läuft genau n-mal. Danach endet die Funktion mit <code>return</code>.</li>
+                <li><strong>Determiniertheit:</strong> Es gibt keinen Zufall. Gleiches n liefert immer dieselbe Summe.</li>
+                <li><strong>Determinismus:</strong> Nach jeder Anweisung steht fest, welche als Nächstes kommt.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Für natürliche Zahlen n erfüllt der Algorithmus alle sechs Eigenschaften.</p>
+            <p><strong>Kontrolle:</strong> Für n = 4 ergibt sich 1 + 2 + 3 + 4 = 10. Die Formel von Gauß liefert ebenfalls 4 · 5 / 2 = 10.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>summe_bis(4)</code></td><td><code>10</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>summe_bis(1)</code></td><td><code>1</code></td><td>Randfall: ein Schleifendurchlauf</td></tr>
+                    <tr><td><code>summe_bis(0)</code></td><td><code>0</code></td><td>Randfall: <code>range(1, 1)</code> ist leer, die Schleife läuft nicht</td></tr>
+                    <tr><td><code>summe_bis(-3)</code></td><td><code>0</code></td><td>terminiert, das Ergebnis ist fachlich aber fragwürdig</td></tr>
+                    <tr><td><code>summe_bis(2.5)</code></td><td><code>TypeError</code></td><td>falscher Typ: <code>range</code> braucht ganze Zahlen</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Die Anweisung „Solange x ≠ 1: Ist x gerade, halbiere x, sonst setze x = 3x + 1“ erzeugt die Collatz-Folge. Gezählt werden soll, nach wie vielen Schritten x den Wert 1 erreicht.</p>
+            <pre><code class="language-python">def collatz_schritte(x):
+    if not isinstance(x, int) or x &lt; 1:   # Vorbedingung: ganze Zahl ab 1
+        return None
+    schritte = 0
+    while x != 1:
+        if x % 2 == 0:
+            x = x // 2
+        else:
+            x = 3 * x + 1
+        schritte = schritte + 1
+    return schritte
+
+print(collatz_schritte(6))   # 8</code></pre>
+            <ol>
+                <li><strong>Ablauf für x = 6 verfolgen:</strong> 6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1. Das sind 8 Schritte. <em>Warum:</em> Erst eine Handrechnung zeigt, ob das Programm überhaupt das Richtige zählt.</li>
+                <li><strong>Determinismus und Determiniertheit prüfen:</strong> In jedem Schritt entscheidet allein „x gerade?“, was passiert. Gleicher Startwert ergibt also immer dieselbe Folge. <em>Warum:</em> Diese beiden Eigenschaften folgen direkt aus der Verzweigung ohne Zufall.</li>
+                <li><strong>Falle bei unzulässigen Eingaben:</strong> Für x = 0 gilt 0 // 2 = 0, die Schleife läuft endlos. Für x = −1 entsteht der Kreislauf −1 → −2 → −1. <em>Warum:</em> Die Terminierung hängt von der Eingabe ab. Deshalb prüft die erste Zeile die <strong>Vorbedingung</strong> x ≥ 1 und gibt sonst <code>None</code> zurück.</li>
+                <li><strong>Falscher Typ:</strong> <code>isinstance(x, int)</code> prüft, ob x eine ganze Zahl ist. Ein Text wie <code>"6"</code> oder eine Kommazahl wie <code>6.0</code> wird abgewiesen. <em>Warum:</em> Ohne die Prüfung bricht <code>"6" &lt; 1</code> mit einem <code>TypeError</code> ab.</li>
+                <li><strong>Terminierung allgemein:</strong> Ob die Schleife für <em>jede</em> Startzahl x ≥ 1 endet, ist bis heute unbewiesen (Collatz-Vermutung). Per Computer wurden riesige Mengen von Startzahlen nachgeprüft, aber ein Beweis fehlt. <em>Warum wichtig:</em> Terminierung ist keine Selbstverständlichkeit, selbst bei einer sehr kurzen Schleife.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>collatz_schritte(6)</code> liefert 8. Für zulässige Eingaben ist der Algorithmus deterministisch und determiniert. Seine Terminierung ist für alle getesteten Werte erfüllt, aber nicht bewiesen.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>collatz_schritte(6)</code></td><td><code>8</code></td><td>Normalfall, siehe Handrechnung</td></tr>
+                    <tr><td><code>collatz_schritte(1)</code></td><td><code>0</code></td><td>Randfall: Schleife läuft nicht</td></tr>
+                    <tr><td><code>collatz_schritte(27)</code></td><td><code>111</code></td><td>kleine Zahl, aber sehr lange Folge</td></tr>
+                    <tr><td><code>collatz_schritte(0)</code></td><td><code>None</code></td><td>Fehlerfall: ohne Prüfung Endlosschleife</td></tr>
+                    <tr><td><code>collatz_schritte(-1)</code></td><td><code>None</code></td><td>Fehlerfall: negative Zahl</td></tr>
+                    <tr><td><code>collatz_schritte("6")</code></td><td><code>None</code></td><td>falscher Typ</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<hr>
+
+<h2>Kontrollstrukturen</h2>
+
+<p>Kontrollstrukturen, auch algorithmische Grundstrukturen genannt, sind die elementaren Bausteine, aus denen komplexe Algorithmen aufgebaut werden.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel: alle vier Grundstrukturen in einem kurzen Programm</summary>
+            <pre><code class="language-python">def bewertung(punkte):            # Unterprogramm
+    if punkte &gt;= 50:              # Verzweigung
+        return "bestanden"
+    else:
+        return "nicht bestanden"
+
+ergebnisse = [72, 38, 55]         # Sequenz
+for p in ergebnisse:              # Schleife
+    print(p, bewertung(p))</code></pre>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Algorithmen im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Eine Ampelsteuerung ist ein Algorithmus aus Sequenzen (Rot → Rot-Gelb → Grün), Verzweigungen (Fußgänger hat gedrückt?) und einer Schleife, die nie endet – ein Beispiel für den erweiterten Algorithmusbegriff.<br><br>
+                    <strong>Beruf:</strong> Softwaretesterinnen und -tester prüfen systematisch, ob jede Verzweigung und jede Schleife eines Programms mit passenden Testfällen durchlaufen wird („Zweigüberdeckung“). In sicherheitskritischen Bereichen wie der Bahn- oder Medizintechnik ist das vorgeschrieben.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Eigenschaften eines Algorithmus:</strong></p>
+            <ul>
+                <li><strong>Finitheit (statisch):</strong> Die Beschreibung des Algorithmus ist endlich lang.</li>
+                <li><strong>Dynamische Finitheit:</strong> Während der Ausführung wird zu jedem Zeitpunkt nur endlich viel Speicher benötigt.</li>
+                <li><strong>Ausführbarkeit:</strong> Jeder Schritt ist tatsächlich ausführbar (z.&nbsp;B. keine Division durch 0, keine unmöglichen Aktionen).</li>
+                <li><strong>Terminierung:</strong> Der Algorithmus endet für jede zulässige Eingabe nach endlich vielen Schritten.</li>
+                <li><strong>Determiniertheit:</strong> Bei gleicher Eingabe liefert der Algorithmus immer dasselbe Ergebnis.</li>
+                <li><strong>Determinismus:</strong> Zu jedem Zeitpunkt ist der nächste Schritt eindeutig festgelegt.</li>
+            </ul>
+        </div>
+
+<div class="merke">
+            <ul>
+                <li><strong>Sequenz:</strong> Anweisungen werden nacheinander in der angegebenen Reihenfolge ausgeführt.</li>
+                <li><strong>Verzweigung (Auswahl):</strong> Abhängig von einer Bedingung wird der eine oder der andere Programmteil ausgeführt (<code>if</code>/<code>elif</code>/<code>else</code>).</li>
+                <li><strong>Schleife (Wiederholung):</strong> Eine Gruppe von Anweisungen wird wiederholt, solange eine Bedingung erfüllt ist (<code>while</code>) oder für jedes Element einer Folge (<code>for</code>).</li>
+                <li><strong>Unterprogramm:</strong> Ein Teil des Algorithmus wird als eigene, benannte Einheit ausgelagert und bei Bedarf aufgerufen. Das fördert Wiederverwendbarkeit und Übersicht.</li>
+            </ul>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.2.1: Eigenschaften erklären <span class="niveau">AFB I</span></summary>
+                <p>Notiere für jede der sechs Eigenschaften eine verständliche Beschreibung in deinem Hefter und finde je ein Gegenbeispiel, das die Eigenschaft verletzt.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.2.2: Wiederholung Kontrollstrukturen <span class="niveau">AFB I–II</span></summary>
+                <p>Die folgenden Aufgaben decken grundlegende Konzepte der Programmierung in Python ab.</p>
+                <h3>a) EVA, Variablen, einfache Mathematik</h3>
+                <ol>
+                    <li><strong>Schulnoten:</strong> Erstelle ein Programm, das den Durchschnitt deiner letzten drei Leistungskontrollen berechnet. Das Programm soll nach den drei Noten fragen und dann den Durchschnitt ausgeben.</li>
+                    <li><strong>Pizzaparty-Planer:</strong> Schreibe ein Programm, das berechnet, wie viele Pizzen du für deine Geburtstagsparty bestellen musst. Frage nach der Anzahl der Gäste und berechne, wie viele Pizzen du brauchst, wenn jeder Gast 2,5 Stücke isst und eine Pizza 8 Stücke hat.</li>
+                </ol>
+                <h3>b) Verzweigungen</h3>
+                <ol>
+                    <li><strong>Schulnoten-Übersetzer:</strong> Schreibe ein Programm, das eine Punktzahl (0–100) in eine Schulnote (1–6) umwandelt. Verwende if-Anweisungen, um die richtige Note auszugeben.</li>
+                    <li><strong>Wetter-Aktivitäten-Planer:</strong> Entwickle ein Programm, das abhängig von Temperatur und Wetter Aktivitäten vorschlägt. Frage nach der Temperatur (in °C) und ob es regnet (ja/nein). Gib dann passende Vorschläge aus (z.&nbsp;B. „Perfekt für ein Picknick!“ bei über 20 °C und keinem Regen).</li>
+                </ol>
+                <h3>c) Schleifen</h3>
+                <ol>
+                    <li><strong>Spardosen-Simulator:</strong> Der Benutzer gibt an, wie viel Geld er täglich sparen möchte und für wie viele Tage. Das Programm soll in einer Schleife den Sparverlauf simulieren und am Ende die Gesamtersparnis ausgeben.</li>
+                    <li><strong>Zahlenraten-Spiel:</strong> Der Computer wählt eine zufällige Zahl zwischen 1 und 100. Der Spieler hat 7 Versuche, die Zahl zu erraten. Nach jedem Versuch gibt das Programm einen Hinweis, ob die gesuchte Zahl größer oder kleiner ist.</li>
+                </ol>
+                <h3>d) Funktionen</h3>
+                <ol>
+                    <li><strong>Begrüßungs-Generator:</strong> Schreibe eine Funktion, die einen Namen als Parameter erhält und eine persönliche Begrüßung zurückgibt. Rufe die Funktion mit verschiedenen Namen auf.</li>
+                    <li><strong>Geometrie-Helfer:</strong> Erstelle drei Funktionen zur Berechnung des Flächeninhalts eines Rechtecks, eines Dreiecks und eines Kreises. Lass den Benutzer auswählen, welche Berechnung er durchführen möchte.</li>
+                </ol>
+            </details>
+        </div>

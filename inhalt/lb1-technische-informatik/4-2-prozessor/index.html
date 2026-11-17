@@ -1,0 +1,71 @@
+<p>In 4.1 hast du das Rechenwerk und das Steuerwerk als Teile der CPU kennengelernt. Auf dieser Seite vertieft ihr das Thema Prozessoren selbst: in Form von Referaten, die ihr in Gruppen erarbeitet und dem Kurs vorstellt.</p>
+
+<h2>Rechenbeispiele zu Prozessorkennzahlen</h2>
+
+<p>Unabhängig von eurem Referatsthema zeigen die beiden Beispiele, wie man mit Kennzahlen wie Taktfrequenz und Transistorzahl rechnet und wo dabei Fallen lauern. Alle Zahlen, die als Annahme gekennzeichnet sind, sind gerundete, plausible Werte.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Wie lange rechnet ein Programm?</summary>
+        <p>Ein Programm führt 6 Milliarden Maschinenbefehle aus. <em>Annahme:</em> Ein Befehl braucht im Mittel 2 Takte (manche Befehle brauchen 1 Takt, andere warten auf den Speicher). Der Prozessorkern läuft mit 3&nbsp;GHz.</p>
+        <ol>
+          <li><strong>Was:</strong> benötigte Takte bestimmen: 6·10<sup>9</sup> Befehle · 2 Takte = 12·10<sup>9</sup> Takte. – <em>warum:</em> Der Prozessor arbeitet im Takt; die Laufzeit hängt davon ab, wie viele Takte insgesamt anfallen.</li>
+          <li><strong>Was:</strong> Takte durch Taktfrequenz teilen: 12·10<sup>9</sup> / (3·10<sup>9</sup>&nbsp;1/s) = 4&nbsp;s. – <em>warum:</em> 3&nbsp;GHz heißt 3·10<sup>9</sup> Takte pro Sekunde.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Laufzeit = Befehlsanzahl · Takte pro Befehl / Taktfrequenz = <strong>4 Sekunden</strong>.</p>
+        <p><strong>Probe:</strong> In 4&nbsp;s schafft der Kern 4 · 3·10<sup>9</sup> = 12·10<sup>9</sup> Takte, bei 2 Takten pro Befehl sind das 6·10<sup>9</sup> Befehle.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Das Mooresche Gesetz hochrechnen</summary>
+        <p>Der erste Mikroprozessor, der Intel 4004 von 1971, hatte ca. 2300 Transistoren und lief mit ca. 740&nbsp;kHz. Nach dem Mooreschen Gesetz verdoppelt sich die Zahl der Transistoren pro Chip etwa alle zwei Jahre. Wie viele Transistoren sagt diese Regel für 2023 voraus, und gilt dasselbe für die Taktfrequenz?</p>
+        <ol>
+          <li><strong>Was:</strong> Anzahl der Verdopplungen bestimmen: (2023 − 1971) / 2 = 52 / 2 = 26. – <em>warum:</em> Alle zwei Jahre kommt eine Verdopplung hinzu.</li>
+          <li><strong>Was:</strong> Wachstumsfaktor berechnen: 2<sup>26</sup> = 67.108.864 ≈ 6,7·10<sup>7</sup>. – <em>warum:</em> 26 Verdopplungen heißen 26-mal mit 2 multiplizieren, nicht 26 · 2 (die Falle „linear statt exponentiell“).</li>
+          <li><strong>Was:</strong> Vorhersage: 2300 · 2<sup>26</sup> ≈ 1,5·10<sup>11</sup> Transistoren. – <em>warum:</em> Startwert mal Wachstumsfaktor.</li>
+          <li><strong>Was:</strong> mit der Wirklichkeit vergleichen: Einer der größten Prozessoren des Jahres 2023 (Apple M2 Ultra) hat rund 134 Milliarden = 1,34·10<sup>11</sup> Transistoren, das sind etwa 87&nbsp;% der Vorhersage. – <em>warum:</em> Eine Faustregel muss sich an echten Daten messen lassen.</li>
+          <li><strong>Was:</strong> dieselbe Rechnung für den Takt: 740&nbsp;kHz · 2<sup>26</sup> ≈ 5·10<sup>13</sup>&nbsp;Hz = 50.000&nbsp;GHz. Tatsächlich takten Prozessoren heute mit etwa 3 bis 6&nbsp;GHz. – <em>warum (die zweite Falle):</em> Das Mooresche Gesetz handelt von der Transistorzahl, nicht von der Geschwindigkeit. Der Takt stagniert seit etwa 2005, weil Wärme und Stromverbrauch mit dem Takt stark steigen.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Für die Transistorzahl trifft die Faustregel nach über 50 Jahren noch die richtige Größenordnung (Vorhersage 1,5·10<sup>11</sup>, Wirklichkeit 1,3·10<sup>11</sup>). Auf die Taktfrequenz lässt sie sich nicht übertragen; die zusätzlichen Transistoren stecken heute vor allem in mehr Kernen und größeren Caches.</p>
+        <p><strong>Probe:</strong> 2<sup>10</sup> = 1024 ≈ 10<sup>3</sup>, also 2<sup>26</sup> = 2<sup>6</sup> · 2<sup>20</sup> ≈ 64 · 10<sup>6</sup>. 2300 · 64·10<sup>6</sup> ≈ 1,5·10<sup>11</sup>. Passt.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Warum Energieeffizienz gerade jetzt so wichtig ist</summary>
+                <p>
+                    Rechenzentren verbrauchten laut der <a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank">Internationalen Energieagentur (IEA)</a> 2024 weltweit bereits rund 415 Terawattstunden Strom – vor allem wegen des KI-Booms wird bis 2030 eine Verdopplung erwartet. Warum Smartphone-Prozessoren (z.&nbsp;B. ARM-basiert) anders gebaut sind als Prozessoren in Gaming-PCs und was das mit Taktfrequenz, Kernanzahl und Akkulaufzeit zu tun hat, ist deshalb ein guter Ausgangspunkt für euren Vortrag.
+                </p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Chipdesigner/in</strong>: entwirft Prozessoren, z.&nbsp;B. bei Intel, AMD oder ARM; gefertigt werden Chips u.&nbsp;a. in den Halbleiterwerken in Dresden.</li>
+                    <li><strong>Green-IT-Berater/in</strong>: berät Unternehmen und Rechenzentren, wie sie mit sparsamerer Hardware und besserer Auslastung Strom und CO₂ einsparen.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 4.2.2: Mehr GHz oder mehr Cache? <span class="niveau">AFB II</span></summary>
+                <p>Ein Programm führt 10<sup>9</sup> Befehle aus. Zwei Prozessoren stehen zur Wahl. <em>Annahmen:</em> Bei beiden braucht ein Befehl 1 Takt, wenn seine Daten im Cache liegen. Sonst muss der Kern 80&nbsp;ns auf den Arbeitsspeicher warten.</p>
+                <table>
+                    <thead><tr><th></th><th>Prozessor A</th><th>Prozessor B</th></tr></thead>
+                    <tbody>
+                        <tr><td>Taktfrequenz</td><td>4&nbsp;GHz</td><td>3&nbsp;GHz</td></tr>
+                        <tr><td>Cache</td><td>klein</td><td>groß</td></tr>
+                        <tr><td>Anteil der Befehle, deren Daten nicht im Cache liegen</td><td>4&nbsp;%</td><td>1&nbsp;%</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Rechne die Wartezeit von 80&nbsp;ns für beide Prozessoren in Takte um.</li>
+                    <li>Berechne für beide die mittleren Takte pro Befehl und die Laufzeit des Programms.</li>
+                    <li>Ein Verkäufer sagt: „Nehmen Sie A, 4&nbsp;GHz sind einfach schneller.“ Beurteile die Aussage mit deinen Ergebnissen.</li>
+                </ol>
+                <p class="tipp">Laufzeit = Befehlsanzahl · mittlere Takte pro Befehl / Taktfrequenz (Beispiel 1).</p>
+            </details>
+        </div>

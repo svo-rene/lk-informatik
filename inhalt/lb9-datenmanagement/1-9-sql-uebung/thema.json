@@ -1,0 +1,14 @@
+{
+  "nr": "1.9",
+  "titel": "SQL-Übungsaufgaben",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

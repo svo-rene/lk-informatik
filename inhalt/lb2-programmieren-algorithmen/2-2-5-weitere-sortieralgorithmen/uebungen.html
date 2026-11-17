@@ -1,0 +1,125 @@
+<script src="../sortierlabor.js" defer></script>
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/2-2-5_weitere_sortieralgorithmen.ipynb" download>2-2-5_weitere_sortieralgorithmen.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser das JupyterLite der Schule <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (alternativ <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Variablen verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Verfolge <code>insertion_sort([2, 3, 1])</code>. Welchen Wert hat <code>j</code>, wenn für <code>i</code> = 1 die <code>while</code>-Schleife verlassen wird, und welchen für <code>i</code> = 2? Wie viele Vergleiche sind es insgesamt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>i</code> = 1: 2 &gt; 3 ist falsch → <code>break</code> mit <code>j</code> = 1. <code>i</code> = 2: 3 &gt; 1 tauschen (2, 1, 3), 2 &gt; 1 tauschen (1, 2, 3), dann ist <code>j</code> = 0 und die Schleife endet. Insgesamt 3 Vergleiche und 2 Vertauschungen.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Auswählen von Hand <span class="niveau">AFB I</span></summary>
+                <p>Sortiere 7, 3, 5, 1 mit Selectionsort. Notiere die Liste nach jedem Schritt. Wie viele Vertauschungen und wie viele Vergleiche sind nötig?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Schritt 1: Minimum 1 ↔ 7 → 1, 3, 5, 7. Schritt 2: Minimum 3 steht schon vorn → kein Tausch. Schritt 3: Minimum 5 steht schon vorn → kein Tausch. Nur 1 Vertauschung, aber trotzdem 3 + 2 + 1 = 6 Vergleiche.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Suchen und tauschen <span class="niveau">AFB I</span></summary>
+                <p>Welche Werte durchläuft <code>j</code> für <code>i</code> = 2 bei einer Liste mit 6 Elementen? Wie oft wird bei <code>selection_sort([1, 2, 3])</code> getauscht, und warum?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>range(3, 6)</code> liefert 3, 4, 5. Bei [1, 2, 3] wird nie getauscht: Das Minimum steht jedes Mal schon vorn, also ist <code>min_pos == i</code> und die Bedingung <code>min_pos != i</code> ist falsch.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-5-1">
+            <details>
+                <summary>Aufgabe 2.2.5.1: Insertionsort <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Sortiere das Array <code>zahlen = [4, 2, 9, 3, 7]</code> mit Insertionsort in deinem Hefter.</li>
+                    <li>Implementiere die Prozedur <code>insertion_sort()</code> und lass sie eine zufällige Liste von Zahlen sortieren.</li>
+                    <li>Begründe anhand des Aufbaus von <code>insertion_sort()</code>, zu welcher Komplexitätsklasse dieser Algorithmus gehört.</li>
+                    <li>Zusatz: Füge die Prozedur in Teil 4 des Messlabors ein, mit Vergleichen über <code>kommt_vor</code> (Notebook von Seite 2.2.3: <a href="../notebooks/2-2-3_einfuehrung_komplexitaet.ipynb" download>2-2-3_einfuehrung_komplexitaet.ipynb</a>), und vergleiche sie im Diagramm mit Bubblesort. Begründe mithilfe des Diagramms, zu welcher Komplexitätsklasse der Algorithmus gehört.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-5-2">
+            <details>
+                <summary>Aufgabe 2.2.5.2: Selectionsort <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Sortiere das Array <code>zahlen = [4, 2, 9, 3, 7]</code> mit Selectionsort in deinem Hefter.</li>
+                    <li>Implementiere die Prozedur <code>selection_sort()</code> und lass sie eine zufällige Liste von Zahlen sortieren.</li>
+                    <li>Begründe anhand des Aufbaus von <code>selection_sort()</code>, zu welcher Komplexitätsklasse dieser Algorithmus gehört.</li>
+                    <li>Zusatz: Füge die Prozedur in Teil 4 des Messlabors ein, mit Vergleichen über <code>kommt_vor</code> (Notebook von Seite 2.2.3: <a href="../notebooks/2-2-3_einfuehrung_komplexitaet.ipynb" download>2-2-3_einfuehrung_komplexitaet.ipynb</a>), miss die Laufzeiten und begründe mithilfe des Diagramms die Komplexitätsklasse.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-5-3">
+            <details>
+                <summary>Aufgabe 2.2.5.3: Insertionsort mit zwei Arrays (Zusatz) <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Sortiere das Array <code>zahlen = [4, 2, 9, 3, 7]</code> mit dieser Variante in deinem Hefter.</li>
+                    <li>Implementiere die Funktion <code>insertion_sort2()</code> und lass sie eine zufällige Liste von Zahlen sortieren.</li>
+                    <li>Begründe anhand des Aufbaus, zu welcher Komplexitätsklasse dieser Algorithmus gehört.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-5-4">
+            <details>
+                <summary>Aufgabe 2.2.5.4: Sortierverfahren vergleichen <span class="niveau">AFB II–III</span></summary>
+                <p>Die Liste 6, 1, 8, 4, 9, 2 wird aufsteigend sortiert.</p>
+                <ol>
+                    <li>Notiere für Bubblesort den Zustand nach jedem vollständigen Durchlauf. Der Durchlauf vergleicht benachbarte Elemente von links nach rechts.</li>
+                    <li>Notiere für Selectionsort und Insertionsort den Zustand nach jedem Schritt.</li>
+                    <li>Entscheide für die folgenden Zustände, bei welchem Verfahren sie auftreten können: (i) 1, 6, 4, 8, 2, 9 &nbsp; (ii) 1, 2, 8, 4, 9, 6 &nbsp; (iii) 1, 4, 6, 8, 9, 2 &nbsp; (iv) 2, 1, 4, 6, 8, 9</li>
+                    <li>Zähle für Bubblesort und Selectionsort die Vertauschungen.</li>
+                    <li>Eine Liste ist schon fast sortiert. Beurteile, welches der drei Verfahren dafür am besten geeignet ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-2-2-5-5">
+            <details>
+                <summary>Aufgabe 2.2.5.5: Vollständiger Ablauf-Trace <span class="niveau">AFB II</span></summary>
+                <p>Sortiere [3, 7, 1, 8, 2, 5] aufsteigend.</p>
+                <ol>
+                    <li>Insertionsort (Tauschen mit dem linken Nachbarn wie in Beispiel 1): Notiere in einer Tabelle für jedes eingefügte Element die Liste danach, die Anzahl der Vergleiche und der Vertauschungen.</li>
+                    <li>Selectionsort: Notiere für jeden Schritt das gefundene Minimum, die Liste danach, die Vergleiche und ob getauscht wurde.</li>
+                    <li>Vergleiche die Summen. Kontrolliere die Vertauschungen bei Insertionsort mit der Anzahl der Fehlstellungen.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-5-6">
+            <details>
+                <summary>Aufgabe 2.2.5.6: Laufzeitvergleich mit perf_counter <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Teste deine Funktionen <code>insertion_sort</code> und <code>selection_sort</code> mit einer Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe. Verwende <code>[4, 2, 9, 3, 7]</code>, <code>[]</code>, <code>[1]</code>, <code>[5, -2, 0, -2]</code> und <code>["b", "a", "c"]</code>.</li>
+                    <li>Miss mit <code>time.perf_counter()</code> beide Verfahren für n = 1000, 2000 und 4000 – jeweils mit einer zufälligen, einer aufsteigend und einer absteigend sortierten Liste.</li>
+                    <li>Berechne die Faktoren bei Verdopplung von n und erkläre die Unterschiede zwischen den beiden Verfahren mit den Fallunterscheidungen aus Beispiel 2.</li>
+                </ol>
+                <p class="tipp">Speichere deine Messversionen als einzelne Commits (siehe 2.1.8), die Messwerte in der Commit-Nachricht.</p>
+            </details>
+        </div>

@@ -1,0 +1,35 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-4-11-7">
+    <details>
+        <summary>Aufgabe 4.11.7: Fehler finden – die vergessene Unterklasse <span class="niveau">AFB III</span></summary>
+        <p>Ein Fahrradverleih berechnet seine Preise so (Fahrrad 10 €, E-Bike 15 €, Lastenrad 18 € pro Tag):</p>
+        <pre><code class="language-python">class Fahrrad:
+    def __init__(self, tage):
+        self.tage = tage
+
+class EBike(Fahrrad):
+    pass
+
+class Lastenrad:
+    def __init__(self, tage):
+        self.tage = tage
+
+def preis(f):
+    if type(f) == Fahrrad:
+        return 10 * f.tage
+    elif type(f) == Lastenrad:
+        return 18 * f.tage
+    else:
+        return 0
+
+leihen = [Fahrrad(2), EBike(3), Lastenrad(1)]
+print(sum(preis(f) for f in leihen))</code></pre>
+        <ol>
+            <li>Sage die Ausgabe vorher und vergleiche sie mit dem richtigen Gesamtpreis. Erkläre den Fehler.</li>
+            <li>Ein Mitschüler schlägt vor, <code>type(f) == Fahrrad</code> durch <code>isinstance(f, Fahrrad)</code> zu ersetzen. Beurteile den Vorschlag.</li>
+            <li>Baue das Programm so um, dass es ohne <code>if</code>-Kette auskommt (Polymorphie), und teste es mit der Liste oben.</li>
+            <li>Vergleiche: Was muss in beiden Fassungen geändert werden, wenn ein Tandem für 12 € pro Tag dazukommt?</li>
+        </ol>
+    </details>
+</div>

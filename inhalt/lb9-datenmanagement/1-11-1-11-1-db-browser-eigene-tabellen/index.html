@@ -1,0 +1,329 @@
+<p>
+            Bisher hast du mit DB Browser immer schon fertige Datenbanken importiert und darin Abfragen ausgeführt.
+            Jetzt kennst du das ERM, das Relationenmodell und Primär- sowie Fremdschlüssel – Zeit, selbst eine eigene
+            Datenbank von Grund auf zu bauen. Dabei lernst du drei Wege kennen, wie Daten in eine Tabelle gelangen:
+            über die Oberfläche, über SQL-Befehle und per CSV-Import.
+        </p>
+
+<h2>1. Neue Datenbank anlegen</h2>
+
+<p>
+            Klicke in DB Browser für SQLite auf „Datei“ &gt; „Neue Datenbank“. Vergib einen Dateinamen
+            (z.&nbsp;B. <code>verein.db</code>) und einen Speicherort. Es öffnet sich automatisch der Dialog zum
+            Anlegen der ersten Tabelle – den kannst du an dieser Stelle mit „Abbrechen“ schließen, wir legen die
+            Tabellen gleich gezielt an.
+        </p>
+
+<h2>2. Tabellen über die Oberfläche erstellen</h2>
+
+<p>
+            Im Reiter „Datenbankstruktur“ klickst du auf „Tabelle erstellen“. Dort vergibst du einen Tabellennamen
+            und fügst über „Feld hinzufügen“ die einzelnen Spalten mit Namen und Datentyp hinzu. Für den
+            Primärschlüssel setzt du in der Zeile des entsprechenden Feldes das Häkchen bei „PK“. Daneben gibt
+            es eigene Häkchen für „NN“ (NOT NULL), „AI“ (AUTOINCREMENT) und „U“ (UNIQUE).
+        </p>
+
+<p>Baue für die folgenden Aufgaben diese beiden Tabellen eines kleinen Sportvereins nach:</p>
+
+<table border="1">
+            <thead>
+                <tr>
+                    <th>Tabelle</th>
+                    <th>Spalte</th>
+                    <th>Datentyp</th>
+                    <th>Besonderheit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">Trainingsgruppen</td>
+                    <td>TrainingsgruppeID</td>
+                    <td>INTEGER</td>
+                    <td>Primärschlüssel</td>
+                </tr>
+                <tr>
+                    <td>Bezeichnung</td>
+                    <td>TEXT</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Trainer</td>
+                    <td>TEXT</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="5">Mitglieder</td>
+                    <td>MitgliedID</td>
+                    <td>INTEGER</td>
+                    <td>Primärschlüssel</td>
+                </tr>
+                <tr>
+                    <td>Nachname</td>
+                    <td>TEXT</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Vorname</td>
+                    <td>TEXT</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Geburtsdatum</td>
+                    <td>TEXT</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>TrainingsgruppeID</td>
+                    <td>INTEGER</td>
+                    <td>Fremdschlüssel &rarr; Trainingsgruppen.TrainingsgruppeID</td>
+                </tr>
+            </tbody>
+        </table>
+
+<h2>3. Tabellen per SQL erstellen</h2>
+
+<p>
+            Die gleiche Struktur kannst du auch direkt im Reiter „SQL ausführen“ mit dem Befehl
+            <code>CREATE TABLE</code> anlegen. Das ist schneller, wenn du die Struktur schon genau kennst, und
+            zeigt dir, wie ein Fremdschlüssel mit <code>REFERENCES</code> auf eine andere Tabelle verweist.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+        <p><strong>Ausgangssituation:</strong> Die Tabellen <code>Trainingsgruppen</code> und <code>Mitglieder</code> aus Abschnitt 2
+           (1:n-Beziehung: eine Gruppe hat mehrere Mitglieder, ein Mitglied gehört zu höchstens einer Gruppe) sollen per SQL angelegt werden.</p>
+        <pre>
+CREATE TABLE Trainingsgruppen (
+    TrainingsgruppeID INTEGER PRIMARY KEY,
+    Bezeichnung TEXT NOT NULL,
+    Trainer TEXT
+);
+
+CREATE TABLE Mitglieder (
+    MitgliedID INTEGER PRIMARY KEY,
+    Nachname TEXT NOT NULL,
+    Vorname TEXT NOT NULL,
+    Geburtsdatum TEXT,
+    TrainingsgruppeID INTEGER,
+    FOREIGN KEY (TrainingsgruppeID) REFERENCES Trainingsgruppen (TrainingsgruppeID)
+);
+        </pre>
+        <ol>
+            <li><strong>Zuerst die Tabelle ohne Fremdschlüssel anlegen (<code>Trainingsgruppen</code>).</strong> <em>Warum?</em> Der
+                Fremdschlüssel in <code>Mitglieder</code> verweist auf sie; die Zieltabelle sollte vorher existieren.</li>
+            <li><strong>Primärschlüssel festlegen:</strong> <code>TrainingsgruppeID INTEGER PRIMARY KEY</code> bzw. <code>MitgliedID INTEGER PRIMARY KEY</code>.
+                <em>Warum?</em> Jeder Datensatz muss eindeutig ansprechbar sein; bei <code>INTEGER PRIMARY KEY</code> vergibt SQLite fehlende Werte selbst.</li>
+            <li><strong>Pflichtfelder mit <code>NOT NULL</code> markieren</strong> (Bezeichnung, Nachname, Vorname). <em>Warum?</em> Ein Mitglied ohne Namen
+                wäre unbrauchbar; die Datenbank weist solche Zeilen ab.</li>
+            <li><strong>Fremdschlüssel auf der n-Seite anlegen:</strong> <code>TrainingsgruppeID</code> in <code>Mitglieder</code> mit
+                <code>FOREIGN KEY … REFERENCES Trainingsgruppen (TrainingsgruppeID)</code>. <em>Warum auf der n-Seite?</em> Jedes Mitglied hat
+                höchstens eine Gruppe, also passt genau ein Wert in die Zeile.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Im Reiter „Datenbankstruktur“ stehen zwei leere Tabellen: <code>Trainingsgruppen</code> mit 3 Spalten
+           und <code>Mitglieder</code> mit 5 Spalten.</p>
+        <p><strong>Kontrolle:</strong> Bei eingeschalteter Fremdschlüsselprüfung (siehe Hinweis) muss
+           <code>INSERT INTO Mitglieder (MitgliedID, Nachname, Vorname, TrainingsgruppeID) VALUES (1, 'Kühn', 'Ida', 99);</code>
+           mit <code>FOREIGN KEY constraint failed</code> scheitern, weil es die Gruppe 99 nicht gibt. Nach dem
+           <code>INSERT</code> der Gruppe 1 (Abschnitt 4.2) klappt derselbe Befehl mit <code>TrainingsgruppeID</code> 1.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Wird der Fremdschlüssel wirklich geprüft?
+                </summary>
+                <p>
+                    SQLite selbst prüft Fremdschlüssel nur, wenn die Einstellung <code>PRAGMA foreign_keys = ON</code>
+                    gesetzt ist; ohne sie könntest du ohne Fehlermeldung eine TrainingsgruppeID eintragen, die es gar
+                    nicht gibt. <strong>DB Browser schaltet diese Prüfung beim Öffnen einer Datenbank standardmäßig
+                    ein.</strong> Kontrollieren kannst du das im Reiter „Pragmas bearbeiten“: Dort muss das Häkchen bei
+                    „Foreign Keys“ gesetzt sein. Im Reiter „SQL ausführen“ bringt der PRAGMA-Befehl dagegen oft nichts,
+                    weil DB Browser deine Befehle dort in einer Transaktion ausführt und SQLite die Einstellung innerhalb
+                    einer Transaktion ignoriert. Wenn du später mit Python (<code>sqlite3</code>) arbeitest, musst du
+                    <code>PRAGMA foreign_keys = ON</code> selbst nach dem Verbinden ausführen.
+                </p>
+            </details>
+        </div>
+
+<h2>4. Drei Wege, Daten hinzuzufügen</h2>
+
+<h3>4.1 Über die Oberfläche</h3>
+
+<p>
+            Wechsle in den Reiter „Daten durchsuchen“, wähle oben die gewünschte Tabelle aus und klicke auf
+            „Neuer Datensatz“. Du kannst die Werte dann direkt in der Tabelle eintippen.
+        </p>
+
+<h3>4.2 Über SQL-Befehle</h3>
+
+<p>
+            Wie schon bei CRUD gelernt, fügst du mit <code>INSERT INTO</code> Datensätze über den Reiter
+            „SQL ausführen“ hinzu.
+        </p>
+
+<pre>
+INSERT INTO Trainingsgruppen (TrainingsgruppeID, Bezeichnung, Trainer)
+VALUES (1, 'Bambini', 'Frau Weber');
+        </pre>
+
+<h3>4.3 Als CSV-Datei importieren</h3>
+
+<p>
+            Wenn schon viele Datensätze in einer CSV-Datei vorliegen (z.&nbsp;B. aus einer Vereinsverwaltung
+            exportiert), musst du sie nicht einzeln eintippen. Klicke auf „Datei“ &gt; „Importieren“ &gt;
+            „Tabelle aus CSV-Datei“. Wähle die Datei aus und prüfe im Importdialog:
+        </p>
+
+<ul>
+            <li>Ist das richtige Trennzeichen ausgewählt (Komma oder Semikolon)?</li>
+            <li>Ist „Spaltennamen in erster Zeile“ aktiviert, falls die CSV eine Kopfzeile hat?</li>
+            <li>Passen die automatisch erkannten Datentypen der Spalten?</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Import in eine bestehende Tabelle
+                </summary>
+                <p>
+                    Trägst du im Importdialog als Tabellennamen den Namen einer Tabelle ein, die du schon per CREATE TABLE
+                    angelegt hast (inklusive Primär- und Fremdschlüssel), fragt DB Browser, ob die Daten in diese
+                    bestehende Tabelle eingefügt werden sollen. Bestätigst du das, gelten die Schlüsselregeln auch für die
+                    importierten Zeilen. Bei einem neuen Namen legt der Import eine neue Tabelle ohne Schlüssel an.
+                </p>
+            </details>
+        </div>
+
+<p>Die beiden Tabellen oben sind der Grundfall: eine 1:n-Beziehung, ein Fremdschlüssel. Das folgende Beispiel zeigt,
+           wie eine m:n-Beziehung mit zusammengesetztem Primärschlüssel angelegt wird und worauf du beim Befüllen achten musst.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Der Verein will zusätzlich speichern, welche Mitglieder an welchen Wettkämpfen
+               teilgenommen haben und welchen Platz sie belegt haben. Aus der Modellierung (Seite 1.11) stammt:</p>
+            <pre class="schema">Wettkaempfe(<u>WettkampfID</u>, Bezeichnung, Datum)
+Teilnahmen(<u>&uarr;MitgliedID, &uarr;WettkampfID</u>, Platz)</pre>
+            <ol>
+                <li><strong>Erst die Tabelle ohne Fremdschlüssel anlegen.</strong>
+<pre><code>CREATE TABLE Wettkaempfe (
+    WettkampfID INTEGER PRIMARY KEY,
+    Bezeichnung TEXT NOT NULL,
+    Datum TEXT NOT NULL
+);</code></pre>
+                    <em>Warum zuerst?</em> <code>Teilnahmen</code> verweist auf sie. SQLite würde die umgekehrte Reihenfolge
+                    zwar dulden, viele andere Datenbanksysteme aber nicht – und die Reihenfolge „erst das Ziel, dann der Verweis“
+                    braucht man beim Einfügen ohnehin.</li>
+                <li><strong>Den zusammengesetzten Primärschlüssel als eigene Zeile schreiben.</strong>
+<pre><code>CREATE TABLE Teilnahmen (
+    MitgliedID INTEGER,
+    WettkampfID INTEGER,
+    Platz INTEGER,
+    PRIMARY KEY (MitgliedID, WettkampfID),
+    FOREIGN KEY (MitgliedID) REFERENCES Mitglieder (MitgliedID),
+    FOREIGN KEY (WettkampfID) REFERENCES Wettkaempfe (WettkampfID)
+);</code></pre>
+                    <em>Warum nicht zweimal <code>PRIMARY KEY</code> hinter die Spalten?</em> Dann meldet SQLite
+                    <code>table "Teilnahmen" has more than one primary key</code>. Ein Primärschlüssel aus zwei Spalten ist
+                    <em>ein</em> Schlüssel und wird deshalb einmal am Ende angegeben.</li>
+                <li><strong>Daten in der richtigen Reihenfolge einfügen.</strong> Angenommen, die Mitglieder 1 und 2 existieren bereits:
+<pre><code>INSERT INTO Wettkaempfe (WettkampfID, Bezeichnung, Datum)
+VALUES (1, 'Stadtmeisterschaft', '2026-06-13');
+
+INSERT INTO Teilnahmen (MitgliedID, WettkampfID, Platz)
+VALUES (1, 1, 2), (2, 1, 1);</code></pre>
+                    <em>Warum diese Reihenfolge?</em> Eine Teilnahme an Wettkampf 1 darf erst gespeichert werden, wenn es
+                    Wettkampf 1 gibt.</li>
+                <li><strong>Die Schlüsselregeln testen.</strong> Führe die folgenden Befehle einzeln aus:
+<pre><code>INSERT INTO Teilnahmen VALUES (99, 1, 3);   -- Mitglied 99 gibt es nicht
+INSERT INTO Teilnahmen VALUES (1, 1, 4);    -- Mitglied 1 ist schon eingetragen</code></pre>
+                    Der erste scheitert mit <code>FOREIGN KEY constraint failed</code> (referenzielle Integrität), der zweite mit
+                    <code>UNIQUE constraint failed: Teilnahmen.MitgliedID, Teilnahmen.WettkampfID</code> (Primärschlüssel).
+                    <em>Warum testen?</em> So siehst du, dass die Datenbank die Regeln wirklich überwacht.</li>
+                <li><strong>Probe mit einer Abfrage.</strong>
+<pre><code>SELECT m.Vorname, m.Nachname, w.Bezeichnung, t.Platz
+FROM Teilnahmen t
+JOIN Mitglieder m   ON t.MitgliedID = m.MitgliedID
+JOIN Wettkaempfe w  ON t.WettkampfID = w.WettkampfID
+ORDER BY t.Platz;</code></pre>
+                    Es erscheinen genau die zwei eingefügten Teilnahmen, Platz 1 zuerst.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die m:n-Beziehung ist als eigene Tabelle mit zwei Fremdschlüsseln umgesetzt, die
+               zusammen den Primärschlüssel bilden. Die Datenbank verhindert Teilnahmen nicht vorhandener Mitglieder und doppelte Einträge.</p>
+            <p><strong>Falle:</strong> Wird die Fremdschlüsselprüfung ausgeschaltet (Häkchen „Foreign Keys“ unter „Pragmas
+               bearbeiten“ fehlt), läuft der erste Testbefehl ohne Fehler durch – die verwaiste Zeile fällt erst später auf.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Datenbanken für Vereine und kleine Betriebe</summary>
+                <p>
+                    Viele Sportvereine, Arztpraxen oder Handwerksbetriebe verwalten Mitglieder, Termine und Aufträge
+                    in kleinen Datenbanken. Wer so etwas als <strong>Fachinformatiker*in für Anwendungsentwicklung</strong>
+                    oder in der <strong>Datenbankadministration</strong> aufbaut, legt zuerst die Struktur mit Schlüsseln an
+                    und übernimmt dann Altbestände per CSV-Import aus alten Excel-Listen – genau die drei Wege dieser Seite.
+                    Weil Mitgliederdaten personenbezogen sind, gehört nach <strong>DSGVO</strong> auch dazu, nur nötige
+                    Spalten anzulegen und die Datei vor fremdem Zugriff zu schützen.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Ein Primärschlüssel muss eindeutig sein und darf keinen fehlenden Wert (NULL) enthalten. Das
+                Häkchen bei „PK“ erzeugt in DB Browser nur <code>PRIMARY KEY</code>. Die automatische Hochzählung
+                setzt erst das zusätzliche Häkchen „AI“ (<code>AUTOINCREMENT</code>), das nur bei
+                <code>INTEGER</code>-Spalten möglich ist.
+            </p>
+            <p>
+                Achtung, SQLite-Besonderheit: Nur eine Spalte vom Typ <code>INTEGER PRIMARY KEY</code> ist garantiert
+                nie NULL – lässt du den Wert weg, vergibt SQLite automatisch die nächste Nummer. Bei einem
+                Primärschlüssel mit anderem Datentyp (z.&nbsp;B. <code>TEXT</code>) lässt SQLite aus historischen
+                Gründen NULL-Werte zu. Setze dort zusätzlich „NN“ (<code>NOT NULL</code>).
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                Syntax für CREATE TABLE mit Primär- und Fremdschlüssel:<br>
+                CREATE TABLE Tabellenname (<br>
+                &nbsp;&nbsp;Spalte1 Datentyp PRIMARY KEY,<br>
+                &nbsp;&nbsp;Spalte2 Datentyp,<br>
+                &nbsp;&nbsp;FremdschluesselSpalte Datentyp,<br>
+                &nbsp;&nbsp;FOREIGN KEY (FremdschluesselSpalte) REFERENCES ZielTabelle (ZielSpalte)<br>
+                );
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.11.1.1: Tabellen über die Oberfläche <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Lege eine neue Datenbank <code>verein.db</code> an und erstelle darin über die Oberfläche
+                    (Reiter „Datenbankstruktur“) die beiden Tabellen <code>Trainingsgruppen</code> und
+                    <code>Mitglieder</code> mit den Spalten aus der Tabelle oben.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.11.1.2: Die gleiche Struktur per SQL <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Lösche beide Tabellen wieder (Rechtsklick auf die Tabelle &gt; „Tabelle löschen“) und lege sie
+                    stattdessen per <code>CREATE TABLE</code>-Befehl im Reiter „SQL ausführen“ neu an – inklusive
+                    Fremdschlüssel.
+                </p>
+            </details>
+        </div>

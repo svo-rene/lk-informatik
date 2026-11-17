@@ -1,0 +1,86 @@
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+            <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+            dieser Seite direkt ausführen und bearbeiten kannst:
+            <a href="../notebooks/4-1_programmierparadigmen.ipynb" download>4-1_programmierparadigmen.ipynb herunterladen</a>.
+            Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+            <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+            <ol>
+                <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+            </ol>
+        </details>
+    </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 4.1.3: Klausurauswertung – imperativ und funktional <span class="niveau">AFB II</span></summary>
+            <p>Eine Kurslehrerin wertet eine Klausur aus. Die Ergebnisse liegen in Notenpunkten (0 bis 15) vor, bestanden ist eine Klausur ab 5 Punkten. Ihr bisheriges Programm ist imperativ:</p>
+            <pre><code class="language-python">punkte = [12, 4, 9, 15, 3, 7]
+summe = 0
+bestanden = 0
+for p in punkte:
+    summe = summe + p
+    if p &gt;= 5:
+        bestanden = bestanden + 1
+print(round(summe / len(punkte), 1), bestanden)</code></pre>
+            <ol>
+                <li>Gib die Ausgabe des Programms an.</li>
+                <li>Schreibe eine Funktion <code>auswertung(punkte)</code> im funktionalen Stil, die das Tupel <code>(durchschnitt, anzahl_bestanden)</code> zurückgibt. Es darf keine Variable schrittweise verändert werden (keine Schleife mit Zuweisungen). Der Durchschnitt wird auf eine Nachkommastelle gerundet; für eine leere Liste soll er <code>None</code> sein.</li>
+                <li>Teste deine Funktion mit <code>print(auswertung(…))</code>:
+                    <table class="gitter">
+                        <thead><tr><th>Eingabe <code>punkte</code></th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>[12, 4, 9, 15, 3, 7]</code></td><td><code>(8.3, 4)</code></td><td></td></tr>
+                            <tr><td><code>[5, 5]</code></td><td><code>(5.0, 2)</code></td><td></td></tr>
+                            <tr><td><code>[0, 4, 3]</code></td><td><code>(2.3, 0)</code></td><td></td></tr>
+                            <tr><td><code>[15]</code></td><td><code>(15.0, 1)</code></td><td></td></tr>
+                            <tr><td><code>[]</code></td><td><code>(None, 0)</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>Erkläre, was das imperative Programm bei einer leeren Liste macht, und begründe, warum dieser Fehler in beiden Paradigmen bedacht werden muss.</li>
+            </ol>
+            <p class="tipp">Tipp: <code>sum</code>, <code>len</code> und eine Listenabstraktion <code>[p for p in punkte if …]</code> reichen aus. Für den Sonderfall hilft ein bedingter Ausdruck <code>wert1 if bedingung else wert2</code>.</p>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 4.1.4: Stammbaum – logisch und imperativ <span class="niveau">AFB II</span></summary>
+            <p>Eine Stammbaum-App speichert, wer Elternteil von wem ist. In Prolog sieht der Ausschnitt so aus:</p>
+            <pre><code>elternteil(erna, ines).
+elternteil(erna, tom).
+elternteil(ines, lea).
+elternteil(ines, max).
+elternteil(tom, ida).
+
+grosselternteil(X, Z) :- elternteil(X, Y), elternteil(Y, Z).
+geschwister(X, Y)     :- elternteil(E, X), elternteil(E, Y), X \= Y.</code></pre>
+            <ol>
+                <li>Gib an, wie SWI-Prolog auf die Anfrage <code>?- grosselternteil(erna, E).</code> antwortet, wenn du nach jeder Antwort <code>;</code> eingibst. Gib außerdem die Antwort auf <code>?- setof(G, geschwister(lea, G), L).</code> an und erkläre, warum lea nicht ihr eigenes Geschwister ist.</li>
+                <li>Ergänze eine Regel <code>cousin(X, Y)</code>: X und Y sind Cousins bzw. Cousinen, wenn ihre Elternteile Geschwister sind. Gib die Antwort auf <code>?- setof(C, cousin(ida, C), L).</code> an.</li>
+                <li>Dieselben Daten liegen in Python als Liste von Paaren vor:
+                    <pre><code class="language-python">beziehungen = [("erna", "ines"), ("erna", "tom"), ("ines", "lea"),
+               ("ines", "max"), ("tom", "ida")]</code></pre>
+                    Schreibe imperativ eine Funktion <code>enkel(person, beziehungen)</code>, die die Liste aller Enkel von <code>person</code> zurückgibt (in der Reihenfolge, in der sie gefunden werden). Teste sie:
+                    <table class="gitter">
+                        <thead><tr><th>Aufruf</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>print(enkel("erna", beziehungen))</code></td><td><code>['lea', 'max', 'ida']</code></td><td></td></tr>
+                            <tr><td><code>print(enkel("ines", beziehungen))</code></td><td><code>[]</code></td><td></td></tr>
+                            <tr><td><code>print(enkel("ines", beziehungen + [("lea", "paul")]))</code></td><td><code>['paul']</code></td><td></td></tr>
+                            <tr><td><code>print(enkel("otto", beziehungen))</code></td><td><code>[]</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>Vergleiche beide Lösungen: Was musst du in Python selbst programmieren, was erledigt Prolog von allein?</li>
+            </ol>
+        </details>
+    </div>

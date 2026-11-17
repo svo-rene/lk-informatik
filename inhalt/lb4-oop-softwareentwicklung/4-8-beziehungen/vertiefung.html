@@ -1,0 +1,47 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-4-8-6">
+        <details>
+            <summary>Aufgabe 4.8.6: Fehler finden – zwei Häuser, ein Raum <span class="niveau">AFB III</span></summary>
+            <p>Im Modell einer Schulverwaltung steht: „Ein Schulgebäude besteht aus Räumen“ (Komposition, gefüllte Raute). Umgesetzt wurde das so:</p>
+            <pre><code class="language-python">class Raum:
+    def __init__(self, nummer: str):
+        self.nummer: str = nummer
+
+class Schulgebaeude:
+    def __init__(self, name: str, raeume: list[Raum]):
+        self.name: str = name
+        self.raeume: list[Raum] = raeume
+
+r = [Raum("A101"), Raum("A102")]
+haus_a = Schulgebaeude("Haus A", r)
+haus_b = Schulgebaeude("Haus B", r)
+haus_b.raeume.append(Raum("B001"))
+print(len(haus_a.raeume))</code></pre>
+            <ol>
+                <li>Sage die Ausgabe vorher und erkläre sie mit einem Speicherbild (Variablen, Listenobjekt, Raumobjekte, Pfeile für Verweise).</li>
+                <li>Begründe, warum der Code dem Modell „Komposition“ widerspricht.</li>
+                <li>Korrigiere die Klasse <code>Schulgebaeude</code> so, dass sie das Modell erfüllt. Nutze dazu auch Kapselung (4.6). Ein Raum soll nur über eine Methode <code>raum_anbauen(nummer)</code> hinzukommen.</li>
+                <li>Teste: Beide Häuser werden mit der Nummernliste <code>["A101", "A102"]</code> erzeugt, <code>haus_b</code> baut „B001“ an. Danach muss <code>haus_a</code> 2 Räume und <code>haus_b</code> 3 Räume haben.</li>
+            </ol>
+        </details>
+    </div>
+
+<div class="aufgabe" id="a-4-8-7">
+        <details>
+            <summary>Aufgabe 4.8.7: Aggregation oder Komposition – kommt drauf an <span class="niveau">AFB III</span></summary>
+            <p>Ob ein Teil „mitstirbt“, hängt nicht vom Gegenstand ab, sondern davon, was die Software leisten soll. Entscheide für jedes Paar begründet, ob du Aggregation oder Komposition modellierst. Beschreibe außerdem eine geänderte Anforderung, bei der sich deine Entscheidung umkehren würde:</p>
+            <ul>
+                <li>(a) Playlist – Song in einer Musik-Streaming-App</li>
+                <li>(b) Rechnung – Rechnungsposition in einem Onlineshop</li>
+                <li>(c) Sportverein – Mitglied in der Vereinsverwaltung</li>
+                <li>(d) Schachbrett – Feld in einem Schachspiel</li>
+            </ul>
+            <p>Implementiere anschließend (b) als Komposition: Eine <code>Rechnung</code> hat eine Rechnungsnummer und erzeugt ihre Positionen selbst mit <code>position_hinzufuegen(bezeichnung, menge, einzelpreis_cent)</code>. <code>summe_cent()</code> liefert den Gesamtbetrag.</p>
+            <table class="gitter">
+                <tr><th>Aufruf</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                <tr><td><code>print(Rechnung("R-2026-001").summe_cent())</code></td><td>0</td><td></td></tr>
+                <tr><td><code>r = Rechnung("R-2026-002"); r.position_hinzufuegen("Heft", 3, 120); r.position_hinzufuegen("Füller", 1, 1499); print(r.summe_cent())</code></td><td>1859</td><td></td></tr>
+            </table>
+        </details>
+    </div>

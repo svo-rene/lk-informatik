@@ -1,0 +1,50 @@
+{
+  "nr": "LB 4/5",
+  "titel": "OOP und Softwareentwicklung",
+  "text": "Objekte und Klassen, Beziehungen und Vererbung, Software im Team und ein eigenes Projekt.",
+  "kapitel": [
+    {
+      "titel": "Paradigmen",
+      "themen": [
+        "4-0-klassifizierung",
+        "4-1-programmierparadigmen"
+      ]
+    },
+    {
+      "titel": "Objekte und Klassen",
+      "themen": [
+        "4-2-objektorientierung",
+        "4-3-klassen",
+        "4-4-attribute",
+        "4-5-methoden",
+        "4-6-kapselung",
+        "4-7-typisierung"
+      ]
+    },
+    {
+      "titel": "Beziehungen und Vererbung",
+      "themen": [
+        "4-8-beziehungen",
+        "4-9-multiplizitaeten",
+        "4-10-vererbung",
+        "4-11-polymorphie"
+      ]
+    },
+    {
+      "titel": "Software im Team",
+      "themen": [
+        "5-1-vom-programm-zum-projekt",
+        "5-2-vorgehensmodelle",
+        "5-3-testen",
+        "5-4-git-im-team"
+      ]
+    },
+    {
+      "titel": "Projekt",
+      "themen": [
+        "5-5-projektauftrag",
+        "5-6-projektleitfaden"
+      ]
+    }
+  ]
+}

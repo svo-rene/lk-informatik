@@ -1,0 +1,52 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+  <details>
+    <summary>Aufgabe 1.2.3: Spielstand im 8-Bit-Register <span class="niveau">AFB III</span></summary>
+    <p>Ein Spiel speichert den Punktestand in einem 8-Bit-Register im Zweierkomplement.</p>
+    <ol>
+      <li>Stelle die Punktestände −45, −90 und −128 dar.</li>
+      <li>Gib an, welche Punktestände die Bitmuster 10110110 und 11111110 bedeuten.</li>
+      <li>Der Spieler hat 100 Punkte und bekommt 50 dazu. Addiere 01100100 und 00110010 und deute das Ergebnis.</li>
+      <li>Beschreibe eine Regel, mit der ein Programm einen solchen Überlauf nach der Addition erkennen kann.</li>
+      <li>Beurteile, welche Folgen der Fehler aus Teil 3 für die Spieler haben könnte und wie ihn die Entwickler hätten vermeiden können.</li>
+    </ol>
+  </details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.2.4: Ein Bitmuster – zwei Temperaturen <span class="niveau">AFB II</span></summary>
+        <p>Eine Wetterstation im Erzgebirge misst stündlich die Temperatur in ganzen Grad Celsius. Der Sensor liefert jeden Messwert als <strong>8-Bit-Zweierkomplementzahl</strong>. Im Speicher stehen die folgenden Bytes (hexadezimal):</p>
+        <pre>17   FB   EC   05   F1</pre>
+        <p>Die Anzeige-App wurde fehlerhaft programmiert: Sie liest die Bytes als <strong>vorzeichenlose</strong> Zahlen.</p>
+        <ol>
+            <li>Lege eine Tabelle an mit den Spalten Byte (hex), Bitmuster, Wert vorzeichenlos (Anzeige der App), Wert im Zweierkomplement (tatsächliche Temperatur).</li>
+            <li>Beschreibe, an welchem Bit man sofort erkennt, ob beide Deutungen übereinstimmen, und um welchen Betrag sie sich sonst unterscheiden.</li>
+            <li>Die App meldet für eine spätere Messung „236 °C“. Bestimme die tatsächliche Temperatur.</li>
+            <li>Gib an, in welchem Temperaturbereich die fehlerhafte App trotzdem richtige Werte anzeigt.</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.2.5: Der Parkhauszähler <span class="niveau">AFB II</span></summary>
+        <p>Ein Parkhaus hat 400 Stellplätze. Die Steuerung zählt die belegten Plätze in einem <strong>vorzeichenlosen 8-Bit-Register</strong>, das um 7:00&nbsp;Uhr auf 0 steht. Die Anzeige an der Einfahrt zeigt „freie Plätze = 400 &minus; Registerwert“.</p>
+        <table class="gitter">
+            <tr><th>Zeitraum</th><th>Ereignis</th></tr>
+            <tr><td>7:00 bis 9:00</td><td>180 Autos fahren ein</td></tr>
+            <tr><td>9:00 bis 11:00</td><td>90 weitere Autos fahren ein</td></tr>
+            <tr><td>11:00 bis 12:00</td><td>20 Autos fahren aus</td></tr>
+        </table>
+        <ol>
+            <li>Berechne den Registerinhalt um 9:00, 11:00 und 12:00&nbsp;Uhr binär und dezimal. Führe die Addition um 11:00&nbsp;Uhr auf Bitebene durch.</li>
+            <li>Beschreibe, was die Anzeige um 11:00&nbsp;Uhr meldet, und welche Folgen das für die Autofahrer hat.</li>
+            <li>Um 12:00&nbsp;Uhr zeigt die Anzeige den richtigen Wert. Ein Techniker folgert: „Das Programm rechnet doch richtig.“ Beurteile diese Aussage.</li>
+            <li>Ein zweites Programm liest dasselbe Register als 8-Bit-Zweierkomplementzahl. Gib an, welchen Wert es um 9:00&nbsp;Uhr anzeigt.</li>
+        </ol>
+        <p class="tipp">Tipp: Das Register rechnet modulo 256. Ein Ergebnis über 255 wird um 256 verringert, ein Ergebnis unter 0 um 256 erhöht.</p>
+    </details>
+</div>

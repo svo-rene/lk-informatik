@@ -1,0 +1,245 @@
+<p>In diesem Projekt wendest du an, was du über Künstliche Intelligenz und Projektmanagement gelernt hast: Du bereitest echte Daten auf, trainierst ein Modell, prüfst es ehrlich und erklärst, was es kann und was nicht. Die Theorie-Seiten 11.0 bis 11.11 dieses Kurses sind dabei euer Material, die Wochenübungen begleiten die Sprints.</p>
+
+<h2>Projektauftrag</h2>
+
+<p>Folgende Teile gehören zum Projekt:</p>
+
+<ol>
+            <li><strong>Pflicht-Notebook in KW 47:</strong> Jede Person bearbeitet das Notebook zum Titanic-Datensatz (Entscheidungsbaum, Kursseite 11.5) und lädt es als <code>titanic_&lt;vorname&gt;.ipynb</code> ins Gruppenrepository hoch. Damit übt ihr den gesamten Ablauf einmal an einem bekannten Beispiel.</li>
+            <li><strong>Thema und Datensatz wählen:</strong> aus der Liste unten oder als eigener Vorschlag nach Absprache mit eurer Lehrkraft.</li>
+            <li><strong>Eigenes Modell – Programmieren ist Pflicht:</strong> Jede Person trainiert und testet mindestens ein Modell im eigenen Notebook <code>modell_&lt;vorname&gt;.ipynb</code>:
+                <ul>
+                    <li>Daten laden, erkunden und aufbereiten (fehlende Werte, Codierung, ggf. Skalierung),</li>
+                    <li>in Trainings-, Validierungs- und Testdaten aufteilen (vgl. 11.3),</li>
+                    <li>Hyperparameter (z.&nbsp;B. Baumtiefe, k, Neuronenzahl, Grad) über die Validierung bzw. Kreuzvalidierung wählen,</li>
+                    <li>das gewählte Modell <em>einmal</em> auf den Testdaten auswerten, mit passender Metrik und Vergleich zu einer einfachen Baseline,</li>
+                    <li>die Ergebnisse in Markdown-Zellen in eigenen Worten deuten und Testfälle im Abschnitt „Tests“ am Ende des Notebooks festhalten (vgl. 10.6).</li>
+                </ul>
+            </li>
+            <li><strong>Vergleich in der Gruppe:</strong> Die drei Personen verwenden verschiedene Verfahren auf demselben Datensatz oder dasselbe Verfahren für verschiedene Fragestellungen. Ihr vergleicht die Ergebnisse und zieht ein gemeinsames Fazit.</li>
+            <li><strong>Einordnen:</strong> Grundlagen der KI (schwache und starke KI, wissens- und datenbasierte KI, überwachtes, unüberwachtes und bestärkendes Lernen; 11.1, 11.2), Nachvollziehbarkeit, Erklärbarkeit, Zuverlässigkeit und Bias eures Modells sowie gesellschaftliche Auswirkungen vergleichbarer KI-Anwendungen (11.11).</li>
+            <li><strong>Generative KI aktiv untersuchen:</strong> Testet einen Chatbot gezielt zu eurem Projektthema. Findet mindestens ein Beispiel, bei dem der Chatbot halluziniert (eine selbstsicher klingende, aber falsche oder erfundene Aussage trifft), und gleicht die Antwort mit einer echten, zitierfähigen Quelle ab. Alternativ: Vergleicht die Antworten zweier Chatbots zum gleichen Thema kritisch. Haltet Beispiel und Quellenabgleich in der <code>README.md</code> fest und stellt es in der Präsentation vor.</li>
+            <li><strong>Projektmanagement:</strong> klassisch planen (Aufgabe 10.5.1) und agil umsetzen (Aufgabe 10.5.2), dokumentiert im Gruppenrepository (vgl. 10.6).</li>
+        </ol>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Muss ich dafür programmieren können?</summary>
+                <p>Ja – in diesem Projekt trainiert und testet jede Person selbst ein Modell. Du musst dafür aber kein Programm von Grund auf schreiben. Die Notebook-Vorlagen unten enthalten das Gerüst: Daten laden, aufteilen, trainieren, auswerten. Deine Aufgabe ist es, die Vorlage an euren Datensatz anzupassen, sinnvolle Entscheidungen zu treffen (Merkmale, Aufteilung, Hyperparameter, Metrik) und jede Zeile deines Notebooks erklären zu können. Genau danach wird nach eurer Vorstellung nachgefragt („Zeige und erkläre in deinem Notebook …“), und ähnliche Fragen kommen im KI-Teil der Klausur.</p>
+            </details>
+        </div>
+
+<h2>Themen und Datensätze zur Auswahl</h2>
+
+<p>Alle Datensätze sind frei verfügbar, klein genug für JupyterLite und enthalten <strong>keine personenbezogenen Daten</strong>. Die Datensätze 1 bis 4 sind in scikit-learn bereits enthalten, ihr braucht also keine Datei hochzuladen. Möglichst jede Gruppe wählt ein anderes Thema; die Verteilung legt eure Lehrkraft fest.</p>
+
+<table>
+            <tr><th>Nr.</th><th>Thema</th><th>Datensatz</th><th>Fragestellung</th><th>Vorschlag für drei Personen</th><th>Vorlage</th></tr>
+            <tr><td>1</td><td>Weinsorten erkennen</td><td><code>load_wine</code>: 178 Proben, 13 chemische Messwerte, 3 Sorten</td><td>Von welcher Rebsorte stammt ein Wein?</td><td>Entscheidungsbaum · k-NN (mit und ohne Skalierung) · neuronales Netz</td><td>11-5, 11-8</td></tr>
+            <tr><td>2</td><td>Handgeschriebene Ziffern</td><td><code>load_digits</code>: 1797 Bilder mit 8&nbsp;×&nbsp;8 Pixeln, Ziffern 0–9</td><td>Welche Ziffer zeigt das Bild? Welche Ziffern werden verwechselt?</td><td>neuronales Netz · k-NN · Entscheidungsbaum</td><td>11-8</td></tr>
+            <tr><td>3</td><td>Schwertlilien ordnen</td><td><code>load_iris</code>: 150 Blüten, 4 Maße, 3 Arten</td><td>Findet ein Verfahren ohne Labels dieselben Gruppen wie eines mit Labels?</td><td>k-Means (unüberwacht) · Entscheidungsbaum · k-NN</td><td>11-7, 11-5</td></tr>
+            <tr><td>4</td><td>Befunde einordnen</td><td><code>load_breast_cancer</code>: 569 anonymisierte Gewebeproben, 30 Messwerte, gutartig/bösartig (Achtung: Klasse 0 bedeutet bösartig)</td><td>Wie zuverlässig erkennt ein Modell bösartige Befunde – und welcher Fehler ist schlimmer?</td><td>Entscheidungsbaum · k-NN · neuronales Netz, Schwerpunkt Recall und Konfusionsmatrix</td><td>11-5, 11-8</td></tr>
+            <tr><td>5</td><td>Wetter in Dresden</td><td>Tageswerte einer Wetterstation in Dresden aus den offenen Klimadaten des Deutschen Wetterdienstes (<a href="https://opendata.dwd.de/climate_environment/CDC/" target="_blank" rel="noopener">DWD Open Data</a>), ein bis zwei Jahre als CSV</td><td>Wie gut lässt sich die Höchsttemperatur von morgen vorhersagen?</td><td>lineare Regression · polynomiale Regression · k-NN-Regression; Baseline „morgen wie heute“</td><td>11-4</td></tr>
+            <tr><td>6</td><td>Eigene Messreihe</td><td>selbst erhobene Messdaten ohne Personenbezug, z.&nbsp;B. aus einem Physik- oder Chemieexperiment</td><td>nach Absprache</td><td>nach Absprache</td><td>11-4, 11-5</td></tr>
+            <tr><td>7</td><td>Eigenes Sprachmodell trainieren</td><td>Liste von Ortsnamen aus Sachsen (wird mit dem Notebook bereitgestellt)</td><td>Kann ein Zeichen-Sprachmodell aus einer Namensliste lernen, wie sächsische Ortsnamen gebaut sind, und neue, glaubwürdige Namen erfinden? Wie viele erfundene Namen sind nur Kopien aus den Trainingsdaten?</td><td>verschiedene Kontextlängen (wie viele Zeichen das Modell zurückblickt) · verschiedene Temperaturen beim Erzeugen · Auswertung: Anteil neuer Namen, Bewertung der Namen durch den Kurs; Grundlagen aus 11.0 (Kickstart Sprachmodelle) und 11.10 (n-Gramme)</td><td>11-10b</td></tr>
+        </table>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Was „keine personenbezogenen Daten“ für euer Projekt bedeutet</summary>
+                <p>Keine Umfragen mit Namen, Klassen oder Wohnorten, keine Fotos von Personen, keine Noten oder Gesundheitsangaben von Mitschülerinnen und Mitschülern. Der Datensatz 4 enthält Messwerte von Gewebeproben ohne jeden Bezug zu einer Person. Der Titanic-Datensatz ist ein historischer Datensatz von 1912 und wird nur als Pflicht-Notebook genutzt. Bei einem eigenen Vorschlag klärt ihr Datenquelle und Datenschutz <em>vor</em> Projektbeginn mit eurer Lehrkraft.</p>
+            </details>
+        </div>
+
+<h2>Notebook-Vorlagen</h2>
+
+<p>Die Vorlagen sind die Notebooks dieses Kurses. Lade die passende Vorlage herunter, speichere sie unter <code>modell_&lt;vorname&gt;.ipynb</code> und passe sie an euren Datensatz an:</p>
+
+<ul>
+            <li><a href="../notebooks/11-5_titanic.ipynb" download>11-5_titanic.ipynb</a> mit <a href="../notebooks/titanic.csv" download>titanic.csv</a>: Entscheidungsbaum, Datenaufbereitung, Kreuzvalidierung, Konfusionsmatrix – Pflicht-Notebook in KW 47 und Vorlage für jede Klassifikation (11.5).</li>
+            <li><a href="../notebooks/11-4_lineare_regression.ipynb" download>11-4_lineare_regression.ipynb</a>: lineare und polynomiale Regression, R² (11.4).</li>
+            <li><a href="../notebooks/11-7_k-means_iris.ipynb" download>11-7_k-means_iris.ipynb</a>: k-Means, Standardisierung, Ellbogenmethode (11.7).</li>
+            <li><a href="../notebooks/11-8_neuronale_netze.ipynb" download>11-8_neuronale_netze.ipynb</a>: neuronales Netz (MLP) mit dem Ziffern-Datensatz (11.8).</li>
+            <li>Notebook „Eigenes Sprachmodell trainieren“ (<a href="../notebooks/11-10b_eigenes_sprachmodell.ipynb" download>11-10b_eigenes_sprachmodell.ipynb herunterladen</a>) für Thema 7: Zeichen-Sprachmodell aus einer Namensliste, Kontextlänge, Temperatur (11.0, 11.10).</li>
+        </ul>
+
+<p>Einen eingebauten Datensatz lädst du so; danach arbeitest du mit <code>df</code> wie im Titanic-Notebook:</p>
+
+<pre><code class="language-python">from sklearn.datasets import load_wine   # bzw. load_digits, load_iris, load_breast_cancer
+daten = load_wine(as_frame=True)
+df = daten.frame                          # Tabelle: alle Merkmale + Spalte "target" (Klasse)
+print(df.shape)                           # erwartete Ausgabe beim Wein-Datensatz: (178, 14)</code></pre>
+
+<p>Für <strong>k-NN</strong> gibt es kein eigenes Notebook. Nimm die Titanic-Vorlage, ersetze den Entscheidungsbaum durch <code>KNeighborsClassifier</code> aus <code>sklearn.neighbors</code> und skaliere die Merkmale vorher (11.6). Wichtig: Minimum und Maximum bzw. Mittelwert und Standardabweichung werden nur aus den <em>Trainingsdaten</em> bestimmt.</p>
+
+<h2>Zeitplan 2026/27</h2>
+
+<table>
+            <tr><th>Woche</th><th>Zeitraum</th><th>Phase</th><th>Was am Ende stehen soll</th><th>begleitende Kursthemen</th></tr>
+            <tr><td>KW 47</td><td>16.–20.11.2026</td><td>Projektstart: Projektmanagement (10.1, 10.2), Lernarten (11.2), Pflicht-Notebook Titanic, Teambildung, Git im Team (10.3)</td><td>Gruppen und Themen stehen; Gruppenrepository mit <code>README.md</code>; jedes Titanic-Notebook hochgeladen</td><td>10.1–10.3, 11.1, 11.2, 11.5 (Titanic)</td></tr>
+            <tr><td>KW 48</td><td>23.–27.11.2026</td><td>Sprint 1</td><td><code>plan.md</code> mit Projektstrukturplan und Gantt-Diagramm (Soll); Board mit Issues; Daten erkundet</td><td>11.5 Entscheidungsbäume, Datenaufbereitung</td></tr>
+            <tr><td>KW 49</td><td>30.11.–4.12.2026</td><td>Sprint 2 – <strong>Zwischenabgabe 1</strong></td><td>jede Person hat ein erstes Modell trainiert; Board-Screenshots Sprint 1 und 2</td><td>11.6 k-NN, Skalierung, Datenaufteilung</td></tr>
+            <tr><td>KW 50</td><td>7.–11.12.2026</td><td>Sprint 3</td><td>Hyperparameter gewählt, Testauswertung, Abschnitt „Tests“ im Notebook begonnen</td><td>11.3 Konfusionsmatrix, Overfitting</td></tr>
+            <tr><td>KW 51</td><td>14.–18.12.2026</td><td>Sprint 4 – <strong>Zwischenabgabe 2</strong></td><td>alle Modelle getestet, Vergleich in der Gruppe, Gantt-Diagramm mit Ist-Werten</td><td>11.4 Regression, 11.11 Bias und Erklärbarkeit</td></tr>
+            <tr><td colspan="5">Weihnachtsferien – plant keine Pflichtarbeit in die Ferien (Risikomanagement!)</td></tr>
+            <tr><td>KW 1</td><td>4.–8.1.2027</td><td>Sprint 5 (letzter Sprint) – <strong>Endabgabe Freitag, 8.1.2027</strong></td><td>Präsentation fertig, <code>README.md</code> mit Reflexion und Planungsartefakte vollständig</td><td>11.8 Neuronale Netze</td></tr>
+            <tr><td>KW 2</td><td>11.–15.1.2027</td><td><strong>Montag, 11.1.:</strong> Vorstellung der Projekte mit Nachfragen und Rückmeldung</td><td>–</td><td>Klausurvorbereitung</td></tr>
+            <tr><td>KW 3</td><td>18.–22.1.2027</td><td>Klausur (Algorithmen, Komplexität, KI) am Montag, 18.1.2027</td><td>–</td><td>–</td></tr>
+        </table>
+
+<p>Die Spalte „begleitende Kursthemen“ zeigt, welche Kursseiten in der jeweiligen Woche im Unterricht und in der Wochenübung im Mittelpunkt stehen. So sind bis Ende KW 1 alle Themen der Klausur einmal geübt; die Kursseite 11.0 (Sprachmodelle) habt ihr schon vor dem Projekt bearbeitet.</p>
+
+<p><strong>Abgaben</strong> sind der Stand eures Gruppenrepositorys zum jeweiligen Termin. Maßgeblich ist der letzte Commit vor dem Termin; die genaue Uhrzeit legt eure Lehrkraft fest. Die Zwischenabgaben sind Meilensteine: Ihr bekommt dazu eine kurze Rückmeldung, was gut läuft und was noch fehlt.</p>
+
+<h2>Arbeiten im Gruppenrepository</h2>
+
+<p>Ihr arbeitet in einem gemeinsamen, privaten Repository auf <a href="https://git.inf7.eu" target="_blank" rel="noopener">git.inf7.eu</a> (Anmeldung über „Anmelden mit inf7.eu“). Wie das genau geht, steht auf Seite 10.3 „Versionsverwaltung mit Git“, Abschnitt 3. Die wichtigsten Regeln:</p>
+
+<ul>
+            <li>Jede Person arbeitet in ihrem eigenen Notebook <code>modell_&lt;vorname&gt;.ipynb</code> und lädt nur diese Datei hoch. So entstehen keine Konflikte, und die Historie zeigt, wer was gemacht hat.</li>
+            <li>Gemeinsame Dateien pflegt jeweils eine benannte Person: <code>README.md</code> (Ziel, Daten, Vorgehen, Ergebnis, Reflexion, dazu Halluzinationsbeispiel und KI-Nutzung der Gruppe) und <code>plan.md</code> (Projektstrukturplan, Gantt-Diagramm mit Soll und Ist, Risiken, Rollen).</li>
+            <li>Arbeitsweise mit JupyterLite: neueste Fassung herunterladen → in <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> bearbeiten → herunterladen → im Repository über „Datei hochladen“ mit aussagekräftiger Commit-Nachricht hochladen.</li>
+            <li>Aufgaben und User Stories sind Issues; euer Kanban-Board ist ein Projekt (Board) im Repository. Am Ende jedes Sprints kommt ein Screenshot des Boards in den Ordner <code>kanban/</code>.</li>
+        </ul>
+
+<h2>Vorstellung und Rückmeldung statt Note</h2>
+
+<p>Das KI-Projekt wird <strong>nicht benotet</strong>. Es gibt keine Prüfung und keine Zulassungsvoraussetzung. Trotzdem lohnt sich gründliche Arbeit: In der <strong>Klausur am Montag, 18.1.2027 (KW 3)</strong> wird neben Algorithmen und Komplexität auch der KI-Teil abgefragt (etwa 40&nbsp;%), also genau die Themen, die ihr im Projekt anwendet: Datenaufbereitung, Aufteilung in Trainings-, Validierungs- und Testdaten, Hyperparameter, Konfusionsmatrix und Metriken, die Verfahren aus 11.4 bis 11.8, Bias und Erklärbarkeit, Sprachmodelle. Wer sein eigenes Modell verstanden hat, hat einen großen Teil davon schon geübt.</p>
+
+<p>Was weiterhin <strong>Pflicht</strong> ist: Jede Person trainiert und testet ein eigenes Modell im eigenen Notebook, ihr arbeitet im Gruppenrepository auf git.inf7.eu, und ihr plant und steuert das Projekt mit Projektstrukturplan, Gantt-Diagramm, User Stories und Kanban-Board. Die Rückmeldung bezieht sich auf drei Bereiche:</p>
+
+<table>
+            <tr><th>Bereich</th><th>worauf die Rückmeldung eingeht</th></tr>
+            <tr><td>Präsentation</td><td>roter Faden, Vergleich der Modelle und Fazit, Einordnung (Erklärbarkeit, Bias, Halluzinationsbeispiel), Verständlichkeit des eigenen Teils</td></tr>
+            <tr><td>Modell und Notebook</td><td>sinnvolle Aufbereitung und Aufteilung, Wahl der Hyperparameter, einmaliger Test mit Baseline, Tests mit erwarteter und tatsächlicher Ausgabe, Deutung in eigenen Worten</td></tr>
+            <tr><td>Zusammenarbeit und Git</td><td>Planung mit Soll und Ist, gepflegtes Board, aussagekräftige Commits, Regeln im Gruppenrepository eingehalten</td></tr>
+        </table>
+
+<p>Je Bereich hörst du, was <em>gelungen</em> und was <em>ausbaufähig</em> ist. Vor der Vorstellung schätzt du dich selbst kurz ein (wenige Sätze im Abschnitt „Reflexion“ der <code>README.md</code>). Was genau ins Repository gehört, steht auf Seite 10.6 „Projektdokumentation“.</p>
+
+<h2>Ablauf der Vorstellung</h2>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Vorstellung am Montag, 11.1.2027</summary>
+                <p>Jede Gruppe stellt ihr Projekt etwa 15 Minuten vor, danach gibt es Zeit für Fragen aus dem Kurs. Jede Person spricht etwa gleich lang und stellt dabei vor allem ihr eigenes Modell vor. Bewährt hat sich dieser Aufbau:</p>
+                <ol>
+                    <li>Fragestellung und Datensatz, Lernart und Einordnung,</li>
+                    <li>die drei Modelle: Aufbereitung, Aufteilung, gewählte Hyperparameter, Testergebnis im Vergleich zur Baseline – gern mit einer kurzen Vorführung im Notebook,</li>
+                    <li>Vergleich und gemeinsames Fazit: Welches Modell eignet sich wofür, und wie zuverlässig ist es?</li>
+                    <li>Einordnung: Erklärbarkeit, Bias, gesellschaftliche Folgen, euer Halluzinationsbeispiel,</li>
+                    <li>kurzer Rückblick auf das Projektmanagement (Soll und Ist).</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Nachfragen und Rückmeldung</summary>
+                <p>Nach jeder Vorstellung stellen Lehrkraft und Kurs Nachfragen, meist an eine bestimmte Person, z.&nbsp;B. „Zeige in deinem Notebook, wo du die Daten aufteilst, und erkläre, warum die Testdaten erst am Ende verwendet werden.“ oder „Warum ist bei euren Daten der Recall wichtiger als die Genauigkeit?“ Die Nachfragen sind so gestellt, wie auch Aufgaben im KI-Teil der Klausur gestellt sein können. Sie werden nicht bewertet: Wer etwas noch nicht erklären kann, weiß danach, was bis zur Klausur zu wiederholen ist.</p>
+                <p><strong>Vorbereitung:</strong> Erklärt euch eure Notebooks gegenseitig, bis jede Person jedes Modell der Gruppe in eigenen Worten erklären kann. Wiederholt die Kursseiten mit ihren Aufgaben – sie sind die Grundlage der Klausur in KW 3.</p>
+            </details>
+        </div>
+
+<h2>KI-Nutzung im Projekt</h2>
+
+<p>Im KI-Projekt ist generative KI ein <strong>Projektwerkzeug</strong> (Kursseite 11.0, Abschnitt 9):</p>
+
+<ul>
+            <li><strong>Erlaubt:</strong> Recherche, Ideen sammeln, Fehlersuche, Fehlermeldungen erklären lassen und Code übernehmen, <em>den du verstanden und mit Testfällen geprüft hast</em>.</li>
+            <li><strong>Nicht erlaubt:</strong> Inhalte oder Code ungeprüft und ohne Kennzeichnung übernehmen.</li>
+            <li><strong>Kennzeichnung:</strong> Am Ende deines Notebooks steht eine Markdown-Zelle „KI-Nutzung“ im Format aus Kursseite 11.0 (Werkzeug, Datum, Zweck, wichtigster Prompt, was übernommen und wie es geprüft wurde). Die Nutzung durch die Gruppe (z.&nbsp;B. für die Präsentation) steht in der <code>README.md</code>. Wurde keine KI genutzt, steht dort „keine“.</li>
+            <li><strong>Datenschutz:</strong> keine personenbezogenen Daten und keine Zugangsdaten in Prompts (Kursseite 11.0, Abschnitt 8).</li>
+            <li><strong>Prüfschema:</strong> Verstehe ich es? Stimmt es? Gibt es die Quelle? Ist es aktuell? Ist es einseitig?</li>
+        </ul>
+
+<p>Bei der Vorstellung und in den Nachfragen solltest du jede Zelle deines Notebooks erklären können, auch übernommenen Code. Was du nur übernommen und nicht verstanden hast, hast du auch nicht gelernt – und in der Klausur steht dir kein Chatbot zur Verfügung.</p>
+
+<h2>Schritt 2: Agiles Projektmanagement</h2>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: KI-Projekte in Unternehmen</summary>
+                <p><strong>Alltag:</strong> Jede Gruppenarbeit, jedes Schulfest und jede Abifeier profitiert von denselben Werkzeugen: klare Ziele, verteilte Verantwortung, sichtbare Aufgabenliste.</p>
+                <p><strong>Beruf:</strong> In KI-Projekten arbeiten Product Owner, Data Scientists und ML Engineers eng zusammen: Der Product Owner priorisiert die Anforderungen der Fachabteilung, Data Scientists bereiten Daten auf und entwickeln Modelle, ML Engineers bringen sie in den laufenden Betrieb. Viele Projekte scheitern nicht an der Technik, sondern an unklaren Zielen oder schlechten Daten – genau deshalb ist gutes Projektmanagement so wichtig.</p>
+            </details>
+        </div>
+
+<h2>Weiterführende Links</h2>
+
+<p>Ein bisschen Inspiration für euer eigenes Projekt gefällig? Hier findet ihr reale Beispiele dafür, wie andere KI-Projekte umgesetzt haben – oder woran sie scheitern können:</p>
+
+<ul>
+            <li><a href="https://www.jugend-forscht.de/" target="_blank" rel="noopener">Jugend forscht</a>: Seit 2026 vergibt der bekannteste deutsche Schülerwettbewerb einen eigenen KI-Sonderpreis. <a href="https://www.iu.de/news/ki-sonderpreis-bei-jugend-forscht-iu-internationale-hochschule-kuert-bundessieger/" target="_blank" rel="noopener">Hier</a> erfährst du, mit welchem KI-Projekt der erste Bundessieger 2026 überzeugt hat – vielleicht ist euer Thema ja auch wettbewerbstauglich.</li>
+            <li><a href="https://scikit-learn.org/stable/datasets/toy_dataset.html" target="_blank" rel="noopener">scikit-learn: Toy datasets</a>: Beschreibung der eingebauten Datensätze (Wein, Ziffern, Iris, Gewebeproben) mit Merkmalen und Klassenverteilung (englisch).</li>
+            <li><a href="https://git.inf7.eu" target="_blank" rel="noopener">git.inf7.eu</a>: der Git-Server der Schule für euer Gruppenrepository, eure Issues und euer Board.</li>
+            <li><a href="https://builtin.com/artificial-intelligence/amazon-abandons-ai-hiring-tool-exposed-gender-bias" target="_blank" rel="noopener">Amazon abandons AI hiring tool exposed for gender bias (Built In)</a>: ein bekanntes Beispiel dafür, wie ein großes KI-Projekt trotz hohem Aufwand scheiterte, weil das Modell Frauen systematisch benachteiligte – ein guter Anlass, den Bias eures eigenen Projekts kritisch zu hinterfragen.</li>
+        </ul>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Projektziele auf einen Blick:</strong> Ihr arbeitet in Gruppen zu dritt an einem Datensatz. <strong>Jede Person trainiert und testet selbst mindestens ein Modell in ihrem eigenen Jupyter-Notebook</strong>, die Gruppe vergleicht die Modelle und ordnet die Ergebnisse fachlich und gesellschaftlich ein. Ihr plant und steuert eure Arbeit mit klassischem und agilem Projektmanagement und arbeitet in einem gemeinsamen Repository auf dem Git-Server der Schule. Am Ende <strong>stellt jede Gruppe ihre Ergebnisse vor</strong> und bekommt dazu eine ausführliche <strong>Rückmeldung</strong>. Das Projekt wird <strong>nicht benotet</strong>. Es bereitet euch aber direkt auf die <strong>Klausur in KW 3</strong> vor: Die KI-Themen, die ihr im Projekt anwendet, werden dort abgefragt.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.5.1: Das Projekt klassisch planen <span class="niveau">AFB II</span></summary>
+                <p>Plant die gesamte Laufzeit des Projekts mit klassischem Projektmanagement (vgl. Seite 10.1 und Seite 10.2) und haltet die Planung in <code>plan.md</code> fest:</p>
+                <ol>
+                    <li><strong>Projektinitiierung:</strong> Formuliert die Ziele des Projekts konkret und überprüfbar.</li>
+                    <li><strong>Projektstrukturplan:</strong> Zerlegt das Projekt in Teilprojekte und Arbeitspakete. Jede Person hat Arbeitspakete zu ihrem eigenen Modell.</li>
+                    <li><strong>Ablaufplanung:</strong> Erstellt ein Gantt-Diagramm über die Wochen KW 47 bis KW 2 mit den Meilensteinen aus dem Zeitplan (Zwischenabgaben, Endabgabe, Vorstellung). Legt neben jeder geplanten Woche (Soll) eine Spalte für die tatsächliche Woche (Ist) an, die ihr in jedem Sprint ausfüllt.</li>
+                    <li><strong>Ressourcenplanung:</strong> Bestimmt, wer welche Arbeitspakete und welche gemeinsamen Dateien verantwortet.</li>
+                    <li><strong>Risikomanagement:</strong> Plant Puffer und Gegenmaßnahmen ein, z.&nbsp;B. für Krankheit, ein Modell, das schlechter ist als die Baseline, oder die Weihnachtsferien.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.5.2: Die Umsetzung agil organisieren <span class="niveau">AFB II</span></summary>
+                <p>Nach der klassischen Planung arbeitet ihr in wöchentlichen Sprints (KW 48 bis KW 51 und KW 1), jeweils mit kurzer Planung am Anfang sowie Review und Retrospektive am Ende (vgl. 10.2).</p>
+                <h3>1. User Stories schreiben</h3>
+                <p>Formuliert für die Inhalte eures Projekts User Stories. Hier einige Beispiele:</p>
+                <ul>
+                    <li><strong>Datenaufbereitung:</strong> „Als Data Scientist möchte ich wissen, wie die Klassen im Datensatz verteilt sind, damit ich eine sinnvolle Baseline festlegen kann.“</li>
+                    <li><strong>Maschinelles Lernen:</strong> „Als angehende Entwicklerin möchte ich ein Modell trainieren, das handgeschriebene Zahlen erkennen und zuordnen kann.“ (siehe Seite 11.8 „Neuronale Netze“)</li>
+                    <li><strong>Bias in KI:</strong> „Als Mensch, dem demokratische Grundwerte wichtig sind, möchte ich lernen, wie Vorurteile in Daten entstehen und wie sie vermieden werden können.“</li>
+                    <li><strong>Generative KI:</strong> „Als Gruppenmitglied möchte ich transparent dokumentieren, wo wir Chatbots im Projekt genutzt haben, damit unsere Arbeit nachvollziehbar bleibt.“ (siehe Seite 10.6 „Projektdokumentation“)</li>
+                </ul>
+                <h3>2. To-dos ableiten</h3>
+                <p>Aus den User Stories leitet ihr konkrete Aufgaben (To-dos) ab. Beispiel:</p>
+                <ul>
+                    <li>User Story: „Als Data Scientist möchte ich ein Modell trainieren, das die Weinsorte vorhersagt, …“</li>
+                    <li>To-dos:
+                        <ul>
+                            <li>„Daten laden und Klassenverteilung bestimmen.“ → neue Unteraufgaben?</li>
+                            <li>„Daten in Trainings-, Validierungs- und Testdaten aufteilen.“ → neue Unteraufgaben?</li>
+                            <li>„Hyperparameter über die Validierung wählen.“ → neue Unteraufgaben?</li>
+                            <li>„Das Modell einmal auf den Testdaten auswerten und mit der Baseline vergleichen.“ → neue Unteraufgaben?</li>
+                            <li>„Ergebnisse visualisieren.“ → neue Unteraufgaben?</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h3>3. Kanban-Board im Gruppenrepository</h3>
+                <p>Legt jede User Story und jedes To-do als Issue an (mit Akzeptanzkriterium und zuständiger Person) und führt sie auf einem Board im Gruppenrepository mit Spalten wie „To Do“, „In Bearbeitung“ und „Erledigt“ (vgl. 10.3, Abschnitt 5):</p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>To Do</th>
+                            <th>In Bearbeitung</th>
+                            <th>Erledigt</th>
+                        </tr>
+                        <tr>
+                            <td>#6 „k-NN: k über Validierung wählen“ (Ben)</td>
+                            <td>#4 „Entscheidungsbaum trainieren“ (Ella)</td>
+                            <td>#2 „Klassenverteilung bestimmen“ (Finn)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Ladet am Ende jedes Sprints einen Screenshot des Boards in den Ordner <code>kanban/</code> hoch. Diese Screenshots bilden euren Kanban-Verlauf.</p>
+            </details>
+        </div>

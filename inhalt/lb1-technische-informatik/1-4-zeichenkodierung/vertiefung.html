@@ -1,0 +1,32 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.4.6: Zeichensalat untersuchen <span class="niveau">AFB III</span></summary>
+        <p>Ein Online-Shop speichert Kundendaten in UTF-8. Im neuen Kundenportal erscheint der Name „Müller“ als <strong>„MÃ¼ller“</strong> und der Gruß „Grüße“ als <strong>„GrÃ¼ÃŸe“</strong>. Das Portal liest die Daten mit der Kodierung Windows-1252, die jedem Byte genau ein Zeichen zuordnet. Auszug aus der Tabelle von Windows-1252:</p>
+        <table class="gitter">
+            <tr><th>Byte</th><td>9F</td><td>A4</td><td>B6</td><td>BC</td><td>C3</td><td>DF</td><td>FC</td></tr>
+            <tr><th>Zeichen</th><td>Ÿ</td><td>¤</td><td>¶</td><td>¼</td><td>Ã</td><td>ß</td><td>ü</td></tr>
+        </table>
+        <ol>
+            <li>Erkläre mithilfe der UTF-8-Bytes von „ü“ und „ß“ (vgl. Aufgabe 1.4.4) genau, wie „MÃ¼ller“ und „GrÃ¼ÃŸe“ entstehen.</li>
+            <li>Ein Mitarbeiter meldet: „Die Datenbank hat die Umlaute zerstört, die Kundennamen sind verloren.“ Beurteile diese Aussage.</li>
+            <li>Ein anderes, älteres System hat „Grüße“ in Windows-1252 gespeichert (Bytes <code>47 72 FC DF 65</code>). Diese Bytes werden nun als UTF-8 gelesen. Untersuche mit der Mustertabelle aus Beispiel 2 jedes Byte und beschreibe, was ein Programm an der Stelle von „ü“ und „ß“ anzeigen wird.</li>
+        </ol>
+        <p class="tipp">Tipp: Programme ersetzen Bytes, die zu keinem gültigen UTF-8-Muster passen, meist durch das Ersatzzeichen „�“.</p>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.4.7: 8 Byte für einen Nachnamen <span class="niveau">AFB III</span></summary>
+        <p>In einer Schulverwaltungs-Datenbank ist das Feld „Nachname“ auf <strong>8 Byte</strong> begrenzt; der Text wird in UTF-8 gespeichert. Der Entwickler versichert: „Nachnamen mit höchstens 8 Zeichen passen immer vollständig hinein.“ Zum Test werden diese drei Namen eingegeben:</p>
+        <p><strong>Wagner</strong> &nbsp;&middot;&nbsp; <strong>Schröder</strong> &nbsp;&middot;&nbsp; <strong>Petrović</strong></p>
+        <p>Dabei ist „ć“ der Codepoint U+0107; „ö“ ist U+00F6.</p>
+        <ol>
+            <li>Bestimme für jeden Namen die Anzahl der Zeichen und der UTF-8-Bytes. Gib für „Petrović“ die vollständige Bytefolge an.</li>
+            <li>Die Datenbank schneidet zu lange Einträge nach dem 8. Byte ab. Beschreibe für jeden Namen, was gespeichert wird und was später angezeigt wird.</li>
+            <li>Beurteile die Aussage des Entwicklers und schlage vor, wie man das Feld richtig bemessen kann.</li>
+        </ol>
+    </details>
+</div>

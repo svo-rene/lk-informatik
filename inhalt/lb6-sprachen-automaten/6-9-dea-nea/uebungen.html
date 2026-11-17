@@ -1,0 +1,82 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.9.4: Automatentypen 1 <span class="niveau">AFB III</span></summary>
+                <p>Ordne die folgenden Sprachen den entsprechenden Automatentypen zu und begründe deine Entscheidung:</p>
+                <ol type="a">
+                    <li>Alle Wörter der Form a<sup>n</sup>b<sup>n</sup> (n ≥ 0), z.&nbsp;B. ε, ab, aabb, aaabbb</li>
+                    <li>Alle Wörter der Form a<sup>n</sup>b<sup>n</sup>c<sup>n</sup> (n ≥ 0), z.&nbsp;B. ε, abc, aabbcc, aaabbbccc</li>
+                    <li>Alle Wörter der Form ww, wobei w ein beliebiges Wort über {a, b, c} ist, z.&nbsp;B. aa, abab, abcabc</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.9.5: Automatentypen 2 <span class="niveau">AFB III</span></summary>
+                <p>
+                    Entwirf einen Kellerautomaten, der die Sprache L = {a<sup>n</sup>b<sup>n</sup> | n ≥ 1} akzeptiert. Beschreibe informell, wie der Automat funktionieren soll, und gib dann die formale Definition als 7-Tupel an.
+                </p>
+                <p>
+                    <strong>Hinweis:</strong> Überlege dir, wie du den Keller nutzen kannst, um die Anzahl der a und b zu vergleichen.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.9.6: Nichtdeterminismus nutzen <span class="niveau">AFB II/III</span></summary>
+                <ol>
+                    <li>Entwirf einen NEA über {0, 1}, der alle Wörter akzeptiert, deren drittletztes Zeichen eine 1 ist, zum Beispiel 0100 oder 111.</li>
+                    <li>Begründe, warum dein Automat nichtdeterministisch ist.</li>
+                    <li>Prüfe die Wörter 0110 und 1001. Gib für ein akzeptiertes Wort einen akzeptierenden Weg an.</li>
+                    <li>Ein DEA für dieselbe Sprache ist deutlich größer. Begründe, wie viele Zustände er mindestens braucht.</li>
+                    <li>Entwirf einen DEA, der alle Wörter über {0, 1} akzeptiert, in denen die Anzahl der Einsen durch 3 teilbar ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.9.7: Suchmuster als NEA <span class="niveau">AFB II</span></summary>
+                <p>Ein Virenscanner sucht in Datenströmen über Σ = {a, b, c} nach dem Muster <code>abc</code>. Akzeptiert werden sollen alle Wörter, die <code>abc</code> als Teilwort enthalten.</p>
+                <ol type="a">
+                    <li>Entwirf einen NEA mit vier Zuständen.</li>
+                    <li>Prüfe <code>aabcab</code> und <code>abacb</code>, indem du Zeichen für Zeichen die Menge der erreichbaren Zustände angibst.</li>
+                    <li>Gib für das akzeptierte Wort einen akzeptierenden Weg an.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.9.8: ε-NEA auswerten <span class="niveau">AFB II</span></summary>
+                <p>Gegeben ist ein ε-NEA über {a, b, c} mit Startzustand q0 und den Endzuständen q1 und q4. Übergänge: q0 –ε→ q1, q0 –ε→ q3, q1 –a→ q2, q2 –b→ q1, q3 –c→ q4.</p>
+                <ol type="a">
+                    <li>Bestimme die ε-Hülle von q0.</li>
+                    <li>Prüfe ε, <code>abab</code>, <code>c</code> und <code>abc</code> mit Zustandsmengen.</li>
+                    <li>Beschreibe die akzeptierte Sprache als regulären Ausdruck und erkläre die Rolle der beiden ε-Übergänge.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.9.9: Kellerautomat mit Mittelzeichen <span class="niveau">AFB II/III</span></summary>
+                <p>Gegeben ist der Kellerautomat ({q0, q1, qf}, {a, b, c}, {A, B, Z0}, δ, q0, Z0, {qf}) mit (X steht für ein beliebiges Kellersymbol A, B oder Z0):</p>
+                <ul>
+                    <li>δ(q0, a, X) = {(q0, AX)}, δ(q0, b, X) = {(q0, BX)}</li>
+                    <li>δ(q0, c, X) = {(q1, X)}</li>
+                    <li>δ(q1, a, A) = {(q1, ε)}, δ(q1, b, B) = {(q1, ε)}</li>
+                    <li>δ(q1, ε, Z0) = {(qf, Z0)}</li>
+                </ul>
+                <ol type="a">
+                    <li>Gib die Konfigurationsfolgen für <code>abcba</code>, <code>abcab</code> und <code>abc</code> an und entscheide jeweils.</li>
+                    <li>Beschreibe die akzeptierte Sprache in Mengenschreibweise.</li>
+                    <li>Erkläre, welche Aufgabe das Zeichen c hat und was sich ändern müsste, wenn die Wörter ohne c auskommen sollen (z.&nbsp;B. abba).</li>
+                </ol>
+            </details>
+        </div>

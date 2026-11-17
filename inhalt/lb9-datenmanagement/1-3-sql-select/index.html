@@ -1,0 +1,361 @@
+<p>SQL (Structured Query Language) ist eine Datenbanksprache zur Definition, Abfrage und Manipulation von Daten in relationalen Datenbanken. In diesem Abschnitt konzentrieren wir uns auf grundlegende SQL-Abfragen.</p>
+
+<div class="praxisbezug">
+    <details>
+        <summary>
+            Praxisbezug: Warum SQL im Berufsleben so gefragt ist
+        </summary>
+        <p>Stell dir einen Online-Shop vor: Die Marketingabteilung möchte wissen, welche Produkte sich in den letzten drei Monaten am besten verkauft haben, das Controlling will die Umsätze nach Region auswerten, und der Kundenservice sucht alle Bestellungen eines bestimmten Kunden. In all diesen Fällen liegen die Daten in einer relationalen Datenbank &ndash; und mit einer einfachen SELECT-Abfrage (ggf. kombiniert mit ORDER BY, wie du es in diesem Kapitel lernst) lassen sich solche Fragen in Sekunden beantworten, statt Tabellen mühsam von Hand zu durchsuchen.</p>
+        <p><strong>Berufsfelder:</strong> SQL-Kenntnisse werden längst nicht nur von Data Analysts, Data Engineers oder Backend-Entwickler*innen erwartet. Auch in Berufen außerhalb der klassischen Informatik gehören Datenbankabfragen mittlerweile zum Alltag &ndash; etwa im Controlling und der Buchhaltung (Finanzkennzahlen auswerten), im Marketing und Vertrieb (Kundendaten und Verkaufszahlen analysieren), im Personalwesen/HR-Analytics (Mitarbeiterdaten auswerten) oder in der medizinischen Statistik (Behandlungsdaten auswerten). Wer SQL beherrscht, hat dadurch auf dem Arbeitsmarkt einen klaren Vorteil.</p>
+        <p><strong>Weiterlesen:</strong> <a href="https://learnsql.de/blog/gehalt-in-deutschland-mit-sql/" target="_blank" rel="noopener">Wie Viel Kann Man in Deutschland Mit SQL-Kenntnissen Verdienen?</a> &ndash; <a href="https://www.sql-werkstatt.de/sql-reporting/" target="_blank" rel="noopener">SQL für Reporting: Wie man Berichte mit SQL vorbereitet</a></p>
+    </details>
+</div>
+
+<h2>Die SELECT-Anweisung</h2>
+
+<p>Die SELECT-Anweisung ist die grundlegendste und am h&auml;ufigsten verwendete SQL-Abfrage. Sie wird verwendet, um Daten aus einer oder mehreren Tabellen abzurufen.</p>
+
+<p>Wir sprechen von einer <strong>Projektion</strong>, wenn wir aus einer Tabelle ausgew&auml;hlte Spalten anzeigen lassen.</p>
+
+<h3>Unsere Beispieltabelle</h3>
+
+<p>Alle Beispiele auf dieser Seite arbeiten mit diesem Ausschnitt der Tabelle <code>Studenten</code> (Studierende einer Hochschule)
+   (die vollst&auml;ndige Tabelle findest du unter
+   <a href="../material/studenten_tabelle.sql">studenten_tabelle.sql</a>). Schau dir bei jedem Beispiel
+   zuerst die Abfrage an, &uuml;berlege, was herauskommen m&uuml;sste, und vergleiche dann mit dem Ergebnis.</p>
+
+<table>
+<thead><tr><th>StudentID</th><th>Vorname</th><th>Nachname</th><th>Geburtsdatum</th><th>Notendurchschnitt</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Max</td><td>Mustermann</td><td>2000-03-15</td><td>2.75</td></tr>
+<tr><td>2</td><td>Anna</td><td>Schmidt</td><td>1999-07-22</td><td>1.8</td></tr>
+<tr><td>3</td><td>Lisa</td><td>M&uuml;ller</td><td>2001-01-30</td><td>3.5</td></tr>
+<tr><td>4</td><td>Jonas</td><td>Bauer</td><td>2000-11-12</td><td>2.9</td></tr>
+<tr><td>5</td><td>Mia</td><td>Klein</td><td>2002-04-18</td><td>1.5</td></tr>
+</tbody>
+</table>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> Du willst dir einen ersten &Uuml;berblick &uuml;ber die Tabelle <code>Studenten</code>
+   verschaffen und alles sehen, was darin steht.</p>
+<h3>Beispiel 1: Alle Spalten ausw&auml;hlen</h3>
+<pre><code>SELECT *
+FROM Studenten;</code></pre>
+<p><strong>Ergebnis</strong> &ndash; der Stern steht f&uuml;r &bdquo;alle Spalten&ldquo;, die Tabelle kommt also
+   unver&auml;ndert zur&uuml;ck (5 Zeilen):</p>
+<table>
+<thead><tr><th>StudentID</th><th>Vorname</th><th>Nachname</th><th>Geburtsdatum</th><th>Notendurchschnitt</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Max</td><td>Mustermann</td><td>2000-03-15</td><td>2.75</td></tr>
+<tr><td>2</td><td>Anna</td><td>Schmidt</td><td>1999-07-22</td><td>1.8</td></tr>
+<tr><td>3</td><td>Lisa</td><td>M&uuml;ller</td><td>2001-01-30</td><td>3.5</td></tr>
+<tr><td>4</td><td>Jonas</td><td>Bauer</td><td>2000-11-12</td><td>2.9</td></tr>
+<tr><td>5</td><td>Mia</td><td>Klein</td><td>2002-04-18</td><td>1.5</td></tr>
+</tbody>
+</table>
+<ol>
+<li><strong>FROM Studenten:</strong> Die Datenbank holt alle Zeilen der Tabelle <code>Studenten</code>.
+    <em>Warum?</em> Erst muss feststehen, woher die Daten kommen.</li>
+<li><strong>Kein WHERE:</strong> Es wird keine Zeile aussortiert. <em>Warum?</em> Ohne Bedingung bleiben alle Datens&auml;tze im Ergebnis.</li>
+<li><strong>SELECT *:</strong> Der Stern w&auml;hlt alle f&uuml;nf Spalten in der Reihenfolge aus, in der sie in der Tabelle
+    angelegt sind. <em>Warum?</em> <code>*</code> ist die Kurzform f&uuml;r <code>StudentID, Vorname, Nachname, Geburtsdatum, Notendurchschnitt</code>.</li>
+</ol>
+<p><strong>Ergebnis:</strong> die Tabelle oben, 5 Zeilen und 5 Spalten (f&uuml;r den Ausschnitt).</p>
+<p><strong>Kontrolle:</strong> Zeilen- und Spaltenzahl des Ergebnisses stimmen mit der Tabelle &uuml;berein. In der vollst&auml;ndigen
+   Datei <a href="../material/studenten_tabelle.sql">studenten_tabelle.sql</a> liefert dieselbe Abfrage 51 Zeilen; der DB Browser
+   zeigt die Zeilenzahl unter dem Ergebnis an. Erst mit einer Spaltenauswahl wie in Beispiel 2 wird daraus eine echte Projektion.</p>
+            </details>
+        </div>
+
+<h3>Beispiel 2: Bestimmte Spalten ausw&auml;hlen (Projektion)</h3>
+
+<pre><code>SELECT Vorname, Nachname
+FROM Studenten;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; es bleiben alle 5 Zeilen, aber nur noch 2 Spalten:</p>
+
+<table>
+<thead><tr><th>Vorname</th><th>Nachname</th></tr></thead>
+<tbody>
+<tr><td>Max</td><td>Mustermann</td></tr>
+<tr><td>Anna</td><td>Schmidt</td></tr>
+<tr><td>Lisa</td><td>M&uuml;ller</td></tr>
+<tr><td>Jonas</td><td>Bauer</td></tr>
+<tr><td>Mia</td><td>Klein</td></tr>
+</tbody>
+</table>
+
+<h3>Beispiel 3: Die Reihenfolge im SELECT bestimmt die Reihenfolge der Spalten</h3>
+
+<pre><code>SELECT Nachname, Vorname
+FROM Studenten;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; dieselben Daten, aber die Spalten sind vertauscht:</p>
+
+<table>
+<thead><tr><th>Nachname</th><th>Vorname</th></tr></thead>
+<tbody>
+<tr><td>Mustermann</td><td>Max</td></tr>
+<tr><td>Schmidt</td><td>Anna</td></tr>
+<tr><td>M&uuml;ller</td><td>Lisa</td></tr>
+<tr><td>Bauer</td><td>Jonas</td></tr>
+<tr><td>Klein</td><td>Mia</td></tr>
+</tbody>
+</table>
+
+<h2>Verwendung von AS f&uuml;r Aliase</h2>
+
+<p>Das Schl&uuml;sselwort AS wird in SQL verwendet, um Spalten oder Tabellen einen Alias (einen alternativen Namen) zu geben. Dies ist besonders n&uuml;tzlich, um die Lesbarkeit von Abfragen zu verbessern oder um komplexe Ausdr&uuml;cke mit einem einfachen Namen zu versehen.</p>
+
+<h3>Beispiel 4: Spalten umbenennen</h3>
+
+<pre><code>SELECT Nachname AS Familienname, Notendurchschnitt AS Schnitt
+FROM Studenten;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; die Daten sind identisch, nur die &Uuml;berschriften &auml;ndern sich:</p>
+
+<table>
+<thead><tr><th>Familienname</th><th>Schnitt</th></tr></thead>
+<tbody>
+<tr><td>Mustermann</td><td>2.75</td></tr>
+<tr><td>Schmidt</td><td>1.8</td></tr>
+<tr><td>M&uuml;ller</td><td>3.5</td></tr>
+<tr><td>Bauer</td><td>2.9</td></tr>
+<tr><td>Klein</td><td>1.5</td></tr>
+</tbody>
+</table>
+
+<h3>Beispiel 5: Einer berechneten Spalte einen Namen geben</h3>
+
+<p>Hier wird eine Spalte ausgegeben, die es in der Tabelle gar nicht gibt: das Alter, berechnet aus dem
+   Geburtsjahr. Ohne <code>AS</code> h&auml;tte die Spalte die ganze Rechnung als &Uuml;berschrift.</p>
+
+<pre><code>SELECT Vorname, Nachname, 2026 - CAST(substr(Geburtsdatum, 1, 4) AS INTEGER) AS Lebensjahre
+FROM Studenten;</code></pre>
+
+<p><strong>Ergebnis:</strong></p>
+
+<table>
+<thead><tr><th>Vorname</th><th>Nachname</th><th>Lebensjahre</th></tr></thead>
+<tbody>
+<tr><td>Max</td><td>Mustermann</td><td>26</td></tr>
+<tr><td>Anna</td><td>Schmidt</td><td>27</td></tr>
+<tr><td>Lisa</td><td>M&uuml;ller</td><td>25</td></tr>
+<tr><td>Jonas</td><td>Bauer</td><td>26</td></tr>
+<tr><td>Mia</td><td>Klein</td><td>24</td></tr>
+</tbody>
+</table>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: Warum hei&szlig;t die Spalte nicht einfach &bdquo;Alter&ldquo;?</summary>
+<p>Weil <code>Alter</code> in SQL ein reserviertes Schl&uuml;sselwort ist (es geh&ouml;rt zum Befehl
+   <code>ALTER TABLE</code>). Schreibt man <code>AS Alter</code>, antwortet SQLite mit
+   <code>near "Alter": syntax error</code>. Wenn eine Abfrage ohne erkennbaren Grund einen Syntaxfehler
+   wirft, ist ein reservierter Name als Alias oder Spaltenname eine h&auml;ufige Ursache. Abhilfe: einen
+   anderen Namen w&auml;hlen oder den Namen in doppelte Anf&uuml;hrungszeichen setzen
+   (<code>AS "Alter"</code>).</p>
+</details>
+</div>
+
+<h2>Die ORDER BY-Klausel in SQL</h2>
+
+<p>Die ORDER BY-Klausel wird in SQL verwendet, um die Ergebnisse einer Abfrage nach einer oder mehreren Spalten zu sortieren. Sie ist besonders n&uuml;tzlich, wenn du Daten in einer bestimmten Reihenfolge anzeigen m&ouml;chtest.</p>
+
+<h3>Syntax der ORDER BY-Klausel:</h3>
+
+<p><code> SELECT spalte1, spalte2, ...<br>
+   FROM tabelle<br>
+   [WHERE bedingung]<br>
+   ORDER BY spalte1 [ASC|DESC], spalte2 [ASC|DESC], ...; </code></p>
+
+<ul>
+<li>ASC: aufsteigend (Standard)</li>
+<li>DESC: absteigend</li>
+</ul>
+
+<h3>Beispiel 6: Aufsteigend sortieren</h3>
+
+<pre><code>SELECT Vorname, Nachname
+FROM Studenten
+ORDER BY Nachname;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; dieselben f&uuml;nf Zeilen wie in Beispiel 2, nur in anderer Reihenfolge.
+   <code>ORDER BY</code> &auml;ndert nie, <em>welche</em> Zeilen kommen, sondern nur <em>in welcher Reihenfolge</em>:</p>
+
+<table>
+<thead><tr><th>Vorname</th><th>Nachname</th></tr></thead>
+<tbody>
+<tr><td>Jonas</td><td>Bauer</td></tr>
+<tr><td>Mia</td><td>Klein</td></tr>
+<tr><td>Max</td><td>Mustermann</td></tr>
+<tr><td>Lisa</td><td>M&uuml;ller</td></tr>
+<tr><td>Anna</td><td>Schmidt</td></tr>
+</tbody>
+</table>
+
+<h3>Beispiel 7: Absteigend sortieren</h3>
+
+<pre><code>SELECT Vorname, Notendurchschnitt
+FROM Studenten
+ORDER BY Notendurchschnitt DESC;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; gr&ouml;&szlig;ter Wert zuerst. Achtung: Beim Notendurchschnitt ist der
+   <em>gr&ouml;&szlig;te</em> Wert die <em>schlechteste</em> Note &ndash; f&uuml;r &bdquo;beste zuerst&ldquo;
+   br&auml;uchte man <code>ASC</code>:</p>
+
+<table>
+<thead><tr><th>Vorname</th><th>Notendurchschnitt</th></tr></thead>
+<tbody>
+<tr><td>Lisa</td><td>3.5</td></tr>
+<tr><td>Jonas</td><td>2.9</td></tr>
+<tr><td>Max</td><td>2.75</td></tr>
+<tr><td>Anna</td><td>1.8</td></tr>
+<tr><td>Mia</td><td>1.5</td></tr>
+</tbody>
+</table>
+
+<h3>Beispiel 8: Nach zwei Kriterien sortieren</h3>
+
+<p>Die zweite Spalte im <code>ORDER BY</code> entscheidet nur dann, wenn die erste gleich ist &ndash; wie im
+   Telefonbuch, wo bei gleichem Nachnamen der Vorname z&auml;hlt.</p>
+
+<pre><code>SELECT Vorname, Nachname, Notendurchschnitt
+FROM Studenten
+ORDER BY Notendurchschnitt ASC, Nachname ASC;</code></pre>
+
+<p><strong>Ergebnis:</strong></p>
+
+<table>
+<thead><tr><th>Vorname</th><th>Nachname</th><th>Notendurchschnitt</th></tr></thead>
+<tbody>
+<tr><td>Mia</td><td>Klein</td><td>1.5</td></tr>
+<tr><td>Anna</td><td>Schmidt</td><td>1.8</td></tr>
+<tr><td>Max</td><td>Mustermann</td><td>2.75</td></tr>
+<tr><td>Jonas</td><td>Bauer</td><td>2.9</td></tr>
+<tr><td>Lisa</td><td>M&uuml;ller</td><td>3.5</td></tr>
+</tbody>
+</table>
+
+<p>Die Beispiele 1 bis 8 zeigen jeweils einen Baustein in Reinform (Beispiel 2 ist der einfachste Grundfall
+   einer Projektion). Das folgende Beispiel setzt alle Bausteine der Seite zusammen.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 9 <span class="beispiel-kopf">komplex</span></summary>
+<p><strong>Ausgangssituation:</strong> Das Prüfungsamt möchte eine Jahrgangsliste: Nachname, Jahrgang
+   (Geburtsjahr als Zahl) und Notendurchschnitt unter dem Namen <code>Schnitt</code>. Die jüngsten Jahrgänge
+   sollen oben stehen, innerhalb eines Jahrgangs die beste Note zuerst. Grundlage ist der Ausschnitt mit den
+   5 Zeilen von oben.</p>
+<pre><code>SELECT Nachname,
+       CAST(substr(Geburtsdatum, 1, 4) AS INTEGER) AS Jahrgang,
+       Notendurchschnitt AS Schnitt
+FROM Studenten
+ORDER BY Jahrgang DESC, Schnitt ASC;</code></pre>
+<ol>
+<li><strong>FROM:</strong> Alle 5 Zeilen der Tabelle <code>Studenten</code> liegen bereit. <em>Warum zuerst?</em> Ohne Tabelle gibt es keine Spalten, mit denen man rechnen könnte.</li>
+<li><strong>WHERE:</strong> Entfällt, denn es sollen alle Personen erscheinen.</li>
+<li><strong>SELECT:</strong> Für jede Zeile wird der Jahrgang berechnet: <code>substr(Geburtsdatum, 1, 4)</code> schneidet die ersten vier Zeichen aus (z.&nbsp;B. <code>'2000'</code>), <code>CAST(… AS INTEGER)</code> macht daraus die Zahl 2000. <em>Warum CAST?</em> Ohne Umwandlung wäre der Jahrgang ein Text; mit Zahlen kann man sicher rechnen und vergleichen. Anschließend bekommen die Spalten ihre neuen Namen <code>Jahrgang</code> und <code>Schnitt</code>.
+<table>
+<thead><tr><th>Nachname</th><th>Jahrgang</th><th>Schnitt</th></tr></thead>
+<tbody>
+<tr><td>Mustermann</td><td>2000</td><td>2.75</td></tr>
+<tr><td>Schmidt</td><td>1999</td><td>1.8</td></tr>
+<tr><td>Müller</td><td>2001</td><td>3.5</td></tr>
+<tr><td>Bauer</td><td>2000</td><td>2.9</td></tr>
+<tr><td>Klein</td><td>2002</td><td>1.5</td></tr>
+</tbody>
+</table></li>
+<li><strong>ORDER BY, erstes Kriterium:</strong> <code>Jahrgang DESC</code> ordnet 2002, 2001, 2000, 2000, 1999. <em>Warum darf hier der Alias stehen?</em> <code>ORDER BY</code> wird als letzter Schritt nach dem <code>SELECT</code> ausgeführt, die neuen Namen existieren dann schon.</li>
+<li><strong>ORDER BY, zweites Kriterium:</strong> Nur beim Jahrgang 2000 gibt es einen Gleichstand (Mustermann und Bauer). <code>Schnitt ASC</code> setzt den kleineren Wert, also die bessere Note, nach oben: 2.75 vor 2.9.</li>
+</ol>
+<p><strong>Ergebnis:</strong></p>
+<table>
+<thead><tr><th>Nachname</th><th>Jahrgang</th><th>Schnitt</th></tr></thead>
+<tbody>
+<tr><td>Klein</td><td>2002</td><td>1.5</td></tr>
+<tr><td>Müller</td><td>2001</td><td>3.5</td></tr>
+<tr><td>Mustermann</td><td>2000</td><td>2.75</td></tr>
+<tr><td>Bauer</td><td>2000</td><td>2.9</td></tr>
+<tr><td>Schmidt</td><td>1999</td><td>1.8</td></tr>
+</tbody>
+</table>
+<p><strong>Falle und Probe:</strong> Wer statt nach dem Jahrgang nach <code>Geburtsdatum DESC</code> sortiert,
+   bekommt Bauer (2000-11-12) vor Mustermann (2000-03-15), denn dann entscheidet der Tag und nicht die Note.
+   Beide Abfragen sehen „richtig“ aus, liefern aber verschiedene Reihenfolgen. Prüfe deshalb immer an einem
+   Gleichstand, ob das zweite Kriterium wirklich greift. Die Probe gelingt hier: Es sind weiterhin genau 5 Zeilen,
+   und nur die Reihenfolge hat sich geändert.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: Schritt f&uuml;r Schritt zu einer eigenen Abfrage</summary>
+<p>Gesucht sind &bdquo;Vorname und Geburtsdatum aller Studierenden, j&uuml;ngste Person zuerst,
+   Geburtsdatum umbenannt in Geboren&ldquo;. So kommst du dahin:</p>
+<ol>
+<li><strong>Woher?</strong> Die Daten stehen in der Tabelle <code>Studenten</code> &rarr;
+    <code>FROM Studenten</code></li>
+<li><strong>Welche Zeilen?</strong> Es sollen <em>alle</em> Personen kommen &rarr; kein <code>WHERE</code></li>
+<li><strong>Welche Spalten?</strong> Vorname und Geburtsdatum &rarr;
+    <code>SELECT Vorname, Geburtsdatum</code></li>
+<li><strong>Umbenennen?</strong> Ja, das Geburtsdatum &rarr; <code>Geburtsdatum AS Geboren</code></li>
+<li><strong>Reihenfolge?</strong> J&uuml;ngste zuerst, also das sp&auml;teste Datum oben &rarr; <code>ORDER BY Geburtsdatum DESC</code></li>
+</ol>
+<p>Zusammengesetzt ergibt das:</p>
+<pre><code>SELECT Vorname, Geburtsdatum AS Geboren
+FROM Studenten
+ORDER BY Geburtsdatum DESC;</code></pre>
+<p>Diese f&uuml;nf Fragen funktionieren bei jeder Abfrage, auch bei den komplizierteren sp&auml;ter &ndash; probiere sie gleich an Aufgabe 1.3.2 aus.</p>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p>Die grundlegende Syntax einer SELECT-Anweisung lautet:<br>SELECT Spaltenname(n) <br>FROM Tabellenname;</p>
+</div>
+
+<div class="merke">
+<p><strong>So arbeitet die Datenbank eine Abfrage ab</strong> &ndash; nicht in der Reihenfolge, in der sie
+   geschrieben ist:</p>
+<ol>
+<li><code>FROM</code>: Aus welcher Tabelle kommen die Daten? &rarr; alle 5 Zeilen liegen bereit</li>
+<li><code>WHERE</code>: Welche Zeilen bleiben &uuml;brig? (siehe Seite 1.4)</li>
+<li><code>SELECT</code>: Welche Spalten werden ausgegeben, und wie hei&szlig;en sie?</li>
+<li><code>ORDER BY</code>: In welcher Reihenfolge werden die Zeilen ausgegeben?</li>
+</ol>
+<p>Wenn du eine Abfrage selbst schreibst, gehe in genau dieser Reihenfolge vor. Dann hast du bei jedem
+   Schritt schon alles, was du f&uuml;r den n&auml;chsten brauchst.</p>
+</div>
+
+<div class="merke">
+<p>AS wird verwendet, um:<br>1. Spalten umzubenennen<br>2. Berechneten Spalten einen Namen zu geben<br>3. Tabellen einen Kurznamen zu geben</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.3.1: <span class="niveau">AFB I</span></summary>
+
+<ul>
+<li>Logge dich als Admin in InstaHub ein und rufe im Datenbank-Bereich die Suche auf.</li>
+<li>Lass dir die Tabelle <code>users</code> und darin die Spalte <code>username</code> anzeigen. Du siehst nun alle Nutzernamen der ausgew&auml;hlten Tabelle. Wechsle dann auf &bdquo;Zeige SQL&ldquo;.</li>
+<li>Lass dir alle Namen, Geburtstage und E-Mail-Adressen der Nutzer ausgeben. <em>Beachte die im Schema verwendeten Namen.</em></li>
+</ul>
+</details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 1.3.2: <span class="niveau">AFB II</span>
+        </summary>
+        <p>
+            Gegeben ist eine Tabelle &bdquo;Produkte&ldquo; mit den Spalten &bdquo;ProduktID&ldquo;, &bdquo;Produktname&ldquo;, &bdquo;Preis&ldquo; und &bdquo;Kategorie&ldquo;. Schreibe eine SQL-Abfrage, die den Produktnamen und den Preis aller Produkte auflistet, sortiert nach Preis absteigend (teuerstes Produkt zuerst). Benenne dabei die Preis-Spalte mit AS in &bdquo;Verkaufspreis&ldquo; um.
+        </p>
+    </details>
+</div>

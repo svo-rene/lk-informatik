@@ -1,0 +1,133 @@
+<p>Symmetrische Verschlüsselung ist ein Verschlüsselungsverfahren, bei dem zum Verschlüsseln und zum Entschlüsseln derselbe Schlüssel verwendet wird. Sender und Empfänger müssen den Schlüssel deshalb über einen sicheren Kanal austauschen, bevor sie vertraulich kommunizieren können.</p>
+
+<h2>Vor- und Nachteile der symmetrischen Verschlüsselung</h2>
+
+<h3>Vorteile</h3>
+
+<ul>
+            <li>Hohe Effizienz: Symmetrische Algorithmen sind schnell und benötigen wenig Rechenleistung. Deshalb eignen sie sich für große Datenmengen.</li>
+            <li>Einfachheit: Pro Kommunikationsbeziehung gibt es nur einen einzigen Schlüssel.</li>
+        </ul>
+
+<h3>Nachteile</h3>
+
+<ul>
+            <li>Schlüsselverteilung: Der sichere Austausch des Schlüssels über unsichere Kanäle ist schwierig.</li>
+            <li>Schlüsselmanagement: In einem großen Netz ist die Verwaltung der Schlüssel für jede Verbindung aufwendig.</li>
+        </ul>
+
+<h2>Historische und aktuelle Verfahren</h2>
+
+<p>Die Geschichte der symmetrischen Verschlüsselung reicht von einfachen Substitutions- und Transpositionsverfahren bis zu den komplexen Algorithmen der modernen Kryptographie.</p>
+
+<h3>Historische Verfahren</h3>
+
+<ul>
+            <li><strong>Caesar-Verschlüsselung:</strong> Eine einfache monoalphabetische Substitution, bei der jeder Buchstabe im Klartext durch den Buchstaben ersetzt wird, der im Alphabet eine feste Anzahl von Stellen weiter steht.</li>
+            <li><strong>Vigenère-Verschlüsselung:</strong> Eine polyalphabetische Substitution und Weiterentwicklung der Caesar-Verschlüsselung. Statt einer festen Verschiebung wird ein Schlüsselwort verwendet: Jeder Buchstabe des Schlüsselworts gibt die Verschiebung für einen Klartextbuchstaben an, danach wird das Schlüsselwort wiederholt.</li>
+        </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Verschlüssele <code>INFO</code> mit Caesar und dem Schlüssel 3.</p>
+            <ol>
+                <li><strong>Buchstaben in Zahlen umwandeln</strong> (A&nbsp;=&nbsp;0, …, Z&nbsp;=&nbsp;25): I&nbsp;=&nbsp;8, N&nbsp;=&nbsp;13, F&nbsp;=&nbsp;5, O&nbsp;=&nbsp;14. <em>Warum?</em> Mit Zahlen lässt sich das Verschieben als Rechnung schreiben.</li>
+                <li><strong>Schlüssel addieren und modulo 26 rechnen:</strong> 11, 16, 8, 17. <em>Warum modulo?</em> Nach Z geht es wieder bei A weiter; hier tritt noch kein Überlauf auf.</li>
+                <li><strong>Zahlen zurück in Buchstaben:</strong> I→L, N→Q, F→I, O→R.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>INFO</code> wird zu <code>LQIR</code>.<br>
+            <strong>Kontrolle:</strong> Zum Entschlüsseln schiebt man um 3 zurück: L−3 = I, Q−3 = N, I−3 = F, R−3 = O.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Verschlüssele <code>INFORMATIK</code> mit Vigenère und dem Schlüsselwort <code>LK</code>.</p>
+            <ol>
+                <li><strong>Schlüsselbuchstaben in Verschiebungen umwandeln:</strong> L&nbsp;=&nbsp;11, K&nbsp;=&nbsp;10. <em>Warum?</em> Jeder Schlüsselbuchstabe steht für eine eigene Caesar-Verschiebung.</li>
+                <li><strong>Schlüsselwort wiederholt unter den Klartext schreiben.</strong> Die Buchstaben an ungerader Position werden um 11, die an gerader Position um 10 verschoben:
+                    <pre>Klartext:   I N F O R M A T I K
+Schlüssel:  L K L K L K L K L K
+Geheimtext: T X Q Y C W L D T U</pre></li>
+                <li><strong>Addieren modulo 26, Überlauf beachten:</strong> I + L = 8 + 11 = 19 = T; N + K = 13 + 10 = 23 = X; R + L = 17 + 11 = 28, 28 mod 26 = 2 = C; T + K = 19 + 10 = 29, 29 mod 26 = 3 = D. <em>Falle:</em> Ohne modulo 26 läge das Ergebnis außerhalb des Alphabets.</li>
+                <li><strong>Muster untersuchen:</strong> Das I wird zweimal zu T, weil es beide Male auf das L trifft. Gleiche Klartextbuchstaben ergeben nur dann gleiche Geheimtextbuchstaben, wenn ihr Abstand ein Vielfaches der Schlüssellänge ist – genau das nutzt der Kasiski-Test (8.4).</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> <code>TXQYCWLDTU</code>.<br>
+            <strong>Kontrolle:</strong> Rückwärts rechnen, z.&nbsp;B. C − L = 2 − 11 = −9, −9 + 26 = 17 = R.</p>
+            </details>
+        </div>
+
+<h3>Ein besonders sicheres Verfahren: das One-Time-Pad</h3>
+
+<p>Das One-Time-Pad ist ein symmetrisches Verfahren und eine besondere Form der Vigenère-Verschlüsselung, die bei korrekter Anwendung beweisbar sicher ist: Der Schlüssel ist echt zufällig, mindestens so lang wie die Nachricht und wird nur ein einziges Mal verwendet. Details findest du in 8.5.</p>
+
+<h3>Aktuelle Verfahren</h3>
+
+<ul>
+            <li><strong>AES</strong> (Advanced Encryption Standard): der weltweit anerkannte Standard für die Verschlüsselung elektronischer Daten (siehe 8.7).</li>
+            <li><strong>DES</strong> (Data Encryption Standard) und seine Weiterentwicklung <strong>3DES</strong>: DES ist wegen seines kurzen 56-Bit-Schlüssels gebrochen, 3DES gilt als veraltet. Beide wurden durch AES ersetzt.</li>
+        </ul>
+
+<h2>Kryptoanalyse und Buchstabenhäufigkeiten</h2>
+
+<p>Die Kryptoanalyse befasst sich mit Methoden, Informationen ohne Kenntnis des Schlüssels zu entschlüsseln.</p>
+
+<p>Ein klassischer Ansatz bei monoalphabetischen Verschlüsselungen ist die Analyse der Buchstabenhäufigkeiten. In jeder Sprache kommen bestimmte Buchstaben häufiger vor als andere, und diese Verteilung bleibt bei monoalphabetischer Verschlüsselung erhalten. Im Deutschen sind z.&nbsp;B. E und N besonders häufig. Findet man im Geheimtext den häufigsten Buchstaben, kann man so bei Caesar direkt auf die Verschiebung schließen.</p>
+
+<p>Bei polyalphabetischen Verschlüsselungen wie der Vigenère-Verschlüsselung muss zuerst die Schlüssellänge bestimmt werden. Ist die Länge des Schlüsselworts bekannt, so weiß man auch, welche Buchstaben gleich verschlüsselt werden. Bei einem Schlüsselwort der Länge drei werden der 1., 4., 7., 10., … Buchstabe mit derselben Caesar-Verschiebung verschlüsselt, ebenso der 2., 5., 8., … und der 3., 6., 9., … Buchstabe. Man teilt die Buchstaben also in so viele Gruppen auf, wie der Schlüssel lang ist, und findet mit einer Häufigkeitsanalyse in jeder Gruppe den häufigsten Buchstaben.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Symmetrische Verschlüsselung im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Jede WhatsApp- oder Signal-Nachricht wird Ende-zu-Ende mit einem symmetrischen Verfahren (AES bzw. ChaCha20) verschlüsselt. Den gemeinsamen Schlüssel handeln die beiden Handys vorher automatisch mit einem asymmetrischen Verfahren aus (siehe 8.10 und 8.11). Auch dein Smartphone-Speicher und BitLocker-Laufwerke sind mit AES verschlüsselt.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> Pentesterinnen und Pentester werden von Firmen beauftragt, deren Systeme wie ein Angreifer zu testen. Sie finden immer wieder veraltete Verfahren wie DES oder selbst gebaute „Verschlüsselungen“, die nur verschieben oder mit XOR arbeiten, und schreiben dazu einen Bericht mit Empfehlungen. Welche Verfahren als sicher gelten, legt in Deutschland die BSI-Richtlinie TR-02102 fest.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Symmetrisches Verfahren:</strong> Ver- und Entschlüsselung verwenden <strong>denselben geheimen Schlüssel</strong> k. Es gilt: Entschlüsseln<sub>k</sub>(Verschlüsseln<sub>k</sub>(m)) = m.<br>
+                Vorteil: schnell, auch für große Datenmengen. Nachteil: Schlüsselverteilung – bei n Teilnehmern braucht man n·(n−1)/2 Schlüssel.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Häufigkeitsanalyse:</strong> Monoalphabetische Verfahren erhalten die Buchstabenhäufigkeiten der Sprache. Der häufigste Geheimtextbuchstabe entspricht vermutlich dem E. Polyalphabetische Verfahren verwischen die Häufigkeiten; man muss zuerst die Schlüssellänge bestimmen und dann jede Gruppe einzeln analysieren.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.3.1: Kryptoanalyse Caesar <span class="niveau">AFB II</span></summary>
+                <p>Ein Text wurde mit der Caesar-Verschlüsselung verschlüsselt; jeder Buchstabe wurde um eine unbekannte Anzahl von Stellen verschoben. Finde den Schlüssel und entschlüssele den Text. Der Text lautet:</p>
+                <p><code>Xdrrjywnxhmj Ajwxhmqzjxxjqzsl nxy jnsj Rjymtij ezw xnhmjwjs Ifyjszjgjwywflzsl gjn ijw ijwxjqgj Xhmqzjxxjq ezr Ajwxhmqzjxxjqs zsi Jsyxhmqzjxxjqs ajwbjsijy bnwi Injx jwrtjlqnhmy jnsj xhmsjqqj zsi jkknenjsyj Ptrrzsnpfynts ebnxhmjs ebjn Ufwyjnjs Ijw bnhmynlxyj Xyfsifwi nxy mjzyj FJX Ifx fjqyjwj Ajwkfmwjs IJX lnqy ifljljs fqx ljgwthmjs zsi xtqqyj snhmy rjmw ajwbjsijy bjwijs</code></p>
+                <ul>
+                    <li><strong>Buchstaben zählen:</strong> Zähle zuerst die Häufigkeit jedes Buchstabens im Text. Berücksichtige nur Buchstaben und ignoriere Leer- und Satzzeichen (z.&nbsp;B. mit einem eigenen Python-Programm oder mit diesem <a href="../material/count_letters.py" download>Programm</a>).</li>
+                    <li><strong>Häufigkeitsvergleich:</strong> Vergleiche die Häufigkeiten mit den typischen Buchstabenhäufigkeiten der deutschen Sprache. Die häufigsten Buchstaben im Deutschen sind E, N und I.</li>
+                    <li><strong>Schlüssel schätzen:</strong> Nimm an, dass der häufigste Geheimtextbuchstabe einem der häufigsten Klartextbuchstaben entspricht, und berechne daraus die Verschiebung. Probiere verschiedene Schlüssel aus, bis ein sinnvoller Text entsteht (z.&nbsp;B. mit CrypTool).</li>
+                    <li><strong>Verifikation:</strong> Überprüfe, ob der entschlüsselte Text sinnvoll ist. Wenn nicht, überprüfe deine Schätzung und versuche es erneut.</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.3.2: Caesar-Verschlüsselung implementieren <span class="niveau">AFB II</span></summary>
+                <ol type="a">
+                    <li>Ein wichtiger Bestandteil der Caesar-Verschlüsselung ist das Verschieben innerhalb des Alphabets. Implementiere eine Funktion <em>verschiebe(buchstabe, abstand)</em>, die einen Buchstaben <em>buchstabe</em> um <em>abstand</em> verschiebt. Achte darauf, dass der Abstand auch negativ sein kann, wenn im Alphabet rückwärts verschoben werden soll.<br><em>Hinweis: <code>ord()</code> und <code>chr()</code> sind eingebaute Python-Funktionen (built-in). Sie wandeln ein Zeichen in eine Ganzzahl bzw. eine Ganzzahl in ein Zeichen um.</em></li>
+                    <li>Nutze die Funktion aus a) und implementiere eine Funktion <em>verschiebeSatz(satz, abstand)</em>, die jeden Buchstaben eines Satzes um einen festgelegten Abstand verschiebt.</li>
+                    <li>Ver- und Entschlüsseln ist nun nur noch das Vor- bzw. Zurückschieben des Satzes um einen gegebenen Abstand. Verwende deine Implementierung aus b), um je eine Funktion zum Ver- und Entschlüsseln umzusetzen.</li>
+                </ol>
+            </details>
+        </div>

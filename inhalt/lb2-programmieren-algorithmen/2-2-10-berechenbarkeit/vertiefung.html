@@ -1,0 +1,35 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.10.3: Entscheidungsprobleme beurteilen <span class="niveau">AFB III</span></summary>
+                <p>Ein Start-up wirbt für sein Prüfwerkzeug „CodeGuard“: „Wir prüfen jedes Python-Programm automatisch.“ Folgende Prüfungen werden angeboten. P ist ein beliebiges Python-Programm, x eine Eingabe.</p>
+                <ol type="a">
+                    <li>Enthält der Quelltext von P eine <code>while</code>-Schleife?</li>
+                    <li>Hält P bei Eingabe x nach höchstens 1 000 000 Rechenschritten an?</li>
+                    <li>Hält P bei Eingabe x irgendwann an?</li>
+                    <li>Gibt P bei <em>jeder</em> Eingabe irgendwann „Hallo“ aus?</li>
+                    <li>Ist die von P ausgegebene Zahl eine Primzahl? (P hat bereits angehalten und die Zahl ausgegeben.)</li>
+                </ol>
+                <ol>
+                    <li>Formuliere jede Prüfung als Entscheidungsproblem (Eingabe, Ja/Nein-Frage) und ordne sie als entscheidbar oder unentscheidbar ein. Begründe jeweils: Bei „entscheidbar“ skizzierst du ein Verfahren, das immer anhält, bei „unentscheidbar“ führst du die Frage auf das Halteproblem zurück.</li>
+                    <li>Ein Mitschüler meint: „(b) ist unentscheidbar, weil es um das Anhalten von Programmen geht.“ Finde den Denkfehler.</li>
+                    <li>Beurteile den Werbeslogan und formuliere eine ehrliche Fassung.</li>
+                </ol>
+                <p class="tipp">Für (d): Baue aus einem Programm Q und einer Eingabe y ein neues Programm, das zuerst Q mit y ausführt und danach „Hallo“ ausgibt.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.10.5: Breitensuche im Zustandsraum beurteilen <span class="niveau">AFB III</span></summary>
+                <p>Beim Schiebepuzzle liegen nummerierte Plättchen und ein freies Feld in einem Rahmen; ein Zug schiebt ein Nachbarplättchen auf das freie Feld. Ein Programm soll die kürzeste Zugfolge zur geordneten Stellung finden. Dazu fasst es jede Stellung als Knoten auf, jeden Zug als Kante, und führt eine Breitensuche (3.8) durch. Von einer Startstellung aus ist genau die Hälfte aller Anordnungen erreichbar.</p>
+                <p>Annahmen: Das Programm erzeugt und prüft 1 Million Stellungen pro Sekunde; jede gespeicherte Stellung belegt 100 Byte.</p>
+                <ol>
+                    <li>Berechne für das 3×3-Puzzle (8 Plättchen) und das 4×4-Puzzle (15 Plättchen) die Anzahl der erreichbaren Stellungen sowie Zeit- und Speicherbedarf, wenn die Breitensuche im schlechtesten Fall alle erreichbaren Stellungen besucht und speichert.</li>
+                    <li>Begründe, warum die Breitensuche die kürzeste Zugfolge findet, und warum sie dafür so viel Speicher braucht.</li>
+                    <li>Eine Tiefensuche mit Backtracking (3.10) bräuchte nur Speicher für den aktuellen Weg. Beurteile, ob sie für das 4×4-Puzzle die bessere Wahl ist.</li>
+                    <li>Ordne ein: Ist das Problem „kürzeste Zugfolge beim 4×4-Puzzle“ entscheidbar, und ist es praktisch lösbar? Unterscheide dabei technische und theoretische Grenzen.</li>
+                </ol>
+            </details>
+        </div>

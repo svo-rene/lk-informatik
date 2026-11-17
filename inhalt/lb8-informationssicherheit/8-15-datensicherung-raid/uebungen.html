@@ -1,0 +1,33 @@
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.15.4: RAID 5 nachrechnen <span class="niveau">AFB II</span></summary>
+                <p>Ein RAID 5 aus vier Platten speichert in einem Streifen die Datenbytes D1 = 10110010 und D3 = 01101100 sowie die Parität P = 11100101. Platte 2 ist ausgefallen.</p>
+                <ol type="a">
+                    <li>Rekonstruiere D2 und mache die Probe.</li>
+                    <li>Ein Kollege meint: „Bei RAID 5 dürfen auch zwei Platten ausfallen, man rechnet dann einfach zweimal.“ Prüfe die Aussage für den Fall, dass D2 und D3 fehlen.</li>
+                    <li>Die vier Platten haben je 8&nbsp;TB. Berechne die nutzbare Kapazität und vergleiche mit RAID 6 aus denselben Platten.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.15.5: Parität programmieren <span class="niveau">AFB II</span></summary>
+                <p>Datenblöcke werden als Zeichenketten aus „0“ und „1“ gleicher Länge dargestellt.</p>
+                <ol type="a">
+                    <li>Schreibe <code>xor_bits(a, b)</code>, die zwei solche Zeichenketten bitweise mit XOR verknüpft.</li>
+                    <li>Schreibe <code>paritaet(bloecke)</code>, die für eine Liste von Blöcken den Paritätsblock berechnet, und <code>rekonstruiere(vorhandene, p)</code>, die aus den noch vorhandenen Datenblöcken und der Parität den fehlenden Block berechnet.</li>
+                    <li>Weise die Funktionen mit diesen Testfällen nach (erwartete und tatsächliche Ausgabe):
+                        <ul>
+                            <li><code>xor_bits("1100", "1010")</code> → <code>"0110"</code></li>
+                            <li><code>paritaet(["1011", "0110", "1100"])</code> → <code>"0001"</code></li>
+                            <li><code>rekonstruiere(["1011", "1100"], "0001")</code> → <code>"0110"</code></li>
+                            <li><code>paritaet(["11110000", "10101010", "00001111"])</code> → <code>"01010101"</code></li>
+                        </ul>
+                    </li>
+                    <li>Erkläre, warum <code>rekonstruiere</code> dieselbe Rechnung durchführen kann wie <code>paritaet</code>.</li>
+                </ol>
+            </details>
+        </div>

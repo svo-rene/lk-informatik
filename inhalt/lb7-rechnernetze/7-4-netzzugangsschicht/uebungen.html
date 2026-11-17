@@ -1,0 +1,42 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.4.3: Braucht der Switch eine MAC-Adresse? <span class="niveau">AFB III</span></summary>
+                <figure>
+                    <img src="../img/dod_aufgabe(p).png" width="500" alt="Zwei Laptops mit MAC-Adressen sind über einen Switch verbunden, auch der Switch ist mit einer MAC-Adresse beschriftet">
+                    <figcaption>Abb. 2: Zwei Rechner an einem Switch (Filius)</figcaption>
+                </figure>
+                <p>Der Rechner 192.168.0.1 sendet ein <code>ping</code> an 192.168.0.2. Beide kennen sich noch nicht.</p>
+                <ol>
+                    <li>Gib für den ARP-Request, die ARP-Antwort und die erste Ping-Anfrage jeweils Quell- und Ziel-MAC-Adresse an.</li>
+                    <li>In Filius ist auch der Switch mit einer MAC-Adresse beschriftet. Beurteile, ob der Switch diese Adresse zum Weiterleiten der Frames benötigt, und nenne eine Situation, in der ein Switch tatsächlich eine eigene MAC-Adresse braucht.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.4.4: Eine Datei in Frames zerlegen <span class="niveau">AFB II</span></summary>
+                <p>Eine Datei von 3&nbsp;MiB wird per TCP/IP über ein 100-Mbit/s-Ethernet übertragen. Jeder Frame enthält ein IP-Paket von höchstens 1&nbsp;500&nbsp;Byte, davon sind 20&nbsp;Byte IP-Header und 20&nbsp;Byte TCP-Header. Präambel und Sendepausen zwischen den Frames werden vernachlässigt.</p>
+                <ol>
+                    <li>Berechne, wie viele Frames nötig sind und wie viele Nutzdaten der letzte Frame trägt.</li>
+                    <li>Berechne die Zahl der Bytes, die insgesamt über die Leitung gehen, und die Übertragungszeit.</li>
+                    <li>Bestimme die Nettodatenrate (Nutzdaten pro Sekunde) in Mbit/s.</li>
+                </ol>
+                <p class="tipp">3&nbsp;MiB = 3 · 1&nbsp;048&nbsp;576&nbsp;Byte. Nutze den Aufbau des Ethernet-Frames aus der Tabelle oben.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.4.5: Zwei Switches hintereinander <span class="niveau">AFB II</span></summary>
+                <p>Switch S1 hat an Port 1 den Rechner A, an Port 2 den Rechner B und an Port 3 eine Leitung zu Switch S2. An S2 hängt diese Leitung an Port 1, an Port 2 der Rechner C und an Port 3 der Rechner D. Beide SATs sind leer. Nacheinander werden die Frames A → D, D → A, C → B und B → C gesendet.</p>
+                <ol>
+                    <li>Gib für jeden Frame und jeden Switch an, welcher Eintrag gelernt wird und an welche Ports weitergeleitet wird.</li>
+                    <li>Gib beide SATs am Ende an. Erkläre, warum in einer SAT mehrere MAC-Adressen demselben Port zugeordnet sein können.</li>
+                </ol>
+            </details>
+        </div>

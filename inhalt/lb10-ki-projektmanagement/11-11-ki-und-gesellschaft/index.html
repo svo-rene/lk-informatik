@@ -1,0 +1,178 @@
+<p>KI-Systeme treffen längst nicht mehr nur Vorhersagen in Testumgebungen – sie entscheiden mit über Kreditvergaben, Bewerbungsverfahren, medizinische Diagnosen oder darüber, welche Inhalte wir online sehen. Auf dieser Seite geht es darum, solche Anwendungen kritisch einordnen zu können.</p>
+
+<h2>1. Bias: Wenn KI Vorurteile übernimmt</h2>
+
+<p>Ein KI-Modell lernt ausschließlich aus den Daten, mit denen es trainiert wurde. Sind diese Daten unausgewogen oder spiegeln sie bestehende gesellschaftliche Ungleichheiten wider, übernimmt das Modell diese Verzerrungen – man spricht von <strong>Bias</strong>.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Zwei bekannt gewordene Fälle:</p>
+            <ul>
+                <li><strong>Beispiel Bewerbungs-KI:</strong> Ein bekannt gewordenes Modell zur Vorauswahl von Bewerbungen wurde überwiegend mit Lebensläufen früherer (mehrheitlich männlicher) Mitarbeiter trainiert und bewertete Bewerbungen von Frauen systematisch schlechter – nicht weil das Modell „sexistisch programmiert“ wurde, sondern weil die Trainingsdaten das bestehende Ungleichgewicht widerspiegelten.</li>
+                <li><strong>Beispiel Gesichtserkennung:</strong> Mehrere Studien zeigten, dass kommerzielle Gesichtserkennungssysteme bei hellhäutigen Männern deutlich genauer arbeiten als bei dunkelhäutigen Frauen, weil Trainingsdatensätze diese Gruppen unterschiedlich stark enthielten.</li>
+            </ul>
+            <p>Am Fall der Bewerbungs-KI lässt sich Schritt für Schritt nachvollziehen, wie der Bias entsteht:</p>
+            <ol>
+                <li><strong>Was:</strong> Die Trainingsdaten untersuchen: Lebensläufe früherer, überwiegend männlicher Mitarbeiter mit dem Label „eingestellt“. – <em>warum:</em> Ein Modell lernt ausschließlich aus seinen Daten; jede Schieflage dort ist die erste Quelle für Bias.</li>
+                <li><strong>Was:</strong> Fragen, welches Muster das Modell daraus lernt: Merkmale, die in Lebensläufen von Männern häufiger vorkommen, gehen mit „eingestellt“ einher; Merkmale, die eher auf Frauen hindeuten (z.&nbsp;B. das Wort „Frauen“ wie in „Kapitänin des Frauen-Schachclubs“ oder der Abschluss an einem reinen Frauen-College), kommen bei „eingestellt“ selten vor. – <em>warum:</em> Das Modell kann nicht unterscheiden, ob ein Zusammenhang fachlich begründet ist oder nur die bisherige Einstellungspraxis widerspiegelt.</li>
+                <li><strong>Was:</strong> Die Wirkung im Einsatz beschreiben: Bewerbungen von Frauen erhalten bei gleicher Qualifikation niedrigere Bewertungen. – <em>warum:</em> Das gelernte Muster wird auf neue Bewerbungen übertragen; die Ungleichheit der Vergangenheit wird so in die Zukunft fortgeschrieben.</li>
+                <li><strong>Was:</strong> Verantwortung klären: Niemand hat „Frauen schlechter bewerten“ programmiert, trotzdem ist das Ergebnis diskriminierend. – <em>warum:</em> Bias entsteht meist ohne Absicht; verantwortlich ist dennoch, wer das System einsetzt.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Der Bias stammt aus unausgewogenen, historisch verzerrten Trainingsdaten, nicht aus einer bösen Absicht im Programm.</p>
+            <p><strong>Kontrolle:</strong> Bei der Gesichtserkennung zeigt sich derselbe Mechanismus: unterschiedlich stark vertretene Gruppen in den Trainingsdaten → unterschiedlich gute Ergebnisse für diese Gruppen. Erkennen kann man so einen Bias nur, wenn man die Ergebnisse <em>getrennt nach Gruppen</em> auswertet (siehe Beispiel 2).</p>
+            </details>
+        </div>
+
+<h2>2. Scheinbare Objektivität: KI-Ergebnisse sind nicht neutral</h2>
+
+<p>KI-Modelle liefern Zahlen, Wahrscheinlichkeiten oder klare Klassifikationen – das wirkt objektiv und „mathematisch korrekt“. Tatsächlich stecken in jedem Modell viele <strong>subjektive Entscheidungen</strong>: Welche Daten wurden gesammelt? Welche Merkmale wurden ausgewählt? Wie wurde eine Zielgröße definiert (z.&nbsp;B. was genau als „kreditwürdig“ oder „erfolgreiche Bewerbung“ gilt)? Wer hat die Trainingsdaten gelabelt, und nach welchen Kriterien?</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Bezug zu diesem Kurs</summary>
+                <p>Ihr habt selbst schon erlebt, wie viele Entscheidungen in ein Modell einfließen – z.&nbsp;B. bei der Wahl der Baumtiefe beim Entscheidungsbaum (11.5), der Anzahl der Cluster k bei k-Means (11.7) oder der Architektur eines neuronalen Netzes (siehe Seite 11.8 „Neuronale Netze“). All das sind subjektive Stellschrauben, die das Ergebnis verändern, auch wenn am Ende nur eine einzelne, glatte Zahl oder Klassifikation ausgegeben wird.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Unternehmen testet eine KI zur Vorauswahl von Bewerbungen mit 1000 Testbewerbungen, bei denen bekannt ist, ob die Person geeignet ist. Der Anbieter wirbt: „Unsere KI trifft in fast 90&nbsp;% der Fälle die richtige Entscheidung.“ Die Bewerbungen stammen aus zwei Gruppen: 800 aus Gruppe A und 200 aus Gruppe B (z.&nbsp;B. Gruppe A ohne und Gruppe B mit einer Lücke im Lebenslauf durch Elternzeit). In beiden Gruppen ist genau die Hälfte geeignet. Die Testergebnisse („geeignet“ ist die positive Klasse):</p>
+            <table>
+                <thead>
+                    <tr><th>Gruppe</th><th>TP (geeignet, angenommen)</th><th>FN (geeignet, abgelehnt)</th><th>FP (ungeeignet, angenommen)</th><th>TN (ungeeignet, abgelehnt)</th><th>Summe</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>A</td><td>360</td><td>40</td><td>20</td><td>380</td><td>800</td></tr>
+                    <tr><td>B</td><td>60</td><td>40</td><td>5</td><td>95</td><td>200</td></tr>
+                    <tr><td>gesamt</td><td>420</td><td>80</td><td>25</td><td>475</td><td>1000</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><strong>Was:</strong> Die Werbeaussage prüfen: Anteil richtiger Entscheidungen insgesamt = (420 + 475) / 1000 = 895 / 1000 = 89,5&nbsp;%. – <em>warum:</em> Zuerst klären, ob die Zahl stimmt. Sie stimmt, „fast 90&nbsp;%“ ist korrekt.</li>
+                <li><strong>Was:</strong> Dieselbe Rechnung getrennt nach Gruppen: A: (360 + 380) / 800 = 740 / 800 = 92,5&nbsp;%; B: (60 + 95) / 200 = 155 / 200 = 77,5&nbsp;%. – <em>warum:</em> Ein Gesamtwert ist ein Durchschnitt; weil Gruppe A viermal so groß ist, bestimmt sie ihn fast allein und verdeckt die schlechtere Leistung bei Gruppe B.</li>
+                <li><strong>Was:</strong> Die für Bewerbende folgenreichste Fehlerart je Gruppe berechnen: Anteil der <em>geeigneten</em> Personen, die abgelehnt werden (FN / (TP + FN)): A: 40 / 400 = 10&nbsp;%; B: 40 / 100 = 40&nbsp;%. – <em>warum:</em> Für eine geeignete Person ist die zu Unrecht verpasste Chance der entscheidende Fehler; geeignete Bewerbende aus Gruppe B werden viermal so oft aussortiert.</li>
+                <li><strong>Was:</strong> Die andere Fehlerart gegenprüfen: Anteil der ungeeigneten Personen, die angenommen werden (FP / (FP + TN)): A: 20 / 400 = 5&nbsp;%; B: 5 / 100 = 5&nbsp;%. – <em>warum:</em> So sieht man, dass die Benachteiligung nicht an einem allgemein „strengeren“ Modell liegt, sondern gezielt die geeigneten Personen aus Gruppe B trifft.</li>
+                <li><strong>Was:</strong> Die Zielgröße hinterfragen: Woher stammt das Label „geeignet“? Wurde es aus früheren Einstellungsentscheidungen übernommen, steckt die Bewertung früherer Personalverantwortlicher darin. – <em>warum:</em> Auch die „richtigen Antworten“ sind eine subjektive Modellierungsentscheidung (Abschnitt 2); waren schon diese verzerrt, misst sogar der Test die Benachteiligung zu gering.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Werbeaussage ist rechnerisch korrekt, aber irreführend. Die KI benachteiligt Gruppe B deutlich: 40&nbsp;% statt 10&nbsp;% der geeigneten Personen werden abgelehnt. Ein Einsatz wäre ohne Nachbesserung nicht vertretbar (nach dem AI Act ist Bewerberauswahl außerdem Hochrisiko-KI, siehe Abschnitt 6).</p>
+            <p><strong>Kontrolle:</strong> 800 + 200 = 1000 und 740 + 155 = 895 richtige Entscheidungen, das passt zum Gesamtwert. Merke für die Praxis: Fehlerraten immer auch getrennt nach Gruppen ausweisen, wie es KI-Auditorinnen und -Auditoren tun.</p>
+            </details>
+        </div>
+
+<h2>3. Datenschutz</h2>
+
+<p>KI-Systeme brauchen große Mengen an Daten – oft auch personenbezogene Daten (Gesundheitsdaten, Fotos, Bewegungsprofile, Kommunikationsverläufe). Das wirft Fragen auf: Haben Betroffene zugestimmt, dass ihre Daten zum Training genutzt werden? Können sie nachträglich verlangen, dass ihre Daten gelöscht oder aus einem Modell „entfernt“ werden – was technisch bei bereits trainierten Modellen oft gar nicht einfach möglich ist? In der EU regelt die Datenschutz-Grundverordnung (DSGVO) den Umgang mit personenbezogenen Daten, auch beim KI-Training.</p>
+
+<h2>4. Urheberrecht und generative KI</h2>
+
+<p>Generative KI-Systeme (siehe Seite 11.10 „Generative KI und Sprachmodelle“) werden häufig mit riesigen Mengen an Texten, Bildern oder Musik trainiert, die im Internet frei zugänglich waren – darunter auch urheberrechtlich geschütztes Material. Das führt zu bislang nicht abschließend geklärten Rechtsfragen:</p>
+
+<ul>
+            <li>Durfte urheberrechtlich geschütztes Material ohne Zustimmung der Urheberinnen und Urheber zum Training verwendet werden?</li>
+            <li>Wem gehört ein von einer KI erzeugtes Bild oder ein KI-generierter Text – der nutzenden Person, dem Unternehmen, das das Modell betreibt, oder niemandem?</li>
+            <li>Was passiert, wenn eine generative KI ein Werk erzeugt, das einem realen, geschützten Werk stark ähnelt?</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Kein theoretisches Problem</summary>
+                <p>Diese Fragen werden aktuell tatsächlich vor Gericht verhandelt, nicht nur in Seminaren diskutiert: Große Medienhäuser klagen gegen KI-Unternehmen, weil ihre Inhalte angeblich ungefragt zum Training verwendet wurden. Einen konkreten, gut dokumentierten Fall findet ihr unten im Abschnitt „Weiterführende Links“.</p>
+            </details>
+        </div>
+
+<h2>5. Auswirkungen auf den Arbeitsmarkt</h2>
+
+<p>KI-Systeme automatisieren zunehmend Aufgaben, die bisher Fachkräfte übernommen haben – von der Texterstellung über Bildbearbeitung bis zur Datenanalyse. Das verändert Berufsbilder: Manche Tätigkeiten fallen weg, neue entstehen (z.&nbsp;B. im Prompt-Design, in der KI-Qualitätskontrolle oder in der KI-Regulierung), und viele bestehende Berufe verändern sich, statt komplett zu verschwinden.</p>
+
+<h2>6. Regulierung: der EU AI Act</h2>
+
+<p>Der „AI Act“ (KI-Verordnung, Verordnung (EU) 2024/1689) ist die weltweit erste umfassende Verordnung zur Regulierung von KI. Er ist am <strong>1. August 2024 in Kraft getreten</strong>, seine Pflichten gelten aber <strong>gestaffelt</strong>. Der AI Act teilt KI-Anwendungen nach ihrem Risiko in Stufen ein:</p>
+
+<ul>
+            <li><strong>Unannehmbares Risiko:</strong> verboten, z.&nbsp;B. Social-Scoring-Systeme wie in autoritären Überwachungsstaaten.</li>
+            <li><strong>Hohes Risiko:</strong> stark reguliert, z.&nbsp;B. KI in der Bewerberauswahl, in der Kreditvergabe oder in medizinischen Geräten – hier gelten strenge Prüf- und Dokumentationspflichten.</li>
+            <li><strong>Begrenztes Risiko:</strong> Transparenzpflichten, z.&nbsp;B. müssen Chatbots offenlegen, dass man mit einer KI kommuniziert, und KI-generierte Bilder/Videos (Deepfakes) gekennzeichnet werden.</li>
+            <li><strong>Minimales Risiko:</strong> kaum reguliert, z.&nbsp;B. Spamfilter oder KI in Videospielen.</li>
+        </ul>
+
+<p>Zusätzlich regelt der AI Act eine eigene Kategorie: <strong>KI-Modelle mit allgemeinem Verwendungszweck</strong> (General-Purpose AI, <strong>GPAI</strong>), also z.&nbsp;B. große Sprachmodelle, die für viele verschiedene Aufgaben eingesetzt werden können. Ihre Anbieter müssen u.&nbsp;a. eine technische Dokumentation erstellen, nachgelagerten Anbietern Informationen bereitstellen, eine Strategie zur Einhaltung des Urheberrechts haben und eine Zusammenfassung der Trainingsinhalte veröffentlichen. Für besonders leistungsfähige Modelle mit <strong>systemischem Risiko</strong> kommen weitere Pflichten hinzu, z.&nbsp;B. Modellbewertungen, Risikominderung, Meldung schwerwiegender Vorfälle und Cybersicherheit.</p>
+
+<table>
+            <thead>
+                <tr><th>Datum</th><th>Was gilt ab dann? (Zeitplan laut Verordnung)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1.&nbsp;8.&nbsp;2024</td><td>Inkrafttreten des AI Act</td></tr>
+                <tr><td>2.&nbsp;2.&nbsp;2025</td><td>Verbote von KI mit unannehmbarem Risiko; Pflicht zur KI-Kompetenz für Anbieter und Betreiber</td></tr>
+                <tr><td>2.&nbsp;8.&nbsp;2025</td><td>Pflichten für Anbieter von GPAI-Modellen; Aufsichtsstrukturen und Sanktionen</td></tr>
+                <tr><td>2.&nbsp;8.&nbsp;2026</td><td>überwiegender Teil der übrigen Regeln, insbesondere die meisten Pflichten für Hochrisiko-KI und die Transparenzpflichten</td></tr>
+                <tr><td>2.&nbsp;8.&nbsp;2027</td><td>Hochrisiko-KI, die Teil bereits regulierter Produkte ist (z.&nbsp;B. Medizinprodukte, Maschinen)</td></tr>
+            </tbody>
+        </table>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Warum das für euch relevant ist</summary>
+                <p>Wenn ihr in eurem Projekt eigene KI-Anwendungen entwickelt oder KI-Tools nutzt, ist es sinnvoll, euch zu fragen, in welche Risikostufe eure Anwendung fallen würde – das schärft den Blick dafür, welche Verantwortung mit dem Einsatz von KI einhergeht.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Der AI Act ist „work in progress“</summary>
+                <p>Die Risikostufen selbst stehen fest, aber <em>wann genau</em> welche Pflichten greifen, wird immer wieder angepasst. Im Rahmen des sogenannten „Digital-Omnibus“ der EU geht es u.&nbsp;a. darum, die Fristen für Hochrisiko-KI nach hinten zu verschieben, weil die dafür nötigen technischen Normen und Prüfstellen noch nicht bereitstehen. Den jeweils aktuell geltenden Zeitplan findet ihr auf der offiziellen EU-Seite (siehe „Weiterführende Links“) – prüft ihn dort, bevor ihr ihn in eurer Dokumentation verwendet. Das zeigt: Ein Gesetz zu einem so schnelllebigen Thema wie KI ist nie „fertig“.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: KI-Auditorin und KI-Auditor</summary>
+                <p><strong>Alltag:</strong> Wenn ein Chatbot auf einer Website sich als KI zu erkennen gibt oder ein Bild in sozialen Medien als „KI-generiert“ markiert ist, siehst du Transparenzregeln in Aktion.</p>
+                <p><strong>Beruf:</strong> <strong>KI-Auditorinnen und KI-Auditoren</strong> prüfen, ob KI-Systeme fair, sicher, nachvollziehbar und gesetzeskonform arbeiten. Sie testen Modelle z.&nbsp;B. auf Bias (Fehlerraten getrennt nach Gruppen), prüfen die technische Dokumentation und die Datenherkunft und bewerten, in welche Risikostufe des AI Act ein System fällt. Solche Tätigkeiten gibt es in Prüforganisationen, Beratungen, Behörden und in den Compliance-Abteilungen großer Unternehmen. Für manche Hochrisiko-Systeme verlangt der AI Act eine Konformitätsbewertung, teils durch unabhängige benannte Stellen. Typische Wege dorthin sind ein Studium der Informatik, Wirtschaftsinformatik oder Rechtswissenschaft mit Schwerpunkt Digitalisierung.</p>
+            </details>
+        </div>
+
+<h2>7. Vertiefung: Vorträge aus dem Kurs</h2>
+
+<p>Zwei Handouts aus Schülervorträgen zu diesem Themenbereich werden als Vertiefung bereitgestellt:</p>
+
+<ul>
+            <li>Ethik und Verantwortung bei der Entscheidungsfindung – <em>Handout folgt</em>.</li>
+            <li>KI in der Medizin – <em>Handout folgt</em>.</li>
+        </ul>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Bias</strong> – systematische Verzerrung in den Ergebnissen eines KI-Systems, die bestimmte Gruppen bevorzugt oder benachteiligt. Bias entsteht meist nicht durch böse Absicht, sondern durch unausgewogene, unvollständige oder historisch verzerrte Trainingsdaten. Wer ein KI-System einsetzt, trägt trotzdem die Verantwortung für seine Auswirkungen.</p>
+        </div>
+
+<div class="merke">
+            <p>Ein Modellergebnis ist keine objektive Tatsache, sondern das Ergebnis vieler menschlicher, subjektiver Modellierungsentscheidungen. Es kritiklos als „Das hat die KI ausgerechnet, also stimmt es“ zu akzeptieren, ist ein verbreiteter, aber gefährlicher Denkfehler.</p>
+        </div>
+
+<div class="merke">
+            <p>Die DSGVO verlangt unter anderem: Personenbezogene Daten dürfen nur mit einer Rechtsgrundlage (z.&nbsp;B. Einwilligung) verarbeitet werden, nur zu einem festgelegten Zweck (Zweckbindung), und Betroffene haben ein Recht auf Auskunft sowie grundsätzlich auf Löschung ihrer Daten. Genau diese Prinzipien geraten beim KI-Training in Konflikt mit der Technik: Ein einmal trainiertes neuronales Netz „vergisst“ einzelne Trainingsdaten nicht einfach auf Wunsch – anders als eine Zeile in einer Datenbank lässt sich ein gelernter Zusammenhang nicht ohne Weiteres gezielt löschen.</p>
+        </div>
+
+<div class="merke">
+            <p>Der <strong>AI Act</strong> reguliert KI nach dem Risiko ihrer Anwendung (unannehmbar – hoch – begrenzt – minimal) und enthält eigene Pflichten für KI-Modelle mit allgemeinem Verwendungszweck (GPAI). Er gilt seit dem 1.&nbsp;8.&nbsp;2024 und wird schrittweise wirksam: Verbote ab 2.&nbsp;2.&nbsp;2025, GPAI-Pflichten ab 2.&nbsp;8.&nbsp;2025, Hochrisiko-Pflichten überwiegend ab 2.&nbsp;8.&nbsp;2026.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.11.1: Bias erkennen <span class="niveau">AFB II</span></summary>
+                <p>Sucht euch eine KI-Anwendung eurer Wahl (z.&nbsp;B. ein Empfehlungssystem, eine Gesichtserkennung, ein Bewerbungs-Tool). Überlegt: Welche Trainingsdaten könnten dahinterstecken, und welche Personengruppen könnten dadurch benachteiligt werden? Begründet konkret.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.11.2: Risikostufe einschätzen <span class="niveau">AFB II</span></summary>
+                <p>Ordnet folgende Anwendungen einer Risikostufe des EU AI Act zu und begründet eure Entscheidung: (a) ein Chatbot auf einer Firmenwebsite, (b) ein KI-System zur automatischen Vorauswahl von Bewerbungen, (c) eine Spam-Filter-KI in eurem E-Mail-Postfach, (d) ein staatliches System, das Bürgerinnen und Bürgern anhand ihres Verhaltens einen „Vertrauens-Score“ zuweist.</p>
+            </details>
+        </div>

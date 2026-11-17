@@ -1,0 +1,347 @@
+<p>Dein Smartphone, ein Taschenrechner, die Spielkonsole, der Bordcomputer im Auto und der schnellste Supercomputer der Welt haben eines gemeinsam: Sie folgen alle demselben Bauplan. Dieser Bauplan ist über 75 Jahre alt und stammt aus einer Zeit, in der ein Computer noch einen ganzen Saal füllte. Er heißt <strong>Von-Neumann-Architektur</strong>, benannt nach dem ungarisch-amerikanischen Mathematiker John von Neumann, der ihn 1945 aufschrieb.</p>
+
+<p>Auf dieser Seite lernst du, aus welchen Bauteilen jeder Computer besteht, wie ein Prozessor Schritt für Schritt ein Programm abarbeitet und warum du am Ende selbst den Prozessor spielen kannst.</p>
+
+<div class="hinweis">
+    <details>
+        <summary>
+            Das Problem, das von Neumann löste
+        </summary>
+        <p>
+            Die ersten elektronischen Rechner der 1940er Jahre waren <strong>fest verdrahtet</strong>. Der amerikanische ENIAC zum Beispiel berechnete Flugbahnen von Artilleriegeschossen. Wollte man ihn für eine andere Aufgabe nutzen, musste ein Team tagelang Kabel umstecken und Schalter neu einstellen. Das Programm steckte buchstäblich in der Verkabelung.
+        </p>
+        <p>
+            Von Neumanns Idee: Das Programm wird <strong>nicht mehr verdrahtet, sondern gespeichert</strong>, und zwar im selben Speicher wie die Daten, als Folge von Zahlen. Ein neues Programm zu laden, dauert dann Sekunden statt Tage. Aus einer Spezialmaschine wird eine Universalmaschine. Genau deshalb kannst du heute auf ein und demselben Gerät spielen, chatten, rechnen und Filme schauen, ohne dass jemand daran herumlötet.
+        </p>
+        <p>
+            Die Idee war so gut, dass sie bis heute nicht ersetzt wurde. Jeder Prozessor, den du je benutzt hast, ist im Kern ein Von-Neumann-Rechner.
+        </p>
+    </details>
+</div>
+
+<h2>Die Bauteile eines Computers</h2>
+
+<p>Ein Von-Neumann-Rechner besteht aus fünf Teilen. Stell dir zur Orientierung eine Person vor, die in einem Büro Rechenaufträge abarbeitet:</p>
+
+<ol>
+    <li><strong>Rechenwerk</strong> (Arithmetic Logic Unit, ALU): Der Taschenrechner auf dem Schreibtisch. Hier wird addiert, subtrahiert, verglichen und mit UND, ODER, NICHT verknüpft. Das Rechenwerk ist genau die Sammlung von Schaltnetzen, die du in Kapitel 3 kennengelernt hast: Volladdierer, Multiplexer und Co.</li>
+    <li><strong>Steuerwerk</strong> (Control Unit): Die Person selbst. Sie liest den nächsten Befehl, versteht ihn und sagt allen anderen Teilen, was zu tun ist. Ein wichtiges Hilfsmittel ist der <strong>Befehlszähler</strong>, ein Zettel, auf dem steht, an welcher Stelle im Programm sie gerade ist.</li>
+    <li><strong>Speicherwerk</strong> (Memory Unit): Ein Regal mit durchnummerierten Fächern. Jedes Fach hat eine <strong>Adresse</strong> und eine feste Größe. In den Fächern liegen sowohl die Befehle des Programms als auch die Daten, mit denen gerechnet wird. Im PC ist das der Arbeitsspeicher (RAM).</li>
+    <li><strong>Ein-/Ausgabewerk</strong> (I/O Unit): Der Briefkasten und die Durchreiche zur Außenwelt. Hierüber kommen Tastatureingaben, Touch-Berührungen und Netzwerkpakete herein, hierüber gehen Bildschirmbilder, Töne und Druckaufträge hinaus.</li>
+    <li><strong>Bussystem</strong>: Die Flure zwischen den Räumen. Über den <strong>Datenbus</strong> werden Werte transportiert, über den <strong>Adressbus</strong> wird gesagt, welches Speicherfach gemeint ist, und über den <strong>Steuerbus</strong> laufen Kommandos wie „lesen“ oder „schreiben“.</li>
+</ol>
+
+<p>Rechenwerk und Steuerwerk zusammen bilden die <strong>Zentraleinheit</strong> (Central Processing Unit, CPU), also den Chip, den man umgangssprachlich „Prozessor“ nennt.</p>
+
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<h2>Wie der Prozessor arbeitet: der Von-Neumann-Zyklus</h2>
+
+<p>Ein Prozessor kann nur eine Sache: immer wieder dieselben vier Schritte ausführen. Er tut das allerdings mehrere Milliarden Mal pro Sekunde. Dieser Kreislauf heißt <strong>Von-Neumann-Zyklus</strong> oder <strong>Fetch-Decode-Execute-Zyklus</strong>:</p>
+
+<ul>
+    <li><strong>Fetch (Befehl holen):</strong> Das Steuerwerk schaut auf den Befehlszähler, holt den Befehl aus der entsprechenden Speicherzelle und erhöht den Befehlszähler um eins.</li>
+    <li><strong>Decode (Befehl entschlüsseln):</strong> Das Bitmuster wird zerlegt: Welche Operation ist gemeint, und auf welche Speicherzelle bezieht sie sich?</li>
+    <li><strong>Execute (Befehl ausführen):</strong> Das Rechenwerk rechnet, oder es wird ein Wert aus dem Speicher geholt, oder der Befehlszähler wird bei einem Sprung neu gesetzt.</li>
+    <li><strong>Writeback (Ergebnis speichern):</strong> Das Ergebnis landet in einem Register oder im Speicher. Dann beginnt der Zyklus von vorn.</li>
+</ul>
+
+<figure><img src="../img/VonNeumannArchitektur.png" width="550" />
+    <figcaption><em><span style="font-size: 8pt;">https://oinf.ch/konzept/computerarchitektur/</span></em></figcaption>
+</figure>
+
+<h3>Ein Mini-Rechner zum Nachspielen</h3>
+
+<p>Um den Zyklus wirklich zu verstehen, bauen wir uns einen absichtlich winzigen Rechner. Er hat 32 Speicherzellen (Adressen 0 bis 31), jede Zelle ist 8 Bit breit. Im Prozessor gibt es ein einziges Rechenregister, den <strong>Akkumulator</strong> (kurz Akku), und den Befehlszähler. Jeder Befehl ist genau ein Byte: Die ersten 3 Bit sind der <strong>Opcode</strong> (welche Operation), die restlichen 5 Bit die <strong>Adresse</strong> (welche Speicherzelle).</p>
+
+<table id="table1">
+    <thead>
+        <tr>
+            <th>Opcode (3 Bit)</th>
+            <th>Assembler</th>
+            <th>Bedeutung</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>000</td><td>HLT</td><td>Halt. Der Prozessor stoppt.</td></tr>
+        <tr><td>001</td><td>LOAD a</td><td>Kopiere den Inhalt von Speicherzelle a in den Akku.</td></tr>
+        <tr><td>010</td><td>STORE a</td><td>Kopiere den Akku in Speicherzelle a.</td></tr>
+        <tr><td>011</td><td>ADD a</td><td>Addiere den Inhalt von Zelle a zum Akku.</td></tr>
+        <tr><td>100</td><td>SUB a</td><td>Subtrahiere den Inhalt von Zelle a vom Akku.</td></tr>
+        <tr><td>101</td><td>JMP a</td><td>Springe: Der nächste Befehl steht in Zelle a.</td></tr>
+        <tr><td>110</td><td>JZ a</td><td>Springe zu Zelle a, aber nur wenn der Akku 0 ist. Sonst weiter wie gewohnt.</td></tr>
+        <tr><td>111</td><td>OUT</td><td>Gib den Inhalt des Akkus aus (Adressbits werden ignoriert).</td></tr>
+    </tbody>
+</table>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Ein Additionsprogramm Zyklus für Zyklus</summary>
+<p>Das folgende Programm addiert die Zahlen in den Zellen 10 und 11, speichert die Summe in Zelle 12 und gibt sie aus. Links steht die Adresse, in der Mitte der Zellinhalt als Bitmuster, rechts die lesbare Form.</p>
+
+<table>
+    <thead>
+        <tr><th>Adresse</th><th>Inhalt (8 Bit)</th><th>Assembler / Bedeutung</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>0</td><td>001 01010</td><td>LOAD 10</td></tr>
+        <tr><td>1</td><td>011 01011</td><td>ADD 11</td></tr>
+        <tr><td>2</td><td>010 01100</td><td>STORE 12</td></tr>
+        <tr><td>3</td><td>111 00000</td><td>OUT</td></tr>
+        <tr><td>4</td><td>000 00000</td><td>HLT</td></tr>
+        <tr><td>…</td><td>…</td><td></td></tr>
+        <tr><td>10</td><td>000 00111</td><td>Zahl 7</td></tr>
+        <tr><td>11</td><td>000 00101</td><td>Zahl 5</td></tr>
+        <tr><td>12</td><td>000 00000</td><td>Zahl 0 (hier landet das Ergebnis)</td></tr>
+    </tbody>
+</table>
+
+<p>So arbeitet das Steuerwerk dieses Programm Zyklus für Zyklus ab. Beachte, dass der Befehlszähler schon beim Holen erhöht wird:</p>
+<table>
+    <thead>
+        <tr><th>Zyklus</th><th>Befehlszähler vor Fetch</th><th>geholter Befehl</th><th>Akku nach Execute</th><th>Sonstiges</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>1</td><td>0</td><td>LOAD 10</td><td>7</td><td></td></tr>
+        <tr><td>2</td><td>1</td><td>ADD 11</td><td>12</td><td></td></tr>
+        <tr><td>3</td><td>2</td><td>STORE 12</td><td>12</td><td>Zelle 12 enthält jetzt 12</td></tr>
+        <tr><td>4</td><td>3</td><td>OUT</td><td>12</td><td>Ausgabe: 12</td></tr>
+        <tr><td>5</td><td>4</td><td>HLT</td><td>12</td><td>Prozessor hält an</td></tr>
+    </tbody>
+</table>
+<p><strong>Ergebnis:</strong> Nach 5 Zyklen steht in Zelle 12 die Summe 12 (Bitmuster <code>000 01100</code>), ausgegeben wird 12.</p>
+<p><strong>Probe:</strong> 7 + 5 = 12 und 12 = 8 + 4 = <code>00001100</code><sub>2</sub>. Jeder der 5 Befehle wurde genau einmal geholt, weil das Programm keinen Sprung enthält: Der Befehlszähler läuft einfach von 0 bis 4.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+    <details>
+        <summary>
+            Ist das eine Zahl oder ein Befehl? Der Trick mit dem gemeinsamen Speicher
+        </summary>
+        <p>
+            Schau dir Zelle 10 an: Dort steht <code>00000111</code>. Wir haben gesagt, das sei die Zahl 7. Aber laut Befehlstabelle ist <code>000 00111</code> auch ein gültiger Befehl, nämlich HLT (die Adressbits werden bei HLT ignoriert). Und Zelle 1 mit <code>01101011</code> ist der Befehl ADD 11, aber genauso gut die Zahl 107.
+        </p>
+        <p>
+            <strong>Am Bitmuster selbst ist nicht erkennbar, ob es ein Befehl oder eine Zahl ist.</strong> Es kommt nur darauf an, ob der Befehlszähler gerade auf diese Zelle zeigt. Das kennst du schon von der Seite 1.4: Ein Byte ist Zahl, Zeichen oder Befehl, je nachdem, wie man es liest.
+        </p>
+        <p>
+            Diese Eigenschaft macht den Rechner so flexibel (ein Programm ist einfach Daten, die man laden kann), sie ist aber auch eine der wichtigsten Sicherheitslücken der Informatik. Angreifer versuchen, eigene Daten in den Speicher zu schmuggeln und den Befehlszähler dorthin zu lenken, sodass der Prozessor ihre Daten als Befehle ausführt (Stichwort <a href="https://de.wikipedia.org/wiki/Pufferüberlauf" target="_blank">Pufferüberlauf</a>). Moderne Prozessoren und Betriebssysteme markieren deshalb Speicherbereiche als „nur Daten, nicht ausführbar“.
+        </p>
+    </details>
+</div>
+
+<h2>Von der Maschinensprache zu Python</h2>
+
+<p>Der Mini-Rechner zeigt, wie mühsam Programmieren direkt in Bitmustern wäre. Deshalb gibt es mehrere Sprachebenen:</p>
+
+<ul>
+    <li><strong>Maschinensprache:</strong> Das, was der Prozessor tatsächlich versteht. Reine Bitmuster, für jeden Prozessortyp anders. Moderne Prozessoren kennen mehrere hundert bis über tausend verschiedene Befehle, unser Mini-Rechner nur acht.</li>
+    <li><strong>Assembler:</strong> Dieselben Befehle, aber mit lesbaren Kürzeln wie <code>LOAD 10</code>. Ein Übersetzungsprogramm, ebenfalls Assembler genannt, wandelt jede Zeile eins zu eins in Maschinensprache um. Assembler wird heute noch dort geschrieben, wo es auf jeden Takt ankommt, zum Beispiel in Treibern, in Teilen von Betriebssystemen oder in Spiele-Engines.</li>
+    <li><strong>Höhere Programmiersprachen</strong> wie Python, Java oder C: Eine Zeile wie <code>summe = a + b</code> wird von einem <strong>Compiler</strong> oder <strong>Interpreter</strong> in viele Maschinenbefehle übersetzt. Der Vorteil: Derselbe Python-Code läuft auf einem Intel-Laptop, einem Apple-Chip und einem Raspberry Pi, obwohl alle drei völlig verschiedene Maschinensprachen haben.</li>
+</ul>
+
+<div class="hinweis">
+    <details>
+        <summary>
+            Warum alte Spiele auf neuen Geräten laufen
+        </summary>
+        <p>
+            Ein Game-Boy-Spiel von 1990 liegt als Maschinensprache für den damaligen Prozessor vor. Dein Smartphone hat einen völlig anderen Prozessor. Trotzdem lassen sich solche Spiele mit einem <strong>Emulator</strong> spielen: Der Emulator ist ein Programm, das den Von-Neumann-Zyklus des alten Prozessors nachspielt, so wie du es in Aufgabe 4.1.2 von Hand gemacht hast, nur ein paar Millionen Mal pro Sekunde. Er holt einen alten Befehl, entschlüsselt ihn und führt ihn mit den Mitteln des neuen Prozessors aus. Derselbe Trick steckt in vielen Retro-Konsolen und hinter der Kompatibilitätsschicht, mit der Apple beim Wechsel auf eigene Chips alte Mac-Programme weiterlaufen ließ.
+        </p>
+    </details>
+</div>
+
+<h2>Was macht einen Prozessor schnell?</h2>
+
+<p>In der Werbung liest man „3,4 GHz“, „8 Kerne“ oder „16 Threads“. Was steckt dahinter?</p>
+
+<ul>
+    <li><strong>Taktfrequenz:</strong> Ein Taktgeber gibt den Rhythmus vor, in dem der Prozessor seine Schritte macht. 3 GHz bedeutet 3 Milliarden Takte pro Sekunde. Mehr Takt heißt mehr Zyklen pro Sekunde, aber auch mehr Wärme und mehr Stromverbrauch. Deshalb takten Smartphone-Prozessoren niedriger als Gaming-PCs, und deshalb wird dein Handy beim Spielen warm.</li>
+    <li><strong>Mehrkernprozessor:</strong> Auf einem Chip sitzen mehrere vollständige Steuer- und Rechenwerke, die <strong>Kerne</strong>. Jeder Kern kann gleichzeitig ein eigenes Programm abarbeiten. Ein Kern spielt Musik, einer lädt die Webseite, einer rendert das Spiel.</li>
+    <li><strong>Multithreading:</strong> Ein Kern wartet oft auf Daten aus dem Speicher. Beim Multithreading hält er zwei Befehlsströme (Threads) gleichzeitig bereit und springt zum zweiten, während der erste wartet. So wirkt ein Kern nach außen wie zwei, ist aber nicht doppelt so schnell.</li>
+</ul>
+
+<h2>Der Von-Neumann-Flaschenhals</h2>
+
+<p>Die Architektur hat eine eingebaute Schwachstelle: Alle Befehle und alle Daten müssen durch denselben Bus zwischen Prozessor und Speicher. Der Prozessor kann in einem Takt eine Addition ausführen, aber ein Zugriff auf den Arbeitsspeicher dauert je nach System 100 bis 300 Takte. Der schnellste Prozessor verbringt also die meiste Zeit mit Warten. Man nennt das den <strong>Von-Neumann-Flaschenhals</strong>.</p>
+
+<p>Stell dir eine Köchin vor, die pro Sekunde einen Handgriff schafft. Was sie gerade braucht, liegt auf der <strong>Arbeitsfläche</strong> neben dem Herd – sofort greifbar. Für alles andere muss sie zum <strong>Kühlschrank</strong> auf der anderen Seite der Küche, für Vorräte in den <strong>Keller</strong> (fünf Minuten hin, fünf Minuten zurück), und was gar nicht im Haus ist, muss sie im <strong>Supermarkt</strong> holen. Egal wie schnell sie schneidet: Wenn sie ständig laufen muss, wird das Essen nicht schneller fertig. Die Lösung ist, die gerade benötigten Zutaten vorher auf die Arbeitsfläche zu legen. Im Computer entspricht die Arbeitsfläche den Registern und dem <strong>Cache</strong>, der Kühlschrank dem Arbeitsspeicher, der Keller der SSD oder Festplatte und der Supermarkt dem Internet (→ Tabelle unten).</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Bringt mehr Takt mehr Leistung?</summary>
+<p>Ein Prozessorkern läuft mit 3&nbsp;GHz. <em>Annahmen:</em> Liegen Befehl und Daten im Cache, braucht jeder Befehl genau 1 Takt. Bei 2&nbsp;% der Befehle liegen die Daten aber nicht im Cache, dann muss der Kern auf den Arbeitsspeicher warten. Ein Zugriff auf den Arbeitsspeicher dauert 100&nbsp;ns (siehe Tabelle unten). Ein Hersteller übertaktet den Kern auf 4&nbsp;GHz und wirbt mit „33&nbsp;% mehr Leistung“. Stimmt das?</p>
+<ol>
+  <li><strong>Was:</strong> Wartezeit in Takte umrechnen: 100&nbsp;ns · 3·10<sup>9</sup>&nbsp;1/s = 300 Wartetakte. – <em>warum:</em> Der Prozessor zählt in Takten, der Speicher antwortet aber nach einer festen Zeit in Nanosekunden.</li>
+  <li><strong>Was:</strong> mittlere Takte pro Befehl bestimmen: 1 + 0,02 · 300 = 7 Takte. – <em>warum:</em> Jeder Befehl kostet 1 Takt, und im Mittel kommt bei jedem Befehl 2&nbsp;% von 300 Wartetakten dazu.</li>
+  <li><strong>Was:</strong> effektive Befehle pro Sekunde: 3·10<sup>9</sup> / 7 ≈ 0,43 Milliarden. – <em>warum:</em> Der Kern könnte 3 Milliarden Befehle schaffen, wartet aber 6 von 7 Takten.</li>
+  <li><strong>Was:</strong> dasselbe bei 4&nbsp;GHz: 100&nbsp;ns sind jetzt 400 Takte, also 1 + 0,02 · 400 = 9 Takte pro Befehl und 4·10<sup>9</sup> / 9 ≈ 0,44 Milliarden Befehle pro Sekunde. – <em>warum (die Falle):</em> Der Speicher wird durch den höheren Prozessortakt nicht schneller. Die Wartezeit in Nanosekunden bleibt gleich, also steigt die Zahl der Wartetakte mit.</li>
+  <li><strong>Was:</strong> vergleichen: 0,444 / 0,429 ≈ 1,037. – <em>warum:</em> Leistung ist das, was pro Sekunde fertig wird, nicht die Zahl der Takte.</li>
+</ol>
+<p><strong>Ergebnis:</strong> 33&nbsp;% mehr Takt bringen hier nur etwa 3,7&nbsp;% mehr Befehle pro Sekunde. Die Werbung ist irreführend, denn den Engpass bildet der Weg zum Speicher, nicht das Rechenwerk. Genau das ist der Von-Neumann-Flaschenhals.</p>
+<p><strong>Probe:</strong> Rechnung in Zeit statt in Takten: Pro Befehl dauert es bei 3&nbsp;GHz im Mittel 0,333&nbsp;ns + 0,02 · 100&nbsp;ns = 2,333&nbsp;ns, bei 4&nbsp;GHz 0,25&nbsp;ns + 2&nbsp;ns = 2,25&nbsp;ns. Kehrwerte: 1 / 2,333&nbsp;ns ≈ 0,43 Milliarden und 1 / 2,25&nbsp;ns ≈ 0,44 Milliarden Befehle pro Sekunde. Das passt.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+    <details>
+        <summary>
+            Wie der Flaschenhals heute umgangen wird
+        </summary>
+        <h4>Cache-Speicher</h4>
+        <p>Kleine, sehr schnelle Speicher direkt im Prozessor halten Kopien der Daten und Befehle bereit, die zuletzt gebraucht wurden. Meist gibt es mehrere Stufen (L1, L2, L3), von winzig und blitzschnell bis größer und langsamer. Ein gutes Programm nutzt Daten, die nahe beieinander liegen, damit sie möglichst oft schon im Cache sind.</p>
+        <h4>Pipelining</h4>
+        <p>Der Prozessor wartet nicht, bis ein Befehl komplett durch alle vier Schritte ist. Während Befehl 1 ausgeführt wird, wird Befehl 2 schon entschlüsselt und Befehl 3 geholt, wie am Fließband. So ist in jedem Takt jede Stufe beschäftigt.</p>
+        <h4>Multithreading und Mehrkernprozessoren</h4>
+        <p>Wenn ein Befehlsstrom auf den Speicher wartet, wird ein anderer bearbeitet. Siehe oben.</p>
+        <h4>Grafikprozessoren (GPUs)</h4>
+        <p>Der Flaschenhals ist auch der Grund, warum KI-Modelle heute meist nicht auf klassischen Prozessoren, sondern auf <strong>Grafikprozessoren</strong> trainiert werden. Eine GPU hat statt weniger schneller Kerne tausende einfache Rechenwerke, die dieselbe Operation gleichzeitig auf riesige Datenmengen anwenden. Genau das braucht man beim Training neuronaler Netze, bei der Bildbearbeitung und beim Rendern von Spielen. Mehr dazu im <a href="https://en.wikipedia.org/wiki/Graphics_processing_unit" target="_blank">Wikipedia-Artikel „Graphics processing unit“</a>.</p>
+        <p>Dieser Trend hat einen realen Energiepreis: Laut der <a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank">Internationalen Energieagentur (IEA)</a> verbrauchten Rechenzentren 2024 weltweit rund 415 Terawattstunden Strom (etwa 1,5&nbsp;% des globalen Stromverbrauchs). Bis 2030 wird durch den KI-Boom eine Verdopplung erwartet.</p>
+    </details>
+</div>
+
+<h2>Die Alternative: Harvard-Architektur</h2>
+
+<p>Schon in den 1940er-Jahren gab es einen zweiten Bauplan. Der Rechner <em>Mark I</em> an der Harvard University hatte <strong>getrennte Speicher</strong> für Befehle und für Daten – jeder mit einem eigenen Bus. Der Prozessor kann deshalb im selben Takt den nächsten Befehl holen und Daten lesen oder schreiben. Der Von-Neumann-Flaschenhals wird so entschärft.</p>
+
+<h2>Speichersysteme: Vom Register bis zur Cloud</h2>
+
+<p>Ein Computer hat nicht einen Speicher, sondern eine ganze Treppe von Speichern. Ganz oben stehen die winzigen, schnellen und teuren, ganz unten die riesigen, langsamen und billigen. Wie groß die Geschwindigkeitsunterschiede sind, kann man sich kaum vorstellen. Deshalb hier ein Trick: Wir tun so, als würde ein Prozessortakt bei 3 GHz nicht 0,33 Nanosekunden dauern, sondern <strong>eine Sekunde</strong>. Dann ergeben sich folgende Wartezeiten aus Sicht des Prozessors (Größenordnungen, je nach Gerät unterschiedlich):</p>
+
+<table>
+    <thead>
+        <tr><th>Speicher</th><th>echte Zugriffszeit (ca.)</th><th>Takte bei 3 GHz</th><th>in „Menschenzeit“ (1 Takt = 1 s)</th><th>typische Größe</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Register im Prozessor</td><td>0,3 ns</td><td>1</td><td>1 Sekunde</td><td>wenige Byte</td></tr>
+        <tr><td>L1-Cache</td><td>1 ns</td><td>ca. 4</td><td>4 Sekunden</td><td>einige 10 KB</td></tr>
+        <tr><td>L3-Cache</td><td>10 ns</td><td>ca. 30</td><td>eine halbe Minute</td><td>einige 10 MB</td></tr>
+        <tr><td>Arbeitsspeicher (RAM)</td><td>100 ns</td><td>ca. 300</td><td>5 Minuten</td><td>8 bis 64 GB</td></tr>
+        <tr><td>SSD</td><td>100 µs</td><td>ca. 300.000</td><td>3,5 Tage</td><td>0,5 bis 4 TB</td></tr>
+        <tr><td>Festplatte (HDD)</td><td>10 ms</td><td>ca. 30 Millionen</td><td>knapp 1 Jahr</td><td>2 bis 20 TB</td></tr>
+        <tr><td>Server im Internet (Antwortzeit)</td><td>100 ms</td><td>ca. 300 Millionen</td><td>etwa 10 Jahre</td><td>beliebig</td></tr>
+    </tbody>
+</table>
+
+<p>Wenn der Prozessor also eine Datei von der Festplatte braucht, ist das aus seiner Sicht so, als würde er einen Brief abschicken und ein Jahr auf Antwort warten. Deshalb fühlt sich ein Rechner mit SSD so viel schneller an als einer mit Festplatte, obwohl der Prozessor derselbe ist.</p>
+
+<p>Die Speicher am unteren Ende der Treppe unterscheiden sich außerdem darin, <strong>wie</strong> sie die Bits festhalten:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Speichersystem</th>
+            <th>Funktionsprinzip</th>
+            <th>Stärken</th>
+            <th>Schwächen</th>
+            <th>Beispiele</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Optisch</td>
+            <td>Ein Laser liest winzige Vertiefungen in einer beschichteten Scheibe.</td>
+            <td>billig, unempfindlich gegen Magnetfelder und Stromausfall, lange haltbar, nicht per Software löschbar</td>
+            <td>langsam, kleine Kapazität, kratzempfindlich, Laufwerke werden selten</td>
+            <td>CD, DVD, Blu-ray, Archiv-Discs</td>
+        </tr>
+        <tr>
+            <td>Magnetisch</td>
+            <td>Ein Schreib-Lese-Kopf magnetisiert Bereiche auf rotierenden Scheiben.</td>
+            <td>sehr viel Kapazität für wenig Geld, sehr oft überschreibbar</td>
+            <td>bewegliche Teile (laut, stoßempfindlich, Verschleiß), lange Zugriffszeit</td>
+            <td>Festplatte (HDD), Magnetband in Rechenzentren</td>
+        </tr>
+        <tr>
+            <td>Elektronisch</td>
+            <td>Ladungen werden in Transistorzellen eingeschlossen (Flash) oder gehalten (RAM).</td>
+            <td>sehr schnell, keine beweglichen Teile, klein, stromsparend</td>
+            <td>teurer pro TB, Flash-Zellen verschleißen beim Schreiben, RAM verliert den Inhalt ohne Strom</td>
+            <td>SSD, USB-Stick, Speicherkarte, Arbeitsspeicher</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Warum das Modell bis heute zählt</summary>
+        <p><strong>Alltag:</strong> Der Von-Neumann-Flaschenhals ist ein Grund, warum KI-Modelle auf Grafikkarten trainiert werden und warum ein Laptop mit mehr Cache und SSD sich „flotter“ anfühlt, obwohl die Taktfrequenz gleich bleibt. In deiner Waschmaschine, deiner Zahnbürste mit Timer oder deinem Fahrradcomputer arbeitet dagegen meist ein kleiner Mikrocontroller mit Harvard-Architektur.</p>
+        <p><strong>Berufsleben:</strong></p>
+        <ul>
+            <li><strong>Computerarchitekt/in</strong>: entscheidet, wie groß Caches werden, wie viele Kerne ein Chip bekommt und wie der Speicher angebunden wird – z.&nbsp;B. bei Chipentwicklern im Raum Dresden, wo Prozessoren für Autos, Industrie und KI entworfen werden.</li>
+            <li><strong>Embedded-Systems-Entwickler/in</strong>: programmiert Mikrocontroller in Fahrzeugen, Haushaltsgeräten oder Medizintechnik und muss dabei mit wenigen Kilobyte Programm- und Datenspeicher auskommen.</li>
+        </ul>
+    </details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+    <p>
+        <strong>Merke: Die Prinzipien der Von-Neumann-Architektur</strong><br>
+        1. Der Rechner besteht aus Rechenwerk, Steuerwerk, Speicherwerk, Ein-/Ausgabewerk und Bussystem.<br>
+        2. Der Aufbau ist <strong>unabhängig vom Problem</strong>. Für eine neue Aufgabe wird ein neues Programm geladen, nicht neue Hardware gebaut.<br>
+        3. <strong>Programme und Daten liegen im selben Speicher</strong> und sehen dort gleich aus: als Bitmuster.<br>
+        4. Der Speicher besteht aus gleich großen, fortlaufend nummerierten Zellen (<strong>Adressierung</strong>).<br>
+        5. Befehle werden in der Reihenfolge abgearbeitet, in der sie im Speicher stehen (<strong>Sequentialität</strong>). Nur <strong>Sprungbefehle</strong> durchbrechen diese Reihenfolge.
+    </p>
+</div>
+
+<div class="merke">
+    <p><strong>Von-Neumann- und Harvard-Architektur im Vergleich</strong></p>
+    <table class="gitter">
+        <tr><th></th><th>Von-Neumann-Architektur</th><th>Harvard-Architektur</th></tr>
+        <tr><td>Speicher</td><td>ein gemeinsamer Speicher für Programm und Daten</td><td>getrennte Speicher für Programm und Daten</td></tr>
+        <tr><td>Bus</td><td>ein gemeinsamer Bus – Befehle und Daten nacheinander</td><td>getrennte Busse – Befehle und Daten gleichzeitig</td></tr>
+        <tr><td>Vorteile</td><td>einfacher Aufbau, Speicher flexibel aufteilbar, Programme lassen sich wie Daten laden</td><td>schneller, weil kein gemeinsamer Engpass; Programm kann nicht versehentlich als Daten überschrieben werden</td></tr>
+        <tr><td>Nachteile</td><td>Von-Neumann-Flaschenhals</td><td>aufwendiger, Speichergrößen fest aufgeteilt</td></tr>
+        <tr><td>Einsatz</td><td>PCs, Laptops, Smartphones (als Grundmodell)</td><td>Mikrocontroller (z.&nbsp;B. in Arduino-Boards), digitale Signalprozessoren</td></tr>
+    </table>
+    <p>Moderne Prozessoren kombinieren beides: Der Arbeitsspeicher ist gemeinsam (Von Neumann), aber der schnellste Cache ist in einen Befehls- und einen Datencache getrennt (Harvard). Man spricht von einer <strong>modifizierten Harvard-Architektur</strong>.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 4.1.1: Bauteile finden <span class="niveau">AFB I</span>
+        </summary>
+        <ol>
+            <li>Lade dir das <a href="../material/AB_Neumann-Architektur.pdf" target="_blank">Arbeitsblatt</a> herunter und trage die fünf Komponenten mit ihrer Aufgabe ein.</li>
+            <li>Ordne die folgenden Teile deines eigenen Laptops oder Smartphones den Komponenten der Von-Neumann-Architektur zu: Tastatur, Bildschirm, Arbeitsspeicher (RAM), Prozessor, Lautsprecher, Touchscreen, Kamera, WLAN-Modul, SSD.<br>
+            Mindestens zwei davon sind knifflig. Begründe bei diesen, warum die Zuordnung nicht eindeutig ist.</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 4.1.2: Sei der Prozessor <span class="niveau">AFB II</span>
+        </summary>
+        <p>Im Speicher des Mini-Rechners steht das folgende Programm. Die Zellen 10 und 11 enthalten die Zahlen 3 und 1.</p>
+        <table>
+            <thead><tr><th>Adresse</th><th>Assembler</th></tr></thead>
+            <tbody>
+                <tr><td>0</td><td>LOAD 10</td></tr>
+                <tr><td>1</td><td>OUT</td></tr>
+                <tr><td>2</td><td>SUB 11</td></tr>
+                <tr><td>3</td><td>JZ 5</td></tr>
+                <tr><td>4</td><td>JMP 1</td></tr>
+                <tr><td>5</td><td>HLT</td></tr>
+                <tr><td>10</td><td>3</td></tr>
+                <tr><td>11</td><td>1</td></tr>
+            </tbody>
+        </table>
+        <ol>
+            <li>Spiele das Steuerwerk: Lege eine Tabelle mit den Spalten <em>Zyklus, Befehlszähler, Befehl, Akku, Ausgabe</em> an und arbeite das Programm Zyklus für Zyklus ab, bis HLT erreicht ist. Was gibt das Programm aus?</li>
+            <li>Beschreibe in einem Satz, was dieses Programm allgemein tut. Welches Konstrukt aus der Programmierung erkennst du wieder?</li>
+            <li>Übersetze die Befehle in den Zellen 0 bis 5 in Maschinensprache (8-Bit-Muster).</li>
+            <li>Jemand ändert den Inhalt von Zelle 11 auf 0. Was passiert jetzt beim Ausführen? Erkläre, was ein Nutzer davon am Bildschirm bemerken würde.</li>
+            <li>Der Befehl in Zelle 5 wird versehentlich gelöscht (Zelle 5 enthält jetzt <code>00000000</code>). Ändert das etwas am Verhalten des Programms? Begründe mit der Befehlstabelle.</li>
+            <li>Für Schnelle: Schreibe ein Programm für den Mini-Rechner, das die Zahl in Zelle 10 verdoppelt, das Ergebnis in Zelle 12 speichert und ausgibt. Du darfst dir aussuchen, ob du mit oder ohne Schleife arbeitest.</li>
+        </ol>
+    </details>
+</div>

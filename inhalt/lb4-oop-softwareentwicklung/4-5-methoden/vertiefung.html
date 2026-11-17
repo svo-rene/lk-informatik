@@ -1,0 +1,44 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-4-5-5">
+        <details>
+            <summary>Aufgabe 4.5.5: Fehler finden – das Leihrad mit Akku <span class="niveau">AFB III</span></summary>
+            <p>Der Verleih von E-Bikes prüft vor jeder Ausleihe, ob ein Rad genug Akku hat. Pro Kilometer verbraucht ein Rad 2&nbsp;% Akku, fahrbereit ist es ab 20&nbsp;%. Das Programm soll für ein Rad mit 80&nbsp;% Akku nach 34&nbsp;km <code>Rad 4 muss an die Ladestation</code> ausgeben.</p>
+            <pre><code class="language-python">class Leihrad:
+    def __init__(self, nummer, akku):
+        self.nummer = nummer
+        self.akku = akku          # Ladestand in Prozent
+
+    def fahren(km):
+        self.akku = self.akku - 2 * km
+
+    def reichweite(self):
+        print(self.akku // 2)
+
+    def ist_fahrbereit(self):
+        return self.akku &gt;= 20
+
+rad = Leihrad(4, 80)
+rad.fahren(34)
+rest = rad.reichweite()
+if rest &gt; 5 and rad.ist_fahrbereit:
+    print("Rad", rad.nummer, "kann ausgeliehen werden")
+else:
+    print("Rad", rad.nummer, "muss an die Ladestation")</code></pre>
+            <ol>
+                <li>Finde die drei Fehler. Gib für jeden an, ob Python ihn mit einer Fehlermeldung anzeigt oder ob das Programm „stumm“ ein falsches Ergebnis liefert.</li>
+                <li>Gib an, was das Programm ausgibt, wenn die Fehler nacheinander in der Reihenfolge behoben werden, in der sie beim Ausführen auftreten.</li>
+                <li>Verbessere die Klasse zusätzlich so, dass der Akku nie unter 0&nbsp;% fällt, und teste:
+                    <table class="gitter">
+                        <thead><tr><th>Anweisungen</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>r = Leihrad(4, 80)</code><br><code>r.fahren(10)</code><br><code>print(r.akku, r.reichweite(), r.ist_fahrbereit())</code></td><td><code>60 30 True</code></td><td></td></tr>
+                            <tr><td><code>r.fahren(25)</code><br><code>print(r.akku, r.reichweite(), r.ist_fahrbereit())</code></td><td><code>10 5 False</code></td><td></td></tr>
+                            <tr><td><code>r.fahren(10)</code><br><code>print(r.akku, r.reichweite())</code></td><td><code>0 0</code></td><td></td></tr>
+                            <tr><td>das korrigierte Hauptprogramm oben</td><td><code>Rad 4 muss an die Ladestation</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+        </details>
+    </div>

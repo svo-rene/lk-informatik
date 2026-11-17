@@ -1,0 +1,62 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.0.5: Fehler finden im Tokenizer <span class="niveau">AFB III</span></summary>
+                <p>Paul hat den Tokenizer aus Beispiel 1 „vereinfacht“. Er ändert nur die innere Schleife:</p>
+                <pre><code class="language-python">        laenge = 1
+        gefunden = False
+        while laenge &lt;= len(wort) - pos and not gefunden:
+            stueck = wort[pos:pos + laenge]
+            if stueck in vokabular:
+                tokens.append(stueck)
+                pos = pos + laenge
+                gefunden = True
+            else:
+                laenge = laenge + 1</code></pre>
+                <ol>
+                    <li>Sage ohne Ausführen die Ausgabe von Pauls Version für „informatikerin“ und für „c3po“ voraus.</li>
+                    <li>Erkläre die Ursache des Fehlers.</li>
+                    <li>Paul hat seine Version nur mit „c3po“ und „“ (leeres Wort) getestet und keinen Fehler bemerkt. Beurteile seine Testauswahl und gib zwei Testfälle an, die den Fehler sicher aufdecken.</li>
+                    <li>Begründe, warum Pauls Version für ein Sprachmodell ungünstig wäre, obwohl sie jedes Wort korrekt zerlegt (Stichworte: Tokenanzahl, Kontextfenster, Rechenaufwand).</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.0.6: KI-Antwort prüfen <span class="niveau">AFB III</span></summary>
+                <p>Mia fragt: „Wie viele r stecken im Wort ‚Erdbeere‘, und wie kommt ein Sprachmodell eigentlich auf seine Antworten?“ Die Antwort klingt souverän:</p>
+                <blockquote>
+                    <p>„Im Wort ‚Erdbeere‘ kommt der Buchstabe r dreimal vor: E-r-d-b-e-e-r-e. Sprachmodelle wie ich schlagen Antworten in einer großen Wissensdatenbank nach, die beim Training angelegt wurde; bei Fakten sind die Antworten deshalb zuverlässig. Wenn du die Temperatur auf 0 stellst, kann ich mich gar nicht mehr irren. Laut einer Studie der TU Dresden von 2019 halluzinieren moderne Sprachmodelle in weniger als 0,1&nbsp;% der Fälle.“</p>
+                </blockquote>
+                <ol>
+                    <li>Untersuche die Antwort. Benenne jeden Fehler, ordne ihn einer Fehlerquelle aus Abschnitt 7 zu und korrigiere ihn.</li>
+                    <li>Ein Fehler lässt sich allein mit der Antwort selbst nachweisen, ohne jede Recherche. Erkläre, wie.</li>
+                    <li>Erkläre mit Tokenisierung und Training, warum gerade das Buchstabenzählen schiefgehen kann.</li>
+                    <li>Formuliere Mias Frage so um, dass die Gefahr eines Zählfehlers sinkt, und begründe.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.0.7: Macht Temperatur 0 ein Modell zuverlässig? <span class="niveau">AFB III</span></summary>
+                <p>Ben behauptet: „Mit Temperatur 0 wählt das Modell immer das wahrscheinlichste Token, also das richtige. Für Fakten sollte man deshalb immer T = 0 einstellen, dann stimmt alles.“</p>
+                <p>Ein Modell bewertet die Fortsetzung von „Die einwohnerreichste Stadt Sachsens ist“ mit den Logits Dresden 2,0 und Leipzig 1,9 (andere Tokens vernachlässigt). Richtig ist Leipzig.</p>
+                <ol>
+                    <li>Berechne die Wahrscheinlichkeiten für T = 1 und T = 0,5.</li>
+                    <li>Gib an, wie oft das Modell bei 100 Anfragen die richtige Antwort gibt: mit T = 0 (greedy) und mit Sampling bei T = 1.</li>
+                    <li>Beurteile Bens Behauptung. Gehe darauf ein, was die Temperatur steuert und was nicht, und nenne eine Situation, in der eine niedrige Temperatur trotzdem sinnvoll ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Weiterführende Links</h2>
+
+<ul>
+            <li><a href="https://www.youtube.com/watch?v=yMQPQuz5WpA" target="_blank" rel="noopener">But what is a GPT? Visual intro to Transformers (3Blue1Brown, YouTube)</a>: anschauliche Erklärung von Tokens, Embeddings, Attention und Softmax mit Temperatur.</li>
+            <li><a href="https://poloclub.github.io/transformer-explainer/" target="_blank" rel="noopener">Transformer Explainer (Georgia Tech, interaktiv)</a>: Ein kleines echtes Sprachmodell läuft im Browser; du kannst die Temperatur verstellen und die Wahrscheinlichkeiten live sehen.</li>
+            <li><a href="https://schulki.de/documentation/token" target="_blank" rel="noopener">schulKI-Anleitung: Erklärung Token</a> und <a href="https://schulki.de/privacy" target="_blank" rel="noopener">Datenschutzerklärung von schulKI</a>: die Quellen für Abschnitt 4 und 8 dieser Seite.</li>
+            <li><a href="https://tiktokenizer.vercel.app/" target="_blank" rel="noopener">Tiktokenizer</a>: zeigt, wie echte Modelle einen eingegebenen Text in Tokens zerlegen. Probiere deutsche und englische Sätze aus.</li>
+        </ul>

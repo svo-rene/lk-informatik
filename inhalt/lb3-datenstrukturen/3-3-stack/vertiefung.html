@@ -1,0 +1,115 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.3.6: Fehler finden im Undo-Stapel <span class="niveau">AFB III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/undo_stack_fehler.py</code> – neu anlegen; Klasse, <code>Node</code> und Testprogramm abtippen<br><strong>Commits:</strong> zuerst unverändert: <code>3.3.6: fehlerhafte Stack-Klasse mit Testprogramm übernommen</code> · nach Teil 2: <code>3.3.6 Teil 2: pop korrigiert</code> · nach Teil 3: <code>3.3.6 Teil 3: peek und leeren ergänzt</code> · nach Teil 4: <code>3.3.6 Teil 4: Attribute privat, Tabelle geprüft</code></p>
+                <p>Für den Undo-Verlauf hat ein Mitschüler eine eigene Stapelklasse mit Zähler geschrieben (<code>Node</code> wie in Beispiel 2):</p>
+                <pre><code class="language-python">class Stack:
+    def __init__(self):
+        self._head = None
+        self._anzahl = 0
+
+    def is_empty(self):
+        return self._head is None
+
+    def push(self, data):
+        neu = Node(data)
+        neu.next = self._head
+        self._head = neu
+        self._anzahl += 1
+
+    def pop(self):
+        data = self._head.data
+        self._head = self._head.next
+        return data
+
+    def __len__(self):
+        return self._anzahl
+
+s = Stack()
+s.push("Kreis")
+s.push("Linie")
+print(s.pop())
+print(len(s))
+print(s.pop())
+print(len(s), s.is_empty())
+s.pop()</code></pre>
+                <p>Im Zeichenprogramm, das diese Klasse benutzt, steht außerdem:</p>
+                <pre><code class="language-python">oben = verlauf._head.data     # oberste Aktion in der Statuszeile anzeigen
+verlauf._head = None          # Knopf „Verlauf löschen“</code></pre>
+                <ol>
+                    <li>Gib die tatsächlichen Ausgaben des Testprogramms an und zeichne das Zeigerdiagramm mit <code>_head</code> und <code>_anzahl</code> nach jeder Operation.</li>
+                    <li>Benenne die beiden Fehler in <code>pop</code> und korrigiere die Methode.</li>
+                    <li>Beurteile die zwei Zeilen aus dem Zeichenprogramm: Welche Probleme entstehen, wenn der Verlauf leer ist bzw. wenn danach <code>len(verlauf)</code> abgefragt wird? Ergänze die Klasse um passende öffentliche Methoden <code>peek()</code> und <code>leeren()</code>.</li>
+                    <li>Die Klasse legt ihre Attribute nur <strong>geschützt</strong> (protected, <code>_head</code>) an. Stelle sie in deiner korrigierten Klasse auf <strong>privat</strong> um (<code>__head</code>, <code>__anzahl</code>). Was passiert jetzt mit den zwei Zeilen aus dem Zeichenprogramm, wenn dort <code>verlauf.__head</code> steht? Unterscheide Lesen und Zuweisen.</li>
+                </ol>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td>Testprogramm oben mit korrigierter Klasse</td><td><code>Linie</code>, <code>1</code>, <code>Kreis</code>, <code>0 True</code>, dann <code>IndexError: pop auf leerem Stapel</code></td><td></td></tr>
+                        <tr><td><code>s = Stack(); s.peek()</code></td><td><code>IndexError: peek auf leerem Stapel</code></td><td></td></tr>
+                        <tr><td><code>s = Stack(); s.push(1); s.push(2); print(s.peek(), len(s))</code></td><td><code>2 2</code></td><td></td></tr>
+                        <tr><td>danach <code>s.leeren(); print(len(s), s.is_empty())</code></td><td><code>0 True</code></td><td></td></tr>
+                    </tbody>
+                </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.3.7: Rangierbahnhof – Schlange aus zwei Stapeln <span class="niveau">AFB III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/zwei_stapel_queue.py</code> – neu anlegen; die Klasse <code>Stack</code> holst du mit <code>from stack_knoten import Stack</code><br><strong>Commits:</strong> nach Teil 2: <code>3.3.7 Teil 2: ZweiStapelQueue, alle 6 Tests ok</code></p>
+                <p>Ein Rangierbahnhof hat zwei Abstellgleise, die beide Sackgleise sind: Der zuletzt hineingeschobene Wagen muss als Erster wieder heraus (Stapel). Trotzdem sollen die Wagen den Bahnhof in der Reihenfolge ihrer Ankunft verlassen (Schlange). Die Lösung der Rangierer: Ankommende Wagen kommen auf Gleis „ein“. Abfahren darf nur ein Wagen von Gleis „aus“. Ist Gleis „aus“ leer, werden <em>alle</em> Wagen von „ein“ nacheinander nach „aus“ umgesetzt.</p>
+                <ol>
+                    <li>Lege eine Tabelle mit den Spalten Operation, Gleis „ein“ (oben rechts), Gleis „aus“ (oben rechts), Rückgabe an und fülle sie für diese Folge aus: enqueue(1), enqueue(2), enqueue(3), dequeue(), enqueue(4), dequeue(), dequeue(), dequeue(), dequeue().</li>
+                    <li>Implementiere eine Klasse <code>ZweiStapelQueue</code> mit den privaten Attributen <code>__ein</code> und <code>__aus</code> (zwei Objekte der Klasse <code>Stack</code> aus Beispiel 2) und den Methoden <code>enqueue</code>, <code>dequeue</code>, <code>peek</code> und <code>is_empty</code>. Bei leerer Schlange lösen <code>dequeue</code> und <code>peek</code> <code>IndexError("dequeue aus leerer Schlange")</code> bzw. <code>IndexError("peek auf leerer Schlange")</code> aus.</li>
+                    <li>Ein Mitschüler schlägt vor, bei <em>jedem</em> <code>dequeue</code> umzusetzen, auch wenn „aus“ nicht leer ist. Zeige an der Folge aus Teil 1, dass dann eine falsche Reihenfolge entsteht.</li>
+                    <li>Beurteile die Laufzeit: Wie teuer ist ein einzelnes <code>dequeue</code> im schlechtesten Fall? Wie oft wird jeder Wagen insgesamt bewegt, wenn n Wagen ankommen und wieder abfahren? Vergleiche mit der <code>Queue</code> aus Seite 3.2.</li>
+                </ol>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe (nacheinander)</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>q = ZweiStapelQueue(); print(q.is_empty())</code></td><td><code>True</code></td><td></td></tr>
+                        <tr><td><code>q.dequeue()</code></td><td><code>IndexError: dequeue aus leerer Schlange</code></td><td></td></tr>
+                        <tr><td><code>q.enqueue(1); q.enqueue(2); q.enqueue(3); print(q.dequeue())</code></td><td><code>1</code></td><td></td></tr>
+                        <tr><td><code>q.enqueue(4); print(q.dequeue(), q.dequeue(), q.dequeue())</code></td><td><code>2 3 4</code></td><td></td></tr>
+                        <tr><td><code>print(q.is_empty())</code></td><td><code>True</code></td><td></td></tr>
+                        <tr><td><code>q.enqueue("x"); print(q.peek(), q.dequeue())</code></td><td><code>x x</code></td><td></td></tr>
+                    </tbody>
+                </table>
+            </details>
+        </div>
+
+<h2 id="vor-der-lk">Vor der LK: so gehst du vor</h2>
+
+<p>In der LK zu Seite 3.0.1 bis 3.3 kommen zwei Arten von Aufgaben: Ohne Rechner verfolgst du, was Anweisungen mit einer Liste, einer Schlange oder einem Stapel machen. Am Rechner schreibst du eine Methode für die verkettete Liste und testest sie. Die vier Videos zeigen an eigenen Beispielen, wie du dabei vorgehst – sie verraten keine Lösungen der Aufgaben auf den Kursseiten.</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1rem">
+            <figure>
+                <div class="lp-video"><video controls preload="none" poster="../vid/3-3-lk1_verfolgen_vorschau.png" src="../vid/3-3-lk1_verfolgen.mp4"></video><a href="../vid/3-3-lk1_verfolgen.mp4">Video ansehen</a></div>
+                <figcaption>Video A: Schlange und Stapel Zeile für Zeile verfolgen (ca. 1,5 min)</figcaption>
+            </figure>
+            <figure>
+                <div class="lp-video"><video controls preload="none" poster="../vid/3-3-lk2_planen_vorschau.png" src="../vid/3-3-lk2_planen.mp4"></video><a href="../vid/3-3-lk2_planen.mp4">Video ansehen</a></div>
+                <figcaption>Video B: Eine Methode planen – erst die Fälle zeichnen (ca. 1 min)</figcaption>
+            </figure>
+            <figure>
+                <div class="lp-video"><video controls preload="none" poster="../vid/3-3-lk3_schreiben_vorschau.png" src="../vid/3-3-lk3_schreiben.mp4"></video><a href="../vid/3-3-lk3_schreiben.mp4">Video ansehen</a></div>
+                <figcaption>Video C: Die Methode schreiben und testen (ca. 1,5 min)</figcaption>
+            </figure>
+            <figure>
+                <div class="lp-video"><video controls preload="none" poster="../vid/3-3-lk4_palindrom_vorschau.png" src="../vid/3-3-lk4_palindrom.mp4"></video><a href="../vid/3-3-lk4_palindrom.mp4">Video ansehen</a></div>
+                <figcaption>Video D: Eine Aufgabe mit Stapel und Schlange lösen (ca. 1,5 min)</figcaption>
+            </figure>
+        </div>
+
+<div class="hinweis">
+            <p><b>Checkliste für die LK</b></p>
+            <ul>
+                <li>Python-Liste: Verschiebungen bei <code>insert(k, x)</code> und <code>pop(k)</code> zählen, Umzug bei voller Kapazität.</li>
+                <li>Verkettete Liste: Zeigerdiagramm zeichnen, <code>head</code> nie als Laufvariable benutzen, beim Einfügen erst den Rest merken, dann umhängen.</li>
+                <li>Schlange: vorn entnehmen, hinten anstellen. Stapel: oben auflegen, oben wegnehmen. <code>peek</code>/<code>top</code> entfernen nichts.</li>
+                <li>Methode schreiben: Fälle zeichnen (leer, erster Knoten, Mitte, Ende, nicht gefunden), dann Fall für Fall programmieren und für jeden Fall einen Test aufschreiben.</li>
+            </ul>
+        </div>

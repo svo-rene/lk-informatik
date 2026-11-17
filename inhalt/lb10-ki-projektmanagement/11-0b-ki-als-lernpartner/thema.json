@@ -1,0 +1,18 @@
+{
+  "nr": "11.0b",
+  "titel": "KI als Lernpartner: Assistenten verstehen und selbst einstellen",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

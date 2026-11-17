@@ -1,0 +1,478 @@
+<p>
+            In der Welt der Datenbanken ist das Entity-Relationship-Modell (ERM) ein fundamentales Konzept, das uns hilft, komplexe Datenstrukturen zu verstehen und zu gestalten. Es kann nicht nur beim relationalen Datenbankmodell verwendet werden, sondern dient auch in anderen Datenbankmodellen als Grundlage für die weitere Entwicklung.
+          </p>
+
+<div class="praxisbezug">
+              <details>
+                  <summary>
+                      Praxisbezug: Warum Datenmodellierung im echten Leben zählt
+                  </summary>
+                  <p>Stell dir ein Krankenhaus vor, das seine Patientendaten, Befunde und Termine plant, ohne vorher ein durchdachtes Datenmodell zu erstellen: Verschiedene Abteilungen legen dieselben Informationen doppelt und in unterschiedlichen Formaten ab, Befunde landen nicht rechtzeitig beim richtigen Arzt, und am Ende leidet die Behandlungsqualität. Genau solche Probleme durch fehlende oder schlechte Datenmodellierung – sogenannte Datensilos und veraltete Datenbestände – treten in der Praxis immer wieder auf, zum Beispiel in Krankenhäusern, Banken oder Online-Shops. Ein sauber geplantes ER-Modell verhindert solche Fehler von Anfang an, weil Entitäten, Attribute und Beziehungen einmal klar definiert und mit allen Beteiligten abgestimmt werden, bevor die eigentliche Datenbank gebaut wird.</p>
+                  <p><strong>Berufsfelder:</strong> In der IT arbeiten Datenbankdesigner*innen, Softwarearchitekt*innen und Systemanalytiker*innen direkt mit ER-Modellen, wenn sie neue Fachverfahren oder Anwendungen konzipieren. Aber auch außerhalb der klassischen Informatik ist Datenmodellierung relevant: Prozessmanager*innen und Unternehmensberater*innen nutzen ähnliche Modelle, um Geschäftsprozesse und Datenflüsse zu analysieren, und Verwaltungsfachangestellte wirken bei der Einführung oder Anpassung von Fachverfahren (z.&nbsp;B. in Schulverwaltung, Gesundheitswesen oder öffentlicher Verwaltung) mit, indem sie fachliche Anforderungen an die Datenstruktur formulieren.</p>
+                  <p><strong>Weiterlesen:</strong> <a href="https://www.krankenhaus-it.de/item.2848/veraltete-daten-und-datensilos-im-krankenhaus.html" target="_blank" rel="noopener">Veraltete Daten und Datensilos im Krankenhaus</a> &middot; <a href="https://www.holsterlabs.de/blog/datenmodellierung-fehler-vermeiden-erfolg-sichern" target="_blank" rel="noopener">Fehlervermeidung bei der Datenmodellierung: Typische Fallstricke und wie man sie vermeidet</a></p>
+              </details>
+          </div>
+
+<h2>Was ist das Entity-Relationship-Modell?</h2>
+
+<p>
+            Das ERM ist ein konzeptuelles Modell, das zur Darstellung der Struktur einer Datenbank verwendet wird. Es hilft uns, die wichtigsten Elemente unserer Daten und ihre Beziehungen zueinander zu identifizieren und zu visualisieren, bevor wir sie in eine tatsächliche Datenbank umsetzen.
+          </p>
+
+<div class="hinweis">
+        <details>
+            <summary>
+                Hinweis: Bedeutung des ERM für das Datenbankdesign
+            </summary>
+            <p>
+                Das ERM ist mehr als nur ein Diagramm. Es ist ein mächtiges Werkzeug für das Datenbankdesign:
+            </p>
+                <ul>
+                    <li>Es hilft, die Struktur der Daten zu verstehen und zu kommunizieren.</li>
+                    <li>Es dient als Grundlage für die Erstellung des relationalen Datenbankschemas.</li>
+                    <li>Es erleichtert die Identifikation von Redundanzen und potenziellen Problemen im Datenbankdesign.</li>
+                    <li>Es unterstützt die Zusammenarbeit zwischen Datenbankdesigner*innen, Entwickler*innen und Auftraggebern.</li>
+                </ul>
+        </details>
+    </div>
+
+<h2>Die Bausteine des ERM</h2>
+
+<h3>1. Entitäten</h3>
+
+<p>
+            Entitäten sind die Hauptakteure in unserem Datenmodell. Sie repräsentieren reale oder abstrakte Dinge, über die wir Informationen speichern möchten. In einer Schulverwaltungsdatenbank könnten beispielsweise „Schüler“, „Lehrer“ und „Klasse“ Entitäten sein.
+            <br>Entitäten werden als Rechtecke dargestellt.
+        </p>
+
+<h3>2. Attribute</h3>
+
+<p>
+            Attribute sind die Eigenschaften, die eine Entität näher beschreiben. Für die Entität „Schüler“ könnten Attribute wie „Schüler-ID“, „Name“, „Geburtsdatum“ und „Adresse“ relevant sein. Jedes Attribut gibt uns eine spezifische Information über die Entität.
+            <br>Attribute werden als Ellipsen dargestellt und mit ihrer Entität verbunden. Das Attribut, das einen Datensatz eindeutig identifiziert, heißt <strong>Schlüsselattribut</strong> und wird unterstrichen.
+        </p>
+
+<h3>3. Beziehungen</h3>
+
+<p>
+            Beziehungen zeigen, wie Entitäten miteinander in Verbindung stehen. In unserem Schulbeispiel könnte es eine „unterrichtet in“-Beziehung zwischen „Lehrer“ und „Klasse“ geben oder eine „gehört zu“-Beziehung zwischen „Schüler“ und „Klasse“.
+            <br>Beziehungen werden als Rauten dargestellt und verbinden die beteiligten Entitäten.
+        </p>
+
+<h2>Kardinalitäten: Die Quantität der Beziehungen</h2>
+
+<p>
+            Ein wichtiger Aspekt von Beziehungen im ERM sind die Kardinalitäten. Sie geben an, wie viele Instanzen einer Entität mit wie vielen Instanzen einer anderen Entität in Beziehung stehen können.
+          </p>
+
+<br>
+
+<div class="hinweis">
+                <details>
+                    <summary>
+                        Hinweis: Bestimmung der Kardinalitäten
+                    </summary>
+                        <ol>
+                            <li>Betrachte die Beziehung von links nach rechts: „Wie viele Instanzen der rechten Entität können mit einer Instanz der linken Entität in Beziehung stehen?“</li>
+                            <li>Betrachte die Beziehung von rechts nach links: „Wie viele Instanzen der linken Entität können mit einer Instanz der rechten Entität in Beziehung stehen?“</li>
+                            <li>Kombiniere die Ergebnisse zur vollständigen Kardinalität.</li>
+                            <li>Kardinalitäten werden an den Verbindungslinien zwischen Entitäten und Beziehungen notiert.</li>
+                        </ol>
+                </details>
+            </div>
+
+<br>
+
+<h2>Vom Sachtext zum ER-Modell</h2>
+
+<p>
+        In der Praxis – und in der Prüfung – bekommst du keine fertigen Entitäten, sondern einen <strong>Sachtext</strong>:
+        eine Beschreibung dessen, was die Datenbank später leisten soll. Daraus muss das Modell erst herausgelesen werden.
+        Das geht mit vier immer gleichen Schritten.
+      </p>
+
+<p>
+        Die folgenden vier Beispiele sind vollständig durchgearbeitet und werden Schritt für Schritt größer:
+        vom kleinsten sinnvollen Modell bis zu einem Modell mit fünf Beziehungen. In den Sachtexten sind
+        <mark style="background:#fde68a">Entitäten gelb</mark>, <mark class="bez" style="background:#bfdbfe">Attribute blau</mark> und
+        <mark class="kard" style="background:#bbf7d0">Kardinalitätsangaben grün</mark> hervorgehoben.
+        Auf der Seite 1.11 werden genau dieselben vier Beispiele in Relationenmodelle überführt.
+      </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+      <h3>Beispiel 1: Der Schulkiosk <span class="beispiel-kopf">2 Entitäten &middot; 1:n</span></h3>
+      <p><strong>Ausgangssituation:</strong> Der Sachtext beschreibt, was der Kiosk über Lieferanten und Produkte speichern will.
+         Gesucht ist das ER-Modell mit Kardinalität.</p>
+
+      <div class="sachtext">
+          <p>
+            Der Schulkiosk kauft seine Ware bei verschiedenen <mark style="background:#fde68a">Lieferanten</mark>. Zu jedem Lieferanten werden
+            eine <mark class="bez" style="background:#bfdbfe">Lieferantennummer</mark>, der <mark class="bez" style="background:#bfdbfe">Name</mark> und eine
+            <mark class="bez" style="background:#bfdbfe">Telefonnummer</mark> gespeichert. Jedes <mark style="background:#fde68a">Produkt</mark> hat eine
+            <mark class="bez" style="background:#bfdbfe">Produktnummer</mark>, eine <mark class="bez" style="background:#bfdbfe">Bezeichnung</mark> und einen
+            <mark class="bez" style="background:#bfdbfe">Verkaufspreis</mark>. Jedes Produkt wird von <mark class="kard" style="background:#bbf7d0">genau einem</mark>
+            Lieferanten geliefert; ein Lieferant liefert <mark class="kard" style="background:#bbf7d0">mehrere</mark> Produkte.
+          </p>
+      </div>
+
+      <table>
+          <thead>
+              <tr><th>Stelle im Text</th><th>Was daraus wird</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>„Lieferanten“, „Produkt“</td><td>zwei Entitäten: <strong>Lieferant</strong> und <strong>Produkt</strong></td></tr>
+              <tr><td>„Lieferantennummer, Name, Telefonnummer“</td><td>Attribute von Lieferant; die Nummer ist eindeutig &rarr; Schlüsselattribut <u>LieferantNr</u></td></tr>
+              <tr><td>„Produktnummer, Bezeichnung, Verkaufspreis“</td><td>Attribute von Produkt; Schlüsselattribut <u>ProduktNr</u></td></tr>
+              <tr><td>„liefert“</td><td>Beziehung <strong>liefert</strong> zwischen beiden Entitäten</td></tr>
+              <tr><td>„genau einem Lieferanten“</td><td>an der Seite von Lieferant steht die <strong>1</strong></td></tr>
+              <tr><td>„mehrere Produkte“</td><td>an der Seite von Produkt steht das <strong>n</strong> &rarr; insgesamt <strong>1:n</strong></td></tr>
+          </tbody>
+      </table>
+
+      <p><strong>Die beiden Lesesätze zur Probe:</strong> Ein Lieferant liefert <em>n</em> Produkte. &ndash;
+         Ein Produkt wird von <em>einem</em> Lieferanten geliefert.</p>
+
+      <ol>
+          <li><strong>Substantive markieren:</strong> „Lieferanten“ und „Produkt“ werden zu Entitäten. <em>Warum?</em> Von beiden gibt es
+              mehrere Exemplare, und zu jedem werden eigene Daten gespeichert.</li>
+          <li><strong>Eigenschaften zuordnen:</strong> Nummer, Name, Telefonnummer an Lieferant; Nummer, Bezeichnung, Verkaufspreis an Produkt;
+              die Nummern werden unterstrichen. <em>Warum?</em> Diese Angaben beschreiben nur ein Exemplar, die Nummer macht es eindeutig.</li>
+          <li><strong>Verb markieren:</strong> „geliefert/liefert“ wird zur Raute <em>liefert</em>. <em>Warum?</em> Das Verb verbindet die beiden Entitäten.</li>
+          <li><strong>Zahlwörter auswerten:</strong> „genau einem Lieferanten“ → 1 an Lieferant, „mehrere Produkte“ → n an Produkt.
+              <em>Warum an diese Seiten?</em> Die Zahl steht an der Entität, von der es so viele geben kann.</li>
+      </ol>
+      <p><strong>Ergebnis:</strong> Lieferant (<u>LieferantNr</u>, Name, Telefonnummer) 1 &ndash; <em>liefert</em> &ndash; n Produkt
+         (<u>ProduktNr</u>, Bezeichnung, Verkaufspreis), siehe Abbildung.</p>
+
+      <figure>
+          <img src="../img/erm_beispiel1_schulkiosk.png" width="900">
+          <figcaption>ER-Modell zum Schulkiosk: zwei Entitäten, eine 1:n-Beziehung.</figcaption>
+      </figure>
+      <p><strong>Kontrolle:</strong> Alle sechs Attribute aus dem Text kommen genau einmal vor, kein Attribut ist erfunden. Beide Lesesätze
+         passen zur Abbildung. Ein Fremdschlüssel „LieferantNr“ bei Produkt gehört <em>nicht</em> ins ERM &ndash; er entsteht erst auf Seite 1.11.</p>
+            </details>
+        </div>
+
+<h3>Beispiel 2: Das Tierheim <span class="beispiel-kopf">4 Entitäten &middot; 1:n und 1:1</span></h3>
+
+<div class="sachtext">
+          <p>
+            Ein Tierheim verwaltet seine <mark style="background:#fde68a">Tiere</mark>. Zu jedem Tier werden eine
+            <mark class="bez" style="background:#bfdbfe">Tiernummer</mark>, der <mark class="bez" style="background:#bfdbfe">Name</mark>, die
+            <mark class="bez" style="background:#bfdbfe">Tierart</mark> und das <mark class="bez" style="background:#bfdbfe">Ankunftsdatum</mark> gespeichert.
+            Jedes Tier lebt in <mark class="kard" style="background:#bbf7d0">genau einem</mark> <mark style="background:#fde68a">Gehege</mark>, in einem Gehege leben
+            <mark class="kard" style="background:#bbf7d0">mehrere</mark> Tiere; zu einem Gehege werden die
+            <mark class="bez" style="background:#bfdbfe">Gehegenummer</mark> und der <mark class="bez" style="background:#bfdbfe">Bereich</mark> gespeichert.
+            Jede <mark style="background:#fde68a">Pflegekraft</mark> (<mark class="bez" style="background:#bfdbfe">Personalnummer</mark>,
+            <mark class="bez" style="background:#bfdbfe">Name</mark>) betreut <mark class="kard" style="background:#bbf7d0">mehrere</mark> Tiere, jedes Tier hat aber
+            <mark class="kard" style="background:#bbf7d0">genau eine</mark> feste Bezugsperson. Zu jedem Tier wird außerdem
+            <mark class="kard" style="background:#bbf7d0">genau eine</mark> <mark style="background:#fde68a">Akte</mark> geführt
+            (<mark class="bez" style="background:#bfdbfe">Aktennummer</mark>, <mark class="bez" style="background:#bfdbfe">Notizen</mark>), und jede Akte gehört zu
+            <mark class="kard" style="background:#bbf7d0">genau einem</mark> Tier.
+          </p>
+      </div>
+
+<table>
+          <thead>
+              <tr><th>Beziehung</th><th>Lesesatz hin</th><th>Lesesatz zurück</th><th>Kardinalität</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>Pflegekraft <em>betreut</em> Tier</td><td>Eine Pflegekraft betreut <em>mehrere</em> Tiere.</td><td>Ein Tier hat <em>eine</em> Bezugsperson.</td><td>1:n</td></tr>
+              <tr><td>Tier <em>lebt in</em> Gehege</td><td>Ein Tier lebt in <em>einem</em> Gehege.</td><td>In einem Gehege leben <em>mehrere</em> Tiere.</td><td>n:1</td></tr>
+              <tr><td>Tier <em>hat</em> Akte</td><td>Ein Tier hat <em>eine</em> Akte.</td><td>Eine Akte gehört zu <em>einem</em> Tier.</td><td>1:1</td></tr>
+          </tbody>
+      </table>
+
+<figure>
+          <img src="../img/erm_beispiel2_tierheim.png" width="900">
+          <figcaption>ER-Modell zum Tierheim: zwei 1:n-Beziehungen und eine 1:1-Beziehung.</figcaption>
+      </figure>
+
+<div class="hinweis">
+          <details>
+              <summary>
+                  Hinweis: Woran erkenne ich eine 1:1-Beziehung – und warum ist sie selten?
+              </summary>
+              <p>
+                Eine 1:1-Beziehung liegt vor, wenn <em>beide</em> Lesesätze im Singular stehen: „Ein Tier hat eine
+                Akte“ und „Eine Akte gehört zu einem Tier“. In der Praxis kommt das selten vor, weil man solche
+                Daten meist gleich in <em>eine</em> Entität schreiben könnte. Man trennt sie trotzdem, wenn
+              </p>
+              <ul>
+                  <li>der zweite Teil sehr viele oder sehr große Daten enthält (hier: lange Notizen),</li>
+                  <li>der zweite Teil nur manchmal existiert oder</li>
+                  <li>unterschiedliche Personen darauf zugreifen dürfen.</li>
+              </ul>
+              <p>
+                Achtung bei der Formulierung: „Ein Tier hat <em>eine</em> Akte“ heißt nicht automatisch 1:1 –
+                entscheidend ist immer auch der Blick in die Gegenrichtung.
+              </p>
+          </details>
+      </div>
+
+<h2>Attribute an Beziehungen</h2>
+
+<p>
+        Bisher hingen alle Attribute an Entitäten. Es gibt aber Angaben, die sich <strong>keiner</strong> der beiden
+        beteiligten Entitäten zuordnen lassen, weil sie erst durch die Kombination der beiden entstehen. Solche
+        Attribute werden an die <strong>Raute</strong> gehängt.
+      </p>
+
+<h3>Beispiel 3: Die Schulmensa <span class="beispiel-kopf">3 Entitäten &middot; m:n mit Beziehungsattribut</span></h3>
+
+<div class="sachtext">
+          <p>
+            Die Schulmensa plant ihre <mark style="background:#fde68a">Gerichte</mark>. Jedes Gericht hat eine
+            <mark class="bez" style="background:#bfdbfe">Gerichtnummer</mark>, einen <mark class="bez" style="background:#bfdbfe">Namen</mark> und einen
+            <mark class="bez" style="background:#bfdbfe">Preis</mark>. Jedes Gericht gehört zu <mark class="kard" style="background:#bbf7d0">genau einer</mark>
+            <mark style="background:#fde68a">Kategorie</mark> (<mark class="bez" style="background:#bfdbfe">Kategorienummer</mark>,
+            <mark class="bez" style="background:#bfdbfe">Bezeichnung</mark>, z.&nbsp;B. „vegetarisch“), zu einer Kategorie gehören
+            <mark class="kard" style="background:#bbf7d0">mehrere</mark> Gerichte. Für jedes Gericht wird festgehalten, welche
+            <mark style="background:#fde68a">Zutaten</mark> (<mark class="bez" style="background:#bfdbfe">Zutatnummer</mark>, <mark class="bez" style="background:#bfdbfe">Bezeichnung</mark>,
+            <mark class="bez" style="background:#bfdbfe">Einheit</mark>) in welcher <mark class="bez" style="background:#bfdbfe">Menge</mark> benötigt werden. Eine Zutat
+            kommt in <mark class="kard" style="background:#bbf7d0">mehreren</mark> Gerichten vor, und ein Gericht besteht aus
+            <mark class="kard" style="background:#bbf7d0">mehreren</mark> Zutaten.
+          </p>
+      </div>
+
+<p>
+        Die spannende Frage ist hier die <strong>Menge</strong>. Sie kann nicht an <em>Gericht</em> hängen – dann
+        gäbe es pro Gericht nur eine einzige Mengenangabe, egal wie viele Zutaten es hat. Sie kann auch nicht an
+        <em>Zutat</em> hängen – „Mehl: 200&nbsp;g“ gilt ja nur für ein bestimmtes Gericht. Erst das Paar
+        (Gericht, Zutat) legt die Menge fest, also gehört <strong>Menge</strong> an die Raute <em>enthält</em>.
+      </p>
+
+<figure>
+          <img src="../img/erm_beispiel3_mensa.png" width="900">
+          <figcaption>ER-Modell zur Schulmensa: eine 1:n-Beziehung und eine m:n-Beziehung mit dem
+              Beziehungsattribut <em>Menge</em>.</figcaption>
+      </figure>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 4 <span class="beispiel-kopf">komplex</span></summary>
+      <p><strong>Ausgangssituation:</strong> Ein längerer Sachtext über drei Absätze; eine Entität hat zwei Beziehungen, und zwei Angaben
+         gehören zu keiner Entität. Gesucht ist das vollständige ER-Modell mit allen Kardinalitäten.</p>
+      <h3>Beispiel 4: Das Ferienlager <span class="beispiel-kopf">4 Entitäten &middot; 4 Beziehungen &middot; 2 Beziehungsattribute</span></h3>
+
+      <div class="sachtext">
+          <p>
+            Ein Ferienlager wird digital verwaltet. Jede <mark style="background:#fde68a">Betreuungsperson</mark> hat eine
+            <mark class="bez" style="background:#bfdbfe">Betreuernummer</mark>, einen <mark class="bez" style="background:#bfdbfe">Namen</mark> und eine
+            <mark class="bez" style="background:#bfdbfe">Handynummer</mark>. Die Kinder sind in <mark style="background:#fde68a">Gruppen</mark> eingeteilt: Eine Gruppe hat
+            eine <mark class="bez" style="background:#bfdbfe">Gruppennummer</mark> und einen <mark class="bez" style="background:#bfdbfe">Namen</mark> (z.&nbsp;B. „Die
+            Füchse“) und wird von <mark class="kard" style="background:#bbf7d0">genau einer</mark> Betreuungsperson geleitet; eine
+            Betreuungsperson kann <mark class="kard" style="background:#bbf7d0">mehrere</mark> Gruppen leiten.
+          </p>
+          <p>
+            Jedes Kind, im Folgenden <mark style="background:#fde68a">Teilnehmer</mark> genannt, hat eine
+            <mark class="bez" style="background:#bfdbfe">Teilnehmernummer</mark>, einen <mark class="bez" style="background:#bfdbfe">Namen</mark> und ein
+            <mark class="bez" style="background:#bfdbfe">Geburtsdatum</mark> und gehört zu <mark class="kard" style="background:#bbf7d0">genau einer</mark> Gruppe; in
+            einer Gruppe sind <mark class="kard" style="background:#bbf7d0">mehrere</mark> Teilnehmer.
+          </p>
+          <p>
+            Außerdem gibt es <mark style="background:#fde68a">Workshops</mark> mit <mark class="bez" style="background:#bfdbfe">Workshopnummer</mark>,
+            <mark class="bez" style="background:#bfdbfe">Titel</mark> und <mark class="bez" style="background:#bfdbfe">Dauer</mark> in Minuten. Jeder Workshop wird von
+            <mark class="kard" style="background:#bbf7d0">genau einer</mark> Betreuungsperson durchgeführt, eine Betreuungsperson kann
+            <mark class="kard" style="background:#bbf7d0">mehrere</mark> Workshops anbieten. Die Teilnehmer melden sich zu Workshops an: Ein
+            Teilnehmer kann an <mark class="kard" style="background:#bbf7d0">mehreren</mark> Workshops teilnehmen, und an einem Workshop nehmen
+            <mark class="kard" style="background:#bbf7d0">mehrere</mark> Teilnehmer teil. Zu jeder Anmeldung werden das
+            <mark class="bez" style="background:#bfdbfe">Anmeldedatum</mark> und nach dem Workshop eine
+            <mark class="bez" style="background:#bfdbfe">Bewertung</mark> von 1 bis 5 gespeichert.
+          </p>
+      </div>
+
+      <table>
+          <thead>
+              <tr><th>Beziehung</th><th>Lesesatz hin</th><th>Lesesatz zurück</th><th>Kardinalität</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>Betreuer <em>leitet</em> Gruppe</td><td>Eine Betreuungsperson leitet <em>mehrere</em> Gruppen.</td><td>Eine Gruppe wird von <em>einer</em> Person geleitet.</td><td>1:n</td></tr>
+              <tr><td>Teilnehmer <em>gehört zu</em> Gruppe</td><td>Ein Teilnehmer gehört zu <em>einer</em> Gruppe.</td><td>In einer Gruppe sind <em>mehrere</em> Teilnehmer.</td><td>n:1</td></tr>
+              <tr><td>Betreuer <em>führt durch</em> Workshop</td><td>Eine Betreuungsperson bietet <em>mehrere</em> Workshops an.</td><td>Ein Workshop wird von <em>einer</em> Person durchgeführt.</td><td>1:n</td></tr>
+              <tr><td>Teilnehmer <em>nimmt teil</em> Workshop</td><td>Ein Teilnehmer besucht <em>mehrere</em> Workshops.</td><td>Ein Workshop hat <em>mehrere</em> Teilnehmer.</td><td>m:n</td></tr>
+          </tbody>
+      </table>
+
+      <p>
+        Beachte zwei Dinge: Von <strong>Betreuer</strong> gehen <em>zwei</em> Beziehungen aus – das ist völlig normal
+        und bedeutet nicht, dass man die Entität doppelt zeichnen müsste. Und <strong>Anmeldedatum</strong> und
+        <strong>Bewertung</strong> hängen beide an der Raute <em>nimmt teil</em>: Beide Angaben gibt es erst, wenn
+        feststeht, <em>wer</em> sich zu <em>welchem</em> Workshop angemeldet hat.
+      </p>
+
+      <ol>
+          <li><strong>Substantive markieren:</strong> Betreuungsperson, Gruppe, Teilnehmer, Workshop → vier Entitäten. „Anmeldung“ wird
+              <em>nicht</em> markiert. <em>Warum?</em> Eine Anmeldung gibt es nur zusammen mit einem Teilnehmer und einem Workshop &ndash; sie ist
+              eine Beziehung, kein eigenständiges Ding.</li>
+          <li><strong>Eigenschaften zuordnen:</strong> je Entität Nummer (unterstrichen), Name bzw. Titel, dazu Handynummer, Geburtsdatum, Dauer.
+              Anmeldedatum und Bewertung bleiben übrig. <em>Warum?</em> Der Test „Kann ich den Wert ohne beide Partner angeben?“ ergibt „nein“:
+              Eine Bewertung gehört zu <em>diesem</em> Teilnehmer in <em>diesem</em> Workshop.</li>
+          <li><strong>Verben markieren:</strong> „geleitet“, „gehört zu“, „durchgeführt“, „nehmen teil“ → vier Rauten. Die Betreuungsperson
+              hängt an zwei davon. <em>Warum nur einmal zeichnen?</em> Es ist dieselbe Menge von Personen in zwei Rollen.</li>
+          <li><strong>Zahlwörter auswerten, je Beziehung zwei Lesesätze:</strong> „genau einer Betreuungsperson“/„mehrere Gruppen“ → 1:n;
+              „genau einer Gruppe“/„mehrere Teilnehmer“ → n:1; „genau einer Betreuungsperson“/„mehrere Workshops“ → 1:n;
+              „mehreren Workshops“/„mehrere Teilnehmer“ → m:n (siehe Tabelle). <em>Warum zwei Sätze?</em> Erst beide Richtungen zusammen
+              legen die Kardinalität fest; ein Satz allein unterscheidet 1:n nicht von 1:1.</li>
+          <li><strong>Beziehungsattribute anhängen:</strong> Anmeldedatum und Bewertung an <em>nimmt teil</em>. <em>Warum gerade dort?</em>
+              Es ist die m:n-Beziehung, und nur das Paar (Teilnehmer, Workshop) legt diese Werte fest.</li>
+      </ol>
+      <p><strong>Ergebnis:</strong> 4 Entitäten, 4 Beziehungen (drei 1:n, eine m:n), 2 Beziehungsattribute &ndash; siehe Abbildung.</p>
+
+      <figure>
+          <img src="../img/erm_beispiel4_ferienlager.png" width="900">
+          <figcaption>ER-Modell zum Ferienlager: drei 1:n-Beziehungen und eine m:n-Beziehung mit zwei
+              Beziehungsattributen.</figcaption>
+      </figure>
+
+      <p>
+        <strong>Leserichtung im Diagramm:</strong> Die Rauten „leitet“ und „führt durch“ liest man vom Betreuer aus
+        (von links nach rechts bzw. von oben nach unten), „gehört zu“ dagegen von unten nach oben (Teilnehmer gehört zu
+        Gruppe) und „nimmt teil“ von rechts nach links (Teilnehmer nimmt teil an Workshop). Die Kardinalitäten stimmen
+        in jeder Leserichtung: Die Zahl an einer Entität gibt an, mit wie vielen Exemplaren <em>dieser</em> Entität ein
+        Exemplar der Gegenseite in Beziehung steht – z.&nbsp;B. steht das n bei Gruppe, weil ein Betreuer <em>n</em> Gruppen
+        leitet. Ob an der m:n-Beziehung „m“ oder „n“ an welcher Seite steht, ist gleichgültig.
+      </p>
+      <p><strong>Kontrolle:</strong> Jedes markierte Zahlwort im Sachtext (acht grüne Stellen) ist genau einer Kardinalität zugeordnet,
+         jedes blaue Attribut steht genau einmal im Modell (13 Attribute, davon 2 an der Raute). Probe für die Falle: Würde man
+         „Bewertung“ an Workshop hängen, hätte jeder Workshop nur <em>eine</em> Bewertung &ndash; der Text verlangt aber eine je Anmeldung.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+          <details>
+              <summary>
+                  Hinweis: Typische Stolperstellen beim Zeichnen
+              </summary>
+              <ul>
+                  <li><strong>Beziehung als Entität modelliert.</strong> „Anmeldung“ ist hier keine Entität, sondern
+                      die Beziehung <em>nimmt teil</em>. Frage zur Prüfung: Gibt es das Ding auch ohne die beiden
+                      Partner? Eine Anmeldung ohne Teilnehmer und ohne Workshop ergibt keinen Sinn.</li>
+                  <li><strong>Kardinalität auf der falschen Seite.</strong> Die Zahl steht immer auf der Seite der
+                      Entität, von der es <em>so viele</em> geben kann. Sprich beide Lesesätze laut mit.</li>
+                  <li><strong>Beziehungsattribut an eine Entität gehängt.</strong> Wende den Test von oben an.</li>
+                  <li><strong>Fremdschlüssel schon im ERM eingezeichnet.</strong> Im ERM gibt es keine
+                      Fremdschlüssel – die entstehen erst beim Übergang zum Relationenmodell (Seite 1.11).</li>
+                  <li><strong>Attribute erfunden.</strong> Modelliere nur, was im Text steht. Zusätzliche Attribute
+                      sind Interpretation und in einer Prüfung meist nicht gefragt.</li>
+              </ul>
+          </details>
+      </div>
+
+<h2>Übergang vom ERM zum Relationenmodell</h2>
+
+<p>
+            Das ERM ist der erste Schritt auf dem Weg zu einer funktionierenden Datenbank. Nach der Erstellung des ERM wird es in ein relationales Datenbankschema umgewandelt. Dabei werden Entitäten zu Tabellen, Attribute zu Spalten und Beziehungen werden durch Fremdschlüssel oder separate Tabellen (bei m:n-Beziehungen) dargestellt.
+          </p>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: Umwandlung zum Relationenmodell
+                </summary>
+        <p><strong>Hauptschritte der Umwandlung:</strong></p>
+        <ol>
+            <li><strong>Entitäten zu Tabellen:</strong> Jede Entität im ERM wird zu einer Tabelle im Relationenmodell.</li>
+            <li><strong>Attribute zu Spalten:</strong> Die Attribute einer Entität werden zu Spalten in der entsprechenden Tabelle.</li>
+            <li><strong>Primärschlüssel definieren:</strong> Für jede Tabelle wird ein Primärschlüssel festgelegt, oft basierend auf dem Schlüsselattribut im ERM.</li>
+            <li><strong>Beziehungen umsetzen:</strong> Je nach Art der Beziehung im ERM (1:1, 1:n, m:n) werden diese unterschiedlich im Relationenmodell dargestellt.</li>
+        </ol>
+        <p><strong>Umsetzung von Beziehungen:</strong></p>
+    <ul>
+        <li><strong>1:1-Beziehungen:</strong> Können durch einen Fremdschlüssel in einer der beteiligten Tabellen dargestellt werden.</li>
+        <li><strong>1:n-Beziehungen:</strong> Werden durch einen Fremdschlüssel in der Tabelle auf der „n“-Seite umgesetzt.</li>
+        <li><strong>m:n-Beziehungen:</strong> Erfordern eine separate Verbindungstabelle, die Fremdschlüssel zu beiden beteiligten Tabellen enthält.</li>
+    </ul>
+            </details>
+    </div>
+
+<p>
+      Auf der Seite 1.11 „Vom ER-Modell zum Relationenmodell“ werden alle vier Beispiele dieser Seite
+      Schritt für Schritt in fertige Relationenschemata überführt.
+    </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+                  <p>Die Hauptkomponenten des Entity-Relationship-Modells sind:</p>
+                  <ul>
+                      <li>Entitäten: Objekte, über die wir Informationen speichern möchten</li>
+                      <li>Attribute: Eigenschaften, die eine Entität beschreiben</li>
+                      <li>Beziehungen: Verbindungen zwischen Entitäten</li>
+                  </ul>
+                  <figure>
+                    <img src="../img/erm_schueler_leer.png" width="600" alt="ER-Modell der Entität Schüler mit leeren Attributfeldern">
+                    <figcaption>Abb. 1: Entität „Schüler“ mit noch leeren Attributen</figcaption>
+                </figure>
+
+          </div>
+
+<div class="merke">
+              <p>
+                  Es gibt drei Haupttypen von Kardinalitäten:
+              </p>
+                  <ul>
+                      <li>1:1 (Eins-zu-Eins): Jede Instanz der ersten Entität ist mit höchstens einer Instanz der zweiten Entität verbunden und umgekehrt.<p><strong>Beispiel: Abschlusszeugnis</strong>  <br /> Ein Sch&uuml;ler bekommt ein Abschlusszeugnis. Ein Abschlusszeugnis geh&ouml;rt zu einem Sch&uuml;ler.</p></li>
+                      <li>1:n (Eins-zu-Viele): Eine Instanz der ersten Entität kann mit mehreren Instanzen der zweiten Entität verbunden sein, aber jede Instanz der zweiten Entität ist mit höchstens einer Instanz der ersten Entität verbunden. <p><strong>Beispiel: Klassen in Sekundarstufe 1</strong> <br /> Ein Sch&uuml;ler geh&ouml;rt zu einer Klasse. In einer Klasse sind „n“ Sch&uuml;ler.</p></li>
+                      <li>m:n (Viele-zu-Viele): Mehrere Instanzen der ersten Entität können mit mehreren Instanzen der zweiten Entität verbunden sein und umgekehrt. <p><strong>Beispiel: Kurssystem Oberstufe </strong><br /> Zu einem Kurs geh&ouml;ren „n“ Sch&uuml;ler. Ein Sch&uuml;ler geh&ouml;rt zu „m“ Kursen.</p></li>
+                  </ul>
+
+                </div>
+
+<div class="merke">
+          <p><strong>Vier Schritte vom Text zum ERM</strong></p>
+          <ol>
+              <li><strong>Substantive markieren.</strong> Alles, wovon es <em>mehrere Exemplare</em> gibt und wozu Daten
+                  gespeichert werden, wird zur <strong>Entität</strong> (Rechteck). Faustregel: Es lässt sich in der
+                  Mehrzahl aufzählen – „die Produkte“, „die Tiere“.</li>
+              <li><strong>Eigenschaften zuordnen.</strong> Alles, was eine Entität nur <em>beschreibt</em> und selbst
+                  keine eigenen Daten trägt, wird zum <strong>Attribut</strong> (Ellipse). Das Attribut, das einen
+                  Datensatz eindeutig macht, wird unterstrichen.</li>
+              <li><strong>Verben markieren.</strong> Wörter wie <em>liefert, betreut, gehört zu, nimmt teil</em> beschreiben
+                  die <strong>Beziehungen</strong> (Rauten) zwischen zwei Entitäten.</li>
+              <li><strong>Zahlwörter suchen.</strong> Formulierungen wie <em>„genau ein“, „höchstens ein“, „mehrere“,
+                  „beliebig viele“</em> liefern die <strong>Kardinalitäten</strong>. Lies dazu jede Beziehung als zwei
+                  Sätze – einmal von links nach rechts und einmal von rechts nach links.</li>
+          </ol>
+      </div>
+
+<div class="merke">
+          <p><strong>Der Test:</strong> Kann ich den Wert angeben, ohne beide Beziehungspartner zu kennen?</p>
+          <ul>
+              <li><strong>Ja</strong> &rarr; das Attribut gehört an eine der beiden Entitäten.</li>
+              <li><strong>Nein</strong> &rarr; das Attribut gehört an die Beziehung.</li>
+          </ul>
+          <p>
+            Attribute an Beziehungen treten fast immer bei <strong>m:n-Beziehungen</strong> auf. Typische Beispiele:
+            die <em>Menge</em> einer Zutat in einem Rezept, die <em>Note</em> einer Schülerin in einem Kurs, das
+            <em>Anmeldedatum</em> zu einer Veranstaltung, die <em>Stückzahl</em> einer Position in einer Bestellung.
+          </p>
+      </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>
+                Aufgabe 1.10.1: <span class="niveau">AFB I</span>
+            </summary>
+                <ol>
+                    <li>Lies den Text auf diesem <span class="material-fehlt">Arbeitsblatt (nur im Unterricht)</span> durch und bearbeite die Aufgaben.</li>
+                    <li>Welche Angaben k&ouml;nnten in den leeren Feldern von Abb. 1 stehen? F&uuml;ge weitere, passende Attribute hinzu.</li>
+                </ol>
+        </details>
+    </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.10.2: <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Prüfe dein Wissen, indem du die Entitäten, Beziehungen und Attribute richtig zuordnest. <br>
+                    <iframe style="border: 0px; width: 600px; height: 500px;" src="https://learningapps.org/view20517469" allowfullscreen="allowfullscreen" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen"></iframe>
+                </p>
+            </details>
+        </div>

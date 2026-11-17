@@ -1,0 +1,248 @@
+<p>CRUD steht für Create, Read, Update und Delete. Dies sind die vier grundlegenden Operationen, die du auf Daten in einer Datenbank ausführen kannst. Da wir uns mit Read schon beschäftigt haben, bleiben nun noch Create, Update und Delete. <br>
+        Die folgenden Beispiele beziehen sich auf die Datenbank aus der Datei <a href="../material/kurs.sql">kurs.sql</a>.
+        </p>
+
+<h2>1. Create (Erstellen)</h2>
+
+<p>Mit dem SQL-Befehl INSERT fügst du neue Datensätze in eine Tabelle ein.</p>
+
+<p>Beispiel aus unserer Datenbank:</p>
+
+<pre>
+INSERT INTO Schueler (s_id, name, vorname) VALUES (6, 'Becker', 'Tom');
+        </pre>
+
+<h2>2. Update (Aktualisieren)</h2>
+
+<p>Mit dem SQL-Befehl UPDATE kannst du bestehende Datensätze in einer Tabelle ändern.</p>
+
+<p>Beispiel aus unserer Datenbank:</p>
+
+<pre>
+UPDATE Kursnote SET note = 1.7 WHERE k_id = 1 AND s_id = 1;
+        </pre>
+
+<h2>3. Delete (Löschen)</h2>
+
+<p>Mit dem SQL-Befehl DELETE kannst du Datensätze aus einer Tabelle entfernen.</p>
+
+<p>Beispiel aus unserer Datenbank:</p>
+
+<pre>
+DELETE FROM Kursnote WHERE k_id = 5 AND s_id = 5;
+        </pre>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Hinweis: UPDATE und DELETE ohne WHERE
+                </summary>
+                <p>
+                    Sei vorsichtig mit UPDATE- und DELETE-Befehlen, besonders wenn du keine WHERE-Klausel verwendest. Ohne WHERE-Klausel werden alle Datensätze in der Tabelle geändert oder gelöscht!
+                </p>
+            </details>
+        </div>
+
+<h2>Alle drei Befehle an einer Tabelle mitverfolgt</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+
+        <p>
+            Bei SELECT sieht man das Ergebnis sofort. Bei INSERT, UPDATE und DELETE meldet die Datenbank
+            dagegen nur „Ausführung erfolgreich“ – <em>was</em> sich geändert hat, muss man selbst
+            nachsehen. Deshalb hier alle drei Befehle nacheinander an derselben kleinen Tabelle
+            <code>Mitglied</code> eines Sportvereins.
+        </p>
+
+        <p><strong>Ausgangszustand</strong></p>
+        <table>
+        <thead><tr><th>MitgliedNr</th><th>Name</th><th>Beitrag</th><th>Status</th></tr></thead>
+        <tbody>
+        <tr><td>1</td><td>Berger, Anna</td><td>60.00</td><td>aktiv</td></tr>
+        <tr><td>2</td><td>Kaufmann, Ben</td><td>60.00</td><td>aktiv</td></tr>
+        <tr><td>3</td><td>Nowak, Clara</td><td>90.00</td><td>aktiv</td></tr>
+        </tbody>
+        </table>
+
+        <h3>Schritt 1: INSERT – ein neues Mitglied</h3>
+        <pre><code>INSERT INTO Mitglied (MitgliedNr, Name, Beitrag, Status)
+VALUES (4, 'Vogt, David', 60.00, 'aktiv');</code></pre>
+        <p>Die Tabelle hat jetzt <strong>vier</strong> Zeilen; die neue steht am Ende. Wichtig ist die
+           Zuordnung: Die vierte Spalte in der Klammer bekommt den vierten Wert.</p>
+
+        <h3>Schritt 2: UPDATE – Beitragserhöhung um 5 Prozent</h3>
+        <pre><code>UPDATE Mitglied
+SET Beitrag = Beitrag * 1.05
+WHERE Status = 'aktiv';</code></pre>
+        <p><strong>Ergebnis</strong> – rechts wird gerechnet, links zugewiesen. Jede Zeile bekommt ihren
+           eigenen neuen Wert, nicht alle denselben:</p>
+        <table>
+        <thead><tr><th>MitgliedNr</th><th>Name</th><th>Beitrag vorher</th><th>Beitrag nachher</th></tr></thead>
+        <tbody>
+        <tr><td>1</td><td>Berger, Anna</td><td>60.00</td><td>63.00</td></tr>
+        <tr><td>2</td><td>Kaufmann, Ben</td><td>60.00</td><td>63.00</td></tr>
+        <tr><td>3</td><td>Nowak, Clara</td><td>90.00</td><td>94.50</td></tr>
+        <tr><td>4</td><td>Vogt, David</td><td>60.00</td><td>63.00</td></tr>
+        </tbody>
+        </table>
+
+        <h3>Schritt 3: DELETE – ein Austritt</h3>
+        <pre><code>DELETE FROM Mitglied
+WHERE MitgliedNr = 2;</code></pre>
+        <p><strong>Endzustand</strong> – Zeile 2 ist weg, die übrigen Nummern bleiben unverändert. Die
+           Lücke wird nicht aufgefüllt, und das ist auch richtig so: Die MitgliedNr ist ein Schlüssel und
+           darf nicht neu vergeben werden.</p>
+        <table>
+        <thead><tr><th>MitgliedNr</th><th>Name</th><th>Beitrag</th><th>Status</th></tr></thead>
+        <tbody>
+        <tr><td>1</td><td>Berger, Anna</td><td>63.00</td><td>aktiv</td></tr>
+        <tr><td>3</td><td>Nowak, Clara</td><td>94.50</td><td>aktiv</td></tr>
+        <tr><td>4</td><td>Vogt, David</td><td>63.00</td><td>aktiv</td></tr>
+        </tbody>
+        </table>
+        <p><strong>Die drei Schritte kurz zusammengefasst – was und warum:</strong></p>
+        <ol>
+        <li><strong>INSERT</strong> legt eine neue Zeile an (3 → 4 Zeilen). <em>Warum mit Spaltenliste?</em> Dann ist eindeutig,
+            welcher Wert in welche Spalte kommt, auch wenn sich die Spaltenreihenfolge der Tabelle einmal ändert.</li>
+        <li><strong>UPDATE</strong> ändert Werte in vorhandenen Zeilen (4 Zeilen bleiben 4). <em>Warum <code>Beitrag * 1.05</code>?</em>
+            Der neue Wert wird für jede Zeile aus ihrem eigenen alten Wert berechnet: 60.00 · 1.05 = 63.00, 90.00 · 1.05 = 94.50.</li>
+        <li><strong>DELETE</strong> entfernt genau die Zeilen, die die Bedingung erfüllen (4 → 3 Zeilen). <em>Warum über den
+            Primärschlüssel?</em> <code>MitgliedNr = 2</code> trifft garantiert höchstens eine Zeile.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> der Endzustand oben mit 3 Zeilen.</p>
+        <p><strong>Kontrolle:</strong> Zeilenzahl 3 + 1 − 1 = 3 stimmt. Summe der Beiträge vorher 60 + 60 + 90 = 210.00, nachher
+           63 + 94.50 + 63 = 220.50. Vor dem DELETE hätte <code>SELECT * FROM Mitglied WHERE MitgliedNr = 2;</code> genau eine Zeile
+           geliefert – das ist der Sicherheitsgriff aus dem Merkkasten unten.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: CRUD in Apps und das Recht auf Löschung</summary>
+                <p>
+                    Jede App, in der du ein Konto anlegst, dein Profil änderst oder einen Beitrag löschst, führt im
+                    Hintergrund INSERT, UPDATE und DELETE aus. In der <strong>Datenbankadministration</strong> gehören
+                    solche Änderungen zu den heikelsten Aufgaben: Vor einem großen UPDATE wird ein Backup angelegt und die
+                    Änderung in einer <em>Transaktion</em> ausgeführt, die sich bei Fehlern zurückrollen lässt. Die
+                    <strong>DSGVO</strong> (Art. 17, „Recht auf Löschung“) verlangt außerdem, dass Unternehmen personenbezogene
+                    Daten auf Wunsch wirklich löschen – mit DELETE in allen betroffenen Tabellen, nicht nur durch Ausblenden.
+                </p>
+            </details>
+        </div>
+
+<p>Das Vereinsbeispiel zeigt die drei Befehle an <em>einer</em> Tabelle. Sobald Tabellen über Fremdschlüssel
+           verbunden sind, kommt es zusätzlich auf die Reihenfolge der Befehle an.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> In der Datenbank <a href="../material/kurs.sql">kurs.sql</a> verlässt
+               Tim Weber (<code>s_id</code> 4) die Schule. Er soll vollständig aus der Datenbank entfernt werden. In
+               <code>Kursnote</code> verweisen zwei Zeilen über den Fremdschlüssel <code>s_id</code> auf ihn.</p>
+            <ol>
+                <li><strong>Betroffene Zeilen ansehen (Sicherheitsgriff).</strong>
+                    <pre><code>SELECT * FROM Kursnote WHERE s_id = 4;</code></pre>
+                    Ergebnis: 2 Zeilen – <code>(3, 4, 2.7)</code> Englisch und <code>(5, 4, 1.3)</code> Geschichte.
+                    <em>Warum?</em> So weißt du vorher, wie viele Zeilen der DELETE treffen muss.</li>
+                <li><strong>Zuerst die abhängigen Zeilen löschen.</strong>
+                    <pre><code>DELETE FROM Kursnote WHERE s_id = 4;</code></pre>
+                    <em>Warum zuerst?</em> Die Noten verweisen auf den Schüler. Würde man den Schüler zuerst löschen, zeigten
+                    zwei Noten auf einen Datensatz, den es nicht mehr gibt – die referenzielle Integrität wäre verletzt.</li>
+                <li><strong>Dann den Datensatz selbst löschen.</strong>
+                    <pre><code>DELETE FROM Schueler WHERE s_id = 4;</code></pre></li>
+                <li><strong>Probe mit einem Join.</strong> Ein LEFT JOIN von <code>Kursnote</code> zu <code>Schueler</code> zeigt
+                    Noten ohne passenden Schüler („verwaiste“ Zeilen):
+                    <pre><code>SELECT Kursnote.*
+FROM Kursnote
+LEFT JOIN Schueler ON Kursnote.s_id = Schueler.s_id
+WHERE Schueler.s_id IS NULL;</code></pre>
+                    Das Ergebnis ist leer. Zusätzlich: <code>SELECT COUNT(*) FROM Kursnote;</code> liefert 8 statt 10,
+                    <code>SELECT COUNT(*) FROM Schueler;</code> liefert 4 statt 5.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Tim Weber und seine beiden Noten sind entfernt; alle übrigen Noten haben weiterhin
+               einen gültigen Schüler.</p>
+            <p><strong>Falle:</strong> Vertauscht man die Schritte 2 und 3, meldet SQLite trotzdem „Ausführung erfolgreich“.
+               SQLite prüft Fremdschlüssel nämlich nur, wenn sie vorher mit <code>PRAGMA foreign_keys = ON;</code>
+               eingeschaltet wurden. Ohne diese Einstellung entstehen stillschweigend zwei verwaiste Noten, die die
+               Probe aus Schritt 4 sofort anzeigen würde. Mit eingeschalteter Prüfung bricht der DELETE auf
+               <code>Schueler</code> dagegen mit <code>FOREIGN KEY constraint failed</code> ab.</p>
+            </details>
+        </div>
+
+<h2>Aufgaben mit JOIN und Aggregatfunktionen</h2>
+
+<div class="hinweis">
+            <details>
+                <summary>
+                    Vorgriff: CASE WHEN
+                </summary>
+                <p>
+                    <code>CASE WHEN Bedingung THEN Wert1 ELSE Wert2 END</code> ist eine Fallunterscheidung
+                    innerhalb einer SQL-Abfrage: Trifft die Bedingung zu, wird <code>Wert1</code> verwendet,
+                    sonst <code>Wert2</code>. So kannst du z.&nbsp;B. verhindern, dass ein berechneter Wert eine
+                    Obergrenze überschreitet.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Syntax für INSERT:<br>
+                INSERT INTO Tabellenname (Spalte1, Spalte2, ...) VALUES (Wert1, Wert2, ...);
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                Syntax für UPDATE:<br>
+                UPDATE Tabellenname SET Spalte1 = Wert1, Spalte2 = Wert2, ... WHERE Bedingung;
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                Syntax für DELETE:<br>
+                DELETE FROM Tabellenname WHERE Bedingung;
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>Der Sicherheitsgriff bei UPDATE und DELETE</strong></p>
+            <p>
+              Schreibe die Bedingung zuerst als SELECT und sieh dir an, welche Zeilen sie trifft:
+            </p>
+            <pre><code>SELECT * FROM Mitglied WHERE MitgliedNr = 2;</code></pre>
+            <p>
+              Stimmt die Trefferzahl, baust du den Befehl um und lässt die <code>WHERE</code>-Bedingung
+              unverändert stehen. Ein vergessenes <code>WHERE</code> trifft <em>jede</em> Zeile der Tabelle
+              – und rückgängig machen lässt sich das nicht.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.8.1: Create <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Füge einen neuen Kurs „Informatik“ mit der k_id 6 in die Tabelle Kurs ein.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.8.2: Update <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Ändere den Nachnamen der Schülerin mit der s_id 3 von „Fischer“ zu „Schulz“.
+                </p>
+            </details>
+        </div>

@@ -1,0 +1,22 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 3.6.6: Fehler finden – der Export, der nicht exportiert <span class="niveau">AFB III</span></summary>
+        <p>Lara soll die Daten <code>daten</code> aus dem DictWriter-Beispiel oben ohne die Spalte <code>Alter</code> exportieren. Ihr Programm:</p>
+        <pre><code class="language-python">import csv
+daten = [{"Name": "Anna", "Alter": "17", "Note": "1.3"},
+         {"Name": "Ben", "Alter": "16", "Note": "2.0"}]
+
+with open("export.csv", "a", encoding="utf-8") as datei:
+    writer = csv.DictWriter(datei, fieldnames=["Name", "Note"], delimiter=";")
+    writer.writeheader()
+    writer.writerow(daten)</code></pre>
+        <ol>
+            <li>Das Programm bricht ab. Bestimme die Fehlermeldung und erkläre sie.</li>
+            <li>Lara ersetzt <code>writerow</code> durch <code>writerows</code>. Sage den nächsten Fehler voraus und gib zwei Möglichkeiten an, ihn zu beheben.</li>
+            <li>Auch danach hat das Programm noch zwei Schwächen, die ohne Fehlermeldung auftreten (eine davon nur unter Windows, eine beim
+                zweiten Programmlauf). Benenne sie und gib das vollständig korrigierte Programm mit dem erwarteten Dateiinhalt an.</li>
+        </ol>
+    </details>
+</div>

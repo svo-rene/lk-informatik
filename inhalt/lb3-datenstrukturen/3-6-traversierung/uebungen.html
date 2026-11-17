@@ -1,0 +1,205 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/3-6_binaerer_suchbaum.ipynb" download>3-6_binaerer_suchbaum.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Aufrufe zählen <span class="niveau">AFB II</span></summary>
+                <p>Wie oft wird <code>in_order</code> insgesamt aufgerufen, wenn du <code>in_order(klein)</code> für den Baum B mit den Kindern A und C startest? Wie viele davon bekommen <code>None</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>7-mal: je ein Aufruf für B, A und C und vier Aufrufe mit <code>None</code> – links und rechts von A sowie links und rechts von C. Allgemein bekommt jeder Knoten zwei Aufrufe für seine Kinder, auch wenn sie fehlen.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Die Schlange führen <span class="niveau">AFB I</span></summary>
+                <p>Führe <code>level_order</code> für den Baum aus Kurz geprüft 1 (D mit den Kindern B und F, A links unter B) von Hand aus. Wie sehen <code>schlange</code> und <code>ergebnis</code> aus, nachdem die ersten zwei Knoten entnommen wurden?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Schlange von vorn nach hinten. Start: D. D entnehmen: <code>ergebnis = [D]</code>, Schlange: B, F. B entnehmen: <code>ergebnis = [D, B]</code>, B stellt A und <code>None</code> hinten an, also Schlange: F, A, <code>None</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-6-1">
+            <details>
+                <summary>Aufgabe 3.6.1: Baumtraversierung <span class="niveau">AFB I</span></summary>
+                <p>Gegeben ist folgender binärer Baum:</p>
+                <pre><code>       10
+      /  \
+     5    15
+    / \     \
+   3   7     20</code></pre>
+                <ol>
+                    <li>Führe eine Pre-Order-Traversierung dieses Baums durch.</li>
+                    <li>Führe eine In-Order-Traversierung dieses Baums durch.</li>
+                    <li>Führe eine Post-Order-Traversierung dieses Baums durch.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.6.2: Suche in einem binären Suchbaum <span class="niveau">AFB I–II</span></summary>
+                <p>Gegeben ist der folgende binäre Suchbaum:</p>
+                <pre><code>        8
+       /  \
+      3    10
+     / \     \
+    1   6     14
+       / \    /
+      4   7  13</code></pre>
+                <ol>
+                    <li>Suche nach der Zahl 6 im Baum und beschreibe den Suchvorgang.</li>
+                    <li>Suche nach der Zahl 9 im Baum und beschreibe, was passiert, wenn das Element nicht gefunden wird.</li>
+                    <li>Die binäre Suche kann in einem Suchbaum oder in einer sortierten Liste umgesetzt werden. Beschreibe die binäre Suche und erkläre, warum sich die Suche im binären Suchbaum und in der Liste stark ähneln. <a href="https://www.inf-schule.de/algorithmen/standardalgorithmen/suchen/binsuche" target="_blank">https://www.inf-schule.de/algorithmen/standardalgorithmen/suchen/binsuche</a></li>
+                    <li>Bestimme die Komplexitätsklasse der Suche in binären Suchbäumen.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.6.3: Hinzufügen und Löschen von Knoten <span class="niveau">AFB II</span></summary>
+                <p><a href="https://www.inf-schule.de/algorithmen/standardalgorithmen/suchbaeume/binaerbaum/andere" target="_blank">https://www.inf-schule.de/algorithmen/standardalgorithmen/suchbaeume/binaerbaum/andere</a></p>
+                <p>Betrachte den folgenden binären Suchbaum:</p>
+                <pre><code>         50
+       /    \
+      30     70
+     /  \   /  \
+    20  40 60  80</code></pre>
+                <ol>
+                    <li>Füge die Zahl 55 in den Baum ein und aktualisiere den Baum entsprechend.</li>
+                    <li>Lösche die Zahl 30 aus dem Baum und aktualisiere den Baum entsprechend.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-6-4">
+            <details>
+                <summary>Aufgabe 3.6.4: Anwendungsbeispiel Dateiverwaltung <span class="niveau">AFB III</span></summary>
+                <p>Stell dir vor, du entwickelst eine Dateiverwaltungssoftware. Jede Datei und jeder Ordner wird als Knoten eines Baums dargestellt; der Inhalt eines Ordners sind seine Kinder. Wie könnte ein solcher Baum aussehen? Wie könntest du Tiefensuche und Breitensuche verwenden, um Dateien oder Ordner zu suchen oder zu organisieren?</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-6-5">
+            <details>
+                <summary>Aufgabe 3.6.5: Anwendungsbeispiel Organigramm <span class="niveau">AFB III</span></summary>
+                <p>Ein Unternehmen hat ein Organigramm mit Geschäftsführung, Abteilungen und Mitarbeitenden. Eine Abteilungsleitung kann beliebig viele Mitarbeitende haben. Begründe, warum sich das Organigramm als allgemeiner Baum, aber nicht direkt als Binärbaum darstellen lässt. Beschreibe, wie du mit Traversierungsalgorithmen (a) alle Mitarbeitenden einer Abteilung auflisten und (b) die Hierarchieebenen nacheinander ausgeben kannst.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.6.6: Form des Suchbaums <span class="niveau">AFB II–III</span></summary>
+                <ol>
+                    <li>Füge die Kundennummern 50, 30, 70, 20, 40, 60, 80 in dieser Reihenfolge in einen leeren binären Suchbaum ein. Füge dieselben Zahlen danach aufsteigend sortiert in einen zweiten Baum ein. Zeichne beide Bäume und gib ihre Höhe an.</li>
+                    <li>Zähle in beiden Bäumen die Vergleiche bei der Suche nach 80 und nach der nicht vorhandenen 45.</li>
+                    <li>Begründe, warum die Suche im mittleren Fall in O(log n) liegt, im schlechtesten Fall aber in O(n).</li>
+                    <li>Du erhältst die Kundendaten aufsteigend sortiert. Beschreibe zwei Möglichkeiten, trotzdem einen gut ausgeglichenen Baum zu erhalten.</li>
+                    <li>Vergleiche die In-Order-Traversierung beider Bäume.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="primm">Code lesen, untersuchen, abwandeln</h2>
+
+<p>Bevor du selbst programmierst, liest du fertigen Code und findest heraus, was er tut. Das geht in fünf Schritten: <strong>Vorhersagen</strong> (auf Papier, ohne Rechner) → <strong>Ausführen</strong> → <strong>Untersuchen</strong> mit dem Debugger → <strong>Abwandeln</strong> → <strong>Fehler finden</strong>. Rechne mit etwa 25 Minuten. Wie der Debugger funktioniert, steht auf Kursseite 3.4 im Kasten „So debuggst du in Thonny“. Eine Vorhersage, die nicht stimmt, ist kein Fehler – sie zeigt dir genau, was du noch nicht verstanden hast.</p>
+
+<div class="aufgabe" id="primm-3-6">
+            <details open>
+                <summary>PRIMM 3.6: Was macht <code>raetsel</code>? <span class="niveau">AFB I–II</span></summary>
+                <p class="git-datei"><strong>Dateien:</strong> <a href="../material/primm_3-6_raetsel.py" download>primm_3-6_raetsel.py</a> und <a href="../material/primm_3-6_fehler.py" download>primm_3-6_fehler.py</a> in <code>2_baeume/</code> speichern, dazu <code>queue_knoten.py</code> (siehe Schritt 4) – erst nach Schritt 1 öffnen.</p>
+                <p><strong>1 Vorhersagen</strong> (Papier, ohne Rechner): Was gibt das Programm aus? Schreibe alle Zeilen auf.</p>
+                <pre><code class="language-python">def raetsel(k, tiefe):
+    if k is None:
+        return
+    raetsel(k.links, tiefe + 1)
+    print(k.wert, "auf Tiefe", tiefe)
+    raetsel(k.rechts, tiefe + 1)
+
+baum = Knoten(10, Knoten(5, Knoten(3), Knoten(7)), Knoten(15, None, Knoten(20)))
+raetsel(baum, 0)</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>Ausgabe (sechs Zeilen): <code>3 auf Tiefe 2</code>, <code>5 auf Tiefe 1</code>, <code>7 auf Tiefe 2</code>, <code>10 auf Tiefe 0</code>, <code>15 auf Tiefe 1</code>, <code>20 auf Tiefe 2</code>. Die Funktion gibt die Werte in In-Order-Reihenfolge aus, jeweils mit ihrer Tiefe (Wurzel = 0).</p></details>
+                <p><strong>2 Ausführen:</strong> Öffne <code>primm_3-6_raetsel.py</code> in Thonny, starte mit <kbd>F5</kbd> und vergleiche mit deiner Vorhersage.</p>
+                <p><strong>3 Untersuchen</strong> mit dem Debugger (<kbd>Strg</kbd>&nbsp;+&nbsp;<kbd>F5</kbd>):</p>
+                <ol><li>Welche Aufrufe sind offen, wenn die Zeile <code>7 auf Tiefe 2</code> ausgegeben wird?</li><li>Welchen Wert hat <code>tiefe</code> im Aufruf für die 20?</li><li>Welche Traversierung steckt in <code>raetsel</code>, wenn man die Tiefe weglässt?</li></ol>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>1. <code>raetsel(10, 0)</code> → <code>raetsel(5, 1)</code> → <code>raetsel(7, 2)</code>. 2. <code>tiefe = 2</code>. 3. In-Order (links – Knoten – rechts).</p></details>
+                <p><strong>4 Abwandeln:</strong></p>
+                <ol type="a"><li>Ändere die Funktion so, dass sie den Baum „seitlich“ ausgibt: jeder Wert in einer eigenen Zeile, um <code>4 · tiefe</code> Leerzeichen eingerückt, der rechte Teilbaum oben. Die 20 steht dann in der ersten Zeile.</li><li>Ändere sie so, dass nur die Blätter mit ihrer Tiefe ausgegeben werden: <code>3 auf Tiefe 2</code>, <code>7 auf Tiefe 2</code>, <code>20 auf Tiefe 2</code>.</li></ol>
+                <p><strong>5 Fehler finden:</strong> Die Level-Order bricht mit einem <code>AttributeError</code> ab. Lies die Fehlermeldung: In welcher Zeile, und welche Variable ist <code>None</code>? Lass den Debugger bis kurz vor den Absturz laufen und sieh dir an, was <code>dequeue()</code> zuletzt geliefert hat. Korrigiere den Fehler und vergleiche danach mit <code>level_order</code> in Beispiel 2.</p>
+                <pre><code class="language-python">def level_order(wurzel):
+    ergebnis = []
+    schlange = Queue()
+    schlange.enqueue(wurzel)
+    while not schlange.is_empty():
+        k = schlange.dequeue()
+        ergebnis.append(k.wert)
+        schlange.enqueue(k.links)
+        schlange.enqueue(k.rechts)
+    return ergebnis
+
+print(level_order(baum))    # AttributeError: &#x27;NoneType&#x27; object has no attribute &#x27;wert&#x27;</code></pre>
+                <p>Lösungen zu Schritt 4 und 5 stehen in der Musterlösung.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.6.7: Baum aus zwei Traversierungen rekonstruieren <span class="niveau">AFB II</span></summary>
+                <p>Von einem Binärbaum sind nur zwei Ausgaben erhalten:</p>
+                <ul>
+                    <li>Pre-Order: 40, 20, 10, 30, 25, 60, 50, 70</li>
+                    <li>In-Order: 10, 20, 25, 30, 40, 50, 60, 70</li>
+                </ul>
+                <ol>
+                    <li>Rekonstruiere den Baum. Beschreibe dein Vorgehen: Welche Information liefert die Pre-Order, welche die In-Order?</li>
+                    <li>Gib Post-Order und Level-Order des Baums an.</li>
+                    <li>Begründe, warum die Pre-Order allein nicht ausreicht, um einen beliebigen Binärbaum eindeutig festzulegen. Gib ein Gegenbeispiel mit zwei Knoten an.</li>
+                </ol>
+                <p class="tipp">Das erste Element der Pre-Order ist die Wurzel. In der In-Order stehen links von ihr genau die Knoten des linken Teilbaums.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.6.9: Ordnergröße mit Post-Order <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>2_baeume/ordnergroesse.py</code> – neu anlegen<br><strong>Commits:</strong> nach Teil 1: <code>3.6.9 Teil 1: Klasse Eintrag, Laufwerk aufgebaut</code> · nach Teil 2: <code>3.6.9 Teil 2: groesse und Ordnerliste ergänzt</code> · nach Teil 4: <code>3.6.9 Teil 4: Tests ok, Schule 806 KB</code></p>
+                <p>Ein Schul-Laufwerk enthält folgende Ordner (mit /) und Dateien (Größen in KB):</p>
+                <pre><code>Schule/
+├── Mathe/
+│   ├── analysis.pdf      200
+│   └── uebung.docx        50
+├── Info/
+│   ├── baum.py             4
+│   └── Bilder/
+│       ├── graph.png     300
+│       └── baum.png      250
+└── notizen.txt             2</code></pre>
+                <ol>
+                    <li>Modelliere die Struktur mit einer Klasse <code>Eintrag</code> (Name, Größe, Liste der Kinder; Ordner haben selbst die Größe 0).</li>
+                    <li>Schreibe eine rekursive Funktion <code>groesse(eintrag)</code>, die die Gesamtgröße berechnet, und eine Funktion, die alle Ordner mit ihrer Größe ausgibt.</li>
+                    <li>Begründe, warum hier nur eine Post-Order-Traversierung zum Ziel führt, und gib die Reihenfolge an, in der die Einträge fertig berechnet werden.</li>
+                    <li>Teste: erwartet sind Schule 806 KB, Info 554 KB, Bilder 550 KB und Mathe 250 KB.</li>
+                </ol>
+            </details>
+        </div>

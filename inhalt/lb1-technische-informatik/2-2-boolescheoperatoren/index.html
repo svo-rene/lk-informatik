@@ -1,0 +1,209 @@
+<p>
+            In der Aussagenlogik können Aussagen entweder wahr (1) oder falsch (0) sein. Beispiele für Aussagen sind:
+        </p>
+
+<ul>
+            <li>Die Sonne scheint.</li>
+            <li>2 + 2 = 5.</li>
+            <li>Alle Vögel können fliegen.</li>
+        </ul>
+
+<p>
+            In der booleschen Algebra werden boolesche Operatoren verwendet, um Aussagen miteinander zu verknüpfen und neue Aussagen zu erstellen. Die wichtigsten booleschen Operatoren sind:
+        </p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Boolesche Operatoren zum Ausprobieren</summary>
+                <h3>UND (Konjunktion) – Beispiel</h3>
+                <label for="hasCar">Du hast ein Auto:</label>
+                <input type="checkbox" id="hasCar">
+                <br>
+                <label for="hasLicense">Du hast einen Führerschein:</label>
+                <input type="checkbox" id="hasLicense">
+                <br>
+                <button onclick="checkDrivingEligibility()">Überprüfen</button>
+                <p id="result1"></p>
+
+                <h3>ODER (Disjunktion) – Beispiel</h3>
+                <label for="isRaining">Es regnet:</label>
+                <input type="checkbox" id="isRaining">
+                <br>
+                <label for="isSwimming">Du schwimmst:</label>
+                <input type="checkbox" id="isSwimming">
+                <br>
+                <button onclick="checkRainProtection()">Überprüfen</button>
+                <p id="result2"></p>
+
+                <h3>NICHT (Negation) – Beispiel</h3>
+                <p>Die Aussage A lautet: „Du bist volljährig.“ Die Negation NICHT A lautet: „Du bist nicht volljährig.“</p>
+                <label for="isAdult">A: Du bist volljährig:</label>
+                <input type="checkbox" id="isAdult">
+                <br>
+                <button onclick="checkAge()">Überprüfen</button>
+                <p id="result3"></p>
+
+                <script>
+                    // Beispiele für boolesche Operatoren in JavaScript
+
+                    // UND (Konjunktion) - Beispiel
+                    function checkDrivingEligibility() {
+                        const hasCar = document.getElementById('hasCar').checked;
+                        const hasLicense = document.getElementById('hasLicense').checked;
+
+                        if (hasCar && hasLicense) {
+                            document.getElementById('result1').textContent = "Auto UND Führerschein ist wahr: Du darfst Auto fahren!";
+                        } else {
+                            document.getElementById('result1').textContent = "Auto UND Führerschein ist falsch: Du darfst nicht Auto fahren!";
+                        }
+                    }
+
+                    // ODER (Disjunktion) - Beispiel
+                    function checkRainProtection() {
+                        const isRaining = document.getElementById('isRaining').checked;
+                        const isSwimming = document.getElementById('isSwimming').checked;
+
+                        if (isRaining || isSwimming) {
+                            document.getElementById('result2').textContent = "Regen ODER Schwimmen ist wahr: Du wirst nass!";
+                        } else {
+                            document.getElementById('result2').textContent = "Regen ODER Schwimmen ist falsch: Du bleibst trocken!";
+                        }
+                    }
+
+                    // NICHT (Negation) - Beispiel
+                    function checkAge() {
+                        const isAdult = document.getElementById('isAdult').checked;
+
+                        if (!isAdult) {
+                            document.getElementById('result3').textContent = "A ist falsch, also ist NICHT A wahr: Du bist nicht volljährig.";
+                        } else {
+                            document.getElementById('result3').textContent = "A ist wahr, also ist NICHT A falsch: Du bist volljährig.";
+                        }
+                    }
+                </script>
+            </details>
+        </div>
+
+<hr>
+
+<h2>Wahrheitstabellen für boolesche Operatoren</h2>
+
+<p>
+    Eine Wahrheitstabelle ist eine tabellarische Darstellung aller möglichen Kombinationen von Wahrheitswerten für logische Aussagen oder Ausdrücke. Sie zeigt die Auswertungsergebnisse dieser Aussagen oder Ausdrücke für jede Kombination. Wahrheitstabellen werden in der Logik, der Analyse digitaler Schaltungen und der Programmierung verwendet, um das Verhalten logischer Funktionen und Schaltungen zu analysieren und komplexe logische Ausdrücke auszuwerten.
+</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Clubzugang mit UND</summary>
+<p>Gegeben ist die Aussage A: „Du bist Mitglied im Club.“ und B: „Du hast eine gültige Eintrittskarte.“</p>
+
+<table class="gitter">
+    <tr>
+        <th>A (Mitglied im Club)</th>
+        <th>B (gültige Eintrittskarte)</th>
+        <th>A UND B (Zugang erlaubt)</th>
+    </tr>
+    <tr><td>0 (false)</td><td>0 (false)</td><td>0 (false)</td></tr>
+    <tr><td>0 (false)</td><td>1 (true)</td><td>0 (false)</td></tr>
+    <tr><td>1 (true)</td><td>0 (false)</td><td>0 (false)</td></tr>
+    <tr><td>1 (true)</td><td>1 (true)</td><td>1 (true)</td></tr>
+</table>
+
+<p>
+    In diesem Beispiel haben wir zwei Aussagen, A und B, die jeweils mit „true“ (1) oder „false“ (0) bewertet werden können.
+    Die Wahrheitstabelle zeigt alle möglichen Kombinationen der Wahrheitswerte für A und B und die entsprechende logische Auswertung der Aussage „Dir ist Zutritt erlaubt, wenn du Mitglied im Club bist und eine gültige Eintrittskarte hast.“
+    In der Spalte A UND B wird das Ergebnis der UND-Verknüpfung von A und B angegeben, wobei 1 für „wahr“ und 0 für „falsch“ steht.
+    Das Ergebnis zeigt, dass dir der Zutritt erlaubt ist (wahr), wenn sowohl „Du bist Mitglied im Club“ als auch „Du hast eine gültige Eintrittskarte“ wahr sind.
+</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Zwei Operatoren kombiniert</summary>
+<p>A: „Es ist Wochenende.“, B: „Es regnet.“ Die Aussage „Ich gehe schwimmen, wenn Wochenende ist UND es NICHT regnet.“ verknüpft UND mit NICHT. Man berechnet zuerst die Hilfsspalte NICHT B und verknüpft sie dann mit A:</p>
+<table class="gitter">
+    <tr><th>A</th><th>B</th><th>NICHT B</th><th>A UND (NICHT B)</th></tr>
+    <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+    <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+    <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+    <tr><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+</table>
+<p>Nur in der dritten Zeile (Wochenende, kein Regen) gehst du schwimmen. Hilfsspalten machen auch lange Ausdrücke übersichtlich – dieses Vorgehen nutzt du in 2.3 für mehrere Variablen.</p>
+<p><strong>Probe:</strong> Zeile 4 (Wochenende und Regen): NICHT B = 0, und UND mit einer 0 ergibt immer 0 – du bleibst also zu Hause, genau wie es der Satz verlangt.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Wo dir boolesche Operatoren wirklich begegnen</summary>
+        <p>
+            Boolesche Operatoren sind kein reines Theoriethema – sie stecken in sehr vielen digitalen Werkzeugen, die du täglich nutzt:
+        </p>
+        <ul>
+            <li><strong>Suchmaschinen:</strong> Mehrere Suchwörter hintereinander verknüpft Google im Wesentlichen mit UND, das Wort <code>OR</code> (in Großbuchstaben) steht für ODER, und ein vorangestelltes Minuszeichen (<code>-wort</code>) schließt ein Wort aus – das ist UND NICHT. Anführungszeichen (<code>"…"</code>) sind dagegen <em>kein</em> boolescher Operator: Sie erzwingen eine exakte Wortfolge (Phrasensuche). Siehe die <a href="https://support.google.com/websearch/answer/2466433?hl=de" target="_blank">offizielle Google-Suchhilfe</a>.</li>
+            <li><strong>Smart Home:</strong> Eine Automatisierungsregel wie „Licht an, WENN Bewegung erkannt UND es dunkel ist“ ist nichts anderes als eine boolesche UND-Verknüpfung zweier Sensor-Aussagen.</li>
+            <li><strong>Spamfilter:</strong> E-Mail-Programme markieren Nachrichten z.&nbsp;B. als Spam, wenn („Absender unbekannt“ UND „Betreff enthält ‚Gewinn‘“) ODER „Anhang ist verdächtig“ wahr ist.</li>
+            <li><strong>Entsperren von Geräten:</strong> Ein Smartphone entsperrt sich oft erst, wenn (PIN korrekt) UND (Fingerabdruck erkannt) – je nach Sicherheitseinstellung auch mit ODER.</li>
+        </ul>
+        <p>
+            Überall dort, wo ein System aus mehreren Bedingungen eine einzige Ja-Nein-Entscheidung treffen muss, arbeiten im Hintergrund boolesche Operatoren.
+        </p>
+        <p><strong>Berufsleben:</strong></p>
+        <ul>
+            <li><strong>Software- und App-Entwickler/in</strong>: schreibt Bedingungen wie <code>if (angemeldet &amp;&amp; !gesperrt)</code> – ein falsch gesetztes NICHT kann eine Sicherheitslücke öffnen.</li>
+            <li><strong>Digitaltechnik-Ingenieur/in</strong>: setzt UND, ODER und NICHT als Gatter in Steuerungen um, z.&nbsp;B. für Fertigungsanlagen im Maschinenbau in Chemnitz oder für Fahrzeugelektronik.</li>
+        </ul>
+    </details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Boolesche Operatoren:</strong></p>
+            <ul>
+                <li><strong>UND (Konjunktion):</strong> Mit dem Operator „und“ werden zwei Aussagen miteinander verknüpft. Das Ergebnis ist nur dann wahr, wenn beide Aussagen wahr sind.</li>
+                <li><strong>ODER (Disjunktion):</strong> Mit dem Operator „oder“ werden zwei Aussagen miteinander verknüpft. Das Ergebnis ist wahr, wenn mindestens eine der Aussagen wahr ist (auch wenn beide wahr sind).</li>
+                <li><strong>NICHT (Negation):</strong> Mit dem Operator „nicht“ wird eine Aussage negiert. Das Ergebnis ist die Umkehrung des Wahrheitswerts der ursprünglichen Aussage.</li>
+            </ul>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 2.2.1: Wahrheitstabellen erstellen <span class="niveau">AFB II</span></summary>
+        <ol>
+            <li>
+                Gegeben sind die Aussagen A: „Es ist Montag.“ und B: „Es regnet.“
+                Erstelle eine Wahrheitstabelle, um die logische Auswertung der Aussage „Du bleibst zu Hause, wenn es Montag ist und es regnet.“ zu zeigen.
+            </li>
+            <li>
+                Gegeben sind die Aussagen A: „Du hast einen Regenschirm.“ und B: „Du hast eine Regenjacke.“
+                Erstelle eine Wahrheitstabelle, um die logische Auswertung der Aussage „Du bleibst trocken, wenn du einen Regenschirm oder eine Regenjacke hast (oder beides).“ zu zeigen.
+            </li>
+            <li>
+                Gegeben ist die Aussage A: „Du hast die Negation verstanden.“
+                Zeige mit einer Wahrheitstabelle, wie die Negation dieser Aussage NICHT(A) aussieht.
+            </li>
+            <li>
+                Gegeben sind die Aussagen A: „Du bist volljährig.“, B: „Du hast einen gültigen Ausweis.“, C: „Du hast ein Ticket.“ und D: „Du bist VIP-Mitglied.“
+                Erstelle eine Wahrheitstabelle für die Aussage: „Du darfst das Konzert betreten, wenn du volljährig bist und einen gültigen Ausweis hast und zusätzlich mindestens eine der beiden folgenden Bedingungen erfüllst: Du hast ein Ticket oder du bist VIP-Mitglied (beides zugleich ist ebenfalls erlaubt).“
+            </li>
+            <li>
+                Informiere dich, wie man die verknüpfte Aussage der letzten Aufgabe einfacher notieren kann. Notiere sie in einer formalen Schreibweise.
+            </li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 2.2.2: Automatisches Fahrradlicht <span class="niveau">AFB I</span></summary>
+        <p>Ein E-Bike hat eine Lichtautomatik. A: „Der Lichtschalter steht auf AN.“, B: „Der Akku ist leer.“, C: „Der Dämmerungssensor meldet Dunkelheit.“, D: „Das Rad fährt durch einen Tunnel.“</p>
+        <ol>
+            <li>Das Licht leuchtet, wenn der Schalter auf AN steht UND der Akku NICHT leer ist. Erstelle die Wahrheitstabelle mit einer Hilfsspalte für NICHT B und gib an, in welcher Situation das Licht leuchtet.</li>
+            <li>Die Automatik schaltet das Licht ein, wenn es dunkel ist ODER das Rad durch einen Tunnel fährt. Erstelle die Wahrheitstabelle für C ODER D und erkläre die Zeile, in der C und D beide wahr sind.</li>
+        </ol>
+    </details>
+</div>

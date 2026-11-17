@@ -1,0 +1,262 @@
+<p>Jetzt arbeitet ihr wie ein kleines Entwicklungsteam: In einer Gruppe von <strong>2 oder 3 Personen</strong> entwickelt ihr in etwa drei Wochen ein objektorientiertes Python-Programm – mit Klassen nach dem Kapitel „Objekte und Klassen“ und „Beziehungen und Vererbung“, aufgeteilt nach MVC (Seite 5.1), mit User Stories und Akzeptanzkriterien (5.2), mit Tests (5.3) und mit Pull Requests und Reviews auf git.inf7.eu (5.4). Diese Seite beschreibt den Auftrag und die Themen. Wie ihr Schritt für Schritt vorgeht, steht auf Seite 5.6 „Projekt-Leitfaden“.</p>
+
+<h2>1. Der Auftrag</h2>
+
+<table class="gitter">
+            <tr><th>Rahmen</th><th>Festlegung</th></tr>
+            <tr><td>Gruppe</td><td>2–3 Personen, ein privates Repository je Gruppe auf git.inf7.eu; die Lehrkraft ist als Mitarbeiter eingetragen</td></tr>
+            <tr><td>Dauer</td><td>etwa 12–15 Unterrichtsstunden in Sprints (Seite 5.6)</td></tr>
+            <tr><td>Technik</td><td>Python mit Thonny; mehrere Module nach MVC; Ein- und Ausgabe nur über die Konsole, keine grafische Oberfläche</td></tr>
+            <tr><td>Tests</td><td>zu jedem Model-Modul eine Testdatei <code>test_….py</code> mit <code>assert</code> und Testrunner wie auf Seite 5.3</td></tr>
+            <tr><td>Ergebnis</td><td>Repository mit Code, Tests, <code>README.md</code>, Klassendiagramm in <code>docs/</code>, geschlossenen Issues und Release <code>v1.0</code></td></tr>
+            <tr><td>Abschluss</td><td>Code-Review-Gespräch, keine Präsentation (Seite 5.6)</td></tr>
+        </table>
+
+<h2>2. Mindestanforderungen</h2>
+
+<table class="gitter">
+            <tr><th>Anforderung</th><th>★ Stufe 1</th><th>★★ Stufe 2</th><th>★★★ Stufe 3</th></tr>
+            <tr><td>Model-Klassen</td><td>mindestens 2</td><td>mindestens 3</td><td>mindestens 4</td></tr>
+            <tr><td>Kapselung: private Attribute <code>__name</code>, fachliche Methoden statt allgemeiner Setter</td><td>ja</td><td>ja</td><td>ja</td></tr>
+            <tr><td>Beziehung mit Multiplizität (z.&nbsp;B. ein Objekt verwaltet eine Liste anderer)</td><td>ja</td><td>ja</td><td>ja</td></tr>
+            <tr><td>Vererbung mit überschriebener Methode und polymorphem Aufruf</td><td>als Erweiterung</td><td>ja</td><td>ja</td></tr>
+            <tr><td>anspruchsvoller Ablauf (mehrere Sortierkriterien, Zustandswechsel, Umrechnungen)</td><td>–</td><td>–</td><td>ja</td></tr>
+            <tr><td>Typhinweise wie auf Seite 4.7</td><td>ja</td><td>ja</td><td>ja</td></tr>
+            <tr><td>MVC: Model ohne <code>print</code>/<code>input</code>, <code>ansicht.py</code>, <code>main.py</code> mit <code>if __name__ == "__main__":</code></td><td>ja</td><td>ja</td><td>ja</td></tr>
+            <tr><td>Tests mit Grenzwerten für jede Model-Klasse</td><td>ja</td><td>ja</td><td>ja</td></tr>
+        </table>
+
+<p class="tipp">Wählt eine Stufe, die euch fordert, die ihr aber in der Zeit schafft. Ein sauber umgesetztes, gut getestetes Projekt der Stufe 1 ist mehr wert als ein halb fertiges der Stufe 3. Habt ihr alle User Stories erledigt, nehmt ihr Erweiterungen dazu.</p>
+
+<h2>3. Regeln im Repository</h2>
+
+<p>Diese Regeln sind kein Selbstzweck. Sie machen sichtbar, wer was beigetragen hat. Genau das wird bewertet (Seite 5.6).</p>
+
+<h2>4. Die Themen</h2>
+
+<p>Jedes Thema enthält 4–6 User Stories und eine <strong>Mindest-Klassenstruktur</strong>. Ihr dürft Klassen ergänzen, Methoden umbenennen und weitere Stories hinzufügen; die Mindeststruktur muss erkennbar bleiben. Die Akzeptanzkriterien schreibt ihr selbst (Aufgabe 5.5.2). Sichtbarkeiten: <code>+</code> öffentlich, <code>−</code> privat. <code>date</code> ist der Datumstyp aus dem Modul <code>datetime</code> (<code>from datetime import date</code>, z.&nbsp;B. <code>date(2027, 3, 4)</code> oder <code>date.fromisoformat("2027-03-04")</code>).</p>
+
+<table class="gitter">
+            <tr><th>Nr.</th><th>Thema</th><th>Stufe</th><th>Schwerpunkt</th></tr>
+            <tr><td>1</td><td>Hausaufgaben-Planer</td><td>★</td><td>Liste verwalten, sortieren, Datum vergleichen</td></tr>
+            <tr><td>2</td><td>Fundbüro der Schule</td><td>★</td><td>fortlaufende Nummern, Suche, Fristen</td></tr>
+            <tr><td>3</td><td>Lernkartei nach dem Leitner-System</td><td>★★</td><td>Zustand je Karte, Polymorphie beim Prüfen</td></tr>
+            <tr><td>4</td><td>Fahrgemeinschaften zum Auswärtsspiel</td><td>★★</td><td>Plätze als Grenze, Kosten gerecht teilen</td></tr>
+            <tr><td>5</td><td>Kasse des Schulchors</td><td>★★</td><td>Einnahmen und Ausgaben polymorph, Deckung prüfen</td></tr>
+            <tr><td>6</td><td>Turnierplan Hallenfußball</td><td>★★★</td><td>Spielplan erzeugen, Tabelle mit mehreren Sortierkriterien</td></tr>
+            <tr><td>7</td><td>Redaktion der Schülerzeitung</td><td>★★★</td><td>Zustandswechsel, Seitenplanung, Polymorphie</td></tr>
+            <tr><td>8</td><td>Rezeptrechner mit Einkaufsliste</td><td>★★★</td><td>Einheiten umrechnen, zusammenfassen, runden</td></tr>
+        </table>
+
+<h3>Thema 1 ★ Hausaufgaben-Planer</h3>
+
+<p>Ein Programm, in das man Hausaufgaben einträgt und das zeigt, was als Nächstes dran ist.</p>
+
+<ol>
+            <li>Als Schülerin möchte ich eine Hausaufgabe mit Fach, Beschreibung und Fälligkeitsdatum eintragen, um nichts zu vergessen.</li>
+            <li>Als Schüler möchte ich alle offenen Hausaufgaben nach Fälligkeit sortiert sehen, um zu wissen, was zuerst dran ist.</li>
+            <li>Als Schülerin möchte ich eine Hausaufgabe als erledigt abhaken, damit sie aus der Liste der offenen verschwindet.</li>
+            <li>Als Schüler möchte ich überfällige Hausaufgaben hervorgehoben sehen, um sie sofort nachzuholen.</li>
+            <li>Als Schülerin möchte ich nur die offenen Hausaufgaben eines Fachs sehen, um mich auf eine Stunde vorzubereiten.</li>
+        </ol>
+
+<table class="gitter" aria-label="Mindest-Klassenstruktur Hausaufgaben-Planer">
+            <tr><th>Hausaufgabe</th><th>Planer</th></tr>
+            <tr><td>+ fach: str<br>+ beschreibung: str<br>− __faellig: date<br>− __erledigt: bool</td><td>− __aufgaben: list[Hausaufgabe]</td></tr>
+            <tr><td>+ get_faellig(): date<br>+ erledigen(): None<br>+ ist_erledigt(): bool<br>+ ist_ueberfaellig(heute: date): bool</td><td>+ hinzufuegen(aufgabe: Hausaufgabe): None<br>+ offene(): list[Hausaufgabe]<br>+ nach_fach(fach: str): list[Hausaufgabe]<br>+ ueberfaellige(heute: date): list[Hausaufgabe]</td></tr>
+        </table>
+
+<p>Beziehung: Ein <code>Planer</code> verwaltet 0..* <code>Hausaufgabe</code>-Objekte. <strong>Erweiterung:</strong> <code>Klausur</code> erbt von <code>Hausaufgabe</code> und überschreibt eine Methode <code>erinnerung(heute)</code>, die schon drei Tage vorher meldet; Speichern in einer Textdatei.</p>
+
+<h3>Thema 2 ★ Fundbüro der Schule</h3>
+
+<p>Der Hausmeister erfasst Fundsachen; Schülerinnen und Schüler suchen ihre verlorenen Dinge.</p>
+
+<ol>
+            <li>Als Hausmeister möchte ich ein Fundstück mit Beschreibung, Kategorie, Fundort und Datum erfassen und eine fortlaufende Nummer erhalten, um es mit einem Etikett zu versehen.</li>
+            <li>Als Schülerin möchte ich nach einem Stichwort suchen, ohne auf Groß- und Kleinschreibung zu achten, um zu sehen, ob meine Jacke abgegeben wurde.</li>
+            <li>Als Hausmeister möchte ich ein Fundstück als abgeholt markieren, damit es in der Suche nicht mehr erscheint.</li>
+            <li>Als Hausmeister möchte ich alle Fundstücke sehen, die seit mehr als 60 Tagen liegen, um sie zu spenden.</li>
+            <li>Als Schulleiterin möchte ich sehen, wie viele Fundstücke es je Kategorie gibt, um gezielt in den Klassen nachzufragen.</li>
+        </ol>
+
+<table class="gitter" aria-label="Mindest-Klassenstruktur Fundbüro">
+            <tr><th>Fundstueck</th><th>Fundbuero</th></tr>
+            <tr><td>− __nummer: int<br>+ beschreibung: str<br>+ kategorie: str<br>+ fundort: str<br>− __funddatum: date<br>− __abgeholt: bool</td><td>− __fundstuecke: list[Fundstueck]<br>− __naechste_nummer: int</td></tr>
+            <tr><td>+ get_nummer(): int<br>+ abholen(): bool<br>+ ist_abgeholt(): bool<br>+ liegt_seit(heute: date): int</td><td>+ erfassen(beschreibung: str, kategorie: str, fundort: str, datum: date): int<br>+ suchen(stichwort: str): list[Fundstueck]<br>+ abholen(nummer: int): bool<br>+ abgelaufen(heute: date, tage: int): list[Fundstueck]<br>+ anzahl_je_kategorie(): dict[str, int]</td></tr>
+        </table>
+
+<p>Beziehung: Das <code>Fundbuero</code> erzeugt und verwaltet 0..* <code>Fundstueck</code>-Objekte (Komposition). <strong>Erweiterung:</strong> <code>Wertsache</code> erbt von <code>Fundstueck</code> und hat eine kürzere Frist (nach 7 Tagen ins Sekretariat) – eine überschriebene Methode <code>frist()</code> macht <code>abgelaufen()</code> polymorph.</p>
+
+<h3>Thema 3 ★★ Lernkartei nach dem Leitner-System</h3>
+
+<p>Beim Leitner-System liegen Karteikarten in fünf Fächern. Neue Karten starten in Fach 1. Wer eine Karte richtig beantwortet, schiebt sie ein Fach weiter; eine falsch beantwortete Karte wandert zurück in Fach 1. Geübt wird zuerst das niedrigste Fach.</p>
+
+<ol>
+            <li>Als Schüler möchte ich Karteikarten mit Frage und Antwort anlegen, um Vokabeln oder Fachbegriffe zu lernen.</li>
+            <li>Als Schülerin möchte ich eine Karte aus dem niedrigsten nicht leeren Fach abgefragt bekommen, um zuerst das zu üben, was ich noch nicht kann.</li>
+            <li>Als Schüler möchte ich, dass eine richtig beantwortete Karte ein Fach weiter wandert (höchstens bis Fach 5) und eine falsch beantwortete zurück in Fach 1.</li>
+            <li>Als Schülerin möchte ich, dass Groß- und Kleinschreibung und Leerzeichen am Rand beim Vergleich keine Rolle spielen, damit Kleinigkeiten nicht als falsch zählen.</li>
+            <li>Als Schüler möchte ich Auswahlkarten mit vier Antwortmöglichkeiten A–D anlegen, bei denen ich nur den Buchstaben eingebe.</li>
+            <li>Als Schülerin möchte ich sehen, wie viele Karten in jedem Fach liegen, um meinen Fortschritt zu erkennen.</li>
+        </ol>
+
+<table class="gitter" aria-label="Mindest-Klassenstruktur Lernkartei">
+            <tr><th>Karteikarte</th><th>Auswahlkarte (erbt von Karteikarte)</th><th>Lernkartei</th></tr>
+            <tr><td>+ frage: str<br>− __antwort: str<br>− __fach: int</td><td>− __optionen: list[str]<br>− __richtig: str (Buchstabe)</td><td>− __karten: list[Karteikarte]</td></tr>
+            <tr><td>+ get_fach(): int<br>+ pruefe(eingabe: str): bool<br>+ richtig_beantwortet(): None<br>+ falsch_beantwortet(): None</td><td>+ pruefe(eingabe: str): bool <em>(überschrieben)</em><br>+ get_optionen(): list[str]</td><td>+ hinzufuegen(karte: Karteikarte): None<br>+ naechste_karte(): Karteikarte | None<br>+ anzahl_in_fach(fach: int): int<br>+ uebersicht(): dict[int, int]</td></tr>
+        </table>
+
+<p><strong>Erweiterung:</strong> mehrere Karteien (Englisch, Biologie); eine Lernsitzung, die nach zehn Karten Bilanz zieht.</p>
+
+<h3>Thema 4 ★★ Fahrgemeinschaften zum Auswärtsspiel</h3>
+
+<p>Die Basketball-Schulmannschaft fährt zu Auswärtsspielen. Eltern bieten Fahrten an, Spielerinnen und Spieler tragen sich ein. Der Förderverein stellt außerdem einen Kleinbus mit fester Pauschale.</p>
+
+<ol>
+            <li>Als Elternteil möchte ich eine Fahrt mit Ziel, Datum, Fahrer und Zahl der freien Plätze anbieten, um Spieler mitzunehmen.</li>
+            <li>Als Spielerin möchte ich alle Fahrten an einem Datum sehen, die noch freie Plätze haben.</li>
+            <li>Als Spieler möchte ich mich für eine Fahrt eintragen. Ist der letzte Platz vergeben, ist die Fahrt voll; doppelt eintragen geht nicht.</li>
+            <li>Als Spielerin möchte ich mich wieder austragen, damit mein Platz frei wird.</li>
+            <li>Als Elternteil möchte ich die Spritkosten (Kilometer · Cent je Kilometer) gleichmäßig auf alle Mitfahrenden und mich verteilen, in ganzen Cent; einen Rest trägt der Fahrer. Beim Kleinbus zahlt jede mitfahrende Person dagegen eine feste Pauschale.</li>
+            <li>Als Trainer möchte ich für ein Datum sehen, welche Spieler aus dem Kader noch keine Mitfahrt haben.</li>
+        </ol>
+
+<table class="gitter" aria-label="Mindest-Klassenstruktur Fahrgemeinschaften">
+            <tr><th>Fahrt</th><th>Kleinbusfahrt (erbt von Fahrt)</th><th>Fahrtenboerse</th></tr>
+            <tr><td>+ ziel: str<br>+ datum: date<br>+ fahrer: str<br>− __plaetze: int<br>− __mitfahrende: list[str]</td><td>− __pauschale_cent: int</td><td>− __fahrten: list[Fahrt]</td></tr>
+            <tr><td>+ freie_plaetze(): int<br>+ eintragen(name: str): bool<br>+ austragen(name: str): bool<br>+ get_mitfahrende(): list[str]<br>+ anteil_cent(km: int, cent_pro_km: int): int</td><td>+ anteil_cent(km: int, cent_pro_km: int): int <em>(überschrieben)</em></td><td>+ anbieten(fahrt: Fahrt): None<br>+ freie_fahrten(datum: date): list[Fahrt]<br>+ ohne_mitfahrt(kader: list[str], datum: date): list[str]</td></tr>
+        </table>
+
+<p><strong>Erweiterung:</strong> Rückfahrt mit anderen Plätzen; Warteliste, wenn alle Fahrten voll sind.</p>
+
+<h3>Thema 5 ★★ Kasse des Schulchors</h3>
+
+<p>Der Schulchor verwaltet seine Kasse: Mitgliedsbeiträge, Spenden und Konzerteinnahmen auf der einen, Noten und Busfahrten auf der anderen Seite.</p>
+
+<ol>
+            <li>Als Kassenwartin möchte ich Einnahmen mit Datum, Text, Betrag und Art (Beitrag, Spende, Konzert) buchen.</li>
+            <li>Als Kassenwart möchte ich Ausgaben mit Datum, Text, Betrag und Kategorie buchen. Eine Ausgabe wird abgelehnt, wenn der Kassenstand dafür nicht reicht; genau 0,00&nbsp;€ danach ist erlaubt.</li>
+            <li>Als Chorleiterin möchte ich jederzeit den Kassenstand sehen.</li>
+            <li>Als Kassenprüfer möchte ich alle Buchungen eines Monats mit der Summe der Einnahmen und der Ausgaben sehen.</li>
+            <li>Als Kassenwartin möchte ich sehen, welche Mitglieder ihren Jahresbeitrag noch nicht bezahlt haben.</li>
+        </ol>
+
+<table class="gitter" aria-label="Mindest-Klassenstruktur Chorkasse">
+            <tr><th>Buchung</th><th>Einnahme / Ausgabe (erben von Buchung)</th><th>Kassenbuch</th></tr>
+            <tr><td>+ datum: date<br>+ text: str<br>− __betrag_cent: int (immer positiv)</td><td>Einnahme: + art: str<br>Ausgabe: + kategorie: str</td><td>− __anfangsbestand_cent: int<br>− __buchungen: list[Buchung]</td></tr>
+            <tr><td>+ get_betrag(): int<br>+ wirkung(): int</td><td>+ wirkung(): int <em>(überschrieben: +Betrag bzw. −Betrag)</em></td><td>+ buchen(buchung: Buchung): bool<br>+ bestand(): int<br>+ buchungen_im_monat(jahr: int, monat: int): list[Buchung]</td></tr>
+        </table>
+
+<p>Für Story 5 kommt eine Klasse <code>Mitglied</code> (Name, privat: Beitrag bezahlt ja/nein) dazu. <strong>Erweiterung:</strong> Jahresabschluss nach Kategorien; Beitrag mit Ermäßigung.</p>
+
+<h3>Thema 6 ★★★ Turnierplan Hallenfußball</h3>
+
+<p>Beim Hallenfußballturnier der Oberstufe spielen 4 bis 8 Mannschaften „jeder gegen jeden“, danach gibt es ein Finale der beiden Besten.</p>
+
+<ol>
+            <li>Als Turnierleiter möchte ich 4 bis 8 Mannschaften anmelden; ein doppelter Name wird abgelehnt.</li>
+            <li>Als Turnierleiterin möchte ich einen Spielplan „jeder gegen jeden“ erzeugen lassen (bei <em>n</em> Mannschaften <em>n</em>·(<em>n</em>−1)/2 Spiele).</li>
+            <li>Als Schiedsrichter möchte ich das Ergebnis eines Spiels eintragen und ein falsch eingetragenes Ergebnis korrigieren.</li>
+            <li>Als Zuschauerin möchte ich die Tabelle sehen: Sieg 3 Punkte, Unentschieden 1 Punkt; sortiert nach Punkten, dann Tordifferenz, dann geschossenen Toren, dann Name.</li>
+            <li>Als Turnierleiter möchte ich die noch offenen Spiele in der Reihenfolge des Spielplans sehen.</li>
+            <li>Als Turnierleiterin möchte ich das Finale der beiden Tabellenersten anlegen; im Finale gibt es kein Unentschieden.</li>
+        </ol>
+
+<table class="gitter" aria-label="Mindest-Klassenstruktur Turnier">
+            <tr><th>Mannschaft</th><th>Spiel</th><th>Finalspiel (erbt von Spiel)</th><th>Turnier</th></tr>
+            <tr><td>+ name: str</td><td>+ heim: Mannschaft<br>+ gast: Mannschaft<br>− __tore_heim: int | None<br>− __tore_gast: int | None</td><td>–</td><td>− __mannschaften: list[Mannschaft]<br>− __spiele: list[Spiel]</td></tr>
+            <tr><td>–</td><td>+ eintragen(heim: int, gast: int): None<br>+ ist_gespielt(): bool<br>+ punkte_fuer(m: Mannschaft): int<br>+ tore_fuer(m: Mannschaft): int<br>+ gegentore_fuer(m: Mannschaft): int</td><td>+ eintragen(heim: int, gast: int): None <em>(überschrieben: Unentschieden → ValueError)</em><br>+ sieger(): Mannschaft | None</td><td>+ anmelden(name: str): bool<br>+ spielplan_erstellen(): None<br>+ ergebnis(nr: int, heim: int, gast: int): None<br>+ offene_spiele(): list[Spiel]<br>+ tabelle(): list[…]</td></tr>
+        </table>
+
+<p class="tipp">Rechnet die Tabelle jedes Mal neu aus den Spielen aus, statt Punkte in der Mannschaft mitzuzählen. Dann ist das Korrigieren eines Ergebnisses (Story 3) ganz einfach.</p>
+
+<p><strong>Erweiterung:</strong> Spielplan so ordnen, dass keine Mannschaft zweimal direkt hintereinander spielt.</p>
+
+<h3>Thema 7 ★★★ Redaktion der Schülerzeitung</h3>
+
+<p>Die Schülerzeitung erscheint mit 16 Seiten. Beiträge durchlaufen Entwurf, Korrektur und Freigabe, dann plant die Chefredaktion sie in die Ausgabe ein.</p>
+
+<ol>
+            <li>Als Redakteurin möchte ich einen Beitrag – Artikel, Interview oder Umfrage – mit Titel, Autor und Zeichenzahl anlegen.</li>
+            <li>Als Chefredakteur möchte ich den Seitenbedarf jedes Beitrags sehen: Artikel 3000 Zeichen je Seite, Interview 2500 Zeichen je Seite plus eine Seite für Fotos, Umfrage immer genau eine Seite; eine angefangene Seite zählt ganz.</li>
+            <li>Als Autorin möchte ich meinen Beitrag zur Korrektur geben. Die Korrekturleserin gibt ihn frei oder zurück an mich. Andere Statuswechsel sind nicht möglich (z.&nbsp;B. nicht von „Entwurf“ direkt zu „freigegeben“).</li>
+            <li>Als Chefredakteur möchte ich freigegebene Beiträge in eine Ausgabe einplanen. Ein Beitrag, der nicht freigegeben ist oder nicht mehr auf die 16 Seiten passt, wird abgelehnt.</li>
+            <li>Als Leserin möchte ich ein Inhaltsverzeichnis mit der Startseite jedes Beitrags sehen (Seite 1 ist die Titelseite, der erste Beitrag beginnt auf Seite 2).</li>
+            <li>Als Chefredakteurin möchte ich sehen, welche Beiträge noch nicht freigegeben sind und wer sie schreibt.</li>
+        </ol>
+
+<table class="gitter" aria-label="Mindest-Klassenstruktur Schülerzeitung">
+            <tr><th>Beitrag</th><th>Artikel / Interview / Umfrage (erben von Beitrag)</th><th>Ausgabe</th></tr>
+            <tr><td>+ titel: str<br>+ autor: str<br>− __zeichen: int<br>− __status: str</td><td>–</td><td>+ nummer: int<br>− __max_seiten: int<br>− __beitraege: list[Beitrag]</td></tr>
+            <tr><td>+ get_zeichen(): int<br>+ get_status(): str<br>+ seiten(): int<br>+ zur_korrektur(): bool<br>+ freigeben(): bool<br>+ zurueckgeben(): bool</td><td>+ seiten(): int <em>(je Unterklasse überschrieben)</em></td><td>+ einplanen(beitrag: Beitrag): bool<br>+ belegte_seiten(): int<br>+ inhaltsverzeichnis(): list[tuple[str, int]]</td></tr>
+        </table>
+
+<p><strong>Erweiterung:</strong> Anzeigen von Sponsoren (halbe Seite); Ausgabe automatisch so füllen, dass möglichst wenig Platz frei bleibt.</p>
+
+<h3>Thema 8 ★★★ Rezeptrechner mit Einkaufsliste</h3>
+
+<p>Die Koch-AG plant ihre Termine: Rezepte werden auf die Gruppengröße umgerechnet und zu einer Einkaufsliste zusammengefasst.</p>
+
+<ol>
+            <li>Als Mitglied der Koch-AG möchte ich ein Rezept mit Name, Portionenzahl und Zutaten (Name, Menge, Einheit g, kg, ml, l oder Stück) anlegen.</li>
+            <li>Als Kursleiterin möchte ich ein Rezept auf eine andere Portionenzahl umrechnen. Stückzutaten werden aufgerundet (2,25 Eier → 3 Eier).</li>
+            <li>Als Einkäufer möchte ich mehrere Rezepte zu einer Einkaufsliste zusammenfassen. Gleiche Zutaten werden addiert, auch bei verschiedenen Einheiten (500 g + 1 kg Mehl = 1,5 kg).</li>
+            <li>Als Einkäuferin möchte ich vorhandene Vorräte abziehen; was vollständig vorhanden ist, erscheint nicht auf der Liste.</li>
+            <li>Als Einkäufer möchte ich, dass unverträgliche Einheiten (Mehl einmal in g, einmal in Stück) gemeldet statt falsch addiert werden.</li>
+        </ol>
+
+<table class="gitter" aria-label="Mindest-Klassenstruktur Rezeptrechner">
+            <tr><th>Zutat</th><th>Stueckzutat (erbt von Zutat)</th><th>Rezept</th><th>Einkaufsliste</th></tr>
+            <tr><td>+ name: str<br>− __menge: float<br>+ einheit: str</td><td>–</td><td>+ name: str<br>+ portionen: int<br>− __zutaten: list[Zutat]</td><td>− __posten: dict[str, float]<br>(Menge in Grundeinheit g, ml oder Stück)</td></tr>
+            <tr><td>+ get_menge(): float<br>+ in_grundeinheit(): float<br>+ skaliert(faktor: float): Zutat</td><td>+ skaliert(faktor: float): Zutat <em>(überschrieben: aufrunden)</em></td><td>+ hinzufuegen(zutat: Zutat): None<br>+ fuer(portionen: int): Rezept</td><td>+ rezept_hinzufuegen(rezept: Rezept): None<br>+ vorrat_abziehen(zutat: Zutat): None<br>+ posten(): list[tuple[str, float, str]]</td></tr>
+        </table>
+
+<p><strong>Erweiterung:</strong> Liste nach Abteilungen im Supermarkt sortieren; Kosten schätzen.</p>
+
+<h2>5. Eigenes Thema oder Projektvorlage</h2>
+
+<ul>
+            <li><strong>Eigenes Thema:</strong> erlaubt nach Absprache mit der Lehrkraft. Ihr legt dazu 4–6 User Stories und eine Mindest-Klassenstruktur im Stil dieser Seite vor und ordnet sie einer Stufe zu. Spiele mit Grafik scheiden aus (keine grafische Oberfläche).</li>
+            <li><strong>Projektvorlagen:</strong> Aus dem früheren Kursteil gibt es den Ordner <strong>„Projektvorlagedateien“</strong> mit drei ZIP-Ordnern in drei Schwierigkeitsgraden (Aufgabenstellung, Hinweise zur Struktur, teils ein Klassengrundgerüst). Wer lieber mit einem Grundgerüst startet, kann nach Absprache eines davon wählen. Es gelten dieselben Regeln wie oben: Stories als Issues, Tests, Branches, Pull Requests und Reviews. Ein mitgeliefertes Grundgerüst wird im README als Ausgangspunkt genannt.</li>
+        </ul>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Ziel:</strong> ein lauffähiges Konsolenprogramm in Python, das die User Stories eures Themas erfüllt, sauber in Klassen modelliert und nach MVC aufgeteilt ist, durch Tests abgesichert ist und im gemeinsamen Repository nachvollziehbar im Team entstanden ist.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>1.</strong> Niemand speichert direkt auf <code>main</code>. Jede Änderung entsteht auf einem eigenen Branch und kommt als <strong>Pull Request</strong> nach <code>main</code>.</p>
+            <p><strong>2.</strong> Jeder Pull Request wird von einem <strong>anderen</strong> Gruppenmitglied geprüft: mindestens ein konkreter Kommentar oder eine Freigabe. Erst danach wird gemergt.</p>
+            <p><strong>3.</strong> Jede User Story ist ein <strong>Issue</strong>. Das Board unter „Projekte“ zeigt jederzeit den Stand.</p>
+            <p><strong>4.</strong> Commit-Nachrichten nennen das Issue, z.&nbsp;B. <code>#4 Fahrt: letzter Platz macht die Fahrt voll</code>.</p>
+            <p><strong>5.</strong> In jedem Sprint bearbeitet jede Person <strong>eigene Dateien</strong>. Gemeinsame Dateien (<code>main.py</code>, <code>ansicht.py</code>, <code>README.md</code>) haben je Sprint eine verantwortliche Person.</p>
+            <p><strong>6.</strong> <code>main</code> läuft immer: Vor jedem Pull Request laufen alle Tests fehlerfrei.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 5.5.1: Thema wählen <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Lest in der Gruppe alle Themen. Jede Person notiert für sich ihre drei Favoriten mit Stufe.</li>
+                    <li>Einigt euch auf ein Thema und ein Ersatzthema. Begründet die Wahl in drei Sätzen: Was reizt euch? Was wird voraussichtlich am schwierigsten? Warum passt die Stufe zu eurer Gruppe und zur Zeit?</li>
+                    <li>Teilt der Lehrkraft Gruppe, Thema und Ersatzthema mit. Jedes Thema sollte im Kurs höchstens zweimal vorkommen.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 5.5.2: User Stories vervollständigen und schätzen <span class="niveau">AFB II–III</span></summary>
+                <ol>
+                    <li>Formuliert zu jeder User Story eures Themas mindestens zwei Akzeptanzkriterien im Muster Gegeben – Wenn – Dann (Seite 5.2), davon mindestens eines für einen Grenzfall oder eine falsche Eingabe.</li>
+                    <li>Ergänzt eine eigene User Story mit Kriterien.</li>
+                    <li>Schätzt jede Story mit Planning Poker in Story Points und ordnet das Backlog nach Priorität. Markiert, welche Stories ihr unbedingt schaffen müsst und welche Erweiterungen sind.</li>
+                    <li>Legt jede Story als Issue im Repository an (Seite 5.6, Sprint 0).</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,254 @@
+<p>Die Ordner auf deinem Rechner, ein Stammbaum oder das Organigramm einer Firma haben dieselbe Form: Von einem Ausgangspunkt verzweigt sich alles immer weiter. In der Informatik heißt diese Struktur Baum – allerdings wächst er von oben nach unten.</p>
+
+<p>Bäume sind in der Informatik wichtig, weil sie hierarchische Beziehungen abbilden und effizientes Suchen, Sortieren, Einfügen und Löschen ermöglichen.</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in fünf kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee und den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe in Thonny mit. Die Schritte 3 und 4 führen dich in die <strong>Rekursion</strong> ein – nimm dir dafür Zeit.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Was ist ein Baum? Die Begriffe</a> – danach Aufgabe 3.4.1 und 3.4.2</li>
+            <li><a href="#schritt-2">Ein Baum in Python: die Klasse <code>Knoten</code></a></li>
+            <li><a href="#schritt-3">Rekursion: die Höhe berechnen</a></li>
+            <li><a href="#schritt-4">Rekursion Schritt für Schritt: der Aufrufstapel</a></li>
+            <li><a href="#schritt-5">Blätter zählen – dasselbe Muster noch einmal</a> – danach Aufgabe 3.4.3</li>
+        </ol>
+
+<p class="git-datei"><strong>Zum Mittippen:</strong> <code>2_baeume/baum.py</code> – neu anlegen, weiter in Aufgabe 3.4.3.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.4 Schritt 2: Klasse Knoten, Beispielbaum aufgebaut</code> · <code>3.4 Schritt 3: hoehe rekursiv</code> (Regeln auf Seite 3.0.2)</p>
+
+<p>Danach findest du besondere Typen von Bäumen, einen Praxisbezug und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Was ist ein Baum? Die Begriffe</h2>
+
+<p>Über Bäume spricht man mit wenigen festen Begriffen: Wurzel, Kinder und Elternknoten, Geschwister, Blätter, Teilbaum, Tiefe, Höhe und Ebenen. Im Video siehst du alle an einem Beispielbaum. Achte besonders auf den Unterschied zwischen der <strong>Tiefe</strong> eines Knotens und der <strong>Höhe</strong> des ganzen Baums – beide zählen Kanten, nicht Knoten.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-4-1_begriffe_vorschau.png" src="../vid/3-4-1_begriffe.mp4"></video><a href="../vid/3-4-1_begriffe.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Was ist ein Baum? Wurzel, Kinder, Blätter, Tiefe und Höhe (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<p>Zum Nachlesen: alle Begriffe im Überblick.</p>
+
+<h3>Grundlegende Elemente</h3>
+
+<ul>
+            <li><strong>Knoten (Node):</strong> ein Element des Baums, das Daten speichert.</li>
+            <li><strong>Wurzel (Root):</strong> der oberste Knoten; er hat keinen Elternknoten und ist Ausgangspunkt der gesamten Struktur.</li>
+            <li><strong>Kinder (Children):</strong> die direkten Nachfolger eines Knotens. Ein Knoten kann kein, ein oder mehrere Kinder haben.</li>
+            <li><strong>Elternknoten (Parent):</strong> der unmittelbare Vorgänger eines Knotens. Er ist über eine Kante mit seinen Kindern verbunden.</li>
+            <li><strong>Geschwister (Siblings):</strong> Knoten mit demselben Elternknoten. Sie liegen daher auf derselben Ebene.</li>
+            <li><strong>Blatt (Leaf):</strong> ein Knoten ohne Kinder (auch Endknoten genannt), das heißt, er hat keine untergeordneten Knoten.</li>
+            <li><strong>Teilbaum (Subtree):</strong> ein Knoten zusammen mit allen seinen Nachkommen.</li>
+            <li><strong>Tiefe (Depth) eines Knotens:</strong> die Anzahl der Kanten auf dem Weg von der Wurzel zu diesem Knoten. Die Wurzel hat die Tiefe 0.</li>
+            <li><strong>Höhe (Height) eines Baums:</strong> die maximale Tiefe aller Knoten, also die Anzahl der Kanten auf dem längsten Weg von der Wurzel zu einem Blatt.</li>
+            <li><strong>Ebenen (Levels):</strong> Alle Knoten gleicher Tiefe bilden eine Ebene. Ein Baum der Höhe h hat <strong>h + 1 Ebenen</strong>.</li>
+        </ul>
+
+<figure>
+            <img src="../img/skizze_baum.svg" width="450" alt="Baum mit Wurzel, Kanten, inneren Knoten und Blättern">
+            <figcaption>Abb. 1: Wurzel, Kanten, innere Knoten und Blätter (grün) eines Baums.</figcaption>
+        </figure>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Begriffe an einem Baum ablesen</summary>
+            <pre><code>          A           Ebene 0 (Tiefe 0)
+        / | \
+       B  C  D         Ebene 1
+      / \     \
+     E   F     G       Ebene 2
+               |
+               H       Ebene 3</code></pre>
+            <p>Wurzel: A. Blätter: E, F, C, H. Geschwister: B, C, D. Teilbaum mit Wurzel D: {D, G, H}. Tiefe von G: 2. Höhe des Baums: 3 (Weg A–D–G–H), also 4 Ebenen.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-4-1">Aufgabe 3.4.1</a> – die Begriffe an einem weiteren Baum, und <a href="uebungen.html#a-3-4-2">Aufgabe 3.4.2</a> – Baum oder nicht?</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Die Klasse Knoten →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Ein Baum in Python – die Klasse <code>Knoten</code></h2>
+
+<p>Ein Knoten einer verketteten Liste hat genau einen Nachfolger (<code>next</code>). Ein Knoten eines allgemeinen Baums kann beliebig viele Kinder haben – deshalb speichert er sie in einer Python-Liste <code>kinder</code>. Im Video baust du den Baum aus Beispiel 1 in der Kommandozeile auf. Achte darauf, warum <code>kind_hinzufuegen</code> den neuen Knoten mit <code>return</code> zurückgibt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-4-2_knoten_vorschau.png" src="../vid/3-4-2_knoten.mp4"></video><a href="../vid/3-4-2_knoten.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Ein Baum in Python – die Klasse <code>Knoten</code> mit einer Liste von Kindern (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>2_baeume/baum.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>Knoten</code> und die Methode <code>kind_hinzufuegen</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>a = Knoten(&quot;A&quot;)</code> · <code>b = a.kind_hinzufuegen(Knoten(&quot;B&quot;))</code>. Danach committen, z.&nbsp;B. <code>3.4 Schritt 2: Knoten, kind_hinzufuegen angelegt</code>.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Rekursion – die Höhe berechnen →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Rekursion – die Höhe berechnen</h2>
+
+<p>Jedes Kind eines Knotens ist selbst die Wurzel eines kleineren Baums. Deshalb lässt sich die Höhe auf kleinere Bäume zurückführen: Höhe = 1 + die größte Höhe der Kinder-Teilbäume, und ein Blatt hat die Höhe 0. Eine Funktion, die sich so selbst aufruft, heißt <strong>rekursiv</strong>; der Fall, in dem sie sich nicht mehr aufruft, heißt <strong>Abbruchbedingung</strong>. Achte im Video auch auf die kurzen Erklärungen zu <code>not</code> und zur Schleife, die die größte Höhe der Kinder sucht.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-4-3_rekursion_hoehe_vorschau.png" src="../vid/3-4-3_rekursion_hoehe.mp4"></video><a href="../vid/3-4-3_rekursion_hoehe.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Rekursion – die Höhe aus kleineren Bäumen berechnen (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/baum.py</code> den Code aus dem Video: die Funktion <code>hoehe</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>hoehe(a)</code>. Danach committen, z.&nbsp;B. <code>3.4 Schritt 3: hoehe ergänzt</code>.</p>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Der Aufrufstapel →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Rekursion Schritt für Schritt – der Aufrufstapel</h2>
+
+<p>Wenn <code>hoehe</code> sich selbst aufruft, ist der erste Aufruf noch nicht fertig: Er wartet auf das Ergebnis. Python merkt sich alle offenen Aufrufe auf dem <strong>Aufrufstapel</strong> – jeder mit seinem eigenen <code>knoten</code>. Im Video verfolgst du <code>hoehe(d)</code> Aufruf für Aufruf. Achte darauf, wann ein Aufruf auf den Stapel kommt und wann er ihn mit seinem Ergebnis wieder verlässt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-4-4_aufrufstapel_vorschau.png" src="../vid/3-4-4_aufrufstapel.mp4"></video><a href="../vid/3-4-4_aufrufstapel.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Rekursion Schritt für Schritt – der Aufrufstapel bei <code>hoehe(d)</code> (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen steht der ganze Code mit dem Ablauf von <code>hoehe(a)</code> in Beispiel 2:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> allgemeiner Baum in Python mit rekursiver Höhenberechnung</summary>
+            <pre><code class="language-python">class Knoten:
+    def __init__(self, wert):
+        self.wert = wert
+        self.kinder = []            # beliebig viele Kinder
+
+    def kind_hinzufuegen(self, knoten):
+        self.kinder.append(knoten)
+        return knoten
+
+def hoehe(knoten):
+    if not knoten.kinder:           # Blatt: Höhe 0
+        return 0
+    groesste = 0
+    for k in knoten.kinder:
+        h = hoehe(k)                # Höhe des Teilbaums von k
+        if h > groesste:
+            groesste = h
+    return 1 + groesste
+
+def anzahl_blaetter(knoten):
+    if not knoten.kinder:
+        return 1
+    summe = 0
+    for k in knoten.kinder:
+        summe = summe + anzahl_blaetter(k)
+    return summe
+
+a = Knoten("A")
+b = a.kind_hinzufuegen(Knoten("B"))
+a.kind_hinzufuegen(Knoten("C"))
+d = a.kind_hinzufuegen(Knoten("D"))
+b.kind_hinzufuegen(Knoten("E"))
+b.kind_hinzufuegen(Knoten("F"))
+g = d.kind_hinzufuegen(Knoten("G"))
+g.kind_hinzufuegen(Knoten("H"))
+
+print(hoehe(a))            # 3
+print(anzahl_blaetter(a))  # 4</code></pre>
+            <p><strong>Ablauf von <code>hoehe(a)</code> für den Baum aus Beispiel 1:</strong></p>
+            <ol>
+                <li><code>hoehe(E)</code>, <code>hoehe(F)</code>, <code>hoehe(C)</code> und <code>hoehe(H)</code> liefern 0 – <em>warum:</em> Es sind Blätter, die Rekursion endet hier (Abbruchbedingung).</li>
+                <li><code>hoehe(B)</code>: Die Kinder E und F liefern 0 und 0, die größte Höhe ist 0, also 1 + 0 = 1 – B liegt eine Kante über seinen Blättern.</li>
+                <li><code>hoehe(G) = 1 + hoehe(H) = 1</code>, danach <code>hoehe(D) = 1 + hoehe(G) = 2</code> – der Wert wird von unten nach oben weitergereicht.</li>
+                <li><code>hoehe(A)</code>: Die Kinder liefern 1, 0 und 2, die größte Höhe ist 2, also 1 + 2 = 3 – <em>warum die größte:</em> Die Höhe zählt den <strong>längsten</strong> Weg, hier A–D–G–H.</li>
+            </ol>
+            <p><strong>Ergebnis und Probe:</strong> Höhe 3 und 4 Blätter, genau wie in Beispiel 1 abgelesen.</p>
+            <table>
+                <thead><tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td>Beispielbaum</td><td><code>hoehe(a)</code>, <code>anzahl_blaetter(a)</code></td><td>3, 4</td></tr>
+                    <tr><td>nur die Wurzel</td><td><code>hoehe(Knoten("X"))</code>, <code>anzahl_blaetter(Knoten("X"))</code></td><td>0, 1</td></tr>
+                    <tr><td>Teilbaum</td><td><code>hoehe(d)</code>, <code>anzahl_blaetter(d)</code></td><td>2, 1</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p><a href="#schritt-5">Weiter mit Schritt 5: Blätter zählen →</a></p>
+
+<h2 id="schritt-5">Schritt 5: Blätter zählen – dasselbe Muster noch einmal</h2>
+
+<p>Rekursive Baumfunktionen sehen fast immer gleich aus: Abbruch beim Blatt, sonst die Ergebnisse der Kinder verrechnen. Bei <code>hoehe</code> wird das Maximum genommen, bei <code>anzahl_blaetter</code> die Summe. Achte im Video auf die Reihenfolge: Python arbeitet erst einen Teilbaum ganz ab, bevor es zum nächsten Kind geht.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-4-5_blaetter_zaehlen_vorschau.png" src="../vid/3-4-5_blaetter_zaehlen.mp4"></video><a href="../vid/3-4-5_blaetter_zaehlen.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Blätter zählen mit <code>anzahl_blaetter</code> (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/baum.py</code> den Code aus dem Video: die Funktion <code>anzahl_blaetter</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>anzahl_blaetter(a)</code> · <code>anzahl_blaetter(Knoten(&quot;X&quot;))</code>. Danach committen, z.&nbsp;B. <code>3.4 Schritt 5: anzahl_blaetter ergänzt</code>.</p>
+
+<p>Danach: <a href="uebungen.html#a-3-4-3">Aufgabe 3.4.3</a> – eigene rekursive Baumfunktionen nach demselben Muster.</p>
+
+<hr>
+
+<h2>Besondere Typen von Bäumen</h2>
+
+<ul>
+            <li><strong>Binärbaum (Binary Tree):</strong> Jeder Knoten hat höchstens zwei Kinder, ein linkes und ein rechtes.</li>
+            <li><strong>Binärer Suchbaum (Binary Search Tree):</strong> ein Binärbaum, bei dem für jeden Knoten gilt: Alle Werte im <strong>gesamten linken Teilbaum</strong> sind kleiner, alle Werte im <strong>gesamten rechten Teilbaum</strong> größer als der Wert des Knotens (siehe 3.5).</li>
+            <li><strong>Balancierter Baum:</strong> ein Baum, bei dem sich für jeden Knoten die Höhen des linken und des rechten Teilbaums um höchstens eins unterscheiden. Seine Höhe wächst nur logarithmisch mit der Anzahl der Knoten.</li>
+            <li><strong>AVL-Baum, Rot-Schwarz-Baum:</strong> selbstbalancierende binäre Suchbäume, die sich beim Einfügen und Löschen automatisch umordnen.</li>
+            <li><strong>B-Baum:</strong> ein balancierter Suchbaum, dessen Knoten viele Schlüssel und viele Kinder haben. Er wird in Datenbanken und Dateisystemen eingesetzt.</li>
+        </ul>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Dateisystem und B-Baum-Index</summary>
+                <p>
+                    <strong>Alltag:</strong> Das Dateisystem deines Rechners ist ein Baum: Laufwerk bzw. <code>/</code> ist die Wurzel, Ordner sind innere Knoten, Dateien sind Blätter. Der Pfad <code>C:\Schule\Informatik\baum.py</code> beschreibt den eindeutigen Weg von der Wurzel zum Blatt.<br><br>
+                    <strong>Beruf:</strong> Datenbanksysteme wie PostgreSQL oder MySQL legen für schnelle Suchen einen <strong>B-Baum-Index</strong> an. Weil jeder Knoten Hunderte Schlüssel enthält, hat selbst ein Index über eine Milliarde Datensätze nur etwa vier Ebenen – eine Suche braucht dann nur wenige Festplattenzugriffe. Datenbankadministratorinnen und -administratoren entscheiden, für welche Spalten sich ein solcher Index lohnt.
+                </p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Python-Dateien zum Herunterladen</summary>
+                <p>Mit diesen Programmen kannst du den Aufbau eines allgemeinen Baums Schritt für Schritt nachvollziehen. Öffne sie in Thonny und untersuche die Objekte im Variablen-Fenster bzw. im Debug-Modus.</p>
+                <ul>
+                    <li><a href="../material/baum_einfuehrung_1.py" download>baum_einfuehrung_1.py</a> – Klassen <code>TreeNode</code> und <code>Tree</code>, Wurzel anlegen</li>
+                    <li><a href="../material/baum_einfuehrung_2.py" download>baum_einfuehrung_2.py</a> – Kinder unter einem Elternknoten einfügen, eingerückte Ausgabe</li>
+                    <li><a href="../material/baum1.py" download>baum1.py</a> – Wurzel einfügen und die Instanz untersuchen</li>
+                    <li><a href="../material/baum2.py" download>baum2.py</a> – Kindknoten an die Wurzel hängen</li>
+                    <li><a href="../material/baum3.py" download>baum3.py</a> – Kindknoten rekursiv unter einem Elternknoten einfügen</li>
+                    <li><a href="../material/baum4.py" download>baum4.py</a> – rekursive Ausgabe, auch eingerückt nach Ebenen</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Ein <strong>Baum</strong> ist eine hierarchische Datenstruktur aus <strong>Knoten</strong> und <strong>Kanten</strong>. Genau ein Knoten, die <strong>Wurzel</strong>, hat keinen Elternknoten; jeder andere Knoten hat <strong>genau einen</strong> Elternknoten. Jeder Knoten kann beliebig viele Kinder haben. Es gibt keine Zyklen: Von der Wurzel führt zu jedem Knoten genau ein Weg.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Begriffe an einem kleinen Baum <span class="niveau">AFB I</span></summary>
+                <pre><code>      R
+     / \
+    S   T
+    |
+    U
+   / \
+  V   W</code></pre>
+                <p>Gib die Blätter und die Geschwister von S an. Bestimme die Tiefe von V, die Höhe des Baums und die Anzahl der Ebenen.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Blätter: T, V, W. Geschwister von S: T (gleicher Elternknoten R). Tiefe von V: 3 (Kanten R–S, S–U, U–V). Höhe: 3, denn der längste Weg R–S–U–V hat 3 Kanten. Also 4 Ebenen.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Über die Kinderlisten wandern <span class="niveau">AFB I</span></summary>
+                <p>Der Baum aus dem Video (Beispiel 1) ist aufgebaut. Was liefern <code>len(b.kinder)</code>, <code>len(a.kinder[1].kinder)</code> und <code>a.kinder[0].kinder[1].wert</code>? Überlege erst, dann probiere es in Thonny aus.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>len(b.kinder)</code> ist 2 (E und F). <code>a.kinder[1]</code> ist C, ein Blatt – also 0. <code>a.kinder[0]</code> ist B, dessen zweites Kind (Index 1) ist F: Ausgabe <code>'F'</code>.</p>
+                </details>
+            </details>
+        </div>

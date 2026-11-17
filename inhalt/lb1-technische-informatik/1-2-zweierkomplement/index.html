@@ -1,0 +1,182 @@
+<p>Das Zweierkomplement ist eine Darstellungsmethode für ganze Zahlen in der binären Form. Es wird verwendet, um negative Zahlen in Computern darzustellen, insbesondere in der elektronischen Verarbeitung und Speicherung von Daten.</p>
+
+<p>Im Zweierkomplement hat das höchstwertige Bit (das Bit ganz links) bei n Bit den <strong>negativen Stellenwert −2<sup>n−1</sup></strong>, alle anderen Bits haben wie gewohnt positive Stellenwerte. Ist das höchstwertige Bit 0, ist die Zahl deshalb nichtnegativ; ist es 1, ist die Zahl negativ. Es zeigt also das Vorzeichen an, die restlichen Bits sind aber <strong>nicht</strong> einfach der Betrag der Zahl (das wäre die Vorzeichen-Betrag-Darstellung).</p>
+
+<p>Beispiel mit 4 Bit: 1101 = −8 + 4 + 0 + 1 = <strong>−3</strong>. Der Betrag 3 wäre binär 0011 und nicht 101.</p>
+
+<p>Die Verwendung des Zweierkomplements hat den Vorteil, dass die gleichen Hardware-Schaltungen für Addition und Subtraktion verwendet werden können, wodurch die Komplexität verringert wird.</p>
+
+<hr>
+
+<h2>Umrechnung Dezimal in Binär (Zweierkomplement mit 4 Bit)</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> −7 im 4-Bit-Zweierkomplement</summary>
+<p>Wir wollen die Dezimalzahl −7 als Binärzahl im Zweierkomplement mit 4 Bit darstellen. <strong>Wichtig:</strong> Die Bitanzahl muss immer vorher festgelegt sein – ohne sie ist die Antwort nicht eindeutig. Mit 8 Bit lautet dieselbe Zahl nämlich 11111001.</p>
+<ul>
+<li>Schritt 1 – Umrechnung der positiven Zahl: Die positive Zahl 7 in binärer Form ist 0111.</li>
+<li>Schritt 2 – Invertierung der Bits (0 wird zu 1 bzw. 1 wird zu 0): Das Einerkomplement von 0111 ist 1000.</li>
+<li>Schritt 3 – Addieren der Zahl 1: Das Zweierkomplement von 1000 ist 1001.</li>
+<li>Die Darstellung von −7 im 4-Bit-Zweierkomplement ist also <strong>1001</strong>. Probe: −8 + 1 = −7 &#10003;</li>
+</ul>
+            </details>
+        </div>
+
+<hr>
+
+<h2>Umrechnung Binärzahl (8-Bit-Zweierkomplement) in Dezimal</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">einfach</span> 10110100 aus dem 8-Bit-Zweierkomplement zurückrechnen</summary>
+<p>Wir wollen die Binärzahl 10110100 im 8-Bit-Zweierkomplement wieder als Dezimalzahl darstellen.</p>
+<ol>
+<li>Überprüfe das höchstwertige Bit (das Bit ganz links).<br>Das höchstwertige Bit der 8-Bit-Zahl ist 1. Das bedeutet, dass es sich um eine negative Zahl handelt. Um ihren Betrag zu bestimmen, bilden wir erneut das Zweierkomplement.</li>
+<li>Invertiere alle Bits (Einerkomplement).<br>Dazu wandeln wir Nullen in Einsen um und umgekehrt.<br>10110100 (Binär)<br>&darr;<br>01001011 (Einerkomplement)</li>
+<li>Addiere 1 (Zweierkomplement).<br>01001011 (Einerkomplement)<br>+ 1<br>--------------<br>01001100 (Zweierkomplement)</li>
+<li>Rechne das Ergebnis ins Dezimalsystem um.<br>01001100 = 64 + 8 + 4 = 76. Das ist der Betrag der gesuchten Zahl.</li>
+<li>Ergänze das Vorzeichen.<br>Da das höchstwertige Bit der Ausgangszahl 1 ist, ist die Zahl negativ.<br><strong>Das Ergebnis: −76</strong></li>
+</ol>
+<p><strong>Probe mit den Stellenwerten:</strong> 10110100 = −128 + 32 + 16 + 4 = −76 &#10003;</p>
+            </details>
+        </div>
+
+<hr>
+
+<h2>Der Wertebereich</h2>
+
+<p>Die Bitanzahl legt nicht nur die Schreibweise fest, sondern auch, <strong>welche Zahlen überhaupt darstellbar sind</strong>. Mit n Bit gibt es 2<sup>n</sup> Bitmuster. Im Zweierkomplement teilt das höchstwertige Bit sie in zwei Hälften: Muster mit führender 0 stehen für nichtnegative Zahlen, Muster mit führender 1 für negative.</p>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Dasselbe Bitmuster, zwei verschiedene Zahlen</summary>
+        <p>Ob ein Bitmuster als Zweierkomplementzahl oder als vorzeichenlose Binärzahl gelesen wird, ist eine <strong>Vereinbarung des Programms</strong> – am Bitmuster selbst ist das nicht erkennbar:</p>
+        <pre>1101 0011   als vorzeichenlose Zahl    =  211
+1101 0011   als 8-Bit-Zweierkomplement =  -45</pre>
+        <p>Beide Lesarten sind korrekt – es kommt darauf an, welchen Datentyp das Programm verwendet. Ein vorzeichenloses 8-Bit-Register hat den Wertebereich <strong>0 bis 255</strong>, ein vorzeichenbehaftetes <strong>&minus;128 bis +127</strong>. Verwechselt man beides, entstehen genau die Fehler, um die es im nächsten Abschnitt geht.</p>
+    </details>
+</div>
+
+<hr>
+
+<h2>Überlauf (Overflow)</h2>
+
+<p>Was passiert, wenn ein Rechenergebnis nicht mehr in die festgelegte Bitanzahl passt? Der Rechner meldet <strong>keinen Fehler</strong>. Er behält einfach nur so viele Bits, wie das Register breit ist – alles darüber hinaus fällt weg. Das Ergebnis ist dann ein gültiges, aber falsches Bitmuster.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span> Überlauf im Zweierkomplement</summary>
+
+<p>Ein 8-Bit-Register im Zweierkomplement enthält den Wert 100. Das Programm addiert 50 dazu:</p>
+
+<pre>100 = 0110 0100
+ 50 = 0011 0010
+
+Übertrag:  1 1 . . . . . .
+           0 1 1 0 0 1 0 0     (100)
+         + 0 0 1 1 0 0 1 0     ( 50)
+           ---------------
+           1 0 0 1 0 1 1 0</pre>
+
+<p>Das Ergebnis beginnt jetzt mit einer 1 – das Register liest es also als <strong>negative</strong> Zahl. Zurückgerechnet: invertieren ergibt 0110 1001, plus 1 ergibt 0110 1010 = 106. Das Register enthält also <strong>&minus;106</strong> statt der erwarteten 150.</p>
+
+<p><strong>Woran erkennt man den Überlauf?</strong> Beide Summanden waren positiv, das Ergebnis ist negativ. Das kann bei einer Addition zweier positiver Zahlen niemals stimmen. Die Ursache: 150 liegt oberhalb der Obergrenze +127.</p>
+
+<p><strong>Probe – dasselbe Bitmuster zweimal gedeutet:</strong> Vorzeichenlos gelesen ist 1001 0110 = 128 + 16 + 4 + 2 = 150 – genau die richtige Summe. Die Addition selbst ist also bitgenau richtig; falsch wird das Ergebnis erst durch die Deutung im Zweierkomplement: &minus;128 + 16 + 4 + 2 = &minus;106. Beide Werte unterscheiden sich um genau 256 (150 &minus; 256 = &minus;106).</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 4 <span class="beispiel-kopf">komplex</span> Überlauf bei einer vorzeichenlosen Zahl</summary>
+
+<p>Ein vorzeichenloses 8-Bit-Register (Wertebereich 0 bis 255) steht auf 250, es werden 20 addiert:</p>
+
+<pre>Übertrag: (1) 1 1 1 . . . . .
+              1 1 1 1 1 0 1 0     (250)
+            + 0 0 0 1 0 1 0 0     ( 20)
+              ---------------
+          (1)  0 0 0 0 1 1 1 0</pre>
+
+<p>Die Summe 270 bräuchte 9 Bit. Der Übertrag aus der höchsten Stelle geht verloren, übrig bleibt 0000 1110 = <strong>14</strong>. Der Zähler ist bei 256 wieder auf 0 gesprungen und rechnet damit <strong>modulo 256</strong>: 270 &minus; 256 = 14.</p>
+            </details>
+        </div>
+
+<hr>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: Echte Bugs durch falsch behandelte Zahlendarstellung</summary>
+<p>Wenn ein Wert nicht mehr in die vorgesehene Anzahl an Bits passt (<strong>Overflow</strong>), kann das reale, teure Folgen haben:</p>
+<ul>
+<li><strong>Ariane&nbsp;5, Flug&nbsp;501 (1996):</strong> Eine Trägerrakete der ESA stürzte 37 Sekunden nach dem Start ab, weil ein Messwert bei der Umwandlung in eine kleinere Ganzzahldarstellung einen Overflow verursachte. Schaden: über 370 Millionen US-Dollar. Details bei <a href="https://en.wikipedia.org/wiki/Ariane_flight_V88" target="_blank">Wikipedia: Ariane flight V88</a>.</li>
+<li><strong>Jahr-2038-Problem:</strong> Viele (v.&nbsp;a. ältere und eingebettete) Systeme speichern die Unixzeit als vorzeichenbehaftete 32-Bit-Zahl. Am 19. Januar 2038 läuft dieser Wertebereich über – die Zahl „kippt“ ins Negative, und Systeme interpretieren das Datum als Zeitpunkt in der Vergangenheit. Mehr dazu bei <a href="https://en.wikipedia.org/wiki/Year_2038_problem" target="_blank">Wikipedia: Year 2038 problem</a>.</li>
+</ul>
+<p>Beide Beispiele zeigen: Wer die Grenzen der Zweierkomplement-Darstellung nicht kennt oder ignoriert, baut Software, die Jahre später (oder erst unter extremen Bedingungen) auf unvorhersehbare Weise versagen kann.</p>
+<p><strong>Berufsleben:</strong></p>
+<ul>
+<li><strong>Embedded-Software-Entwickler/in</strong>: programmiert Steuergeräte, z.&nbsp;B. für Fahrzeuge oder Industrieanlagen, und muss für jeden Sensorwert den passenden Datentyp (8, 16 oder 32 Bit, mit oder ohne Vorzeichen) wählen.</li>
+<li><strong>Safety-Ingenieur/in</strong> für sicherheitskritische Systeme (Luftfahrt, Bahn, Medizintechnik, Automobil): prüft mit Code-Analysen, dass kein Überlauf auftreten kann – in Sachsen z.&nbsp;B. bei Zulieferern der Fahrzeugwerke in Zwickau, Dresden und Leipzig.</li>
+<li><strong>Compiler-/Prozessorentwickler/in</strong>: legt fest, wie Addierwerke Überläufe erkennen und im Statusregister (Overflow-Flag) melden.</li>
+</ul>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Zweierkomplement:</strong></p>
+<p>Das Zweierkomplement ist eine Methode zur Darstellung ganzer Zahlen mit einer festen Bitanzahl n. Das höchstwertige Bit hat den Stellenwert −2<sup>n−1</sup> und zeigt damit das Vorzeichen an (0 = nichtnegativ, 1 = negativ).</p>
+<p>Umrechnung einer negativen Zahl −x:</p>
+<ol>
+<li>Stelle die positive Zahl x im Binärformat mit n Bit dar (führende Nullen ergänzen).</li>
+<li>Invertiere alle Bits, um das Einerkomplement zu erhalten.</li>
+<li>Addiere 1 zum Einerkomplement, um das Zweierkomplement zu erhalten.</li>
+</ol>
+</div>
+
+<div class="merke">
+    <p><strong>Wertebereich im n-Bit-Zweierkomplement:</strong></p>
+    <p>von &minus;2<sup>n&minus;1</sup> &nbsp;bis&nbsp; +2<sup>n&minus;1</sup> &minus; 1</p>
+    <table class="gitter">
+        <tr><th>Bitanzahl</th><th>kleinster Wert</th><th>größter Wert</th></tr>
+        <tr><td>4 Bit</td><td>&minus;8</td><td>+7</td></tr>
+        <tr><td>8 Bit</td><td>&minus;128</td><td>+127</td></tr>
+        <tr><td>16 Bit</td><td>&minus;32768</td><td>+32767</td></tr>
+        <tr><td>32 Bit</td><td>&minus;2147483648</td><td>+2147483647</td></tr>
+    </table>
+    <p><strong>Warum ist der Bereich unsymmetrisch?</strong> Die Null muss dargestellt werden und belegt eines der Muster mit führender 0. Für positive Werte bleibt deshalb ein Muster weniger übrig als für negative. Bei 8 Bit: 128 Muster für &minus;128 bis &minus;1, aber nur 127 für +1 bis +127 (plus eines für die 0).</p>
+</div>
+
+<div class="merke">
+    <p><strong>Überlauf:</strong> Ein Überlauf entsteht, wenn das Ergebnis den Wertebereich der gewählten Bitanzahl verlässt. Die Hardware meldet ihn nicht von selbst – das Programm rechnet mit dem falschen Wert weiter. Vorbeugen kann man auf zwei Wegen: eine ausreichend große Bitanzahl wählen oder den Wertebereich vor der Rechnung im Programm prüfen.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.2.1: Umrechnen im Zweierkomplement <span class="niveau">AFB I</span></summary>
+<ol>
+<li>Konvertiere die Dezimalzahl −28 ins Binärsystem (8-Bit-Zweierkomplement).</li>
+<li>Konvertiere die Dezimalzahl −75 ins Binärsystem (8-Bit-Zweierkomplement).</li>
+<li>Konvertiere die Dezimalzahl −139 ins Binärsystem (9-Bit-Zweierkomplement).</li>
+<li>Konvertiere die im <strong>4-Bit</strong>-Zweierkomplement dargestellte Binärzahl 1101 ins Dezimalsystem.</li>
+<li>Konvertiere die im <strong>6-Bit</strong>-Zweierkomplement dargestellte Binärzahl 101011 ins Dezimalsystem.</li>
+<li>Konvertiere die im <strong>7-Bit</strong>-Zweierkomplement dargestellte Binärzahl 1110100 ins Dezimalsystem.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.2.2: Wertebereich und Überlauf <span class="niveau">AFB II</span></summary>
+        <ol>
+            <li>Gib den Wertebereich einer 5-Bit- und einer 10-Bit-Zweierkomplementzahl an.</li>
+            <li>Ein 4-Bit-Zähler im Zweierkomplement steht auf 0111 und wird um 1 erhöht. Berechne das neue Bitmuster und gib an, welchen Wert der Zähler danach anzeigt.</li>
+            <li>Ein <strong>vorzeichenloses</strong> 8-Bit-Register enthält 200, es werden 100 addiert. Berechne die Summe auf Bitebene und gib den angezeigten Wert an.</li>
+            <li>Erkläre, warum die Rechnung aus Teil 3 in einem 16-Bit-Register kein Problem wäre.</li>
+        </ol>
+    </details>
+</div>

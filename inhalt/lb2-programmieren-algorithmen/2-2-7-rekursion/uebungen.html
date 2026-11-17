@@ -1,0 +1,140 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebooks zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es zwei Jupyter-Notebooks, in denen du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:</p>
+                <ul>
+                    <li><a href="../notebooks/2-2-7_a_rekursion.ipynb" download>2-2-7_a_rekursion.ipynb herunterladen</a> (Rekursion: Beispiele und Übungen)</li>
+                    <li><a href="../notebooks/2-2-7_b_uebung_rekursion.ipynb" download>2-2-7_b_uebung_rekursion.ipynb herunterladen</a> (Übungsaufgaben zur Rekursion)</li>
+                </ul>
+                <p>Die Notebooks ersetzen diese Seite nicht, sondern bieten dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser das JupyterLite der Schule <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (alternativ <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Basisfall und Rekursionsschritt <span class="niveau">AFB I</span></summary>
+                <p>Schreibe die Kette der Aufrufe für <code>sum_recursion(4)</code> auf. Was ist das Ergebnis? Welcher Aufruf ruft sich nicht mehr selbst auf?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>sum_recursion(4)</code> = 4 + <code>sum_recursion(3)</code> = 4 + 3 + <code>sum_recursion(2)</code> = … = 4 + 3 + 2 + 1 + <code>sum_recursion(0)</code> = 10. <code>sum_recursion(0)</code> ist der Basisfall und gibt direkt 0 zurück.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Wie hoch wird der Stapel? <span class="niveau">AFB I</span></summary>
+                <p>Wie viele Aufrufe liegen bei <code>sum_recursion(5)</code> höchstens gleichzeitig auf dem Aufrufstapel? Welcher Aufruf wird als erster fertig, welcher als letzter?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>6 Aufrufe (n = 5, 4, 3, 2, 1, 0). Als erster wird <code>sum_recursion(0)</code> fertig, als letzter <code>sum_recursion(5)</code> – er wurde zuerst aufgerufen und wartet am längsten.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Endet das? <span class="niveau">AFB II</span></summary>
+                <pre><code class="language-python">def schritte(n):
+    if n == 0:
+        return 0
+    return 1 + schritte(n - 2)</code></pre>
+                <p>Für welche Werte von <code>n</code> liefert <code>schritte(n)</code> ein Ergebnis, für welche gibt es einen <code>RecursionError</code>? Wie lässt sich die Funktion absichern?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nur für gerade n ≥ 0 wird 0 genau getroffen (z.&nbsp;B. 6, 4, 2, 0 → Ergebnis 3). Bei ungeraden oder negativen n springt <code>n</code> an 0 vorbei (z.&nbsp;B. 3, 1, −1, −3, …) – <code>RecursionError</code>. Absichern mit <code>if n &lt;= 0:</code> als Basisfall.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-7-1">
+            <details>
+                <summary>Aufgabe 2.2.7.1: Iterativ und rekursiv implementieren <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Implementiere die Berechnung der Summe der Zahlen von 0 bis zur Eingabe n jeweils einmal als iterativen und als rekursiven Algorithmus.</li>
+                    <li>Implementiere die Berechnung der Fakultät n! jeweils einmal als iterativen und als rekursiven Algorithmus.</li>
+                    <li>Implementiere die Berechnung der Fibonacci-Folge von 0 bis zur Eingabe n als rekursiven Algorithmus.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-7-2">
+            <details>
+                <summary>Aufgabe 2.2.7.2: Rekursion von Hand <span class="niveau">AFB II–III</span></summary>
+                <ol>
+                    <li>Gegeben ist die Funktion <code>f(n) = 2 · f(n−1) − 1</code> mit <code>f(0) = 3</code>. Benenne Abbruchbedingung und rekursiven Aufruf.</li>
+                    <li>Skizziere für <code>f(3)</code> den rekursiven Abstieg mit allen offenen Aufrufen und den Aufstieg mit den zurückgegebenen Werten.</li>
+                    <li>Schreibe <code>f</code> iterativ.</li>
+                    <li>Der ggT zweier Zahlen lässt sich rekursiv berechnen: <code>ggT(a, b) = a</code>, falls <code>b = 0</code>, sonst <code>ggT(b, a mod b)</code>. Skizziere den Ablauf für <code>ggT(84, 36)</code>. Beschreibe, was beim Aufstieg anders ist als bei <code>f</code>.</li>
+                    <li>Zähle, wie oft die rekursive Fibonacci-Funktion aus Aufgabe 2.2.7.1 beim Aufruf <code>fib(5)</code> insgesamt aufgerufen wird. Beurteile, ob die rekursive Lösung für große n geeignet ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-2-2-7-3">
+            <details>
+                <summary>Aufgabe 2.2.7.3: Ergebnis vorhersagen mit Aufrufstapel <span class="niveau">AFB II</span></summary>
+                <p>Bestimme die Ausgaben, <strong>ohne</strong> die Programme auszuführen.</p>
+                <pre><code class="language-python"># Programm A
+def a(n):
+    if n == 0:
+        print("Boden")
+        return 1
+    print("ab", n)
+    ergebnis = 2 * a(n - 1)
+    print("auf", n)
+    return ergebnis
+
+print(a(3))
+
+# Programm B
+def b(text):
+    if len(text) &lt;= 1:
+        return text
+    return b(text[1:]) + text[0]
+
+print(b("Abi"))</code></pre>
+                <ol>
+                    <li>Notiere alle Ausgabezeilen von Programm A in der richtigen Reihenfolge.</li>
+                    <li>Zeichne für Programm A den Aufrufstapel zu dem Zeitpunkt, an dem „Boden“ ausgegeben wird. Gib die Rekursionstiefe an.</li>
+                    <li>Bestimme die Ausgabe von Programm B. Beschreibe, was <code>b</code> allgemein leistet, und gib <code>b("")</code> und <code>b("x")</code> an.</li>
+                </ol>
+                <p class="tipp"><code>text[1:]</code> ist der Text ab dem zweiten Zeichen, <code>text[0]</code> das erste Zeichen.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-7-6">
+            <details>
+                <summary>Aufgabe 2.2.7.6: Rekursiv und iterativ im Vergleich <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Schreibe eine rekursive Funktion <code>quersumme(n)</code>. Es gilt: Die Quersumme von n ist n % 10 plus die Quersumme von n // 10. Für negative n wird die Quersumme des Betrags berechnet, bei einem anderen Typ als <code>int</code> wird <code>None</code> zurückgegeben.</li>
+                    <li>Schreibe eine rekursive Funktion <code>ist_palindrom(text)</code>, die Groß- und Kleinschreibung ignoriert: Ein Text ist ein Palindrom, wenn erstes und letztes Zeichen übereinstimmen und der Rest dazwischen ein Palindrom ist.</li>
+                    <li>Teste beide:
+                        <table>
+                            <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>quersumme(1234)</code></td><td><code>10</code></td><td></td></tr>
+                                <tr><td><code>quersumme(0)</code></td><td></td><td></td></tr>
+                                <tr><td><code>quersumme(7)</code></td><td></td><td></td></tr>
+                                <tr><td><code>quersumme(-1234)</code></td><td></td><td></td></tr>
+                                <tr><td><code>quersumme("12")</code></td><td></td><td></td></tr>
+                                <tr><td><code>ist_palindrom("Anna")</code></td><td></td><td></td></tr>
+                                <tr><td><code>ist_palindrom("Abi")</code></td><td></td><td></td></tr>
+                                <tr><td><code>ist_palindrom("")</code></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li>Gib für beide Funktionen die Rekursionstiefe in Abhängigkeit von der Eingabe an und schreibe <code>quersumme</code> zusätzlich iterativ.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,150 @@
+<p>
+            In der Theorie der formalen Sprachen gibt es eine enge Verbindung zwischen regulären Grammatiken und endlichen Automaten. Beide beschreiben genau die regulären Sprachen. In diesem Kapitel lernst du, wie man zwischen diesen beiden Darstellungsformen wechseln kann.
+        </p>
+
+<h2>1. Von der regulären Grammatik zum endlichen Automaten</h2>
+
+<p>Um eine reguläre Grammatik (Regeln A → aB, A → a, ggf. S → ε) in einen endlichen Automaten zu überführen, gehst du wie folgt vor:</p>
+
+<ol>
+            <li>Jedes Nichtterminal der Grammatik wird zu einem Zustand des Automaten.</li>
+            <li>Zusätzlich wird ein neuer Zustand E angelegt, der Endzustand wird.</li>
+            <li>Das Startsymbol der Grammatik wird zum Startzustand des Automaten.</li>
+            <li>Für jede Regel A → aB entsteht ein Übergang von A nach B mit der Beschriftung a.</li>
+            <li>Für jede Regel A → a entsteht ein Übergang von A in den <strong>neuen Endzustand E</strong> mit der Beschriftung a.</li>
+            <li>Gibt es die Regel S → ε, wird auch der Startzustand S zum Endzustand.</li>
+        </ol>
+
+<p>Das Ergebnis ist im Allgemeinen ein NEA (z.&nbsp;B. bei A → aA | a). Mit der Potenzmengenkonstruktion (Kapitel 6.10) erhältst du daraus einen DEA.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: ε-Variante</summary>
+                <p>Lässt man – wie FLACI und viele Schulbücher – Regeln A → ε für beliebige Nichtterminale zu, wird jedes Nichtterminal A mit einer Regel A → ε zum Endzustand. Der zusätzliche Zustand E ist dann nur für Regeln A → a nötig.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Die reguläre Grammatik G mit den Produktionsregeln</p>
+            <pre>S → aA | bB
+A → aA | a
+B → bB | b</pre>
+            <p>erzeugt die Wörter aa, aaa, …, bb, bbb, … Der zugehörige Automat hat die Zustände S, A, B und den neuen Endzustand C (= E):</p>
+            <figure>
+                <img src="../img/automat_beispiel.png" width="600" alt="Endlicher Automat mit den Zuständen S, A, B und Endzustand C">
+                <figcaption>Abb. 1: Endlicher Automat für die Grammatik G (A → a wird zu A –a→ C, B → b zu B –b→ C)</figcaption>
+            </figure>
+            <p>Der Automat ist ein NEA: In A führt a sowohl nach A als auch nach C.</p>
+            <ol>
+                <li><strong>Zustände anlegen:</strong> S (Start), A, B und der neue Endzustand C. <em>Warum?</em> Jedes Nichtterminal steht für „so viel ist schon erzeugt, so geht es weiter“.</li>
+                <li><strong>Regeln A → aB übersetzen:</strong> S → aA wird S –a→ A, S → bB wird S –b→ B, A → aA wird A –a→ A, B → bB wird B –b→ B.</li>
+                <li><strong>Regeln A → a übersetzen:</strong> A → a wird A –a→ C, B → b wird B –b→ C. <em>Warum?</em> Mit diesen Regeln endet die Ableitung, also muss der Automat danach akzeptieren können.</li>
+                <li><strong>ε prüfen:</strong> Es gibt keine Regel S → ε, also ist S kein Endzustand.</li>
+            </ol>
+            <table>
+                <thead><tr><th>δ</th><th>a</th><th>b</th></tr></thead>
+                <tbody>
+                    <tr><td>→ S</td><td>{A}</td><td>{B}</td></tr>
+                    <tr><td>A</td><td>{A, C}</td><td>∅</td></tr>
+                    <tr><td>B</td><td>∅</td><td>{B, C}</td></tr>
+                    <tr><td>C (Endzustand)</td><td>∅</td><td>∅</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Ergebnis:</strong> NEA mit vier Zuständen, der genau die Wörter aa, aaa, … und bb, bbb, … akzeptiert.</p>
+            <p><strong>Kontrolle:</strong> Ableitung S ⇒ aA ⇒ aaA ⇒ aaa entspricht dem Weg S –a→ A –a→ A –a→ C. Mit Zustandsmengen: {S} –a→ {A} –a→ {A, C} –a→ {A, C} ✓. Dagegen <code>ab</code>: {S} –a→ {A} –b→ ∅ ✗ – auch in G nicht ableitbar.</p>
+            </details>
+        </div>
+
+<h2>2. Vom endlichen Automaten zur regulären Grammatik</h2>
+
+<p>Die Umkehrung, also die Überführung eines endlichen Automaten in eine reguläre Grammatik, funktioniert ähnlich:</p>
+
+<ol>
+            <li>Jeder Zustand des Automaten wird zu einem Nichtterminal der Grammatik, der Startzustand zum Startsymbol. (Ein Fangzustand wird weggelassen.)</li>
+            <li>Für jeden Übergang q –a→ p entsteht die Regel q → a p.</li>
+            <li>Ist p ein Endzustand, entsteht zusätzlich die Regel q → a (die Ableitung darf hier enden).</li>
+            <li>Ist der Startzustand ein Endzustand (ε wird akzeptiert), kommt S → ε hinzu. Führen Pfeile in den Startzustand zurück, braucht man dafür ein neues Startsymbol S', das dieselben Regeln wie der Startzustand und zusätzlich S' → ε erhält – denn S → ε ist nur erlaubt, wenn S auf keiner rechten Seite vorkommt.</li>
+        </ol>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> DEA für „gerade Anzahl von a“ über {a, b} (Kapitel 6.7, Aufgabe 6.7.7): q0 (Start- und Endzustand) –a→ q1, q0 –b→ q0, q1 –a→ q0, q1 –b→ q1.</p>
+            <pre>q0 → a q1 | b q0 | b
+q1 → a q0 | a | b q1
+S' → a q1 | b q0 | b | ε      (neues Startsymbol, weil q0 Endzustand ist und Pfeile nach q0 führen)</pre>
+            <p>Ableitung von <code>aba</code>: S' ⇒ a q1 ⇒ ab q1 ⇒ aba</p>
+            <ol>
+                <li><strong>Übergänge in Regeln übersetzen:</strong> q0 –a→ q1 wird q0 → a q1, q0 –b→ q0 wird q0 → b q0, q1 –a→ q0 wird q1 → a q0, q1 –b→ q1 wird q1 → b q1.</li>
+                <li><strong>Übergänge in den Endzustand ergänzen:</strong> Nach q0 führen q0 –b→ q0 und q1 –a→ q0. Daraus entstehen q0 → b und q1 → a. <em>Warum?</em> Nach diesen Zeichen darf das Wort enden.</li>
+                <li><strong>Leeres Wort behandeln – die Falle:</strong> q0 ist Start- und Endzustand, also gehört ε zur Sprache. Die Regel q0 → ε ist aber nicht erlaubt, weil q0 auf rechten Seiten vorkommt (q0 → b q0, q1 → a q0). <em>Lösung:</em> neues Startsymbol S' mit allen Regeln von q0 und zusätzlich S' → ε.</li>
+                <li><strong>Typ prüfen:</strong> Alle Regeln haben die Form A → aB oder A → a, nur S' → ε ist die erlaubte Ausnahme, und S' steht auf keiner rechten Seite.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Grammatik mit Startsymbol S' und den drei Regelzeilen oben ist streng regulär (Typ 3).</p>
+            <p><strong>Kontrolle:</strong> <code>bb</code>: S' ⇒ b q0 ⇒ bb ✓ (0 a). <code>a</code>: S' ⇒ a q1 – für q1 gibt es keine Regel, die ohne weiteres Zeichen endet; a ist nicht ableitbar ✓ (1 a). ε: S' ⇒ ε ✓.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Äquivalenz prüfen</summary>
+                <p>
+                    Bei der Überführung in beide Richtungen muss die beschriebene Sprache gleich bleiben. Prüfe deshalb einige kurze Wörter – auch das leere Wort – in beiden Darstellungen.
+                </p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Von der Spezifikation zum Programm</summary>
+                <p><strong>Alltag:</strong> Die Regeln für eine gültige Kfz-Kennzeichen- oder Kundennummer stehen oft als Grammatik oder Muster in einer Spezifikation. Im Programm, z.&nbsp;B. beim Scannen eines Tickets an der Kasse, arbeitet ein Automat, der Zeichen für Zeichen prüft.</p>
+                <p><strong>Beruf:</strong> Softwareentwickler übersetzen Formatvorgaben aus Normen in Prüfautomaten; Werkzeuge wie FLACI oder JFLAP (Lehre) und Lexer-Generatoren (Industrie) übernehmen die Umwandlung automatisch. In der Protokollentwicklung wird die zulässige Nachrichtenfolge als Grammatik beschrieben und in der Firmware eines Geräts als Zustandsautomat umgesetzt.</p>
+            </details>
+        </div>
+
+<h2>3. Aufgaben</h2>
+
+<p>
+            Die Fähigkeit, zwischen diesen beiden Darstellungsformen zu wechseln, ist in der theoretischen Informatik von großer Bedeutung. Sie ermöglicht es, je nach Problemstellung die geeignetere Darstellung zu wählen: Grammatiken zum Beschreiben und Erzeugen, Automaten zum Prüfen.
+        </p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Merke:</strong><br>
+                Bei der Überführung einer regulären Grammatik in einen endlichen Automaten entsprechen die Nichtterminale den Zuständen, und jede Produktionsregel wird zu einem Übergang. Regeln A → a, die eine Ableitung beenden, führen in einen neuen Endzustand.
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>Merke:</strong> Jeder Übergang q –a→ p wird zur Regel q → a p; führt er in einen Endzustand, kommt q → a hinzu. So entstehen nur Regeln der Form A → aB und A → a – die Grammatik ist regulär (Typ 3).</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.11.1: <span class="niveau">AFB I/II</span></summary>
+                <p>Gegeben sei folgender endlicher Automat:</p>
+                <figure>
+                    <img src="../img/aufgabe_automat.png" width="400" alt="Endlicher Automat mit Zuständen S, A (Endzustand), B">
+                    <figcaption>Abb. 2: Endlicher Automat</figcaption>
+                </figure>
+                <p>Überführe diesen Automaten in eine äquivalente reguläre Grammatik.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.11.2: <span class="niveau">AFB II</span></summary>
+                <p>Gegeben ist die reguläre Grammatik G mit S → aS | bA, A → bA | b.</p>
+                <ol type="a">
+                    <li>Konstruiere den zugehörigen endlichen Automaten.</li>
+                    <li>Begründe, ob der Automat deterministisch ist.</li>
+                    <li>Beschreibe die Sprache in Worten und als regulären Ausdruck.</li>
+                </ol>
+            </details>
+        </div>

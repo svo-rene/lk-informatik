@@ -1,0 +1,46 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.4.4: Fehler im KV-Diagramm finden <span class="niveau">AFB III</span></summary>
+<p>Nils hat dieses KV-Diagramm ausgewertet:</p>
+<table class="gitter">
+<tr><th></th><th colspan="2">A</th><th colspan="2">¬A</th><th></th></tr>
+<tr><th rowspan="2">B</th><td>1</td><td>0</td><td>0</td><td>1</td><th>¬D</th></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td><th rowspan="2">D</th></tr>
+<tr><th rowspan="2">¬B</th><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><th>¬D</th></tr>
+<tr><th></th><th>¬C</th><th colspan="2">C</th><th>¬C</th><th></th></tr>
+</table>
+<p>Seine Gruppen:</p>
+<ul>
+<li>Gruppe 1: die beiden Einsen in der obersten Zeile ganz links und ganz rechts → B ∧ ¬C ∧ ¬D</li>
+<li>Gruppe 2: die beiden Einsen in der untersten Zeile ganz links und ganz rechts → ¬B ∧ ¬C ∧ ¬D</li>
+<li>Gruppe 3: die zwei Einsen in der zweiten Zeile und die Eins darunter in der dritten Zeile → C ∧ D</li>
+</ul>
+<p>Sein Ergebnis: f = (B ∧ ¬C ∧ ¬D) ∨ (¬B ∧ ¬C ∧ ¬D) ∨ (C ∧ D)</p>
+<ol>
+<li>Prüfe jede Gruppe anhand der Regeln im Merkkasten. Unterscheide dabei zwischen „falsch“ und „richtig, aber nicht optimal“.</li>
+<li>Gib eine Belegung an, bei der Nils’ Schaltung einen falschen Wert liefert.</li>
+<li>Bilde die Gruppen richtig und gib die minimale Funktion an.</li>
+</ol>
+<p class="tipp">Stell dir das Diagramm als Ring vor – erst links mit rechts, dann oben mit unten verbunden.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 3.4.5: KV-Diagramm oder Gesetze? <span class="niveau">AFB III</span></summary>
+<p>Für eine Lüftungsklappe hat sich aus der Wahrheitstabelle ergeben: f = (A ∧ B ∧ C) ∨ (A ∧ B ∧ ¬D) ∨ (¬A ∧ B ∧ C).</p>
+<ul>
+<li><strong>Lea</strong> (mit Gesetzen): „Ich klammere aus den ersten beiden Termen A ∧ B aus: f = (A ∧ B ∧ (C ∨ ¬D)) ∨ (¬A ∧ B ∧ C). Weiter geht es nicht, das sind 6 Gatter.“</li>
+<li><strong>Ben</strong> (mit KV-Diagramm): „Ich erhalte f = (B ∧ C) ∨ (A ∧ B ∧ ¬D), das sind 4 Gatter.“</li>
+</ul>
+<ol>
+<li>Prüfe Leas Umformung und Bens Ergebnis, Ben z.&nbsp;B. mit einem eigenen KV-Diagramm.</li>
+<li>Lea hat den Term A ∧ B ∧ C nur einmal verwendet. Zeige mit den Gesetzen (Idempotenz: X = X ∨ X, Absorption), dass man von der Ausgangsfunktion auch rechnerisch zu Bens Ergebnis kommt.</li>
+<li>Klammere in Bens Ergebnis B aus. Gib die Gatterliste an und vergleiche Gatterzahl und Gattereingänge mit Bens Version.</li>
+<li>Beurteile Leas Aussage „Weiter geht es nicht“ und die Frage, wann das KV-Diagramm dem Umformen mit Gesetzen überlegen ist.</li>
+</ol>
+</details>
+</div>

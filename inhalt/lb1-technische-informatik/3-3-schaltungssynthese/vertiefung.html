@@ -1,0 +1,21 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.3.5: Fehler beim Ausklammern – der Rollladen <span class="niveau">AFB III</span></summary>
+                <p>Ein Smart-Home-Rollladen soll abends automatisch herunterfahren. Eingänge (1 = trifft zu): A = Automatik eingeschaltet, B = es ist dunkel, C = Terrassentür geschlossen, D = Person auf der Terrasse erkannt. Anforderung: Der Rollladen fährt herunter, wenn die Automatik an ist und es dunkel ist – aber nicht, wenn dabei die Terrassentür offen steht und jemand auf der Terrasse ist (sonst wäre die Person ausgesperrt).</p>
+                <p>Paul hat so gearbeitet:</p>
+                <ol class="schritte">
+                    <li>Aus der Wahrheitstabelle: f = (A ∧ B ∧ C) ∨ (A ∧ B ∧ ¬D)</li>
+                    <li>Ausklammern: f = A ∧ B ∧ C ∨ ¬D</li>
+                    <li>Schaltung: UND(A, B, C) und NICHT(D) gehen in ein ODER-Gatter – nur 3 Gatter.</li>
+                    <li>Test in LogicSim mit A = B = C = 1, D = 0 und mit A = B = 1, C = 0, D = 1: beide Male richtig.</li>
+                </ol>
+                <ol>
+                    <li>Prüfe, ob Pauls Ausdruck aus Schritt 1 die Anforderung richtig wiedergibt.</li>
+                    <li>Finde den Fehler in Schritt 2 und gib alle Belegungen an, bei denen Pauls Schaltung falsch reagiert. Beschreibe, was der Rollladen dann tut.</li>
+                    <li>Gib die korrekte vereinfachte Funktion und Schaltung an. Wie viele Gatter braucht sie?</li>
+                    <li>Beurteile Pauls Testvorgehen in Schritt 4 und schlage ein besseres vor.</li>
+                </ol>
+            </details>
+        </div>

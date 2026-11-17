@@ -1,0 +1,14 @@
+{
+  "nr": "6.15",
+  "titel": "Selbstcheck und Klausurvorbereitung: Sprachen und Automaten",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

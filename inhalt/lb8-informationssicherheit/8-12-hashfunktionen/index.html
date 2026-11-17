@@ -1,0 +1,153 @@
+<p>Woher weiß ein Webshop, dass dein Passwort stimmt, wenn er es gar nicht gespeichert hat? Und wie prüfst du, ob eine heruntergeladene Datei unverändert ist? Die Antwort auf beide Fragen sind kryptographische Hashfunktionen.</p>
+
+<p>Eine kryptographische Hashfunktion (auch Einweg-Hashfunktion) nimmt eine Eingabe beliebiger Länge und berechnet daraus einen Hashwert fester, meist kurzer Länge, eine Art digitalen Fingerabdruck. Die Berechnung ist in eine Richtung leicht, die Umkehrung – also die Rekonstruktion der Eingabe aus dem Hashwert – dagegen praktisch unmöglich.</p>
+
+<h2>Verwendungszwecke</h2>
+
+<ul>
+            <li><strong>Integritätsprüfung:</strong> Veränderungen an Daten führen zu einem anderen Hashwert. So prüft man Downloads, Backups und Blöcke einer Blockchain.</li>
+            <li><strong>Digitale Signaturen:</strong> Man signiert nicht das ganze Dokument, sondern nur seinen Hashwert – mit dem privaten Schlüssel des Absenders (siehe 8.13).</li>
+            <li><strong>Passwortspeicherung:</strong> Statt Passwörter im Klartext zu speichern, speichert man nur Hashwerte. Bei der Anmeldung wird das eingegebene Passwort gehasht und mit dem gespeicherten Wert verglichen. Dafür verwendet man aber <em>keine</em> schnelle Hashfunktion wie SHA-256 allein, sondern:
+                <ul>
+                    <li>ein <strong>Salt</strong>: eine zufällige Zeichenfolge pro Benutzer, die vor dem Hashen an das Passwort angehängt und mitgespeichert wird. Gleiche Passwörter ergeben so verschiedene Hashwerte, vorberechnete Tabellen (Rainbow Tables) werden nutzlos.</li>
+                    <li>eine absichtlich <strong>langsame Passwort-Hashfunktion</strong> wie <strong>bcrypt</strong>, scrypt oder <strong>Argon2</strong>. Sie braucht pro Versuch viel Rechenzeit und Speicher und bremst Brute-Force-Angriffe um viele Größenordnungen.</li>
+                </ul>
+            </li>
+            <li><strong>Blockchain und Kryptowährungen:</strong> Hashfunktionen verketten die Blöcke und bilden die Grundlage für Proof-of-Work.</li>
+        </ul>
+
+<h2>Hashfunktionen und Schutzziele</h2>
+
+<ul>
+            <li><strong>Integrität:</strong> Die Integrität von Daten lässt sich prüfen, indem man ihren Hashwert berechnet und mit einem bekannten Hashwert vergleicht. Das funktioniert nur, wenn dieser Vergleichswert über einen <strong>vertrauenswürdigen Kanal</strong> kommt (z.&nbsp;B. von der HTTPS-Seite des Herstellers oder digital signiert). Wer die Datei manipulieren kann und zugleich den daneben stehenden Hashwert, ersetzt einfach beide.</li>
+            <li><strong>Authentizität:</strong> Allein liefert ein Hash keine Authentizität, denn jeder kann ihn berechnen. Erst zusammen mit einem Schlüssel entsteht sie: als MAC mit gemeinsamem geheimem Schlüssel oder als digitale Signatur mit privatem Schlüssel.</li>
+            <li><strong>Keine Vertraulichkeit:</strong> Eine Hashfunktion ist keine Verschlüsselung, denn es gibt keinen Schlüssel und kein Entschlüsseln. Hashwerte kurzer oder vorhersagbarer Eingaben (PINs, Geburtsdaten, schwache Passwörter) findet man einfach durch Ausprobieren. Wer Daten vertraulich halten will, muss sie verschlüsseln.</li>
+        </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation (Download prüfen):</strong> Ein Softwarehersteller gibt auf seiner HTTPS-Seite den SHA-256-Hashwert einer Installationsdatei an. Du lädst die Datei herunter.</p>
+            <ol>
+                <li><strong>Hashwert selbst berechnen:</strong> unter Windows z.&nbsp;B. mit <code>Get-FileHash datei.exe</code> in der PowerShell. <em>Warum selbst?</em> Nur so prüfst du die Datei, die tatsächlich auf deinem Rechner liegt.</li>
+                <li><strong>Mit dem angegebenen Wert vergleichen:</strong> alle 64 Hex-Zeichen, nicht nur Anfang und Ende. <em>Achtung:</em> PowerShell gibt Großbuchstaben aus, viele Webseiten Kleinbuchstaben – das ist derselbe Wert.</li>
+                <li><strong>Herkunft des Vergleichswerts prüfen:</strong> Er muss von der HTTPS-Seite des Herstellers stammen, nicht vom selben Download-Spiegel wie die Datei.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Stimmen beide Werte überein, wurde die Datei beim Download nicht verändert.<br>
+            <strong>Kontrolle:</strong> Weicht auch nur ein Zeichen ab, ist die Datei beschädigt oder manipuliert und darf nicht ausgeführt werden.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation (Lawineneffekt und Salt):</strong> Ein Schulportal will Passwörter als Hashwerte speichern. Zwei Nutzer haben das Passwort „geheim“.</p>
+            <ol>
+                <li><strong>Lawineneffekt beobachten:</strong>
+                    <pre>SHA-256("Hallo")  = 753692ec36adb4c794c973945eb2a99c1649703ea6f76bf259abb4fb838e013e
+SHA-256("hallo")  = d3751d33f9cd5049c4af2b462735457e4d3baf130bcbb87f389e349fbaeb20b9
+SHA-256("Hallo!") = 357a57fe73d6c63bb1923e970f79a924db3a3609eb9797547784a94ee38fc3df</pre>
+                    Ein einziges geändertes Zeichen ergibt einen völlig anderen Hashwert. Ähnliche Passwörter verraten also nichts über ähnliche Hashwerte.</li>
+                <li><strong>Problem ohne Salt erkennen:</strong> Haben zwei Nutzer das Passwort „geheim“, stünde ohne Salt zweimal <code>addb0f5e…c940</code> in der Datenbank – ein Angreifer sähe sofort, dass die Passwörter gleich sind, und fände „geheim“ in jeder Wortliste. <em>Warum?</em> Die Hashfunktion ist deterministisch.</li>
+                <li><strong>Salt hinzufügen:</strong> Mit dem zufälligen Salt „7Kx!“ wird daraus SHA-256("7Kx!geheim") = <code>03cd46c9…44e8</code>, beim zweiten Nutzer mit anderem Salt ein ganz anderer Wert. Das Salt wird offen neben dem Hashwert gespeichert.</li>
+                <li><strong>Anmeldung prüfen:</strong> Das Portal liest das Salt des Nutzers, hängt das eingegebene Passwort an, berechnet den Hashwert und vergleicht.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Gleiche Passwörter ergeben verschiedene Hashwerte; vorberechnete Tabellen werden nutzlos.<br>
+            <strong>Falle:</strong> Salt allein bremst keinen Angreifer, der ein einzelnes Konto gezielt angreift – SHA-256 bleibt schnell. Deshalb gehört zum Salt eine langsame Passwort-Hashfunktion wie bcrypt oder Argon2.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Ablauf von SHA-256 interaktiv</summary>
+                <p><a href="https://www.cryptool.org/de/cto/sha2">https://www.cryptool.org/de/cto/sha2</a></p>
+            </details>
+        </div>
+
+<h2>Vereinfachte Erklärung einer Hashfunktion</h2>
+
+<p>Diese vereinfachte „Hashfunktion“ hat nicht die Sicherheitseigenschaften echter kryptographischer Hashfunktionen wie SHA-256, hilft aber, das Konzept zu verstehen.</p>
+
+<p>Angenommen, die Hashfunktion arbeitet mit Zahlen statt mit binären Daten. Die Schritte könnten so aussehen:</p>
+
+<ul>
+            <li>Eingabe: eine beliebige natürliche Zahl.</li>
+            <li>Operationen:
+                <ul>
+                    <li>Multipliziere die Eingabe mit einem festen Wert (z.&nbsp;B. 3).</li>
+                    <li>Addiere einen konstanten Wert (z.&nbsp;B. 7).</li>
+                    <li>Führe eine Modulo-Operation mit einem anderen festen Wert (z.&nbsp;B. 12) durch, damit das Ergebnis in einem festen Bereich bleibt.</li>
+                </ul>
+            </li>
+            <li>Ausgabe: Das Ergebnis dieser Berechnungen ist der „Hashwert“.</li>
+        </ul>
+
+<h3>Beispielrechnung</h3>
+
+<p>Bei der Eingabezahl 5 werden diese Schritte durchlaufen:</p>
+
+<ol>
+            <li>Eingabe: 5</li>
+            <li>Operationen:
+                <ol>
+                    <li>Multiplikation mit 3: 5 · 3 = 15</li>
+                    <li>Addition von 7: 15 + 7 = 22</li>
+                    <li>Modulo 12: 22 mod 12 = 10</li>
+                </ol>
+            </li>
+            <li>Ausgabe: 10</li>
+        </ol>
+
+<p>In diesem Beispiel ist 10 der Hashwert der Eingabe 5. Auch 1 und 9 ergeben 10 – eine Kollision. Weil 3 und 12 den gemeinsamen Teiler 3 haben, kommen sogar nur die vier Hashwerte 1, 4, 7 und 10 vor.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Passwörter, Datenlecks und Forensik</summary>
+                <p>
+                    <strong>Alltag:</strong> Wird bei einem Online-Dienst die Passwortdatenbank gestohlen, entscheidet die Art der Speicherung über den Schaden: Mit Salt und Argon2 bleiben gute Passwörter sicher, ungesalzene MD5-Hashes sind in Stunden geknackt. Bei <em>Have I Been Pwned</em> kannst du prüfen, ob deine E-Mail-Adresse betroffen war. Der Dienst prüft Passwörter übrigens, ohne sie zu kennen: Dein Browser schickt nur die ersten 5 Zeichen des SHA-1-Hashwerts. Ein Passwort-Manager erzeugt für jeden Dienst ein eigenes, langes Zufallspasswort, sodass ein Leck nicht alle Konten gefährdet.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> IT-Forensikerinnen und -Forensiker, etwa beim Landeskriminalamt Sachsen oder in Beratungsfirmen, sichern Beweise auf Festplatten und berechnen sofort deren Hashwert. So können sie vor Gericht belegen, dass die Beweise seit der Sicherung nicht verändert wurden. Beim BSI legt die TR-02102 fest, welche Hashfunktionen für welchen Zweck zulässig sind.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Eigenschaften einer kryptographischen Hashfunktion h</strong></p>
+            <ul>
+                <li><strong>feste Länge:</strong> Jede Eingabe ergibt einen Hashwert gleicher Länge (SHA-256: 256 Bit).</li>
+                <li><strong>deterministisch und schnell:</strong> Gleiche Eingabe liefert immer denselben Hashwert.</li>
+                <li><strong>Einwegeigenschaft (Urbildresistenz):</strong> Zu einem Hashwert y findet man praktisch keine Eingabe x mit h(x) = y.</li>
+                <li><strong>schwache Kollisionsresistenz:</strong> Zu gegebenem x findet man praktisch kein anderes x' mit h(x') = h(x).</li>
+                <li><strong>starke Kollisionsresistenz:</strong> Man findet praktisch überhaupt kein Paar x ≠ x' mit h(x) = h(x').</li>
+                <li><strong>Lawineneffekt:</strong> Eine winzige Änderung der Eingabe ändert etwa die Hälfte der Bits des Hashwerts.</li>
+            </ul>
+            <p>Ein Hashwert ist <strong>nicht eindeutig</strong>: Es gibt unendlich viele Eingaben, aber nur 2<sup>256</sup> Hashwerte, also müssen Kollisionen existieren (Schubfachprinzip). Sie lassen sich bei einer guten Hashfunktion nur nicht gezielt finden.</p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>MD5 und SHA-1 sind gebrochen.</strong> Für MD5 lassen sich seit 2004 Kollisionen in Sekunden erzeugen, für SHA-1 wurde 2017 eine praktische Kollision vorgeführt („SHAttered“). Für Sicherheitszwecke verwendet man heute <strong>SHA-256</strong>, SHA-384/512 oder <strong>SHA-3</strong>.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.12.1: Hashwerte erzeugen <span class="niveau">AFB I</span></summary>
+                <p>Bearbeite die folgende Aufgabe und erzeuge Hashwerte: <a href="https://www.inf-schule.de/kryptologie/digitalesignatur/einstieg_hashfunktion/experimentepython">https://www.inf-schule.de/kryptologie/digitalesignatur/einstieg_hashfunktion/experimentepython</a></p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.12.2: Eine schlechte Hashfunktion bewerten <span class="niveau">AFB II</span></summary>
+                <p>Für eine Zeichenkette s sei folgende Hashfunktion gegeben:<br>
+                f(s) = (AnzahlVokale(s) + AnzahlZeichen(s)) mod 8<br>
+                Beispiel: f(Martha) = (2 + 6) mod 8 = 8 mod 8 = 0</p>
+                <p>Implementiere die Funktion und bewerte die Güte der Hashfunktion anhand der Eigenschaften aus dem Merkkasten.</p>
+            </details>
+        </div>

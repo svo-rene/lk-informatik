@@ -1,0 +1,120 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe" id="a-4-7-1">
+    <details>
+        <summary>Aufgabe 4.7.1: Typen ergänzen <span class="niveau">AFB I</span></summary>
+        <p>Ergänze sinnvolle Typen für Parameter und Rückgabewerte:</p>
+        <pre><code class="language-python">def mittlere_laenge(worte):
+    gesamt = sum(len(w) for w in worte)
+    return gesamt / len(worte)
+
+def erste_ziffer(text):
+    for zeichen in text:
+        if zeichen.isdigit():
+            return int(zeichen)
+    return None</code></pre>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-7-2">
+    <details>
+        <summary>Aufgabe 4.7.2: Klasse Buch typisieren <span class="niveau">AFB I–II</span></summary>
+        <p>Vervollständige die Klasse <code>Buch</code> mit sinnvollen Typangaben. Das Erscheinungsjahr kann leer bleiben (z.&nbsp;B. wenn es unbekannt ist).</p>
+        <pre><code class="language-python">class Buch:
+    def __init__(self, titel, autor, erscheinungsjahr):
+        self.titel = titel
+        self.autor = autor
+        self.erscheinungsjahr = erscheinungsjahr</code></pre>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-7-3">
+    <details>
+        <summary>Aufgabe 4.7.3: Klasse Rechner <span class="niveau">AFB II</span></summary>
+        <p>Erstelle eine Klasse <code>Rechner</code> mit folgenden Attributen:</p>
+        <ul>
+            <li>Modellname (Text)</li>
+            <li>RAM in GB (Ganzzahl)</li>
+            <li>Preis (Kommazahl oder <code>None</code>)</li>
+        </ul>
+        <p>Gib alle Typen direkt im Konstruktor an.</p>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-7-4">
+    <details>
+        <summary>Aufgabe 4.7.4: Notenliste <span class="niveau">AFB II–III</span></summary>
+        <p>Entwickle eine Klasse <code>Notenliste</code> mit:</p>
+        <ul>
+            <li>einem Attribut <code>schueler</code> vom Typ <code>str</code>,</li>
+            <li>einem Attribut <code>noten</code> als Liste von <code>float</code>,</li>
+            <li>einer Methode <code>durchschnitt()</code>, die den Durchschnitt berechnet.</li>
+        </ul>
+        <p>Achte auf korrekte Typangaben im Konstruktor <em>und</em> bei der Methode. Überlege, was bei einer leeren Liste passieren soll.</p>
+    </details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-4-7-5">
+    <details>
+        <summary>Aufgabe 4.7.5: Typen aus der Verwendung ableiten – Playlist <span class="niveau">AFB II</span></summary>
+        <p>Für eine Lern-Playlist-App liegt diese Klasse ohne Typangaben vor:</p>
+        <pre><code class="language-python">class Playlist:
+    def __init__(self, name):
+        self.name = name
+        self.titel = []            # Einträge: (Titel, Dauer in Sekunden)
+        self.oeffentlich = False
+
+    def hinzufuegen(self, titel, dauer):
+        self.titel.append((titel, dauer))
+
+    def gesamtdauer(self):
+        return sum(d for _, d in self.titel)
+
+    def laengster(self):
+        if not self.titel:
+            return None
+        return max(self.titel, key=lambda t: t[1])[0]</code></pre>
+        <ol>
+            <li>Ergänze alle Typangaben für Parameter, Rückgabewerte und Attribute. Begründe besonders die Typen von <code>titel</code> und <code>laengster()</code>.</li>
+            <li>Teste deine typisierte Klasse:</li>
+        </ol>
+        <table class="gitter">
+            <tr><th>Aufruf (nacheinander)</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+            <tr><td><code>p = Playlist("Lernen"); print(p.gesamtdauer(), p.laengster())</code></td><td>0 None</td><td></td></tr>
+            <tr><td><code>p.hinzufuegen("Intro", 95); p.hinzufuegen("Focus", 240); p.hinzufuegen("Outro", 180)</code>, dann <code>print(p.gesamtdauer())</code></td><td>515</td><td></td></tr>
+            <tr><td><code>print(p.laengster())</code></td><td>Focus</td><td></td></tr>
+        </table>
+    </details>
+</div>
+
+<div class="aufgabe" id="a-4-7-7">
+    <details>
+        <summary>Aufgabe 4.7.7: Kinokasse – UML mit Typen in Code übersetzen <span class="niveau">AFB II</span></summary>
+        <p>Ein kleines Programmkino möchte Reservierungen verwalten. Das Klassendiagramm steht schon:</p>
+        <table class="gitter" aria-label="UML-Klassendiagramm Kinovorstellung">
+            <tr><th>Kinovorstellung</th></tr>
+            <tr><td>+ film: str<br>+ saal: int<br>+ preis: float<br>− __plaetze_frei: int<br>− __reservierungen: dict[str, int]</td></tr>
+            <tr><td>+ get_plaetze_frei(): int<br>+ reservieren(name: str, anzahl: int): bool<br>+ stornieren(name: str): int<br>+ umsatz(): float</td></tr>
+        </table>
+        <ul>
+            <li>Der Konstruktor erhält <code>film</code>, <code>saal</code>, die Anzahl der Plätze und den Preis; zu Beginn gibt es keine Reservierungen.</li>
+            <li><code>reservieren</code> gelingt nur für mindestens 1 Platz und höchstens so viele, wie frei sind. Reserviert ein Name ein zweites Mal, werden die Plätze addiert.</li>
+            <li><code>stornieren</code> löscht die Reservierung eines Namens und gibt die Zahl der frei gewordenen Plätze zurück (0, wenn es keine gab).</li>
+            <li><code>umsatz</code> ist die Zahl aller reservierten Plätze mal Preis.</li>
+        </ul>
+        <p>Implementiere die Klasse mit allen Typangaben und teste nacheinander mit <code>v = Kinovorstellung("Das Labyrinth", 2, 10, 8.5)</code>:</p>
+        <table class="gitter">
+            <tr><th>Aufruf</th><th>erwartete Rückgabe</th><th>freie Plätze danach</th><th>tatsächlich</th></tr>
+            <tr><td><code>v.reservieren("Mia", 4)</code></td><td>True</td><td>6</td><td></td></tr>
+            <tr><td><code>v.reservieren("Ben", 7)</code></td><td>False</td><td>6</td><td></td></tr>
+            <tr><td><code>v.reservieren("Mia", 2)</code></td><td>True</td><td>4</td><td></td></tr>
+            <tr><td><code>v.reservieren("Ben", 0)</code></td><td>False</td><td>4</td><td></td></tr>
+            <tr><td><code>v.umsatz()</code></td><td>51.0</td><td>4</td><td></td></tr>
+            <tr><td><code>v.stornieren("Tom")</code></td><td>0</td><td>4</td><td></td></tr>
+            <tr><td><code>v.stornieren("Mia")</code></td><td>6</td><td>10</td><td></td></tr>
+            <tr><td><code>v.umsatz()</code></td><td>0.0</td><td>10</td><td></td></tr>
+        </table>
+    </details>
+</div>

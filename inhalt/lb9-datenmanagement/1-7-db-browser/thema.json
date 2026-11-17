@@ -1,0 +1,14 @@
+{
+  "nr": "1.7",
+  "titel": "DB Browser (SQLite)",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    }
+  ]
+}

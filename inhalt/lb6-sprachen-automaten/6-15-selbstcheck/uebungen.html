@@ -1,0 +1,80 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.15.3: BNF und EBNF <span class="niveau">AFB II</span></summary>
+                <p>Versionsnummern von Software haben häufig die Form <code>Major.Minor.Patch</code>, z.&nbsp;B. <code>2.10.3</code>. Jeder Teil ist eine natürliche Zahl ohne führende Nullen (0 ist erlaubt).</p>
+                <ol type="a">
+                    <li>Gib eine Grammatik in BNF an.</li>
+                    <li>Gib dieselbe Grammatik kompakter in EBNF an.</li>
+                    <li>Entscheide begründet, ob <code>1.02.3</code> und <code>0.0.1</code> zur Sprache gehören.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.15.4: Chomsky-Hierarchie <span class="niveau">AFB II</span></summary>
+                <p>Ordne die Grammatiken dem speziellsten zutreffenden Chomsky-Typ zu und begründe.</p>
+                <ul>
+                    <li>G1: S → 0S | 1S | 0</li>
+                    <li>G2: S → 0S1 | ε</li>
+                    <li>G3: S → aB, aB → ab</li>
+                    <li>G4: S → SAB | a, AB → b</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.15.5: DEA entwerfen <span class="niveau">AFB II</span></summary>
+                <ol type="a">
+                    <li>Entwirf einen vollständigen DEA über {a, b}, der genau die Wörter mit genau zwei a akzeptiert. Gib die Übergangstabelle an.</li>
+                    <li>Prüfe die Wörter <code>baba</code> und <code>aaba</code> über die Zustandsfolge.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.15.6: NEA und Potenzmengenkonstruktion <span class="niveau">AFB II/III</span></summary>
+                <p>Gegeben ist ein NEA über {0, 1} mit Startzustand q0 und Endzustand q2: q0 hat Schleifen für 0 und 1, außerdem q0 –0→ q1 und q1 –0→ q2.</p>
+                <ol type="a">
+                    <li>Beschreibe die akzeptierte Sprache.</li>
+                    <li>Begründe, warum es sich um einen NEA handelt, und erkläre, wann ein NEA ein Wort akzeptiert.</li>
+                    <li>Wandle den NEA mit der Potenzmengenkonstruktion in einen DEA um.</li>
+                    <li>Prüfe mit dem DEA die Wörter <code>1100</code> und <code>0010</code>.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.15.7: Automat und Grammatik <span class="niveau">AFB II</span></summary>
+                <p>Überführe den DEA aus Aufgabe 6.15.5 in eine reguläre Grammatik (ohne ε-Regeln).</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.15.8: Grenzen von Automaten <span class="niveau">AFB III</span></summary>
+                <p>Gegeben ist L = {a<sup>n</sup>ba<sup>n</sup> | n ≥ 0}.</p>
+                <ol type="a">
+                    <li>Zeige mit dem Pumping-Lemma, dass L nicht regulär ist.</li>
+                    <li>Gib eine Grammatik für L an und nenne den Automatentyp, der L erkennt.</li>
+                    <li>Ein Mitschüler möchte ein Programm schreiben, das für jedes Python-Programm entscheidet, ob es irgendwann anhält. Nimm Stellung und verwende die Begriffe „entscheidbar“ und „rekursiv aufzählbar“.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 6.15.9: Anwendung in Webentwicklung und Compilerbau <span class="niveau">AFB II/III</span></summary>
+                <p>Ein Online-Shop soll (1) im Bestellformular prüfen, ob eine deutsche Postleitzahl eingegeben wurde, und (2) auf dem Server prüfen, ob eine empfangene JSON-Nachricht korrekt geschachtelte Klammern <code>{ }</code> und <code>[ ]</code> hat.</p>
+                <ol type="a">
+                    <li>Gib für (1) einen regulären Ausdruck an und begründe, welches Automatenmodell genügt.</li>
+                    <li>Begründe, warum für (2) ein regulärer Ausdruck grundsätzlich nicht ausreicht, und nenne das passende Modell.</li>
+                    <li>Ordne beide Prüfungen den Phasen eines Compilers zu.</li>
+                </ol>
+            </details>
+        </div>

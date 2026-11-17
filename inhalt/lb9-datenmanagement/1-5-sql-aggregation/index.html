@@ -1,0 +1,382 @@
+<p>Aggregatfunktionen in SQL werden verwendet, um Berechnungen auf einer Menge von Werten durchzuf&uuml;hren und ein einzelnes Ergebnis zur&uuml;ckzugeben.</p>
+
+<h2>H&auml;ufig verwendete Aggregatfunktionen</h2>
+
+<table>
+<tbody>
+<tr>
+<th>Funktion</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+<tr>
+<td>COUNT()</td>
+<td>Z&auml;hlt die Anzahl der Zeilen</td>
+<td><code>SELECT COUNT(spalte) FROM tabelle;</code></td>
+</tr>
+<tr>
+<td>SUM()</td>
+<td>Berechnet die Summe der Werte</td>
+<td><code>SELECT SUM(spalte) FROM tabelle;</code></td>
+</tr>
+<tr>
+<td>AVG()</td>
+<td>Berechnet den Durchschnitt der Werte</td>
+<td><code>SELECT AVG(spalte) FROM tabelle;</code></td>
+</tr>
+<tr>
+<td>MAX()</td>
+<td>Findet den h&ouml;chsten Wert</td>
+<td><code>SELECT MAX(spalte) FROM tabelle;</code></td>
+</tr>
+<tr>
+<td>MIN()</td>
+<td>Findet den niedrigsten Wert</td>
+<td><code>SELECT MIN(spalte) FROM tabelle;</code></td>
+</tr>
+</tbody>
+</table>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: Aggregatfunktionen und NULL</summary>
+<p>Aggregatfunktionen ignorieren NULL-Werte. Einzige Ausnahme ist <code>COUNT(*)</code>: Es z&auml;hlt alle Zeilen, w&auml;hrend <code>COUNT(spalte)</code> nur die Zeilen z&auml;hlt, in denen <code>spalte</code> nicht NULL ist.</p>
+</details>
+</div>
+
+<h2>Durchgerechnete Beispiele</h2>
+
+<p>Alle Beispiele auf dieser Seite arbeiten mit der Tabelle
+   <a href="../material/verkaeufe.sql">Verk&auml;ufe</a>, die auch in den Aufgaben verwendet wird.
+   Sie enth&auml;lt <strong>20 Zeilen</strong>; hier die ersten acht:</p>
+
+<table>
+<thead><tr><th>VerkaufID</th><th>Produkt</th><th>Menge</th><th>Preis</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Laptop</td><td>2</td><td>999.99</td></tr>
+<tr><td>2</td><td>Smartphone</td><td>5</td><td>599.99</td></tr>
+<tr><td>3</td><td>Tablet</td><td>3</td><td>399.99</td></tr>
+<tr><td>4</td><td>Kopfh&ouml;rer</td><td>10</td><td>79.99</td></tr>
+<tr><td>5</td><td>Maus</td><td>15</td><td>29.99</td></tr>
+<tr><td>6</td><td>Monitor</td><td>4</td><td>249.99</td></tr>
+<tr><td>7</td><td>Tastatur</td><td>8</td><td>59.99</td></tr>
+<tr><td>8</td><td>Drucker</td><td>2</td><td>179.99</td></tr>
+</tbody>
+</table>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> Die Gesch&auml;ftsleitung fragt: &bdquo;Wie viele Verkaufsvorg&auml;nge
+   stehen in der Tabelle <code>Verk&auml;ufe</code>?&ldquo;</p>
+<h3>Beispiel 1: Zeilen z&auml;hlen mit COUNT</h3>
+<pre><code>SELECT COUNT(*) AS AnzahlVerkaeufe
+FROM Verk&auml;ufe;</code></pre>
+<p><strong>Ergebnis:</strong></p>
+<table><thead><tr><th>AnzahlVerkaeufe</th></tr></thead><tbody><tr><td>20</td></tr></tbody></table>
+<p>Aus 20 Zeilen wird eine einzige Zahl. Beachte: Gez&auml;hlt werden <em>Verkaufsvorg&auml;nge</em>, nicht
+   verkaufte St&uuml;ck &ndash; daf&uuml;r braucht man SUM.</p>
+<ol>
+<li><strong>FROM Verk&auml;ufe:</strong> Alle 20 Zeilen liegen bereit. <em>Warum?</em> Die Aggregatfunktion braucht die Zeilen, die sie zusammenfassen soll.</li>
+<li><strong>Kein WHERE, kein GROUP BY:</strong> Alle Zeilen bilden eine einzige Gruppe. <em>Warum wichtig?</em> Deshalb entsteht genau eine Ergebniszeile.</li>
+<li><strong>COUNT(*):</strong> z&auml;hlt jede Zeile der Gruppe einmal, unabh&auml;ngig vom Inhalt der Spalten. <em>Warum der Stern?</em> Es geht um die Anzahl der Datens&auml;tze, nicht um die Werte einer bestimmten Spalte.</li>
+<li><strong>AS AnzahlVerkaeufe:</strong> gibt der berechneten Spalte einen lesbaren Namen. <em>Warum?</em> Sonst hie&szlig;e die Spalte <code>COUNT(*)</code>.</li>
+</ol>
+<p><strong>Kontrolle:</strong> Die Tabelle wird mit <code>AUTOINCREMENT</code> von 1 an durchnummeriert, die gr&ouml;&szlig;te VerkaufID ist 20
+   &ndash; das passt zu 20 Zeilen. Zum Vergleich: <code>SUM(Menge)</code> ergibt 132 (Beispiel 2), weil dort die
+   St&uuml;ckzahlen addiert werden.</p>
+            </details>
+        </div>
+
+<h3>Beispiel 2: Werte einer Spalte summieren mit SUM</h3>
+
+<pre><code>SELECT SUM(Menge) AS VerkaufteStueck
+FROM Verk&auml;ufe;</code></pre>
+
+<p><strong>Ergebnis:</strong></p>
+
+<table><thead><tr><th>VerkaufteStueck</th></tr></thead><tbody><tr><td>132</td></tr></tbody></table>
+
+<h3>Beispiel 3: Erst rechnen, dann summieren</h3>
+
+<p>Der Umsatz einer Zeile ist <code>Menge * Preis</code>. Die Rechnung wird f&uuml;r jede Zeile einzeln
+   ausgef&uuml;hrt, und erst danach summiert SUM alle Ergebnisse auf.</p>
+
+<pre><code>SELECT ROUND(SUM(Menge * Preis), 2) AS Gesamtumsatz
+FROM Verk&auml;ufe;</code></pre>
+
+<p><strong>Ergebnis:</strong></p>
+
+<table><thead><tr><th>Gesamtumsatz</th></tr></thead><tbody><tr><td>26858.68</td></tr></tbody></table>
+
+<p><code>ROUND(&hellip;, 2)</code> rundet auf zwei Nachkommastellen &ndash; ohne das erscheinen bei
+   Kommazahlen lange Ziffernfolgen wie 26858.679999999997.</p>
+
+<h3>Beispiel 4: Durchschnitt, kleinster und gr&ouml;&szlig;ter Wert</h3>
+
+<pre><code>SELECT ROUND(AVG(Preis), 2) AS Durchschnittspreis,
+       MIN(Preis) AS Guenstigster,
+       MAX(Preis) AS Teuerster
+FROM Verk&auml;ufe;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; mehrere Aggregatfunktionen d&uuml;rfen in einer Abfrage stehen, das
+   Ergebnis bleibt eine Zeile:</p>
+
+<table>
+<thead><tr><th>Durchschnittspreis</th><th>Guenstigster</th><th>Teuerster</th></tr></thead>
+<tbody><tr><td>325.74</td><td>29.99</td><td>1099.99</td></tr></tbody>
+</table>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: Kennzahlen im Onlinehandel</summary>
+<p>Wenn ein Onlineshop am Monatsende wissen will, wie viel Umsatz jede Produktgruppe gebracht hat, steckt dahinter fast immer eine Abfrage mit <code>SUM</code> und <code>GROUP BY</code>. <strong>Data Analysts</strong> im Onlinehandel &ndash; in Sachsen etwa bei Versandh&auml;ndlern und E-Commerce-Dienstleistern in Leipzig und Dresden &ndash; bauen daraus Dashboards f&uuml;r das Management: Umsatz pro Tag, Bestseller, durchschnittlicher Warenkorb. Weil Aggregatfunktionen viele Einzeldatens&auml;tze zu einer Zahl zusammenfassen, sind sie auch f&uuml;r den <strong>Datenschutz</strong> n&uuml;tzlich: Eine Summe pro Region verr&auml;t nichts &uuml;ber einzelne Kundinnen und Kunden.</p>
+</details>
+</div>
+
+<h2>Verwendung mit GROUP BY</h2>
+
+<p>GROUP BY wird oft mit Aggregatfunktionen verwendet, um Ergebnisse f&uuml;r Gruppen von Daten zu berechnen.</p>
+
+<h3>Beispiele f&uuml;r GROUP BY</h3>
+
+<h4>Beispiel 5: Einfache Gruppierung</h4>
+
+<p>In den 20 Zeilen kommt jedes Produkt zweimal vor &ndash; einmal im Januar und einmal sp&auml;ter zu einem
+   anderen Preis. Beim Produkt <em>Maus</em> sind das die Zeilen mit den Mengen 15 und 20.</p>
+
+<pre><code>SELECT Produkt, SUM(Menge) AS GesamtMenge
+FROM Verk&auml;ufe
+GROUP BY Produkt
+ORDER BY Produkt;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; aus 20 Zeilen werden 10, denn es gibt 10 verschiedene Produkte.
+   Bei <em>Maus</em> steht 35, also 15 + 20:</p>
+
+<table>
+<thead><tr><th>Produkt</th><th>GesamtMenge</th></tr></thead>
+<tbody>
+<tr><td>Drucker</td><td>5</td></tr>
+<tr><td>Festplatte</td><td>14</td></tr>
+<tr><td>Grafikkarte</td><td>5</td></tr>
+<tr><td>Kopfh&ouml;rer</td><td>22</td></tr>
+<tr><td>Laptop</td><td>5</td></tr>
+<tr><td>Maus</td><td>35</td></tr>
+<tr><td>Monitor</td><td>9</td></tr>
+<tr><td>Smartphone</td><td>12</td></tr>
+<tr><td>Tablet</td><td>7</td></tr>
+<tr><td>Tastatur</td><td>18</td></tr>
+</tbody>
+</table>
+
+<h4>Beispiel 6: Mehrere Aggregate je Gruppe</h4>
+
+<pre><code>SELECT Produkt, COUNT(*) AS Anzahl, ROUND(SUM(Menge * Preis), 2) AS Umsatz
+FROM Verk&auml;ufe
+GROUP BY Produkt
+ORDER BY Umsatz DESC;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; <code>COUNT(*)</code> z&auml;hlt jetzt die Zeilen <em>je Stapel</em>,
+   nicht mehr die der ganzen Tabelle:</p>
+
+<table>
+<thead><tr><th>Produkt</th><th>Anzahl</th><th>Umsatz</th></tr></thead>
+<tbody>
+<tr><td>Smartphone</td><td>2</td><td>7549.88</td></tr>
+<tr><td>Laptop</td><td>2</td><td>5299.95</td></tr>
+<tr><td>Tablet</td><td>2</td><td>2999.93</td></tr>
+<tr><td>Monitor</td><td>2</td><td>2399.91</td></tr>
+<tr><td>Grafikkarte</td><td>2</td><td>2099.95</td></tr>
+<tr><td>Kopfh&ouml;rer</td><td>2</td><td>1879.78</td></tr>
+<tr><td>Festplatte</td><td>2</td><td>1339.86</td></tr>
+<tr><td>Tastatur</td><td>2</td><td>1179.82</td></tr>
+<tr><td>Maus</td><td>2</td><td>1149.65</td></tr>
+<tr><td>Drucker</td><td>2</td><td>959.95</td></tr>
+</tbody>
+</table>
+
+<p>Zur Kontrolle: Die zehn Umsatzwerte ergeben zusammen wieder 26858.68 &ndash; den Gesamtumsatz aus
+   Beispiel 3.</p>
+
+<h2>WHERE oder HAVING? Der wichtigste Unterschied</h2>
+
+<h4>Beispiel 7: WHERE &ndash; Zeilen aussortieren, dann gruppieren</h4>
+
+<pre><code>SELECT Produkt, SUM(Menge) AS GesamtMenge
+FROM Verk&auml;ufe
+WHERE Preis &lt; 100
+GROUP BY Produkt
+ORDER BY Produkt;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; zuerst fliegen alle Zeilen mit Preis ab 100 raus, erst die Reste werden
+   gestapelt. &Uuml;brig bleiben nur die vier g&uuml;nstigen Produkte:</p>
+
+<table>
+<thead><tr><th>Produkt</th><th>GesamtMenge</th></tr></thead>
+<tbody>
+<tr><td>Festplatte</td><td>14</td></tr>
+<tr><td>Kopfh&ouml;rer</td><td>22</td></tr>
+<tr><td>Maus</td><td>35</td></tr>
+<tr><td>Tastatur</td><td>18</td></tr>
+</tbody>
+</table>
+
+<h4>Beispiel 8: HAVING &ndash; gruppieren, dann Gruppen aussortieren</h4>
+
+<pre><code>SELECT Produkt, SUM(Menge) AS GesamtMenge
+FROM Verk&auml;ufe
+GROUP BY Produkt
+HAVING SUM(Menge) &gt; 20
+ORDER BY Produkt;</code></pre>
+
+<p><strong>Ergebnis</strong> &ndash; alle 20 Zeilen werden gestapelt, danach bleiben nur die Stapel mit mehr
+   als 20 verkauften St&uuml;ck &uuml;brig:</p>
+
+<table>
+<thead><tr><th>Produkt</th><th>GesamtMenge</th></tr></thead>
+<tbody>
+<tr><td>Kopfh&ouml;rer</td><td>22</td></tr>
+<tr><td>Maus</td><td>35</td></tr>
+</tbody>
+</table>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: Der h&auml;ufigste Fehler &ndash; Aggregat im WHERE</summary>
+<p>Diese Abfrage sieht plausibel aus, funktioniert aber nicht:</p>
+<pre><code>SELECT Produkt, SUM(Menge)
+FROM Verk&auml;ufe
+WHERE SUM(Menge) &gt; 20
+GROUP BY Produkt;</code></pre>
+<p>SQLite antwortet mit:</p>
+<pre><code>misuse of aggregate: SUM()</code></pre>
+<p>Der Grund: <code>WHERE</code> wird f&uuml;r <em>jede einzelne Zeile</em> gepr&uuml;ft, bevor es
+   &uuml;berhaupt Gruppen gibt. Zu diesem Zeitpunkt kann <code>SUM(Menge)</code> gar nicht berechnet werden.
+   Die Bedingung muss deshalb nach hinten in ein <code>HAVING</code> &ndash; siehe Beispiel 8.</p>
+<p>Umgekehrt gilt: Eine Bedingung <em>ohne</em> Aggregatfunktion geh&ouml;rt ins <code>WHERE</code>. Sie
+   dort zu pr&uuml;fen ist schneller, weil dann von vornherein weniger Zeilen gruppiert werden m&uuml;ssen.</p>
+</details>
+</div>
+
+<p>Beispiel 1 zeigt eine Aggregatfunktion in Reinform. Das folgende Beispiel verbindet alle Bausteine
+   der Seite in einer Abfrage.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 9 <span class="beispiel-kopf">komplex</span></summary>
+<p><strong>Ausgangssituation:</strong> Die Geschäftsleitung fragt: „Welche Produkte wurden im
+   <em>Januar</em> mehrfach verkauft und haben dabei zusammen mehr als 1500&nbsp;€ Umsatz gebracht? Zeigt
+   Anzahl der Verkäufe, Stückzahl und Umsatz, den größten Umsatz zuerst.“</p>
+<pre><code>SELECT Produkt,
+       COUNT(*) AS Verkaeufe,
+       SUM(Menge) AS Stueck,
+       ROUND(SUM(Menge * Preis), 2) AS Umsatz
+FROM Verkäufe
+WHERE Datum LIKE '2023-01%'
+GROUP BY Produkt
+HAVING COUNT(*) &gt;= 2 AND SUM(Menge * Preis) &gt; 1500
+ORDER BY Umsatz DESC;</code></pre>
+<ol>
+<li><strong>FROM:</strong> Alle 20 Zeilen der Tabelle liegen bereit.</li>
+<li><strong>WHERE:</strong> Nur Zeilen mit einem Datum im Januar 2023 bleiben. Die Zeilen 18 bis 20 (Drucker,
+    Festplatte, Grafikkarte im Februar) fallen heraus, 17 Zeilen bleiben. <em>Warum WHERE?</em> Das Datum ist
+    eine Eigenschaft der einzelnen Zeile, nicht der Gruppe.</li>
+<li><strong>GROUP BY:</strong> Die 17 Zeilen werden nach Produkt auf 10 Stapel verteilt. Sieben Produkte haben
+    zwei Januar-Verkäufe, Drucker, Festplatte und Grafikkarte nur noch einen.
+    <table>
+    <thead><tr><th>Produkt</th><th>COUNT(*)</th><th>SUM(Menge)</th><th>SUM(Menge * Preis)</th></tr></thead>
+    <tbody>
+    <tr><td>Laptop</td><td>2</td><td>5</td><td>1999.98 + 3299.97 = 5299.95</td></tr>
+    <tr><td>Smartphone</td><td>2</td><td>12</td><td>2999.95 + 4549.93 = 7549.88</td></tr>
+    <tr><td>Tablet</td><td>2</td><td>7</td><td>1199.97 + 1799.96 = 2999.93</td></tr>
+    <tr><td>Kopfhörer</td><td>2</td><td>22</td><td>799.90 + 1079.88 = 1879.78</td></tr>
+    <tr><td>Maus</td><td>2</td><td>35</td><td>449.85 + 699.80 = 1149.65</td></tr>
+    <tr><td>Monitor</td><td>2</td><td>9</td><td>999.96 + 1399.95 = 2399.91</td></tr>
+    <tr><td>Tastatur</td><td>2</td><td>18</td><td>479.92 + 699.90 = 1179.82</td></tr>
+    <tr><td>Drucker</td><td>1</td><td>2</td><td>359.98</td></tr>
+    <tr><td>Festplatte</td><td>1</td><td>6</td><td>539.94</td></tr>
+    <tr><td>Grafikkarte</td><td>1</td><td>3</td><td>1199.97</td></tr>
+    </tbody>
+    </table></li>
+<li><strong>HAVING:</strong> Jetzt werden ganze Stapel geprüft. <code>COUNT(*) &gt;= 2</code> streicht Drucker,
+    Festplatte und Grafikkarte; <code>SUM(Menge * Preis) &gt; 1500</code> streicht Maus und Tastatur.
+    <em>Warum HAVING?</em> Beide Bedingungen enthalten Aggregatfunktionen, die es erst nach dem Gruppieren gibt.</li>
+<li><strong>SELECT:</strong> Für die 5 übrigen Stapel werden die vier Spalten berechnet und benannt.</li>
+<li><strong>ORDER BY:</strong> Absteigend nach dem Alias <code>Umsatz</code>.</li>
+</ol>
+<p><strong>Ergebnis (5 Zeilen):</strong></p>
+<table>
+<thead><tr><th>Produkt</th><th>Verkaeufe</th><th>Stueck</th><th>Umsatz</th></tr></thead>
+<tbody>
+<tr><td>Smartphone</td><td>2</td><td>12</td><td>7549.88</td></tr>
+<tr><td>Laptop</td><td>2</td><td>5</td><td>5299.95</td></tr>
+<tr><td>Tablet</td><td>2</td><td>7</td><td>2999.93</td></tr>
+<tr><td>Monitor</td><td>2</td><td>9</td><td>2399.91</td></tr>
+<tr><td>Kopfh&ouml;rer</td><td>2</td><td>22</td><td>1879.78</td></tr>
+</tbody>
+</table>
+<p><strong>Falle und Probe:</strong> Ohne die WHERE-Zeile hätte jedes Produkt zwei Verkäufe, und die
+   Grafikkarte (insgesamt 2099.95&nbsp;€) stünde fälschlich im Ergebnis. Die Datumsbedingung muss also
+   <em>vor</em> dem Gruppieren greifen. Probe: Die Umsätze stimmen mit Beispiel 6 überein, weil diese fünf
+   Produkte beide Verkäufe im Januar hatten.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Das Grundprinzip:</strong> Eine Aggregatfunktion nimmt <em>viele</em> Zeilen und macht daraus
+   <em>eine</em> Zahl. Ohne <code>GROUP BY</code> ist das Ergebnis deshalb immer genau eine Zeile &ndash;
+   egal, wie viele Zeilen in der Tabelle stehen.</p>
+</div>
+
+<div class="merke">
+<p>Die grundlegende Syntax einer GROUP BY-Anweisung lautet:<br>SELECT spalte1, spalte2, ..., aggregatfunktion(spalte)<br>FROM tabelle <br>WHERE bedingung <br>GROUP BY spalte1, spalte2, ...<br>[HAVING bedingung] [ORDER BY spalte]</p>
+</div>
+
+<div class="merke">
+<p><strong>Was GROUP BY tut, in drei Schritten:</strong></p>
+<ol>
+<li>Alle Zeilen werden auf Stapel verteilt &ndash; ein Stapel je Wert der Gruppierungsspalte.</li>
+<li>Die Aggregatfunktion wird auf <em>jeden Stapel einzeln</em> angewendet.</li>
+<li>Jeder Stapel liefert genau <em>eine</em> Ergebniszeile.</li>
+</ol>
+<p>Daraus folgt die wichtigste Regel: Im SELECT d&uuml;rfen nur die Gruppierungsspalten und
+   Aggregatfunktionen stehen. Eine Spalte wie <code>Datum</code> h&auml;tte auf einem Stapel mit f&uuml;nf
+   verschiedenen Daten ja keinen eindeutigen Wert.</p>
+</div>
+
+<div class="merke">
+<p><code>WHERE</code> filtert <strong>Zeilen, bevor</strong> gruppiert wird.<br>
+   <code>HAVING</code> filtert <strong>Gruppen, nachdem</strong> gruppiert wurde.</p>
+<p>Merkhilfe: Steht in der Bedingung eine Aggregatfunktion wie <code>SUM(&hellip;)</code> oder
+   <code>COUNT(&hellip;)</code>, muss es <code>HAVING</code> sein &ndash; denn zum Zeitpunkt von
+   <code>WHERE</code> existieren die Gruppen noch gar nicht.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.5.1: <span class="niveau">AFB I</span></summary>
+<p>Gegeben ist eine <a href="../material/verkaeufe.sql">Tabelle</a> „Verk&auml;ufe“ mit den Spalten „VerkaufID“, „Produkt“, „Menge“, „Preis“ und „Datum“.</p>
+<ol>
+<li>Wie viele Verk&auml;ufe wurden insgesamt get&auml;tigt?</li>
+<li>Was ist der Gesamtumsatz aller Verk&auml;ufe?</li>
+<li>Was ist der durchschnittliche Verkaufspreis?</li>
+<li>Was ist die h&ouml;chste verkaufte Menge in einem einzelnen Verkauf?</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.5.2: <span class="niveau">AFB II</span></summary>
+<p>Gegeben ist weiterhin die <a href="../material/verkaeufe.sql">Tabelle</a> „Verk&auml;ufe“ mit den Spalten „VerkaufID“, „Produkt“, „Menge“, „Preis“ und „Datum“.</p>
+<ol>
+<li>Wie viele Verk&auml;ufe des Produkts &bdquo;Maus&ldquo; wurden get&auml;tigt?</li>
+<li>Was ist der durchschnittliche Verkaufspreis aller Verk&auml;ufe mit einer Menge von mindestens 5 St&uuml;ck?</li>
+<li>Was ist der niedrigste Preis, der f&uuml;r das Produkt &bdquo;Kopfh&ouml;rer&ldquo; verlangt wurde?</li>
+</ol>
+</details>
+</div>

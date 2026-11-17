@@ -1,0 +1,199 @@
+<p>
+            Die Synthese einer Schaltung ist das Gegenstück zur Analyse einer Schaltung. Das heißt, man hat eine gegebene Wahrheitstabelle und/oder boolesche Funktion und soll daraus eine logische Schaltung erstellen.
+        </p>
+
+<h2>Schaltnetzsynthese aus einer booleschen Funktion</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Von der Formel zur Schaltung</summary>
+        <p>
+            Anhand des folgenden Beispiels soll die Schaltnetzsynthese aus einer booleschen Funktion verdeutlicht werden.<br>
+            Gegebene Funktion: f(A,B,C) = (¬A ∨ B) ∧ ¬C
+        </p>
+        <table class="gitter">
+            <tr><th>A</th><th>B</th><th>C</th><th>f</th></tr>
+            <tr><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+            <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+        </table>
+        <br>
+        <table class="gitter">
+            <tr>
+                <th>Syntheseschritt über Formel</th><th>logische Schaltung</th>
+            </tr>
+            <tr>
+                <td>Was bindet am stärksten?<br>
+                    ¬A<br>
+                    Also zuerst Schalter A in ein NICHT-Gatter.</td>
+                <td>
+                    <figure>
+                        <img src="../img/synthese_1.png" width="300" alt="Schalter A an einem NICHT-Gatter">
+                    </figure>
+                </td>
+            </tr>
+            <tr>
+                <td>Was bindet danach am stärksten?<br>
+                    ¬C<br>
+                    Also Schalter C in ein NICHT-Gatter.</td>
+                <td>
+                    <figure>
+                        <img src="../img/synthese_2.png" width="300" alt="Zusätzlich Schalter C an einem NICHT-Gatter">
+                    </figure>
+                </td>
+            </tr>
+            <tr>
+                <td>Was bindet danach am stärksten?<br>
+                    ¬A ∨ B<br>
+                    Also ein ODER-Gatter, das als Eingänge das ¬A und den Schalter B hat.</td>
+                <td>
+                    <figure>
+                        <img src="../img/synthese_3.png" width="300" alt="ODER-Gatter mit den Eingängen NICHT A und B">
+                    </figure>
+                </td>
+            </tr>
+            <tr>
+                <td>Was bindet danach am stärksten?<br>
+                    (¬A ∨ B) ∧ ¬C<br>
+                    Also ein UND-Gatter, das als Eingänge den Ausgang des ODER-Gatters und das ¬C hat.</td>
+                <td>
+                    <figure>
+                        <img src="../img/synthese_4.png" width="300" alt="UND-Gatter mit dem ODER-Ausgang und NICHT C">
+                    </figure>
+                </td>
+            </tr>
+            <tr>
+                <td>Als Letztes eine LED zum Überprüfen der Eingaben von A, B und C.<br>
+                    Das Überprüfen funktioniert am besten mit einer Wahrheitstabelle.</td>
+                <td>
+                    <figure>
+                        <img src="../img/synthese_5.png" width="300" alt="Fertige Schaltung mit LED am Ausgang">
+                    </figure>
+                </td>
+            </tr>
+        </table>
+        <p><strong>Lösungsschritte im Überblick:</strong></p>
+        <ol>
+            <li><strong>Was:</strong> Die Wahrheitstabelle mit 2<sup>3</sup> = 8 Zeilen aus der Formel berechnen. – <em>Warum:</em> Sie ist der Maßstab, an dem die fertige Schaltung später getestet wird.</li>
+            <li><strong>Was:</strong> Die Formel nach Bindungsstärke zerlegen (¬ vor ∧ vor ∨, Klammern zuerst): ¬A, ¬C, dann (¬A ∨ B), zuletzt (…) ∧ ¬C. – <em>Warum:</em> Diese Reihenfolge ergibt die Reihenfolge der Gatter vom Eingang zum Ausgang. Der zuletzt ausgewertete Operator ist das Ausgangsgatter.</li>
+            <li><strong>Was:</strong> Für jede Teilformel ein Gatter setzen und verdrahten (siehe Tabelle oben). – <em>Warum:</em> Jeder Operator entspricht genau einem Gatter. Die Teilformeln sind die Leitungen zwischen den Gattern.</li>
+            <li><strong>Was:</strong> Eine LED an den Ausgang hängen und in LogicSim alle 8 Belegungen mit der Wahrheitstabelle vergleichen. – <em>Warum:</em> Eine Schaltung gilt erst als richtig, wenn sie in jeder Zeile den erwarteten Wert liefert.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> 4 Gatter (2 × NICHT, 1 × ODER, 1 × UND).</p>
+        <p><strong>Probe:</strong> Für A = 1, B = 0, C = 0 gilt ¬A = 0, also ¬A ∨ B = 0 und damit f = 0 – wie in Zeile 5 der Wahrheitstabelle. Für A = 1, B = 1, C = 0 gilt ¬A ∨ B = 1 und ¬C = 1, also f = 1 – wie in Zeile 7. So prüfst du in LogicSim jede Zeile der Tabelle.</p>
+            </details>
+        </div>
+
+<h2>Schaltnetzsynthese aus einer Wahrheitstabelle</h2>
+
+<p>In der Realität ist oft eine Problemstellung der Ausgangspunkt für eine Schaltnetzsynthese. Auf Basis des Problems erstellt man eine Wahrheitstabelle und kann aus dieser die boolesche Funktion ableiten.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Alarmanlage</summary>
+        <p>Stellen wir uns vor, wir möchten eine einfache Alarmanlage für unser Zuhause entwerfen. Diese Anlage soll einen Alarm auslösen, wenn nachts die Tür oder ein Fenster geöffnet ist (oder beide). Hierfür haben wir drei Eingangsvariablen:</p>
+        <ul>
+            <li><code>A</code>: Türzustand (0 = Tür geschlossen, 1 = Tür geöffnet)</li>
+            <li><code>B</code>: Fensterzustand (0 = Fenster geschlossen, 1 = Fenster geöffnet)</li>
+            <li><code>C</code>: Tageszeit (0 = Tag, 1 = Nacht)</li>
+        </ul>
+        <p>Der Ausgang <code>f</code> (Alarm) soll auf 1 (Alarm wird ausgelöst) gesetzt werden, wenn bei Nacht die Tür, das Fenster oder beide geöffnet sind. Gemeint ist also das einschließende ODER, nicht „entweder … oder“.</p>
+        <p>Um eine logische Schaltung zu entwerfen, beginnen wir mit der Erstellung einer Wahrheitstabelle. Diese Tabelle zeigt die Beziehung zwischen den Eingangsvariablen und den gewünschten Ausgangswerten.</p>
+
+        <p><strong>1. Erstellen der Wahrheitstabelle</strong></p>
+        <p>Die Wahrheitstabelle listet alle möglichen Kombinationen der Eingangsvariablen auf und zeigt, welche Ausgangswerte (0 oder 1) diese Kombinationen ergeben.</p>
+        <table class="gitter">
+            <thead>
+                <tr><th>A</th><th>B</th><th>C</th><th>f</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+            </tbody>
+        </table>
+        <p><strong>2. Ableitung der Schaltungsfunktion</strong></p>
+        <p>Aus der Wahrheitstabelle werden die booleschen Ausdrücke abgeleitet. Hierbei betrachten wir die Zeilen, in denen der Ausgang den Wert 1 hat. Die Variablen in diesen Zeilen werden mit einer UND-Verknüpfung (AND) kombiniert (Minterm). Falls mehrere Zeilen den Ausgang 1 haben, werden diese Ausdrücke durch eine ODER-Verknüpfung (OR) verbunden, da jede dieser Kombinationen allein ausreicht, um den Ausgang 1 zu erzielen.</p>
+        <p><code>f = (¬A ∧ B ∧ C) ∨ (A ∧ ¬B ∧ C) ∨ (A ∧ B ∧ C)</code></p>
+        <p><strong>3. Vereinfachung der Funktion</strong></p>
+        <p>Die resultierende boolesche Funktion wird vereinfacht, um die Anzahl der benötigten logischen Gatter zu minimieren. Dies erleichtert die spätere Umsetzung und reduziert die Komplexität der Schaltung.</p>
+        <p><code>f = C ∧ ((¬A ∧ B) ∨ (A ∧ ¬B) ∨ (A ∧ B)) = C ∧ (A ∨ B) = (A ∧ C) ∨ (B ∧ C)</code></p>
+        <p>(C ausklammern; die drei Terme in der Klammer sind die KDNF von A ∨ B aus 2.8; zum Schluss Distributivgesetz.)</p>
+        <p><strong>4. Implementierung der Schaltung</strong></p>
+        <p>Die vereinfachte logische Gleichung wird schließlich in eine tatsächliche Schaltung umgesetzt, die mit logischen Gattern (AND, OR, NOT usw.) realisiert wird. Hierbei kann die Funktionalität noch einmal getestet werden. Die abgebildete Schaltung setzt f = (A ∧ C) ∨ (B ∧ C) um; mit f = (A ∨ B) ∧ C käme man sogar mit zwei Gattern aus.</p>
+        <figure>
+            <img src="../img/SN-synthese.png" width="500" alt="Schaltung mit zwei UND-Gattern und einem ODER-Gatter für die Alarmanlage">
+        </figure>
+        <p><strong>Lösungsschritte im Überblick:</strong></p>
+        <ol>
+            <li><strong>Was:</strong> Eingänge und Ausgang mit Bedeutung von 0 und 1 festlegen (A Tür, B Fenster, C Nacht, f Alarm). – <em>Warum:</em> Ohne eindeutige Kodierung lässt sich die Tabelle nicht aufstellen und die Schaltung nicht prüfen.</li>
+            <li><strong>Was:</strong> Für alle 8 Belegungen entscheiden, ob Alarm ausgelöst wird. – <em>Warum:</em> Hier wird der Text in Logik übersetzt. Dabei muss man „oder“ als einschließendes ODER erkennen.</li>
+            <li><strong>Was:</strong> Für jede 1-Zeile einen Minterm bilden und die Minterme mit ∨ verbinden (KDNF). – <em>Warum:</em> Jeder Minterm ist genau in seiner Zeile wahr. Die KDNF trifft also genau die 1-Zeilen.</li>
+            <li><strong>Was:</strong> Das gemeinsame C ausklammern: f = C ∧ ((¬A ∧ B) ∨ (A ∧ ¬B) ∨ (A ∧ B)). Den Klammerinhalt als KDNF von A ∨ B erkennen. – <em>Warum:</em> Ausklammern verringert die Zahl der Gatter. Aus 3 Mintermen mit je 3 Variablen werden 2 Gatter.</li>
+            <li><strong>Was:</strong> Die einfachste Form f = (A ∨ B) ∧ C mit einem ODER- und einem UND-Gatter bauen und alle 8 Zeilen in LogicSim testen. – <em>Warum:</em> Weniger Gatter heißt weniger Bauteile und kürzere Laufzeit. Der Test sichert ab, dass die Vereinfachung den Wert nicht verändert hat.</li>
+        </ol>
+        <p><strong>Probe:</strong> f = (A ∨ B) ∧ C liefert bei Tag (C = 0) immer 0 und bei Nacht genau dann 1, wenn A oder B gleich 1 ist – das sind die drei 1-Zeilen 011, 101 und 111 der Wahrheitstabelle. Die Falle „entweder … oder“ ist vermieden: Bei A = B = C = 1 (Tür und Fenster nachts offen) gibt es Alarm.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Synthese in echten Werkzeugen</summary>
+                <p><strong>Alltag:</strong> Zugangskontrollen mit Mehr-Personen-Prinzip wie beim Tresor aus Aufgabe 3.3.2 gibt es in Banken, Rechenzentren und bei der Freigabe wichtiger Zahlungen („Vier-Augen-Prinzip“).</p>
+                <p><strong>Berufsleben:</strong></p>
+                <ul>
+                    <li><strong>Chipdesigner/in</strong>: EDA-Software (Electronic Design Automation) erledigt die Schaltungssynthese heute automatisch für Milliarden von Transistoren. Die Ingenieur/innen beschreiben nur noch die Funktion und prüfen das Ergebnis.</li>
+                    <li><strong>Planer/in für Sicherheitstechnik</strong>: entwirft Zugangskontrollsysteme und legt fest, welche Kombinationen von Karten, Schlüsseln und PINs eine Tür öffnen.</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Schaltungssynthese:</strong> Die Synthese einer Schaltung beschreibt das Erstellen der logischen Schaltung aus einer gegebenen Wahrheitstabelle oder einer booleschen Funktion.</p>
+            <ul>
+                <li><strong>Aus einer Funktion:</strong> Die Gatter werden in der Reihenfolge der Bindungsstärke gesetzt – zuerst ¬, dann ∧, dann ∨; Klammern zuerst. Man baut also „von innen nach außen“.</li>
+                <li><strong>Aus einer Problemstellung:</strong> Problem → Wahrheitstabelle → KDNF (Zeilen mit 1) → vereinfachen → Schaltung → Test mit der Wahrheitstabelle.</li>
+            </ul>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.3.1: Schaltungen aus Funktionen <span class="niveau">AFB I</span></summary>
+                <p>
+                    Ergänze für die gegebene boolesche Funktion die Wahrheitstabelle.<br>
+                    Erstelle eine logische Schaltung aus der gegebenen Funktion (Schaltungssynthese).
+                </p>
+                <ol>
+                    <li>f(A,B) = ¬(A ∨ B)</li>
+                    <li>f(A,B,C) = (A ∧ B ∧ ¬C) ∨ (¬A ∧ B ∧ C)</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.3.2: Tresorraum <span class="niveau">AFB II</span></summary>
+                <p>
+                    Die Firma Digitech hat sich zur Sicherung ihres Tresorraumes folgendes System überlegt: Der Geschäftsleiter besitzt einen Schlüssel, der ihn direkt öffnet. Die beiden Sicherheitsbeauftragten können den Tresorraum nur öffnen, wenn beide gleichzeitig aufschließen.
+                    Erstelle in LogicSim ein Schaltnetz, das die drei Personen als Eingangssignale besitzt. Ausgang soll eine LED sein, die leuchtet, wenn der Tresorraum geöffnet wird.
+                </p>
+                <ol>
+                    <li>Erstelle für die gegebene Situation die Wahrheitstabelle und die boolesche Funktion.</li>
+                    <li>Setze die Schaltfunktion in dem Programm LogicSim praktisch um.</li>
+                </ol>
+            </details>
+        </div>

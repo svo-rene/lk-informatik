@@ -1,0 +1,143 @@
+<p>Wenn du dein Handy entsperrst, eine WhatsApp-Nachricht sendest oder eine HTTPS-Seite aufrufst, arbeitet fast immer AES im Hintergrund. Der <strong>Advanced Encryption Standard</strong> wurde 2000 nach einem öffentlichen Wettbewerb ausgewählt; er beruht auf dem Verfahren Rijndael der belgischen Kryptologen Joan Daemen und Vincent Rijmen.</p>
+
+<p>Da zum Ver- und Entschlüsseln derselbe Schlüssel verwendet wird, handelt es sich um ein symmetrisches Verfahren. AES ist eine <strong>Blockchiffre</strong>: Die Daten werden in Blöcke fester Größe zerlegt, und jeder Block wird in mehreren Runden aus Substitution, Permutation und Mischen verarbeitet, die jeweils vom geheimen Schlüssel abhängen.</p>
+
+<h2>Ablauf der AES-Verschlüsselung</h2>
+
+<ol>
+            <li><strong>Schlüsselerweiterung:</strong> Aus dem geheimen Schlüssel werden mit einer festgelegten Funktion so viele Rundenschlüssel berechnet, wie es Runden gibt (plus einen für die Anfangsrunde).</li>
+            <li><strong>Anfangsrunde:</strong>
+                <ul>
+                    <li><em>AddRoundKey:</em> Der 128-Bit-Eingabeblock wird bitweise per XOR (exklusives ODER) mit dem ersten Rundenschlüssel verknüpft.</li>
+                </ul>
+            </li>
+            <li><strong>Hauptrunden</strong> (9, 11 bzw. 13): Jede Runde besteht aus vier Operationen:
+                <ul>
+                    <li><em>SubBytes:</em> Jedes Byte wird über eine Tabelle (S-Box) nichtlinear ersetzt.</li>
+                    <li><em>ShiftRows:</em> Die Zeilen der 4×4-Matrix werden zyklisch um 0, 1, 2 bzw. 3 Stellen nach links verschoben.</li>
+                    <li><em>MixColumns:</em> Die vier Bytes jeder Spalte werden miteinander verrechnet und dadurch gemischt.</li>
+                    <li><em>AddRoundKey:</em> Der Block wird erneut per XOR mit dem Rundenschlüssel verknüpft.</li>
+                </ul>
+            </li>
+            <li><strong>Finale Runde:</strong> wie eine Hauptrunde, jedoch ohne MixColumns.</li>
+            <li><strong>Abschluss:</strong> Nach der letzten Runde ist der Zustand der verschlüsselte Block.</li>
+        </ol>
+
+<figure>
+            <img src="../img/aes_demo.png" width="600" alt="Schematischer Ablauf der AES-Verschlüsselung">
+            <figcaption><i>Abb. 1: Ablauf des Verschlüsselungsprozesses. Quelle: https://www.inf-schule.de/kryptologie/modernechiffriersysteme/beispiel_aes</i></figcaption>
+        </figure>
+
+<p>Der Empfänger, der denselben geheimen Schlüssel besitzt, entschlüsselt, indem er die Umkehroperationen in umgekehrter Reihenfolge ausführt.</p>
+
+<h2>Betriebsmodi: Wie verschlüsselt man mehr als 128 Bit?</h2>
+
+<p>AES selbst verschlüsselt nur einen einzigen 128-Bit-Block. Wie längere Nachrichten in Blöcke zerlegt und verknüpft werden, legt der <strong>Betriebsmodus</strong> fest.</p>
+
+<ul>
+            <li><strong>ECB</strong> (Electronic Code Book): Jeder Block wird unabhängig mit demselben Schlüssel verschlüsselt. Gleiche Klartextblöcke ergeben gleiche Geheimtextblöcke – Muster im Klartext bleiben sichtbar. Ein bekanntes Beispiel ist ein verschlüsseltes Bild, auf dem man den Umriss des Motivs weiterhin erkennt.</li>
+            <li><strong>CBC</strong> (Cipher Block Chaining): Jeder Klartextblock wird vor dem Verschlüsseln per XOR mit dem vorherigen Geheimtextblock verknüpft; der erste mit einem zufälligen Initialisierungsvektor (IV). Gleiche Blöcke ergeben so verschiedene Geheimtexte.</li>
+            <li><strong>GCM</strong> (Galois/Counter Mode): verschlüsselt und berechnet zusätzlich eine Prüfsumme, die jede Veränderung erkennt (Vertraulichkeit <em>und</em> Integrität). GCM ist heute der Standard, z.&nbsp;B. in TLS&nbsp;1.3.</li>
+        </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Mini-AES-8 verschlüsselt ein einziges Byte in einer Runde aus SubBytes, Permutation und AddRoundKey. Klartext 7E, Schlüssel A5, S-Box wie im <a href="../material/aes.pdf">Arbeitsblatt</a> und in <code>aes.py</code>:</p>
+            <table class="gitter">
+                <tr><th>Eingabe</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td></tr>
+                <tr><th>S-Box</th><td>E</td><td>4</td><td>D</td><td>1</td><td>2</td><td>F</td><td>B</td><td>8</td><td>3</td><td>A</td><td>6</td><td>C</td><td>5</td><td>9</td><td>0</td><td>7</td></tr>
+            </table>
+            <ol>
+                <li><strong>SubBytes:</strong> Jedes Nibble (4 Bit, eine Hex-Ziffer) wird über die S-Box ersetzt: 7 → 8, E → 0, also <strong>80</strong>. <em>Warum?</em> Die nichtlineare Ersetzung sorgt für Konfusion.</li>
+                <li><strong>Permutation:</strong> Die beiden Nibbles werden vertauscht: 80 → <strong>08</strong>. <em>Warum?</em> Das Umordnen ist eine Mini-Form von ShiftRows und sorgt für Diffusion.</li>
+                <li><strong>AddRoundKey:</strong> bitweises XOR mit dem Schlüssel: 0000&nbsp;1000 XOR 1010&nbsp;0101 = 1010&nbsp;1101 = <strong>AD</strong>. <em>Warum?</em> Erst hier fließt der geheime Schlüssel ein.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Der Geheimtext ist AD.<br>
+            <strong>Kontrolle:</strong> Entschlüsseln in umgekehrter Reihenfolge mit den Umkehroperationen: AD XOR A5 = 08, zurücktauschen → 80, inverse S-Box (8 steht unter 7, 0 unter E) → 7E.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation (ECB-Schwäche):</strong> Eine Datenbank speichert Noten AES-ECB-verschlüsselt, jeweils ein Block pro Note, alle mit demselben Schlüssel.</p>
+            <ol>
+                <li><strong>Eigenschaft von ECB nutzen:</strong> ECB verschlüsselt jeden Block unabhängig und deterministisch. Gleicher Klartextblock und gleicher Schlüssel ergeben immer denselben Geheimtextblock.</li>
+                <li><strong>Folgerung des Angreifers:</strong> Er sieht zwar keine Klartexte, erkennt aber, welche Schülerinnen und Schüler <em>dieselbe</em> Note haben, weil ihre Geheimtextblöcke identisch sind. Bei nur sechs möglichen Noten gibt es höchstens sechs verschiedene Blöcke.</li>
+                <li><strong>Known-Plaintext ausnutzen:</strong> Kennt er eine einzige Note (z.&nbsp;B. seine eigene), kennt er alle gleichen. Mit wenigen bekannten Noten lassen sich alle sechs Blöcke zuordnen – ohne den Schlüssel zu kennen.</li>
+                <li><strong>Abhilfe:</strong> Mit CBC oder GCM und zufälligem IV bzw. Nonce wird derselbe Klartext jedes Mal anders verschlüsselt; alle Geheimtexte sind verschieden.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> AES selbst ist nicht gebrochen, aber der Betriebsmodus ECB verrät Muster. <strong>Falle:</strong> Auch AES-256 statt AES-128 hilft hier nichts – der Fehler liegt im Modus, nicht in der Schlüssellänge.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: AES im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Klickst du im Browser auf das HTTPS-Schloss, siehst du bei TLS&nbsp;1.3 meist die Angabe „TLS_AES_128_GCM_SHA256“ oder „TLS_AES_256_GCM_SHA384“: Die Daten werden mit AES im GCM-Modus verschlüsselt, der Schlüssel wurde vorher per ECDHE vereinbart (8.10). Auch WLAN (WPA2/WPA3), Festplattenverschlüsselung und Signal-Anhänge nutzen AES. Viele Prozessoren haben dafür eigene Befehle, sodass AES Gigabytes pro Sekunde schafft.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> Softwareentwicklerinnen und -entwickler in der IT-Sicherheit binden AES nicht selbst programmiert ein, sondern über geprüfte Bibliotheken – und müssen dabei den richtigen Modus, zufällige IVs und die sichere Schlüsselablage wählen. In Sachsen arbeiten z.&nbsp;B. Chiphersteller im Raum Dresden („Silicon Saxony“) an Hardware, die AES direkt im Chip umsetzt, etwa für Bankkarten und Autos.
+                </p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Nähere Erklärung als Video</summary>
+                <p>Eine gute Zusammenfassung bietet das folgende Video.</p>
+                <iframe width="600" height="400" src="https://www.youtube.com/embed/C4ATDMIz5wc" title="YouTube Video Player" frameborder="0" allowfullscreen></iframe>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>AES in Zahlen:</strong> Die Blockgröße beträgt <strong>immer 128 Bit</strong> (16 Byte, angeordnet als 4×4-Byte-Matrix). Die Schlüssellänge ist wählbar und bestimmt die Rundenzahl:
+            </p>
+            <table class="gitter">
+                <tr><th>Variante</th><th>Schlüssellänge</th><th>Runden</th></tr>
+                <tr><td>AES-128</td><td>128 Bit</td><td>10</td></tr>
+                <tr><td>AES-192</td><td>192 Bit</td><td>12</td></tr>
+                <tr><td>AES-256</td><td>256 Bit</td><td>14</td></tr>
+            </table>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Konfusion und Diffusion</strong> (Claude Shannon): <strong>Konfusion</strong> macht den Zusammenhang zwischen Schlüssel und Geheimtext möglichst kompliziert (bei AES: SubBytes, AddRoundKey). <strong>Diffusion</strong> verteilt den Einfluss jedes Klartextbits auf möglichst viele Geheimtextbits (bei AES: ShiftRows, MixColumns). Nach wenigen Runden ändert ein einziges geändertes Klartextbit etwa die Hälfte aller Geheimtextbits.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>ECB nicht verwenden!</strong> Die Sicherheit hängt nicht nur vom Verfahren (AES), sondern auch vom Betriebsmodus ab. Für neue Anwendungen empfiehlt das BSI (TR-02102) z.&nbsp;B. AES im GCM-Modus mit einem Nonce, der pro Schlüssel nie wiederholt wird.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.7.1: Konfusion und Diffusion <span class="niveau">AFB I–II</span></summary>
+                <ul>
+                    <li>Öffne den folgenden <a href="https://formaestudio.com/rijndaelinspector/archivos/Rijndael_Animation_v4_eng-html5.html">Link</a> und bearbeite die Animation.</li>
+                    <li>Ein sicheres Verschlüsselungsverfahren benötigt Konfusion und Diffusion. Erkläre diese beiden Begriffe.</li>
+                    <li>In der Hauptrunde finden vier Operationen statt. Beschäftige dich mit einer Operation näher und entscheide, ob in diesem Schritt Diffusion oder Konfusion das maßgebliche Ziel ist.</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.7.2: Mini-AES <span class="niveau">AFB II</span></summary>
+                <ul>
+                    <li>Bearbeite die Aufgaben 1–4 des <a href="../material/aes.pdf">Arbeitsblattes</a>.</li>
+                    <li>Öffne die Python-Datei <a href="../material/aes.py" download><code>aes.py</code></a> und vervollständige dort die fehlenden Funktionen.</li>
+                    <li>Teste dein Programm.</li>
+                </ul>
+            </details>
+        </div>

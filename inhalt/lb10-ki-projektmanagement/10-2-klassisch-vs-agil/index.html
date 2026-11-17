@@ -1,0 +1,290 @@
+<p>Ein Haus baut man nicht in zweiwöchigen Experimenten – eine App dagegen schon. Je nachdem, wie gut sich ein Projekt vorab planen lässt, eignet sich ein klassisches oder ein agiles Vorgehen. Auf dieser Seite lernst du beide Ansätze und ihre wichtigsten Werkzeuge kennen.</p>
+
+<h2>1. Klassisches Projektmanagement</h2>
+
+<p>Das klassische Projektmanagement ist der traditionelle Ansatz, der bei gut planbaren Projekten verwendet wird. Es besteht aus mehreren Phasen, die nacheinander durchlaufen werden (daher auch „Wasserfallmodell“):</p>
+
+<ol>
+            <li><strong>Projektinitiierung:</strong> Ziel und Rahmenbedingungen werden festgelegt.</li>
+            <li><strong>Projektplanung:</strong> Ein detaillierter Plan wird erstellt, der den Ablauf, die Ressourcen und die Zeitvorgaben beschreibt.</li>
+            <li><strong>Projektdurchführung:</strong> Der Plan wird umgesetzt, und Fortschritte werden überwacht.</li>
+            <li><strong>Projektabschluss:</strong> Das Ergebnis wird überprüft, und das Projekt wird offiziell beendet.</li>
+        </ol>
+
+<p>Ein Beispiel: der Bau eines Bürogebäudes. Hier wird ein genauer Plan erstellt, der die Reihenfolge der Bauarbeiten (Fundament, Wände, Dach) und die benötigten Ressourcen beschreibt.</p>
+
+<h3>Projektstrukturplan</h3>
+
+<p>Ein Projektstrukturplan teilt ein großes Projekt in kleinere Teilaufgaben (Arbeitspakete) auf. Beispiel: Beim Bau eines Hauses könnten die Teilaufgaben „Fundament legen“, „Wände hochziehen“ und „Dach decken“ sein.</p>
+
+<h3>Ablaufplanung mit Gantt-Diagramm</h3>
+
+<p>Die zeitliche Abfolge der Teilaufgaben wird oft mit einem Gantt-Diagramm (nach Henry L. Gantt) visualisiert. Ein Gantt-Diagramm ist ein Balkendiagramm: In der ersten Spalte stehen die Teilaufgaben untereinander, in der ersten Zeile die Zeiteinheiten (z.&nbsp;B. Wochen oder Monate). Für jede Teilaufgabe wird ein waagerechter Balken über den Zeitraum gezeichnet, in dem sie bearbeitet wird – die Länge des Balkens zeigt also die Dauer der Aufgabe. So erkennst du auf einen Blick, welche Aufgaben sich zeitlich überschneiden (parallel laufen) und welche erst nacheinander erledigt werden können.</p>
+
+<p>Beispiel für den Hausbau aus dem Projektstrukturplan oben (ergänzt um ein Planungspaket, das parallel laufen kann):</p>
+
+<table class="gitter">
+            <tr>
+                <th>Teilaufgabe</th>
+                <th>Woche 1</th>
+                <th>Woche 2</th>
+                <th>Woche 3</th>
+                <th>Woche 4</th>
+                <th>Woche 5</th>
+                <th>Woche 6</th>
+            </tr>
+            <tr>
+                <td>Fundament legen</td>
+                <td>█</td>
+                <td>█</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Wände hochziehen</td>
+                <td></td>
+                <td></td>
+                <td>█</td>
+                <td>█</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Dach decken</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>█</td>
+                <td>█</td>
+            </tr>
+            <tr>
+                <td>Elektroinstallation planen</td>
+                <td></td>
+                <td>█</td>
+                <td>█</td>
+                <td>█</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+<p>Man erkennt hier, dass „Wände hochziehen“ erst beginnen kann, wenn das Fundament fertig ist (Woche 3), und dass „Dach decken“ erst auf fertigen Wänden startet (Woche 5). Diese Abhängigkeiten nennt man <em>Ende-Anfang-Beziehungen</em>. Die Planung der Elektroinstallation hängt nicht vom Bau ab und läuft deshalb parallel (Wochen 2–4).</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Software für Gantt-Diagramme</summary>
+                <p>Gantt-Diagramme werden häufig in Software wie Microsoft Project, OpenProject oder einer Tabellenkalkulation erstellt, um die Übersicht über komplexe Projekte zu behalten.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Team aus dem Informatikkurs (Mia, Jonas, Emir, Lena) soll die Web-App <strong>„Mensa-Vorbestellung“</strong> entwickeln: Schülerinnen und Schüler bestellen ihr Mittagessen vor, die Küche sieht die Portionszahl. Bevor programmiert wird, braucht das Team einen Projektstrukturplan und einen Zeitplan.</p>
+            <ol>
+                <li><strong>Was:</strong> das Projekt im Projektstrukturplan in Teilprojekte und Arbeitspakete zerlegen. – <em>warum:</em> Kleine, abgeschlossene Pakete lassen sich einzeln schätzen, verteilen und abhaken.
+                    <ul>
+                        <li><strong>1 Analyse:</strong> A – Anforderungen mit der Küche klären</li>
+                        <li><strong>2 Entwicklung:</strong> B – Datenbank entwerfen; C – Oberfläche entwerfen; D – Bestellfunktion programmieren</li>
+                        <li><strong>3 Organisation:</strong> E – Datenschutz-Freigabe der Schulleitung einholen</li>
+                        <li><strong>4 Einführung:</strong> F – Test mit einer Testklasse; G – Einführung in der Mensa</li>
+                    </ul>
+                </li>
+                <li><strong>Was:</strong> für jedes Paket die Dauer schätzen und die Vorgänger festlegen (Ende-Anfang-Beziehungen). – <em>warum:</em> Erst die Abhängigkeiten bestimmen, was parallel laufen kann und was warten muss.
+                    <table>
+                        <thead>
+                            <tr><th>Paket</th><th>Dauer</th><th>Vorgänger</th><th>Begründung der Abhängigkeit</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>A Anforderungen klären</td><td>2 Wochen</td><td>–</td><td>Startpaket</td></tr>
+                            <tr><td>B Datenbank entwerfen</td><td>2 Wochen</td><td>A</td><td>Welche Daten gespeichert werden, ergibt sich aus den Anforderungen.</td></tr>
+                            <tr><td>C Oberfläche entwerfen</td><td>3 Wochen</td><td>A</td><td>Die Bildschirme hängen von den gewünschten Funktionen ab.</td></tr>
+                            <tr><td>D Bestellfunktion programmieren</td><td>3 Wochen</td><td>B</td><td>Die Bestellungen werden in der Datenbank gespeichert.</td></tr>
+                            <tr><td>E Datenschutz-Freigabe</td><td>4 Wochen</td><td>A</td><td>Die Schulleitung braucht die Liste der gespeicherten Daten.</td></tr>
+                            <tr><td>F Test mit Testklasse</td><td>1 Woche</td><td>C, D</td><td>Getestet wird die fertige Oberfläche mit funktionierender Bestellung.</td></tr>
+                            <tr><td>G Einführung</td><td>1 Woche</td><td>E, F</td><td>Live geht die App erst mit Freigabe und bestandenem Test.</td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li><strong>Was:</strong> jeden Balken so früh wie möglich einzeichnen, also direkt nach dem Ende des <em>spätesten</em> Vorgängers. – <em>warum:</em> Ein Paket mit zwei Vorgängern (F, G) kann erst beginnen, wenn beide fertig sind.
+                    <table class="gitter">
+                        <thead>
+                            <tr><th>Paket</th><th>W1</th><th>W2</th><th>W3</th><th>W4</th><th>W5</th><th>W6</th><th>W7</th><th>W8</th><th>W9</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>A</td><td>█</td><td>█</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                            <tr><td>B</td><td></td><td></td><td>█</td><td>█</td><td></td><td></td><td></td><td></td><td></td></tr>
+                            <tr><td>C</td><td></td><td></td><td>█</td><td>█</td><td>█</td><td></td><td></td><td></td><td></td></tr>
+                            <tr><td>D</td><td></td><td></td><td></td><td></td><td>█</td><td>█</td><td>█</td><td></td><td></td></tr>
+                            <tr><td>E</td><td></td><td></td><td>█</td><td>█</td><td>█</td><td>█</td><td></td><td></td><td></td></tr>
+                            <tr><td>F</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>█</td><td></td></tr>
+                            <tr><td>G</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>█</td></tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Das Projekt dauert 9 Wochen. In den Wochen 3 und 4 laufen B, C und E parallel; F beginnt erst in Woche 8, weil D bis Ende Woche 7 dauert.</p>
+            <p><strong>Kontrolle:</strong> Kein Balken beginnt, bevor alle seine Vorgänger beendet sind (z.&nbsp;B. D in Woche 5 nach B, Ende Woche 4); jede Balkenlänge entspricht der geschätzten Dauer.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Die Lehrkraft fragt das Mensa-Team aus Beispiel 1: „Welche Arbeitspakete dürfen sich verspäten, ohne dass die Einführung nach Woche 9 rutscht – und um wie viel?“ Dazu werden die Daten aus Beispiel 1 wie in einem <strong>Netzplan</strong> durchgerechnet. Zeitpunkte zählen in Wochen: 0 = Beginn von Woche 1, 2 = Ende von Woche 2.</p>
+            <ol>
+                <li><strong>Was:</strong> Vorwärtsrechnung. Der früheste Anfang FA ist das größte früheste Ende der Vorgänger (Startpaket: 0), das früheste Ende ist FE = FA + Dauer. – <em>warum:</em> Ein Paket kann erst beginnen, wenn <em>alle</em> Vorgänger fertig sind. Beispiel F: Vorgänger C endet frühestens bei 5, D bei 7, also FA(F) = 7. Für G: max(6; 8) = 8, FE(G) = 9. Die Projektdauer ist 9 Wochen.</li>
+                <li><strong>Was:</strong> Rückwärtsrechnung vom Projektende 9 aus. Das späteste Ende SE ist der kleinste späteste Anfang der Nachfolger (letztes Paket: Projektende), der späteste Anfang ist SA = SE − Dauer. – <em>warum:</em> Ein Paket muss so rechtzeitig fertig sein, dass <em>jeder</em> Nachfolger noch pünktlich starten kann. Beispiel A: Nachfolger B (SA 2), C (SA 4), E (SA 4), also SE(A) = 2.</li>
+                <li><strong>Was:</strong> den Gesamtpuffer GP = SA − FA berechnen. – <em>warum:</em> Er gibt an, um wie viele Wochen sich ein Paket verschieben oder verlängern darf, ohne das Projektende zu verschieben.
+                    <table>
+                        <thead>
+                            <tr><th>Paket</th><th>Dauer</th><th>FA</th><th>FE</th><th>SA</th><th>SE</th><th>GP</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>A</td><td>2</td><td>0</td><td>2</td><td>0</td><td>2</td><td>0</td></tr>
+                            <tr><td>B</td><td>2</td><td>2</td><td>4</td><td>2</td><td>4</td><td>0</td></tr>
+                            <tr><td>C</td><td>3</td><td>2</td><td>5</td><td>4</td><td>7</td><td>2</td></tr>
+                            <tr><td>D</td><td>3</td><td>4</td><td>7</td><td>4</td><td>7</td><td>0</td></tr>
+                            <tr><td>E</td><td>4</td><td>2</td><td>6</td><td>4</td><td>8</td><td>2</td></tr>
+                            <tr><td>F</td><td>1</td><td>7</td><td>8</td><td>7</td><td>8</td><td>0</td></tr>
+                            <tr><td>G</td><td>1</td><td>8</td><td>9</td><td>8</td><td>9</td><td>0</td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li><strong>Was:</strong> den kritischen Pfad bestimmen: alle Pakete mit GP = 0, also A – B – D – F – G. – <em>warum:</em> Jede Verzögerung auf diesem Pfad verschiebt die Einführung sofort. Hier muss die Projektleitung besonders genau hinsehen.</li>
+                <li><strong>Was (Falle):</strong> nicht nach der Einzeldauer urteilen. E ist mit 4 Wochen das längste Paket, liegt aber <em>nicht</em> auf dem kritischen Pfad (GP 2). D ist kürzer und trotzdem kritisch. – <em>warum:</em> Entscheidend ist die längste <em>Kette</em> von Paketen, nicht das längste einzelne Paket.</li>
+                <li><strong>Was (Sonderfall):</strong> Die Schulleitung braucht für die Freigabe 3 Wochen länger, E dauert also 7 Wochen. – <em>warum:</em> Der Puffer fängt nur einen Teil auf. FE(E) = 2 + 7 = 9, G beginnt erst bei 9 und endet bei 10. Verzögerung = 3 − 2 = 1 Woche. Jetzt ist A – E – G der kritische Pfad (2 + 7 + 1 = 10). B, D und F haben dagegen 1 Woche Puffer.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Kritischer Pfad A – B – D – F – G, Projektdauer 9 Wochen. C und E dürfen sich je um bis zu 2 Wochen verzögern. Die Datenschutz-Freigabe sollte trotzdem früh beantragt werden, denn ab 3 Wochen Verzug verschiebt sie die Einführung.</p>
+            <p><strong>Kontrolle:</strong> Summe der Dauern auf dem kritischen Pfad 2 + 2 + 3 + 1 + 1 = 9 = Projektdauer; bei allen Paketen gilt GP ≥ 0, und beim Startpaket ist FA = SA = 0.</p>
+            </details>
+        </div>
+
+<h2>2. Agiles Projektmanagement</h2>
+
+<p>Das agile Projektmanagement ist flexibel und iterativ: Die Arbeit erfolgt in kurzen Zyklen (Iterationen), bei Scrum heißen sie Sprints. Nach jeder Iteration wird das bisher Erreichte überprüft und die weitere Planung gegebenenfalls angepasst. Die bekanntesten agilen Ansätze sind Scrum und Kanban.</p>
+
+<h3>Scrum</h3>
+
+<p>Scrum ist ein Rahmenwerk (Framework) für die agile Entwicklung. Es legt fest, wer welche Verantwortung hat (Rollen), welche Termine regelmäßig stattfinden (Events) und welche Ergebnisse sichtbar gemacht werden (Artefakte). Grundlage ist der Scrum Guide von Ken Schwaber und Jeff Sutherland.</p>
+
+<table>
+            <tr><th>Bereich</th><th>Bestandteil</th><th>Bedeutung</th></tr>
+            <tr><td rowspan="3"><strong>Rollen</strong><br>(Scrum Team)</td><td>Product Owner</td><td>verantwortet den Wert des Produkts, pflegt und priorisiert das Product Backlog; eine Person, kein Gremium</td></tr>
+            <tr><td>Scrum Master</td><td>sorgt dafür, dass Scrum verstanden und gelebt wird, beseitigt Hindernisse, moderiert – ist aber kein Chef des Teams</td></tr>
+            <tr><td>Developers</td><td>erstellen in jedem Sprint ein nutzbares Inkrement, planen ihre Arbeit selbst (selbstorganisiert)</td></tr>
+            <tr><td rowspan="5"><strong>Events</strong></td><td>Sprint</td><td>fester Zeitrahmen von höchstens einem Monat (oft 1–4 Wochen), der alle anderen Events enthält</td></tr>
+            <tr><td>Sprint Planning</td><td>zu Beginn: Sprint-Ziel festlegen und Einträge aus dem Product Backlog für den Sprint auswählen</td></tr>
+            <tr><td>Daily Scrum</td><td>tägliches Treffen der Developers (höchstens 15 Minuten) zum Abgleich des Fortschritts</td></tr>
+            <tr><td>Sprint Review</td><td>am Ende: das Inkrement den Stakeholdern zeigen, Rückmeldungen einholen, Backlog anpassen</td></tr>
+            <tr><td>Sprint Retrospektive</td><td>zum Abschluss: Das Team reflektiert seine Zusammenarbeit und beschließt Verbesserungen.</td></tr>
+            <tr><td rowspan="3"><strong>Artefakte</strong></td><td>Product Backlog</td><td>geordnete Liste aller bekannten Anforderungen an das Produkt (z.&nbsp;B. User Stories)</td></tr>
+            <tr><td>Sprint Backlog</td><td>Sprint-Ziel, die für den Sprint ausgewählten Einträge und der Plan, wie sie umgesetzt werden</td></tr>
+            <tr><td>Inkrement</td><td>das am Sprint-Ende fertige, nutzbare Zwischenergebnis, das die „Definition of Done“ erfüllt</td></tr>
+        </table>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation (Beispiel am Schulprojekt):</strong> Eine Vierergruppe entwickelt in sechs Wochen einen Bilderkennungs-Klassifikator (vgl. 10.5).</p>
+            <ol>
+                <li><strong>Rollen:</strong> Lea ist Product Owner (entscheidet, welche Funktion zuerst kommt, und hält Kontakt zur Lehrkraft als Stakeholder), Tom ist Scrum Master (achtet auf die Termine, klärt Probleme wie „JupyterLite startet nicht“), alle vier sind Developers. – <em>warum:</em> Klare Verantwortlichkeiten verhindern, dass Entscheidungen liegen bleiben oder Hindernisse niemandem auffallen.</li>
+                <li><strong>Product Backlog:</strong> „Datensatz sammeln“, „Bilder vorverarbeiten“, „Modell trainieren“, „Genauigkeit auswerten“, „Präsentation erstellen“ … – <em>warum:</em> Alle bekannten Anforderungen stehen geordnet an einer Stelle; was oben steht, wird zuerst umgesetzt.</li>
+                <li><strong>Sprint 1 (2 Wochen):</strong> Im Sprint Planning wird das Sprint-Ziel „Ein erstes Modell erkennt zwei Klassen“ festgelegt. Zu Beginn jeder Informatikstunde gibt es ein kurzes Daily (je Person: Was habe ich geschafft? Was mache ich als Nächstes? Wo hänge ich fest?). – <em>warum:</em> Das Sprint-Ziel führt zu einem nutzbaren Inkrement, das Daily macht Probleme schon nach einem Tag sichtbar statt erst am Sprint-Ende.</li>
+                <li><strong>Sprint Review:</strong> Die Gruppe zeigt der Lehrkraft das Notebook mit 70&nbsp;% Genauigkeit; die Rückmeldung „mehr Bilder pro Klasse“ wandert ins Product Backlog. – <em>warum:</em> Rückmeldungen der Stakeholder fließen sofort in die weitere Planung ein, das ist der Kern des agilen Vorgehens.</li>
+                <li><strong>Retrospektive:</strong> Das Team stellt fest, dass Dateien doppelt bearbeitet wurden, und beschließt, künftig mit Git zu arbeiten (vgl. 10.3). – <em>warum:</em> Hier geht es um die Zusammenarbeit, nicht um das Produkt; die Verbesserung gilt ab dem nächsten Sprint.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Nach Sprint 1 gibt es ein lauffähiges erstes Modell, ein angepasstes Product Backlog und eine konkrete Verbesserung der Arbeitsweise für Sprint 2.</p>
+            </details>
+        </div>
+
+<h3>Kanban</h3>
+
+<p>Kanban stammt ursprünglich aus der Produktion bei Toyota. Ein Kanban-Board macht den Arbeitsfluss sichtbar. Es hat Spalten wie „To Do“, „In Bearbeitung“ und „Erledigt“.</p>
+
+<p>Im Softwareteam könnte eine Aufgabe wie „Login-Funktion programmieren“ zuerst in der Spalte „To Do“ stehen, nach Beginn der Arbeit in „In Bearbeitung“ verschoben werden und nach Abschluss in „Erledigt“ landen.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Kanban ist nicht Scrum</summary>
+                <p>Kanban kennt <strong>keine Sprints</strong> und keine festen Rollen. Die Arbeit fließt kontinuierlich: Sobald eine Aufgabe erledigt ist, wird die nächste gezogen. Gesteuert wird über <strong>WIP-Limits</strong> (Work in Progress), z.&nbsp;B. „höchstens drei Karten gleichzeitig in Bearbeitung“. Viele Scrum-Teams nutzen trotzdem ein Board, um ihr Sprint Backlog darzustellen – das Board allein macht aber noch kein Kanban und auch kein Scrum.</p>
+            </details>
+        </div>
+
+<h3>User Stories</h3>
+
+<p>User Stories beschreiben, was ein Nutzer vom System erwartet. Sie folgen meist einem festen Satzschema: „Als &lt;Rolle&gt; möchte ich &lt;Funktion/Ziel&gt;, um &lt;Nutzen&gt;.“ Beispiel: „Als Benutzer möchte ich eine Suchfunktion nutzen können, um schnell Produkte zu finden.“ User Stories helfen, Anforderungen aus der Sicht des Nutzers zu verstehen, und sind typische Einträge im Product Backlog.</p>
+
+<h2>3. Vergleich: klassisches und agiles Projektmanagement</h2>
+
+<p>Beide Ansätze haben ihre Stärken und Schwächen. Hier ein direkter Vergleich:</p>
+
+<table>
+            <tr>
+                <th>Aspekt</th>
+                <th>Klassisches Projektmanagement</th>
+                <th>Agiles Projektmanagement</th>
+            </tr>
+            <tr>
+                <td><strong>Planung</strong></td>
+                <td>Umfassende Planung am Anfang (z.&nbsp;B. Gantt-Diagramm)</td>
+                <td>Laufende Planung: in Sprints (Scrum) oder kontinuierlich (Kanban)</td>
+            </tr>
+            <tr>
+                <td><strong>Anpassungen</strong></td>
+                <td>Schwierig und oft teuer</td>
+                <td>Einfacher, da nach jeder Iteration umgeplant werden kann</td>
+            </tr>
+            <tr>
+                <td><strong>Werkzeuge</strong></td>
+                <td>Projektstrukturplan, Gantt-Diagramm</td>
+                <td>Product Backlog, Kanban-Board, User Stories</td>
+            </tr>
+            <tr>
+                <td><strong>Teamarbeit</strong></td>
+                <td>Hierarchisch, Projektleitung entscheidet</td>
+                <td>Selbstorganisierte Teams</td>
+            </tr>
+            <tr>
+                <td><strong>Beispiele</strong></td>
+                <td>Bau eines Gebäudes, Planung eines Events</td>
+                <td>Entwicklung einer App, Erstellung einer Website</td>
+            </tr>
+        </table>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Product Owner und Scrum Master</summary>
+                <p><strong>Alltag:</strong> Die Apps auf deinem Smartphone bekommen alle paar Wochen ein Update – oft das Ergebnis eines Sprints.</p>
+                <p><strong>Beruf:</strong> Als <strong>Product Owner</strong> sprichst du mit Kunden und Fachabteilungen, schreibst und priorisierst User Stories und entscheidest, was im nächsten Sprint entwickelt wird. Als <strong>Scrum Master</strong> moderierst du Plannings und Retrospektiven, coachst das Team und räumst Hindernisse aus dem Weg. Beide Rollen sind in Softwarefirmen, bei IT-Dienstleistern und in IT-Abteilungen von Industrieunternehmen verbreitet, auch in Sachsen. Einstieg oft über ein Informatik- oder Wirtschaftsinformatikstudium und Zertifikate (z.&nbsp;B. von Scrum.org).</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Klassisches Projektmanagement</strong> – Ziel, Umfang und Ablauf werden zu Beginn vollständig geplant und dann phasenweise abgearbeitet. <strong>Agiles Projektmanagement</strong> – das Ergebnis entsteht schrittweise in kurzen Iterationen; nach jeder Iteration wird das Zwischenergebnis überprüft und die weitere Planung angepasst.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Scrum</strong> – agiles Rahmenwerk mit drei Verantwortlichkeiten (Product Owner, Scrum Master, Developers), fünf Events (Sprint, Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospektive) und drei Artefakten (Product Backlog, Sprint Backlog, Inkrement). Jeder Sprint liefert ein nutzbares Inkrement.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.2.1: Gantt-Diagramm <span class="niveau">AFB II</span></summary>
+                <p>Erstelle ein Gantt-Diagramm für ein Projekt deiner Wahl (z.&nbsp;B. Schulfest). Teile das Projekt in mindestens fünf Teilaufgaben auf und plane die zeitliche Abfolge. Kennzeichne mindestens eine Abhängigkeit und mindestens zwei parallel laufende Aufgaben.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 10.2.2: Kanban-Board <span class="niveau">AFB I</span></summary>
+                <p>Plane ein agiles Projekt mit einem Kanban-Board. Notiere mindestens sechs Aufgaben und verteile sie auf die Spalten „To Do“, „In Bearbeitung“ und „Erledigt“. Lege ein WIP-Limit für „In Bearbeitung“ fest.</p>
+            </details>
+        </div>

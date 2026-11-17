@@ -1,0 +1,27 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.4.5: Fehler finden in Argumentationen <span class="niveau">AFB III</span></summary>
+                <p>Prüfe die Aussagen, berichtige sie, falls nötig, und begründe.</p>
+                <ol>
+                    <li>„Die binäre Suche liegt in O(log n). Also sollte man vor jeder einzelnen Suche die Liste sortieren.“</li>
+                    <li>„O(2<sup>n</sup>) und O(3<sup>n</sup>) sind dieselbe Komplexitätsklasse, beide sind exponentiell.“</li>
+                    <li>„Ein Verfahren in O(n log n) ist für n = 10 immer schneller als eines in O(n²).“</li>
+                    <li>„Das Problem des Handlungsreisenden ist praktisch unlösbar. Paketdienste können also keine guten Routen berechnen.“</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.4.6: Schrittzahlen per Programm vergleichen <span class="niveau">AFB III</span></summary>
+                <ol>
+                    <li>Schreibe eine Funktion <code>schritte(klasse, n)</code>, die für die Klassen <code>"1"</code>, <code>"log n"</code>, <code>"n"</code>, <code>"n log n"</code>, <code>"n^2"</code>, <code>"2^n"</code> und <code>"n!"</code> die Schrittzahl liefert (Logarithmus zur Basis 2). Bei unbekannter Klasse oder negativem n gibt sie <code>None</code> zurück.</li>
+                    <li>Teste mit einer Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe: <code>("n^2", 10)</code>, <code>("2^n", 10)</code>, <code>("n log n", 8)</code>, <code>("n!", 0)</code>, <code>("log n", 1)</code>, <code>("n^3", 5)</code>, <code>("n", -1)</code>.</li>
+                    <li>Gib für n = 10, 20, 40, 80 eine Tabelle aus, die für jede Klasse den Faktor zeigt, um den die Schrittzahl bei Verdopplung von n wächst.</li>
+                    <li>Begründe allgemein, welcher Faktor sich bei Verdopplung von n für jede Klasse ergibt, und vergleiche mit deiner Tabelle.</li>
+                </ol>
+                <p class="tipp"><code>math.log2(n)</code> und <code>math.factorial(n)</code> stehen im Modul <code>math</code>.</p>
+            </details>
+        </div>

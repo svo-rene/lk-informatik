@@ -1,0 +1,264 @@
+<p>Wie findet dein Rechner alle Dateien namens „referat.docx“ in allen Unterordnern? Er muss den Verzeichnisbaum systematisch Knoten für Knoten besuchen, ohne einen zu vergessen oder doppelt anzusehen.</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in vier kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee und den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe in Thonny mit.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Vier Reihenfolgen: Pre-, In-, Post- und Level-Order</a></li>
+            <li><a href="#schritt-2">Der Baum in Python</a></li>
+            <li><a href="#schritt-3">In-Order Schritt für Schritt (Rekursion)</a> – danach Aufgabe 3.6.1</li>
+            <li><a href="#schritt-4">Level-Order mit einer Warteschlange</a> – danach Aufgabe 3.6.4 und 3.6.5</li>
+        </ol>
+
+<p class="git-datei"><strong>Zum Mittippen:</strong> <code>2_baeume/traversierung.py</code> – neu anlegen.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.6 Schritt 2: Knoten mit links und rechts, Beispielbaum</code> · <code>3.6 Schritt 4: level_order mit Schlange</code> (Regeln auf Seite 3.0.2)</p>
+
+<p>Danach findest du einen Praxisbezug, Python-Dateien zum Herunterladen und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Vier Reihenfolgen</h2>
+
+<p>Einen Baum kann man in verschiedenen Reihenfolgen durchlaufen. Bei den drei Tiefensuchen entscheidet nur, <strong>wann</strong> der Knoten selbst drankommt: vor seinen Teilbäumen (Pre), zwischen ihnen (In) oder danach (Post). Die Breitensuche geht dagegen Ebene für Ebene. Achte im Video auf die Nummern an den Knoten.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-6-1_reihenfolgen_vorschau.png" src="../vid/3-6-1_reihenfolgen.mp4"></video><a href="../vid/3-6-1_reihenfolgen.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Vier Reihenfolgen – Pre-, In-, Post- und Level-Order an einem kleinen Baum (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/skizze_traversierung.svg" width="450" alt="Baum mit Wurzel B und Kindern A und C und den vier Besuchsreihenfolgen">
+            <figcaption>Abb. 1: Ein Baum, vier Reihenfolgen – Pre-, In-, Post- und Level-Order.</figcaption>
+        </figure>
+
+<p>Zum Nachlesen:</p>
+
+<h3>Tiefensuche (DFS – depth-first search)</h3>
+
+<p>
+            Die Tiefensuche ist eine Methode zur Traversierung von Bäumen oder Graphen, bei der man zuerst so weit wie möglich absteigt, bevor man zurückkehrt und den nächsten Zweig untersucht. Bei Binärbäumen unterscheidet man drei Varianten, je nachdem, wann der aktuelle Knoten verarbeitet wird:
+        </p>
+
+<ol>
+            <li><strong>In-Order-Traversierung:</strong> zuerst der linke Teilbaum, dann der aktuelle Knoten, zuletzt der rechte Teilbaum.</li>
+            <li><strong>Pre-Order-Traversierung:</strong> zuerst der aktuelle Knoten, dann der linke Teilbaum, zuletzt der rechte Teilbaum.</li>
+            <li><strong>Post-Order-Traversierung:</strong> zuerst der linke Teilbaum, dann der rechte Teilbaum, zuletzt der aktuelle Knoten.</li>
+        </ol>
+
+<h3>Breitensuche (BFS – breadth-first search)</h3>
+
+<p>
+            Die Breitensuche ist eine Methode zur Traversierung von Bäumen oder Graphen, bei der zuerst alle Knoten einer Ebene besucht werden, bevor man zur nächsten Ebene übergeht. Bei Bäumen ist die gängigste Variante die <strong>Level-Order-Traversierung</strong>. Sie wird mit einer Schlange (Queue, siehe Seite 3.2) umgesetzt, die Tiefensuche dagegen rekursiv oder mit einem Stapel (siehe Seite 3.3).
+        </p>
+
+<p>
+            Die Varianten haben unterschiedliche Anwendungen und werden je nach Problem ausgewählt: In-Order liefert bei Suchbäumen die sortierte Reihenfolge, Pre-Order eignet sich zum Kopieren oder Ausgeben einer Struktur, Post-Order zum Löschen oder zum Berechnen von Ordnergrößen (erst die Kinder, dann der Elternknoten), Level-Order zum Finden des nächstgelegenen Knotens.
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> drei Knoten</summary>
+            <pre><code>      B
+     / \
+    A   C</code></pre>
+            <p>Pre-Order: B, A, C · In-Order: A, B, C · Post-Order: A, C, B · Level-Order: B, A, C</p>
+            </details>
+        </div>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Der Baum in Python →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Der Baum in Python</h2>
+
+<p>Diesmal bekommt der Konstruktor die Kinder gleich mit: <code>Knoten(wert, links=None, rechts=None)</code>. So lässt sich ein ganzer Baum in einer einzigen Anweisung bauen, Knoten in Knoten. Achte im Video auf die kurze Erklärung zu Standardwerten und darauf, in welcher Reihenfolge Python die verschachtelten Aufrufe auswertet.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-6-2_knoten_vorschau.png" src="../vid/3-6-2_knoten.mp4"></video><a href="../vid/3-6-2_knoten.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Der Baum in Python – Standardwerte und verschachtelte Knoten (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>2_baeume/traversierung.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>Knoten</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>blatt = Knoten(3)</code>. Danach committen, z.&nbsp;B. <code>3.6 Schritt 2: Knoten angelegt</code>.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: In-Order Schritt für Schritt →</a></p>
+
+<h2 id="schritt-3">Schritt 3: In-Order Schritt für Schritt</h2>
+
+<p>Die drei Tiefensuchen sind rekursive Funktionen mit derselben Form: Ein leerer Teilbaum (<code>None</code>) liefert die leere Liste, sonst werden die Ergebnisse für links, den Knoten und rechts mit <code>+</code> aneinandergehängt. Im Video verfolgst du <code>in_order</code> am kleinen Baum aus Beispiel 1 mit dem Aufrufstapel – wie bei <code>hoehe</code> auf Seite 3.4. Achte darauf, dass auch <code>None</code> einen eigenen Aufruf bekommt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-6-3_in_order_vorschau.png" src="../vid/3-6-3_in_order.mp4"></video><a href="../vid/3-6-3_in_order.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: In-Order Schritt für Schritt – Rekursion mit Listen (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/traversierung.py</code> den Code aus dem Video: die Funktionen <code>pre_order</code>, <code>in_order</code> und <code>post_order</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>klein = Knoten(&quot;B&quot;, Knoten(&quot;A&quot;), Knoten(&quot;C&quot;))</code> · <code>in_order(klein)</code> · <code>pre_order(klein)</code>. Danach committen, z.&nbsp;B. <code>3.6 Schritt 3: pre_order, in_order, post_order ergänzt</code>.</p>
+
+<p>Danach: <a href="uebungen.html#a-3-6-1">Aufgabe 3.6.1</a> – Pre-, In- und Post-Order am größeren Baum von Hand.</p>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Level-Order →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Level-Order mit einer Warteschlange</h2>
+
+<p>Für die Breitensuche braucht man eine Schlange (Seite 3.2): vorn einen Knoten entnehmen und ausgeben, seine Kinder hinten anhängen. Weil Kinder hinten anstehen, kommen alle Knoten einer Ebene vor der nächsten dran. Als Schlange nehmen wir die Klasse <code>Queue</code> aus Seite 3.2: <code>enqueue</code> stellt hinten an, <code>dequeue</code> nimmt vorn heraus, beides in O(1). Lege dazu deine Datei <code>queue_knoten.py</code> aus <code>1_listen</code> in den Ordner <code>2_baeume</code> (oder lade sie herunter: <a href="../material/queue_knoten.py" download>queue_knoten.py</a>). Stehen in deiner Datei unten noch Testzeilen, müssen sie unter <code>if __name__ == "__main__":</code> stehen – sonst laufen sie bei jedem <code>import</code> mit (Abschnitt „import“ auf Seite 3.2). Warum keine einfache Liste? Das klärt der Vergleich unter Beispiel 2. Achte im Video darauf, was mit den <code>None</code>-Einträgen in der Schlange passiert.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-6-4_level_order_vorschau.png" src="../vid/3-6-4_level_order.mp4"></video><a href="../vid/3-6-4_level_order.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Level-Order mit Warteschlange (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/traversierung.py</code> den Code aus dem Video: die Funktion <code>level_order</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>level_order(baum)</code>. Danach committen, z.&nbsp;B. <code>3.6 Schritt 4: level_order ergänzt</code>.</p>
+
+<p>Zum Nachlesen stehen alle vier Traversierungen mit dem Ablauf von <code>level_order</code> in Beispiel 2:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> alle vier Traversierungen in Python</summary>
+            <pre><code class="language-python">from queue_knoten import Queue   # Schlange mit Knoten aus Seite 3.2
+
+class Knoten:
+    def __init__(self, wert, links=None, rechts=None):
+        self.wert = wert
+        self.links = links
+        self.rechts = rechts
+
+def pre_order(k):
+    if k is None:
+        return []
+    return [k.wert] + pre_order(k.links) + pre_order(k.rechts)
+
+def in_order(k):
+    if k is None:
+        return []
+    return in_order(k.links) + [k.wert] + in_order(k.rechts)
+
+def post_order(k):
+    if k is None:
+        return []
+    return post_order(k.links) + post_order(k.rechts) + [k.wert]
+
+def level_order(wurzel):
+    ergebnis = []
+    schlange = Queue()
+    schlange.enqueue(wurzel)
+    while not schlange.is_empty():
+        k = schlange.dequeue()
+        if k is not None:
+            ergebnis.append(k.wert)
+            schlange.enqueue(k.links)
+            schlange.enqueue(k.rechts)
+    return ergebnis
+
+baum = Knoten(10, Knoten(5, Knoten(3), Knoten(7)), Knoten(15, None, Knoten(20)))
+print(pre_order(baum))    # [10, 5, 3, 7, 15, 20]
+print(level_order(baum))  # [10, 5, 15, 3, 7, 20]</code></pre>
+            <p><strong>Ablauf von <code>level_order(baum)</code></strong> – die Schlange wird vorn geleert und hinten gefüllt:</p>
+            <table>
+                <thead><tr><th>Schritt</th><th>entnommen</th><th>angehängt</th><th>Schlange danach</th><th>Ergebnis bisher</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>10</td><td>5, 15</td><td>[5, 15]</td><td>[10]</td></tr>
+                    <tr><td>2</td><td>5</td><td>3, 7</td><td>[15, 3, 7]</td><td>[10, 5]</td></tr>
+                    <tr><td>3</td><td>15</td><td>None, 20</td><td>[3, 7, None, 20]</td><td>[10, 5, 15]</td></tr>
+                    <tr><td>ab 4</td><td>3, 7, None, 20, danach nur noch None</td><td>für 3, 7 und 20 je zweimal None</td><td>leert sich</td><td>[10, 5, 15, 3, 7, 20]</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><em>Was:</em> Die Wurzel kommt zuerst in die Schlange. <em>Warum:</em> Sie bildet Ebene 0.</li>
+                <li><em>Was:</em> Jeder entnommene Knoten hängt seine Kinder <strong>hinten</strong> an. <em>Warum:</em> So stehen alle Knoten einer Ebene vor denen der nächsten Ebene.</li>
+                <li><em>Was:</em> <code>None</code>-Einträge werden entnommen, aber nicht ausgegeben. <em>Warum:</em> So muss nicht vor jedem Anhängen geprüft werden, ob ein Kind existiert.</li>
+            </ol>
+            <table>
+                <thead><tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td>In-Order (Probe: sortiert, da Suchbaum)</td><td><code>in_order(baum)</code></td><td>[3, 5, 7, 10, 15, 20]</td></tr>
+                    <tr><td>Post-Order</td><td><code>post_order(baum)</code></td><td>[3, 7, 5, 20, 15, 10]</td></tr>
+                    <tr><td>leerer Baum</td><td><code>pre_order(None)</code>, <code>level_order(None)</code></td><td>[], []</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="hinweis" id="vergleich-schlange">
+            <details>
+                <summary>Vergleich: Queue aus 3.2 oder einfache Liste als Schlange?</summary>
+                <p>Bis vor Kurzem stand hier eine Python-Liste als Schlange. Wir nehmen jetzt die <code>Queue</code> aus Seite 3.2 – hier siehst du beide Fassungen und warum.</p>
+                <p><strong>Fassung mit Liste</strong> (liefert dasselbe Ergebnis):</p>
+                <pre><code class="language-python">def level_order_liste(wurzel):
+    ergebnis = []
+    schlange = [wurzel]
+    while len(schlange) &gt; 0:
+        k = schlange.pop(0)          # vorn entnehmen: alle anderen rücken nach
+        if k is not None:
+            ergebnis.append(k.wert)
+            schlange.append(k.links)
+            schlange.append(k.rechts)
+    return ergebnis</code></pre>
+                <table>
+                    <thead><tr><th></th><th>Liste mit <code>append</code> und <code>pop(0)</code></th><th><code>Queue</code> aus 3.2 (<code>enqueue</code>, <code>dequeue</code>)</th></tr></thead>
+                    <tbody>
+                        <tr><td>Laufzeit je Entnahme</td><td>O(n): Alle übrigen Einträge rücken eine Stelle nach vorn.</td><td>O(1): Nur <code>__head</code> wird umgesetzt.</td></tr>
+                        <tr><td>ganze Traversierung</td><td>bis O(n²) bei n Knoten</td><td>O(n)</td></tr>
+                        <tr><td>Aufwand</td><td>keine Zusatzdatei, sofort hingeschrieben – auch auf Papier</td><td>braucht <code>queue_knoten.py</code> im Ordner und eine Import-Zeile</td></tr>
+                        <tr><td>Lesbarkeit</td><td>Man muss wissen, dass <code>pop(0)</code> „vorn“ bedeutet.</td><td>Die Namen sagen, was passiert: hinten anstellen, vorn entnehmen.</td></tr>
+                        <tr><td>Fehlerquelle</td><td>Wer versehentlich <code>pop()</code> schreibt, hat einen Stapel – und eine Tiefensuche.</td><td>Es gibt nur die Operationen einer Schlange (Kapselung).</td></tr>
+                        <tr><td>im Debugger</td><td>Der ganze Inhalt ist auf einen Blick sichtbar.</td><td>Man sieht nur ein <code>Queue</code>-Objekt; den Inhalt erreicht man über <code>__head</code> und <code>next</code>.</td></tr>
+                        <tr><td>kleine Bäume</td><td>oft sogar schneller (das Nachrücken läuft intern in C)</td><td>etwas langsamer, weil jeder Knoten ein eigenes Objekt ist</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>Fazit:</strong> Beide Fassungen sind richtig. Die Liste ist bequem für kleine Beispiele. Wer eine Laufzeit wie O(n) angeben will, braucht aber eine Schlange, die vorn in O(1) entnimmt – also die <code>Queue</code> aus 3.2. In der Praxis nimmt man in Python dafür <code>collections.deque</code> (siehe 3.2).</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-6-4">Aufgabe 3.6.4</a> und <a href="uebungen.html#a-3-6-5">Aufgabe 3.6.5</a> – Tiefen- und Breitensuche in Anwendungen.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Traversierung im Dateisystem und in der Webentwicklung</summary>
+                <p>
+                    <strong>Alltag:</strong> Die Suche im Explorer oder im Finder durchläuft den Verzeichnisbaum mit einer Tiefensuche. Die Anzeige „Größe des Ordners“ ist eine Post-Order-Traversierung: Erst werden die Größen aller Unterordner berechnet, dann addiert.<br><br>
+                    <strong>Beruf:</strong> Jede Webseite ist intern ein Baum (das DOM). Frontend-Entwicklerinnen und -Entwickler durchlaufen ihn, um z.&nbsp;B. alle Bilder ohne Alternativtext zu finden. Suchmaschinen-Crawler besuchen Webseiten per Breitensuche, damit nah an der Startseite liegende Seiten zuerst indiziert werden.
+                </p>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Python-Dateien zum Herunterladen</summary>
+                <ul>
+                    <li><a href="../material/bintree_traversal.py" download>bintree_traversal.py</a> – binärer Suchbaum mit rekursivem Einfügen, Pre-Order- und In-Order-Ausgabe</li>
+                    <li><a href="../material/baum_einfuehrungsstunde_leistungskurs.py" download>baum_einfuehrungsstunde_leistungskurs.py</a> – allgemeiner Baum mit Tiefensuche und einem Versuch einer Breitensuche (wird in Aufgabe 3.6.8 untersucht)</li>
+                </ul>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Traversierung</strong> ist das systematische Durchlaufen einer Datenstruktur wie eines Baums oder eines Graphen, bei dem jedes Element genau einmal besucht wird. Sie ermöglicht es, alle Elemente in einer bestimmten Reihenfolge zu verarbeiten.<br>
+                <strong>Tiefensuche (DFS)</strong>: erst so weit wie möglich in die Tiefe, dann zurück (Pre-, In-, Post-Order).<br>
+                <strong>Breitensuche (BFS)</strong>: Ebene für Ebene (Level-Order).
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Vier Reihenfolgen an vier Knoten <span class="niveau">AFB I</span></summary>
+                <pre><code>      D
+     / \
+    B   F
+   /
+  A</code></pre>
+                <p>Gib Pre-, In-, Post- und Level-Order dieses Baums an.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Pre-Order: D, B, A, F · In-Order: A, B, D, F · Post-Order: A, B, F, D · Level-Order: D, B, F, A. Hier unterscheiden sich Pre- und Level-Order: Nach B geht die Tiefensuche erst zu A hinunter, die Breitensuche erst zu F hinüber.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Knoten in Knoten <span class="niveau">AFB I</span></summary>
+                <p>Schreibe den Baum aus Kurz geprüft 1 als eine Anweisung <code>b = Knoten(…)</code>. Was liefert für den Baum aus dem Video <code>baum.rechts.links</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>b = Knoten("D", Knoten("B", Knoten("A")), Knoten("F"))</code> – A ist das linke Kind von B, also das zweite Argument. <code>baum.rechts</code> ist die 15, und sie hat links kein Kind: <code>None</code>.</p>
+                </details>
+            </details>
+        </div>

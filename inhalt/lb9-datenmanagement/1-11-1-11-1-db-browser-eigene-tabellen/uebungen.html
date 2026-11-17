@@ -1,0 +1,43 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.11.1.3: Daten auf drei Wegen hinzufügen <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    a) Füge über die Oberfläche drei Trainingsgruppen deiner Wahl in <code>Trainingsgruppen</code>
+                    ein.<br>
+                    b) Füge per <code>INSERT INTO</code>-Befehlen fünf Mitglieder in <code>Mitglieder</code> ein.<br>
+                    c) Erstelle mit einem Texteditor oder LibreOffice Calc eine Datei <code>neue_mitglieder.csv</code>
+                    mit dem unten stehenden Inhalt und importiere sie in die bestehende Tabelle <code>Mitglieder</code>.
+                    Die Trainingsgruppen 1 bis 3 müssen dafür aus a) schon existieren.
+                </p>
+                <pre>
+MitgliedID,Nachname,Vorname,Geburtsdatum,TrainingsgruppeID
+6,Hoffmann,Noah,2007-03-19,3
+7,Schulz,Mila,2012-07-08,1
+8,Becker,Finn,2010-12-25,2
+                </pre>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 1.11.1.4: Die Schulmensa als Datenbank <span class="niveau">AFB II</span>
+                </summary>
+                <p>Auf Seite 1.11 (Beispiel 3) ist für die Schulmensa dieses Relationenmodell entstanden:</p>
+                <pre class="schema">Kategorie(<u>KategorieNr</u>, Bezeichnung)
+Gericht(<u>GerichtNr</u>, Name, Preis, &uarr;KategorieNr)
+Zutat(<u>ZutatNr</u>, Bezeichnung, Einheit)
+enthaelt(<u>&uarr;GerichtNr, &uarr;ZutatNr</u>, Menge)</pre>
+                <ol>
+                    <li>Lege eine neue Datenbank <code>mensa.db</code> an und erstelle alle vier Tabellen per <code>CREATE TABLE</code> mit passenden Datentypen, Primär- und Fremdschlüsseln. Begründe die Reihenfolge der Befehle.</li>
+                    <li>Füge zwei Kategorien, zwei Gerichte, drei Zutaten und vier Einträge in <code>enthaelt</code> ein (z.&nbsp;B. Pfannkuchen und Pizza wie auf Seite 1.11).</li>
+                    <li>Prüfe dein Ergebnis mit einer Abfrage, die zu jedem Gericht die Zutaten mit Menge und Einheit ausgibt.</li>
+                </ol>
+            </details>
+        </div>

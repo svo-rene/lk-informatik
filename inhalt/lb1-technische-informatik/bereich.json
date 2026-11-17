@@ -1,0 +1,63 @@
+{
+  "nr": "LB 1",
+  "titel": "Technische Informatik",
+  "text": "Zahlen und Zeichen im Rechner, boolesche Algebra, Schaltnetze und der Aufbau eines Computers.",
+  "kapitel": [
+    {
+      "titel": "Grundlagen",
+      "themen": [
+        "1-1-zahlenformate",
+        "1-2-zweierkomplement",
+        "1-3-festkommazahlen",
+        "1-4-zeichenkodierung"
+      ]
+    },
+    {
+      "titel": "Boolesche Algebra",
+      "themen": [
+        "2-1-booleschealgebra",
+        "2-2-boolescheoperatoren",
+        "2-3-formaleschreibweise",
+        "2-4-implikationundaequivalenz",
+        "2-5-gesetzeaussagenlogik",
+        "2-6-tautologieundwiderspruch",
+        "2-7-normalformen",
+        "2-8-kanonischenormalformen"
+      ]
+    },
+    {
+      "titel": "Schaltnetze",
+      "themen": [
+        "3-1-technischeumsetzung",
+        "3-2-schaltungsanalyse",
+        "3-3-schaltungssynthese",
+        "3-4-kv-diagramme",
+        "3-5-standardschaltnetze",
+        "3-6-halbaddierer",
+        "3-7-volladdierer",
+        "3-8-uebungsaufgaben"
+      ]
+    },
+    {
+      "titel": "Rechnerarchitektur",
+      "themen": [
+        "4-1-neumann",
+        "4-2-prozessor",
+        "4-3-speichersysteme"
+      ]
+    },
+    {
+      "titel": "Informatik und Gesellschaft",
+      "themen": [
+        "5-1-systemsoftware",
+        "5-2-hardware-life"
+      ]
+    },
+    {
+      "titel": "Selbstcheck",
+      "themen": [
+        "6-1-selbstcheck"
+      ]
+    }
+  ]
+}

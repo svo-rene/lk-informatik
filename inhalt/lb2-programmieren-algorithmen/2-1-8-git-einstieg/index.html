@@ -1,0 +1,779 @@
+<p>
+            <code>sortieren.py</code>, <code>sortieren_neu.py</code>, <code>sortieren_neu_FINAL.py</code>, <code>sortieren_neu_FINAL2.py</code> – kommt dir das bekannt vor? Spätestens nach einer Woche weiß niemand mehr, welche Datei welche Änderung enthält und welche Fassung eigentlich funktioniert hat. Eine <strong>Versionsverwaltung</strong> löst dieses Problem: Sie speichert jede Fassung deiner Dateien mit Datum und Begründung und kann jede frühere Fassung wieder hervorholen. Das verbreitetste Werkzeug dafür heißt <strong>Git</strong>.
+        </p>
+
+<p>
+            Wir nutzen dafür den Git-Server <a href="https://git.inf7.eu" target="_blank" rel="noopener">git.inf7.eu</a>, einen „Git-Server für den Informatikunterricht“. Er läuft mit der freien Software <strong>Forgejo</strong> und wird vom Verein Neue Informatik e.V. betrieben. Du arbeitest dort zunächst nur im Browser, eine Installation ist nicht nötig. Deine Python-Programme schreibst du wie bisher in Thonny oder im JupyterLite (<a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a>) und legst sie anschließend in deinem Repository ab.
+        </p>
+
+<div class="hinweis">
+            <p><strong>So benutzt du diese Anleitung:</strong> Die Bilder sind echte Bildschirmfotos von git.inf7.eu (Forgejo, Version 16.0.5, deutsche Oberfläche). Das Beispiel-Repository auf den Bildern heißt <code>test-anleitung</code>, deines heißt <code>informatik-11</code>. Wo auf den Bildern der Benutzername der Lehrkraft steht, steht bei dir <strong>dein Benutzername</strong>. Einige wenige Beschriftungen sind englisch geblieben (z.&nbsp;B. „Continue with beste.schule“, „Copy link“, „Search“). Arbeite die Schritte beim ersten Mal der Reihe nach durch, später dient die Seite zum Nachschlagen.</p>
+        </div>
+
+<p><strong>Inhalt dieser Seite</strong></p>
+
+<ul>
+            <li>Warum Versionsverwaltung? und Die wichtigsten Begriffe</li>
+            <li>Schritt 1: Anmelden</li>
+            <li>Schritt 2: Dein Repository anlegen</li>
+            <li>Schritt 3: Die Repository-Seite kennenlernen</li>
+            <li>Schritt 4: Eine Datei hochladen und committen</li>
+            <li>Schritt 5: Eine Datei ansehen – Originalformat, Permalink, Blame, Verlauf</li>
+            <li>Schritt 6: Versionen vergleichen</li>
+            <li>Schritt 7: Im Browser bearbeiten – die README in Markdown</li>
+            <li>Schritt 8: Alte Stände ansehen und zurückholen</li>
+            <li>Schritt 9: Herunterladen und Klonen</li>
+            <li>Schritt 10: Die Lehrkraft einladen (falls verlangt)</li>
+            <li>Gute Commit-Nachrichten, Was nicht ins Repository gehört, Häufige Fehler und Fragen</li>
+            <li>Beispiele, Aufgaben, Übung und Vertiefung</li>
+        </ul>
+
+<h2 id="warum">Warum Versionsverwaltung?</h2>
+
+<ul>
+            <li><strong>Nichts geht verloren:</strong> Jede gespeicherte Fassung bleibt erhalten. Ein misslungener Umbau lässt sich zurücknehmen.</li>
+            <li><strong>Nachvollziehbarkeit:</strong> Zu jeder Änderung steht fest, wann sie gemacht wurde und warum.</li>
+            <li><strong>Vergleichbarkeit:</strong> Zwei Fassungen lassen sich Zeile für Zeile vergleichen. So findest du schnell heraus, welche Änderung einen Fehler verursacht hat.</li>
+            <li><strong>Dokumentation von Experimenten:</strong> Wer Programme schrittweise verbessert und misst (siehe 2.2.3), hält in der Historie Code und Messergebnis zusammen fest.</li>
+            <li><strong>Zusammenarbeit:</strong> Im Team arbeiten mehrere Personen an denselben Dateien. Das nutzt du später im Projekt (Lernbereich 5); zunächst arbeitest du allein in deinem eigenen Repository.</li>
+        </ul>
+
+<h2 id="begriffe">Die wichtigsten Begriffe</h2>
+
+<p>
+            Ein Commit ist mehr als „Speichern“: Beim Speichern in Thonny wird die alte Fassung überschrieben. Ein Commit legt dagegen einen <em>zusätzlichen</em> Stand an, und alle früheren bleiben abrufbar. Wichtig: Was einmal committet wurde, steht in der Historie – auch dann, wenn die Datei in einem späteren Commit gelöscht wird.
+        </p>
+
+<h2 id="s1">Schritt 1: Anmelden</h2>
+
+<p>Du brauchst kein neues Konto. Die Anmeldung läuft über deinen Zugang zu <strong>beste.schule</strong>. Technisch gibt es dafür eine zentrale Anmeldeseite unter <code>auth.inf7.eu</code>, die dich an beste.schule weiterleitet. Das sieht nach vielen Seiten aus, dauert aber nur wenige Klicks.</p>
+
+<ol>
+            <li><strong>Startseite öffnen.</strong> Gib in die Adresszeile <code>git.inf7.eu</code> ein. Du siehst die Startseite mit der Überschrift „Git-Server für den Informatikunterricht“. Klicke <strong>oben rechts auf „Anmelden“</strong>.
+                <figure>
+                    <img src="../img/git_01_startseite.jpg" alt="Startseite von git.inf7.eu mit Logo, Überschrift Git-Server für den Informatikunterricht und oben rechts dem Link Anmelden" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 1: Die Startseite. Unten steht: „Für jede Schule wird eine Organisation und die Klassen als Teams angelegt.“ Oben rechts: „Anmelden“.</figcaption>
+                </figure>
+            </li>
+            <li><strong>„Anmelden mit inf7.eu“ wählen.</strong> Es öffnet sich eine Seite mit den Feldern „Benutzername oder E-Mail-Adresse“ und „Passwort“. <strong>Diese Felder benutzt du nicht</strong>, denn du hast auf git.inf7.eu kein eigenes Passwort. Klicke stattdessen unten auf die graue Schaltfläche <strong>„Anmelden mit inf7.eu“</strong>.
+                <figure>
+                    <img src="../img/git_02_forgejo_anmelden.jpg" alt="Anmeldeseite von Forgejo mit Feldern für Benutzername und Passwort, darunter oder und die Schaltfläche Anmelden mit inf7.eu" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 2: Die Anmeldeseite von Forgejo. Richtig ist die untere Schaltfläche „Anmelden mit inf7.eu“. In der Fußzeile siehst du die Forgejo-Version und den Betreiber.</figcaption>
+                </figure>
+            </li>
+            <li><strong>„Continue with beste.schule“ wählen.</strong> Du landest auf <code>auth.inf7.eu</code> („Willkommen auf auth.inf7.eu!“). Das Feld „E-Mail oder Anmeldename“ lässt du leer. Klicke auf die untere blaue Schaltfläche <strong>„Continue with beste.schule“</strong> (auf Deutsch: „Weiter mit beste.schule“).
+                <figure>
+                    <img src="../img/git_03_auth_inf7.jpg" alt="Anmeldeseite auth.inf7.eu mit authentik-Logo, einem Feld E-Mail oder Anmeldename, der Schaltfläche Anmelden und darunter Continue with beste.schule" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 3: Die zentrale Anmeldeseite auth.inf7.eu. Schülerinnen und Schüler nehmen „Continue with beste.schule“.</figcaption>
+                </figure>
+            </li>
+            <li><strong>Bei beste.schule anmelden.</strong> Jetzt erscheint die bekannte Anmeldeseite von beste.schule. Gib deinen Benutzernamen (oder deine E-Mail-Adresse) und dein Passwort von beste.schule ein und klicke auf „Anmelden“. Die Schaltflächen „mit VIDIS anmelden“ bzw. „mit Microsoft anmelden“ nimmst du nur, wenn du dich auch sonst auf diesem Weg bei beste.schule anmeldest.
+                <figure>
+                    <img src="../img/git_04_beste_schule_login.jpg" alt="Anmeldeseite von beste.schule mit Feldern Benutzername oder E-Mail und Passwort, Schaltfläche Anmelden sowie mit VIDIS anmelden und mit Microsoft anmelden" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 4: Die Anmeldeseite von beste.schule. Hier – und nur hier – gibst du dein Passwort ein.</figcaption>
+                </figure>
+                <p class="tipp">Gib dein Passwort nur auf der Anmeldeseite von beste.schule ein und prüfe dazu kurz die Adresszeile des Browsers. Niemand – auch keine Lehrkraft – fragt dich auf git.inf7.eu nach deinem Passwort.</p>
+            </li>
+            <li><strong>Beim ersten Mal: Erlaubnis erteilen.</strong> Bei deiner ersten Anmeldung fragt beste.schule, ob <code>auth.inf7.eu</code> auf dein Konto zugreifen darf. Die Liste zeigt genau, welche Angaben übertragen werden:
+                <ul>
+                    <li><strong>Deine E-Mail-Adresse</strong> – für dein Konto auf dem Git-Server,</li>
+                    <li><strong>Deine Klassen</strong> – damit du in den Teams deiner Klassen bzw. Kurse erscheinst,</li>
+                    <li><strong>OpenID Connect aktivieren</strong> – das ist der Name des technischen Anmeldeverfahrens, keine weitere Angabe über dich,</li>
+                    <li><strong>Ein gekürzter Name (mit Initialen)</strong> – so erscheinst du später z.&nbsp;B. als Autor eines Commits,</li>
+                    <li><strong>Ihre Rolle in der Schule</strong> – also ob du Schülerin bzw. Schüler oder Lehrkraft bist,</li>
+                    <li><strong>Deine Schule</strong> – damit du der Organisation deiner Schule zugeordnet wirst.</li>
+                </ul>
+                Klicke auf <strong>„Erlauben“</strong>. Mit „Abbrechen“ wirst du nicht angemeldet. Bei späteren Anmeldungen erscheint diese Frage normalerweise nicht mehr.
+                <figure>
+                    <img src="../img/git_05_erlaubnis.jpg" alt="Erlaubnisanfrage: auth.inf7.eu bittet um die Erlaubnis, auf Ihr Konto zuzugreifen, mit Liste der Rechte und den Schaltflächen Erlauben und Abbrechen" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 5: Die Erlaubnisanfrage bei der ersten Anmeldung.</figcaption>
+                </figure>
+            </li>
+            <li><strong>Die Übersicht.</strong> Nach der Anmeldung siehst du deine Übersicht. Am Anfang steht dort „Keine Aktivität“, rechts stehen die Reiter <strong>„Repositorys“</strong> (noch 0) und <strong>„Organisationen“</strong> (1 – das ist deine Schule).
+                <figure>
+                    <img src="../img/git_06_uebersicht.jpg" alt="Übersichtsseite nach der Anmeldung mit Menü Issues, Pull-Requests, Meilensteine, Erkunden, dem Hinweis Keine Aktivität und rechts den Reitern Repositorys 0 und Organisationen 1" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 6: Die Übersicht direkt nach der ersten Anmeldung. Oben links unter dem Logo steht dein Benutzername.</figcaption>
+                </figure>
+            </li>
+        </ol>
+
+<table>
+            <thead><tr><th>Element der Übersicht</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+                <tr><td>Logo oben links</td><td>führt von überall zurück zu dieser Übersicht</td></tr>
+                <tr><td>„Issues“, „Pull-Requests“, „Meilensteine“</td><td>sammeln Issues, Pull-Requests und Meilensteine aus allen deinen Repositorys. Issues nutzt du im KI-Projekt, die anderen beiden erst später.</td></tr>
+                <tr><td>„Erkunden“</td><td>zeigt Repositorys, Benutzer und Organisationen, die du sehen darfst</td></tr>
+                <tr><td>Glocke</td><td>Benachrichtigungen, z.&nbsp;B. wenn dich jemand in einem Issue erwähnt</td></tr>
+                <tr><td>„+“</td><td>etwas Neues erstellen, vor allem ein neues Repository (Schritt 2)</td></tr>
+                <tr><td>Profilbild mit Pfeil (oben rechts)</td><td>Menü für dein Konto</td></tr>
+                <tr><td>dein Benutzername (unter dem Logo)</td><td>Dein Benutzername wird automatisch vergeben. Merke ihn dir: Wer dich später in ein Gruppenrepository einladen will, braucht ihn.</td></tr>
+                <tr><td>„Repositorys“ / „Organisationen“ (rechts)</td><td>deine Repositorys mit Suchfeld bzw. die Organisation deiner Schule. In der Organisation sind die Klassen und Kurse als Teams angelegt.</td></tr>
+            </tbody>
+        </table>
+
+<p class="tipp">Am Schulrechner meldest du dich am Ende der Stunde ab (Menü unter deinem Profilbild) und schließt den Browser, damit niemand nach dir in deinem Konto weiterarbeitet.</p>
+
+<h2 id="s2">Schritt 2: Dein Repository anlegen</h2>
+
+<ol>
+            <li>Klicke oben rechts auf <strong>„+“</strong> und im Menü auf <strong>„Neues Repository“</strong>. Die beiden anderen Einträge brauchst du nicht: „Neue Migration“ übernimmt ein Repository von einem anderen Server, „Neue Organisation“ legt eine Organisation an.
+                <figure>
+                    <img src="../img/git_07_menue_neues_repository.jpg" alt="Geöffnetes Plus-Menü mit den Einträgen Neues Repository, Neue Migration und Neue Organisation" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 7: Das Menü hinter dem „+“.</figcaption>
+                </figure>
+            </li>
+            <li>Fülle das Formular „Neues Repository“ von oben nach unten aus. Die Tabelle unter den Bildern erklärt jedes Feld.
+                <figure>
+                    <img src="../img/git_08_formular_name_privat.jpg" alt="Formular Neues Repository, oberer Teil: Besitzer, Repository-Name test-anleitung, angekreuztes Kästchen In privates Repository umwandeln, Beschreibung" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 8: Oberer Teil des Formulars: Besitzer, Name, „privat“ und Beschreibung.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/git_09_initialisieren.jpg" alt="Formular, mittlerer Teil: Vorlage, angekreuztes Kästchen Repository initialisieren, darunter die Felder .gitignore und Lizenz" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 9: Nach dem Haken bei „Repository initialisieren“ erscheinen die Felder „.gitignore“ und „Lizenz“.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/git_10_gitignore_python.jpg" alt="Formular, unterer Teil: im Feld .gitignore ist Python ausgewählt, Lizenz leer, Erweiterte Einstellungen zugeklappt, Schaltfläche Repository erstellen" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 10: Unterer Teil: „.gitignore“ mit der Vorlage „Python“, „Lizenz“ leer, dann „Repository erstellen“.</figcaption>
+                </figure>
+            </li>
+        </ol>
+
+<table>
+            <thead><tr><th>Feld</th><th>Was du einträgst</th><th>Erklärung</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Besitzer</strong></td><td>dein Benutzername (ist vorausgewählt)</td><td>Wem das Repository gehört. Lehrkräfte können hier auch die Organisation der Schule wählen. Für dein eigenes Repository bleibt dein Benutzername stehen.</td></tr>
+                <tr><td><strong>Repository-Name</strong></td><td><code>informatik-11</code></td><td>Erscheint in der Adresse, z.&nbsp;B. <code>git.inf7.eu/dein-benutzername/informatik-11</code>. Nimm Kleinbuchstaben, Ziffern und Bindestriche, keine Leerzeichen und keine Umlaute.</td></tr>
+                <tr><td><strong>In privates Repository umwandeln</strong></td><td><strong>immer ankreuzen</strong></td><td>„Nur der Besitzer oder Organisationsmitglieder mit entsprechender Berechtigung werden in der Lage sein, es zu sehen.“ Ohne Haken wäre dein Repository für andere sichtbar.</td></tr>
+                <tr><td><strong>Beschreibung</strong></td><td>ein Satz, z.&nbsp;B. „Meine Programme aus dem Informatikunterricht“</td><td>Steht oben auf der Repository-Seite und landet beim Initialisieren auch in der README.</td></tr>
+                <tr><td><strong>Eine Vorlage benutzen – Vorlage</strong></td><td>leer lassen</td><td>Damit könnte man ein vorhandenes Vorlage-Repository kopieren. Brauchst du nur, wenn deine Lehrkraft es ausdrücklich sagt.</td></tr>
+                <tr><td><strong>Repository initialisieren</strong></td><td><strong>ankreuzen</strong></td><td>„Die Git-Historie mit einer README-Datei und optional einer Lizenz- und .gitignore-Datei starten.“ Es entsteht sofort ein erster Commit („Initial commit“). Ohne den Haken bekommst du ein leeres Repository ohne Commit, mit dem die Arbeit im Browser umständlicher ist.</td></tr>
+                <tr><td><strong>.gitignore</strong></td><td>„Python“ auswählen</td><td>Legt eine Liste von Dateien an, die Git ignorieren soll, z.&nbsp;B. automatisch erzeugte Python-Dateien. Sie wirkt vor allem, wenn du später mit Git auf einem eigenen Rechner arbeitest. Beim Hochladen im Browser achtest du selbst darauf, nur deine eigenen Dateien hochzuladen.</td></tr>
+                <tr><td><strong>Lizenz</strong></td><td>leer lassen</td><td>Eine Lizenz regelt, was andere mit deinem Code tun dürfen. Bei einem privaten Schul-Repository ist keine nötig. Der Verweis „Choose a license“ führt zu einer englischen Erklärseite.</td></tr>
+                <tr><td><strong>Erweiterte Einstellungen</strong></td><td>zugeklappt lassen</td><td>Hier musst du nichts ändern.</td></tr>
+                <tr><td><strong>Repository erstellen</strong></td><td>klicken</td><td>legt das Repository an und öffnet es</td></tr>
+            </tbody>
+        </table>
+
+<h2 id="s3">Schritt 3: Die Repository-Seite kennenlernen</h2>
+
+<p>Nach dem Erstellen siehst du die Startseite deines Repositorys. Sie enthält schon zwei Dateien – <code>.gitignore</code> und <code>README.md</code> – und einen Commit „Initial commit“. Diese Seite ist dein Ausgangspunkt für alles Weitere.</p>
+
+<figure>
+            <img src="../img/git_11_repository_erstellt.jpg" alt="Neu erstelltes Repository mit Kopfzeile, Reitern, Leiste 1 Commit, 1 Branch, 0 Tags, Dateiliste mit .gitignore und README.md und darunter der angezeigten README" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 11: Das frisch angelegte Repository. Der erste Commit „Initial commit“ ist mit dem gekürzten Namen „R. Richter“ beschriftet, bei dir mit deinem.</figcaption>
+        </figure>
+
+<p>Von oben nach unten:</p>
+
+<table>
+            <thead><tr><th>Bereich</th><th>Element</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+                <tr><td rowspan="5">Kopf</td><td>„Besitzer / Name“ und Etikett „Privat“</td><td>Wem das Repository gehört und wie es heißt. Steht dort <strong>nicht</strong> „Privat“, ist dein Repository öffentlich (siehe Häufige Fehler).</td></tr>
+                <tr><td>RSS-Symbol</td><td>Neuigkeiten des Repositorys als Feed abonnieren – brauchst du nicht</td></tr>
+                <tr><td>„Beobachten“ mit Zahl</td><td>Wer ein Repository beobachtet, wird über Änderungen benachrichtigt. Die 1 bist du selbst.</td></tr>
+                <tr><td>„Favorisieren“ mit Zahl</td><td>ein Stern als Lesezeichen</td></tr>
+                <tr><td>„Fork“ mit Zahl</td><td>Ein Fork ist eine Kopie eines fremden Repositorys im eigenen Konto. Brauchst du nicht.</td></tr>
+                <tr><td rowspan="10">Reiter</td><td>„Code“</td><td>die Dateien – hier arbeitest du fast immer</td></tr>
+                <tr><td>„Issues“</td><td>Aufgaben, Ideen und Fehlermeldungen als Liste; nutzt du im KI-Projekt</td></tr>
+                <tr><td>„Pull-Requests“</td><td>Änderungsvorschläge aus einem anderen Branch; erst im Lernbereich 5</td></tr>
+                <tr><td>„Projekte“</td><td>Boards zur Planung, z.&nbsp;B. ein Kanban-Board; nutzt du im KI-Projekt</td></tr>
+                <tr><td>„Releases“</td><td>veröffentlichte, benannte Versionen eines Programms – brauchst du nicht</td></tr>
+                <tr><td>„Pakete“</td><td>fertig gebaute Softwarepakete – brauchst du nicht</td></tr>
+                <tr><td>„Wiki“</td><td>zusätzliche Dokumentationsseiten – brauchst du nicht, deine Beschreibung steht in der README</td></tr>
+                <tr><td>„Aktivität“</td><td>Überblick, was in letzter Zeit im Repository passiert ist</td></tr>
+                <tr><td>„Aktionen“</td><td>automatische Abläufe, z.&nbsp;B. Tests bei jedem Commit – brauchst du nicht</td></tr>
+                <tr><td>„…“</td><td>weitere Einträge, u.&nbsp;a. die <strong>Einstellungen</strong> des Repositorys (Schritt 10)</td></tr>
+                <tr><td rowspan="2">Beschreibung</td><td>Text unter den Reitern</td><td>die Beschreibung aus dem Formular</td></tr>
+                <tr><td>„Themen verwalten“</td><td>Schlagwörter vergeben – brauchst du nicht</td></tr>
+                <tr><td rowspan="4">Leiste</td><td>„1 Commit“</td><td>Anzahl der Commits. <strong>Ein Klick öffnet die Commit-Liste</strong> (Schritt 8).</td></tr>
+                <tr><td>„1 Branch“</td><td>Anzahl der Branches; bei dir bleibt es bei <code>main</code></td></tr>
+                <tr><td>„0 Tags“</td><td>Tags sind feste Namen für einzelne Commits, z.&nbsp;B. „v1.0“ – brauchst du nicht</td></tr>
+                <tr><td>Größe, z.&nbsp;B. „2,7 KiB“</td><td>Speicherplatz des Repositorys</td></tr>
+                <tr><td rowspan="5">Werkzeugzeile</td><td>„main ▾“</td><td>Branch-Auswahl. Hier steht, welchen Stand du gerade ansiehst.</td></tr>
+                <tr><td>Symbol mit zwei Pfeilen</td><td>Branches vergleichen bzw. Pull-Request starten – erst im Lernbereich 5</td></tr>
+                <tr><td>„Datei suchen“</td><td>eine Datei über ihren Namen finden</td></tr>
+                <tr><td>„Datei hinzufügen ▾“</td><td>„Neue Datei“, „Datei hochladen“, „Patch anwenden“ (Schritt 4)</td></tr>
+                <tr><td>„HTTPS | SSH | Adresse | Kopieren | …“</td><td>Klon-Adresse für Git auf einem eigenen Rechner und das Menü zum Herunterladen (Schritt 9)</td></tr>
+                <tr><td>Suche</td><td>„Code durchsuchen …“</td><td>sucht im <em>Inhalt</em> der Dateien, z.&nbsp;B. nach einem Funktionsnamen</td></tr>
+                <tr><td>Letzter Commit</td><td>Autor, gekürzte SHA, Nachricht, Zeit</td><td>Der neueste Commit des Repositorys. Ein Klick auf die SHA zeigt, was in diesem Commit geändert wurde (Schritt 6).</td></tr>
+                <tr><td>Dateiliste</td><td>Dateiname und Nachricht</td><td>Neben jeder Datei steht die Nachricht des Commits, der sie zuletzt geändert hat, und wann das war.</td></tr>
+                <tr><td>README</td><td>„README.md“ mit Stift</td><td>Der Inhalt der README wird automatisch angezeigt. Mit dem Stift bearbeitest du sie (Schritt 7).</td></tr>
+            </tbody>
+        </table>
+
+<h2 id="s4">Schritt 4: Eine Datei hochladen und committen</h2>
+
+<p><strong>Vorbereitung:</strong> Speichere dein Programm in Thonny als <code>.py</code>-Datei, bzw. lade dein Notebook in JupyterLite herunter (Rechtsklick auf die Datei → <em>Download</em>). Gib der Datei einen klaren Namen ohne Leerzeichen und Umlaute, z.&nbsp;B. <code>sortieren.py</code>. Teste das Programm, bevor du es hochlädst.</p>
+
+<ol>
+            <li><strong>Menü öffnen:</strong> Klicke in deinem Repository auf <strong>„Datei hinzufügen ▾“</strong>. Im Menü stehen:
+                <ul>
+                    <li><strong>„Neue Datei“</strong> – eine Datei direkt im Browser schreiben (Schritt 7),</li>
+                    <li><strong>„Datei hochladen“</strong> – eine fertige Datei von deinem Rechner hochladen; <strong>das nimmst du jetzt</strong>,</li>
+                    <li><strong>„Patch anwenden“</strong> – Änderungen im Diff-Format einspielen; brauchst du nicht.</li>
+                </ul>
+                <figure>
+                    <img src="../img/git_12_datei_hinzufuegen.jpg" alt="Geöffnetes Menü Datei hinzufügen mit den Einträgen Neue Datei, Datei hochladen und Patch anwenden" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 12: Das Menü „Datei hinzufügen“.</figcaption>
+                </figure>
+            </li>
+            <li><strong>Ziel wählen:</strong> Oben steht eine Pfadzeile „<code>informatik-11 /</code> [Verzeichnis erstellen …]“. Lässt du das Feld leer, landet die Datei im obersten Ordner. Trägst du z.&nbsp;B. <code>wochenuebungen</code> ein, landet sie im Ordner <code>wochenuebungen/</code>; gibt es ihn noch nicht, wird er angelegt. Mit „oder Abbrechen“ verlässt du die Seite, ohne etwas zu ändern.</li>
+            <li><strong>Datei auswählen:</strong> Ziehe die Datei in das gestrichelte Feld „Dateien zum Hochladen hier ablegen oder klicken.“ oder klicke hinein und wähle sie aus. Danach erscheint eine Kachel mit Größe und Dateinamen. Mit <strong>„Datei entfernen“</strong> nimmst du eine falsch gewählte Datei wieder heraus. „Copy link“ brauchst du nicht. Du kannst auch mehrere Dateien auf einmal hochladen; sie landen dann in <em>einem</em> Commit.</li>
+            <li><strong>Commit-Nachricht schreiben:</strong> Darunter steht der Kasten <strong>„Änderungen committen“</strong>. In die erste Zeile (Kurzbeschreibung) schreibst du deine Commit-Nachricht. Dort steht anfangs nur grau ein Vorschlag wie „Dateien nach … hochladen“ – der sagt nichts darüber aus, <em>was</em> du geändert hast. Schreib immer deine eigene Nachricht (siehe Gute Commit-Nachrichten).
+                <figure>
+                    <img src="../img/git_13_hochladen_commitnachricht.jpg" alt="Seite Datei hochladen mit Pfadzeile, hochgeladener Datei sortieren.py (0,6 KB) und Kasten Änderungen committen mit der Nachricht Bubblesort V1: ohne Optimierung, n=1000: 0,09 s, n=2000: 0,36 s" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 13: Datei <code>sortieren.py</code> ist ausgewählt, die Commit-Nachricht enthält Version und Messwerte (Beispielwerte).</figcaption>
+                </figure>
+            </li>
+            <li><strong>Optionen prüfen</strong> und auf <strong>„Änderungen committen“</strong> klicken. Was die übrigen Felder bedeuten, steht in der Tabelle.
+                <figure>
+                    <img src="../img/git_14_commit_optionen.jpg" alt="Kasten Änderungen committen mit Kurzbeschreibung, Feld für ausführliche Beschreibung, Kästchen Signed-off-by, Auswahl Direkt in den Branch main einchecken oder neuen Branch erstellen, Feld Commit-E-Mail und Schaltflächen Änderungen committen und Abbrechen" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 14: Alle Optionen des Kastens „Änderungen committen“. Ausgewählt ist „Direkt in den Branch ‚main‘ einchecken.“ – so bleibt es.</figcaption>
+                </figure>
+            </li>
+        </ol>
+
+<table>
+            <thead><tr><th>Feld bzw. Option</th><th>Was du tust</th><th>Erklärung</th></tr></thead>
+            <tbody>
+                <tr><td>erste Zeile (Kurzbeschreibung)</td><td>eigene Commit-Nachricht eintragen</td><td>Das ist die Commit-Nachricht, die später in allen Listen erscheint.</td></tr>
+                <tr><td>„Eine ausführlichere (optionale) Beschreibung hinzufügen …“</td><td>bei Bedarf ausfüllen</td><td>Platz für Einzelheiten, z.&nbsp;B. mit welchen Daten gemessen wurde oder welche Testfälle du geprüft hast. Erscheint, wenn man den Commit öffnet.</td></tr>
+                <tr><td>„Am Ende der Commit-Nachricht einen ‚Signed-off-by‘-Anhang vom Committer hinzufügen.“</td><td>nicht ankreuzen</td><td>Hängt eine Zeile mit deinem Namen an. In manchen Open-Source-Projekten bestätigt man damit, dass man den Beitrag einreichen darf. Für uns ohne Bedeutung.</td></tr>
+                <tr><td>„Direkt in den Branch ‚main‘ einchecken.“</td><td><strong>ausgewählt lassen</strong></td><td>Der Commit landet sofort im Hauptbranch <code>main</code>. Das ist für dich immer richtig.</td></tr>
+                <tr><td>„Einen <strong>neuen Branch</strong> für diesen Commit erstellen und einen Pull-Request starten.“</td><td><strong>nicht wählen</strong></td><td>Dann landet die Änderung in einem neuen Nebenzweig, und ein Pull-Request (ein Antrag, die Änderung nach <code>main</code> zu übernehmen) wird begonnen. Das ist für Teams gedacht, die Änderungen erst prüfen; das lernst du im Lernbereich 5.</td></tr>
+                <tr><td>„Commit-E-Mail“</td><td>nicht ändern</td><td>Ist automatisch mit einer Adresse der Form <code>dein-benutzername@noreply.git.inf7.eu</code> gefüllt. „noreply“ bedeutet: keine echte Postfachadresse. So steht deine echte E-Mail-Adresse nicht in jedem Commit.</td></tr>
+                <tr><td>„Änderungen committen“ / „Abbrechen“</td><td>committen</td><td>erzeugt den Commit bzw. verwirft alles</td></tr>
+            </tbody>
+        </table>
+
+<ol start="6">
+            <li><strong>Ergebnis kontrollieren:</strong> Du landest wieder auf der Repository-Seite. Die neue Datei steht in der Liste, daneben deine Commit-Nachricht, und oben steht dein Commit mit einer neuen SHA.
+                <figure>
+                    <img src="../img/git_15_nach_dem_commit.jpg" alt="Repository-Seite nach dem Commit: oben der neue Commit f67d3abf0d mit der Nachricht Bubblesort V1, in der Dateiliste zusätzlich sortieren.py" style="max-width:100%; border:1px solid #ccc">
+                    <figcaption>Bild 15: Nach dem Commit: <code>sortieren.py</code> ist da, neben der Datei steht die Commit-Nachricht.</figcaption>
+                </figure>
+                <p class="tipp">Prüfe nach jedem Commit kurz die Commit-Liste (Klick auf „… Commits“). Beim Erstellen dieser Anleitung kam ein Commit einmal nicht an. Steht dein Commit nicht in der Liste, wiederhole das Hochladen.</p>
+            </li>
+        </ol>
+
+<h2 id="s5">Schritt 5: Eine Datei ansehen – Originalformat, Permalink, Blame, Verlauf</h2>
+
+<p>Klicke in der Dateiliste auf einen Dateinamen. Du siehst den Inhalt mit Zeilennummern und farbiger Syntaxhervorhebung.</p>
+
+<figure>
+            <img src="../img/git_16_dateiansicht.jpg" alt="Dateiansicht von sortieren.py mit letzter Commit-Zeile, Kopfzeile 28 Zeilen, 836 B, Python, den Schaltflächen Originalformat, Permalink, Blame, Verlauf und Symbolen, darunter der Python-Code mit Zeilennummern" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 16: Die Dateiansicht. Oben der Commit, der die Datei zuletzt geändert hat, darunter die Kopfzeile mit Schaltflächen.</figcaption>
+        </figure>
+
+<table>
+            <thead><tr><th>Element</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+                <tr><td>„test-anleitung / sortieren.py“ mit Kopier-Symbol</td><td>der Pfad der Datei; das Symbol kopiert ihn</td></tr>
+                <tr><td>Commit-Zeile</td><td>der letzte Commit, der <em>diese Datei</em> geändert hat</td></tr>
+                <tr><td>„28 Zeilen | 836 B | Python“</td><td>Länge, Größe in Byte und erkannte Sprache</td></tr>
+                <tr><td><strong>„Originalformat“</strong></td><td>zeigt die reine Datei ohne Forgejo-Rahmen. Praktisch zum Kopieren oder Speichern.</td></tr>
+                <tr><td><strong>„Permalink“</strong></td><td>ein fester Link auf <em>genau diese Version</em> der Datei. Er zeigt auch später noch diesen Stand, selbst wenn die Datei inzwischen geändert wurde.</td></tr>
+                <tr><td><strong>„Blame“</strong></td><td>zeigt für jede Zeile, in welchem Commit und von wem sie zuletzt geändert wurde (engl. to blame: verantwortlich machen). Im Team sehr nützlich.</td></tr>
+                <tr><td><strong>„Verlauf“</strong></td><td>alle Commits, die <em>diese Datei</em> verändert haben (Bild 17)</td></tr>
+                <tr><td>Pfeil nach unten</td><td>die Datei herunterladen</td></tr>
+                <tr><td>zwei Rechtecke</td><td>den ganzen Inhalt in die Zwischenablage kopieren</td></tr>
+                <tr><td>RSS-Symbol</td><td>Änderungen dieser Datei als Feed – brauchst du nicht</td></tr>
+                <tr><td>Stift</td><td>die Datei im Browser bearbeiten (Schritt 7)</td></tr>
+                <tr><td>Mülleimer</td><td>die Datei löschen. Auch das ist ein Commit: Die Datei verschwindet aus dem aktuellen Stand, bleibt aber in der Historie.</td></tr>
+            </tbody>
+        </table>
+
+<p>Ein Klick auf <strong>„Verlauf“</strong> zeigt die Historie dieser einen Datei:</p>
+
+<figure>
+            <img src="../img/git_17_dateiverlauf.jpg" alt="Verlauf der Datei sortieren.py: Tabelle mit Spalten Autor, SHA1, Nachricht, Datum und zwei Commits Bubblesort V2 und Bubblesort V1; oben steht 3 Commits" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 17: Der Verlauf von <code>sortieren.py</code>. Oben steht „3 Commits“ (das ganze Repository), die Liste zeigt nur die zwei Commits, die diese Datei geändert haben.</figcaption>
+        </figure>
+
+<p>Die Spalten heißen <strong>Autor</strong>, <strong>SHA1</strong> (die gekürzte Kennung des Commits), <strong>Nachricht</strong> und <strong>Datum</strong>. Rechts in jeder Zeile stehen kleine Symbole; fährst du mit der Maus darüber, erscheint eine Erklärung. Das erste kopiert die SHA („SHA kopieren“), das Symbol „An diesem Punkt im Verlauf anzeigen“ lernst du in Schritt 8 kennen. Die Schaltfläche <strong>„Commit-Graph“</strong> zeigt die Commits als Grafik; das ist erst bei mehreren Branches interessant.</p>
+
+<h2 id="s6">Schritt 6: Versionen vergleichen</h2>
+
+<p>Klicke in einer Commit-Liste oder im Verlauf auf eine <strong>SHA</strong>. Forgejo zeigt dann, was dieser Commit gegenüber seinem Vorgänger geändert hat.</p>
+
+<figure>
+            <img src="../img/git_18_commit_vergleich.jpg" alt="Commit-Ansicht: Titel Bubblesort V2, Schaltflächen Quellcode durchsuchen und Operationen, Autor, Ursprung f67d3abf0d, Commit 75a5186538, Zeile 1 geänderte Dateien mit 7 neuen und 2 gelöschten Zeilen und Beginn des Vergleichs" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 18: Die Commit-Ansicht von „Bubblesort V2“. „Ursprung“ ist der Vorgänger-Commit.</figcaption>
+        </figure>
+
+<table>
+            <thead><tr><th>Element</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+                <tr><td>Titel</td><td>die Commit-Nachricht</td></tr>
+                <tr><td>„Quellcode durchsuchen“</td><td>öffnet das ganze Repository in genau diesem Stand</td></tr>
+                <tr><td>„Operationen ▾“</td><td>weitere Git-Funktionen für Fortgeschrittene – brauchst du nicht</td></tr>
+                <tr><td>Autor und Zeit</td><td>wer den Commit wann erzeugt hat</td></tr>
+                <tr><td>„Ursprung f67d3abf0d“</td><td>der Vorgänger-Commit, mit dem verglichen wird (anklickbar)</td></tr>
+                <tr><td>„Commit 75a5186538“</td><td>die Kennung dieses Commits</td></tr>
+                <tr><td>„1 geänderte Dateien mit 7 neuen und 2 gelöschten Zeilen“</td><td>die Zusammenfassung des Diffs</td></tr>
+                <tr><td>„9“, grün-roter Balken, Dateiname</td><td>je Datei: Zahl der geänderten Zeilen (7 + 2 = 9) und ihr Verhältnis als Balken</td></tr>
+                <tr><td>„Unescapen“</td><td>stellt bestimmte Sonderzeichen anders dar; brauchst du selten</td></tr>
+                <tr><td>„Datei anzeigen“</td><td>zeigt die ganze Datei in diesem Stand</td></tr>
+            </tbody>
+        </table>
+
+<figure>
+            <img src="../img/git_19_commit_vergleich_detail.jpg" alt="Diff von sortieren.py mit zwei Spalten Zeilennummern: rote Zeilen 5 und 8 entfernt, grüne Zeilen 5, 8, 9, 12, 13, 14 und 21 hinzugefügt, geänderte Wörter zusätzlich hervorgehoben" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 19: Der Diff im Detail. Links die alten, rechts die neuen Zeilennummern.</figcaption>
+        </figure>
+
+<p><strong>So liest du den Diff in Bild 19:</strong></p>
+
+<ul>
+            <li><strong>Zwei Spalten mit Zeilennummern:</strong> links die Nummer in der alten Fassung, rechts in der neuen. Unveränderte Zeilen (weiß) haben beide Nummern, z.&nbsp;B. 6 und 6.</li>
+            <li><strong>Rot mit <code>-</code></strong> und nur linker Nummer: Diese Zeile gab es nur in der alten Fassung. <strong>Grün mit <code>+</code></strong> und nur rechter Nummer: Diese Zeile ist neu. Innerhalb einer geänderten Zeile sind die geänderten Wörter zusätzlich kräftig markiert, z.&nbsp;B. „1: ohne Optimierung“ → „2: mit vorzeitigem Abbruch“.</li>
+            <li><strong>Kopfzeile <code>@@ -2,18 +2,23 @@ import time</code>:</strong> Der gezeigte Ausschnitt (ein „Hunk“) beginnt in der alten und in der neuen Fassung bei Zeile 2. Er umfasst alt 18 und neu 23 Zeilen. Probe: 18 − 2 gelöschte + 7 neue = 23. Dahinter zeigt Forgejo zur Orientierung eine Zeile, die vor dem Ausschnitt steht.</li>
+            <li><strong>Was wurde inhaltlich geändert?</strong> Die alte Zeile 8 <code>for i in range(n - 1):</code> wurde ersetzt durch <code>getauscht = False</code> und die kürzere innere Schleife <code>for i in range(n - 1 - durchlauf):</code>. Neu sind außerdem die Zeilen 12 bis 14 (vorzeitiger Abbruch) und ein weiterer Testfall in Zeile 21.</li>
+            <li>Über die kleinen Symbole rechts über dem Vergleich lässt sich die Darstellung umschalten (z.&nbsp;B. alt und neu nebeneinander). Probiere es aus.</li>
+        </ul>
+
+<p class="tipp">Ein Commit wird immer mit seinem direkten Vorgänger verglichen. Willst du Version 1 mit Version 3 vergleichen, sieh dir die Commits dazwischen nacheinander an – deshalb lohnt es sich, jede Version einzeln zu committen.</p>
+
+<h2 id="s7">Schritt 7: Im Browser bearbeiten – die README in Markdown</h2>
+
+<p>Kleine Änderungen machst du direkt im Browser, z.&nbsp;B. an der README. Klicke dazu in der Dateiansicht oder unter der angezeigten README auf den <strong>Stift</strong>. Es öffnet sich der Web-Editor.</p>
+
+<figure>
+            <img src="../img/git_20_editor.jpg" alt="Web-Editor für README.md mit Reitern Datei bearbeiten, Vorschau und Vorschau der Änderungen, dem Markdown-Text mit Zeilennummern und darunter dem Kasten Änderungen committen mit dem Vorschlag README.md aktualisiert" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 20: Der Web-Editor, Reiter „Datei bearbeiten“. Unten wieder der Kasten „Änderungen committen“.</figcaption>
+        </figure>
+
+<ul>
+            <li><strong>Oben:</strong> Pfad und Dateiname (<code>README.md</code>). Den Namen lässt du unverändert. „oder Abbrechen“ verwirft alle Änderungen.</li>
+            <li><strong>Reiter „Datei bearbeiten“:</strong> Hier schreibst du. Die Schaltfläche „Search“ sucht im Text.</li>
+            <li><strong>Reiter „Vorschau“:</strong> zeigt, wie der Markdown-Text später aussieht (Bild 21).</li>
+            <li><strong>Reiter „Vorschau der Änderungen“:</strong> zeigt den Diff, <em>bevor</em> du committest (Bild 22). Das ist deine letzte Kontrolle.</li>
+            <li><strong>Unten:</strong> derselbe Kasten „Änderungen committen“ wie beim Hochladen. Forgejo schlägt „README.md aktualisiert“ vor – besser ist eine eigene Nachricht, z.&nbsp;B. „README: Inhaltsverzeichnis ergänzt“.</li>
+        </ul>
+
+<figure>
+            <img src="../img/git_21_editor_vorschau.jpg" alt="Reiter Vorschau: die README wird mit Überschrift test-anleitung, Text, Unterüberschrift Inhalt und einer Aufzählung mit sortieren.py in Code-Schrift dargestellt" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 21: Die Vorschau: aus <code>#</code> wird eine Überschrift, aus <code>-</code> ein Aufzählungspunkt, aus <code>`sortieren.py`</code> Code-Schrift.</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_22_editor_aenderungen.jpg" alt="Reiter Vorschau der Änderungen: Diff mit Kopf @@ -1,3 +1,7 @@, rote Zeile 3 und grüne Zeilen 3 bis 7" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 22: Die Vorschau der Änderungen. Die Zeile 3 erscheint als gelöscht und neu, obwohl ihr Text gleich ist.</figcaption>
+        </figure>
+
+<p><strong>Warum ist Zeile 3 in Bild 22 rot und grün?</strong> In der alten Datei stand nach der letzten Zeile kein Zeilenumbruch. Durch das Weiterschreiben bekommt diese Zeile einen. Git vergleicht ganze Zeilen einschließlich des Zeilenendes, deshalb gilt sie als geändert. Das ist harmlos.</p>
+
+<div class="hinweis">
+            <p><strong>Web-Editor oder Thonny?</strong> Im Web-Editor kannst du Programme nicht ausführen. Kleine Korrekturen (README, Kommentare, Tippfehler) machst du im Browser. Größere Änderungen am Code machst du in Thonny bzw. JupyterLite, testest sie dort und lädst die Datei mit demselben Namen neu hoch (Schritt 4). Jede Änderung schließt du mit einem Commit und einer neuen Nachricht ab.</p>
+            <p><strong>Neue Datei im Browser:</strong> Über „Datei hinzufügen“ → „Neue Datei“ öffnet sich derselbe Editor mit leerem Namensfeld. Gibst du im Namen einen Ordner mit Schrägstrich an, z.&nbsp;B. <code>wochenuebungen/kw44_sortieren.py</code>, landet die Datei in diesem Ordner.</p>
+        </div>
+
+<h3>Markdown für die README</h3>
+
+<table>
+            <thead><tr><th>Du schreibst</th><th>Ergebnis</th></tr></thead>
+            <tbody>
+                <tr><td><code># Überschrift</code>, <code>## Unterüberschrift</code></td><td>Überschriften der Ebene 1 bzw. 2</td></tr>
+                <tr><td><code>**wichtig**</code>, <code>*betont*</code></td><td><strong>wichtig</strong>, <em>betont</em></td></tr>
+                <tr><td><code>- Punkt</code> bzw. <code>1. Punkt</code></td><td>Aufzählung bzw. nummerierte Liste</td></tr>
+                <tr><td><code>`sortiere(liste)`</code></td><td>Code im Text: <code>sortiere(liste)</code></td></tr>
+                <tr><td><code>[Kursseite](https://…)</code></td><td>Verweis mit dem Text „Kursseite“</td></tr>
+                <tr><td>Tabelle mit <code>|</code> und einer Trennzeile <code>|---|---|</code></td><td>Tabelle</td></tr>
+                <tr><td>eine Leerzeile</td><td>neuer Absatz. Ohne Leerzeile werden Zeilen oft zu einem Absatz zusammengezogen.</td></tr>
+            </tbody>
+        </table>
+
+<pre><code># informatik-11
+
+Meine Programme aus dem Leistungskurs Informatik, Klasse 11.
+
+## Inhalt
+- `wochenuebungen/` – Lösungen der Wochenübungen
+- `sortierexperiment.py` – Laufzeitexperiment (siehe Commit-Historie)
+
+## Hinweise
+Alle Programme laufen in Thonny oder im JupyterLite der Schule.</code></pre>
+
+<h2 id="s8">Schritt 8: Alte Stände ansehen und zurückholen</h2>
+
+<p>Klicke auf der Repository-Seite auf <strong>„… Commits“</strong>. Du siehst die Commit-Liste des ganzen Repositorys, der neueste Commit steht oben. Mit dem Feld „Commits suchen …“ findest du Commits über Wörter aus der Nachricht; „Dieser Branch“ bedeutet, dass nur in <code>main</code> gesucht wird.</p>
+
+<figure>
+            <img src="../img/git_23_commit_liste.jpg" alt="Commit-Liste mit 4 Commits: README: Inhaltsverzeichnis ergaenzt, Bubblesort V2, Bubblesort V1, Initial commit, jeweils mit Autor, SHA1 und Datum" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 23: Die Commit-Liste mit vier Commits. Die Historie erzählt die Entstehung des Repositorys.</figcaption>
+        </figure>
+
+<p>Rechts neben jedem Commit stehen zwei Symbole: „SHA kopieren“ und <strong>„An diesem Punkt im Verlauf anzeigen“</strong>.</p>
+
+<figure>
+            <img src="../img/git_24_an_diesem_punkt.jpg" alt="Commit-Liste, die Maus zeigt beim Commit Bubblesort V1 auf das rechte Symbol, der Hinweis An diesem Punkt im Verlauf anzeigen erscheint" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 24: Das Symbol „An diesem Punkt im Verlauf anzeigen“.</figcaption>
+        </figure>
+
+<p>Ein Klick darauf zeigt dir das <strong>ganze Repository so, wie es nach diesem Commit war</strong>:</p>
+
+<figure>
+            <img src="../img/git_25_alter_stand.jpg" alt="Repository im alten Stand: in der Branch-Auswahl steht f67d3abf0d statt main, oben 2 Commits, sortieren.py mit der Nachricht Bubblesort V1, README ohne Inhaltsverzeichnis; die Schaltfläche Datei hinzufügen fehlt" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 25: Der Stand nach „Bubblesort V1“. Statt „main“ steht oben die SHA <code>f67d3abf0d</code>.</figcaption>
+        </figure>
+
+<p>Woran du erkennst, dass du einen alten Stand ansiehst:</p>
+
+<ul>
+            <li>In der Branch-Auswahl steht die <strong>SHA</strong> statt <code>main</code>.</li>
+            <li>Die Leiste zeigt nur die Commits bis zu diesem Stand (hier „2 Commits“).</li>
+            <li>Dateiliste und README zeigen den alten Inhalt (die README hat hier noch kein Inhaltsverzeichnis).</li>
+            <li>Die Schaltfläche „Datei hinzufügen“ fehlt: Einen alten Stand kann man ansehen, aber nicht verändern.</li>
+        </ul>
+
+<p>Klickst du jetzt auf <code>sortieren.py</code>, siehst du die Datei in Version 1. Mit „Originalformat“ öffnest du sie als reine Datei, mit dem Pfeil lädst du sie herunter. <strong>Zurück zum aktuellen Stand</strong> kommst du, indem du in der Branch-Auswahl wieder <code>main</code> wählst.</p>
+
+<h3>Eine alte Fassung zurückholen</h3>
+
+<p>Git dreht die Historie nicht zurück. Du holst den alten Inhalt und speicherst ihn als <strong>neuen</strong> Commit. Dafür gibt es zwei Wege:</p>
+
+<table>
+            <thead><tr><th>Weg A: herunterladen und neu hochladen</th><th>Weg B: Inhalt kopieren und im Editor einfügen</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <ol>
+                            <li>Commit-Liste → beim gewünschten Commit „An diesem Punkt im Verlauf anzeigen“.</li>
+                            <li>Datei anklicken → Pfeil (Herunterladen), bzw. „Originalformat“ und im Browser speichern.</li>
+                            <li>Dateinamen prüfen: Er muss genau so heißen wie die aktuelle Datei.</li>
+                            <li>Branch-Auswahl → <code>main</code>.</li>
+                            <li>„Datei hinzufügen“ → „Datei hochladen“, Datei hineinziehen.</li>
+                            <li>Nachricht, z.&nbsp;B. „V1 wiederhergestellt, V2 sortierte falsch“, dann „Änderungen committen“.</li>
+                        </ol>
+                    </td>
+                    <td>
+                        <ol>
+                            <li>Commit-Liste → beim gewünschten Commit „An diesem Punkt im Verlauf anzeigen“.</li>
+                            <li>Datei anklicken → Symbol „Inhalt kopieren“ (zwei Rechtecke).</li>
+                            <li>Branch-Auswahl → <code>main</code>, dieselbe Datei öffnen → Stift.</li>
+                            <li>Im Editor alles markieren (<kbd>Strg</kbd>&nbsp;+&nbsp;<kbd>A</kbd>) und einfügen (<kbd>Strg</kbd>&nbsp;+&nbsp;<kbd>V</kbd>).</li>
+                            <li>„Vorschau der Änderungen“ prüfen.</li>
+                            <li>Nachricht eintragen und „Änderungen committen“.</li>
+                        </ol>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+<h2 id="s9">Schritt 9: Herunterladen und Klonen</h2>
+
+<p>Rechts in der Werkzeugzeile der Repository-Seite stehen „HTTPS“, „SSH“, die Klon-Adresse, ein Kopier-Symbol und das Menü <strong>„…“</strong>.</p>
+
+<figure>
+            <img src="../img/git_26_menue_herunterladen.jpg" alt="Geöffnetes Menü mit ZIP herunterladen, TAR.GZ herunterladen, BUNDLE herunterladen, Öffnen mit VS Code, Öffnen mit VSCodium, Öffnen mit IntelliJ IDEA" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 26: Das Menü „…“ neben der Klon-Adresse.</figcaption>
+        </figure>
+
+<table>
+            <thead><tr><th>Eintrag</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+                <tr><td>„ZIP herunterladen“</td><td>alle Dateien im aktuellen Stand als ZIP-Archiv, z.&nbsp;B. als Sicherung am Schuljahresende. Die Historie ist darin <em>nicht</em> enthalten.</td></tr>
+                <tr><td>„TAR.GZ herunterladen“</td><td>dasselbe in einem anderen Archivformat (unter Linux üblich)</td></tr>
+                <tr><td>„BUNDLE herunterladen“</td><td>ein Git-Paket mit der vollständigen Historie; nur sinnvoll, wenn Git auf dem Rechner installiert ist</td></tr>
+                <tr><td>„Öffnen mit VS Code“, „… VSCodium“, „… IntelliJ IDEA“</td><td>öffnet das Repository in einem dieser Programme, wenn es installiert ist – brauchst du nicht</td></tr>
+                <tr><td>„HTTPS“ / „SSH“ + Adresse + Kopieren</td><td>Die Adresse braucht man, um das Repository mit Git auf einem eigenen Rechner zu <strong>klonen</strong> (vollständig zu kopieren, mit Historie). Das lernst du im Lernbereich 5.</td></tr>
+            </tbody>
+        </table>
+
+<p>Eine einzelne Datei lädst du in der Dateiansicht über den Pfeil herunter (Schritt 5).</p>
+
+<h2 id="s10">Schritt 10: Die Lehrkraft einladen (falls verlangt)</h2>
+
+<p>Dein Repository ist privat. Soll deine Lehrkraft hineinsehen, lädst du sie als <strong>Mitarbeiter</strong> ein – aber nur, wenn sie dich darum bittet:</p>
+
+<ol>
+            <li>Reiter „…“ → <strong>Einstellungen</strong> → links <strong>„Mitarbeiter“</strong>.</li>
+            <li>Im Feld „Benutzer suchen …“ den Benutzernamen der Lehrkraft eingeben und aus der Liste auswählen.</li>
+            <li>„Mitarbeiter hinzufügen“ klicken. Danach lassen sich die Rechte in der Regel in dieser Liste einstellen; zum Ansehen genügen Leserechte.</li>
+        </ol>
+
+<figure>
+            <img src="../img/git_33_mitarbeiter.jpg" alt="Einstellungen des Repositorys, links Repository, Einheiten, Mitarbeiter, Webhooks, Branches, Tags, Deploy-Schlüssel, LFS, Aktionen; rechts Bereich Mitarbeiter mit Feld Benutzer suchen und Schaltfläche Mitarbeiter hinzufügen" style="max-width:100%; border:1px solid #ccc">
+            <figcaption>Bild 27: Einstellungen → „Mitarbeiter“. Die übrigen Bereiche links brauchst du nicht.</figcaption>
+        </figure>
+
+<h2 id="regeln">Regeln für gute Commit-Nachrichten</h2>
+
+<table>
+            <thead><tr><th>schwach</th><th>besser</th></tr></thead>
+            <tbody>
+                <tr><td>„Dateien nach … hochladen“ (Vorschlag übernommen)</td><td>„Bubblesort V1: ohne Optimierung, n=1000: 0,09 s, n=2000: 0,36 s“</td></tr>
+                <tr><td>„README.md aktualisiert“ (Vorschlag übernommen)</td><td>„README: Inhaltsverzeichnis ergänzt“</td></tr>
+                <tr><td>„neue Version“</td><td>„Bubblesort V2: vorzeitiger Abbruch + kürzere innere Schleife, n=1000: 0,06 s, n=2000: 0,24 s“</td></tr>
+            </tbody>
+        </table>
+
+<p class="tipp">Umlaute sind in Commit-Nachrichten erlaubt. Die Messwerte in der Tabelle sind Beispielwerte.</p>
+
+<h2 id="faq">Häufige Fehler und Fragen</h2>
+
+<table>
+            <thead><tr><th>Problem</th><th>Ursache und Lösung</th></tr></thead>
+            <tbody>
+                <tr><td>Ich habe meinen Benutzernamen und mein Passwort in die Felder auf git.inf7.eu eingegeben – es klappt nicht.</td><td>Dort hast du kein Passwort. Nimm „Anmelden mit inf7.eu“ → „Continue with beste.schule“ (Schritt 1).</td></tr>
+                <tr><td>Bei der Erlaubnisanfrage habe ich „Abbrechen“ geklickt.</td><td>Dann bist du nicht angemeldet. Melde dich neu an und klicke auf „Erlauben“.</td></tr>
+                <tr><td>Neben dem Namen meines Repositorys steht nicht „Privat“.</td><td>Du hast den Haken vergessen. Die Sichtbarkeit lässt sich in den Einstellungen des Repositorys (Reiter „…“ → Einstellungen, Bereich „Repository“) nachträglich ändern. Sag im Zweifel deiner Lehrkraft Bescheid.</td></tr>
+                <tr><td>Mein Repository ist leer, es gibt keine README.</td><td>„Repository initialisieren“ war nicht angekreuzt. Lege am einfachsten ein neues Repository richtig an und frage deine Lehrkraft, was mit dem leeren geschehen soll.</td></tr>
+                <tr><td>Mein Commit steht nicht in der Commit-Liste.</td><td>Seite neu laden und noch einmal nachsehen. Fehlt er weiter, das Hochladen bzw. Bearbeiten wiederholen.</td></tr>
+                <tr><td>Nach dem Hochladen habe ich <code>sortieren.py</code> <em>und</em> <code>sortieren(1).py</code>.</td><td>Die Datei hatte einen anderen Namen. Lösche die überzählige Datei (Mülleimer, mit Commit-Nachricht) und lade die richtige Datei mit dem richtigen Namen hoch.</td></tr>
+                <tr><td>Ich habe „Einen neuen Branch … erstellen und einen Pull-Request starten“ gewählt.</td><td>Deine Änderung liegt dann nicht in <code>main</code>. Brich den Pull-Request ab, wechsle in der Branch-Auswahl zu <code>main</code> und mache die Änderung dort noch einmal mit „Direkt in den Branch ‚main‘ einchecken“. Frage bei Unklarheit deine Lehrkraft.</td></tr>
+                <tr><td>Die Schaltfläche „Datei hinzufügen“ ist verschwunden.</td><td>Du siehst einen alten Stand (oben steht eine SHA statt <code>main</code>). Wähle in der Branch-Auswahl <code>main</code>.</td></tr>
+                <tr><td>Im Diff ist meine letzte alte Zeile rot und grün, obwohl ich sie nicht geändert habe.</td><td>Am Dateiende fehlte ein Zeilenumbruch (Schritt 7). Harmlos.</td></tr>
+                <tr><td>In meiner Commit-Nachricht ist ein Tippfehler.</td><td>Eine Commit-Nachricht lässt sich im Browser nicht nachträglich ändern. Beim nächsten Commit besser machen.</td></tr>
+                <tr><td>Ich habe ein Passwort oder fremde Daten hochgeladen.</td><td>Sofort das Passwort ändern und der Lehrkraft Bescheid sagen. Löschen allein genügt nicht, weil die Historie den alten Stand behält.</td></tr>
+                <tr><td>Mein Programm läuft im Web-Editor nicht.</td><td>Der Web-Editor führt keine Programme aus. Teste in Thonny bzw. JupyterLite.</td></tr>
+            </tbody>
+        </table>
+
+<h2 id="beispiele">Beispiele</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Mia schreibt ein Programm, das Temperaturen von Grad Celsius in Grad Fahrenheit umrechnet (F = C · 9/5 + 32). Sie legt es in drei Commits in ihrem Repository <code>informatik-11</code> ab.</p>
+            <ol>
+                <li><strong>Erste Fassung hochladen.</strong> Mia wählt „Datei hinzufügen“ → „Datei hochladen“, zieht <code>temperatur.py</code> in das Feld, schreibt in die erste Zeile des Kastens „Änderungen committen“ die Nachricht „Umrechnung Celsius in Fahrenheit (erste Fassung)“, lässt „Direkt in den Branch ‚main‘ einchecken“ ausgewählt und klickt „Änderungen committen“. <em>Warum gleich committen?</em> Ab jetzt gibt es einen Stand, zu dem sie jederzeit zurückkehren kann.
+                    <pre><code class="language-python">def celsius_in_fahrenheit(c):
+    return c * 5 / 9 + 32
+
+print(celsius_in_fahrenheit(100))</code></pre>
+                </li>
+                <li><strong>Testen und Fehler beheben.</strong> Der Test mit 100 °C liefert <code>87.55555555555556</code> statt 212. Der Bruch ist vertauscht. Mia öffnet die Datei, klickt auf den Stift, korrigiert die Zeile im Web-Editor, prüft unter „Vorschau der Änderungen“ und committet mit „Fehler behoben: Faktor 9/5 statt 5/9“. <em>Warum ein eigener Commit?</em> Die Korrektur ist ein Anliegen für sich und in der Historie sofort auffindbar.</li>
+                <li><strong>Erweitern.</strong> Mia ergänzt in Thonny eine Umrechnungstabelle, testet sie dort und lädt <code>temperatur.py</code> mit demselben Namen erneut hoch. Commit-Nachricht: „Tabelle von −20 °C bis 40 °C ergänzt“. Die Datei lautet jetzt:
+                    <pre><code class="language-python">def celsius_in_fahrenheit(c):
+    return c * 9 / 5 + 32
+
+print(celsius_in_fahrenheit(100))
+
+for c in range(-20, 41, 10):
+    print(c, "°C =", celsius_in_fahrenheit(c), "°F")</code></pre>
+                </li>
+                <li><strong>Historie lesen.</strong> In der Dateiansicht klickt Mia auf „Verlauf“. Dort stehen die drei Commits, der neueste oben (Kennungen und Zeiten sind Beispielwerte):
+                    <table>
+                        <thead><tr><th>Kennung</th><th>Commit-Nachricht</th><th>Zeitpunkt</th><th>Änderung (Diff)</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>c41e7d0</code></td><td>Tabelle von −20 °C bis 40 °C ergänzt</td><td>Mo 14:32</td><td>3 Zeilen hinzugefügt</td></tr>
+                            <tr><td><code>9b2f5a8</code></td><td>Fehler behoben: Faktor 9/5 statt 5/9</td><td>Mo 14:20</td><td>1 Zeile geändert</td></tr>
+                            <tr><td><code>3f9a2c1</code></td><td>Umrechnung Celsius in Fahrenheit (erste Fassung)</td><td>Mo 14:11</td><td>Datei neu, 4 Zeilen</td></tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li><strong>Vergleich ansehen.</strong> Ein Klick auf <code>9b2f5a8</code> zeigt die Commit-Ansicht mit „1 geänderte Dateien mit 1 neuen und 1 gelöschten Zeilen“. Die geänderte Zeile erscheint als entfernte (rot) und hinzugefügte (grün) Zeile:
+                    <pre><code> def celsius_in_fahrenheit(c):
+-    return c * 5 / 9 + 32
++    return c * 9 / 5 + 32
+
+ print(celsius_in_fahrenheit(100))</code></pre>
+                </li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Historie erzählt die Entstehung des Programms: erste Fassung, Fehlerkorrektur, Erweiterung. Jede Fassung lässt sich über ihre Kennung wieder aufrufen („An diesem Punkt im Verlauf anzeigen“).</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>celsius_in_fahrenheit(100)</code></td><td><code>212.0</code></td><td>Siedepunkt; Fassung 1 lieferte <code>87.55555555555556</code></td></tr>
+                    <tr><td><code>celsius_in_fahrenheit(0)</code></td><td><code>32.0</code></td><td>Gefrierpunkt – fällt in Fassung 1 <em>nicht</em> auf (0 · 5/9 = 0 · 9/5)</td></tr>
+                    <tr><td><code>celsius_in_fahrenheit(-40)</code></td><td><code>-40.0</code></td><td>einziger Wert, an dem beide Skalen übereinstimmen</td></tr>
+                    <tr><td>Tabelle, Zeile für <code>-20</code></td><td><code>-20 °C = -4.0 °F</code></td><td>negative Werte</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Kontrolle:</strong> Der Test mit 0 °C hätte den Fehler in Fassung 1 nicht gezeigt. Ein guter Testfall muss den Fehler auch sichtbar machen können.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Jonas will zeigen, wie viel schnellere Sortierverfahren wirklich bringen. Er verbessert sein Programm <code>sortierexperiment.py</code> in vier Schritten: Bubblesort → Bubblesort mit vorzeitigem Abbruch → Insertionsort → Mergesort. Jede Version wird ein eigener Commit, die gemessenen Laufzeiten für n = 2000 und 2n = 4000 schreibt er in die Commit-Nachricht. So zeigt die Historie Algorithmus und Laufzeit gemeinsam. Die Zeitangaben sind <strong>Beispielwerte</strong> eines Schulrechners; auf deinem Rechner sind sie anders, die Faktoren aber ähnlich.</p>
+            <ol>
+                <li><strong>Version 1 anlegen und messen.</strong> Die Funktion heißt in allen Versionen <code>sortiere(liste)</code> und sortiert die übergebene Liste selbst. Der Messteil bleibt in allen Versionen gleich. <em>Warum?</em> Nur dann misst jeder Commit dasselbe, und der Diff zeigt allein die Änderung am Algorithmus.
+                    <pre><code class="language-python">import random
+import time
+
+def sortiere(liste):
+    """Version 1: Bubblesort ohne Abbruch."""
+    n = len(liste)
+    for i in range(n - 1):
+        for j in range(n - i - 1):
+            if liste[j] &gt; liste[j + 1]:
+                temp = liste[j]
+                liste[j] = liste[j + 1]
+                liste[j + 1] = temp
+
+random.seed(1)                       # in jeder Version dieselben Zufallsdaten
+for n in [2000, 4000]:
+    daten = []
+    for i in range(n):
+        daten.append(random.randint(1, 10**6))
+    start = time.perf_counter()
+    sortiere(daten)
+    ms = round((time.perf_counter() - start) * 1000)
+    assert daten == sorted(daten)    # Kontrolle: wirklich sortiert?
+    print("n =", n, "->", ms, "ms")</code></pre>
+                    Ausgabe (Beispielwerte): <code>n = 2000: 180 ms</code> und <code>n = 4000: 712 ms</code>. Jonas lädt die Datei über „Datei hochladen“ hoch. Commit-Nachricht: „V1 Bubblesort: 180 ms / 712 ms (n = 2000/4000)“. <em>Warum <code>random.seed(1)</code> und <code>assert</code>?</em> Mit festem Startwert erzeugt jede Version dieselben Zufallslisten, die Messungen sind also vergleichbar. Das <code>assert</code> bricht mit <code>AssertionError</code> ab, falls eine „Optimierung“ falsch sortiert. Eine schnelle, aber falsche Version darf nicht als Erfolg in der Historie landen.</li>
+                <li><strong>Version 2: vorzeitiger Abbruch (siehe 2.2.2).</strong> Jonas ändert den Code in Thonny, misst und lädt die Datei mit <em>demselben Namen</em> neu hoch. In der Commit-Ansicht zeigt der Diff genau die Änderung (in Forgejo farbig mit zwei Spalten Zeilennummern wie in Bild 19; hier in Textform):
+                    <pre><code>@@ -2,12 +2,16 @@
+ import time
+
+ def sortiere(liste):
+-    """Version 1: Bubblesort ohne Abbruch."""
++    """Version 2: Bubblesort mit vorzeitigem Abbruch."""
+     n = len(liste)
+     for i in range(n - 1):
++        getauscht = False
+         for j in range(n - i - 1):
+             if liste[j] &gt; liste[j + 1]:
+                 temp = liste[j]
+                 liste[j] = liste[j + 1]
+                 liste[j + 1] = temp
++                getauscht = True
++        if not getauscht:
++            break
+
+ random.seed(1)                       # in jeder Version dieselben Zufallsdaten
+ for n in [2000, 4000]:</code></pre>
+                    <em>So liest du den Diff:</em> Die Kopfzeile <code>@@ -2,12 +2,16 @@</code> bedeutet: Der Ausschnitt beginnt in der alten und der neuen Fassung bei Zeile 2 und umfasst alt 12, neu 16 Zeilen. Zeilen ohne Zeichen am Anfang sind unveränderter Kontext. Eine Zeile wurde geändert (der Docstring), vier sind hinzugekommen: 12 − 1 + 1 + 4 = 16. Forgejo fasst das oben zusammen als „1 geänderte Dateien mit 5 neuen und 1 gelöschten Zeilen“.<br>
+                    Messung: 172 ms / 688 ms. Commit: „V2 Bubblesort mit Abbruch: 172 ms / 688 ms (n = 2000/4000)“.</li>
+                <li><strong>Version 3: Insertionsort (siehe 2.2.5).</strong> Der Rumpf von <code>sortiere</code> wird ersetzt:
+                    <pre><code class="language-python">def sortiere(liste):
+    """Version 3: Insertionsort."""
+    for i in range(1, len(liste)):
+        j = i
+        while j &gt; 0 and liste[j - 1] &gt; liste[j]:
+            temp = liste[j - 1]
+            liste[j - 1] = liste[j]
+            liste[j] = temp
+            j = j - 1</code></pre>
+                    Messung: 81 ms / 330 ms. Commit: „V3 Insertionsort: 81 ms / 330 ms (n = 2000/4000)“.</li>
+                <li><strong>Version 4: Mergesort (siehe 2.2.9).</strong> Mergesort liefert eine neue Liste. Damit der Messteil unverändert bleibt, schreibt <code>sortiere</code> das Ergebnis mit <code>liste[:] = …</code> in die übergebene Liste zurück. <em>Warum nicht <code>liste = mergesort(liste)</code>?</em> Das würde nur den lokalen Namen neu binden, die Liste <code>daten</code> bliebe unsortiert (call by sharing, siehe 2.1.6) – das <code>assert</code> würde es melden.
+                    <pre><code class="language-python">def mergesort(liste):
+    if len(liste) &lt;= 1:
+        return liste
+    mitte = len(liste) // 2
+    links = mergesort(liste[:mitte])
+    rechts = mergesort(liste[mitte:])
+    ergebnis = []
+    i = j = 0
+    while i &lt; len(links) and j &lt; len(rechts):
+        if links[i] &lt;= rechts[j]:
+            ergebnis.append(links[i])
+            i = i + 1
+        else:
+            ergebnis.append(rechts[j])
+            j = j + 1
+    ergebnis.extend(links[i:])
+    ergebnis.extend(rechts[j:])
+    return ergebnis
+
+def sortiere(liste):
+    """Version 4: Mergesort."""
+    liste[:] = mergesort(liste)</code></pre>
+                    Messung: 6,0 ms / 13,1 ms. Commit: „V4 Mergesort: 6,0 ms / 13,1 ms (n = 2000/4000)“. Mergesort lernst du erst in 2.2.9 kennen; diesen Commit kannst du später ergänzen.</li>
+                <li><strong>Historie auswerten.</strong> Jonas öffnet die Commit-Liste (Klick auf „… Commits“), überträgt sie (neuester oben) in eine Tabelle und berechnet den Faktor t(2n) / t(n):
+                    <table>
+                        <thead><tr><th>Commit (Beispiel)</th><th>Algorithmus</th><th>n = 2000</th><th>n = 4000</th><th>Faktor</th><th>passt zu</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>e8d31b4</code> V4</td><td>Mergesort</td><td>6,0 ms</td><td>13,1 ms</td><td>≈ 2,2</td><td>O(n log n)</td></tr>
+                            <tr><td><code>71ac0f9</code> V3</td><td>Insertionsort</td><td>81 ms</td><td>330 ms</td><td>≈ 4,1</td><td>O(n²)</td></tr>
+                            <tr><td><code>5b90e2a</code> V2</td><td>Bubblesort mit Abbruch</td><td>172 ms</td><td>688 ms</td><td>≈ 4,0</td><td>O(n²)</td></tr>
+                            <tr><td><code>a07c6d3</code> V1</td><td>Bubblesort</td><td>180 ms</td><td>712 ms</td><td>≈ 4,0</td><td>O(n²)</td></tr>
+                        </tbody>
+                    </table>
+                    <em>Warum ist der Faktor bei Mergesort etwas größer als 2?</em> Bei n log n gilt t(2n) / t(n) = 2 · log₂(4000) / log₂(2000) ≈ 2 · 11,97 / 10,97 ≈ 2,18.</li>
+                <li><strong>Falle erkennen.</strong> Version 2 bringt bei Zufallsdaten fast nichts (172 statt 180 ms): Der Abbruch greift erst, wenn ein Durchlauf ohne Tausch bleibt, und das passiert bei zufälligen Listen erst ganz am Ende. Auf fast sortierten Listen wäre Version 2 dagegen viel schneller (bester Fall O(n), siehe 2.2.2). Die Historie zeigt das ehrlich: Nicht jede „Optimierung“ lohnt sich für jede Art von Daten. Darum gehört in die Commit-Nachricht bzw. README, mit welchen Daten gemessen wurde – etwa in das Feld „Eine ausführlichere (optionale) Beschreibung hinzufügen …“.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Historie dokumentiert das Experiment vollständig: Jeder Commit enthält den lauffähigen Code einer Version, die Nachricht ihr Messergebnis. Insertionsort ist etwa doppelt so schnell wie Bubblesort, bleibt aber in O(n²). Erst Mergesort wechselt die Komplexitätsklasse und ist bei n = 4000 rund 50-mal schneller als Bubblesort (712 / 13,1 ≈ 54).</p>
+            <p><strong>Kontrolle:</strong> Bei O(n²) erwartet man bei Verdopplung von n den Faktor 2² = 4, gemessen 4,0 bis 4,1. Bei O(n log n) erwartet man etwa 2,18, gemessen 13,1 / 6,0 ≈ 2,18.</p>
+            <table>
+                <thead><tr><th>Eingabe <code>daten</code></th><th>erwartetes Ergebnis nach <code>sortiere(daten)</code> (alle Versionen)</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[5, 2, 9, 1]</code></td><td><code>[1, 2, 5, 9]</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>[]</code> bzw. <code>[7]</code></td><td><code>[]</code> bzw. <code>[7]</code></td><td>Randfälle</td></tr>
+                    <tr><td><code>[3, 1, 3, 1]</code></td><td><code>[1, 1, 3, 3]</code></td><td>doppelte Werte</td></tr>
+                    <tr><td><code>[1, 2, 3, 4]</code></td><td><code>[1, 2, 3, 4]</code></td><td>schon sortiert: V2 und V3 brauchen nur n − 1 Vergleiche</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Git in Software-Firmen und in der Wissenschaft</summary>
+                <p>
+                    <strong>Alltag:</strong> Viele Textprogramme und Cloud-Speicher bieten einen „Versionsverlauf“ – das Grundprinzip ist dasselbe, nur ohne aussagekräftige Nachrichten.<br><br>
+                    <strong>Beruf:</strong> Praktisch jede Softwarefirma verwaltet ihren Code mit Git. Bevor eine Änderung übernommen wird, sieht eine Kollegin den Diff durch (Code-Review). Forschungsgruppen legen Auswertungsskripte mit Git ab, damit sich später nachvollziehen lässt, mit welcher Programmversion welche Messergebnisse entstanden sind.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Repository</strong> (kurz Repo): ein Projektordner unter Versionsverwaltung. Er enthält die Dateien und die vollständige Geschichte aller ihrer Fassungen.<br>
+                <strong>Commit</strong>: ein gespeicherter Stand aller Dateien des Repositorys, eine Art Schnappschuss. Jeder Commit hat eine eindeutige Kennung (eine lange Prüfsumme aus Ziffern und Buchstaben a–f, meist gekürzt angezeigt, z.&nbsp;B. <code>3f9a2c1</code>; Forgejo nennt sie <strong>SHA</strong> bzw. <strong>SHA1</strong>), eine Autorin bzw. einen Autor, einen Zeitpunkt und eine Commit-Nachricht.<br>
+                <strong>Commit-Nachricht</strong>: ein kurzer Text, der beschreibt, <em>was</em> geändert wurde und <em>warum</em>.<br>
+                <strong>Historie</strong> (engl. history, log; in Forgejo „Verlauf“ bzw. die Liste „Commits“): die Liste aller Commits eines Repositorys bzw. einer Datei, in der Regel der neueste oben.<br>
+                <strong>Diff</strong> (von engl. difference): die Darstellung der Unterschiede zwischen zwei Fassungen. Entfernte Zeilen sind mit <code>-</code> (meist rot), hinzugefügte mit <code>+</code> (meist grün) markiert. Eine geänderte Zeile erscheint als entfernte alte und hinzugefügte neue Zeile.<br>
+                <strong>README</strong>: die Datei <code>README.md</code> im obersten Ordner. Sie beschreibt das Repository und wird auf der Startseite des Repositorys automatisch angezeigt. Sie ist in <strong>Markdown</strong> geschrieben, einer einfachen Auszeichnungssprache.<br>
+                <strong>Branch</strong> (Zweig): eine Entwicklungslinie. Dein Repository hat genau einen Branch namens <code>main</code>, in dem alle deine Commits landen. Mehrere Branches und Pull-Requests brauchst du erst im Lernbereich 5.<br>
+                <strong>.gitignore</strong>: eine Datei mit einer Liste von Datei- und Ordnernamen, die Git nicht mit verwalten soll, z.&nbsp;B. den Ordner <code>__pycache__</code>, den Python automatisch anlegt.
+            </p>
+        </div>
+
+<div class="merke">
+            <p><strong>Neue Version einer Datei hochladen:</strong> Lade die geänderte Datei mit <strong>genau demselben Namen</strong> in denselben Ordner hoch. Forgejo ersetzt dann die Datei, und es entsteht eine neue Version mit eigenem Commit. Heißt die Datei anders – etwa <code>sortieren(1).py</code>, weil der Browser beim Herunterladen eine Zahl angehängt hat –, hast du danach <em>zwei</em> Dateien. Benenne die Datei vor dem Hochladen also passend um.</p>
+        </div>
+
+<div class="merke">
+            <p>Zurückholen bedeutet in Git: Ein alter Inhalt wird als <strong>neuer Commit</strong> gespeichert. Die Historie wird ergänzt, nicht zurückgedreht. Deshalb geht dabei keine Fassung verloren – auch die verworfene Version bleibt in der Historie.</p>
+        </div>
+
+<div class="merke">
+            <ul>
+                <li><strong>Ein Commit, ein Anliegen:</strong> Eine Fehlerkorrektur und eine neue Funktion gehören in zwei Commits.</li>
+                <li><strong>Die erste Zeile sagt, was sich ändert</strong>, kurz und konkret (höchstens etwa 60–70 Zeichen), z.&nbsp;B. „Insertionsort statt Bubblesort“ statt „update“.</li>
+                <li><strong>Das Warum gehört dazu</strong>, wenn es nicht offensichtlich ist: „Fehler behoben: Faktor 9/5 statt 5/9“. Bei Experimenten gehören die Messwerte hinein.</li>
+                <li><strong>Einheitlich schreiben:</strong> z.&nbsp;B. immer im Präsens oder als Stichwort, immer auf Deutsch.</li>
+                <li><strong>Nur Funktionierendes committen</strong> oder es ausdrücklich sagen („unfertig: merge fehlt noch“).</li>
+            </ul>
+        </div>
+
+<div class="merke">
+            <ul>
+                <li><strong>Passwörter, Zugangsdaten, Schlüssel</strong> (z.&nbsp;B. ein API-Schlüssel für eine KI-Schnittstelle). Wurde so etwas versehentlich committet, gilt es als bekannt: sofort ändern bzw. sperren lassen. Löschen im nächsten Commit genügt nicht, denn die alte Fassung steht weiter in der Historie.</li>
+                <li><strong>Personenbezogene Daten</strong> anderer Menschen: Namen und Noten von Mitschülerinnen und Mitschülern, Adresslisten, Fotos. Für Tests nimmst du ausgedachte Daten. Auch über dich selbst gehört nur das Nötigste hinein, keine Adresse und keine Telefonnummer.</li>
+                <li><strong>Große oder automatisch erzeugte Dateien</strong>, die sich jederzeit neu herstellen lassen, z.&nbsp;B. riesige Messdateien oder Ordner wie <code>__pycache__</code>.</li>
+                <li><strong>Fremde Werke</strong>, die du nicht weitergeben darfst, z.&nbsp;B. urheberrechtlich geschützte Bilder, Texte oder Programme anderer.</li>
+            </ul>
+            <p>Und: Dein Repository ist immer <strong>privat</strong> (Etikett „Privat“ neben dem Namen).</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.8.1: Dein Repository anlegen <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Melde dich auf git.inf7.eu mit „Anmelden mit inf7.eu“ → „Continue with beste.schule“ an und lege das Repository <code>informatik-11</code> an (Schritt 2). Kreuze „In privates Repository umwandeln“ und „Repository initialisieren“ an und wähle als .gitignore „Python“.</li>
+                    <li>Ergänze die <code>README.md</code> im Web-Editor (Stift) um eine Überschrift, einen Satz zum Zweck des Repositorys und eine Liste der geplanten Ordner bzw. Dateien. Verwende mindestens eine Hervorhebung und einmal Code-Schreibweise mit Backticks. Prüfe im Reiter „Vorschau“, ob alles richtig dargestellt wird, und im Reiter „Vorschau der Änderungen“, was sich ändert. Ersetze den Nachrichtenvorschlag „README.md aktualisiert“ durch eine eigene Nachricht.</li>
+                    <li>Kontrolliere in der Commit-Liste (Klick auf „… Commits“), dass dein Commit mit einer aussagekräftigen Nachricht entstanden ist, und notiere seine gekürzte Kennung (SHA).</li>
+                </ol>
+                <p class="tipp">Persönliche Angaben wie Adresse oder Telefonnummer gehören nicht in die README.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.8.2: Wochenübungs-Code einchecken <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Lade ein Programm aus der Wochenübung dieser Woche (oder aus einer Aufgabe der Kursseiten 2.2.2 bis 2.2.5) in deinen Ordner <code>wochenuebungen/</code> hoch. Den Ordner legst du an, indem du beim Hochladen in der Pfadzeile in das Feld „Verzeichnis erstellen …“ <code>wochenuebungen</code> einträgst bzw. beim Anlegen einer neuen Datei den Namen mit Schrägstrich angibst, z.&nbsp;B. <code>wochenuebungen/kw44_sortieren.py</code>.</li>
+                    <li>Verbessere das Programm in mindestens zwei weiteren Commits, z.&nbsp;B. einen Fehler beheben und eine Testtabelle als Kommentar ergänzen (Eingabe | erwartete Ausgabe | tatsächliche Ausgabe). Halte dich an die Regeln für gute Commit-Nachrichten.</li>
+                    <li>Ergänze die README um einen Verweis auf den neuen Ordner.</li>
+                </ol>
+            </details>
+        </div>

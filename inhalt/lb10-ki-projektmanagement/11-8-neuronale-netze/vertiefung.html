@@ -1,0 +1,49 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.8.7: Fehler finden – ein Perzeptron in Python <span class="niveau">AFB III</span></summary>
+                <p>Jonas hat ein Perzeptron programmiert und will damit das logische UND berechnen (Gewichte 1 und 1, Schwelle 2). Er ist zufrieden, weil seine ersten drei Tests stimmen:</p>
+<pre><code class="language-python">def perzeptron(eingaben, gewichte, schwelle):
+    summe = 0
+    for i in range(len(eingaben)):
+        summe = eingaben[i] * gewichte[i]
+    if summe &gt; schwelle:
+        return 1
+    return 0
+
+print(perzeptron([0, 0], [1, 1], 2))
+print(perzeptron([0, 1], [1, 1], 2))
+print(perzeptron([1, 0], [1, 1], 2))
+print(perzeptron([1, 1], [1, 1], 2))</code></pre>
+                <ol>
+                    <li>Lege eine Tabelle mit den Spalten Eingabe, erwartete Ausgabe und tatsächliche Ausgabe an. Gehe dazu den Code für jeden der vier Aufrufe gedanklich Zeile für Zeile durch.</li>
+                    <li>Im Code stecken zwei Fehler. Finde beide, erkläre ihre Wirkung und gib den korrigierten Code an.</li>
+                    <li>Begründe, warum die ersten drei Tests keinen der beiden Fehler aufdecken. Gib einen Testfall (Eingaben, Gewichte, Schwelle, erwartete Ausgabe) an, der den Fehler in der Schleife auch dann noch aufdeckt, wenn der Vergleich schon korrigiert ist.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.8.8: Ergebnis prüfen und Netz entwerfen <span class="niveau">AFB III</span></summary>
+                <p>Mia behauptet: „Ich habe doch ein einzelnes Perzeptron für XOR gefunden: w₁ = 1, w₂ = 1, Θ = 1. Probe: (0|0) → 0, (1|0) → 1, (0|1) → 1. Passt!“</p>
+                <ol>
+                    <li>Prüfe Mias Ergebnis und erkläre, wo ihre Probe unvollständig ist.</li>
+                    <li>Begründe allgemein – für beliebige Gewichte w₁, w₂ und jede Schwelle Θ –, dass kein einzelnes Perzeptron XOR berechnen kann.</li>
+                    <li>Entwirf ein zweischichtiges Netz aus Schwellenwert-Perzeptronen für die Funktion „Gleichheit“ (XNOR): Ausgabe 1, wenn x₁ = x₂, sonst 0. Gib alle Gewichte und Schwellen an und weise mit einer Tabelle nach, dass dein Netz korrekt ist.</li>
+                </ol>
+                <p class="tipp">Zu b): Schreibe für jede Zeile der XOR-Wahrheitstabelle auf, welche Ungleichung für w₁, w₂ und Θ gelten müsste. Zu c): Du kannst die versteckte Schicht aus Beispiel 2 übernehmen.</p>
+            </details>
+        </div>
+
+<h2>Weiterführende Links</h2>
+
+<p>Neuronale Netze und Deep Learning gehören zu den spannendsten und wichtigsten Themen der KI überhaupt. Wenn du tiefer einsteigen möchtest, lohnen sich diese Ressourcen besonders:</p>
+
+<ul>
+            <li><strong><a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank" rel="noopener">But what is a neural network? (3Blue1Brown)</a></strong> – eine der bekanntesten und besten Erklärungen zu neuronalen Netzen überhaupt: wunderschön animiert und sehr anschaulich. Das ist Kapitel 1 einer vierteiligen Serie; die weiteren Kapitel (u.&nbsp;a. zu Gradientenabstieg und Backpropagation) findest du auf <a href="https://www.3blue1brown.com/lessons/neural-networks" target="_blank" rel="noopener">3blue1brown.com</a>.</li>
+            <li><strong><a href="https://www.youtube.com/playlist?list=PLjUC8HjyxGTSrn4cZEw9Uw8R0STaRcbYY" target="_blank" rel="noopener">Neural Networks (StatQuest)</a></strong> – die Videoreihe von Josh Starmer erklärt neuronale Netze in kleinen, leicht verdaulichen Schritten. Eine gute Alternative oder Ergänzung zu 3Blue1Brown, wenn du lieber etwas langsamer und Begriff für Begriff lernst.</li>
+            <li><strong><a href="https://playground.tensorflow.org/" target="_blank" rel="noopener">TensorFlow Playground</a></strong> – ein interaktives Tool direkt im Browser: Du kannst Schichten, Neuronen pro Schicht, Lernrate und Aktivierungsfunktion live verändern und sofort beobachten, wie sich ein neuronales Netz beim Training verhält. Perfekt, um mit den Hyperparametern aus Abschnitt 7 in der Praxis zu experimentieren.</li>
+            <li><strong><a href="https://www.embl.org/news/science-technology/alphafold-wins-nobel-prize-chemistry-2024/" target="_blank" rel="noopener">Nobelpreis für Chemie 2024 für AlphaFold (EMBL, englisch)</a></strong> – ein beeindruckendes Beispiel dafür, wozu Deep Learning fähig ist: Das von Demis Hassabis und John Jumper entwickelte System AlphaFold sagt die 3D-Struktur von Proteinen allein aus ihrer Aminosäuresequenz vorher. Den Preis erhielten die Forschenden – gemeinsam mit David Baker –, nicht das KI-System selbst.</li>
+        </ul>

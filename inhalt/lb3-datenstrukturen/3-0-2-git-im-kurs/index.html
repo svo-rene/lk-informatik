@@ -1,0 +1,467 @@
+<p><code>bestenliste.py</code>, <code>bestenliste2.py</code>, <code>bestenliste_neu_FINAL.py</code> – und die Fassung, die vorgestern funktioniert hat, ist überschrieben. Ab jetzt legst du alle Programme dieses Kurses in einem eigenen <strong>Git-Repository</strong> ab. Git speichert jede Fassung mit Datum und Begründung. Du kannst jederzeit nachsehen, was sich geändert hat, und eine ältere Fassung zurückholen.</p>
+
+<p>Wir nutzen den Git-Server <strong>git.inf7.eu</strong> (Software Forgejo, betrieben vom Verein Neue Informatik e.V.). Du arbeitest nur im Browser, eine Installation ist nicht nötig. Programmiert wird weiter in <strong>Thonny</strong>. Das Repository legst du <strong>selbst</strong> an, es ist <strong>privat</strong> und gehört nur dir.</p>
+
+<p>Die Bilder sind Bildschirmfotos von git.inf7.eu. Das Beispiel-Repository auf den Bildern heißt <code>test-anleitung</code>, deines heißt <code>datenstrukturen</code>. Wo der Benutzername der Lehrkraft steht, steht bei dir deiner.</p>
+
+<h2>Die wichtigsten Begriffe</h2>
+
+<ul>
+            <li><strong>Repository</strong> (kurz Repo): ein Projektordner unter Versionsverwaltung mit allen Dateien und ihrer vollständigen Geschichte.</li>
+            <li><strong>Commit:</strong> ein gespeicherter Stand aller Dateien, ein Schnappschuss. Jeder Commit hat eine Kennung (SHA, z.&nbsp;B. <code>3f9a2c1</code>), einen Autor, einen Zeitpunkt und eine <strong>Commit-Nachricht</strong>.</li>
+            <li><strong>Verlauf</strong> (Historie): die Liste aller Commits, der neueste oben.</li>
+            <li><strong>Diff:</strong> die Unterschiede zwischen zwei Fassungen. Entfernte Zeilen sind rot mit <code>-</code>, neue Zeilen grün mit <code>+</code> markiert.</li>
+            <li><strong>README.md:</strong> die Beschreibung im obersten Ordner, in Markdown geschrieben. Sie wird auf der Startseite des Repositorys angezeigt.</li>
+            <li><strong>.gitignore:</strong> eine Liste von Dateien, die Git nicht verwalten soll, z.&nbsp;B. den Ordner <code>__pycache__</code>.</li>
+        </ul>
+
+<h2>Schritt 1: Anmelden</h2>
+
+<ol>
+            <li>Im Browser <strong>git.inf7.eu</strong> öffnen und oben rechts auf „Anmelden“ klicken (Bild 1).</li>
+            <li>Die Felder Benutzername und Passwort <strong>nicht</strong> benutzen, sondern unten „Anmelden mit inf7.eu“ wählen (Bild 2).</li>
+            <li>Auf auth.inf7.eu „Continue with beste.schule“ wählen (Bild 3).</li>
+            <li>Auf der Anmeldeseite von beste.schule mit deinem gewohnten Zugang anmelden (Bild 4). Beim ersten Mal fragt beste.schule, ob auth.inf7.eu deine E-Mail-Adresse, Klassen, einen gekürzten Namen, deine Rolle und deine Schule erhalten darf. Klicke auf „Erlauben“ (Bild 5).</li>
+        </ol>
+
+<figure>
+            <img src="../img/git_02_forgejo_anmelden.jpg" width="600" alt="Anmeldeseite von Forgejo mit der Schaltfläche Anmelden mit inf7.eu">
+            <figcaption>Bild 2: Richtig ist die untere Schaltfläche „Anmelden mit inf7.eu“.</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_04_beste_schule_login.jpg" width="600" alt="Anmeldeseite von beste.schule">
+            <figcaption>Bild 4: Nur hier gibst du dein Passwort ein. Prüfe vorher die Adresszeile.</figcaption>
+        </figure>
+
+<p class="tipp">Bilder 1, 3 und 5 findest du hier: <a href="../img/git_01_startseite.jpg" target="_blank">Bild 1</a>, <a href="../img/git_03_auth_inf7.jpg" target="_blank">Bild 3</a>, <a href="../img/git_05_erlaubnis.jpg" target="_blank">Bild 5</a>. Am Schulrechner meldest du dich am Ende der Stunde über das Menü unter deinem Profilbild ab.</p>
+
+<h2>Schritt 2: Repository anlegen</h2>
+
+<p>Klicke oben rechts auf „+“ und dann auf „Neues Repository“. Fülle das Formular so aus:</p>
+
+<table>
+            <thead><tr><th>Feld</th><th>Eintrag</th><th>Warum</th></tr></thead>
+            <tbody>
+                <tr><td>Besitzer</td><td>dein Benutzername (vorausgewählt)</td><td>Das Repository gehört dir.</td></tr>
+                <tr><td>Repository-Name</td><td><code>datenstrukturen</code></td><td>Kleinbuchstaben, keine Leerzeichen, keine Umlaute.</td></tr>
+                <tr><td>In privates Repository umwandeln</td><td><strong>ankreuzen</strong></td><td>Sonst kann jeder deine Lösungen sehen.</td></tr>
+                <tr><td>Beschreibung</td><td>z.&nbsp;B. „Meine Programme zu Datenstrukturen, LK Informatik 12“</td><td>erscheint auf der Startseite</td></tr>
+                <tr><td>Vorlage</td><td>leer lassen</td><td>Du baust alles selbst auf.</td></tr>
+                <tr><td>Repository initialisieren</td><td>ankreuzen</td><td>Es entstehen README und ein erster Commit.</td></tr>
+                <tr><td>.gitignore</td><td>„Python“</td><td>Automatisch erzeugte Python-Dateien werden ignoriert.</td></tr>
+                <tr><td>Lizenz</td><td>leer lassen</td><td>Bei einem privaten Schul-Repository unnötig.</td></tr>
+            </tbody>
+        </table>
+
+<figure>
+            <img src="../img/git_08_formular_name_privat.jpg" width="600" alt="Formular Neues Repository mit Name und Haken bei privat">
+            <figcaption>Bild 8: Name und Haken bei „privat“</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_10_gitignore_python.jpg" width="600" alt="Auswahl der gitignore-Vorlage Python">
+            <figcaption>Bild 10: „.gitignore“ mit der Vorlage „Python“, dann „Repository erstellen“</figcaption>
+        </figure>
+
+<p>Nach „Repository erstellen“ siehst du die Startseite mit <code>.gitignore</code>, <code>README.md</code> und dem Commit „Initial commit“ (Bild 11). Neben dem Namen muss das Etikett <strong>„Privat“</strong> stehen.</p>
+
+<figure>
+            <img src="../img/git_11_repository_erstellt.jpg" width="600" alt="Startseite eines frisch angelegten Repositorys">
+            <figcaption>Bild 11: Das frisch angelegte Repository</figcaption>
+        </figure>
+
+<h2>Schritt 3: Ordnung im Repository</h2>
+
+<p>Lege für jedes Kapitel des Kurses einen eigenen Ordner an. Jede Datei bekommt einen <strong>sprechenden Namen nach ihrem Inhalt</strong>, nicht nach der Aufgabennummer: Eine Datei wie <code>verkettete_liste.py</code> wächst über mehrere Aufgaben, und welche Aufgabe du gerade bearbeitet hast, steht in der Commit-Nachricht. Lege dieselben Ordner auch auf deinem Rechner oder USB-Stick in einem Ordner <code>datenstrukturen</code> an, dann heißen die Dateien in Thonny und im Repository gleich.</p>
+
+<pre><code>datenstrukturen/
+├── README.md                      Inhaltsverzeichnis deiner Lösungen
+├── .gitignore
+├── 1_listen/
+│   ├── negative_werte.py          3.0.1.5
+│   ├── verkettete_liste.py        3.1: Node und LinkedList, wächst bis 3.1.2
+│   ├── test_verkettete_liste.py   Testfälle dazu
+│   ├── playlist.py                3.1.4 und 3.1.5
+│   └── druckwarteschlange.py      3.2.2
+├── 2_baeume/
+└── 3_graphen/</code></pre>
+
+<p>Einen Ordner musst du nicht vorher anlegen. Er entsteht beim ersten Hochladen, wenn du seinen Namen in die Pfadzeile einträgst (Schritt 4). Welche Datei zu welcher Aufgabe gehört, steht bei jeder Programmieraufgabe im Kasten „Datei &amp; Git“ und in der Übersicht <a href="#ganzer-kurs">„So arbeitest du im ganzen Kurs“</a>.</p>
+
+<h2>Schritt 4: Eine Lösung aus Thonny hochladen</h2>
+
+<ol>
+            <li><strong>In Thonny:</strong> Programm testen und als <code>.py</code> speichern, Dateiname wie oben (ohne Leerzeichen und Umlaute).</li>
+            <li><strong>Im Repository:</strong> „Datei hinzufügen ▾“ → „Datei hochladen“ (Bild 12).</li>
+            <li><strong>Ziel wählen:</strong> In der Pfadzeile hinter <code>datenstrukturen /</code> den Ordner eintragen, z.&nbsp;B. <code>1_listen</code>. Gibt es ihn noch nicht, wird er angelegt. Bleibt das Feld leer, landet die Datei im obersten Ordner.</li>
+            <li><strong>Datei auswählen:</strong> in das gestrichelte Feld ziehen oder hineinklicken. Mehrere Dateien auf einmal landen in einem Commit.</li>
+            <li><strong>Commit-Nachricht</strong> in die erste Zeile schreiben. Der graue Vorschlag „Dateien nach … hochladen“ sagt nichts aus – schreib immer deine eigene Nachricht.</li>
+            <li>„Direkt in den Branch ‚main‘ einchecken“ ausgewählt lassen und auf <strong>„Änderungen committen“</strong> klicken (Bild 14).</li>
+            <li><strong>Kontrolle:</strong> Die Datei steht in der Liste, daneben deine Nachricht. Klicke auf „… Commits“ und prüfe, dass dein Commit oben steht. Fehlt er, lade erneut hoch.</li>
+        </ol>
+
+<figure>
+            <img src="../img/git_12_datei_hinzufuegen.jpg" width="600" alt="Menü Datei hinzufügen mit den Einträgen Neue Datei, Datei hochladen, Patch anwenden">
+            <figcaption>Bild 12: Das Menü „Datei hinzufügen“</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_13_hochladen_commitnachricht.jpg" width="600" alt="Hochladen einer Datei mit eingetragener Commit-Nachricht">
+            <figcaption>Bild 13: Datei ausgewählt, eigene Commit-Nachricht eingetragen</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_14_commit_optionen.jpg" width="600" alt="Optionen des Kastens Änderungen committen">
+            <figcaption>Bild 14: „Direkt in den Branch ‚main‘ einchecken“ bleibt ausgewählt.</figcaption>
+        </figure>
+
+<p><strong>Neue Fassung derselben Lösung:</strong> Lade die geänderte Datei mit <strong>genau demselben Namen</strong> in <strong>denselben Ordner</strong> hoch. Forgejo ersetzt sie, und es entsteht ein neuer Commit. Heißt die Datei anders (z.&nbsp;B. <code>playlist(1).py</code>), hast du danach zwei Dateien.</p>
+
+<h2>Schritt 5: Gute Commit-Nachrichten</h2>
+
+<p>Eine Commit-Nachricht sagt in einer Zeile, <strong>was</strong> sich geändert hat und, wenn nicht offensichtlich, <strong>warum</strong>. Sie beginnt mit dem Gegenstand und ist so genau, dass du den Commit nach Wochen im Verlauf wiederfindest.</p>
+
+<table>
+            <thead><tr><th>schlecht</th><th>gut</th></tr></thead>
+            <tbody>
+                <tr><td><code>update</code></td><td><code>3.1.4 Playlist: anhaengen in O(1) mit __tail</code></td></tr>
+                <tr><td><code>Dateien nach 1_listen hochladen</code></td><td><code>3.0.1.5 negative Werte: neue Liste statt pop, alle 4 Tests ok</code></td></tr>
+                <tr><td><code>geht jetzt</code></td><td><code>3.1.6 entfernen: __tail beim Löschen des letzten Titels angepasst</code></td></tr>
+            </tbody>
+        </table>
+
+<p class="tipp">Lieber oft und klein committen: eine Methode fertig und getestet → Commit. Dann zeigt jeder Diff genau eine Änderung. Weitere Beispiele und die Regeln für den ganzen Kurs stehen unten in <a href="#ganzer-kurs">„So arbeitest du im ganzen Kurs“</a>.</p>
+
+<h2>Schritt 6: Verlauf und Diff lesen</h2>
+
+<p>Klicke in der Dateiliste auf eine Datei und dann auf <strong>„Verlauf“</strong>. Du siehst alle Commits, die diese Datei geändert haben (Bild 17). Ein Klick auf eine SHA zeigt den <strong>Diff</strong> dieses Commits gegenüber seinem Vorgänger (Bild 19).</p>
+
+<figure>
+            <img src="../img/git_17_dateiverlauf.jpg" width="600" alt="Verlauf einer Datei mit zwei Commits">
+            <figcaption>Bild 17: Der Verlauf einer Datei</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/git_19_commit_vergleich_detail.jpg" width="600" alt="Diff mit roten gelöschten und grünen neuen Zeilen">
+            <figcaption>Bild 19: Der Diff. Links alte, rechts neue Zeilennummern.</figcaption>
+        </figure>
+
+<ul>
+            <li>Weiß mit zwei Zeilennummern: unverändert.</li>
+            <li>Rot mit <code>-</code> und nur linker Nummer: nur in der alten Fassung.</li>
+            <li>Grün mit <code>+</code> und nur rechter Nummer: neu. Eine geänderte Zeile erscheint als rote alte und grüne neue Zeile.</li>
+            <li>Die Kopfzeile <code>@@ -2,18 +2,23 @@</code> heißt: Der Ausschnitt beginnt alt und neu bei Zeile 2 und umfasst alt 18, neu 23 Zeilen.</li>
+        </ul>
+
+<h2>Schritt 7: Einen alten Stand zurückholen</h2>
+
+<ol>
+            <li>Im Verlauf der Datei beim gewünschten Commit auf das Symbol „An diesem Punkt im Verlauf anzeigen“ klicken (Bild 24). Oben steht nun ein Hinweis, dass du einen alten Stand ansiehst.</li>
+            <li>Die Datei öffnen und mit dem Pfeil nach unten <strong>herunterladen</strong>.</li>
+            <li>In Thonny prüfen, dann mit demselben Namen in denselben Ordner hochladen. Commit-Nachricht z.&nbsp;B. <code>3.1.4 Playlist: zurück auf Stand 3f9a2c1, umkehren() war fehlerhaft</code>.</li>
+        </ol>
+
+<p>Der fehlerhafte Stand verschwindet dabei nicht, sondern bleibt im Verlauf. Du machst nichts rückgängig, sondern legst einen neuen Stand an, der dem alten gleicht.</p>
+
+<figure>
+            <img src="../img/git_24_an_diesem_punkt.jpg" width="600" alt="Symbol An diesem Punkt im Verlauf anzeigen in der Commit-Liste">
+            <figcaption>Bild 24: „An diesem Punkt im Verlauf anzeigen“</figcaption>
+        </figure>
+
+<h2>Schritt 8: README als Inhaltsverzeichnis</h2>
+
+<p>Klicke unter der angezeigten README auf den Stift. Im Web-Editor schreibst du Markdown, der Reiter „Vorschau“ zeigt das Ergebnis, „Vorschau der Änderungen“ den Diff vor dem Commit.</p>
+
+<pre><code># Datenstrukturen – LK Informatik 12
+
+| Aufgabe | Datei | Stand |
+|---|---|---|
+| 3.0.1.5 negative Messwerte | `1_listen/negative_werte.py` | fertig, 4 Tests ok |
+| 3.1 verkettete Liste, 3.1.1, 3.1.2 | `1_listen/verkettete_liste.py` | fertig, Tests in `test_verkettete_liste.py` |
+| 3.1.4 Playlist | `1_listen/playlist.py` | get() fehlt noch |</code></pre>
+
+<h2>Schritt 9: Die Lehrkraft für eine Abgabe einladen</h2>
+
+<p>Dein Repository bleibt privat. Wird eine Lösung bewertet, lädst du deine Lehrkraft als Mitarbeiter ein, damit sie hineinsehen kann:</p>
+
+<ol>
+            <li>Reiter „…“ → „Einstellungen“ → links „Mitarbeiter“.</li>
+            <li>Im Feld „Benutzer suchen …“ den Benutzernamen der Lehrkraft eingeben und aus der Liste auswählen.</li>
+            <li>„Mitarbeiter hinzufügen“ klicken und die Rechte auf <strong>Lesen</strong> stellen.</li>
+        </ol>
+
+<p>Bewertet wird der Stand des letzten Commits vor der Abgabefrist. Commits nach der Frist sieht die Lehrkraft mit Datum im Verlauf.</p>
+
+<figure>
+            <img src="../img/git_33_mitarbeiter.jpg" width="600" alt="Einstellungen eines Repositorys, Bereich Mitarbeiter">
+            <figcaption>Bild 33: Einstellungen → „Mitarbeiter“</figcaption>
+        </figure>
+
+<h2 id="ganzer-kurs">So arbeitest du im ganzen Kurs</h2>
+
+<p>Du programmierst in diesem Kurs wenige Dateien, die Schritt für Schritt wachsen – so wie die verkettete Liste, die mit jeder Methode größer wird. Bei jeder Programmieraufgabe auf den Seiten 3.0.1 bis 3.10 steht deshalb ein grauer Kasten <strong>„Datei &amp; Git“</strong>. Er nennt den Dateinamen, sagt, ob du die Datei <strong>neu anlegst</strong> oder <strong>weiterführst</strong>, und schlägt Commit-Nachrichten vor. Auf den Lernpfad-Seiten steht unter „Dein Weg durch diese Seite“, in welche Datei du beim Video mittippst.</p>
+
+<h3>Ordner und Dateinamen</h3>
+
+<p>Drei Ordner wie die Kapitel: <code>1_listen</code> (Seiten 3.0.1 bis 3.3), <code>2_baeume</code> (3.4 bis 3.6) und <code>3_graphen</code> (3.7 bis 3.10).</p>
+
+<table>
+            <thead><tr><th>Art der Datei</th><th>Name</th><th>Beispiele</th><th>So gehst du vor</th></tr></thead>
+            <tbody>
+                <tr><td>Datenstruktur aus dem Lernpfad</td><td>Name der Datenstruktur</td><td><code>verkettete_liste.py</code>, <code>queue_knoten.py</code>, <code>stack_knoten.py</code>, <code>baum.py</code>, <code>suchbaum.py</code>, <code>graph.py</code>, <code>dijkstra.py</code></td><td>beim Mittippen der Videos anlegen, in den Aufgaben der Seite <strong>weiterführen</strong></td></tr>
+                <tr><td>Testdatei</td><td><code>test_</code> + Name der getesteten Datei</td><td><code>test_verkettete_liste.py</code>, <code>test_playlist.py</code></td><td>enthält die Testfälle aus den Tabellen und holt die Klasse mit <code>import</code></td></tr>
+                <tr><td>Anwendung</td><td>Thema der Aufgabe</td><td><code>playlist.py</code>, <code>druckwarteschlange.py</code>, <code>postfix.py</code>, <code>leserverwaltung.py</code>, <code>sudoku.py</code></td><td>eine Datei je Aufgabe, über alle Teile der Aufgabe weiterführen</td></tr>
+                <tr><td>„Fehler finden“</td><td>Thema + <code>_fehler</code></td><td><code>playlist_fehler.py</code>, <code>ticket_queue_fehler.py</code></td><td>fehlerhaften Code erst <strong>unverändert</strong> committen, dann jede Korrektur – der Diff zeigt genau deine Verbesserung</td></tr>
+                <tr><td>Material aus OPAL</td><td>neuer Name nach dem Thema</td><td><code>baum_einfuehrung_2.py</code> → <code>verein.py</code></td><td>herunterladen, umbenennen, unverändert committen, dann ändern</td></tr>
+            </tbody>
+        </table>
+
+<ul>
+            <li>Nur Kleinbuchstaben, Wörter mit <code>_</code> getrennt, keine Leerzeichen, Umlaute oder Bindestriche, keine Ziffer am Anfang. Nur dann kann eine andere Datei sie mit <code>import</code> laden – mit <code>3-1-4_playlist.py</code> ginge das nicht.</li>
+            <li>Nenne keine Datei wie ein Python-Modul, z.&nbsp;B. <code>queue.py</code>, <code>random.py</code> oder <code>heapq.py</code>: Sonst lädt <code>import</code> deine Datei statt des Moduls. Deshalb heißt die Schlange mit Knoten <code>queue_knoten.py</code>.</li>
+            <li>Die Aufgabennummer gehört in die Commit-Nachricht, nicht in den Dateinamen.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Alle Dateien des Kurses im Überblick</summary>
+                <table>
+                    <thead><tr><th>Datei</th><th>Inhalt</th><th>Seite bzw. Aufgaben</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>1_listen/negative_werte.py</code></td><td><code>entferne_negative</code></td><td>3.0.1.5</td></tr>
+                        <tr><td><code>1_listen/verkettete_liste.py</code></td><td><code>Node</code>, <code>LinkedList</code></td><td>3.1 Schritte 2–6, 3.1.1, 3.1.2</td></tr>
+                        <tr><td><code>1_listen/playlist.py</code>, <code>playlist_fehler.py</code>, <code>messung_chat.py</code></td><td><code>Playlist</code>, fehlerhafte Playlist, Laufzeitmessung</td><td>3.1.4 und 3.1.5, 3.1.6, 3.1.7</td></tr>
+                        <tr><td><code>1_listen/listen_queue.py</code>, <code>queue_knoten.py</code></td><td><code>ListenQueue</code>; <code>Node</code> und <code>Queue</code></td><td>3.2 Schritt 2; Schritte 4–5</td></tr>
+                        <tr><td><code>1_listen/druckwarteschlange.py</code>, <code>abzaehlen.py</code>, <code>ring_queue.py</code>, <code>ticket_queue_fehler.py</code></td><td>Anwendungen der Schlange</td><td>3.2.2, 3.2.4, 3.2.5, 3.2.6</td></tr>
+                        <tr><td><code>1_listen/listen_stack.py</code>, <code>stack_knoten.py</code></td><td><code>ListenStack</code>; <code>Node</code>, <code>Stack</code>, <code>klammern_ok</code></td><td>3.3 Schritt 2; Schritte 3–5</td></tr>
+                        <tr><td><code>1_listen/umkehren_undo.py</code>, <code>postfix.py</code>, <code>zeichenprogramm.py</code>, <code>undo_stack_fehler.py</code>, <code>zwei_stapel_queue.py</code></td><td>Anwendungen des Stapels</td><td>3.3.2, 3.3.4, 3.3.5, 3.3.6, 3.3.7</td></tr>
+                        <tr><td><code>2_baeume/baum.py</code></td><td><code>Knoten</code>, <code>hoehe</code>, <code>anzahl_blaetter</code></td><td>3.4 Schritte 2–5, 3.4.3</td></tr>
+                        <tr><td><code>2_baeume/verein.py</code>, <code>baum_ausgabe_fehler.py</code>, <code>ist_baum.py</code></td><td>Vereinsstruktur, eingerückte Ausgabe, Elternverweise</td><td>3.4.4, 3.4.5, 3.4.6</td></tr>
+                        <tr><td><code>2_baeume/suchbaum.py</code>, <code>leserverwaltung.py</code></td><td><code>Suchbaum</code>; <code>Leser</code>, <code>Knoten</code>, <code>Suchbaum</code></td><td>3.5 Schritte 2–4; 3.5.3, 3.5.4, 3.5.6</td></tr>
+                        <tr><td><code>2_baeume/traversierung.py</code>, <code>breitensuche_fehler.py</code>, <code>ordnergroesse.py</code></td><td>vier Traversierungen, Breitensuche, <code>Eintrag</code></td><td>3.6 Schritte 2–4; 3.6.8, 3.6.9</td></tr>
+                        <tr><td><code>3_graphen/strassenbahn.py</code>, <code>folgen.py</code></td><td>Graph als Dictionary und Matrix</td><td>3.7 Schritte 3–4; 3.7.4</td></tr>
+                        <tr><td><code>3_graphen/graph.py</code>, <code>namens_graph.py</code>, <code>fluchtweg.py</code></td><td><code>Graph</code> mit <code>bfs</code>; Graph mit Namen; Rasterplan</td><td>3.8 Schritte 1–4, 3.8.3, 3.8.6; 3.8.2; 3.8.4</td></tr>
+                        <tr><td><code>3_graphen/dijkstra.py</code></td><td><code>dijkstra</code>, <code>weg</code></td><td>3.9 Schritte 3–4, 3.9.2</td></tr>
+                        <tr><td><code>3_graphen/wegsuche.py</code>, <code>klausurplan.py</code></td><td><code>find_path</code>; <code>plane</code></td><td>3.10 Schritte 2–4, 3.10.1, 3.10.6</td></tr>
+                        <tr><td><code>3_graphen/n_damen.py</code>, <code>sudoku.py</code>, <code>landkarte.py</code></td><td>Belegungsprobleme</td><td>3.10.2 und 3.10.8, 3.10.3, 3.10.4</td></tr>
+                    </tbody>
+                </table>
+                <p>Zu jeder Datei, die Klassen enthält, kann eine Testdatei <code>test_….py</code> im selben Ordner gehören.</p>
+            </details>
+        </div>
+
+<h3>Hauptdatei und Testdatei</h3>
+
+<p>Die Testdatei liegt im selben Ordner wie die Hauptdatei und holt sich die Klasse von dort. Beide lädst du zusammen hoch, dann landen sie in einem Commit.</p>
+
+<pre><code class="language-python"># test_verkettete_liste.py
+from verkettete_liste import LinkedList
+
+ll = LinkedList()
+for wert in [1, 2, 3]:
+    ll.append(wert)
+ll.display()      # erwartet: 1 -&gt; 2 -&gt; 3 -&gt; None
+ll.delete(2)
+ll.display()      # erwartet: 1 -&gt; 3 -&gt; None</code></pre>
+
+<p class="tipp">Probeaufrufe in der Hauptdatei schreibst du unter <code>if __name__ == "__main__":</code>. Dann laufen sie nur, wenn du die Hauptdatei selbst startest, und nicht beim <code>import</code> in der Testdatei.</p>
+
+<h3>Wann committen?</h3>
+
+<ul>
+            <li><strong>Nach jeder Teilaufgabe, die läuft</strong> – im Lernpfad nach jedem Schritt mit Code. „Läuft“ heißt: Das Programm startet ohne Fehlermeldung, und die Tests, die es bis jetzt gibt, liefern das Erwartete.</li>
+            <li>Lieber zu oft als zu selten: Ein Commit kostet eine Minute, ein verlorener Stand eine Stunde.</li>
+            <li>Musst du mitten in einer Teilaufgabe aufhören, committe trotzdem und schreib es dazu: <code>3.1.2 Teil 2: insert_after begonnen, läuft noch nicht</code>.</li>
+        </ul>
+
+<p>So sieht der Verlauf von <code>verkettete_liste.py</code> nach Seite 3.1 aus (neuester oben). Jede Zeile ist ein Stand, zu dem du zurückkehren kannst:</p>
+
+<pre><code>3.1.2 Teil 2: insert_after ergänzt, Tests ok
+3.1.2 Teil 1: laenge und enthaelt ergänzt, Tests ok
+3.1.1: print_ll korrigiert und getestet
+3.1.1: fehlerhaftes print_ll zum Testen eingefügt
+3.1 Schritt 6: delete ergänzt
+3.1 Schritt 5: insert_at_start ergänzt
+3.1 Schritt 4: display ergänzt
+3.1 Schritt 3: LinkedList mit append
+3.1 Schritt 2: Klasse Node angelegt</code></pre>
+
+<h3>Gute Commit-Nachrichten</h3>
+
+<ul>
+            <li>Eine Zeile, höchstens etwa 70 Zeichen.</li>
+            <li>Vorn die Aufgabennummer, bei Teilaufgaben „Teil n“, im Lernpfad „Schritt n“, dann ein Doppelpunkt: <code>3.1.2 Teil 2:</code></li>
+            <li>Danach, was sich geändert hat – knapp („insert_after ergänzt“) oder im Präsens („setzt __tail bei leerer Liste“), nicht „ich habe …“. Methoden- und Klassennamen schreibst du genau wie im Code.</li>
+            <li>Gibt es Tests, hängst du das Ergebnis an: „4 Tests ok“ oder „Test 3 schlägt noch fehl“.</li>
+        </ul>
+
+<p><strong>Gute Beispiele:</strong></p>
+
+<ul>
+            <li><code>3.1 Schritt 3: LinkedList mit append</code></li>
+            <li><code>3.1.2 Teil 1: laenge und enthaelt ergänzt, Tests ok</code></li>
+            <li><code>3.1.2 Teil 2: insert_after ergänzt, 3 Tests ok</code></li>
+            <li><code>3.1.4: get mit IndexError ergänzt, Tests 1–6 ok</code></li>
+            <li><code>3.1.6: fehlerhafte Playlist der Mitschülerin übernommen</code></li>
+            <li><code>3.2.4 Teil 2: abzaehlen mit Queue, 6 Tests ok</code></li>
+            <li><code>3.5.3 Teil 3: leser.csv eingelesen, 50 000 Leser im Baum</code></li>
+            <li><code>3.8.3 Teil 2: ist_zusammenhaengend ergänzt, Test 3 schlägt noch fehl</code></li>
+        </ul>
+
+<table>
+            <thead><tr><th>schlecht</th><th>warum</th></tr></thead>
+            <tbody>
+                <tr><td><code>update</code></td><td>sagt nichts: welche Aufgabe, welche Änderung?</td></tr>
+                <tr><td><code>3.1.2</code></td><td>Nummer ohne Inhalt: Teil 1, 2 oder 3? Fertig oder angefangen?</td></tr>
+                <tr><td><code>Dateien nach 1_listen hochladen</code></td><td>grauer Vorschlag übernommen, sagt nur, was man ohnehin sieht</td></tr>
+                <tr><td><code>endlich geht alles!!!</code></td><td>Gefühl statt Inhalt: Was geht jetzt, was ging vorher nicht?</td></tr>
+            </tbody>
+        </table>
+
+<h3>Den Verlauf nutzen</h3>
+
+<table>
+            <thead><tr><th>Frage</th><th>So gehst du vor</th></tr></thead>
+            <tbody>
+                <tr><td>Wie sah meine Datei früher aus?</td><td>Datei öffnen → „Verlauf“ → beim gewünschten Commit „An diesem Punkt im Verlauf anzeigen“ (Bild 24) → Datei öffnen. Oben steht, dass du einen alten Stand ansiehst.</td></tr>
+                <tr><td>Was habe ich in einem Commit geändert?</td><td>Im Verlauf auf die SHA klicken. Der Diff zeigt den Unterschied zum Commit davor (Schritt 6).</td></tr>
+                <tr><td>Was hat sich zwischen zwei Commits geändert, die weiter auseinanderliegen?</td><td>Die Diffs der Commits dazwischen nacheinander öffnen, vom ältesten zum neuesten. Forgejo kann zwei Stände auch direkt vergleichen: In der Adresszeile hinter <code>…/datenstrukturen/compare/</code> die beiden Kennungen eintragen, die ältere zuerst und dazwischen drei Punkte, z.&nbsp;B. <code>…/compare/a3d5e60...c71e0d2</code>. Klappt das bei dir nicht, nimm den Weg über die einzelnen Diffs.</td></tr>
+                <tr><td>Seit welchem Commit geht der Test nicht mehr?</td><td>Ältere Stände nacheinander testen, siehe unten.</td></tr>
+                <tr><td>Eine einzelne Datei soll wieder so sein wie früher.</td><td>Wie in Schritt 7: alten Stand anzeigen, die Datei herunterladen und mit demselben Namen in denselben Ordner hochladen. Nur diese Datei ändert sich, alle anderen bleiben, wie sie sind. Nachricht z.&nbsp;B. <code>3.1.5: playlist.py zurück auf Stand 8b42f19, umkehren fehlerhaft</code>.</td></tr>
+            </tbody>
+        </table>
+
+<p><strong>Seit welchem Commit geht der Test nicht mehr?</strong> Weil du nach jeder Teilaufgabe committet hast, gibt es viele kleine Stände, und genau einer davon hat den Fehler hineingebracht:</p>
+
+<ol>
+            <li>Lege auf deinem Rechner einen Ordner <code>pruefen</code> an und kopiere die aktuelle Testdatei hinein, z.&nbsp;B. <code>test_verkettete_liste.py</code>. Lass darin nur den Testfall stehen, der jetzt fehlschlägt.</li>
+            <li>Öffne den Verlauf der Hauptdatei. Wähle einen Commit ungefähr in der Mitte zwischen dem letzten Stand, bei dem der Test sicher lief, und dem neuesten. „An diesem Punkt im Verlauf anzeigen“, Datei öffnen, herunterladen und in <code>pruefen</code> genau als <code>verkettete_liste.py</code> speichern – der Browser hängt manchmal „(1)“ an.</li>
+            <li>Testdatei in Thonny starten. Läuft der Test, kam der Fehler später dazu; schlägt er fehl, steckt der Fehler in diesem oder einem älteren Commit. Mit der Hälfte, in der der Fehler liegen muss, wiederholst du Schritt 2.</li>
+            <li>So halbierst du die Auswahl jedes Mal – wie bei der binären Suche: Bei 16 Commits genügen 4 Versuche. Beim ersten Commit, mit dem der Test fehlschlägt, öffnest du den Diff. Der Fehler steckt fast immer in den grünen Zeilen.</li>
+        </ol>
+
+<p>Teste dabei nur Stände, in denen die getestete Methode schon existiert. Wie man den Diff des gefundenen Commits liest, zeigt Beispiel 2 weiter unten.</p>
+
+<h2>Arbeitsablauf in jeder Stunde</h2>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Checkliste für jede Stunde</summary>
+                <ol>
+                    <li>Am Anfang: git.inf7.eu öffnen, anmelden. Die neueste Fassung deiner Datei herunterladen, falls du zu Hause weitergearbeitet hast.</li>
+                    <li>In Thonny arbeiten und testen.</li>
+                    <li>Jede fertige, getestete Teilaufgabe mit demselben Dateinamen hochladen und mit einer genauen Nachricht committen.</li>
+                    <li>Am Ende: Commit-Liste prüfen, README aktualisieren, abmelden.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2>Was nicht ins Repository gehört</h2>
+
+<ul>
+            <li>Passwörter, Zugangsdaten, persönliche Daten anderer Personen</li>
+            <li>Lösungen von Mitschülerinnen und Mitschülern – der Verlauf zeigt, wann welcher Code entstanden ist</li>
+            <li>große Datendateien wie <code>leser.csv</code> (1,7&nbsp;MB) – die liegen in OPAL; im Repository genügt der Hinweis, woher die Datei kommt</li>
+            <li>automatisch erzeugte Ordner wie <code>__pycache__</code></li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Häufige Fehler</summary>
+                <ul>
+                    <li><strong>Das Repository ist öffentlich:</strong> Neben dem Namen fehlt „Privat“. Unter „…“ → „Einstellungen“ ganz unten in der „Gefahrenzone“ die Sichtbarkeit auf privat stellen.</li>
+                    <li><strong>Datei im falschen Ordner:</strong> Die Datei öffnen, auf den Stift klicken und in der Pfadzeile den Ordner ändern. Das ist eine Verschiebung mit eigenem Commit.</li>
+                    <li><strong>Zwei Dateien statt einer neuen Fassung:</strong> Der Name weicht ab, z.&nbsp;B. durch „(1)“. Die überzählige Datei mit dem Mülleimer löschen und künftig vor dem Hochladen umbenennen.</li>
+                    <li><strong>Notebook statt Programm:</strong> Aus JupyterLite heruntergeladene <code>.ipynb</code>-Dateien kannst du genauso hochladen. Forgejo zeigt sie an, der Diff ist aber schwer lesbar. Für Lösungen in diesem Kurs sind <code>.py</code>-Dateien aus Thonny besser.</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Die erste Lösung ablegen</summary>
+            <p><strong>Ausgangssituation:</strong> Lea hat Aufgabe 3.0.1.5 in Thonny gelöst und als <code>negative_werte.py</code> gespeichert. Ihr Repository <code>datenstrukturen</code> enthält bisher nur <code>README.md</code> und <code>.gitignore</code>.</p>
+            <ol>
+                <li><strong>Testen:</strong> Lea führt die vier Testfälle der Aufgabe in Thonny aus. Alle liefern das erwartete Ergebnis. Erst getestete Fassungen werden committet, damit jeder Stand im Verlauf lauffähig ist.</li>
+                <li><strong>Hochladen:</strong> „Datei hinzufügen ▾“ → „Datei hochladen“, in die Pfadzeile <code>1_listen</code> eintragen. Weil es den Ordner noch nicht gibt, legt Forgejo ihn an.</li>
+                <li><strong>Nachricht:</strong> <code>3.0.1.5 negative Werte: neue Liste in O(n), 4 Tests ok</code>. Die Aufgabennummer vorn macht den Commit im Verlauf auffindbar, der Rest sagt, was die Lösung tut.</li>
+                <li><strong>Committen</strong> mit „Direkt in den Branch ‚main‘ einchecken“.</li>
+                <li><strong>Kontrolle:</strong> Auf der Startseite steht jetzt der Ordner <code>1_listen</code>, die Leiste zeigt „2 Commits“.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Die Lösung liegt mit Datum und Beschreibung im Repository. Der erste Commit („Initial commit“) und Leas Commit stehen im Verlauf.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Einen Fehler über den Verlauf finden und beheben</summary>
+            <p><strong>Ausgangssituation:</strong> Jonas hat die Playlist aus Aufgabe 3.1.4 in drei Commits gebaut:</p>
+            <table>
+                <thead><tr><th>SHA</th><th>Nachricht</th></tr></thead>
+                <tbody>
+                    <tr><td><code>c71e0d2</code></td><td><code>3.1.4 Playlist: __str__ und get ergänzt</code> (neuester)</td></tr>
+                    <tr><td><code>8b42f19</code></td><td><code>3.1.4 Playlist: vorne_einfuegen ergänzt</code></td></tr>
+                    <tr><td><code>a3d5e60</code></td><td><code>3.1.4 Playlist: anhaengen mit __tail, Tests 1–3 ok</code></td></tr>
+                </tbody>
+            </table>
+            <p>Jetzt schlägt der Testfall <code>q = Playlist(); q.vorne_einfuegen("X"); q.anhaengen("Y"); print(q)</code> fehl: Statt <code>X -&gt; Y</code> erscheint <code>Y</code>.</p>
+            <ol>
+                <li><strong>Eingrenzen:</strong> Der Fehler betrifft <code>vorne_einfuegen</code> zusammen mit <code>anhaengen</code>. <code>anhaengen</code> war in <code>a3d5e60</code> getestet, <code>vorne_einfuegen</code> kam in <code>8b42f19</code> dazu. Jonas öffnet deshalb den Diff von <code>8b42f19</code>.</li>
+                <li><strong>Diff lesen:</strong> Neu (grün) sind diese Zeilen:
+                    <pre><code class="language-python">+    def vorne_einfuegen(self, titel):
++        neu = Node(titel)
++        neu.next = self.__head
++        self.__head = neu
++        self.__anzahl += 1</code></pre>
+                    Bei einer leeren Playlist wird <code>X</code> zum Anfang, aber <code>__tail</code> bleibt <code>None</code>.</li>
+                <li><strong>Wirkung verstehen:</strong> Jonas' <code>anhaengen</code> aus Commit <code>a3d5e60</code> erkennt eine leere Playlist an <code>__tail</code>:
+                    <pre><code class="language-python">    def anhaengen(self, titel):
+        neu = Node(titel)
+        if self.__tail is None:      # leere Playlist
+            self.__head = neu
+        else:
+            self.__tail.next = neu
+        self.__tail = neu
+        self.__anzahl += 1</code></pre>
+                    Nach <code>vorne_einfuegen("X")</code> ist <code>__head</code> der Knoten X, <code>__tail</code> aber noch <code>None</code>. <code>anhaengen("Y")</code> hält die Playlist deshalb für leer und setzt <code>__head = neu</code>. X ist nicht mehr erreichbar, die Ausgabe ist <code>Y</code> (und <code>len(q)</code> meldet trotzdem 2).</li>
+                <li><strong>Beheben:</strong> In <code>vorne_einfuegen</code> ergänzt er <code>if self.__tail is None: self.__tail = neu</code>, testet alle Fälle in Thonny und lädt die Datei mit demselben Namen hoch.</li>
+                <li><strong>Nachricht:</strong> <code>3.1.4 Playlist: vorne_einfuegen setzt __tail bei leerer Liste, Test 7 ok</code>.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Der Verlauf zeigt jetzt vier Commits. Wer ihn liest, sieht, wann der Fehler hineinkam und wie er behoben wurde.</p>
+            <p><strong>Kontrolle:</strong> Der Diff des neuen Commits enthält genau zwei grüne Zeilen und keine roten. Hätte Jonas „update“ als Nachricht gewählt, müsste er jeden Commit einzeln öffnen, um die Änderung zu finden.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Ein <strong>Commit</strong> ist mehr als Speichern: Speichern in Thonny überschreibt die alte Fassung, ein Commit legt einen <strong>zusätzlichen</strong> Stand an. Alle früheren Stände bleiben abrufbar.<br>
+                Was einmal committet wurde, bleibt in der Historie – auch wenn die Datei später gelöscht wird. Passwörter und persönliche Daten gehören deshalb nie in ein Repository.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.0.2.1: Dein Repository einrichten <span class="niveau">AFB I</span></summary>
+                <ol>
+                    <li>Melde dich auf git.inf7.eu an und lege das private Repository <code>datenstrukturen</code> mit README und <code>.gitignore</code> „Python“ an.</li>
+                    <li>Prüfe, dass neben dem Namen „Privat“ steht.</li>
+                    <li>Ersetze den Inhalt der README durch eine Überschrift und die leere Tabelle aus Schritt 8. Committe mit einer eigenen Nachricht.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.0.2.2: Lösungen aus Thonny ablegen <span class="niveau">AFB I–II</span></summary>
+                <ol>
+                    <li>Lade deine Lösung zu Aufgabe 3.0.1.5 als <code>negative_werte.py</code> (oder zu 3.0.1.2 als <code>zwei_wege.py</code>) in den Ordner <code>1_listen</code> hoch.</li>
+                    <li>Ergänze in Thonny die Testfälle als Programmzeilen mit Kommentar <code># erwartet: …</code> und lade die Datei mit demselben Namen erneut hoch.</li>
+                    <li>Öffne den Verlauf der Datei und den Diff des zweiten Commits. Notiere, wie viele Zeilen neu sind, und trage die Lösung in die README-Tabelle ein.</li>
+                </ol>
+            </details>
+        </div>

@@ -1,0 +1,14 @@
+{
+  "nr": "7.13",
+  "titel": "Filius-Praxis: Zwei Netzwerke verbinden",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

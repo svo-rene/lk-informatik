@@ -1,0 +1,126 @@
+<script src="../sortierlabor.js" defer></script>
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/2-2-9_effiziente_sortieralgorithmen.ipynb" download>2-2-9_effiziente_sortieralgorithmen.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser das JupyterLite der Schule <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (alternativ <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+                <p><strong>Wichtig:</strong> Das Notebook liest die Datei <a href="../notebooks/adressdaten.csv" download>adressdaten.csv</a> ein und verwendet das Modul <a href="../notebooks/listenoperationen_zum_laden_und_speichern.py" download>listenoperationen_zum_laden_und_speichern.py</a>. Lade beide Dateien mit in den Dateibereich hoch, sonst meldet Python <code>FileNotFoundError</code> bzw. <code>ModuleNotFoundError</code>.</p>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Zeiger verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Verfolge <code>merge([2, 4], [1, 9])</code>. Welche Werte haben <code>i</code> und <code>j</code>, wenn die <code>while</code>-Schleife endet? Was hängen die beiden <code>extend</code>-Zeilen an?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>2 &lt;= 1? nein → 1, <code>j</code> = 1; 2 &lt;= 9 → 2, <code>i</code> = 1; 4 &lt;= 9 → 4, <code>i</code> = 2. Jetzt ist <code>i &lt; 2</code> falsch: Die Schleife endet mit <code>i</code> = 2 und <code>j</code> = 1. <code>links[2:]</code> ist leer, <code>rechts[1:]</code> hängt die 9 an. Ergebnis: [1, 2, 4, 9].</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Teilen <span class="niveau">AFB I</span></summary>
+                <p>Wie wird die Liste [6, 2, 5, 1, 4] geteilt (<code>mitte = len(liste) // 2</code>)? Notiere alle Teillisten bis zum Basisfall.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>mitte</code> = 5 // 2 = 2: [6, 2] und [5, 1, 4]. Dann [6] und [2] sowie [5] und [1, 4] (3 // 2 = 1). Zum Schluss [1] und [4].</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Neue Liste und Aufrufe <span class="niveau">AFB I</span></summary>
+                <p>Nach <code>zahlen = [4, 2]</code> wird <code>mergesort(zahlen)</code> aufgerufen. Welchen Wert hat <code>zahlen</code> danach? Wie oft wird <code>mergesort</code> dabei insgesamt aufgerufen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>zahlen</code> ist weiterhin <code>[4, 2]</code>, denn die sortierte Liste <code>[2, 4]</code> ist eine neue Liste, die nur zurückgegeben wird. Aufrufe: einmal mit [4, 2], dann je einmal mit [4] und [2] (Basisfälle), also 3.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9-1">
+            <details>
+                <summary>Aufgabe 2.2.9.1: Mergesort von Hand <span class="niveau">AFB II</span></summary>
+                <p>Sortiere [5, 1, 7, 2, 8, 6, 3, 4] mit Mergesort von Hand. Notiere alle Teillisten und zähle die Vergleiche beim Zusammenführen.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9-2">
+            <details>
+                <summary>Aufgabe 2.2.9.2: Mergesort erarbeiten <span class="niveau">AFB I–II</span></summary>
+                <ul>
+                    <li>Recherchiere, was das Prinzip <strong>Divide and Conquer</strong> bedeutet, und halte es in eigenen Worten schriftlich fest.</li>
+                    <li>Erarbeite dir den Algorithmus <strong>Mergesort</strong> mithilfe der Seite <a href="https://www.happycoders.eu/de/algorithmen/mergesort/" target="_blank">https://www.happycoders.eu/de/algorithmen/mergesort/</a>:
+                        <ul>
+                            <li>Wie funktioniert Mergesort Schritt für Schritt?</li>
+                            <li>Warum ist die Zeitkomplexität O(n · log n)?</li>
+                            <li>Wie lässt sich Mergesort in Python umsetzen?</li>
+                        </ul>
+                    </li>
+                    <li>Implementiere Mergesort in Python und teste deinen Code mit verschiedenen Datensätzen (leer, ein Element, sortiert, absteigend, mit doppelten Werten).</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9-3">
+            <details>
+                <summary>Aufgabe 2.2.9.3: Quicksort (Zusatz) <span class="niveau">AFB III</span></summary>
+                <ul>
+                    <li>Quicksort hat eine eigene Seite: <strong>2.2.9b Quicksort</strong>. Arbeite sie durch.</li>
+                    <li>Finde Gemeinsamkeiten und Unterschiede zwischen Mergesort und Quicksort bezüglich Arbeitsweise, Verwendung von Divide and Conquer sowie Vor- und Nachteilen.</li>
+                    <li>Vergleiche die Zahl der Vergleiche von Mergesort und Quicksort für eine zufällige und für eine schon sortierte Liste (Wettrennen oben oder dein eigener Code).</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9-8">
+            <details>
+                <summary>Aufgabe 2.2.9.8: Mergesort mit den Karten <span class="niveau">AFB II</span></summary>
+                <p>Spielt die Station Mergesort (Kasten „Mit den Karten“ oben) in eurer Gruppe.</p>
+                <ol>
+                    <li>Sortiert 8 Karten mit Mergesort und führt eine Strichliste der Vergleiche, getrennt nach Ebenen. Kontrolliert eure Zahl im Sortierlabor, indem ihr dieselbe Startreihenfolge eingebt.</li>
+                    <li>Wiederholt das mit 16 Karten. Vergleicht beide Ergebnisse mit eurem eigenen Verfahren aus 2.2.1: Um welchen Faktor wachsen die Vergleiche jeweils?</li>
+                    <li>Begründet mit dem Spiel, warum Mergesort zusätzlichen Platz auf dem Tisch braucht, euer Verfahren aus 2.2.1 aber nicht.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-2-2-9-4">
+            <details>
+                <summary>Aufgabe 2.2.9.4: Mergesort mit Datensätzen – ist er stabil? <span class="niveau">AFB II</span></summary>
+                <p>Die Ergebnisse eines Wettbewerbs werden mit dem Mergesort aus Beispiel 2 nach Punkten sortiert. Dabei vergleicht <code>merge</code> nur die Punkte, also <code>links[i][1] &lt;= rechts[j][1]</code>:</p>
+                <pre><code>[("Ida", 3), ("Max", 1), ("Eva", 3), ("Tim", 2), ("Lou", 1), ("Kai", 2)]</code></pre>
+                <ol>
+                    <li>Notiere alle Teillisten beim Teilen und das Ergebnis jedes merge-Schritts mit der Anzahl der Vergleiche.</li>
+                    <li>Prüfe am Ergebnis, ob die Sortierung stabil ist.</li>
+                    <li>Gib an, an welchem merge-Schritt sich das Ergebnis ändert, wenn <code>&lt;=</code> durch <code>&lt;</code> ersetzt wird, und wie es dann lautet.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9-5">
+            <details>
+                <summary>Aufgabe 2.2.9.5: Laufzeiten messen und hochrechnen <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Prüfe deine Mergesort-Implementierung mit einer Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe. Verwende die Testfälle aus Beispiel 2 und zusätzlich 100 Zufallslisten, deren Ergebnis du mit <code>sorted()</code> vergleichst.</li>
+                    <li>Miss mit <code>time.perf_counter()</code> die Laufzeit für n = 10 000, 20 000, 40 000 und 80 000. Berechne die Faktoren bei Verdopplung.</li>
+                    <li>Begründe, warum der Faktor etwas über 2 liegt, und berechne den theoretisch erwarteten Faktor für n = 10 000 → 20 000.</li>
+                    <li>Rechne hoch, wie lange Mergesort und Bubblesort für eine Million Zahlen brauchen. Verwende für Bubblesort deine Messung aus Aufgabe 2.2.2.4.</li>
+                </ol>
+                <p class="tipp">Speichere deine Messversionen als einzelne Commits (siehe 2.1.8). Hast du dein Laufzeitexperiment schon im Repository, ergänze Mergesort als weiteren Commit mit den Messwerten in der Nachricht.</p>
+            </details>
+        </div>

@@ -1,0 +1,44 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.4.6: Fehler finden – zweitgrößter Wert <span class="niveau">AFB III</span></summary>
+                <p>Die Funktion soll den zweitgrößten Wert einer Liste liefern, also das vorletzte Element der aufsteigend sortierten Liste. Bei weniger als zwei Elementen soll sie <code>None</code> zurückgeben.</p>
+                <pre><code class="language-python">def zweitgroesste(liste):
+    groesste = liste[0]
+    zweite = liste[0]
+    for x in liste:
+        if x &gt; groesste:
+            zweite = groesste
+            groesste = x
+    return zweite</code></pre>
+                <ol>
+                    <li>Bestimme für die Eingaben <code>[3, 9, 5]</code>, <code>[1, 5, 9]</code>, <code>[9, 5, 1]</code>, <code>[9, 9, 5]</code>, <code>[-4, -2, -7]</code>, <code>[4]</code> und <code>[]</code> die erwartete und die tatsächliche Ausgabe in einer Tabelle.</li>
+                    <li>Erkläre die beiden Ursachen für die falschen Ergebnisse.</li>
+                    <li>Korrigiere die Funktion, ohne die Liste zu sortieren, und teste erneut mit allen Fällen.</li>
+                    <li>Beurteile die Aussage: „Ich habe mit [1, 5, 9] getestet, es kam 5 heraus – die Funktion ist richtig.“</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.4.7: Klassenfahrtskasse aus einer CSV-Datei <span class="niveau">AFB III</span></summary>
+                <p>Die Klassenfahrt kostet 180 € pro Person. Viele zahlen in Raten. Die Einzahlungen stehen in der Datei <code>einzahlungen.csv</code>. Lege sie mit diesem Inhalt an (mit einem Texteditor oder mit Python):</p>
+                <pre><code>name;betrag
+Anna;100
+Ben;180
+Anna;80
+Cem;50
+Dana;abc
+Cem;-20</code></pre>
+                <ol>
+                    <li>Schreibe ein Programm, das die Datei einliest und für jede Person die Summe ihrer gültigen Einzahlungen bildet. Verwende zwei parallele Listen <code>namen</code> und <code>summen</code>. Ungültige Zeilen (Betrag ist keine positive ganze Zahl) werden mit „übersprungen: …“ gemeldet.</li>
+                    <li>Das Programm schreibt eine Datei <code>offen.csv</code> mit den Spalten <code>name;offen</code> für alle, die noch nicht 180 € gezahlt haben.</li>
+                    <li>Teste mit einer Tabelle Eingabedatei | erwartete Ausgabe | tatsächliche Ausgabe: die Datei oben, eine Datei nur mit Kopfzeile und eine fehlende Datei.</li>
+                    <li>Dana taucht in <code>offen.csv</code> nicht auf, obwohl sie nichts gültig bezahlt hat. Beurteile dieses Ergebnis und schlage eine Verbesserung vor.</li>
+                    <li>Begründe, warum für deutsche Daten das Semikolon als Trennzeichen sicherer ist als das Komma.</li>
+                </ol>
+                <p class="tipp">Mit <code>name in namen</code> prüfst du, ob ein Name schon vorkommt, und mit <code>namen.index(name)</code> erhältst du seine Position.</p>
+            </details>
+        </div>

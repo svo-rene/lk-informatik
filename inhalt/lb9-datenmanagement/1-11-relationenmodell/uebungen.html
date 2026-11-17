@@ -1,0 +1,85 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 1.11.2: Fehlersuche <span class="niveau">AFB III</span>
+        </summary>
+        <p>Ein Kursteilnehmer gibt zum Ferienlager-Modell dieses Relationenmodell ab. Finde
+           <strong>f&uuml;nf</strong> Fehler und begr&uuml;nde jeden.</p>
+<pre class="schema">Betreuer(<u>BetreuerNr</u>, Name, Handy, &uarr;GruppeNr)
+Gruppe(<u>GruppeNr</u>, Name)
+Teilnehmer(<u>TeilnehmerNr</u>, Name, Geburtsdatum, &uarr;GruppeNr, Bewertung)
+Workshop(<u>WorkshopNr</u>, Titel, Dauer, Anmeldedatum)
+Anmeldung(&uarr;TeilnehmerNr, &uarr;WorkshopNr)</pre>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 1.11.3: Eigener Sachtext <span class="niveau">AFB III</span>
+        </summary>
+        <p>
+          Schreibe selbst einen Sachtext (6&ndash;10 S&auml;tze) zu einem Bereich, den du kennst &ndash;
+          Sportverein, Band, Onlineshop, Spielesammlung. Der Text muss mindestens drei Entit&auml;ten und eine
+          m:n-Beziehung mit einem Beziehungsattribut enthalten. Tauscht die Texte anschlie&szlig;end zu zweit: Erstelle
+          zum Text deiner Partnerin bzw. deines Partners ERM und Relationenmodell. Vergleicht danach gemeinsam
+          mit der Absicht der Autorin bzw. des Autors: Wo war der Text mehrdeutig?
+        </p>
+    </details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 1.11.4: R&uuml;ckweg &ndash; das Kino <span class="niveau">AFB II</span>
+        </summary>
+        <p>Ein Programmkino verwaltet sein Programm mit diesem Relationenmodell. Erstelle das zugeh&ouml;rige ER-Modell und
+           pr&uuml;fe es mit der Faustformel.</p>
+        <pre class="schema">Film(<u>FilmNr</u>, Titel, Dauer, FSK)
+Saal(<u>SaalNr</u>, Plaetze)
+Vorstellung(<u>VorstellungNr</u>, Datum, Uhrzeit, &uarr;FilmNr, &uarr;SaalNr)
+Kunde(<u>KundenNr</u>, Name, Email)
+Reservierung(<u>&uarr;KundenNr, &uarr;VorstellungNr</u>, Anzahl)</pre>
+        <p class="tipp">Nicht jede Relation mit zwei Fremdschl&uuml;sseln ist eine Verbindungsrelation. Schau auf den Prim&auml;rschl&uuml;ssel.</p>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 1.11.5: R&uuml;ckweg aus einer SQL-Datei &ndash; der Fahrradverleih <span class="niveau">AFB II</span>
+        </summary>
+        <p>Von einem Fahrradverleih ist nur diese SQL-Datei erhalten. Notiere zuerst das Relationenmodell in der Schreibweise
+           dieser Seite und erstelle dann das ER-Modell. Begr&uuml;nde jede Kardinalit&auml;t mit einer Stelle im SQL-Code.</p>
+        <pre><code>CREATE TABLE Station (
+    StationNr INTEGER PRIMARY KEY,
+    Ort       TEXT NOT NULL
+);
+CREATE TABLE Fahrrad (
+    RadNr     INTEGER PRIMARY KEY,
+    Typ       TEXT,
+    StationNr INTEGER NOT NULL,
+    FOREIGN KEY (StationNr) REFERENCES Station(StationNr)
+);
+CREATE TABLE Kunde (
+    KundenNr INTEGER PRIMARY KEY,
+    Name     TEXT NOT NULL,
+    Email    TEXT UNIQUE
+);
+CREATE TABLE Ausleihe (
+    KundenNr INTEGER,
+    RadNr    INTEGER,
+    Start    TEXT,
+    Ende     TEXT,
+    PRIMARY KEY (KundenNr, RadNr, Start),
+    FOREIGN KEY (KundenNr) REFERENCES Kunde(KundenNr),
+    FOREIGN KEY (RadNr)    REFERENCES Fahrrad(RadNr)
+);</code></pre>
+        <p>Erkl&auml;re au&szlig;erdem, warum <code>Start</code> zum Prim&auml;rschl&uuml;ssel von <code>Ausleihe</code> geh&ouml;rt und was
+           das f&uuml;r das ER-Modell bedeutet.</p>
+    </details>
+</div>

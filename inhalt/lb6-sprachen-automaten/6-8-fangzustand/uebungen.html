@@ -1,0 +1,47 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+      <details>
+        <summary>Aufgabe 6.8.3: Entwurf <span class="niveau">AFB II</span></summary>
+        <p>
+          Entwirf einen DEA über <code>Σ = {0,1}</code>, der alle Wörter akzeptiert, die <em>nicht</em> mit
+          <code>00</code> beginnen. Erstelle zunächst eine partielle Skizze (nicht benötigte
+          Kanten weglassen) und vervollständige sie dann mit einem Fangzustand.
+        </p>
+      </details>
+    </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+      <details>
+        <summary>Aufgabe 6.8.4: Postleitzahlen prüfen <span class="niveau">AFB II</span></summary>
+        <p>Ein Bestellformular prüft deutsche Postleitzahlen (genau fünf Ziffern) über Σ = {0, …, 9}.</p>
+        <ol type="a">
+          <li>Gib einen partiellen DEA als Übergangstabelle an (gleich behandelte Ziffern dürfen zu einer Spalte zusammengefasst werden).</li>
+          <li>Vervollständige ihn mit einem Fangzustand. Bestimme, wie viele Übergänge dabei neu hinzukommen und wie viele der vollständige DEA insgesamt hat.</li>
+          <li>Prüfe <code>01069</code>, <code>0106</code> und <code>010699</code> mit dem vollständigen DEA.</li>
+        </ol>
+      </details>
+    </div>
+
+<div class="aufgabe">
+      <details>
+        <summary>Aufgabe 6.8.5: Sprache eines vollständigen DEA deuten <span class="niveau">AFB II</span></summary>
+        <p>Gegeben ist ein vollständiger DEA über Σ = {a, b}:</p>
+        <table>
+          <thead><tr><th>δ</th><th>a</th><th>b</th></tr></thead>
+          <tbody>
+            <tr><td>→ s</td><td>p</td><td>⊥</td></tr>
+            <tr><td>p</td><td>⊥</td><td>q</td></tr>
+            <tr><td>q (Endzustand)</td><td>p</td><td>⊥</td></tr>
+            <tr><td>⊥</td><td>⊥</td><td>⊥</td></tr>
+          </tbody>
+        </table>
+        <ol type="a">
+          <li>Prüfe ε, <code>ab</code>, <code>abab</code>, <code>aba</code> und <code>abb</code> über die Zustandsfolge.</li>
+          <li>Beschreibe die akzeptierte Sprache in Worten und als regulären Ausdruck.</li>
+          <li>Gib die partielle Darstellung desselben Automaten an.</li>
+        </ol>
+      </details>
+    </div>

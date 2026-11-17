@@ -1,0 +1,36 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.5.7: Fehler finden <span class="niveau">AFB III</span></summary>
+                <p>Mia hat den Term (A ∧ B ∧ C) ∨ (A ∧ B ∧ ¬D) ∨ (A ∧ ¬B ∧ C) so umgeformt:</p>
+                <table class="gitter">
+                    <tr><th>Zeile</th><th>Term</th><th>Mias Begründung</th></tr>
+                    <tr><td>0</td><td>(A ∧ B ∧ C) ∨ (A ∧ B ∧ ¬D) ∨ (A ∧ ¬B ∧ C)</td><td>Ausgangsterm</td></tr>
+                    <tr><td>1</td><td>(A ∧ B) ∧ (C ∨ ¬D) ∨ (A ∧ ¬B ∧ C)</td><td>Distributivgesetz (A ∧ B ausklammern)</td></tr>
+                    <tr><td>2</td><td>A ∧ ((B ∧ (C ∨ ¬D)) ∨ (¬B ∧ C))</td><td>Distributivgesetz (A ausklammern)</td></tr>
+                    <tr><td>3</td><td>A ∧ ((B ∨ ¬B) ∧ (C ∨ ¬D ∨ C))</td><td>Distributivgesetz</td></tr>
+                    <tr><td>4</td><td>A ∧ (W ∧ (C ∨ ¬D))</td><td>Komplement, Idempotenz</td></tr>
+                    <tr><td>5</td><td>A ∧ (C ∨ ¬D)</td><td>neutrales Element</td></tr>
+                </table>
+                <ol>
+                    <li>Finde die erste fehlerhafte Zeile. Benenne das Gesetz, das Mia dort anwenden wollte, und erkläre, warum es so nicht angewendet werden darf.</li>
+                    <li>Gib eine Belegung von A, B, C, D an, für die Ausgangsterm und Mias Ergebnis verschiedene Werte haben.</li>
+                    <li>Vereinfache den Ausgangsterm korrekt (jede Zeile mit Gesetz).</li>
+                    <li>Ben behauptet: „(A ∧ B ∧ C) ∨ (A ∧ B ∧ ¬D) = A ∧ B ∧ C ∨ ¬D, ich habe nur A ∧ B ausgeklammert.“ Beurteile Bens Umformung.</li>
+                </ol>
+                <p class="tipp">Bei Teil 3: Fasse zuerst die beiden Teilterme zusammen, die sich nur in einer einzigen Variablen unterscheiden. Welcher gemeinsame UND-Block steckt in ihnen?</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.5.8: Ausklammern mit innerem ODER <span class="niveau">AFB III</span></summary>
+                <p>Das Distributivgesetz gibt es in zwei Formen. Bisher hast du einen gemeinsamen UND-Block aus ODER-verknüpften Teiltermen ausgeklammert. Jetzt ist es umgekehrt.</p>
+                <ol>
+                    <li>Vereinfache (A ∨ ¬B ∨ C) ∧ (A ∨ ¬B ∨ ¬C) ∧ (A ∨ ¬B ∨ D) mit Gesetzesangabe in jeder Zeile.</li>
+                    <li>Vergleiche deinen Lösungsweg mit Beispiel 3 auf dieser Seite. Beschreibe, welche Rollen dabei getauscht sind (∧ und ∨, W und F).</li>
+                    <li>Lena rechnet: (A ∨ ¬B ∨ C) ∧ (A ∨ ¬B ∨ ¬C) = (A ∨ ¬B) ∧ (C ∨ ¬C) = (A ∨ ¬B) ∧ W = A ∨ ¬B. Ihr Ergebnis stimmt. Beurteile ihren Lösungsweg und belege deine Einschätzung mit einem Gegenbeispiel für die von ihr benutzte „Regel“ (X ∨ Y) ∧ (X ∨ Z) = X ∧ (Y ∨ Z).</li>
+                </ol>
+            </details>
+        </div>

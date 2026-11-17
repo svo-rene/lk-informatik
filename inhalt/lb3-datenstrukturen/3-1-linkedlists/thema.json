@@ -1,0 +1,23 @@
+{
+  "nr": "3.1",
+  "titel": "Verkettete Listen (linked lists)",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    },
+    {
+      "datei": "zeiger-werkstatt.html",
+      "titel": "Zeiger-Werkstatt",
+      "zusatz": true
+    }
+  ]
+}

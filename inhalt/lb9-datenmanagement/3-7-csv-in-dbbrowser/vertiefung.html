@@ -1,0 +1,29 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 3.7.3: Vorbereitung in der Tabellenkalkulation <span class="niveau">AFB III</span></summary>
+        <p>
+            Wähle eine CSV-Datei deiner Wahl aus dem Kurs (z.&nbsp;B. <code>wetterdaten.csv</code> oder
+            <code>verkauf_produkte.csv</code>), öffne sie in LibreOffice Calc, entferne mindestens eine nicht
+            benötigte Spalte sowie offensichtlich fehlerhafte Zeilen und speichere das Ergebnis unter einem
+            neuen Dateinamen. Importiere diese reduzierte Datei anschließend in DB Browser und formuliere eine
+            eigene Auswertungsabfrage dazu.
+        </p>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 3.7.5: Fehler finden – vier missglückte Importe <span class="niveau">AFB III</span></summary>
+        <p>Vier Mitschüler*innen haben CSV-Dateien in DB Browser importiert und berichten von Problemen:</p>
+        <ol>
+            <li>Ben importiert <code>klassenarbeit.csv</code>. Die Tabelle hat nur <em>eine</em> Spalte namens <code>Name,Punkte</code>.</li>
+            <li>Bei Clara heißen die Spalten <code>field1</code>, <code>field2</code>, <code>field3</code>, und die erste Datenzeile lautet <code>Name | Alter | Note</code>.</li>
+            <li>In Davids Tabelle steht statt „Müller“ der Text „MÃ¼ller“.</li>
+            <li>Eva hat Punktzahlen importiert. <code>SELECT MAX(Punkte) FROM Test;</code> liefert 95, obwohl jemand 100 Punkte hat, und
+                <code>ORDER BY Punkte DESC</code> liefert die Reihenfolge 95, 9, 100.</li>
+        </ol>
+        <p>Erkläre für jeden Fall die Ursache, beschreibe die Korrektur und begründe, welcher der vier Fehler am gefährlichsten ist.</p>
+    </details>
+</div>

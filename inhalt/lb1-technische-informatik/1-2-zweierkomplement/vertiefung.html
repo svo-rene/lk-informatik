@@ -1,0 +1,36 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.2.6: Fehler finden – Überlauf oder nicht? <span class="niveau">AFB III</span></summary>
+        <p>Lea hat sich für die Klausur eine Merkliste angelegt. Alle vier Einträge enthalten einen Fehler.</p>
+        <ol type="a">
+            <li>„&minus;100 im 8-Bit-Zweierkomplement: 100 = 1100100, invertiert 0011011, plus 1 ergibt <strong>0011100</strong>.“</li>
+            <li>„10000000 im 8-Bit-Zweierkomplement ist <strong>&minus;0</strong>: Das Vorzeichenbit ist 1, der Rest ist 0.“</li>
+            <li>„0111 1111 + 0000 0001 = 1000 0000 im 8-Bit-Zweierkomplement: Es gibt keinen Übertrag aus der höchsten Stelle, also auch <strong>keinen Überlauf</strong>.“</li>
+            <li>„(&minus;3) + (&minus;2) im 4-Bit-Zweierkomplement: 1101 + 1110 = 1 1011. Aus der höchsten Stelle entsteht ein Übertrag, also liegt ein <strong>Überlauf</strong> vor und das Ergebnis ist ungültig.“</li>
+        </ol>
+        <ol>
+            <li>Finde in jedem Eintrag den Fehler, erkläre ihn und korrigiere den Eintrag. Mache bei a) und d) die Probe mit den Stellenwerten.</li>
+            <li>Lea leitet aus c) und d) die Regel ab: „Übertrag aus der höchsten Stelle bedeutet Überlauf.“ Beurteile diese Regel getrennt für vorzeichenlose Zahlen und für Zahlen im Zweierkomplement.</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.2.7: Den passenden Datentyp wählen <span class="niveau">AFB III</span></summary>
+        <p>Ein Entwicklerteam hat für vier Größen folgende Datentypen vorgeschlagen:</p>
+        <table class="gitter">
+            <tr><th>Nr.</th><th>Größe</th><th>Vorschlag</th></tr>
+            <tr><td>1</td><td>Etage in einem Aufzug (3 Tiefgaragenebenen, Erdgeschoss, 40 Obergeschosse)</td><td>8 Bit, Zweierkomplement</td></tr>
+            <tr><td>2</td><td>Kilometerstand eines Autos in ganzen Kilometern</td><td>16 Bit, vorzeichenlos</td></tr>
+            <tr><td>3</td><td>Guthaben einer Mensakarte in Cent (höchstens 150&nbsp;€, kein Minus möglich)</td><td>16 Bit, vorzeichenlos</td></tr>
+            <tr><td>4</td><td>Außentemperatur einer Wetterstation in ganzen Grad Celsius</td><td>8 Bit, vorzeichenlos</td></tr>
+        </table>
+        <ol>
+            <li>Gib für jeden Vorschlag den Wertebereich an.</li>
+            <li>Beurteile jeden Vorschlag. Beschreibe bei ungeeigneten Vorschlägen, welcher Registerwert in einer typischen Situation entsteht, und schlage einen passenden Datentyp vor.</li>
+        </ol>
+    </details>
+</div>

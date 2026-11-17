@@ -1,0 +1,106 @@
+<p>Die Backus-Naur-Form (BNF) ist eine Metasprache zur Beschreibung formaler Sprachen, insbesondere von Programmiersprachen. Sie wurde von John Backus und Peter Naur um 1960 für die Beschreibung der Programmiersprache ALGOL 60 entwickelt.</p>
+
+<h2>Grundlegende Elemente der BNF</h2>
+
+<p>Die BNF verwendet folgende Grundelemente:</p>
+
+<ul>
+<li><strong>Nichtterminale:</strong> werden in spitze Klammern gesetzt, z.&nbsp;B. <code>&lt;zahl&gt;</code></li>
+<li><strong>Terminale:</strong> konkrete Zeichen oder Wörter, die direkt in der Sprache vorkommen</li>
+<li><strong><code>::=</code></strong> bedeutet „wird definiert als“ (entspricht dem Regelpfeil →)</li>
+<li><strong><code>|</code></strong> bedeutet „oder“ und trennt Alternativen</li>
+</ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> Zusammen mit der Regel für <code>&lt;zahl&gt;</code> aus dem Merkkasten beschreibt</p>
+<pre>&lt;ziffer&gt; ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</pre>
+<p>alle natürlichen Zahlen in Ziffernschreibweise. Wir leiten <code>407</code> ab.</p>
+<ol>
+<li><strong>Anzahl der Ziffern bestimmen:</strong> <code>407</code> hat drei Ziffern, also wird <code>&lt;zahl&gt; ::= &lt;zahl&gt;&lt;ziffer&gt;</code> zweimal angewendet: <code>&lt;zahl&gt; ⇒ &lt;zahl&gt;&lt;ziffer&gt; ⇒ &lt;zahl&gt;&lt;ziffer&gt;&lt;ziffer&gt;</code>. <em>Warum?</em> Jede Anwendung der rekursiven Regel hängt rechts eine Ziffer an.</li>
+<li><strong>Rekursion beenden:</strong> <code>&lt;zahl&gt; ::= &lt;ziffer&gt;</code> liefert die erste Ziffer: <code>⇒ &lt;ziffer&gt;&lt;ziffer&gt;&lt;ziffer&gt;</code>. <em>Warum?</em> Ohne diese Abbruchregel würde immer ein <code>&lt;zahl&gt;</code> übrig bleiben.</li>
+<li><strong>Ziffern einsetzen:</strong> <code>⇒ 4&lt;ziffer&gt;&lt;ziffer&gt; ⇒ 40&lt;ziffer&gt; ⇒ 407</code>. <em>Warum?</em> Jedes <code>&lt;ziffer&gt;</code> wird durch genau eine der zehn Alternativen ersetzt.</li>
+</ol>
+<p><strong>Ergebnis:</strong> <code>&lt;zahl&gt; ⇒ &lt;zahl&gt;&lt;ziffer&gt; ⇒ &lt;zahl&gt;&lt;ziffer&gt;&lt;ziffer&gt; ⇒ &lt;ziffer&gt;&lt;ziffer&gt;&lt;ziffer&gt; ⇒ 4&lt;ziffer&gt;&lt;ziffer&gt; ⇒ 40&lt;ziffer&gt; ⇒ 407</code></p>
+<p><strong>Kontrolle:</strong> Das leere Wort ist nicht ableitbar (mindestens eine Ziffer). <code>007</code> ist dagegen ableitbar – führende Nullen verbietet diese Grammatik nicht.</p>
+            </details>
+        </div>
+
+<h2>Terminale in der BNF</h2>
+
+<p>Terminale können in der BNF auf verschiedene Weisen dargestellt werden:</p>
+
+<ul>
+<li>Einzelne Zeichen können direkt geschrieben werden, z.&nbsp;B. a, 1, +</li>
+<li>Zeichenketten (Strings) werden üblicherweise in Anführungszeichen gesetzt, z.&nbsp;B. "while", "if"</li>
+<li>Manchmal werden auch einfache Anführungszeichen verwendet, z.&nbsp;B. 'while', 'if'</li>
+</ul>
+
+<p>Beispiel einer BNF-Regel mit Zeichenketten als Terminale:</p>
+
+<pre>&lt;schlüsselwort&gt; ::= "if" | "else" | "while" | "for"</pre>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: Erweiterte Backus-Naur-Form (EBNF)</summary>
+<p>Die erweiterte Backus-Naur-Form (EBNF) ergänzt die BNF um zusätzliche Notationen:</p>
+<ul>
+<li><code>[ ]</code> für optionale Elemente (0- oder 1-mal)</li>
+<li><code>{ }</code> für Wiederholungen (0-mal oder öfter)</li>
+<li><code>( )</code> für Gruppierungen</li>
+<li><code>" "</code> oder <code>' '</code> für Terminale: In der EBNF (Norm ISO/IEC 14977) sind einfache und doppelte Anführungszeichen gleichwertig. Ein Terminal, das selbst ein doppeltes Anführungszeichen enthält, schreibt man in einfache, und umgekehrt.</li>
+</ul>
+<p>In der Norm werden Nichtterminale ohne spitze Klammern geschrieben, Verkettungen durch Komma getrennt und Regeln mit Semikolon beendet, z.&nbsp;B. <code>zahl = ziffer, { ziffer } ;</code>. In Schulbüchern findet man häufig auch Mischformen wie <code>&lt;zahl&gt; ::= &lt;ziffer&gt; { &lt;ziffer&gt; }</code>. Beide Schreibweisen sind zulässig, wichtig ist eine einheitliche Verwendung.</p>
+<p>Dies ermöglicht eine kompaktere Darstellung von Grammatiken. Die Ausdrucksstärke ist dieselbe wie bei der BNF: Jede EBNF-Regel lässt sich in BNF-Regeln umschreiben.</p>
+</details>
+</div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+<p><strong>Bezeichner in BNF und EBNF</strong><br>Ein Bezeichner beginnt mit einem Buchstaben, danach folgen beliebig viele Buchstaben oder Ziffern.</p>
+<pre>BNF:   &lt;bezeichner&gt; ::= &lt;buchstabe&gt; | &lt;bezeichner&gt;&lt;buchstabe&gt; | &lt;bezeichner&gt;&lt;ziffer&gt;
+EBNF:  bezeichner = buchstabe, { buchstabe | ziffer } ;</pre>
+<p>Die BNF braucht eine rekursive Regel, die EBNF drückt dasselbe mit <code>{ }</code> aus.</p>
+<p><strong>Den Bezeichner <code>x1y</code> in beiden Notationen erzeugen:</strong></p>
+<ol>
+<li><strong>BNF von rechts nach links aufbauen:</strong> Das letzte Zeichen y ist ein Buchstabe, das vorletzte 1 eine Ziffer: <code>&lt;bezeichner&gt; ⇒ &lt;bezeichner&gt;&lt;buchstabe&gt; ⇒ &lt;bezeichner&gt;&lt;ziffer&gt;&lt;buchstabe&gt;</code>. <em>Warum?</em> Die rekursiven Regeln hängen jeweils rechts ein Zeichen an; das zuletzt angehängte steht ganz rechts.</li>
+<li><strong>Rekursion beenden:</strong> <code>⇒ &lt;buchstabe&gt;&lt;ziffer&gt;&lt;buchstabe&gt; ⇒ x&lt;ziffer&gt;&lt;buchstabe&gt; ⇒ x1&lt;buchstabe&gt; ⇒ x1y</code>. <em>Warum?</em> Die Abbruchregel <code>&lt;bezeichner&gt; ::= &lt;buchstabe&gt;</code> erzeugt das erste Zeichen.</li>
+<li><strong>EBNF von links nach rechts lesen:</strong> <code>buchstabe</code> liefert x; die Wiederholung <code>{ buchstabe | ziffer }</code> wird zweimal durchlaufen: einmal <code>ziffer</code> (1), einmal <code>buchstabe</code> (y). <em>Warum?</em> <code>{ }</code> erlaubt beliebig viele Durchläufe, in jedem wird eine Alternative gewählt.</li>
+<li><strong>Falle prüfen:</strong> <code>1x</code> ist kein Bezeichner. In der BNF entsteht das erste Zeichen <em>immer</em> durch die Abbruchregel, also ist es ein Buchstabe; in der EBNF steht <code>buchstabe</code> fest am Anfang.</li>
+</ol>
+<p><strong>Ergebnis:</strong> Beide Notationen beschreiben dieselbe Sprache. Die BNF braucht dafür drei Alternativen mit Rekursion, die EBNF eine einzige Zeile.</p>
+<p><strong>Kontrolle:</strong> Ein Bezeichner aus nur einem Buchstaben, z.&nbsp;B. <code>a</code>, entsteht in der BNF direkt durch die Abbruchregel und in der EBNF mit null Durchläufen von <code>{ }</code>.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: BNF in Normen, Compilern und Webformularen</summary>
+<p><strong>Alltag:</strong> Ob eine E-Mail-Adresse gültig ist, legt eine Norm fest (RFC 5322), deren Grammatik in einer BNF-Variante (ABNF) aufgeschrieben ist. Webformulare prüfen Eingaben nach solchen Regeln.</p>
+<p><strong>Beruf:</strong> Die Syntax fast jeder Programmiersprache (Java, Python, SQL) ist in einer EBNF-artigen Notation spezifiziert. Im Compilerbau erzeugen Lexer- und Parser-Generatoren wie ANTLR, Flex/Bison oder JavaCC direkt aus einer solchen Grammatik das Analyseprogramm. Softwareentwicklerinnen nutzen das z.&nbsp;B. für eigene Konfigurations- oder Abfragesprachen in Unternehmenssoftware.</p>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Merke:</strong><br>In der BNF wird jedes Nichtterminal durch eine Produktionsregel definiert. Die linke Seite enthält das zu definierende Nichtterminal, die rechte Seite die möglichen Ersetzungen. Wiederholungen werden in der BNF durch <strong>Rekursion</strong> ausgedrückt, z.&nbsp;B. <code>&lt;zahl&gt; ::= &lt;ziffer&gt; | &lt;zahl&gt;&lt;ziffer&gt;</code>.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.5.1: <span class="niveau">AFB II</span></summary>
+<p>Erstelle eine BNF-Grammatik für einfache mathematische Ausdrücke, die ganze Zahlen und die Operatoren +, - und * enthalten.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.5.2: <span class="niveau">AFB II</span></summary>
+<p>Leite den arithmetischen Ausdruck <code>3 + 4 * 2</code> mit der in Aufgabe 6.5.1 erstellten Grammatik ab.</p>
+</details>
+</div>

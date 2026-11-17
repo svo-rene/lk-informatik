@@ -1,0 +1,27 @@
+<p>Im Video bekommen zwei Clients ihre Adressen automatisch von einem DHCP-Server. In der Simulation kannst du die vier DHCP-Nachrichten Discover, Offer, Request und Acknowledgement im Datenaustausch mitlesen (→ 7.7).</p>
+
+<video width="500" controls>
+            <source src="../vid/dhcp_zwei_clients.mp4" type="video/mp4">
+            Dein Browser kann dieses Video nicht abspielen. <a href="../vid/dhcp_zwei_clients.mp4" download="">Lade das Video herunter</a> und öffne es mit einem Videoplayer.
+        </video>
+
+<h2>Dateien</h2>
+
+<ul>
+            <li><a href="../material/dhcp.fls" download="">dhcp.fls</a> – DHCP-Server 192.168.0.2 mit dem Adressbereich 192.168.0.3 bis 192.168.0.20, zwei Notebooks mit „DHCP zur Konfiguration verwenden“, ein Switch.</li>
+        </ul>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.15.1: DHCP beobachten und erweitern <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Öffne dhcp.fls, starte den Aktionsmodus und lass dir auf beiden Notebooks mit <code>ipconfig</code> die Konfiguration anzeigen.</li>
+                    <li>Öffne auf einem Notebook den Datenaustausch (Rechtsklick → „Datenaustausch anzeigen“). Suche die vier DHCP-Nachrichten und notiere jeweils Quell- und Ziel-IP-Adresse. Welche Nachrichten sind Broadcasts?</li>
+                    <li>Wie viele Clients kann dieser DHCP-Server höchstens versorgen?</li>
+                    <li>Gateway und DNS-Server stehen bei den Notebooks auf 0.0.0.0. Erkläre, woran das liegt und was die Notebooks deshalb nicht können. Behebe das Problem in der Konfiguration des DHCP-Servers (Gateway z.&nbsp;B. 192.168.0.1).</li>
+                    <li>Füge ein drittes Notebook mit DHCP hinzu und prüfe, welche Adresse es erhält.</li>
+                </ol>
+            </details>
+        </div>

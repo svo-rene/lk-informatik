@@ -1,0 +1,27 @@
+<p>Hier läuft alles zusammen: Zwei Client-Netze bekommen per DHCP nicht nur ihre Adresse, sondern auch Gateway und DNS-Server (→ 7.7). Ein DNS-Server löst den Namen gdp.de auf (→ 7.8), ein Vermittlungsrechner verbindet vier Netze (→ 7.5), und ein Webserver liefert die Seite aus (→ 7.10).</p>
+
+<video width="500" controls>
+            <source src="../vid/dns_web.mp4" type="video/mp4">
+            Dein Browser kann dieses Video nicht abspielen. <a href="../vid/dns_web.mp4" download="">Lade das Video herunter</a> (Achtung, große Datei) und öffne es mit einem Videoplayer.
+        </video>
+
+<h2>Dateien</h2>
+
+<ul>
+            <li><a href="../material/dns_web.fls" download="">dns_web.fls</a> – Netz aus dem Video: Client-Netze 192.168.0.0/24 und 192.168.1.0/24 mit je einem DHCP-Server, DNS-Server 192.168.2.2, Webserver 192.168.3.2, ein Vermittlungsrechner mit vier Schnittstellen.</li>
+        </ul>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.16.1: Das Zusammenspiel der Dienste untersuchen <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Öffne dns_web.fls und starte den Aktionsmodus. Lass dir mit <code>ipconfig</code> auf je einem Notebook aus beiden Client-Netzen die Konfiguration anzeigen. Welche Werte stammen vom DHCP-Server?</li>
+                    <li>Rufe auf einem Notebook im Browser gdp.de auf und führe <code>ping gdp.de</code> aus. Zu welcher IP-Adresse wird der Name aufgelöst?</li>
+                    <li>Beschreibe in der richtigen Reihenfolge, mit welchen Rechnern das Notebook beim Aufruf von gdp.de kommuniziert und welche Protokolle und Ports dabei verwendet werden.</li>
+                    <li>Lege auf dem DNS-Server einen zusätzlichen A-Eintrag für <code>schule.local</code> an, der ebenfalls auf den Webserver zeigt, und teste ihn (vgl. Projektaufgabe P3).</li>
+                    <li>Ändere auf dem Webserver die Hintergrundfarbe der Startseite und zeige, dass die Änderung im Browser ankommt (vgl. Projektaufgabe P4).</li>
+                </ol>
+            </details>
+        </div>

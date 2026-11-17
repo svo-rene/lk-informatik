@@ -1,0 +1,137 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/3-2_queue.ipynb" download>3-2_queue.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Verschiebungen zählen <span class="niveau">AFB I</span></summary>
+                <p>Eine <code>ListenQueue</code> enthält 1000 Elemente. Wie viele Verschiebungen kostet das nächste <code>dequeue</code>? Wie viele sind es ungefähr, bis alle 1000 Elemente entnommen sind?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Ein <code>dequeue</code> lässt die übrigen 999 Elemente nachrücken. Bis die Schlange leer ist: 999 + 998 + … + 1 + 0 = 999 · 1000 / 2 = 499&nbsp;500 Verschiebungen, also etwa n²/2 – O(n²).</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Welche Verweise ändern sich? <span class="niveau">AFB I</span></summary>
+                <p>Die Schlange enthält A → B, <code>__head</code> zeigt auf A, <code>__tail</code> auf B. Welche Verweise ändern sich bei <code>enqueue("C")</code>, und in welcher Reihenfolge?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Zuerst <code>self.__tail.next = neu</code>: Das <code>next</code> von B zeigt auf C. Dann <code>self.__tail = neu</code>: <code>__tail</code> zeigt auf C. <code>__head</code> bleibt bei A. Es wird nichts durchlaufen – O(1).</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Zwei Mal entnehmen <span class="niveau">AFB I</span></summary>
+                <p>Die Schlange enthält A → B → C. Es wird zweimal <code>dequeue()</code> aufgerufen. Was wird zurückgegeben? Worauf zeigen <code>__head</code> und <code>__tail</code> danach, und was liefert <code>peek()</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Zurückgegeben werden A und dann B. Danach zeigen <code>__head</code> und <code>__tail</code> beide auf den Knoten C, <code>peek()</code> liefert C.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 6: Was läuft beim Import mit? <span class="niveau">AFB II</span></summary>
+                <p>In <code>queue_knoten.py</code> stehen unter den Klassen ohne <code>if __name__ == "__main__":</code> die Zeilen <code>t = Queue()</code>, <code>t.enqueue("Test")</code> und <code>print("Probe:", t.dequeue())</code>. Was gibt <code>druckwarteschlange.py</code> aus dem Beispiel oben aus? Was ändert sich, wenn du die drei Zeilen unter <code>if __name__ == "__main__":</code> einrückst?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Ohne die Bedingung: erst <code>Probe: Test</code> (der Import führt die Testzeilen aus), dann <code>Brief.pdf</code>. Mit der Bedingung nur <code>Brief.pdf</code> – beim Import ist <code>__name__</code> gleich <code>"queue_knoten"</code>, die Testzeilen werden übersprungen. Startest du <code>queue_knoten.py</code> selbst, erscheint <code>Probe: Test</code> weiterhin.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-2-1">
+            <details>
+                <summary>Aufgabe 3.2.1: FIFO nachvollziehen <span class="niveau">AFB I</span></summary>
+                <p>Eine leere Schlange erhält die Operationen: enqueue(5), enqueue(8), dequeue(), enqueue(3), enqueue(1), dequeue(), peek(). Gib nach jeder Operation den Inhalt (vorn links) und die Rückgabewerte an.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-2-2">
+            <details>
+                <summary>Aufgabe 3.2.2: Druckwarteschlange simulieren <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/druckwarteschlange.py</code> – neu anlegen; die Klasse <code>Queue</code> holst du mit <code>from queue_knoten import Queue</code> (wie das funktioniert: <a href="index.html#import">Abschnitt „import“</a>; Testzeilen in <code>queue_knoten.py</code> unter <code>if __name__ == "__main__":</code>)<br><strong>Commits:</strong> wenn es läuft: <code>3.2.2: Druckaufträge einreihen und drucken, Seitensumme stimmt</code></p>
+                <p>Schreibe mit der Klasse <code>Queue</code> ein Programm, das Druckaufträge aufnimmt. Jeder Auftrag ist ein Objekt einer kleinen Klasse <code>Druckauftrag</code> mit den Attributen <code>name</code> und <code>seiten</code>. Anschließend sollen alle Aufträge nacheinander „gedruckt“ werden; ausgegeben wird jeweils der Name und die bis dahin insgesamt gedruckte Seitenzahl.</p>
+                <p class="tipp"><code>Node</code> und <code>Queue</code> bleiben unverändert. Der ganze <code>Druckauftrag</code> kommt als <code>data</code> in den Knoten: <code>drucker.enqueue(Druckauftrag("Brief.pdf", 2))</code>. <code>dequeue()</code> liefert dieses Objekt zurück, dann liest du <code>auftrag.name</code> und <code>auftrag.seiten</code>. So bleibt die Schlange für jeden Inhalt verwendbar – Zahlen, Namen oder Aufträge.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-2-3">
+            <details>
+                <summary>Aufgabe 3.2.3: Implementierungen bewerten <span class="niveau">AFB III</span></summary>
+                <p>Ein Mitschüler implementiert die Schlange mit einer Python-Liste: <code>enqueue</code> mit <code>append</code> und <code>dequeue</code> mit <code>pop(0)</code>. Ein Server soll damit pro Sekunde 100 000 Anfragen verwalten, die Schlange enthält oft 50 000 Einträge. Beurteile diese Lösung und vergleiche sie mit einer verketteten Liste und mit <code>deque</code>.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.2.4: Abzählreim im Ferienlager <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/abzaehlen.py</code> – neu anlegen; die Klasse <code>Queue</code> holst du mit <code>from queue_knoten import Queue</code> (siehe <a href="index.html#import">Abschnitt „import“</a>)<br><strong>Commits:</strong> nach Teil 2: <code>3.2.4 Teil 2: abzaehlen mit Queue, 6 Tests ok</code></p>
+                <p>Im Ferienlager stehen die Kinder im Kreis. Mit einem Abzählreim wird reihum gezählt; wer beim k-ten Wort dran ist, scheidet aus, und beim nächsten Kind geht es weiter. Das zuletzt übrig gebliebene Kind darf das Abendspiel aussuchen.</p>
+                <p>Ein Kreis lässt sich mit einer Schlange nachbilden: Wer gezählt wurde, aber nicht ausscheidet, wird vorn entnommen und hinten wieder angestellt.</p>
+                <ol>
+                    <li>Spiele den Ablauf für die Kinder Ali, Ben, Cleo, Dana, Emil (Ali vorn) und k = 3 von Hand durch. Notiere nach jedem Ausscheiden den Inhalt der Schlange (vorn links).</li>
+                    <li>Schreibe eine Funktion <code>abzaehlen(namen, k)</code>, die nur die Methoden der Klasse <code>Queue</code> aus Beispiel 2 benutzt und eine Python-Liste mit den Namen in der Reihenfolge des Ausscheidens zurückgibt. Das letzte Element ist also das Kind, das übrig bleibt. Für k &lt; 1 soll <code>raise ValueError("k muss mindestens 1 sein")</code> ausgelöst werden.</li>
+                    <li>Gib an, wie viele <code>enqueue</code>- und <code>dequeue</code>-Aufrufe für n Kinder ungefähr nötig sind, und folgere die Laufzeit in O-Notation.</li>
+                </ol>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>abzaehlen(["Ali", "Ben", "Cleo", "Dana", "Emil"], 3)</code></td><td><code>['Cleo', 'Ali', 'Emil', 'Ben', 'Dana']</code></td><td></td></tr>
+                        <tr><td><code>abzaehlen([], 3)</code></td><td><code>[]</code></td><td></td></tr>
+                        <tr><td><code>abzaehlen(["Ali"], 3)</code></td><td><code>['Ali']</code></td><td></td></tr>
+                        <tr><td><code>abzaehlen(["A", "B", "C", "D"], 1)</code></td><td><code>['A', 'B', 'C', 'D']</code></td><td></td></tr>
+                        <tr><td><code>abzaehlen(["A", "B", "C", "D"], 2)</code></td><td><code>['B', 'D', 'C', 'A']</code></td><td></td></tr>
+                        <tr><td><code>abzaehlen(["A", "B"], 0)</code></td><td><code>ValueError: k muss mindestens 1 sein</code></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p class="tipp">Für jedes ausscheidende Kind werden zuerst k − 1 Kinder „weitergereicht“ (<code>q.enqueue(q.dequeue())</code>), dann scheidet das nächste aus.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.2.5: Ringpuffer für eine Wetterstation <span class="niveau">AFB II–III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/ring_queue.py</code> – neu anlegen<br><strong>Commits:</strong> <code>3.2.5 Teil 2: RingQueue mit is_empty, is_full und enqueue</code> · <code>3.2.5 Teil 2: dequeue und peek ergänzt, alle 8 Tests ok</code></p>
+                <p>Eine Wetterstation mit Mikrocontroller sammelt Messwerte in einer Schlange, bis sie per Funk verschickt werden. Der Speicher ist knapp und fest: Es dürfen höchstens <code>kapazitaet</code> Werte gleichzeitig gespeichert werden, und während des Betriebs soll kein neuer Speicher angelegt werden. Deshalb wird die Schlange als <strong>Ringpuffer</strong> gebaut (siehe „Implementierung mit einem Array“): eine Liste fester Länge, ein Index <code>__vorn</code> auf das vordere Element und ein Zähler <code>__anzahl</code>. Der nächste freie Platz ist <code>(__vorn + __anzahl) % kapazitaet</code>.</p>
+                <ol>
+                    <li>Lege für die Kapazität 3 eine Tabelle mit den Spalten Operation, <code>__daten</code>, <code>__vorn</code>, <code>__anzahl</code>, Rückgabe an und fülle sie für diese Folge aus: enqueue(1), enqueue(2), enqueue(3), enqueue(4), dequeue(), enqueue(4), dequeue(), dequeue(), dequeue(), dequeue(). Entnommene Plätze sollen wieder auf <code>None</code> gesetzt werden.</li>
+                    <li>Implementiere die Klasse <code>RingQueue</code> mit <code>__init__(self, kapazitaet)</code>, <code>is_empty()</code>, <code>is_full()</code>, <code>enqueue(x)</code>, <code>dequeue()</code> und <code>peek()</code>. Ist der Puffer voll, löst <code>enqueue</code> <code>IndexError("Puffer voll")</code> aus. Ist er leer, lösen <code>dequeue</code> und <code>peek</code> <code>IndexError("Puffer leer")</code> aus.</li>
+                    <li>Beurteile, wann ein Ringpuffer der verketteten <code>Queue</code> aus Beispiel 2 vorzuziehen ist und wann nicht.</li>
+                </ol>
+                <table class="gitter">
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>r = RingQueue(3); print(r.is_empty(), r.is_full())</code></td><td><code>True False</code></td><td></td></tr>
+                        <tr><td><code>r.dequeue()</code> (leer)</td><td><code>IndexError: Puffer leer</code></td><td></td></tr>
+                        <tr><td><code>r.enqueue(1); r.enqueue(2); r.enqueue(3); print(r.is_full())</code></td><td><code>True</code></td><td></td></tr>
+                        <tr><td><code>r.enqueue(4)</code> (voll)</td><td><code>IndexError: Puffer voll</code></td><td></td></tr>
+                        <tr><td><code>print(r.dequeue()); r.enqueue(4); print(r.peek())</code></td><td><code>1</code>, dann <code>2</code></td><td></td></tr>
+                        <tr><td>dreimal <code>print(r.dequeue())</code></td><td><code>2</code>, <code>3</code>, <code>4</code></td><td></td></tr>
+                        <tr><td><code>r.peek()</code> (wieder leer)</td><td><code>IndexError: Puffer leer</code></td><td></td></tr>
+                        <tr><td><code>r1 = RingQueue(1); r1.enqueue("x"); print(r1.dequeue()); r1.enqueue("y"); print(r1.dequeue())</code></td><td><code>x</code>, dann <code>y</code></td><td></td></tr>
+                    </tbody>
+                </table>
+                <p class="tipp">Beim Entnehmen rückt <code>__vorn</code> mit <code>(__vorn + 1) % kapazitaet</code> weiter – hinter dem letzten Platz geht es wieder bei Index 0 los.</p>
+            </details>
+        </div>

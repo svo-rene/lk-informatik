@@ -1,0 +1,290 @@
+<p>
+            Zu Hause hängen Laptop, Handy, Smart-TV und Drucker alle an einem einzigen Gerät, dem Router. In der Schule führen Kabel aus jedem Raum in einen Verteilerschrank auf der Etage und von dort in den Serverraum. Wie Geräte miteinander verbunden sind, beschreibt die <strong>Topologie</strong> eines Netzes. Über welches <strong>Übertragungsmedium</strong> die Daten laufen (Funk, Kupfer, Glas), entscheidet über Datenrate, Reichweite und Kosten.
+        </p>
+
+<p>
+            Netzwerktopologien beschreiben die Anordnung der Elemente (Knoten und Verbindungen) in einem Kommunikationsnetz. Man unterscheidet physische und logische Topologien. Übertragungsmedien sind die physischen Kanäle, über die Daten zwischen Netzwerkgeräten übertragen werden.
+        </p>
+
+<h2>Physische Topologien</h2>
+
+<p>Die physische Topologie beschreibt die tatsächliche Anordnung der Geräte (Knoten) und ihrer Kabel- bzw. Funkverbindungen. Die wichtigsten physischen Topologien sind:</p>
+
+<ul>
+            <li><strong>Bus:</strong> Alle Geräte sind an eine einzige gemeinsame Leitung angeschlossen. Fällt die Leitung aus, ist das ganze Netz gestört.</li>
+            <li><strong>Stern:</strong> Alle Geräte sind mit einem zentralen Knoten (z.&nbsp;B. einem Switch) verbunden. Fällt ein Kabel aus, ist nur ein Gerät betroffen; fällt der zentrale Knoten aus, das ganze Netz.</li>
+            <li><strong>Ring:</strong> Jedes Gerät ist mit genau zwei Nachbarn verbunden, sodass ein geschlossener Kreis entsteht. Die Daten laufen von Station zu Station.</li>
+            <li><strong>Baum:</strong> Mehrere Sterne sind hierarchisch miteinander verbunden. Ein zentraler Knoten (Wurzel, z.&nbsp;B. Core-Switch im Serverraum) ist mit Verteilern (z.&nbsp;B. Etagen-Switches) verbunden, an denen wiederum die Endgeräte hängen. Die Baumtopologie ist gut erweiterbar; fällt aber ein Verteiler aus, ist der ganze Teilbaum darunter abgeschnitten.</li>
+            <li><strong>Vermascht (Mesh):</strong> Jedes Gerät ist mit mehreren anderen verbunden. Dadurch gibt es mehrere Wege zwischen zwei Knoten, was eine hohe Redundanz ermöglicht. Sind alle Knoten direkt miteinander verbunden, spricht man von einem vollvermaschten Netz.</li>
+        </ul>
+
+<table>
+            <thead>
+                <tr>
+                    <th>Topologie</th>
+                    <th>Vorteile</th>
+                    <th>Nachteile</th>
+                    <th>typischer Einsatz</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bus</td>
+                    <td>wenig Kabel, einfach</td>
+                    <td>Leitungsausfall legt alles lahm, Kollisionen, schlecht skalierbar</td>
+                    <td>früher Ethernet mit Koaxialkabel; heute Feldbusse (z.&nbsp;B. CAN im Auto)</td>
+                </tr>
+                <tr>
+                    <td>Stern</td>
+                    <td>einfache Fehlersuche, Ausfall eines Kabels betrifft nur ein Gerät</td>
+                    <td>zentraler Knoten ist Single Point of Failure, viel Kabel</td>
+                    <td>Heimnetz, Büro-LAN mit Switch</td>
+                </tr>
+                <tr>
+                    <td>Ring</td>
+                    <td>gleichberechtigte Stationen, vorhersagbare Laufzeiten</td>
+                    <td>Ausfall einer Station kann den Ring unterbrechen (ohne Doppelring)</td>
+                    <td>früher Token Ring; heute Glasfaser-Ringe bei Netzbetreibern und in der Industrie</td>
+                </tr>
+                <tr>
+                    <td>Baum</td>
+                    <td>gut strukturiert und erweiterbar, große Netze möglich</td>
+                    <td>Ausfall eines oberen Knotens trennt den ganzen Teilbaum</td>
+                    <td>Gebäudeverkabelung in Schulen und Firmen</td>
+                </tr>
+                <tr>
+                    <td>vermascht</td>
+                    <td>sehr ausfallsicher, mehrere Wege</td>
+                    <td>hoher Aufwand, komplexes Routing</td>
+                    <td>Internet-Backbone, WLAN-Mesh zu Hause</td>
+                </tr>
+            </tbody>
+        </table>
+
+<h2>Logische Topologien</h2>
+
+<p>Die logische Topologie beschreibt, wie Daten innerhalb eines Netzes tatsächlich übertragen werden, unabhängig von der physischen Anordnung der Geräte. Sie ergibt sich aus den verwendeten Übertragungsverfahren und Protokollen. So kann ein physischer Stern logisch wie ein Bus arbeiten, wenn der zentrale Knoten jedes Signal an alle Anschlüsse weitergibt.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: Hub und Switch <span class="beispiel-kopf">einfach</span></summary>
+            <p>Ein alter Hub und ein moderner Switch werden beide sternförmig verkabelt (physisch Stern). Der Hub gibt jedes ankommende Signal an alle Anschlüsse weiter; logisch ist das ein Bus, auf dem alle mithören und Kollisionen entstehen können. Der Switch leitet jeden Frame nur an den Anschluss des Empfängers weiter (→ 7.4); logisch entstehen Punkt-zu-Punkt-Verbindungen.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: Wie viele Verbindungen braucht man? <span class="beispiel-kopf">komplex</span></summary>
+            <p>Sechs Standorte einer Firma sollen vernetzt werden.</p>
+            <ul>
+                <li>Stern (mit zusätzlichem zentralem Knoten): 6 Leitungen.</li>
+                <li>Ring: 6 Leitungen; jeder Standort hat 2 Nachbarn.</li>
+                <li>Vollvermascht: Jeder Standort ist mit allen 5 anderen verbunden. Jede Leitung wird dabei doppelt gezählt, also n·(n−1)/2 = 6·5/2 = <strong>15 Leitungen</strong>.</li>
+            </ul>
+            <p>Fällt im Stern der zentrale Knoten aus, ist kein Standort mehr erreichbar. Im vollvermaschten Netz müssen dagegen schon 5 Leitungen ausfallen, bevor ein Standort abgeschnitten ist. Mehr Redundanz kostet also deutlich mehr Leitungen, deshalb wählt man in der Praxis oft ein teilvermaschtes Netz.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3: Die Baumtopologie eines Schulgebäudes <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Im Serverraum steht der Core-Switch C. Er ist mit drei Etagen-Switches E0, E1 und E2 verbunden. An jedem Etagen-Switch hängen vier Raum-Switches, und jeder Raum-Switch versorgt sechs Endgeräte. Gesucht sind die Zahl der Leitungen, die Weglänge zwischen zwei Rechnern und die Folgen von Ausfällen.</p>
+<pre>                      C (Core, Serverraum)
+          ┌───────────┼───────────┐
+         E0          E1          E2        Etagen-Switches
+     ┌──┬─┴┬──┐  ┌──┬─┴┬──┐  ┌──┬─┴┬──┐
+     R  R  R  R  R  R  R  R  R  R  R  R    Raum-Switches
+    (an jedem R: 6 Endgeräte)</pre>
+            <ol>
+                <li><strong>Topologie erkennen:</strong> Jeder Switch bildet mit den Geräten darunter einen Stern, und die Sterne sind hierarchisch an C angebunden. Das ist ein Baum mit der Wurzel C und drei Ebenen unterhalb der Wurzel (Etage, Raum, Endgerät).</li>
+                <li><strong>Knoten zählen:</strong> 1 Core-Switch + 3 Etagen-Switches + 3 · 4 = 12 Raum-Switches + 12 · 6 = 72 Endgeräte = 88 Knoten.</li>
+                <li><strong>Leitungen zählen:</strong> In einem Baum gibt es zwischen zwei Knoten genau einen Weg; jeder Knoten außer der Wurzel hängt mit genau einer Leitung an seinem Vorgänger. Deshalb gilt: Leitungen = Knoten − 1 = 88 − 1 = <strong>87</strong>.</li>
+                <li><strong>Weg zwischen zwei Rechnern:</strong> Ein Rechner in einem Raum im Erdgeschoss schickt Daten an einen Rechner in der zweiten Etage. Weil es nur einen Weg gibt, muss er über die gemeinsame Wurzel laufen: PC → R → E0 → C → E2 → R → PC, also <strong>6 Leitungen</strong>. Zwei Rechner im selben Raum brauchen nur 2 Leitungen (PC → R → PC), der Core-Switch wird dabei nicht belastet.</li>
+                <li><strong>Ausfälle untersuchen:</strong> Fällt ein Raum-Switch aus, sind dessen 6 Geräte abgeschnitten. Fällt ein Etagen-Switch aus, ist der ganze Teilbaum darunter abgeschnitten: 4 · 6 = 24 Geräte. Fällt C aus, erreicht kein Gerät mehr den Serverraum; innerhalb einer Etage funktioniert die Verbindung aber weiter, weil die Etagen-Switches noch arbeiten.</li>
+                <li><strong>Erweiterung:</strong> Kommt eine vierte Etage dazu, genügt eine neue Leitung von C zum neuen Etagen-Switch. Die übrigen Etagen merken davon nichts. Das ist der Grund, warum Gebäude als Baum verkabelt werden.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> 88 Knoten, 87 Leitungen, höchstens 6 Leitungen zwischen zwei Endgeräten. Je höher ein Knoten im Baum sitzt, desto mehr Geräte trifft sein Ausfall.</p>
+            <p><strong>Probe:</strong> Leitungen ebenenweise gezählt: C–E: 3, E–R: 12, R–Endgerät: 72, zusammen 3 + 12 + 72 = 87.</p>
+            </details>
+        </div>
+
+<h2>Übertragungsmedien für die physische Datenübertragung</h2>
+
+<p>Die physische Übertragung von Daten kann über verschiedene Medien erfolgen, u.&nbsp;a. Funk, Kupferkabel und Lichtwellenleiter. Jedes Medium hat eigene Eigenschaften, Vor- und Nachteile, die es für bestimmte Anwendungen besser oder schlechter geeignet machen.</p>
+
+<h3>Funkübertragung</h3>
+
+<p>Funkübertragung nutzt elektromagnetische Wellen zur drahtlosen Datenübertragung zwischen Geräten. Sie ermöglicht flexible Kommunikation über kurze bis mittlere Distanzen ohne Kabel (WLAN, Bluetooth, Mobilfunk).</p>
+
+<ul>
+            <li><strong>Vorteile:</strong> hohe Mobilität, einfache Installation und Erweiterung von Netzen.</li>
+            <li><strong>Nachteile:</strong> anfällig für Störungen (Wände, andere Funknetze), Abhörgefahr, begrenzte und mit anderen Geräten geteilte Datenrate.</li>
+        </ul>
+
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<h3>Kabelgebundene Übertragung (Kupfer)</h3>
+
+<p>Kabelgebundene Übertragungsmedien aus elektrischen Leitern wie Twisted-Pair- und Koaxialkabel sind die traditionellste Form der Datenübertragung in Netzen.</p>
+
+<ul>
+            <li><strong>Twisted-Pair-Kabel:</strong> am weitesten verbreitet in lokalen Netzen (LANs). Die Verdrillung der Adernpaare schützt vor elektromagnetischen Störungen. Moderne Kabel (Cat 6A und höher) übertragen 10&nbsp;Gbit/s auf bis zu 100&nbsp;m.</li>
+            <li><strong>Koaxialkabel:</strong> durch den Außenleiter gut abgeschirmt. Früher wurde es auch für Ethernet verwendet; heute kommt es vor allem im Kabelfernsehen und beim Kabelinternet zum Einsatz. In lokalen Netzen ist es durch Twisted Pair abgelöst, das inzwischen gleich hohe oder höhere Datenraten erreicht.</li>
+            <li><strong>Vorteile:</strong> hohe, stabile Datenraten, zuverlässige Verbindungen, schwerer abzuhören als Funk.</li>
+            <li><strong>Nachteile:</strong> Installation und Wartung können aufwendig und teuer sein, die Flexibilität ist eingeschränkt, die Reichweite ist begrenzt.</li>
+        </ul>
+
+<h3>Lichtwellenleiter (Glasfaser)</h3>
+
+<p>Lichtwellenleiter (Glasfaserkabel) übertragen Daten mit Licht und erreichen dadurch sehr hohe Datenraten über lange Distanzen. Sie bilden das Rückgrat (Backbone) von Internet- und Telekommunikationsnetzen.</p>
+
+<ul>
+            <li><strong>Vorteile:</strong> sehr hohe Datenraten, geringe Dämpfung auch über große Entfernungen, unempfindlich gegen elektromagnetische Störungen.</li>
+            <li><strong>Nachteile:</strong> höhere Kosten als Kupferkabel; Installation und Reparatur (z.&nbsp;B. Spleißen) erfordern Fachwissen und Spezialwerkzeug.</li>
+        </ul>
+
+<h3>Übertragungszeit berechnen</h3>
+
+<p>Ob ein Medium für eine Aufgabe reicht, entscheidet oft eine einfache Rechnung: <strong>Übertragungszeit = Datenmenge : nutzbare Datenrate</strong>. Dabei lauern drei Fallen:</p>
+
+<ul>
+            <li><strong>Bit und Byte:</strong> Datenraten werden in Bit pro Sekunde angegeben, Dateigrößen in Byte. 1&nbsp;Byte = 8&nbsp;bit.</li>
+            <li><strong>Dezimal- und Binärpräfixe:</strong> Datenraten sind immer dezimal (1&nbsp;Mbit/s = 10<sup>6</sup>&nbsp;bit/s). Bei Dateigrößen ist 1&nbsp;MB = 10<sup>6</sup>&nbsp;Byte, 1&nbsp;MiB = 2<sup>20</sup>&nbsp;Byte = 1&nbsp;048&nbsp;576&nbsp;Byte und 1&nbsp;GiB = 2<sup>30</sup>&nbsp;Byte. Windows zeigt Binärwerte an, schreibt aber „MB“ bzw. „GB“.</li>
+            <li><strong>Overhead:</strong> Nicht die ganze Datenrate steht für die Datei zur Verfügung. Jedes Paket trägt Header der einzelnen Schichten (→ 7.3, 7.4), außerdem teilen sich oft mehrere Geräte die Leitung.</li>
+        </ul>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 4: Ein Download ohne Überraschungen <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Spiele-Update hat laut Hersteller 300&nbsp;MB (dezimal). Der Anschluss liefert 100&nbsp;Mbit/s. Overhead wird hier vernachlässigt.</p>
+            <ol>
+                <li><strong>Datenmenge in Bit umrechnen,</strong> weil die Datenrate in Bit angegeben ist: 300&nbsp;MB · 8 = 2&nbsp;400&nbsp;Mbit.</li>
+                <li><strong>Durch die Datenrate teilen:</strong> 2&nbsp;400&nbsp;Mbit : 100&nbsp;Mbit/s = 24&nbsp;s.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Der Download dauert etwa <strong>24&nbsp;s</strong>.</p>
+            <p><strong>Probe:</strong> 100&nbsp;Mbit/s sind 100 : 8 = 12,5&nbsp;MB/s. 300&nbsp;MB : 12,5&nbsp;MB/s = 24&nbsp;s.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 5: Ein Lernvideo hochladen – mit MiB und Overhead <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Du lädst ein Video auf den Schulserver hoch. Der Windows-Explorer zeigt „1,5&nbsp;GB“ an. Dein Anschluss hat 40&nbsp;Mbit/s im Upload. Die Daten laufen per TCP/IP über Ethernet: Jeder Frame trägt höchstens 1&nbsp;500&nbsp;Byte IP-Paket, davon sind 20&nbsp;Byte IP-Header und 20&nbsp;Byte TCP-Header; dazu kommen 18&nbsp;Byte Ethernet-Header und Prüfsumme (→ 7.4).</p>
+            <ol>
+                <li><strong>Einheit klären:</strong> Windows rechnet binär, gemeint sind also 1,5&nbsp;GiB = 1,5 · 2<sup>30</sup>&nbsp;Byte = 1&nbsp;610&nbsp;612&nbsp;736&nbsp;Byte.</li>
+                <li><strong>In Bit umrechnen:</strong> 1&nbsp;610&nbsp;612&nbsp;736 · 8 = 12&nbsp;884&nbsp;901&nbsp;888&nbsp;bit ≈ 12,88 · 10<sup>9</sup>&nbsp;bit.</li>
+                <li><strong>Nutzanteil je Frame bestimmen:</strong> Nutzdaten 1&nbsp;500 − 20 − 20 = 1&nbsp;460&nbsp;Byte; auf der Leitung 1&nbsp;500 + 18 = 1&nbsp;518&nbsp;Byte. Nutzanteil 1&nbsp;460 : 1&nbsp;518 ≈ 0,962, also gehen knapp 4&nbsp;% für Header verloren.</li>
+                <li><strong>Nutzbare Datenrate:</strong> 40&nbsp;Mbit/s · 0,962 ≈ 38,47&nbsp;Mbit/s.</li>
+                <li><strong>Zeit berechnen:</strong> 12,88 · 10<sup>9</sup>&nbsp;bit : (38,47 · 10<sup>6</sup>&nbsp;bit/s) ≈ 335&nbsp;s.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Der Upload dauert etwa <strong>335&nbsp;s ≈ 5&nbsp;min 35&nbsp;s</strong>.</p>
+            <p><strong>Falle:</strong> Wer 1,5&nbsp;GB dezimal rechnet und den Overhead weglässt, kommt auf 1,5 · 10<sup>9</sup> · 8 : (40 · 10<sup>6</sup>) = 300&nbsp;s und unterschätzt die Zeit um gut 10&nbsp;%. Wer das Umrechnen in Bit vergisst, kommt auf 37,5&nbsp;s – ein Fehler um den Faktor 8.</p>
+            <p><strong>Probe (Überschlag):</strong> 40&nbsp;Mbit/s sind 5&nbsp;MB/s. 1,6&nbsp;GB : 5&nbsp;MB/s ≈ 320&nbsp;s; mit dem Overhead etwas mehr. Das passt zu 335&nbsp;s.</p>
+            </details>
+        </div>
+
+<h2>Netzwerkgrößen</h2>
+
+<table>
+            <thead>
+                <tr>
+                    <th>Netzwerkgröße</th>
+                    <th>Abkürzung</th>
+                    <th>Beschreibung</th>
+                    <th>Anwendungsbeispiel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Personal Area Network</td>
+                    <td>PAN</td>
+                    <td>Netz für die Kommunikation zwischen Geräten in der Nähe einer Person</td>
+                    <td>Verbindung zwischen Smartphone, Smartwatch und Bluetooth-Kopfhörern</td>
+                </tr>
+                <tr>
+                    <td>Local Area Network</td>
+                    <td>LAN</td>
+                    <td>Netz in einem begrenzten Bereich wie einem Gebäude</td>
+                    <td>Vernetzung von Computern und Druckern in einem Bürogebäude</td>
+                </tr>
+                <tr>
+                    <td>Metropolitan Area Network</td>
+                    <td>MAN</td>
+                    <td>Netz, das eine Stadt oder einen städtischen Bereich abdeckt</td>
+                    <td>Netz, das die Standorte einer Organisation innerhalb einer Stadt verbindet</td>
+                </tr>
+                <tr>
+                    <td>Wide Area Network</td>
+                    <td>WAN</td>
+                    <td>Netz, das große Gebiete, oft Länder oder Kontinente, abdeckt</td>
+                    <td>Verbindung von Firmenstandorten in verschiedenen Städten oder Ländern</td>
+                </tr>
+                <tr>
+                    <td>Global Area Network</td>
+                    <td>GAN</td>
+                    <td>Netz, das Geräte weltweit über Kontinente hinweg verbindet, z.&nbsp;B. über Seekabel und Satelliten</td>
+                    <td>internationale Firmennetze, das Internet als Ganzes</td>
+                </tr>
+            </tbody>
+        </table>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Vom Heimnetz bis zur Schulverkabelung</summary>
+                <p><strong>Alltag:</strong> Dein Heimnetz ist ein Stern: Alle Geräte hängen per Kabel oder WLAN am Router (z.&nbsp;B. einer FRITZ!Box). Reicht das WLAN nicht bis ins Kinderzimmer, stellt man Repeater oder ein WLAN-Mesh auf – dann entsteht ein teilvermaschtes Funknetz, in dem die Geräte automatisch den besten Weg wählen.</p>
+                <p><strong>Beruf:</strong> Fachinformatikerinnen und Fachinformatiker für Systemintegration sowie Elektronikerinnen und Elektroniker für Informations- und Systemtechnik planen die strukturierte Verkabelung von Gebäuden als Baum: Glasfaser zwischen den Gebäuden (Primärbereich), Glasfaser oder Kupfer in die Etagenverteiler (Sekundärbereich) und Twisted Pair bis zur Netzwerkdose im Raum (Tertiärbereich). Regionale Netzbetreiber wie SachsenEnergie treiben in und um Dresden den Glasfaserausbau bis in die Häuser voran.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Physische Topologie</strong> – die tatsächliche Verkabelung und Anordnung der Geräte in einem Netz (Bus, Stern, Ring, Baum, vermascht).
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Logische Topologie</strong> – beschreibt, auf welchem Weg die Daten durch das Netz laufen, und nicht, wie die Geräte physisch verbunden sind.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>Funkübertragung ist ideal für mobile Geräte und für Orte, an denen Kabel schwer zu verlegen sind. Alle Geräte in einer Funkzelle teilen sich die Datenrate.</p>
+        </div>
+
+<div class="merke">
+            <p>Kabelgebundene Übertragung eignet sich für Umgebungen, die hohe Datenraten, Zuverlässigkeit und Sicherheit erfordern.</p>
+        </div>
+
+<div class="merke">
+            <p>Glasfaserkabel sind die bevorzugte Wahl für große Datenmengen über weite Strecken und für Hochgeschwindigkeitsnetze.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.1.1: Topologien zuordnen <span class="niveau">AFB I</span></summary>
+                <p>Ordne jeder Situation die passende physische Topologie zu und begründe kurz.</p>
+                <ol type="a">
+                    <li>Vier Laptops sind per Kabel an einen Switch angeschlossen.</li>
+                    <li>Im Serverraum steht ein Core-Switch, der mit je einem Switch pro Etage verbunden ist. An den Etagen-Switches hängen die Rechner der Räume.</li>
+                    <li>Die Router eines Internetanbieters sind so verbunden, dass zwischen zwei Städten immer mehrere Wege existieren.</li>
+                    <li>Mehrere Steuergeräte im Auto teilen sich eine gemeinsame Leitung.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.1.2: Übertragungszeiten abschätzen <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Ein Klassensatz Videos mit 24&nbsp;GB soll über eine Leitung mit 500&nbsp;Mbit/s übertragen werden. Effektiv sind 75&nbsp;% der Datenrate nutzbar. Berechne die Übertragungszeit.</li>
+                    <li>Wie ändert sich das Ergebnis, wenn 1&nbsp;GB als 1&nbsp;024 · 1&nbsp;024 · 1&nbsp;024 Byte gerechnet wird?</li>
+                    <li>Die Übertragung soll höchstens 5 Minuten dauern. Welche Datenrate braucht die Leitung bei gleicher Auslastung?</li>
+                    <li>Beurteile, ob für diese Aufgabe WLAN, Kupferkabel oder Glasfaser am besten geeignet ist.</li>
+                </ol>
+            </details>
+        </div>

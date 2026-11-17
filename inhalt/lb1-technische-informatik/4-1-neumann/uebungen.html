@@ -1,0 +1,121 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 4.1.3: Ein echter Simulator <span class="niveau">AFB III</span>
+        </summary>
+        <p>Der <a href="https://oinf.ch/interactive/little-man-computer/" target="_blank">Little Man Computer</a> ist ein Mini-Rechner wie unserer, nur mit 100 Speicherzellen und ein paar Befehlen mehr. Falls die Seite nicht erreichbar ist, kannst du alternativ die <a href="https://peterhigginson.co.uk/lmc/" target="_blank">Version von Peter Higginson</a> nutzen.</p>
+        <ol>
+            <li>Lade Beispiel 1 und lass es im Einzelschritt-Modus laufen. Beobachte dabei den Befehlszähler und den Akkumulator. Notiere, welche Befehle des Simulators unseren Befehlen LOAD, STORE, ADD, SUB, JMP, JZ, OUT und HLT entsprechen.</li>
+            <li>Lade Beispiel 2. Versuche, das Programm zu verstehen, <em>bevor</em> du es startest, und schreibe in einem Satz auf, was es tun wird. Starte es dann und überprüfe deine Vorhersage.</li>
+            <li>Schreibe ein eigenes Programm, das zwei Zahlen einliest und die größere der beiden ausgibt. Tipp: Subtrahiere und nutze einen bedingten Sprung.</li>
+            <li>Erkläre anhand deines Programms den Zusammenhang der Begriffe Maschinensprache, Assembler und höhere Programmiersprache. Wie sähe dein Programm aus Teil 3 in Python aus, und wie viele Zeilen brauchst du dort?</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 4.1.4: Werbeversprechen prüfen <span class="niveau">AFB II</span>
+        </summary>
+        <p>Schaue dir zuerst das Video „Wie funktioniert der Prozessor?“ an.</p>
+        <figure>
+            <iframe width="300" src="https://www.youtube.com/embed/aue3hIQvhzo?si=Z48lcTvmVtfHAHoF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <figcaption>Video „Wie funktioniert der Prozessor?“</figcaption>
+        </figure>
+        <p>Zwei Laptops stehen im Elektromarkt nebeneinander:</p>
+        <table>
+            <thead><tr><th></th><th>Laptop A</th><th>Laptop B</th></tr></thead>
+            <tbody>
+                <tr><td>Kerne</td><td>4</td><td>8</td></tr>
+                <tr><td>Taktfrequenz</td><td>3,6 GHz</td><td>2,0 GHz</td></tr>
+                <tr><td>Multithreading</td><td>nein</td><td>ja (16 Threads)</td></tr>
+                <tr><td>Werbeslogan</td><td>„Der Schnellste seiner Klasse“</td><td>„Doppelt so viele Kerne, vierfache Power“</td></tr>
+            </tbody>
+        </table>
+        <ol>
+            <li>Erkläre in eigenen Worten, was Taktfrequenz, Kern und Thread bedeuten, und wie jede der drei Größen die Leistung beeinflusst.</li>
+            <li>Ein altes Spiel nutzt nur einen einzigen Thread. Welcher Laptop ist dafür vermutlich schneller? Begründe.</li>
+            <li>Beim Videoschnitt lässt sich die Arbeit auf viele Threads verteilen. Welcher Laptop ist dafür vermutlich schneller? Begründe.</li>
+            <li>Beurteile beide Werbeslogans: Welche Aussage ist nachvollziehbar, welche ist irreführend? Begründe mit dem Von-Neumann-Zyklus.</li>
+            <li>Warum bauen Hersteller lieber mehr Kerne ein, statt die Taktfrequenz immer weiter zu erhöhen? Nenne zwei Gründe.</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>
+            Aufgabe 4.1.5: Speicher in Menschenzeit <span class="niveau">AFB II</span>
+        </summary>
+        <ol>
+            <li>Rechne selbst nach: Ein Prozessor mit 3 GHz führt 3 Milliarden Takte pro Sekunde aus. Ein Zugriff auf eine SSD dauert etwa 100 Mikrosekunden. Wie viele Takte wartet der Prozessor? Rechne die Wartezeit in „Menschenzeit“ um (1 Takt = 1 Sekunde) und vergleiche mit der Tabelle.</li>
+            <li>Ein Freund sagt: „Ich habe meinen Laptop von einer Festplatte auf eine SSD umgebaut, jetzt startet er in 10 statt 60 Sekunden. Dabei ist der Prozessor doch derselbe!“ Erkläre ihm mit Hilfe der Tabelle, warum das kein Widerspruch ist.</li>
+            <li>Du bist IT-Beraterin oder IT-Berater. Entscheide für jede der folgenden Situationen, welches Speichersystem (optisch, magnetisch oder elektronisch) du empfiehlst, und begründe mit den Stärken und Schwächen aus der Tabelle:
+                <ol type="a">
+                    <li>Ein Krankenhaus muss Röntgenbilder 30 Jahre lang aufbewahren und darf sie nie verändern.</li>
+                    <li>Ein Gamer will, dass Spiele so schnell wie möglich laden.</li>
+                    <li>Ein Filmstudio braucht 200 TB Platz für Rohmaterial, greift aber nur selten darauf zu.</li>
+                    <li>Eine Wander-Fotografin will ihre Bilder unterwegs in einer Kamera speichern, die häufig herunterfällt.</li>
+                </ol>
+            </li>
+            <li>Erkläre mit der Küchen-Analogie (Arbeitsfläche, Kühlschrank, Keller, Supermarkt), warum ein Computer mehrere Speicherstufen braucht und nicht einfach nur einen riesigen, schnellen Speicher.</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 4.1.6: Von Neumann oder Harvard? <span class="niveau">AFB II</span></summary>
+        <ol>
+            <li>Nenne den wesentlichen Unterschied zwischen Von-Neumann- und Harvard-Architektur.</li>
+            <li>Die Steuerung einer Waschmaschine läuft auf einem Mikrocontroller mit Harvard-Architektur. Ihr Programm wird im Werk einmal aufgespielt und danach nie geändert. Begründe, warum diese Architektur hier gut passt.</li>
+            <li>Erkläre, warum ein Pufferüberlauf-Angriff (siehe Hinweis „Ist das eine Zahl oder ein Befehl?“) bei einer reinen Harvard-Architektur deutlich schwerer ist.</li>
+        </ol>
+    </details>
+</div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 4.1.7: Eine Schleife, die nur durch Überlauf endet <span class="niveau">AFB II</span></summary>
+        <p>Der Akku des Mini-Rechners ist 8 Bit breit. Wird bei ADD das Ergebnis größer als 255, geht der Übertrag aus dem höchsten Bit verloren, genau wie bei einem 8-Bit-Addierer aus Volladdierern. Im Speicher steht dieses Programm, die Zellen 10 und 11 enthalten die Zahlen 250 und 2.</p>
+        <table>
+            <thead><tr><th>Adresse</th><th>Assembler</th></tr></thead>
+            <tbody>
+                <tr><td>0</td><td>LOAD 10</td></tr>
+                <tr><td>1</td><td>ADD 11</td></tr>
+                <tr><td>2</td><td>OUT</td></tr>
+                <tr><td>3</td><td>JZ 5</td></tr>
+                <tr><td>4</td><td>JMP 1</td></tr>
+                <tr><td>5</td><td>HLT</td></tr>
+                <tr><td>10</td><td>250</td></tr>
+                <tr><td>11</td><td>2</td></tr>
+            </tbody>
+        </table>
+        <ol>
+            <li>Arbeite das Programm in einer Tabelle mit den Spalten <em>Zyklus, Befehlszähler, Befehl, Akku (dezimal und binär), Ausgabe</em> ab, bis HLT erreicht ist. Was wird ausgegeben?</li>
+            <li>Ein Mitschüler sagt: „Der Akku wird immer größer, das Programm kann nie bei JZ aussteigen.“ Erkläre, warum es trotzdem anhält.</li>
+            <li>Die ausgegebenen Bitmuster lassen sich auch als Zahlen im Zweierkomplement lesen. Gib für jede Ausgabe beide Deutungen an (vorzeichenlos und Zweierkomplement).</li>
+            <li>Zelle 11 wird auf 4 geändert. Begründe, ohne alle Zyklen durchzuspielen, ob das Programm jetzt noch anhält.</li>
+        </ol>
+        <p class="tipp">Rechne bei jedem ADD: Ergebnis = (Akku + Zahl) mod 256. Für Teil 4: Welchen Rest lässt der Akku bei Division durch 4?</p>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 4.1.8: Wie groß darf der Speicher sein? <span class="niveau">AFB II</span></summary>
+        <p>Beim Mini-Rechner stehen im Befehl 5 Adressbits, deshalb gibt es genau 2<sup>5</sup> = 32 Speicherzellen. Allgemein gilt: Mit <em>n</em> Adressleitungen lassen sich 2<sup><em>n</em></sup> Zellen unterscheiden. In allen Teilaufgaben ist jede Zelle 1 Byte groß.</p>
+        <ol>
+            <li>Ein Nachfolgemodell des Mini-Rechners verwendet 16-Bit-Befehle mit 4 Bit Opcode. Wie viele Befehle kann es höchstens geben, und wie viele Speicherzellen lassen sich mit dem Rest des Befehls adressieren?</li>
+            <li>Viele Heimcomputer der 1980er-Jahre hatten einen 16 Bit breiten Adressbus. Berechne den größten Speicher, den der Prozessor direkt ansprechen konnte, in Byte und in KiB.</li>
+            <li>Ein PC mit 32-Bit-Betriebssystem kann 32-Bit-Adressen verwenden. Berechne den Adressraum in GiB. Jemand baut 8&nbsp;GB Arbeitsspeicher ein und wundert sich, dass das System nur etwa 3,2&nbsp;GB nutzbar anzeigt. Beurteile, ob ein Defekt vorliegt.</li>
+            <li>Wie viele Adressleitungen braucht man mindestens, um 16&nbsp;GiB byteweise zu adressieren?</li>
+        </ol>
+        <p class="tipp">1&nbsp;KiB = 2<sup>10</sup> Byte, 1&nbsp;MiB = 2<sup>20</sup> Byte, 1&nbsp;GiB = 2<sup>30</sup> Byte.</p>
+    </details>
+</div>

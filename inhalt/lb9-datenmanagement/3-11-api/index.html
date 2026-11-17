@@ -1,0 +1,286 @@
+<p>
+            APIs (Application Programming Interfaces) sind essenziell für die moderne Softwareentwicklung. Sie ermöglichen die Kommunikation zwischen verschiedenen Anwendungen und Systemen und sind aus der heutigen IT-Landschaft nicht mehr wegzudenken.
+        </p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>
+                    Praxisbezug: APIs im Bankwesen (Open Banking / PSD2)
+                </summary>
+                <p>
+                    Ein sehr konkretes Alltagsbeispiel für APIs findet sich im Finanzsektor: Seit der EU-Zahlungsdiensterichtlinie
+                    PSD2 sind Banken verpflichtet, standardisierte, sichere Schnittstellen (APIs) bereitzustellen. Über diese
+                    „Open Banking“-APIs können Multibanking-Apps oder Budget-Apps mit Zustimmung der Kundschaft automatisch
+                    Kontostände und Umsätze mehrerer Banken abrufen oder sogar Überweisungen direkt auslösen &ndash; im Hintergrund
+                    laufen dabei ständig API-Anfragen zwischen App, Bank und ggf. weiteren Drittanbietern.
+                </p>
+                <p>
+                    <strong>Berufsfelder:</strong> Innerhalb der Informatik arbeiten hier z.&nbsp;B. Backend- und
+                    API-Entwickler*innen sowie Integrations- und IT-Sicherheitsspezialist*innen, die solche Schnittstellen
+                    programmieren, testen und absichern. Außerhalb der klassischen IT sind u.&nbsp;a. Produktmanager*innen bei
+                    Fintech-Unternehmen, Bankkaufleute und Bankberater*innen sowie Mitarbeitende in Compliance/Regulatorik und im
+                    Business Development (Aufbau von Partnerschaften zwischen Banken und Drittanbietern) beteiligt.
+                </p>
+                <p>
+                    <strong>Weiterlesen:</strong>
+                    <a href="https://www.heise.de/hintergrund/Neue-und-alte-Banken-APIs-eine-Uebersicht-4907369.html" target="_blank" rel="noopener">Neue und alte Banken-APIs &ndash; eine Übersicht (heise online)</a>
+                </p>
+            </details>
+        </div>
+
+<h2>Was ist eine API?</h2>
+
+<p>
+            Eine API ist eine Schnittstelle, die es ermöglicht, Funktionen und Daten einer Software für andere Anwendungen bereitzustellen. Sie definiert, wie Anfragen gestellt und Antworten empfangen werden. APIs werden oft genutzt, um komplexe Prozesse zu abstrahieren, sodass Entwickler*innen nur die notwendigen Parameter bereitstellen müssen.
+        </p>
+
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<h2>Warum wird häufig JSON verwendet?</h2>
+
+<p>
+            JSON (JavaScript Object Notation) ist ein beliebtes Format für die Datenübertragung in APIs, da es:
+        </p>
+
+<ul>
+            <li>leicht lesbar und schreibbar für Menschen ist,</li>
+            <li>einfach von Programmen geparst werden kann,</li>
+            <li>kompakt und effizient für die Übertragung ist,</li>
+            <li>nativ in JavaScript unterstützt wird, was es ideal für Webanwendungen macht,</li>
+            <li>aber auch in fast allen anderen modernen Programmiersprachen genutzt werden kann.</li>
+        </ul>
+
+<h2>Wo findet man Informationen über eine API?</h2>
+
+<p>
+            Informationen zu APIs werden typischerweise in der sogenannten API-Dokumentation bereitgestellt. Diese enthält:
+        </p>
+
+<ul>
+            <li>Details über die verfügbaren Endpunkte und deren Funktionalität,</li>
+            <li>Beispiele für Anfragen und Antworten,</li>
+            <li>Beschreibung der benötigten Parameter,</li>
+            <li>Fehlercodes und deren Bedeutung.</li>
+        </ul>
+
+<p>
+            Die Dokumentation wird oft von den Anbietern auf deren Webseite bereitgestellt.
+        </p>
+
+<h2>Freie APIs zum Testen</h2>
+
+<p>
+            Es gibt viele freie APIs, die ohne Anmeldung oder Authentifizierung genutzt werden können. Beispiele sind:
+        </p>
+
+<ul>
+            <li><a href="https://pokeapi.co/" target="_blank" rel="noopener">PokeAPI</a>: Daten zu Pokémon.</li>
+            <li><a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>: Wetterdaten für beliebige Standorte.</li>
+            <li><a href="https://catfact.ninja/" target="_blank" rel="noopener">Cat Facts</a>: Zufällige Fakten über Katzen.</li>
+        </ul>
+
+<h2>APIs mit Python nutzen</h2>
+
+<p>
+            Mit dem Modul <code>requests</code> kannst du eine API direkt aus Python heraus abfragen. Die Methode
+            <code>.json()</code> wandelt die JSON-Antwort automatisch in ein Python-Dictionary bzw. eine Liste um.
+            <code>requests</code> gehört nicht zur Standardbibliothek; auf dem eigenen Rechner installierst du es einmal mit
+            <code>pip install requests</code> (bei Anaconda ist es schon dabei).
+        </p>
+
+<pre><code>import requests
+
+antwort = requests.get("https://catfact.ninja/fact")
+daten = antwort.json()
+print(daten["fact"])</code></pre>
+
+<h3>Beispiel: Wetterdaten von Open-Meteo abfragen</h3>
+
+<p>
+            Bei Open-Meteo übergibst du Breiten- und Längengrad als Parameter in der URL. Die Antwort enthält u.&nbsp;a.
+            die aktuelle Temperatur.
+        </p>
+
+<pre><code>import requests
+
+url = "https://api.open-meteo.com/v1/forecast"
+parameter = {
+    "latitude": 52.52,
+    "longitude": 13.41,
+    "current_weather": True
+}
+
+antwort = requests.get(url, params=parameter)
+daten = antwort.json()
+print("Aktuelle Temperatur in Berlin:", daten["current_weather"]["temperature"], "°C")</code></pre>
+
+<p>
+            <code>params</code> hängt die Parameter automatisch an die Adresse an – die tatsächlich abgerufene URL lautet
+            <code>https://api.open-meteo.com/v1/forecast?latitude=52.52&amp;longitude=13.41&amp;current_weather=True</code>.
+            Die Antwort hat genau den Aufbau der Datei <code>wetter_dresden.json</code> von Seite 3.10.
+        </p>
+
+<h3>Komplexeres Beispiel: Statuscode prüfen</h3>
+
+<p>
+            Nicht jede Anfrage klappt: Ein falsch geschriebener Name oder ein Serverproblem liefert keinen Datensatz, sondern
+            einen Fehlercode. Deshalb prüft man vor dem Auslesen den Statuscode:
+        </p>
+
+<pre><code>import requests
+
+name = "pikachuu"          # Tippfehler!
+antwort = requests.get(f"https://pokeapi.co/api/v2/pokemon/{name}", timeout=10)
+
+if antwort.status_code == 200:
+    daten = antwort.json()
+    print(daten["name"], daten["height"])
+else:
+    print("Fehler", antwort.status_code)     # Fehler 404</code></pre>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Eine API-Anfrage lesen und die Antwort ansprechen</summary>
+            <p><strong>Ausgangssituation:</strong> In der Dokumentation von Open-Meteo steht die Beispieladresse
+               <code>https://api.open-meteo.com/v1/forecast?latitude=51.05&amp;longitude=13.74&amp;current_weather=true</code>.
+               Die Antwort hat den Aufbau von <a href="../notebooks/wetter_dresden.json" download>wetter_dresden.json</a> (Seite 3.10).
+               Gesucht sind die Bestandteile der Anfrage und der Python-Zugriff auf die Windrichtung.</p>
+            <ol>
+                <li><strong>Adresse zerlegen</strong> – <code>https://</code> (verschlüsseltes Protokoll), <code>api.open-meteo.com</code> (Server),
+                    <code>/v1/forecast</code> (Endpunkt, <code>v1</code> = Version der API).</li>
+                <li><strong>Parameter erkennen</strong> – Alles nach dem <code>?</code> sind Parameter, getrennt durch <code>&amp;</code>:
+                    <code>latitude=51.05</code>, <code>longitude=13.74</code>, <code>current_weather=true</code>. In Python übergibt man sie als
+                    Dictionary an <code>params</code>; <code>requests</code> baut daraus genau diese Adresse.</li>
+                <li><strong>Statuscode prüfen</strong> – Nur bei 200 steht in der Antwort das erwartete JSON.</li>
+                <li><strong>Pfad zum Wert bestimmen</strong> – In der Antwort liegt <code>winddirection</code> im Objekt
+                    <code>current_weather</code>, die Einheit im Objekt <code>current_weather_units</code>.</li>
+            </ol>
+            <pre><code class="language-python">import json
+
+with open('wetter_dresden.json', encoding='utf-8') as datei:   # statt requests.get(...).json()
+    daten = json.load(datei)
+print(daten['current_weather']['winddirection'], daten['current_weather_units']['winddirection'])</code></pre>
+            <p><strong>Ergebnis:</strong> Ausgabe <code>250 °</code> – der Wind kommt aus Westsüdwest.</p>
+            <p><strong>Kontrolle:</strong> Die Adresse im Browser öffnen: Die Antwort muss ein Objekt <code>current_weather</code> enthalten. Fehlt der
+               Parameter <code>current_weather=true</code>, fehlt auch dieses Objekt – dann gäbe es in Python einen <code>KeyError</code>.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Abruf und Auswertung trennen – robust und testbar</summary>
+            <p><strong>Ausgangssituation:</strong> Ein Programm soll aus der stündlichen Vorhersage die höchste Temperatur mit Uhrzeit bestimmen. Dabei
+               kann einiges schiefgehen: keine Internetverbindung, ein Fehlercode, eine Antwort ohne die erwarteten Daten oder einzelne fehlende
+               Werte (<code>null</code>). Weil Live-Daten sich ständig ändern, lässt sich die Auswertung nur mit festen Beispielantworten testen.</p>
+            <pre><code class="language-python">import json
+import requests
+
+def abrufen(lat, lon):
+    """Holt die Antwort. Liefert (Statuscode, Text) oder (None, Fehlermeldung)."""
+    try:
+        antwort = requests.get("https://api.open-meteo.com/v1/forecast",
+                               params={"latitude": lat, "longitude": lon,
+                                       "hourly": "temperature_2m"},
+                               timeout=10)
+        return antwort.status_code, antwort.text
+    except requests.RequestException as fehler:
+        return None, str(fehler)
+
+def auswerten(status, text):
+    """Liefert (Maximum, Uhrzeit) oder eine Fehlermeldung als Text."""
+    if status is None:
+        return "Keine Verbindung"
+    if status != 200:
+        return f"Fehler {status}"
+    daten = json.loads(text)
+    stunden = daten.get("hourly")
+    if stunden is None:
+        return "Antwort ohne Stundenwerte"
+    werte = [(t, z) for z, t in zip(stunden["time"], stunden["temperature_2m"]) if t is not None]
+    if not werte:
+        return "Keine gültigen Messwerte"
+    t_max, zeit = max(werte)
+    return t_max, zeit[11:]
+
+# live (Ergebnis hängt vom Zeitpunkt ab):
+# print(auswerten(*abrufen(51.05, 13.74)))</code></pre>
+            <ol>
+                <li><strong>Trennen</strong> – <code>abrufen</code> erledigt nur das Netzwerk, <code>auswerten</code> nur die Verarbeitung. So kann man
+                    <code>auswerten</code> mit festen Texten testen, ohne Internet und mit immer gleichem Ergebnis.</li>
+                <li><strong>Netzwerkfehler abfangen</strong> – <code>timeout=10</code> verhindert endloses Warten; <code>RequestException</code> fängt
+                    fehlende Verbindung und Zeitüberschreitung ab.</li>
+                <li><strong>Statuscode vor dem JSON prüfen</strong> – Bei 400 oder 404 enthält die Antwort eine Fehlerbeschreibung, keine Messwerte.</li>
+                <li><strong>Fehlende Schlüssel</strong> – <code>daten.get("hourly")</code> liefert <code>None</code> statt eines <code>KeyError</code>.</li>
+                <li><strong>Fehlende Einzelwerte</strong> – JSON <code>null</code> wird <code>None</code>. <code>max</code> mit <code>None</code> in der Liste
+                    bricht mit <code>TypeError</code> ab, deshalb werden solche Paare vorher aussortiert.</li>
+                <li><strong>Maximum mit Uhrzeit</strong> – Die Paare stehen als (Temperatur, Zeit) in der Liste, damit <code>max</code> nach der Temperatur
+                    vergleicht; <code>zeit[11:]</code> schneidet das Datum ab.</li>
+            </ol>
+            <p><strong>Ergebnis</strong> – Testfälle mit festen Antworten:</p>
+            <table class="gitter">
+                <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+                <tr><td><code>auswerten(200, text)</code> mit dem Inhalt von <code>wetter_dresden.json</code></td><td><code>(16.1, '11:00')</code></td></tr>
+                <tr><td><code>auswerten(200, '{"hourly": {"time": ["2026-09-27T08:00", "2026-09-27T09:00"], "temperature_2m": [null, 12.5]}}')</code></td><td><code>(12.5, '09:00')</code></td></tr>
+                <tr><td><code>auswerten(400, '{"error": true, "reason": "Latitude must be in range of -90 to 90°."}')</code></td><td><code>'Fehler 400'</code></td></tr>
+                <tr><td><code>auswerten(200, '{"latitude": 51.06}')</code></td><td><code>'Antwort ohne Stundenwerte'</code></td></tr>
+                <tr><td><code>auswerten(None, 'Connection refused')</code></td><td><code>'Keine Verbindung'</code></td></tr>
+            </table>
+            <p><strong>Kontrolle:</strong> Jeder Zweig der Funktion wird von mindestens einem Testfall durchlaufen (vier Fehlerfälle, ein Normalfall). Für
+               <code>wetter_dresden.json</code> von Hand: Die Werte 11.9, 13.2, 14.8, 16.1 haben ihr Maximum 16.1 um 11:00 Uhr.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: API-Schlüssel und Datenschutz</summary>
+                <p>
+                    Viele kommerzielle APIs (Kartendienste, Zahlungsanbieter, KI-Dienste) verlangen einen persönlichen
+                    <em>API-Schlüssel</em>, über den abgerechnet und begrenzt wird, wie viele Anfragen man stellen darf.
+                    <strong>Backend-Entwickler*innen</strong> achten deshalb darauf, solche Schlüssel nie im Quelltext zu
+                    veröffentlichen. Werden über eine API personenbezogene Daten übertragen, etwa Kontodaten beim Open Banking,
+                    gilt die <strong>DSGVO</strong>: Die Übertragung muss verschlüsselt (HTTPS) sein und die Kundschaft muss
+                    zugestimmt haben.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Eine <strong>API</strong> (Application Programming Interface) ist eine festgelegte Schnittstelle, über die ein
+                Programm Daten oder Funktionen eines anderen Programms nutzen kann. Bei einer <strong>Web-API</strong> schickt
+                dein Programm eine HTTP-Anfrage an eine Adresse (einen <em>Endpunkt</em>, z.&nbsp;B.
+                <code>https://pokeapi.co/api/v2/pokemon/pikachu</code>), meist mit Parametern; der Server antwortet mit einem
+                <strong>Statuscode</strong> (200 = OK, 404 = nicht gefunden) und den Daten, meist im JSON-Format. In Python
+                erledigt das <code>requests.get(url)</code>, <code>.json()</code> macht aus der Antwort Dictionaries und Listen.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.11.1: Pokémon-Daten abrufen <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Rufe über die PokeAPI die Daten für ein Pokémon deiner Wahl ab (z.&nbsp;B.
+                    <code>https://pokeapi.co/api/v2/pokemon/pikachu</code>) und gib Name, Größe (<code>height</code>)
+                    und Gewicht (<code>weight</code>) auf der Konsole aus.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.11.2: Live-Wetter für Dresden <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Rufe mit <code>requests</code> das aktuelle Wetter für Dresden (Breite 51.05, Länge 13.74) von Open-Meteo ab.
+                    Übernimm dafür dein Programm aus Aufgabe 3.10.1 und ersetze das Einlesen der Datei durch die API-Anfrage.
+                    Gib die aktuelle Temperatur und Windgeschwindigkeit mit Einheiten aus.
+                </p>
+            </details>
+        </div>

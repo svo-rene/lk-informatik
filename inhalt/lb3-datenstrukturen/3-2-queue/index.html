@@ -1,0 +1,413 @@
+<p>An der Supermarktkasse wird bedient, wer zuerst da war. Wer neu kommt, stellt sich hinten an. Diese einfache Regel ist auch in der Informatik eine der wichtigsten Datenstrukturen.</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in fünf kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee und den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und tippe in Thonny mit.</p>
+
+<ol class="schritte">
+            <li><a href="#schritt-1">Die Idee: FIFO</a></li>
+            <li><a href="#schritt-2">Die Klasse <code>ListenQueue</code></a> – danach Aufgabe 3.2.1</li>
+            <li><a href="#schritt-3">Warum ist <code>pop(0)</code> langsam?</a></li>
+            <li><a href="#schritt-4">Queue mit Knoten: <code>enqueue</code></a></li>
+            <li><a href="#schritt-5">Queue mit Knoten: <code>dequeue</code></a> – danach den Abschnitt <a href="#import"><code>import</code></a> lesen, dann Aufgabe 3.2.2 und 3.2.3</li>
+        </ol>
+
+<p class="git-datei"><strong>Zum Mittippen:</strong> <code>1_listen/listen_queue.py</code> (Schritt 2) und <code>1_listen/queue_knoten.py</code> (Schritte 4 und 5, Klassen <code>Node</code> und <code>Queue</code>) – neu anlegen. Nenne die Datei nicht <code>queue.py</code>, so heißt schon ein Python-Modul.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.2 Schritt 2: ListenQueue mit enqueue und dequeue</code> · <code>3.2 Schritt 5: dequeue und peek ergänzt</code> (Regeln auf Seite 3.0.2)</p>
+
+<p>Zum Schluss findest du die <a href="#zusammen">ganze Klasse <code>Queue</code> zum Nachlesen</a> und die Übungsaufgaben.</p>
+
+<div class="hinweis" id="ki-hilfe">
+            <details>
+                <summary>Hinweis: KI als Lernhilfe</summary>
+                <p>Wenn du festhängst: erst den Lernpfad-Schritt und das Video noch einmal ansehen. Wenn du dann eine KI fragst, nutze sie als Lernhilfe, nicht als Lösungsautomat:</p>
+                <ul>
+                    <li>Schick deinen Code und die <strong>vollständige</strong> Fehlermeldung und schreib dazu, an welcher Aufgabe du arbeitest.</li>
+                    <li>Keine Namen oder persönlichen Daten in den Chat.</li>
+                    <li>Bei der Übungs-LK und der LK gibt es keine KI.</li>
+                </ul>
+                <p><strong>Mit einer freien KI</strong> (ChatGPT, Gemini, Claude …): Eine KI ohne Anweisung schreibt dir meist sofort die ganze Lösung – dabei lernst du nichts. Stell sie deshalb vorher so ein, dass sie dir beim Selbstlösen hilft:</p>
+                <ul>
+                    <li><strong>ChatGPT:</strong> Einstellungen → Personalisierung → „Benutzerdefinierte Anweisungen“, Text unten einfügen. Oder in einem neuen Chat <code>@study</code> eintippen (Lernmodus).</li>
+                    <li><strong>Gemini:</strong> Seitenleiste → Gems → „Neues Gem“, Text unten als Anweisung einfügen und speichern.</li>
+                    <li><strong>Claude:</strong> Projekte → „Neues Projekt“, Text unten als Projektanweisung einfügen.</li>
+                    <li><strong>Überall sonst:</strong> den Text einfach als erste Nachricht in einen neuen Chat kopieren.</li>
+                </ul>
+                <p>Keine Namen oder Noten eingeben. Diese Anweisung kannst du kopieren:</p>
+                <pre>Ich lerne im Informatik-LK Datenstrukturen in Python: verkettete Liste (Node mit data und next, LinkedList mit head), Schlange (Queue mit head und tail: enqueue, dequeue, peek, is_empty) und Stapel (Stack, oben = head: push, pop, top, is_empty).
+Hilf mir beim Selbstlösen, nicht mit fertigen Lösungen:
+- Frag zuerst nach meinem Code und der vollständigen Fehlermeldung.
+- Hilf in Stufen: Rückfrage, dann Hinweis, dann Zeigerdiagramm in Textform, höchstens 3 Zeilen Code für einen einzelnen Schritt.
+- Schreib nie eine ganze Methode oder Funktion, auch wenn ich darum bitte.
+- Keine deque, keine Bibliotheken, keine Einzeiler-Tricks.
+- Zeig mir bei Fehlern die Zeile und erkläre, was dort passiert, statt meinen Code zu korrigieren.
+- Spiel meinen Code mit einem Beispiel durch, bevor du sagst, dass er stimmt.
+- Stell immer nur eine Frage und antworte kurz.
+- Wenn es läuft: Lass mich erklären, warum, und frag nach einem Testfall für einen Sonderfall.</pre>
+            </details>
+        </div>
+
+<h2 id="schritt-1">Schritt 1: Die Idee – FIFO</h2>
+
+<ul>
+            <li><strong>FIFO-Prinzip:</strong> Das Verhalten ähnelt einer Warteschlange, in der diejenigen, die zuerst ankommen, auch zuerst bedient werden.</li>
+            <li><strong>Einsatz:</strong> überall dort, wo Aufträge in der Reihenfolge ihres Eintreffens abgearbeitet werden müssen, z.&nbsp;B. Druckaufträge, Anfragen an einen Server oder die Breitensuche in Graphen (siehe Seite 3.8).</li>
+        </ul>
+
+<p>Im Video spielst du die Mensa-Warteschlange aus Beispiel 1 als Bild durch. Achte darauf, an welchem Ende hinzugefügt und an welchem entnommen wird.</p>
+
+<figure>
+            <img src="../img/skizze_schlange_queue.svg" width="450" alt="Schlange mit A, B, C, D: vorn heraus, hinten hinein">
+            <figcaption>Abb. 1: Schlange – vorn heraus (dequeue), hinten hinein (enqueue).</figcaption>
+        </figure>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-2-1_idee_vorschau.png" src="../vid/3-2-1_idee.mp4"></video><a href="../vid/3-2-1_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Was ist eine Queue? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Die Klasse ListenQueue →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Die Klasse <code>ListenQueue</code></h2>
+
+<p>Die einfachste Umsetzung speichert die Wartenden in einer Python-Liste: vorn ist Index 0, hinten ist das Ende. <code>enqueue</code> hängt mit <code>append</code> an, <code>dequeue</code> entnimmt mit <code>pop(0)</code>. Die Liste ist ein privates Attribut <code>__daten</code> – von außen wird die Schlange nur über ihre Methoden benutzt. Achte im Video darauf, wie <code>raise</code> eine verständliche Fehlermeldung erzeugt, wenn die Schlange leer ist.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-2-2_listenqueue_vorschau.png" src="../vid/3-2-2_listenqueue.mp4"></video><a href="../vid/3-2-2_listenqueue.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Die Klasse <code>ListenQueue</code> in Thonny (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>1_listen/listen_queue.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>ListenQueue</code> und die Methoden <code>is_empty</code>, <code>enqueue</code>, <code>dequeue</code> und <code>peek</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>mensa = ListenQueue()</code> · <code>mensa.enqueue(&quot;A&quot;)</code>. Danach committen, z.&nbsp;B. <code>3.2 Schritt 2: ListenQueue, is_empty, enqueue angelegt</code>.</p>
+
+<p>Zum Nachlesen steht derselbe Code mit allen Erklärungen in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Mensa-Warteschlange als gekapselte Klasse</summary>
+            <p><strong>Ausgangssituation:</strong> enqueue(A), enqueue(B), enqueue(C), dequeue() → A, enqueue(D), dequeue() → B. In der Schlange stehen danach C, D (C vorn).</p>
+            <p>Diesen Ablauf an der Mensa-Ausgabe setzen wir mit einer Klasse <code>ListenQueue</code> um. Sie speichert die Wartenden in einer Python-Liste. Diese Liste ist ein <strong>privates</strong> Attribut <code>__daten</code>: Von außen wird die Schlange nur über <code>enqueue</code>, <code>dequeue</code>, <code>peek</code> und <code>is_empty</code> benutzt.</p>
+            <pre><code class="language-python">class ListenQueue:
+    def __init__(self):
+        self.__daten = []                # privat; vorn = Index 0
+
+    def is_empty(self):
+        return len(self.__daten) == 0
+
+    def enqueue(self, x):
+        self.__daten.append(x)           # hinten anstellen
+
+    def dequeue(self):
+        if self.is_empty():
+            raise IndexError("dequeue aus leerer Schlange")
+        return self.__daten.pop(0)       # vorn entnehmen
+
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("peek auf leerer Schlange")
+        return self.__daten[0]           # nur ansehen, nicht entfernen
+
+mensa = ListenQueue()
+mensa.enqueue("A")
+mensa.enqueue("B")
+mensa.enqueue("C")
+print(mensa.dequeue())   # A
+mensa.enqueue("D")
+print(mensa.dequeue())   # B
+print(mensa.peek())      # C</code></pre>
+            <ol>
+                <li><strong>Leere Schlange anlegen:</strong> Der Konstruktor erzeugt eine leere Liste <code>__daten</code>. Die zwei Unterstriche machen das Attribut privat (vgl. 4.6 Kapselung): Es ist ein Implementierungsdetail, nur die eigenen Methoden benutzen es, von außen ist <code>__daten</code> nicht erreichbar.</li>
+                <li><strong>Anstellen mit <code>enqueue</code>:</strong> A, B und C werden mit <code>append</code> hinten angehängt. Das Ende der Liste ist das Ende der Schlange, deshalb stellen sich Neue immer hinten an.</li>
+                <li><strong>Bedienen mit <code>dequeue</code>:</strong> <code>pop(0)</code> entfernt das Element mit Index 0, also A, und gibt es zurück. Vorher prüft die Methode, ob die Schlange leer ist, und meldet diesen Fehlerfall mit einem <code>IndexError</code> und einer verständlichen Meldung.</li>
+                <li><strong>Weitere Schritte:</strong> D stellt sich hinter C an, danach wird B bedient. Die Reihenfolge des Ankommens bleibt immer erhalten (FIFO).</li>
+                <li><strong>Nachsehen mit <code>peek</code>:</strong> <code>peek</code> liefert C, verändert die Schlange aber nicht. So kann man sehen, wer als Nächstes dran ist, ohne die Person schon zu bedienen.</li>
+            </ol>
+            <p><strong>Speicherbild Schritt für Schritt</strong> (vorn = links):</p>
+            <table class="gitter">
+                <thead><tr><th>Operation</th><th>Inhalt von <code>__daten</code></th><th>Rückgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>ListenQueue()</code></td><td><code>[]</code></td><td>–</td></tr>
+                    <tr><td><code>enqueue("A")</code></td><td><code>["A"]</code></td><td>–</td></tr>
+                    <tr><td><code>enqueue("B")</code></td><td><code>["A", "B"]</code></td><td>–</td></tr>
+                    <tr><td><code>enqueue("C")</code></td><td><code>["A", "B", "C"]</code></td><td>–</td></tr>
+                    <tr><td><code>dequeue()</code></td><td><code>["B", "C"]</code></td><td><code>A</code></td></tr>
+                    <tr><td><code>enqueue("D")</code></td><td><code>["B", "C", "D"]</code></td><td>–</td></tr>
+                    <tr><td><code>dequeue()</code></td><td><code>["C", "D"]</code></td><td><code>B</code></td></tr>
+                    <tr><td><code>peek()</code></td><td><code>["C", "D"]</code></td><td><code>C</code></td></tr>
+                </tbody>
+            </table>
+            <p><strong>Ergebnis:</strong> Das Programm gibt <code>A</code>, <code>B</code> und <code>C</code> aus. In der Schlange stehen danach C und D, C vorn – wie in der Ausgangssituation.</p>
+            <p><strong>Kontrolle:</strong> Jeder Test beginnt mit einer neuen Schlange <code>q = ListenQueue()</code>.</p>
+            <table class="gitter">
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>print(q.is_empty())</code> (leere Schlange)</td><td><code>True</code></td></tr>
+                    <tr><td><code>q.dequeue()</code> (Fehlerfall)</td><td><code>IndexError: dequeue aus leerer Schlange</code></td></tr>
+                    <tr><td><code>q.enqueue("X"); print(q.dequeue()); print(q.is_empty())</code> (ein Element)</td><td><code>X</code>, dann <code>True</code></td></tr>
+                    <tr><td><code>q.enqueue(1); q.enqueue(2); print(q.peek(), q.peek(), q.dequeue())</code></td><td><code>1 1 1</code> – <code>peek</code> entfernt nichts</td></tr>
+                </tbody>
+            </table>
+            <p>Die Klasse ist kurz und richtig, hat aber eine Schwäche: <code>pop(0)</code> lässt alle übrigen Elemente um eine Stelle nachrücken. Wie man das vermeidet, zeigen die folgenden Abschnitte und Beispiel 2.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-2-1">Aufgabe 3.2.1</a> – FIFO an einer Folge von Operationen nachvollziehen.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Warum ist pop(0) langsam? →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Warum ist <code>pop(0)</code> langsam?</h2>
+
+<p>Eine Schlange kann auf verschiedene Arten implementiert werden. Die beiden häufigsten Ansätze sind ein Array und eine verkettete Liste.</p>
+
+<h3>1. Implementierung mit einem Array</h3>
+
+<ul>
+            <li>Die Elemente liegen hintereinander im Speicher; es wird kein zusätzlicher Speicher für Verweise benötigt.</li>
+            <li>Problem: Entfernt man vorn ein Element, müssten alle übrigen um eine Stelle nach vorn rücken – bei einer Python-Liste ist <code>pop(0)</code> deshalb O(n).</li>
+            <li>Lösung: ein <strong>Ringpuffer</strong> mit zwei Indizes für Anfang und Ende, die im Kreis weiterwandern. Damit sind enqueue und dequeue O(1).</li>
+            <li>Ist die Kapazität erschöpft, muss in ein größeres Array umkopiert werden (O(n) für diesen einen Schritt).</li>
+        </ul>
+
+<p>Im Video siehst du, was bei <code>pop(0)</code> im Speicher passiert (wie beim Einfügen vorn auf Seite 3.0.1), und warum wir deshalb in Video 4 und 5 eine eigene Schlange aus Knoten bauen. Achte darauf, wie viele Elemente bei einem einzigen <code>dequeue</code> rutschen.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-2-3_pop0_vorschau.png" src="../vid/3-2-3_pop0.mp4"></video><a href="../vid/3-2-3_pop0.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Warum ist <code>pop(0)</code> langsam? (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Queue mit Knoten – enqueue →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Queue mit Knoten – <code>enqueue</code></h2>
+
+<h3>2. Implementierung mit einer verketteten Liste</h3>
+
+<ul>
+            <li>Die Schlange merkt sich den ersten Knoten (<code>head</code>, zum Entnehmen) und den letzten Knoten (<code>tail</code>, zum Einfügen).</li>
+            <li>enqueue und dequeue sind O(1), es muss nie umkopiert werden; die Schlange wächst knotenweise.</li>
+            <li>Nachteil: Jeder Knoten braucht zusätzlichen Speicher für den Verweis, und die Implementierung ist etwas aufwendiger.</li>
+        </ul>
+
+<p>Die Klasse <code>Queue</code> aus Beispiel 2 speichert dafür die privaten Attribute <code>__head</code> und <code>__tail</code>. Im Video wird die Mensa-Schlange mit Knoten aufgebaut. Achte auf den Sonderfall der leeren Schlange und darauf, dass <code>__tail</code> nach jedem <code>enqueue</code> auf den neuen Knoten zeigt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-2-4_enqueue_vorschau.png" src="../vid/3-2-4_enqueue.mp4"></video><a href="../vid/3-2-4_enqueue.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Queue mit Knoten – <code>enqueue</code> Schritt für Schritt (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>1_listen/queue_knoten.py</code> an und tippe den Code aus dem Video ab: die Klassen <code>Node</code> und <code>Queue</code> und die Methoden <code>is_empty</code> und <code>enqueue</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>mensa = Queue()</code> · <code>mensa.enqueue(&quot;A&quot;)</code>. Danach committen, z.&nbsp;B. <code>3.2 Schritt 4: Node, Queue, is_empty angelegt</code>.</p>
+
+<p><a href="#schritt-5">Weiter mit Schritt 5: Queue mit Knoten – dequeue →</a></p>
+
+<h2 id="schritt-5">Schritt 5: Queue mit Knoten – <code>dequeue</code></h2>
+
+<p>Beim Entnehmen werden die Daten des vorderen Knotens gemerkt, dann rückt <code>__head</code> auf den Nachfolger – nur ein Verweis wird umgesetzt, also O(1). Achte im Video besonders auf das letzte Element: Wird <code>__head</code> zu <code>None</code>, muss auch <code>__tail</code> zurückgesetzt werden.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-2-5_dequeue_vorschau.png" src="../vid/3-2-5_dequeue.mp4"></video><a href="../vid/3-2-5_dequeue.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Queue mit Knoten – <code>dequeue</code> und der Sonderfall beim letzten Element (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/queue_knoten.py</code> den Code aus dem Video: die Methoden <code>dequeue</code> und <code>peek</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>print(mensa.dequeue())</code> · <code>print(mensa.peek())</code>. Danach committen, z.&nbsp;B. <code>3.2 Schritt 5: dequeue, peek ergänzt</code>.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: enqueue und dequeue selbst umhängen</summary>
+                <p>Öffne im Kursmenü links die Seite <strong>Zeiger-Werkstatt</strong>. Dort gibt es die Übungen „3.2 Schlange: enqueue“ und „3.2 Schlange: dequeue bis leer“. In beiden setzt du <code>__head</code> und <code>__tail</code> selbst um. Die Werkstatt meldet dir, wenn <code>__tail</code> vergessen wurde – auch beim Sonderfall des letzten Elements.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-2-2">Aufgabe 3.2.2</a> – eine Druckwarteschlange mit der Klasse <code>Queue</code>, und <a href="uebungen.html#a-3-2-3">Aufgabe 3.2.3</a> – die Implementierungen bewerten.</p>
+
+<h2 id="zusammen">Alles zusammen: die Klasse <code>Queue</code></h2>
+
+<p>Hier steht die vollständige Klasse aus den Videos 4 und 5 zum Nachlesen, mit Speicherbild, Kontrolltabelle und Messprogramm. Ganz unten steht ein Ausblick auf die fertige Python-Klasse <code>deque</code>.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Schlange mit einer verketteten Liste</summary>
+            <p><strong>Ausgangssituation:</strong> Der Schuldrucker soll Druckaufträge in der Reihenfolge ihres Eintreffens abarbeiten, und zwar auch bei sehr vielen Aufträgen schnell. Statt der Python-Liste aus Beispiel 1 verwendet die Klasse <code>Queue</code> deshalb Knoten. Sie merkt sich in den privaten Attributen <code>__head</code> den vorderen und in <code>__tail</code> den hinteren Knoten. Die Schnittstelle (<code>enqueue</code>, <code>dequeue</code>, <code>peek</code>, <code>is_empty</code>) bleibt gleich.</p>
+            <pre><code class="language-python">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Queue:
+    def __init__(self):
+        self.__head = None    # vorn: hier wird entnommen
+        self.__tail = None    # hinten: hier wird eingefügt
+
+    def is_empty(self):
+        return self.__head is None
+
+    def enqueue(self, data):
+        neu = Node(data)
+        if self.__tail is None:         # Schlange war leer
+            self.__head = neu
+        else:
+            self.__tail.next = neu
+        self.__tail = neu
+
+    def dequeue(self):
+        if self.is_empty():
+            raise IndexError("dequeue aus leerer Schlange")
+        data = self.__head.data
+        self.__head = self.__head.next
+        if self.__head is None:         # letztes Element entnommen
+            self.__tail = None
+        return data
+
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("peek auf leerer Schlange")
+        return self.__head.data
+
+if __name__ == "__main__":        # Testzeilen nur beim direkten Start (F5), nicht beim import
+    q = Queue()
+    for auftrag in ["Brief.pdf", "Foto.jpg", "Referat.docx"]:
+        q.enqueue(auftrag)
+    print(q.dequeue())   # Brief.pdf
+    print(q.peek())      # Foto.jpg</code></pre>
+            <ol>
+                <li><strong>Erster Auftrag in leerer Schlange:</strong> <code>__tail</code> ist <code>None</code>, also wird der neue Knoten zugleich <code>__head</code> und <code>__tail</code>. Diesen Sonderfall braucht man, weil es noch keinen letzten Knoten gibt, an den man anhängen könnte.</li>
+                <li><strong>Weitere Aufträge:</strong> Der neue Knoten wird an <code>__tail.next</code> gehängt, danach rückt <code>__tail</code> auf ihn weiter. Weil <code>__tail</code> direkt auf das Ende zeigt, muss nichts durchlaufen werden: O(1).</li>
+                <li><strong><code>dequeue()</code>:</strong> Die Daten des vorderen Knotens werden gemerkt, dann rückt <code>__head</code> auf den Nachfolger. Kein Element wird verschoben, nur ein Verweis wird umgesetzt: O(1). Der alte Knoten ist nicht mehr erreichbar und wird von Python freigegeben.</li>
+                <li><strong><code>peek()</code>:</strong> Liefert nur <code>__head.data</code>, die Verweise bleiben unverändert.</li>
+                <li><strong>Sonderfall „letztes Element entnommen“:</strong> Wird <code>__head</code> beim Entnehmen <code>None</code>, muss auch <code>__tail</code> auf <code>None</code> gesetzt werden. Sonst zeigte <code>__tail</code> noch auf den entnommenen Knoten. Das nächste <code>enqueue</code> würde dort anhängen und <code>__head</code> bliebe <code>None</code>; der neue Auftrag wäre „verschwunden“.</li>
+            </ol>
+            <p><strong>Speicherbild Schritt für Schritt:</strong></p>
+            <pre><code>Queue():                 __head → None                                     __tail → None
+enqueue("Brief.pdf"):    __head → [Brief.pdf|None] ← __tail
+enqueue("Foto.jpg"):     __head → [Brief.pdf|•] → [Foto.jpg|None] ← __tail
+enqueue("Referat.docx"): __head → [Brief.pdf|•] → [Foto.jpg|•] → [Referat.docx|None] ← __tail
+dequeue() → Brief.pdf:   __head → [Foto.jpg|•] → [Referat.docx|None] ← __tail
+peek() → Foto.jpg:       unverändert
+
+Weiter mit zwei dequeue()-Aufrufen (Sonderfall):
+dequeue() → Foto.jpg:     __head → [Referat.docx|None] ← __tail
+dequeue() → Referat.docx: __head → None, deshalb auch __tail → None</code></pre>
+            <p><strong>Ergebnis:</strong> Das Programm gibt <code>Brief.pdf</code> und <code>Foto.jpg</code> aus. Alle vier Operationen kommen ohne Schleife aus und liegen in O(1). Weil die Schnittstelle dieselbe ist wie in Beispiel 1, läuft das Mensa-Programm aus Beispiel 1 unverändert mit <code>Queue()</code> statt <code>ListenQueue()</code>. Die Kapselung erlaubt es also, die Implementierung auszutauschen, ohne die Programme zu ändern, die die Klasse benutzen.</p>
+            <p><strong>Kontrolle:</strong> Jeder Test beginnt mit einer neuen Schlange <code>q2 = Queue()</code>; die Zeilen werden nacheinander ausgeführt.</p>
+            <table class="gitter">
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>print(q2.is_empty())</code> (leere Schlange)</td><td><code>True</code></td></tr>
+                    <tr><td><code>q2.enqueue("X"); print(q2.dequeue()); print(q2.is_empty())</code> (ein Element)</td><td><code>X</code>, dann <code>True</code> (<code>__head</code> und <code>__tail</code> sind wieder <code>None</code>)</td></tr>
+                    <tr><td>danach <code>q2.enqueue("Y"); print(q2.peek())</code></td><td><code>Y</code> – klappt nur, weil <code>__tail</code> zurückgesetzt wurde</td></tr>
+                    <tr><td>danach <code>q2.dequeue(); q2.dequeue()</code> (Fehlerfall)</td><td>erstes <code>dequeue</code> liefert <code>Y</code>, das zweite löst <code>IndexError: dequeue aus leerer Schlange</code> aus</td></tr>
+                    <tr><td><code>q2.peek()</code> bei leerer Schlange</td><td><code>IndexError: peek auf leerer Schlange</code></td></tr>
+                </tbody>
+            </table>
+            <p><strong>Laufzeitvergleich mit der Python-Liste:</strong> Bei <code>ListenQueue</code> kostet ein <code>dequeue</code> mit <code>pop(0)</code> O(n), weil alle übrigen Elemente nachrücken. Eine Schlange mit n Elementen komplett zu leeren, kostet damit O(n²). Bei <code>Queue</code> sind es O(1) je Aufruf und O(n) insgesamt. Mit diesem Messprogramm kannst du das selbst prüfen. Speichere es als eigene Datei <code>1_listen/messen.py</code> – nicht in <code>queue_knoten.py</code>, sonst liefe die Messung bei jedem <code>import</code> mit:</p>
+            <pre><code class="language-python">import time
+from queue_knoten import Queue
+
+def messen_liste(n):
+    liste = []
+    for i in range(n):
+        liste.append(i)
+    start = time.perf_counter()
+    while len(liste) > 0:
+        liste.pop(0)                 # O(n) je Aufruf
+    return time.perf_counter() - start
+
+def messen_queue(n):
+    q = Queue()
+    for i in range(n):
+        q.enqueue(i)
+    start = time.perf_counter()
+    while not q.is_empty():
+        q.dequeue()                  # O(1) je Aufruf
+    return time.perf_counter() - start
+
+for n in [20000, 40000, 80000]:
+    print("n =", n)
+    print("  list.pop(0):   ", round(messen_liste(n), 3), "s")
+    print("  Queue.dequeue: ", round(messen_queue(n), 3), "s")</code></pre>
+            <p>Die gemessenen Zeiten hängen von deinem Rechner ab. Aussagekräftig ist das Wachstum: Bei jeder Verdopplung von n sollte die Zeit für <code>pop(0)</code> ungefähr auf das Vierfache steigen, die für <code>dequeue</code> nur ungefähr auf das Doppelte. Bei kleinem n kann <code>pop(0)</code> trotzdem schneller sein, weil das Nachrücken in C als ein schneller Kopiervorgang abläuft, während jeder <code>Node</code> ein eigenes Python-Objekt ist.</p>
+            <p><strong>Ausblick Praxis:</strong> Außerhalb der Schule baut man die Schlange meist nicht selbst, sondern nimmt die fertige Klasse <code>collections.deque</code>: <code>append(x)</code> fügt hinten an, <code>popleft()</code> entnimmt vorn – beides in O(1). Im Kurs verwenden wir unsere eigene <code>Queue</code> aus <code>queue_knoten.py</code>.</p>
+            <p><strong>Achtung, Verwechslungsgefahr:</strong> <code>deque</code> (ohne zweites „ue“, gesprochen „deck“, von <em>double-ended queue</em>) ist der Name einer Klasse. <code>dequeue</code> ist bei uns eine <em>Methode</em> der <code>Queue</code>: vorn entnehmen. Eine <code>deque</code> hat keine Methode <code>dequeue</code> – dort heißt sie <code>popleft</code>.</p>
+            <pre><code class="language-python">from collections import deque
+q = deque()
+q.append("A")
+q.append("B")
+print(q.popleft())   # A</code></pre>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Druckwarteschlange und Warteschlangen im Netz</summary>
+                <p>
+                    <strong>Alltag:</strong> Schicken mehrere Personen gleichzeitig Dokumente an den Schuldrucker, landen sie in der <strong>Druckwarteschlange</strong> und werden in der Reihenfolge ihres Eintreffens gedruckt. Auch Ticketsysteme bei Konzertvorverkäufen stellen dich in eine virtuelle Warteschlange.<br><br>
+                    <strong>Beruf:</strong> Backend-Entwicklerinnen und -Entwickler koppeln große Systeme über <strong>Message Queues</strong> (z.&nbsp;B. RabbitMQ oder Kafka): Ein Onlineshop legt jede Bestellung in eine Schlange, und Lager, Rechnungsstellung und Versand holen sie dort nacheinander ab. So geht bei Lastspitzen keine Bestellung verloren.
+                </p>
+            </details>
+        </div>
+
+<h2 id="import">Die Klasse <code>Queue</code> in anderen Programmen benutzen: <code>import</code></h2>
+
+<p>Ab Aufgabe 3.2.2 schreibst du Programme, die deine Schlange <em>benutzen</em> – die Druckwarteschlange, den Abzählreim, später die Breitensuche (3.6, 3.8). Die Klasse schreibst du dafür nicht jedes Mal neu ab, sondern holst sie mit <code>import</code> aus deiner Datei <code>queue_knoten.py</code>.</p>
+
+<div class="beispiel">
+            <p><strong>Zwei Dateien im selben Ordner <code>1_listen/</code>:</strong></p>
+            <pre><code class="language-python"># Datei queue_knoten.py – Node und Queue wie in Beispiel 2
+class Node:
+    ...
+
+class Queue:
+    ...
+
+if __name__ == "__main__":        # nur beim direkten Start (F5)
+    q = Queue()
+    q.enqueue("Test")
+    print(q.dequeue())            # Test</code></pre>
+            <pre><code class="language-python"># Datei druckwarteschlange.py
+from queue_knoten import Queue    # Datei queue_knoten.py, Klasse Queue
+
+drucker = Queue()
+drucker.enqueue("Brief.pdf")
+print(drucker.dequeue())          # Brief.pdf</code></pre>
+            <ol>
+                <li><strong><code>from queue_knoten import Queue</code></strong>: Python sucht die Datei <code>queue_knoten.py</code> im Ordner des Programms, das du startest. Der Dateiname steht ohne <code>.py</code>. Danach benutzt du <code>Queue</code>, als stünde die Klasse in deiner eigenen Datei. <code>Node</code> musst du nicht importieren – <code>Queue</code> benutzt es intern selbst.</li>
+                <li><strong>Beim <code>import</code> wird die ganze Datei einmal ausgeführt</strong>, von oben nach unten. Klassen und Funktionen werden dabei nur angelegt. Stehen ganz unten aber Testzeilen wie <code>print(q.dequeue())</code>, laufen sie wirklich mit – deine Testausgaben erscheinen dann plötzlich in der Druckwarteschlange.</li>
+                <li><strong>Deshalb gehören Testzeilen unter <code>if __name__ == "__main__":</code></strong>. <code>__name__</code> setzt Python selbst: Startest du <code>queue_knoten.py</code> mit F5, ist <code>__name__</code> gleich <code>"__main__"</code> und die Tests laufen. Wird die Datei importiert, ist <code>__name__</code> gleich <code>"queue_knoten"</code> – die Tests werden übersprungen. (Dieselbe Regel steht für Testdateien auf Seite 3.0.2.)</li>
+            </ol>
+            <table class="gitter">
+                <thead><tr><th>Fehlermeldung</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>ModuleNotFoundError: No module named 'queue_knoten'</code></td><td>Die Datei liegt nicht im selben Ordner wie dein Programm oder heißt anders.</td><td><code>queue_knoten.py</code> in den Ordner kopieren (z.&nbsp;B. nach <code>2_baeume/</code> oder <code>3_graphen/</code>) oder den Dateinamen prüfen.</td></tr>
+                    <tr><td><code>ImportError: cannot import name 'Queue'</code></td><td>In der Datei heißt die Klasse anders (Groß-/Kleinschreibung!).</td><td>Klassennamen in beiden Dateien angleichen.</td></tr>
+                    <tr><td>Beim Start erscheinen fremde Ausgaben</td><td>Testzeilen in <code>queue_knoten.py</code> stehen nicht unter <code>if __name__ == "__main__":</code>.</td><td>Testzeilen einrücken und darunter setzen.</td></tr>
+                </tbody>
+            </table>
+            <p>Nenne die Datei nicht <code>queue.py</code>: Python hat schon ein eigenes Modul <code>queue</code>, dann würde das falsche geladen.</p>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                Eine <strong>Schlange (Queue)</strong> ist eine Datenstruktur nach dem <strong>FIFO-Prinzip</strong> („First In – First Out“): Das Element, das zuerst eingefügt wurde, wird auch zuerst entnommen.<br>
+                Grundoperationen: <code>enqueue(x)</code> fügt x am <strong>Ende</strong> ein, <code>dequeue()</code> entfernt das Element am <strong>Anfang</strong> und gibt es zurück, <code>is_empty()</code> prüft, ob die Schlange leer ist, <code>peek()</code> liefert das vordere Element, ohne es zu entfernen. Bei geeigneter Implementierung liegen alle Operationen in O(1).
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Am Fahrkartenautomaten <span class="niveau">AFB I</span></summary>
+                <p>Am Fahrkartenautomaten stellen sich nacheinander Tom, Ida und Max an. Dann wird eine Person bedient, danach stellt sich Lea an. Wer wurde bedient? Wer steht jetzt vorn, wer hinten?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Bedient wurde Tom, denn er kam zuerst (FIFO). Jetzt steht Ida vorn, dahinter Max, ganz hinten Lea.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Wozu die Prüfung auf leer? <span class="niveau">AFB I</span></summary>
+                <p>Stell dir vor, in <code>peek</code> fehlen die beiden Zeilen mit <code>if self.is_empty()</code> und <code>raise</code>. Was passiert bei <code>ListenQueue().peek()</code>? Was meldet die Methode mit der Prüfung? Probiere beides in Thonny aus.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Ohne Prüfung greift <code>self.__daten[0]</code> auf eine leere Liste zu: <code>IndexError: list index out of range</code> – die Meldung verrät nicht, was eigentlich schiefging. Mit Prüfung erscheint <code>IndexError: peek auf leerer Schlange</code>.</p>
+                </details>
+            </details>
+        </div>

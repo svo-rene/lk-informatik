@@ -1,0 +1,42 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.3.6: Ist die Liste richtig sortiert? <span class="niveau">AFB III</span></summary>
+<p>Für ein Namensverzeichnis schreibt Jonas</p>
+<pre><code>SELECT Nachname, Vorname
+FROM Studenten
+ORDER BY Nachname;</code></pre>
+<p>Im Ergebnis findet er diesen Abschnitt:</p>
+<table>
+<thead><tr><th>Nachname</th><th>Vorname</th></tr></thead>
+<tbody>
+<tr><td>Klein</td><td>Mia</td></tr>
+<tr><td>Krause</td><td>Felix</td></tr>
+<tr><td>Kruger</td><td>Alina</td></tr>
+<tr><td>Krämer</td><td>Sofia</td></tr>
+<tr><td>Köhler</td><td>Jan</td></tr>
+<tr><td>König</td><td>Marie</td></tr>
+</tbody>
+</table>
+<p>Jonas meint: „Die Datenbank sortiert falsch. Krämer gehört vor Krause, und Köhler gehört vor Krause.“</p>
+<ol>
+<li>Erkläre, nach welcher Regel SQLite hier sortiert und warum diese Reihenfolge entsteht.</li>
+<li>Suche in der vollständigen Liste eine weitere Stelle, an der ein Name mit Umlaut „zu spät“ einsortiert wird.</li>
+<li>Beurteile, ob die Liste für ein gedrucktes Namensverzeichnis taugt, und schlage eine pragmatische Lösung vor.</li>
+</ol>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 1.3.7: Fehler finden – die Abfrage läuft, aber… <span class="niveau">AFB III</span></summary>
+<p>Gesucht ist eine Liste mit Vorname und Notendurchschnitt aller Studierenden, beste Note zuerst. Lea schreibt:</p>
+<pre><code>SELECT Vorname Notendurchschnitt
+FROM Studenten
+ORDER BY Notendurchschnitt DESC;</code></pre>
+<p>SQLite meldet keinen Fehler. Sage für den Ausschnitt mit den 5 Zeilen oben das tatsächliche Ergebnis voraus,
+   erkläre beide Fehler und gib eine korrigierte Abfrage an.</p>
+<p class="tipp">Ein Alias darf in SQL auch ohne das Wort <code>AS</code> geschrieben werden.</p>
+</details>
+</div>

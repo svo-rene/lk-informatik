@@ -1,0 +1,18 @@
+{
+  "nr": "6.12",
+  "titel": "Überführung einer Grammatik mit ε-Regeln in eine Grammatik ohne ε-Regeln",
+  "seiten": [
+    {
+      "datei": "index.html",
+      "titel": "Einführung"
+    },
+    {
+      "datei": "uebungen.html",
+      "titel": "Übungen"
+    },
+    {
+      "datei": "vertiefung.html",
+      "titel": "Vertiefung"
+    }
+  ]
+}

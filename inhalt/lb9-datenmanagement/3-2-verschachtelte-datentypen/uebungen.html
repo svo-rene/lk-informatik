@@ -1,0 +1,85 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/3-2_verschachtelte_datentypen.ipynb" download>3-2_verschachtelte_datentypen.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a> öffnen. JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.2.3: Aufteilen in Listen <span class="niveau">AFB II</span>
+                </summary>
+                <p>
+                    Gegeben ist eine Liste mit Datensätzen: <br>
+                    <code>messungen = [["2024-04-01", 15.2], ["2024-04-02", 17.5], ["2024-04-03", 14.0]]</code><br>
+                    Erstelle daraus zwei neue Listen:
+                </p>
+                    <ul>
+                        <li><code>daten</code>: enthält nur die Datumsangaben</li>
+                        <li><code>temperaturen</code>: enthält nur die Temperaturen</li>
+                    </ul>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.2.4: Anwendung <span class="niveau">AFB I</span>
+                </summary>
+                <p>
+                    Modelliere eine Schulklasse mit Schülerdaten. Jede Schülerin und jeder Schüler soll Name, Alter und eine Notenliste haben. Speichere die Daten in einem Dictionary.
+                </p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>
+                    Aufgabe 3.2.5: Herausforderung <span class="niveau">AFB II–III</span>
+                </summary>
+                <p>
+                    Entwickle ein Dictionary, das mehrere Schulklassen enthält. Jede Klasse enthält eine Liste von Dictionaries mit Schülerdaten. Ermittle den Durchschnitt aller Noten einer bestimmten Schülerin oder eines bestimmten Schülers.
+                </p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.2.7: Wetterstationen auswerten <span class="niveau">AFB II</span></summary>
+                <p>Ein Wetterdienst speichert die Mittagstemperaturen seiner Stationen so:</p>
+                <pre><code class="language-python">stationen = {
+    "Dresden":     {"hoehe": 113,  "messungen": [18.5, 21.0, 19.5]},
+    "Fichtelberg": {"hoehe": 1215, "messungen": [9.0, 11.5, 8.0]},
+    "Leipzig":     {"hoehe": 131,  "messungen": []}
+}</code></pre>
+                <ol>
+                    <li>Schreibe eine Funktion <code>mittelwerte(stationen)</code>, die ein neues Dictionary zurückgibt: Station &rarr;
+                        Mittelwert der Messungen, gerundet auf eine Nachkommastelle. Hat eine Station keine Messungen, ist der Wert <code>None</code>.</li>
+                    <li>Schreibe eine Funktion <code>hoechste_station(stationen)</code>, die den Namen der am höchsten gelegenen Station zurückgibt.</li>
+                    <li>Ergänze für Leipzig die Messung 20.0, ohne das Dictionary neu zu schreiben, und rufe <code>mittelwerte</code> erneut auf.</li>
+                </ol>
+                <table class="gitter">
+                    <tr><th>Aufruf</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                    <tr><td><code>print(mittelwerte(stationen))</code></td><td><code>{'Dresden': 19.7, 'Fichtelberg': 9.5, 'Leipzig': None}</code></td><td></td></tr>
+                    <tr><td><code>print(hoechste_station(stationen))</code></td><td><code>Fichtelberg</code></td><td></td></tr>
+                    <tr><td>nach Teil 3: <code>print(mittelwerte(stationen)["Leipzig"])</code></td><td><code>20.0</code></td><td></td></tr>
+                </table>
+                <p class="tipp">Denke an den Sonderfall der leeren Liste: <code>sum([]) / len([])</code> führt zu einer Division durch 0.</p>
+            </details>
+        </div>

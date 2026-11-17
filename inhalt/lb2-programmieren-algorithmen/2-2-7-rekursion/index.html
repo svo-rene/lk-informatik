@@ -1,0 +1,255 @@
+<p>In der Informatik gibt es zwei grundlegende Techniken, um Abläufe zu wiederholen: Iteration und Rekursion. Stell dir zwei Spiegel vor, die sich gegenüberstehen: Das Bild enthält sich selbst immer kleiner – das ist die Grundidee der Rekursion.</p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in fünf kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Rekursion ist neu und braucht etwas Zeit – halte die Videos ruhig an und rechne mit.</p>
+
+<ol class="schritte">
+            <li>Die Idee: Wie viele stehen vor dir?</li>
+            <li>Die Summe mit einer Schleife (Iteration)</li>
+            <li>Die Summe rekursiv</li>
+            <li>Rekursion Schritt für Schritt: der Aufrufstapel – danach Aufgabe 2.2.7.1</li>
+            <li>Wenn die Rekursion nicht endet – danach Aufgabe 2.2.7.2</li>
+        </ol>
+
+<p>Zum Schluss findest du den Praxisbezug, eine Zusammenfassung und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Die Idee – Wie viele stehen vor dir?</h2>
+
+<p>Rekursion löst ein Problem, indem sie <strong>dieselbe Frage für ein kleineres Problem</strong> stellt. Das Video zeigt das an einer Mensa-Schlange: Niemand überblickt die ganze Schlange, trotzdem kommt die richtige Antwort heraus. Achte auf zwei Dinge: Wo hört das Weiterfragen auf (Basisfall)? Und in welche Richtung fließen danach die Antworten?</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-7-1_idee_vorschau.png" src="../vid/2-2-7-1_idee.mp4"></video><a href="../vid/2-2-7-1_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Was ist Rekursion? (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<h2 id="schritt-2">Schritt 2: Die Summe mit einer Schleife (Iteration)</h2>
+
+<p>Iteration ist ein wiederholter Prozess, bei dem eine Aufgabe Schritt für Schritt wiederholt wird, bis eine bestimmte Bedingung erfüllt ist. Das geschieht mit Schleifen, zum Beispiel einer <code>for</code>- oder einer <code>while</code>-Schleife. Im Video verfolgst du <code>sum_iteration(3)</code> in einer Tabelle. Kurz erklärt wird <code>range(n + 1)</code>.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-7-2_iteration_vorschau.png" src="../vid/2-2-7-2_iteration.mp4"></video><a href="../vid/2-2-7-2_iteration.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Die Summe mit einer Schleife (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen – Beispiel in Python: die Summe von 0 bis n mit Iteration berechnen</p>
+
+<pre><code class="language-python">def sum_iteration(n):
+    result = 0
+    for i in range(n + 1):
+        result = result + i
+    return result
+
+n = 5
+print("Summe von 0 bis", n, "mit Iteration:", sum_iteration(n))
+# Ausgabe: Summe von 0 bis 5 mit Iteration: 15</code></pre>
+
+<h2 id="schritt-3">Schritt 3: Die Summe rekursiv</h2>
+
+<p>Bei der Rekursion ruft eine Funktion sich selbst auf, um ein Problem in kleinere Teilprobleme aufzuteilen und diese zu lösen. Jeder rekursive Aufruf verkleinert das Problem, bis die Abbruchbedingung erreicht ist. Achte im Video darauf, welche Zeilen den Basisfall und welche den Rekursionsschritt bilden, und vergleiche mit der Schleife aus Schritt 2.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-7-3_rekursion_vorschau.png" src="../vid/2-2-7-3_rekursion.mp4"></video><a href="../vid/2-2-7-3_rekursion.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Die Summe rekursiv (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen – Beispiel in Python: die Summe von 0 bis n mit Rekursion berechnen</p>
+
+<pre><code class="language-python">def sum_recursion(n):
+    # Abbruchbedingung
+    if n == 0:
+        return 0
+    # Rekursionsschritt
+    else:
+        return n + sum_recursion(n - 1)
+
+n = 5
+print("Summe von 0 bis", n, "mit Rekursion:", sum_recursion(n))
+# Ausgabe: Summe von 0 bis 5 mit Rekursion: 15</code></pre>
+
+<p>In diesem Beispiel ist die Abbruchbedingung erreicht, wenn <code>n</code> gleich 0 ist. Ist <code>n</code> größer als 0, ruft sich die Funktion selbst mit <code>n − 1</code> auf und addiert <code>n</code> zum Ergebnis dieses Aufrufs.</p>
+
+<h2 id="schritt-4">Schritt 4: Rekursion Schritt für Schritt – der Aufrufstapel</h2>
+
+<p>Was macht Python, wenn sich eine Funktion selbst aufruft? Jeder Aufruf, der noch auf ein Ergebnis wartet, liegt auf dem <strong>Aufrufstapel</strong>. Im Video wächst der Stapel bei <code>sum_recursion(3)</code> zuerst (Abstieg) und schrumpft dann wieder (Aufstieg). Achte darauf, dass jeder Aufruf sein eigenes <code>n</code> hat und wie die Rückgabewerte von oben nach unten durchgereicht werden.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-7-4_aufrufstapel_vorschau.png" src="../vid/2-2-7-4_aufrufstapel.mp4"></video><a href="../vid/2-2-7-4_aufrufstapel.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Rekursion Schritt für Schritt – der Aufrufstapel (ca. 2 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen steht der Ablauf mit Aufrufstapel und Testfällen in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ablauf von <code>sum_recursion(3)</code></p>
+            <pre><code>rekursiver Abstieg:              | rekursiver Aufstieg:
+3 + sum_recursion(2)             |     -&gt; 3 + 3 = 6
+    2 + sum_recursion(1)         |   -&gt; 2 + 1 = 3
+        1 + sum_recursion(0)     | -&gt; 1 + 0 = 1
+            return 0
+
+Ergebnis: 6</code></pre>
+            <p>Jeder Aufruf, der noch auf ein Ergebnis wartet, liegt auf dem <strong>Aufrufstapel</strong> (engl. call stack). Ein neuer Aufruf wird oben aufgelegt, ein beendeter Aufruf oben entfernt.</p>
+            <ol>
+                <li><strong>Abstieg:</strong> <code>sum_recursion(3)</code> kann nicht sofort antworten und ruft <code>sum_recursion(2)</code> auf. Der Aufruf mit n = 3 bleibt mit seiner offenen Rechnung „3 + ?“ auf dem Stapel liegen. Genauso geht es mit n = 2 und n = 1 weiter.</li>
+                <li><strong>Abbruchbedingung:</strong> <code>sum_recursion(0)</code> erreicht den Basisfall und gibt 0 sofort zurück. <em>Warum nötig:</em> Ohne Basisfall würde der Stapel immer weiter wachsen.</li>
+                <li><strong>Aufstieg:</strong> Die wartenden Aufrufe werden von oben nach unten abgeschlossen. Jeder setzt den erhaltenen Wert in seine offene Rechnung ein.</li>
+            </ol>
+            <table>
+                <thead><tr><th>Schritt</th><th>Aufrufstapel (unten → oben)</th><th>Ereignis</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>s(3)</td><td>s(3) ruft s(2) auf</td></tr>
+                    <tr><td>2</td><td>s(3), s(2)</td><td>s(2) ruft s(1) auf</td></tr>
+                    <tr><td>3</td><td>s(3), s(2), s(1)</td><td>s(1) ruft s(0) auf</td></tr>
+                    <tr><td>4</td><td>s(3), s(2), s(1), s(0)</td><td>Basisfall: s(0) gibt 0 zurück – größte Tiefe</td></tr>
+                    <tr><td>5</td><td>s(3), s(2), s(1)</td><td>s(1) rechnet 1 + 0 = 1 und gibt 1 zurück</td></tr>
+                    <tr><td>6</td><td>s(3), s(2)</td><td>s(2) rechnet 2 + 1 = 3</td></tr>
+                    <tr><td>7</td><td>s(3)</td><td>s(3) rechnet 3 + 3 = 6</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Ergebnis:</strong> 6 bei einer <strong>Rekursionstiefe</strong> von 4 gleichzeitig offenen Aufrufen (allgemein n + 1). <strong>Kontrolle:</strong> 0 + 1 + 2 + 3 = 6.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sum_recursion(3)</code></td><td><code>6</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>sum_recursion(0)</code></td><td><code>0</code></td><td>Basisfall direkt</td></tr>
+                    <tr><td><code>sum_recursion(1)</code></td><td><code>1</code></td><td>ein rekursiver Aufruf</td></tr>
+                    <tr><td><code>sum_recursion(2000)</code></td><td><code>RecursionError</code></td><td>Rekursionstiefe 2001 übersteigt die Grenze von etwa 1000; iterativ kein Problem</td></tr>
+                    <tr><td><code>sum_recursion(-1)</code></td><td><code>RecursionError</code></td><td>Falle: −1, −2, … erreicht den Basisfall n == 0 nie; sicherer ist <code>if n &lt;= 0</code></td></tr>
+                    <tr><td><code>sum_recursion(2.5)</code></td><td><code>RecursionError</code></td><td>falscher Typ: 2.5, 1.5, 0.5, −0.5 … trifft 0 nie</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.7.1 – Summe, Fakultät und Fibonacci iterativ und rekursiv implementieren.</p>
+
+<h2 id="schritt-5">Schritt 5: Wenn die Rekursion nicht endet</h2>
+
+<p>Der häufigste Fehler bei Rekursion: Der Basisfall fehlt oder wird nie erreicht. Dann ruft sich die Funktion immer weiter auf, bis Python mit <code>RecursionError</code> abbricht. Im Video siehst du diese Fehlermeldung in der Kommandozeile und erfährst, warum sogar eine korrekte Rekursion an eine Grenze stoßen kann, die eine Schleife nicht hat.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-7-5_recursionerror_vorschau.png" src="../vid/2-2-7-5_recursionerror.mp4"></video><a href="../vid/2-2-7-5_recursionerror.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Wenn die Rekursion nicht endet (ca. 1 min)</figcaption>
+        </figure>
+
+<p>Zum Nachlesen: Beispiel 2 zeigt, wo Rekursion ihre Stärke hat (verschachtelte Daten wie Ordner), wo sie an die Grenze der Rekursionstiefe stößt und wie man dieselbe Aufgabe iterativ mit einem eigenen Stapel löst.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> rekursives Durchsuchen einer verschachtelten Liste (wie Ordner mit Unterordnern)</p>
+            <pre><code class="language-python">def zaehle_dateien(ordner):
+    anzahl = 0
+    for eintrag in ordner:
+        if isinstance(eintrag, list):      # Unterordner
+            anzahl = anzahl + zaehle_dateien(eintrag)
+        else:                              # Datei
+            anzahl = anzahl + 1
+    return anzahl
+
+schule = ["plan.pdf", ["info.py", ["alt.py", "neu.py"]], "notizen.txt"]
+print(zaehle_dateien(schule))   # 5</code></pre>
+            <p>Hier ist die Rekursion natürlicher als eine Schleife, weil die Schachtelungstiefe vorher nicht bekannt ist.</p>
+            <ol>
+                <li><strong>Basisfall erkennen:</strong> Ein Eintrag, der keine Liste ist, ist eine Datei und zählt 1. Ein leerer Ordner liefert 0, weil die Schleife nicht läuft. <em>Warum gibt es kein eigenes <code>if</code> für den Basisfall?</em> Die Rekursion endet automatisch, sobald keine Unterordner mehr da sind.</li>
+                <li><strong>Rekursionsschritt:</strong> Für jeden Unterordner wird dieselbe Funktion mit dem <em>kleineren</em> Teilproblem aufgerufen. Das Ergebnis wird zur eigenen Anzahl addiert.</li>
+                <li><strong>Aufrufbaum zeichnen:</strong> Jeder Knoten ist ein Aufruf, die Kinder sind die Aufrufe, die er selbst auslöst.
+                    <pre><code>zaehle(schule)                              -&gt; 1 + 3 + 1 = 5
+├── "plan.pdf"                              +1
+├── zaehle(["info.py", [...]])              -&gt; 1 + 2 = 3
+│   ├── "info.py"                           +1
+│   └── zaehle(["alt.py", "neu.py"])        -&gt; 2
+│       ├── "alt.py"                        +1
+│       └── "neu.py"                        +1
+└── "notizen.txt"                           +1</code></pre>
+                    Es gibt 3 Aufrufe. Höchstens 3 sind gleichzeitig offen, die Rekursionstiefe entspricht also der Schachtelungstiefe der Ordner.</li>
+                <li><strong>Falle Rekursionstiefe:</strong> Eine 2000-fach verschachtelte Liste führt zu 2001 gleichzeitig offenen Aufrufen. Python bricht mit <code>RecursionError: maximum recursion depth exceeded</code> ab, obwohl die Funktion korrekt ist.
+                    <pre><code class="language-python">tief = []
+for i in range(2000):
+    tief = [tief]              # [[[[ … ]]]] – 2000 Ebenen
+zaehle_dateien(tief)           # RecursionError</code></pre>
+                </li>
+                <li><strong>Iterative Lösung mit eigenem Stapel:</strong> Jede Rekursion lässt sich iterativ formulieren. Man verwaltet die noch zu bearbeitenden Ordner selbst in einer Liste, die als Stapel dient (<code>append</code> legt auf, <code>pop</code> nimmt oben weg).
+                    <pre><code class="language-python">def zaehle_dateien_iterativ(ordner):
+    anzahl = 0
+    stapel = [ordner]
+    while len(stapel) &gt; 0:
+        aktuell = stapel.pop()
+        for eintrag in aktuell:
+            if isinstance(eintrag, list):
+                stapel.append(eintrag)     # später bearbeiten
+            else:
+                anzahl = anzahl + 1
+    return anzahl
+
+print(zaehle_dateien_iterativ(schule))   # 5
+print(zaehle_dateien_iterativ(tief))     # 0 – kein RecursionError</code></pre>
+                </li>
+            </ol>
+            <p><strong>Ergebnis:</strong> 5 Dateien. Die rekursive Fassung ist kürzer und folgt direkt der Struktur der Daten. Die iterative Fassung ist länger, kommt aber mit beliebig tiefer Schachtelung zurecht.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>schule</code></td><td><code>5</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>[]</code></td><td><code>0</code></td><td>leerer Ordner</td></tr>
+                    <tr><td><code>["a.txt"]</code></td><td><code>1</code></td><td>ein Element</td></tr>
+                    <tr><td><code>[[[]]]</code></td><td><code>0</code></td><td>nur leere Unterordner</td></tr>
+                    <tr><td><code>tief</code> (2000 Ebenen)</td><td>rekursiv <code>RecursionError</code>, iterativ <code>0</code></td><td>Grenze der Rekursionstiefe</td></tr>
+                    <tr><td><code>"abc"</code></td><td><code>3</code></td><td>falscher Typ: Ein Text wird zeichenweise durchlaufen, jedes Zeichen zählt als „Datei“ – kein Absturz, aber Unsinn</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.7.2 – Rekursion von Hand verfolgen. Zum Üben zu Hause passt besonders Aufgabe 2.2.7.5 (drei kaputte Rekursionen).</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Rekursion im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Wenn du auf deinem Rechner die Größe eines Ordners anzeigen lässt, berechnet das Betriebssystem rekursiv die Größe aller Unterordner. Auch Fraktale wie der Romanesco-Kohl oder Schneeflocken sind rekursive Strukturen.<br><br>
+                    <strong>Beruf:</strong> Compiler und Interpreter zerlegen Programmcode rekursiv, weil Ausdrücke wie <code>(a + (b * c))</code> ineinander geschachtelt sind. Wer beruflich Suchmaschinen, Dateisysteme oder Spiele-KI (z.&nbsp;B. Schachprogramme) entwickelt, arbeitet ständig mit rekursiven Algorithmen.
+                </p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>Iteration und Rekursion sind zwei unterschiedliche Ansätze zur Lösung von Problemen. Die Wahl zwischen ihnen hängt von der Struktur des Problems und von den Anforderungen deiner Implementierung ab. Jede rekursive Lösung lässt sich auch iterativ formulieren; rekursive Lösungen sind oft kürzer, brauchen aber für jeden offenen Aufruf Speicher auf dem Aufrufstapel.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Iteration:</strong> Wiederholung mithilfe einer Schleife (<code>for</code>, <code>while</code>).<br>
+                <strong>Rekursion:</strong> Eine Funktion ruft sich selbst mit einem kleineren Teilproblem auf. Jede rekursive Funktion braucht<br>
+                1. eine <strong>Abbruchbedingung</strong> (Basisfall), die das Ergebnis direkt liefert, und<br>
+                2. einen <strong>Rekursionsschritt</strong>, der das Problem verkleinert und sich selbst aufruft.<br>
+                Fehlt die Abbruchbedingung oder wird sie nie erreicht, bricht Python mit <code>RecursionError</code> ab (Standardgrenze: etwa 1000 Aufrufe).
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Puppen zählen <span class="niveau">AFB I</span></summary>
+                <p>Eine Matroschka enthält eine kleinere Puppe, diese wieder eine kleinere und so weiter. Die kleinste Puppe lässt sich nicht öffnen. Beschreibe, wie du die Anzahl der Puppen rekursiv bestimmst: Was ist der Basisfall, was der rekursive Fall?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Basisfall: Die Puppe lässt sich nicht öffnen – Anzahl 1. Rekursiver Fall: Puppe öffnen, die Puppen in der inneren Puppe (nach derselben Regel) zählen und 1 addieren.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Die Schleife verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Welche Zahlen liefert <code>range(4 + 1)</code>? Welchen Wert hat <code>result</code> nach jedem Schleifendurchlauf von <code>sum_iteration(4)</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>range(5)</code> liefert 0, 1, 2, 3, 4. <code>result</code> ist nacheinander 0, 1, 3, 6, 10 – Rückgabe 10.</p>
+                </details>
+            </details>
+        </div>

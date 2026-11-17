@@ -1,0 +1,126 @@
+<p>Maschinen verarbeiten Sprache nicht intuitiv, sondern benötigen <strong>klare Regeln</strong>. Um zu prüfen, ob eine Zeichenkette zur gewünschten Sprache gehört, nutzen wir sogenannte <strong>Grammatiken</strong>. Diese beschreiben, wie gültige Zeichenfolgen aus einem <em>Startsymbol</em> mithilfe von Ersetzungsregeln erzeugt werden können.</p>
+
+<h2>Was ist eine Grammatik?</h2>
+
+<p>Eine formale Grammatik besteht aus:</p>
+
+<ul>
+<li>einem endlichen <strong>Alphabet</strong> von Terminalen (z.&nbsp;B. Ziffern, Buchstaben, Sonderzeichen)</li>
+<li>einem <strong>Startsymbol</strong></li>
+<li><strong>Nichtterminalen</strong>, die ersetzt werden können</li>
+<li><strong>Ersetzungsregeln</strong>, auch Produktionsregeln genannt</li>
+</ul>
+
+<p>Das Ziel ist es, durch Anwendung der Regeln gültige Zeichenketten zu erzeugen – z.&nbsp;B. Bezeichner, Dateiformate oder Produktcodes.</p>
+
+<h2>Grundlegende Begriffe</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> G = ({S}, {a, b}, P, S) mit P = { S → aS | b }. Aus S entstehen b, ab, aab, … Die Sprache ist L(G) = {a<sup>n</sup>b | n ≥ 0}.</p>
+<ol>
+<li><strong>Bestandteile ablesen:</strong> N = {S}, T = {a, b}, Startsymbol S, zwei Regeln. <em>Warum?</em> Nur Terminale dürfen im fertigen Wort stehen.</li>
+<li><strong>Kürzeste Wörter erzeugen:</strong> S ⇒ b; S ⇒ aS ⇒ ab; S ⇒ aS ⇒ aaS ⇒ aab. <em>Warum?</em> Jede Anwendung von S → aS setzt ein a davor, S → b beendet die Ableitung.</li>
+<li><strong>Muster verallgemeinern:</strong> n-mal S → aS und einmal S → b ergibt a<sup>n</sup>b. <em>Warum?</em> Andere Möglichkeiten gibt es nicht, weil in jeder Zeichenkette höchstens ein S steht.</li>
+</ol>
+<p><strong>Ergebnis:</strong> L(G) = {a<sup>n</sup>b | n ≥ 0} = {b, ab, aab, aaab, …}.</p>
+<p><strong>Kontrolle:</strong> <code>ba</code> ∉ L(G), denn nach dem b ist kein Nichtterminal mehr übrig, an das ein a angehängt werden könnte.</p>
+            </details>
+        </div>
+
+<h3>Komplexeres Beispiel: Molkereikennung</h3>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+<p>Die Molkereikennung auf Lebensmitteln lässt sich durch folgende Grammatik G = (N, T, P, S) definieren:</p>
+<pre><code>
+N = {Molkerei, Betriebsnummer, Europa, Ziffer}
+T = {"DE", "EC", "EG", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}
+S = Molkerei
+P = {
+  Molkerei → "DE" Betriebsnummer Europa
+  Betriebsnummer → Ziffer Ziffer Ziffer
+  Europa → "EC" | "EG"
+  Ziffer → "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+}  </code></pre>
+<p>Beispiel für eine gültige Zeichenkette: <code>DE077EG</code></p>
+<ol>
+<li><strong>Bestandteile ablesen:</strong> Vier Nichtterminale, 13 Terminale, Startsymbol Molkerei. „DE“, „EC“ und „EG“ sind jeweils <em>ein</em> Terminal. <em>Warum?</em> Die Regeln behandeln diese Buchstabenpaare als unteilbare Bausteine.</li>
+<li><strong>DE077EG ableiten</strong> (in jedem Schritt wird genau ein Nichtterminal ersetzt):<br>
+<code>Molkerei ⇒ DE Betriebsnummer Europa ⇒ DE Ziffer Ziffer Ziffer Europa ⇒ DE0 Ziffer Ziffer Europa ⇒ DE07 Ziffer Europa ⇒ DE077 Europa ⇒ DE077EG</code><br>
+<em>Warum?</em> Am Ende stehen nur noch Terminale, also gehört DE077EG zu L(G).</li>
+<li><strong>Falle prüfen:</strong> <code>DE77EG</code> sieht ähnlich aus, ist aber nicht ableitbar: Betriebsnummer → Ziffer Ziffer Ziffer erzeugt immer <em>genau drei</em> Ziffern. Auch <code>DE077EU</code> scheitert, weil Europa nur „EC“ oder „EG“ liefert.</li>
+<li><strong>Sprache überblicken:</strong> 10 · 10 · 10 Betriebsnummern und 2 Endungen ergeben 10<sup>3</sup> · 2 = 2&nbsp;000 Wörter. <em>Warum?</em> Die Wahlen an den einzelnen Stellen sind unabhängig voneinander.</li>
+</ol>
+<p><strong>Ergebnis:</strong> L(G) ist endlich und enthält 2&nbsp;000 Kennungen von DE000EC bis DE999EG. Abb. 1 zeigt die Ableitung aus Schritt 2 als Baum.</p>
+<figure><img src="../img/molkerei_grammatik.png" width="600" alt="Ableitungsbaum Molkereikennung">
+<figcaption>Abb. 1: Ableitungsbaum der Zeichenkette „DE077EG“</figcaption>
+</figure>
+            </details>
+        </div>
+
+<p>Ein <strong>Ableitungsbaum</strong> zeigt, wie eine Zeichenkette Schritt für Schritt mithilfe der Produktionsregeln einer Grammatik aufgebaut wird. Der Baum beginnt beim <strong>Startsymbol</strong> und verzweigt sich nach jeder Regelanwendung, bis nur noch <strong>Terminalsymbole</strong> in den Blättern stehen.</p>
+
+<h2>Grammatiken mit FLACI testen</h2>
+
+<p>Mit dem kostenlosen Werkzeug <a href="https://flaci.com/" target="_blank" rel="noopener">FLACI</a> kannst du formale Grammatiken interaktiv ausprobieren:</p>
+
+<ul>
+<li>Grammatiken eingeben und als Datei speichern</li>
+<li>Zeichenketten erzeugen und auf Gültigkeit testen</li>
+<li>Ableitungsbäume automatisch generieren lassen</li>
+<li>Fehlerhafte Produktionen identifizieren</li>
+</ul>
+
+<p>So kannst du prüfen, ob deine Grammatik korrekt ist – z.&nbsp;B. für Emoticons, Produktnummern oder Datumsformate.</p>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: FLACI-Grammatik für die Molkereikennung</summary>
+<p>So könnte die Grammatik für FLACI aussehen:<br><br><code> Molkerei -&gt; DE Betriebsnr Europa <br>
+      Betriebsnr -&gt; Ziffer Ziffer Ziffer <br>
+      Europa -&gt; EC | EG <br>
+      Ziffer -&gt; 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 <br></code></p>
+</details>
+</div>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: Grammatiken für Codes und Kennungen</summary>
+<p><strong>Alltag:</strong> Molkereikennung, IBAN, Autokennzeichen, ISBN oder Paketnummern folgen festen Bildungsregeln. Online-Banking lehnt eine IBAN mit falscher Länge sofort ab, noch bevor die Bank angefragt wird.</p>
+<p><strong>Beruf:</strong> Softwareentwicklerinnen bei Banken, Zahlungsdienstleistern oder in der Logistik beschreiben solche Formate formal und erzeugen daraus Prüfprogramme. Im Compilerbau erzeugen Parser-Generatoren (z.&nbsp;B. ANTLR oder Bison) aus einer Grammatik automatisch das Programm, das Quelltext auf korrekte Struktur prüft.</p>
+</details>
+</div>
+
+<p>Die Einordnung von Grammatiken in Typen (regulär, kontextfrei …) folgt in Kapitel 6.6 „Chomsky-Hierarchie“.</p>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Merke:</strong> Eine formale Grammatik ist ein 4-Tupel <strong>G = (N, T, P, S)</strong> mit</p>
+<ul>
+<li><strong>N</strong>: endliche Menge der Nichtterminale (Variablen, werden ersetzt)</li>
+<li><strong>T</strong>: endliche Menge der Terminale (Zeichen des Alphabets, erscheinen im fertigen Wort), N ∩ T = ∅</li>
+<li><strong>P</strong>: endliche Menge der Produktionsregeln der Form <code>linke Seite → rechte Seite</code></li>
+<li><strong>S</strong>: Startsymbol, wobei S ∈ N</li>
+</ul>
+<p>Die von G erzeugte <strong>Sprache L(G)</strong> ist die Menge aller Wörter aus Terminalen, die sich aus S ableiten lassen: L(G) ⊆ T*.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.3.1: Emoticon-Grammatik <span class="niveau">AFB II</span></summary>
+<p>Entwickle eine Grammatik, die folgende Emoticons erzeugt:<br><code>:-)</code>, <code>:-(</code>, <code>;)</code>, <code>:D</code>, <code>:'(</code>, <code>:-|</code><br><br>Teste deinen Entwurf in FLACI.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.3.2: IBAN-Vereinfachung <span class="niveau">AFB II</span></summary>
+<p>Beschreibe eine vereinfachte Grammatik für eine IBAN mit deutschem Format:<br>Format: <code>DEkkbbbbbbbbcccccccccc</code> (k: Prüfziffer, b: Bankleitzahl, c: Kontonummer)</p>
+</details>
+</div>

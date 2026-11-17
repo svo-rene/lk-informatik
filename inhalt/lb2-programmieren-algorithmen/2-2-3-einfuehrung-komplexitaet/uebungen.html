@@ -1,0 +1,148 @@
+<script src="../sortierlabor.js" defer></script>
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Das Messlabor (Jupyter-Notebook) – ab dieser Seite bis 2.2.9b</summary>
+                <p>Im <strong>Messlabor</strong> misst du, wie lange die Sortierverfahren für die Streams aus der Songliste brauchen und wie viele Vergleiche sie machen, und vergleichst sie im Diagramm. Das Laden der Streams, der Vergleichszähler und die Stoppuhr sind fertig – die liest und verstehst du. Deine Sortierverfahren kommen nach und nach dazu und vergleichen dort nur mit <code>kommt_vor</code>: auf dieser Seite Bubblesort und dein eigenes Verfahren (Teil 1–3), später Insertionsort und Selectionsort (2.2.5), Mergesort (2.2.9) und Quicksort (2.2.9b).</p>
+                <p><a href="../notebooks/2-2-3_einfuehrung_komplexitaet.ipynb" download>Messlabor herunterladen (2-2-3_einfuehrung_komplexitaet.ipynb)</a> und dazu die Songliste <a href="../material/songs.csv" download>songs.csv</a>.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook und <code>songs.csv</code> über die Links oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser das JupyterLite der Schule <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (alternativ <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Beide Dateien links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen. Ohne <code>songs.csv</code> meldet Python <code>FileNotFoundError</code>.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Zeit hochrechnen <span class="niveau">AFB I</span></summary>
+                <p>Ein Programm mit quadratischer Laufzeit braucht für n = 3000 Elemente 0,5 s. Wie lange braucht es ungefähr für n = 6000 und für n = 12 000?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Jede Verdopplung von n vervierfacht die Zeit: n = 6000 etwa 0,5 s · 4 = 2 s, n = 12 000 etwa 2 s · 4 = 8 s.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Welcher Term gewinnt? <span class="niveau">AFB I–II</span></summary>
+                <p>Ein Algorithmus braucht f(n) = 2n² + 100n + 7 Schritte. Welcher Teil ist bei n = 10 größer, 2n² oder 100n + 7? Welcher bei n = 1000? In welcher Komplexitätsklasse liegt f?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>n = 10: 2n² = 200, 100n + 7 = 1007 – hier überwiegt noch der lineare Teil. n = 1000: 2n² = 2 000 000, 100n + 7 = 100 007 – jetzt überwiegt der quadratische Teil, und sein Vorsprung wächst weiter. Für große n zählt nur der höchste Term, der Faktor 2 fällt weg: f liegt in O(n²).</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-3-1">
+            <details>
+                <summary>Aufgabe 2.2.3.1: Messwerte auswerten <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Berechne mit der Tabelle, um welchen Faktor die Zeit steigt, wenn sich n von 4000 auf 8000 bzw. von 10000 auf 20000 verdoppelt.</li>
+                    <li>Begründe damit, dass die Messung zu O(n²) passt.</li>
+                    <li>Schätze die Laufzeit für n = 40 000 ab.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-3-2">
+            <details>
+                <summary>Aufgabe 2.2.3.2: Komplexität bestimmen <span class="niveau">AFB I–III</span></summary>
+                <p>Bestimme für jedes Programmstück die Anzahl der Durchläufe der innersten Anweisung in Abhängigkeit von n und gib die Komplexitätsklasse an.</p>
+                <pre><code class="language-python"># a)
+print(liste[0])
+
+# b)
+for i in range(n):
+    print(i)
+
+# c)
+for i in range(n):
+    for j in range(n):
+        print(i, j)
+
+# d)
+for i in range(n):
+    for j in range(i):
+        print(i, j)
+
+# e)
+i = n
+while i &gt; 1:
+    i = i // 2</code></pre>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.3.3: Die Definition anwenden <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Zeige mit der Definition, dass f(n) = 4n + 7 in O(n) liegt. Gib c und n<sub>0</sub> an.</li>
+                    <li>Zeige, dass g(n) = 2n² + 10n in O(n²) liegt. Finde ein Paar (c, n<sub>0</sub>) mit c = 3 und ein zweites mit n<sub>0</sub> = 1.</li>
+                    <li>Begründe, dass n² <strong>nicht</strong> in O(n) liegt.</li>
+                    <li>Entscheide und begründe: (a) n ∈ O(n²) &nbsp; (b) 2<sup>n+1</sup> ∈ O(2<sup>n</sup>) &nbsp; (c) 2<sup>2n</sup> ∈ O(2<sup>n</sup>)</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.3.4: Ergebnis vorhersagen – Schleifen zählen <span class="niveau">AFB II</span></summary>
+                <p>Bestimme die Rückgabewerte, <strong>ohne</strong> die Funktionen auszuführen, und leite daraus die Komplexitätsklasse ab.</p>
+                <pre><code class="language-python">def zaehle_a(n):
+    z = 0
+    i = 1
+    while i &lt; n:
+        for j in range(n):
+            z = z + 1
+        i = i * 2
+    return z
+
+def zaehle_b(n):
+    z = 0
+    for i in range(n):
+        for j in range(i, n):
+            for k in range(3):
+                z = z + 1
+    return z</code></pre>
+                <table>
+                    <thead><tr><th>Eingabe</th><th>erwartete Ausgabe (von Hand)</th><th>tatsächliche Ausgabe</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>zaehle_a(8)</code></td><td></td><td></td></tr>
+                        <tr><td><code>zaehle_a(16)</code></td><td></td><td></td></tr>
+                        <tr><td><code>zaehle_a(1)</code></td><td></td><td></td></tr>
+                        <tr><td><code>zaehle_b(4)</code></td><td></td><td></td></tr>
+                        <tr><td><code>zaehle_b(10)</code></td><td></td><td></td></tr>
+                        <tr><td><code>zaehle_b(0)</code></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.3.5: Lineare Suche messen <span class="niveau">AFB II</span></summary>
+                <p>Die lineare Suche durchläuft eine Liste von vorn, bis das gesuchte Element gefunden ist. Sie gibt den Index zurück oder −1, wenn es nicht vorkommt.</p>
+                <ol>
+                    <li>Implementiere <code>lineare_suche(liste, gesucht)</code> und teste:
+                        <table>
+                            <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>lineare_suche([4, 8, 1], 1)</code></td><td><code>2</code></td><td></td></tr>
+                                <tr><td><code>lineare_suche([4, 8, 1], 5)</code></td><td><code>-1</code></td><td></td></tr>
+                                <tr><td><code>lineare_suche([], 5)</code></td><td></td><td></td></tr>
+                                <tr><td><code>lineare_suche([3, -2, 7, -2], -2)</code></td><td></td><td></td></tr>
+                                <tr><td><code>lineare_suche(["4", "8"], 8)</code></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li>Miss mit <code>time.perf_counter()</code> die Laufzeit im schlechtesten Fall (das Element fehlt) für n = 100 000, 200 000, 400 000 und 800 000.</li>
+                    <li>Berechne die Faktoren bei Verdopplung und begründe, dass die Messung zu O(n) passt. Gib an, welcher Fall der beste ist und welche Laufzeit er hat.</li>
+                </ol>
+            </details>
+        </div>

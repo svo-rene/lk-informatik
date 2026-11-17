@@ -1,0 +1,297 @@
+<p>
+        In größeren Programmen arbeiten Objekte nicht allein – sie kennen einander, enthalten andere oder bestehen aus Teilen. Solche Beziehungen zwischen Klassen helfen dir, komplexe Systeme realitätsnah zu modellieren.
+    </p>
+
+<h2>Dein Weg durch diese Seite</h2>
+
+<p>Diese Seite ist ein Lernpfad in drei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (knapp 2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Rechts im Video siehst du das Speicherbild: Objekte, deren Attribute mit Pfeilen auf andere Objekte verweisen. Halte die Videos ruhig an und tippe mit.</p>
+
+<ol class="schritte">
+        <li><a href="#schritt-1">Assoziation: Ein Objekt kennt ein anderes</a> – danach Aufgabe 4.8.1</li>
+        <li><a href="#schritt-2">Aggregation und Komposition: Wer lebt wie lange?</a> – danach Aufgabe 4.8.2</li>
+        <li><a href="#schritt-3">Vom Klassendiagramm zu Verweisen</a> – danach Aufgabe 4.8.3</li>
+    </ol>
+
+<p>Zum Schluss findest du die Zusammenfassung, den Praxisbezug und die Übungsaufgaben.</p>
+
+<h2 id="schritt-1">Schritt 1: Assoziation – „kennt“</h2>
+
+<p>Eine Assoziation bedeutet: Ein Objekt „kennt“ ein anderes, z.&nbsp;B. über ein Attribut. Beide Objekte können unabhängig voneinander existieren. Im Code ist „kennen“ nichts anderes als ein Attribut, in dem ein <strong>Verweis</strong> auf das andere Objekt steht. Achte im Video darauf, dass <code>unterrichtet(ma)</code> kein neues Fach erzeugt, sondern nur einen Pfeil setzt. Neu ist der Operator <code>is</code>, er wird kurz erklärt.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-8-1_assoziation_vorschau.png" src="../vid/4-8-1_assoziation.mp4"></video><a href="../vid/4-8-1_assoziation.mp4">Video ansehen</a></div>
+        <figcaption>Video 1: Assoziation – ein Objekt kennt ein anderes (ca. 2 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+    </figure>
+
+<p>Zum Nachlesen steht das Beispiel aus dem Video mit allen Schritten und Testfällen in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Lehrkraft kennt ihr Fach (Assoziation)</summary>
+        <p><strong>Ausgangssituation:</strong> Eine Stundenplan-Software soll speichern, welches Fach eine Lehrkraft unterrichtet. Fächer gibt es auch ohne Lehrkraft (z.&nbsp;B. ein neues Wahlfach), Lehrkräfte auch ohne zugeordnetes Fach.</p>
+        <pre><code class="language-python">class Fach:
+    def __init__(self, titel: str):
+        self.titel: str = titel
+
+class Lehrer:
+    def __init__(self, name: str):
+        self.name: str = name
+        self.fach: Fach | None = None  # optionales Attribut
+
+    def unterrichtet(self, fach: Fach) -&gt; None:
+        self.fach = fach
+
+# Beispiel
+ma = Fach("Mathematik")
+schroeder = Lehrer("Herr Schröder")
+schroeder.unterrichtet(ma)</code></pre>
+        <ol>
+            <li><strong>Unabhängigkeit prüfen:</strong> Beide Objekte werden getrennt mit eigenem Konstruktor erzeugt. Warum: Wenn beide auch allein sinnvoll existieren und keines Teil des anderen ist, liegt eine Assoziation vor.</li>
+            <li><strong>Verweis als Attribut:</strong> <code>Lehrer</code> erhält das Attribut <code>fach: Fach | None</code>, anfangs <code>None</code>. Warum: Die Beziehung entsteht erst später, und „kennen“ bedeutet im Code: einen Verweis auf das andere Objekt speichern.</li>
+            <li><strong>Beziehung herstellen:</strong> <code>schroeder.unterrichtet(ma)</code> speichert den Verweis auf das <em>vorhandene</em> Objekt <code>ma</code>. Es wird kein neues Fach erzeugt.</li>
+            <li><strong>Richtung beachten:</strong> Der Lehrer kennt das Fach, das Fach kennt den Lehrer nicht (gerichtete Assoziation, Pfeil zum Fach).</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> <code>schroeder.fach</code> verweist auf dasselbe Objekt wie <code>ma</code>.</p>
+        <p><strong>Kontrolle:</strong></p>
+        <table class="gitter">
+            <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+            <tr><td><code>print(Lehrer("Frau Kaya").fach)</code></td><td>None</td></tr>
+            <tr><td><code>print(schroeder.fach.titel)</code></td><td>Mathematik</td></tr>
+            <tr><td><code>print(schroeder.fach is ma)</code></td><td>True (Verweis, keine Kopie)</td></tr>
+        </table>
+            </details>
+        </div>
+
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: Warum steht bei <code>self.fach</code> ein Typ direkt am Attribut?</summary>
+            <p>
+                Wenn ein Attribut <strong>zunächst leer ist (z.&nbsp;B. <code>None</code>)</strong>, ist der Typ nicht automatisch klar. Mit <code>self.fach: Fach | None = None</code> erklärst du: „Hier soll später ein Objekt vom Typ <code>Fach</code> stehen – oder <code>None</code>, solange noch kein Fach zugewiesen wurde.“ Das hilft dir, der Entwicklungsumgebung und allen, die deinen Code lesen.
+            </p>
+        </details>
+    </div>
+
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: <code>is</code> oder <code>==</code>?</summary>
+            <p><code>a is b</code> ist genau dann <code>True</code>, wenn <code>a</code> und <code>b</code> auf <strong>dasselbe</strong> Objekt zeigen – im Speicherbild: Beide Pfeile enden im selben Kasten. <code>==</code> vergleicht dagegen den Inhalt. Nach <code>a = [1, 2]</code>, <code>b = a</code> und <code>c = [1, 2]</code> gilt <code>a is b</code> (dieselbe Liste), aber <code>a is c</code> ist <code>False</code> (zwei Listen mit gleichem Inhalt, <code>a == c</code> ist <code>True</code>).</p>
+        </details>
+    </div>
+
+<figure>
+        <img src="../img/assoziation.png" width="600" alt="UML-Diagramm: Assoziation zwischen Lehrer und Fach">
+        <figcaption>Abb. 1: Assoziation – Lehrkraft unterrichtet Fach</figcaption>
+    </figure>
+
+<p><strong>Merkmale:</strong> lose Verbindung; beide Objekte können auch unabhängig voneinander bestehen.</p>
+
+<p>Danach: <a href="uebungen.html#a-4-8-1">Aufgabe 4.8.1</a> – Typen ergänzen: Ein Spieler kennt sein Level.</p>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Aggregation und Komposition →</a></p>
+
+<hr>
+
+<h2 id="schritt-2">Schritt 2: Aggregation und Komposition – wer lebt wie lange?</h2>
+
+<p>Bei Aggregation und Komposition hat ein Ganzes Teile. Der Unterschied liegt in der Lebensdauer der Teile: Bei der Aggregation werden sie außerhalb erzeugt und dem Ganzen übergeben, bei der Komposition erzeugt das Ganze sie selbst. Achte im Video darauf, wie viele Pfeile auf ein Teil zeigen – und was passiert, wenn das Ganze mit <code>del</code> verschwindet. <code>del</code> ist neu und wird kurz erklärt.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-8-2_lebensdauer_vorschau.png" src="../vid/4-8-2_lebensdauer.mp4"></video><a href="../vid/4-8-2_lebensdauer.mp4">Video ansehen</a></div>
+        <figcaption>Video 2: Aggregation und Komposition – wer lebt wie lange? (ca. 2 min)</figcaption>
+    </figure>
+
+<h3>Zum Nachlesen: Aggregation – „hat, aber unabhängig“</h3>
+
+<p>Eine Aggregation bedeutet: Ein Objekt enthält andere Objekte, aber die enthaltenen Teile haben ein eigenes Leben. Sie werden meist außerhalb erzeugt und dem Ganzen übergeben.</p>
+
+<pre><code class="language-python">class Schueler:
+    def __init__(self, name: str):
+        self.name: str = name
+
+class Schulklasse:
+    def __init__(self, bezeichnung: str):
+        self.bezeichnung: str = bezeichnung
+        self.schueler_liste: list[Schueler] = []
+
+    def hinzufuegen(self, schueler: Schueler) -&gt; None:
+        self.schueler_liste.append(schueler)
+
+# Beispiel
+s1 = Schueler("Lina")
+s2 = Schueler("Jonas")
+klasse = Schulklasse("10a")
+klasse.hinzufuegen(s1)
+klasse.hinzufuegen(s2)</code></pre>
+
+<figure>
+        <img src="../img/aggregation.png" width="600" alt="UML-Diagramm: Aggregation zwischen Schulklasse und Schueler">
+        <figcaption>Abb. 2: Aggregation – Schulklasse enthält Schüler</figcaption>
+    </figure>
+
+<p><strong>Merkmale:</strong> Die Schulklasse enthält Schülerinnen und Schüler, aber diese existieren auch ohne die Klasse weiter (z.&nbsp;B. nach einem Klassenwechsel).</p>
+
+<h3>Zum Nachlesen: Komposition – „besteht aus, untrennbar“</h3>
+
+<p>Die Komposition beschreibt eine sehr starke Beziehung: Das enthaltene Objekt gehört fest zum Ganzen. Wird das Ganze zerstört, verschwindet auch das Teil. Den Code dazu findest du in Beispiel 2 bei Schritt 3.</p>
+
+<figure>
+        <img src="../img/komposition.png" width="600" alt="UML-Diagramm: Komposition zwischen Auto und Motor">
+        <figcaption>Abb. 3: Komposition – Auto besteht aus Motor</figcaption>
+    </figure>
+
+<p><strong>Merkmale:</strong> Der Motor gehört fest zum Auto und wird direkt darin erzeugt. Ohne Auto kein Motorobjekt.</p>
+
+<div class="hinweis">
+        <details>
+            <summary>Hinweis: Was macht <code>del</code> genau?</summary>
+            <p><code>del name</code> löscht nur den <strong>Namen</strong>, nicht unbedingt das Objekt. Nach <code>x = 5</code> und <code>del x</code> führt <code>x</code> zu einem <code>NameError</code>. Ein Objekt wird von Python erst freigegeben, wenn <strong>kein</strong> Verweis mehr darauf zeigt. Deshalb leben Lina und Jonas nach <code>del klasse</code> weiter (<code>s1</code> und <code>s2</code> zeigen noch auf sie), der Motor nach <code>del auto1</code> aber nicht (nur das Auto zeigte auf ihn).</p>
+        </details>
+    </div>
+
+<p>Danach: <a href="uebungen.html#a-4-8-2">Aufgabe 4.8.2</a> – Kursverwaltung: Beziehungen bestimmen und programmieren.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Vom Klassendiagramm zu Verweisen →</a></p>
+
+<hr>
+
+<h2 id="schritt-3">Schritt 3: Vom Klassendiagramm zu Verweisen</h2>
+
+<p>Pfeil, leere Raute, gefüllte Raute – im Code erkennst du die Beziehung an einer Frage: Wird ein vorhandenes Objekt übergeben, oder erzeugt das Ganze sein Teil selbst? Im Video siehst du eine typische Falle: eine „Komposition“, bei der der Motor von außen kommt. Achte im Speicherbild darauf, wie viele Pfeile auf den Motor zeigen.</p>
+
+<figure>
+        <div class="lp-video"><video controls preload="none" poster="../vid/4-8-3_klassendiagramm_vorschau.png" src="../vid/4-8-3_klassendiagramm.mp4"></video><a href="../vid/4-8-3_klassendiagramm.mp4">Video ansehen</a></div>
+        <figcaption>Video 3: Vom Klassendiagramm zu Verweisen (ca. 2 min)</figcaption>
+    </figure>
+
+<p>Zum Nachlesen: Beispiel 2 zeigt die Komposition Auto – Motor und die Falle aus dem Video.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Das Teil wird im Konstruktor des Ganzen erzeugt</summary>
+        <p><strong>Ausgangssituation:</strong> Eine Kfz-Werkstatt-Software verwaltet Autos. Jedes Auto hat genau einen Motor; ein Motor wird in dieser Software nie einzeln geführt, sondern nur als Teil seines Autos. Das Klassendiagramm (vgl. Abb. 3):</p>
+        <table class="gitter" aria-label="UML-Klassendiagramm Auto und Motor mit Komposition">
+            <tr><th>Auto</th><td rowspan="3" style="text-align: center; vertical-align: middle;">◆────────<br>besteht aus</td><th>Motor</th></tr>
+            <tr><td>+ marke: str<br>+ motor: Motor</td><td>+ typ: str<br>+ ps: int</td></tr>
+            <tr><td>+ __init__(marke: str, motor_typ: str, motor_ps: int)</td><td>+ __init__(typ: str, ps: int)</td></tr>
+        </table>
+        <pre><code class="language-python">class Motor:
+    def __init__(self, typ: str, ps: int):
+        self.typ: str = typ
+        self.ps: int = ps
+
+class Auto:
+    def __init__(self, marke: str, motor_typ: str, motor_ps: int):
+        self.marke: str = marke
+        self.motor: Motor = Motor(motor_typ, motor_ps)   # Teil entsteht mit dem Ganzen
+
+# Beispiel
+auto1 = Auto("BMW", "V6", 160)
+print(auto1.motor.ps)  # 160</code></pre>
+        <ol>
+            <li><strong>Ganzes-Teil-Beziehung erkennen:</strong> „Ein Auto besteht aus einem Motor“, und der Motor existiert in dieser Software nicht ohne Auto. Warum Komposition: Das Teil ist untrennbar an die Lebensdauer des Ganzen gebunden.</li>
+            <li><strong>Teil im Konstruktor erzeugen:</strong> <code>Auto.__init__</code> bekommt nur die <em>Daten</em> des Motors (<code>motor_typ</code>, <code>motor_ps</code>) und erzeugt das Motorobjekt selbst. Warum: Außerhalb des Autos gibt es dadurch keinen Verweis auf den Motor; verschwindet das Auto, ist auch der Motor nicht mehr erreichbar.</li>
+            <li><strong>Ablauf für <code>Auto("BMW", "V6", 160)</code>:</strong> Zuerst wird <code>marke = "BMW"</code> gesetzt, dann <code>Motor("V6", 160)</code> erzeugt und in <code>self.motor</code> gespeichert. <code>auto1.motor.ps</code> folgt dem Verweis vom Auto zum Motor und liefert 160.</li>
+            <li><strong>Falle – „Komposition“, die keine ist:</strong> Würde man den Motor außerhalb erzeugen und übergeben, könnten sich zwei Autos denselben Motor teilen:
+                <pre><code class="language-python">class Auto2:
+    def __init__(self, marke: str, motor: Motor):
+        self.marke: str = marke
+        self.motor: Motor = motor        # Teil kommt von außen
+
+m = Motor("V6", 160)
+a = Auto2("BMW", m)
+b = Auto2("Audi", m)                 # derselbe Motor in zwei Autos?!
+b.motor.ps = 200                     # "Tuning" an Auto b ...
+print(a.motor.ps)                    # 200 – ... verändert auch Auto a</code></pre>
+                Das ist höchstens eine Aggregation und widerspricht dem Modell. Bei echter Komposition hat jedes Ganze sein eigenes Teil.</li>
+        </ol>
+        <p><strong>Ergebnis:</strong> Ausgabe <code>160</code>. Jedes <code>Auto</code>-Objekt besitzt ein eigenes, nur über das Auto erreichbares <code>Motor</code>-Objekt.</p>
+        <p><strong>Kontrolle:</strong></p>
+        <table class="gitter">
+            <tr><th>Aufruf</th><th>erwartete Ausgabe</th></tr>
+            <tr><td><code>print(auto1.motor.typ)</code></td><td>V6</td></tr>
+            <tr><td><code>x = Auto("VW", "R4", 110); y = Auto("VW", "R4", 110); print(x.motor is y.motor)</code></td><td>False (zwei eigene Motoren)</td></tr>
+        </table>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-4-8-3">Aufgabe 4.8.3</a> – Computer-Modell mit Assoziation und Komposition.</p>
+
+<h2>Zusammenfassung: Beziehungen im Vergleich</h2>
+
+<table>
+        <thead>
+            <tr>
+                <th>Beziehung</th>
+                <th>Definition</th>
+                <th>Beispiel</th>
+                <th>Lebensdauer</th>
+                <th>Verbindung</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Assoziation</strong></td>
+                <td>Ein Objekt kennt ein anderes.</td>
+                <td>Lehrer kennt Fach</td>
+                <td>beide unabhängig</td>
+                <td>🔹 locker</td>
+            </tr>
+            <tr>
+                <td><strong>Aggregation</strong></td>
+                <td>Ein Objekt enthält andere – diese leben aber eigenständig weiter.</td>
+                <td>Schulklasse enthält Schüler</td>
+                <td>Teil lebt auch ohne Ganzes</td>
+                <td>🔸 mittel</td>
+            </tr>
+            <tr>
+                <td><strong>Komposition</strong></td>
+                <td>Ein Objekt besteht aus anderen – sie können nicht ohne es existieren.</td>
+                <td>Auto enthält Motor</td>
+                <td>Teil endet mit dem Ganzen</td>
+                <td>🔴 stark</td>
+            </tr>
+        </tbody>
+    </table>
+
+<div class="praxisbezug">
+        <details>
+            <summary>Praxisbezug: Beziehungen modellieren</summary>
+            <p>
+                <strong>Alltag:</strong> Ein Online-Warenkorb ist eine Komposition aus Positionen (löschst du den Warenkorb, verschwinden seine Positionen), er verweist aber nur per Assoziation auf die Produkte – die bleiben im Shop erhalten.<br><br>
+                <strong>Beruf:</strong> Die Entscheidung zwischen Aggregation und Komposition hat in echter Software Folgen: In Datenbanken entscheidet sie z.&nbsp;B., ob beim Löschen eines Kunden auch seine Bestellungen gelöscht werden („ON DELETE CASCADE“). Softwarearchitektinnen und -architekten legen das im UML-Modell fest, bevor programmiert wird.
+            </p>
+        </details>
+    </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+        <p>Beziehungen zeigen, wie stark zwei Objekte miteinander verbunden sind. Man unterscheidet:</p>
+        <ul>
+            <li><strong>Assoziation</strong> („kennt“): Ein Objekt kennt ein anderes; beide existieren unabhängig voneinander.</li>
+            <li><strong>Aggregation</strong> („hat“, Teile unabhängig): Ein Ganzes enthält Teile, die aber auch ohne das Ganze existieren. UML: Linie mit <strong>leerer</strong> Raute am Ganzen.</li>
+            <li><strong>Komposition</strong> („besteht aus“, untrennbar): Die Teile gehören fest zum Ganzen und existieren nicht ohne es. UML: Linie mit <strong>gefüllter</strong> Raute am Ganzen.</li>
+        </ul>
+    </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 1: Verweis oder neues Objekt? <span class="niveau">AFB I</span></summary>
+            <p>Nach <code>kaya = Lehrer("Frau Kaya")</code>, <code>ph = Fach("Physik")</code> und <code>kaya.unterrichtet(ph)</code>: Was gibt <code>print(kaya.fach.titel)</code> aus? Wie viele <code>Fach</code>-Objekte gibt es jetzt? Und was passiert bei <code>ph.lehrer</code>?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Ausgabe <code>Physik</code>. Es gibt genau ein Fach-Objekt: <code>unterrichtet</code> speichert nur einen Verweis, <code>kaya.fach is ph</code> ist <code>True</code>. <code>ph.lehrer</code> löst einen <code>AttributeError</code> aus – das Fach kennt die Lehrkraft nicht (gerichtete Assoziation).</p>
+            </details>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Kurz geprüft 2: Wer bleibt übrig? <span class="niveau">AFB I</span></summary>
+            <p>Ein <code>Haus</code> erzeugt in seinem Konstruktor mit <code>self.dach = Dach()</code> sein Dach. Eine <code>Garage</code> bekommt mit <code>garage.parken(a)</code> ein vorhandenes Auto <code>a</code>. Welche Beziehung liegt jeweils vor? Gibt es das Dach nach <code>del haus</code> noch, und das Auto nach <code>del garage</code>?</p>
+            <details class="loesung-details"><summary>Lösung zeigen</summary>
+            <p>Haus – Dach ist eine Komposition: Nur das Haus zeigt auf das Dach, nach <code>del haus</code> ist es nicht mehr erreichbar und verschwindet. Garage – Auto ist eine Aggregation: <code>a</code> zeigt weiter auf das Auto, es bleibt nach <code>del garage</code> erhalten.</p>
+            </details>
+        </details>
+    </div>

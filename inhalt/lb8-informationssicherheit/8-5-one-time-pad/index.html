@@ -1,0 +1,119 @@
+<p>Während des Kalten Krieges verband ein „heißer Draht“ Washington und Moskau. Die Nachrichten darüber wurden mit einem Verfahren verschlüsselt, das beweisbar nicht zu knacken ist: dem One-Time-Pad. Warum nutzt man es dann nicht überall? Das klärt diese Seite.</p>
+
+<div class="hinweis">
+            <details open>
+                <summary>Hinweis: Verwechslungsgefahr bei „OTP“</summary>
+                <p>Die Abkürzung OTP wird für zwei völlig verschiedene Dinge verwendet:</p>
+                <ul>
+                    <li><strong>One-Time-Pad</strong> (Einmalschlüssel-Verfahren): ein <em>Verschlüsselungsverfahren</em> – Thema dieser Seite.</li>
+                    <li><strong>One-Time Password</strong> (Einmalpasswort): ein <em>Anmeldecode</em>, der nur einmal gültig ist, z.&nbsp;B. aus einer Authenticator-App oder als TAN – Thema von 8.14.</li>
+                </ul>
+                <p>Im Kurs schreiben wir deshalb immer „One-Time-Pad“ bzw. „Einmalpasswort“ aus.</p>
+            </details>
+        </div>
+
+<p>Das <strong>One-Time-Pad</strong> ist ein symmetrisches Verschlüsselungsverfahren. Jedes Zeichen der Nachricht wird mit einem Zeichen des Schlüssels verknüpft – bei Buchstaben durch Addition modulo 26 (wie bei Vigenère), bei Bits durch XOR. Die Entschlüsselung erfolgt durch den umgekehrten Vorgang.</p>
+
+<h2>Einfaches Beispiel: Buchstaben modulo 26</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <h3>Schritt 1: Nachricht und Schlüssel</h3>
+            <ul>
+                <li><strong>Nachricht:</strong> INFO</li>
+                <li><strong>Schlüssel:</strong> Angenommen, unser zufällig erzeugter Schlüssel ist „XMCK“. Er ist genauso lang wie die Nachricht und wird nur dieses eine Mal verwendet.</li>
+            </ul>
+
+            <h3>Schritt 2: Umwandlung in Zahlen</h3>
+            <p>Jeder Buchstabe wird entsprechend seiner Position im Alphabet in eine Zahl umgewandelt (A&nbsp;=&nbsp;0, B&nbsp;=&nbsp;1, …, Z&nbsp;=&nbsp;25). In der Praxis arbeitet man mit den Bits der Daten, z.&nbsp;B. im ASCII- oder UTF-8-Code.</p>
+            <ul>
+                <li><strong>Nachricht:</strong> I(8) N(13) F(5) O(14)</li>
+                <li><strong>Schlüssel:</strong> X(23) M(12) C(2) K(10)</li>
+            </ul>
+
+            <h3>Schritt 3: Verschlüsselung</h3>
+            <p>Die Zahlen von Nachricht und Schlüssel werden addiert. Das Ergebnis wird modulo 26 gerechnet, um im Alphabet zu bleiben.</p>
+            <ul>
+                <li>I(8) + X(23) = 31, 31 mod 26 = 5 (F)</li>
+                <li>N(13) + M(12) = 25 (Z)</li>
+                <li>F(5) + C(2) = 7 (H)</li>
+                <li>O(14) + K(10) = 24 (Y)</li>
+            </ul>
+            <p><strong>Geheimtext:</strong> FZHY</p>
+
+            <h3>Schritt 4: Entschlüsselung</h3>
+            <p>Die Entschlüsselung erfolgt durch Subtraktion des Schlüssels vom Geheimtext. Bei negativen Ergebnissen addieren wir 26.</p>
+            <ul>
+                <li>F(5) − X(23) = −18, −18 + 26 = 8 (I)</li>
+                <li>Z(25) − M(12) = 13 (N)</li>
+                <li>H(7) − C(2) = 5 (F)</li>
+                <li>Y(24) − K(10) = 14 (O)</li>
+            </ul>
+            <p><strong>Entschlüsselter Text:</strong> INFO</p>
+            </details>
+        </div>
+
+<h2>Komplexeres Beispiel: Bits mit XOR</h2>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p>Die Nachricht „HI“ hat im ASCII-Code die Bytes 0x48 und 0x49. Der zufällige Schlüssel besteht aus den Bytes 0xA7 und 0x3C. XOR ergibt 1, wenn die beiden Bits verschieden sind:</p>
+            <pre>           H          I
+Nachricht: 01001000   01001001
+Schlüssel: 10100111   00111100
+XOR:       11101111   01110101   = 0xEF 0x75 (Geheimtext)</pre>
+            <p>Zum Entschlüsseln verknüpft man den Geheimtext noch einmal mit demselben Schlüssel: 11101111 XOR 10100111 = 01001000 = H. Das funktioniert, weil (m XOR k) XOR k = m gilt.</p>
+            <p><strong>Warum „nur einmal“?</strong> Verschlüsselt man zwei Nachrichten m₁ und m₂ mit demselben Schlüssel k, gilt c₁ XOR c₂ = m₁ XOR m₂. Der Schlüssel fällt heraus, und ein Angreifer kann aus der Verknüpfung zweier Klartexte oft beide rekonstruieren. Genau so entschlüsselten US-Kryptoanalytiker im Venona-Projekt sowjetische Nachrichten, bei denen Schlüsselblöcke mehrfach benutzt worden waren.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: One-Time-Pad im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Moderne Stromchiffren wie ChaCha20 (z.&nbsp;B. in Signal und bei HTTPS auf Smartphones) funktionieren wie ein One-Time-Pad: Die Daten werden per XOR mit einem Schlüsselstrom verknüpft. Der Schlüsselstrom ist aber nicht echt zufällig, sondern wird aus einem kurzen Schlüssel berechnet. Das ist nicht perfekt, aber praktisch sicher – und der Schlüssel passt auf jedes Handy. Nicht verwechseln: Der sechsstellige Code in deiner Authenticator-App ist ein Einmalpasswort, kein One-Time-Pad.
+                </p>
+                <p>
+                    <strong>Beruf:</strong> One-Time-Pads werden nur dort eingesetzt, wo die Schlüsselübergabe organisiert werden kann, etwa im diplomatischen und militärischen Bereich. Physikerinnen und Informatiker forschen an der Quantenschlüsselverteilung (QKD), mit der sich lange Zufallsschlüssel abhörsicher erzeugen lassen; in Deutschland bündelt z.&nbsp;B. die Initiative QuNET solche Projekte.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Bedingungen für das One-Time-Pad:</strong> Der Schlüssel muss
+            </p>
+            <ol>
+                <li><strong>echt zufällig</strong> sein,</li>
+                <li><strong>mindestens so lang</strong> wie die Nachricht sein,</li>
+                <li>nur ein <strong>einziges Mal</strong> verwendet und danach vernichtet werden,</li>
+                <li><strong>geheim</strong> bleiben und vorab sicher zum Empfänger gelangen.</li>
+            </ol>
+            <p>
+                Sind alle vier Bedingungen erfüllt, ist das Verfahren <strong>perfekt sicher</strong> (Claude Shannon, 1949): Der Geheimtext verrät nichts über den Klartext, weil zu jedem Geheimtext jeder Klartext gleicher Länge mit einem passenden Schlüssel gehört. Wird eine Bedingung verletzt, geht die Sicherheit verloren.
+            </p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>Warum das One-Time-Pad kaum genutzt wird:</strong> Man braucht so viel geheimes Schlüsselmaterial wie Nachrichten und muss es vorher sicher übergeben. Damit verschiebt sich das Problem nur: Könnte man den Schlüssel sicher übertragen, könnte man gleich die Nachricht übertragen.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 8.5.1: Ein Geheimtext – viele Klartexte <span class="niveau">AFB II</span></summary>
+                <p>Der Geheimtext MHOAYU wurde mit dem Vigenère-Verfahren verschlüsselt.</p>
+                <ol type="a">
+                    <li>Zeige, dass sich sowohl der Klartext SCHULE als auch der Klartext PAUSEN in den Geheimtext überführen lassen.</li>
+                    <li>Ermittle einen weiteren sinnvollen Klartext, der sich aus dem Geheimtext rekonstruieren lässt.</li>
+                    <li>Leite eine Schlussfolgerung zur Sicherheit des Vigenère-Verfahrens ab, wenn ein Schlüssel verwendet wird, der die gleiche Länge wie der Klartext hat.</li>
+                </ol>
+            </details>
+        </div>

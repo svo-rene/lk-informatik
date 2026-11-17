@@ -1,0 +1,27 @@
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.1.4: Partition beim Fahrradverleih <span class="niveau">AFB II</span></summary>
+                <p>Ein Dresdner Fahrradverleih betreibt seine App-Datenbank auf zwei Knoten: N (Neustadt) und A (Altstadt). Über die App
+                   kann man ein Rad für 15 Minuten <em>reservieren</em>. In der CP-Konfiguration ist N der Primärknoten: Nur er nimmt
+                   Reservierungen an, und ein Knoten beantwortet Anfragen nur, wenn er Verbindung zu N hat. Rad 17 ist frei.
+                   Um 14:00 Uhr fällt die Verbindung zwischen N und A aus, um 14:12 Uhr ist sie wieder da.</p>
+                <table class="gitter">
+                    <tr><th>Zeit</th><th>Ereignis</th></tr>
+                    <tr><td>14:02</td><td>Lea fragt über Knoten N: „Ist Rad 17 frei?“</td></tr>
+                    <tr><td>14:03</td><td>Lea reserviert Rad 17 über Knoten N.</td></tr>
+                    <tr><td>14:05</td><td>Tom fragt über Knoten A: „Ist Rad 17 frei?“</td></tr>
+                    <tr><td>14:06</td><td>Tom will Rad 17 über Knoten A reservieren.</td></tr>
+                    <tr><td>14:12</td><td>Die Verbindung ist wieder da, die Knoten gleichen sich ab.</td></tr>
+                </table>
+                <ol>
+                    <li>Gib für jedes Ereignis an, wie ein CP-System und wie ein AP-System reagiert.</li>
+                    <li>Beschreibe, welcher Konflikt um 14:12 Uhr im AP-System aufgelöst werden muss, und schlage eine Regel zur
+                        Konfliktauflösung vor.</li>
+                    <li>Entscheide begründet, ob der Verleih für die Funktionen „Rad reservieren“ und „Karte mit freien Rädern anzeigen“
+                        jeweils CP oder AP wählen sollte.</li>
+                </ol>
+                <p class="tipp">Gehe vor wie in Beispiel 2: Frage bei jeder Funktion nach dem schlimmsten Fall einer veralteten Antwort.</p>
+            </details>
+        </div>

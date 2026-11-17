@@ -1,0 +1,34 @@
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+              <details>
+                  <summary>
+                      Aufgabe 1.1.3: Datenimport an der Grundschule <span class="niveau">AFB II</span>
+                  </summary>
+                  <p>Eine Grundschule übernimmt ihre Daten in eine neue Datenbank. Unterstrichen ist jeweils der Primärschlüssel;
+                     <code>KlassenNr</code> in <code>Kind</code> ist ein Fremdschlüssel auf <code>Klasse</code>.</p>
+                  <table>
+                      <thead><tr><th colspan="2">Klasse</th></tr><tr><th><u>KlassenNr</u></th><th>Bezeichnung</th></tr></thead>
+                      <tbody>
+                          <tr><td>1</td><td>1a</td></tr>
+                          <tr><td>2</td><td>1b</td></tr>
+                          <tr><td>3</td><td>2a</td></tr>
+                      </tbody>
+                  </table>
+                  <table>
+                      <thead><tr><th colspan="3">Kind</th></tr><tr><th><u>KindNr</u></th><th>Name</th><th>KlassenNr</th></tr></thead>
+                      <tbody>
+                          <tr><td>10</td><td>Ida</td><td>1</td></tr>
+                          <tr><td>11</td><td>Jon</td><td>4</td></tr>
+                          <tr><td>12</td><td>Kim</td><td>2</td></tr>
+                          <tr><td>12</td><td>Lou</td><td>3</td></tr>
+                          <tr><td>14</td><td>Mo</td><td>NULL</td></tr>
+                      </tbody>
+                  </table>
+                  <ol>
+                      <li>Prüfe beide Tabellen auf Verstöße gegen die Entitätsintegrität und die referenzielle Integrität. Nenne jeden Verstoß mit der betroffenen Zeile.</li>
+                      <li>Beurteile den Eintrag bei Mo: Ist ein fehlender Fremdschlüsselwert ein Verstoß? Unter welcher Bedingung wäre er einer?</li>
+                      <li>Die Schule löst die Klasse 1b auf und löscht die Zeile mit KlassenNr 2. Welche neue Verletzung entsteht, und wie hätte man sie vermeiden können?</li>
+                  </ol>
+              </details>
+          </div>

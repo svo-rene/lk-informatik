@@ -1,0 +1,156 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Den kleinsten offenen Knoten finden <span class="niveau">AFB I</span></summary>
+                <p>Was geben die beiden <code>print</code>-Anweisungen aus? Überlege erst, dann probiere es in Thonny aus.</p>
+                <pre><code class="language-python">dist = {"A": 0, "B": 3, "C": 2, "D": 8}
+fertig = ["A"]
+u = None
+for k in dist:
+    if k not in fertig:
+        if u is None or dist[k] &lt; dist[u]:
+            u = k
+print(u)
+print(float("inf") + 1 &gt; 1000000)</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>C</code> – A ist schon fertig und wird übersprungen; unter B (3), C (2) und D (8) hat C die kleinste Distanz. <code>u is None</code> sorgt dafür, dass der erste offene Knoten genommen wird. <code>True</code> – unendlich plus 1 bleibt unendlich und ist größer als jede Zahl.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Wie oft wird gesucht? <span class="niveau">AFB II</span></summary>
+                <p>Beim Aufruf <code>dijkstra(graph, "A", dist, vorgaenger)</code> aus Beispiel 2: Wie oft wird die <code>while</code>-Schleife durchlaufen, und wie viele Knoten sieht die Suche nach dem kleinsten offenen Knoten jedes Mal an? Was folgt daraus für die Laufzeit bei n Knoten?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Die <code>while</code>-Schleife läuft 5-mal, einmal für jeden Knoten. Die Suche geht jedes Mal mit <code>for k in graph</code> alle 5 Knoten durch, zusammen also 5 · 5 = 25 Schritte. Bei n Knoten sind es n · n Schritte – diese Fassung liegt in O(n²). Das passt zur Messreihe in Aufgabe 3.9.5.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-9-1">
+            <details>
+                <summary>Aufgabe 3.9.1: Dijkstra von Hand <span class="niveau">AFB I</span></summary>
+                <p>Ein ungerichteter Graph hat die Kanten S–A (7), S–B (3), A–B (2), A–Z (1), B–Z (8). Bestimme mit dem Dijkstra-Algorithmus in einer Tabelle die kürzesten Distanzen von S aus und den kürzesten Weg nach Z.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-9-2">
+            <details>
+                <summary>Aufgabe 3.9.2: Weg rekonstruieren <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/dijkstra.py</code> – weiterführen<br><strong>Commits:</strong> wenn es läuft: <code>3.9.2: weg(vorgaenger, ziel) ergänzt, Weg nach E stimmt</code></p>
+                <p>Die Funktion <code>dijkstra</code> liefert neben den Distanzen ein Dictionary <code>vorgaenger</code>. Schreibe eine Funktion <code>weg(vorgaenger, ziel)</code>, die daraus den Weg vom Start zum Ziel als Liste zurückgibt, und teste sie für E im komplexeren Beispiel.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-9-3">
+            <details>
+                <summary>Aufgabe 3.9.3: Verfahren beurteilen <span class="niveau">AFB III</span></summary>
+                <ol>
+                    <li>Ein Lieferdienst bekommt für bestimmte Straßen eine Prämie, die als negatives Gewicht eingetragen wird. Beurteile, ob der Dijkstra-Algorithmus weiterhin eingesetzt werden kann.</li>
+                    <li>Erkläre, warum in einem ungerichteten Graphen mit einer negativen Kante kein kürzester Weg existiert, wenn diese Kante erreichbar ist.</li>
+                    <li>Ein Navi soll die Route mit den wenigsten Abbiegevorgängen finden. Beschreibe, wie man das Problem mit einem der bekannten Verfahren lösen kann.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="primm">Code lesen, untersuchen, abwandeln</h2>
+
+<p>Bevor du selbst programmierst, liest du fertigen Code und findest heraus, was er tut: <strong>Vorhersagen</strong> (auf Papier, ohne Rechner) → <strong>Ausführen</strong> → <strong>Untersuchen</strong> mit dem Debugger → <strong>Abwandeln</strong> → <strong>Fehler finden</strong>. Rechne mit etwa 25 Minuten. Wie der Debugger funktioniert, zeigen der Kasten „So debuggst du in Thonny“ und das Video auf Kursseite 3.4.</p>
+
+<div class="aufgabe" id="primm-3-9">
+            <details open>
+                <summary>PRIMM 3.9: Dijkstra beim Arbeiten zusehen <span class="niveau">AFB I–II</span></summary>
+                <p class="git-datei"><strong>Dateien:</strong> <a href="../material/primm_3-9_raetsel.py" download>primm_3-9_raetsel.py</a> und <a href="../material/primm_3-9_fehler.py" download>primm_3-9_fehler.py</a> in <code>3_graphen/</code> speichern – erst nach Schritt 1 öffnen.</p>
+                <p><strong>1 Vorhersagen</strong> (Papier, ohne Rechner): Welche Entfernungen und Vorgänger gibt das Programm aus? Rechne Dijkstra von Hand mit einer Tabelle.</p>
+                <pre><code class="language-python">graph = {
+    &quot;S&quot;: {&quot;A&quot;: 5, &quot;B&quot;: 1},
+    &quot;A&quot;: {&quot;S&quot;: 5, &quot;B&quot;: 2, &quot;Z&quot;: 1},
+    &quot;B&quot;: {&quot;S&quot;: 1, &quot;A&quot;: 2, &quot;Z&quot;: 6},
+    &quot;Z&quot;: {&quot;A&quot;: 1, &quot;B&quot;: 6},
+}
+
+
+# dijkstra wie auf dieser Seite (Beispiel 2)
+dist = {}
+vorgaenger = {}
+dijkstra(graph, &quot;S&quot;, dist, vorgaenger)
+print(dist)
+print(vorgaenger)</code></pre>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p><code>{'S': 0, 'A': 3, 'B': 1, 'Z': 4}</code> und <code>{'S': None, 'A': 'B', 'B': 'S', 'Z': 'A'}</code>. Fertig werden nacheinander S (0), B (1), A (3), Z (4). Der kürzeste Weg nach Z ist S → B → A → Z.</p></details>
+                <p><strong>2 Ausführen:</strong> Öffne <code>primm_3-9_raetsel.py</code> in Thonny, starte mit <kbd>F5</kbd> und vergleiche mit deiner Vorhersage.</p>
+                <p><strong>3 Untersuchen</strong> mit dem Debugger (<kbd>Strg</kbd>&nbsp;+&nbsp;<kbd>F5</kbd>):</p>
+                <ol><li>In welcher Reihenfolge werden die Knoten fertig?</li><li>Was steht in <code>dist</code>, direkt nachdem B fertig geworden ist und seine Nachbarn relaxiert hat?</li><li>Zweimal wird eine schon eingetragene Distanz durch eine kleinere ersetzt. Bei welchen Knoten, und von welchem Wert auf welchen?</li></ol>
+                <details class="loesung-details"><summary>Lösung zeigen</summary><p>1. S, B, A, Z. 2. <code>{'S': 0, 'A': 3, 'B': 1, 'Z': 7}</code>. 3. Bei A von 5 (direkt von S) auf 3 (über B) und bei Z von 7 (über B) auf 4 (über A).</p></details>
+                <p><strong>4 Abwandeln:</strong></p>
+                <ol type="a"><li>Ergänze <code>dijkstra</code> um eine Ausgabe: Nach jedem Schritt soll eine Zeile erscheinen mit dem Knoten, der gerade fertig wurde, und dem aktuellen <code>dist</code> – also eine Zeile deiner Tabelle aus Schritt 1.</li><li>Schreibe <code>dijkstra_bis(graph, start, ziel)</code>, die aufhört, sobald das Ziel fertig ist, und nur dessen Entfernung zurückgibt. Warum darf man an dieser Stelle aufhören?</li></ol>
+                <p><strong>5 Fehler finden:</strong> Diese Fassung liefert für A die Entfernung 2 und für Z sogar 1. Gehe im Debugger zu dem Moment, in dem <code>dist['A']</code> geändert wird: Welche Zahl wird eingetragen, und welche müsste es sein? Korrigiere den Fehler.</p>
+                <pre><code class="language-python">def dijkstra(graph, start, dist):
+    for k in graph:
+        dist[k] = float("inf")
+    dist[start] = 0
+    fertig = []
+    while len(fertig) &lt; len(graph):
+        u = None
+        for k in graph:
+            if k not in fertig:
+                if u is None or dist[k] &lt; dist[u]:
+                    u = k
+        fertig.append(u)
+        for v in graph[u]:
+            w = graph[u][v]
+            if v not in fertig and w &lt; dist[v]:
+                dist[v] = w</code></pre>
+                <p>Lösungen zu Schritt 4 und 5 stehen in der Musterlösung.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe" id="a-3-9-4">
+            <details>
+                <summary>Aufgabe 3.9.4: Lieferfahrten in Mittelsachsen <span class="niveau">AFB II</span></summary>
+                <p>Ein Lieferdienst startet in Dresden (DD). Die Fahrzeiten in Minuten (vereinfacht) betragen: DD–Meißen (MEI) 30, DD–Freiberg (FG) 40, DD–Pirna (PIR) 25, MEI–FG 35, MEI–Chemnitz (C) 70, FG–C 35, PIR–FG 55, MEI–Döbeln (DL) 35, DL–C 40, FG–DL 40. Alle Straßen können in beide Richtungen befahren werden.</p>
+                <ol>
+                    <li>Zeichne den Graphen.</li>
+                    <li>Bestimme mit dem Dijkstra-Algorithmus die kürzesten Fahrzeiten von Dresden zu allen Orten. Notiere alle Schritte in einer Tabelle mit „Distanz / Vorgänger“ wie in Beispiel 2.</li>
+                    <li>Gib die schnellste Route nach Chemnitz an und mache die Probe.</li>
+                    <li>Der Fahrer meint: „Über Meißen nach Chemnitz ist besser, die Strecke MEI–C ist doch direkt.“ Nimm mithilfe deiner Tabelle Stellung.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-9-5">
+            <details>
+                <summary>Aufgabe 3.9.5: Laufzeit und Speicherbedarf hochrechnen <span class="niveau">AFB II–III</span></summary>
+                <p>Ein Verkehrsverbund testet eine Dijkstra-Implementierung, die den Graphen als Adjazenzmatrix speichert und in jedem Schritt den offenen Knoten mit der kleinsten Distanz durch Durchsuchen aller Knoten bestimmt. Gemessen wurden (gerundet):</p>
+                <table>
+                    <thead><tr><th>Knoten n</th><th>1 000</th><th>2 000</th><th>4 000</th><th>8 000</th></tr></thead>
+                    <tbody>
+                        <tr><td>Laufzeit in s</td><td>0,12</td><td>0,48</td><td>1,92</td><td>7,68</td></tr>
+                        <tr><td>Speicher der Matrix in MB</td><td>8</td><td>32</td><td>128</td><td>512</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Bestimme aus den Quotienten aufeinanderfolgender Messwerte, wie Laufzeit und Speicherbedarf mit n wachsen. Gib die Komplexitätsklassen an und begründe sie mit dem Algorithmus.</li>
+                    <li>Gib je eine Formel der Form <code>c · n<sup>k</sup></code> an und rechne hoch: Wie lange dauert eine Anfrage und wie viel Speicher braucht die Matrix für das Straßennetz von Sachsen mit 100 000 Kreuzungen?</li>
+                    <li>Wie viele Knoten kann das Verfahren höchstens verarbeiten, wenn eine Anfrage höchstens 1 s dauern darf bzw. der Rechner 16 GB Arbeitsspeicher hat?</li>
+                    <li>Eine zweite Fassung mit Adjazenzliste und einer Prioritätswarteschlange (einer Datenstruktur, die den kleinsten offenen Knoten ohne Durchsuchen aller Knoten liefert) braucht für 8 000 Knoten 0,042 s; jede Kreuzung hat im Mittel 3 Nachbarn. Ihre Laufzeit wächst etwa wie n · log<sub>2</sub> n. Rechne auf 100 000 Knoten hoch und beurteile, welche Fassung der Verkehrsverbund einsetzen sollte.</li>
+                </ol>
+                <p class="tipp">1 MB = 10<sup>6</sup> Byte, 1 GB = 10<sup>9</sup> Byte. log<sub>2</sub> 8 000 ≈ 12,97 und log<sub>2</sub> 100 000 ≈ 16,61.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-9-7">
+            <details>
+                <summary>Aufgabe 3.9.7: Moore mit negativem Gewicht <span class="niveau">AFB II</span></summary>
+                <p>Ein gerichteter Graph hat die Kanten S→A (4), S→B (6), B→A (−3), A→C (2) und B→C (4). Die Kanten werden in jeder Runde in dieser Reihenfolge relaxiert: A→C, B→A, B→C, S→A, S→B.</p>
+                <ol>
+                    <li>Führe den Algorithmus von Moore (Bellman-Ford) mit Start S aus. Notiere nach jeder Runde den Stand „Distanz / Vorgänger“ in einer Tabelle.</li>
+                    <li>Begründe, wie viele Runden höchstens nötig sind und woran du erkennst, dass es keinen negativen Zyklus gibt.</li>
+                    <li>Zeige mit einer Dijkstra-Tabelle, dass Dijkstra hier für A und C falsche Werte liefert.</li>
+                    <li>Beurteile, ob eine günstigere Reihenfolge der Kanten das Ergebnis oder nur die Zahl der Runden ändert.</li>
+                </ol>
+            </details>
+        </div>

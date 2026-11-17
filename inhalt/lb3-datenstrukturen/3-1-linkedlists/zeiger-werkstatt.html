@@ -1,0 +1,907 @@
+<style>
+            /* nur für die Werkstatt auf dieser Seite */
+            /* Breite setzt das Skript (breiteAnpassen): breiter als die Textspalte, damit 5 Knoten ohne Scrollen passen */
+            .zw { display: flex; height: 620px; border: 1px solid #c7d2fe; border-radius: 8px; overflow: hidden; background: #f4f5f7; margin: 1.25rem 0; line-height: 1.35; }
+            .zw-panel { width: 250px; flex: none; padding: 10px; background: #fff; border-right: 1px solid #c9ced8; overflow: auto; font-size: 0.86rem; }
+            .zw-panel h3 { margin: 12px 0 5px; font-size: 0.9rem; border-bottom: 1px solid #e2e2e2; color: #1d4ed8; }
+            .zw-panel button { font: inherit; margin: 2px 0; padding: 5px 7px; min-height: 34px; width: 100%; text-align: left; border: 1px solid #c9ced8; border-radius: 6px; background: #fff; cursor: pointer; }
+            .zw-panel button:hover { border-color: #1d4ed8; }
+            .zw-panel button.haupt { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+            .zw-panel button:disabled { opacity: 0.4; cursor: default; }
+            .zw-panel input, .zw-panel select { font: inherit; width: 100%; padding: 4px; margin: 2px 0; border: 1px solid #c9ced8; border-radius: 4px; }
+            .zw-panel label { display: block; margin-top: 4px; }
+            .zw-zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4px; }
+            .zw-modus { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 6px; }
+            .zw-modus button { text-align: center; }
+            .zw-modus button.an { background: #1d4ed8; color: #fff; border-color: #1d4ed8; font-weight: bold; }
+            .zw-auftrag { background: #fff7e6; border-left: 3px solid #b45309; border-radius: 4px; padding: 6px 8px; margin: 4px 0; }
+            .zw-auftrag:empty { display: none; }
+            .zw-klein { font-size: 0.8rem; color: #555; }
+            .zw-wrap { flex: 1; position: relative; overflow: auto; }
+            .zw-wrap svg { display: block; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+            .zw-meldung { position: sticky; left: 0; bottom: 0; margin: 0 10px 10px; padding: 7px 11px; border-radius: 6px; display: none; font-size: 0.9rem; }
+            .zw-meldung.warn { display: block; background: #fdeceb; border: 1px solid #d64545; color: #5c1414; }
+            .zw-meldung.info { display: block; background: #eaf1fd; border: 1px solid #1d64d8; color: #123; }
+            .zw-meldung.ok { display: block; background: #e9f9ee; border: 1px solid #2f9e57; color: #12361f; }
+            .zw svg text { font-size: 13px; font-family: Consolas, monospace; }
+            .zw .node, .zw .zeiger { cursor: grab; }
+            .zw .node rect.kasten { fill: #fff; stroke: #234; stroke-width: 1.6; }
+            .zw .node.verloren rect.kasten { fill: #ffe3e3; stroke: #c00; stroke-dasharray: 6 4; }
+            .zw .node.gewaehlt rect.kasten, .zw .zeiger.gewaehlt rect { stroke: #e80; stroke-width: 3; }
+            .zw .zeiger rect { fill: #2a6; stroke: #164; }
+            .zw .zeiger text { fill: #fff; font-weight: bold; }
+            .zw .port { fill: #58a; stroke: #fff; stroke-width: 1.5; cursor: crosshair; }
+            .zw .port:hover { fill: #e80; }
+            .zw .portHit { fill: transparent; stroke: none; cursor: crosshair; }
+            .zw .kante { fill: none; stroke: #234; stroke-width: 1.6; }
+            .zw .zkante { fill: none; stroke: #2a6; stroke-width: 2; }
+            @media (max-width: 760px) {
+                .zw { flex-direction: column; height: auto; }
+                .zw-panel { width: 100%; max-height: 300px; border-right: 0; border-bottom: 1px solid #c9ced8; }
+                .zw-wrap { height: 460px; flex: none; }
+            }
+            @media print { .zw-panel, .zw-meldung { display: none !important; } .zw { border: 0; height: auto; } }
+        </style>
+<p>Verkettete Listen, Schlangen, Stapel und Bäume bestehen aus Knoten, die über Verweise verbunden sind. In der Werkstatt legst du solche Knoten an und hängst die Verweise mit der Maus oder dem Finger um, so wie es der Python-Code Zeile für Zeile tut. Die Werkstatt zeigt dir sofort, wenn ein Knoten von keiner Variablen mehr erreichbar ist. Im Modus <strong>Felder</strong> siehst du, was beim Anfügen an eine Python-Liste im Speicher passiert, wenn die Kapazität nicht mehr reicht.</p>
+
+        <div class="merke">
+            <p>
+                <strong>Erreichbarkeit:</strong> Ein Knoten ist nur so lange nutzbar, wie eine Variable oder ein Verweis eines anderen erreichbaren Knotens auf ihn zeigt. Zeigt nichts mehr auf ihn, kommt man nie wieder an ihn heran, und Python räumt ihn weg.<br>
+                <strong>Reihenfolge beim Umhängen:</strong> Erst den neuen Verweis setzen, der den Rest festhält, dann den alten Verweis umlegen.
+            </p>
+        </div>
+
+        <h2>So bedienst du die Werkstatt</h2>
+        <ul>
+            <li><strong>Übung wählen:</strong> Oben links wählst du eine Übung zu einer Kursseite. Der Auftrag steht darunter. Mit <strong>Prüfen</strong> bekommst du eine Rückmeldung.</li>
+            <li><strong>Verweis setzen:</strong> Ziehe vom blauen Punkt eines Feldes (zum Beispiel <code>next</code>) oder vom Punkt einer grünen Variablen auf einen Knoten. Ziehst du auf eine leere Fläche, wird der Verweis <code>None</code>.</li>
+            <li><strong>Neuer Knoten:</strong> Ein neuer Knoten kommt immer in eine Variable, so wie <code>neu = Node(5)</code>. Den Namen der Variablen kannst du ändern.</li>
+            <li><strong>Rückgängig:</strong> In Python ist ein verlorener Knoten endgültig weg. Hier kannst du einen Fehler rückgängig machen und es noch einmal versuchen.</li>
+            <li><strong>Verschieben:</strong> Knoten und Variablen kannst du an eine andere Stelle ziehen. „Als Liste anordnen“ und „Als Baum anordnen“ räumen die Zeichnung auf.</li>
+        </ul>
+
+        <figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/zw-1_bedienung_vorschau.png" src="../vid/zw-1_bedienung.mp4"></video><a href="../vid/zw-1_bedienung.mp4">Video ansehen</a></div>
+            <figcaption>Video: So löst du eine Aufgabe zu Feldern und eine zu Zeigern in der Werkstatt (1 min) – Das Video hat keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+        <h2 id="werkstatt">Die Werkstatt</h2>
+
+        <div class="zw" id="zw">
+            <div class="zw-panel">
+                <div class="zw-modus"><button type="button" id="zw-modusZ" class="an">Zeiger</button><button type="button" id="zw-modusF">Felder</button></div>
+
+                <div id="zw-zeigerPanel">
+                    <label for="zw-uebung"><strong>Übung</strong></label>
+                    <select id="zw-uebung"></select>
+                    <div class="zw-auftrag" id="zw-auftrag"></div>
+                    <div class="zw-zwei"><button type="button" class="haupt" id="zw-pruefen">Prüfen</button><button type="button" id="zw-neustart">Neu starten</button></div>
+
+                    <h3>Aufbau</h3>
+                    <label for="zw-typ">Art des Knotens</label>
+                    <select id="zw-typ">
+                        <option value="liste">Node (data, next)</option>
+                        <option value="baum">Knoten (wert, links, rechts)</option>
+                        <option value="kinder">Knoten (wert, kinder)</option>
+                    </select>
+                    <div class="zw-zwei">
+                        <label>Wert <input id="zw-wert" value="5"></label>
+                        <label>Variable <input id="zw-varname" value="neu"></label>
+                    </div>
+                    <button type="button" id="zw-neuNode">+ Neuer Knoten in Variable</button>
+                    <button type="button" id="zw-neuVar">+ Neue Variable (zeigt auf None)</button>
+
+                    <h3>Werkzeuge</h3>
+                    <button type="button" id="zw-undo">↶ Rückgängig</button>
+                    <div class="zw-zwei"><button type="button" id="zw-layoutListe">Als Liste anordnen</button><button type="button" id="zw-layoutBaum">Als Baum anordnen</button></div>
+                    <button type="button" id="zw-delVar">Gewählte Variable löschen</button>
+                    <button type="button" id="zw-aufraeumen">Unerreichbare Knoten wegräumen</button>
+                    <button type="button" id="zw-alles">Alles leeren</button>
+
+                    <h3>Speichern</h3>
+                    <div class="zw-zwei"><button type="button" id="zw-expJson">JSON speichern</button><button type="button" id="zw-impJson">JSON laden</button></div>
+                    <div class="zw-zwei"><button type="button" id="zw-expPng">Bild (PNG)</button><button type="button" id="zw-expPdf">Drucken / PDF</button></div>
+                    <input type="file" id="zw-datei" accept=".json,application/json" style="display:none">
+                </div>
+
+                <div id="zw-feldPanel" style="display:none">
+                    <label for="zw-fStart"><strong>Start</strong></label>
+                    <select id="zw-fStart">
+                        <option value="6-6">Länge 6, Kapazität 6 (voll)</option>
+                        <option value="6-8">Länge 6, Kapazität 8</option>
+                        <option value="0-1">leer, Kapazität 1</option>
+                    </select>
+                    <button type="button" id="zw-fReset">Zurücksetzen</button>
+                    <p class="zw-klein">Einfaches Modell: Ist die Kapazität erschöpft, wird ein doppelt so großes Feld an einer anderen Speicherstelle angelegt und alles umkopiert (Umzug).</p>
+                    <label>Wert <input id="zw-fWert" value="7"></label>
+                    <button type="button" class="haupt" id="zw-fAnfuegen">Hinten anfügen (append)</button>
+                    <div class="zw-zwei"><label>Anzahl <input id="zw-fAnzahl" type="number" min="1" max="64" value="16"></label><button type="button" id="zw-fViele" style="margin-top:22px">× hinten anfügen</button></div>
+                    <button type="button" id="zw-fVorne">Vorne einfügen (insert(0, …))</button>
+                    <button type="button" id="zw-fLoeschen">Vorne löschen (pop(0))</button>
+                    <label style="margin-top:6px"><input type="checkbox" id="zw-fSchritt" style="width:auto"> Schritt für Schritt</label>
+                    <button type="button" id="zw-fWeiter" disabled>Weiter ▶</button>
+
+                    <h3>Zähler</h3>
+                    <div>Länge: <b id="zw-fLaenge">6</b>, Kapazität: <b id="zw-fKap">6</b></div>
+                    <div>Umzüge: <b id="zw-fUmzuege">0</b>, dabei kopiert: <b id="zw-fKopiert">0</b> Elemente</div>
+                    <div>Zugriffe insgesamt: <b id="zw-fZugriffe">0</b></div>
+                    <div>bei der letzten Aktion: <b id="zw-fLetzte">0</b></div>
+                    <div>Anfügungen hinten: <b id="zw-fAnz">0</b>, dafür Zugriffe: <b id="zw-fZA">0</b></div>
+                    <div>Durchschnitt je Anfügen: <b id="zw-fDS">–</b></div>
+                    <p class="zw-klein">Ein Zugriff ist ein Lesen oder Schreiben eines Platzes. Kopieren eines Elements kostet also 2 Zugriffe.</p>
+                </div>
+            </div>
+            <div class="zw-wrap" id="zw-wrap">
+                <svg id="zw-svg" xmlns="http://www.w3.org/2000/svg" width="600" height="560" aria-label="Zeichenfläche der Zeiger-Werkstatt"><defs>
+                    <marker id="zw-pf" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6z" fill="#234"/></marker>
+                    <marker id="zw-pz" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6z" fill="#2a6"/></marker>
+                </defs><g id="zw-kanten"></g><g id="zw-nodes"></g><g id="zw-feld" style="display:none"></g><line id="zw-gummi" stroke="#e80" stroke-width="2" stroke-dasharray="4 3" style="display:none;pointer-events:none"/></svg>
+                <div class="zw-meldung" id="zw-meldung" aria-live="polite"></div>
+            </div>
+        </div>
+
+        <h2>Übungen zu den Kursseiten</h2>
+        <table>
+            <tr><th>Übung in der Werkstatt</th><th>Kursseite</th><th>Darauf kommt es an</th></tr>
+            <tr><td>Modus Felder: Länge 6, Kapazität 8 und leer, Kapazität 1</td><td>3.0.1 Schritt 4</td><td>Wann wird umgezogen, und wie viele Elemente werden dabei kopiert?</td></tr>
+            <tr><td>Einfügen am Anfang</td><td>3.1 Schritt 5</td><td>Reihenfolge der beiden Zuweisungen</td></tr>
+            <tr><td>Durchlaufen bis zum Ende</td><td>3.1 Schritt 4</td><td><code>current</code> wandert, <code>head</code> bleibt</td></tr>
+            <tr><td>Löschen</td><td>3.1 Schritt 6</td><td><code>current</code> steht vor dem zu löschenden Knoten</td></tr>
+            <tr><td>Schlange: enqueue</td><td>3.2 Schritt 4</td><td><code>__tail</code> nach dem Anhängen weitersetzen</td></tr>
+            <tr><td>Schlange: dequeue bis leer</td><td>3.2 Schritt 5</td><td>Sonderfall beim letzten Element</td></tr>
+            <tr><td>Stapel: push</td><td>3.3 Schritt 3</td><td>Neuer Knoten zeigt auf das bisherige oberste Element</td></tr>
+            <tr><td>Suchbaum: einfügen</td><td>3.5 Schritt 2</td><td><code>aktuell</code> wandert abwärts, bis der Platz <code>None</code> ist</td></tr>
+        </table>
+        <p class="tipp">Überlege bei jeder Übung zuerst auf Papier, welche Zeile welchen Pfeil ändert, und klicke erst dann. In der Leistungskontrolle hast du die Werkstatt nicht.</p>
+
+        <script>
+        (function () {
+        "use strict";
+        var NS = "http://www.w3.org/2000/svg";
+        function $(id) { return document.getElementById("zw-" + id); }
+        function el(n, a, t) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (t !== undefined) e.textContent = t; return e; }
+
+        var TYPEN = {
+            liste: { name: "Node", felder: [{ n: "data", art: "wert" }, { n: "next", art: "zeiger" }] },
+            baum: { name: "Knoten", felder: [{ n: "wert", art: "wert" }, { n: "links", art: "zeiger" }, { n: "rechts", art: "zeiger" }] },
+            kinder: { name: "Knoten", felder: [{ n: "wert", art: "wert" }, { n: "kinder", art: "liste" }] }
+        };
+        var B = 140, ZH = 24, ZB = 84;
+        var S = leer();
+        var verlauf = [];
+        var gewaehlt = null;       // {art: "node", id} oder {art: "zeiger", name}
+        var uebung = null;
+        var meldung = null;        // {art: "info"|"ok"|"warn", text}
+        var svg = $("svg"), gummi = $("gummi");
+
+        function leer() { return { nodes: [], zeiger: [], naechsteId: 1, jeVerloren: [], umgesetzt: {} }; }
+        function merken() { verlauf.push(JSON.stringify(S)); if (verlauf.length > 200) verlauf.shift(); }
+        function holeNode(id) { for (var i = 0; i < S.nodes.length; i++) if (S.nodes[i].id === id) return S.nodes[i]; return null; }
+        function holeZeiger(name) { for (var i = 0; i < S.zeiger.length; i++) if (S.zeiger[i].name === name) return S.zeiger[i]; return null; }
+        function wertVon(n) { return n.felder[TYPEN[n.typ].felder[0].n]; }
+        function hoehe(n) { return ZH * (TYPEN[n.typ].felder.length + 1) + 6; }
+        function zeigeWert(v) { return typeof v === "string" ? '"' + v + '"' : String(v); }
+        function leseWert(v) {
+            v = String(v).trim();
+            if (v.length >= 2 && (v[0] === '"' || v[0] === "'") && v[v.length - 1] === v[0]) return v.slice(1, -1);
+            if (v !== "" && !isNaN(Number(v))) return Number(v);
+            return v;
+        }
+
+        function neueNode(typ, wert, x, y) {
+            var n = { id: S.naechsteId++, typ: typ, x: x, y: y, felder: {} };
+            TYPEN[typ].felder.forEach(function (f) { n.felder[f.n] = f.art === "wert" ? wert : f.art === "liste" ? [] : null; });
+            S.nodes.push(n);
+            return n;
+        }
+        function setzeZeiger(name, ziel) {
+            var z = holeZeiger(name);
+            if (!z) { z = { name: name, ziel: null, x: 20, y: 20 }; S.zeiger.push(z); }
+            z.ziel = ziel;
+            return z;
+        }
+        function kinderVon(n) {
+            var r = [];
+            TYPEN[n.typ].felder.forEach(function (f) {
+                var v = n.felder[f.n];
+                if (f.art === "zeiger" && v != null) r.push(v);
+                if (f.art === "liste") v.forEach(function (i) { r.push(i); });
+            });
+            return r;
+        }
+
+        // Erreichbar ist alles, was von einer Variablen aus über Verweise erreicht wird.
+        function erreichbar() {
+            var seen = {}, stapel = [];
+            S.zeiger.forEach(function (z) { if (z.ziel != null) stapel.push(z.ziel); });
+            while (stapel.length) {
+                var id = stapel.pop();
+                if (seen[id]) continue;
+                seen[id] = true;
+                var n = holeNode(id);
+                if (n) kinderVon(n).forEach(function (k) { stapel.push(k); });
+            }
+            return seen;
+        }
+
+        // ---------- Zeichnen ----------
+        function feldPos(n, i) { return { x: n.x + B, y: n.y + ZH * (i + 1) + ZH / 2 + 3 }; }
+        function istGewaehlt(art, wert) { return gewaehlt && gewaehlt.art === art && (art === "node" ? gewaehlt.id === wert : gewaehlt.name === wert); }
+
+        function zeichne() {
+            var K = $("kanten"), N = $("nodes");
+            K.innerHTML = ""; N.innerHTML = "";
+            var ok = erreichbar();
+            var verloren = S.nodes.filter(function (n) { return !ok[n.id]; });
+            verloren.forEach(function (n) { if (S.jeVerloren.indexOf(n.id) < 0) S.jeVerloren.push(n.id); });
+
+            S.nodes.forEach(function (n) {
+                var t = TYPEN[n.typ], h = hoehe(n);
+                var g = el("g", { "class": "node" + (ok[n.id] ? "" : " verloren") + (istGewaehlt("node", n.id) ? " gewaehlt" : "") });
+                g.appendChild(el("rect", { "class": "kasten", x: n.x, y: n.y, width: B, height: h, rx: 5 }));
+                g.appendChild(el("rect", { x: n.x, y: n.y, width: B, height: ZH, rx: 5, fill: ok[n.id] ? "#cfe3ff" : "#ffc2c2" }));
+                g.appendChild(el("text", { x: n.x + 8, y: n.y + 16 }, t.name + " #" + n.id + (ok[n.id] ? "" : " verloren")));
+                t.felder.forEach(function (f, i) {
+                    var y = n.y + ZH * (i + 1) + ZH / 2 + 8, v = n.felder[f.n];
+                    if (f.art === "wert") {
+                        g.appendChild(el("text", { x: n.x + 8, y: y }, f.n + " = " + zeigeWert(v)));
+                    } else if (f.art === "zeiger") {
+                        g.appendChild(el("text", { x: n.x + 8, y: y }, f.n + (v == null ? " = None" : " →")));
+                        var z = v == null ? null : holeNode(v);
+                        if (z) kante(K, n, i, z);
+                        port(g, feldPos(n, i), { art: "feld", n: n, f: f });
+                    } else {
+                        g.appendChild(el("text", { x: n.x + 8, y: y }, f.n + " = [" + v.length + "]"));
+                        v.forEach(function (id) { var z = holeNode(id); if (z) kante(K, n, i, z); });
+                        port(g, feldPos(n, i), { art: "feld", n: n, f: f });
+                    }
+                });
+                g.addEventListener("pointerdown", function (e) {
+                    if (e.target.classList.contains("port")) return;
+                    gewaehlt = { art: "node", id: n.id };
+                    startVerschieben(e, n);
+                });
+                N.appendChild(g);
+            });
+
+            S.zeiger.forEach(function (z) {
+                var g = el("g", { "class": "zeiger" + (istGewaehlt("zeiger", z.name) ? " gewaehlt" : "") });
+                g.appendChild(el("rect", { x: z.x, y: z.y, width: ZB, height: 26, rx: 13 }));
+                g.appendChild(el("text", { x: z.x + ZB / 2 - 4, y: z.y + 17, "text-anchor": "middle" }, z.name));
+                port(g, { x: z.x + ZB, y: z.y + 13 }, { art: "zeiger", z: z });
+                g.addEventListener("pointerdown", function (e) {
+                    if (e.target.classList.contains("port")) return;
+                    gewaehlt = { art: "zeiger", name: z.name };
+                    startVerschieben(e, z);
+                });
+                N.appendChild(g);
+                var n = z.ziel == null ? null : holeNode(z.ziel);
+                if (n) {
+                    var sx = z.x + ZB + 6, sy = z.y + 13, tx, ty;
+                    if (sy < n.y - 10) { tx = n.x + B / 2; ty = n.y; } else { tx = n.x; ty = n.y + ZH / 2; }
+                    K.appendChild(el("path", { "class": "zkante", d: "M" + sx + "," + sy + " L" + tx + "," + ty, "marker-end": "url(#zw-pz)" }));
+                }
+            });
+
+            groesseAnpassen();
+            zeigeMeldung(verloren);
+        }
+
+        function port(g, p, info) {
+            var c = el("circle", { "class": "port", cx: p.x, cy: p.y, r: 8 });
+            var h = el("circle", { "class": "port portHit", cx: p.x, cy: p.y, r: 20 });
+            c.addEventListener("pointerdown", function (e) { starteZiehen(e, info, p); });
+            h.addEventListener("pointerdown", function (e) { starteZiehen(e, info, p); });
+            g.appendChild(c); g.appendChild(h);
+        }
+
+        function kante(K, n, i, z) {
+            var p = feldPos(n, i), d;
+            if (z === n) {
+                d = "M" + p.x + "," + p.y + " C" + (p.x + 50) + "," + (p.y - 40) + " " + (p.x + 50) + "," + (n.y - 30) + " " + (n.x + B / 2) + "," + (n.y - 2);
+            } else if (z.y > p.y + 20 && Math.abs(z.x + B / 2 - p.x) < 260 || z.x + B < p.x) {
+                // Ziel liegt darunter oder links: oben in der Mitte ankommen
+                var ex = z.x + B / 2, ey = z.y - 2;
+                d = "M" + p.x + "," + p.y + " C" + (p.x + 45) + "," + p.y + " " + ex + "," + (ey - 55) + " " + ex + "," + ey;
+            } else {
+                var tx = z.x, ty = z.y + ZH / 2, dx = Math.max(40, Math.abs(tx - p.x) / 2);
+                d = "M" + p.x + "," + p.y + " C" + (p.x + dx) + "," + p.y + " " + (tx - dx) + "," + ty + " " + tx + "," + ty;
+            }
+            K.appendChild(el("path", { "class": "kante", d: d, "marker-end": "url(#zw-pf)" }));
+        }
+
+        function inhaltGrenzen() {
+            var maxx = 0, maxy = 0;
+            S.nodes.forEach(function (n) { maxx = Math.max(maxx, n.x + B + 60); maxy = Math.max(maxy, n.y + hoehe(n) + 40); });
+            S.zeiger.forEach(function (z) { maxx = Math.max(maxx, z.x + ZB + 40); maxy = Math.max(maxy, z.y + 60); });
+            return { x: maxx, y: maxy };
+        }
+        function groesseAnpassen() {
+            var w = $("wrap"), gr = inhaltGrenzen();
+            svg.setAttribute("width", Math.max(w.clientWidth - 2, gr.x));
+            svg.setAttribute("height", Math.max(w.clientHeight - 60, gr.y + 60));
+        }
+
+        function zeigeMeldung(verloren) {
+            var m = $("meldung");
+            if (meldung && meldung.art !== "info") {
+                m.className = "zw-meldung " + meldung.art; m.textContent = meldung.text; return;
+            }
+            if (verloren.length) {
+                var liste = verloren.map(function (n) { return "#" + n.id + " (" + TYPEN[n.typ].felder[0].n + " = " + zeigeWert(wertVon(n)) + ")"; }).join(", ");
+                m.className = "zw-meldung warn";
+                var mehr = verloren.length > 1;
+                m.textContent = "Nicht mehr erreichbar: " + liste + ". Keine Variable und kein Verweis führt mehr dorthin. In Python " + (mehr ? "wären diese Knoten jetzt verloren und würden" : "wäre der Knoten jetzt verloren und würde") + " weggeräumt. Beim Löschen ist das gewollt – sonst war die Reihenfolge beim Umhängen falsch: erst die neue Verbindung setzen, dann den alten Verweis umlegen.";
+                return;
+            }
+            if (meldung) { m.className = "zw-meldung info"; m.textContent = meldung.text; return; }
+            m.className = "zw-meldung";
+        }
+
+        // ---------- Maus und Finger ----------
+        function mausPos(e) { var r = svg.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+        function startVerschieben(e, obj) {
+            e.preventDefault();
+            var s = mausPos(e), ox = obj.x - s.x, oy = obj.y - s.y;
+            function mv(ev) { var p = mausPos(ev); obj.x = Math.max(4, p.x + ox); obj.y = Math.max(4, p.y + oy); zeichne(); }
+            function up() { removeEventListener("pointermove", mv); removeEventListener("pointerup", up); removeEventListener("pointercancel", up); zeichne(); }
+            addEventListener("pointermove", mv); addEventListener("pointerup", up); addEventListener("pointercancel", up);
+            zeichne();
+        }
+        function starteZiehen(e, info, start) {
+            e.stopPropagation(); e.preventDefault();
+            gummi.setAttribute("x1", start.x); gummi.setAttribute("y1", start.y);
+            gummi.setAttribute("x2", start.x); gummi.setAttribute("y2", start.y);
+            gummi.style.display = "";
+            function mv(ev) { var p = mausPos(ev); gummi.setAttribute("x2", p.x); gummi.setAttribute("y2", p.y); }
+            function up(ev) {
+                removeEventListener("pointermove", mv); removeEventListener("pointerup", up); removeEventListener("pointercancel", up);
+                gummi.style.display = "none";
+                var p = mausPos(ev), ziel = null;
+                for (var i = S.nodes.length - 1; i >= 0; i--) {
+                    var n = S.nodes[i];
+                    if (p.x >= n.x && p.x <= n.x + B && p.y >= n.y && p.y <= n.y + hoehe(n)) { ziel = n; break; }
+                }
+                var vorher = JSON.stringify(S);
+                if (setze(info, ziel ? ziel.id : null)) { verlauf.push(vorher); meldung = null; }
+                zeichne();
+            }
+            addEventListener("pointermove", mv); addEventListener("pointerup", up); addEventListener("pointercancel", up);
+        }
+        // setzt einen Verweis; liefert true, wenn sich etwas geändert hat
+        function setze(info, zielId) {
+            if (info.art === "zeiger") {
+                var z = holeZeiger(info.z.name);
+                if (z.ziel === zielId) return false;
+                z.ziel = zielId;
+                S.umgesetzt[z.name] = (S.umgesetzt[z.name] || 0) + 1;
+                return true;
+            }
+            var n = holeNode(info.n.id), f = info.f;
+            if (f.art === "zeiger") {
+                if (n.felder[f.n] === zielId) return false;
+                n.felder[f.n] = zielId;
+                return true;
+            }
+            var l = n.felder[f.n];
+            if (zielId != null) { if (l.indexOf(zielId) >= 0) return false; l.push(zielId); return true; }
+            if (!l.length) return false;
+            l.pop();     // auf leere Fläche: letzten Eintrag der Liste entfernen
+            return true;
+        }
+
+        // ---------- Anordnen ----------
+        function zeigerPlatzieren() {
+            var proZiel = {}, frei = 0;
+            S.zeiger.forEach(function (z) {
+                var n = z.ziel == null ? null : holeNode(z.ziel);
+                if (n) {
+                    var k = proZiel[n.id] || 0; proZiel[n.id] = k + 1;
+                    z.x = n.x + B / 2 - ZB / 2 - 20; z.y = n.y - 46 - k * 32;
+                } else { z.x = 20 + frei * (ZB + 34); z.y = 12; frei++; }
+            });
+        }
+        function layoutListe() {
+            var reihe = [], drin = {};
+            function nimm(id) {
+                while (id != null && !drin[id]) {
+                    var n = holeNode(id); if (!n) return;
+                    drin[id] = true; reihe.push(n);
+                    id = n.typ === "liste" ? n.felder.next : null;
+                }
+            }
+            S.zeiger.forEach(function (z) { nimm(z.ziel); });
+            S.nodes.forEach(function (n) { nimm(n.id); });
+            reihe.forEach(function (n, i) { n.x = 24 + i * (B + 40); n.y = 150; });
+            zeigerPlatzieren(); zeichne();
+        }
+        function layoutBaum() {
+            var platziert = {}, spalte = 0;
+            function platz(n, tiefe) {
+                platziert[n.id] = true;
+                var xs = [];
+                kinderVon(n).forEach(function (id) { var k = holeNode(id); if (k && !platziert[k.id]) xs.push(platz(k, tiefe + 1)); });
+                var x = xs.length ? (Math.min.apply(null, xs) + Math.max.apply(null, xs)) / 2 : 20 + (spalte++) * (B + 16);
+                n.x = x; n.y = 110 + tiefe * 160;
+                return x;
+            }
+            S.zeiger.forEach(function (z) { var w = z.ziel == null ? null : holeNode(z.ziel); if (w && !platziert[w.id]) platz(w, 0); });
+            var tief = 0;
+            S.nodes.forEach(function (n) { tief = Math.max(tief, n.y); });
+            S.nodes.forEach(function (n) { if (!platziert[n.id]) { n.x = 20 + (spalte++) * (B + 16); n.y = tief + 160; } });
+            zeigerPlatzieren(); zeichne();
+        }
+        // neuer Knoten: rechts neben die Zeichnung, wenn dort Platz ist, sonst darunter
+        function freiePosition() {
+            if (!S.nodes.length) return { x: 40, y: 120 };
+            var maxx = 0, maxy = 0, miny = 1e9;
+            S.nodes.forEach(function (n) { maxx = Math.max(maxx, n.x + B); maxy = Math.max(maxy, n.y + hoehe(n)); miny = Math.min(miny, n.y); });
+            if (maxx + 60 + B + 40 < $("wrap").clientWidth) return { x: maxx + 60, y: Math.max(miny, 80) + 40 };
+            return { x: 40, y: maxy + 70 };
+        }
+
+        // ---------- Übungen ----------
+        function baueListe(werte, typ) {
+            var vorige = null, erste = null;
+            werte.forEach(function (w) {
+                var n = neueNode(typ || "liste", w, 0, 0);
+                if (vorige) vorige.felder.next = n.id; else erste = n;
+                vorige = n;
+            });
+            return erste;
+        }
+        function knotenMitWert(w) { for (var i = 0; i < S.nodes.length; i++) if (wertVon(S.nodes[i]) === w) return S.nodes[i]; return null; }
+        function kette(name) {
+            var z = holeZeiger(name), out = [], seen = {}, id = z ? z.ziel : null;
+            while (id != null) {
+                if (seen[id]) { out.push("(Kreis)"); break; }
+                seen[id] = true;
+                var n = holeNode(id); out.push(wertVon(n)); id = n.felder.next;
+            }
+            return out;
+        }
+        function zielWert(name) { var z = holeZeiger(name); return z && z.ziel != null ? wertVon(holeNode(z.ziel)) : null; }
+        function gleich(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+        function pfeile(werte) { return werte.length ? werte.map(zeigeWert).join(" → ") : "leer"; }
+        // Knoten, die im Ergebnis gebraucht werden, aber zwischendurch unerreichbar waren
+        function zwischendurchVerloren(werte) {
+            return S.jeVerloren.map(holeNode).filter(function (n) { return n && werte.indexOf(wertVon(n)) >= 0; }).map(wertVon);
+        }
+        function okMitHinweis(text, werte) {
+            var v = zwischendurchVerloren(werte);
+            if (!v.length) return { art: "ok", text: text };
+            var mehr = v.length > 1;
+            return { art: "warn", text: "Das Ergebnis stimmt, aber zwischendurch " + (mehr ? "waren die Knoten " : "war der Knoten ") + v.map(zeigeWert).join(", ") + " von keiner Variablen mehr erreichbar. In Python " + (mehr ? "wären sie" : "wäre er") + " in diesem Moment verloren gewesen, und du hättest " + (mehr ? "sie" : "ihn") + " nicht wieder anhängen können. Mach es rückgängig und finde eine Reihenfolge, bei der nichts verloren geht." };
+        }
+        function baumStruktur(id) {
+            var n = id == null ? null : holeNode(id);
+            if (!n || n.typ !== "baum") return null;
+            return [n.felder.wert, baumStruktur(n.felder.links), baumStruktur(n.felder.rechts)];
+        }
+        function sollEinfuegen(baum, w) {
+            if (baum === null) return [w, null, null];
+            if (w < baum[0]) return [baum[0], sollEinfuegen(baum[1], w), baum[2]];
+            if (w > baum[0]) return [baum[0], baum[1], sollEinfuegen(baum[2], w)];
+            return baum;
+        }
+        function istPlatz(id, w, eltern, seite, tiefe) {
+            var n = id == null ? null : holeNode(id);
+            if (!n || n.typ !== "baum" || tiefe > 50) return null;
+            if (n.felder.wert === w) return eltern === null ? "die Wurzel" : (seite + " Kind der " + eltern);
+            return istPlatz(n.felder.links, w, n.felder.wert, "linkes", tiefe + 1) || istPlatz(n.felder.rechts, w, n.felder.wert, "rechtes", tiefe + 1);
+        }
+        function sollPlatz(baum, w, eltern, seite) {
+            if (baum === null) return eltern === null ? "die Wurzel" : (seite + " Kind der " + eltern);
+            if (w < baum[0]) return sollPlatz(baum[1], w, baum[0], "linkes");
+            return sollPlatz(baum[2], w, baum[0], "rechtes");
+        }
+
+        var UEBUNGEN = [
+            { id: "frei", titel: "Frei zeichnen", auftrag: "", aufbau: function () {} },
+            { id: "anfang", gruppe: "Übungen", titel: "3.1 Einfügen am Anfang", typ: "liste", wert: "5", layout: "liste",
+              auftrag: "Füge die 5 am Anfang ein wie <code>insert_at_start(5)</code>: <code>neu = Node(5)</code>, dann <code>neu.next = self.head</code>, dann <code>self.head = neu</code>. Probiere auch die vertauschte Reihenfolge aus und mache sie rückgängig.",
+              aufbau: function () { setzeZeiger("head", baueListe([3, 7, 9]).id); },
+              pruefe: function () {
+                  var k = kette("head");
+                  if (gleich(k, [5, 3, 7, 9])) return okMitHinweis("Richtig: head → 5 → 3 → 7 → 9. Es wurden nur zwei Verweise umgesetzt, egal wie lang die Liste ist: O(1).", [3, 7, 9]);
+                  if (k[0] !== 5) return { art: "warn", text: "head zeigt noch nicht auf die neue Node. Ab head steht im Moment: " + pfeile(k) + "." };
+                  return { art: "warn", text: "Ab head steht: " + pfeile(k) + ". Erwartet ist 5 → 3 → 7 → 9." };
+              } },
+            { id: "durchlaufen", gruppe: "Übungen", titel: "3.1 Durchlaufen bis zum Ende", layout: "liste",
+              auftrag: "Lass <code>current</code> wie in <code>append</code> bis zum letzten Knoten laufen: Ziehe den Punkt von <code>current</code> jedes Mal auf den Knoten, auf den <code>current.next</code> zeigt. <code>head</code> bleibt, wo er ist.",
+              aufbau: function () { var e = baueListe([4, 8, 15, 16]); setzeZeiger("head", e.id); setzeZeiger("current", e.id); },
+              pruefe: function () {
+                  var k = kette("head"), z = holeZeiger("current"), n = z && z.ziel != null ? holeNode(z.ziel) : null;
+                  if (!gleich(k, [4, 8, 15, 16])) return { art: "warn", text: "Die Liste hat sich verändert: " + pfeile(k) + ". Beim Durchlaufen wird nur current umgesetzt, nichts an der Liste." };
+                  if (!n) return { art: "warn", text: "current ist None – du bist einen Schritt zu weit gelaufen. Das ist die Schleife aus display (while current is not None), nicht die aus append." };
+                  if (n.felder.next != null) return { art: "warn", text: "current steht auf " + wertVon(n) + ", dahinter kommt noch etwas. Weiter, bis current.next None ist." };
+                  var s = S.umgesetzt.current || 0;
+                  if (s < 3) return { art: "warn", text: "current steht richtig, aber du bist gesprungen. In Python geht es nur mit current = current.next weiter, also immer einen Knoten pro Schritt." };
+                  return { art: "ok", text: "Richtig: current steht auf der 16, current.next ist None. Bei 4 Knoten waren es 3 Schritte, bei n Knoten n − 1 Schritte – das Durchlaufen kostet O(n)." };
+              } },
+            { id: "loeschen", gruppe: "Übungen", titel: "3.1 Löschen", layout: "liste",
+              auftrag: "Lösche die 15 wie <code>delete(15)</code>. <code>current</code> steht schon auf dem Vorgänger. Setze <code>current.next = current.next.next</code>: Ziehe den Punkt bei <code>next</code> der 8 auf die 16.",
+              aufbau: function () { var e = baueListe([4, 8, 15, 16]); setzeZeiger("head", e.id); setzeZeiger("current", holeNode(e.felder.next).id); },
+              pruefe: function () {
+                  var k = kette("head");
+                  if (gleich(k, [4, 8, 16])) return okMitHinweis("Richtig: head → 4 → 8 → 16. Die 15 ist nicht mehr erreichbar und wird von Python weggeräumt – genau das heißt Löschen in einer verketteten Liste.", [4, 8, 16]);
+                  return { art: "warn", text: "Ab head steht: " + pfeile(k) + ". Erwartet ist 4 → 8 → 16." };
+              } },
+            { id: "enqueue", gruppe: "Übungen", titel: "3.2 Schlange: enqueue", typ: "liste", wert: "C", layout: "liste",
+              auftrag: "Hänge C hinten an wie <code>enqueue(\"C\")</code>: <code>neu = Node(\"C\")</code>, dann <code>self.__tail.next = neu</code>, dann <code>self.__tail = neu</code>.",
+              aufbau: function () { var e = baueListe(["A", "B"]); setzeZeiger("__head", e.id); setzeZeiger("__tail", e.felder.next); },
+              pruefe: function () {
+                  var k = kette("__head"), t = zielWert("__tail");
+                  if (!gleich(k, ["A", "B", "C"])) return { art: "warn", text: "Ab __head steht: " + pfeile(k) + ". Erwartet ist \"A\" → \"B\" → \"C\"." };
+                  if (t !== "C") return { art: "warn", text: "Die Kette stimmt, aber __tail zeigt noch auf " + zeigeWert(t) + ". Beim nächsten enqueue würde der neue Knoten hinter " + zeigeWert(t) + " gehängt und C abgeschnitten." };
+                  return okMitHinweis("Richtig: Die Kette ist \"A\" → \"B\" → \"C\", __tail zeigt auf C. Es wurde nichts durchlaufen: O(1).", ["A", "B"]);
+              } },
+            { id: "dequeue", gruppe: "Übungen", titel: "3.2 Schlange: dequeue bis leer", layout: "liste",
+              auftrag: "Rufe zweimal <code>dequeue()</code> auf. Jedes Mal wird <code>self.__head = self.__head.next</code> (Punkt auf den nächsten Knoten ziehen, für <code>None</code> auf eine leere Fläche). Was muss beim letzten Element zusätzlich passieren?",
+              aufbau: function () { var e = baueListe(["A", "B"]); setzeZeiger("__head", e.id); setzeZeiger("__tail", e.felder.next); },
+              pruefe: function () {
+                  var h = zielWert("__head"), t = zielWert("__tail");
+                  if (h !== null) return { art: "warn", text: "__head zeigt noch auf " + zeigeWert(h) + ". Es fehlt noch ein dequeue." };
+                  if (t !== null) return { art: "warn", text: "__head ist None, aber __tail zeigt noch auf " + zeigeWert(t) + ". Dann wäre B noch erreichbar, und das nächste enqueue hängt den neuen Knoten an B statt ihn in __head einzutragen. Genau dafür steht in dequeue: if self.__head is None: self.__tail = None." };
+                  return { art: "ok", text: "Richtig: __head und __tail sind beide None, die Schlange ist leer. A und B sind nicht mehr erreichbar und werden weggeräumt." };
+              } },
+            { id: "push", gruppe: "Übungen", titel: "3.3 Stapel: push", typ: "liste", wert: "3", layout: "liste",
+              auftrag: "Lege die 3 auf wie <code>push(3)</code>. Die Zeile <code>self.__head = Node(3, self.__head)</code> erzeugt zuerst den Knoten, dessen <code>next</code> auf das bisherige oberste Element zeigt, und setzt erst danach <code>__head</code> um. Mach es in dieser Reihenfolge.",
+              aufbau: function () { setzeZeiger("__head", baueListe([2, 1]).id); },
+              pruefe: function () {
+                  var k = kette("__head");
+                  if (gleich(k, [3, 2, 1])) return okMitHinweis("Richtig: __head → 3 → 2 → 1. Das zuletzt aufgelegte Element liegt oben (LIFO), push kostet O(1).", [2, 1]);
+                  return { art: "warn", text: "Ab __head steht: " + pfeile(k) + ". Erwartet ist 3 → 2 → 1." };
+              } },
+            { id: "suchbaum", gruppe: "Übungen", titel: "3.5 Suchbaum: einfügen", typ: "baum", wert: "7", layout: "baum",
+              auftrag: "Füge erst 7, dann 12 ein wie <code>einfuegen</code>: Ziehe <code>aktuell</code> von der Wurzel abwärts (kleiner: links, größer: rechts), bis der passende Platz <code>None</code> ist. Dort hängst du den neuen Knoten an. Danach <code>aktuell</code> wieder auf die Wurzel setzen.",
+              aufbau: function () {
+                  var w = neueNode("baum", 8, 0, 0), a = neueNode("baum", 3, 0, 0), b = neueNode("baum", 10, 0, 0);
+                  var c = neueNode("baum", 1, 0, 0), d = neueNode("baum", 6, 0, 0), e = neueNode("baum", 14, 0, 0);
+                  w.felder.links = a.id; w.felder.rechts = b.id; a.felder.links = c.id; a.felder.rechts = d.id; b.felder.rechts = e.id;
+                  setzeZeiger("wurzel", w.id); setzeZeiger("aktuell", w.id);
+              },
+              pruefe: function () {
+                  var start = [8, [3, [1, null, null], [6, null, null]], [10, null, [14, null, null]]];
+                  var wz = holeZeiger("wurzel"), soll = start, eingefuegt = [7, 12], vorher = "";
+                  for (var i = 0; i < eingefuegt.length; i++) {
+                      var w = eingefuegt[i], sp = sollPlatz(soll, w, null, ""), ist = istPlatz(wz ? wz.ziel : null, w, null, "", 0);
+                      soll = sollEinfuegen(soll, w);
+                      if (ist === null && !knotenMitWert(w)) return { art: "warn", text: vorher + "Es fehlt noch der Knoten mit wert = " + w + "." };
+                      if (ist === null) return { art: "warn", text: vorher + "Der Knoten " + w + " ist angelegt, hängt aber noch nicht im Baum. Er gehört als " + sp + "." };
+                      if (ist !== sp) return { art: "warn", text: "Die " + w + " hängt als " + ist + ", gehört aber als " + sp + ". Vergleiche ab der Wurzel: kleiner nach links, größer nach rechts." };
+                      vorher = "Die " + w + " sitzt richtig. ";
+                  }
+                  if (!gleich(baumStruktur(wz ? wz.ziel : null), soll)) return { art: "warn", text: "7 und 12 sitzen richtig, aber am übrigen Baum hat sich etwas verändert. Beim Einfügen wird nur ein einziger Verweis gesetzt." };
+                  return okMitHinweis("Richtig: 7 ist rechtes Kind der 6, 12 ist linkes Kind der 14. Für jeden Wert waren drei Vergleiche nötig (mit 8, 3, 6 bzw. mit 8, 10, 14), und es wurde nur ein Verweis gesetzt.", [8, 3, 10, 1, 6, 14, 7, 12]);
+              } },
+            { id: "bspListe", gruppe: "Beispiele", titel: "Verkettete Liste mit head", typ: "liste", layout: "liste",
+              auftrag: "Eine Liste zum Ausprobieren.", aufbau: function () { setzeZeiger("head", baueListe([3, 7, 9]).id); } },
+            { id: "bspBaum", gruppe: "Beispiele", titel: "Binärer Suchbaum aus 3.5", typ: "baum", layout: "baum",
+              auftrag: "Der Suchbaum aus Beispiel 1 von Seite 3.5.",
+              aufbau: function () {
+                  var w = neueNode("baum", 8, 0, 0), a = neueNode("baum", 3, 0, 0), b = neueNode("baum", 10, 0, 0);
+                  var c = neueNode("baum", 1, 0, 0), d = neueNode("baum", 6, 0, 0), e = neueNode("baum", 14, 0, 0);
+                  w.felder.links = a.id; w.felder.rechts = b.id; a.felder.links = c.id; a.felder.rechts = d.id; b.felder.rechts = e.id;
+                  setzeZeiger("wurzel", w.id);
+              } },
+            { id: "bspKinder", gruppe: "Beispiele", titel: "Allgemeiner Baum (wert, kinder)", typ: "kinder", wert: "\"G\"", layout: "baum",
+              auftrag: "Ein Baum wie auf Seite 3.4: Jeder Knoten hat eine Liste <code>kinder</code>. Ziehst du den Punkt bei <code>kinder</code> auf einen Knoten, wird er angehängt (<code>append</code>). Ziehst du ihn auf eine leere Fläche, wird das letzte Kind entfernt.",
+              aufbau: function () {
+                  var a = neueNode("kinder", "A", 0, 0), b = neueNode("kinder", "B", 0, 0), c = neueNode("kinder", "C", 0, 0);
+                  var d = neueNode("kinder", "D", 0, 0), e = neueNode("kinder", "E", 0, 0), f = neueNode("kinder", "F", 0, 0);
+                  a.felder.kinder = [b.id, c.id, d.id]; b.felder.kinder = [e.id, f.id];
+                  setzeZeiger("wurzel", a.id);
+              } }
+        ];
+
+        function holeUebung(id) { for (var i = 0; i < UEBUNGEN.length; i++) if (UEBUNGEN[i].id === id) return UEBUNGEN[i]; return UEBUNGEN[0]; }
+        function starteUebung(id) {
+            uebung = holeUebung(id);
+            S = leer(); verlauf = []; gewaehlt = null; meldung = null;
+            uebung.aufbau();
+            if (uebung.typ) $("typ").value = uebung.typ;
+            if (uebung.wert) $("wert").value = uebung.wert;
+            $("varname").value = "neu";
+            $("auftrag").innerHTML = uebung.auftrag;
+            $("pruefen").disabled = !uebung.pruefe;
+            S.jeVerloren = [];
+            if (uebung.layout === "baum") layoutBaum(); else if (uebung.layout === "liste") layoutListe(); else zeichne();
+        }
+        (function fuelleAuswahl() {
+            var sel = $("uebung"), gruppen = {};
+            UEBUNGEN.forEach(function (u) {
+                var o = document.createElement("option"); o.value = u.id; o.textContent = u.titel;
+                if (!u.gruppe) { sel.appendChild(o); return; }
+                if (!gruppen[u.gruppe]) { gruppen[u.gruppe] = document.createElement("optgroup"); gruppen[u.gruppe].label = u.gruppe; sel.appendChild(gruppen[u.gruppe]); }
+                gruppen[u.gruppe].appendChild(o);
+            });
+        })();
+
+        // ---------- Knöpfe Zeiger-Modus ----------
+        $("uebung").onchange = function () { starteUebung(this.value); };
+        $("neustart").onclick = function () { starteUebung(uebung.id); };
+        $("pruefen").onclick = function () { if (uebung && uebung.pruefe) { meldung = uebung.pruefe(); zeichne(); } };
+        $("neuNode").onclick = function () {
+            var name = $("varname").value.trim() || "neu";
+            if (!/^[A-Za-z_]\w*$/.test(name)) { meldung = { art: "warn", text: "„" + name + "“ ist kein gültiger Variablenname." }; zeichne(); return; }
+            merken();
+            var typ = $("typ").value, w = leseWert($("wert").value), p = freiePosition();
+            var n = neueNode(typ, w, p.x, p.y), z = holeZeiger(name), alt = z ? z.ziel : null;
+            z = setzeZeiger(name, n.id);
+            if (alt === null || !z.x) { z.x = n.x + B / 2 - ZB / 2 - 20; z.y = n.y - 46; }
+            meldung = { art: "info", text: "Angelegt wie in Python: " + name + " = " + TYPEN[typ].name + "(" + zeigeWert(w) + ")" + (alt !== null ? ". Die Variable " + name + " zeigte vorher auf einen anderen Knoten – dieser Verweis ist jetzt überschrieben." : ".") };
+            zeichne();
+        };
+        $("neuVar").onclick = function () {
+            var name = $("varname").value.trim();
+            if (!/^[A-Za-z_]\w*$/.test(name)) { meldung = { art: "warn", text: "„" + name + "“ ist kein gültiger Variablenname." }; zeichne(); return; }
+            if (holeZeiger(name)) { meldung = { art: "warn", text: "Die Variable " + name + " gibt es schon." }; zeichne(); return; }
+            merken();
+            var frei = S.zeiger.filter(function (z) { return z.ziel == null; }).length;
+            S.zeiger.push({ name: name, ziel: null, x: 20 + frei * (ZB + 34), y: 12 });
+            meldung = { art: "info", text: name + " = None. Ziehe den Punkt der Variablen auf einen Knoten." };
+            zeichne();
+        };
+        $("undo").onclick = function () {
+            if (!verlauf.length) return;
+            S = JSON.parse(verlauf.pop()); gewaehlt = null; meldung = null; zeichne();
+        };
+        $("layoutListe").onclick = layoutListe;
+        $("layoutBaum").onclick = layoutBaum;
+        $("delVar").onclick = function () {
+            if (!gewaehlt || gewaehlt.art !== "zeiger") { meldung = { art: "info", text: "Klicke zuerst auf eine grüne Variable." }; zeichne(); return; }
+            merken();
+            var name = gewaehlt.name;
+            S.zeiger = S.zeiger.filter(function (z) { return z.name !== name; });
+            gewaehlt = null; meldung = { art: "info", text: "del " + name + ": Die Variable gibt es nicht mehr." };
+            zeichne();
+        };
+        $("aufraeumen").onclick = function () {
+            var ok = erreichbar(), weg = S.nodes.filter(function (n) { return !ok[n.id]; });
+            if (!weg.length) { meldung = { art: "info", text: "Alle Knoten sind erreichbar, es gibt nichts wegzuräumen." }; zeichne(); return; }
+            merken();
+            var ids = weg.map(function (n) { return n.id; });
+            S.nodes = S.nodes.filter(function (n) { return ids.indexOf(n.id) < 0; });
+            S.nodes.forEach(function (n) {
+                TYPEN[n.typ].felder.forEach(function (f) { if (f.art === "liste") n.felder[f.n] = n.felder[f.n].filter(function (i) { return ids.indexOf(i) < 0; }); });
+            });
+            meldung = { art: "info", text: "Weggeräumt: " + weg.length + " Knoten. Das macht Python mit der Speicherbereinigung von selbst." };
+            zeichne();
+        };
+        $("alles").onclick = function () { merken(); S = leer(); gewaehlt = null; meldung = null; zeichne(); };
+        svg.addEventListener("pointerdown", function (e) { if (e.target === svg) { gewaehlt = null; zeichne(); } });
+
+        // ---------- Speichern ----------
+        // Format "zeiger-werkstatt" Version 1: nodes, zeiger, verbindungen
+        function alsJson() {
+            var verb = [], ok = erreichbar();
+            S.zeiger.forEach(function (z) { if (z.ziel != null) verb.push({ von: { art: "zeiger", name: z.name }, nach: z.ziel }); });
+            S.nodes.forEach(function (n) {
+                TYPEN[n.typ].felder.forEach(function (f) {
+                    var v = n.felder[f.n];
+                    if (f.art === "zeiger" && v != null) verb.push({ von: { art: "node", id: n.id, feld: f.n }, nach: v });
+                    if (f.art === "liste") v.forEach(function (i) { verb.push({ von: { art: "node", id: n.id, feld: f.n }, nach: i }); });
+                });
+            });
+            return { format: "zeiger-werkstatt", version: 1,
+                nodes: S.nodes.map(function (n) { var o = { id: n.id, typ: n.typ, x: Math.round(n.x), y: Math.round(n.y), erreichbar: !!ok[n.id], felder: {} }; o.felder[TYPEN[n.typ].felder[0].n] = wertVon(n); return o; }),
+                zeiger: S.zeiger.map(function (z) { return { name: z.name, ziel: z.ziel, x: Math.round(z.x), y: Math.round(z.y) }; }),
+                verbindungen: verb };
+        }
+        function ausJson(d) {
+            if (!d || d.format !== "zeiger-werkstatt") throw new Error("Keine Datei der Zeiger-Werkstatt");
+            var alt = { viele: "kinder" }, neu = leer();
+            d.nodes.forEach(function (o) {
+                var typ = alt[o.typ] || o.typ;
+                if (!TYPEN[typ]) throw new Error("Unbekannte Art: " + o.typ);
+                var f = o.felder || {}, w = f[TYPEN[typ].felder[0].n];
+                if (w === undefined) w = f.data !== undefined ? f.data : "";
+                var n = { id: o.id, typ: typ, x: o.x, y: o.y, felder: {} };
+                TYPEN[typ].felder.forEach(function (ff) { n.felder[ff.n] = ff.art === "wert" ? w : ff.art === "liste" ? [] : null; });
+                neu.nodes.push(n); neu.naechsteId = Math.max(neu.naechsteId, o.id + 1);
+            });
+            d.zeiger.forEach(function (z) { neu.zeiger.push({ name: z.name, ziel: null, x: z.x || 20, y: z.y || 12 }); });
+            d.verbindungen.forEach(function (v) {
+                if (v.von.art === "zeiger") { neu.zeiger.forEach(function (z) { if (z.name === v.von.name) z.ziel = v.nach; }); return; }
+                var n = null; neu.nodes.forEach(function (k) { if (k.id === v.von.id) n = k; });
+                if (!n) return;
+                var feld = v.von.feld === "nachbarn" ? "kinder" : v.von.feld, f = null;
+                TYPEN[n.typ].felder.forEach(function (ff) { if (ff.n === feld) f = ff; });
+                if (!f) return;
+                if (f.art === "zeiger") n.felder[f.n] = v.nach; else if (f.art === "liste") n.felder[f.n].push(v.nach);
+            });
+            merken(); S = neu; gewaehlt = null; meldung = null; zeichne();
+        }
+        function laden(blob, name) { var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000); }
+        function svgText() {
+            var minx = 1e9, miny = 1e9, maxx = -1e9, maxy = -1e9;
+            S.nodes.forEach(function (n) { minx = Math.min(minx, n.x); miny = Math.min(miny, n.y - 70); maxx = Math.max(maxx, n.x + B + 50); maxy = Math.max(maxy, n.y + hoehe(n)); });
+            S.zeiger.forEach(function (z) { minx = Math.min(minx, z.x); miny = Math.min(miny, z.y); maxx = Math.max(maxx, z.x + ZB + 10); maxy = Math.max(maxy, z.y + 30); });
+            if (minx > maxx) { minx = 0; miny = 0; maxx = 300; maxy = 200; }
+            var p = 20, w = maxx - minx + 2 * p, h = maxy - miny + 2 * p;
+            var c = svg.cloneNode(true);
+            c.querySelector("#zw-gummi").remove(); c.querySelector("#zw-feld").remove();
+            Array.prototype.forEach.call(c.querySelectorAll(".port"), function (e) { e.remove(); });
+            c.setAttribute("viewBox", (minx - p) + " " + (miny - p) + " " + w + " " + h); c.setAttribute("width", w); c.setAttribute("height", h);
+            var css = document.createElementNS(NS, "style");
+            css.textContent = "text{font-size:13px;font-family:Consolas,monospace}.node rect.kasten{fill:#fff;stroke:#234;stroke-width:1.6}.node.verloren rect.kasten{fill:#ffe3e3;stroke:#c00;stroke-dasharray:6 4}.zeiger rect{fill:#2a6;stroke:#164}.zeiger text{fill:#fff;font-weight:bold}.kante{fill:none;stroke:#234;stroke-width:1.6}.zkante{fill:none;stroke:#2a6;stroke-width:2}";
+            c.insertBefore(css, c.firstChild);
+            var bg = el("rect", { x: minx - p, y: miny - p, width: w, height: h, fill: "#fff" });
+            c.insertBefore(bg, css.nextSibling);
+            return { text: new XMLSerializer().serializeToString(c), w: w, h: h };
+        }
+        $("expJson").onclick = function () { laden(new Blob([JSON.stringify(alsJson(), null, 2)], { type: "application/json" }), "zeiger_werkstatt.json"); };
+        $("expPng").onclick = function () {
+            var s = svgText(), img = new Image();
+            img.onload = function () {
+                var cv = document.createElement("canvas"); cv.width = s.w * 2; cv.height = s.h * 2;
+                var x = cv.getContext("2d"); x.scale(2, 2); x.drawImage(img, 0, 0);
+                cv.toBlob(function (b) { laden(b, "zeiger_werkstatt.png"); });
+            };
+            img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(s.text);
+        };
+        $("expPdf").onclick = function () { window.print(); };
+        $("impJson").onclick = function () { $("datei").click(); };
+        $("datei").onchange = function (e) {
+            var f = e.target.files[0]; if (!f) return;
+            var r = new FileReader();
+            r.onload = function () { try { ausJson(JSON.parse(r.result)); } catch (err) { meldung = { art: "warn", text: "Laden fehlgeschlagen: " + err.message }; zeichne(); } };
+            r.readAsText(f); e.target.value = "";
+        };
+
+        // ---------- Modus Felder (Länge und Kapazität) ----------
+        var F = {};
+        function fReset() {
+            var s = $("fStart").value.split("-"), laenge = Number(s[0]), kap = Number(s[1]);
+            F = { arr: [], kap: kap, zugriffe: 0, letzte: 0, schritte: [], kopie: null, kopieKap: 0, hinweis: "", hervor: {}, nAnf: 0, zAnf: 0, aktuellAnf: false, umzuege: 0, kopiert: 0 };
+            for (var i = 0; i < laenge; i++) F.arr.push(10 * (i + 1));
+            F.hinweis = laenge ? "Feld mit Länge " + laenge + " und Kapazität " + kap + "." : "Leeres Feld mit Kapazität " + kap + ".";
+            fZeichne();
+        }
+        // Jede Aktion wird als Liste von Einzelschritten geplant; jeder Schritt zählt seine Zugriffe.
+        function planAnfuegen(wert, vorne) {
+            var s = [], kap = F.kap, arr = F.arr.slice(), i;
+            if (arr.length >= kap) {
+                var neuKap = kap * 2;
+                s.push({ art: "neu", kap: neuKap, text: "Die Kapazität ist erschöpft. An einer anderen Speicherstelle wird ein Feld mit Kapazität " + neuKap + " angelegt (Umzug)." });
+                for (i = 0; i < arr.length; i++) {
+                    var ziel = vorne ? i + 1 : i;
+                    s.push({ art: "kopie", von: i, nach: ziel, wert: arr[i], zugriffe: 2, text: "Wert " + arr[i] + " von Platz " + i + " nach Platz " + ziel + " kopieren (1 Lesen + 1 Schreiben)." });
+                }
+                s.push({ art: "fertigNeu", kap: neuKap, vorne: vorne, wert: wert, n: arr.length });
+                return s;
+            }
+            if (vorne) {
+                for (i = arr.length - 1; i >= 0; i--) s.push({ art: "schieb", von: i, nach: i + 1, wert: arr[i], zugriffe: 2, text: "Wert " + arr[i] + " von Platz " + i + " nach Platz " + (i + 1) + " schieben (1 Lesen + 1 Schreiben)." });
+                s.push({ art: "setze", platz: 0, wert: wert, zugriffe: 1, text: "Neuen Wert " + wert + " auf Platz 0 schreiben (1 Schreiben)." });
+            } else {
+                s.push({ art: "setze", platz: arr.length, wert: wert, zugriffe: 1, text: "Neuen Wert " + wert + " auf Platz " + arr.length + " schreiben (1 Schreiben)." });
+            }
+            return s;
+        }
+        function planLoeschen() {
+            var s = [], arr = F.arr;
+            for (var i = 1; i < arr.length; i++) s.push({ art: "schiebL", von: i, nach: i - 1, wert: arr[i], zugriffe: 2, text: "Wert " + arr[i] + " von Platz " + i + " nach Platz " + (i - 1) + " schieben (1 Lesen + 1 Schreiben)." });
+            if (arr.length) s.push({ art: "kuerze", zugriffe: 1, text: "Letzten Platz freigeben (1 Schreiben)." });
+            return s;
+        }
+        function zaehle(z) { F.zugriffe += z; F.letzte += z; if (F.aktuellAnf) F.zAnf += z; }
+        function wendeAn(st) {
+            F.hervor = {};
+            if (st.art === "neu") { F.kopie = []; for (var i = 0; i < st.kap; i++) F.kopie.push(null); F.kopieKap = st.kap; F.umzuege++; }
+            else if (st.art === "kopie") { F.kopie[st.nach] = st.wert; F.hervor = { nach: st.nach }; F.kopiert++; }
+            else if (st.art === "fertigNeu") {
+                F.kopie[st.vorne ? 0 : st.n] = st.wert;
+                F.arr = F.kopie.filter(function (v) { return v !== null; });
+                F.kap = st.kap; F.kopie = null; zaehle(1);
+                F.hinweis = "Neuen Wert eingetragen (1 Schreiben). Das alte Feld wird freigegeben.";
+                return;
+            }
+            else if (st.art === "schieb" || st.art === "schiebL" || st.art === "setze") { F.arr[st.art === "setze" ? st.platz : st.nach] = st.wert; F.hervor = { nach: st.art === "setze" ? st.platz : st.nach }; }
+            else if (st.art === "kuerze") F.arr.pop();
+            if (st.zugriffe) zaehle(st.zugriffe);
+            if (st.text) F.hinweis = st.text;
+        }
+        function fStart(plan, anf) {
+            if (!plan.length) { F.hinweis = "Das Feld ist leer, es gibt nichts zu löschen."; fZeichne(); return; }
+            F.letzte = 0; F.schritte = plan; F.aktuellAnf = !!anf; if (anf) F.nAnf++;
+            if (!$("fSchritt").checked) {
+                while (F.schritte.length) wendeAn(F.schritte.shift());
+                F.hinweis = "Fertig. Zugriffe bei dieser Aktion: " + F.letzte + ".";
+                fZeichne(); return;
+            }
+            fWeiter();
+        }
+        function fWeiter() {
+            if (!F.schritte.length) return;
+            wendeAn(F.schritte.shift());
+            if (!F.schritte.length) F.hinweis += "  Fertig. Zugriffe bei dieser Aktion: " + F.letzte + ".";
+            fZeichne();
+        }
+        function fZeichne() {
+            var g = $("feld"); g.innerHTML = "";
+            var verfuegbar = Math.max(240, $("wrap").clientWidth - 40);
+            var maxKap = F.kopie ? F.kopieKap : F.kap;
+            var proZeile = Math.max(3, Math.min(maxKap, Math.floor(verfuegbar / 52)));
+            var ZB2 = Math.max(40, Math.min(60, Math.floor(verfuegbar / proZeile) - 4)), ZHh = 44;
+            var yUnten = 0;
+            function reihe(arr, kap, y, titel, farbe, istKopie) {
+                g.appendChild(el("text", { x: 20, y: y - 12, "font-size": 14, "font-weight": "bold", "font-family": "sans-serif" }, titel));
+                for (var i = 0; i < kap; i++) {
+                    var zl = Math.floor(i / proZeile), sp = i % proZeile;
+                    var x = 20 + sp * (ZB2 + 4), yy = y + zl * (ZHh + 30), v = i < arr.length ? arr[i] : null;
+                    var hv = F.hervor.nach === i && (istKopie ? !!F.kopie : !F.kopie);
+                    g.appendChild(el("rect", { x: x, y: yy, width: ZB2, height: ZHh, rx: 3, fill: v == null ? "#f0f0f0" : hv ? "#ffe9a8" : farbe, stroke: "#234", "stroke-width": 1.5, "stroke-dasharray": v == null ? "4 3" : "0" }));
+                    g.appendChild(el("text", { x: x + ZB2 / 2, y: yy + ZHh / 2 + 5, "text-anchor": "middle", "font-size": 15 }, v == null ? "" : v));
+                    g.appendChild(el("text", { x: x + ZB2 / 2, y: yy + ZHh + 15, "text-anchor": "middle", "font-size": 10, fill: "#666" }, (ZB2 >= 56 ? "Platz " : "") + i));
+                }
+                yUnten = y + Math.ceil(kap / proZeile) * (ZHh + 30);
+            }
+            var laenge = F.arr.length;
+            reihe(F.arr, F.kap, 40, (F.kopie ? "Altes Feld" : "Feld") + " – Länge " + laenge + ", Kapazität " + F.kap, F.kopie ? "#e0e0e0" : "#cfe3ff", false);
+            if (F.kopie) reihe(F.kopie, F.kopieKap, yUnten + 36, "Neues Feld an anderer Speicherstelle – Kapazität " + F.kopieKap, "#d4f5d4", true);
+            var maxZ = Math.max(24, Math.floor(verfuegbar / 8)), worte = F.hinweis.split(" "), zeile = "", ly = yUnten + 26;
+            worte.forEach(function (w) {
+                if ((zeile + " " + w).length > maxZ) { g.appendChild(el("text", { x: 20, y: ly, "font-size": 14, "font-family": "sans-serif" }, zeile)); ly += 19; zeile = w; }
+                else zeile = zeile ? zeile + " " + w : w;
+            });
+            if (zeile) g.appendChild(el("text", { x: 20, y: ly, "font-size": 14, "font-family": "sans-serif" }, zeile));
+            svg.setAttribute("width", Math.max($("wrap").clientWidth - 2, 300));
+            svg.setAttribute("height", Math.max($("wrap").clientHeight - 4, ly + 30));
+            $("fLaenge").textContent = laenge; $("fKap").textContent = F.kopie ? F.kap + " → " + F.kopieKap : F.kap;
+            $("fUmzuege").textContent = F.umzuege; $("fKopiert").textContent = F.kopiert;
+            $("fZugriffe").textContent = F.zugriffe; $("fLetzte").textContent = F.letzte;
+            $("fAnz").textContent = F.nAnf; $("fZA").textContent = F.zAnf;
+            $("fDS").textContent = F.nAnf && !F.schritte.length ? (F.zAnf / F.nAnf).toFixed(1).replace(".", ",") : "–";
+            $("fWeiter").disabled = !F.schritte.length;
+        }
+        var modusFeld = false;
+        function modus(f) {
+            modusFeld = f;
+            $("zeigerPanel").style.display = f ? "none" : ""; $("feldPanel").style.display = f ? "" : "none";
+            $("kanten").style.display = f ? "none" : ""; $("nodes").style.display = f ? "none" : ""; $("feld").style.display = f ? "" : "none";
+            $("modusF").className = f ? "an" : ""; $("modusZ").className = f ? "" : "an";
+            $("meldung").style.display = f ? "none" : "";
+            if (f) fZeichne(); else zeichne();
+        }
+        $("modusZ").onclick = function () { modus(false); };
+        $("modusF").onclick = function () { modus(true); };
+        function fw() { return leseWert($("fWert").value); }
+        $("fAnfuegen").onclick = function () { if (!F.schritte.length) fStart(planAnfuegen(fw(), false), true); };
+        $("fViele").onclick = function () {
+            if (F.schritte.length) return;
+            var anzahl = Math.max(1, Math.min(64, Number($("fAnzahl").value) || 1)), vorher = F.zugriffe, umz = F.umzuege, kop = F.kopiert;
+            for (var i = 0; i < anzahl; i++) {
+                var plan = planAnfuegen(100 + F.nAnf, false);
+                F.aktuellAnf = true; F.nAnf++;
+                while (plan.length) wendeAn(plan.shift());
+            }
+            F.letzte = F.zugriffe - vorher;
+            F.hinweis = anzahl + " Werte nacheinander hinten angefügt: " + (F.umzuege - umz) + " Umzüge, dabei " + (F.kopiert - kop) + " Elemente kopiert, " + F.letzte + " Zugriffe zusammen. Durchschnitt je Anfügen bisher: " + (F.zAnf / F.nAnf).toFixed(1).replace(".", ",") + " Zugriffe.";
+            fZeichne();
+        };
+        $("fVorne").onclick = function () { if (!F.schritte.length) fStart(planAnfuegen(fw(), true)); };
+        $("fLoeschen").onclick = function () { if (!F.schritte.length) fStart(planLoeschen()); };
+        $("fReset").onclick = fReset; $("fStart").onchange = fReset; $("fWeiter").onclick = fWeiter;
+        // Die Werkstatt ragt links und rechts über die Textspalte hinaus, gemessen an ihrer
+        // tatsächlichen Lage (OPAL setzt die Seite im Rahmen anders als der Browser direkt).
+        function breiteAnpassen() {
+            var zw = $("wrap").parentNode;
+            zw.style.width = ""; zw.style.marginLeft = "";
+            var r = zw.getBoundingClientRect(), vw = document.documentElement.clientWidth, x0 = 0;
+            var haupt = document.querySelector('.haupt');
+            if (haupt) { var hr = haupt.getBoundingClientRect(); vw = hr.width; x0 = hr.left; }
+            var w = Math.min(1240, vw - 32);
+            if (w <= r.width) return;
+            zw.style.width = w + "px";
+            zw.style.marginLeft = (x0 + (vw - w) / 2 - r.left) + "px";
+        }
+        addEventListener("resize", function () { breiteAnpassen(); if (modusFeld) fZeichne(); else zeichne(); });
+
+        breiteAnpassen();
+        fReset();
+        starteUebung("anfang");
+        $("uebung").value = "anfang";
+        })();
+        </script>

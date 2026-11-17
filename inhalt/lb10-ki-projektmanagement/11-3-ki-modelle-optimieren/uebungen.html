@@ -1,0 +1,102 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.3.3: Werkzeugerkennung <span class="niveau">AFB II</span></summary>
+                <p>Stell dir vor, du trainierst ein Modell, das anhand eines Fotos erkennen soll, um welches Werkzeug es sich handelt (Hammer, Schraubendreher, Zange oder Säge).</p>
+                <ul>
+                    <li>Beschreibe, welche Fehler ein solches Modell bei Underfitting machen würde (z.&nbsp;B. bei sehr unterschiedlichen, aber auch bei sehr ähnlichen Werkzeugen).</li>
+                    <li>Beschreibe, woran du Overfitting bei diesem Modell erkennen würdest (denk an die drei Genauigkeitswerte aus Aufgabe 11.3.2).</li>
+                    <li>Welche Maßnahmen könntest du ergreifen, um Overfitting zu vermeiden? Nenne mindestens drei konkrete Strategien und erkläre kurz, wie diese helfen würden.</li>
+                </ul>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.3.4: Metriken berechnen <span class="niveau">AFB I–II</span></summary>
+                <p>Gegeben sei folgende Konfusionsmatrix für einen Spam-Filter:</p>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Vorhergesagt: Spam</th>
+                        <th>Vorhergesagt: kein Spam</th>
+                    </tr>
+                    <tr>
+                        <td>Tatsächlich: Spam</td>
+                        <td>810</td>
+                        <td>185</td>
+                    </tr>
+                    <tr>
+                        <td>Tatsächlich: kein Spam</td>
+                        <td>163</td>
+                        <td>1212</td>
+                    </tr>
+                </table>
+                <ol>
+                    <li>Berechne die Genauigkeit (Accuracy) des Spam-Filters.</li>
+                    <li>Berechne die Präzision (Precision) und die Sensitivität (Recall) für die Spam-Erkennung.</li>
+                    <li>Diskutiere, ob dieser Spam-Filter für den praktischen Einsatz geeignet wäre.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.3.5: Weitere Metriken <span class="niveau">AFB II–III</span></summary>
+                <ol>
+                    <li>Berechne die Spezifität des Spam-Filters aus Aufgabe 11.3.4. Die Spezifität gibt an, wie viele der tatsächlichen Nicht-Spam-E-Mails korrekt als solche erkannt wurden. Die Formel lautet: TN / (TN + FP).</li>
+                    <li>Ein anderer Spam-Filter hat eine Genauigkeit von 90&nbsp;%, eine Präzision von 80&nbsp;% und eine Sensitivität von 95&nbsp;%. Vergleiche die Leistung dieses Filters mit dem aus Aufgabe 11.3.4. Welchen Filter würdest du bevorzugen und warum?</li>
+                    <li>In einem medizinischen Screening-Test für eine seltene Krankheit ist es besonders wichtig, möglichst alle erkrankten Personen zu identifizieren, auch wenn dabei einige gesunde Personen fälschlicherweise als krank eingestuft werden. Welche Metrik sollte in diesem Fall optimiert werden? Begründe deine Antwort.</li>
+                    <li>Berechne den F1-Score für den Spam-Filter aus Aufgabe 11.3.4. Der F1-Score ist das harmonische Mittel aus Präzision und Sensitivität und wird wie folgt berechnet: 2 · (Präzision · Sensitivität) / (Präzision + Sensitivität). Was sagt dieser Wert über die Gesamtleistung des Filters aus?</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.3.6: Qualitätskontrolle von Platinen <span class="niveau">AFB II</span></summary>
+                <p>Ein Elektronikhersteller in Dresden prüft gelötete Platinen mit einer Kamera und einem KI-Modell, das jede Platine als „defekt“ oder „in Ordnung“ einstuft. Platinen, die als „defekt“ eingestuft werden, prüft ein Mensch noch einmal von Hand; alle anderen werden ausgeliefert. Für einen Test wurden 16 Platinen zusätzlich von einer Fachkraft begutachtet:</p>
+                <table>
+                    <thead>
+                        <tr><th>Platine</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>tatsächlich (Fachkraft)</td><td>D</td><td>OK</td><td>OK</td><td>OK</td><td>D</td><td>OK</td><td>D</td><td>OK</td><td>OK</td><td>D</td><td>OK</td><td>OK</td><td>OK</td><td>D</td><td>OK</td><td>OK</td></tr>
+                        <tr><td>vorhergesagt (KI)</td><td>D</td><td>OK</td><td>D</td><td>OK</td><td>D</td><td>OK</td><td>OK</td><td>OK</td><td>D</td><td>D</td><td>OK</td><td>OK</td><td>D</td><td>D</td><td>OK</td><td>OK</td></tr>
+                    </tbody>
+                </table>
+                <p>(D = defekt, OK = in Ordnung)</p>
+                <ol>
+                    <li>Lege fest, welche Klasse hier sinnvollerweise die positive ist, und stelle die Konfusionsmatrix auf.</li>
+                    <li>Berechne Accuracy, Precision und Recall.</li>
+                    <li>Erkläre für diesen Betrieb, welche Folgen ein False Positive und welche ein False Negative hat. Entscheide begründet, welche der beiden Kennzahlen Precision oder Recall hier wichtiger ist.</li>
+                </ol>
+                <p class="tipp">Kontrolliere am Ende, ob TP + FP + FN + TN wieder 16 ergibt.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.3.7: Die richtige Baumtiefe finden <span class="niveau">AFB II</span></summary>
+                <p>Lara trainiert einen Entscheidungsbaum, der vorhersagt, ob Kundinnen und Kunden eines Fitnessstudios ihren Vertrag kündigen. Die maximale Baumtiefe ist ein Hyperparameter. Für jede Tiefe hat sie die <strong>Fehlerquote</strong> (Anteil falsch klassifizierter Fälle, also 1 − Genauigkeit) auf den Trainings- und auf den Validierungsdaten notiert:</p>
+                <table>
+                    <thead>
+                        <tr><th>maximale Baumtiefe</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Fehlerquote Training</td><td>31&nbsp;%</td><td>22&nbsp;%</td><td>15&nbsp;%</td><td>10&nbsp;%</td><td>6&nbsp;%</td><td>3&nbsp;%</td><td>1&nbsp;%</td><td>0&nbsp;%</td></tr>
+                        <tr><td>Fehlerquote Validierung</td><td>32&nbsp;%</td><td>24&nbsp;%</td><td>17&nbsp;%</td><td>13&nbsp;%</td><td>12&nbsp;%</td><td>14&nbsp;%</td><td>18&nbsp;%</td><td>21&nbsp;%</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Berechne für jede Tiefe den Abstand zwischen Validierungs- und Trainingsfehler. Beschreibe, wie sich beide Fehlerquoten mit wachsender Modellkomplexität entwickeln.</li>
+                    <li>Gib an, bei welchen Tiefen Underfitting und bei welchen Overfitting vorliegt. Begründe mit den Merkmalen aus Abschnitt 4.</li>
+                    <li>Wähle eine Baumtiefe für das endgültige Modell und begründe deine Wahl. Gib die zugehörige Trainings- und Validierungs<em>genauigkeit</em> an.</li>
+                    <li>Laras Mitschüler meint: „Nimm Tiefe 8, da macht das Modell überhaupt keine Fehler.“ Nimm Stellung.</li>
+                    <li>Beschreibe, was Lara nach der Wahl der Tiefe noch tun muss, bevor sie die Leistung des Modells angeben darf.</li>
+                </ol>
+            </details>
+        </div>

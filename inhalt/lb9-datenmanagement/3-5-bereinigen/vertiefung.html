@@ -1,0 +1,42 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.5.5: Fehler finden – vier Muster, die zu viel oder das Falsche tun <span class="niveau">AFB III</span></summary>
+            <p>In einem Bereinigungsskript stehen diese vier Zeilen. Jede enthält einen Fehler.</p>
+            <pre><code class="language-python">import re
+print(bool(re.search(r"\d{2}:\d{2}", "125:309")))       # soll eine Uhrzeit HH:MM erkennen
+print(bool(re.fullmatch(r"\d+.\d+", "12x5")))           # soll eine Dezimalzahl erkennen
+print(re.sub(r"\d", "", "0351 / 123-45 67"))            # soll nur die Ziffern übrig lassen
+print(int(re.search(r"\d{5}", "01067 Dresden").group())) # soll die PLZ speichern</code></pre>
+            <ol>
+                <li>Bestimme ohne Computer die Ausgabe jeder Zeile.</li>
+                <li>Erkläre jeweils, warum das Ergebnis nicht dem Ziel entspricht.</li>
+                <li>Korrigiere jede Zeile und gib für jede Korrektur einen Testfall an, der vorher falsch und jetzt richtig ist.</li>
+            </ol>
+        </details>
+    </div>
+
+<div class="aufgabe">
+        <details>
+            <summary>Aufgabe 3.5.6: Eine Bereinigungsstrategie für Sensordaten entwerfen <span class="niveau">AFB III</span></summary>
+            <p>Die Datei <a href="../notebooks/sensordaten.csv" download>sensordaten.csv</a> enthält Messungen aus dem Schulgewächshaus mit den
+               Spalten <code>Zeit;Code;Temperatur;SensorInfo</code>. Ein gültiger Code besteht aus genau drei Ziffern, die SensorInfo hat die
+               Form <code>G18_Typ-A</code> (Sensornummer nach dem G, Typ A, B oder C).</p>
+            <ol>
+                <li>Untersuche die Datei und beschreibe alle Auffälligkeiten.</li>
+                <li>Schreibe ein Programm, das mit regulären Ausdrücken ungültige Codes erkennt, aus der SensorInfo Sensornummer und Typ gewinnt
+                    und Zeilen mit ungültigem Code oder unrealistischer Temperatur (Grenzen wie auf dieser Seite) verwirft. Gib die Zahl der
+                    gültigen Zeilen, die Anzahl je Typ, die verworfenen Zeilen mit Grund und den Mittelwert der gültigen Temperaturen
+                    (eine Nachkommastelle) aus.</li>
+                <li>Der Wert 48.0 um 11:20 Uhr liegt innerhalb der Grenzen. Beurteile, ob er trotzdem bereinigt werden sollte, und vergleiche,
+                    wie sich der Mittelwert ändert. Entwickle eine Regel, die solche Werte erkennt, ohne echte Hitzetage zu verfälschen.</li>
+            </ol>
+            <table class="gitter">
+                <tr><th>Testfall</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr>
+                <tr><td>gültige Zeilen / je Typ</td><td><code>7 {'A': 3, 'B': 2, 'C': 2}</code></td><td></td></tr>
+                <tr><td>Mittelwert der gültigen Temperaturen</td><td><code>27.9</code></td><td></td></tr>
+                <tr><td><code>re.fullmatch(r"\d{3}", "abc")</code></td><td><code>None</code></td><td></td></tr>
+            </table>
+        </details>
+    </div>

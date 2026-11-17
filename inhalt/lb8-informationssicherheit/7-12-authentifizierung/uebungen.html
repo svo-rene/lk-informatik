@@ -1,0 +1,45 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.12.3: Fingerabdruck in der Schulmensa? <span class="niveau">AFB III</span></summary>
+                <p>Ein Caterer schlägt vor, dass Schülerinnen und Schüler ihr Mittagessen künftig per Fingerabdruck statt mit einer Chipkarte bezahlen. Beurteile den Vorschlag aus Sicht von Sicherheit, Bequemlichkeit und Datenschutz und formuliere eine begründete Empfehlung.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.12.4: Das RADIUS-Protokoll lesen <span class="niveau">AFB II</span></summary>
+                <p>Ausschnitt aus dem Protokoll des RADIUS-Servers einer Schule (AP = Access Point):</p>
+                <pre>07:52:10  Access-Request    user=lena.k     von AP-Haus2-OG1
+07:52:10  Access-Accept     user=lena.k     Netz=Schueler
+07:52:11  Accounting-Start  user=lena.k     Geraet=Tablet-17
+07:58:03  Access-Request    user=m.weber    von AP-Lehrerzimmer
+07:58:03  Access-Accept     user=m.weber    Netz=Lehrkraefte
+08:15:40  Access-Request    user=admin      von AP-Haus2-OG1
+08:15:40  Access-Reject     user=admin
+08:15:41  Access-Request    user=admin      von AP-Haus2-OG1
+08:15:41  Access-Reject     user=admin
+   ... (insgesamt 240 abgelehnte Anfragen für "admin" bis 08:19:40)
+13:05:22  Accounting-Stop   user=lena.k     Dauer=5h13min</pre>
+                <ol type="a">
+                    <li>Beschreibe, was um 07:52 Uhr zwischen Tablet, Access Point und RADIUS-Server abläuft. Ordne die Einträge den drei A (Authentifizierung, Autorisierung, Accounting) zu.</li>
+                    <li>Erkläre, woran man erkennt, dass Lena und Herr Weber unterschiedliche Rechte erhalten.</li>
+                    <li>Deute die Einträge ab 08:15:40 und schlage zwei Maßnahmen vor.</li>
+                    <li>Beurteile, welche Daten das Accounting über Schülerinnen und Schüler sammelt und wie lange sie gespeichert werden sollten.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.12.6: Fehler finden – das neue Schul-WLAN <span class="niveau">AFB II</span></summary>
+                <p>Der IT-Verantwortliche stellt seinen Plan für das neue WLAN vor:</p>
+                <div class="sachtext">
+                    <p>„Wir stellen auf WPA3-Enterprise mit RADIUS um. Damit es einfach bleibt, bekommen alle Schülerinnen und Schüler das gemeinsame Konto ‚schueler‘ mit dem Passwort ‚Schule2026‘, alle Lehrkräfte das Konto ‚lehrer‘. Beide Gruppen landen im selben Netz wie die Verwaltungsrechner. Das Accounting schalten wir ab, das braucht nur Speicherplatz. Der RADIUS-Server läuft auf dem alten PC im Sekretariat.“</p>
+                </div>
+                <p>Finde mindestens vier Schwachstellen und begründe jeweils, welcher Vorteil von RADIUS dadurch verloren geht. Schlage Verbesserungen vor.</p>
+            </details>
+        </div>

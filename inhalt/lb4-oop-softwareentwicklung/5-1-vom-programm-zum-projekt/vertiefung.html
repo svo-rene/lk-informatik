@@ -1,0 +1,55 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-5-1-6">
+            <details>
+                <summary>Aufgabe 5.1.6: Fehler finden – der Lauftreff startet nicht <span class="niveau">AFB III</span></summary>
+                <p>Der Lauftreff der Schule möchte zu jedem Lauf die Zeit und das Tempo in Minuten pro Kilometer sehen. Drei Module:</p>
+                <pre><code class="language-python"># lauf.py  (Model)
+from anzeige import als_minuten
+
+class Lauf:
+    def __init__(self, strecke_m: int, zeit_s: int):
+        self.__strecke_m = strecke_m
+        self.__zeit_s = zeit_s
+
+    def get_zeit(self) -&gt; int:
+        return self.__zeit_s
+
+    def tempo(self) -&gt; str:
+        sekunden_pro_km = self.__zeit_s * 1000 // self.__strecke_m
+        return als_minuten(sekunden_pro_km) + " min/km"</code></pre>
+                <pre><code class="language-python"># anzeige.py  (View)
+from lauf import Lauf
+
+def als_minuten(sekunden: int) -&gt; str:
+    return f"{sekunden // 60}:{sekunden % 60:02d}"
+
+def zeige(lauf: Lauf) -&gt; None:
+    print("Zeit:", als_minuten(lauf.get_zeit()), " Tempo:", lauf.tempo())</code></pre>
+                <pre><code class="language-python"># main.py  (Controller)
+from lauf import Lauf
+from anzeige import zeige
+
+zeige(Lauf(5000, 1530))</code></pre>
+                <p>Beim Start von <code>main.py</code> erscheint am Ende:</p>
+                <pre><code>ImportError: cannot import name 'Lauf' from partially initialized module 'lauf' (most likely due to a circular import)</code></pre>
+                <ol>
+                    <li>Erkläre Schritt für Schritt, was Python beim Start von <code>main.py</code> lädt und warum <code>Lauf</code> beim Import in <code>anzeige.py</code> noch nicht existiert.</li>
+                    <li>Benenne, gegen welche Regel von MVC der Entwurf verstößt.</li>
+                    <li>Korrigiere die Module so, dass das Model nichts aus der View importiert. Das Tempo soll das Model als ganze Zahl (Sekunden pro Kilometer) liefern. Ergänze in <code>main.py</code> einen kontrollierten Programmeinstieg.</li>
+                    <li>Prüfe: <code>Lauf(5000, 1530)</code> ergibt „Zeit: 25:30 &nbsp;Tempo: 5:06 min/km“, <code>Lauf(10000, 3005)</code> ergibt „Zeit: 50:05 &nbsp;Tempo: 5:00 min/km“.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-5-1-7">
+            <details>
+                <summary>Aufgabe 5.1.7: Beurteile – „Eine Datei reicht doch“ <span class="niveau">AFB III</span></summary>
+                <p>Eine Dreiergruppe soll ein Programm für die Abstimmung über das Ziel der Kursfahrt schreiben: Vorschläge sammeln, jede Person der Kursliste darf genau einmal abstimmen, das Ergebnis erscheint als Tabelle und als Balken. Ole schlägt vor: „Wir schreiben alles in eine Datei <code>kursfahrt.py</code>. Dann gibt es keine Importfehler, und jeder sieht immer den ganzen Code.“</p>
+                <ol>
+                    <li>Beurteile Oles Vorschlag. Gehe auf Übersicht, Testbarkeit, Austauschbarkeit und auf die Arbeit zu dritt an einem gemeinsamen Repository ein.</li>
+                    <li>Entwirf eine Aufteilung in Module nach MVC. Gib für jedes Modul an, was es enthält, welche Module es importiert und welche Person es bearbeitet.</li>
+                    <li>Nenne eine Situation, in der eine einzige Datei tatsächlich die bessere Wahl ist.</li>
+                </ol>
+            </details>
+        </div>

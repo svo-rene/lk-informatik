@@ -1,0 +1,251 @@
+<p>Beim Umgang mit Programmiersprachen spielen Compiler und Interpreter eine zentrale Rolle. Sie sind dafür verantwortlich, den von Menschen geschriebenen Quellcode in eine für den Computer ausführbare Form zu übersetzen. Mit deinem Wissen über formale Sprachen, Grammatiken und Automaten kannst du nun verstehen, wie diese Übersetzung funktioniert.</p>
+
+<h2>1. Compiler vs. Interpreter – die Grundlagen</h2>
+
+<h3>1.1 Compiler</h3>
+
+<p>Ein Compiler übersetzt den gesamten Quellcode einer höheren Programmiersprache in Maschinencode, bevor das Programm ausgeführt wird. Dieser übersetzte Code kann dann direkt von der Zielplattform ausgeführt werden (z.&nbsp;B. C, C++, Rust).</p>
+
+<h3>1.2 Interpreter</h3>
+
+<p>Ein Interpreter hingegen übersetzt und führt den Quellcode Anweisung für Anweisung aus. Er liest eine Anweisung, analysiert sie, führt sie aus und geht dann zur nächsten Anweisung über.</p>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: Mischformen mit Bytecode</summary>
+<p>Viele Sprachen verwenden eine Mischform: Java wird vom Compiler <code>javac</code> vollständig in <strong>Bytecode</strong> übersetzt, den die Java Virtual Machine (JVM) anschließend interpretiert bzw. zur Laufzeit in Maschinencode übersetzt (Just-in-time-Compiler). Auch Python übersetzt ein Programm zuerst in Bytecode (<code>.pyc</code>), der dann vom Python-Interpreter ausgeführt wird. Viele Fehler, die ein Java-Compiler vor dem Start meldet, bemerkt Python deshalb erst zur Laufzeit.</p>
+</details>
+</div>
+
+<h2>2. Die Phasen eines Compilers</h2>
+
+<p>Der Übersetzungsprozess eines Compilers lässt sich in mehrere Phasen unterteilen. Hier sind die Hauptphasen:</p>
+
+<ol>
+<li><strong>Lexikalische Analyse (Scanner, Lexer)</strong></li>
+<li><strong>Syntaktische Analyse (Parser)</strong></li>
+<li><strong>Semantische Analyse</strong></li>
+<li><strong>Zwischencode-Erzeugung</strong></li>
+<li><strong>Optimierung</strong></li>
+<li><strong>Code-Erzeugung</strong></li>
+</ol>
+
+<h2>3. Lexikalische Analyse – endliche Automaten in Aktion</h2>
+
+<p>Bei der lexikalischen Analyse wird der Quellcode in Tokens zerlegt. Ein Token ist die kleinste sinnvolle Einheit in einer Programmiersprache, wie zum Beispiel Schlüsselwörter, Bezeichner, Literale oder Operatoren.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+<p><strong>Ausgangssituation:</strong> Die Zeile <code>summe = summe + 42;</code> wird zerlegt in</p>
+<p><code>BEZEICHNER(summe) ZUWEISUNG BEZEICHNER(summe) PLUS ZAHL(42) SEMIKOLON</code></p>
+<p>Der Automat für ZAHL hat einen Startzustand und einen akzeptierenden Zustand „Zahl“ mit einer Schleife für die Ziffern 0–9. Der Automat für BEZEICHNER akzeptiert <code>[a-zA-Z_][a-zA-Z0-9_]*</code>.</p>
+<ol>
+<li><strong>Erstes Zeichen entscheidet:</strong> <code>s</code> ist ein Buchstabe, also startet der BEZEICHNER-Automat. <em>Warum?</em> Nur dieser Automat hat für einen Buchstaben einen Übergang aus dem Startzustand.</li>
+<li><strong>So weit wie möglich lesen:</strong> u, m, m, e bleiben in der Schleife des Endzustands; beim Leerzeichen gibt es keinen Übergang. Token: BEZEICHNER(summe). <em>Warum?</em> Lexer suchen das <em>längste</em> passende Teilwort – sonst würde aus <code>summe</code> eine Folge von fünf Ein-Buchstaben-Bezeichnern.</li>
+<li><strong>Leerzeichen überspringen:</strong> Es erzeugt kein Token, es trennt nur.</li>
+<li><strong>Einzelzeichen-Token:</strong> <code>=</code> → ZUWEISUNG, später <code>+</code> → PLUS und <code>;</code> → SEMIKOLON.</li>
+<li><strong>Zahl lesen:</strong> <code>4</code> startet den ZAHL-Automaten, <code>2</code> bleibt in der Schleife, bei <code>;</code> endet das Token ZAHL(42).</li>
+</ol>
+<p><strong>Ergebnis:</strong> sechs Tokens, wie oben angegeben.</p>
+<p><strong>Kontrolle – die Grenze des Lexers:</strong> <code>2summe</code> ergibt ZAHL(2) BEZEICHNER(summe). Der Lexer meldet keinen Fehler; dass eine Zahl nicht direkt vor einem Bezeichner stehen darf, erkennt erst der Parser.</p>
+            </details>
+        </div>
+
+<h2>4. Syntaktische Analyse – Kellerautomaten und Grammatiken</h2>
+
+<p>Der Parser überprüft, ob die Abfolge der Tokens den Regeln der Programmiersprache entspricht. Er erstellt dabei oft einen Syntaxbaum, der die Struktur des Programms repräsentiert.</p>
+
+<div class="hinweis">
+<details>
+<summary>Hinweis: Parser als Kellerautomat</summary>
+<p>Die Syntax der meisten Programmiersprachen lässt sich durch kontextfreie Grammatiken beschreiben. Der Parser, der die syntaktische Analyse durchführt, arbeitet wie ein Kellerautomat, der diese Grammatik verarbeitet.</p>
+</details>
+</div>
+
+<h2>5. Semantische Analyse – über Grammatiken hinaus</h2>
+
+<p>Bei der semantischen Analyse wird die Bedeutung der Anweisungen geprüft. Das geht über die Möglichkeiten kontextfreier Grammatiken hinaus: Ob eine Variable vorher deklariert wurde, hängt vom „Kontext“ an einer ganz anderen Stelle im Programm ab. Der Compiler verwendet dafür eine Symboltabelle.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+<p><strong>Ausgangssituation:</strong> <code>if (a &gt; 0) b = a * 2;</code> in Java</p>
+<ul>
+<li><strong>Lexer:</strong> IF KLAMMER_AUF BEZEICHNER(a) GRÖSSER ZAHL(0) KLAMMER_ZU BEZEICHNER(b) ZUWEISUNG BEZEICHNER(a) MAL ZAHL(2) SEMIKOLON</li>
+<li><strong>Parser:</strong> erkennt nach der Grammatik <code>&lt;if&gt; ::= "if" "(" &lt;ausdruck&gt; ")" &lt;anweisung&gt;</code> eine if-Anweisung und baut den Syntaxbaum; <code>a * 2</code> hängt wegen „Punkt vor Strich“ als eigener Teilbaum unter der Zuweisung.</li>
+<li><strong>Semantik:</strong> Sind a und b deklariert? Ist <code>a &gt; 0</code> vom Typ boolean? Passt der Typ von <code>a * 2</code> zum Typ von b?</li>
+</ul>
+<p><strong>Die drei Phasen nacheinander:</strong></p>
+<ol>
+<li><strong>Lexer:</strong> <code>if</code> passt zwar auch auf den Bezeichner-Automaten, steht aber in der Liste der Schlüsselwörter und wird deshalb zum Token IF. <em>Warum?</em> Sonst könnte der Parser eine if-Anweisung nicht von einer Variablen namens if unterscheiden.</li>
+<li><strong>Parser:</strong> Er arbeitet nur noch mit den Token-Typen, nicht mit den Namen. Er prüft die Reihenfolge IF, KLAMMER_AUF, Ausdruck, KLAMMER_ZU, Anweisung – wie ein Kellerautomat, der sich die offene Klammer merkt.</li>
+<li><strong>Semantische Analyse:</strong> Sie schlägt a und b in der Symboltabelle nach (Deklaration und Typ) und prüft die Typen. <em>Warum erst hier?</em> Ob b vorher als <code>int</code> deklariert wurde, steht an einer ganz anderen Stelle im Programm – das kann keine kontextfreie Grammatik prüfen.</li>
+</ol>
+<p><strong>Ergebnis:</strong> Fehlt die schließende Klammer, meldet der Parser einen Fehler; ist b als <code>String</code> deklariert, meldet die semantische Analyse „incompatible types“ – zwei verschiedene Phasen, zwei verschiedene Fehlermeldungen.</p>
+            </details>
+        </div>
+
+<h2>6. Verbindung zu Automaten und Grammatiken</h2>
+
+<table>
+<thead>
+<tr>
+<th>Compiler-Phase</th>
+<th>verwendete Theorie</th>
+<th>Modell</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lexikalische Analyse</td>
+<td>reguläre Ausdrücke (Typ 3)</td>
+<td>endlicher Automat</td>
+<td>Erkennung von <code>if</code>, <code>while</code>, Bezeichnern, Zahlen</td>
+</tr>
+<tr>
+<td>Syntaktische Analyse</td>
+<td>kontextfreie Grammatiken (Typ 2)</td>
+<td>Kellerautomat</td>
+<td>Überprüfung von Klammerstrukturen und Anweisungsaufbau</td>
+</tr>
+<tr>
+<td>Semantische Analyse</td>
+<td>kontextabhängige Regeln (Symboltabelle, Typsystem)</td>
+<td>allgemeine Algorithmen</td>
+<td>Typprüfung, Variablendeklaration, Parameteranzahl</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Ein Mini-Scanner in Python</h3>
+
+<p>Ein Scanner lässt sich ohne Bibliothek programmieren: Eine Funktion ordnet jedem Zeichen eine Zeichenklasse zu, eine Schleife liest den Text und wählt nach dem ersten Zeichen den passenden „Automaten“. Die inneren Schleifen sind genau die Schleifen an den Endzuständen „Zahl“ und „Bezeichner“.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">Programmierung</span></summary>
+<p><strong>Ausgangssituation:</strong> Einfache Ausdrücke mit Zahlen, Bezeichnern, den Rechenzeichen + - * /, Zuweisung, Klammern und Semikolon sollen in Tokens zerlegt werden. Jedes Token ist ein Tupel (Typ, Text).</p>
+<pre><code class="language-python">OPERATOREN = {
+    "+": "PLUS", "-": "MINUS", "*": "MAL", "/": "GETEILT",
+    "=": "ZUWEISUNG", "(": "KLAMMER_AUF", ")": "KLAMMER_ZU",
+    ";": "SEMIKOLON",
+}
+
+
+def zeichenklasse(z):
+    if z in "0123456789":
+        return "ziffer"
+    if z.isalpha() or z == "_":
+        return "buchstabe"
+    if z == " ":
+        return "leer"
+    if z in OPERATOREN:
+        return "operator"
+    return "unbekannt"
+
+
+def scanne(text):
+    tokens = []
+    i = 0
+    while i &lt; len(text):
+        klasse = zeichenklasse(text[i])
+        if klasse == "leer":
+            i = i + 1                      # Leerzeichen trennen nur
+        elif klasse == "operator":
+            tokens.append((OPERATOREN[text[i]], text[i]))
+            i = i + 1
+        elif klasse == "ziffer":           # Automat für ZAHL
+            start = i
+            while i &lt; len(text) and zeichenklasse(text[i]) == "ziffer":
+                i = i + 1
+            tokens.append(("ZAHL", text[start:i]))
+        elif klasse == "buchstabe":        # Automat für BEZEICHNER
+            start = i
+            while i &lt; len(text) and zeichenklasse(text[i]) in ("buchstabe", "ziffer"):
+                i = i + 1
+            tokens.append(("BEZEICHNER", text[start:i]))
+        else:                              # kein Automat passt
+            tokens.append(("FEHLER", text[i]))
+            i = i + 1
+    return tokens
+
+
+# Testfälle: (Eingabe, erwartete Tokenliste)
+tests = [
+    ("summe = summe + 42;",
+     [("BEZEICHNER", "summe"), ("ZUWEISUNG", "="), ("BEZEICHNER", "summe"),
+      ("PLUS", "+"), ("ZAHL", "42"), ("SEMIKOLON", ";")]),
+    ("x1*(y+7)",
+     [("BEZEICHNER", "x1"), ("MAL", "*"), ("KLAMMER_AUF", "("),
+      ("BEZEICHNER", "y"), ("PLUS", "+"), ("ZAHL", "7"), ("KLAMMER_ZU", ")")]),
+    ("3a", [("ZAHL", "3"), ("BEZEICHNER", "a")]),
+    ("a # b", [("BEZEICHNER", "a"), ("FEHLER", "#"), ("BEZEICHNER", "b")]),
+    ("", []),
+]
+for eingabe, erwartet in tests:
+    ergebnis = scanne(eingabe)
+    print(repr(eingabe), "ok" if ergebnis == erwartet else "FEHLER")
+
+print(scanne("x1*(y+7)"))</code></pre>
+<ol>
+<li><strong>Zeichenklassen:</strong> <code>zeichenklasse</code> entspricht den Spalten einer Übergangstabelle: Alle Ziffern verhalten sich gleich, alle Buchstaben auch. <em>Warum?</em> So braucht der Scanner keine Tabelle mit hunderten Spalten.</li>
+<li><strong>Ablauf für <code>"x1*(y+7)"</code>:</strong> i = 0, <code>x</code> ist ein Buchstabe → innere Schleife liest <code>x</code> und <code>1</code> (Ziffern sind im Bezeichner erlaubt), stoppt bei <code>*</code> mit i = 2 → BEZEICHNER(x1). Dann <code>*</code> → MAL, <code>(</code> → KLAMMER_AUF, <code>y</code> → BEZEICHNER(y), <code>+</code> → PLUS, <code>7</code> → ZAHL(7), <code>)</code> → KLAMMER_ZU.</li>
+<li><strong>Längstes Teilwort:</strong> Die inneren <code>while</code>-Schleifen laufen, solange der Automat im Endzustand bleiben kann. Die Bedingung <code>i &lt; len(text)</code> verhindert, dass am Textende über die letzte Stelle hinaus gelesen wird.</li>
+<li><strong>Fehlerfall:</strong> Für <code>#</code> gibt es keinen Automaten. Der Scanner erzeugt ein Token FEHLER und liest weiter, damit er weitere Fehler in derselben Zeile melden kann.</li>
+</ol>
+<p><strong>Ergebnis (Ausgabe des Programms):</strong></p>
+<pre>'summe = summe + 42;' ok
+'x1*(y+7)' ok
+'3a' ok
+'a # b' ok
+'' ok
+[('BEZEICHNER', 'x1'), ('MAL', '*'), ('KLAMMER_AUF', '('), ('BEZEICHNER', 'y'), ('PLUS', '+'), ('ZAHL', '7'), ('KLAMMER_ZU', ')')]</pre>
+<p><strong>Kontrolle:</strong> Der Testfall <code>"3a"</code> zeigt die Grenze aus Beispiel 1: Der Scanner liefert ohne Fehlermeldung ZAHL und BEZEICHNER. Die leere Eingabe ergibt eine leere Tokenliste.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+<details>
+<summary>Praxisbezug: Compilerbau im Berufsleben</summary>
+<p><strong>Alltag:</strong> Jede App auf deinem Smartphone wurde von einem Compiler übersetzt. Die Fehlermeldung „missing semicolon“ in deiner Entwicklungsumgebung stammt direkt aus Lexer oder Parser. Auch Webbrowser enthalten Compiler: JavaScript wird beim Laden einer Seite geparst und in Maschinencode übersetzt.</p>
+<p><strong>Beruf:</strong> Compilerentwicklerinnen und -entwickler arbeiten bei Chip- und Softwareherstellern an Werkzeugketten, z.&nbsp;B. für Mikrocontroller in Autos und Industrieanlagen – ein Bereich, der im „Silicon Saxony“ rund um Dresden stark vertreten ist. Mit Lexer- und Parser-Generatoren (ANTLR, flex/bison) entwickeln Softwarefirmen außerdem eigene domänenspezifische Sprachen, etwa für Konfigurationen, Datenbankabfragen oder Testskripte.</p>
+</details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke"><p><strong>Merke:</strong> Compiler übersetzen den gesamten Code vor der Ausführung und können dabei viele Fehler schon vor dem Programmstart melden. Interpreter übersetzen und führen den Code Anweisung für Anweisung während der Ausführung aus.</p></div>
+
+<div class="merke"><p><strong>Merke:</strong> Ein Compiler analysiert Quelltext in mehreren Stufen: lexikalisch → syntaktisch → semantisch.<br>Die ersten beiden Stufen beruhen auf <strong>formalen Sprachen</strong> – also auf dem, was wir mit Automaten und Grammatiken gelernt haben.</p></div>
+
+<div class="merke"><p><strong>Merke:</strong> Die lexikalische Analyse beschreibt jeden Token-Typ durch einen regulären Ausdruck. Daraus wird ein endlicher Automat erzeugt. Die <strong>akzeptierenden Zustände</strong> dieses Automaten entsprechen den Token-Typen (z.&nbsp;B. „Zahl erkannt“, „Bezeichner erkannt“); die übrigen Zustände sind Zwischenzustände während des Lesens.</p></div>
+
+<div class="merke"><p><strong>Merke:</strong> Die semantische Analyse überprüft unter anderem die Typkorrektheit, die Deklaration von Variablen vor ihrer Verwendung und die korrekte Anzahl von Parametern bei Funktionsaufrufen.</p></div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.14.1: Compiler vs. Interpreter <span class="niveau">AFB I</span></summary>
+<p>Erkläre den Unterschied zwischen einem Compiler und einem Interpreter. Nenne jeweils einen Vor- und Nachteil beider Ansätze.</p>
+</details>
+</div>
+
+<div class="aufgabe">
+<details>
+<summary>Aufgabe 6.14.2: Analyse eines Python-Codes <span class="niveau">AFB II</span></summary>
+<p>Betrachte den folgenden Python-Code:</p>
+<pre>def greet(name):
+    print("Hello, " + name + "!")
+
+greet("Alice")</pre>
+<ol>
+<li>Identifiziere die Tokens in der ersten Zeile des Codes.</li>
+<li>Gib eine vereinfachte Grammatikregel für die Funktionsdefinition an.</li>
+<li>Nenne zwei Aspekte, die bei der semantischen Analyse dieses Codes überprüft werden könnten.</li>
+<li>Erkläre kurz, wie die drei Analysephasen (lexikalisch, syntaktisch, semantisch) diesen Code verarbeiten würden.</li>
+</ol>
+</details>
+</div>

@@ -1,0 +1,102 @@
+<p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+
+<p>Wie du bereits weißt, benötigen Netzwerkgeräte IP-Adressen, um miteinander kommunizieren zu können. Je nachdem, mit welchem Netz sich ein Gerät verbindet, bekommt es eine andere IP-Adresse zugewiesen: zu Hause eine andere als in der Schule. Damit die Vergabe geordnet abläuft, verwenden Netze ein Protokoll, also ein festes Schema, nach dem der Vergabeprozess abläuft. Dieses Protokoll heißt <strong>DHCP</strong> (<strong>D</strong>ynamic <strong>H</strong>ost <strong>C</strong>onfiguration <strong>P</strong>rotocol).</p>
+
+<p>DHCP weist Geräten beim Verbinden mit einem Netz automatisch eine IP-Adresse und weitere wichtige Netzwerkeinstellungen zu. Das vereinfacht die Verwaltung der IP-Adressen in einem Netz erheblich. Obwohl DHCP Adressen der Internetschicht vergibt, ist es selbst ein <strong>Anwendungsprotokoll</strong>: Es läuft über UDP, der Server nutzt Port 67, der Client Port 68.</p>
+
+<h2>DHCP-Discover</h2>
+
+<p>Wenn sich ein Gerät mit einem Netz verbindet und noch keine IP-Adresse hat, sucht es nach einem DHCP-Server. Dazu sendet es per Broadcast eine Nachricht (den sogenannten DHCP-Discover) mit dem Wunsch, eine IP-Adresse zu erhalten. Da es noch keine eigene Adresse hat, verwendet es als Quell-IP-Adresse 0.0.0.0.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Broadcast</summary>
+                <p>
+                    Eine Broadcast-Nachricht ist an die Broadcast-Adresse gerichtet – bei IP an 255.255.255.255 (bzw. die Broadcast-Adresse des Subnetzes), bei Ethernet an die MAC-Adresse FF:FF:FF:FF:FF:FF. Deshalb wird sie jedem Teilnehmer im lokalen Netz zugestellt. Router leiten Broadcasts nicht in andere Netze weiter. Kennt ein Netzwerkgerät die Adressen seiner Netzwerknachbarn noch nicht, kann es auf diese Weise trotzdem Kontakt aufnehmen.
+                </p>
+            </details>
+        </div>
+
+<h2>DHCP-Offer</h2>
+
+<p>Erhält ein DHCP-Server einen Discover, prüft er, ob er noch eine freie IP-Adresse hat. Jeder DHCP-Server ist für einen eigenen Adressbereich (Pool) zuständig.</p>
+
+<p>Ist eine Adresse frei, sendet der Server dem Client ein DHCP-Offer. Es enthält die angebotene IP-Adresse, die Subnetzmaske, das Standard-Gateway, den DNS-Server, die Dauer der Leihzeit (Lease) sowie die IP-Adresse des DHCP-Servers als Kennung. Da der Client noch keine IP-Adresse besitzt, wird das Offer an seine MAC-Adresse geschickt (je nach Client auch per Broadcast). Der Server merkt sich die angebotene Adresse vor, damit er sie nicht gleichzeitig einem anderen Client anbietet.</p>
+
+<h2>DHCP-Request</h2>
+
+<p>Der Client erhält ein oder mehrere Offers und entscheidet sich für ein Angebot. Er sendet daraufhin einen DHCP-Request – wieder <strong>per Broadcast</strong>, denn er hat immer noch keine gültige Adresse. Der Request enthält die Kennung des gewählten Servers. So erfahren alle DHCP-Server im Netz gleichzeitig, welches Angebot angenommen wurde: Der gewählte Server bestätigt, die anderen geben ihre vorgemerkten Adressen wieder frei.</p>
+
+<h2>DHCP-Acknowledgement</h2>
+
+<p>Im letzten Schritt sendet der gewählte DHCP-Server dem Client eine Bestätigung, dass die IP-Adresse nun erfolgreich ausgeliehen wurde. Dieser Schritt heißt DHCP-Acknowledgement (ACK). Erst jetzt übernimmt der Client Adresse, Maske, Gateway und DNS-Server. Kann der Server die Adresse nicht mehr vergeben, antwortet er stattdessen mit einem DHCP-NAK, und der Client beginnt von vorn.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: Das Handy kommt nach Hause <span class="beispiel-kopf">einfach</span></summary>
+            <p>Dein Handy verbindet sich mit dem WLAN der FRITZ!Box und schickt einen Discover. Die FRITZ!Box antwortet mit einem Offer: IP-Adresse 192.168.178.34, Maske 255.255.255.0, Gateway 192.168.178.1, DNS-Server 192.168.178.1, Lease mehrere Tage. Das Handy fordert das Angebot per Request an, die FRITZ!Box bestätigt mit ACK – fertig, nach weniger als einer Sekunde.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: Zwei DHCP-Server in einem Netz <span class="beispiel-kopf">komplex</span></summary>
+            <p>Im Netz 192.168.0.0/24 arbeiten die DHCP-Server S1 (192.168.0.2, Pool .10 bis .99) und S2 (192.168.0.3, Pool .100 bis .199). Ein neuer Laptop meldet sich an.</p>
+            <table>
+                <thead>
+                    <tr><th>Nr.</th><th>Nachricht</th><th>Quell-IP:Port</th><th>Ziel-IP:Port</th><th>Ziel-MAC</th><th>Inhalt</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Discover</td><td>0.0.0.0:68</td><td>255.255.255.255:67</td><td>FF:FF:FF:FF:FF:FF</td><td>„Ich brauche eine Adresse“</td></tr>
+                    <tr><td>2a</td><td>Offer von S1</td><td>192.168.0.2:67</td><td>an den Client, Port 68</td><td>MAC des Laptops</td><td>192.168.0.10, Maske, Gateway, DNS, Lease</td></tr>
+                    <tr><td>2b</td><td>Offer von S2</td><td>192.168.0.3:67</td><td>an den Client, Port 68</td><td>MAC des Laptops</td><td>192.168.0.100, Maske, Gateway, DNS, Lease</td></tr>
+                    <tr><td>3</td><td>Request</td><td>0.0.0.0:68</td><td>255.255.255.255:67</td><td>FF:FF:FF:FF:FF:FF</td><td>„Ich nehme 192.168.0.10 von Server 192.168.0.2“</td></tr>
+                    <tr><td>4</td><td>ACK von S1</td><td>192.168.0.2:67</td><td>an den Client, Port 68</td><td>MAC des Laptops</td><td>Bestätigung</td></tr>
+                </tbody>
+            </table>
+            <p>S2 liest im Request eine fremde Server-Kennung und gibt 192.168.0.100 wieder frei. Der Laptop verwendet ab Schritt 4 die Adresse 192.168.0.10.</p>
+            </details>
+        </div>
+
+<h2>Nachbau eines DHCP-Servers in Filius</h2>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: „Warum ist mein Handy 192.168.178.x?“</summary>
+                <p class="bild-fehlt">Hier stand eine Abbildung, deren Nutzungsrechte für die Webseite nicht geklärt sind.</p>
+                <p><strong>Alltag:</strong> Die FRITZ!Box verwendet ab Werk das Netz 192.168.178.0/24. Sie selbst hat die Adresse 192.168.178.1 und verteilt per DHCP Adressen aus dem Bereich 192.168.178.20 bis 192.168.178.200. Darum bekommt dein Handy zu Hause eine Adresse wie 192.168.178.34 – in der Schule oder im Café dagegen eine ganz andere. Diese private Adresse sieht im Internet niemand: Nach außen erscheinen alle Geräte des Haushalts mit der einen öffentlichen Adresse der FRITZ!Box (NAT, → 7.5). Unter „Heimnetz“ kannst du für den Drucker festlegen, dass er immer dieselbe Adresse bekommt.</p>
+                <p><strong>Beruf:</strong> Im Firmennetz richten Systemintegratorinnen und Systemintegratoren DHCP-Bereiche (Scopes) für jedes Subnetz ein, reservieren feste Adressen für Drucker und Server und überwachen die Auslastung der Pools. Typisches Ticket am Montagmorgen: „Die neuen Laptops bekommen eine Adresse 169.254.x.x und kein Netz.“ Ursache ist dann meist ein ausgefallener DHCP-Server oder ein voller Adress-Pool.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>DHCP</strong> – Anwendungsprotokoll (UDP, Ports 67/68), mit dem ein DHCP-Server einem Client für eine begrenzte Zeit (Lease) eine IP-Adresse samt Subnetzmaske, Standard-Gateway und DNS-Server zuweist. Der Ablauf besteht aus vier Nachrichten: <strong>D</strong>iscover, <strong>O</strong>ffer, <strong>R</strong>equest, <strong>A</strong>cknowledgement (DORA).
+            </p>
+        </div>
+
+<div class="merke">
+            <p>Discover und Request werden per <strong>Broadcast</strong> gesendet, weil der Client noch keine gültige IP-Adresse hat und alle DHCP-Server von seiner Wahl erfahren sollen. Offer und Acknowledgement kommen vom Server und enthalten die vollständige Konfiguration.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.7.1: Ablaufplan erstellen <span class="niveau">AFB I</span></summary>
+                <figure>
+                    <img src="../img/DHCP_Ablauf(p).png" width="600" alt="Ablauf: Gerät verbindet sich zum Netzwerk, DHCP Discover, weitere Schritte, Gerät ist unter IP bekannt">
+                    <figcaption>Abb. 2: Beginn des DHCP-Ablaufs</figcaption>
+                </figure>
+                <p>Erstelle in deinem Hefter einen Ablaufplan, der alle Teilschritte von DHCP abbildet. Ergänze unter jedem Teilschritt Stichpunkte, die den Vorgang beschreiben. Die einzelnen Schritte werden im Folgenden erklärt.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.7.2: Selbst vergebene Adressen? <span class="niveau">AFB I</span></summary>
+                <p>Warum weisen sich Netzwerkgeräte bei IPv4 nicht einfach selbst eine IP-Adresse zu?</p>
+            </details>
+        </div>

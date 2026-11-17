@@ -1,0 +1,40 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.8.3: DNS over HTTPS in der Schule? <span class="niveau">AFB III</span></summary>
+                <p>Viele Browser schalten DoH standardmäßig ein. Das Schulnetz filtert jugendgefährdende Seiten jedoch über den schuleigenen DNS-Server. Beurteile die Vor- und Nachteile von DoH aus Sicht der Nutzerinnen und Nutzer sowie der Schule und formuliere eine Empfehlung.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.8.4: Eine Zonendatei lesen <span class="niveau">AFB II</span></summary>
+                <p>Auszug aus der Zone <code>schule-beispiel.de</code>. Die Zahl hinter <code>MX</code> ist eine Priorität: Der Mailserver mit dem kleineren Wert wird zuerst versucht.</p>
+<pre>schule-beispiel.de.                  3600 IN NS    ns1.hoster-beispiel.de.
+schule-beispiel.de.                  3600 IN MX 10 mail.schule-beispiel.de.
+schule-beispiel.de.                  3600 IN MX 20 backup-mx.hoster-beispiel.de.
+www.schule-beispiel.de.              3600 IN A     198.51.100.7
+www.schule-beispiel.de.              3600 IN AAAA  2001:db8:7::7
+vertretungsplan.schule-beispiel.de.   300 IN CNAME www.schule-beispiel.de.
+mail.schule-beispiel.de.             3600 IN A     198.51.100.25</pre>
+                <ol>
+                    <li>Ein Laptop fragt nach der IPv4-Adresse von <code>vertretungsplan.schule-beispiel.de</code>. Beschreibe, welche Einträge der Resolver dafür auswertet, und gib das Ergebnis an.</li>
+                    <li>Eine Mail an <code>sekretariat@schule-beispiel.de</code> soll zugestellt werden. An welche IP-Adresse liefert der sendende Mailserver normalerweise ein, und wann kommt der zweite MX-Eintrag ins Spiel?</li>
+                    <li>Der Webserver zieht auf die Adresse 198.51.100.8 um. Der Administrator ändert den A-Eintrag von www und meint: „Für den Vertretungsplan ist die TTL nur 300 Sekunden, nach 5 Minuten sehen alle die neue Adresse.“ Beurteile die Aussage.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.8.5: Ein Vormittag im Cache des Resolvers <span class="niveau">AFB II</span></summary>
+                <p>Der Resolver der Schule hat einen leeren Cache. Der autoritative Eintrag lautet <code>lernplattform.beispiel.org. 600 IN A 203.0.113.80</code>. Anfragen nach diesem Namen kommen um 8:00, 8:05, 8:12, 8:13 und 8:30 Uhr.</p>
+                <ol>
+                    <li>Gib für jede Anfrage an, ob der Resolver aus dem Cache antwortet oder beim autoritativen Nameserver nachfragen muss. Gib jeweils an, bis wann der Eintrag im Cache gültig ist.</li>
+                    <li>Um 8:03 Uhr wird die Adresse auf 203.0.113.81 geändert. Welche der Anfragen erhalten noch die alte Adresse?</li>
+                </ol>
+            </details>
+        </div>

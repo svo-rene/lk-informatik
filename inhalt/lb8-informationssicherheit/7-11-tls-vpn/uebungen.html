@@ -1,0 +1,45 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.11.3: Angreifer in der Mitte <span class="niveau">AFB III</span></summary>
+                <p>Ein Angreifer betreibt im Café einen gefälschten WLAN-Hotspot und leitet den gesamten Verkehr über seinen Rechner.</p>
+                <ol>
+                    <li>Erläutere, wie er einen Diffie-Hellman-Austausch <em>ohne</em> Authentifizierung angreifen könnte.</li>
+                    <li>Erkläre, warum das bei TLS scheitert, und beurteile, unter welchen Bedingungen es doch gelingen könnte.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.11.4: Wer sieht was? <span class="niveau">AFB II</span></summary>
+                <p>Lena sitzt im Café und ruft über das offene WLAN die Lernplattform <code>https://lernen.beispiel-schule.de</code> auf. Untersuche zwei Fälle: (1) nur HTTPS, (2) HTTPS und zusätzlich ein eingeschaltetes VPN zum Schulnetz.</p>
+                <p>Lege eine Tabelle an und gib für den Café-Betreiber, den VPN-Server der Schule und den Webserver der Lernplattform jeweils an, ob er</p>
+                <ol type="a">
+                    <li>Lenas eigene IP-Adresse,</li>
+                    <li>die IP-Adresse bzw. den Domainnamen der Lernplattform,</li>
+                    <li>den Inhalt der Seiten und Lenas Passwort</li>
+                </ol>
+                <p>sehen kann. Begründe jede Angabe mit der Schicht, auf der TLS bzw. das VPN arbeitet.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.11.6: Ergebnis prüfen – die Zertifikatswarnung <span class="niveau">AFB II</span></summary>
+                <p>Am 7. Oktober 2026 ruft ein Schüler <code>https://beispiel-schule.de</code> auf (ohne „www“). Der Browser zeigt eine Warnung. Das Zertifikat des Servers enthält:</p>
+                <table class="gitter">
+                    <tr><th>Ausgestellt für</th><td>www.beispiel-schule.de (keine weiteren Namen)</td></tr>
+                    <tr><th>Aussteller</th><td>Beispiel-CA Intermediate R3, signiert von „Beispiel Root X1“ (im Browser gespeichert)</td></tr>
+                    <tr><th>Gültig</th><td>vom 01.07.2026 bis zum 29.09.2026</td></tr>
+                </table>
+                <ol type="a">
+                    <li>Prüfe das Zertifikat wie ein Browser und gib alle Gründe für die Warnung an.</li>
+                    <li>Der Hausmeister meint: „Klick einfach auf ‚Trotzdem fortfahren‘, die Verbindung ist doch trotzdem verschlüsselt.“ Beurteile diesen Rat.</li>
+                    <li>Nach der Reparatur meldet der Browser auf manchen Geräten immer noch „Aussteller unbekannt“. Der Server schickt nur sein eigenes Zertifikat. Erkläre den Fehler.</li>
+                </ol>
+            </details>
+        </div>

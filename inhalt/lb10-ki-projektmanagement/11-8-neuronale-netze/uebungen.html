@@ -1,0 +1,81 @@
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
+                dieser Seite direkt ausführen und bearbeiten kannst:
+                <a href="../notebooks/11-8_neuronale_netze.ipynb" download>11-8_neuronale_netze.ipynb herunterladen</a>.
+                Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
+                <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
+                <ol>
+                    <li>Notebook über den Link oben <strong>herunterladen</strong>.</li>
+                    <li>Im Browser <a href="https://jupyterlite.inf7.eu" target="_blank" rel="noopener">jupyterlite.inf7.eu</a> öffnen (JupyterLite der Schule; falls nicht erreichbar: <a href="https://jupyter.org/try-jupyter/lab/" target="_blank" rel="noopener">jupyter.org/try-jupyter/lab</a>). JupyterLab startet dort vollständig im Browser.</li>
+                    <li>Die heruntergeladene Datei links in den Dateibereich <strong>ziehen</strong> oder über den Hochladen-Pfeil auswählen.</li>
+                    <li>Mit einem Doppelklick öffnen und die Zellen mit <kbd>Umschalt</kbd>&nbsp;+&nbsp;<kbd>Enter</kbd> nacheinander ausführen.</li>
+                    <li><strong>Am Ende herunterladen:</strong> Rechtsklick auf die Datei im Dateibereich &rarr; <em>Download</em>, dann in deinen eigenen Dokumenten speichern.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.8.3: Diskussion – das „Black-Box“-Problem <span class="niveau">AFB III</span></summary>
+                <p>Ein Entscheidungsbaum lässt sich Schritt für Schritt nachvollziehen: Man kann genau sehen, welche Bedingung an welchem Knoten zu welcher Entscheidung geführt hat. Bei einem neuronalen Netz mit tausenden Gewichten ist das kaum mehr möglich.</p>
+                <ol>
+                    <li>Nenne mindestens zwei Anwendungsfälle, in denen es besonders wichtig wäre, die Entscheidung eines KI-Modells nachvollziehen zu können (z.&nbsp;B. Medizin, Justiz, Bewerbungsverfahren).</li>
+                    <li>Diskutiert: Sollte man in diesen Fällen auf ein gut interpretierbares Modell (z.&nbsp;B. Entscheidungsbaum) verzichten und stattdessen ein leistungsfähigeres, aber schwerer interpretierbares neuronales Netz einsetzen? Begründet eure Position.</li>
+                    <li>Recherchiert kurz den Begriff „Explainable AI (XAI)“. Welches Problem soll er lösen?</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.8.4: Notebook bearbeiten <span class="niveau">AFB II</span></summary>
+                <p>Öffne das Notebook <code>11-8_neuronale_netze.ipynb</code> in JupyterLite (siehe Seite 10.4) und bearbeite alle enthaltenen Aufgaben. Trainiere ein neuronales Netz, das handgeschriebene Ziffern erkennt, und untersuche, wie sich die Anzahl der Neuronen pro Schicht auf die Genauigkeit des Modells auswirkt.</p>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.8.5: Ein Perzeptron gießt das Schulbeet <span class="niveau">AFB II</span></summary>
+                <p>Die Garten-AG steuert die Bewässerung des Schulbeets mit einem Perzeptron. Es hat drei Eingaben (jeweils 1 = ja, 0 = nein) und gibt 1 aus, wenn gegossen werden soll:</p>
+                <table>
+                    <thead>
+                        <tr><th>Eingabe</th><th>Bedeutung</th><th>Gewicht</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>x₁</td><td>Boden ist trocken</td><td>w₁ = 0,6</td></tr>
+                        <tr><td>x₂</td><td>Es ist sonnig</td><td>w₂ = 0,3</td></tr>
+                        <tr><td>x₃</td><td>Für heute ist Regen vorhergesagt</td><td>w₃ = −0,7</td></tr>
+                    </tbody>
+                </table>
+                <p>Der Schwellenwert beträgt <code>Θ = 0,5</code> (Ausgabe 1, wenn Summe ≥ Θ).</p>
+                <ol>
+                    <li>Berechne für alle acht Eingabekombinationen die gewichtete Summe und die Ausgabe. Stelle die Ergebnisse in einer Tabelle dar.</li>
+                    <li>Formuliere die Regel, nach der das Perzeptron gießt, in einem Satz. Welche Eingabe hat bei diesen Gewichten keinen Einfluss auf die Entscheidung? Begründe anhand deiner Tabelle.</li>
+                    <li>Die AG möchte, dass bei trockenem Boden und Sonne auch dann gegossen wird, wenn Regen vorhergesagt ist – bei feuchtem Boden aber nie. Untersuche, ob das gelingt, wenn nur w₂ verändert wird.</li>
+                </ol>
+                <p class="tipp">Stelle für die Fälle, die sich ändern bzw. nicht ändern dürfen, je eine Ungleichung für w₂ auf.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.8.6: Vorwärtsdurchlauf mit ReLU <span class="niveau">AFB II</span></summary>
+                <p>Lena probiert im TensorFlow Playground ein kleines Netz mit zwei Eingaben, zwei versteckten Neuronen und einem Ausgabeneuron aus. Alle drei Neuronen verwenden die Aktivierungsfunktion ReLU (negative Summen werden zu 0, positive bleiben unverändert). Die Gewichte lauten:</p>
+                <ul>
+                    <li>h₁: <code>0,5</code> für x₁ und <code>−1,0</code> für x₂</li>
+                    <li>h₂: <code>0,8</code> für x₁ und <code>0,6</code> für x₂</li>
+                    <li>Ausgabe y: <code>1,2</code> für h₁ und <code>0,5</code> für h₂</li>
+                </ul>
+                <ol>
+                    <li>Berechne den Vorwärtsdurchlauf für die Eingabe (x₁|x₂) = (2|0,5). Gib alle Zwischenwerte (Summen, h₁, h₂, y) an.</li>
+                    <li>Berechne ebenso den Vorwärtsdurchlauf für (1|1). An welcher Stelle greift ReLU ein?</li>
+                    <li>Lena lässt die Aktivierungsfunktion weg, die Neuronen geben also einfach ihre Summe weiter. Zeige durch Einsetzen, dass das ganze Netz dann zu einem einzigen Neuron mit der Summe <code>y = a · x₁ + b · x₂</code> zusammenfällt, und bestimme a und b. Berechne damit y für beide Eingaben und vergleiche mit a) und b). Was folgt daraus für die Bedeutung der Aktivierungsfunktion?</li>
+                </ol>
+            </details>
+        </div>

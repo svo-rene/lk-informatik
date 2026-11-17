@@ -1,0 +1,42 @@
+<script src="../sortierlabor.js" defer></script>
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe" id="a-2-2-9-6">
+            <details>
+                <summary>Aufgabe 2.2.9.6: Fehler finden – Elemente gehen verloren <span class="niveau">AFB III</span></summary>
+                <pre><code class="language-python">def merge(links, rechts):
+    ergebnis = []
+    i = j = 0
+    while i &lt; len(links) and j &lt; len(rechts):
+        if links[i] &lt; rechts[j]:
+            ergebnis.append(links[i])
+            i = i + 1
+        else:
+            ergebnis.append(rechts[j])
+            j = j + 1
+    ergebnis.extend(links[i:])
+    return ergebnis
+
+def mergesort(liste):
+    if len(liste) == 1:
+        return liste
+    mitte = len(liste) // 2
+    return merge(mergesort(liste[:mitte]), mergesort(liste[mitte:]))</code></pre>
+                <ol>
+                    <li>Teste <code>merge</code> mit <code>([3, 4], [1, 2])</code>, <code>([1, 2], [3, 4])</code> und <code>([1, 5], [2, 3])</code> und teste <code>mergesort</code> mit <code>[2, 1]</code>, <code>[1, 2]</code> und <code>[]</code>. Lege eine Tabelle Eingabe | erwartete Ausgabe | tatsächliche Ausgabe an.</li>
+                    <li>Erkläre, warum manche Tests trotz des Fehlers in <code>merge</code> erfolgreich sind.</li>
+                    <li>Das Programm enthält insgesamt drei Abweichungen von Beispiel 2. Eine davon verändert die Zahlenergebnisse nicht. Benenne alle drei und gib an, welche Eigenschaft durch die dritte verloren geht.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9-7">
+            <details>
+                <summary>Aufgabe 2.2.9.7: Das beste Verfahren gibt es nicht <span class="niveau">AFB III</span></summary>
+                <ol>
+                    <li>Bestimme für n = 8 die Anzahl der Vergleiche von Insertionsort und Mergesort jeweils für eine aufsteigend sortierte und eine absteigend sortierte Liste.</li>
+                    <li>Pythons <code>sorted()</code> (Timsort) sortiert kurze Teilstücke mit Insertionsort und führt sie dann wie Mergesort zusammen. Begründe diese Kombination mit deinen Ergebnissen aus Teil 1 und mit den Eigenschaften beider Verfahren.</li>
+                    <li>Ein Mikrocontroller in einem Messgerät hat nur sehr wenig Arbeitsspeicher und soll 500 Messwerte sortieren. Beurteile, ob Mergesort dafür geeignet ist.</li>
+                </ol>
+            </details>
+        </div>

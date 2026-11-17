@@ -1,0 +1,41 @@
+<h2 id="weitere-aufgaben">Weitere Aufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.5.3: Fehlersuche im Netzwerk <span class="niveau">AFB III</span></summary>
+                <p>Öffne die Datei <a href="../material/netz_fehlersuche.fls" download="">netz_fehlersuche.fls</a> in Filius. Das Netz besteht aus zwei Client-Netzen mit je einem DHCP-Server, einem DNS-Server, einem Webserver unter der Adresse gdp.de und einem Vermittlungsrechner. Im Netz sind vier Fehler versteckt.</p>
+                <ol>
+                    <li>Starte die Simulation und teste von je einem Client aus jedem Netz: <code>ipconfig</code>, <code>ping</code> zum Webserver, Aufruf von gdp.de im Browser.</li>
+                    <li>Grenze jeden Fehler systematisch ein. Arbeite dich dabei vom eigenen Rechner über das Gateway bis zum Ziel vor.</li>
+                    <li>Behebe die Fehler.</li>
+                    <li>Dokumentiere jeden Fehler in einer Tabelle mit Symptom, Ursache und Korrektur.</li>
+                    <li>Weise mit Screenshots nach, dass danach alle Clients die Webseite über den Namen erreichen.</li>
+                </ol>
+            </details>
+        </div>
+
+<h2 id="zum-ueben">Zum Üben zu Hause</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.5.4: Routingtabellen erstellen <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Erstelle die Routingtabellen von R1, R2 und R3 (Zielnetz mit Präfix, Next Hop, Schnittstelle), sodass alle drei LANs einander und das Internet erreichen. Nimm die direkt angeschlossenen Netze mit auf und verwende Default-Routen, wo es möglich ist.</li>
+                    <li>Ein Rechner 192.168.10.5 sendet ein Paket mit TTL 64 an 192.168.30.8. Gib für jeden Router an, welcher Eintrag nach dem Longest-Prefix-Match gewählt wird, und mit welcher TTL das Paket ankommt.</li>
+                    <li>Verfolge ebenso die Antwort von 192.168.30.8 an 192.168.10.5.</li>
+                </ol>
+                <p class="tipp">Überlege für jeden Router: In welcher Richtung liegt „der Rest der Welt“? Dorthin zeigt die Default-Route.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.5.6: Was traceroute verrät <span class="niveau">AFB II</span></summary>
+                <p>Das Programm <code>tracert</code> (Windows) bzw. <code>traceroute</code> sendet Pakete mit TTL 1, dann TTL 2, TTL 3 usw. an das Ziel. Ein Router, bei dem die TTL auf 0 sinkt, verwirft das Paket und schickt eine ICMP-Meldung „Zeitüberschreitung“ zurück – mit der Adresse der Schnittstelle, an der das Paket ankam. Das Ziel selbst antwortet mit einem Echo Reply.</p>
+                <ol>
+                    <li>Gib die Ausgabe von <code>tracert 192.168.30.8</code> auf dem Rechner 192.168.10.5 an (Nummer, antwortende Adresse) und erkläre, warum jede Zeile genau so entsteht.</li>
+                    <li>Nach einer Störung endet die Ausgabe nach Zeile 2, danach erscheinen nur noch Sternchen (keine Antwort). Nenne zwei mögliche Ursachen und wo du weitersuchen würdest.</li>
+                    <li>Erkläre mit der TTL, warum das Paket an 192.168.5.5 aus Aufgabe 7.5.5 nicht für immer im Netz bleibt.</li>
+                </ol>
+            </details>
+        </div>

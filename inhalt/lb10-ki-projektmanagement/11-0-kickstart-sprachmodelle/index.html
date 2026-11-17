@@ -1,0 +1,417 @@
+<p>In diesem Kurs arbeitest du regelmäßig mit <strong>schulKI.de</strong>. schulKI ist selbst kein Sprachmodell, sondern eine Schulplattform, die deine Eingaben an große Sprachmodelle weiterleitet (Standardmodell: Haiku 5.5 von Anthropic, weitere Modelle wählbar). Bevor du das tust, sollst du verstehen, was dabei technisch passiert: wie aus deinem Text Zahlen werden, wie das Modell das nächste Wort auswählt, wie es trainiert wurde und warum es deshalb manchmal überzeugend klingenden Unsinn schreibt. Am Ende stehen die Regeln, nach denen wir KI in diesem Kurs einsetzen, und die Frage, welche Daten du einem Sprachmodell anvertrauen darfst.</p>
+
+<p><strong>Nach dieser Seite kannst du</strong></p>
+
+<ul>
+            <li>den Weg vom Prompt zur Antwort in sechs Schritten beschreiben (Tokenisierung, Embedding, Attention, Logits, Softmax, Auswahl),</li>
+            <li>einen Text mit einem gegebenen Vokabular tokenisieren und Wahrscheinlichkeiten mit Softmax und Temperatur berechnen,</li>
+            <li>die wichtigsten Fehlerquellen eines Sprachmodells aus seiner Funktionsweise begründen,</li>
+            <li>beurteilen, welche Daten in einen Prompt gehören und wie du KI-Nutzung kennzeichnest.</li>
+        </ul>
+
+<h2>1. Die Grundidee: das nächste Token vorhersagen</h2>
+
+<p>Ein Sprachmodell ist mathematisch gesehen eine Funktion. Sie bekommt eine Folge von Textbausteinen (<strong>Tokens</strong>) t<sub>1</sub>, t<sub>2</sub>, …, t<sub>n−1</sub> und liefert für <em>jedes</em> Token ihres Vokabulars eine Wahrscheinlichkeit, dass es als Nächstes kommt:</p>
+
+<p style="text-align:center"><strong>P(t<sub>n</sub> | t<sub>1</sub>, …, t<sub>n−1</sub>)</strong></p>
+
+<p>Mehr kann das Modell nicht. Eine ganze Antwort entsteht, indem diese Vorhersage in einer Schleife wiederholt wird: Ein Token wird ausgewählt, an den Text angehängt, und der verlängerte Text ist die Eingabe für den nächsten Durchlauf. Man nennt das <strong>autoregressiv</strong>.</p>
+
+<pre><code>text = prompt
+solange das Modell nicht das Ende-Token wählt:
+    verteilung = modell(text)        # Wahrscheinlichkeit für jedes Token im Vokabular
+    token = auswaehlen(verteilung)   # z. B. das wahrscheinlichste oder zufällig gewichtet
+    text = text + token</code></pre>
+
+<p>Innerhalb von <code>modell(text)</code> laufen sechs Schritte ab, die du auf dieser Seite nacheinander kennenlernst:</p>
+
+<table class="gitter">
+            <thead>
+                <tr><th>Schritt</th><th>Was passiert?</th><th>Abschnitt</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1. Tokenisierung</td><td>Text wird in Tokens zerlegt, jedes Token bekommt eine Nummer (ID).</td><td>2</td></tr>
+                <tr><td>2. Embedding</td><td>Jede ID wird durch einen Zahlenvektor ersetzt, der die Bedeutung „codiert“.</td><td>3</td></tr>
+                <tr><td>3. Transformer-Schichten</td><td>Attention mischt die Vektoren so, dass jedes Token seinen Kontext „kennt“.</td><td>4</td></tr>
+                <tr><td>4. Logits</td><td>Für jedes Token im Vokabular entsteht eine Bewertungszahl.</td><td>5</td></tr>
+                <tr><td>5. Softmax</td><td>Die Bewertungen werden in Wahrscheinlichkeiten umgerechnet (Temperatur).</td><td>5</td></tr>
+                <tr><td>6. Auswahl</td><td>Ein Token wird gewählt: das wahrscheinlichste oder gewichtet zufällig.</td><td>5</td></tr>
+            </tbody>
+        </table>
+
+<p>Im Video siehst du die Schleife einmal ganz durchlaufen: vom Prompt über die Verteilung bis zum Ende-Token.</p>
+
+<figure><div class="lp-video"><video controls preload="none" poster="../vid/11-0-1_token_fuer_token_vorschau.png" src="../vid/11-0-1_token_fuer_token.mp4"></video><a href="../vid/11-0-1_token_fuer_token.mp4">Video ansehen</a></div><figcaption>Video 1: Token für Token – wie aus einem Prompt eine Antwort wird (ca. 1,5 min)</figcaption></figure>
+
+<h2>2. Tokenisierung: aus Text werden Zahlen</h2>
+
+<p>Ein neuronales Netz rechnet nur mit Zahlen. Deshalb wird der Text zuerst in <strong>Tokens</strong> zerlegt. Ein Token ist meist ein häufiges Wort oder ein Wortteil, manchmal auch ein einzelnes Zeichen. Jedes Token hat eine feste Nummer, seine <strong>Token-ID</strong>. Das <strong>Vokabular</strong> eines großen Modells umfasst typischerweise einige Zehntausend bis einige Hunderttausend Tokens.</p>
+
+<ul>
+            <li>Häufige Wörter wie „und“ oder „Haus“ sind ein einziges Token. Als Faustregel nennt schulKI für englische Texte etwa vier Zeichen pro Token; der Satz „Hallo, wie geht es dir?“ hat 23 Zeichen und ergibt 7 Tokens. Satzzeichen sind meist ein Token, Emojis zwei bis drei.</li>
+            <li>Seltene oder lange Wörter werden in mehrere Teile zerlegt, z.&nbsp;B. „Informatik|erin“. Deutsche Texte brauchen deshalb oft mehr Tokens pro Wort als englische.</li>
+            <li>Das Vokabular wird vor dem eigentlichen Training aus großen Textmengen bestimmt. Das verbreitete Verfahren <strong>Byte-Pair-Encoding</strong> beginnt mit einzelnen Zeichen und fasst immer wieder das häufigste benachbarte Paar zu einem neuen Token zusammen, bis das Vokabular die gewünschte Größe hat.</li>
+        </ul>
+
+<p>Beim Zerlegen eines neuen Textes nehmen wir hier eine vereinfachte, aber verbreitete Regel: <strong>An jeder Stelle wird das längste Stück gewählt, das im Vokabular steht</strong> (greedy longest match). Einzelne Buchstaben stehen immer im Vokabular, so lässt sich jedes Wort zerlegen.</p>
+
+<figure><div class="lp-video"><video controls preload="none" poster="../vid/11-0-2_tokenisierung_vorschau.png" src="../vid/11-0-2_tokenisierung.mp4"></video><a href="../vid/11-0-2_tokenisierung.mp4">Video ansehen</a></div><figcaption>Video 2: Tokenisierung – die Regel Schritt für Schritt an „informatikerin“ (ca. 1,5 min)</figcaption></figure>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Das Vokabular besteht aus diesen Tokens (ID in Klammern) und danach den Einzelbuchstaben a–z, ä, ö, ü, ß mit den IDs 8 bis 37 (a&nbsp;=&nbsp;8, b&nbsp;=&nbsp;9, …, z&nbsp;=&nbsp;33):</p>
+            <p><code>informat</code> (0), <code>inform</code> (1), <code>iker</code> (2), <code>ik</code> (3), <code>er</code> (4), <code>in</code> (5), <code>atik</code> (6), <code>ung</code> (7)</p>
+            <p>Das Wort „informatikerin“ soll tokenisiert werden.</p>
+            <ol>
+                <li><strong>Was:</strong> An Position 0 das längste passende Stück suchen. „informatikerin“, „informatikeri“, … stehen nicht im Vokabular; das erste Stück, das passt, ist „informat“ (8 Zeichen). – <em>warum:</em> Wir prüfen von lang nach kurz, damit „informat“ vor „inform“ und vor „i“ gewinnt.</li>
+                <li><strong>Was:</strong> Ab Position 8 bleibt „ikerin“. Längstes passendes Stück: „iker“ (nicht „ik“). – <em>warum:</em> Gleiche Regel; „ikerin“ und „ikeri“ gibt es nicht.</li>
+                <li><strong>Was:</strong> Ab Position 12 bleibt „in“, und „in“ steht im Vokabular. – <em>warum:</em> Damit ist das Wortende erreicht.</li>
+                <li><strong>Was:</strong> Die Tokens in IDs übersetzen: informat → 0, iker → 2, in → 5. – <em>warum:</em> Nur diese Zahlen gehen in das neuronale Netz.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> „informatikerin“ → <code>informat | iker | in</code> → IDs <code>[0, 2, 5]</code>, also 3 Tokens für 14 Buchstaben.</p>
+            <p><strong>Kontrolle:</strong> Hängt man die Tokens wieder aneinander, entsteht genau das Ausgangswort. Zum Vergleich: Das Wort „spielerin“ kommt im Vokabular kaum vor und wird zu <code>s | p | i | e | l | er | in</code>, also 7 Tokens für 9 Buchstaben.</p>
+            <pre><code class="language-python">vokabular = ["informat", "inform", "iker", "ik", "er", "in", "atik", "ung"]
+for buchstabe in "abcdefghijklmnopqrstuvwxyzäöüß":
+    vokabular.append(buchstabe)        # IDs 8 bis 37
+
+def tokenisiere(wort, vokabular):
+    """Zerlegt wort: an jeder Stelle das längste passende Vokabular-Stück."""
+    tokens = []
+    pos = 0
+    while pos &lt; len(wort):
+        laenge = len(wort) - pos       # mit dem längsten möglichen Stück beginnen
+        gefunden = False
+        while laenge &gt; 0 and not gefunden:
+            stueck = wort[pos:pos + laenge]
+            if stueck in vokabular:
+                tokens.append(stueck)
+                pos = pos + laenge
+                gefunden = True
+            else:
+                laenge = laenge - 1
+        if not gefunden:               # Zeichen steht nicht im Vokabular
+            tokens.append("&lt;unbekannt&gt;")
+            pos = pos + 1
+    return tokens
+
+def token_ids(tokens, vokabular):
+    ids = []
+    for t in tokens:
+        if t in vokabular:
+            ids.append(vokabular.index(t))
+        else:
+            ids.append(-1)             # -1 steht für „unbekannt“
+    return ids
+
+# Testfälle (erwartete Ausgabe als Kommentar)
+print(tokenisiere("informatikerin", vokabular))   # ['informat', 'iker', 'in']
+print(token_ids(["informat", "iker", "in"], vokabular))   # [0, 2, 5]
+print(tokenisiere("spielerin", vokabular))        # ['s', 'p', 'i', 'e', 'l', 'er', 'in']
+print(tokenisiere("", vokabular))                 # []
+print(tokenisiere("c3po", vokabular))             # ['c', '&lt;unbekannt&gt;', 'p', 'o']</code></pre>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <p><strong>Folge für die Praxis:</strong> Das Modell sieht „informat“ als <em>eine</em> Zahl, nicht als acht Buchstaben. Fragen wie „Wie viele r stecken in ‚Erdbeere‘?“ oder „Schreibe das Wort rückwärts“ sind für ein Sprachmodell deshalb überraschend schwer, obwohl sie für dich trivial sind.</p>
+        </div>
+
+<h2>3. Embeddings: Bedeutung als Vektor</h2>
+
+<p>Eine Token-ID ist nur eine Nummer; ID 5 ist nicht „ähnlicher“ zu ID 6 als zu ID 3000. Deshalb ersetzt das Modell jede ID durch einen <strong>Embedding-Vektor</strong>, eine Liste aus mehreren Hundert bis einigen Tausend Kommazahlen. Diese Zahlen sind nicht von Menschen festgelegt, sondern werden beim Training gelernt. Dabei landen Tokens, die in ähnlichen Zusammenhängen vorkommen, bei Vektoren, die in eine ähnliche Richtung zeigen.</p>
+
+<p>Wie ähnlich zwei Vektoren a und b sind, misst die <strong>Kosinus-Ähnlichkeit</strong>:</p>
+
+<p style="text-align:center"><strong>cos(a, b) = (a · b) / (|a| · |b|)</strong>, &nbsp; mit a · b = a<sub>1</sub>b<sub>1</sub> + a<sub>2</sub>b<sub>2</sub> + … und |a| = √(a<sub>1</sub>² + a<sub>2</sub>² + …)</p>
+
+<p>Der Wert liegt zwischen −1 und 1. Werte nahe 1 bedeuten „gleiche Richtung“, also ähnliche Bedeutung.</p>
+
+<figure><div class="lp-video"><video controls preload="none" poster="../vid/11-0-3_embeddings_vorschau.png" src="../vid/11-0-3_embeddings.mp4"></video><a href="../vid/11-0-3_embeddings.mp4">Video ansehen</a></div><figcaption>Video 3: Embeddings – Vektoren als Pfeile und die Kosinus-Ähnlichkeit Schritt für Schritt (ca. 1,5 min)</figcaption></figure>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Stark vereinfachte Embeddings mit nur 3 Zahlen: Hund = (0,8; 0,6; 0,1), Katze = (0,7; 0,7; 0,2), Auto = (0,1; 0,2; 0,9). Welches Wort ist „Hund“ ähnlicher?</p>
+            <ol>
+                <li><strong>Was:</strong> Skalarprodukte berechnen: Hund · Katze = 0,56 + 0,42 + 0,02 = 1,00; Hund · Auto = 0,08 + 0,12 + 0,09 = 0,29. – <em>warum:</em> Das Skalarprodukt ist groß, wenn große Einträge an denselben Stellen stehen.</li>
+                <li><strong>Was:</strong> Längen berechnen: |Hund| = √1,01 ≈ 1,005; |Katze| = √1,02 ≈ 1,010; |Auto| = √0,86 ≈ 0,927. – <em>warum:</em> Wir teilen durch die Längen, damit nur die Richtung zählt, nicht die Größe der Zahlen.</li>
+                <li><strong>Was:</strong> Kosinus bilden: cos(Hund, Katze) = 1,00 / (1,005 · 1,010) ≈ 0,985; cos(Hund, Auto) = 0,29 / (1,005 · 0,927) ≈ 0,311. – <em>warum:</em> Das ist die Formel von oben.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> „Katze“ ist „Hund“ deutlich ähnlicher (0,985) als „Auto“ (0,311).</p>
+            <p><strong>Kontrolle:</strong> cos(Hund, Hund) = 1,01 / (1,005 · 1,005) = 1, wie es für identische Vektoren sein muss. In echten Modellen haben die einzelnen Zahlen keine einfache Bedeutung wie „ist ein Tier“; nur die Richtung im hochdimensionalen Raum zählt.</p>
+            <pre><code class="language-python">import math
+
+def kosinus(a, b):
+    skalar = 0
+    laenge_a = 0
+    laenge_b = 0
+    for i in range(len(a)):
+        skalar = skalar + a[i] * b[i]
+        laenge_a = laenge_a + a[i] ** 2
+        laenge_b = laenge_b + b[i] ** 2
+    return skalar / (math.sqrt(laenge_a) * math.sqrt(laenge_b))
+
+hund  = [0.8, 0.6, 0.1]
+katze = [0.7, 0.7, 0.2]
+auto  = [0.1, 0.2, 0.9]
+print(round(kosinus(hund, katze), 3))   # 0.985
+print(round(kosinus(hund, auto), 3))    # 0.311
+print(round(kosinus(hund, hund), 3))    # 1.0</code></pre>
+            </details>
+        </div>
+
+<h2>4. Kontext verstehen: Attention und Transformer</h2>
+
+<p>Ein Embedding allein kennt keinen Zusammenhang. Das Token „Bank“ hat zunächst denselben Vektor in „Am Elbufer sitze ich auf der Bank“ und in „Ich hebe Geld ab bei der Bank“. Moderne Sprachmodelle verwenden deshalb die <strong>Transformer</strong>-Architektur, deren Kern der <strong>Attention</strong>-Mechanismus ist:</p>
+
+<ol>
+            <li>Für jedes Token berechnet das Modell, wie wichtig jedes <em>vorherige</em> Token für seine Bedeutung ist. Heraus kommen Gewichte zwischen 0 und 1, die zusammen 1 ergeben (sie werden ebenfalls mit Softmax berechnet, siehe Abschnitt 5).</li>
+            <li>Der neue Vektor des Tokens ist eine gewichtete Mischung der Vektoren dieser Tokens. Im ersten Satz fließt viel von „Elbufer“ und „sitze“ ein, im zweiten viel von „Geld“ und „hebe … ab“. Beide Sätze sind so gebaut, dass diese Wörter <em>vor</em> „Bank“ stehen, denn nur auf diese darf ein Token schauen (siehe unten).</li>
+            <li>Dieser Schritt wird in vielen Schichten hintereinander und mit mehreren „Köpfen“ parallel wiederholt. Dazwischen liegen kleine neuronale Netze. Alle Gewichte zusammen sind die <strong>Parameter</strong> des Modells, bei großen Modellen viele Milliarden.</li>
+        </ol>
+
+<p>Ein Token darf dabei nur auf Tokens <em>vor</em> sich schauen, denn bei der Vorhersage ist die Zukunft ja noch unbekannt. Wie viele Tokens das Modell gleichzeitig berücksichtigen kann, legt das <strong>Kontextfenster</strong> fest. Was nicht mehr hineinpasst, zum Beispiel der Anfang eines sehr langen Chats, existiert für das Modell nicht mehr.</p>
+
+<figure><div class="lp-video"><video controls preload="none" poster="../vid/11-0-4_attention_vorschau.png" src="../vid/11-0-4_attention.mp4"></video><a href="../vid/11-0-4_attention.mp4">Video ansehen</a></div><figcaption>Video 4: Attention – wie „Bank“ ihren Kontext kennenlernt, und das Kontextfenster (ca. 1,5 min)</figcaption></figure>
+
+<div class="hinweis">
+            <p><strong>So ist es bei schulKI:</strong> Das Modell selbst merkt sich nichts zwischen zwei Nachrichten. Bei jeder neuen Eingabe schickt schulKI deshalb deinen Prompt <em>und</em> den bisherigen Chatverlauf erneut an das Modell, laut Anleitung etwa die letzten sieben Nachrichten. Ältere Nachrichten fallen heraus und werden nicht mehr berücksichtigt. Alle mitgeschickten Tokens werden jedes Mal neu berechnet und vom Token-Konto deiner Lehrkraft abgezogen.</p>
+        </div>
+
+<h2>5. Von Bewertungen zu Wahrscheinlichkeiten: Softmax und Temperatur</h2>
+
+<p>Am Ende der Transformer-Schichten berechnet das Modell für jedes Token des Vokabulars eine reelle Zahl, seinen <strong>Logit</strong>. Je größer der Logit, desto passender findet das Modell das Token. Logits können negativ sein und ergeben zusammen nicht 1. Die <strong>Softmax-Funktion</strong> rechnet sie in Wahrscheinlichkeiten um; die <strong>Temperatur</strong> T steuert dabei, wie „spitz“ die Verteilung wird:</p>
+
+<p style="text-align:center"><strong>p<sub>i</sub> = e<sup>z<sub>i</sub> / T</sup> / (e<sup>z<sub>1</sub> / T</sup> + e<sup>z<sub>2</sub> / T</sup> + … + e<sup>z<sub>k</sub> / T</sup>)</strong></p>
+
+<ul>
+            <li>Alle p<sub>i</sub> sind positiv und ergeben zusammen 1; die Reihenfolge der Logits bleibt erhalten.</li>
+            <li><strong>T &lt; 1</strong>: Unterschiede werden verstärkt, das beste Token wird noch wahrscheinlicher (vorhersehbarer Text).</li>
+            <li><strong>T &gt; 1</strong>: Unterschiede werden abgeschwächt, auch unwahrscheinliche Tokens kommen öfter vor (abwechslungsreicher, aber fehleranfälliger).</li>
+            <li><strong>T → 0</strong>: Praktisch immer das beste Token (<strong>greedy</strong>). Gleicher Prompt, gleiche Antwort.</li>
+        </ul>
+
+<p>Für die <strong>Auswahl</strong> gibt es mehrere Strategien: immer das wahrscheinlichste Token (greedy), gewichtet zufällig ziehen (<strong>Sampling</strong>) oder nur unter den k wahrscheinlichsten Tokens ziehen (<strong>Top-k</strong>).</p>
+
+<p>Die drei Videos rechnen Beispiel 3 Schritt für Schritt vor: erst die Softmax, dann die Wirkung der Temperatur, zuletzt die Auswahl mit Zufallszahlen.</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1em">
+            <figure><div class="lp-video"><video controls preload="none" poster="../vid/11-0-5_softmax_vorschau.png" src="../vid/11-0-5_softmax.mp4"></video><a href="../vid/11-0-5_softmax.mp4">Video ansehen</a></div><figcaption>Video 5: Softmax – von Logits zu Wahrscheinlichkeiten (ca. 1,5 min)</figcaption></figure>
+            <figure><div class="lp-video"><video controls preload="none" poster="../vid/11-0-6_temperatur_vorschau.png" src="../vid/11-0-6_temperatur.mp4"></video><a href="../vid/11-0-6_temperatur.mp4">Video ansehen</a></div><figcaption>Video 6: Temperatur – der Regler für mehr oder weniger Zufall (ca. 1,5 min)</figcaption></figure>
+            <figure><div class="lp-video"><video controls preload="none" poster="../vid/11-0-7_auswahl_vorschau.png" src="../vid/11-0-7_auswahl.mp4"></video><a href="../vid/11-0-7_auswahl.mp4">Video ansehen</a></div><figcaption>Video 7: Auswahl – greedy, Sampling und Top-k (ca. 1,5 min)</figcaption></figure>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Prompt: „Die Landeshauptstadt von Sachsen ist“. Das Modell liefert für vier Kandidaten diese Logits (alle übrigen Tokens lassen wir weg): Dresden 4,0 · Leipzig 2,5 · Chemnitz 1,5 · schön 1,0. Gesucht sind die Wahrscheinlichkeiten für T = 1, T = 0,5 und T = 2 sowie der Trainingsverlust.</p>
+            <ol>
+                <li><strong>Was:</strong> Für T = 1 die Exponentialwerte berechnen: e<sup>4,0</sup> ≈ 54,598; e<sup>2,5</sup> ≈ 12,182; e<sup>1,5</sup> ≈ 4,482; e<sup>1,0</sup> ≈ 2,718. – <em>warum:</em> Die e-Funktion macht jeden Wert positiv und verstärkt Unterschiede: 1,5 Logit-Punkte Abstand bedeuten Faktor e<sup>1,5</sup> ≈ 4,5.</li>
+                <li><strong>Was:</strong> Summe bilden: 54,598 + 12,182 + 4,482 + 2,718 = 73,981. – <em>warum:</em> Durch diese Summe teilen wir, damit sich alles zu 1 addiert.</li>
+                <li><strong>Was:</strong> Teilen: p(Dresden) = 54,598 / 73,981 ≈ 0,738; p(Leipzig) ≈ 0,165; p(Chemnitz) ≈ 0,061; p(schön) ≈ 0,037. – <em>warum:</em> Das ist die Softmax-Formel mit T = 1.</li>
+                <li><strong>Was:</strong> Für T = 0,5 zuerst die Logits durch 0,5 teilen (8; 5; 3; 2), dann wie oben rechnen: e<sup>8</sup> ≈ 2980,96; e<sup>5</sup> ≈ 148,41; e<sup>3</sup> ≈ 20,09; e<sup>2</sup> ≈ 7,39; Summe ≈ 3156,85. – <em>warum:</em> Teilen durch T &lt; 1 vergrößert die Abstände zwischen den Logits.</li>
+                <li><strong>Was:</strong> Für T = 2 die Logits halbieren (2; 1,25; 0,75; 0,5): e-Werte ≈ 7,389; 3,490; 2,117; 1,649; Summe ≈ 14,645. – <em>warum:</em> Teilen durch T &gt; 1 verkleinert die Abstände.</li>
+                <li><strong>Was:</strong> Verlust berechnen, falls im Trainingstext tatsächlich „Dresden“ folgt: L = −ln(0,738) ≈ 0,304. Stünde dort „Leipzig“, wäre L = −ln(0,165) ≈ 1,804. – <em>warum:</em> Beim Training wird genau diese Größe verkleinert (Abschnitt 6). Ein unwahrscheinlich bewertetes richtiges Token erzeugt einen hohen Verlust.</li>
+            </ol>
+            <table class="gitter">
+                <thead>
+                    <tr><th>Token</th><th>Logit</th><th>p bei T = 0,5</th><th>p bei T = 1</th><th>p bei T = 2</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Dresden</td><td>4,0</td><td>0,944</td><td>0,738</td><td>0,505</td></tr>
+                    <tr><td>Leipzig</td><td>2,5</td><td>0,047</td><td>0,165</td><td>0,238</td></tr>
+                    <tr><td>Chemnitz</td><td>1,5</td><td>0,006</td><td>0,061</td><td>0,145</td></tr>
+                    <tr><td>schön</td><td>1,0</td><td>0,002</td><td>0,037</td><td>0,113</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Ergebnis:</strong> Greedy wählt in allen drei Fällen „Dresden“. Mit Sampling erscheint „Dresden“ bei T = 0,5 in etwa 94 von 100 Durchläufen, bei T = 2 nur noch in etwa 50 von 100; in etwa 11 von 100 Durchläufen steht dann sogar „Die Landeshauptstadt von Sachsen ist schön“.</p>
+            <p><strong>Kontrolle:</strong> Jede Spalte ergibt (bis auf Rundung) 1. Die beiden Verluste unterscheiden sich um 1,804 − 0,304 = 1,5, genau den Abstand der Logits von Dresden und Leipzig. Das muss so sein, weil −ln p<sub>i</sub> = −z<sub>i</sub> + ln(Summe) gilt und die Summe für beide gleich ist.</p>
+            <pre><code class="language-python">import math
+import random
+
+def softmax(logits, temperatur=1.0):
+    exps = []
+    for z in logits:
+        exps.append(math.exp(z / temperatur))
+    summe = sum(exps)
+    wahrscheinlichkeiten = []
+    for e in exps:
+        wahrscheinlichkeiten.append(e / summe)
+    return wahrscheinlichkeiten
+
+kandidaten = ["Dresden", "Leipzig", "Chemnitz", "schön"]
+logits = [4.0, 2.5, 1.5, 1.0]
+
+for T in [0.5, 1.0, 2.0]:
+    p = softmax(logits, T)
+    gerundet = []
+    for wert in p:
+        gerundet.append(round(wert, 3))
+    print(T, gerundet)
+# 0.5 [0.944, 0.047, 0.006, 0.002]
+# 1.0 [0.738, 0.165, 0.061, 0.037]
+# 2.0 [0.505, 0.238, 0.145, 0.113]
+
+p = softmax(logits, 1.0)
+print(kandidaten[p.index(max(p))])                  # Dresden   (greedy)
+print(random.choices(kandidaten, weights=p, k=10))  # zufällig, meist 'Dresden'
+print(round(-math.log(p[0]), 3))                    # 0.304     Verlust, wenn "Dresden" richtig ist
+print(round(-math.log(p[1]), 3))                    # 1.804     Verlust, wenn "Leipzig" richtig wäre</code></pre>
+            </details>
+        </div>
+
+<h2>6. Wie ein Sprachmodell trainiert wird</h2>
+
+<p>Das Training läuft in mehreren Phasen:</p>
+
+<ol>
+            <li><strong>Vortraining:</strong> Das Modell liest riesige Textmengen (Webseiten, Bücher, Code; insgesamt Billionen Tokens). An jeder Stelle sagt es das nächste Token voraus und vergleicht mit dem Token, das tatsächlich folgt. Man braucht dafür keine von Menschen beschrifteten Daten, denn der Text liefert die richtige Antwort selbst (<em>selbstüberwachtes Lernen</em>).</li>
+            <li><strong>Verlust und Anpassung:</strong> Der Fehler wird mit dem <strong>Verlust</strong> L = −ln(p<sub>richtig</sub>) gemessen. Ein Optimierungsverfahren (Gradientenabstieg, siehe Seite 11.8 Neuronale Netze) verändert alle Parameter ein kleines Stück so, dass L sinkt. Das wird Milliarden Male wiederholt.</li>
+            <li><strong>Feinabstimmung:</strong> Danach wird das Modell mit Beispiel-Dialogen weitertrainiert, damit es Fragen beantwortet, statt einfach Text fortzusetzen. Häufig bewerten Menschen zusätzlich Antworten, und das Modell wird auf die bevorzugten Antworten hin trainiert (Reinforcement Learning from Human Feedback, <strong>RLHF</strong>).</li>
+            <li><strong>Systemprompt:</strong> Im Betrieb setzt der Anbieter vor deinen Prompt meist unsichtbare Anweisungen, zum Beispiel zu Tonfall und Grenzen. Auch die Plattform deiner Schule kann so eingestellt sein.</li>
+        </ol>
+
+<table class="gitter">
+            <thead><tr><th>p(richtiges Token)</th><th>0,8</th><th>0,6</th><th>0,25</th><th>0,05</th><th>0,01</th></tr></thead>
+            <tbody><tr><td>Verlust −ln p</td><td>0,223</td><td>0,511</td><td>1,386</td><td>2,996</td><td>4,605</td></tr></tbody>
+        </table>
+
+<figure><div class="lp-video"><video controls preload="none" poster="../vid/11-0-8_training_vorschau.png" src="../vid/11-0-8_training.mp4"></video><a href="../vid/11-0-8_training.mp4">Video ansehen</a></div><figcaption>Video 8: Training – nächstes Token raten, Verlust messen, Verlust verkleinern (ca. 1,5 min)</figcaption></figure>
+
+<h2>7. Warum Sprachmodelle Fehler machen</h2>
+
+<p>Jede der folgenden Fehlerquellen folgt direkt aus der Funktionsweise:</p>
+
+<table class="gitter">
+            <thead><tr><th>Fehlerquelle</th><th>Ursache im Modell</th><th>Was du tun kannst</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Halluzination</strong>: erfundene Fakten, Quellen, Funktionen</td><td>Das Modell erzeugt immer eine <em>wahrscheinliche</em> Fortsetzung, auch wenn es keine verlässliche kennt. „Plausibel“ ist nicht „wahr“.</td><td>Fakten und Quellen an echten Quellen prüfen.</td></tr>
+                <tr><td><strong>Veraltetes Wissen</strong></td><td>Trainingsdaten haben einen Stichtag.</td><td>Bei aktuellen Themen nicht dem Modell vertrauen.</td></tr>
+                <tr><td><strong>Buchstaben, Zählen, Rechnen</strong></td><td>Das Modell sieht Tokens, nicht Buchstaben oder Ziffern; Rechnen ist für es „Text fortsetzen“.</td><td>Nachrechnen, Code ausführen und testen.</td></tr>
+                <tr><td><strong>Vergessen im langen Chat</strong></td><td>Was aus dem Kontextfenster fällt, ist weg; bei schulKI werden nur etwa die letzten sieben Nachrichten mitgeschickt.</td><td>Wichtiges erneut nennen, für eine neue Frage einen neuen Chat beginnen.</td></tr>
+                <tr><td><strong>Gefälligkeit</strong>: stimmt dir zu, auch wenn du falschliegst</td><td>Bei der Feinabstimmung werden Antworten belohnt, die Menschen gefallen.</td><td>Neutral fragen („Prüfe, ob …“), nicht „Stimmt doch, oder?“.</td></tr>
+                <tr><td><strong>Bias</strong></td><td>Schieflagen der Trainingstexte werden mitgelernt.</td><td>Ausgaben kritisch auf Einseitigkeit lesen.</td></tr>
+                <tr><td><strong>Unterschiedliche Antworten</strong></td><td>Sampling: Bei T &gt; 0 ist Zufall im Spiel.</td><td>Eine Antwort ist kein Beweis; mehrfach fragen zeigt Unsicherheit.</td></tr>
+            </tbody>
+        </table>
+
+<p>Auf Seite 11.10 baust du später selbst ein kleines Sprachmodell und siehst, wie eine Halluzination aus reinen Häufigkeiten entsteht.</p>
+
+<h2>8. Datenschutz: Was gehört in einen Prompt?</h2>
+
+<p>Dein Prompt wird an einen Server geschickt, dort verarbeitet und kann gespeichert werden. Die Datenschutz-Grundverordnung (DSGVO) schützt <strong>personenbezogene Daten</strong>, also alle Angaben, die sich einer Person zuordnen lassen: Namen, Noten, Adressen, Fotos, Gesundheitsangaben.</p>
+
+<p><strong>Was mit deinen Eingaben bei schulKI passiert</strong> (laut Datenschutzerklärung und Anleitung von schulKI, Stand Oktober 2026):</p>
+
+<table class="gitter">
+            <thead><tr><th>Frage</th><th>Antwort</th></tr></thead>
+            <tbody>
+                <tr><td>Wie meldest du dich an?</td><td>Gar nicht: Deine Lehrkraft teilt einen <strong>Freigabeschlüssel</strong> (QR-Code oder Link), der nur für eine festgelegte Zeit gilt. Du arbeitest anonym unter einem zufälligen Pseudonym wie „lebhafter Nasenbär“ und verbrauchst die Tokens deiner Lehrkraft.</td></tr>
+                <tr><td>Wer sieht deine Chats?</td><td>Die Chats werden gespeichert. Deine <strong>Lehrkraft sieht alle Chats</strong>, die über ihren Freigabeschlüssel entstanden sind, kann darin mitschreiben und sie von einer KI zusammenfassend auswerten lassen. Ob du Chats löschen darfst, legt sie beim Erstellen des Schlüssels fest.</td></tr>
+                <tr><td>Wohin geht dein Text?</td><td>schulKI selbst läuft auf Servern in Deutschland. Den <strong>Inhalt</strong> deines Chats leitet schulKI aber an den Anbieter des gewählten Modells weiter: beim Standardmodell Haiku 5.5 an Anthropic, ein US-Unternehmen. schulKI tritt dabei selbst als Nutzer auf; dein Name und deine IP-Adresse werden nicht übertragen, der Text, den du schreibst, schon.</td></tr>
+                <tr><td>Gibt es eine sicherere Variante?</td><td>Für „sichere Chats“ bietet schulKI Modelle wie Llama und DeepSeek an, die von europäischen Firmen auf Servern in der EU betrieben und nicht mit deinen Eingaben trainiert werden. Ob du sie nutzen kannst, hängt von den Einstellungen deiner Lehrkraft ab.</td></tr>
+                <tr><td>Wie lange wird gespeichert?</td><td>Bis zum Löschen. Wird ein Chat am Tag der Erstellung gelöscht, ist er sofort weg, sonst bleibt er noch 14 Tage in Sicherungskopien. Sprachaufnahmen werden bei der Deutschen Telekom in Deutschland in Text umgewandelt und danach sofort gelöscht.</td></tr>
+            </tbody>
+        </table>
+
+<p>Daraus folgen diese Regeln:</p>
+
+<ul>
+            <li><strong>Keine personenbezogenen Daten anderer</strong> (Mitschüler, Lehrkräfte, Familie) und keine besonders schützenswerten eigenen Daten (Gesundheit, Religion, …).</li>
+            <li><strong>Keine Zugangsdaten</strong> wie Passwörter, PINs oder API-Schlüssel, auch nicht in eingefügtem Code.</li>
+            <li><strong>Anonymisieren</strong>: „Schüler A hat …“ statt eines Namens; nur so viel Kontext wie nötig.</li>
+            <li><strong>Fremde Texte und Bilder</strong> (z.&nbsp;B. urheberrechtlich geschütztes Material) nur, wenn du sie nutzen darfst. Das gilt auch für hochgeladene PDFs und Fotos: Auf einem Foto vom Arbeitsplatz können Namen oder Gesichter zu sehen sein.</li>
+            <li><strong>Schreib nur, was deine Lehrkraft lesen darf.</strong> Der Chat ist kein privates Tagebuch.</li>
+        </ul>
+
+<div class="hinweis">
+            <p>schulKI selbst schreibt in seinen häufigen Fragen: Alle aktuellen KIs können sich irren, der Einsatz wird nur im begleiteten Unterricht empfohlen. Maßgeblich sind außerdem die Nutzungsregeln deiner Schule. Wenn du unsicher bist, ob etwas in den Prompt darf: weglassen oder vorher fragen.</p>
+        </div>
+
+<h2>9. Regeln für die KI-Nutzung in diesem Kurs</h2>
+
+<p>In jedem Unterrichtsblock ist festgelegt, welche Rolle KI spielen darf. Die Abiturprüfung schreibst du ohne KI. Deshalb muss alles, was geprüft wird, in deinem Kopf ankommen und nicht nur im Chatverlauf.</p>
+
+<table class="gitter">
+            <thead><tr><th>Phase</th><th>Rolle der KI</th><th>Erlaubt</th><th>Nicht erlaubt</th></tr></thead>
+            <tbody>
+                <tr><td>Programmieren lernen (Klasse 11)</td><td><strong>Tutor</strong></td><td>Fehlermeldungen und Konzepte erklären lassen, Hinweise erfragen</td><td>Code für Aufgaben schreiben lassen</td></tr>
+                <tr><td>Leistungskontrollen, Klausuren</td><td><strong>keine</strong></td><td>–</td><td>jede Nutzung</td></tr>
+                <tr><td>KI-Projekt</td><td><strong>Projektwerkzeug</strong></td><td>Recherche, Ideen, Fehlersuche, Code mit Verständnis übernehmen</td><td>ungeprüft und ohne Kennzeichnung übernehmen</td></tr>
+                <tr><td>Softwareprojekt (OOP)</td><td><strong>Pair-Programming, Code-Review</strong></td><td>Code besprechen und prüfen lassen</td><td>Code abgeben, den du nicht erklären kannst</td></tr>
+                <tr><td>Klasse 12, Prüfungsvorbereitung</td><td>Tutor, mit <strong>KI-freien Phasen</strong></td><td>wie angegeben</td><td>in KI-freien Phasen jede Nutzung</td></tr>
+            </tbody>
+        </table>
+
+<p>In schulKI lässt sich das technisch umsetzen: Eine Lehrkraft kann einen eigenen <strong>Assistenten</strong> anlegen, dessen Systemprompt (Abschnitt 6) z.&nbsp;B. festlegt „Erkläre und gib Hinweise, aber schreibe keinen fertigen Code“, und genau diesen Assistenten per Freigabeschlüssel teilen. Auch ein Systemprompt ist aber nur ein Text, den das Modell meistens befolgt, nicht immer. Die Regel gilt deshalb auch dann, wenn das Modell sich nicht daran hält.</p>
+
+<p>Für diesen Kurs gibt es sechs solcher Assistenten (Projekt-Coach, Git-Helfer, Notebook-Tutor, Rechenweg-Prüfer ML, KI-Begriffe-Quiz, Streitgespräch KI und Gesellschaft). Wie sie aufgebaut sind, warum sie bestimmte Dinge absichtlich nicht tun und wie du ChatGPT, Gemini, Claude oder Mistral selbst als Lernhilfe einstellst, lernst du auf der nächsten Seite, <strong>11.0b KI als Lernpartner</strong>. Den Link zum jeweiligen Assistenten bekommst du in der Stunde.</p>
+
+<p><strong>Kennzeichnung:</strong> Wo KI eingesetzt werden darf, wird sie angegeben, z.&nbsp;B. am Ende einer Abgabe:</p>
+
+<pre><code>KI-Nutzung: schulKI.de, 12.11.2026
+Zweck: Fehlermeldung "IndexError" in Funktion auswerten() erklären lassen
+Wichtigster Prompt: "Erkläre mir, was diese Fehlermeldung bedeutet,
+                    und gib mir einen Hinweis, wo ich suchen muss. Schreibe keinen Code."
+Übernommen: nichts wörtlich; Schleifengrenze selbst korrigiert und mit 3 Testfällen geprüft</code></pre>
+
+<p><strong>Prüfschema für KI-Antworten</strong>, bevor du etwas verwendest:</p>
+
+<ol>
+            <li><strong>Verstehe ich es?</strong> Kann ich die Antwort mit eigenen Worten erklären?</li>
+            <li><strong>Stimmt es?</strong> Zahlen nachrechnen, Code ausführen und mit Testfällen prüfen.</li>
+            <li><strong>Gibt es die Quelle?</strong> Genannte Quellen, Funktionen und Bibliotheken nachschlagen.</li>
+            <li><strong>Ist es aktuell?</strong> Bei Daten, Gesetzen, Versionen das Datum beachten.</li>
+            <li><strong>Ist es einseitig?</strong> Fehlen Gegenpositionen, Gruppen, Fälle?</li>
+        </ol>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Sprachmodelle im Alltag und im Beruf</summary>
+                <p><strong>Alltag:</strong> Die Wortvorschläge deiner Handytastatur, automatische Übersetzungen und Untertitel arbeiten nach demselben Prinzip „nächstes Token vorhersagen“, nur mit kleineren Modellen.</p>
+                <p><strong>Beruf:</strong> Softwareentwicklerinnen und -entwickler nutzen Sprachmodelle als Programmierassistenz und müssen deren Code genauso prüfen und testen wie den eines Kollegen. <strong>Machine-Learning-Engineers</strong> passen Modelle an Firmendaten an und messen, wie oft sie halluzinieren. In Dresden und Leipzig forscht das KI-Kompetenzzentrum <strong>ScaDS.AI</strong> unter anderem daran, wie man solche Modelle zuverlässiger und nachvollziehbarer macht.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>Ein <strong>Sprachmodell</strong> berechnet für jedes Token seines Vokabulars die Wahrscheinlichkeit, als Nächstes zu kommen. Texte entstehen <strong>autoregressiv</strong>: Token wählen, anhängen, neu berechnen. Das Modell optimiert dabei <em>Wahrscheinlichkeit</em>, nicht <em>Wahrheit</em>.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Attention</strong> macht aus festen Wort-Vektoren kontextabhängige Vektoren: Jedes Token mischt sich mit den vorherigen Tokens, gewichtet nach deren Bedeutung für es. Das <strong>Kontextfenster</strong> begrenzt, wie viel Text dabei berücksichtigt wird.</p>
+        </div>
+
+<div class="merke">
+            <p>Ein Sprachmodell lernt <strong>statistische Muster</strong> in Texten, indem es den Verlust −ln(p<sub>richtig</sub>) über riesige Datenmengen minimiert. Es legt dabei <strong>keine Faktendatenbank</strong> an, in der es nachschlagen könnte. Was in den Trainingsdaten häufig und einheitlich vorkommt, gibt es meist richtig wieder; Seltenes, Widersprüchliches und alles nach dem <strong>Wissensstichtag</strong> nicht.</p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.0.1: Tokenisieren von Hand <span class="niveau">AFB I/II</span></summary>
+                <p>Verwende das Vokabular und die Regel aus Beispiel 1 (an jeder Stelle das längste passende Stück; a&nbsp;=&nbsp;8, b&nbsp;=&nbsp;9, …).</p>
+                <ol>
+                    <li>Tokenisiere die Wörter „informatik“, „formatierung“ und „informatikerinnen“ und gib jeweils die Token-IDs an.</li>
+                    <li>Vergleiche die Anzahl der Tokens mit der Anzahl der Buchstaben. Erkläre, warum seltene Wörter mehr Tokens brauchen.</li>
+                    <li>Begründe mit deinem Ergebnis, warum ein Sprachmodell bei der Frage „Wie oft kommt der Buchstabe n in ‚informatikerinnen‘ vor?“ Fehler machen kann.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 11.0.2: Softmax und Temperatur <span class="niveau">AFB II</span></summary>
+                <p>Ein Modell bewertet die Fortsetzung von „Ich trinke morgens gern eine Tasse“ mit diesen Logits: Kaffee 2,0 · Tee 1,0 · Kakao 0,5 · Suppe −1,0.</p>
+                <ol>
+                    <li>Berechne die Wahrscheinlichkeiten für T = 1 (drei Nachkommastellen).</li>
+                    <li>Berechne sie für T = 0,5 und beschreibe, wie sich die Verteilung verändert.</li>
+                    <li>Das Modell erzeugt 1000 Fortsetzungen mit Sampling bei T = 1. Gib an, wie oft du ungefähr „Suppe“ erwartest.</li>
+                    <li>Im Trainingstext folgt an dieser Stelle „Tee“. Berechne den Verlust bei T = 1 und vergleiche mit dem Verlust, wenn „Kaffee“ gefolgt wäre.</li>
+                </ol>
+                <p class="tipp">e<sup>2</sup> ≈ 7,389; e<sup>1</sup> ≈ 2,718; e<sup>0,5</sup> ≈ 1,649; e<sup>−1</sup> ≈ 0,368</p>
+            </details>
+        </div>

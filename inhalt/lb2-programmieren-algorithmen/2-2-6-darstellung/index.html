@@ -1,0 +1,232 @@
+<p>Bevor ein größeres Programm entsteht, wird der Ablauf meist geplant – so wie ein Architekt erst einen Bauplan zeichnet. Für Algorithmen gibt es dafür zwei genormte grafische Darstellungen.</p>
+
+<h2>Struktogramm</h2>
+
+<p>
+            Struktogramme sind grafische Darstellungen, die in der Softwareentwicklung verwendet werden, um den logischen Ablauf von Algorithmen und Programmen zu visualisieren. Sie bieten eine klare und übersichtliche Möglichkeit, den Programmablauf zu planen, zu dokumentieren und zu kommunizieren. Struktogramme helfen Entwicklerinnen und Entwicklern, den logischen Aufbau eines Algorithmus zu verstehen, bevor sie den eigentlichen Programmcode schreiben. Sie bestehen aus rechteckigen Symbolen, die ineinander geschachtelt werden.
+        </p>
+
+<p>Elemente in Struktogrammen:</p>
+
+<figure>
+            <img src="../img/anweisung.png" width="600" alt="Struktogramm-Symbol Anweisung">
+            <figcaption>Abb. 1: Anweisung im Struktogramm</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/sequenz.png" width="600" alt="Struktogramm-Symbol Sequenz">
+            <figcaption>Abb. 2: Sequenz im Struktogramm</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/schleife.png" width="600" alt="Struktogramm-Symbol Zählschleife">
+            <figcaption>Abb. 3: Zählschleife im Struktogramm</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/verzweigung.png" width="600" alt="Struktogramm-Symbol Verzweigung">
+            <figcaption>Abb. 4: Verzweigung im Struktogramm</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/fallunterscheidung.png" width="600" alt="Struktogramm-Symbol Fallunterscheidung">
+            <figcaption>Abb. 5: Fallunterscheidung im Struktogramm</figcaption>
+        </figure>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Ein Struktogramm für „Lies eine Zahl ein; wenn sie gerade ist, gib ‚gerade‘ aus, sonst ‚ungerade‘“ besteht aus einer Anweisung (Eingabe) und darunter einer Verzweigung mit der Bedingung „zahl mod 2 = 0?“ und den beiden Ausgaben in den Ja- und Nein-Feldern.</p>
+            <table class="gitter" style="width: auto;">
+                <tr><td colspan="2" style="text-align: left;">Eingabe: zahl</td></tr>
+                <tr><td colspan="2">zahl mod 2 = 0 ?</td></tr>
+                <tr><td>ja</td><td>nein</td></tr>
+                <tr><td>Ausgabe: „gerade“</td><td>Ausgabe: „ungerade“</td></tr>
+            </table>
+            <p>(Vereinfachte Darstellung als Tabelle. Im echten Struktogramm steht die Bedingung in einem Dreieck, siehe Abb. 4.)</p>
+            <ol>
+                <li><strong>Blöcke von oben nach unten lesen:</strong> Zuerst eine Anweisung, dann eine Verzweigung. <em>Warum:</em> Im Struktogramm bedeutet „untereinander“ immer Sequenz.</li>
+                <li><strong>Jeden Block übersetzen:</strong> Die Eingabe wird zu <code>int(input(…))</code>, die Verzweigung zu <code>if</code>/<code>else</code>, die Bedingung „zahl mod 2 = 0“ zu <code>zahl % 2 == 0</code>.
+                    <pre><code class="language-python">zahl = int(input("Zahl: "))
+if zahl % 2 == 0:
+    print("gerade")
+else:
+    print("ungerade")</code></pre>
+                </li>
+                <li><strong>Prüfen:</strong> Jeder Zweig der Verzweigung wird von mindestens einem Testfall durchlaufen.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Struktogramm und Programm haben denselben Aufbau. Jeder Block entspricht genau einer Kontrollstruktur.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td>4</td><td><code>gerade</code></td><td>Ja-Zweig</td></tr>
+                    <tr><td>7</td><td><code>ungerade</code></td><td>Nein-Zweig</td></tr>
+                    <tr><td>0</td><td><code>gerade</code></td><td>Randfall</td></tr>
+                    <tr><td>-3</td><td><code>ungerade</code></td><td>negative Zahl: in Python ist −3 % 2 = 1</td></tr>
+                    <tr><td>2.5</td><td><code>ValueError</code></td><td>falscher Typ für <code>int()</code></td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Bubblesort mit zwei geschachtelten Zählschleifen und einer Verzweigung</p>
+            <figure>
+                <img src="../img/bubblesort_struktogramm.png" width="600" alt="Struktogramm des Bubblesort-Algorithmus">
+                <figcaption>Abb. 6: Struktogramm Bubblesort</figcaption>
+            </figure>
+            <ol>
+                <li><strong>Von außen nach innen lesen:</strong> äußere Zählschleife → innere Zählschleife → Verzweigung → Tausch. <em>Warum:</em> Die Einrückung der Blöcke zeigt die Schachtelung. Was weiter innen steht, wird öfter ausgeführt.</li>
+                <li><strong>Ungenauigkeiten erkennen:</strong> In Abb. 6 heißt die Zählvariable der äußeren Schleife versehentlich j; gemeint ist i. Die Startwerte fehlen: Beide Schleifen beginnen bei 0. Die Obergrenzen sind wie bei <code>range</code> ausschließlich gemeint. <em>Warum wichtig:</em> Ein Struktogramm ist nur so eindeutig wie seine Beschriftung. Unklare Grenzen führen beim Programmieren zu Fehlern um eins.</li>
+                <li><strong>Übersetzen:</strong>
+                    <pre><code class="language-python">def bubblesort(zahlen):
+    for i in range(len(zahlen) - 1):              # äußere Zählschleife
+        for j in range(len(zahlen) - 1 - i):      # innere Zählschleife
+            if zahlen[j] &gt; zahlen[j + 1]:         # Verzweigung
+                temp = zahlen[j]   # Ja-Zweig
+                zahlen[j] = zahlen[j + 1]
+                zahlen[j + 1] = temp
+            # Nein-Zweig ist leer (Symbol ∅)
+    return zahlen</code></pre>
+                </li>
+                <li><strong>Erweitern um den Abbruch:</strong> Bubblesort mit Abbruch wiederholt Durchläufe, <em>bis</em> kein Tausch mehr stattfindet. Das ist eine <strong>fußgesteuerte Schleife</strong>: Die Bedingung wird erst nach dem Rumpf geprüft, der Rumpf läuft mindestens einmal. Im Struktogramm steht die Bedingung deshalb im unteren Balken:
+                    <pre><code>┌──────────────────────────────────────────────┐
+│ getauscht ← falsch                           │
+│ ┌──────────────────────────────────────────┐ │
+│ │ für j von 0 bis Länge − 2                │ │
+│ │   wenn zahlen[j] &gt; zahlen[j + 1]:        │ │
+│ │     tausche; getauscht ← wahr            │ │
+│ └──────────────────────────────────────────┘ │
+├──────────────────────────────────────────────┤
+│ wiederhole, solange getauscht = wahr         │
+└──────────────────────────────────────────────┘</code></pre>
+                </li>
+                <li><strong>Falle beim Übersetzen:</strong> Python kennt keine fußgesteuerte Schleife. Man bildet sie mit <code>while True</code> und <code>break</code> nach:
+                    <pre><code class="language-python">def bubblesort_abbruch(zahlen):
+    while True:
+        getauscht = False
+        for j in range(len(zahlen) - 1):
+            if zahlen[j] &gt; zahlen[j + 1]:
+                temp = zahlen[j]
+                zahlen[j] = zahlen[j + 1]
+                zahlen[j + 1] = temp
+                getauscht = True
+        if not getauscht:            # Bedingung am Ende des Rumpfs
+            break
+    return zahlen</code></pre>
+                </li>
+            </ol>
+            <p><strong>Ergebnis:</strong> Beide Fassungen sortieren korrekt. Die zweite entspricht der Darstellung mit fußgesteuerter Schleife.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe (beide Fassungen)</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[5, 2, 9, 3]</code></td><td><code>[2, 3, 5, 9]</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>[]</code></td><td><code>[]</code></td><td>leere Liste: der Rumpf läuft einmal, findet nichts und bricht ab</td></tr>
+                    <tr><td><code>[4]</code></td><td><code>[4]</code></td><td>ein Element</td></tr>
+                    <tr><td><code>[-1, -8, 0]</code></td><td><code>[-8, -1, 0]</code></td><td>negative Zahlen</td></tr>
+                    <tr><td><code>[2, "x"]</code></td><td><code>TypeError</code></td><td>falscher Typ</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Struktogramme online erstellen</summary>
+                <p><a href="https://struktog.openpatch.org/" target="_blank">https://struktog.openpatch.org/</a></p>
+            </details>
+        </div>
+
+<h2>Programmablaufplan (PAP)</h2>
+
+<p>
+            Ein Programmablaufplan, auch Flussdiagramm genannt, ist eine grafische Darstellung eines Algorithmus oder eines Prozesses. Er wird verwendet, um den Ablauf von Anweisungen in einem Programm anschaulich darzustellen. Ein Flussdiagramm besteht aus verschiedenen Symbolen, die durch Pfeile verbunden sind und den Fluss von Informationen und Entscheidungen darstellen.
+        </p>
+
+<figure>
+            <img src="../img/pap_anweisung.png" width="200" alt="PAP-Symbol Anweisung">
+            <figcaption>Abb. 7: Anweisung im PAP</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/pap_sequenz.png" width="200" alt="PAP-Symbole einer Sequenz">
+            <figcaption>Abb. 8: Sequenz im PAP</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/pap_schleife.png" width="250" alt="PAP einer Zählschleife">
+            <figcaption>Abb. 9: Zählschleife im PAP</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/pap_verzweigung.png" width="400" alt="PAP einer Verzweigung">
+            <figcaption>Abb. 10: Verzweigung im PAP</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/bubblesort_pap.png" width="600" alt="Programmablaufplan des Bubblesort-Algorithmus">
+            <figcaption>Abb. 11: PAP Bubblesort</figcaption>
+        </figure>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Programmablaufpläne erstellen</summary>
+                <p>
+                    Online: <a href="https://app.diagrams.net/" target="_blank">https://app.diagrams.net/</a><br>
+                    Offline: Flowgorithm (auf den Schulrechnern), Download: <a href="http://flowgorithm.org/index.html" target="_blank">http://flowgorithm.org/index.html</a>
+                </p>
+            </details>
+        </div>
+
+<h2>Struktogramm und PAP im Vergleich</h2>
+
+<table>
+            <thead>
+                <tr><th></th><th>Struktogramm</th><th>Programmablaufplan</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Vorteile</strong></td><td>strukturierte Darstellung, klare Hierarchie der Blöcke, passt direkt zu <code>if</code>/<code>for</code>/<code>while</code>, viel Platz für Text</td><td>allgemein verständlich, sehr flexibel, auch für Abläufe außerhalb der Programmierung (Geschäftsprozesse) weit verbreitet</td></tr>
+                <tr><td><strong>Nachteile</strong></td><td>für Laien weniger verständlich, Änderungen erfordern oft Neuzeichnen, außerhalb der Programmierung kaum gebräuchlich</td><td>erlaubt unstrukturierte Sprünge („Spaghetti-Code“), wenig Platz für Text, große Algorithmen werden schnell unübersichtlich</td></tr>
+            </tbody>
+        </table>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Abläufe dokumentieren</summary>
+                <p>
+                    <strong>Alltag:</strong> Anleitungen wie „Was tun bei Feueralarm?“ oder die Fehlersuche-Seite im Handbuch deines Routers sind oft als Flussdiagramm gezeichnet.<br><br>
+                    <strong>Beruf:</strong> Business-Analystinnen und -Analysten modellieren Geschäftsprozesse – etwa den Ablauf eines Kreditantrags bei einer Bank – mit BPMN, einer Weiterentwicklung des Flussdiagramms. Softwareentwicklerinnen und -entwickler nutzen solche Diagramme, um mit Fachabteilungen über Abläufe zu sprechen, bevor programmiert wird.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p>
+                <strong>Struktogramm</strong> (Nassi-Shneiderman-Diagramm, DIN 66261): stellt einen Algorithmus als ineinander geschachtelte Blöcke dar. Jede Kontrollstruktur (Sequenz, Verzweigung, Schleife) hat ein eigenes Rechteck-Symbol; Sprünge sind nicht möglich.<br>
+                <strong>Programmablaufplan (PAP)</strong> (Flussdiagramm, DIN 66001): stellt den Ablauf mit Symbolen (Rechteck = Anweisung, Raute = Verzweigung, abgerundetes Rechteck = Start/Ende) dar, die durch Pfeile verbunden sind.
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.6.1: Symbole zuordnen <span class="niveau">AFB I</span></summary>
+                <p>Beschreibe, wie eine Verzweigung und eine kopfgesteuerte Schleife im Struktogramm und im PAP dargestellt werden.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 2.2.6.2: Struktogramme für Sortierverfahren <span class="niveau">AFB II</span></summary>
+                <p>Erstelle ein Struktogramm für die Algorithmen:</p>
+                <ol>
+                    <li>Selectionsort</li>
+                    <li>Insertionsort</li>
+                </ol>
+            </details>
+        </div>

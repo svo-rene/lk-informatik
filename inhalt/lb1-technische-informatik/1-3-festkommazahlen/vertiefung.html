@@ -1,0 +1,46 @@
+<h2 id="anspruchsvoll">Anspruchsvolle Aufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.3.6: Fehler finden in einer Umrechnung <span class="niveau">AFB III</span></summary>
+        <p>Max soll 6,3 in eine binäre Festkommazahl mit 8 Bit Bruchteil umwandeln. Seine Lösung:</p>
+        <pre>Ganzzahlteil:  6 = 110
+
+Bruchteil:     0,3 · 2 = 0,6  →  0
+               0,6 · 2 = 1,2  →  1
+               0,2 · 2 = 0,4  →  0
+               0,4 · 2 = 0,8  →  0
+               0,8 · 2 = 1,6  →  1
+               0,6 · 2 = 1,2  →  1
+               0,2 · 2 = 0,4  →  0
+               0,4 · 2 = 0,8  →  0
+
+Wie beim Ganzzahlteil von unten nach oben gelesen: 00110010
+Ergebnis: 6,3 = 110,00110010
+
+Bemerkung: Der gespeicherte Wert ist etwas größer als 6,3, weil gerundet
+wurde. Mit 12 Bit Bruchteil wäre 6,3 exakt darstellbar.</pre>
+        <ol>
+            <li>Finde alle Fehler in der Lösung und erkläre jeweils, warum es ein Fehler ist.</li>
+            <li>Gib die richtige Darstellung an und berechne den tatsächlich gespeicherten Dezimalwert und die Abweichung von 6,3.</li>
+            <li>Berechne, welchen Wert Max' falsches Bitmuster darstellt. Beschreibe, wie Max seinen Fehler mit einer Probe selbst hätte entdecken können.</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.3.7: 16 Bit für eine Küchenwaage <span class="niveau">AFB III</span></summary>
+        <p>Eine digitale Küchenwaage soll Gewichte von 0 bis 5&nbsp;kg auf <strong>1&nbsp;g genau</strong> anzeigen. Für den Messwert steht ein vorzeichenloses 16-Bit-Register zur Verfügung. Drei Vorschläge liegen vor:</p>
+        <table class="gitter">
+            <tr><th>Vorschlag</th><th>Einheit</th><th>Ganzzahlteil</th><th>Bruchteil</th></tr>
+            <tr><td>A</td><td>Kilogramm</td><td>8 Bit</td><td>8 Bit</td></tr>
+            <tr><td>B</td><td>Kilogramm</td><td>3 Bit</td><td>13 Bit</td></tr>
+            <tr><td>C</td><td>Gramm</td><td>16 Bit</td><td>0 Bit (ganze Zahl)</td></tr>
+        </table>
+        <ol>
+            <li>Bestimme für jeden Vorschlag den größten darstellbaren Wert und die Auflösung (kleinster Abstand) in Gramm.</li>
+            <li>Beurteile die drei Vorschläge anhand der Anforderungen und gib eine begründete Empfehlung ab.</li>
+        </ol>
+    </details>
+</div>

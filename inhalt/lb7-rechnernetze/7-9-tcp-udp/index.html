@@ -1,0 +1,192 @@
+<p>
+            Auf deinem Laptop laufen gleichzeitig Browser, Musik-Streaming, ein Messenger und ein Update-Dienst – alle über dieselbe IP-Adresse. Woher weiß der Laptop, welches Paket zu welchem Programm gehört? Und warum ruckelt ein Videocall lieber kurz, statt zu warten, während ein Download niemals ein Byte verlieren darf? Das regelt die Transportschicht.
+        </p>
+
+<h2>Aufgaben der Transportschicht</h2>
+
+<p>Die Transportschicht ist die dritte Schicht im TCP/IP-Modell (im OSI-Modell die vierte). Sie sorgt für die Ende-zu-Ende-Kommunikation zwischen <em>Anwendungsprozessen</em> auf verschiedenen Hosts. Zu ihren Aufgaben gehören:</p>
+
+<ul>
+            <li><strong>Ende-zu-Ende-Kommunikation:</strong> Verbindung zwischen Anwendungsprozessen auf unterschiedlichen Hosts; die Prozesse werden über Ports unterschieden.</li>
+            <li><strong>Segmentierung und Reassemblierung:</strong> Lange Datenströme werden in Segmente aufgeteilt und am Ziel in der richtigen Reihenfolge wieder zusammengesetzt.</li>
+            <li><strong>Flusskontrolle:</strong> verhindert, dass der Sender den Empfänger mit Daten überflutet.</li>
+            <li><strong>Fehlererkennung und erneutes Senden:</strong> Beschädigte Segmente werden über eine Prüfsumme erkannt und verworfen; verlorene oder beschädigte Daten sendet TCP erneut. Eine Korrektur der fehlerhaften Bits findet nicht statt.</li>
+            <li><strong>Verbindungsaufbau und -abbau:</strong> bei TCP die Verwaltung der Verbindung zwischen den Endpunkten.</li>
+        </ul>
+
+<h2>Ports</h2>
+
+<p>Ports sind 16-Bit-Nummern (0 bis 65535), mit denen die Transportschicht Dienste bzw. Prozesse <strong>innerhalb eines Hosts</strong> unterscheidet. Jeder Serverdienst wartet auf einem festgelegten Port auf eingehende Anfragen, z.&nbsp;B. HTTP auf Port 80 und HTTPS auf Port 443. Der Client verwendet einen vom Betriebssystem zufällig gewählten Quellport. Die Kombination aus IP-Adresse und Port heißt <strong>Socket</strong>, z.&nbsp;B. 192.168.1.20:443. Eine Verbindung ist durch Quell- und Ziel-Socket eindeutig bestimmt.</p>
+
+<ul>
+            <li><strong>0 bis 1023:</strong> Well-known Ports für Standarddienste (HTTP 80, HTTPS 443, DNS 53, SSH 22 …, → 7.10).</li>
+            <li><strong>1024 bis 49151:</strong> registrierte Ports für bestimmte Anwendungen.</li>
+            <li><strong>49152 bis 65535:</strong> dynamische Ports, die Clients als Quellport verwenden.</li>
+        </ul>
+
+<h2>Verbindungslos: das Datagrammprinzip</h2>
+
+<p>Beim Datagrammprinzip werden Daten übertragen, ohne dass vorher eine Verbindung zwischen Sender und Empfänger aufgebaut wird. Jedes Datagramm ist eine selbstständige Einheit, die alle für die Zustellung notwendigen Informationen enthält, insbesondere die Adressen von Sender und Empfänger. Dadurch können Datagramme unabhängig voneinander und über verschiedene Wege zum Ziel gelangen (→ Paketvermittlung in 7.2).</p>
+
+<p>Dieses Prinzip nutzen verbindungslose Dienste wie das Internetprotokoll (IP), bei dem jedes Paket (IP-Datagramm) einzeln geroutet wird, und auf der Transportschicht UDP. Die verbindungslose Arbeitsweise macht den Netzverkehr flexibel und effizient und passt sich an Änderungen im Netz an, bringt aber Herausforderungen bei Zuverlässigkeit, Reihenfolge und Vollständigkeit der Daten mit sich. Wer diese Eigenschaften braucht, setzt TCP darüber.</p>
+
+<h2>UDP (User Datagram Protocol)</h2>
+
+<p>UDP ist ein verbindungsloses Protokoll, das eine schnelle, aber unzuverlässige Datenübertragung bietet. Ein UDP-Datagramm hat nur einen 8 Byte kleinen Header (Quellport, Zielport, Länge, Prüfsumme). UDP erkennt beschädigte Datagramme über die Prüfsumme, sendet aber nichts neu und garantiert keine Reihenfolge. Es eignet sich für Anwendungen, die geringe Verzögerungen erfordern und bei denen gelegentliche Verluste akzeptabel sind, etwa Live-Video, Sprachübertragung (VoIP) oder Online-Spiele, sowie für kurze Anfrage-Antwort-Dienste wie DNS und DHCP.</p>
+
+<h2>TCP (Transmission Control Protocol)</h2>
+
+<p>TCP ist eines der Hauptprotokolle der Internetprotokollfamilie. Als verbindungsorientiertes Protokoll ermöglicht es eine zuverlässige, geordnete und vollständige Übertragung von Daten zwischen Anwendungen. TCP stellt sicher, dass die Daten beim Empfänger in der Reihenfolge ankommen, in der sie gesendet wurden. Dazu verwendet es mehrere Mechanismen:</p>
+
+<h3>1. Verbindungsaufbau (Drei-Wege-Handshake)</h3>
+
+<p>Bevor Daten übertragen werden, wird eine TCP-Verbindung mit einem Drei-Wege-Handshake eingerichtet:</p>
+
+<ol>
+            <li>Der Client sendet ein SYN-Segment (Synchronize) an den Server, um eine Verbindung anzufordern.</li>
+            <li>Der Server antwortet mit einem SYN-ACK-Segment (Synchronize-Acknowledgement), um die Anfrage zu bestätigen und seine Bereitschaft anzuzeigen.</li>
+            <li>Der Client sendet ein ACK-Segment (Acknowledgement) zurück, um den Erhalt des SYN-ACK zu bestätigen. Die Verbindung ist aufgebaut.</li>
+        </ol>
+
+<h3>2. Datenübertragung</h3>
+
+<p>Nach dem Verbindungsaufbau können Daten im Vollduplexmodus übertragen werden, d.&nbsp;h., Daten können gleichzeitig in beide Richtungen fließen. TCP teilt den Datenstrom in Segmente auf, die als IP-Pakete unabhängig voneinander durch das Netz übertragen werden.</p>
+
+<h3>3. Sequenznummern und Bestätigungen</h3>
+
+<p>TCP nummeriert die <em>Bytes</em> des Datenstroms. Jedes Segment trägt als Sequenznummer die Nummer seines ersten Datenbytes. Der Empfänger setzt die Daten anhand dieser Nummern in der richtigen Reihenfolge zusammen. Er bestätigt den Empfang mit einer Bestätigungsnummer (ACK-Nummer): Sie gibt das <strong>nächste erwartete Byte</strong> an und bestätigt damit alle Bytes davor auf einmal (<strong>kumulative Bestätigung</strong>). Nicht jedes Segment braucht also ein eigenes ACK. Bleibt eine Bestätigung aus, erkennt der Sender den Verlust (Zeitüberschreitung oder mehrfach wiederholtes gleiches ACK) und sendet die fehlenden Daten erneut.</p>
+
+<h3>4. Flusskontrolle</h3>
+
+<p>TCP verhindert mit einem Fenstermechanismus, dass der Sender den Empfänger überflutet: Der Empfänger teilt dem Sender mit, wie viele Daten er entsprechend seiner freien Pufferkapazität noch aufnehmen kann (Empfangsfenster).</p>
+
+<h3>5. Staukontrolle</h3>
+
+<p>Um Überlastungen im Netz zu vermeiden, verwendet TCP Staukontrollalgorithmen. Sie passen die Senderate an die erkannten Netzbedingungen an: Gehen Pakete verloren, wird langsamer gesendet, läuft alles glatt, wird die Rate schrittweise erhöht.</p>
+
+<h3>6. Verbindungsabbau</h3>
+
+<p>Um eine Verbindung zu beenden, tauschen beide Seiten FIN-Segmente (Finish) aus, die jeweils bestätigt werden. So wird sichergestellt, dass beide Seiten die Verbindung ordnungsgemäß schließen und alle ausstehenden Daten übertragen wurden.</p>
+
+<h2>Unterschied zwischen TCP und UDP</h2>
+
+<table>
+            <thead>
+                <tr>
+                    <th>Eigenschaft</th>
+                    <th>TCP</th>
+                    <th>UDP</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Verbindungsart</td>
+                    <td>verbindungsorientiert</td>
+                    <td>verbindungslos (Datagrammprinzip)</td>
+                </tr>
+                <tr>
+                    <td>Zuverlässigkeit</td>
+                    <td>zuverlässige Übertragung mit Bestätigungen und Wiederholungen</td>
+                    <td>unzuverlässige Übertragung ohne Bestätigungen</td>
+                </tr>
+                <tr>
+                    <td>Reihenfolge der Daten</td>
+                    <td>garantiert die korrekte Reihenfolge</td>
+                    <td>keine garantierte Reihenfolge</td>
+                </tr>
+                <tr>
+                    <td>Fluss- und Staukontrolle</td>
+                    <td>ja</td>
+                    <td>nein</td>
+                </tr>
+                <tr>
+                    <td>Overhead</td>
+                    <td>höher durch Verbindungsaufbau, Bestätigungen, Zustandsverwaltung und mindestens 20 Byte Header</td>
+                    <td>gering, 8 Byte Header</td>
+                </tr>
+                <tr>
+                    <td>Dateneinheit</td>
+                    <td>Segment</td>
+                    <td>Datagramm</td>
+                </tr>
+                <tr>
+                    <td>Anwendungsfälle</td>
+                    <td>Webseiten, E-Mail, Dateiübertragungen – wo Vollständigkeit wichtig ist</td>
+                    <td>Streaming, VoIP, Online-Spiele, DNS, DHCP – wo geringe Verzögerung wichtig ist</td>
+                </tr>
+            </tbody>
+        </table>
+
+<p>TCP eignet sich für Anwendungen, die eine zuverlässige Übertragung erfordern; UDP für Dienste, bei denen Geschwindigkeit und geringe Verzögerung wichtiger sind als die vollständige Zustellung jedes einzelnen Datagramms. Beide Protokolle ergänzen sich, und jede Anwendung kann das für ihre Anforderungen passende Protokoll wählen.</p>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Wo liegt die Verschlüsselung?</summary>
+                <p>Weder TCP noch UDP verschlüsseln. TLS (z.&nbsp;B. bei HTTPS) setzt oberhalb von TCP an und wird im TCP/IP-Modell meist der Anwendungsschicht zugerechnet; IPsec für VPNs arbeitet auf der Internetschicht. Beides wird in Klasse 12 behandelt (siehe Kurs „Informationssicherheit“, Seite 7.11 „Transportverschlüsselung: TLS und VPN“).</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1: Zwei Browser-Tabs, ein Server <span class="beispiel-kopf">einfach</span></summary>
+            <p>Du öffnest in zwei Tabs Seiten desselben Webservers 192.168.1.20. Tab 1 verwendet den Quellport 50123, Tab 2 den Quellport 50124; beide gehen an Port 443. Die Verbindungen 192.168.0.10:50123 ↔ 192.168.1.20:443 und 192.168.0.10:50124 ↔ 192.168.1.20:443 sind verschieden – so landet jede Antwort im richtigen Tab.</p>
+            </details>
+        </div>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2: Handshake, Datenübertragung und Verlust <span class="beispiel-kopf">komplex</span></summary>
+            <ol>
+                <li><strong>SYN:</strong> Der Client wählt die Anfangssequenznummer 1000. Segment: SYN=1, Seq=1000.</li>
+                <li><strong>SYN-ACK:</strong> Der Server wählt seine eigene Anfangsnummer 5000 und bestätigt mit 1001 (Sequenznummer des Clients plus 1). Segment: SYN=1, ACK=1, Seq=5000, Ack=1001.</li>
+                <li><strong>ACK:</strong> Der Client bestätigt mit 5001. Segment: ACK=1, Seq=1001, Ack=5001. Die Verbindung steht; beide Seiten verwalten ab jetzt eigene Sequenz- und Bestätigungsnummern.</li>
+                <li><strong>Daten:</strong> Der Client sendet drei Segmente zu je 500 Byte mit Seq=1001, Seq=1501 und Seq=2001.</li>
+                <li><strong>Alles kommt an:</strong> Der Server kann mit einem einzigen Ack=2501 alle 1&nbsp;500 Byte bestätigen (kumulativ).</li>
+                <li><strong>Segment 1501 geht verloren:</strong> Der Server erhält 1001 und bestätigt Ack=1501. Danach erhält er 2001, bestätigt aber weiterhin Ack=1501, weil Byte 1501 fehlt (doppeltes ACK). Der Client sendet das Segment mit Seq=1501 erneut; danach bestätigt der Server Ack=2501.</li>
+            </ol>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Gaming, Videocalls und Portfreigaben</summary>
+                <p><strong>Alltag:</strong> Online-Spiele und Videocalls nutzen meist UDP: Ein verlorenes Datagramm mit der Position eines Mitspielers ist egal, eine Sekunde später ist die Position ohnehin veraltet. Beim Download einer Datei darf dagegen kein Byte fehlen – dafür ist TCP da. Wer zu Hause einen eigenen Minecraft-Server betreibt, richtet in der FRITZ!Box eine Portfreigabe ein (Standard: TCP-Port 25565), damit Anfragen von außen beim richtigen Rechner und Programm ankommen.</p>
+                <p><strong>Beruf:</strong> Firewall-Regeln in Firmennetzen werden über Protokoll und Port formuliert, z.&nbsp;B. „TCP 443 zum Webserver erlauben, alles andere sperren“. Bei einem Ticket wie „Das Kassensystem verbindet sich nicht mehr mit dem Server“ prüfen Systemintegratorinnen und Systemintegratoren mit <code>netstat</code> oder dem Mitschnittprogramm Wireshark, ob der Handshake zustande kommt oder schon das SYN von einer Firewall blockiert wird.</p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+            <p><strong>Port</strong> – Nummer, mit der die Transportschicht einen Dienst bzw. Prozess innerhalb eines Hosts adressiert. Die IP-Adresse bestimmt den Rechner, der Port das Programm auf diesem Rechner.</p>
+        </div>
+
+<div class="merke">
+            <p><strong>Datagrammprinzip</strong> – verbindungslose Übertragung, bei der jedes Datagramm die vollständigen Adressen trägt und unabhängig von den anderen zugestellt wird. Es ist robust und anpassungsfähig, garantiert aber weder Ankunft noch Reihenfolge.</p>
+        </div>
+
+<div class="merke">
+            <p>
+                <strong>TCP</strong> – verbindungsorientiertes, zuverlässiges Transportprotokoll: Drei-Wege-Handshake, Sequenznummern, kumulative Bestätigungen, erneutes Senden verlorener Daten, Fluss- und Staukontrolle. <strong>UDP</strong> – verbindungsloses, schlankes Transportprotokoll ohne Bestätigung und ohne erneutes Senden. „Zuverlässig“ heißt dabei nur: vollständig und in der richtigen Reihenfolge – nicht verschlüsselt und nicht sicher gegen Angreifer (dafür siehe Kurs „Informationssicherheit“, Seite 7.11).
+            </p>
+        </div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.9.1: TCP oder UDP? <span class="niveau">AFB I</span></summary>
+                <p>Entscheide jeweils, ob TCP oder UDP besser geeignet ist, und begründe kurz: (a) Videokonferenz, (b) Online-Banking-Webseite, (c) DNS-Abfrage, (d) Download eines Betriebssystem-Updates, (e) Online-Spiel mit Positionsdaten.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Aufgabe 7.9.2: Sequenz- und Bestätigungsnummern <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Ein Client wählt die Anfangssequenznummer 300, der Server 7000. Gib für alle drei Segmente des Handshakes die Flags, die Sequenz- und die Bestätigungsnummer an.</li>
+                    <li>Danach sendet der Client zwei Segmente mit je 200 Byte. Welche Sequenznummern tragen sie, und mit welcher Bestätigungsnummer bestätigt der Server beide auf einmal?</li>
+                    <li>Das erste der beiden Segmente geht verloren. Welche Bestätigungsnummer sendet der Server nach Empfang des zweiten Segments, und was folgt daraus?</li>
+                </ol>
+            </details>
+        </div>
