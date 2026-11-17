@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Boolesche Algebra: Vereinfachung": [
+      "Ich kann KNF und DNF unterscheiden und Beispiele angeben.",
+      "Ich kann einen Term mit dem Umformungsalgorithmus in KNF oder DNF bringen."
+    ]
+  }
 }

@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Standardschaltnetze Halb- und Volladdierer": [
+      "Ich kann erklären, was ein Standardschaltnetz ist und warum man es als fertigen Baustein verwendet.",
+      "Ich kann ein gegebenes Schaltnetz analysieren und einem Standardbaustein zuordnen."
+    ]
+  }
 }

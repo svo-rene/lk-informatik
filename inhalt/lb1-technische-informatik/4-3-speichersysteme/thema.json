@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Arten von Speichersystemen": [
+      "Ich kann Speicherarten (optisch, magnetisch, elektronisch) unterscheiden und Beispiele nennen.",
+      "Ich kann mit Trefferquote und Zugriffszeiten die mittlere Zugriffszeit mit Cache berechnen."
+    ]
+  }
 }

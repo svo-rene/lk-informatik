@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Boolesche Algebra: Wahrheitstabellen": [
+      "Ich kann Minterm und Maxterm erklären.",
+      "Ich kann aus einer Wahrheitstabelle die KDNF (Zeilen mit 1) und die KKNF (Zeilen mit 0) aufstellen."
+    ]
+  }
 }

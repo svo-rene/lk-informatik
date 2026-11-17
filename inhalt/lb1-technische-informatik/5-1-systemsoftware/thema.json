@@ -14,5 +14,13 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Beurteilen der Einsatzmöglichkeiten von Systemsoftware": [
+      "Ich kann Systemsoftware von Anwendungssoftware abgrenzen und Beispiele nennen.",
+      "Ich kann den Bootvorgang in der richtigen Reihenfolge beschreiben.",
+      "Ich kann Aufgaben eines Betriebssystems erklären.",
+      "Ich kann Betriebssysteme vergleichen und Vor- und Nachteile von Open Source beurteilen."
+    ]
+  }
 }

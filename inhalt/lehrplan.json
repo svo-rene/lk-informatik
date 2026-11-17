@@ -48,6 +48,7 @@
        "text": "Boolesche Algebra: Wahrheitstabellen",
        "themen": [
         "lb1-technische-informatik/2-2-boolescheoperatoren",
+        "lb1-technische-informatik/2-3-formaleschreibweise",
         "lb1-technische-informatik/2-4-implikationundaequivalenz",
         "lb1-technische-informatik/2-6-tautologieundwiderspruch",
         "lb1-technische-informatik/2-8-kanonischenormalformen"
@@ -93,8 +94,7 @@
        "themen": [
         "lb1-technische-informatik/3-5-standardschaltnetze",
         "lb1-technische-informatik/3-6-halbaddierer",
-        "lb1-technische-informatik/3-7-volladdierer",
-        "lb1-technische-informatik/3-8-uebungsaufgaben"
+        "lb1-technische-informatik/3-7-volladdierer"
        ]
       }
      ]

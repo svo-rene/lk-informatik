@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Boolesche Algebra: NOT, AND, OR": [
+      "Ich kann erklären, womit sich die boolesche Algebra beschäftigt.",
+      "Ich kann entscheiden, ob ein Satz eine Aussage ist, und das begründen."
+    ]
+  }
 }

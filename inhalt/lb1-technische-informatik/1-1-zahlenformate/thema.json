@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Binär- und Hexadezimalsystem": [
+      "Ich kann erklären, wie ein Stellenwertsystem aufgebaut ist (Basis, Ziffern, Stellenwerte).",
+      "Ich kann Zahlen zwischen Dezimal-, Binär- und Hexadezimalsystem umrechnen und das Ergebnis mit einer Probe prüfen.",
+      "Ich kann zwei Binärzahlen schriftlich addieren und die Überträge notieren."
+    ]
+  }
 }

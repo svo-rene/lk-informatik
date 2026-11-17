@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Schaltnetz-Analyse": [
+      "Ich kann zu einer gegebenen Schaltung die Wahrheitstabelle mit allen Zwischenergebnissen erstellen.",
+      "Ich kann aus einer Schaltung die boolesche Funktion aufstellen und, wenn möglich, vereinfachen."
+    ]
+  }
 }

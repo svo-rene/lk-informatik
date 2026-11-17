@@ -14,5 +14,12 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Standardschaltnetze Halb- und Volladdierer": [
+      "Ich kann die Wahrheitstabelle des Volladdierers mit Übertragseingang aufstellen.",
+      "Ich kann den Volladdierer als Schaltung aufbauen, auch aus zwei Halbaddierern und einem ODER-Gatter.",
+      "Ich kann erklären, wie mehrere Volladdierer mehrstellige Binärzahlen addieren."
+    ]
+  }
 }

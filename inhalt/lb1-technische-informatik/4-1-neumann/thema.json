@@ -14,5 +14,15 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Prozessoren": [
+      "Ich kann die Bauteile der Von-Neumann-Architektur und ihre Aufgaben nennen.",
+      "Ich kann den Von-Neumann-Zyklus beschreiben.",
+      "Ich kann den Von-Neumann-Flaschenhals erklären und die Architektur mit der Harvard-Architektur vergleichen."
+    ],
+    "Arten von Speichersystemen": [
+      "Ich kann die Speicherhierarchie vom Register bis zur Cloud beschreiben (Größe, Geschwindigkeit, Kosten)."
+    ]
+  }
 }

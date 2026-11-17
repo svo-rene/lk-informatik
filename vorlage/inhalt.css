@@ -580,3 +580,4 @@ pre .token.deleted { color: #ff5370 !important; }
     background: var(--bg);
 }
 .ziel-thema:hover { border-color: var(--akzent); }
+.ziel-titel em { font-style: normal; font-weight: 400; color: var(--text-3); }

@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Boolesche Algebra: Gesetze inkl. De Morgan": [
+      "Ich kann die Gesetze der Aussagenlogik benennen, besonders das Distributivgesetz und die De-Morgan-Regeln.",
+      "Ich kann ein Gesetz mit einer Wahrheitstabelle nachweisen."
+    ],
+    "Boolesche Algebra: Vereinfachung": [
+      "Ich kann einen Term mit den Gesetzen schrittweise vereinfachen und zu jedem Schritt das Gesetz angeben."
+    ]
+  }
 }

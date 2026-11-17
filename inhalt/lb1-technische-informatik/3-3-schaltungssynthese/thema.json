@@ -14,5 +14,11 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Schaltnetz-Synthese": [
+      "Ich kann aus einer booleschen Funktion eine Schaltung aufbauen (von innen nach außen).",
+      "Ich kann aus einer Problemstellung über Wahrheitstabelle und KDNF eine Schaltung entwickeln und testen."
+    ]
+  }
 }

@@ -14,5 +14,13 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "rechnerinterne Zahlenformate: Zweierkomplement": [
+      "Ich kann eine negative Dezimalzahl ins n-Bit-Zweierkomplement umrechnen (invertieren, 1 addieren).",
+      "Ich kann eine Zahl im Zweierkomplement zurück ins Dezimalsystem rechnen.",
+      "Ich kann den Wertebereich für n Bit angeben und begründen, warum er unsymmetrisch ist.",
+      "Ich kann erkennen, wann bei einer Addition ein Überlauf entsteht, und seine Folgen erklären."
+    ]
+  }
 }

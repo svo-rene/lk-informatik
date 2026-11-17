@@ -14,5 +14,14 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Boolesche Algebra: Vereinfachung": [
+      "Ich kann eine Funktion mit zwei bis vier Variablen in ein KV-Diagramm eintragen.",
+      "Ich kann nach den Regeln möglichst große Gruppen bilden, auch über den Rand, und die vereinfachte Funktion ablesen."
+    ],
+    "Schaltnetz-Synthese": [
+      "Ich kann eine mit dem KV-Diagramm vereinfachte Funktion als kleinere Schaltung umsetzen."
+    ]
+  }
 }

@@ -10,5 +10,13 @@
       "datei": "uebungen.html",
       "titel": "Übungen"
     }
-  ]
+  ],
+  "kann": {
+    "Schaltnetz-Analyse": [
+      "Ich kann eine unbekannte Schaltung analysieren und ihr einen Anwendungsfall zuordnen."
+    ],
+    "Schaltnetz-Synthese": [
+      "Ich kann eine Problemstellung selbstständig umsetzen: Wahrheitstabelle, Funktion, Vereinfachung, Schaltung, Test."
+    ]
+  }
 }

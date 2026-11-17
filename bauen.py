@@ -187,7 +187,7 @@ def bereichseite(kurs, bereiche, b):
         for t in k["themen_meta"]:
             marken = "".join(f'<span class="marke-klein m-{"zusatz" if s.get("zusatz") else s["datei"][:-5]}">{e(s["titel"])}</span>'
                              for s in t["seiten"][1:])
-            schl = " ".join(p["schluessel"] for p in LEHRPLAN_JE_THEMA.get(f'{b["slug"]}/{t["slug"]}', []))
+            schl = " ".join(k for _, eintraege in themen_ziele(b, t) for k, _ in eintraege)
             stand = f' data-ziele="{schl}"' if schl else ""
             teile.append(f'<li{stand}><a href="{t["slug"]}/index.html"><span class="t-nr">{e(t["nr"])}</span> {e(t["titel"])}</a>{marken}</li>')
         teile.append("</ul>")
@@ -254,14 +254,38 @@ def lehrplan_liste(punkte, links_von=None):
     return "".join(teile)
 
 
+def themen_ziele(b, t):
+    """Checkliste eines Themas: je Lehrplanpunkt die konkreten Punkte aus thema.json ("kann"),
+    sonst der Lehrplanpunkt selbst. Liefert [(lehrplanpunkt, [(schluessel, text), ...]), ...]."""
+    kann = t.get("kann") or {}
+    liste = []
+    for p in LEHRPLAN_JE_THEMA.get(f'{b["slug"]}/{t["slug"]}', []):
+        konkret = kann.get(p["text"] or p["ziel"])
+        if konkret:
+            eintraege = [("k" + hashlib.md5(f'{b["slug"]}/{t["slug"]}|{k}'.encode("utf-8")).hexdigest()[:10], e(k)) for k in konkret]
+        else:
+            eintraege = [(p["schluessel"], e(p["text"] or p["ziel"]))]
+        liste.append((p, eintraege))
+    return liste
+
+
 def ziele_html(b, t):
-    punkte = LEHRPLAN_JE_THEMA.get(f'{b["slug"]}/{t["slug"]}', [])
-    if not punkte:
+    liste = themen_ziele(b, t)
+    if not liste:
         return ""
+    teile = []
+    for p, eintraege in liste:
+        if p["text"]:
+            kopf = f'{e(p["text"])} <em>({e(p["ziel"])})</em>'
+        else:
+            kopf = e(p["ziel"])
+        teile.append(f'<p class="ziel-titel"><span>Lehrplan LB {e(p["lb"])}</span> {kopf}</p>')
+        punkte = "".join(f'<li><label><input type="checkbox" data-ziel="{k}"><span>{text}</span></label></li>' for k, text in eintraege)
+        teile.append(f'<ul class="ziele-liste">{punkte}</ul>')
     return f"""<section class="ziele" aria-labelledby="das-kann-ich">
 <h2 id="das-kann-ich">Das kann ich jetzt</h2>
-<p class="ziele-hinweis">Das verlangt der Lehrplan zu diesem Thema. Hake einen Punkt ab, wenn er in deinem Hefter zusammengefasst ist und du ihn <strong>ohne Hilfe</strong> erklären oder anwenden kannst. Die Haken speichert nur dein Browser.</p>
-{lehrplan_liste(punkte)}
+<p class="ziele-hinweis">Grau steht, was der Lehrplan verlangt, darunter, was das für dieses Thema konkret heißt. Hake einen Punkt ab, wenn er in deinem Hefter zusammengefasst ist und du ihn <strong>ohne Hilfe</strong> kannst. Wie du ihn zusammenfasst, entscheidest du selbst. Die Haken speichert nur dein Browser.</p>
+{"".join(teile)}
 <p class="ziele-stand" aria-live="polite"></p>
 </section>"""
 

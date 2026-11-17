@@ -14,5 +14,13 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Boolesche Algebra: NOT, AND, OR": [
+      "Ich kann die Operatoren UND, ODER und NICHT erklären und an Beispielen anwenden."
+    ],
+    "Boolesche Algebra: Wahrheitstabellen": [
+      "Ich kann für eine zusammengesetzte Aussage eine Wahrheitstabelle erstellen."
+    ]
+  }
 }

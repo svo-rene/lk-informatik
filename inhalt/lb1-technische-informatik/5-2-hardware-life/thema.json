@@ -14,5 +14,15 @@
       "datei": "vertiefung.html",
       "titel": "Vertiefung"
     }
-  ]
+  ],
+  "kann": {
+    "Einblick gewinnen in die Herstellung von Mikrochips": [
+      "Ich kann die Herstellung eines Mikrochips in groben Schritten beschreiben (Wafer, Fotolithografie, Reinraum)."
+    ],
+    "Einblick gewinnen in die nachhaltige Nutzung von Hardware": [
+      "Ich kann die Phasen des Hardware-Lebenszyklus nennen.",
+      "Ich kann mit einer CO₂-Rechnung zeigen, dass bei Smartphones und Laptops die Herstellung den größten Teil des Fußabdrucks ausmacht.",
+      "Ich kann Maßnahmen für eine nachhaltige Nutzung von Hardware nennen und bewerten."
+    ]
+  }
 }
