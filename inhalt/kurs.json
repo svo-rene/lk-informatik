@@ -49,9 +49,9 @@
     {
       "titel": "Automate the Castle",
       "url": "https://svo-rene.github.io/automate-the-castle/lk.html",
-      "bereich": "LB 2/3 Programmieren",
-      "text": "Tagsüber programmierst du in Python, nachts verteidigst du die Burg. Ein Spiel zum Programmierenlernen mit eigenem Heft.",
-      "fuss": "läuft im Browser"
+      "bereich": "alle Lernbereiche",
+      "text": "Tagsüber löst du Programmieraufgaben in Python zu den Themen des Kurses, nachts verteidigst du die Burg. Mit eigenem Heft.",
+      "fuss": "läuft im Browser · noch in Erprobung"
     }
   ]
 }
