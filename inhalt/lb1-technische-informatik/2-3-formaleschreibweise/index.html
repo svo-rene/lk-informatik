@@ -109,24 +109,20 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Formale Schreibweise:</strong> Ein boolescher Ausdruck (Term) besteht aus Variablen (A, B, C, …), die nur die Werte 0 und 1 annehmen, und den Verknüpfungszeichen ∧, ∨ und ¬. Es gilt die Bindungsstärke <strong>¬ vor ∧ vor ∨</strong>; Klammern werden zuerst ausgewertet.</p>
-            <table class="gitter">
-                <thead>
-                    <tr>
-                        <th>Operator</th>
-                        <th>Formale Bezeichnung</th>
-                        <th>Formale Darstellung</th>
-                        <th>in Python</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>UND</td><td>Konjunktion</td><td>A ∧ B</td><td><code>a and b</code></td></tr>
-                    <tr><td>ODER</td><td>Disjunktion</td><td>A ∨ B</td><td><code>a or b</code></td></tr>
-                    <tr><td>NICHT</td><td>Negation</td><td>¬A</td><td><code>not a</code></td></tr>
-                </tbody>
-            </table>
-            <p>Bei n Variablen hat die Wahrheitstabelle <strong>2<sup>n</sup> Zeilen</strong> (2 Variablen → 4, 3 Variablen → 8, 4 Variablen → 16).</p>
-        </div>
+<p><strong>Boolescher Term:</strong> besteht aus Variablen (A, B, C, …), die nur die Werte 0 und 1 annehmen, und den Verknüpfungszeichen ∧, ∨ und ¬.</p>
+<table class="gitter">
+    <thead>
+        <tr><th>Operator</th><th>Formale Bezeichnung</th><th>Formale Darstellung</th><th>in Python</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>UND</td><td>Konjunktion</td><td>A ∧ B</td><td><code>a and b</code></td></tr>
+        <tr><td>ODER</td><td>Disjunktion</td><td>A ∨ B</td><td><code>a or b</code></td></tr>
+        <tr><td>NICHT</td><td>Negation</td><td>¬A</td><td><code>not a</code></td></tr>
+    </tbody>
+</table>
+<p><strong>Bindungsstärke:</strong> Klammern werden zuerst ausgewertet, dann gilt <strong>¬ vor ∧ vor ∨</strong>.</p>
+<p><strong>Wahrheitstabelle:</strong> Bei n Variablen hat sie <strong>2<sup>n</sup> Zeilen</strong>, eine für jede Belegung.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

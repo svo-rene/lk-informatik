@@ -223,14 +223,10 @@ print(netz.tour(40))       # ['Parkplatz', 'Uferweg', 'Mühle', 'Bootssteg']</co
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Backtracking</strong> ist eine systematische Suche: Man trifft eine Entscheidung und geht damit weiter (<strong>vorwärts</strong>). Erkennt man, dass es so nicht zum Ziel führt (<strong>Sackgasse</strong>), nimmt man die letzte Entscheidung zurück und probiert die nächste Möglichkeit (<strong>zurück</strong>). Im Baum ist das eine Tiefensuche, die bei einer Sackgasse zum Elternknoten zurückkehrt.
-            </p>
-        </div>
-
-<div class="merke">
-            <p><strong>Verwaltungsklasse für einen Baum:</strong> Die Klasse <code>Knoten</code> speichert die Daten eines Knotens und die Liste seiner Kinder. Die Klasse <code>Baum</code> speichert die Wurzel privat (<code>__wurzel</code>). Eine rekursive Aufgabe teilt man auf: Die <strong>öffentliche</strong> Methode (z.&nbsp;B. <code>hoehe()</code>) braucht keinen Knoten als Parameter und ruft die <strong>private</strong> Hilfsmethode mit der Wurzel auf (<code>__hoehe(self.__wurzel)</code>). Die Hilfsmethode ruft sich für die Kinder selbst auf.</p>
-        </div>
+<p><strong>Backtracking:</strong> Systematische Suche: Man trifft eine Entscheidung und geht damit weiter (vorwärts). Führt das nicht zum Ziel (Sackgasse), nimmt man die letzte Entscheidung zurück und probiert die nächste Möglichkeit (zurück).</p>
+<p><strong>Backtracking im Baum:</strong> Eine Tiefensuche, die bei einer Sackgasse zum Elternknoten zurückkehrt.</p>
+<p><strong>Verwaltungsklasse für einen Baum:</strong> <code>Knoten</code> speichert die Daten und die Liste der Kinder, <code>Baum</code> speichert die Wurzel privat (<code>__wurzel</code>). Eine öffentliche Methode wie <code>hoehe()</code> ruft eine private rekursive Hilfsmethode mit der Wurzel auf: <code>__hoehe(self.__wurzel)</code>.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

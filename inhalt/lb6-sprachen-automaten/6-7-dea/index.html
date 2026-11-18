@@ -279,25 +279,11 @@ print(zustandsfolge("10101"))</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Merke:</strong><br>
-                Ein endlicher Automat kann überprüfen, ob eine Zeichenkette zu einer Sprache gehört.<br>
-                Endliche Automaten können sich nur eine begrenzte Menge an Information „merken“ – nämlich den aktuellen Zustand. Sie eignen sich daher besonders gut für Probleme, bei denen nur eine begrenzte Vorgeschichte relevant ist.
-            </p>
-        </div>
-
-<div class="merke">
-            <p><strong>Merke:</strong><br>
-                Ein DEA ist ein 5-Tupel <code>(Q, Σ, δ, q<sub>0</sub>, F)</code>, wobei</p>
-            <ul>
-                <li>Q eine endliche Menge von Zuständen ist,</li>
-                <li>Σ das Eingabealphabet ist,</li>
-                <li>δ: Q × Σ → Q die Übergangsfunktion ist,</li>
-                <li>q<sub>0</sub> ∈ Q der Startzustand ist,</li>
-                <li>F ⊆ Q die Menge der Endzustände ist.</li>
-            </ul>
-            <p><strong>Akzeptanz:</strong> Ein Wort wird akzeptiert, wenn sich der Automat nach dem letzten Zeichen in einem Zustand aus <code>F</code> befindet. Die Menge aller akzeptierten Wörter ist die Sprache L(A) des Automaten.</p>
-        </div>
+<p><strong>Endlicher Automat:</strong> Er kann überprüfen, ob eine Zeichenkette zu einer Sprache gehört. Er „merkt“ sich nur seinen aktuellen Zustand und eignet sich daher für Probleme, bei denen nur eine begrenzte Vorgeschichte zählt.</p>
+<p><strong>DEA (5-Tupel):</strong> Er besteht aus Zuständen, Eingabealphabet, Übergangsfunktion, Startzustand und Endzuständen. Die Übergangsfunktion legt für einen Zustand und ein Zeichen den nächsten Zustand fest.</p>
+<p><strong>Akzeptanz:</strong> Ein Wort wird akzeptiert, wenn sich der Automat nach dem letzten Zeichen in einem Endzustand befindet.</p>
+<p><strong>Sprache L(A):</strong> Die Menge aller Wörter, die der Automat akzeptiert.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

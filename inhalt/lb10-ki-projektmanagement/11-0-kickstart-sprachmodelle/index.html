@@ -377,16 +377,13 @@ Wichtigster Prompt: "Erkläre mir, was diese Fehlermeldung bedeutet,
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>Ein <strong>Sprachmodell</strong> berechnet für jedes Token seines Vokabulars die Wahrscheinlichkeit, als Nächstes zu kommen. Texte entstehen <strong>autoregressiv</strong>: Token wählen, anhängen, neu berechnen. Das Modell optimiert dabei <em>Wahrscheinlichkeit</em>, nicht <em>Wahrheit</em>.</p>
-        </div>
-
-<div class="merke">
-            <p><strong>Attention</strong> macht aus festen Wort-Vektoren kontextabhängige Vektoren: Jedes Token mischt sich mit den vorherigen Tokens, gewichtet nach deren Bedeutung für es. Das <strong>Kontextfenster</strong> begrenzt, wie viel Text dabei berücksichtigt wird.</p>
-        </div>
-
-<div class="merke">
-            <p>Ein Sprachmodell lernt <strong>statistische Muster</strong> in Texten, indem es den Verlust −ln(p<sub>richtig</sub>) über riesige Datenmengen minimiert. Es legt dabei <strong>keine Faktendatenbank</strong> an, in der es nachschlagen könnte. Was in den Trainingsdaten häufig und einheitlich vorkommt, gibt es meist richtig wieder; Seltenes, Widersprüchliches und alles nach dem <strong>Wissensstichtag</strong> nicht.</p>
-        </div>
+<p><strong>Sprachmodell:</strong> berechnet für jedes Token seines Vokabulars die Wahrscheinlichkeit, als Nächstes zu kommen.</p>
+<p><strong>Autoregressiv:</strong> Text entsteht Token für Token: Token wählen, anhängen, neu berechnen.</p>
+<p><strong>Training:</strong> Das Modell wird an riesigen Textmengen so angepasst, dass das tatsächlich folgende Token eine möglichst hohe Wahrscheinlichkeit bekommt. Es lernt statistische Muster, legt aber keine Faktendatenbank an.</p>
+<p><strong>Wahrscheinlich statt wahr:</strong> Häufiges und Einheitliches gibt ein Sprachmodell meist richtig wieder; Seltenes, Widersprüchliches und alles nach dem Wissensstichtag nicht.</p>
+<p><strong>Attention:</strong> macht aus festen Wort-Vektoren kontextabhängige Vektoren: Jedes Token mischt sich mit den vorherigen Tokens, gewichtet nach deren Bedeutung für es.</p>
+<p><strong>Kontextfenster:</strong> begrenzt, wie viel Text dabei berücksichtigt wird.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

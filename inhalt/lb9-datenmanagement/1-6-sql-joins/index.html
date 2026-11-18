@@ -299,19 +299,12 @@ ORDER BY Schnitt ASC;</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-        <p>
-            Eigenschaften eines Primärschlüssels:<br>
-            - Eindeutigkeit: Jeder Wert muss einzigartig (unique) sein.<br>
-            - Nicht NULL: Es muss immer ein Wert eingetragen sein.<br>
-            - Unveränderlichkeit: Der Wert sollte sich nicht ändern.
-        </p>
-    </div>
-
-<div class="merke">
-            <p><strong>INNER JOIN</strong> liefert nur Zeilen, die in <em>beiden</em> Tabellen einen passenden Partner haben.
-               <strong>LEFT JOIN</strong> liefert <em>alle</em> Zeilen der linken Tabelle; fehlt der Partner rechts, werden dessen Spalten mit NULL aufgefüllt.
-               Die Verknüpfungsbedingung nach <code>ON</code> verbindet fast immer einen Fremdschlüssel mit dem Primärschlüssel, auf den er verweist.</p>
-        </div>
+<p><strong>Primärschlüssel:</strong> eindeutig, nie NULL und möglichst unveränderlich.</p>
+<p><strong>Fremdschlüssel:</strong> Feld, das auf den Primärschlüssel einer anderen Tabelle verweist und so die Tabellen verbindet.</p>
+<p><strong>JOIN … ON:</strong> verknüpft zwei Tabellen. Die Bedingung nach <code>ON</code> verbindet fast immer einen Fremdschlüssel mit dem Primärschlüssel, auf den er verweist.</p>
+<p><strong>INNER JOIN:</strong> liefert nur Zeilen, die in beiden Tabellen einen passenden Partner haben.</p>
+<p><strong>LEFT JOIN:</strong> liefert alle Zeilen der linken Tabelle. Fehlt rechts der Partner, werden dessen Spalten mit NULL aufgefüllt.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

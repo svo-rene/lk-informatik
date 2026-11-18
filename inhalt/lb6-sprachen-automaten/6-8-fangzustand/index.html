@@ -69,16 +69,22 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-      <p>
-        <strong>Merke:</strong><br>
-        Ein DEA ist ein 5-Tupel <code>A = (Q, Σ, δ, q<sub>0</sub>, F)</code>. In vielen Lehrbüchern wird
+<p><strong>Fehlende Übergänge:</strong> Fehlt in einem Zustandsdiagramm ein Übergang, wird das Wort verworfen. Die Übergangsfunktion ist dann <em>partiell</em>.</p>
+<p><strong>Fangzustand ⊥:</strong> Ein neuer, nicht akzeptierender Zustand. Alle fehlenden Übergänge führen nach ⊥, und von ⊥ aus führt jedes Zeichen wieder nach ⊥.</p>
+<p><strong>Vollständiger DEA:</strong> Mit dem Fangzustand ist die Übergangsfunktion <em>total</em> (vollständig). Der Automat akzeptiert dieselbe Sprache wie vorher.</p>
+</div>
+
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Formale Beschreibung</summary>
+<p>Ein DEA ist ein 5-Tupel <code>A = (Q, Σ, δ, q<sub>0</sub>, F)</code>. In vielen Lehrbüchern wird
         <code>δ: Q × Σ → Q</code> als <em>totale</em> Funktion gefordert. Fehlen in einem Zustandsdiagramm
         Übergänge, interpretieren wir das als <em>partielle</em> Funktion <code>δ<sub>p</sub></code>: Fehlt ein Übergang, wird das Wort verworfen.
         Die Vervollständigung erhält man durch einen neuen, nicht akzeptierenden Fangzustand <code>⊥</code> mit
         <code>δ'(q,a) = δ<sub>p</sub>(q,a)</code>, falls definiert, sonst <code>⊥</code>, und
-        <code>δ'(⊥,a) = ⊥</code> für alle <code>a ∈ Σ</code>. Für den neuen Automaten A' gilt dann <code>L(A) = L(A')</code>.
-      </p>
-    </div>
+        <code>δ'(⊥,a) = ⊥</code> für alle <code>a ∈ Σ</code>. Für den neuen Automaten A' gilt dann <code>L(A) = L(A')</code>.</p>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

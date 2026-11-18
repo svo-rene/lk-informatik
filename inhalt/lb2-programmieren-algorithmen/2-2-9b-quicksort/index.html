@@ -319,11 +319,10 @@ print(zahlen)   # [1, 2, 3, 5, 6, 7, 8, 9]</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Quicksort</strong> wählt ein Element der Liste als <strong>Pivot</strong> (Drehpunkt) und teilt die übrigen Elemente auf: alle kleineren nach links, alle größeren nach rechts. Danach steht das Pivot an seinem <strong>endgültigen</strong> Platz. Die beiden Teile werden rekursiv genauso sortiert. Eine Liste mit höchstens einem Element ist sortiert (Basisfall).<br>
-                Laufzeit: im besten und im mittleren Fall <strong>O(n · log n)</strong>, im schlechtesten Fall – wenn das Pivot immer das kleinste oder größte Element ist – <strong>O(n²)</strong>. Mit Aufteilen <em>in place</em> (durch Tauschen in derselben Liste) braucht Quicksort keinen zusätzlichen Speicher für Teillisten.
-            </p>
-        </div>
+<p><strong>Quicksort:</strong> wählt ein Element als <strong>Pivot</strong> und teilt die übrigen Elemente auf: kleinere nach links, größere nach rechts. Danach steht das Pivot an seinem <strong>endgültigen</strong> Platz, und beide Teile werden rekursiv genauso sortiert (Basisfall: höchstens ein Element).</p>
+<p><strong>Laufzeit:</strong> im besten und im mittleren Fall <strong>O(n · log n)</strong>, im schlechtesten Fall <strong>O(n²)</strong> – wenn das Pivot immer das kleinste oder größte Element ist.</p>
+<p><strong>Speicher:</strong> Mit Aufteilen <em>in place</em> (durch Tauschen in derselben Liste) braucht Quicksort keinen zusätzlichen Speicher für Teillisten.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

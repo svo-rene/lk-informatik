@@ -32,6 +32,13 @@
 
 <p>Diese Regeln sind kein Selbstzweck. Sie machen sichtbar, wer was beigetragen hat. Genau das wird bewertet (Seite 5.6).</p>
 
+<p><strong>1.</strong> Niemand speichert direkt auf <code>main</code>. Jede Änderung entsteht auf einem eigenen Branch und kommt als <strong>Pull Request</strong> nach <code>main</code>.</p>
+<p><strong>2.</strong> Jeder Pull Request wird von einem <strong>anderen</strong> Gruppenmitglied geprüft: mindestens ein konkreter Kommentar oder eine Freigabe. Erst danach wird gemergt.</p>
+<p><strong>3.</strong> Jede User Story ist ein <strong>Issue</strong>. Das Board unter „Projekte“ zeigt jederzeit den Stand.</p>
+<p><strong>4.</strong> Commit-Nachrichten nennen das Issue, z.&nbsp;B. <code>#4 Fahrt: letzter Platz macht die Fahrt voll</code>.</p>
+<p><strong>5.</strong> In jedem Sprint bearbeitet jede Person <strong>eigene Dateien</strong>. Gemeinsame Dateien (<code>main.py</code>, <code>ansicht.py</code>, <code>README.md</code>) haben je Sprint eine verantwortliche Person.</p>
+<p><strong>6.</strong> <code>main</code> läuft immer: Vor jedem Pull Request laufen alle Tests fehlerfrei.</p>
+
 <h2>4. Die Themen</h2>
 
 <p>Jedes Thema enthält 4–6 User Stories und eine <strong>Mindest-Klassenstruktur</strong>. Ihr dürft Klassen ergänzen, Methoden umbenennen und weitere Stories hinzufügen; die Mindeststruktur muss erkennbar bleiben. Die Akzeptanzkriterien schreibt ihr selbst (Aufgabe 5.5.2). Sichtbarkeiten: <code>+</code> öffentlich, <code>−</code> privat. <code>date</code> ist der Datumstyp aus dem Modul <code>datetime</code> (<code>from datetime import date</code>, z.&nbsp;B. <code>date(2027, 3, 4)</code> oder <code>date.fromisoformat("2027-03-04")</code>).</p>
@@ -224,17 +231,10 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Ziel:</strong> ein lauffähiges Konsolenprogramm in Python, das die User Stories eures Themas erfüllt, sauber in Klassen modelliert und nach MVC aufgeteilt ist, durch Tests abgesichert ist und im gemeinsamen Repository nachvollziehbar im Team entstanden ist.</p>
-        </div>
-
-<div class="merke">
-            <p><strong>1.</strong> Niemand speichert direkt auf <code>main</code>. Jede Änderung entsteht auf einem eigenen Branch und kommt als <strong>Pull Request</strong> nach <code>main</code>.</p>
-            <p><strong>2.</strong> Jeder Pull Request wird von einem <strong>anderen</strong> Gruppenmitglied geprüft: mindestens ein konkreter Kommentar oder eine Freigabe. Erst danach wird gemergt.</p>
-            <p><strong>3.</strong> Jede User Story ist ein <strong>Issue</strong>. Das Board unter „Projekte“ zeigt jederzeit den Stand.</p>
-            <p><strong>4.</strong> Commit-Nachrichten nennen das Issue, z.&nbsp;B. <code>#4 Fahrt: letzter Platz macht die Fahrt voll</code>.</p>
-            <p><strong>5.</strong> In jedem Sprint bearbeitet jede Person <strong>eigene Dateien</strong>. Gemeinsame Dateien (<code>main.py</code>, <code>ansicht.py</code>, <code>README.md</code>) haben je Sprint eine verantwortliche Person.</p>
-            <p><strong>6.</strong> <code>main</code> läuft immer: Vor jedem Pull Request laufen alle Tests fehlerfrei.</p>
-        </div>
+<p><strong>Projektziel:</strong> Ein lauffähiges Konsolenprogramm in Python, das die User Stories eures Themas erfüllt.</p>
+<p><strong>Qualität:</strong> Das Programm ist sauber in Klassen modelliert, nach MVC aufgeteilt und durch Tests abgesichert.</p>
+<p><strong>Teamarbeit:</strong> Es entsteht nachvollziehbar im gemeinsamen Repository: über Issues, Branches, Pull Requests mit Review und Commits mit Issue-Nummer.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

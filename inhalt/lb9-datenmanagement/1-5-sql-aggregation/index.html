@@ -325,33 +325,11 @@ ORDER BY Umsatz DESC;</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-<p><strong>Das Grundprinzip:</strong> Eine Aggregatfunktion nimmt <em>viele</em> Zeilen und macht daraus
-   <em>eine</em> Zahl. Ohne <code>GROUP BY</code> ist das Ergebnis deshalb immer genau eine Zeile &ndash;
-   egal, wie viele Zeilen in der Tabelle stehen.</p>
-</div>
-
-<div class="merke">
-<p>Die grundlegende Syntax einer GROUP BY-Anweisung lautet:<br>SELECT spalte1, spalte2, ..., aggregatfunktion(spalte)<br>FROM tabelle <br>WHERE bedingung <br>GROUP BY spalte1, spalte2, ...<br>[HAVING bedingung] [ORDER BY spalte]</p>
-</div>
-
-<div class="merke">
-<p><strong>Was GROUP BY tut, in drei Schritten:</strong></p>
-<ol>
-<li>Alle Zeilen werden auf Stapel verteilt &ndash; ein Stapel je Wert der Gruppierungsspalte.</li>
-<li>Die Aggregatfunktion wird auf <em>jeden Stapel einzeln</em> angewendet.</li>
-<li>Jeder Stapel liefert genau <em>eine</em> Ergebniszeile.</li>
-</ol>
-<p>Daraus folgt die wichtigste Regel: Im SELECT d&uuml;rfen nur die Gruppierungsspalten und
-   Aggregatfunktionen stehen. Eine Spalte wie <code>Datum</code> h&auml;tte auf einem Stapel mit f&uuml;nf
-   verschiedenen Daten ja keinen eindeutigen Wert.</p>
-</div>
-
-<div class="merke">
-<p><code>WHERE</code> filtert <strong>Zeilen, bevor</strong> gruppiert wird.<br>
-   <code>HAVING</code> filtert <strong>Gruppen, nachdem</strong> gruppiert wurde.</p>
-<p>Merkhilfe: Steht in der Bedingung eine Aggregatfunktion wie <code>SUM(&hellip;)</code> oder
-   <code>COUNT(&hellip;)</code>, muss es <code>HAVING</code> sein &ndash; denn zum Zeitpunkt von
-   <code>WHERE</code> existieren die Gruppen noch gar nicht.</p>
+<p><strong>Aggregatfunktion:</strong> <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code> und <code>MAX</code> machen aus vielen Zeilen einen Wert. Ohne <code>GROUP BY</code> ist das Ergebnis genau eine Zeile.</p>
+<p><strong>GROUP BY:</strong> verteilt die Zeilen auf Gruppen, je eine pro Wert der Gruppierungsspalte. Die Aggregatfunktion wird auf jede Gruppe einzeln angewendet, jede Gruppe liefert eine Ergebniszeile.</p>
+<p><strong>SELECT mit GROUP BY:</strong> Im SELECT dürfen nur Gruppierungsspalten und Aggregatfunktionen stehen.</p>
+<p><strong>WHERE und HAVING:</strong> <code>WHERE</code> filtert Zeilen, bevor gruppiert wird; <code>HAVING</code> filtert Gruppen danach. Steht in der Bedingung eine Aggregatfunktion, muss es <code>HAVING</code> sein.</p>
+<p><strong>Aufbau:</strong> <code>SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER BY …</code></p>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

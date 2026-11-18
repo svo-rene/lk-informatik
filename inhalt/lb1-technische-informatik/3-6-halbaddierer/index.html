@@ -73,16 +73,7 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-<p><strong>Halbaddierer:</strong> Schaltnetz mit zwei Eingängen A, B und zwei Ausgängen.</p>
-<ul>
-<li><strong>S (Summenbit)</strong>: die Stelle mit der Wertigkeit 2<sup>0</sup> = 1 des Ergebnisses.</li>
-<li><strong>C (Carry, Übertrag)</strong>: die Stelle mit der Wertigkeit 2<sup>1</sup> = 2, die in die nächsthöhere Stelle übertragen wird.</li>
-</ul>
-<p>Das zweistellige Ergebnis CS ist die Summe A + B als Binärzahl.</p>
-</div>
-
-<div class="merke">
-<p><strong>Zusammenfassung Halbaddierer</strong> (vergleiche mit deinen Lösungen zu 3.6.1 und 3.6.2):</p>
+<p><strong>Halbaddierer:</strong> Schaltnetz mit zwei Eingängen A, B und zwei Ausgängen: dem Summenbit <strong>S</strong> (Wertigkeit 2<sup>0</sup> = 1) und dem Übertrag <strong>C</strong> (Carry, Wertigkeit 2<sup>1</sup> = 2) für die nächsthöhere Stelle. Das zweistellige Ergebnis CS ist die Summe A + B als Binärzahl.</p>
 <table class="gitter">
 <tr><th>A</th><th>B</th><th>C</th><th>S</th></tr>
 <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -90,7 +81,7 @@
 <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
 <tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>
 </table>
-<p><strong>S = A ⊕ B</strong> (XOR: S ist 1, wenn genau ein Eingang 1 ist) &nbsp;&nbsp; <strong>C = A ∧ B</strong> (UND: ein Übertrag entsteht nur bei 1 + 1 = 10)</p>
+<p><strong>Funktionen:</strong> <strong>S = A ⊕ B</strong> (S ist 1, wenn genau ein Eingang 1 ist) und <strong>C = A ∧ B</strong> (ein Übertrag entsteht nur bei 1 + 1 = 10).</p>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

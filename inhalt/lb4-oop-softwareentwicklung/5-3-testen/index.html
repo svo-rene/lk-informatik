@@ -352,15 +352,11 @@ ok      test_unmoegliches_gewicht
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Testfall</strong> – Eingabe, erwartetes Ergebnis (aus der Spezifikation) und tatsächliches Ergebnis. Ein Test ist bestanden, wenn beide übereinstimmen.<br>
-            <strong>Äquivalenzklasse</strong> – Menge von Eingaben, die laut Spezifikation gleich behandelt werden; gültige und ungültige Klassen, aus jeder mindestens ein Vertreter.<br>
-            <strong>Grenzwertanalyse</strong> – an jeder Klassengrenze den Wert direkt davor und direkt dahinter testen, weil dort die meisten Fehler entstehen.</p>
-        </div>
-
-<div class="merke">
-            <p>Tests stehen in einer eigenen Datei <code>test_&lt;modul&gt;.py</code> neben dem Modul, in Funktionen <code>test_…()</code>, mit <code>assert bedingung, f"erwartet …, tatsächlich …"</code>.<br>
-            <strong>Achtung:</strong> <code>assert (bedingung, "meldung")</code> mit Klammern prüft ein Tupel – und ein nicht leeres Tupel ist immer wahr. Python warnt dann mit <code>SyntaxWarning: assertion is always true</code>.</p>
-        </div>
+<p><strong>Testfall:</strong> Besteht aus Eingabe, erwartetem Ergebnis (aus der Spezifikation) und tatsächlichem Ergebnis. Der Test ist bestanden, wenn beide Ergebnisse übereinstimmen.</p>
+<p><strong>Äquivalenzklasse:</strong> Menge von Eingaben, die laut Spezifikation gleich behandelt werden. Es gibt gültige und ungültige Klassen; aus jeder testet man mindestens einen Vertreter.</p>
+<p><strong>Grenzwertanalyse:</strong> An jeder Klassengrenze testet man den Wert direkt davor und direkt dahinter, weil dort die meisten Fehler entstehen.</p>
+<p><strong>Tests in Python:</strong> Sie stehen in einer eigenen Datei <code>test_&lt;modul&gt;.py</code>, in Funktionen <code>test_…()</code>, mit <code>assert bedingung, "meldung"</code>. Ohne Klammern schreiben: <code>assert (bedingung, "meldung")</code> prüft ein Tupel und ist immer wahr.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

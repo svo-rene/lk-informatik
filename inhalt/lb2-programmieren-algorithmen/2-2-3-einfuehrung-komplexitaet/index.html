@@ -142,7 +142,7 @@ plt.show()</code></pre>
 
 <h2 id="schritt-4">Schritt 4: Was bedeutet O(n²) genau?</h2>
 
-<p>Bisher hieß es „wächst etwa wie n²“. Die Definition im Merke-Kasten oben macht das genau. Im Video wendest du sie auf <code>summe</code> und Bubblesort an und siehst, warum konstante Faktoren und kleinere Terme wegfallen. Achte auf die Falle: O ist eine obere Schranke – man gibt trotzdem immer die kleinste passende Klasse an.</p>
+<p>Bisher hieß es „wächst etwa wie n²“. Die formale Definition (unten bei „Das Wichtigste“ zum Nachlesen) macht das genau. Im Video wendest du sie auf <code>summe</code> und Bubblesort an und siehst, warum konstante Faktoren und kleinere Terme wegfallen. Achte auf die Falle: O ist eine obere Schranke – man gibt trotzdem immer die kleinste passende Klasse an.</p>
 
 <figure>
             <div class="lp-video"><video controls preload="none" poster="../vid/2-2-3-4_definition_vorschau.png" src="../vid/2-2-3-4_definition.mp4"></video><a href="../vid/2-2-3-4_definition.mp4">Video ansehen</a></div>
@@ -265,12 +265,19 @@ for n in [2000, 4000, 8000]:
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                Die <strong>O-Notation</strong> gibt eine <strong>obere Schranke</strong> für das Wachstum einer Funktion an. Beschreibt f(n) die Anzahl der Schritte eines Algorithmus bei Eingabegröße n, dann bedeutet f(n) ∈ O(g(n)):<br>
-                Es gibt eine Konstante c &gt; 0 und eine Zahl n<sub>0</sub>, sodass f(n) ≤ c · g(n) für alle n ≥ n<sub>0</sub> gilt.<br>
-                Anschaulich: Für große n wächst f höchstens so schnell wie g. Konstante Faktoren und Terme niedrigerer Ordnung werden dabei weggelassen.
-            </p>
-        </div>
+<p><strong>O-Notation:</strong> beschreibt, wie stark der Aufwand eines Algorithmus wächst, wenn die Eingabe größer wird. Man betrachtet nur den am schnellsten wachsenden Teil: Ein Algorithmus mit 3n² + 5n + 2 Schritten liegt in O(n²).</p>
+<p><strong>Vereinfachen:</strong> Konstante Faktoren und Terme niedrigerer Ordnung werden weggelassen. Angegeben wird die kleinste passende Klasse.</p>
+<p><strong>Schritte zählen:</strong> Schleifenrümpfe zählen so oft, wie die Schleife läuft; bei geschachtelten Schleifen addiert man die Durchläufe der inneren Schleife.</p>
+<p><strong>Verdopplungsexperiment:</strong> Messungen bestätigen die Klasse über den Faktor bei Verdopplung von n, bei O(n²) etwa 4.</p>
+</div>
+
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: formale Definition der O-Notation</summary>
+<p>Beschreibt f(n) die Anzahl der Schritte eines Algorithmus bei Eingabegröße n, dann bedeutet f(n) ∈ O(g(n)):<br>
+Es gibt eine Konstante c &gt; 0 und eine Zahl n<sub>0</sub>, sodass f(n) ≤ c · g(n) für alle n ≥ n<sub>0</sub> gilt.</p>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

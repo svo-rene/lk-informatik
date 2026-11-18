@@ -126,31 +126,29 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-<p><strong>Zweierkomplement:</strong></p>
-<p>Das Zweierkomplement ist eine Methode zur Darstellung ganzer Zahlen mit einer festen Bitanzahl n. Das höchstwertige Bit hat den Stellenwert −2<sup>n−1</sup> und zeigt damit das Vorzeichen an (0 = nichtnegativ, 1 = negativ).</p>
-<p>Umrechnung einer negativen Zahl −x:</p>
+<p><strong>Zweierkomplement:</strong> Darstellung ganzer Zahlen mit einer festen Bitanzahl n. Das höchstwertige Bit hat den Stellenwert &minus;2<sup>n&minus;1</sup> und zeigt das Vorzeichen an (0 = nichtnegativ, 1 = negativ).</p>
+<p><strong>Negative Zahl &minus;x darstellen:</strong></p>
 <ol>
-<li>Stelle die positive Zahl x im Binärformat mit n Bit dar (führende Nullen ergänzen).</li>
-<li>Invertiere alle Bits, um das Einerkomplement zu erhalten.</li>
-<li>Addiere 1 zum Einerkomplement, um das Zweierkomplement zu erhalten.</li>
+<li>x mit n Bit binär darstellen (führende Nullen ergänzen).</li>
+<li>Alle Bits invertieren (Einerkomplement).</li>
+<li>1 addieren.</li>
 </ol>
+<p><strong>Wertebereich:</strong> von &minus;2<sup>n&minus;1</sup> bis +2<sup>n&minus;1</sup> &minus; 1. Er ist unsymmetrisch, weil die Null eines der Muster mit führender 0 belegt.</p>
+<p><strong>Überlauf:</strong> Das Ergebnis einer Rechnung verlässt den Wertebereich. Die Hardware meldet das nicht, das Programm rechnet mit einem falschen Wert weiter. Vorbeugen: eine ausreichend große Bitanzahl wählen oder den Wertebereich vor der Rechnung prüfen.</p>
 </div>
 
-<div class="merke">
-    <p><strong>Wertebereich im n-Bit-Zweierkomplement:</strong></p>
-    <p>von &minus;2<sup>n&minus;1</sup> &nbsp;bis&nbsp; +2<sup>n&minus;1</sup> &minus; 1</p>
-    <table class="gitter">
-        <tr><th>Bitanzahl</th><th>kleinster Wert</th><th>größter Wert</th></tr>
-        <tr><td>4 Bit</td><td>&minus;8</td><td>+7</td></tr>
-        <tr><td>8 Bit</td><td>&minus;128</td><td>+127</td></tr>
-        <tr><td>16 Bit</td><td>&minus;32768</td><td>+32767</td></tr>
-        <tr><td>32 Bit</td><td>&minus;2147483648</td><td>+2147483647</td></tr>
-    </table>
-    <p><strong>Warum ist der Bereich unsymmetrisch?</strong> Die Null muss dargestellt werden und belegt eines der Muster mit führender 0. Für positive Werte bleibt deshalb ein Muster weniger übrig als für negative. Bei 8 Bit: 128 Muster für &minus;128 bis &minus;1, aber nur 127 für +1 bis +127 (plus eines für die 0).</p>
-</div>
-
-<div class="merke">
-    <p><strong>Überlauf:</strong> Ein Überlauf entsteht, wenn das Ergebnis den Wertebereich der gewählten Bitanzahl verlässt. Die Hardware meldet ihn nicht von selbst – das Programm rechnet mit dem falschen Wert weiter. Vorbeugen kann man auf zwei Wegen: eine ausreichend große Bitanzahl wählen oder den Wertebereich vor der Rechnung im Programm prüfen.</p>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Wertebereiche von 4 bis 32 Bit</summary>
+<table class="gitter">
+    <tr><th>Bitanzahl</th><th>kleinster Wert</th><th>größter Wert</th></tr>
+    <tr><td>4 Bit</td><td>&minus;8</td><td>+7</td></tr>
+    <tr><td>8 Bit</td><td>&minus;128</td><td>+127</td></tr>
+    <tr><td>16 Bit</td><td>&minus;32768</td><td>+32767</td></tr>
+    <tr><td>32 Bit</td><td>&minus;2147483648</td><td>+2147483647</td></tr>
+</table>
+<p><strong>Warum ist der Bereich unsymmetrisch?</strong> Die Null muss dargestellt werden und belegt eines der Muster mit führender 0. Für positive Werte bleibt deshalb ein Muster weniger übrig als für negative. Bei 8 Bit: 128 Muster für &minus;128 bis &minus;1, aber nur 127 für +1 bis +127 (plus eines für die 0).</p>
+</details>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

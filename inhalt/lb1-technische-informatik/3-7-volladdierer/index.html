@@ -54,16 +54,11 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-                <p><strong>Volladdierer:</strong> Schaltnetz mit <strong>drei Eingängen</strong> A, B und C<sub>in</sub> (Übertrag aus der vorherigen Stelle) und <strong>zwei Ausgängen</strong> S (Summenbit) und C<sub>out</sub> (Übertrag in die nächste Stelle). Die zweistellige Binärzahl C<sub>out</sub>S ist die Summe A + B + C<sub>in</sub>, also die Anzahl der Einsen an den Eingängen (0 bis 3).</p>
-                <p>Bei mehrstelligen Zahlen wird C<sub>out</sub> einer Stelle zu C<sub>in</sub> der nächsthöheren Stelle.</p>
-            </div>
-
-<div class="merke">
-                <p><strong>Zusammenfassung Volladdierer</strong> (vergleiche mit deinen Lösungen zu 3.7.1 und 3.7.2):</p>
-                <p><strong>S = A ⊕ B ⊕ C<sub>in</sub></strong> (S ist 1 bei einer ungeraden Anzahl von Einsen)<br>
-                <strong>C<sub>out</sub> = (A ∧ B) ∨ (A ∧ C<sub>in</sub>) ∨ (B ∧ C<sub>in</sub>)</strong> (C<sub>out</sub> ist 1, wenn mindestens zwei Eingänge 1 sind)</p>
-                <p>Ein Volladdierer lässt sich aus zwei Halbaddierern und einem ODER-Gatter für die beiden Überträge aufbauen.</p>
-            </div>
+<p><strong>Volladdierer:</strong> Schaltnetz mit drei Eingängen A, B und C<sub>in</sub> (Übertrag aus der vorherigen Stelle) und zwei Ausgängen S (Summenbit) und C<sub>out</sub> (Übertrag in die nächste Stelle). C<sub>out</sub>S ist die Summe A + B + C<sub>in</sub> als Binärzahl (0 bis 3).</p>
+<p><strong>Funktionen:</strong> <strong>S = A ⊕ B ⊕ C<sub>in</sub></strong> (1 bei einer ungeraden Anzahl von Einsen) und <strong>C<sub>out</sub> = (A ∧ B) ∨ (A ∧ C<sub>in</sub>) ∨ (B ∧ C<sub>in</sub>)</strong> (1, wenn mindestens zwei Eingänge 1 sind).</p>
+<p><strong>Aufbau:</strong> aus zwei Halbaddierern und einem ODER-Gatter für die beiden Überträge.</p>
+<p><strong>Mehrstellige Zahlen:</strong> Für jede Stelle arbeitet ein Volladdierer. C<sub>out</sub> einer Stelle wird zu C<sub>in</sub> der nächsthöheren Stelle.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

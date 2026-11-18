@@ -129,6 +129,11 @@
 
 <h3>3.2 Die Regeln für das Gruppenrepository</h3>
 
+<p><strong>Regel 1 – Jede Person arbeitet in ihrem eigenen Notebook.</strong> Der Dateiname enthält den Vornamen, z.&nbsp;B. <code>modell_lena.ipynb</code> oder <code>titanic_lena.ipynb</code>. Nur Lena lädt diese Datei hoch.</p>
+<p><strong>Regel 2 – Jede gemeinsame Datei hat genau eine verantwortliche Person.</strong> <code>README.md</code> (Projektbeschreibung) pflegt z.&nbsp;B. Tom, <code>plan.md</code> (Projektstrukturplan, Gantt-Diagramm mit Soll und Ist, Risiken) pflegt z.&nbsp;B. Ali. Wer dort etwas geändert haben möchte, schreibt es als Kommentar in ein Issue.</p>
+<p><strong>Regel 3 – Jeder Commit bekommt eine aussagekräftige Nachricht</strong> (Abschnitt 4).</p>
+<p><strong>Regel 4 – Lieber oft hochladen als selten.</strong> Mindestens am Ende jeder Arbeitsphase, damit nichts im Browser verloren geht und die Historie euren Weg zeigt.</p>
+
 <p><strong>Und immer: vor dem Bearbeiten den neuesten Stand holen.</strong> Sieh vor jeder Arbeitsphase in die Commit-Liste: Hat seit deinem letzten Herunterladen jemand die Datei geändert, die du bearbeiten willst? Wenn ja, lade sie neu herunter. Beim Hochladen wird eine gleichnamige Datei nämlich vollständig ersetzt – Git führt dabei nichts zusammen und warnt auch nicht (siehe Beispiel 2).</p>
 
 <p><strong>Warum eigene Notebooks?</strong> Ein Jupyter-Notebook ist intern eine lange JSON-Textdatei, die neben dem Code auch alle Ausgaben, Grafiken und Ausführungszähler speichert. Arbeiten zwei Personen an derselben <code>.ipynb</code>-Datei, lassen sich ihre Fassungen kaum zusammenführen, und beim Hochladen ersetzt die zweite Fassung einfach die erste. Mit eigenen Notebooks kann das nicht passieren. Außerdem belegt die Historie dann eindeutig, wer welches Modell trainiert und getestet hat. Genau das braucht ihr im KI-Projekt, denn dort trainiert und testet jede Person ein eigenes Modell (vgl. 10.5).</p>
@@ -430,19 +435,12 @@ Fertig, wenn:
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Versionsverwaltung</strong> – dokumentiert jeden Änderungsstand eines Projekts. Sie macht nachvollziehbar, wer wann was geändert hat, hält alle früheren Stände wiederherstellbar bereit und ermöglicht es mehreren Personen, gemeinsam an einem Projekt zu arbeiten.</p>
-        </div>
-
-<div class="merke">
-            <p><strong>Regel 1 – Jede Person arbeitet in ihrem eigenen Notebook.</strong> Der Dateiname enthält den Vornamen, z.&nbsp;B. <code>modell_lena.ipynb</code> oder <code>titanic_lena.ipynb</code>. Nur Lena lädt diese Datei hoch.</p>
-            <p><strong>Regel 2 – Jede gemeinsame Datei hat genau eine verantwortliche Person.</strong> <code>README.md</code> (Projektbeschreibung) pflegt z.&nbsp;B. Tom, <code>plan.md</code> (Projektstrukturplan, Gantt-Diagramm mit Soll und Ist, Risiken) pflegt z.&nbsp;B. Ali. Wer dort etwas geändert haben möchte, schreibt es als Kommentar in ein Issue.</p>
-            <p><strong>Regel 3 – Jeder Commit bekommt eine aussagekräftige Nachricht</strong> (Abschnitt 4).</p>
-            <p><strong>Regel 4 – Lieber oft hochladen als selten.</strong> Mindestens am Ende jeder Arbeitsphase, damit nichts im Browser verloren geht und die Historie euren Weg zeigt.</p>
-        </div>
-
-<div class="merke">
-            <p>Git (die Versionsverwaltung selbst) und GitHub (ein Anbieter, der Repositories im Internet hostet) sind zwei verschiedene Dinge. Forgejo ist eine freie Software, mit der man einen solchen Dienst selbst betreiben kann – so wie auf git.inf7.eu oder beim gemeinnützigen Verein hinter Codeberg.</p>
-        </div>
+<p><strong>Versionsverwaltung:</strong> dokumentiert jeden Änderungsstand eines Projekts. Sie zeigt, wer wann was geändert hat, hält frühere Stände wiederherstellbar bereit und ermöglicht gemeinsames Arbeiten an einem Projekt.</p>
+<p><strong>Repository:</strong> der Projektordner, in dem Git alle Dateien und die gesamte Historie speichert.</p>
+<p><strong>Commit:</strong> ein gespeicherter Änderungsstand mit Commit-Nachricht, Autor, Zeitpunkt und Kennung. Die Nachricht beschreibt aussagekräftig, was geändert wurde.</p>
+<p><strong>Historie:</strong> die Liste aller Commits, die neuesten oben.</p>
+<p><strong>Git und GitHub:</strong> Git ist die Versionsverwaltung selbst, GitHub ein Anbieter, der Repositories im Internet bereitstellt. Mit der freien Software Forgejo kann man einen solchen Dienst selbst betreiben.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

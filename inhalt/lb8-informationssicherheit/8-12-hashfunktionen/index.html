@@ -115,23 +115,30 @@ SHA-256("Hallo!") = 357a57fe73d6c63bb1923e970f79a924db3a3609eb9797547784a94ee38f
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Eigenschaften einer kryptographischen Hashfunktion h</strong></p>
-            <ul>
-                <li><strong>feste Länge:</strong> Jede Eingabe ergibt einen Hashwert gleicher Länge (SHA-256: 256 Bit).</li>
-                <li><strong>deterministisch und schnell:</strong> Gleiche Eingabe liefert immer denselben Hashwert.</li>
-                <li><strong>Einwegeigenschaft (Urbildresistenz):</strong> Zu einem Hashwert y findet man praktisch keine Eingabe x mit h(x) = y.</li>
-                <li><strong>schwache Kollisionsresistenz:</strong> Zu gegebenem x findet man praktisch kein anderes x' mit h(x') = h(x).</li>
-                <li><strong>starke Kollisionsresistenz:</strong> Man findet praktisch überhaupt kein Paar x ≠ x' mit h(x) = h(x').</li>
-                <li><strong>Lawineneffekt:</strong> Eine winzige Änderung der Eingabe ändert etwa die Hälfte der Bits des Hashwerts.</li>
-            </ul>
-            <p>Ein Hashwert ist <strong>nicht eindeutig</strong>: Es gibt unendlich viele Eingaben, aber nur 2<sup>256</sup> Hashwerte, also müssen Kollisionen existieren (Schubfachprinzip). Sie lassen sich bei einer guten Hashfunktion nur nicht gezielt finden.</p>
-        </div>
+<p><strong>Kryptographische Hashfunktion:</strong> berechnet aus jeder Eingabe schnell und immer gleich einen Hashwert fester Länge (SHA-256: 256&nbsp;Bit).</p>
+<p><strong>Einwegeigenschaft:</strong> Zu einem Hashwert findet man praktisch keine passende Eingabe.</p>
+<p><strong>Kollisionsresistenz:</strong> Man findet praktisch keine zwei verschiedenen Eingaben mit demselben Hashwert. Solche Kollisionen gibt es zwar, man kann sie aber nicht gezielt finden.</p>
+<p><strong>Lawineneffekt:</strong> Eine winzige Änderung der Eingabe ändert etwa die Hälfte der Bits des Hashwerts.</p>
+<p><strong>Heute sicher:</strong> SHA-256, SHA-384/512 oder SHA-3. MD5 und SHA-1 sind gebrochen.</p>
+</div>
 
-<div class="merke">
-            <p>
-                <strong>MD5 und SHA-1 sind gebrochen.</strong> Für MD5 lassen sich seit 2004 Kollisionen in Sekunden erzeugen, für SHA-1 wurde 2017 eine praktische Kollision vorgeführt („SHAttered“). Für Sicherheitszwecke verwendet man heute <strong>SHA-256</strong>, SHA-384/512 oder <strong>SHA-3</strong>.
-            </p>
-        </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Eigenschaften von Hashfunktionen formal</summary>
+<p><strong>Eigenschaften einer kryptographischen Hashfunktion h</strong></p>
+<ul>
+<li><strong>feste Länge:</strong> Jede Eingabe ergibt einen Hashwert gleicher Länge (SHA-256: 256 Bit).</li>
+<li><strong>deterministisch und schnell:</strong> Gleiche Eingabe liefert immer denselben Hashwert.</li>
+<li><strong>Einwegeigenschaft (Urbildresistenz):</strong> Zu einem Hashwert y findet man praktisch keine Eingabe x mit h(x) = y.</li>
+<li><strong>schwache Kollisionsresistenz:</strong> Zu gegebenem x findet man praktisch kein anderes x' mit h(x') = h(x).</li>
+<li><strong>starke Kollisionsresistenz:</strong> Man findet praktisch überhaupt kein Paar x ≠ x' mit h(x) = h(x').</li>
+<li><strong>Lawineneffekt:</strong> Eine winzige Änderung der Eingabe ändert etwa die Hälfte der Bits des Hashwerts.</li>
+</ul>
+<p>Ein Hashwert ist <strong>nicht eindeutig</strong>: Es gibt unendlich viele Eingaben, aber nur 2<sup>256</sup> Hashwerte, also müssen Kollisionen existieren (Schubfachprinzip). Sie lassen sich bei einer guten Hashfunktion nur nicht gezielt finden.</p>
+<p>Für MD5 lassen sich seit 2004 Kollisionen in Sekunden erzeugen, für SHA-1 wurde 2017 eine praktische Kollision vorgeführt („SHAttered“).</p>
+</details>
+</div>
+
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

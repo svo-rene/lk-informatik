@@ -154,25 +154,31 @@ Anwendung: v.&nbsp;a. theoretisch, z.&nbsp;B. wenn drei Teile eines Wortes gleic
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-<p><strong>Merke:</strong><br>Die Chomsky-Hierarchie besteht aus vier Ebenen (Typ 0 bis Typ 3). Je kleiner die Typnummer, desto weniger ist die Form der Regeln eingeschränkt und desto mehr Sprachen lassen sich beschreiben – gleichzeitig wird die Analyse schwieriger.<br>Für die <strong>Sprachklassen</strong> 𝓛<sub>i</sub> (Menge aller Sprachen vom Typ i) gilt die echte Inklusion:<br><code>𝓛<sub>3</sub> ⊊ 𝓛<sub>2</sub> ⊊ 𝓛<sub>1</sub> ⊊ 𝓛<sub>0</sub></code><br>Jede reguläre Sprache ist also kontextfrei, aber es gibt kontextfreie Sprachen, die nicht regulär sind (z.&nbsp;B. {a<sup>n</sup>b<sup>n</sup>}), usw.</p>
-<p>Eine Sprache ist vom Typ i, wenn es <em>eine</em> Grammatik vom Typ i gibt, die sie erzeugt. Eine Grammatik ordnet man dem speziellsten Typ zu, dessen Bedingungen alle ihre Regeln erfüllen.</p>
+<p><strong>Chomsky-Hierarchie:</strong> Ordnet Grammatiken nach der Form ihrer Regeln in vier Typen. Je kleiner die Typnummer, desto weniger Einschränkungen und desto mehr Sprachen.</p>
+<table>
+<thead><tr><th>Typ</th><th>Bedingung an alle Regeln</th></tr></thead>
+<tbody>
+<tr><td>3 – regulär</td><td>nur A → aB oder A → a (rechtslinear; durchgehend linkslinear ist auch erlaubt)</td></tr>
+<tr><td>2 – kontextfrei</td><td>links steht genau ein Nichtterminal</td></tr>
+<tr><td>1 – kontextsensitiv</td><td>keine Regel ist verkürzend: Die rechte Seite ist nie kürzer als die linke</td></tr>
+<tr><td>0 – unbeschränkt</td><td>keine Einschränkung, auch verkürzende Regeln sind erlaubt</td></tr>
+</tbody>
+</table>
+<p><strong>Ausnahme S → ε:</strong> Bei Typ 1 und Typ 3 erlaubt, sofern S auf keiner rechten Seite vorkommt.</p>
+<p><strong>Zuordnen:</strong> Eine Grammatik gehört zum speziellsten Typ, dessen Bedingungen alle ihre Regeln erfüllen. Eine Sprache ist vom Typ i, wenn es eine Grammatik vom Typ i gibt, die sie erzeugt.</p>
+<p><strong>Sprachklassen:</strong> Jede reguläre Sprache ist kontextfrei, jede kontextfreie kontextsensitiv usw., aber nicht umgekehrt: {a<sup>n</sup>b<sup>n</sup>} ist kontextfrei, nicht regulär.</p>
 </div>
 
-<div class="merke">
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Formale Definitionen der vier Typen</summary>
+<p>Für die <strong>Sprachklassen</strong> 𝓛<sub>i</sub> (Menge aller Sprachen vom Typ i) gilt die echte Inklusion:<br><code>𝓛<sub>3</sub> ⊊ 𝓛<sub>2</sub> ⊊ 𝓛<sub>1</sub> ⊊ 𝓛<sub>0</sub></code></p>
 <p><strong>Regeln für Typ 3 (rechtslinear):</strong><br>Alle Produktionsregeln haben die Form A → aB oder A → a, wobei A und B Nichtterminale sind und a ein Terminal ist. Zusätzlich ist die Regel S → ε erlaubt, sofern das Startsymbol S auf keiner rechten Seite vorkommt.<br>Linkslineare Grammatiken (A → Ba oder A → a) sind ebenfalls regulär; beide Formen dürfen aber nicht gemischt werden.</p>
-</div>
-
-<div class="merke">
 <p><strong>Regeln für Typ 2:</strong><br>Alle Produktionsregeln haben die Form A → γ, wobei A ein einzelnes Nichtterminal ist und γ eine beliebige (auch leere) Zeichenkette aus Terminalen und Nichtterminalen.</p>
-</div>
-
-<div class="merke">
 <p><strong>Regeln für Typ 1:</strong><br>Alle Produktionsregeln haben die Form αAβ → αγβ, wobei A ein Nichtterminal ist, α und β (möglicherweise leere) Zeichenketten aus Terminalen und Nichtterminalen sind und γ eine nichtleere Zeichenkette ist. A darf also nur im „Kontext“ α…β ersetzt werden. Die einzige Ausnahme ist die Regel S → ε, sofern S auf keiner rechten Seite vorkommt.</p>
 <p><strong>Gleichwertige Definition (monoton, „nicht verkürzend“):</strong> Alle Regeln α → β erfüllen |α| ≤ |β| (die rechte Seite ist nie kürzer als die linke), wieder mit der Ausnahme S → ε.<br>Beide Definitionen ergeben <strong>dieselbe Sprachklasse</strong>: Jede monotone Regel lässt sich durch mehrere kontextsensitive Regeln ersetzen. In den Aufgaben prüfen wir deshalb meist einfach, ob eine Regel verkürzend ist.</p>
-</div>
-
-<div class="merke">
 <p><strong>Regeln für Typ 0:</strong><br>Es gibt keine Einschränkungen für die Produktionsregeln. Sie haben die Form α → β, wobei α und β beliebige Zeichenketten aus Terminalen und Nichtterminalen sind und α mindestens ein Nichtterminal enthält. Insbesondere sind <strong>verkürzende</strong> Regeln wie AB → A oder aB → ε erlaubt.</p>
+</details>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

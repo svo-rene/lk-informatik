@@ -274,31 +274,32 @@ ORDER BY t.Platz;</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                Ein Primärschlüssel muss eindeutig sein und darf keinen fehlenden Wert (NULL) enthalten. Das
-                Häkchen bei „PK“ erzeugt in DB Browser nur <code>PRIMARY KEY</code>. Die automatische Hochzählung
-                setzt erst das zusätzliche Häkchen „AI“ (<code>AUTOINCREMENT</code>), das nur bei
-                <code>INTEGER</code>-Spalten möglich ist.
-            </p>
-            <p>
-                Achtung, SQLite-Besonderheit: Nur eine Spalte vom Typ <code>INTEGER PRIMARY KEY</code> ist garantiert
-                nie NULL – lässt du den Wert weg, vergibt SQLite automatisch die nächste Nummer. Bei einem
-                Primärschlüssel mit anderem Datentyp (z.&nbsp;B. <code>TEXT</code>) lässt SQLite aus historischen
-                Gründen NULL-Werte zu. Setze dort zusätzlich „NN“ (<code>NOT NULL</code>).
-            </p>
-        </div>
+<p><strong>Primärschlüssel:</strong> muss eindeutig sein und darf nicht leer (NULL) sein. In DB Browser setzt das Häkchen „PK“ den <code>PRIMARY KEY</code>.</p>
+<p><strong>AUTOINCREMENT:</strong> Erst das zusätzliche Häkchen „AI“ zählt den Schlüssel automatisch hoch. Das geht nur bei <code>INTEGER</code>-Spalten.</p>
+<p><strong>NOT NULL:</strong> Ist der Primärschlüssel nicht vom Typ <code>INTEGER</code>, lässt SQLite dort NULL-Werte zu. Setze deshalb zusätzlich „NN“.</p>
+<p><strong>Fremdschlüssel:</strong> wird beim Anlegen der Tabelle mit <code>FOREIGN KEY (Spalte) REFERENCES Zieltabelle (Zielspalte)</code> festgelegt.</p>
+</div>
 
-<div class="merke">
-            <p>
-                Syntax für CREATE TABLE mit Primär- und Fremdschlüssel:<br>
-                CREATE TABLE Tabellenname (<br>
-                &nbsp;&nbsp;Spalte1 Datentyp PRIMARY KEY,<br>
-                &nbsp;&nbsp;Spalte2 Datentyp,<br>
-                &nbsp;&nbsp;FremdschluesselSpalte Datentyp,<br>
-                &nbsp;&nbsp;FOREIGN KEY (FremdschluesselSpalte) REFERENCES ZielTabelle (ZielSpalte)<br>
-                );
-            </p>
-        </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Syntax von CREATE TABLE und SQLite-Besonderheit</summary>
+<p>
+    Syntax für CREATE TABLE mit Primär- und Fremdschlüssel:<br>
+    CREATE TABLE Tabellenname (<br>
+    &nbsp;&nbsp;Spalte1 Datentyp PRIMARY KEY,<br>
+    &nbsp;&nbsp;Spalte2 Datentyp,<br>
+    &nbsp;&nbsp;FremdschluesselSpalte Datentyp,<br>
+    &nbsp;&nbsp;FOREIGN KEY (FremdschluesselSpalte) REFERENCES ZielTabelle (ZielSpalte)<br>
+    );
+</p>
+<p>
+    Achtung, SQLite-Besonderheit: Nur eine Spalte vom Typ <code>INTEGER PRIMARY KEY</code> ist garantiert
+    nie NULL – lässt du den Wert weg, vergibt SQLite automatisch die nächste Nummer. Bei einem
+    Primärschlüssel mit anderem Datentyp (z.&nbsp;B. <code>TEXT</code>) lässt SQLite aus historischen
+    Gründen NULL-Werte zu. Setze dort zusätzlich „NN“ (<code>NOT NULL</code>).
+</p>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

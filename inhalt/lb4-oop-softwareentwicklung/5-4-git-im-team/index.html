@@ -266,6 +266,18 @@ punkte_pro_aufgabe = 5
             </details>
         </div>
 
+<p><strong>Regel 1 – Nie direkt auf <code>main</code>.</strong> Jede Änderung entsteht auf einem eigenen Branch <code>&lt;issue-nr&gt;-&lt;stichwort&gt;</code>, z.&nbsp;B. <code>3-auswertung</code>.</p>
+<p><strong>Regel 2 – Jede Änderung kommt als Pull Request.</strong> Eine <em>andere</em> Person der Gruppe reviewt sie (mindestens ein konkreter Kommentar oder eine Freigabe). Gemergt wird erst nach der Freigabe, danach wird der Branch gelöscht.</p>
+<p><strong>Regel 3 – Commit-Nachrichten beginnen mit der Issue-Nummer:</strong> <code>#3 Runde: Prozent auf ganze Zahl gerundet</code>.</p>
+<p><strong>Regel 4 – Eigene Dateien je Person und Sprint</strong>, gemeinsame Dateien mit einer verantwortlichen Person (Schritt 3).</p>
+<ul>
+<li>In jedem Sprint bearbeitet jede Person <strong>eigene Dateien</strong>: ihr Modul und die Testdatei daneben.</li>
+<li>Gemeinsame Dateien (<code>main.py</code>, <code>ansicht.py</code>, <code>README.md</code>) haben je Sprint <strong>eine verantwortliche Person</strong>. Wünsche der anderen kommen als Kommentar ins Issue.</li>
+<li>Kleine Pull Requests, schnell reviewen, schnell mergen. Ein Branch, der eine Woche lebt, sammelt Konflikte.</li>
+<li>Jeden neuen Branch vom <strong>aktuellen</strong> <code>main</code> aus anlegen (Branch-Auswahl steht auf <code>main</code>).</li>
+</ul>
+<p><strong>Regel 5 – <code>main</code> läuft immer.</strong> Vor dem Pull Request laufen alle Tests fehlerfrei; wer reviewt, startet sie noch einmal.</p>
+
 <h2>Zusammenfassung</h2>
 
 <p>Im Team entsteht jede Änderung auf einem eigenen Branch, der beim Speichern im Browser angelegt wird und nach Issue-Nummer und Stichwort heißt. Ein Pull Request beantragt die Übernahme nach <code>main</code>; eine andere Person reviewt den Diff, startet die Tests und stimmt zu, kommentiert oder fordert Änderungen an. Erst dann wird gemergt – dabei entsteht ein Merge-Commit mit zwei Eltern – und der Branch, der nur ein Zeiger ist, wird gelöscht. Im Commit-Graph sieht man Abzweigungen, Merge-Commits und die Branch-Zeiger. Ändern zwei Branches dieselben Zeilen, entsteht ein Merge-Konflikt: Ein Mensch entscheidet, was gilt. Besser ist es, Konflikte durch eigene Dateien je Person, kleine Pull Requests und Branches vom aktuellen <code>main</code> zu vermeiden.</p>
@@ -273,27 +285,12 @@ punkte_pro_aufgabe = 5
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Feature-Branch-Ablauf:</strong> Issue → eigener Branch → Commits → Pull Request → Review durch eine andere Person → Merge nach <code>main</code> → Branch löschen.<br>
-            <code>main</code> enthält nur geprüften, lauffähigen Code. Jede Änderung kommt über einen Pull Request dorthin.</p>
-        </div>
-
-<div class="merke">
-            <p><strong>Konflikte vermeiden ist besser als Konflikte lösen.</strong></p>
-            <ul>
-                <li>In jedem Sprint bearbeitet jede Person <strong>eigene Dateien</strong>: ihr Modul und die Testdatei daneben.</li>
-                <li>Gemeinsame Dateien (<code>main.py</code>, <code>ansicht.py</code>, <code>README.md</code>) haben je Sprint <strong>eine verantwortliche Person</strong>. Wünsche der anderen kommen als Kommentar ins Issue.</li>
-                <li>Kleine Pull Requests, schnell reviewen, schnell mergen. Ein Branch, der eine Woche lebt, sammelt Konflikte.</li>
-                <li>Jeden neuen Branch vom <strong>aktuellen</strong> <code>main</code> aus anlegen (Branch-Auswahl steht auf <code>main</code>).</li>
-            </ul>
-        </div>
-
-<div class="merke">
-            <p><strong>Regel 1 – Nie direkt auf <code>main</code>.</strong> Jede Änderung entsteht auf einem eigenen Branch <code>&lt;issue-nr&gt;-&lt;stichwort&gt;</code>, z.&nbsp;B. <code>3-auswertung</code>.</p>
-            <p><strong>Regel 2 – Jede Änderung kommt als Pull Request.</strong> Eine <em>andere</em> Person der Gruppe reviewt sie (mindestens ein konkreter Kommentar oder eine Freigabe). Gemergt wird erst nach der Freigabe, danach wird der Branch gelöscht.</p>
-            <p><strong>Regel 3 – Commit-Nachrichten beginnen mit der Issue-Nummer:</strong> <code>#3 Runde: Prozent auf ganze Zahl gerundet</code>.</p>
-            <p><strong>Regel 4 – Eigene Dateien je Person und Sprint</strong>, gemeinsame Dateien mit einer verantwortlichen Person (Schritt 3).</p>
-            <p><strong>Regel 5 – <code>main</code> läuft immer.</strong> Vor dem Pull Request laufen alle Tests fehlerfrei; wer reviewt, startet sie noch einmal.</p>
-        </div>
+<p><strong>Branch:</strong> Ein eigener Entwicklungszweig, technisch nur ein Zeiger auf einen Commit. Jede Änderung entsteht auf einem eigenen Branch statt direkt auf <code>main</code>.</p>
+<p><strong>Pull Request:</strong> Beantragt die Übernahme eines Branches nach <code>main</code>. Eine andere Person prüft die Änderung (Review); erst danach wird gemergt.</p>
+<p><strong>Feature-Branch-Ablauf:</strong> Issue → eigener Branch → Commits → Pull Request → Review → Merge nach <code>main</code> → Branch löschen. So enthält <code>main</code> nur geprüften, lauffähigen Code.</p>
+<p><strong>Merge-Konflikt:</strong> Zwei Branches haben dieselbe Stelle derselben Datei unterschiedlich geändert. Ein Mensch muss entscheiden, welche Fassung gilt.</p>
+<p><strong>Konflikte vermeiden:</strong> Eigene Dateien je Person, kleine Pull Requests, die schnell gemergt werden, und neue Branches immer vom aktuellen <code>main</code> aus.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

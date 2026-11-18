@@ -87,65 +87,22 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Tautologie:</strong> Ein Ausdruck, der für jede Belegung seiner Variablen wahr (1) ist; in der Ergebnisspalte der Wahrheitstabelle steht überall 1.</p>
-            <p><strong>Äquivalente Terme:</strong> Zwei Terme sind äquivalent (T<sub>1</sub> ↔ T<sub>2</sub> ist eine Tautologie), wenn sie für jede Belegung der Variablen denselben Wahrheitswert haben. Äquivalente Terme dürfen gegeneinander ausgetauscht werden – das ist die Grundlage jeder Vereinfachung. W steht für „wahr“ (1), F für „falsch“ (0).</p>
-            <table class="gitter">
-                <tr>
-                    <th>Name</th>
-                    <th>Tautologie</th>
-                </tr>
-                <tr>
-                    <td>Idempotenzgesetz</td>
-                    <td>A ∧ A ↔ A<br>
-                    A ∨ A ↔ A</td>
-                </tr>
-                <tr>
-                    <td>Kommutativgesetz</td>
-                    <td>A ∧ B ↔ B ∧ A<br>
-                        A ∨ B ↔ B ∨ A</td>
-                </tr>
-                <tr>
-                    <td>Assoziativgesetz</td>
-                    <td>(A ∧ B) ∧ C ↔ A ∧ (B ∧ C)<br>
-                        (A ∨ B) ∨ C ↔ A ∨ (B ∨ C)</td>
-                </tr>
-                <tr>
-                    <td>Absorptionsgesetz</td>
-                    <td>A ∧ (A ∨ B) ↔ A<br>
-                        A ∨ (A ∧ B) ↔ A</td>
-                </tr>
-                <tr>
-                    <td>Distributivgesetz</td>
-                    <td>A ∧ (B ∨ C) ↔ (A ∧ B) ∨ (A ∧ C)<br>
-                        A ∨ (B ∧ C) ↔ (A ∨ B) ∧ (A ∨ C)</td>
-                </tr>
-                <tr>
-                    <td>doppelte Negation</td>
-                    <td>¬(¬A) ↔ A</td>
-                </tr>
-                <tr>
-                    <td>De-Morgan’sche Regeln</td>
-                    <td>¬(A ∧ B) ↔ ¬A ∨ ¬B<br>
-                        ¬(A ∨ B) ↔ ¬A ∧ ¬B</td>
-                </tr>
-                <tr>
-                    <td>Gesetze mit Wahr/Falsch</td>
-                    <td>A ∧ W ↔ A &nbsp;&nbsp; A ∨ F ↔ A &nbsp;(neutrales Element)<br>
-                        A ∨ W ↔ W &nbsp;&nbsp; A ∧ F ↔ F &nbsp;(dominantes Element)<br>
-                        A ∧ ¬A ↔ F &nbsp;&nbsp; A ∨ ¬A ↔ W &nbsp;(Komplement)</td>
-                </tr>
-            </table>
-        </div>
-
-<div class="merke">
-            <p><strong>Vorrangregeln:</strong></p>
-            <ol>
-                <li>Klammerausdrücke „()“ werden zuerst ausgewertet.</li>
-                <li>Die Negation „¬“ bindet stärker als das UND „∧“. Dieses bindet wiederum stärker als das ODER „∨“.</li>
-                <li>Das Zeichen für das UND „∧“ kann analog zum Malzeichen „·“ in der Mathematik weggelassen werden.</li>
-                <li>Folgen gleiche Verknüpfungen hintereinander, so wird der Term von links nach rechts ausgewertet.</li>
-            </ol>
-        </div>
+<p><strong>Tautologie:</strong> ein Term, der für jede Belegung seiner Variablen wahr (1) ist. In der Ergebnisspalte der Wahrheitstabelle steht überall 1.</p>
+<p><strong>Äquivalente Terme:</strong> haben für jede Belegung der Variablen denselben Wahrheitswert (T<sub>1</sub> ↔ T<sub>2</sub> ist eine Tautologie). Sie dürfen gegeneinander ausgetauscht werden – das ist die Grundlage jeder Vereinfachung.</p>
+<p><strong>Gesetze</strong> (W steht für „wahr“ (1), F für „falsch“ (0)):</p>
+<table class="gitter">
+    <tr><th>Name</th><th>Tautologie</th></tr>
+    <tr><td>Idempotenzgesetz</td><td>A ∧ A ↔ A<br>A ∨ A ↔ A</td></tr>
+    <tr><td>Kommutativgesetz</td><td>A ∧ B ↔ B ∧ A<br>A ∨ B ↔ B ∨ A</td></tr>
+    <tr><td>Assoziativgesetz</td><td>(A ∧ B) ∧ C ↔ A ∧ (B ∧ C)<br>(A ∨ B) ∨ C ↔ A ∨ (B ∨ C)</td></tr>
+    <tr><td>Absorptionsgesetz</td><td>A ∧ (A ∨ B) ↔ A<br>A ∨ (A ∧ B) ↔ A</td></tr>
+    <tr><td>Distributivgesetz</td><td>A ∧ (B ∨ C) ↔ (A ∧ B) ∨ (A ∧ C)<br>A ∨ (B ∧ C) ↔ (A ∨ B) ∧ (A ∨ C)</td></tr>
+    <tr><td>doppelte Negation</td><td>¬(¬A) ↔ A</td></tr>
+    <tr><td>De-Morgan’sche Regeln</td><td>¬(A ∧ B) ↔ ¬A ∨ ¬B<br>¬(A ∨ B) ↔ ¬A ∧ ¬B</td></tr>
+    <tr><td>Gesetze mit Wahr/Falsch</td><td>A ∧ W ↔ A &nbsp;&nbsp; A ∨ F ↔ A &nbsp;(neutrales Element)<br>A ∨ W ↔ W &nbsp;&nbsp; A ∧ F ↔ F &nbsp;(dominantes Element)<br>A ∧ ¬A ↔ F &nbsp;&nbsp; A ∨ ¬A ↔ W &nbsp;(Komplement)</td></tr>
+</table>
+<p><strong>Vorrangregeln:</strong> Klammern zuerst, dann ¬ vor ∧ vor ∨. Gleiche Verknüpfungen werden von links nach rechts ausgewertet; das ∧ darf wie der Malpunkt „·“ weggelassen werden.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

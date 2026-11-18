@@ -217,14 +217,19 @@ print(einfuegen_sortiert(liste, 700), liste)   # 2 [900, 750, 700, 600, 400]</co
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                Eine <strong>Python-Liste</strong> ist ein <strong>dynamisches Array</strong>: Die Elemente liegen lückenlos in einem zusammenhängenden Speicherbereich.<br>
-                <strong>Zugriff</strong> über den Index: O(1), weil die Adresse berechnet wird.<br>
-                <strong>Einfügen/Löschen am Ende:</strong> O(1) im Mittel.<br>
-                <strong>Einfügen/Löschen an Position k:</strong> O(n), weil n − k Elemente verschoben werden müssen; am Anfang ist es am teuersten.<br>
-                Wird eine O(n)-Operation in einer Schleife n-mal ausgeführt, entsteht O(n²): 0 + 1 + 2 + … + (n − 1) = n(n − 1)/2 Verschiebungen.
-            </p>
-        </div>
+<p><strong>Python-Liste:</strong> Sie ist ein dynamisches Array. Die Elemente liegen lückenlos hintereinander in einem zusammenhängenden Speicherbereich.</p>
+<p><strong>Zugriff über den Index:</strong> O(1), weil die Adresse des Elements berechnet wird.</p>
+<p><strong>Einfügen/Löschen am Ende:</strong> im Mittel O(1).</p>
+<p><strong>Einfügen/Löschen an Position k:</strong> O(n), weil alle Elemente dahinter verschoben werden müssen. Am Anfang ist es am teuersten.</p>
+<p><strong>O(n)-Operation in einer Schleife:</strong> Wird sie n-mal ausgeführt, entsteht insgesamt O(n²).</p>
+</div>
+
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Warum O(n²)?</summary>
+<p>Wird an Position k eingefügt oder gelöscht, müssen n − k Elemente verschoben werden. Wird eine solche O(n)-Operation in einer Schleife n-mal ausgeführt, ergeben sich 0 + 1 + 2 + … + (n − 1) = n(n − 1)/2 Verschiebungen, also O(n²).</p>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

@@ -157,12 +157,15 @@ Der Eintrag δ(q1, □) = (q2, 1, L) schreibt die neue führende 1 links vor die
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-<p><strong>Merke:</strong><br>Endliche Automaten erkennen genau die regulären Sprachen. Sprachen mit beliebig tief geschachtelten Strukturen – wie korrekt geklammerte Ausdrücke – sind <em>nicht</em> regulär.</p>
+<p><strong>Grenze endlicher Automaten:</strong> Endliche Automaten erkennen genau die regulären Sprachen. Sprachen mit beliebig tief geschachtelten Strukturen, etwa korrekt geklammerte Ausdrücke, sind nicht regulär.</p>
+<p><strong>Pumping-Lemma:</strong> Liest ein DEA mit n Zuständen ein Wort mit mindestens n Zeichen, durchläuft er eine Schleife, die man beliebig oft wiederholen oder weglassen kann. Damit zeigt man, dass eine Sprache <em>nicht</em> regulär ist – beweisen, dass sie regulär ist, kann man damit nie.</p>
+<p><strong>Halteproblem:</strong> Es ist unmöglich, einen Algorithmus zu schreiben, der für jede Turingmaschine und jede Eingabe entscheidet, ob sie anhält oder endlos läuft. Es gibt also prinzipiell unlösbare Probleme.</p>
 </div>
 
-<div class="merke">
-<p><strong>Merke: Pumping-Lemma für reguläre Sprachen</strong><br>
-Ist L eine reguläre Sprache, dann gibt es eine Zahl n ≥ 1 (die Pumping-Länge, z.&nbsp;B. die Zustandszahl eines DEA für L), sodass sich <strong>jedes</strong> Wort z ∈ L mit |z| ≥ n so in drei Teile z = u v w zerlegen lässt, dass gilt:</p>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Pumping-Lemma formal</summary>
+<p>Ist L eine reguläre Sprache, dann gibt es eine Zahl n ≥ 1 (die Pumping-Länge, z.&nbsp;B. die Zustandszahl eines DEA für L), sodass sich <strong>jedes</strong> Wort z ∈ L mit |z| ≥ n so in drei Teile z = u v w zerlegen lässt, dass gilt:</p>
 <ol>
 <li>|uv| ≤ n (die Schleife liegt in den ersten n Zeichen),</li>
 <li>|v| ≥ 1 (die Schleife ist nicht leer),</li>
@@ -170,16 +173,18 @@ Ist L eine reguläre Sprache, dann gibt es eine Zahl n ≥ 1 (die Pumping-Länge
 </ol>
 <p><strong>Anwendung (Widerspruchsbeweis):</strong> Um zu zeigen, dass L <em>nicht</em> regulär ist, nimmt man an, L sei regulär mit Pumping-Länge n. Dann wählt man geschickt ein Wort z ∈ L mit |z| ≥ n und zeigt, dass für <em>jede</em> erlaubte Zerlegung z = uvw ein i existiert mit uv<sup>i</sup>w ∉ L.<br>
 Achtung: Das Lemma ist nur eine notwendige Bedingung. Man kann damit nie beweisen, dass eine Sprache regulär ist.</p>
+</details>
 </div>
 
-<div class="merke">
-<p><strong>Das Halteproblem:</strong><br>Es ist unmöglich, einen Algorithmus zu schreiben, der für jede beliebige Turingmaschine und jede Eingabe entscheidet, ob sie anhält oder endlos läuft.</p>
-<p><strong>Entscheidbar vs. rekursiv aufzählbar:</strong></p>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: entscheidbar und rekursiv aufzählbar</summary>
 <ul>
 <li>Eine Sprache L ist <strong>entscheidbar</strong>, wenn es eine Turingmaschine gibt, die bei <em>jeder</em> Eingabe anhält und korrekt „ja“ (w ∈ L) oder „nein“ (w ∉ L) antwortet.</li>
 <li>L ist <strong>rekursiv aufzählbar</strong> (Typ 0, semi-entscheidbar), wenn eine Turingmaschine bei jedem w ∈ L anhält und „ja“ sagt; bei w ∉ L darf sie aber endlos laufen.</li>
 <li>Jede entscheidbare Sprache ist rekursiv aufzählbar, aber nicht umgekehrt: Das Halteproblem ist rekursiv aufzählbar (man simuliert die Maschine und wartet, ob sie hält), aber nicht entscheidbar.</li>
 </ul>
+</details>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

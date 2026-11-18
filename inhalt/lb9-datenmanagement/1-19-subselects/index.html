@@ -317,22 +317,10 @@ WHERE k.name = '10A';</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                Subselects liefern ein Ergebnis, das von der übergeordneten SQL-Anweisung weiterverarbeitet wird.
-                Sie können in SELECT-, FROM- oder WHERE-Klauseln verwendet werden.
-            </p>
-        </div>
-
-<div class="merke">
-            <p>
-                <strong>Achtung, tückischer Fehler:</strong> Schreibt man in diesem Fall <code>=</code> statt
-                <code>IN</code>, meldet SQLite <em>keinen</em> Fehler. Es nimmt stillschweigend nur den
-                ersten Wert der inneren Abfrage und liefert nur die drei Namen aus der 10A. Der Fehler fällt
-                also nicht durch eine Fehlermeldung auf, sondern nur dadurch, dass zu wenige Zeilen
-                herauskommen. Prüfe deshalb bei jedem Subselect: <em>Kann die innere Abfrage mehr als eine
-                Zeile liefern?</em> Wenn ja, gehört dort ein <code>IN</code> hin.
-            </p>
-        </div>
+<p><strong>Subselect (Unterabfrage):</strong> eine SELECT-Abfrage in Klammern, deren Ergebnis die äußere SQL-Anweisung weiterverwendet. Sie kann in der SELECT-, FROM- oder WHERE-Klausel stehen.</p>
+<p><strong>= oder IN:</strong> Liefert die Unterabfrage genau einen Wert, vergleicht man mit <code>=</code>. Kann sie mehrere Zeilen liefern, braucht man <code>IN</code>.</p>
+<p><strong>Typischer Fehler:</strong> Steht <code>=</code> statt <code>IN</code>, meldet SQLite keinen Fehler, sondern nimmt nur den ersten Wert der Unterabfrage. Das Ergebnis hat dann einfach zu wenige Zeilen.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

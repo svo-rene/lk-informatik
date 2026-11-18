@@ -164,16 +164,10 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>k-NN</strong> – klassifiziert einen neuen Datenpunkt anhand der k nächstgelegenen Punkte in den Trainingsdaten: Die Klasse, die unter diesen k Nachbarn am häufigsten vorkommt, wird vorhergesagt. Der Wert k ist ein Hyperparameter.</p>
-        </div>
-
-<div class="merke">
-            <p>k-NN berechnet für einen neuen Punkt den Abstand (meist den euklidischen Abstand) zu <em>allen</em> Trainingspunkten, sortiert diese nach Abstand und lässt die k nächsten per Mehrheitsentscheid über die Klasse abstimmen.</p>
-        </div>
-
-<div class="merke">
-            <p>Vor k-NN (und allen anderen abstandsbasierten Verfahren wie k-Means) müssen die Merkmale auf vergleichbare Wertebereiche gebracht werden, z.&nbsp;B. durch Min-Max-Skalierung oder Standardisierung (Mittelwert 0, Standardabweichung 1).</p>
-        </div>
+<p><strong>k-NN (k nächste Nachbarn):</strong> klassifiziert einen neuen Datenpunkt anhand der k nächstgelegenen Punkte der Trainingsdaten: Die häufigste Klasse unter ihnen wird vorhergesagt. Der Wert k ist ein Hyperparameter.</p>
+<p><strong>Vorgehen:</strong> den Abstand (meist euklidisch) zu allen Trainingspunkten berechnen, nach Abstand sortieren und die k nächsten per Mehrheitsentscheid abstimmen lassen.</p>
+<p><strong>Skalierung:</strong> Vor abstandsbasierten Verfahren wie k-NN oder k-Means müssen die Merkmale auf vergleichbare Wertebereiche gebracht werden, z.&nbsp;B. durch Min-Max-Skalierung oder Standardisierung. Sonst bestimmt das Merkmal mit den größten Zahlen den Abstand fast allein.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

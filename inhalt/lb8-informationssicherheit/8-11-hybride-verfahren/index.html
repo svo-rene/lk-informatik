@@ -58,17 +58,15 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Hybrides Verfahren:</strong>
-            </p>
-            <ol>
-                <li>Der Absender erzeugt einen zufälligen symmetrischen <strong>Sitzungsschlüssel</strong> k.</li>
-                <li>Er verschlüsselt die <strong>Daten symmetrisch</strong> mit k (z.&nbsp;B. AES-GCM).</li>
-                <li>Er verschlüsselt <strong>k asymmetrisch</strong> mit dem öffentlichen Schlüssel des Empfängers – oder beide vereinbaren k per Diffie-Hellman.</li>
-                <li>Der Empfänger gewinnt k mit seinem privaten Schlüssel zurück und entschlüsselt damit die Daten.</li>
-            </ol>
-            <p>Asymmetrisch wird also nur der kurze Schlüssel behandelt, symmetrisch die großen Datenmengen.</p>
-        </div>
+<p><strong>Hybrides Verfahren:</strong> Asymmetrisch wird nur der kurze Sitzungsschlüssel behandelt, symmetrisch die großen Datenmengen.</p>
+<ol>
+<li>Der Absender erzeugt einen zufälligen symmetrischen <strong>Sitzungsschlüssel</strong> k.</li>
+<li>Er verschlüsselt die <strong>Daten symmetrisch</strong> mit k (z.&nbsp;B. AES-GCM).</li>
+<li>Er verschlüsselt <strong>k asymmetrisch</strong> mit dem öffentlichen Schlüssel des Empfängers – oder beide vereinbaren k per Diffie-Hellman.</li>
+<li>Der Empfänger gewinnt k mit seinem privaten Schlüssel zurück und entschlüsselt damit die Daten.</li>
+</ol>
+</div>
+
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

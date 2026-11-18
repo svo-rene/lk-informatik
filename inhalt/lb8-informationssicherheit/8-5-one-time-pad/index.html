@@ -84,25 +84,17 @@ XOR:       11101111   01110101   = 0xEF 0x75 (Geheimtext)</pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Bedingungen für das One-Time-Pad:</strong> Der Schlüssel muss
-            </p>
-            <ol>
-                <li><strong>echt zufällig</strong> sein,</li>
-                <li><strong>mindestens so lang</strong> wie die Nachricht sein,</li>
-                <li>nur ein <strong>einziges Mal</strong> verwendet und danach vernichtet werden,</li>
-                <li><strong>geheim</strong> bleiben und vorab sicher zum Empfänger gelangen.</li>
-            </ol>
-            <p>
-                Sind alle vier Bedingungen erfüllt, ist das Verfahren <strong>perfekt sicher</strong> (Claude Shannon, 1949): Der Geheimtext verrät nichts über den Klartext, weil zu jedem Geheimtext jeder Klartext gleicher Länge mit einem passenden Schlüssel gehört. Wird eine Bedingung verletzt, geht die Sicherheit verloren.
-            </p>
-        </div>
+<p><strong>One-Time-Pad:</strong> Es ist <strong>perfekt sicher</strong> (Shannon 1949), wenn der Schlüssel</p>
+<ol>
+<li>echt zufällig ist,</li>
+<li>mindestens so lang wie die Nachricht ist,</li>
+<li>nur ein einziges Mal verwendet und danach vernichtet wird,</li>
+<li>geheim bleibt und vorab sicher zum Empfänger gelangt.</li>
+</ol>
+<p><strong>Perfekte Sicherheit:</strong> Der Geheimtext verrät nichts über den Klartext, weil zu jedem Geheimtext jeder Klartext gleicher Länge mit einem passenden Schlüssel gehört. Wird eine Bedingung verletzt, geht die Sicherheit verloren.</p>
+<p><strong>Kaum genutzt:</strong> Man braucht so viel geheimes Schlüsselmaterial wie Nachrichten und muss es vorher sicher übergeben – damit verschiebt sich das Problem nur.</p>
+</div>
 
-<div class="merke">
-            <p>
-                <strong>Warum das One-Time-Pad kaum genutzt wird:</strong> Man braucht so viel geheimes Schlüsselmaterial wie Nachrichten und muss es vorher sicher übergeben. Damit verschiebt sich das Problem nur: Könnte man den Schlüssel sicher übertragen, könnte man gleich die Nachricht übertragen.
-            </p>
-        </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

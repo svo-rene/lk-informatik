@@ -216,13 +216,13 @@ print(scanne("x1*(y+7)"))</code></pre>
 
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
-<div class="merke"><p><strong>Merke:</strong> Compiler übersetzen den gesamten Code vor der Ausführung und können dabei viele Fehler schon vor dem Programmstart melden. Interpreter übersetzen und führen den Code Anweisung für Anweisung während der Ausführung aus.</p></div>
-
-<div class="merke"><p><strong>Merke:</strong> Ein Compiler analysiert Quelltext in mehreren Stufen: lexikalisch → syntaktisch → semantisch.<br>Die ersten beiden Stufen beruhen auf <strong>formalen Sprachen</strong> – also auf dem, was wir mit Automaten und Grammatiken gelernt haben.</p></div>
-
-<div class="merke"><p><strong>Merke:</strong> Die lexikalische Analyse beschreibt jeden Token-Typ durch einen regulären Ausdruck. Daraus wird ein endlicher Automat erzeugt. Die <strong>akzeptierenden Zustände</strong> dieses Automaten entsprechen den Token-Typen (z.&nbsp;B. „Zahl erkannt“, „Bezeichner erkannt“); die übrigen Zustände sind Zwischenzustände während des Lesens.</p></div>
-
-<div class="merke"><p><strong>Merke:</strong> Die semantische Analyse überprüft unter anderem die Typkorrektheit, die Deklaration von Variablen vor ihrer Verwendung und die korrekte Anzahl von Parametern bei Funktionsaufrufen.</p></div>
+<div class="merke">
+<p><strong>Compiler:</strong> Übersetzt den gesamten Code vor der Ausführung und kann dabei viele Fehler schon vor dem Programmstart melden.</p>
+<p><strong>Interpreter:</strong> Übersetzt und führt den Code Anweisung für Anweisung während der Ausführung aus.</p>
+<p><strong>Phasen der Analyse:</strong> lexikalisch → syntaktisch → semantisch. Die ersten beiden beruhen auf formalen Sprachen, also auf Automaten und Grammatiken.</p>
+<p><strong>Lexikalische Analyse:</strong> Jeder Token-Typ wird durch einen regulären Ausdruck beschrieben, daraus entsteht ein endlicher Automat. Seine akzeptierenden Zustände entsprechen den Token-Typen, z.&nbsp;B. „Zahl erkannt“.</p>
+<p><strong>Semantische Analyse:</strong> Prüft unter anderem die Typkorrektheit, ob Variablen vor ihrer Verwendung deklariert sind und ob Funktionen mit der richtigen Anzahl von Parametern aufgerufen werden.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

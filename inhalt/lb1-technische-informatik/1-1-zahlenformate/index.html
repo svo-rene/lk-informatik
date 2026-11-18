@@ -131,90 +131,56 @@ Stelle 8 (2^7):  0 + 0        = 0</pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-    <p><strong>Stellenwertsystem</strong> – Eine Zahl wird durch Ziffern dargestellt, deren Wert von ihrer Position abhängt. Bei der Basis b hat die Stelle k (von rechts, beginnend bei 0) den Stellenwert b<sup>k</sup>. Das <strong>Binärsystem</strong> hat die Basis 2 und die Ziffern 0 und 1, das <strong>Hexadezimalsystem</strong> hat die Basis 16 und die Ziffern 0–9 und A–F.</p>
+<p><strong>Stellenwertsystem:</strong> Der Wert einer Ziffer hängt von ihrer Position ab: Bei der Basis b hat die Stelle k (von rechts, ab 0 gezählt) den Stellenwert b<sup>k</sup>. <strong>Binärsystem:</strong> Basis 2, Ziffern 0 und 1. <strong>Hexadezimalsystem:</strong> Basis 16, Ziffern 0–9 und A–F.</p>
+<p><strong>In das Dezimalsystem umrechnen:</strong> Jede Ziffer mit ihrem Stellenwert multiplizieren und alle Ergebnisse addieren.</p>
+<p><strong>Aus dem Dezimalsystem umrechnen:</strong> Wiederholt durch die Basis (2 bzw. 16) teilen. Die Reste von unten nach oben gelesen ergeben die Zahl.</p>
+<p><strong>Binär &harr; Hexadezimal:</strong> Eine Hexadezimalziffer entspricht genau 4 Bit (16 = 2<sup>4</sup>). Die Binärzahl wird dazu <strong>von rechts</strong> in Vierergruppen geteilt.</p>
+<p><strong>Anzahl der Werte:</strong> Mit n Bit gibt es 2<sup>n</sup> Bitmuster. Der größte Wert ist 2<sup>n</sup> &minus; 1, weil die Zählung bei 0 beginnt.</p>
+<p><strong>Binäre Addition:</strong> 0 + 0 = 0, &nbsp;0 + 1 = 1, &nbsp;1 + 1 = 0 Übertrag 1, &nbsp;1 + 1 + 1 = 1 Übertrag 1.</p>
 </div>
 
-<div class="merke">
-    <p><strong>Dezimal zu Binär</strong></p>
-    <p>Um eine Dezimalzahl in eine Binärzahl umzurechnen, dividiere die Dezimalzahl sukzessive durch 2 und notiere den Rest bei jeder Division. Die Binärzahl ist dann die umgekehrte Reihenfolge der Reste.</p>
-    <p>Beispiel: Umrechnung von 43 (Dezimal) in Binär</p>
-    <p>
-      43 / 2 = 21 Rest 1<br>
-      21 / 2 = 10 Rest 1<br>
-      10 / 2 = 5 Rest 0<br>
-      5 / 2 = 2 Rest 1<br>
-      2 / 2 = 1 Rest 0<br>
-      1 / 2 = 0 Rest 1
-    </p>
-    <p>Die Binärzahl ist die umgekehrte Reihenfolge der Reste, also von unten nach oben gelesen: 101011 (Binär)</p>
-    <p><strong>Achte genau auf die Leserichtung:</strong> Von oben nach unten gelesen ergäben dieselben Reste 110101 – und das wäre 53 statt 43. Mache deshalb immer die Probe: 32 + 8 + 2 + 1 = 43 &#10003;</p>
-</div>
-
-<div class="merke">
-    <p><strong>Binär zu Dezimal</strong></p>
-    <p>Um eine Binärzahl in eine Dezimalzahl umzurechnen, multipliziere jede Binärziffer von rechts nach links mit der entsprechenden Potenz von 2 und addiere die Ergebnisse.</p>
-    <p>Beispiel: Umrechnung von 101011 (Binär) in Dezimal</p>
-    <p>
-      1 · 2<sup>5</sup> (32) + 0 · 2<sup>4</sup> (0) + 1 · 2<sup>3</sup> (8) + 0 · 2<sup>2</sup> (0) + 1 · 2<sup>1</sup> (2) + 1 · 2<sup>0</sup> (1) = 32 + 0 + 8 + 0 + 2 + 1 = 43 (Dezimal)
-    </p>
-</div>
-
-<div class="merke">
-    <p><strong>Dezimal zu Hexadezimal</strong></p>
-    <p>Um eine Dezimalzahl in eine Hexadezimalzahl umzurechnen, teile die Dezimalzahl sukzessive durch 16 und notiere den Rest bei jeder Division. Die Hexadezimalzahl ist dann die umgekehrte Reihenfolge der Reste.</p>
-    <p>Beispiel: Umrechnung von 178 (Dezimal) in Hexadezimal</p>
-    <p>
-        178 / 16 = 11 Rest 2<br>
-        11 / 16 = 0 Rest 11 (B)
-    </p>
-    <p>Die Hexadezimalzahl ist die umgekehrte Reihenfolge der Reste: B2 (Hexadezimal)</p>
-</div>
-
-<div class="merke">
-    <p><strong>Hexadezimal zu Dezimal</strong></p>
-    <p>Um eine Hexadezimalzahl in eine Dezimalzahl umzurechnen, multipliziere jede Hexadezimalziffer von rechts nach links mit der entsprechenden Potenz von 16 und addiere die Ergebnisse.</p>
-    <p>Beispiel: Umrechnung von 5F (Hexadezimal) in Dezimal</p>
-    <p>
-    5 · 16<sup>1</sup> (80) + F (15) · 16<sup>0</sup> (15) = 80 + 15 = 95 (Dezimal)
-    </p>
-</div>
-
-<div class="merke">
-    <p><strong>Binär &harr; Hexadezimal: der direkte Weg (ohne Dezimalsystem)</strong></p>
-    <p>Zwischen Binär- und Hexadezimalsystem braucht man <strong>keinen Umweg über das Dezimalsystem</strong>. Der Grund: 16 = 2<sup>4</sup>. Eine Hexadezimalziffer kann genau 16 verschiedene Werte annehmen – und genau das leisten auch 4 Bit. Jede Hexadezimalziffer entspricht deshalb exakt einer Vierergruppe von Bits.</p>
-    <p><strong>Binär &rarr; Hexadezimal:</strong> Teile die Binärzahl <strong>von rechts</strong> in Vierergruppen ein und ersetze jede Gruppe durch ihre Hexadezimalziffer.</p>
-    <pre class="darstellung">1101   0110
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Umrechnungen mit Beispielen</summary>
+<p><strong>Dezimal zu Binär</strong> – Beispiel: 43 (Dezimal) in Binär</p>
+<p>
+  43 / 2 = 21 Rest 1<br>
+  21 / 2 = 10 Rest 1<br>
+  10 / 2 = 5 Rest 0<br>
+  5 / 2 = 2 Rest 1<br>
+  2 / 2 = 1 Rest 0<br>
+  1 / 2 = 0 Rest 1
+</p>
+<p>Die Binärzahl ist die umgekehrte Reihenfolge der Reste, also von unten nach oben gelesen: 101011 (Binär)</p>
+<p><strong>Achte genau auf die Leserichtung:</strong> Von oben nach unten gelesen ergäben dieselben Reste 110101 – und das wäre 53 statt 43. Mache deshalb immer die Probe: 32 + 8 + 2 + 1 = 43 &#10003;</p>
+<p><strong>Binär zu Dezimal</strong> – Beispiel: 101011 (Binär) in Dezimal</p>
+<p>
+  1 · 2<sup>5</sup> (32) + 0 · 2<sup>4</sup> (0) + 1 · 2<sup>3</sup> (8) + 0 · 2<sup>2</sup> (0) + 1 · 2<sup>1</sup> (2) + 1 · 2<sup>0</sup> (1) = 32 + 0 + 8 + 0 + 2 + 1 = 43 (Dezimal)
+</p>
+<p><strong>Dezimal zu Hexadezimal</strong> – Beispiel: 178 (Dezimal) in Hexadezimal</p>
+<p>
+  178 / 16 = 11 Rest 2<br>
+  11 / 16 = 0 Rest 11 (B)
+</p>
+<p>Die Hexadezimalzahl ist die umgekehrte Reihenfolge der Reste: B2 (Hexadezimal)</p>
+<p><strong>Hexadezimal zu Dezimal</strong> – Beispiel: 5F (Hexadezimal) in Dezimal</p>
+<p>
+  5 · 16<sup>1</sup> (80) + F (15) · 16<sup>0</sup> (15) = 80 + 15 = 95 (Dezimal)
+</p>
+<p><strong>Binär &rarr; Hexadezimal:</strong> Teile die Binärzahl <strong>von rechts</strong> in Vierergruppen ein und ersetze jede Gruppe durch ihre Hexadezimalziffer.</p>
+<pre class="darstellung">1101   0110
   &darr;      &darr;
   13      6
   D       6      &rarr;  D6 (Hexadezimal)</pre>
-    <p><strong>Hexadezimal &rarr; Binär:</strong> Ersetze jede Hexadezimalziffer durch ihre 4-Bit-Gruppe.</p>
-    <pre class="darstellung">  A     7
+<p><strong>Hexadezimal &rarr; Binär:</strong> Ersetze jede Hexadezimalziffer durch ihre 4-Bit-Gruppe.</p>
+<pre class="darstellung">  A     7
   &darr;     &darr;
 1010  0111      &rarr;  10100111 (Binär)</pre>
-    <p><strong>Achtung – immer von rechts gruppieren!</strong> Die Zahl 1011011 hat 7 Stellen. Von links gruppiert ergäbe das 1011|011 – falsch. Richtig ist von rechts: 101|1011, links mit einer Null aufgefüllt also 0101|1011 = 5B<sub>16</sub>. Probe: 5 · 16 + 11 = 91, und 1011011<sub>2</sub> = 64 + 16 + 8 + 2 + 1 = 91 &#10003;</p>
-    <p>Genau deshalb schreibt man Speicheradressen, Farbwerte und MAC-Adressen hexadezimal: Ein Byte (8 Bit) ist immer genau zwei Hexadezimalziffern lang, und man kann die Bits jederzeit ohne Rechnung ablesen.</p>
-</div>
-
-<div class="merke">
-    <p><strong>Wie viele Werte passen in n Stellen?</strong></p>
-    <p>Jede Binärstelle kann unabhängig von den anderen 0 oder 1 sein – also 2 Möglichkeiten. Bei n Stellen multiplizieren sich diese Möglichkeiten:</p>
-    <p><strong>Anzahl der Bitmuster = 2<sup>n</sup></strong></p>
-    <p>Beispiele: 4 Bit &rarr; 2<sup>4</sup> = 16 &nbsp;&middot;&nbsp; 5 Bit &rarr; 2<sup>5</sup> = 32 &nbsp;&middot;&nbsp; 8 Bit (1 Byte) &rarr; 2<sup>8</sup> = 256 &nbsp;&middot;&nbsp; 16 Bit &rarr; 2<sup>16</sup> = 65536</p>
-    <p><strong>Die häufigste Verwechslung – Anzahl gegen größten Wert:</strong> Mit 8 Bit lassen sich <strong>256</strong> verschiedene Muster bilden, aber der <strong>größte darstellbare Wert</strong> ist nur <strong>255</strong>. Der Grund: Die Zählung beginnt bei 0. Es gilt also:</p>
-    <ul>
-        <li>Anzahl der darstellbaren Werte: 2<sup>n</sup></li>
-        <li>Wertebereich (vorzeichenlos): 0 bis 2<sup>n</sup> &minus; 1</li>
-    </ul>
-    <p>Allgemein für ein Stellenwertsystem mit der Basis b: Mit n Stellen lassen sich b<sup>n</sup> Werte darstellen, der größte ist b<sup>n</sup> &minus; 1. Im Dezimalsystem mit 3 Stellen also 10&sup3; = 1000 Werte von 0 bis 999.</p>
-</div>
-
-<div class="merke">
-    <p><strong>Die vier Regeln der binären Addition:</strong></p>
-    <pre class="darstellung">0 + 0     = 0
-0 + 1     = 1
-1 + 1     = 0   Übertrag 1
-1 + 1 + 1 = 1   Übertrag 1   (wenn zusätzlich ein Übertrag hereinkommt)</pre>
-    <p>Mehr Fälle gibt es nicht. Die letzte Zeile wird am häufigsten übersehen.</p>
+<p><strong>Achtung – immer von rechts gruppieren!</strong> Die Zahl 1011011 hat 7 Stellen. Von links gruppiert ergäbe das 1011|011 – falsch. Richtig ist von rechts: 101|1011, links mit einer Null aufgefüllt also 0101|1011 = 5B<sub>16</sub>. Probe: 5 · 16 + 11 = 91, und 1011011<sub>2</sub> = 64 + 16 + 8 + 2 + 1 = 91 &#10003;</p>
+<p>Genau deshalb schreibt man Speicheradressen, Farbwerte und MAC-Adressen hexadezimal: Ein Byte (8 Bit) ist immer genau zwei Hexadezimalziffern lang, und man kann die Bits jederzeit ohne Rechnung ablesen.</p>
+<p><strong>Anzahl gegen größten Wert:</strong> 4 Bit &rarr; 2<sup>4</sup> = 16 &nbsp;&middot;&nbsp; 5 Bit &rarr; 2<sup>5</sup> = 32 &nbsp;&middot;&nbsp; 8 Bit (1 Byte) &rarr; 2<sup>8</sup> = 256 &nbsp;&middot;&nbsp; 16 Bit &rarr; 2<sup>16</sup> = 65536. Mit 8 Bit lassen sich <strong>256</strong> verschiedene Muster bilden, der <strong>größte darstellbare Wert</strong> ist aber nur <strong>255</strong>.</p>
+<p>Allgemein für ein Stellenwertsystem mit der Basis b: Mit n Stellen lassen sich b<sup>n</sup> Werte darstellen, der größte ist b<sup>n</sup> &minus; 1. Im Dezimalsystem mit 3 Stellen also 10&sup3; = 1000 Werte von 0 bis 999.</p>
+</details>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

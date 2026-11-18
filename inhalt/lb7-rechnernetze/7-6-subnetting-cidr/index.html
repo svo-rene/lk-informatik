@@ -139,22 +139,13 @@ Hostbits = 1 192.168.10. 95   →  ...00001010.010 11111   = Broadcast-Adresse</
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Subnetz</strong> – logisch abgegrenzter Teil eines IP-Netzes, in dem alle Hosts denselben Netzanteil haben. Subnetze verbessern Übersicht, Leistung (weniger Broadcasts) und Sicherheit, indem sie große Netze in kleinere Segmente aufteilen.</p>
-        </div>
+<p><strong>Subnetz:</strong> Teil eines IP-Netzes, in dem alle Hosts denselben Netzanteil haben. Subnetze verbessern Übersicht, Leistung (weniger Broadcasts) und Sicherheit.</p>
+<p><strong>Präfixlänge:</strong> gibt in der CIDR-Schreibweise an, wie viele Bits zum Netzanteil gehören, z.&nbsp;B. /24 = 24&nbsp;Bit Netzanteil, 8&nbsp;Bit Hostanteil.</p>
+<p><strong>Netzadresse:</strong> IP-Adresse AND Subnetzmaske. Die erste Adresse eines Subnetzes ist die Netzadresse, die letzte die Broadcast-Adresse; beide sind für Hosts nicht nutzbar.</p>
+<p><strong>Anzahl der Hosts:</strong> Ein Subnetz mit Präfixlänge p hat 2<sup>32−p</sup> Adressen, davon 2<sup>32−p</sup> − 2 nutzbare Hostadressen.</p>
+<p><strong>VLSM:</strong> Aufteilung eines Adressblocks in Subnetze verschiedener Größe. Man vergibt vom größten zum kleinsten Subnetz und wählt jeweils den kleinsten Block, der Geräte, Gateway, Netz- und Broadcast-Adresse aufnimmt.</p>
+</div>
 
-<div class="merke">
-            <p>
-                <strong>Netzadresse = IP-Adresse AND Subnetzmaske.</strong> Die erste Adresse eines Subnetzes ist die Netzadresse, die letzte die Broadcast-Adresse; beide sind nicht für Hosts nutzbar. Ein Subnetz mit Präfixlänge p hat 2<sup>32−p</sup> Adressen und 2<sup>32−p</sup> − 2 nutzbare Hostadressen.
-            </p>
-        </div>
-
-<div class="merke">
-            <p><strong>Präfixlänge</strong> – gibt in der CIDR-Schreibweise an, wie viele Bits der Adresse zum Netzpräfix gehören, und legt damit die Größe des Netzes fest (z.&nbsp;B. /24 = 24 Bit Netzanteil, 8 Bit Hostanteil).</p>
-        </div>
-
-<div class="merke">
-            <p><strong>VLSM</strong> – Aufteilung eines Adressblocks in Subnetze verschiedener Größe. Man vergibt vom größten zum kleinsten Subnetz und wählt jeweils die kleinste Blockgröße, die Geräte, Gateway, Netz- und Broadcast-Adresse aufnimmt.</p>
-        </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

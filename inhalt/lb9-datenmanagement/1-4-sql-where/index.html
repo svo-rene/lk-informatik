@@ -315,35 +315,11 @@ WHERE Kategorie = (SELECT Kategorie FROM Produkte WHERE Produktname = 'Laptop');
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                Die grundlegende Syntax einer WHERE-Anweisung lautet:<br>
-                SELECT spalte1, spalte2, ...<br>
-                    FROM tabelle <br>
-                    WHERE bedingung;
-            </p>
-        </div>
-
-<div class="merke">
-            <p>
-              Der Unterschied in einem Satz: <code>_</code> steht für <strong>genau ein</strong> Zeichen,
-              <code>%</code> für <strong>beliebig viele</strong> – auch null.
-            </p>
-            <p>
-              Häufiger Fehler: <code>WHERE Nachname = 'M%'</code>. Mit <code>=</code> sind
-              <code>%</code> und <code>_</code> ganz normale Zeichen, die Abfrage sucht dann wörtlich nach
-              dem Nachnamen „M%“ und liefert nichts. Platzhalter wirken nur zusammen mit <code>LIKE</code>.
-            </p>
-        </div>
-
-<div class="merke">
-                    <p>
-                        Die Subquery in Klammern wird zuerst ausgeführt. Ihr Ergebnis wird anschließend von der
-                        äußeren Abfrage für den Vergleich verwendet:<br>
-                        SELECT spalte1, ...<br>
-                        FROM tabelle<br>
-                        WHERE spalte = (SELECT spalte FROM tabelle WHERE bedingung);
-                    </p>
-                </div>
+<p><strong>WHERE:</strong> <code>SELECT spalte1, spalte2 FROM tabelle WHERE bedingung;</code> gibt nur die Zeilen aus, die die Bedingung erfüllen.</p>
+<p><strong>AND und OR:</strong> Bei <code>AND</code> müssen alle Bedingungen erfüllt sein, bei <code>OR</code> mindestens eine.</p>
+<p><strong>LIKE:</strong> sucht nach Textmustern. <code>_</code> steht für genau ein Zeichen, <code>%</code> für beliebig viele, auch null. Die Platzhalter wirken nur mit <code>LIKE</code>, nicht mit <code>=</code>.</p>
+<p><strong>Subquery:</strong> Eine Abfrage in Klammern innerhalb der WHERE-Klausel wird zuerst ausgeführt; die äußere Abfrage vergleicht mit ihrem Ergebnis, z.&nbsp;B. <code>WHERE spalte = (SELECT …)</code>.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

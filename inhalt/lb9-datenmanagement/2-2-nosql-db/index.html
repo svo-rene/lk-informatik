@@ -465,55 +465,57 @@ db.nutzer.find({ _id: { $in: [2, 5] }, stadt: "Dresden" })  &rarr;  { "_id": 5, 
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Der entscheidende Unterschied zum relationalen Modell:</strong></p>
-            <ul>
-                <li>Anna hat ein Feld <code>hobbys</code> mit <em>mehreren</em> Werten. Relational wäre das
-                    ein Verstoß gegen die 1. Normalform und müsste in eine eigene Tabelle ausgelagert
-                    werden.</li>
-                <li>Ben hat ein Feld <code>firma</code>, das selbst wieder ein Objekt ist – ein Dokument im
-                    Dokument. Relational bräuchte man dafür eine zweite Tabelle mit Fremdschlüssel.</li>
-                <li>Anna hat kein Feld <code>firma</code>, und das ist kein Fehler. Es gibt kein festes
-                    Schema, das alle Dokumente einhalten müssten.</li>
-            </ul>
-            <p>
-                Der Preis dieser Freiheit: Die Datenbank prüft nicht mehr, ob die Struktur stimmt. Tippt
-                jemand <code>Stadt</code> statt <code>stadt</code>, wird das Dokument einfach gespeichert –
-                und bei der Suche nach Dresden nicht gefunden.
-            </p>
-        </div>
+<p><strong>Dokumentenorientierte Datenbank:</strong> speichert Dokumente ohne festes Schema. Felder dürfen mehrere Werte oder verschachtelte Objekte enthalten; dafür prüft die Datenbank die Struktur nicht mehr.</p>
+<p><strong>Key-Value-Datenbank:</strong> greift nur über den Schlüssel zu und ist dadurch sehr schnell. Nach dem Inhalt der Werte kann sie nicht suchen.</p>
+<p><strong>Graph-Datenbank:</strong> folgt bei Abfragen direkt den gespeicherten Kanten. Sie eignet sich für stark vernetzte Daten, z.&nbsp;B. Freundschaftsvorschläge; relational wären dafür viele JOINs nötig.</p>
+<p><strong>Objektorientierte Datenbank:</strong> speichert Objekte so, wie sie im Programm existieren, ohne Zerlegen in Tabellenzeilen. Dafür sind die Daten eng an eine Programmiersprache gebunden.</p>
+<p><strong>Einordnung im CAP-Theorem:</strong> hängt vom konkreten System ab. Key-Value-Stores setzen meist auf Verfügbarkeit (AP), Graph-Datenbanken eher auf Konsistenz (CP).</p>
+</div>
 
-<div class="merke">
-            <p>
-                Ein Key-Value Store kennt nur <em>einen</em> Zugriffsweg: über den Schlüssel. Das macht ihn
-                extrem schnell – die Datenbank muss nichts durchsuchen, sie greift direkt zu. Dafür kann er
-                aber auch nur das: Eine Frage wie „alle Nutzer aus Dresden“ ist nicht möglich, weil der
-                Wert für die Datenbank nur ein undurchsichtiger Klumpen ist. Deshalb steckt in der Struktur
-                der Schlüssel die ganze Logik – <code>nutzer:1:punkte</code> ist bewusst so aufgebaut.
-            </p>
-        </div>
-
-<div class="merke">
-            <p>
-                <strong>Warum nicht einfach relational?</strong> Relational lägen die Daten in den Tabellen
-                Person, Kennt, Mitgliedschaft und Gruppe. Dieselbe Frage bräuchte dann vier JOINs. Jede weitere
-                Stufe „Freunde von Freunden“ bringt zwei JOINs dazu (noch einmal Kennt und noch einmal Person),
-                und die Abfrage wird mit jeder Stufe deutlich aufwendiger. Eine Graph-Datenbank
-                folgt dagegen einfach den gespeicherten Kanten – die Tiefe der Suche kostet sie kaum etwas.
-                Deshalb stecken Graph-Datenbanken hinter Freundschaftsvorschlägen, Empfehlungssystemen und
-                der Betrugserkennung bei Banken.
-            </p>
-        </div>
-
-<div class="merke">
-            <p>
-                Relational müsste man das Objekt beim Speichern erst in Tabellenzeilen zerlegen und beim
-                Laden wieder zusammensetzen – dieser Übersetzungsaufwand heißt
-                <em>Object-Relational Impedance Mismatch</em>. Eine objektorientierte Datenbank spart ihn,
-                weil sie das Objekt so ablegt, wie es im Programm existiert. Der Nachteil: Die Daten sind
-                dadurch eng an eine bestimmte Programmiersprache gebunden, und andere Programme kommen
-                schlechter an sie heran.
-            </p>
-        </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Die Datenbankmodelle im Vergleich mit dem relationalen Modell</summary>
+<p><strong>Der entscheidende Unterschied zum relationalen Modell:</strong></p>
+<ul>
+    <li>Anna hat ein Feld <code>hobbys</code> mit <em>mehreren</em> Werten. Relational wäre das
+        ein Verstoß gegen die 1. Normalform und müsste in eine eigene Tabelle ausgelagert
+        werden.</li>
+    <li>Ben hat ein Feld <code>firma</code>, das selbst wieder ein Objekt ist – ein Dokument im
+        Dokument. Relational bräuchte man dafür eine zweite Tabelle mit Fremdschlüssel.</li>
+    <li>Anna hat kein Feld <code>firma</code>, und das ist kein Fehler. Es gibt kein festes
+        Schema, das alle Dokumente einhalten müssten.</li>
+</ul>
+<p>
+    Der Preis dieser Freiheit: Die Datenbank prüft nicht mehr, ob die Struktur stimmt. Tippt
+    jemand <code>Stadt</code> statt <code>stadt</code>, wird das Dokument einfach gespeichert –
+    und bei der Suche nach Dresden nicht gefunden.
+</p>
+<p>
+    Ein Key-Value Store kennt nur <em>einen</em> Zugriffsweg: über den Schlüssel. Das macht ihn
+    extrem schnell – die Datenbank muss nichts durchsuchen, sie greift direkt zu. Dafür kann er
+    aber auch nur das: Eine Frage wie „alle Nutzer aus Dresden“ ist nicht möglich, weil der
+    Wert für die Datenbank nur ein undurchsichtiger Klumpen ist. Deshalb steckt in der Struktur
+    der Schlüssel die ganze Logik – <code>nutzer:1:punkte</code> ist bewusst so aufgebaut.
+</p>
+<p>
+    <strong>Warum nicht einfach relational?</strong> Relational lägen die Daten in den Tabellen
+    Person, Kennt, Mitgliedschaft und Gruppe. Dieselbe Frage bräuchte dann vier JOINs. Jede weitere
+    Stufe „Freunde von Freunden“ bringt zwei JOINs dazu (noch einmal Kennt und noch einmal Person),
+    und die Abfrage wird mit jeder Stufe deutlich aufwendiger. Eine Graph-Datenbank
+    folgt dagegen einfach den gespeicherten Kanten – die Tiefe der Suche kostet sie kaum etwas.
+    Deshalb stecken Graph-Datenbanken hinter Freundschaftsvorschlägen, Empfehlungssystemen und
+    der Betrugserkennung bei Banken.
+</p>
+<p>
+    Relational müsste man das Objekt beim Speichern erst in Tabellenzeilen zerlegen und beim
+    Laden wieder zusammensetzen – dieser Übersetzungsaufwand heißt
+    <em>Object-Relational Impedance Mismatch</em>. Eine objektorientierte Datenbank spart ihn,
+    weil sie das Objekt so ablegt, wie es im Programm existiert. Der Nachteil: Die Daten sind
+    dadurch eng an eine bestimmte Programmiersprache gebunden, und andere Programme kommen
+    schlechter an sie heran.
+</p>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

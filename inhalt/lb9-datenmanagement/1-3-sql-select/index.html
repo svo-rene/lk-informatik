@@ -315,24 +315,10 @@ ORDER BY Geburtsdatum DESC;</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-<p>Die grundlegende Syntax einer SELECT-Anweisung lautet:<br>SELECT Spaltenname(n) <br>FROM Tabellenname;</p>
-</div>
-
-<div class="merke">
-<p><strong>So arbeitet die Datenbank eine Abfrage ab</strong> &ndash; nicht in der Reihenfolge, in der sie
-   geschrieben ist:</p>
-<ol>
-<li><code>FROM</code>: Aus welcher Tabelle kommen die Daten? &rarr; alle 5 Zeilen liegen bereit</li>
-<li><code>WHERE</code>: Welche Zeilen bleiben &uuml;brig? (siehe Seite 1.4)</li>
-<li><code>SELECT</code>: Welche Spalten werden ausgegeben, und wie hei&szlig;en sie?</li>
-<li><code>ORDER BY</code>: In welcher Reihenfolge werden die Zeilen ausgegeben?</li>
-</ol>
-<p>Wenn du eine Abfrage selbst schreibst, gehe in genau dieser Reihenfolge vor. Dann hast du bei jedem
-   Schritt schon alles, was du f&uuml;r den n&auml;chsten brauchst.</p>
-</div>
-
-<div class="merke">
-<p>AS wird verwendet, um:<br>1. Spalten umzubenennen<br>2. Berechneten Spalten einen Namen zu geben<br>3. Tabellen einen Kurznamen zu geben</p>
+<p><strong>SELECT … FROM:</strong> <code>SELECT Spalte1, Spalte2 FROM Tabelle;</code> gibt die genannten Spalten einer Tabelle aus, <code>*</code> alle Spalten.</p>
+<p><strong>AS:</strong> gibt Spalten, berechneten Spalten oder Tabellen einen anderen Namen (Alias).</p>
+<p><strong>ORDER BY:</strong> sortiert das Ergebnis nach einer oder mehreren Spalten, aufsteigend (<code>ASC</code>, Standard) oder absteigend (<code>DESC</code>).</p>
+<p><strong>Abarbeitungsreihenfolge:</strong> Die Datenbank arbeitet eine Abfrage in der Reihenfolge <code>FROM</code> → <code>WHERE</code> → <code>SELECT</code> → <code>ORDER BY</code> ab, nicht in der Schreibreihenfolge. In dieser Reihenfolge baut man auch eigene Abfragen auf.</p>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

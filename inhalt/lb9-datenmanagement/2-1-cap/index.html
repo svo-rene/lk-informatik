@@ -160,39 +160,25 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Consistency (Konsistenz):</strong> Jede Leseanfrage liefert den zuletzt geschriebenen Wert – egal, welcher Knoten antwortet. Alle Knoten zeigen also denselben Datenstand.<br>
-                <strong>Availability (Verfügbarkeit):</strong> Jede Anfrage an einen funktionierenden Knoten bekommt eine Antwort (keine Fehlermeldung, kein endloses Warten).<br>
-                <strong>Partition Tolerance (Partitionstoleranz):</strong> Das System arbeitet weiter, auch wenn Nachrichten zwischen Knoten verloren gehen oder das Netz in Teile zerfällt.
-            </p>
-            <p>
-                In einem verteilten System lassen sich Netzwerkstörungen nicht ausschließen, P ist dort also Pflicht.
-                Die eigentliche Wahl lautet deshalb: <strong>Im Fall einer Partition entweder Konsistenz (CP) oder
-                Verfügbarkeit (AP).</strong> Solange das Netz funktioniert, kann ein System durchaus C und A zugleich bieten.
-            </p>
-        </div>
+<p><strong>Konsistenz (Consistency):</strong> Jede Leseanfrage liefert den zuletzt geschriebenen Wert, egal welcher Knoten antwortet.</p>
+<p><strong>Verfügbarkeit (Availability):</strong> Jede Anfrage an einen funktionierenden Knoten bekommt eine Antwort.</p>
+<p><strong>Partitionstoleranz (Partition Tolerance):</strong> Das System arbeitet weiter, auch wenn Nachrichten zwischen den Knoten verloren gehen.</p>
+<p><strong>CAP-Theorem:</strong> In verteilten Systemen lassen sich Netzwerkstörungen nicht ausschließen. Bei einer Störung muss das System deshalb zwischen Konsistenz (CP) und Verfügbarkeit (AP) wählen.</p>
+<p><strong>ACID:</strong> Eine Transaktion läuft atomar (ganz oder gar nicht), konsistent, isoliert von anderen und dauerhaft ab.</p>
+<p><strong>Zweimal „C“:</strong> ACID-Konsistenz heißt, eine Transaktion hält alle Regeln der Datenbank ein. CAP-Konsistenz heißt, alle Kopien auf verschiedenen Knoten zeigen denselben aktuellen Wert.</p>
+</div>
 
-<div class="merke">
-            <p>
-                <strong>Achtung, zweimal „C“:</strong> Das C in <strong>ACID</strong> und das C in <strong>CAP</strong>
-                bedeuten Verschiedenes. <em>ACID-Konsistenz</em> heißt: Eine Transaktion hält alle Regeln der Datenbank ein
-                (Primärschlüssel, Fremdschlüssel, CHECK- und NOT-NULL-Bedingungen) – das gilt auch für eine einzelne
-                Datenbank auf einem Server. <em>CAP-Konsistenz</em> heißt: Alle Kopien auf verschiedenen Knoten zeigen
-                denselben, aktuellen Wert – das ist nur bei verteilten Systemen ein Thema.
-            </p>
-        </div>
-
-<div class="merke">
-            <p>
-                <strong>ACID</strong> ist ein Prinzip, das sicherstellt, dass Datenbanktransaktionen zuverlässig und sicher ablaufen. Die vier Buchstaben stehen für die folgenden Eigenschaften:
-            </p>
-            <ul>
-                <li><strong>A – Atomicity (Atomarität):</strong> Eine Transaktion wird entweder vollständig ausgeführt oder gar nicht. Es gibt keinen Zwischenzustand. Wenn ein Fehler auftritt, werden alle Änderungen zurückgenommen (Rollback).</li>
-                <li><strong>C – Consistency (Konsistenz):</strong> Eine Transaktion bringt die Datenbank von einem regelkonformen Zustand in einen anderen. Alle definierten Regeln und Einschränkungen (Constraints) werden eingehalten.</li>
-                <li><strong>I – Isolation (Isolation):</strong> Mehrere Transaktionen, die gleichzeitig ausgeführt werden, beeinflussen sich nicht gegenseitig. Jede Transaktion läuft so ab, als wäre sie die einzige, die auf die Datenbank zugreift.</li>
-                <li><strong>D – Durability (Dauerhaftigkeit):</strong> Sobald eine Transaktion abgeschlossen ist, bleiben ihre Änderungen auch im Falle eines Systemausfalls dauerhaft bestehen.</li>
-            </ul>
-        </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: ACID im Einzelnen</summary>
+<ul>
+    <li><strong>A – Atomicity (Atomarität):</strong> Eine Transaktion wird entweder vollständig ausgeführt oder gar nicht. Es gibt keinen Zwischenzustand. Wenn ein Fehler auftritt, werden alle Änderungen zurückgenommen (Rollback).</li>
+    <li><strong>C – Consistency (Konsistenz):</strong> Eine Transaktion bringt die Datenbank von einem regelkonformen Zustand in einen anderen. Alle definierten Regeln und Einschränkungen (Constraints) werden eingehalten, z.&nbsp;B. Primärschlüssel, Fremdschlüssel, CHECK- und NOT-NULL-Bedingungen – das gilt auch für eine einzelne Datenbank auf einem Server.</li>
+    <li><strong>I – Isolation (Isolation):</strong> Mehrere Transaktionen, die gleichzeitig ausgeführt werden, beeinflussen sich nicht gegenseitig. Jede Transaktion läuft so ab, als wäre sie die einzige, die auf die Datenbank zugreift.</li>
+    <li><strong>D – Durability (Dauerhaftigkeit):</strong> Sobald eine Transaktion abgeschlossen ist, bleiben ihre Änderungen auch im Falle eines Systemausfalls dauerhaft bestehen.</li>
+</ul>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

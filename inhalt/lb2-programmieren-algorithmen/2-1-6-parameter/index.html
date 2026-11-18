@@ -118,20 +118,12 @@ print(z)                      # [1, 7]</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Werteparameter</strong> erhalten eine Kopie des übergebenen Werts. Änderungen am Parameter innerhalb des Unterprogramms wirken sich nicht auf die Variable des Aufrufers aus.</p>
-        </div>
-
-<div class="merke">
-            <p><strong>Referenzparameter</strong> erhalten einen Verweis auf die Variable des Aufrufers. Jede Änderung am Parameter – auch eine neue Zuweisung – verändert die Variable des Aufrufers.</p>
-        </div>
-
-<div class="merke">
-            <p>
-                Python übergibt an den Parameter immer eine <strong>Referenz auf das Objekt</strong>, kopiert wird dabei nichts. Man nennt das <strong>call by sharing</strong> (auch „call by object reference“). Daraus folgt:<br>
-                1. Wird dem Parameter ein <strong>neuer Wert zugewiesen</strong> (<code>zahl = zahl * 2</code>), zeigt nur der Parameter auf ein neues Objekt. Die Variable des Aufrufers bleibt unverändert.<br>
-                2. Wird ein <strong>veränderbares Objekt</strong> (Liste, Dictionary, eigenes Objekt) über den Parameter <strong>verändert</strong> (<code>liste.append(42)</code>), sieht der Aufrufer die Änderung, denn beide Namen zeigen auf dasselbe Objekt.
-            </p>
-        </div>
+<p><strong>Werteparameter:</strong> erhält eine Kopie des übergebenen Werts. Änderungen im Unterprogramm wirken sich nicht auf die Variable des Aufrufers aus.</p>
+<p><strong>Referenzparameter:</strong> erhält einen Verweis auf die Variable des Aufrufers. Jede Änderung am Parameter – auch eine neue Zuweisung – verändert die Variable des Aufrufers.</p>
+<p><strong>Python (call by sharing):</strong> Der Parameter erhält immer eine Referenz auf das Objekt, kopiert wird nichts.</p>
+<p><strong>Neue Zuweisung in Python:</strong> Nach <code>zahl = zahl * 2</code> zeigt nur der Parameter auf ein neues Objekt. Die Variable des Aufrufers bleibt unverändert.</p>
+<p><strong>Veränderbare Objekte in Python:</strong> Wird eine Liste, ein Dictionary oder ein eigenes Objekt über den Parameter verändert (<code>liste.append(42)</code>), sieht der Aufrufer die Änderung, denn beide Namen zeigen auf dasselbe Objekt.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

@@ -194,19 +194,12 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Merke:</strong> Bei einem DEA gibt es für jede Eingabe in jedem Zustand genau einen Folgezustand. Jedes Wort hat daher genau einen Berechnungsweg.</p>
-        </div>
-
-<div class="merke">
-            <p><strong>Merke: Akzeptanz beim NEA</strong><br>
-            Ein NEA <strong>akzeptiert</strong> ein Wort w, wenn es <strong>mindestens einen</strong> Berechnungsweg gibt, der w vollständig liest und in einem Endzustand endet.<br>
-            Er <strong>verwirft</strong> w, wenn <em>alle</em> möglichen Wege entweder steckenbleiben (kein Übergang vorhanden) oder nach dem letzten Zeichen in einem Nicht-Endzustand enden.<br>
-            Praktisch prüft man das, indem man Zeichen für Zeichen die <em>Menge</em> aller erreichbaren Zustände mitführt: w wird akzeptiert, wenn diese Menge am Ende einen Endzustand enthält.</p>
-        </div>
-
-<div class="merke">
-            <p><strong>Merke:</strong> Die <strong>ε-Hülle</strong> eines Zustands q ist die Menge aller Zustände, die von q aus allein über ε-Übergänge erreichbar sind (q selbst eingeschlossen). Beim Prüfen eines Wortes bildet man nach jedem Schritt – und schon vor dem ersten Zeichen – die ε-Hülle der erreichten Zustände. ε-NEA, NEA und DEA erkennen genau dieselbe Sprachklasse: die regulären Sprachen.</p>
-        </div>
+<p><strong>DEA:</strong> Für jede Eingabe gibt es in jedem Zustand genau einen Folgezustand. Jedes Wort hat daher genau einen Berechnungsweg.</p>
+<p><strong>NEA:</strong> Er akzeptiert ein Wort, wenn es mindestens einen Berechnungsweg gibt, der das Wort vollständig liest und in einem Endzustand endet. Er verwirft es, wenn alle Wege steckenbleiben oder in einem Nicht-Endzustand enden.</p>
+<p><strong>Prüfen beim NEA:</strong> Man führt Zeichen für Zeichen die Menge aller erreichbaren Zustände mit. Enthält sie am Ende einen Endzustand, wird das Wort akzeptiert.</p>
+<p><strong>ε-Hülle:</strong> Alle Zustände, die von einem Zustand aus allein über ε-Übergänge erreichbar sind, er selbst eingeschlossen. Man bildet sie vor dem ersten Zeichen und nach jedem Schritt.</p>
+<p><strong>Gleiche Stärke:</strong> ε-NEA, NEA und DEA erkennen genau dieselbe Sprachklasse: die regulären Sprachen.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

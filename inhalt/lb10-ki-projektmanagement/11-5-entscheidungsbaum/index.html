@@ -290,16 +290,18 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Entscheidungsbaum</strong> – Modell, das eine Entscheidung als Folge von Tests auf Merkmalen darstellt; von der Wurzel führt jeder Pfad über die Testergebnisse zu einem Blatt mit der Vorhersage. Entscheidungsbäume können manuell durch Expertenwissen erstellt werden (wissensbasierter Ansatz) oder von Algorithmen automatisch aus Daten erzeugt werden (datenbasierter Ansatz).</p>
-        </div>
+<p><strong>Entscheidungsbaum:</strong> stellt eine Entscheidung als Folge von Tests auf Merkmalen dar. Von der Wurzel führt jeder Pfad über die Testergebnisse zu einem Blatt mit der Vorhersage.</p>
+<p><strong>Wissens- oder datenbasiert:</strong> Ein Entscheidungsbaum kann von Experten von Hand erstellt oder von einem Algorithmus automatisch aus Daten erzeugt werden.</p>
+<p><strong>Aufbau aus Daten:</strong> Der Algorithmus wählt als nächsten Knoten immer das Attribut mit dem höchsten Informationsgewinn, also der geringsten Gesamtentropie.</p>
+<p><strong>Gini-Index:</strong> Maß für die Unreinheit eines Knotens; 0 bedeutet, dass der Knoten nur eine Klasse enthält. Gewählt wird die Aufteilung mit der kleinsten gewichteten Gini-Unreinheit.</p>
+</div>
 
-<div class="merke">
-            <p>Der Algorithmus wählt immer das Attribut mit der geringsten Gesamtentropie bzw. dem höchsten Informationsgewinn als nächsten Entscheidungsknoten.</p>
-        </div>
-
-<div class="merke">
-            <p><strong>Gini-Index</strong> – Maß für die Unreinheit eines Knotens: die Wahrscheinlichkeit, dass zwei zufällig (mit Zurücklegen) gezogene Datensätze des Knotens zu verschiedenen Klassen gehören. G = 0 bedeutet ein reiner Knoten (nur eine Klasse); bei zwei Klassen ist G höchstens 0,5 (je 50&nbsp;%). Gewählt wird die Aufteilung mit der kleinsten gewichteten Gini-Unreinheit.</p>
-        </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Gini-Index genau</summary>
+<p><strong>Gini-Index</strong> – Maß für die Unreinheit eines Knotens: die Wahrscheinlichkeit, dass zwei zufällig (mit Zurücklegen) gezogene Datensätze des Knotens zu verschiedenen Klassen gehören. G = 0 bedeutet ein reiner Knoten (nur eine Klasse); bei zwei Klassen ist G höchstens 0,5 (je 50&nbsp;%). Gewählt wird die Aufteilung mit der kleinsten gewichteten Gini-Unreinheit.</p>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

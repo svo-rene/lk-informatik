@@ -294,24 +294,12 @@ print(b.in_order())                    # [1, 3, 6, 8, 10, 14]</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                Ein <strong>Binärbaum</strong> ist ein Baum, in dem jeder Knoten <strong>höchstens zwei Kinder</strong> hat, die als linkes und rechtes Kind unterschieden werden. Der oberste Knoten, von dem aus alle anderen Knoten erreichbar sind, heißt Wurzel.
-            </p>
-        </div>
-
-<div class="merke">
-            <p>
-                Ein <strong>binärer Suchbaum</strong> (BST, binary search tree) ist ein Binärbaum, bei dem für <strong>jeden</strong> Knoten gilt:<br>
-                – Alle Werte im <strong>gesamten linken Teilbaum</strong> sind kleiner als der Wert des Knotens.<br>
-                – Alle Werte im <strong>gesamten rechten Teilbaum</strong> sind größer als der Wert des Knotens.<br>
-                Daraus folgt: Der <strong>kleinste Wert</strong> steht im Knoten ganz links (von der Wurzel aus immer nach links gehen), der <strong>größte Wert</strong> ganz rechts. Eine In-Order-Traversierung (links – Knoten – rechts) gibt alle Werte aufsteigend sortiert aus.
-            </p>
-        </div>
-
-<div class="merke">
-            <p><strong>Rekursive Methoden in der Verwaltungsklasse:</strong> Eine rekursive Methode von <code>Suchbaum</code> bekommt den Knoten als <strong>letzten Parameter mit dem Standardwert <code>None</code></strong>, z.&nbsp;B. <code>def einfuegen(self, wert, knoten=None)</code>. Von außen ruft man sie ohne Knoten auf – dann startet sie an der <code>__wurzel</code>. In sich selbst ruft sie sich mit einem Kind auf.</p>
-            <p><strong>Achtung:</strong> <code>None</code> bedeutet dann „von außen aufgerufen“. Deshalb steigt die Methode nur in Kinder ab, die <strong>nicht</strong> <code>None</code> sind. Ein Aufruf mit einem fehlenden Kind würde wieder an der Wurzel beginnen und nie enden (<code>RecursionError</code>).</p>
-        </div>
+<p><strong>Binärbaum:</strong> Ein Baum, in dem jeder Knoten höchstens zwei Kinder hat: ein linkes und ein rechtes.</p>
+<p><strong>Binärer Suchbaum:</strong> Für jeden Knoten gilt: Alle Werte im gesamten linken Teilbaum sind kleiner, alle Werte im gesamten rechten Teilbaum größer als sein Wert.</p>
+<p><strong>Folgerungen:</strong> Der kleinste Wert steht ganz links, der größte ganz rechts. Die In-Order-Traversierung (links – Knoten – rechts) gibt alle Werte aufsteigend sortiert aus.</p>
+<p><strong>Aufwand:</strong> Ist der Baum ausgeglichen, liegen Suchen und Einfügen in O(log n); entartet er zu einer Kette, in O(n).</p>
+<p><strong>Rekursive Methode in der Verwaltungsklasse:</strong> Der Knoten ist der letzte Parameter mit Standardwert <code>None</code>, z.&nbsp;B. <code>def einfuegen(self, wert, knoten=None)</code>. Ohne Knoten aufgerufen beginnt sie an der <code>__wurzel</code>; deshalb steigt sie nur in Kinder ab, die nicht <code>None</code> sind.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

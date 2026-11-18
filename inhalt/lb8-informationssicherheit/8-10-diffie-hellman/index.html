@@ -55,21 +55,27 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>Ablauf des Diffie-Hellman-Verfahrens</strong></p>
-            <ol>
-                <li>Öffentlich: eine große Primzahl p und eine Basis g (ein Erzeuger modulo p).</li>
-                <li>Alice wählt geheim a und sendet A = g<sup>a</sup> mod p.</li>
-                <li>Bob wählt geheim b und sendet B = g<sup>b</sup> mod p.</li>
-                <li>Alice berechnet s = B<sup>a</sup> mod p, Bob berechnet s = A<sup>b</sup> mod p.</li>
-            </ol>
-            <p>Beide erhalten denselben Schlüssel, denn B<sup>a</sup> = (g<sup>b</sup>)<sup>a</sup> = g<sup>ab</sup> = (g<sup>a</sup>)<sup>b</sup> = A<sup>b</sup> (mod p). Ein Lauscher kennt p, g, A und B, müsste aber a aus A = g<sup>a</sup> mod p bestimmen. Dieses Problem des <strong>diskreten Logarithmus</strong> ist für große p praktisch unlösbar.</p>
-        </div>
+<p><strong>Diffie-Hellman:</strong> Zwei Partner vereinbaren über einen unsicheren Kanal einen gemeinsamen geheimen Schlüssel, ohne den Schlüssel selbst zu übertragen.</p>
+<p><strong>Idee:</strong> Öffentlich sind eine große Primzahl p und eine Basis g. Jeder wählt eine geheime Zahl, schickt dem anderen einen daraus berechneten Wert (A bzw. B) und berechnet mit seiner eigenen geheimen Zahl denselben Schlüssel.</p>
+<p><strong>Sicherheit:</strong> Ein Lauscher kennt p, g, A und B, müsste aber eine geheime Zahl aus A oder B zurückrechnen. Dieses Problem (diskreter Logarithmus) ist für große p praktisch unlösbar.</p>
+<p><strong>Man-in-the-Middle:</strong> Diffie-Hellman schützt nur gegen passive Lauscher. Ohne Authentifizierung kann sich ein Angreifer dazwischenschalten; deshalb müssen A und B authentisch sein, z.&nbsp;B. durch eine Signatur des Servers in TLS.</p>
+</div>
 
-<div class="merke">
-            <p>
-                <strong>Diffie-Hellman schützt nur gegen passive Lauscher.</strong> Ohne Authentifizierung ist das Verfahren anfällig für einen <strong>Man-in-the-Middle-Angriff</strong>. Deshalb müssen die Werte A und B authentisch sein: In TLS signiert der Server seinen DH-Wert mit dem privaten Schlüssel seines Zertifikats (8.13); bei Signal und WhatsApp können Nutzer die Sicherheitsnummern vergleichen.
-            </p>
-        </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Diffie-Hellman mit Formeln</summary>
+<p><strong>Ablauf des Diffie-Hellman-Verfahrens</strong></p>
+<ol>
+<li>Öffentlich: eine große Primzahl p und eine Basis g (ein Erzeuger modulo p).</li>
+<li>Alice wählt geheim a und sendet A = g<sup>a</sup> mod p.</li>
+<li>Bob wählt geheim b und sendet B = g<sup>b</sup> mod p.</li>
+<li>Alice berechnet s = B<sup>a</sup> mod p, Bob berechnet s = A<sup>b</sup> mod p.</li>
+</ol>
+<p>Beide erhalten denselben Schlüssel, denn B<sup>a</sup> = (g<sup>b</sup>)<sup>a</sup> = g<sup>ab</sup> = (g<sup>a</sup>)<sup>b</sup> = A<sup>b</sup> (mod p). Ein Lauscher müsste a aus A = g<sup>a</sup> mod p bestimmen (diskreter Logarithmus).</p>
+<p>In TLS signiert der Server seinen DH-Wert mit dem privaten Schlüssel seines Zertifikats (8.13); bei Signal und WhatsApp können Nutzer die Sicherheitsnummern vergleichen.</p>
+</details>
+</div>
+
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

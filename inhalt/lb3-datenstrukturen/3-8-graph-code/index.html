@@ -312,10 +312,11 @@ print(kuerzester_weg(g, 0, 4))   # [0, 1, 4]</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                Eine <strong>Adjazenzliste</strong> speichert zu jedem Knoten die Liste seiner Nachbarn. Sie braucht Speicher proportional zu Knoten + Kanten und eignet sich besonders für dünn besetzte Graphen. Die <strong>Breitensuche (BFS)</strong> besucht die Knoten mithilfe einer Schlange Ebene für Ebene; in ungewichteten Graphen findet sie dadurch die Wege mit den wenigsten Kanten. Mit einer Schlange, die vorn in O(1) entnimmt (Queue aus 3.2), ist ihre Laufzeit O(Knoten + Kanten).
-            </p>
-        </div>
+<p><strong>Adjazenzliste:</strong> Speichert zu jedem Knoten die Liste seiner Nachbarn. Sie braucht Speicher proportional zu Knoten + Kanten und eignet sich besonders für dünn besetzte Graphen.</p>
+<p><strong>Adjazenzmatrix:</strong> Braucht n² Einträge, unabhängig von der Zahl der Kanten.</p>
+<p><strong>Breitensuche (BFS):</strong> Besucht die Knoten mithilfe einer Schlange Ebene für Ebene. In ungewichteten Graphen findet sie dadurch die Wege mit den wenigsten Kanten.</p>
+<p><strong>Laufzeit der Breitensuche:</strong> Mit einer Schlange, die vorn in O(1) entnimmt (Queue aus 3.2), O(Knoten + Kanten).</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

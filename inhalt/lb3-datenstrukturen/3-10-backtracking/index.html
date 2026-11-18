@@ -236,20 +236,17 @@ print(plan)
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Backtracking</strong> ist ein Verfahren zur systematischen Suche nach Lösungen kombinatorischer Probleme: Man trifft schrittweise Entscheidungen, springt zurück, sobald eine Entscheidung in eine Sackgasse führt, und erforscht die nächste Alternative, bis eine gültige Lösung gefunden oder ausgeschlossen ist. Backtracking ist eine Tiefensuche im Baum aller möglichen Entscheidungen.
-            </p>
-        </div>
-
-<div class="merke">
-            <p><strong>Backtracking-Muster für Belegungsprobleme:</strong><br>
-            1. Wähle den nächsten freien Platz. Gibt es keinen mehr, ist eine Lösung gefunden.<br>
-            2. Probiere nacheinander alle Kandidaten für diesen Platz.<br>
-            3. Prüfe, ob der Kandidat die Regeln verletzt. Nur zulässige Kandidaten werden gesetzt.<br>
-            4. Löse den Rest rekursiv. Klappt das, ist man fertig.<br>
-            5. Klappt es nicht, nimm den Kandidaten wieder zurück und probiere den nächsten.<br>
-            6. Passt kein Kandidat, melde einen Misserfolg an die aufrufende Ebene zurück.</p>
-        </div>
+<p><strong>Backtracking:</strong> Systematische Suche nach Lösungen: Man trifft schrittweise Entscheidungen und springt zurück, sobald eine Entscheidung in eine Sackgasse führt. Dann probiert man die nächste Möglichkeit, bis eine Lösung gefunden oder ausgeschlossen ist.</p>
+<p><strong>Suche im Entscheidungsbaum:</strong> Backtracking ist eine Tiefensuche im Baum aller möglichen Entscheidungen.</p>
+<p><strong>Muster für Belegungsprobleme (rekursiv):</strong></p>
+<ol>
+<li>Nächsten freien Platz wählen. Gibt es keinen mehr, ist eine Lösung gefunden.</li>
+<li>Alle Kandidaten für diesen Platz nacheinander probieren; nur Kandidaten setzen, die keine Regel verletzen.</li>
+<li>Den Rest rekursiv lösen. Klappt das, ist man fertig.</li>
+<li>Klappt es nicht, den Kandidaten zurücknehmen und den nächsten probieren.</li>
+<li>Passt kein Kandidat, einen Misserfolg an die aufrufende Ebene melden.</li>
+</ol>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

@@ -130,25 +130,19 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-    <p>
-        <strong>Zeichenkodierung</strong> bezeichnet die Methode, mit der Zeichen, Symbole oder Schriftzeichen in eine binäre Darstellung umgewandelt werden, damit Computer und digitale Systeme sie verarbeiten, übertragen oder speichern können.
-        Eine Zeichenkodierung legt eine feste Zuordnung zwischen den Zeichen und den zugehörigen binären Codes fest. Jedes Zeichen erhält einen eindeutigen Code, der es repräsentiert. Dieser Code kann als eine Folge von Bits oder Bytes dargestellt werden.
-    </p>
+<p><strong>Zeichenkodierung:</strong> legt eine feste Zuordnung zwischen Zeichen und binären Codes fest. Jedes Zeichen erhält einen eindeutigen Code, damit Computer Text speichern, verarbeiten und übertragen können.</p>
+<p><strong>ASCII und Unicode:</strong> ASCII nutzt 7 Bit und kann damit 128 Zeichen darstellen: englische Buchstaben, Ziffern, Satz- und Steuerzeichen. Unicode umfasst auch die Zeichen anderer Sprachen und Schriftsysteme und wird z.&nbsp;B. als UTF-8 gespeichert.</p>
+<p><strong>Ankerwerte in ASCII:</strong> <code>'A' = 65</code>, <code>'a' = 97</code>, <code>'0' = 48</code>, Leerzeichen = 32. Weil die Zeichen lückenlos aufeinanderfolgen, lassen sich die übrigen Buchstaben und Ziffern davon abzählen.</p>
+<p><strong>Bedeutung eines Bitmusters:</strong> Ein Bitmuster bekommt erst durch eine <strong>Vereinbarung</strong> eine Bedeutung, etwa durch den Datentyp, das Dateiformat oder die angegebene Zeichenkodierung. So wird die Zahl 7 als <code>0000 0111</code> gespeichert, das Zeichen „7“ als <code>0011 0111</code> (= 55).</p>
 </div>
 
-<div class="merke">
-    <p><strong>Vier Ankerwerte statt einer ganzen Tabelle</strong></p>
-    <p>Du musst die ASCII-Tabelle nicht auswendig können. Es genügen vier Werte, weil die Zeichen jeweils lückenlos aufeinanderfolgen:</p>
-    <p>
-        <code>'A' = 65</code> &nbsp;&middot;&nbsp; <code>'a' = 97</code> &nbsp;&middot;&nbsp; <code>'0' = 48</code> &nbsp;&middot;&nbsp; <code>Leerzeichen = 32</code>
-    </p>
-    <p>Beispiel: „H“ ist der 8. Großbuchstabe, also 65 + 7 = <strong>72</strong>. Und „i“ ist der 9. Kleinbuchstabe, also 97 + 8 = <strong>105</strong>.</p>
-    <p>Praktisch nebenbei: Der Abstand zwischen Groß- und Kleinbuchstaben beträgt immer genau <strong>32</strong> (65 → 97). Das ist 2<sup>5</sup> – Groß- und Kleinschreibung unterscheiden sich also in genau <strong>einem</strong> gekippten Bit.</p>
-</div>
-
-<div class="merke">
-    <p><strong>Bedeutung eines Bitmusters:</strong> Die Bedeutung eines Bitmusters entsteht erst durch die <strong>Vereinbarung</strong>, mit der es gelesen wird – durch den <strong>Datentyp</strong> der Variablen (etwa <code>int</code> gegenüber <code>char</code>), durch das Dateiformat oder durch eine mitgelieferte Angabe zur Zeichenkodierung. Ohne diese Zusatzinformation lässt sich ein Byte nicht interpretieren.</p>
-    <p>Besonders wichtig ist der Unterschied zwischen der <strong>Zahl 7</strong> und dem <strong>Schriftzeichen „7“</strong>: Die Zahl 7 wird als <code>0000 0111</code> gespeichert, das Zeichen „7“ dagegen als <code>0011 0111</code> (= 55). Deshalb muss ein Programm eine Benutzereingabe erst umwandeln, bevor es damit rechnen kann.</p>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Abzählen mit den Ankerwerten</summary>
+<p>„H“ ist der 8. Großbuchstabe, also 65 + 7 = <strong>72</strong>. Und „i“ ist der 9. Kleinbuchstabe, also 97 + 8 = <strong>105</strong>.</p>
+<p>Der Abstand zwischen Groß- und Kleinbuchstaben beträgt immer genau <strong>32</strong> (65 → 97). Das ist 2<sup>5</sup> – Groß- und Kleinschreibung unterscheiden sich also in genau <strong>einem</strong> gekippten Bit.</p>
+<p>Weil die Zahl 7 und das Zeichen „7“ verschieden gespeichert werden, muss ein Programm eine Benutzereingabe erst umwandeln, bevor es damit rechnen kann.</p>
+</details>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

@@ -247,12 +247,10 @@ print(float("inf") + 1 &gt; 1000000)</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Kantenrelaxation</strong> (Kante „entspannen“): Für eine Kante u → v mit Gewicht w wird geprüft, ob der Weg über u kürzer ist als der bisher bekannte: Ist dist[u] + w &lt; dist[v], setze dist[v] = dist[u] + w und merke u als Vorgänger von v.<br>
-                <strong>Moore-Bellman-Ford:</strong> relaxiert (n − 1)-mal alle Kanten. Er funktioniert auch mit negativen Kantengewichten, solange es keinen negativen Zyklus gibt. Laufzeit O(Knoten · Kanten).<br>
-                <strong>Dijkstra:</strong> wählt immer den noch nicht fertigen Knoten mit der kleinsten Distanz, legt diese endgültig fest und relaxiert seine ausgehenden Kanten. Er ist schneller, liefert aber <strong>nur bei nichtnegativen Kantengewichten</strong> garantiert korrekte Ergebnisse.
-            </p>
-        </div>
+<p><strong>Kantenrelaxation:</strong> Für eine Kante von u nach v prüft man, ob der Weg über u kürzer ist als der bisher bekannte Weg zu v. Wenn ja, übernimmt man die kürzere Distanz und merkt u als Vorgänger von v.</p>
+<p><strong>Moore-Bellman-Ford:</strong> Relaxiert (Anzahl der Knoten − 1)-mal alle Kanten. Er funktioniert auch mit negativen Kantengewichten, solange es keinen negativen Zyklus gibt; Laufzeit O(Knoten · Kanten).</p>
+<p><strong>Dijkstra:</strong> Wählt immer den noch nicht fertigen Knoten mit der kleinsten Distanz, legt diese endgültig fest und relaxiert seine ausgehenden Kanten. Er ist schneller, liefert aber nur bei nichtnegativen Kantengewichten garantiert korrekte Ergebnisse.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

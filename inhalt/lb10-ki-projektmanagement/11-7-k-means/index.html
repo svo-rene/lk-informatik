@@ -165,12 +165,18 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>k-Means</strong> – unüberwachtes Verfahren, das Datenpunkte in k Cluster einteilt: Jeder Punkt gehört zu dem Cluster, dessen Zentrum ihm am nächsten liegt, und jedes Zentrum ist der Mittelwert seiner Punkte. Ziel ist eine möglichst kleine Summe der quadrierten Abstände zu den Zentren (SSE). k-Means ist besonders nützlich, wenn du große Datenmengen nach Gemeinsamkeiten und Mustern durchsuchen möchtest.</p>
-        </div>
+<p><strong>k-Means:</strong> unüberwachtes Verfahren, das Datenpunkte ohne vorgegebene Ergebnisse in k Cluster einteilt.</p>
+<p><strong>Zuordnung und Zentren:</strong> Jeder Punkt gehört zu dem Cluster, dessen Zentrum ihm am nächsten liegt, und jedes Zentrum ist der Mittelwert seiner Punkte. Beides wird wiederholt, bis sich die Zuordnung nicht mehr ändert.</p>
+<p><strong>Ziel:</strong> eine möglichst kleine Summe der quadrierten Abstände der Punkte zu ihren Zentren (SSE).</p>
+<p><strong>Mehr Merkmale:</strong> Abstände lassen sich genauso für beliebig viele Merkmale berechnen. Wie bei k-NN müssen die Merkmale vorher skaliert werden.</p>
+</div>
 
-<div class="merke">
-            <p>Die Formeln oben sind der Übersichtlichkeit halber nur für zwei Merkmale (x und y) dargestellt. In der Praxis haben Datenpunkte oft viel mehr Merkmale (z.&nbsp;B. Blütenblattlänge, Blütenblattbreite, Kelchblattlänge und Kelchblattbreite bei Blumendaten – also 4 Merkmale). Die Formeln lassen sich aber einfach erweitern: Für jedes weitere Merkmal kommt ein zusätzlicher Term hinzu. Beim euklidischen Abstand zweier Punkte p = (p₁, …, pₙ) und q = (q₁, …, qₙ) mit n Merkmalen gilt: <code>d = √((p₁ − q₁)² + (p₂ − q₂)² + … + (pₙ − qₙ)²)</code>. Python-Bibliotheken berechnen das automatisch für beliebig viele Merkmale. Wie bei k-NN (11.6) müssen die Merkmale dafür vorher skaliert werden.</p>
-        </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Abstand bei mehr als zwei Merkmalen</summary>
+<p>Die Formeln oben sind der Übersichtlichkeit halber nur für zwei Merkmale (x und y) dargestellt. In der Praxis haben Datenpunkte oft viel mehr Merkmale (z.&nbsp;B. Blütenblattlänge, Blütenblattbreite, Kelchblattlänge und Kelchblattbreite bei Blumendaten – also 4 Merkmale). Die Formeln lassen sich aber einfach erweitern: Für jedes weitere Merkmal kommt ein zusätzlicher Term hinzu. Beim euklidischen Abstand zweier Punkte p = (p₁, …, pₙ) und q = (q₁, …, qₙ) mit n Merkmalen gilt: <code>d = √((p₁ − q₁)² + (p₂ − q₂)² + … + (pₙ − qₙ)²)</code>. Python-Bibliotheken berechnen das automatisch für beliebig viele Merkmale. Wie bei k-NN (11.6) müssen die Merkmale dafür vorher skaliert werden.</p>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

@@ -95,28 +95,12 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>AES in Zahlen:</strong> Die Blockgröße beträgt <strong>immer 128 Bit</strong> (16 Byte, angeordnet als 4×4-Byte-Matrix). Die Schlüssellänge ist wählbar und bestimmt die Rundenzahl:
-            </p>
-            <table class="gitter">
-                <tr><th>Variante</th><th>Schlüssellänge</th><th>Runden</th></tr>
-                <tr><td>AES-128</td><td>128 Bit</td><td>10</td></tr>
-                <tr><td>AES-192</td><td>192 Bit</td><td>12</td></tr>
-                <tr><td>AES-256</td><td>256 Bit</td><td>14</td></tr>
-            </table>
-        </div>
+<p><strong>AES:</strong> Blockchiffre mit einer Blockgröße von immer 128&nbsp;Bit. Die Schlüssellänge ist wählbar (128, 192 oder 256&nbsp;Bit) und bestimmt die Rundenzahl (10, 12 oder 14).</p>
+<p><strong>Konfusion:</strong> macht den Zusammenhang zwischen Schlüssel und Geheimtext möglichst kompliziert (bei AES: SubBytes, AddRoundKey).</p>
+<p><strong>Diffusion:</strong> verteilt den Einfluss jedes Klartextbits auf möglichst viele Geheimtextbits (bei AES: ShiftRows, MixColumns). Nach wenigen Runden ändert ein geändertes Klartextbit etwa die Hälfte aller Geheimtextbits.</p>
+<p><strong>Betriebsmodus:</strong> Die Sicherheit hängt auch vom Betriebsmodus ab. ECB nicht verwenden; das BSI empfiehlt z.&nbsp;B. AES im GCM-Modus mit einem Nonce, der pro Schlüssel nie wiederholt wird.</p>
+</div>
 
-<div class="merke">
-            <p>
-                <strong>Konfusion und Diffusion</strong> (Claude Shannon): <strong>Konfusion</strong> macht den Zusammenhang zwischen Schlüssel und Geheimtext möglichst kompliziert (bei AES: SubBytes, AddRoundKey). <strong>Diffusion</strong> verteilt den Einfluss jedes Klartextbits auf möglichst viele Geheimtextbits (bei AES: ShiftRows, MixColumns). Nach wenigen Runden ändert ein einziges geändertes Klartextbit etwa die Hälfte aller Geheimtextbits.
-            </p>
-        </div>
-
-<div class="merke">
-            <p>
-                <strong>ECB nicht verwenden!</strong> Die Sicherheit hängt nicht nur vom Verfahren (AES), sondern auch vom Betriebsmodus ab. Für neue Anwendungen empfiehlt das BSI (TR-02102) z.&nbsp;B. AES im GCM-Modus mit einem Nonce, der pro Schlüssel nie wiederholt wird.
-            </p>
-        </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

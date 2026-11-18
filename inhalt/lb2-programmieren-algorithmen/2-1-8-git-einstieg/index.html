@@ -713,45 +713,38 @@ def sortiere(liste):
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Repository</strong> (kurz Repo): ein Projektordner unter Versionsverwaltung. Er enthält die Dateien und die vollständige Geschichte aller ihrer Fassungen.<br>
-                <strong>Commit</strong>: ein gespeicherter Stand aller Dateien des Repositorys, eine Art Schnappschuss. Jeder Commit hat eine eindeutige Kennung (eine lange Prüfsumme aus Ziffern und Buchstaben a–f, meist gekürzt angezeigt, z.&nbsp;B. <code>3f9a2c1</code>; Forgejo nennt sie <strong>SHA</strong> bzw. <strong>SHA1</strong>), eine Autorin bzw. einen Autor, einen Zeitpunkt und eine Commit-Nachricht.<br>
-                <strong>Commit-Nachricht</strong>: ein kurzer Text, der beschreibt, <em>was</em> geändert wurde und <em>warum</em>.<br>
-                <strong>Historie</strong> (engl. history, log; in Forgejo „Verlauf“ bzw. die Liste „Commits“): die Liste aller Commits eines Repositorys bzw. einer Datei, in der Regel der neueste oben.<br>
-                <strong>Diff</strong> (von engl. difference): die Darstellung der Unterschiede zwischen zwei Fassungen. Entfernte Zeilen sind mit <code>-</code> (meist rot), hinzugefügte mit <code>+</code> (meist grün) markiert. Eine geänderte Zeile erscheint als entfernte alte und hinzugefügte neue Zeile.<br>
-                <strong>README</strong>: die Datei <code>README.md</code> im obersten Ordner. Sie beschreibt das Repository und wird auf der Startseite des Repositorys automatisch angezeigt. Sie ist in <strong>Markdown</strong> geschrieben, einer einfachen Auszeichnungssprache.<br>
-                <strong>Branch</strong> (Zweig): eine Entwicklungslinie. Dein Repository hat genau einen Branch namens <code>main</code>, in dem alle deine Commits landen. Mehrere Branches und Pull-Requests brauchst du erst im Lernbereich 5.<br>
-                <strong>.gitignore</strong>: eine Datei mit einer Liste von Datei- und Ordnernamen, die Git nicht mit verwalten soll, z.&nbsp;B. den Ordner <code>__pycache__</code>, den Python automatisch anlegt.
-            </p>
-        </div>
+<p><strong>Repository</strong> (kurz Repo): ein Projektordner unter Versionsverwaltung. Er enthält die Dateien und die vollständige Geschichte aller ihrer Fassungen.</p>
+<p><strong>Commit:</strong> ein gespeicherter Stand aller Dateien des Repositorys, eine Art Schnappschuss. Jeder Commit hat eine eindeutige Kennung, einen Autor bzw. eine Autorin, einen Zeitpunkt und eine Commit-Nachricht, die beschreibt, <em>was</em> geändert wurde und <em>warum</em>.</p>
+<p><strong>Historie:</strong> die Liste aller Commits eines Repositorys bzw. einer Datei, in der Regel der neueste oben.</p>
+<p><strong>Diff:</strong> die Darstellung der Unterschiede zwischen zwei Fassungen. Entfernte Zeilen sind mit <code>-</code>, hinzugefügte mit <code>+</code> markiert.</p>
+<p><strong>Zurückholen:</strong> Ein alter Inhalt wird als <strong>neuer Commit</strong> gespeichert. Die Historie wird ergänzt, nicht zurückgedreht, deshalb geht keine Fassung verloren.</p>
+</div>
 
-<div class="merke">
-            <p><strong>Neue Version einer Datei hochladen:</strong> Lade die geänderte Datei mit <strong>genau demselben Namen</strong> in denselben Ordner hoch. Forgejo ersetzt dann die Datei, und es entsteht eine neue Version mit eigenem Commit. Heißt die Datei anders – etwa <code>sortieren(1).py</code>, weil der Browser beim Herunterladen eine Zahl angehängt hat –, hast du danach <em>zwei</em> Dateien. Benenne die Datei vor dem Hochladen also passend um.</p>
-        </div>
-
-<div class="merke">
-            <p>Zurückholen bedeutet in Git: Ein alter Inhalt wird als <strong>neuer Commit</strong> gespeichert. Die Historie wird ergänzt, nicht zurückgedreht. Deshalb geht dabei keine Fassung verloren – auch die verworfene Version bleibt in der Historie.</p>
-        </div>
-
-<div class="merke">
-            <ul>
-                <li><strong>Ein Commit, ein Anliegen:</strong> Eine Fehlerkorrektur und eine neue Funktion gehören in zwei Commits.</li>
-                <li><strong>Die erste Zeile sagt, was sich ändert</strong>, kurz und konkret (höchstens etwa 60–70 Zeichen), z.&nbsp;B. „Insertionsort statt Bubblesort“ statt „update“.</li>
-                <li><strong>Das Warum gehört dazu</strong>, wenn es nicht offensichtlich ist: „Fehler behoben: Faktor 9/5 statt 5/9“. Bei Experimenten gehören die Messwerte hinein.</li>
-                <li><strong>Einheitlich schreiben:</strong> z.&nbsp;B. immer im Präsens oder als Stichwort, immer auf Deutsch.</li>
-                <li><strong>Nur Funktionierendes committen</strong> oder es ausdrücklich sagen („unfertig: merge fehlt noch“).</li>
-            </ul>
-        </div>
-
-<div class="merke">
-            <ul>
-                <li><strong>Passwörter, Zugangsdaten, Schlüssel</strong> (z.&nbsp;B. ein API-Schlüssel für eine KI-Schnittstelle). Wurde so etwas versehentlich committet, gilt es als bekannt: sofort ändern bzw. sperren lassen. Löschen im nächsten Commit genügt nicht, denn die alte Fassung steht weiter in der Historie.</li>
-                <li><strong>Personenbezogene Daten</strong> anderer Menschen: Namen und Noten von Mitschülerinnen und Mitschülern, Adresslisten, Fotos. Für Tests nimmst du ausgedachte Daten. Auch über dich selbst gehört nur das Nötigste hinein, keine Adresse und keine Telefonnummer.</li>
-                <li><strong>Große oder automatisch erzeugte Dateien</strong>, die sich jederzeit neu herstellen lassen, z.&nbsp;B. riesige Messdateien oder Ordner wie <code>__pycache__</code>.</li>
-                <li><strong>Fremde Werke</strong>, die du nicht weitergeben darfst, z.&nbsp;B. urheberrechtlich geschützte Bilder, Texte oder Programme anderer.</li>
-            </ul>
-            <p>Und: Dein Repository ist immer <strong>privat</strong> (Etikett „Privat“ neben dem Namen).</p>
-        </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: weitere Begriffe, gute Commits, was nicht ins Repository gehört</summary>
+<p><strong>Kennung eines Commits:</strong> eine lange Prüfsumme aus Ziffern und Buchstaben a–f, meist gekürzt angezeigt, z.&nbsp;B. <code>3f9a2c1</code>; Forgejo nennt sie <strong>SHA</strong> bzw. <strong>SHA1</strong>. Die Historie heißt engl. history oder log, in Forgejo „Verlauf“ bzw. die Liste „Commits“. Im Diff erscheint eine geänderte Zeile als entfernte alte und hinzugefügte neue Zeile (meist rot bzw. grün).</p>
+<p><strong>README</strong>: die Datei <code>README.md</code> im obersten Ordner. Sie beschreibt das Repository und wird auf der Startseite des Repositorys automatisch angezeigt. Sie ist in <strong>Markdown</strong> geschrieben, einer einfachen Auszeichnungssprache.</p>
+<p><strong>Branch</strong> (Zweig): eine Entwicklungslinie. Dein Repository hat genau einen Branch namens <code>main</code>, in dem alle deine Commits landen. Mehrere Branches und Pull-Requests brauchst du erst im Lernbereich 5.</p>
+<p><strong>.gitignore</strong>: eine Datei mit einer Liste von Datei- und Ordnernamen, die Git nicht mit verwalten soll, z.&nbsp;B. den Ordner <code>__pycache__</code>, den Python automatisch anlegt.</p>
+<p><strong>Gute Commits:</strong></p>
+<ul>
+    <li><strong>Ein Commit, ein Anliegen:</strong> Eine Fehlerkorrektur und eine neue Funktion gehören in zwei Commits.</li>
+    <li><strong>Die erste Zeile sagt, was sich ändert</strong>, kurz und konkret (höchstens etwa 60–70 Zeichen), z.&nbsp;B. „Insertionsort statt Bubblesort“ statt „update“.</li>
+    <li><strong>Das Warum gehört dazu</strong>, wenn es nicht offensichtlich ist: „Fehler behoben: Faktor 9/5 statt 5/9“. Bei Experimenten gehören die Messwerte hinein.</li>
+    <li><strong>Einheitlich schreiben:</strong> z.&nbsp;B. immer im Präsens oder als Stichwort, immer auf Deutsch.</li>
+    <li><strong>Nur Funktionierendes committen</strong> oder es ausdrücklich sagen („unfertig: merge fehlt noch“).</li>
+</ul>
+<p><strong>Was nicht ins Repository gehört:</strong></p>
+<ul>
+    <li><strong>Passwörter, Zugangsdaten, Schlüssel</strong> (z.&nbsp;B. ein API-Schlüssel für eine KI-Schnittstelle). Wurde so etwas versehentlich committet, gilt es als bekannt: sofort ändern bzw. sperren lassen. Löschen im nächsten Commit genügt nicht, denn die alte Fassung steht weiter in der Historie.</li>
+    <li><strong>Personenbezogene Daten</strong> anderer Menschen: Namen und Noten von Mitschülerinnen und Mitschülern, Adresslisten, Fotos. Für Tests nimmst du ausgedachte Daten. Auch über dich selbst gehört nur das Nötigste hinein, keine Adresse und keine Telefonnummer.</li>
+    <li><strong>Große oder automatisch erzeugte Dateien</strong>, die sich jederzeit neu herstellen lassen, z.&nbsp;B. riesige Messdateien oder Ordner wie <code>__pycache__</code>.</li>
+    <li><strong>Fremde Werke</strong>, die du nicht weitergeben darfst, z.&nbsp;B. urheberrechtlich geschützte Bilder, Texte oder Programme anderer.</li>
+</ul>
+<p>Und: Dein Repository ist immer <strong>privat</strong> (Etikett „Privat“ neben dem Namen).</p>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

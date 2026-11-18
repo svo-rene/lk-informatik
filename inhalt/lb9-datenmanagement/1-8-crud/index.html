@@ -190,38 +190,11 @@ WHERE Schueler.s_id IS NULL;</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                Syntax für INSERT:<br>
-                INSERT INTO Tabellenname (Spalte1, Spalte2, ...) VALUES (Wert1, Wert2, ...);
-            </p>
-        </div>
-
-<div class="merke">
-            <p>
-                Syntax für UPDATE:<br>
-                UPDATE Tabellenname SET Spalte1 = Wert1, Spalte2 = Wert2, ... WHERE Bedingung;
-            </p>
-        </div>
-
-<div class="merke">
-            <p>
-                Syntax für DELETE:<br>
-                DELETE FROM Tabellenname WHERE Bedingung;
-            </p>
-        </div>
-
-<div class="merke">
-            <p><strong>Der Sicherheitsgriff bei UPDATE und DELETE</strong></p>
-            <p>
-              Schreibe die Bedingung zuerst als SELECT und sieh dir an, welche Zeilen sie trifft:
-            </p>
-            <pre><code class="language-sql">SELECT * FROM Mitglied WHERE MitgliedNr = 2;</code></pre>
-            <p>
-              Stimmt die Trefferzahl, baust du den Befehl um und lässt die <code>WHERE</code>-Bedingung
-              unverändert stehen. Ein vergessenes <code>WHERE</code> trifft <em>jede</em> Zeile der Tabelle
-              – und rückgängig machen lässt sich das nicht.
-            </p>
-        </div>
+<p><strong>INSERT:</strong> <code>INSERT INTO Tabelle (Spalte1, Spalte2) VALUES (Wert1, Wert2);</code> fügt einen Datensatz ein.</p>
+<p><strong>UPDATE:</strong> <code>UPDATE Tabelle SET Spalte1 = Wert1 WHERE Bedingung;</code> ändert Datensätze.</p>
+<p><strong>DELETE:</strong> <code>DELETE FROM Tabelle WHERE Bedingung;</code> löscht Datensätze.</p>
+<p><strong>Vorher prüfen:</strong> Die Bedingung zuerst als <code>SELECT</code> ausführen und ansehen, welche Zeilen sie trifft. Ohne <code>WHERE</code> trifft UPDATE oder DELETE jede Zeile der Tabelle, und das lässt sich nicht rückgängig machen.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

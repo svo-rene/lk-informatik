@@ -488,38 +488,29 @@ Schliessfach(<u>FachNr</u>, Etage, &uarr;SchuelerNr)</pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-    <p><strong>Merkhilfe f&uuml;r die Beziehungen</strong></p>
-    <ul>
-        <li><strong>1:n</strong> &rarr; keine neue Relation. Der Prim&auml;rschl&uuml;ssel der <em>1</em>-Seite
-            wandert als Fremdschl&uuml;ssel auf die <em>n</em>-Seite. Eselsbr&uuml;cke:
-            <em>&bdquo;Der Fremdschl&uuml;ssel steht dort, wo das n steht.&ldquo;</em></li>
-        <li><strong>1:1</strong> &rarr; keine neue Relation. Der Fremdschl&uuml;ssel darf auf beide Seiten,
-            sinnvoll ist die Seite, bei der der Partner <em>immer</em> existiert &ndash; sonst entstehen leere Felder.</li>
-        <li><strong>m:n</strong> &rarr; <em>immer</em> eine neue Relation. Sie erh&auml;lt beide
-            Prim&auml;rschl&uuml;ssel als Fremdschl&uuml;ssel; diese bilden zusammen den zusammengesetzten
-            Prim&auml;rschl&uuml;ssel. Attribute an der Raute wandern in <em>diese</em> neue Relation.</li>
-    </ul>
+<p><strong>1:n-Beziehung:</strong> keine neue Relation. Der Primärschlüssel der 1-Seite wird als Fremdschlüssel auf der n-Seite eingetragen: „Der Fremdschlüssel steht dort, wo das n steht.“</p>
+<p><strong>1:1-Beziehung:</strong> keine neue Relation. Der Fremdschlüssel kommt auf die Seite, bei der der Partner immer existiert.</p>
+<p><strong>m:n-Beziehung:</strong> immer eine neue Relation. Sie enthält die Primärschlüssel beider Entitäten als Fremdschlüssel, die zusammen ihren Primärschlüssel bilden. Attribute der Beziehung kommen in diese Relation.</p>
+<p><strong>Anzahl der Relationen:</strong> Anzahl der Entitäten plus Anzahl der m:n-Beziehungen.</p>
+<p><strong>Rückweg zum ERM:</strong> Eine Relation, deren Primärschlüssel nur aus Fremdschlüsseln auf zwei andere Relationen besteht, wird zur m:n-Beziehung. Jeder andere Fremdschlüssel wird zu einer Beziehung, bei der seine Relation die n-Seite ist; ist er eindeutig, ist es eine 1:1-Beziehung.</p>
 </div>
 
-<div class="merke">
-    <p><strong>Faustformel:</strong> Anzahl der Relationen = Anzahl der Entit&auml;ten + Anzahl der
-       m:n&#8209;Beziehungen. Damit kannst du deine L&ouml;sung vor der Abgabe schnell gegenpr&uuml;fen.</p>
-</div>
-
-<div class="merke">
-    <p><strong>R&uuml;ckweg in vier Schritten</strong></p>
-    <ol>
-        <li><strong>Verbindungsrelationen erkennen.</strong> Besteht der Prim&auml;rschl&uuml;ssel einer Relation <em>vollst&auml;ndig</em>
-            aus Fremdschl&uuml;sseln auf zwei andere Relationen, ist sie keine Entit&auml;t, sondern eine <strong>m:n-Beziehung</strong>.
-            Ihre &uuml;brigen Spalten werden <strong>Beziehungsattribute</strong>.</li>
-        <li><strong>Entit&auml;ten bilden.</strong> Alle anderen Relationen werden Entit&auml;ten. Ihre Spalten ohne Fremdschl&uuml;ssel
-            werden Attribute, der Prim&auml;rschl&uuml;ssel wird zum unterstrichenen Schl&uuml;sselattribut.</li>
-        <li><strong>Einzelne Fremdschl&uuml;ssel &uuml;bersetzen.</strong> Jeder &uuml;brige Fremdschl&uuml;ssel ist eine Beziehung zwischen
-            seiner Relation und der Relation, auf die er verweist. <em>Die Relation mit dem Fremdschl&uuml;ssel ist die n-Seite</em>
-            &ndash; es sei denn, der Fremdschl&uuml;ssel ist eindeutig (<code>UNIQUE</code> oder selbst Prim&auml;rschl&uuml;ssel): Dann ist es eine <strong>1:1</strong>-Beziehung.</li>
-        <li><strong>Fremdschl&uuml;ssel streichen und Beziehungen benennen.</strong> Im ERM gibt es keine Fremdschl&uuml;ssel. Die Rauten
-            brauchen ein Verb, das im Schema nicht steht &ndash; du musst es aus der Bedeutung erschlie&szlig;en.</li>
-    </ol>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Rückweg in vier Schritten</summary>
+<ol>
+    <li><strong>Verbindungsrelationen erkennen.</strong> Besteht der Prim&auml;rschl&uuml;ssel einer Relation <em>vollst&auml;ndig</em>
+        aus Fremdschl&uuml;sseln auf zwei andere Relationen, ist sie keine Entit&auml;t, sondern eine <strong>m:n-Beziehung</strong>.
+        Ihre &uuml;brigen Spalten werden <strong>Beziehungsattribute</strong>.</li>
+    <li><strong>Entit&auml;ten bilden.</strong> Alle anderen Relationen werden Entit&auml;ten. Ihre Spalten ohne Fremdschl&uuml;ssel
+        werden Attribute, der Prim&auml;rschl&uuml;ssel wird zum unterstrichenen Schl&uuml;sselattribut.</li>
+    <li><strong>Einzelne Fremdschl&uuml;ssel &uuml;bersetzen.</strong> Jeder &uuml;brige Fremdschl&uuml;ssel ist eine Beziehung zwischen
+        seiner Relation und der Relation, auf die er verweist. <em>Die Relation mit dem Fremdschl&uuml;ssel ist die n-Seite</em>
+        &ndash; es sei denn, der Fremdschl&uuml;ssel ist eindeutig (<code>UNIQUE</code> oder selbst Prim&auml;rschl&uuml;ssel): Dann ist es eine <strong>1:1</strong>-Beziehung.</li>
+    <li><strong>Fremdschl&uuml;ssel streichen und Beziehungen benennen.</strong> Im ERM gibt es keine Fremdschl&uuml;ssel. Die Rauten
+        brauchen ein Verb, das im Schema nicht steht &ndash; du musst es aus der Bedeutung erschlie&szlig;en.</li>
+</ol>
+</details>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

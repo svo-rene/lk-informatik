@@ -222,17 +222,11 @@ print(k._Konto__kontostand)    # 100 – so heißt es intern (bitte nicht benutz
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-        <p>
-            <strong>Kapselung</strong> ist ein Grundprinzip der objektorientierten Programmierung: Ein Objekt verbirgt seine inneren Daten und stellt nach außen nur ausgewählte Methoden zur Verfügung, über die auf die Daten zugegriffen wird.<br>
-            <strong>Sichtbarkeit</strong> legt fest, ob und von wo aus auf die Bestandteile eines Objekts (Attribute, Methoden) zugegriffen werden darf.
-        </p>
-    </div>
-
-<div class="merke">
-        <p>
-            In Python ist nichts wirklich „unsichtbar“. Mit <code>_</code> oder <code>__</code> machst du aber deutlich: Dieses Attribut soll nur intern verwendet werden. Ein doppelter Unterstrich schützt zusätzlich durch Umbenennung vor versehentlichem Zugriff.
-        </p>
-    </div>
+<p><strong>Kapselung:</strong> Ein Objekt verbirgt seine inneren Daten und stellt nach außen nur ausgewählte Methoden zur Verfügung, über die auf die Daten zugegriffen wird.</p>
+<p><strong>Sichtbarkeit:</strong> Legt fest, ob und von wo aus auf Attribute und Methoden zugegriffen werden darf. Im UML-Klassendiagramm: <code>+</code> öffentlich, <code>-</code> privat.</p>
+<p><strong>Getter und Setter:</strong> Öffentliche Methoden, über die man ein geschütztes Attribut liest bzw. ändert. Der Setter prüft den neuen Wert, bevor er ihn übernimmt.</p>
+<p><strong>In Python:</strong> Nichts ist wirklich unsichtbar. <code>_</code> oder <code>__</code> vor dem Namen zeigt: nur für den internen Gebrauch; <code>__</code> schützt zusätzlich durch Umbenennung vor versehentlichem Zugriff.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

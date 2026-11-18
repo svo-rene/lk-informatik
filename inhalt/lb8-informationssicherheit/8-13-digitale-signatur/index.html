@@ -95,23 +95,12 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Digitale Signatur:</strong> Die Signatur wird mit dem <strong>privaten Schlüssel des Absenders</strong> erzeugt und mit dem <strong>öffentlichen Schlüssel des Absenders</strong> geprüft.<br>
-                Weil nur der Absender seinen privaten Schlüssel besitzt, kann nur er die Signatur erzeugt haben (Authentizität, Verbindlichkeit). Weil die Signatur vom Hashwert des Dokuments abhängt, fällt jede Änderung auf (Integrität).
-            </p>
-        </div>
+<p><strong>Digitale Signatur:</strong> wird mit dem privaten Schlüssel des Absenders erzeugt und mit dem öffentlichen Schlüssel des Absenders geprüft.</p>
+<p><strong>Gesicherte Schutzziele:</strong> Nur der Absender besitzt seinen privaten Schlüssel, also kann nur er signiert haben (Authentizität, Verbindlichkeit). Weil die Signatur vom Hashwert des Dokuments abhängt, fällt jede Änderung auf (Integrität).</p>
+<p><strong>MAC:</strong> wird mit einem <em>gemeinsamen</em> geheimen Schlüssel berechnet. Er sichert Integrität und Authentizität, aber keine Verbindlichkeit, denn auch der Empfänger könnte ihn erzeugt haben.</p>
+<p><strong>Vertrauenskette (PKI):</strong> Eine CA bestätigt mit ihrer Signatur den öffentlichen Schlüssel des Absenders, übergeordnete CAs bestätigen diese CA – bis zur Wurzel-CA, der man ausdrücklich vertraut.</p>
+</div>
 
-<div class="merke">
-            <p>
-                <strong>MAC oder Signatur?</strong> Ein Message Authentication Code (MAC) wird mit einem <em>gemeinsamen</em> geheimen Schlüssel berechnet. Er sichert Integrität und Authentizität zwischen zwei Partnern, aber <strong>keine Verbindlichkeit</strong>: Da beide den Schlüssel kennen, könnte auch der Empfänger den MAC erzeugt haben. Nur die digitale Signatur mit einem privaten Schlüssel, den allein der Absender besitzt, liefert Nichtabstreitbarkeit.
-            </p>
-        </div>
-
-<div class="merke">
-            <p>
-                <strong>Vertrauenskette:</strong> Der öffentliche Schlüssel des Absenders wird durch die Signatur der CA bestätigt, der öffentliche Schlüssel der CA durch eine übergeordnete CA bis hin zur Wurzel-CA, der man ausdrücklich vertraut. Diese Infrastruktur heißt Public-Key-Infrastruktur (PKI).
-            </p>
-        </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

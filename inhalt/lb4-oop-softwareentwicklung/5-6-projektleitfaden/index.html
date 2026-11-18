@@ -40,6 +40,17 @@
 
 <p>„Fast fertig“ zählt nicht. Eine Story, bei der der Review fehlt, bleibt im Board in „In Progress“ und wandert in den nächsten Sprint.</p>
 
+<p>Eine User Story ist erst <strong>fertig</strong>, wenn alle Punkte erfüllt sind:</p>
+<ol>
+<li>Alle Akzeptanzkriterien des Issues sind erfüllt und abgehakt.</li>
+<li>Zu jeder neuen oder geänderten Model-Methode gibt es Tests mit Grenzwerten in <code>test_….py</code>; alle Testdateien laufen fehlerfrei.</li>
+<li>Das Model enthält kein <code>print</code> und kein <code>input</code>; Attribute sind privat, öffentliche Methoden haben Typhinweise.</li>
+<li>Die Änderung kam über einen Pull Request mit Issue-Nummer im Titel und in den Commit-Nachrichten.</li>
+<li>Eine andere Person hat den Pull Request geprüft (Kommentar oder Freigabe) und dabei die Tests selbst gestartet.</li>
+<li>Der Pull Request ist in <code>main</code> gemergt, der Branch gelöscht, das Issue geschlossen, die Karte steht auf „Done“.</li>
+<li><code>main.py</code> startet auf dem Stand von <code>main</code> ohne Fehler.</li>
+</ol>
+
 <h2>4. Checklisten je Sprint</h2>
 
 <h3>Sprint 0: Start (2 Std.)</h3>
@@ -203,17 +214,10 @@ siehe `docs/klassendiagramm.md`</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>Eine User Story ist erst <strong>fertig</strong>, wenn alle Punkte erfüllt sind:</p>
-            <ol>
-                <li>Alle Akzeptanzkriterien des Issues sind erfüllt und abgehakt.</li>
-                <li>Zu jeder neuen oder geänderten Model-Methode gibt es Tests mit Grenzwerten in <code>test_….py</code>; alle Testdateien laufen fehlerfrei.</li>
-                <li>Das Model enthält kein <code>print</code> und kein <code>input</code>; Attribute sind privat, öffentliche Methoden haben Typhinweise.</li>
-                <li>Die Änderung kam über einen Pull Request mit Issue-Nummer im Titel und in den Commit-Nachrichten.</li>
-                <li>Eine andere Person hat den Pull Request geprüft (Kommentar oder Freigabe) und dabei die Tests selbst gestartet.</li>
-                <li>Der Pull Request ist in <code>main</code> gemergt, der Branch gelöscht, das Issue geschlossen, die Karte steht auf „Done“.</li>
-                <li><code>main.py</code> startet auf dem Stand von <code>main</code> ohne Fehler.</li>
-            </ol>
-        </div>
+<p><strong>Definition of Done:</strong> Vereinbarte Kriterien, die jede User Story erfüllen muss, bevor sie als fertig gilt. „Fast fertig“ zählt nicht.</p>
+<p><strong>Code-Review:</strong> Eine andere Person prüft jede Änderung im Pull Request und startet dabei die Tests selbst.</p>
+<p><strong>Retrospektive:</strong> Nach einem Sprint blickt das Team zurück: Was lief gut, was ändern wir?</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

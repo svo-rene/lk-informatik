@@ -72,14 +72,11 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>DHCP</strong> – Anwendungsprotokoll (UDP, Ports 67/68), mit dem ein DHCP-Server einem Client für eine begrenzte Zeit (Lease) eine IP-Adresse samt Subnetzmaske, Standard-Gateway und DNS-Server zuweist. Der Ablauf besteht aus vier Nachrichten: <strong>D</strong>iscover, <strong>O</strong>ffer, <strong>R</strong>equest, <strong>A</strong>cknowledgement (DORA).
-            </p>
-        </div>
+<p><strong>DHCP:</strong> Protokoll (UDP, Ports 67/68), mit dem ein DHCP-Server einem Client für eine begrenzte Zeit (Lease) IP-Adresse, Subnetzmaske, Standard-Gateway und DNS-Server zuweist.</p>
+<p><strong>DORA:</strong> Der Ablauf besteht aus vier Nachrichten: Discover, Offer, Request, Acknowledgement. Offer und Acknowledgement kommen vom Server und enthalten die Konfiguration.</p>
+<p><strong>Broadcast:</strong> Discover und Request werden per Broadcast gesendet, weil der Client noch keine gültige IP-Adresse hat und alle DHCP-Server von seiner Wahl erfahren sollen.</p>
+</div>
 
-<div class="merke">
-            <p>Discover und Request werden per <strong>Broadcast</strong> gesendet, weil der Client noch keine gültige IP-Adresse hat und alle DHCP-Server von seiner Wahl erfahren sollen. Offer und Acknowledgement kommen vom Server und enthalten die vollständige Konfiguration.</p>
-        </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

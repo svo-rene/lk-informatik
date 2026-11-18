@@ -278,27 +278,31 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-    <p>
-        <strong>Merke: Die Prinzipien der Von-Neumann-Architektur</strong><br>
-        1. Der Rechner besteht aus Rechenwerk, Steuerwerk, Speicherwerk, Ein-/Ausgabewerk und Bussystem.<br>
-        2. Der Aufbau ist <strong>unabhängig vom Problem</strong>. Für eine neue Aufgabe wird ein neues Programm geladen, nicht neue Hardware gebaut.<br>
-        3. <strong>Programme und Daten liegen im selben Speicher</strong> und sehen dort gleich aus: als Bitmuster.<br>
-        4. Der Speicher besteht aus gleich großen, fortlaufend nummerierten Zellen (<strong>Adressierung</strong>).<br>
-        5. Befehle werden in der Reihenfolge abgearbeitet, in der sie im Speicher stehen (<strong>Sequentialität</strong>). Nur <strong>Sprungbefehle</strong> durchbrechen diese Reihenfolge.
-    </p>
+<p><strong>Prinzipien der Von-Neumann-Architektur:</strong></p>
+<ol>
+<li>Der Rechner besteht aus Rechenwerk, Steuerwerk, Speicherwerk, Ein-/Ausgabewerk und Bussystem.</li>
+<li>Der Aufbau ist <strong>unabhängig vom Problem</strong>: Für eine neue Aufgabe wird ein neues Programm geladen, nicht neue Hardware gebaut.</li>
+<li><strong>Programme und Daten liegen im selben Speicher</strong>, beide als Bitmuster.</li>
+<li>Der Speicher besteht aus gleich großen, fortlaufend nummerierten Zellen (<strong>Adressierung</strong>).</li>
+<li>Befehle werden in der Reihenfolge abgearbeitet, in der sie im Speicher stehen (<strong>Sequentialität</strong>); nur Sprungbefehle durchbrechen sie.</li>
+</ol>
+<p><strong>Von-Neumann-Flaschenhals:</strong> Alle Befehle und Daten müssen durch denselben Bus zwischen Prozessor und Speicher. Der Prozessor wartet deshalb oft auf den Speicher.</p>
+<p><strong>Harvard-Architektur:</strong> getrennte Speicher und Busse für Programm und Daten, sodass Befehle und Daten gleichzeitig geholt werden können. Moderne Prozessoren kombinieren beide Bauweisen.</p>
 </div>
 
-<div class="merke">
-    <p><strong>Von-Neumann- und Harvard-Architektur im Vergleich</strong></p>
-    <table class="gitter">
-        <tr><th></th><th>Von-Neumann-Architektur</th><th>Harvard-Architektur</th></tr>
-        <tr><td>Speicher</td><td>ein gemeinsamer Speicher für Programm und Daten</td><td>getrennte Speicher für Programm und Daten</td></tr>
-        <tr><td>Bus</td><td>ein gemeinsamer Bus – Befehle und Daten nacheinander</td><td>getrennte Busse – Befehle und Daten gleichzeitig</td></tr>
-        <tr><td>Vorteile</td><td>einfacher Aufbau, Speicher flexibel aufteilbar, Programme lassen sich wie Daten laden</td><td>schneller, weil kein gemeinsamer Engpass; Programm kann nicht versehentlich als Daten überschrieben werden</td></tr>
-        <tr><td>Nachteile</td><td>Von-Neumann-Flaschenhals</td><td>aufwendiger, Speichergrößen fest aufgeteilt</td></tr>
-        <tr><td>Einsatz</td><td>PCs, Laptops, Smartphones (als Grundmodell)</td><td>Mikrocontroller (z.&nbsp;B. in Arduino-Boards), digitale Signalprozessoren</td></tr>
-    </table>
-    <p>Moderne Prozessoren kombinieren beides: Der Arbeitsspeicher ist gemeinsam (Von Neumann), aber der schnellste Cache ist in einen Befehls- und einen Datencache getrennt (Harvard). Man spricht von einer <strong>modifizierten Harvard-Architektur</strong>.</p>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Von-Neumann- und Harvard-Architektur im Vergleich</summary>
+<table class="gitter">
+    <tr><th></th><th>Von-Neumann-Architektur</th><th>Harvard-Architektur</th></tr>
+    <tr><td>Speicher</td><td>ein gemeinsamer Speicher für Programm und Daten</td><td>getrennte Speicher für Programm und Daten</td></tr>
+    <tr><td>Bus</td><td>ein gemeinsamer Bus – Befehle und Daten nacheinander</td><td>getrennte Busse – Befehle und Daten gleichzeitig</td></tr>
+    <tr><td>Vorteile</td><td>einfacher Aufbau, Speicher flexibel aufteilbar, Programme lassen sich wie Daten laden</td><td>schneller, weil kein gemeinsamer Engpass; Programm kann nicht versehentlich als Daten überschrieben werden</td></tr>
+    <tr><td>Nachteile</td><td>Von-Neumann-Flaschenhals</td><td>aufwendiger, Speichergrößen fest aufgeteilt</td></tr>
+    <tr><td>Einsatz</td><td>PCs, Laptops, Smartphones (als Grundmodell)</td><td>Mikrocontroller (z.&nbsp;B. in Arduino-Boards), digitale Signalprozessoren</td></tr>
+</table>
+<p>Moderne Prozessoren kombinieren beides: Der Arbeitsspeicher ist gemeinsam (Von Neumann), aber der schnellste Cache ist in einen Befehls- und einen Datencache getrennt (Harvard). Man spricht von einer <strong>modifizierten Harvard-Architektur</strong>.</p>
+</details>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

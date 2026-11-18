@@ -362,34 +362,31 @@ Anmeldung(<u>&uarr;SchuelerNr, &uarr;KursNr</u>)</pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-        <p>
-            Eine Relation befindet sich in der dritten Normalform, wenn:
-        </p>
-    
-        
-        <ol>
-            <li>sie sich in der zweiten Normalform befindet und</li>
-            <li>kein Nicht-Schlüssel-Attribut transitiv vom Primärschlüssel abhängt.</li>
-        </ol>
-        </div>
+<p><strong>Dritte Normalform (3NF):</strong> Die Relation ist in der 2NF, und kein Nicht-Schlüssel-Attribut hängt transitiv vom Primärschlüssel ab.</p>
+<p><strong>Transitive Abhängigkeit:</strong> Ein Nicht-Schlüssel-Attribut hängt von einem anderen Nicht-Schlüssel-Attribut ab statt direkt vom Primärschlüssel.</p>
+<p><strong>Überführen in die 3NF:</strong> Die voneinander abhängigen Nicht-Schlüssel-Attribute gemeinsam in eine eigene Relation auslagern.</p>
+<p><strong>Kontrolle:</strong> Nach dem Normalisieren steht jede Information nur an einer Stelle, und die Ausgangsdaten lassen sich über die Fremdschlüssel wieder vollständig zusammensetzen.</p>
+</div>
 
-<div class="merke">
-            <p><strong>Das Vorgehen in fünf Schritten</strong></p>
-            <ol>
-                <li><strong>1NF prüfen:</strong> Steht in jeder Zelle nur ein Wert? Wenn nein: Spalte
-                    zerlegen oder Zeilen vervielfachen.</li>
-                <li><strong>Primärschlüssel bestimmen:</strong> Welche Spalte oder Spaltenkombination
-                    identifiziert eine Zeile eindeutig? Ohne diesen Schritt sind die nächsten beiden nicht
-                    machbar.</li>
-                <li><strong>2NF prüfen (nur bei zusammengesetztem Schlüssel):</strong> Hängt ein Attribut
-                    schon von einem <em>Teil</em> des Schlüssels ab? Alle Attribute, die zum selben
-                    Schlüsselteil gehören, wandern gemeinsam in eine neue Relation.</li>
-                <li><strong>3NF prüfen:</strong> Hängt ein Attribut von einem anderen
-                    <em>Nicht-Schlüssel-Attribut</em> ab? Dann diese beiden gemeinsam auslagern.</li>
-                <li><strong>Kontrolle:</strong> Steht jetzt jede Information nur noch an einer Stelle? Und
-                    lassen sich die Ausgangsdaten über die Fremdschlüssel wieder vollständig zusammenbauen?</li>
-            </ol>
-        </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Das Vorgehen in fünf Schritten</summary>
+<ol>
+    <li><strong>1NF prüfen:</strong> Steht in jeder Zelle nur ein Wert? Wenn nein: Spalte
+        zerlegen oder Zeilen vervielfachen.</li>
+    <li><strong>Primärschlüssel bestimmen:</strong> Welche Spalte oder Spaltenkombination
+        identifiziert eine Zeile eindeutig? Ohne diesen Schritt sind die nächsten beiden nicht
+        machbar.</li>
+    <li><strong>2NF prüfen (nur bei zusammengesetztem Schlüssel):</strong> Hängt ein Attribut
+        schon von einem <em>Teil</em> des Schlüssels ab? Alle Attribute, die zum selben
+        Schlüsselteil gehören, wandern gemeinsam in eine neue Relation.</li>
+    <li><strong>3NF prüfen:</strong> Hängt ein Attribut von einem anderen
+        <em>Nicht-Schlüssel-Attribut</em> ab? Dann diese beiden gemeinsam auslagern.</li>
+    <li><strong>Kontrolle:</strong> Steht jetzt jede Information nur noch an einer Stelle? Und
+        lassen sich die Ausgangsdaten über die Fremdschlüssel wieder vollständig zusammenbauen?</li>
+</ol>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

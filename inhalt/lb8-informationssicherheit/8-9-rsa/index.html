@@ -87,30 +87,30 @@ Rückwärts: 1 = 3 − 2 = 3 − (5 − 3) = 2 · 3 − 5
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p><strong>RSA-Schlüsselerzeugung</strong></p>
-            <ol>
-                <li>Wähle zwei verschiedene große Primzahlen p und q.</li>
-                <li>Berechne das RSA-Modul n = p · q.</li>
-                <li>Berechne φ(n) = (p − 1) · (q − 1).</li>
-                <li>Wähle e mit 1 &lt; e &lt; φ(n) und ggT(e, φ(n)) = 1.</li>
-                <li>Berechne d mit e · d mod φ(n) = 1 (modulares Inverses, z.&nbsp;B. mit dem erweiterten euklidischen Algorithmus).</li>
-            </ol>
-            <p>
-                Öffentlicher Schlüssel: (e, n). Privater Schlüssel: (d, n); p, q und φ(n) werden gelöscht oder geheim gehalten.<br>
-                <strong>Verschlüsseln:</strong> c = m<sup>e</sup> mod n &nbsp;&nbsp; <strong>Entschlüsseln:</strong> m = c<sup>d</sup> mod n &nbsp;&nbsp; (mit 0 ≤ m &lt; n)
-            </p>
-        </div>
+<p><strong>RSA-Schlüssel:</strong> Man wählt zwei große geheime Primzahlen p und q und bildet n = p · q. Der öffentliche Schlüssel ist (e, n), der private (d, n); d kann man nur mit Kenntnis von p und q berechnen.</p>
+<p><strong>Ver- und Entschlüsseln:</strong> c = m<sup>e</sup> mod n und m = c<sup>d</sup> mod n.</p>
+<p><strong>Sicherheit:</strong> RSA beruht darauf, dass das Zerlegen einer großen Zahl n in ihre Primfaktoren p und q extrem aufwendig ist.</p>
+<p><strong>Schulbuch-RSA ist unsicher:</strong> Wird jeder Buchstabe einzeln und immer gleich verschlüsselt, ist das eine monoalphabetische Substitution, die man mit Häufigkeitsanalyse bricht.</p>
+<p><strong>RSA in der Praxis:</strong> ein Modul n mit mindestens 3000&nbsp;Bit und ein zufälliges Padding (OAEP), damit dieselbe Nachricht jedes Mal anders verschlüsselt wird. RSA verschlüsselt fast nur kurze Daten, meist einen symmetrischen Schlüssel (hybride Verfahren).</p>
+</div>
 
-<div class="merke">
-            <p>
-                <strong>RSA in der Praxis:</strong> Das „Schulbuch-RSA“ oben ist unsicher. Weil jeder Buchstabe einzeln und immer gleich verschlüsselt wird, ist es in Wahrheit eine monoalphabetische Substitution, die man mit Häufigkeitsanalyse bricht. Echtes RSA verwendet deshalb
-            </p>
-            <ul>
-                <li>ein Modul n mit mindestens 3000 Bit (Empfehlung des BSI, TR-02102),</li>
-                <li>ein zufälliges <strong>Padding</strong> wie <strong>OAEP</strong>, das die Nachricht vor dem Verschlüsseln mit Zufallsdaten auffüllt – so wird dieselbe Nachricht jedes Mal anders verschlüsselt,</li>
-                <li>und verschlüsselt fast nur kurze Daten, meist einen symmetrischen Schlüssel (hybride Verfahren, 8.11).</li>
-            </ul>
-        </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: RSA-Schlüsselerzeugung Schritt für Schritt</summary>
+<p><strong>RSA-Schlüsselerzeugung</strong></p>
+<ol>
+<li>Wähle zwei verschiedene große Primzahlen p und q.</li>
+<li>Berechne das RSA-Modul n = p · q.</li>
+<li>Berechne φ(n) = (p − 1) · (q − 1).</li>
+<li>Wähle e mit 1 &lt; e &lt; φ(n) und ggT(e, φ(n)) = 1.</li>
+<li>Berechne d mit e · d mod φ(n) = 1 (modulares Inverses, z.&nbsp;B. mit dem erweiterten euklidischen Algorithmus).</li>
+</ol>
+<p>Öffentlicher Schlüssel: (e, n). Privater Schlüssel: (d, n); p, q und φ(n) werden gelöscht oder geheim gehalten.<br>
+<strong>Verschlüsseln:</strong> c = m<sup>e</sup> mod n &nbsp;&nbsp; <strong>Entschlüsseln:</strong> m = c<sup>d</sup> mod n &nbsp;&nbsp; (mit 0 ≤ m &lt; n)</p>
+<p>Die Mindestlänge von 3000&nbsp;Bit für das Modul n empfiehlt das BSI (TR-02102).</p>
+</details>
+</div>
+
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

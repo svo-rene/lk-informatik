@@ -253,29 +253,12 @@ print(a is c)</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-        <p>
-            <strong>Instanzattribute</strong> gehören zu einem einzelnen Objekt; jedes Objekt hat eigene Werte. Sie werden im Konstruktor über <code>self.name = …</code> angelegt.<br>
-            <strong>Klassenattribute</strong> gehören zur Klasse selbst und werden von allen Objekten gemeinsam genutzt. Sie werden direkt im Klassenrumpf definiert und über den Klassennamen verändert (<code>Auto.anzahl_autos += 1</code>).
-        </p>
-    </div>
-
-<div class="merke">
-        <p>
-            <code>self</code> verweist auf das Objekt, das gerade erzeugt bzw. benutzt wird. Schreibst du <code>luna = Hund("Luna", "Dackel")</code>, dann steht <code>self</code> in <code>__init__(self, name, rasse)</code> für das neue Objekt <code>luna</code>. Dadurch wird <code>luna.name = "Luna"</code> und <code>luna.rasse = "Dackel"</code> gesetzt. Jedes Objekt erhält so seine eigenen Instanzattribute.
-        </p>
-    </div>
-
-<div class="merke">
-        <p>
-            Der Konstruktor sorgt dafür, dass dein Objekt von Anfang an sinnvoll „gefüllt“ ist. Ohne <code>__init__</code> müssten alle Attribute von Hand gesetzt werden – das ist fehleranfällig.
-        </p>
-    </div>
-
-<div class="merke">
-        <p>
-            <code>b = a</code> gibt einem vorhandenen Objekt einen zweiten Namen – es entsteht kein neues Objekt. Änderungen über einen Namen sieht man über alle Namen. <code>a is b</code> prüft, ob zwei Namen auf <em>dasselbe</em> Objekt zeigen; zwei Objekte mit gleichen Werten sind trotzdem verschiedene Objekte.
-        </p>
-    </div>
+<p><strong>Instanzattribut:</strong> Gehört zu einem einzelnen Objekt; jedes Objekt hat eigene Werte. Es wird im Konstruktor mit <code>self.name = …</code> angelegt.</p>
+<p><strong>Klassenattribut:</strong> Gehört zur Klasse selbst und wird von allen Objekten gemeinsam genutzt. Es steht direkt im Klassenrumpf und wird über den Klassennamen verändert, z.&nbsp;B. <code>Auto.anzahl_autos += 1</code>.</p>
+<p><strong>Konstruktor <code>__init__</code>:</strong> Sorgt dafür, dass jedes neue Objekt von Anfang an sinnvoll belegte Attribute hat.</p>
+<p><strong><code>self</code>:</strong> Verweist auf das Objekt, das gerade erzeugt bzw. benutzt wird.</p>
+<p><strong>Zwei Namen, ein Objekt:</strong> <code>b = a</code> gibt einem vorhandenen Objekt einen zweiten Namen, es entsteht kein neues Objekt. <code>a is b</code> prüft, ob beide Namen auf dasselbe Objekt zeigen; zwei Objekte mit gleichen Werten bleiben verschiedene Objekte.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

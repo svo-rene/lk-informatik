@@ -307,30 +307,12 @@ print([reduce_phase(w, e) for w, e in gruppen.items()])</code></pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Personenbezogene Daten</strong> sind alle Angaben, die sich einer bestimmten oder bestimmbaren Person
-                zuordnen lassen – auch eine Kartennummer oder IP-Adresse, wenn man über sie die Person ermitteln kann. Die
-                <strong>DSGVO</strong> (Art.&nbsp;5) verlangt für ihre Verarbeitung unter anderem: Rechtmäßigkeit (z.&nbsp;B.
-                Einwilligung oder gesetzliche Grundlage), <strong>Zweckbindung</strong>, <strong>Datenminimierung</strong>
-                (nur so viele Daten wie für den Zweck nötig), Richtigkeit, <strong>Speicherbegrenzung</strong> (löschen,
-                sobald der Zweck erfüllt ist) sowie Integrität und Vertraulichkeit (Schutz vor unbefugtem Zugriff).
-            </p>
-        </div>
-
-<div class="merke">
-            <ul>
-                <li><strong>Hashing und Index:</strong> Statt alle Datensätze zu durchsuchen, berechnet eine Hashfunktion aus dem Schlüssel direkt
-                    den Speicherplatz („Fach“). Suchen und Einfügen kosten dann fast unabhängig von der Datenmenge nur wenige Schritte – auch
-                    wenn ständig neue Daten hinzukommen. Python-Dictionaries und Key-Value-Datenbanken (Seite 2.3) arbeiten so; Datenbanken
-                    legen für häufig gesuchte Spalten einen Index an.</li>
-                <li><strong>Datenstromverarbeitung:</strong> Kommen die Daten als endloser Strom (Sensoren, Klicks), sieht man jeden Wert nur einmal an
-                    und speichert nur eine kleine Zusammenfassung (Zähler, Summe, die letzten <em>k</em> Werte). Der Speicherbedarf bleibt
-                    gleich, egal wie lange der Strom läuft.</li>
-                <li><strong>Verteiltes Verarbeiten (MapReduce):</strong> Die Daten werden auf viele Rechner verteilt. Jeder bearbeitet seinen Teil
-                    (<em>Map</em>), die Zwischenergebnisse werden nach Schlüssel sortiert und verteilt (<em>Shuffle</em>) und dann zusammengefasst
-                    (<em>Reduce</em>). Mehr Daten heißt einfach: mehr Rechner.</li>
-            </ul>
-        </div>
+<p><strong>Personenbezogene Daten:</strong> alle Angaben, die sich einer bestimmten oder bestimmbaren Person zuordnen lassen, auch eine Kartennummer oder IP-Adresse.</p>
+<p><strong>Grundsätze der DSGVO:</strong> Rechtmäßigkeit, Zweckbindung, Datenminimierung (nur so viele Daten wie nötig), Richtigkeit, Speicherbegrenzung (löschen, sobald der Zweck erfüllt ist) sowie Integrität und Vertraulichkeit.</p>
+<p><strong>Hashing und Index:</strong> Eine Hashfunktion berechnet aus dem Schlüssel direkt den Speicherplatz. Suchen und Einfügen brauchen dann fast unabhängig von der Datenmenge nur wenige Schritte.</p>
+<p><strong>Datenstromverarbeitung:</strong> Jeder Wert wird nur einmal angesehen, gespeichert wird nur eine kleine Zusammenfassung wie ein Zähler oder eine Summe.</p>
+<p><strong>MapReduce:</strong> Viele Rechner bearbeiten je einen Teil der Daten (Map), die Zwischenergebnisse werden nach Schlüssel verteilt (Shuffle) und zusammengefasst (Reduce).</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

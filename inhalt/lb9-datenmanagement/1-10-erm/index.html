@@ -396,60 +396,47 @@
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-                  <p>Die Hauptkomponenten des Entity-Relationship-Modells sind:</p>
-                  <ul>
-                      <li>Entitäten: Objekte, über die wir Informationen speichern möchten</li>
-                      <li>Attribute: Eigenschaften, die eine Entität beschreiben</li>
-                      <li>Beziehungen: Verbindungen zwischen Entitäten</li>
-                  </ul>
-                  <figure>
-                    <img src="../img/erm_schueler_leer.png" width="600" alt="ER-Modell der Entität Schüler mit leeren Attributfeldern">
-                    <figcaption>Abb. 1: Entität „Schüler“ mit noch leeren Attributen</figcaption>
-                </figure>
+<p><strong>Entität:</strong> Objekt, über das Daten gespeichert werden, z.&nbsp;B. ein Schüler. Darstellung als Rechteck.</p>
+<p><strong>Attribut:</strong> Eigenschaft, die eine Entität beschreibt (Ellipse). Das Schlüsselattribut, das jeden Datensatz eindeutig macht, wird unterstrichen.</p>
+<p><strong>Beziehung:</strong> Verbindung zwischen Entitäten (Raute), meist mit einem Verb benannt.</p>
+<p><strong>Kardinalität:</strong> gibt an, mit wie vielen Partnern ein Exemplar verbunden sein kann: 1:1, 1:n oder m:n.</p>
+<p><strong>Vom Text zum ERM:</strong> Substantive werden Entitäten, beschreibende Angaben Attribute, Verben Beziehungen und Zahlwörter Kardinalitäten.</p>
+<p><strong>Attribut an der Beziehung:</strong> Lässt sich ein Wert nur angeben, wenn man beide Beziehungspartner kennt, gehört er an die Raute. Das kommt fast nur bei m:n-Beziehungen vor.</p>
+</div>
 
-          </div>
+<figure>
+  <img src="../img/erm_schueler_leer.png" width="600" alt="ER-Modell der Entität Schüler mit leeren Attributfeldern">
+  <figcaption>Abb. 1: Entität „Schüler“ mit noch leeren Attributen</figcaption>
+</figure>
 
-<div class="merke">
-              <p>
-                  Es gibt drei Haupttypen von Kardinalitäten:
-              </p>
-                  <ul>
-                      <li>1:1 (Eins-zu-Eins): Jede Instanz der ersten Entität ist mit höchstens einer Instanz der zweiten Entität verbunden und umgekehrt.<p><strong>Beispiel: Abschlusszeugnis</strong>  <br /> Ein Sch&uuml;ler bekommt ein Abschlusszeugnis. Ein Abschlusszeugnis geh&ouml;rt zu einem Sch&uuml;ler.</p></li>
-                      <li>1:n (Eins-zu-Viele): Eine Instanz der ersten Entität kann mit mehreren Instanzen der zweiten Entität verbunden sein, aber jede Instanz der zweiten Entität ist mit höchstens einer Instanz der ersten Entität verbunden. <p><strong>Beispiel: Klassen in Sekundarstufe 1</strong> <br /> Ein Sch&uuml;ler geh&ouml;rt zu einer Klasse. In einer Klasse sind „n“ Sch&uuml;ler.</p></li>
-                      <li>m:n (Viele-zu-Viele): Mehrere Instanzen der ersten Entität können mit mehreren Instanzen der zweiten Entität verbunden sein und umgekehrt. <p><strong>Beispiel: Kurssystem Oberstufe </strong><br /> Zu einem Kurs geh&ouml;ren „n“ Sch&uuml;ler. Ein Sch&uuml;ler geh&ouml;rt zu „m“ Kursen.</p></li>
-                  </ul>
-
-                </div>
-
-<div class="merke">
-          <p><strong>Vier Schritte vom Text zum ERM</strong></p>
-          <ol>
-              <li><strong>Substantive markieren.</strong> Alles, wovon es <em>mehrere Exemplare</em> gibt und wozu Daten
-                  gespeichert werden, wird zur <strong>Entität</strong> (Rechteck). Faustregel: Es lässt sich in der
-                  Mehrzahl aufzählen – „die Produkte“, „die Tiere“.</li>
-              <li><strong>Eigenschaften zuordnen.</strong> Alles, was eine Entität nur <em>beschreibt</em> und selbst
-                  keine eigenen Daten trägt, wird zum <strong>Attribut</strong> (Ellipse). Das Attribut, das einen
-                  Datensatz eindeutig macht, wird unterstrichen.</li>
-              <li><strong>Verben markieren.</strong> Wörter wie <em>liefert, betreut, gehört zu, nimmt teil</em> beschreiben
-                  die <strong>Beziehungen</strong> (Rauten) zwischen zwei Entitäten.</li>
-              <li><strong>Zahlwörter suchen.</strong> Formulierungen wie <em>„genau ein“, „höchstens ein“, „mehrere“,
-                  „beliebig viele“</em> liefern die <strong>Kardinalitäten</strong>. Lies dazu jede Beziehung als zwei
-                  Sätze – einmal von links nach rechts und einmal von rechts nach links.</li>
-          </ol>
-      </div>
-
-<div class="merke">
-          <p><strong>Der Test:</strong> Kann ich den Wert angeben, ohne beide Beziehungspartner zu kennen?</p>
-          <ul>
-              <li><strong>Ja</strong> &rarr; das Attribut gehört an eine der beiden Entitäten.</li>
-              <li><strong>Nein</strong> &rarr; das Attribut gehört an die Beziehung.</li>
-          </ul>
-          <p>
-            Attribute an Beziehungen treten fast immer bei <strong>m:n-Beziehungen</strong> auf. Typische Beispiele:
-            die <em>Menge</em> einer Zutat in einem Rezept, die <em>Note</em> einer Schülerin in einem Kurs, das
-            <em>Anmeldedatum</em> zu einer Veranstaltung, die <em>Stückzahl</em> einer Position in einer Bestellung.
-          </p>
-      </div>
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Kardinalitäten mit Beispielen und vier Schritte vom Text zum ERM</summary>
+<ul>
+    <li>1:1 (Eins-zu-Eins): Jede Instanz der ersten Entität ist mit höchstens einer Instanz der zweiten Entität verbunden und umgekehrt.<p><strong>Beispiel: Abschlusszeugnis</strong>  <br /> Ein Sch&uuml;ler bekommt ein Abschlusszeugnis. Ein Abschlusszeugnis geh&ouml;rt zu einem Sch&uuml;ler.</p></li>
+    <li>1:n (Eins-zu-Viele): Eine Instanz der ersten Entität kann mit mehreren Instanzen der zweiten Entität verbunden sein, aber jede Instanz der zweiten Entität ist mit höchstens einer Instanz der ersten Entität verbunden. <p><strong>Beispiel: Klassen in Sekundarstufe 1</strong> <br /> Ein Sch&uuml;ler geh&ouml;rt zu einer Klasse. In einer Klasse sind „n“ Sch&uuml;ler.</p></li>
+    <li>m:n (Viele-zu-Viele): Mehrere Instanzen der ersten Entität können mit mehreren Instanzen der zweiten Entität verbunden sein und umgekehrt. <p><strong>Beispiel: Kurssystem Oberstufe </strong><br /> Zu einem Kurs geh&ouml;ren „n“ Sch&uuml;ler. Ein Sch&uuml;ler geh&ouml;rt zu „m“ Kursen.</p></li>
+</ul>
+<p><strong>Vier Schritte vom Text zum ERM</strong></p>
+<ol>
+    <li><strong>Substantive markieren.</strong> Alles, wovon es <em>mehrere Exemplare</em> gibt und wozu Daten
+        gespeichert werden, wird zur <strong>Entität</strong> (Rechteck). Faustregel: Es lässt sich in der
+        Mehrzahl aufzählen – „die Produkte“, „die Tiere“.</li>
+    <li><strong>Eigenschaften zuordnen.</strong> Alles, was eine Entität nur <em>beschreibt</em> und selbst
+        keine eigenen Daten trägt, wird zum <strong>Attribut</strong> (Ellipse). Das Attribut, das einen
+        Datensatz eindeutig macht, wird unterstrichen.</li>
+    <li><strong>Verben markieren.</strong> Wörter wie <em>liefert, betreut, gehört zu, nimmt teil</em> beschreiben
+        die <strong>Beziehungen</strong> (Rauten) zwischen zwei Entitäten.</li>
+    <li><strong>Zahlwörter suchen.</strong> Formulierungen wie <em>„genau ein“, „höchstens ein“, „mehrere“,
+        „beliebig viele“</em> liefern die <strong>Kardinalitäten</strong>. Lies dazu jede Beziehung als zwei
+        Sätze – einmal von links nach rechts und einmal von rechts nach links.</li>
+</ol>
+<p><strong>Der Test für Attribute an Beziehungen:</strong> Kann ich den Wert angeben, ohne beide Beziehungspartner zu kennen?
+   Ja &rarr; das Attribut gehört an eine der beiden Entitäten. Nein &rarr; das Attribut gehört an die Beziehung.
+   Typische Beispiele: die <em>Menge</em> einer Zutat in einem Rezept, die <em>Note</em> einer Schülerin in einem Kurs, das
+   <em>Anmeldedatum</em> zu einer Veranstaltung, die <em>Stückzahl</em> einer Position in einer Bestellung.</p>
+</details>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

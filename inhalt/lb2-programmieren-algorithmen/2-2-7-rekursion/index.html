@@ -263,14 +263,12 @@ print(zaehle_dateien_iterativ(tief))     # 0 – kein RecursionError</code></pre
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                <strong>Iteration:</strong> Wiederholung mithilfe einer Schleife (<code>for</code>, <code>while</code>).<br>
-                <strong>Rekursion:</strong> Eine Funktion ruft sich selbst mit einem kleineren Teilproblem auf. Jede rekursive Funktion braucht<br>
-                1. eine <strong>Abbruchbedingung</strong> (Basisfall), die das Ergebnis direkt liefert, und<br>
-                2. einen <strong>Rekursionsschritt</strong>, der das Problem verkleinert und sich selbst aufruft.<br>
-                Fehlt die Abbruchbedingung oder wird sie nie erreicht, bricht Python mit <code>RecursionError</code> ab (Standardgrenze: etwa 1000 Aufrufe).
-            </p>
-        </div>
+<p><strong>Iteration:</strong> Wiederholung mithilfe einer Schleife (<code>for</code>, <code>while</code>).</p>
+<p><strong>Rekursion:</strong> Eine Funktion ruft sich selbst mit einem kleineren Teilproblem auf. Sie braucht eine Abbruchbedingung und einen Rekursionsschritt.</p>
+<p><strong>Abbruchbedingung (Basisfall):</strong> liefert das Ergebnis direkt, ohne weiteren Aufruf.</p>
+<p><strong>Rekursionsschritt:</strong> verkleinert das Problem und ruft die Funktion erneut auf.</p>
+<p><strong>Fehlender Basisfall:</strong> Fehlt die Abbruchbedingung oder wird sie nie erreicht, bricht Python mit <code>RecursionError</code> ab (Standardgrenze: etwa 1000 Aufrufe).</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 

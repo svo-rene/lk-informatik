@@ -86,7 +86,9 @@ EBNF:  bezeichner = buchstabe, { buchstabe | ziffer } ;</pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-<p><strong>Merke:</strong><br>In der BNF wird jedes Nichtterminal durch eine Produktionsregel definiert. Die linke Seite enthält das zu definierende Nichtterminal, die rechte Seite die möglichen Ersetzungen. Wiederholungen werden in der BNF durch <strong>Rekursion</strong> ausgedrückt, z.&nbsp;B. <code>&lt;zahl&gt; ::= &lt;ziffer&gt; | &lt;zahl&gt;&lt;ziffer&gt;</code>.</p>
+<p><strong>Backus-Naur-Form (BNF):</strong> Jedes Nichtterminal wird durch eine Produktionsregel definiert. Links steht das zu definierende Nichtterminal, rechts stehen die möglichen Ersetzungen.</p>
+<p><strong>Schreibweise:</strong> Nichtterminale stehen in spitzen Klammern, <code>::=</code> bedeutet „wird definiert als“, <code>|</code> bedeutet „oder“.</p>
+<p><strong>Wiederholungen:</strong> Sie werden durch Rekursion ausgedrückt, z.&nbsp;B. <code>&lt;zahl&gt; ::= &lt;ziffer&gt; | &lt;zahl&gt;&lt;ziffer&gt;</code>.</p>
 </div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>

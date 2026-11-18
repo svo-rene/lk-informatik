@@ -266,10 +266,12 @@ Spiel(<u>SpielNr</u>, Datum, &uarr;Heim, &uarr;Gast, &uarr;Halle)</pre>
 <h2 id="das-wichtigste">Das Wichtigste</h2>
 
 <div class="merke">
-            <p>
-                Anomalien sind unerwünschte Effekte in Datenbanken, die zu Inkonsistenzen, Datenverlusten oder Problemen bei der Datenpflege führen können. Die drei Haupttypen sind Einfüge-, Lösch- und Änderungsanomalien. Sie entstehen oft durch redundante Datenspeicherung und mangelnde Strukturierung der Datenbank.
-            </p>
-        </div>
+<p><strong>Anomalie:</strong> unerwünschter Effekt beim Einfügen, Ändern oder Löschen, der zu widersprüchlichen oder verlorenen Daten führt.</p>
+<p><strong>Einfügeanomalie:</strong> Eine Information lässt sich nicht speichern, ohne andere, nicht direkt zusammenhängende Daten mit einzutragen.</p>
+<p><strong>Änderungsanomalie:</strong> Eine mehrfach gespeicherte Information wird nur an einer Stelle geändert, sodass sich die Daten widersprechen.</p>
+<p><strong>Löschanomalie:</strong> Beim Löschen von Daten gehen unbeabsichtigt andere, wichtige Informationen verloren.</p>
+<p><strong>Ursache:</strong> Anomalien entstehen durch redundante Speicherung und eine schlecht strukturierte Datenbank. Normalisierung vermeidet sie, weil danach jede Information nur einmal gespeichert ist.</p>
+</div>
 
 <h2 id="grundaufgaben">Grundaufgaben</h2>
 
