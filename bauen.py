@@ -617,6 +617,12 @@ def bauen():
                 schreibe(os.path.join(ziel, t["slug"], s["datei"]), themenseite(kurs, bereiche, b, t, s, vorher, nachher))
                 anzahl += 1
     print(f"{anzahl} Seiten nach {SITE} geschrieben.")
+    # Foliensätze: nur verschlüsselt und nur, wenn die (nicht öffentliche) Einstellungsdatei da ist
+    lehrer = os.path.join(HIER, "..", "_Lehrer")
+    cfg = os.path.join(lehrer, "_werkzeuge", "webseite", "folien.json")
+    if os.path.isfile(cfg):
+        import folien_schutz
+        print(f"{folien_schutz.folien_bauen(cfg, lehrer, SITE)} Foliensätze verschlüsselt.")
 
 
 def veroeffentlichen():
