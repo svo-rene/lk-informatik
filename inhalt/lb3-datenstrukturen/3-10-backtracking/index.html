@@ -1,18 +1,5 @@
 <p>In 3.6b hast du im Wegenetz eine Tour gesucht: vorwärts gehen, bei einer Sackgasse zurück, den nächsten Weg probieren. Dort lag der Baum fertig im Speicher. Auf dieser Seite geht es weiter – erst in einem Graphen, in dem es Kreise gibt, dann bei Belegungsproblemen wie Klausurplan, Sudoku oder N-Damen. Dort ist gar kein Baum gespeichert: Der Baum der Möglichkeiten entsteht erst beim Suchen.</p>
 
-<h2>Dein Weg durch diese Seite</h2>
-
-<p>Diese Seite ist ein Lernpfad in zwei Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Halte die Videos ruhig an und zeichne oder tippe mit.</p>
-
-<ol class="schritte">
-            <li>Vom Baum zum Graphen: <code>find_path</code> – danach Aufgabe 3.10.1</li>
-            <li>Belegungsprobleme: Klausurtermine planen – danach Aufgabe 3.10.2</li>
-        </ol>
-
-<p class="git-datei"><strong>Zum Mittippen:</strong> <code>3_graphen/wegsuche.py</code> (Schritt 1, weiter in 3.10.1) und <code>3_graphen/klausurplan.py</code> (Schritt 2, weiter in 3.10.6) – neu anlegen.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.10 Schritt 1: find_path rekursiv</code> · <code>3.10 Schritt 2: Klausurplan mit Backtracking</code> (Regeln auf Seite 3.0.2)</p>
-
-<p>Am Ende findest du den Praxisbezug und alle weiteren Aufgaben.</p>
-
 <h2 id="schritt-1">Schritt 1: Vom Baum zum Graphen – <code>find_path</code></h2>
 
 <p>Im Baum führt zu jedem Knoten genau ein Weg. In einem Graphen gibt es Kreise: Von 0 kommt man zu 1 und von 1 wieder zu 0. Eine Suche, die einfach jeden Nachbarn probiert, liefe dort endlos im Kreis. <code>find_path</code> überspringt deshalb alle Knoten, die schon im Pfad sind – sonst ist es dieselbe Suche wie in 3.6b. Achte im Video außerdem darauf, warum <code>path + [start]</code> eine <em>neue</em> Liste erzeugt: In 3.6b wurde stattdessen mit <code>append</code> und <code>pop</code> zurückgenommen.</p>

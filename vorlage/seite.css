@@ -507,3 +507,41 @@ div.code-toolbar { position: static; }
     .rahmen, .haupt-rahmen { display: block; padding: 0; }
     .haupt { max-width: none; }
 }
+
+/* ---------- Interaktive Zusatzseiten: Vollbild und eigener Tab ---------- */
+.zusatz-leiste { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; }
+.zusatz-leiste-text { font-size: 0.85rem; color: var(--text-3); margin-right: auto; }
+.zusatz-knopf {
+    display: inline-flex; align-items: center; gap: 6px;
+    font: inherit; font-size: 0.85rem; font-weight: 600;
+    padding: 6px 12px; border-radius: 999px;
+    border: 1px solid var(--linie-stark); background: var(--bg); color: var(--text);
+    text-decoration: none; cursor: pointer;
+}
+.zusatz-knopf:hover { border-color: var(--akzent); color: var(--akzent-text); }
+.zusatz-knopf svg { width: 16px; height: 16px; }
+.nur-vollseite { display: none; }
+html.vollseite .nur-vollseite { display: inline-flex; }
+html.vollseite .nur-im-kurs { display: none; }
+/* eigener Tab: nur die Zusatzseite, ohne Kopf, Leiste, Reiter und Fuß */
+html.vollseite .kopf, html.vollseite .leiste, html.vollseite .toc, html.vollseite .reiter,
+html.vollseite .pfad, html.vollseite .blaettern, html.vollseite .fuss, html.vollseite .weiter-kasten { display: none !important; }
+html.vollseite .rahmen { grid-template-columns: minmax(0, 1fr); min-height: 100vh; }
+html.vollseite .haupt-rahmen, html.vollseite .mit-toc .haupt-rahmen { grid-template-columns: minmax(0, 1fr); padding: 16px 20px 32px; }
+html.vollseite .haupt { max-width: 1400px; justify-self: center; }
+html.vollseite .haupt h1 { font-size: 1.4rem; margin: 0 0 10px; }
+/* Vollbild */
+#seiteninhalt:fullscreen { overflow: auto; padding: 24px 28px; border-radius: 0; background: var(--bg); }
+#seiteninhalt::backdrop { background: var(--bg); }
+.zusatz-knopf[hidden] { display: none; }
+
+/* Inhaltsverzeichnis auf schmalen Bildschirmen (unter 1280 px) */
+.toc-mobil { display: none; margin: 0 0 18px; border: 1px solid var(--linie); border-radius: 12px; background: var(--bg-weich); }
+.toc-mobil summary { cursor: pointer; padding: 10px 14px; font-size: 0.9rem; font-weight: 600; color: var(--text-2); }
+.toc-mobil ul { margin: 0; padding: 0 14px 10px 30px; }
+.toc-mobil li { margin: 4px 0; font-size: 0.92rem; }
+.toc-mobil a { color: var(--text); text-decoration: none; }
+.toc-mobil a:hover { color: var(--akzent-text); }
+@media (max-width: 1280px) { .toc-mobil { display: block; } }
+html.vollseite .toc-mobil { display: none !important; }
+@media print { .toc-mobil { display: none !important; } }

@@ -890,7 +890,7 @@
             var zw = $("wrap").parentNode;
             zw.style.width = ""; zw.style.marginLeft = "";
             var r = zw.getBoundingClientRect(), vw = document.documentElement.clientWidth, x0 = 0;
-            var haupt = document.querySelector('.haupt');
+            var haupt = document.fullscreenElement || document.querySelector('.haupt');
             if (haupt) { var hr = haupt.getBoundingClientRect(); vw = hr.width; x0 = hr.left; }
             var w = Math.min(1240, vw - 32);
             if (w <= r.width) return;

@@ -2,18 +2,6 @@
     Nachdem du gelernt hast, welche Arten von Beziehungen es zwischen Klassen gibt (Assoziation, Aggregation, Komposition), kommt jetzt ein wichtiges Detail der UML: <strong>Multiplizitäten</strong>. Sie zeigen an, <strong>wie viele</strong> Objekte auf jeder Seite einer Beziehung beteiligt sein können.
 </p>
 
-<h2>Dein Weg durch diese Seite</h2>
-
-<p>Diese Seite ist ein Lernpfad in drei kurzen Schritten. Jeder Schritt hat dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1,5–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast. Rechts im Video siehst du das Speicherbild mit Objekten, Listen und Verweisen. Halte die Videos ruhig an und tippe mit.</p>
-
-<ol class="schritte">
-    <li><a href="#schritt-1">0..1, 1 und * im Code: Attribut oder Liste von Verweisen</a> – danach Aufgabe 4.9.1 und 4.9.2</li>
-    <li><a href="#schritt-2">Grenzen durchsetzen: 1..2 im Code</a></li>
-    <li><a href="#schritt-3">Grenzen Schritt für Schritt</a> – danach Aufgabe 4.9.3</li>
-</ol>
-
-<p>Zum Schluss findest du den Praxisbezug und die Übungsaufgaben.</p>
-
 <h2 id="schritt-1">Schritt 1: 0..1, 1 und * im Code</h2>
 
 <p>Jede Multiplizität hat eine typische Form im Code: Genau 1 wird zu einem Pflichtparameter, 0..1 zu einem Attribut, das <code>None</code> sein darf, und * zu einer Liste von Verweisen. Im Video siehst du das am Beispiel Person und Personalausweis. Achte darauf, an welcher Klasse welche Zahl steht und wie die beiden Objekte sich gegenseitig kennen. Neu ist die Zeile <code>from __future__ import annotations</code>, sie wird kurz erklärt.</p>

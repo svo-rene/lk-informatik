@@ -102,6 +102,18 @@
                     text.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</a></li>";
             }
             toc.innerHTML = html + "</ul>";
+            /* schmale Bildschirme: dasselbe Verzeichnis aufklappbar über dem Inhalt (nur h2) */
+            var mobil = document.createElement("details");
+            mobil.className = "toc-mobil";
+            var mhtml = "<summary>Auf dieser Seite</summary><ul>";
+            for (var m = 0; m < liste.length; m++) {
+                if (liste[m].tagName !== "H2") continue;
+                mhtml += '<li><a href="#' + liste[m].id + '">' +
+                    liste[m].textContent.replace(/#$/, "").trim().replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</a></li>";
+            }
+            mobil.innerHTML = mhtml + "</ul>";
+            mobil.addEventListener("click", function (ev) { if (ev.target.tagName === "A") mobil.open = false; });
+            inhalt.parentNode.insertBefore(mobil, inhalt);
             var links = toc.querySelectorAll("a");
             var markiere = function () {
                 var y = window.scrollY + 200, akt = 0;
@@ -296,5 +308,21 @@
         chip.title = "Lernziele abgehakt";
         chip.textContent = (n === keys.length ? "✓ " : "") + n + "/" + keys.length;
         li.appendChild(chip);
+    });
+})();
+
+/* Vollbild für interaktive Zusatzseiten */
+(function () {
+    var knopf = document.getElementById("vollbild-knopf");
+    var ziel = document.getElementById("seiteninhalt");
+    if (!knopf || !ziel) return;
+    if (!ziel.requestFullscreen) { knopf.hidden = true; return; }
+    knopf.addEventListener("click", function () {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else ziel.requestFullscreen().catch(function () {});
+    });
+    document.addEventListener("fullscreenchange", function () {
+        knopf.querySelector("span").textContent = document.fullscreenElement ? "Vollbild beenden" : "Vollbild";
+        window.dispatchEvent(new Event("resize"));
     });
 })();

@@ -107,7 +107,7 @@ def geruest(kurs, bereiche, root, titel, inhalt, aktiv_bereich=None, aktiv_thema
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(titel) if titel == kurs["titel"] else e(titel) + " – " + e(kurs["titel"])}</title>
-<script>try{{var t=localStorage.getItem("thema");if(t)document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}</script>
+<script>try{{var t=localStorage.getItem("thema");if(t)document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}if(/[?&]vollseite/.test(location.search))document.documentElement.classList.add("vollseite")</script>
 <link rel="stylesheet" href="{root}assets/inhalt.css">
 <link rel="stylesheet" href="{root}assets/seite.css">
 <link rel="icon" href="{root}assets/icon.svg" type="image/svg+xml">
@@ -372,6 +372,21 @@ def rechnungen(roh):
     return re.sub(r'<pre class="rechnung">(.*?)</pre>', lambda m: rechnung_html(m.group(1)), roh, flags=re.S)
 
 
+SVG_VOLLBILD = SVG.format('<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>')
+SVG_NEUER_TAB = SVG.format('<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>')
+SVG_ZURUECK = SVG.format('<path d="M15 18l-6-6 6-6"/>')
+
+
+def zusatz_leiste(seite):
+    """Knöpfe über interaktiven Zusatzseiten: Vollbild, eigener Tab ohne Kursrahmen."""
+    return f"""<div class="zusatz-leiste">
+<span class="zusatz-leiste-text">Interaktiv: mehr Platz?</span>
+<button type="button" class="zusatz-knopf" id="vollbild-knopf">{SVG_VOLLBILD}<span>Vollbild</span></button>
+<a class="zusatz-knopf nur-im-kurs" href="{seite["datei"]}?vollseite" target="_blank" rel="noopener">{SVG_NEUER_TAB}<span>In neuem Tab öffnen</span></a>
+<a class="zusatz-knopf nur-vollseite" href="{seite["datei"]}">{SVG_ZURUECK}<span>Zur Kursseite</span></a>
+</div>"""
+
+
 def themenseite(kurs, bereiche, b, t, seite, vorher, nachher):
     root = "../../"
     pfad = os.path.join(INHALT, b["slug"], t["slug"], seite["datei"])
@@ -395,7 +410,8 @@ def themenseite(kurs, bereiche, b, t, seite, vorher, nachher):
     inhalt = f"""<p class="pfad"><a href="{root}index.html">Überblick</a> › <a href="../index.html">{e(b["nr"])} {e(b["titel"])}</a>{unterseite}</p>
 <h1><span class="h1-nr">{e(t["nr"])}</span> {e(t["titel"])}</h1>
 <nav class="reiter" aria-label="Teile dieses Themas">{"".join(reiter)}</nav>
-<div class="seiteninhalt{" immer-hell" if seite.get("zusatz") else ""}">
+<div class="seiteninhalt{" immer-hell" if seite.get("zusatz") else ""}" id="seiteninhalt">
+{zusatz_leiste(seite) if seite.get("zusatz") else ""}
 {roh}
 </div>
 {ziele_html(b, t) if seite["datei"] == "index.html" else ""}

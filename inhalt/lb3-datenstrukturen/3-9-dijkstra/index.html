@@ -1,20 +1,5 @@
 <p>Du gibst im Navi „Hauptbahnhof Dresden“ ein, und nach Sekundenbruchteilen steht die schnellste Route fest – obwohl das Straßennetz Hunderttausende Kreuzungen hat. Dahinter steckt das <strong>Kürzeste-Wege-Problem</strong>: In einem gewichteten Graphen soll ein Weg mit minimaler Summe der Kantengewichte gefunden werden.</p>
 
-<h2>Dein Weg durch diese Seite</h2>
-
-<p>Diese Seite ist ein Lernpfad in vier Schritten. Schritt 1 ist ein Lesetext zum Algorithmus von Moore. Die Schritte 2 bis 4 haben dieselbe Form: Erst liest du kurz, worum es geht, dann zeigt dir ein Video (1–2 min, ohne Ton) die Idee oder den Code in Thonny, dann prüfst du mit einer kleinen Frage, ob du es verstanden hast.</p>
-
-<ol class="schritte">
-            <li><a href="#schritt-1">Algorithmus von Moore (Bellman-Ford)</a> – Lesetext</li>
-            <li><a href="#schritt-2">Dijkstra an einem Beispiel</a> – danach Aufgabe 3.9.1</li>
-            <li><a href="#schritt-3">Dijkstra im Code: neue Bausteine</a></li>
-            <li><a href="#schritt-4">Dijkstra im Code Schritt für Schritt</a> – danach Aufgabe 3.9.2 und 3.9.3</li>
-        </ol>
-
-<p class="git-datei"><strong>Zum Mittippen:</strong> <code>3_graphen/dijkstra.py</code> – neu anlegen, weiter in Aufgabe 3.9.2.<br><strong>Commit nach jedem Schritt mit Code</strong>, z.&nbsp;B. <code>3.9 Schritt 3: dijkstra mit Beispielgraph</code> (Regeln auf Seite 3.0.2)</p>
-
-<p>Am Ende findest du den Praxisbezug und alle Aufgaben.</p>
-
 <h2 id="schritt-1">Schritt 1: Algorithmus von Moore (Bellman-Ford)</h2>
 
 <p><strong>Erläuterung:</strong> Der Algorithmus von Moore – meist als Bellman-Ford- oder Moore-Bellman-Ford-Algorithmus bezeichnet – löst das Kürzeste-Wege-Problem von einem Startknoten aus. Er kann mit negativen Gewichten umgehen, solange keine negativen Zyklen existieren. Negative Gewichte ergeben nur in <strong>gerichteten</strong> Graphen Sinn: In einem ungerichteten Graphen wäre jede negative Kante u–v schon ein negativer Zyklus (u → v → u), und der „kürzeste Weg“ wäre beliebig kurz.</p>
