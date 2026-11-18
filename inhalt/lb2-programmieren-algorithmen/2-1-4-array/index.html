@@ -188,7 +188,7 @@ print(werte)                                 # [12.5, 15.0]</code></pre>
 <div class="beispiel klappbar">
             <details>
                 <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span></summary>
-            <p><strong>Ausgangssituation:</strong> Eine Lehrkraft exportiert Klausurpunkte aus einer Tabellenkalkulation als <code>punkte.csv</code>. Die Datei enthält einen Tippfehler („abc“) und am Ende eine Leerzeile. Das Programm soll gültige Zeilen einlesen, ungültige melden, den Durchschnitt ausgeben und eine Datei <code>auswertung.csv</code> mit der Spalte „bestanden“ (ab 5 Punkten) schreiben.</p>
+            <p><strong>Ausgangssituation:</strong> Eine Lehrkraft exportiert Klausurpunkte aus einer Tabellenkalkulation als <a href="../material/punkte.csv" download><code>punkte.csv</code></a>. Die Datei enthält einen Tippfehler („abc“) und am Ende eine Leerzeile. Das Programm soll gültige Zeilen einlesen, ungültige melden, den Durchschnitt ausgeben und eine Datei <code>auswertung.csv</code> mit der Spalte „bestanden“ (ab 5 Punkten) schreiben.</p>
             <pre class="ausfuehrbar"><code class="language-python"># Testdatei anlegen – so sähe der Export aus
 with open("punkte.csv", "w", encoding="utf-8") as datei:
     datei.write("name;punkte\nAnna;12\nBen;4\nLea;abc\nTom;9\n\n")
