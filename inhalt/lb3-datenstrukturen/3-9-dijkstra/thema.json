@@ -17,7 +17,8 @@
     {
       "datei": "dijkstra-simulator.html",
       "titel": "Dijkstra-Simulator",
-      "zusatz": true
+      "zusatz": true,
+      "beschreibung": "Den Algorithmus von Dijkstra Schritt für Schritt an einem Graphen verfolgen."
     }
   ],
   "kann": {

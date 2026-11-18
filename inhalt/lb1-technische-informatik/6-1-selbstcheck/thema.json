@@ -9,7 +9,8 @@
     {
       "datei": "uebungsstunde.html",
       "titel": "Übungsstunde",
-      "zusatz": true
+      "zusatz": true,
+      "beschreibung": "Übungsstunde zur Klausurvorbereitung in Stationen, mit Checkliste und Hilfekarten."
     }
   ]
 }

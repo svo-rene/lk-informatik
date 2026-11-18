@@ -37,5 +37,21 @@
       "urheber": "unDraw (Katerina Limpitsouni)",
       "lizenz": "unDraw-Lizenz (frei nutzbar)"
     }
+  ],
+  "lernprojekte": [
+    {
+      "titel": "Lern-Survivor",
+      "url": "https://lern-survivor.de/",
+      "bereich": "alle Lernbereiche",
+      "text": "Gegnerwellen überleben und bei jedem Level-up eine Frage zum Kurs beantworten. Fragen zu allen Lernbereichen, falsch beantwortete kommen wieder, dazu ein Hefter mit Merksätzen.",
+      "fuss": "läuft im Browser, ohne Anmeldung"
+    },
+    {
+      "titel": "Automate the Castle",
+      "url": "https://svo-rene.github.io/automate-the-castle/lk.html",
+      "bereich": "LB 2/3 Programmieren",
+      "text": "Tagsüber programmierst du in Python, nachts verteidigst du die Burg. Ein Spiel zum Programmierenlernen mit eigenem Heft.",
+      "fuss": "läuft im Browser"
+    }
   ]
 }

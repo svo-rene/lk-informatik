@@ -81,7 +81,9 @@ def themenname(t):
 def seitenleiste(bereiche, root, aktiv_bereich=None, aktiv_thema=None):
     z = ['<nav class="leiste" id="leiste" aria-label="Lernbereiche">',
          '<div class="suche">' + SVG_LUPE + '<input type="search" id="filter" placeholder="Thema suchen …" aria-label="Thema suchen"></div>',
-         f'<a class="leiste-start{" aktiv" if aktiv_bereich is None else ""}" href="{root}index.html">Überblick</a>']
+         f'<a class="leiste-start{" aktiv" if aktiv_bereich is None else ""}" href="{root}index.html">Überblick</a>',
+         f'<a class="leiste-start{" aktiv" if aktiv_bereich == "werkzeuge" else ""}" href="{root}werkzeuge.html">Werkzeuge</a>',
+         f'<a class="leiste-start{" aktiv" if aktiv_bereich == "projekte" else ""}" href="{root}projekte.html">Lernprojekte</a>']
     for b in bereiche:
         offen = " open" if aktiv_bereich is b else ""
         z.append(f'<details class="lb"{offen}><summary><span class="lb-nr">{e(b["nr"])}</span> {e(b["titel"])}</summary>'
@@ -143,6 +145,117 @@ def geruest(kurs, bereiche, root, titel, inhalt, aktiv_bereich=None, aktiv_thema
 
 
 # ---------------------------------------------------------------------------
+# Werkzeugseite: füllt sich beim Bauen von selbst aus den Inhalten
+#  - interaktive Zusatzseiten (thema.json: "zusatz": true, optional "beschreibung")
+#  - Sortierlabor (<div class="sortierlabor" data-verfahren="…">)
+#  - eingebettete Übungen von LearningApps und H5P (<iframe>)
+#  - Lernspiele aus kurs.json ("lernspiele")
+VERFAHREN = {"bubble": "Bubblesort", "insertion": "Insertionsort", "selection": "Selectionsort",
+             "merge": "Mergesort", "mergeteil": "Mergesort", "quick": "Quicksort", "quickinplace": "Quicksort",
+             "rennen": "Verfahren im Rennen vergleichen", "hochrechner": "Laufzeit hochrechnen"}
+
+
+def _klartext(s):
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", s))).strip()
+
+
+def _titel_davor(s, pos):
+    """Titel der Aufgabe, in der eine eingebettete Übung steckt (leer, wenn sie frei auf der Seite steht)."""
+    kandidaten = list(re.finditer(r"<summary[^>]*>(.*?)</summary>", s[:pos], re.S))
+    if not kandidaten or "</details>" in s[kandidaten[-1].end():pos]:
+        return ""
+    t = _klartext(kandidaten[-1].group(1))
+    t = re.sub(r"\s*(AFB\s*[I/]+.*|einfach|komplex)$", "", t)
+    t = re.sub(r"^(Aufgabe|Beispiel)\s*[\d.]*\s*:?\s*", "", t)
+    return re.sub(r"\s*\((LearningApps|H5P)\)\s*$", "", t).strip()
+
+
+def werkzeuge_sammeln(bereiche):
+    je_bereich = []
+    for b in bereiche:
+        liste = []
+        for t in b["alle_themen"]:
+            for s in t["seiten"]:
+                pfad = os.path.join(INHALT, b["slug"], t["slug"], s["datei"])
+                roh = lies(pfad)
+                link = f'{b["slug"]}/{t["slug"]}/{s["datei"]}'
+                thema = f'{t["nr"]} {t["titel"]}'
+                if s.get("zusatz"):
+                    text = s.get("beschreibung")
+                    if not text:
+                        m = re.search(r"<p[^>]*>(.*?)</p>", roh, re.S)
+                        text = _klartext(m.group(1)) if m else ""
+                        if len(text) > 200:
+                            text = text[:200].rsplit(" ", 1)[0] + " …"
+                    art = "Übung" if "übung" in s["titel"].lower() else "Simulation"
+                    liste.append({"art": art, "titel": s["titel"], "text": text, "link": link, "thema": thema})
+                verfahren = []
+                for v in re.findall(r'class="sortierlabor"[^>]*data-verfahren="([^"]+)"', roh):
+                    for x in v.split(","):
+                        name = VERFAHREN.get(x.strip(), x.strip())
+                        if name not in verfahren:
+                            verfahren.append(name)
+                if verfahren:
+                    liste.append({"art": "Labor", "titel": "Sortierlabor",
+                                  "text": "Sortieren Schritt für Schritt ausprobieren und Vergleiche zählen. Auf dieser Seite: " + ", ".join(verfahren) + ".",
+                                  "link": link, "thema": thema + " · " + s["titel"]})
+                for m in re.finditer(r'<iframe[^>]*src="([^"]+)"', roh):
+                    src = m.group(1)
+                    if "learningapps.org" in src:
+                        quelle = "LearningApps"
+                    elif "/h5p/" in src:
+                        quelle = "H5P"
+                    else:
+                        continue  # Videos u. Ä. sind keine Werkzeuge
+                    titel = _titel_davor(roh, m.start()) or f'Übung zu „{t["titel"]}“'
+                    liste.append({"art": "Übung", "titel": titel, "text": f"Interaktive Übung ({quelle}) direkt auf der Seite.",
+                                  "link": link, "thema": thema + " · " + s["titel"]})
+        if liste:
+            je_bereich.append((b, liste))
+    return je_bereich
+
+
+def werkzeugseite(kurs, bereiche):
+    teile = ['<p class="pfad"><a href="index.html">Überblick</a> › Werkzeuge</p>',
+             "<h1>Werkzeuge</h1>",
+             '<p class="unterzeile">Simulationen, Labore und interaktive Übungen aus allen Themen an einem Ort. '
+             "Die Liste füllt sich von selbst, sobald ein Thema ein neues interaktives Werkzeug bekommt.</p>"]
+    for b, liste in werkzeuge_sammeln(bereiche):
+        teile.append(f'<h2 id="{b["slug"]}"><span class="h1-nr">{e(b["nr"])}</span> {e(b["titel"])}</h2><ul class="werkzeug-liste">')
+        for w in liste:
+            teile.append(f'<li><span class="werkzeug-art art-{slug_klein(w["art"])}">{e(w["art"])}</span>'
+                         f'<div><a href="{w["link"]}">{e(w["titel"])}</a>'
+                         f'<p>{e(w["text"])}</p><p class="werkzeug-thema">{e(w["thema"])}</p></div></li>')
+        teile.append("</ul>")
+    inhalt = teile[:3] + ['<div class="seiteninhalt">'] + teile[3:] + ["</div>"]
+    return geruest(kurs, bereiche, "", "Werkzeuge", "\n".join(inhalt), aktiv_bereich="werkzeuge", toc=True)
+
+
+def projekteseite(kurs, bereiche):
+    """Lernprojekte: eigene Spiele und Projekte zum Kurs (kurs.json: "lernprojekte"), auf eigenen Seiten."""
+    karten = []
+    for p in kurs.get("lernprojekte") or []:
+        karten.append(f"""<a class="karte projekt-karte" href="{e(p["url"])}" target="_blank" rel="noopener">
+  <span class="karte-nr">{e(p.get("bereich", ""))}</span>
+  <span class="karte-titel">{e(p["titel"])} ↗</span>
+  <span class="karte-text">{e(p["text"])}</span>
+  <span class="karte-fuss">{e(p.get("fuss", "läuft im Browser"))}</span>
+</a>""")
+    inhalt = f"""<p class="pfad"><a href="index.html">Überblick</a> › Lernprojekte</p>
+<h1>Lernprojekte</h1>
+<p class="unterzeile">Spiele, die für diesen Kurs entstanden sind. Sie üben genau die Inhalte des Kurses, nur anders: mit Fragen im Spiel oder mit Programmieren als Spielmechanik.</p>
+<div class="karten">
+{"".join(karten)}
+</div>
+<p class="werkzeug-hinweis">Die Lernprojekte liegen auf eigenen Seiten und öffnen sich in einem neuen Tab.</p>"""
+    return geruest(kurs, bereiche, "", "Lernprojekte", inhalt, aktiv_bereich="projekte")
+
+
+def slug_klein(s):
+    return re.sub(r"[^a-z]+", "", s.lower().replace("ü", "ue"))
+
+
+# ---------------------------------------------------------------------------
 def startseite(kurs, bereiche):
     karten = []
     for b in bereiche:
@@ -172,6 +285,14 @@ def startseite(kurs, bereiche):
 <h2>Lernbereiche</h2>
 <div class="karten">
 {"".join(karten)}
+</div>
+
+<h2>Mehr zum Ausprobieren</h2>
+<div class="karten">
+<a class="karte" href="werkzeuge.html"><span class="karte-nr">alle Themen</span><span class="karte-titel">Werkzeuge</span>
+<span class="karte-text">Simulationen, Labore und interaktive Übungen aus allen Lernbereichen an einem Ort.</span></a>
+<a class="karte projekt-karte" href="projekte.html"><span class="karte-nr">Spiele</span><span class="karte-titel">Lernprojekte</span>
+<span class="karte-text">{e(" und ".join(p["titel"] for p in kurs.get("lernprojekte") or []))}: Spiele, die genau die Inhalte des Kurses üben.</span></a>
 </div>
 """
     return geruest(kurs, bereiche, "", kurs["titel"], inhalt)
@@ -469,7 +590,9 @@ def bauen():
     schreibe(os.path.join(SITE, "index.html"), startseite(kurs, bereiche))
     schreibe(os.path.join(SITE, "hinweise.html"), hinweisseite(kurs, bereiche))
     schreibe(os.path.join(SITE, "impressum.html"), impressumseite(kurs, bereiche))
-    anzahl = 3
+    schreibe(os.path.join(SITE, "werkzeuge.html"), werkzeugseite(kurs, bereiche))
+    schreibe(os.path.join(SITE, "projekte.html"), projekteseite(kurs, bereiche))
+    anzahl = 5
     for b in bereiche:
         quelle = os.path.join(INHALT, b["slug"])
         ziel = os.path.join(SITE, b["slug"])

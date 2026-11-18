@@ -545,3 +545,23 @@ html.vollseite .haupt h1 { font-size: 1.4rem; margin: 0 0 10px; }
 @media (max-width: 1280px) { .toc-mobil { display: block; } }
 html.vollseite .toc-mobil { display: none !important; }
 @media print { .toc-mobil { display: none !important; } }
+
+/* ---------- Werkzeugseite ---------- */
+.werkzeug-liste { list-style: none; padding: 0; margin: 0.6em 0 1.6em; border-top: 1px solid var(--linie); }
+.werkzeug-liste li { display: flex; gap: 14px; align-items: flex-start; padding: 12px 4px; border-bottom: 1px solid var(--linie); margin: 0; }
+.werkzeug-liste li > div { min-width: 0; }
+.werkzeug-liste a { font-weight: 600; text-decoration: none; color: var(--text); }
+.werkzeug-liste a:hover { color: var(--akzent-text); }
+.werkzeug-liste p { margin: 2px 0 0; font-size: 0.93rem; color: var(--text-2); }
+.werkzeug-liste p.werkzeug-thema { font-size: 0.8rem; color: var(--text-3); }
+.werkzeug-art {
+    flex: none; width: 82px; text-align: center; margin-top: 2px;
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
+    padding: 3px 0; border-radius: 6px; border: 1px solid var(--linie-stark); color: var(--text-2); background: var(--bg-weich);
+}
+.werkzeug-art.art-simulation { color: var(--beispiel); border-color: var(--beispiel-linie); background: var(--beispiel-bg); }
+.werkzeug-art.art-labor { color: var(--praxis); border-color: var(--praxis-linie); background: var(--praxis-bg); }
+.werkzeug-art.art-uebung { color: var(--aufgabe); border-color: var(--aufgabe-linie); background: var(--aufgabe-bg); }
+.werkzeug-hinweis { font-size: 0.85rem; color: var(--text-3); margin-top: 8px; }
+.projekt-karte { border-color: var(--beispiel-linie); }
+.projekt-karte .karte-nr { color: var(--beispiel); }

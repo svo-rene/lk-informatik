@@ -17,7 +17,8 @@
     {
       "datei": "zeiger-werkstatt.html",
       "titel": "Zeiger-Werkstatt",
-      "zusatz": true
+      "zusatz": true,
+      "beschreibung": "Knoten und Verweise per Maus verbinden und zusehen, was der Python-Code mit einer verketteten Liste macht – mit Übungen zum Prüfen."
     }
   ],
   "kann": {
