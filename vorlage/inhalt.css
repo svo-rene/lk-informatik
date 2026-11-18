@@ -4,11 +4,25 @@
    Kästen: <div class="merke|hinweis|aufgabe|beispiel|praxisbezug|loesung">
    ========================================================================== */
 
+/* Schrift IBM Plex (SIL Open Font License, liegt in assets/schrift, kein Google-Abruf) */
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("schrift/ibm-plex-sans-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("schrift/ibm-plex-sans-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "IBM Plex Sans"; font-style: italic; font-weight: 400; font-display: swap; src: url("schrift/ibm-plex-sans-latin-400-italic.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "IBM Plex Sans"; font-style: italic; font-weight: 400; font-display: swap; src: url("schrift/ibm-plex-sans-latin-ext-400-italic.woff2") format("woff2"); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("schrift/ibm-plex-sans-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("schrift/ibm-plex-sans-latin-ext-600-normal.woff2") format("woff2"); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 700; font-display: swap; src: url("schrift/ibm-plex-sans-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 700; font-display: swap; src: url("schrift/ibm-plex-sans-latin-ext-700-normal.woff2") format("woff2"); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("schrift/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("schrift/ibm-plex-mono-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 600; font-display: swap; src: url("schrift/ibm-plex-mono-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 600; font-display: swap; src: url("schrift/ibm-plex-mono-latin-ext-600-normal.woff2") format("woff2"); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
 :root {
     color-scheme: light;
-    --schrift: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
-    --schrift-titel: "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
-    --schrift-code: "Cascadia Code", "JetBrains Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
+    --schrift: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
+    --schrift-titel: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
+    --schrift-code: "IBM Plex Mono", "Cascadia Code", "SF Mono", Consolas, "Liberation Mono", monospace;
 
     --bg: #ffffff;
     --bg-weich: #f6f7f9;
@@ -18,11 +32,11 @@
     --text-3: #6b7280;
     --linie: #e4e7eb;
     --linie-stark: #cfd5dc;
-    --akzent: #2457d6;
-    --akzent-text: #1d4ed8;
-    --akzent-weich: #eef3fe;
+    --akzent: #2350c8;
+    --akzent-text: #1f47b3;
+    --akzent-weich: #eaf0fd;
 
-    --merke: #be123c;      --merke-bg: #fff4f5;     --merke-linie: #fbd0d8;
+    --merke: #1f47b3;      --merke-bg: #f2f6fe;     --merke-linie: #d3e0fb;
     --hinweis: #15803d;    --hinweis-bg: #f2fbf5;   --hinweis-linie: #c4ebd1;
     --aufgabe: #b45309;    --aufgabe-bg: #fffaf0;   --aufgabe-linie: #f6dfb0;
     --beispiel: #6d28d9;   --beispiel-bg: #f7f5ff;  --beispiel-linie: #ddd5fb;
@@ -45,9 +59,9 @@
 /* Interaktive Zusatzseiten haben eigene helle Flächen: immer hell darstellen */
 .immer-hell {
     color-scheme: light;
-    --schrift: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
-    --schrift-titel: "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
-    --schrift-code: "Cascadia Code", "JetBrains Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
+    --schrift: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
+    --schrift-titel: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
+    --schrift-code: "IBM Plex Mono", "Cascadia Code", "SF Mono", Consolas, "Liberation Mono", monospace;
 
     --bg: #ffffff;
     --bg-weich: #f6f7f9;
@@ -57,11 +71,11 @@
     --text-3: #6b7280;
     --linie: #e4e7eb;
     --linie-stark: #cfd5dc;
-    --akzent: #2457d6;
-    --akzent-text: #1d4ed8;
-    --akzent-weich: #eef3fe;
+    --akzent: #2350c8;
+    --akzent-text: #1f47b3;
+    --akzent-weich: #eaf0fd;
 
-    --merke: #be123c;      --merke-bg: #fff4f5;     --merke-linie: #fbd0d8;
+    --merke: #1f47b3;      --merke-bg: #f2f6fe;     --merke-linie: #d3e0fb;
     --hinweis: #15803d;    --hinweis-bg: #f2fbf5;   --hinweis-linie: #c4ebd1;
     --aufgabe: #b45309;    --aufgabe-bg: #fffaf0;   --aufgabe-linie: #f6dfb0;
     --beispiel: #6d28d9;   --beispiel-bg: #f7f5ff;  --beispiel-linie: #ddd5fb;
@@ -95,10 +109,10 @@
         --text-3: #8b95a2;
         --linie: #272d36;
         --linie-stark: #38404b;
-        --akzent: #7aa7ff;
-        --akzent-text: #8fb5ff;
-        --akzent-weich: #172338;
-        --merke: #fb7185;   --merke-bg: #23141a;   --merke-linie: #4a2230;
+        --akzent: #7fa2ff;
+        --akzent-text: #9db8ff;
+        --akzent-weich: #1c2742;
+        --merke: #9db8ff;   --merke-bg: #172036;   --merke-linie: #26355a;
         --hinweis: #4ade80; --hinweis-bg: #10201a; --hinweis-linie: #1f4430;
         --aufgabe: #fbbf24; --aufgabe-bg: #211b0f; --aufgabe-linie: #4a3a16;
         --beispiel: #b49cff;--beispiel-bg: #1a1630;--beispiel-linie: #362c63;
@@ -124,10 +138,10 @@
     --text-3: #8b95a2;
     --linie: #272d36;
     --linie-stark: #38404b;
-    --akzent: #7aa7ff;
-    --akzent-text: #8fb5ff;
-    --akzent-weich: #172338;
-    --merke: #fb7185;   --merke-bg: #23141a;   --merke-linie: #4a2230;
+    --akzent: #7fa2ff;
+    --akzent-text: #9db8ff;
+    --akzent-weich: #1c2742;
+    --merke: #9db8ff;   --merke-bg: #172036;   --merke-linie: #26355a;
     --hinweis: #4ade80; --hinweis-bg: #10201a; --hinweis-linie: #1f4430;
     --aufgabe: #fbbf24; --aufgabe-bg: #211b0f; --aufgabe-linie: #4a3a16;
     --beispiel: #b49cff;--beispiel-bg: #1a1630;--beispiel-linie: #362c63;
@@ -164,9 +178,9 @@ h1, h2, h3, h4 {
     scroll-margin-top: 90px;
 }
 h1 { font-size: 2.1rem; font-weight: 700; margin: 0.2em 0 0.6em; letter-spacing: -0.02em; }
-h2 { font-size: 1.45rem; font-weight: 650; margin: 2.2em 0 0.6em; padding-top: 0.2em; }
-h3 { font-size: 1.15rem; font-weight: 650; margin: 1.6em 0 0.4em; }
-h4 { font-size: 1rem; font-weight: 650; margin: 1.3em 0 0.3em; }
+h2 { font-size: 1.45rem; font-weight: 600; margin: 2.2em 0 0.6em; padding-top: 0.2em; }
+h3 { font-size: 1.15rem; font-weight: 600; margin: 1.6em 0 0.4em; }
+h4 { font-size: 1rem; font-weight: 600; margin: 1.3em 0 0.3em; }
 
 .anker {
     margin-left: 0.35em;
@@ -183,7 +197,7 @@ li { margin: 0.35em 0; }
 ul, ol { padding-left: 1.4em; }
 a { color: var(--akzent-text); text-underline-offset: 2px; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
-strong { font-weight: 650; }
+strong { font-weight: 600; }
 hr { border: none; border-top: 1px solid var(--linie); margin: 2em 0; }
 
 /* ---------- Tabellen ---------- */
@@ -204,7 +218,7 @@ th, td {
     vertical-align: top;
     border-bottom: 1px solid var(--linie);
 }
-thead th, th { background: var(--bg-weich); font-weight: 650; color: var(--text); }
+thead th, th { background: var(--bg-weich); font-weight: 600; color: var(--text); }
 tbody tr:last-child td { border-bottom: none; }
 tbody tr:hover td { background: var(--bg-weich); }
 table.gitter th, table.gitter td { border: 1px solid var(--linie-stark); text-align: center; }
@@ -273,6 +287,7 @@ figcaption { font-size: 0.88rem; color: var(--text-3); margin-top: -0.3em; }
     border-radius: 0 0 3px 3px;
     background: var(--aufgabe);
     opacity: 0.85;
+    display: none;  /* Stil „Klar“: Aufgaben ohne Farbbalken */
 }
 
 /* ---------- Aufklappen ---------- */
@@ -284,7 +299,7 @@ summary {
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5em;
-    font-weight: 650;
+    font-weight: 600;
     color: var(--k, var(--text));
     border-radius: 6px;
 }
@@ -327,7 +342,7 @@ details.loesung-details > summary { color: var(--loesung); }
     padding: 0.12em 0.65em;
     white-space: nowrap;
 }
-.niveau { color: var(--aufgabe); background: var(--aufgabe-bg); border: 1px solid var(--aufgabe-linie); margin-left: auto; }
+.niveau { color: var(--akzent-text); background: var(--akzent-weich); border: 1px solid transparent; margin-left: auto; }
 .beispiel-kopf { color: var(--beispiel); background: var(--bg); border: 1px solid var(--beispiel-linie); text-transform: uppercase; }
 
 /* ---------- kleinere Kästen ---------- */
@@ -526,19 +541,19 @@ pre .token.deleted { color: #ff5370 !important; }
 .ziele {
     margin: 2.2rem 0 1.5rem;
     padding: 1.1em 1.3em 0.9em;
-    border: 1px solid var(--hinweis-linie);
+    border: 1px solid var(--linie-stark);
     border-radius: var(--radius);
-    background: var(--hinweis-bg);
+    background: var(--bg);
 }
-.ziele h2 { margin: 0 0 0.3em; font-size: 1.2rem; color: var(--hinweis); }
+.ziele h2 { margin: 0 0 0.3em; font-size: 1.2rem; color: var(--text); }
 .ziele .ziele-hinweis { margin: 0 0 0.7em; font-size: 0.92rem; color: var(--text-2); }
 .ziele-liste { list-style: none; margin: 0; padding: 0; }
-.ziele-liste li { margin: 0; padding: 0; border-top: 1px solid var(--hinweis-linie); }
+.ziele-liste li { margin: 0; padding: 0; border-top: 1px solid var(--linie); }
 .ziele-liste li:first-child { border-top: 0; }
 .ziele-liste label { display: flex; gap: 0.7em; align-items: flex-start; padding: 0.55em 0; cursor: pointer; }
-.ziele-liste input { width: 1.15em; height: 1.15em; margin: 0.15em 0 0; flex: none; accent-color: var(--hinweis); cursor: pointer; }
+.ziele-liste input { width: 1.15em; height: 1.15em; margin: 0.15em 0 0; flex: none; accent-color: var(--akzent); cursor: pointer; }
 .ziele-liste input:checked + span { color: var(--text-2); }
-.ziele .ziele-stand { margin: 0.5em 0 0; font-size: 0.88rem; font-weight: 600; color: var(--hinweis); }
+.ziele .ziele-stand { margin: 0.5em 0 0; font-size: 0.88rem; font-weight: 600; color: var(--akzent-text); }
 .ziele-chip {
     margin-left: auto;
     font-size: 0.75rem;

@@ -45,8 +45,8 @@ body { margin: 0; padding: 0; max-width: none; }
     height: 32px;
     flex: none;
     border-radius: 9px;
-    background: linear-gradient(135deg, #2f6bff, #6d3df5);
-    color: #fff;
+    background: var(--akzent);
+    color: var(--bg);
     font-family: var(--schrift-code);
     font-size: 0.78rem;
     font-weight: 700;
@@ -94,6 +94,7 @@ body { margin: 0; padding: 0; max-width: none; }
     padding: 16px 12px 48px;
     font-size: 0.9rem;
     scrollbar-width: thin;
+    background: var(--bg-weich);
 }
 .suche { position: relative; margin-bottom: 12px; }
 .suche input {
@@ -103,7 +104,7 @@ body { margin: 0; padding: 0; max-width: none; }
     padding: 8px 12px 8px 34px;
     border: 1px solid var(--linie);
     border-radius: 10px;
-    background: var(--bg-weich);
+    background: var(--bg);
 }
 .suche input:focus { outline: 2px solid var(--akzent); outline-offset: 0; background: var(--bg); }
 .suche svg { position: absolute; left: 11px; top: 50%; width: 15px; height: 15px; transform: translateY(-50%); color: var(--text-3); }
@@ -115,7 +116,7 @@ body { margin: 0; padding: 0; max-width: none; }
     border-radius: 8px;
     line-height: 1.35;
 }
-.leiste a:hover { background: var(--bg-weich); color: var(--text); }
+.leiste a:hover { background: var(--bg-tief); color: var(--text); }
 .leiste a.aktiv { background: var(--akzent-weich); color: var(--akzent-text); font-weight: 600; }
 .leiste-start { font-weight: 600; color: var(--text) !important; margin-bottom: 6px; }
 .leiste details.lb { margin: 2px 0; }
@@ -129,7 +130,7 @@ body { margin: 0; padding: 0; max-width: none; }
     color: var(--text);
     border-radius: 8px;
 }
-.leiste details.lb > summary:hover { background: var(--bg-weich); opacity: 1; }
+.leiste details.lb > summary:hover { background: var(--bg-tief); opacity: 1; }
 .leiste details.lb > summary::before { align-self: flex-start; margin-top: 0.55em; color: var(--text-3); width: 0.45em; height: 0.45em; }
 .leiste details.lb[open] > summary { margin-bottom: 2px; }
 .lb-nr {
@@ -189,7 +190,7 @@ body { margin: 0; padding: 0; max-width: none; }
     flex-wrap: wrap;
     gap: 4px;
     margin: 0 0 1.8em;
-    padding: 8px 0;
+    padding: 4px 0 0;
     background: color-mix(in srgb, var(--bg) 92%, transparent);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -199,15 +200,16 @@ body { margin: 0; padding: 0; max-width: none; }
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 14px;
-    border-radius: 999px;
+    padding: 8px 14px;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
     color: var(--text-2);
     text-decoration: none;
     font-weight: 600;
     font-size: 0.92rem;
 }
-.reiter a:hover { background: var(--bg-weich); color: var(--text); }
-.reiter a.aktiv { background: var(--text); color: var(--bg); }
+.reiter a:hover { color: var(--text); border-bottom-color: var(--linie-stark); }
+.reiter a.aktiv { color: var(--text); border-bottom-color: var(--akzent); }
 .reiter .r-zahl { font-size: 0.75rem; font-weight: 600; opacity: 0.65; }
 .zusatz-marke, .marke-klein {
     display: inline-block;
@@ -221,7 +223,6 @@ body { margin: 0; padding: 0; max-width: none; }
     color: var(--beispiel);
     border: 1px solid var(--beispiel-linie);
 }
-.reiter a.aktiv .zusatz-marke { background: transparent; color: inherit; border-color: currentColor; }
 .marke-klein { margin-left: 6px; vertical-align: 2px; background: var(--bg-weich); color: var(--text-3); border-color: var(--linie); }
 .marke-klein.m-vertiefung { background: var(--aufgabe-bg); color: var(--aufgabe); border-color: var(--aufgabe-linie); }
 .marke-klein.m-zusatz { background: var(--beispiel-bg); color: var(--beispiel); border-color: var(--beispiel-linie); }
@@ -415,10 +416,7 @@ div.code-toolbar { position: static; }
     /* Platz für Unterlängen (g, p): der Verlauf wird auf die Box geschnitten */
     padding-bottom: 0.1em;
     margin: 0 0 0.2em;
-    background: linear-gradient(120deg, var(--text) 30%, var(--akzent) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--text);
 }
 .held .unterzeile { font-size: 1.2rem; max-width: 38em; }
 .aufbau { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
