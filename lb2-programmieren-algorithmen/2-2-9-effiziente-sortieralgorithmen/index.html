@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.2.9 Effiziente Sortieralgorithmen – Mergesort – Leistungskurs Informatik</title>
+<script>try{var t=localStorage.getItem("thema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}if(/[?&]vollseite/.test(location.search))document.documentElement.classList.add("vollseite")</script>
+<link rel="stylesheet" href="../../assets/inhalt.css">
+<link rel="stylesheet" href="../../assets/seite.css">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+</head>
+<body class="mit-toc" data-root="../../">
+<header class="kopf">
+  <button class="menue-knopf" id="menue-knopf" aria-controls="leiste" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Themen</span></button>
+  <a class="marke" href="../../index.html"><span class="marke-zeichen">&lt;/&gt;</span><span>Leistungskurs Informatik</span></a>
+  <div class="kopf-rechts">
+    <button class="knopf-rund" id="thema-knopf" title="Hell oder dunkel" aria-label="Hell oder dunkel umschalten">
+      <span class="thema-dunkel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span><span class="thema-hell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+    </button>
+  </div>
+</header>
+<div class="rahmen">
+<nav class="leiste" id="leiste" aria-label="Lernbereiche">
+<div class="suche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="filter" placeholder="Thema suchen …" aria-label="Thema suchen"></div>
+<a class="leiste-start" href="../../index.html">Überblick</a>
+<a class="leiste-start" href="../../werkzeuge.html">Werkzeuge</a>
+<a class="leiste-start" href="../../projekte.html">Lernprojekte</a>
+<details class="lb"><summary><span class="lb-nr">LB 1</span> Technische Informatik</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb1-technische-informatik/index.html">Überblick Technische Informatik</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb1-technische-informatik/1-1-zahlenformate/index.html"><span class="t-nr">1.1</span> Zahlenformate</a></li>
+<li><a href="../../lb1-technische-informatik/1-2-zweierkomplement/index.html"><span class="t-nr">1.2</span> Zweierkomplement</a></li>
+<li><a href="../../lb1-technische-informatik/1-3-festkommazahlen/index.html"><span class="t-nr">1.3</span> Festkommazahlen</a></li>
+<li><a href="../../lb1-technische-informatik/1-4-zeichenkodierung/index.html"><span class="t-nr">1.4</span> Kodierung von Zeichen in der Informatik</a></li>
+</ul>
+<p class="kap">Boolesche Algebra</p><ul>
+<li><a href="../../lb1-technische-informatik/2-1-booleschealgebra/index.html"><span class="t-nr">2.1</span> Boolesche Algebra</a></li>
+<li><a href="../../lb1-technische-informatik/2-2-boolescheoperatoren/index.html"><span class="t-nr">2.2</span> Boolesche Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-3-formaleschreibweise/index.html"><span class="t-nr">2.3</span> Formale Schreibweise boolescher Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-4-implikationundaequivalenz/index.html"><span class="t-nr">2.4</span> Implikation und Äquivalenz</a></li>
+<li><a href="../../lb1-technische-informatik/2-5-gesetzeaussagenlogik/index.html"><span class="t-nr">2.5</span> Gesetze der Aussagenlogik</a></li>
+<li><a href="../../lb1-technische-informatik/2-6-kanonischenormalformen/index.html"><span class="t-nr">2.6</span> Kanonische Normalformen</a></li>
+</ul>
+<p class="kap">Schaltnetze</p><ul>
+<li><a href="../../lb1-technische-informatik/3-1-technischeumsetzung/index.html"><span class="t-nr">3.1</span> Boolesche Ausdrücke in Schaltungen</a></li>
+<li><a href="../../lb1-technische-informatik/3-2-schaltungsanalyse/index.html"><span class="t-nr">3.2</span> Schaltungsanalyse</a></li>
+<li><a href="../../lb1-technische-informatik/3-3-schaltungssynthese/index.html"><span class="t-nr">3.3</span> Schaltungssynthese</a></li>
+<li><a href="../../lb1-technische-informatik/3-4-kv-diagramme/index.html"><span class="t-nr">3.4</span> Karnaugh-Veitch-Diagramme</a></li>
+<li><a href="../../lb1-technische-informatik/3-5-standardschaltnetze/index.html"><span class="t-nr">3.5</span> Standardschaltnetze</a></li>
+<li><a href="../../lb1-technische-informatik/3-6-halbaddierer/index.html"><span class="t-nr">3.6</span> Halbaddierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-7-volladdierer/index.html"><span class="t-nr">3.7</span> Volladdierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-8-uebungsaufgaben/index.html"><span class="t-nr">3.8</span> Übungsaufgaben</a></li>
+</ul>
+<p class="kap">Rechnerarchitektur</p><ul>
+<li><a href="../../lb1-technische-informatik/4-1-neumann/index.html"><span class="t-nr">4.1</span> Rechnerarchitekturen</a></li>
+<li><a href="../../lb1-technische-informatik/4-2-prozessor/index.html"><span class="t-nr">4.2</span> Prozessoren</a></li>
+<li><a href="../../lb1-technische-informatik/4-3-speichersysteme/index.html"><span class="t-nr">4.3</span> Speichersysteme</a></li>
+</ul>
+<p class="kap">Informatik und Gesellschaft</p><ul>
+<li><a href="../../lb1-technische-informatik/5-1-systemsoftware/index.html"><span class="t-nr">5.1</span> Systemsoftware</a></li>
+<li><a href="../../lb1-technische-informatik/5-2-hardware-life/index.html"><span class="t-nr">5.2</span> Hardware-Lebenszyklus</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb1-technische-informatik/6-1-selbstcheck/index.html"><span class="t-nr">6.1</span> Selbstcheck</a></li>
+</ul>
+</div></details>
+<details class="lb" open><summary><span class="lb-nr">LB 2/3</span> Programmieren und Algorithmen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb2-programmieren-algorithmen/index.html">Überblick Programmieren und Algorithmen</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-2-algorithmus/index.html"><span class="t-nr">2.1.2</span> Algorithmus und Kontrollstrukturen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-3-eva-python/index.html"><span class="t-nr">2.1.3</span> EVA in Python</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-4-array/index.html"><span class="t-nr">2.1.4</span> Array – eine Datenstruktur</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-5-unterprogramme/index.html"><span class="t-nr">2.1.5</span> Unterprogramme</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-6-parameter/index.html"><span class="t-nr">2.1.6</span> Parameter in Funktionen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-7-global-var/index.html"><span class="t-nr">2.1.7</span> Lokale und globale Variablen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-8-git-einstieg/index.html"><span class="t-nr">2.1.8</span> Versionen verwalten mit Git</a></li>
+</ul>
+<p class="kap">Algorithmen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-1-algorithmen-komplexitaet/index.html"><span class="t-nr">2.2.1</span> Algorithmen und Komplexität</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-2-bubblesort/index.html"><span class="t-nr">2.2.2</span> Bubblesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-3-einfuehrung-komplexitaet/index.html"><span class="t-nr">2.2.3</span> Einführung in Komplexität und die O-Notation</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-4-komplexitaetsklassen/index.html"><span class="t-nr">2.2.4</span> Komplexitätsklassen im Überblick</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-5-weitere-sortieralgorithmen/index.html"><span class="t-nr">2.2.5</span> Weitere Sortieralgorithmen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-6-darstellung/index.html"><span class="t-nr">2.2.6</span> Darstellung von Algorithmen (Modellierungshilfen)</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-7-rekursion/index.html"><span class="t-nr">2.2.7</span> Iteration und Rekursion</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-8-divide-and-conquer/index.html"><span class="t-nr">2.2.8</span> Divide and Conquer</a></li>
+<li><a class="aktiv" aria-current="page" href="../../lb2-programmieren-algorithmen/2-2-9-effiziente-sortieralgorithmen/index.html"><span class="t-nr">2.2.9</span> Effiziente Sortieralgorithmen – Mergesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9b-quicksort/index.html"><span class="t-nr">2.2.9b</span> Effiziente Sortieralgorithmen – Quicksort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-10-berechenbarkeit/index.html"><span class="t-nr">2.2.10</span> Berechenbarkeit: technische und theoretische Grenzen</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 2/3</span> Datenstrukturen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb3-datenstrukturen/index.html">Überblick Datenstrukturen</a>
+<p class="kap">Listen, Schlange und Stapel</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-0-1-einfuegen/index.html"><span class="t-nr">3.0.1</span> Was kostet das Einfügen in eine Liste?</a></li>
+<li><a href="../../lb3-datenstrukturen/3-0-2-git-im-kurs/index.html"><span class="t-nr">3.0.2</span> Deine Lösungen mit Git verwalten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-1-linkedlists/index.html"><span class="t-nr">3.1</span> Verkettete Listen (linked lists)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-2-queue/index.html"><span class="t-nr">3.2</span> Schlange (Queue)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-3-stack/index.html"><span class="t-nr">3.3</span> Stapel (Stack)</a></li>
+</ul>
+<p class="kap">Bäume</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-4-baum/index.html"><span class="t-nr">3.4</span> Datenstruktur Baum (Tree)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-5-bin-baum/index.html"><span class="t-nr">3.5</span> Binärbaum und binärer Suchbaum</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6-traversierung/index.html"><span class="t-nr">3.6</span> Traversierung</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6b-backtracking-baum/index.html"><span class="t-nr">3.6b</span> Backtracking 1: Suchen und zurückgehen im Baum</a></li>
+</ul>
+<p class="kap">Graphen</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-7-graph/index.html"><span class="t-nr">3.7</span> Graphen</a></li>
+<li><a href="../../lb3-datenstrukturen/3-8-graph-code/index.html"><span class="t-nr">3.8</span> Implementierung eines Graphen mit Adjazenzlisten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-9-dijkstra/index.html"><span class="t-nr">3.9</span> Kürzeste Wege: Moore und Dijkstra</a></li>
+<li><a href="../../lb3-datenstrukturen/3-10-backtracking/index.html"><span class="t-nr">3.10</span> Backtracking 2: Graphen und Belegungsprobleme</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 4/5</span> OOP und Softwareentwicklung</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb4-oop-softwareentwicklung/index.html">Überblick OOP und Softwareentwicklung</a>
+<p class="kap">Paradigmen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-0-klassifizierung/index.html"><span class="t-nr">4.0</span> Klassifizierung von Programmiersprachen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-1-programmierparadigmen/index.html"><span class="t-nr">4.1</span> Programmierparadigmen entdecken</a></li>
+</ul>
+<p class="kap">Objekte und Klassen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-2-objektorientierung/index.html"><span class="t-nr">4.2</span> Objektorientiertes Denken – vor dem Code</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-3-klassen/index.html"><span class="t-nr">4.3</span> Klassen als Baupläne</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-4-attribute/index.html"><span class="t-nr">4.4</span> Attribute im Detail</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-5-methoden/index.html"><span class="t-nr">4.5</span> Methoden schreiben und aufrufen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-6-kapselung/index.html"><span class="t-nr">4.6</span> Kapselung, Sichtbarkeit und kontrollierter Zugriff</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-7-typisierung/index.html"><span class="t-nr">4.7</span> Typisierung in Python: Klarheit im Code</a></li>
+</ul>
+<p class="kap">Beziehungen und Vererbung</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-8-beziehungen/index.html"><span class="t-nr">4.8</span> Beziehungen zwischen Klassen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-9-multiplizitaeten/index.html"><span class="t-nr">4.9</span> Multiplizitäten in UML: Wie viele Objekte?</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-10-vererbung/index.html"><span class="t-nr">4.10</span> Vererbung</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-11-polymorphie/index.html"><span class="t-nr">4.11</span> Botschaften und Polymorphie</a></li>
+</ul>
+<p class="kap">Software im Team</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-1-vom-programm-zum-projekt/index.html"><span class="t-nr">5.1</span> Vom Klassenmodell zur Softwarearchitektur</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-2-vorgehensmodelle/index.html"><span class="t-nr">5.2</span> Vorgehensmodelle und Anforderungen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-3-testen/index.html"><span class="t-nr">5.3</span> Testen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-4-git-im-team/index.html"><span class="t-nr">5.4</span> Git im Team</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-5-projektauftrag/index.html"><span class="t-nr">5.5</span> Projektauftrag und Themen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-6-projektleitfaden/index.html"><span class="t-nr">5.6</span> Projekt-Leitfaden</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 6</span> Sprachen und Automaten</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb6-sprachen-automaten/index.html">Überblick Sprachen und Automaten</a>
+<p class="kap">Sprachen und Grammatiken</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-1-spracherkennung/index.html"><span class="t-nr">6.1</span> Wie Sprache für Maschinen verständlich wird – Einstieg in Sprachen und Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-2-formale-sprache/index.html"><span class="t-nr">6.2</span> Aufbau von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-3-grammatik/index.html"><span class="t-nr">6.3</span> Grammatiken als formale Beschreibung von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-4-woerter-ableiten/index.html"><span class="t-nr">6.4</span> Ableitung von Wörtern</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-5-bnf/index.html"><span class="t-nr">6.5</span> Backus-Naur-Form (BNF)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-6-chomsky/index.html"><span class="t-nr">6.6</span> Die Chomsky-Hierarchie</a></li>
+</ul>
+<p class="kap">Endliche Automaten</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-7-dea/index.html"><span class="t-nr">6.7</span> Endliche Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-8-fangzustand/index.html"><span class="t-nr">6.8</span> Partielle Übergangsfunktion und Fangzustand (Trap-Zustand)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-9-dea-nea/index.html"><span class="t-nr">6.9</span> NEA, ε-Übergänge und weitere Automatentypen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-10-potenzmengenkonstruktion/index.html"><span class="t-nr">6.10</span> Überführung von NEA in DEA (Potenzmengenkonstruktion)</a></li>
+</ul>
+<p class="kap">Grammatik und Automat</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-11-grammatik-automat/index.html"><span class="t-nr">6.11</span> Überführung zwischen regulären Grammatiken und endlichen Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-12-epsilon-regeln/index.html"><span class="t-nr">6.12</span> Überführung einer Grammatik mit ε-Regeln in eine Grammatik ohne ε-Regeln</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-13-grenzen-automaten/index.html"><span class="t-nr">6.13</span> Grenzen von Automaten</a></li>
+</ul>
+<p class="kap">Compiler</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-14-compiler/index.html"><span class="t-nr">6.14</span> Compiler und Interpreter – von der Theorie zur Praxis</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-15-selbstcheck/index.html"><span class="t-nr">6.15</span> Selbstcheck und Klausurvorbereitung: Sprachen und Automaten</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 7</span> Rechnernetze</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb7-rechnernetze/index.html">Überblick Rechnernetze</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb7-rechnernetze/7-1-topologien/index.html"><span class="t-nr">7.1</span> Topologien und Übertragungsmedien</a></li>
+<li><a href="../../lb7-rechnernetze/7-2-vermittlung-dienste/index.html"><span class="t-nr">7.2</span> Vermittlung und Dienste</a></li>
+<li><a href="../../lb7-rechnernetze/7-3-schichtenmodelle/index.html"><span class="t-nr">7.3</span> Schichtenmodelle (OSI und TCP/IP)</a></li>
+<li><a href="../../lb7-rechnernetze/7-4-netzzugangsschicht/index.html"><span class="t-nr">7.4</span> Netzzugangsschicht: MAC, Ethernet und Switch</a></li>
+</ul>
+<p class="kap">Internetschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-5-ip-adressierung-routing/index.html"><span class="t-nr">7.5</span> Internetschicht: IP-Adressierung und Routing</a></li>
+<li><a href="../../lb7-rechnernetze/7-6-subnetting-cidr/index.html"><span class="t-nr">7.6</span> Subnetting, CIDR und VLSM</a></li>
+<li><a href="../../lb7-rechnernetze/7-7-dhcp/index.html"><span class="t-nr">7.7</span> DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-8-dns/index.html"><span class="t-nr">7.8</span> DNS und Namensauflösung</a></li>
+</ul>
+<p class="kap">Transport- und Anwendungsschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-9-tcp-udp/index.html"><span class="t-nr">7.9</span> Transportschicht: TCP und UDP</a></li>
+<li><a href="../../lb7-rechnernetze/7-10-anwendungsschicht-protokolle/index.html"><span class="t-nr">7.10</span> Anwendungsschicht und Protokolle</a></li>
+</ul>
+<p class="kap">Filius-Praxis</p><ul>
+<li><a href="../../lb7-rechnernetze/7-13-filius-gateway/index.html"><span class="t-nr">7.13</span> Filius-Praxis: Zwei Netzwerke verbinden</a></li>
+<li><a href="../../lb7-rechnernetze/7-14-filius-routingtabelle/index.html"><span class="t-nr">7.14</span> Filius-Praxis: Mehrere Router und Routingtabellen</a></li>
+<li><a href="../../lb7-rechnernetze/7-15-filius-dhcp/index.html"><span class="t-nr">7.15</span> Filius-Praxis: DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-16-filius-dns-web/index.html"><span class="t-nr">7.16</span> Filius-Praxis: DNS, Webserver und Einstellungen über DHCP</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb7-rechnernetze/7-17-aufgabenstellung/index.html"><span class="t-nr">7.17</span> Projekt: Rechnernetze – Theorie, Praxis und Netzplanung</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 8</span> Informationssicherheit</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb8-informationssicherheit/index.html">Überblick Informationssicherheit</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-1-sicherheitsziele/index.html"><span class="t-nr">8.1</span> Sicherheitsziele und Datenschutz</a></li>
+<li><a href="../../lb8-informationssicherheit/8-2-uebersicht-kryptologie/index.html"><span class="t-nr">8.2</span> Übersicht Kryptologie</a></li>
+</ul>
+<p class="kap">Symmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-3-symmetrische-verfahren/index.html"><span class="t-nr">8.3</span> Symmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-4-kasiski-test/index.html"><span class="t-nr">8.4</span> Kasiski-Test</a></li>
+<li><a href="../../lb8-informationssicherheit/8-5-one-time-pad/index.html"><span class="t-nr">8.5</span> One-Time-Pad</a></li>
+<li><a href="../../lb8-informationssicherheit/8-6-kryptoanalyse/index.html"><span class="t-nr">8.6</span> Kryptoanalyse</a></li>
+<li><a href="../../lb8-informationssicherheit/8-7-aes/index.html"><span class="t-nr">8.7</span> AES</a></li>
+</ul>
+<p class="kap">Asymmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-8-asymmetrische-verfahren/index.html"><span class="t-nr">8.8</span> Asymmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-9-rsa/index.html"><span class="t-nr">8.9</span> RSA</a></li>
+<li><a href="../../lb8-informationssicherheit/8-10-diffie-hellman/index.html"><span class="t-nr">8.10</span> Diffie-Hellman-Schlüsselaustausch</a></li>
+<li><a href="../../lb8-informationssicherheit/8-11-hybride-verfahren/index.html"><span class="t-nr">8.11</span> Hybride Verfahren</a></li>
+</ul>
+<p class="kap">Integrität und Authentizität</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-12-hashfunktionen/index.html"><span class="t-nr">8.12</span> Hashfunktionen</a></li>
+<li><a href="../../lb8-informationssicherheit/8-13-digitale-signatur/index.html"><span class="t-nr">8.13</span> Digitale Signatur</a></li>
+<li><a href="../../lb8-informationssicherheit/8-14-authentifizierung/index.html"><span class="t-nr">8.14</span> Authentifizierung</a></li>
+</ul>
+<p class="kap">Netzsicherheit</p><ul>
+<li><a href="../../lb8-informationssicherheit/7-11-tls-vpn/index.html"><span class="t-nr">7.11</span> Transportverschlüsselung: TLS und VPN</a></li>
+<li><a href="../../lb8-informationssicherheit/7-12-authentifizierung/index.html"><span class="t-nr">7.12</span> Identifizierung und Authentifizierung</a></li>
+</ul>
+<p class="kap">Verfügbarkeit</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-15-datensicherung-raid/index.html"><span class="t-nr">8.15</span> Datensicherung und RAID</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 9</span> Datenmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb9-datenmanagement/index.html">Überblick Datenmanagement</a>
+<p class="kap">Relationale Datenbanken</p><ul>
+<li><a href="../../lb9-datenmanagement/1-1-datenbanken/index.html"><span class="t-nr">1.1</span> Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/1-2-relationale-db/index.html"><span class="t-nr">1.2</span> Das relationale Datenmodell</a></li>
+<li><a href="../../lb9-datenmanagement/1-3-sql-select/index.html"><span class="t-nr">1.3</span> SQL-Abfragen</a></li>
+<li><a href="../../lb9-datenmanagement/1-4-sql-where/index.html"><span class="t-nr">1.4</span> SQL WHERE- und LIKE-Klauseln</a></li>
+<li><a href="../../lb9-datenmanagement/1-5-sql-aggregation/index.html"><span class="t-nr">1.5</span> SQL-Aggregatfunktionen</a></li>
+<li><a href="../../lb9-datenmanagement/1-6-sql-joins/index.html"><span class="t-nr">1.6</span> SQL-Joins</a></li>
+<li><a href="../../lb9-datenmanagement/1-7-db-browser/index.html"><span class="t-nr">1.7</span> DB Browser (SQLite)</a></li>
+<li><a href="../../lb9-datenmanagement/1-8-crud/index.html"><span class="t-nr">1.8</span> CRUD: Create, (Read), Update und Delete in SQL</a></li>
+<li><a href="../../lb9-datenmanagement/1-9-sql-uebung/index.html"><span class="t-nr">1.9</span> SQL-Übungsaufgaben</a></li>
+<li><a href="../../lb9-datenmanagement/1-10-erm/index.html"><span class="t-nr">1.10</span> Das Entity-Relationship-Modell</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-1-11-1-db-browser-eigene-tabellen/index.html"><span class="t-nr">1.11.1</span> Eigene Datenbank in DB Browser anlegen</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-relationenmodell/index.html"><span class="t-nr">1.11</span> Vom ER-Modell zum Relationenmodell und Relationenschemata</a></li>
+<li><a href="../../lb9-datenmanagement/1-12-uebung-modellierung/index.html"><span class="t-nr">1.12</span> Übungsaufgaben zur Modellierung von Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/1-13-normalisierung/index.html"><span class="t-nr">1.13</span> Normalisierung und Anomalien</a></li>
+<li><a href="../../lb9-datenmanagement/1-14-erste-normalform/index.html"><span class="t-nr">1.14</span> Erste Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-15-zweite-normalform/index.html"><span class="t-nr">1.15</span> Zweite Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-16-dritte-normalform/index.html"><span class="t-nr">1.16</span> Dritte Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-17-uebung-normalformen/index.html"><span class="t-nr">1.17</span> Übungsaufgaben zu den Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-18-komplette-uebung/index.html"><span class="t-nr">1.18</span> Übung: ERM, Relationenmodell und Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-19-subselects/index.html"><span class="t-nr">1.19</span> Subselects in SQLite</a></li>
+<li><a href="../../lb9-datenmanagement/1-20-sql-uebung/index.html"><span class="t-nr">1.20</span> SQL-Übungen für DB Browser (SQLite) – Thema: Freizeitpark</a></li>
+<li><a href="../../lb9-datenmanagement/1-21-selbstcheck/index.html"><span class="t-nr">1.21</span> Selbstcheck: Datenbanken</a></li>
+</ul>
+<p class="kap">NoSQL</p><ul>
+<li><a href="../../lb9-datenmanagement/2-1-cap/index.html"><span class="t-nr">2.1</span> Das CAP-Theorem</a></li>
+<li><a href="../../lb9-datenmanagement/2-2-nosql-db/index.html"><span class="t-nr">2.2</span> NoSQL-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-3-key-value-db/index.html"><span class="t-nr">2.3</span> Key-Value-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-4-selbstcheck/index.html"><span class="t-nr">2.4</span> Selbstcheck: NoSQL-Datenbanken</a></li>
+</ul>
+<p class="kap">Datenverarbeitung mit Python</p><ul>
+<li><a href="../../lb9-datenmanagement/3-1-data-life-cycle/index.html"><span class="t-nr">3.1</span> Arbeit mit Daten: Der Data Life Cycle</a></li>
+<li><a href="../../lb9-datenmanagement/3-2-verschachtelte-datentypen/index.html"><span class="t-nr">3.2</span> Geschachtelte Datentypen</a></li>
+<li><a href="../../lb9-datenmanagement/3-3-einlesen/index.html"><span class="t-nr">3.3</span> Daten mit Python einlesen</a></li>
+<li><a href="../../lb9-datenmanagement/3-4-verarbeiten/index.html"><span class="t-nr">3.4</span> Verarbeitung eingelesener Daten in Python</a></li>
+<li><a href="../../lb9-datenmanagement/3-5-bereinigen/index.html"><span class="t-nr">3.5</span> Daten bereinigen und analysieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-6-schreiben/index.html"><span class="t-nr">3.6</span> Daten in CSV-Dateien schreiben</a></li>
+<li><a href="../../lb9-datenmanagement/3-7-csv-in-dbbrowser/index.html"><span class="t-nr">3.7</span> CSV-Daten in DB Browser importieren und mit SQL auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-8-visualisieren/index.html"><span class="t-nr">3.8</span> CSV-Dateien mit LibreOffice visualisieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-9-data-life-cycle-csv/index.html"><span class="t-nr">3.9</span> Datenlebenszyklus mit CSV – Eigene Umfrage gestalten und auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-10-json/index.html"><span class="t-nr">3.10</span> JSON: Ein aktuelles Standardformat</a></li>
+<li><a href="../../lb9-datenmanagement/3-11-api/index.html"><span class="t-nr">3.11</span> APIs verstehen und nutzen</a></li>
+<li><a href="../../lb9-datenmanagement/3-12-uebung-erm-daten-verarbeiten/index.html"><span class="t-nr">3.12</span> WÜ Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/3-13-datenmanagement-vertiefung/index.html"><span class="t-nr">3.13</span> Vertiefung des Datenmanagements</a></li>
+<li><a href="../../lb9-datenmanagement/3-14-iug/index.html"><span class="t-nr">3.14</span> Daten in der Gesellschaft: Ethische und kritische Betrachtungen</a></li>
+<li><a href="../../lb9-datenmanagement/3-15-selbstcheck/index.html"><span class="t-nr">3.15</span> Selbstcheck: Datenverarbeitung mit Python</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 10/11</span> KI und Projektmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb10-ki-projektmanagement/index.html">Überblick KI und Projektmanagement</a>
+<p class="kap">KI-Kickstart</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-0-kickstart-sprachmodelle/index.html"><span class="t-nr">11.0</span> KI-Kickstart: Wie funktionieren Sprachmodelle?</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-0b-ki-als-lernpartner/index.html"><span class="t-nr">11.0b</span> KI als Lernpartner: Assistenten verstehen und selbst einstellen</a></li>
+</ul>
+<p class="kap">KI-Grundlagen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-1-begriff-ki/index.html"><span class="t-nr">11.1</span> Einführung in die Künstliche Intelligenz</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-2-wissens-datenbasierte-ki/index.html"><span class="t-nr">11.2</span> Wissensbasierte und datenbasierte Ansätze in der KI</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-3-ki-modelle-optimieren/index.html"><span class="t-nr">11.3</span> KI-Systeme: Training und Optimierung</a></li>
+</ul>
+<p class="kap">Projektmanagement</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-1-grundlagen/index.html"><span class="t-nr">10.1</span> Grundlagen des Projektmanagements</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-2-klassisch-vs-agil/index.html"><span class="t-nr">10.2</span> Klassisches und agiles Projektmanagement</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-3-versionsverwaltung-git/index.html"><span class="t-nr">10.3</span> Versionsverwaltung mit Git</a></li>
+</ul>
+<p class="kap">KI-Projekt</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-4-tutorial-jupyter/index.html"><span class="t-nr">10.4</span> Maschinelles Lernen: Tutorials mit Jupyter</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-5-ki-projektmanagement/index.html"><span class="t-nr">10.5</span> Projektaufgabe: Künstliche Intelligenz mit Projektmanagement erarbeiten</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-6-ki-projekt-dokumentation/index.html"><span class="t-nr">10.6</span> Projektdokumentation: Künstliche Intelligenz (KI) &amp; Projektmanagement</a></li>
+</ul>
+<p class="kap">Maschinelles Lernen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-4-lineare-regression/index.html"><span class="t-nr">11.4</span> Lineare Regression</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-5-entscheidungsbaum/index.html"><span class="t-nr">11.5</span> Entscheidungsbäume</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-6-k-naechster-nachbar/index.html"><span class="t-nr">11.6</span> k-Nächste-Nachbarn-Algorithmus (k-NN)</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-7-k-means/index.html"><span class="t-nr">11.7</span> k-Means-Clustering</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-8-neuronale-netze/index.html"><span class="t-nr">11.8</span> Neuronale Netze und Deep Learning</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-9-genetische-algorithmen/index.html"><span class="t-nr">11.9</span> Genetische Algorithmen</a></li>
+</ul>
+<p class="kap">Generative KI und Gesellschaft</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-10-generative-ki/index.html"><span class="t-nr">11.10</span> Generative KI und Sprachmodelle</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-11-ki-und-gesellschaft/index.html"><span class="t-nr">11.11</span> Gesellschaftliche Auswirkungen Künstlicher Intelligenz</a></li>
+</ul>
+</div></details>
+</nav>
+<div class="haupt-rahmen">
+<main class="haupt" id="inhalt">
+<p class="pfad"><a href="../../index.html">Überblick</a> › <a href="../index.html">LB 2/3 Programmieren und Algorithmen</a></p>
+<h1><span class="h1-nr">2.2.9</span> Effiziente Sortieralgorithmen – Mergesort</h1>
+<nav class="reiter" aria-label="Teile dieses Themas"><a class="aktiv" aria-current="page" href="index.html">Einführung <span class="r-zahl">2</span></a><a href="uebungen.html">Übungen <span class="r-zahl">4</span></a><a href="vertiefung.html">Vertiefung <span class="r-zahl">2</span></a></nav>
+<div class="seiteninhalt" id="seiteninhalt">
+
+<script src="../sortierlabor.js" defer></script>
+<p>
+            In den vorherigen Stunden hast du einfache Sortieralgorithmen wie Bubblesort und Insertionsort kennengelernt. Dabei wurde dir auch bewusst, dass diese Algorithmen bei größeren Datenmengen ineffizient sind.
+        </p>
+
+<p>
+            Die Algorithmen, die du bisher kennengelernt hast, gehören zur Komplexitätsklasse O(n²). Für kleine Datenmengen ist das noch in Ordnung, bei großen Datenmengen dauert das Sortieren aber sehr lange. Daher braucht man effizientere Verfahren mit besserer Zeitkomplexität.
+        </p>
+
+<p>
+            Mergesort ist ein effizienter Sortieralgorithmus mit einer garantierten Zeitkomplexität von O(n · log n) – im besten, mittleren und schlechtesten Fall. Er basiert auf dem Divide-and-Conquer-Prinzip und sortiert zuverlässig auch große Datenmengen.
+        </p>
+
+<h2>Die Idee in einem Bild</h2>
+
+<p>Stell dir vor, 8 Personen sollen 8 Karten sortieren. Die erste Person teilt den Stapel und gibt je eine Hälfte an zwei andere weiter, diese teilen wieder – bis jede Person nur noch <strong>eine Karte</strong> hat. Eine einzelne Karte ist sortiert, da gibt es nichts zu tun. Jetzt geht es zurück: Je zwei Personen legen ihre sortierten Stapel zu einem sortierten Stapel zusammen, indem sie immer nur die beiden <strong>vorderen</strong> Karten vergleichen. Am Ende hält die erste Person alle 8 Karten sortiert in der Hand.</p>
+
+<ul>
+            <li><strong>Teilen</strong> kostet keinen einzigen Vergleich – es wird nur halbiert.</li>
+            <li><strong>Zusammenführen</strong> ist die eigentliche Arbeit – aber sie ist billig, weil beide Stapel schon sortiert sind.</li>
+            <li>Bei 8 Karten gibt es nur 3 Ebenen (8 → 4 → 2 → 1), bei 1 000 Karten nur 10, bei einer Million 20. Auf jeder Ebene wird jede Karte nur einmal angefasst.</li>
+        </ul>
+
+<div class="hinweis">
+            <details>
+                <summary>Mit den Karten: Station Mergesort</summary>
+                <p>Holt eure Zahlenkarten aus 2.2.1 wieder heraus. Es gelten die bekannten Regeln, mit einer Änderung: Jetzt ist eine <strong>zweite Reihe</strong> erlaubt – das ist der zusätzliche Speicher, den Mergesort braucht.</p>
+                <ol>
+                    <li><strong>Teilen:</strong> Teilt die 8 verdeckten Karten in zwei Hälften, gebt jede Hälfte weiter und teilt, bis jede Hälfte nur noch eine Karte hat.</li>
+                    <li><strong>Zusammenführen:</strong> Zwei sortierte Stapel liegen verdeckt nebeneinander, die kleinste Karte vorn. Aufgedeckt werden <strong>nur die beiden vorderen Karten</strong>. Die kleinere kommt in die Ergebnisreihe (1 Strich V). Ist ein Stapel leer, kommt der Rest des anderen ohne Vergleich dahinter.</li>
+                    <li>Zählt die Vergleiche für 8 und für 16 Karten und vergleicht mit eurem Verfahren aus 2.2.1 (Aufgabe 2.2.9.8).</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Divide and Conquer</summary>
+                <p>
+                    Viele effiziente Algorithmen nutzen das Prinzip „Teile und herrsche“ (Divide and Conquer, siehe 2.2.8): Das Problem wird in kleinere Teilprobleme zerlegt, diese werden rekursiv gelöst, und die Teillösungen werden zu einer Gesamtlösung kombiniert.
+                </p>
+            </details>
+        </div>
+
+<h2 id="schritt-1">Schritt 1: Zwei sortierte Listen zusammenführen</h2>
+
+<p>Mergesort beruht auf einer einfachen Beobachtung: Zwei Listen, die <em>schon sortiert</em> sind, lassen sich schnell zu einer sortierten Liste zusammenführen. Man vergleicht nur die vorderen, noch nicht übernommenen Elemente und nimmt das kleinere. Im Video siehst du das an [3, 8] und [2, 5]. Achte auf die beiden Zeiger <code>i</code> und <code>j</code> und darauf, was passiert, wenn eine Liste aufgebraucht ist.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-1_merge_idee_vorschau.png" src="../vid/2-2-9-1_merge_idee.mp4"></video><a href="../vid/2-2-9-1_merge_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Wie führt man zwei sortierte Listen zusammen? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<h3>Jetzt du: Welche Zahl kommt als Nächstes?</h3>
+
+<p>Im Sortierlabor entscheidest du bei jedem Vergleich, welche der beiden vorderen Zahlen ins Ergebnis kommt. Mit „Neue Zufallslisten“ bekommst du neue Aufgaben, du kannst aber auch selbst zwei sortierte Listen eintippen. Achte darauf, ab wann keine Vergleiche mehr nötig sind.</p>
+
+<div class="sortierlabor" data-verfahren="mergeteil" data-links="3, 8" data-rechts="2, 5" data-vorhersage="ja" data-code="nein"></div>
+
+<p>Zum Nachlesen steht derselbe Ablauf als Tabelle in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Zusammenführen (Merge) der sortierten Listen [3, 8] und [2, 5]: Vergleiche die jeweils ersten Elemente und nimm das kleinere: 2 → 3 → 5 → 8. Ergebnis: [2, 3, 5, 8].</p>
+            <table>
+                <thead><tr><th>Schritt</th><th>links[i]</th><th>rechts[j]</th><th>Vergleich</th><th>ergebnis danach</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>3</td><td>2</td><td>3 ≤ 2? nein → rechts nehmen</td><td>[2]</td></tr>
+                    <tr><td>2</td><td>3</td><td>5</td><td>3 ≤ 5? ja → links nehmen</td><td>[2, 3]</td></tr>
+                    <tr><td>3</td><td>8</td><td>5</td><td>8 ≤ 5? nein → rechts nehmen</td><td>[2, 3, 5]</td></tr>
+                    <tr><td>4</td><td>8</td><td>–</td><td>rechts ist leer → Rest von links anhängen</td><td>[2, 3, 5, 8]</td></tr>
+                </tbody>
+            </table>
+            <ol>
+                <li><strong>Nur die Anfänge vergleichen:</strong> Beide Listen sind sortiert. Das kleinste noch nicht übernommene Element steht deshalb immer vorn in einer der beiden Listen.</li>
+                <li><strong>Rest anhängen:</strong> Ist eine Liste leer, kann der Rest der anderen ohne weitere Vergleiche angehängt werden, denn er ist bereits sortiert und größer.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> [2, 3, 5, 8] nach 3 Vergleichen. <strong>Kontrolle:</strong> Beim Zusammenführen von a und b Elementen sind höchstens a + b − 1 Vergleiche nötig, hier 2 + 2 − 1 = 3.</p>
+            <table>
+                <thead><tr><th>Eingabe <code>merge(links, rechts)</code></th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>([3, 8], [2, 5])</code></td><td><code>[2, 3, 5, 8]</code></td><td>Normalfall, 3 Vergleiche</td></tr>
+                    <tr><td><code>([1, 2], [7, 9])</code></td><td><code>[1, 2, 7, 9]</code></td><td>bester Fall, 2 Vergleiche</td></tr>
+                    <tr><td><code>([], [4, 6])</code></td><td><code>[4, 6]</code></td><td>leere Liste, 0 Vergleiche</td></tr>
+                    <tr><td><code>([1], [1])</code></td><td><code>[1, 1]</code></td><td>gleiche Werte</td></tr>
+                    <tr><td><code>([-4, 0], [-5])</code></td><td><code>[-5, -4, 0]</code></td><td>negative Zahlen</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Zusammenführen von Hand <span class="niveau">AFB I</span></summary>
+                <p>Führe [1, 6] und [2, 3, 9] zusammen. In welcher Reihenfolge werden die Zahlen übernommen, und wie viele Vergleiche sind nötig?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>1 ≤ 2 → 1; 6 ≤ 2? nein → 2; 6 ≤ 3? nein → 3; 6 ≤ 9 → 6. Jetzt ist die linke Liste leer, die 9 wird ohne Vergleich angehängt: [1, 2, 3, 6, 9] nach 4 Vergleichen (höchstens 2 + 3 − 1 = 4).</p>
+                </details>
+            </details>
+        </div>
+
+<h2 id="schritt-2">Schritt 2: merge in Python</h2>
+
+<p>Die Funktion <code>merge</code> setzt das Zusammenführen mit zwei Zeigern <code>i</code> und <code>j</code> um. Darin stecken drei Python-Bausteine, die im Video an kleinen Beispielen in der Kommandozeile gezeigt werden: die Mehrfachzuweisung <code>i = j = 0</code>, eine <code>while</code>-Bedingung mit <code>and</code> und der Rest einer Liste mit <code>links[i:]</code>, der mit <code>extend</code> angehängt wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-2_merge_code_vorschau.png" src="../vid/2-2-9-2_merge_code.mp4"></video><a href="../vid/2-2-9-2_merge_code.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: merge in Python (ca. 2 min)</figcaption>
+        </figure>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Slicing und extend <span class="niveau">AFB I</span></summary>
+                <p>Was liefern <code>[4, 7, 9][1:]</code> und <code>[4, 7, 9][3:]</code>? Wie sieht <code>a</code> nach <code>a = [1]</code> und <code>a.extend([5, 6])</code> aus?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[7, 9]</code> (ab Position 1) und <code>[]</code> (ab Position 3 gibt es nichts mehr). Danach ist <code>a</code> = <code>[1, 5, 6]</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<h2 id="schritt-3">Schritt 3: merge Schritt für Schritt</h2>
+
+<p>Jetzt läuft <code>merge([3, 8], [2, 5])</code> in Thonny. Im Speicherbild zeigen <code>i</code> und <code>j</code> auf die Elemente, die gerade verglichen werden, übernommene Elemente werden grau. Achte darauf, welcher Teil der <code>while</code>-Bedingung am Ende falsch wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-3_merge_schritte_vorschau.png" src="../vid/2-2-9-3_merge_schritte.mp4"></video><a href="../vid/2-2-9-3_merge_schritte.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: merge Schritt für Schritt (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Jetzt du: merge im Code mitverfolgen</h3>
+
+<p>Hier läuft <code>merge</code> Zeile für Zeile. Rechts siehst du <code>i</code>, <code>j</code> und <code>ergebnis</code>. Gib danach <code>2, 4</code> und <code>1, 9</code> ein und vergleiche mit deiner Lösung von Kurz geprüft 3.</p>
+
+<div class="sortierlabor" data-verfahren="mergeteil" data-links="3, 8" data-rechts="2, 5" data-fein="ja"></div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Zeiger verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Verfolge <code>merge([2, 4], [1, 9])</code>. Welche Werte haben <code>i</code> und <code>j</code>, wenn die <code>while</code>-Schleife endet? Was hängen die beiden <code>extend</code>-Zeilen an?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>2 &lt;= 1? nein → 1, <code>j</code> = 1; 2 &lt;= 9 → 2, <code>i</code> = 1; 4 &lt;= 9 → 4, <code>i</code> = 2. Jetzt ist <code>i &lt; 2</code> falsch: Die Schleife endet mit <code>i</code> = 2 und <code>j</code> = 1. <code>links[2:]</code> ist leer, <code>rechts[1:]</code> hängt die 9 an. Ergebnis: [1, 2, 4, 9].</p>
+                </details>
+            </details>
+        </div>
+
+<h2 id="schritt-4">Schritt 4: Mergesort – Teilen und Zusammenführen</h2>
+
+<p>Mergesort nutzt <code>merge</code> immer wieder: Die Liste wird so lange halbiert, bis nur noch Listen mit einem Element übrig sind. Diese sind sortiert, und von unten nach oben werden je zwei sortierte Teillisten zusammengeführt. Im Video siehst du das an der Liste [38, 27, 43, 3, 9, 82, 10] aus Beispiel 2. Achte darauf, wie viele Vergleiche auf jeder Ebene anfallen.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-4_teilen_vorschau.png" src="../vid/2-2-9-4_teilen.mp4"></video><a href="../vid/2-2-9-4_teilen.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Mergesort – Teilen und Zusammenführen (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Jetzt du: Den Baum wachsen sehen</h3>
+
+<p>Das Sortierlabor zeichnet jeden Aufruf von <code>mergesort</code> als Kasten. Gestrichelt: Die Liste wurde geteilt und wartet auf ihre Hälften. Gelb: Hier wird gerade zusammengeführt – die leeren Plätze füllen sich von links. Grün: sortiert. Der blaue Rahmen zeigt den Aufruf, der gerade läuft. Bei jedem Vergleich sagst du vorher, welche Zahl ins Ergebnis kommt.</p>
+
+<div class="sortierlabor" data-verfahren="merge" data-liste="38, 27, 43, 3, 9, 82, 10" data-vorhersage="ja" data-code="nein"></div>
+
+<p class="tipp">Gib eine Liste mit 16 Zahlen ein oder nimm die Zahlen deines Kartensatzes. Zähle die Ebenen. Wie viele Ebenen wären es bei 32 Zahlen?</p>
+
+<p>Die vollständige Rechnung mit allen merge-Schritten steht in Beispiel 2 (Schritt 5).</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Teilen <span class="niveau">AFB I</span></summary>
+                <p>Wie wird die Liste [6, 2, 5, 1, 4] geteilt (<code>mitte = len(liste) // 2</code>)? Notiere alle Teillisten bis zum Basisfall.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>mitte</code> = 5 // 2 = 2: [6, 2] und [5, 1, 4]. Dann [6] und [2] sowie [5] und [1, 4] (3 // 2 = 1). Zum Schluss [1] und [4].</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.9.1 – Mergesort von Hand.</p>
+
+<h2 id="schritt-5">Schritt 5: Mergesort in Python</h2>
+
+<p>Die Funktion <code>mergesort</code> ist kurz: ein Basisfall, zweimal Teilen mit Rekursion, einmal <code>merge</code>. Neu sind die ganzzahlige Division <code>//</code> und das Slicing <code>liste[:mitte]</code> und <code>liste[mitte:]</code>. Achte am Ende des Videos auf die Falle: <code>mergesort</code> sortiert die übergebene Liste nicht selbst, sondern gibt eine neue zurück.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-9-5_code_vorschau.png" src="../vid/2-2-9-5_code.mp4"></video><a href="../vid/2-2-9-5_code.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Mergesort in Python (ca. 2 min)</figcaption>
+        </figure>
+
+<h3>Jetzt du: Rekursion und Aufrufstapel beobachten</h3>
+
+<p>Jetzt läuft der ganze Code. Rechts unten steht der <strong>Aufrufstapel</strong>: Jeder Aufruf von <code>mergesort</code> wartet dort, bis seine beiden Hälften zurückkommen. Beobachte: Der Stapel wird nie höher als die Zahl der Ebenen + 1 – deshalb droht hier kein <code>RecursionError</code>. Und: In Zeile 19 und 20 wird nur geteilt, verglichen wird ausschließlich in <code>merge</code> (Zeile 5).</p>
+
+<div class="sortierlabor" data-verfahren="merge" data-liste="6, 2, 5, 1, 4"></div>
+
+<h3>Zum Verstehen: Warum ist Mergesort so viel schneller?</h3>
+
+<p>Auf jeder Ebene des Baums werden alle n Zahlen genau einmal in eine neue Liste übernommen, dafür reichen höchstens n Vergleiche. Die Zahl der Ebenen ist die Antwort auf die Frage „Wie oft kann ich n halbieren, bis 1 übrig bleibt?“, also log<sub>2</sub> n. Zusammen sind das höchstens etwa n · log<sub>2</sub> n Vergleiche.</p>
+
+<table>
+            <thead><tr><th>n</th><th>Ebenen log<sub>2</sub> n</th><th>Mergesort höchstens ≈ n · log<sub>2</sub> n</th><th>Bubblesort schlechtester Fall n · (n − 1) / 2</th></tr></thead>
+            <tbody>
+                <tr><td>8</td><td>3</td><td>24</td><td>28</td></tr>
+                <tr><td>16</td><td>4</td><td>64</td><td>120</td></tr>
+                <tr><td>1 024</td><td>10</td><td>10 240</td><td>523 776</td></tr>
+                <tr><td>1 048 576</td><td>20</td><td>≈ 21 Millionen</td><td>≈ 550 Milliarden</td></tr>
+            </tbody>
+        </table>
+
+<p>Bei 8 Karten merkt man den Unterschied kaum, bei einer Million ist Mergesort rund 25 000-mal schneller. Im Wettrennen unten siehst du es selbst.</p>
+
+<p>Zum Nachlesen: der vollständige Code, alle Teillisten und die Vergleiche in Beispiel 2.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Mergesort für [38, 27, 43, 3, 9, 82, 10]</p>
+            <pre class="darstellung"><code>Teilen (mitte = len // 2):
+               [38, 27, 43]               [3, 9, 82, 10]
+               [38]   [27, 43]            [3, 9]    [82, 10]
+               [38]   [27] [43]           [3] [9]   [82] [10]
+Zusammenführen:
+               [38]   [27, 43]            [3, 9]    [10, 82]
+               [27, 38, 43]               [3, 9, 10, 82]
+               [3, 9, 10, 27, 38, 43, 82]</code></pre>
+            <pre class="ausfuehrbar"><code class="language-python">def merge(links, rechts):
+    ergebnis = []
+    i = j = 0
+    while i &lt; len(links) and j &lt; len(rechts):
+        if links[i] &lt;= rechts[j]:       # &lt;= hält Mergesort stabil
+            ergebnis.append(links[i])
+            i = i + 1
+        else:
+            ergebnis.append(rechts[j])
+            j = j + 1
+    ergebnis.extend(links[i:])          # Rest anhängen
+    ergebnis.extend(rechts[j:])
+    return ergebnis
+
+def mergesort(liste):
+    if len(liste) &lt;= 1:                 # Basisfall
+        return liste
+    mitte = len(liste) // 2
+    links = mergesort(liste[:mitte])    # Teilen und Herrschen
+    rechts = mergesort(liste[mitte:])
+    return merge(links, rechts)         # Kombinieren
+
+print(mergesort([38, 27, 43, 3, 9, 82, 10]))
+# [3, 9, 10, 27, 38, 43, 82]</code></pre>
+            <ol>
+                <li><strong>Teilen bis zum Basisfall:</strong> mitte = 7 // 2 = 3 → [38, 27, 43] und [3, 9, 82, 10]. Weiter halbieren, bis nur noch Listen mit einem Element übrig sind. <em>Warum:</em> Eine Liste mit höchstens einem Element ist sortiert, dort endet die Rekursion.</li>
+                <li><strong>Zusammenführen und Vergleiche zählen:</strong>
+                    <table>
+                        <thead><tr><th>merge</th><th>Ergebnis</th><th>Vergleiche</th></tr></thead>
+                        <tbody>
+                            <tr><td>[27] + [43]</td><td>[27, 43]</td><td>1</td></tr>
+                            <tr><td>[38] + [27, 43]</td><td>[27, 38, 43]</td><td>2</td></tr>
+                            <tr><td>[3] + [9]</td><td>[3, 9]</td><td>1</td></tr>
+                            <tr><td>[82] + [10]</td><td>[10, 82]</td><td>1</td></tr>
+                            <tr><td>[3, 9] + [10, 82]</td><td>[3, 9, 10, 82]</td><td>2</td></tr>
+                            <tr><td>[27, 38, 43] + [3, 9, 10, 82]</td><td>[3, 9, 10, 27, 38, 43, 82]</td><td>6</td></tr>
+                            <tr><td colspan="2"><strong>Summe</strong></td><td><strong>13</strong></td></tr>
+                        </tbody>
+                    </table>
+                    Zum Vergleich: Bubblesort bräuchte ohne Abbruch 7 · 6 / 2 = 21 Vergleiche.</li>
+                <li><strong>Warum O(n · log n)?</strong> Es entstehen ⌈log<sub>2</sub> 7⌉ = 3 Ebenen. Auf jeder Ebene wird jedes Element höchstens einmal in eine neue Liste übernommen, das sind höchstens n Schritte pro Ebene.</li>
+                <li><strong>Stabilität:</strong> In <code>merge</code> steht <code>&lt;=</code>. Bei gleichen Werten wird zuerst das Element aus der <em>linken</em> Teilliste genommen, und das stand ursprünglich weiter vorn. Mit <code>&lt;</code> wäre Mergesort nicht mehr stabil.</li>
+                <li><strong>Bester und schlechtester Fall:</strong> Ein merge von a und b Elementen braucht mindestens min(a, b) und höchstens a + b − 1 Vergleiche. Die Gesamtzahl schwankt also nur in engen Grenzen. Auch eine bereits sortierte Liste kostet O(n log n), im Unterschied zu Insertionsort und Bubblesort mit Abbruch.</li>
+                <li><strong>Falle „sortiert die Funktion meine Liste?“:</strong> <code>mergesort</code> arbeitet mit Kopien (<code>liste[:mitte]</code>) und gibt eine <em>neue</em> Liste zurück. Nach <code>zahlen = [3, 1, 2]</code> und <code>mergesort(zahlen)</code> ist <code>zahlen</code> immer noch <code>[3, 1, 2]</code>. Richtig ist <code>zahlen = mergesort(zahlen)</code> (siehe call by sharing, 2.1.6).</li>
+                <li><strong>Rekursionstiefe:</strong> Nur etwa log<sub>2</sub> n + 1 Aufrufe sind gleichzeitig offen, bei einer Million Elementen etwa 21. Anders als bei <code>sum_recursion</code> aus 2.2.7 droht kein <code>RecursionError</code>.</li>
+                <li><strong>Laufzeit messen:</strong>
+                    <pre><code class="language-python">import random
+import time
+
+for n in [10000, 20000, 40000, 80000]:
+    daten = []
+    for i in range(n):
+        daten.append(random.randint(1, 10**6))
+    start = time.perf_counter()
+    mergesort(daten)
+    ms = round((time.perf_counter() - start) * 1000)
+    print(n, ms, "ms")</code></pre>
+                    Beispielwerte eines Schulrechners: 31 ms; 66 ms; 141 ms; 302 ms. Bei Verdopplung von n steigt die Zeit um den Faktor ≈ 2,1. Das ist etwas mehr als 2, weil log<sub>2</sub>(2n) = log<sub>2</sub> n + 1 ist. Bubblesort hätte den Faktor 4 und bräuchte für n = 80 000 bereits mehrere Minuten.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> [3, 9, 10, 27, 38, 43, 82] mit 13 Vergleichen. Mergesort ist stabil, liegt immer in O(n log n) und braucht zusätzlichen Speicher.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe <code>mergesort</code></th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[38, 27, 43, 3, 9, 82, 10]</code></td><td><code>[3, 9, 10, 27, 38, 43, 82]</code></td><td>Normalfall</td></tr>
+                    <tr><td><code>[]</code></td><td><code>[]</code></td><td>leere Liste: Basisfall</td></tr>
+                    <tr><td><code>[5]</code></td><td><code>[5]</code></td><td>ein Element</td></tr>
+                    <tr><td><code>[3, -1, 3, 0]</code></td><td><code>[-1, 0, 3, 3]</code></td><td>negative Zahlen und Duplikate</td></tr>
+                    <tr><td><code>["b", "a"]</code></td><td><code>['a', 'b']</code></td><td>Texte</td></tr>
+                    <tr><td><code>[1, "a"]</code></td><td><code>TypeError</code></td><td>falscher Typ: <code>1 &lt;= "a"</code> ist nicht definiert</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Neue Liste und Aufrufe <span class="niveau">AFB I</span></summary>
+                <p>Nach <code>zahlen = [4, 2]</code> wird <code>mergesort(zahlen)</code> aufgerufen. Welchen Wert hat <code>zahlen</code> danach? Wie oft wird <code>mergesort</code> dabei insgesamt aufgerufen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>zahlen</code> ist weiterhin <code>[4, 2]</code>, denn die sortierte Liste <code>[2, 4]</code> ist eine neue Liste, die nur zurückgegeben wird. Aufrufe: einmal mit [4, 2], dann je einmal mit [4] und [2] (Basisfälle), also 3.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.9.2 – Mergesort erarbeiten, implementieren und testen.</p>
+
+<h2>Wettrennen: Mergesort gegen die einfachen Verfahren</h2>
+
+<p>Alle Verfahren sortieren gleichzeitig dieselbe Liste. Ein Zeittakt ist ein Vergleich. Probiere verschiedene Startreihenfolgen aus. Mit dem Knopf unten zählt das Labor die Vergleiche für n = 8 bis 512 und zeichnet sie als Diagramm. Quicksort lernst du auf der nächsten Seite kennen.</p>
+
+<div class="sortierlabor" data-verfahren="rennen"></div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Sortieren großer Datenmengen</summary>
+                <p>
+                    <strong>Alltag:</strong> Wenn ein Streamingdienst Millionen Titel nach Beliebtheit ordnet oder deine Fotos-App Tausende Bilder nach Datum sortiert, stecken O(n · log n)-Verfahren dahinter. Mit O(n²) würde das Minuten statt Millisekunden dauern.<br><br>
+                    <strong>Beruf:</strong> Datenbanksysteme sortieren Tabellen, die nicht in den Arbeitsspeicher passen, mit „externem Mergesort“: Sie sortieren handliche Stücke im Arbeitsspeicher, schreiben sie auf die Festplatte und führen sie anschließend zusammen. Datenbankadministratorinnen und -administratoren beobachten solche Sortiervorgänge, um langsame Abfragen zu beschleunigen.
+                </p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+            Mergesort teilt die Liste so lange in Hälften, bis nur noch Listen mit höchstens einem Element übrig sind, und führt die sortierten Teillisten mit <code>merge</code> wieder zusammen. <code>merge</code> vergleicht dabei immer nur die vorderen Elemente zweier sortierter Listen und hängt am Ende den Rest an. Weil es etwa log<sub>2</sub> n Ebenen gibt und auf jeder Ebene höchstens n Elemente bewegt werden, liegt Mergesort immer in O(n · log n). Er ist stabil, braucht aber zusätzlichen Speicher und gibt eine neue Liste zurück.
+        </p>
+
+<div class="hinweis" id="einschaetzen">
+            <details open>
+                <summary>Einschätzen: zurück zum Streamingdienst</summary>
+                <p>Jetzt kommt die entscheidende Frage: Schafft Mergesort die Charts mit 100 Millionen Songs in einer Nacht? Füge deinen Mergesort in Teil 5 des Messlabors ein (<a href="../notebooks/2-2-3_einfuehrung_komplexitaet.ipynb" download>Notebook von Seite 2.2.3</a>) – in <code>merge</code> wird nur der Vergleich zu <code>kommt_vor</code>, an der Stoppuhr musst du nichts ändern. Vergleiche ihn im Diagramm mit Bubblesort und miss ihn dann für 12 500, 25 000 und 50 000 Songs. Trage den größten Messwert in den Hochrechner ein (Klasse O(n · log n)). Zum Vergleich: Bubblesort hätte für 50 000 Songs weit über eine Minute gebraucht.</p>
+                <div class="sortierlabor" data-verfahren="hochrechner" data-n="50000" data-zeit="0,209" data-klasse="nlogn"></div>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Beispielmessung mit der Songliste (mit Vergleichszähler): 12 500 Songs 0,041 s (154 617 Vergleiche), 25 000 Songs 0,091 s (334 264), 50 000 Songs 0,209 s (718 358). Faktor bei Verdopplung ≈ 2,2 – etwas mehr als 2, wie bei n · log n erwartet. Hochgerechnet auf 100 Millionen Songs: etwa 12 Minuten. Die Charts passen also locker in eine Nacht, Bubblesort hätte Jahrzehnte gebraucht. Gleiche Daten, gleicher Rechner, gleiche Messung – nur ein Verfahren aus einer besseren Klasse.</p>
+                <p>Achtung bei <code>stoppe</code>: Mergesort gibt eine neue Liste zurück, statt die übergebene zu sortieren. Für die Zeitmessung ist das egal. Wer das Ergebnis braucht, schreibt <code>sortiert = mergesort(streams)</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Mergesort:</strong> teilt die Liste in zwei Hälften, sortiert beide Hälften rekursiv und führt die sortierten Hälften anschließend zusammen (engl. <em>merge</em>). Eine Liste mit höchstens einem Element ist bereits sortiert (Basisfall).</p>
+<p><strong>Laufzeit:</strong> Es entstehen etwa log<sub>2</sub> n Ebenen, und auf jeder Ebene werden beim Zusammenführen insgesamt n Elemente bewegt. Das ergibt <strong>O(n · log n)</strong>.</p>
+<p><strong>Speicher:</strong> Mergesort braucht zusätzlichen Speicher für die Teillisten (O(n)).</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe" id="a-2-2-9-1">
+            <details>
+                <summary>Aufgabe 2.2.9.1: Mergesort von Hand <span class="niveau">AFB II</span></summary>
+                <p>Sortiere [5, 1, 7, 2, 8, 6, 3, 4] mit Mergesort von Hand. Notiere alle Teillisten und zähle die Vergleiche beim Zusammenführen.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-9-2">
+            <details>
+                <summary>Aufgabe 2.2.9.2: Mergesort erarbeiten <span class="niveau">AFB I–II</span></summary>
+                <ul>
+                    <li>Recherchiere, was das Prinzip <strong>Divide and Conquer</strong> bedeutet, und halte es in eigenen Worten schriftlich fest.</li>
+                    <li>Erarbeite dir den Algorithmus <strong>Mergesort</strong> mithilfe der Seite <a href="https://www.happycoders.eu/de/algorithmen/mergesort/" target="_blank">https://www.happycoders.eu/de/algorithmen/mergesort/</a>:
+                        <ul>
+                            <li>Wie funktioniert Mergesort Schritt für Schritt?</li>
+                            <li>Warum ist die Zeitkomplexität O(n · log n)?</li>
+                            <li>Wie lässt sich Mergesort in Python umsetzen?</li>
+                        </ul>
+                    </li>
+                    <li>Implementiere Mergesort in Python und teste deinen Code mit verschiedenen Datensätzen (leer, ein Element, sortiert, absteigend, mit doppelten Werten).</li>
+                </ul>
+            </details>
+        </div>
+
+</div>
+<section class="ziele" aria-labelledby="das-kann-ich">
+<h2 id="das-kann-ich">Das kann ich jetzt</h2>
+<p class="ziele-hinweis">Grau steht, was der Lehrplan verlangt, darunter, was das für dieses Thema konkret heißt. Hake einen Punkt ab, wenn er in deinem Hefter zusammengefasst ist und du ihn <strong>ohne Hilfe</strong> kannst. Wie du ihn zusammenfasst, entscheidest du selbst. Die Haken speichert nur dein Browser.</p>
+<p class="ziel-titel"><span>Lehrplan LB 2</span> Divide-and-Conquer <em>(Kennen algorithmischer Problemlösestrategien)</em></p><ul class="ziele-liste"><li><label><input type="checkbox" data-ziel="k94f227a7c1"><span>Ich kann an einem effizienten Sortierverfahren (z. B. Mergesort) zeigen, wie Teilen, rekursives Lösen und Kombinieren zusammenwirken.</span></label></li></ul><p class="ziel-titel"><span>Lehrplan LB 3</span> Nachweis der Komplexität <em>(Beurteilen der Effizienz und Komplexität von Algorithmen)</em></p><ul class="ziele-liste"><li><label><input type="checkbox" data-ziel="kd2e802392c"><span>Ich kann begründen, warum ein Sortierverfahren, das die Liste immer halbiert und linear zusammenführt, in O(n · log n) liegt.</span></label></li><li><label><input type="checkbox" data-ziel="k0a6c92e999"><span>Ich kann effiziente und einfache Sortierverfahren nach Laufzeit und Speicherbedarf vergleichen.</span></label></li></ul>
+<p class="ziele-stand" aria-live="polite"></p>
+</section>
+<div class="weiter-kasten"><p><strong>Weiter mit diesem Thema</strong></p><a class="weiter-link" href="uebungen.html">Übungen →</a><a class="weiter-link" href="vertiefung.html">Vertiefung →</a></div>
+<nav class="blaettern" aria-label="Themen blättern"><a class="zurueck" href="../2-2-8-divide-and-conquer/index.html"><small>← Vorheriges Thema</small>2.2.8 Divide and Conquer</a><a class="vor" href="../2-2-9b-quicksort/index.html"><small>Nächstes Thema →</small>2.2.9b Effiziente Sortieralgorithmen – Quicksort</a></nav>
+</main>
+<aside class="toc" id="toc" aria-label="Auf dieser Seite"></aside>
+</div>
+</div>
+<footer class="fuss">
+  <a href="../../hinweise.html">Hinweise und Bildnachweise</a>
+  <a href="../../impressum.html">Impressum</a>
+</footer>
+<script src="../../assets/prism.js"></script>
+<script src="../../assets/seite.js"></script>
+</body>
+</html>

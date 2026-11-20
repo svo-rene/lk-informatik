@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.5 Binärbaum und binärer Suchbaum – Leistungskurs Informatik</title>
+<script>try{var t=localStorage.getItem("thema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}if(/[?&]vollseite/.test(location.search))document.documentElement.classList.add("vollseite")</script>
+<link rel="stylesheet" href="../../assets/inhalt.css">
+<link rel="stylesheet" href="../../assets/seite.css">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+</head>
+<body class="mit-toc" data-root="../../">
+<header class="kopf">
+  <button class="menue-knopf" id="menue-knopf" aria-controls="leiste" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Themen</span></button>
+  <a class="marke" href="../../index.html"><span class="marke-zeichen">&lt;/&gt;</span><span>Leistungskurs Informatik</span></a>
+  <div class="kopf-rechts">
+    <button class="knopf-rund" id="thema-knopf" title="Hell oder dunkel" aria-label="Hell oder dunkel umschalten">
+      <span class="thema-dunkel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span><span class="thema-hell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+    </button>
+  </div>
+</header>
+<div class="rahmen">
+<nav class="leiste" id="leiste" aria-label="Lernbereiche">
+<div class="suche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="filter" placeholder="Thema suchen …" aria-label="Thema suchen"></div>
+<a class="leiste-start" href="../../index.html">Überblick</a>
+<a class="leiste-start" href="../../werkzeuge.html">Werkzeuge</a>
+<a class="leiste-start" href="../../projekte.html">Lernprojekte</a>
+<details class="lb"><summary><span class="lb-nr">LB 1</span> Technische Informatik</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb1-technische-informatik/index.html">Überblick Technische Informatik</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb1-technische-informatik/1-1-zahlenformate/index.html"><span class="t-nr">1.1</span> Zahlenformate</a></li>
+<li><a href="../../lb1-technische-informatik/1-2-zweierkomplement/index.html"><span class="t-nr">1.2</span> Zweierkomplement</a></li>
+<li><a href="../../lb1-technische-informatik/1-3-festkommazahlen/index.html"><span class="t-nr">1.3</span> Festkommazahlen</a></li>
+<li><a href="../../lb1-technische-informatik/1-4-zeichenkodierung/index.html"><span class="t-nr">1.4</span> Kodierung von Zeichen in der Informatik</a></li>
+</ul>
+<p class="kap">Boolesche Algebra</p><ul>
+<li><a href="../../lb1-technische-informatik/2-1-booleschealgebra/index.html"><span class="t-nr">2.1</span> Boolesche Algebra</a></li>
+<li><a href="../../lb1-technische-informatik/2-2-boolescheoperatoren/index.html"><span class="t-nr">2.2</span> Boolesche Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-3-formaleschreibweise/index.html"><span class="t-nr">2.3</span> Formale Schreibweise boolescher Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-4-implikationundaequivalenz/index.html"><span class="t-nr">2.4</span> Implikation und Äquivalenz</a></li>
+<li><a href="../../lb1-technische-informatik/2-5-gesetzeaussagenlogik/index.html"><span class="t-nr">2.5</span> Gesetze der Aussagenlogik</a></li>
+<li><a href="../../lb1-technische-informatik/2-6-kanonischenormalformen/index.html"><span class="t-nr">2.6</span> Kanonische Normalformen</a></li>
+</ul>
+<p class="kap">Schaltnetze</p><ul>
+<li><a href="../../lb1-technische-informatik/3-1-technischeumsetzung/index.html"><span class="t-nr">3.1</span> Boolesche Ausdrücke in Schaltungen</a></li>
+<li><a href="../../lb1-technische-informatik/3-2-schaltungsanalyse/index.html"><span class="t-nr">3.2</span> Schaltungsanalyse</a></li>
+<li><a href="../../lb1-technische-informatik/3-3-schaltungssynthese/index.html"><span class="t-nr">3.3</span> Schaltungssynthese</a></li>
+<li><a href="../../lb1-technische-informatik/3-4-kv-diagramme/index.html"><span class="t-nr">3.4</span> Karnaugh-Veitch-Diagramme</a></li>
+<li><a href="../../lb1-technische-informatik/3-5-standardschaltnetze/index.html"><span class="t-nr">3.5</span> Standardschaltnetze</a></li>
+<li><a href="../../lb1-technische-informatik/3-6-halbaddierer/index.html"><span class="t-nr">3.6</span> Halbaddierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-7-volladdierer/index.html"><span class="t-nr">3.7</span> Volladdierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-8-uebungsaufgaben/index.html"><span class="t-nr">3.8</span> Übungsaufgaben</a></li>
+</ul>
+<p class="kap">Rechnerarchitektur</p><ul>
+<li><a href="../../lb1-technische-informatik/4-1-neumann/index.html"><span class="t-nr">4.1</span> Rechnerarchitekturen</a></li>
+<li><a href="../../lb1-technische-informatik/4-2-prozessor/index.html"><span class="t-nr">4.2</span> Prozessoren</a></li>
+<li><a href="../../lb1-technische-informatik/4-3-speichersysteme/index.html"><span class="t-nr">4.3</span> Speichersysteme</a></li>
+</ul>
+<p class="kap">Informatik und Gesellschaft</p><ul>
+<li><a href="../../lb1-technische-informatik/5-1-systemsoftware/index.html"><span class="t-nr">5.1</span> Systemsoftware</a></li>
+<li><a href="../../lb1-technische-informatik/5-2-hardware-life/index.html"><span class="t-nr">5.2</span> Hardware-Lebenszyklus</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb1-technische-informatik/6-1-selbstcheck/index.html"><span class="t-nr">6.1</span> Selbstcheck</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 2/3</span> Programmieren und Algorithmen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb2-programmieren-algorithmen/index.html">Überblick Programmieren und Algorithmen</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-2-algorithmus/index.html"><span class="t-nr">2.1.2</span> Algorithmus und Kontrollstrukturen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-3-eva-python/index.html"><span class="t-nr">2.1.3</span> EVA in Python</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-4-array/index.html"><span class="t-nr">2.1.4</span> Array – eine Datenstruktur</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-5-unterprogramme/index.html"><span class="t-nr">2.1.5</span> Unterprogramme</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-6-parameter/index.html"><span class="t-nr">2.1.6</span> Parameter in Funktionen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-7-global-var/index.html"><span class="t-nr">2.1.7</span> Lokale und globale Variablen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-8-git-einstieg/index.html"><span class="t-nr">2.1.8</span> Versionen verwalten mit Git</a></li>
+</ul>
+<p class="kap">Algorithmen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-1-algorithmen-komplexitaet/index.html"><span class="t-nr">2.2.1</span> Algorithmen und Komplexität</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-2-bubblesort/index.html"><span class="t-nr">2.2.2</span> Bubblesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-3-einfuehrung-komplexitaet/index.html"><span class="t-nr">2.2.3</span> Einführung in Komplexität und die O-Notation</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-4-komplexitaetsklassen/index.html"><span class="t-nr">2.2.4</span> Komplexitätsklassen im Überblick</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-5-weitere-sortieralgorithmen/index.html"><span class="t-nr">2.2.5</span> Weitere Sortieralgorithmen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-6-darstellung/index.html"><span class="t-nr">2.2.6</span> Darstellung von Algorithmen (Modellierungshilfen)</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-7-rekursion/index.html"><span class="t-nr">2.2.7</span> Iteration und Rekursion</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-8-divide-and-conquer/index.html"><span class="t-nr">2.2.8</span> Divide and Conquer</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9-effiziente-sortieralgorithmen/index.html"><span class="t-nr">2.2.9</span> Effiziente Sortieralgorithmen – Mergesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9b-quicksort/index.html"><span class="t-nr">2.2.9b</span> Effiziente Sortieralgorithmen – Quicksort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-10-berechenbarkeit/index.html"><span class="t-nr">2.2.10</span> Berechenbarkeit: technische und theoretische Grenzen</a></li>
+</ul>
+</div></details>
+<details class="lb" open><summary><span class="lb-nr">LB 2/3</span> Datenstrukturen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb3-datenstrukturen/index.html">Überblick Datenstrukturen</a>
+<p class="kap">Listen, Schlange und Stapel</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-0-1-einfuegen/index.html"><span class="t-nr">3.0.1</span> Was kostet das Einfügen in eine Liste?</a></li>
+<li><a href="../../lb3-datenstrukturen/3-0-2-git-im-kurs/index.html"><span class="t-nr">3.0.2</span> Deine Lösungen mit Git verwalten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-1-linkedlists/index.html"><span class="t-nr">3.1</span> Verkettete Listen (linked lists)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-2-queue/index.html"><span class="t-nr">3.2</span> Schlange (Queue)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-3-stack/index.html"><span class="t-nr">3.3</span> Stapel (Stack)</a></li>
+</ul>
+<p class="kap">Bäume</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-4-baum/index.html"><span class="t-nr">3.4</span> Datenstruktur Baum (Tree)</a></li>
+<li><a class="aktiv" aria-current="page" href="../../lb3-datenstrukturen/3-5-bin-baum/index.html"><span class="t-nr">3.5</span> Binärbaum und binärer Suchbaum</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6-traversierung/index.html"><span class="t-nr">3.6</span> Traversierung</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6b-backtracking-baum/index.html"><span class="t-nr">3.6b</span> Backtracking 1: Suchen und zurückgehen im Baum</a></li>
+</ul>
+<p class="kap">Graphen</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-7-graph/index.html"><span class="t-nr">3.7</span> Graphen</a></li>
+<li><a href="../../lb3-datenstrukturen/3-8-graph-code/index.html"><span class="t-nr">3.8</span> Implementierung eines Graphen mit Adjazenzlisten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-9-dijkstra/index.html"><span class="t-nr">3.9</span> Kürzeste Wege: Moore und Dijkstra</a></li>
+<li><a href="../../lb3-datenstrukturen/3-10-backtracking/index.html"><span class="t-nr">3.10</span> Backtracking 2: Graphen und Belegungsprobleme</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 4/5</span> OOP und Softwareentwicklung</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb4-oop-softwareentwicklung/index.html">Überblick OOP und Softwareentwicklung</a>
+<p class="kap">Paradigmen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-0-klassifizierung/index.html"><span class="t-nr">4.0</span> Klassifizierung von Programmiersprachen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-1-programmierparadigmen/index.html"><span class="t-nr">4.1</span> Programmierparadigmen entdecken</a></li>
+</ul>
+<p class="kap">Objekte und Klassen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-2-objektorientierung/index.html"><span class="t-nr">4.2</span> Objektorientiertes Denken – vor dem Code</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-3-klassen/index.html"><span class="t-nr">4.3</span> Klassen als Baupläne</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-4-attribute/index.html"><span class="t-nr">4.4</span> Attribute im Detail</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-5-methoden/index.html"><span class="t-nr">4.5</span> Methoden schreiben und aufrufen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-6-kapselung/index.html"><span class="t-nr">4.6</span> Kapselung, Sichtbarkeit und kontrollierter Zugriff</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-7-typisierung/index.html"><span class="t-nr">4.7</span> Typisierung in Python: Klarheit im Code</a></li>
+</ul>
+<p class="kap">Beziehungen und Vererbung</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-8-beziehungen/index.html"><span class="t-nr">4.8</span> Beziehungen zwischen Klassen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-9-multiplizitaeten/index.html"><span class="t-nr">4.9</span> Multiplizitäten in UML: Wie viele Objekte?</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-10-vererbung/index.html"><span class="t-nr">4.10</span> Vererbung</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-11-polymorphie/index.html"><span class="t-nr">4.11</span> Botschaften und Polymorphie</a></li>
+</ul>
+<p class="kap">Software im Team</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-1-vom-programm-zum-projekt/index.html"><span class="t-nr">5.1</span> Vom Klassenmodell zur Softwarearchitektur</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-2-vorgehensmodelle/index.html"><span class="t-nr">5.2</span> Vorgehensmodelle und Anforderungen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-3-testen/index.html"><span class="t-nr">5.3</span> Testen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-4-git-im-team/index.html"><span class="t-nr">5.4</span> Git im Team</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-5-projektauftrag/index.html"><span class="t-nr">5.5</span> Projektauftrag und Themen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-6-projektleitfaden/index.html"><span class="t-nr">5.6</span> Projekt-Leitfaden</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 6</span> Sprachen und Automaten</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb6-sprachen-automaten/index.html">Überblick Sprachen und Automaten</a>
+<p class="kap">Sprachen und Grammatiken</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-1-spracherkennung/index.html"><span class="t-nr">6.1</span> Wie Sprache für Maschinen verständlich wird – Einstieg in Sprachen und Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-2-formale-sprache/index.html"><span class="t-nr">6.2</span> Aufbau von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-3-grammatik/index.html"><span class="t-nr">6.3</span> Grammatiken als formale Beschreibung von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-4-woerter-ableiten/index.html"><span class="t-nr">6.4</span> Ableitung von Wörtern</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-5-bnf/index.html"><span class="t-nr">6.5</span> Backus-Naur-Form (BNF)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-6-chomsky/index.html"><span class="t-nr">6.6</span> Die Chomsky-Hierarchie</a></li>
+</ul>
+<p class="kap">Endliche Automaten</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-7-dea/index.html"><span class="t-nr">6.7</span> Endliche Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-8-fangzustand/index.html"><span class="t-nr">6.8</span> Partielle Übergangsfunktion und Fangzustand (Trap-Zustand)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-9-dea-nea/index.html"><span class="t-nr">6.9</span> NEA, ε-Übergänge und weitere Automatentypen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-10-potenzmengenkonstruktion/index.html"><span class="t-nr">6.10</span> Überführung von NEA in DEA (Potenzmengenkonstruktion)</a></li>
+</ul>
+<p class="kap">Grammatik und Automat</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-11-grammatik-automat/index.html"><span class="t-nr">6.11</span> Überführung zwischen regulären Grammatiken und endlichen Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-12-epsilon-regeln/index.html"><span class="t-nr">6.12</span> Überführung einer Grammatik mit ε-Regeln in eine Grammatik ohne ε-Regeln</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-13-grenzen-automaten/index.html"><span class="t-nr">6.13</span> Grenzen von Automaten</a></li>
+</ul>
+<p class="kap">Compiler</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-14-compiler/index.html"><span class="t-nr">6.14</span> Compiler und Interpreter – von der Theorie zur Praxis</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-15-selbstcheck/index.html"><span class="t-nr">6.15</span> Selbstcheck und Klausurvorbereitung: Sprachen und Automaten</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 7</span> Rechnernetze</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb7-rechnernetze/index.html">Überblick Rechnernetze</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb7-rechnernetze/7-1-topologien/index.html"><span class="t-nr">7.1</span> Topologien und Übertragungsmedien</a></li>
+<li><a href="../../lb7-rechnernetze/7-2-vermittlung-dienste/index.html"><span class="t-nr">7.2</span> Vermittlung und Dienste</a></li>
+<li><a href="../../lb7-rechnernetze/7-3-schichtenmodelle/index.html"><span class="t-nr">7.3</span> Schichtenmodelle (OSI und TCP/IP)</a></li>
+<li><a href="../../lb7-rechnernetze/7-4-netzzugangsschicht/index.html"><span class="t-nr">7.4</span> Netzzugangsschicht: MAC, Ethernet und Switch</a></li>
+</ul>
+<p class="kap">Internetschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-5-ip-adressierung-routing/index.html"><span class="t-nr">7.5</span> Internetschicht: IP-Adressierung und Routing</a></li>
+<li><a href="../../lb7-rechnernetze/7-6-subnetting-cidr/index.html"><span class="t-nr">7.6</span> Subnetting, CIDR und VLSM</a></li>
+<li><a href="../../lb7-rechnernetze/7-7-dhcp/index.html"><span class="t-nr">7.7</span> DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-8-dns/index.html"><span class="t-nr">7.8</span> DNS und Namensauflösung</a></li>
+</ul>
+<p class="kap">Transport- und Anwendungsschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-9-tcp-udp/index.html"><span class="t-nr">7.9</span> Transportschicht: TCP und UDP</a></li>
+<li><a href="../../lb7-rechnernetze/7-10-anwendungsschicht-protokolle/index.html"><span class="t-nr">7.10</span> Anwendungsschicht und Protokolle</a></li>
+</ul>
+<p class="kap">Filius-Praxis</p><ul>
+<li><a href="../../lb7-rechnernetze/7-13-filius-gateway/index.html"><span class="t-nr">7.13</span> Filius-Praxis: Zwei Netzwerke verbinden</a></li>
+<li><a href="../../lb7-rechnernetze/7-14-filius-routingtabelle/index.html"><span class="t-nr">7.14</span> Filius-Praxis: Mehrere Router und Routingtabellen</a></li>
+<li><a href="../../lb7-rechnernetze/7-15-filius-dhcp/index.html"><span class="t-nr">7.15</span> Filius-Praxis: DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-16-filius-dns-web/index.html"><span class="t-nr">7.16</span> Filius-Praxis: DNS, Webserver und Einstellungen über DHCP</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb7-rechnernetze/7-17-aufgabenstellung/index.html"><span class="t-nr">7.17</span> Projekt: Rechnernetze – Theorie, Praxis und Netzplanung</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 8</span> Informationssicherheit</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb8-informationssicherheit/index.html">Überblick Informationssicherheit</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-1-sicherheitsziele/index.html"><span class="t-nr">8.1</span> Sicherheitsziele und Datenschutz</a></li>
+<li><a href="../../lb8-informationssicherheit/8-2-uebersicht-kryptologie/index.html"><span class="t-nr">8.2</span> Übersicht Kryptologie</a></li>
+</ul>
+<p class="kap">Symmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-3-symmetrische-verfahren/index.html"><span class="t-nr">8.3</span> Symmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-4-kasiski-test/index.html"><span class="t-nr">8.4</span> Kasiski-Test</a></li>
+<li><a href="../../lb8-informationssicherheit/8-5-one-time-pad/index.html"><span class="t-nr">8.5</span> One-Time-Pad</a></li>
+<li><a href="../../lb8-informationssicherheit/8-6-kryptoanalyse/index.html"><span class="t-nr">8.6</span> Kryptoanalyse</a></li>
+<li><a href="../../lb8-informationssicherheit/8-7-aes/index.html"><span class="t-nr">8.7</span> AES</a></li>
+</ul>
+<p class="kap">Asymmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-8-asymmetrische-verfahren/index.html"><span class="t-nr">8.8</span> Asymmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-9-rsa/index.html"><span class="t-nr">8.9</span> RSA</a></li>
+<li><a href="../../lb8-informationssicherheit/8-10-diffie-hellman/index.html"><span class="t-nr">8.10</span> Diffie-Hellman-Schlüsselaustausch</a></li>
+<li><a href="../../lb8-informationssicherheit/8-11-hybride-verfahren/index.html"><span class="t-nr">8.11</span> Hybride Verfahren</a></li>
+</ul>
+<p class="kap">Integrität und Authentizität</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-12-hashfunktionen/index.html"><span class="t-nr">8.12</span> Hashfunktionen</a></li>
+<li><a href="../../lb8-informationssicherheit/8-13-digitale-signatur/index.html"><span class="t-nr">8.13</span> Digitale Signatur</a></li>
+<li><a href="../../lb8-informationssicherheit/8-14-authentifizierung/index.html"><span class="t-nr">8.14</span> Authentifizierung</a></li>
+</ul>
+<p class="kap">Netzsicherheit</p><ul>
+<li><a href="../../lb8-informationssicherheit/7-11-tls-vpn/index.html"><span class="t-nr">7.11</span> Transportverschlüsselung: TLS und VPN</a></li>
+<li><a href="../../lb8-informationssicherheit/7-12-authentifizierung/index.html"><span class="t-nr">7.12</span> Identifizierung und Authentifizierung</a></li>
+</ul>
+<p class="kap">Verfügbarkeit</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-15-datensicherung-raid/index.html"><span class="t-nr">8.15</span> Datensicherung und RAID</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 9</span> Datenmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb9-datenmanagement/index.html">Überblick Datenmanagement</a>
+<p class="kap">Relationale Datenbanken</p><ul>
+<li><a href="../../lb9-datenmanagement/1-1-datenbanken/index.html"><span class="t-nr">1.1</span> Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/1-2-relationale-db/index.html"><span class="t-nr">1.2</span> Das relationale Datenmodell</a></li>
+<li><a href="../../lb9-datenmanagement/1-3-sql-select/index.html"><span class="t-nr">1.3</span> SQL-Abfragen</a></li>
+<li><a href="../../lb9-datenmanagement/1-4-sql-where/index.html"><span class="t-nr">1.4</span> SQL WHERE- und LIKE-Klauseln</a></li>
+<li><a href="../../lb9-datenmanagement/1-5-sql-aggregation/index.html"><span class="t-nr">1.5</span> SQL-Aggregatfunktionen</a></li>
+<li><a href="../../lb9-datenmanagement/1-6-sql-joins/index.html"><span class="t-nr">1.6</span> SQL-Joins</a></li>
+<li><a href="../../lb9-datenmanagement/1-7-db-browser/index.html"><span class="t-nr">1.7</span> DB Browser (SQLite)</a></li>
+<li><a href="../../lb9-datenmanagement/1-8-crud/index.html"><span class="t-nr">1.8</span> CRUD: Create, (Read), Update und Delete in SQL</a></li>
+<li><a href="../../lb9-datenmanagement/1-9-sql-uebung/index.html"><span class="t-nr">1.9</span> SQL-Übungsaufgaben</a></li>
+<li><a href="../../lb9-datenmanagement/1-10-erm/index.html"><span class="t-nr">1.10</span> Das Entity-Relationship-Modell</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-1-11-1-db-browser-eigene-tabellen/index.html"><span class="t-nr">1.11.1</span> Eigene Datenbank in DB Browser anlegen</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-relationenmodell/index.html"><span class="t-nr">1.11</span> Vom ER-Modell zum Relationenmodell und Relationenschemata</a></li>
+<li><a href="../../lb9-datenmanagement/1-12-uebung-modellierung/index.html"><span class="t-nr">1.12</span> Übungsaufgaben zur Modellierung von Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/1-13-normalisierung/index.html"><span class="t-nr">1.13</span> Normalisierung und Anomalien</a></li>
+<li><a href="../../lb9-datenmanagement/1-14-erste-normalform/index.html"><span class="t-nr">1.14</span> Erste Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-15-zweite-normalform/index.html"><span class="t-nr">1.15</span> Zweite Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-16-dritte-normalform/index.html"><span class="t-nr">1.16</span> Dritte Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-17-uebung-normalformen/index.html"><span class="t-nr">1.17</span> Übungsaufgaben zu den Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-18-komplette-uebung/index.html"><span class="t-nr">1.18</span> Übung: ERM, Relationenmodell und Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-19-subselects/index.html"><span class="t-nr">1.19</span> Subselects in SQLite</a></li>
+<li><a href="../../lb9-datenmanagement/1-20-sql-uebung/index.html"><span class="t-nr">1.20</span> SQL-Übungen für DB Browser (SQLite) – Thema: Freizeitpark</a></li>
+<li><a href="../../lb9-datenmanagement/1-21-selbstcheck/index.html"><span class="t-nr">1.21</span> Selbstcheck: Datenbanken</a></li>
+</ul>
+<p class="kap">NoSQL</p><ul>
+<li><a href="../../lb9-datenmanagement/2-1-cap/index.html"><span class="t-nr">2.1</span> Das CAP-Theorem</a></li>
+<li><a href="../../lb9-datenmanagement/2-2-nosql-db/index.html"><span class="t-nr">2.2</span> NoSQL-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-3-key-value-db/index.html"><span class="t-nr">2.3</span> Key-Value-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-4-selbstcheck/index.html"><span class="t-nr">2.4</span> Selbstcheck: NoSQL-Datenbanken</a></li>
+</ul>
+<p class="kap">Datenverarbeitung mit Python</p><ul>
+<li><a href="../../lb9-datenmanagement/3-1-data-life-cycle/index.html"><span class="t-nr">3.1</span> Arbeit mit Daten: Der Data Life Cycle</a></li>
+<li><a href="../../lb9-datenmanagement/3-2-verschachtelte-datentypen/index.html"><span class="t-nr">3.2</span> Geschachtelte Datentypen</a></li>
+<li><a href="../../lb9-datenmanagement/3-3-einlesen/index.html"><span class="t-nr">3.3</span> Daten mit Python einlesen</a></li>
+<li><a href="../../lb9-datenmanagement/3-4-verarbeiten/index.html"><span class="t-nr">3.4</span> Verarbeitung eingelesener Daten in Python</a></li>
+<li><a href="../../lb9-datenmanagement/3-5-bereinigen/index.html"><span class="t-nr">3.5</span> Daten bereinigen und analysieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-6-schreiben/index.html"><span class="t-nr">3.6</span> Daten in CSV-Dateien schreiben</a></li>
+<li><a href="../../lb9-datenmanagement/3-7-csv-in-dbbrowser/index.html"><span class="t-nr">3.7</span> CSV-Daten in DB Browser importieren und mit SQL auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-8-visualisieren/index.html"><span class="t-nr">3.8</span> CSV-Dateien mit LibreOffice visualisieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-9-data-life-cycle-csv/index.html"><span class="t-nr">3.9</span> Datenlebenszyklus mit CSV – Eigene Umfrage gestalten und auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-10-json/index.html"><span class="t-nr">3.10</span> JSON: Ein aktuelles Standardformat</a></li>
+<li><a href="../../lb9-datenmanagement/3-11-api/index.html"><span class="t-nr">3.11</span> APIs verstehen und nutzen</a></li>
+<li><a href="../../lb9-datenmanagement/3-12-uebung-erm-daten-verarbeiten/index.html"><span class="t-nr">3.12</span> WÜ Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/3-13-datenmanagement-vertiefung/index.html"><span class="t-nr">3.13</span> Vertiefung des Datenmanagements</a></li>
+<li><a href="../../lb9-datenmanagement/3-14-iug/index.html"><span class="t-nr">3.14</span> Daten in der Gesellschaft: Ethische und kritische Betrachtungen</a></li>
+<li><a href="../../lb9-datenmanagement/3-15-selbstcheck/index.html"><span class="t-nr">3.15</span> Selbstcheck: Datenverarbeitung mit Python</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 10/11</span> KI und Projektmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb10-ki-projektmanagement/index.html">Überblick KI und Projektmanagement</a>
+<p class="kap">KI-Kickstart</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-0-kickstart-sprachmodelle/index.html"><span class="t-nr">11.0</span> KI-Kickstart: Wie funktionieren Sprachmodelle?</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-0b-ki-als-lernpartner/index.html"><span class="t-nr">11.0b</span> KI als Lernpartner: Assistenten verstehen und selbst einstellen</a></li>
+</ul>
+<p class="kap">KI-Grundlagen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-1-begriff-ki/index.html"><span class="t-nr">11.1</span> Einführung in die Künstliche Intelligenz</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-2-wissens-datenbasierte-ki/index.html"><span class="t-nr">11.2</span> Wissensbasierte und datenbasierte Ansätze in der KI</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-3-ki-modelle-optimieren/index.html"><span class="t-nr">11.3</span> KI-Systeme: Training und Optimierung</a></li>
+</ul>
+<p class="kap">Projektmanagement</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-1-grundlagen/index.html"><span class="t-nr">10.1</span> Grundlagen des Projektmanagements</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-2-klassisch-vs-agil/index.html"><span class="t-nr">10.2</span> Klassisches und agiles Projektmanagement</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-3-versionsverwaltung-git/index.html"><span class="t-nr">10.3</span> Versionsverwaltung mit Git</a></li>
+</ul>
+<p class="kap">KI-Projekt</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-4-tutorial-jupyter/index.html"><span class="t-nr">10.4</span> Maschinelles Lernen: Tutorials mit Jupyter</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-5-ki-projektmanagement/index.html"><span class="t-nr">10.5</span> Projektaufgabe: Künstliche Intelligenz mit Projektmanagement erarbeiten</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-6-ki-projekt-dokumentation/index.html"><span class="t-nr">10.6</span> Projektdokumentation: Künstliche Intelligenz (KI) &amp; Projektmanagement</a></li>
+</ul>
+<p class="kap">Maschinelles Lernen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-4-lineare-regression/index.html"><span class="t-nr">11.4</span> Lineare Regression</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-5-entscheidungsbaum/index.html"><span class="t-nr">11.5</span> Entscheidungsbäume</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-6-k-naechster-nachbar/index.html"><span class="t-nr">11.6</span> k-Nächste-Nachbarn-Algorithmus (k-NN)</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-7-k-means/index.html"><span class="t-nr">11.7</span> k-Means-Clustering</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-8-neuronale-netze/index.html"><span class="t-nr">11.8</span> Neuronale Netze und Deep Learning</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-9-genetische-algorithmen/index.html"><span class="t-nr">11.9</span> Genetische Algorithmen</a></li>
+</ul>
+<p class="kap">Generative KI und Gesellschaft</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-10-generative-ki/index.html"><span class="t-nr">11.10</span> Generative KI und Sprachmodelle</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-11-ki-und-gesellschaft/index.html"><span class="t-nr">11.11</span> Gesellschaftliche Auswirkungen Künstlicher Intelligenz</a></li>
+</ul>
+</div></details>
+</nav>
+<div class="haupt-rahmen">
+<main class="haupt" id="inhalt">
+<p class="pfad"><a href="../../index.html">Überblick</a> › <a href="../index.html">LB 2/3 Datenstrukturen</a></p>
+<h1><span class="h1-nr">3.5</span> Binärbaum und binärer Suchbaum</h1>
+<nav class="reiter" aria-label="Teile dieses Themas"><a class="aktiv" aria-current="page" href="index.html">Einführung <span class="r-zahl">2</span></a><a href="uebungen.html">Übungen <span class="r-zahl">2</span></a><a href="vertiefung.html">Vertiefung <span class="r-zahl">2</span></a></nav>
+<div class="seiteninhalt" id="seiteninhalt">
+
+<p>Beim Zahlenraten „Ich denke mir eine Zahl zwischen 1 und 100“ fragst du geschickt „Ist sie größer als 50?“ – und halbierst so mit jeder Antwort die Möglichkeiten. Ein binärer Suchbaum speichert Daten genau so, dass jede Suche wie dieses Ratespiel abläuft.</p>
+
+<h2>Binärbaum</h2>
+
+<h3>Eigenschaften eines binären Baums</h3>
+
+<ul>
+            <li>Ein binärer Baum besteht aus Knoten und Kanten.</li>
+            <li>Ein Knoten hat höchstens zwei Kinder: einen linken und einen rechten Nachfolger.</li>
+            <li>Die Knoten sind hierarchisch angeordnet; jeder Knoten außer der Wurzel hat genau einen Elternknoten.</li>
+            <li>Knoten ohne Kinder heißen Blätter.</li>
+            <li>Ein Binärbaum der Höhe h hat höchstens 2<sup>h+1</sup> − 1 Knoten. Umgekehrt braucht ein Binärbaum mit n Knoten mindestens etwa log<sub>2</sub> n Ebenen.</li>
+        </ul>
+
+<hr>
+
+<h2 id="schritt-1">Schritt 1: Was ist ein binärer Suchbaum?</h2>
+
+<p>In einem Binärbaum hat jeder Knoten zwei Plätze: links und rechts. Ein binärer Suchbaum ordnet die Werte so, dass für <strong>jeden</strong> Knoten links nur Kleineres und rechts nur Größeres steht. Achte im Video darauf, dass die Regel für den <strong>gesamten</strong> Teilbaum gilt, nicht nur für die direkten Kinder.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-5-1_idee_vorschau.png" src="../vid/3-5-1_idee.mp4"></video><a href="../vid/3-5-1_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Was ist ein binärer Suchbaum? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<figure>
+            <img src="../img/skizze_binaerer_suchbaum.svg" width="450" alt="Binärer Suchbaum mit 8, 3, 10, 1, 6, 14 und dem Suchweg zur 6">
+            <figcaption>Abb. 1: Suche nach 6: 6 &lt; 8 → links, 6 &gt; 3 → rechts – gefunden nach drei Vergleichen.</figcaption>
+        </figure>
+
+<p>Es genügt nicht, nur das direkte linke und rechte Kind zu prüfen. Der folgende Baum ist <strong>kein</strong> Suchbaum, obwohl bei jedem Knoten das linke Kind kleiner und das rechte größer ist: Die 12 steht im linken Teilbaum der 10, ist aber größer als 10.</p>
+
+<pre class="darstellung"><code>        10
+       /  \
+      5    15
+       \
+        12      &lt;-- verletzt die Suchbaum-Eigenschaft</code></pre>
+
+<p>Zum Nachlesen: der Baum aus dem Video in Beispiel 1.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> ein binärer Suchbaum</summary>
+            <pre class="darstellung"><code>        8
+       / \
+      3   10
+     / \    \
+    1   6    14</code></pre>
+            <p>Die Wurzel ist 8, das linke Kind 3, das rechte Kind 10. Das linke Kind von 3 ist 1, das rechte Kind von 3 ist 6. Das rechte Kind von 10 ist 14. Alle Werte links der 8 (1, 3, 6) sind kleiner als 8, alle rechts (10, 14) größer. Kleinster Wert: 1 (ganz links), größter Wert: 14 (ganz rechts). In-Order: 1, 3, 6, 8, 10, 14.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Links oder rechts? <span class="niveau">AFB I</span></summary>
+                <p>Betrachte den Baum aus Beispiel 1. Welche der Zahlen 2, 7, 9 und 12 dürften irgendwo im linken Teilbaum der 8 stehen? Welche davon dürften im rechten Teilbaum der 3 stehen?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Im linken Teilbaum der 8 nur Werte kleiner als 8: 2 und 7. Der rechte Teilbaum der 3 liegt zugleich im linken Teilbaum der 8 – dort müssen Werte größer als 3 <em>und</em> kleiner als 8 sein: nur die 7.</p>
+                </details>
+            </details>
+        </div>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Einfügen →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Einfügen in den Suchbaum</h2>
+
+<p>Ein neuer Wert wird immer als neues Blatt eingefügt. Den Platz findet man wie beim Zahlenraten: Bei jedem Knoten vergleichen – kleiner nach links, größer nach rechts – bis der passende Platz <code>None</code> ist. Im Video baust du den Baum aus Beispiel 1 mit den Klassen <code>Knoten</code> und <code>Suchbaum</code> auf. Die Verwaltungsklasse <code>Suchbaum</code> merkt sich die Wurzel im privaten Attribut <code>__wurzel</code> – wie <code>__head</code> bei der verketteten Liste. <code>einfuegen</code> ist <strong>rekursiv</strong>: Ist der passende Platz frei, kommt der neue Knoten dorthin, sonst ruft sich die Methode selbst mit diesem Kind auf. Achte darauf, welchen Knoten der Parameter <code>knoten</code> in jedem Aufruf hat.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-5-2_einfuegen_vorschau.png" src="../vid/3-5-2_einfuegen.mp4"></video><a href="../vid/3-5-2_einfuegen.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Einfügen in den Suchbaum – Schritt für Schritt (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>2_baeume/suchbaum.py</code> an und tippe den Code aus dem Video ab: die Klassen <code>Knoten</code> und <code>Suchbaum</code> und die Methode <code>einfuegen</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>b = Suchbaum()</code> · <code>b.einfuegen(8)</code>. Danach committen, z.&nbsp;B. <code>3.5 Schritt 2: Knoten, Suchbaum, einfuegen angelegt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Einen kleinen Suchbaum aufbauen <span class="niveau">AFB I</span></summary>
+                <p>Füge 5, 2, 8, 4 in dieser Reihenfolge in einen leeren Suchbaum ein und zeichne ihn. Mit welchen Knoten wird <code>einfuegen</code> nacheinander aufgerufen, bevor die 4 ihren Platz bekommt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>5 ist die Wurzel, 2 ihr linkes, 8 ihr rechtes Kind. Zwei Aufrufe: von außen mit <code>knoten</code> = 5 (4 &lt; 5, links ist die 2 → Aufruf mit der 2), dann mit <code>knoten</code> = 2 (4 &gt; 2, rechts ist frei). Die 4 wird rechtes Kind der 2.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Einfügen in der Zeiger-Werkstatt</summary>
+                <p>Öffne im Kursmenü links die Seite <strong>Zeiger-Werkstatt</strong>. In der Übung „3.5 Suchbaum: einfügen“ lässt du eine Variable <code>aktuell</code> im Baum aus Beispiel 1 selbst abwärts wandern (wie in der Schleifen-Fassung im Hinweis nach Beispiel 2) und hängst 7 und 12 an der richtigen Stelle an. Die Werkstatt sagt dir, wo ein Knoten falsch hängt.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-5-1">Aufgabe 3.5.1</a> – einen größeren Suchbaum von Hand aufbauen. Die In-Order-Reihenfolge, nach der dort auch gefragt ist, lernst du in Schritt 4 genauer kennen.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Suchen →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Suchen im Suchbaum</h2>
+
+<p>Suchen läuft genauso wie Einfügen: von der Wurzel abwärts, bei jedem Knoten links oder rechts. Bei jedem Vergleich fällt ein ganzer Teilbaum weg. Im Video siehst du eine erfolgreiche Suche (6) und eine erfolglose (7). <code>suchen</code> ist wie <code>einfuegen</code> rekursiv. Achte darauf, woran die Methode merkt, dass es einen Wert nicht gibt – und warum vor dem rekursiven Aufruf <code>return</code> steht.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-5-3_suchen_vorschau.png" src="../vid/3-5-3_suchen.mp4"></video><a href="../vid/3-5-3_suchen.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Suchen im Suchbaum (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/suchbaum.py</code> den Code aus dem Video: die Methode <code>suchen</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>b.suchen(6)</code> · <code>b.suchen(7)</code>. Danach committen, z.&nbsp;B. <code>3.5 Schritt 3: suchen ergänzt</code>.</p>
+
+<p>Zum Nachlesen steht der ganze Code aus den Videos 2–4 mit dem Ablauf von <code>einfuegen(6)</code> in Beispiel 2:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Einfügen und Suchen in Python</summary>
+            <pre class="ausfuehrbar"><code class="language-python">class Knoten:
+    def __init__(self, wert):
+        self.wert = wert
+        self.links = None
+        self.rechts = None
+
+class Suchbaum:
+    def __init__(self):
+        self.__wurzel = None
+
+    def einfuegen(self, wert, knoten=None):
+        if self.__wurzel is None:          # leerer Baum
+            self.__wurzel = Knoten(wert)
+            return
+        if knoten is None:                 # Aufruf von außen:
+            knoten = self.__wurzel         # an der Wurzel starten
+        if wert &lt; knoten.wert:
+            if knoten.links is None:
+                knoten.links = Knoten(wert)
+            else:
+                self.einfuegen(wert, knoten.links)
+        elif wert &gt; knoten.wert:           # gleich: nichts tun
+            if knoten.rechts is None:
+                knoten.rechts = Knoten(wert)
+            else:
+                self.einfuegen(wert, knoten.rechts)
+
+    def suchen(self, wert, knoten=None):
+        if self.__wurzel is None:          # leerer Baum
+            return False
+        if knoten is None:                 # Aufruf von außen
+            knoten = self.__wurzel
+        if wert == knoten.wert:
+            return True
+        if wert &lt; knoten.wert:
+            if knoten.links is None:       # kein Kind: Wert fehlt
+                return False
+            return self.suchen(wert, knoten.links)
+        if knoten.rechts is None:
+            return False
+        return self.suchen(wert, knoten.rechts)
+
+    def in_order(self, knoten=None):
+        if self.__wurzel is None:          # leerer Baum
+            return []
+        if knoten is None:                 # Aufruf von außen:
+            knoten = self.__wurzel         # an der Wurzel starten
+        ergebnis = []
+        if knoten.links is not None:       # nur in vorhandene Kinder
+            ergebnis = ergebnis + self.in_order(knoten.links)
+        ergebnis.append(knoten.wert)
+        if knoten.rechts is not None:
+            ergebnis = ergebnis + self.in_order(knoten.rechts)
+        return ergebnis
+
+b = Suchbaum()
+for w in [8, 3, 10, 1, 6, 14]:
+    b.einfuegen(w)
+print(b.suchen(6), b.suchen(7))        # True False
+print(b.in_order())                    # [1, 3, 6, 8, 10, 14]</code></pre>
+            <p><strong>Ablauf von <code>einfuegen(6)</code></strong>, wenn 8, 3, 10 und 1 schon im Baum stehen:</p>
+            <ol>
+                <li>Aufruf von außen <code>b.einfuegen(6)</code>: <code>knoten</code> ist <code>None</code>, also startet die Methode an der Wurzel 8. 6 &lt; 8, links sitzt die 3 – <em>warum links:</em> Alle kleineren Werte gehören in den linken Teilbaum. Rekursiver Aufruf <code>self.einfuegen(6, knoten.links)</code>, der erste Aufruf wartet.</li>
+                <li>Im zweiten Aufruf ist <code>knoten</code> die 3. 6 &gt; 3, und der rechte Platz von 3 ist frei (<code>None</code>).</li>
+                <li>Neuer Knoten 6 wird rechtes Kind von 3. Der zweite Aufruf endet, danach der erste. Beim Einfügen sind also so viele Aufrufe gleichzeitig offen, wie der Weg Knoten hat.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> der Baum aus Beispiel 1. <strong>Probe:</strong> Die In-Order-Ausgabe ist aufsteigend sortiert.</p>
+            <table>
+                <thead><tr><th>Testfall</th><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td>vorhandener Wert</td><td><code>b.suchen(6)</code></td><td><code>True</code> nach 3 Vergleichen (8, 3, 6)</td></tr>
+                    <tr><td>fehlender Wert</td><td><code>b.suchen(7)</code></td><td><code>False</code> (8, 3, 6, rechts von 6 kein Kind)</td></tr>
+                    <tr><td>Duplikat</td><td><code>b.einfuegen(8)</code>, danach <code>b.in_order()</code></td><td>unverändert <code>[1, 3, 6, 8, 10, 14]</code></td></tr>
+                    <tr><td>leerer Baum</td><td><code>Suchbaum().suchen(5)</code></td><td><code>False</code></td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Einfügen und Suchen gehen auch ohne Rekursion</summary>
+                <p>Weil Einfügen und Suchen immer nur <strong>einen</strong> Weg nach unten gehen, reicht auch eine Schleife. Eine Hilfsvariable <code>aktuell</code> wandert von der Wurzel abwärts:</p>
+                <pre><code class="language-python">    def einfuegen(self, wert):
+        if self.__wurzel is None:
+            self.__wurzel = Knoten(wert)
+            return
+        aktuell = self.__wurzel
+        while True:
+            if wert == aktuell.wert:
+                return                      # keine Duplikate
+            if wert &lt; aktuell.wert:
+                if aktuell.links is None:
+                    aktuell.links = Knoten(wert)
+                    return
+                aktuell = aktuell.links
+            else:
+                if aktuell.rechts is None:
+                    aktuell.rechts = Knoten(wert)
+                    return
+                aktuell = aktuell.rechts
+
+    def suchen(self, wert):
+        aktuell = self.__wurzel
+        while aktuell is not None:
+            if wert == aktuell.wert:
+                return True
+            if wert &lt; aktuell.wert:
+                aktuell = aktuell.links
+            else:
+                aktuell = aktuell.rechts
+        return False</code></pre>
+                <p><code>while True:</code> ist eine Schleife ohne Abbruchbedingung – sie endet erst, wenn <code>return</code> die Methode verlässt. Die Schleife merkt sich nur den aktuellen Knoten, es entstehen keine offenen Methodenaufrufe. Wann das wichtig wird, untersuchst du in Aufgabe 3.5.3.</p>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Suchwege <span class="niveau">AFB I</span></summary>
+                <p>Gib für den Baum aus Beispiel 1 an, mit welchen Knoten <code>suchen</code> bei <code>b.suchen(10)</code> und bei <code>b.suchen(2)</code> nacheinander aufgerufen wird, und was jeweils zurückgegeben wird.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>suchen(10)</code>: Aufruf mit 8 (10 &gt; 8 → rechts), dann mit 10 – gefunden, <code>True</code>. <code>suchen(2)</code>: 8 (2 &lt; 8 → links), 3 (2 &lt; 3 → links), 1 (2 &gt; 1 → rechts, aber rechts von 1 ist kein Kind) – <code>False</code>, ohne weiteren Aufruf. Das Ergebnis wird über alle wartenden Aufrufe nach oben zurückgegeben.</p>
+                </details>
+            </details>
+        </div>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Sortiert ausgeben →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Sortiert ausgeben – und wann der Suchbaum langsam wird</h2>
+
+<p>Die Methode <code>in_order</code> besucht für jeden Knoten erst den linken Teilbaum, dann den Knoten, dann den rechten Teilbaum – bei einem Suchbaum kommen die Werte so sortiert heraus. Sie ist rekursiv wie <code>einfuegen</code> und <code>suchen</code>: Von außen rufst du <code>b.in_order()</code> ohne Knoten auf. Wie die Aufrufe genau ablaufen, zeigt dir Kursseite 3.6. Achte im Video außerdem darauf, was passiert, wenn man die Werte schon sortiert einfügt.</p>
+
+<p>Binäre Suchbäume werden häufig zum Suchen, Einfügen und sortierten Ausgeben von Daten verwendet. Ist der Baum ausgeglichen, liegen diese Operationen in O(log n); entartet er zu einer Kette, in O(n).</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-5-4_in_order_vorschau.png" src="../vid/3-5-4_in_order.mp4"></video><a href="../vid/3-5-4_in_order.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Sortiert ausgeben mit <code>in_order</code> – und wann der Suchbaum langsam wird (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>2_baeume/suchbaum.py</code> den Code aus dem Video: die Methode <code>in_order</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>b.in_order()</code>. Danach committen, z.&nbsp;B. <code>3.5 Schritt 4: in_order ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Sortiert und entartet <span class="niveau">AFB I</span></summary>
+                <p>Gib die In-Order-Reihenfolge deines Baums aus Kurz geprüft 2 an. Wie hoch wird ein Suchbaum, in den man 1, 2, 3, 4 in dieser Reihenfolge einfügt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>In-Order: 2, 4, 5, 8 – aufsteigend sortiert. Bei 1, 2, 3, 4 hängt jeder Wert rechts am vorigen: eine Kette mit 4 Knoten und der Höhe 3.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Es geht auch mit zwei Methoden</summary>
+                <p>Ebenso richtig ist eine öffentliche Methode ohne Knoten, die eine private Hilfsmethode an der Wurzel startet:</p>
+                <pre><code class="language-python">    def in_order(self):
+        ergebnis = []
+        self.__in_order(self.__wurzel, ergebnis)
+        return ergebnis
+
+    def __in_order(self, knoten, ergebnis):
+        if knoten is not None:
+            self.__in_order(knoten.links, ergebnis)
+            ergebnis.append(knoten.wert)
+            self.__in_order(knoten.rechts, ergebnis)</code></pre>
+                <p>Hier bedeutet <code>None</code> nur „kein Knoten“, die Hilfsmethode darf also mit <code>None</code> aufgerufen werden. Diese Form findest du zum Beispiel auf Kursseite 3.6b. Im Kurs schreiben wir rekursive Methoden als <strong>eine</strong> Methode mit <code>knoten=None</code>.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-5-2">Aufgabe 3.5.2</a> – die Suchbaum-Eigenschaft richtig prüfen, und <a href="uebungen.html#a-3-5-3">Aufgabe 3.5.3</a> – die Leserverwaltung der Stadtbibliothek.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Suchbäume in Bibliothek und Datenbank</summary>
+                <p>
+                    <strong>Alltag:</strong> Wenn du in der Stadtbibliothek deinen Leserausweis scannst, muss das System unter Zehntausenden Ausweisnummern in Sekundenbruchteilen deinen Datensatz finden. Ein Suchbaum mit 50 000 Einträgen braucht dafür bei guter Balance nur etwa 16 Vergleiche.<br><br>
+                    <strong>Beruf:</strong> Datenbanken nutzen dafür B-Bäume (siehe 3.4), die Programmiersprache Java verwendet in ihrer <code>TreeMap</code> einen Rot-Schwarz-Baum. Softwareentwicklerinnen und -entwickler müssen wissen, wann eine sortierte Eingabe einen einfachen Suchbaum entarten lässt – ein klassischer Fehler, der erst mit echten Daten auffällt.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Binärbaum:</strong> Ein Baum, in dem jeder Knoten höchstens zwei Kinder hat: ein linkes und ein rechtes.</p>
+<p><strong>Binärer Suchbaum:</strong> Für jeden Knoten gilt: Alle Werte im gesamten linken Teilbaum sind kleiner, alle Werte im gesamten rechten Teilbaum größer als sein Wert.</p>
+<p><strong>Folgerungen:</strong> Der kleinste Wert steht ganz links, der größte ganz rechts. Die In-Order-Traversierung (links – Knoten – rechts) gibt alle Werte aufsteigend sortiert aus.</p>
+<p><strong>Aufwand:</strong> Ist der Baum ausgeglichen, liegen Suchen und Einfügen in O(log n); entartet er zu einer Kette, in O(n).</p>
+<p><strong>Rekursive Methode in der Verwaltungsklasse:</strong> Der Knoten ist der letzte Parameter mit Standardwert <code>None</code>, z.&nbsp;B. <code>def einfuegen(self, wert, knoten=None)</code>. Ohne Knoten aufgerufen beginnt sie an der <code>__wurzel</code>; deshalb steigt sie nur in Kinder ab, die nicht <code>None</code> sind.</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe" id="a-3-5-1">
+            <details>
+                <summary>Aufgabe 3.5.1: Suchbaum aufbauen <span class="niveau">AFB I</span></summary>
+                <p>Füge die Werte 15, 8, 20, 3, 11, 17, 25, 9 in dieser Reihenfolge in einen leeren binären Suchbaum ein. Zeichne den Baum, gib den kleinsten und den größten Wert an und notiere die In-Order-Reihenfolge.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-5-2">
+            <details>
+                <summary>Aufgabe 3.5.2: Suchbaum-Eigenschaft prüfen <span class="niveau">AFB II</span></summary>
+                <p>Eine Mitschülerin prüft die Suchbaum-Eigenschaft so: „Für jeden Knoten ist <code>links.wert &lt; wert &lt; rechts.wert</code>.“ Zeige an einem Beispiel, dass diese Prüfung nicht ausreicht, und beschreibe eine korrekte Prüfung.</p>
+            </details>
+        </div>
+
+</div>
+<section class="ziele" aria-labelledby="das-kann-ich">
+<h2 id="das-kann-ich">Das kann ich jetzt</h2>
+<p class="ziele-hinweis">Grau steht, was der Lehrplan verlangt, darunter, was das für dieses Thema konkret heißt. Hake einen Punkt ab, wenn er in deinem Hefter zusammengefasst ist und du ihn <strong>ohne Hilfe</strong> kannst. Wie du ihn zusammenfasst, entscheidest du selbst. Die Haken speichert nur dein Browser.</p>
+<p class="ziel-titel"><span>Lehrplan LB 2</span> Baum <em>(Kennen von komplexen Datenstrukturen)</em></p><ul class="ziele-liste"><li><label><input type="checkbox" data-ziel="k00fe7f6252"><span>Ich kann Binärbaum und binären Suchbaum unterscheiden und die Ordnungseigenschaft des Suchbaums erklären.</span></label></li><li><label><input type="checkbox" data-ziel="k4897e3ca11"><span>Ich kann Einfügen und Suchen im binären Suchbaum durchführen und implementieren.</span></label></li><li><label><input type="checkbox" data-ziel="kdab3ea85e8"><span>Ich kann begründen, wann ein Suchbaum schnell sucht und wann er so langsam wie eine Liste wird.</span></label></li></ul>
+<p class="ziele-stand" aria-live="polite"></p>
+</section>
+<div class="weiter-kasten"><p><strong>Weiter mit diesem Thema</strong></p><a class="weiter-link" href="uebungen.html">Übungen →</a><a class="weiter-link" href="vertiefung.html">Vertiefung →</a></div>
+<nav class="blaettern" aria-label="Themen blättern"><a class="zurueck" href="../3-4-baum/index.html"><small>← Vorheriges Thema</small>3.4 Datenstruktur Baum (Tree)</a><a class="vor" href="../3-6-traversierung/index.html"><small>Nächstes Thema →</small>3.6 Traversierung</a></nav>
+</main>
+<aside class="toc" id="toc" aria-label="Auf dieser Seite"></aside>
+</div>
+</div>
+<footer class="fuss">
+  <a href="../../hinweise.html">Hinweise und Bildnachweise</a>
+  <a href="../../impressum.html">Impressum</a>
+</footer>
+<script src="../../assets/prism.js"></script>
+<script src="../../assets/seite.js"></script>
+</body>
+</html>

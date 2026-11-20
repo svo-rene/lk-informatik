@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.2.3 Einführung in Komplexität und die O-Notation – Leistungskurs Informatik</title>
+<script>try{var t=localStorage.getItem("thema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}if(/[?&]vollseite/.test(location.search))document.documentElement.classList.add("vollseite")</script>
+<link rel="stylesheet" href="../../assets/inhalt.css">
+<link rel="stylesheet" href="../../assets/seite.css">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+</head>
+<body class="mit-toc" data-root="../../">
+<header class="kopf">
+  <button class="menue-knopf" id="menue-knopf" aria-controls="leiste" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Themen</span></button>
+  <a class="marke" href="../../index.html"><span class="marke-zeichen">&lt;/&gt;</span><span>Leistungskurs Informatik</span></a>
+  <div class="kopf-rechts">
+    <button class="knopf-rund" id="thema-knopf" title="Hell oder dunkel" aria-label="Hell oder dunkel umschalten">
+      <span class="thema-dunkel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span><span class="thema-hell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+    </button>
+  </div>
+</header>
+<div class="rahmen">
+<nav class="leiste" id="leiste" aria-label="Lernbereiche">
+<div class="suche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="filter" placeholder="Thema suchen …" aria-label="Thema suchen"></div>
+<a class="leiste-start" href="../../index.html">Überblick</a>
+<a class="leiste-start" href="../../werkzeuge.html">Werkzeuge</a>
+<a class="leiste-start" href="../../projekte.html">Lernprojekte</a>
+<details class="lb"><summary><span class="lb-nr">LB 1</span> Technische Informatik</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb1-technische-informatik/index.html">Überblick Technische Informatik</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb1-technische-informatik/1-1-zahlenformate/index.html"><span class="t-nr">1.1</span> Zahlenformate</a></li>
+<li><a href="../../lb1-technische-informatik/1-2-zweierkomplement/index.html"><span class="t-nr">1.2</span> Zweierkomplement</a></li>
+<li><a href="../../lb1-technische-informatik/1-3-festkommazahlen/index.html"><span class="t-nr">1.3</span> Festkommazahlen</a></li>
+<li><a href="../../lb1-technische-informatik/1-4-zeichenkodierung/index.html"><span class="t-nr">1.4</span> Kodierung von Zeichen in der Informatik</a></li>
+</ul>
+<p class="kap">Boolesche Algebra</p><ul>
+<li><a href="../../lb1-technische-informatik/2-1-booleschealgebra/index.html"><span class="t-nr">2.1</span> Boolesche Algebra</a></li>
+<li><a href="../../lb1-technische-informatik/2-2-boolescheoperatoren/index.html"><span class="t-nr">2.2</span> Boolesche Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-3-formaleschreibweise/index.html"><span class="t-nr">2.3</span> Formale Schreibweise boolescher Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-4-implikationundaequivalenz/index.html"><span class="t-nr">2.4</span> Implikation und Äquivalenz</a></li>
+<li><a href="../../lb1-technische-informatik/2-5-gesetzeaussagenlogik/index.html"><span class="t-nr">2.5</span> Gesetze der Aussagenlogik</a></li>
+<li><a href="../../lb1-technische-informatik/2-6-kanonischenormalformen/index.html"><span class="t-nr">2.6</span> Kanonische Normalformen</a></li>
+</ul>
+<p class="kap">Schaltnetze</p><ul>
+<li><a href="../../lb1-technische-informatik/3-1-technischeumsetzung/index.html"><span class="t-nr">3.1</span> Boolesche Ausdrücke in Schaltungen</a></li>
+<li><a href="../../lb1-technische-informatik/3-2-schaltungsanalyse/index.html"><span class="t-nr">3.2</span> Schaltungsanalyse</a></li>
+<li><a href="../../lb1-technische-informatik/3-3-schaltungssynthese/index.html"><span class="t-nr">3.3</span> Schaltungssynthese</a></li>
+<li><a href="../../lb1-technische-informatik/3-4-kv-diagramme/index.html"><span class="t-nr">3.4</span> Karnaugh-Veitch-Diagramme</a></li>
+<li><a href="../../lb1-technische-informatik/3-5-standardschaltnetze/index.html"><span class="t-nr">3.5</span> Standardschaltnetze</a></li>
+<li><a href="../../lb1-technische-informatik/3-6-halbaddierer/index.html"><span class="t-nr">3.6</span> Halbaddierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-7-volladdierer/index.html"><span class="t-nr">3.7</span> Volladdierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-8-uebungsaufgaben/index.html"><span class="t-nr">3.8</span> Übungsaufgaben</a></li>
+</ul>
+<p class="kap">Rechnerarchitektur</p><ul>
+<li><a href="../../lb1-technische-informatik/4-1-neumann/index.html"><span class="t-nr">4.1</span> Rechnerarchitekturen</a></li>
+<li><a href="../../lb1-technische-informatik/4-2-prozessor/index.html"><span class="t-nr">4.2</span> Prozessoren</a></li>
+<li><a href="../../lb1-technische-informatik/4-3-speichersysteme/index.html"><span class="t-nr">4.3</span> Speichersysteme</a></li>
+</ul>
+<p class="kap">Informatik und Gesellschaft</p><ul>
+<li><a href="../../lb1-technische-informatik/5-1-systemsoftware/index.html"><span class="t-nr">5.1</span> Systemsoftware</a></li>
+<li><a href="../../lb1-technische-informatik/5-2-hardware-life/index.html"><span class="t-nr">5.2</span> Hardware-Lebenszyklus</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb1-technische-informatik/6-1-selbstcheck/index.html"><span class="t-nr">6.1</span> Selbstcheck</a></li>
+</ul>
+</div></details>
+<details class="lb" open><summary><span class="lb-nr">LB 2/3</span> Programmieren und Algorithmen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb2-programmieren-algorithmen/index.html">Überblick Programmieren und Algorithmen</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-2-algorithmus/index.html"><span class="t-nr">2.1.2</span> Algorithmus und Kontrollstrukturen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-3-eva-python/index.html"><span class="t-nr">2.1.3</span> EVA in Python</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-4-array/index.html"><span class="t-nr">2.1.4</span> Array – eine Datenstruktur</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-5-unterprogramme/index.html"><span class="t-nr">2.1.5</span> Unterprogramme</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-6-parameter/index.html"><span class="t-nr">2.1.6</span> Parameter in Funktionen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-7-global-var/index.html"><span class="t-nr">2.1.7</span> Lokale und globale Variablen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-8-git-einstieg/index.html"><span class="t-nr">2.1.8</span> Versionen verwalten mit Git</a></li>
+</ul>
+<p class="kap">Algorithmen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-1-algorithmen-komplexitaet/index.html"><span class="t-nr">2.2.1</span> Algorithmen und Komplexität</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-2-bubblesort/index.html"><span class="t-nr">2.2.2</span> Bubblesort</a></li>
+<li><a class="aktiv" aria-current="page" href="../../lb2-programmieren-algorithmen/2-2-3-einfuehrung-komplexitaet/index.html"><span class="t-nr">2.2.3</span> Einführung in Komplexität und die O-Notation</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-4-komplexitaetsklassen/index.html"><span class="t-nr">2.2.4</span> Komplexitätsklassen im Überblick</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-5-weitere-sortieralgorithmen/index.html"><span class="t-nr">2.2.5</span> Weitere Sortieralgorithmen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-6-darstellung/index.html"><span class="t-nr">2.2.6</span> Darstellung von Algorithmen (Modellierungshilfen)</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-7-rekursion/index.html"><span class="t-nr">2.2.7</span> Iteration und Rekursion</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-8-divide-and-conquer/index.html"><span class="t-nr">2.2.8</span> Divide and Conquer</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9-effiziente-sortieralgorithmen/index.html"><span class="t-nr">2.2.9</span> Effiziente Sortieralgorithmen – Mergesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9b-quicksort/index.html"><span class="t-nr">2.2.9b</span> Effiziente Sortieralgorithmen – Quicksort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-10-berechenbarkeit/index.html"><span class="t-nr">2.2.10</span> Berechenbarkeit: technische und theoretische Grenzen</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 2/3</span> Datenstrukturen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb3-datenstrukturen/index.html">Überblick Datenstrukturen</a>
+<p class="kap">Listen, Schlange und Stapel</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-0-1-einfuegen/index.html"><span class="t-nr">3.0.1</span> Was kostet das Einfügen in eine Liste?</a></li>
+<li><a href="../../lb3-datenstrukturen/3-0-2-git-im-kurs/index.html"><span class="t-nr">3.0.2</span> Deine Lösungen mit Git verwalten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-1-linkedlists/index.html"><span class="t-nr">3.1</span> Verkettete Listen (linked lists)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-2-queue/index.html"><span class="t-nr">3.2</span> Schlange (Queue)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-3-stack/index.html"><span class="t-nr">3.3</span> Stapel (Stack)</a></li>
+</ul>
+<p class="kap">Bäume</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-4-baum/index.html"><span class="t-nr">3.4</span> Datenstruktur Baum (Tree)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-5-bin-baum/index.html"><span class="t-nr">3.5</span> Binärbaum und binärer Suchbaum</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6-traversierung/index.html"><span class="t-nr">3.6</span> Traversierung</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6b-backtracking-baum/index.html"><span class="t-nr">3.6b</span> Backtracking 1: Suchen und zurückgehen im Baum</a></li>
+</ul>
+<p class="kap">Graphen</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-7-graph/index.html"><span class="t-nr">3.7</span> Graphen</a></li>
+<li><a href="../../lb3-datenstrukturen/3-8-graph-code/index.html"><span class="t-nr">3.8</span> Implementierung eines Graphen mit Adjazenzlisten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-9-dijkstra/index.html"><span class="t-nr">3.9</span> Kürzeste Wege: Moore und Dijkstra</a></li>
+<li><a href="../../lb3-datenstrukturen/3-10-backtracking/index.html"><span class="t-nr">3.10</span> Backtracking 2: Graphen und Belegungsprobleme</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 4/5</span> OOP und Softwareentwicklung</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb4-oop-softwareentwicklung/index.html">Überblick OOP und Softwareentwicklung</a>
+<p class="kap">Paradigmen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-0-klassifizierung/index.html"><span class="t-nr">4.0</span> Klassifizierung von Programmiersprachen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-1-programmierparadigmen/index.html"><span class="t-nr">4.1</span> Programmierparadigmen entdecken</a></li>
+</ul>
+<p class="kap">Objekte und Klassen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-2-objektorientierung/index.html"><span class="t-nr">4.2</span> Objektorientiertes Denken – vor dem Code</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-3-klassen/index.html"><span class="t-nr">4.3</span> Klassen als Baupläne</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-4-attribute/index.html"><span class="t-nr">4.4</span> Attribute im Detail</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-5-methoden/index.html"><span class="t-nr">4.5</span> Methoden schreiben und aufrufen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-6-kapselung/index.html"><span class="t-nr">4.6</span> Kapselung, Sichtbarkeit und kontrollierter Zugriff</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-7-typisierung/index.html"><span class="t-nr">4.7</span> Typisierung in Python: Klarheit im Code</a></li>
+</ul>
+<p class="kap">Beziehungen und Vererbung</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-8-beziehungen/index.html"><span class="t-nr">4.8</span> Beziehungen zwischen Klassen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-9-multiplizitaeten/index.html"><span class="t-nr">4.9</span> Multiplizitäten in UML: Wie viele Objekte?</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-10-vererbung/index.html"><span class="t-nr">4.10</span> Vererbung</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-11-polymorphie/index.html"><span class="t-nr">4.11</span> Botschaften und Polymorphie</a></li>
+</ul>
+<p class="kap">Software im Team</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-1-vom-programm-zum-projekt/index.html"><span class="t-nr">5.1</span> Vom Klassenmodell zur Softwarearchitektur</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-2-vorgehensmodelle/index.html"><span class="t-nr">5.2</span> Vorgehensmodelle und Anforderungen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-3-testen/index.html"><span class="t-nr">5.3</span> Testen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-4-git-im-team/index.html"><span class="t-nr">5.4</span> Git im Team</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-5-projektauftrag/index.html"><span class="t-nr">5.5</span> Projektauftrag und Themen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-6-projektleitfaden/index.html"><span class="t-nr">5.6</span> Projekt-Leitfaden</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 6</span> Sprachen und Automaten</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb6-sprachen-automaten/index.html">Überblick Sprachen und Automaten</a>
+<p class="kap">Sprachen und Grammatiken</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-1-spracherkennung/index.html"><span class="t-nr">6.1</span> Wie Sprache für Maschinen verständlich wird – Einstieg in Sprachen und Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-2-formale-sprache/index.html"><span class="t-nr">6.2</span> Aufbau von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-3-grammatik/index.html"><span class="t-nr">6.3</span> Grammatiken als formale Beschreibung von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-4-woerter-ableiten/index.html"><span class="t-nr">6.4</span> Ableitung von Wörtern</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-5-bnf/index.html"><span class="t-nr">6.5</span> Backus-Naur-Form (BNF)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-6-chomsky/index.html"><span class="t-nr">6.6</span> Die Chomsky-Hierarchie</a></li>
+</ul>
+<p class="kap">Endliche Automaten</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-7-dea/index.html"><span class="t-nr">6.7</span> Endliche Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-8-fangzustand/index.html"><span class="t-nr">6.8</span> Partielle Übergangsfunktion und Fangzustand (Trap-Zustand)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-9-dea-nea/index.html"><span class="t-nr">6.9</span> NEA, ε-Übergänge und weitere Automatentypen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-10-potenzmengenkonstruktion/index.html"><span class="t-nr">6.10</span> Überführung von NEA in DEA (Potenzmengenkonstruktion)</a></li>
+</ul>
+<p class="kap">Grammatik und Automat</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-11-grammatik-automat/index.html"><span class="t-nr">6.11</span> Überführung zwischen regulären Grammatiken und endlichen Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-12-epsilon-regeln/index.html"><span class="t-nr">6.12</span> Überführung einer Grammatik mit ε-Regeln in eine Grammatik ohne ε-Regeln</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-13-grenzen-automaten/index.html"><span class="t-nr">6.13</span> Grenzen von Automaten</a></li>
+</ul>
+<p class="kap">Compiler</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-14-compiler/index.html"><span class="t-nr">6.14</span> Compiler und Interpreter – von der Theorie zur Praxis</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-15-selbstcheck/index.html"><span class="t-nr">6.15</span> Selbstcheck und Klausurvorbereitung: Sprachen und Automaten</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 7</span> Rechnernetze</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb7-rechnernetze/index.html">Überblick Rechnernetze</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb7-rechnernetze/7-1-topologien/index.html"><span class="t-nr">7.1</span> Topologien und Übertragungsmedien</a></li>
+<li><a href="../../lb7-rechnernetze/7-2-vermittlung-dienste/index.html"><span class="t-nr">7.2</span> Vermittlung und Dienste</a></li>
+<li><a href="../../lb7-rechnernetze/7-3-schichtenmodelle/index.html"><span class="t-nr">7.3</span> Schichtenmodelle (OSI und TCP/IP)</a></li>
+<li><a href="../../lb7-rechnernetze/7-4-netzzugangsschicht/index.html"><span class="t-nr">7.4</span> Netzzugangsschicht: MAC, Ethernet und Switch</a></li>
+</ul>
+<p class="kap">Internetschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-5-ip-adressierung-routing/index.html"><span class="t-nr">7.5</span> Internetschicht: IP-Adressierung und Routing</a></li>
+<li><a href="../../lb7-rechnernetze/7-6-subnetting-cidr/index.html"><span class="t-nr">7.6</span> Subnetting, CIDR und VLSM</a></li>
+<li><a href="../../lb7-rechnernetze/7-7-dhcp/index.html"><span class="t-nr">7.7</span> DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-8-dns/index.html"><span class="t-nr">7.8</span> DNS und Namensauflösung</a></li>
+</ul>
+<p class="kap">Transport- und Anwendungsschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-9-tcp-udp/index.html"><span class="t-nr">7.9</span> Transportschicht: TCP und UDP</a></li>
+<li><a href="../../lb7-rechnernetze/7-10-anwendungsschicht-protokolle/index.html"><span class="t-nr">7.10</span> Anwendungsschicht und Protokolle</a></li>
+</ul>
+<p class="kap">Filius-Praxis</p><ul>
+<li><a href="../../lb7-rechnernetze/7-13-filius-gateway/index.html"><span class="t-nr">7.13</span> Filius-Praxis: Zwei Netzwerke verbinden</a></li>
+<li><a href="../../lb7-rechnernetze/7-14-filius-routingtabelle/index.html"><span class="t-nr">7.14</span> Filius-Praxis: Mehrere Router und Routingtabellen</a></li>
+<li><a href="../../lb7-rechnernetze/7-15-filius-dhcp/index.html"><span class="t-nr">7.15</span> Filius-Praxis: DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-16-filius-dns-web/index.html"><span class="t-nr">7.16</span> Filius-Praxis: DNS, Webserver und Einstellungen über DHCP</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb7-rechnernetze/7-17-aufgabenstellung/index.html"><span class="t-nr">7.17</span> Projekt: Rechnernetze – Theorie, Praxis und Netzplanung</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 8</span> Informationssicherheit</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb8-informationssicherheit/index.html">Überblick Informationssicherheit</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-1-sicherheitsziele/index.html"><span class="t-nr">8.1</span> Sicherheitsziele und Datenschutz</a></li>
+<li><a href="../../lb8-informationssicherheit/8-2-uebersicht-kryptologie/index.html"><span class="t-nr">8.2</span> Übersicht Kryptologie</a></li>
+</ul>
+<p class="kap">Symmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-3-symmetrische-verfahren/index.html"><span class="t-nr">8.3</span> Symmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-4-kasiski-test/index.html"><span class="t-nr">8.4</span> Kasiski-Test</a></li>
+<li><a href="../../lb8-informationssicherheit/8-5-one-time-pad/index.html"><span class="t-nr">8.5</span> One-Time-Pad</a></li>
+<li><a href="../../lb8-informationssicherheit/8-6-kryptoanalyse/index.html"><span class="t-nr">8.6</span> Kryptoanalyse</a></li>
+<li><a href="../../lb8-informationssicherheit/8-7-aes/index.html"><span class="t-nr">8.7</span> AES</a></li>
+</ul>
+<p class="kap">Asymmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-8-asymmetrische-verfahren/index.html"><span class="t-nr">8.8</span> Asymmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-9-rsa/index.html"><span class="t-nr">8.9</span> RSA</a></li>
+<li><a href="../../lb8-informationssicherheit/8-10-diffie-hellman/index.html"><span class="t-nr">8.10</span> Diffie-Hellman-Schlüsselaustausch</a></li>
+<li><a href="../../lb8-informationssicherheit/8-11-hybride-verfahren/index.html"><span class="t-nr">8.11</span> Hybride Verfahren</a></li>
+</ul>
+<p class="kap">Integrität und Authentizität</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-12-hashfunktionen/index.html"><span class="t-nr">8.12</span> Hashfunktionen</a></li>
+<li><a href="../../lb8-informationssicherheit/8-13-digitale-signatur/index.html"><span class="t-nr">8.13</span> Digitale Signatur</a></li>
+<li><a href="../../lb8-informationssicherheit/8-14-authentifizierung/index.html"><span class="t-nr">8.14</span> Authentifizierung</a></li>
+</ul>
+<p class="kap">Netzsicherheit</p><ul>
+<li><a href="../../lb8-informationssicherheit/7-11-tls-vpn/index.html"><span class="t-nr">7.11</span> Transportverschlüsselung: TLS und VPN</a></li>
+<li><a href="../../lb8-informationssicherheit/7-12-authentifizierung/index.html"><span class="t-nr">7.12</span> Identifizierung und Authentifizierung</a></li>
+</ul>
+<p class="kap">Verfügbarkeit</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-15-datensicherung-raid/index.html"><span class="t-nr">8.15</span> Datensicherung und RAID</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 9</span> Datenmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb9-datenmanagement/index.html">Überblick Datenmanagement</a>
+<p class="kap">Relationale Datenbanken</p><ul>
+<li><a href="../../lb9-datenmanagement/1-1-datenbanken/index.html"><span class="t-nr">1.1</span> Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/1-2-relationale-db/index.html"><span class="t-nr">1.2</span> Das relationale Datenmodell</a></li>
+<li><a href="../../lb9-datenmanagement/1-3-sql-select/index.html"><span class="t-nr">1.3</span> SQL-Abfragen</a></li>
+<li><a href="../../lb9-datenmanagement/1-4-sql-where/index.html"><span class="t-nr">1.4</span> SQL WHERE- und LIKE-Klauseln</a></li>
+<li><a href="../../lb9-datenmanagement/1-5-sql-aggregation/index.html"><span class="t-nr">1.5</span> SQL-Aggregatfunktionen</a></li>
+<li><a href="../../lb9-datenmanagement/1-6-sql-joins/index.html"><span class="t-nr">1.6</span> SQL-Joins</a></li>
+<li><a href="../../lb9-datenmanagement/1-7-db-browser/index.html"><span class="t-nr">1.7</span> DB Browser (SQLite)</a></li>
+<li><a href="../../lb9-datenmanagement/1-8-crud/index.html"><span class="t-nr">1.8</span> CRUD: Create, (Read), Update und Delete in SQL</a></li>
+<li><a href="../../lb9-datenmanagement/1-9-sql-uebung/index.html"><span class="t-nr">1.9</span> SQL-Übungsaufgaben</a></li>
+<li><a href="../../lb9-datenmanagement/1-10-erm/index.html"><span class="t-nr">1.10</span> Das Entity-Relationship-Modell</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-1-11-1-db-browser-eigene-tabellen/index.html"><span class="t-nr">1.11.1</span> Eigene Datenbank in DB Browser anlegen</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-relationenmodell/index.html"><span class="t-nr">1.11</span> Vom ER-Modell zum Relationenmodell und Relationenschemata</a></li>
+<li><a href="../../lb9-datenmanagement/1-12-uebung-modellierung/index.html"><span class="t-nr">1.12</span> Übungsaufgaben zur Modellierung von Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/1-13-normalisierung/index.html"><span class="t-nr">1.13</span> Normalisierung und Anomalien</a></li>
+<li><a href="../../lb9-datenmanagement/1-14-erste-normalform/index.html"><span class="t-nr">1.14</span> Erste Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-15-zweite-normalform/index.html"><span class="t-nr">1.15</span> Zweite Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-16-dritte-normalform/index.html"><span class="t-nr">1.16</span> Dritte Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-17-uebung-normalformen/index.html"><span class="t-nr">1.17</span> Übungsaufgaben zu den Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-18-komplette-uebung/index.html"><span class="t-nr">1.18</span> Übung: ERM, Relationenmodell und Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-19-subselects/index.html"><span class="t-nr">1.19</span> Subselects in SQLite</a></li>
+<li><a href="../../lb9-datenmanagement/1-20-sql-uebung/index.html"><span class="t-nr">1.20</span> SQL-Übungen für DB Browser (SQLite) – Thema: Freizeitpark</a></li>
+<li><a href="../../lb9-datenmanagement/1-21-selbstcheck/index.html"><span class="t-nr">1.21</span> Selbstcheck: Datenbanken</a></li>
+</ul>
+<p class="kap">NoSQL</p><ul>
+<li><a href="../../lb9-datenmanagement/2-1-cap/index.html"><span class="t-nr">2.1</span> Das CAP-Theorem</a></li>
+<li><a href="../../lb9-datenmanagement/2-2-nosql-db/index.html"><span class="t-nr">2.2</span> NoSQL-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-3-key-value-db/index.html"><span class="t-nr">2.3</span> Key-Value-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-4-selbstcheck/index.html"><span class="t-nr">2.4</span> Selbstcheck: NoSQL-Datenbanken</a></li>
+</ul>
+<p class="kap">Datenverarbeitung mit Python</p><ul>
+<li><a href="../../lb9-datenmanagement/3-1-data-life-cycle/index.html"><span class="t-nr">3.1</span> Arbeit mit Daten: Der Data Life Cycle</a></li>
+<li><a href="../../lb9-datenmanagement/3-2-verschachtelte-datentypen/index.html"><span class="t-nr">3.2</span> Geschachtelte Datentypen</a></li>
+<li><a href="../../lb9-datenmanagement/3-3-einlesen/index.html"><span class="t-nr">3.3</span> Daten mit Python einlesen</a></li>
+<li><a href="../../lb9-datenmanagement/3-4-verarbeiten/index.html"><span class="t-nr">3.4</span> Verarbeitung eingelesener Daten in Python</a></li>
+<li><a href="../../lb9-datenmanagement/3-5-bereinigen/index.html"><span class="t-nr">3.5</span> Daten bereinigen und analysieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-6-schreiben/index.html"><span class="t-nr">3.6</span> Daten in CSV-Dateien schreiben</a></li>
+<li><a href="../../lb9-datenmanagement/3-7-csv-in-dbbrowser/index.html"><span class="t-nr">3.7</span> CSV-Daten in DB Browser importieren und mit SQL auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-8-visualisieren/index.html"><span class="t-nr">3.8</span> CSV-Dateien mit LibreOffice visualisieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-9-data-life-cycle-csv/index.html"><span class="t-nr">3.9</span> Datenlebenszyklus mit CSV – Eigene Umfrage gestalten und auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-10-json/index.html"><span class="t-nr">3.10</span> JSON: Ein aktuelles Standardformat</a></li>
+<li><a href="../../lb9-datenmanagement/3-11-api/index.html"><span class="t-nr">3.11</span> APIs verstehen und nutzen</a></li>
+<li><a href="../../lb9-datenmanagement/3-12-uebung-erm-daten-verarbeiten/index.html"><span class="t-nr">3.12</span> WÜ Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/3-13-datenmanagement-vertiefung/index.html"><span class="t-nr">3.13</span> Vertiefung des Datenmanagements</a></li>
+<li><a href="../../lb9-datenmanagement/3-14-iug/index.html"><span class="t-nr">3.14</span> Daten in der Gesellschaft: Ethische und kritische Betrachtungen</a></li>
+<li><a href="../../lb9-datenmanagement/3-15-selbstcheck/index.html"><span class="t-nr">3.15</span> Selbstcheck: Datenverarbeitung mit Python</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 10/11</span> KI und Projektmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb10-ki-projektmanagement/index.html">Überblick KI und Projektmanagement</a>
+<p class="kap">KI-Kickstart</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-0-kickstart-sprachmodelle/index.html"><span class="t-nr">11.0</span> KI-Kickstart: Wie funktionieren Sprachmodelle?</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-0b-ki-als-lernpartner/index.html"><span class="t-nr">11.0b</span> KI als Lernpartner: Assistenten verstehen und selbst einstellen</a></li>
+</ul>
+<p class="kap">KI-Grundlagen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-1-begriff-ki/index.html"><span class="t-nr">11.1</span> Einführung in die Künstliche Intelligenz</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-2-wissens-datenbasierte-ki/index.html"><span class="t-nr">11.2</span> Wissensbasierte und datenbasierte Ansätze in der KI</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-3-ki-modelle-optimieren/index.html"><span class="t-nr">11.3</span> KI-Systeme: Training und Optimierung</a></li>
+</ul>
+<p class="kap">Projektmanagement</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-1-grundlagen/index.html"><span class="t-nr">10.1</span> Grundlagen des Projektmanagements</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-2-klassisch-vs-agil/index.html"><span class="t-nr">10.2</span> Klassisches und agiles Projektmanagement</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-3-versionsverwaltung-git/index.html"><span class="t-nr">10.3</span> Versionsverwaltung mit Git</a></li>
+</ul>
+<p class="kap">KI-Projekt</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-4-tutorial-jupyter/index.html"><span class="t-nr">10.4</span> Maschinelles Lernen: Tutorials mit Jupyter</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-5-ki-projektmanagement/index.html"><span class="t-nr">10.5</span> Projektaufgabe: Künstliche Intelligenz mit Projektmanagement erarbeiten</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-6-ki-projekt-dokumentation/index.html"><span class="t-nr">10.6</span> Projektdokumentation: Künstliche Intelligenz (KI) &amp; Projektmanagement</a></li>
+</ul>
+<p class="kap">Maschinelles Lernen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-4-lineare-regression/index.html"><span class="t-nr">11.4</span> Lineare Regression</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-5-entscheidungsbaum/index.html"><span class="t-nr">11.5</span> Entscheidungsbäume</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-6-k-naechster-nachbar/index.html"><span class="t-nr">11.6</span> k-Nächste-Nachbarn-Algorithmus (k-NN)</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-7-k-means/index.html"><span class="t-nr">11.7</span> k-Means-Clustering</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-8-neuronale-netze/index.html"><span class="t-nr">11.8</span> Neuronale Netze und Deep Learning</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-9-genetische-algorithmen/index.html"><span class="t-nr">11.9</span> Genetische Algorithmen</a></li>
+</ul>
+<p class="kap">Generative KI und Gesellschaft</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-10-generative-ki/index.html"><span class="t-nr">11.10</span> Generative KI und Sprachmodelle</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-11-ki-und-gesellschaft/index.html"><span class="t-nr">11.11</span> Gesellschaftliche Auswirkungen Künstlicher Intelligenz</a></li>
+</ul>
+</div></details>
+</nav>
+<div class="haupt-rahmen">
+<main class="haupt" id="inhalt">
+<p class="pfad"><a href="../../index.html">Überblick</a> › <a href="../index.html">LB 2/3 Programmieren und Algorithmen</a></p>
+<h1><span class="h1-nr">2.2.3</span> Einführung in Komplexität und die O-Notation</h1>
+<nav class="reiter" aria-label="Teile dieses Themas"><a class="aktiv" aria-current="page" href="index.html">Einführung <span class="r-zahl">2</span></a><a href="uebungen.html">Übungen <span class="r-zahl">3</span></a><a href="vertiefung.html">Vertiefung <span class="r-zahl">1</span></a></nav>
+<div class="seiteninhalt" id="seiteninhalt">
+
+<script src="../sortierlabor.js" defer></script>
+<p>Die Analyse der Laufzeit von Algorithmen ist ein wichtiger Bestandteil der Informatik. Sie hilft dabei, die Effizienz von Algorithmen zu verstehen und zu vergleichen – unabhängig davon, wie schnell der konkrete Rechner ist. Das wichtigste Werkzeug dafür ist die O-Notation (engl. Big-O-Notation).</p>
+
+<h2 id="schritt-1">Schritt 1: Schritte zählen statt Sekunden messen</h2>
+
+<p>Sekunden hängen vom Rechner ab, die Anzahl der Schritte nur vom Algorithmus und von der Eingabegröße n. Im Video zählst du in Thonny die Schritte der Funktion <code>summe</code> für die Liste [4, 8, 1] mit. Achte darauf, welche Anweisungen einmal zählen und welche so oft, wie die Schleife läuft.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-3-1_schritte_vorschau.png" src="../vid/2-2-3-1_schritte.mp4"></video><a href="../vid/2-2-3-1_schritte.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Schritte zählen statt Sekunden messen (ca. 1,5 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<p>Zum Nachlesen steht die Zählung mit dem Nachweis über die Definition in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span></summary>
+            <p><strong>Ausgangssituation:</strong> Summe einer Liste</p>
+            <pre class="ausfuehrbar"><code class="language-python">def summe(liste):
+    s = 0                 # 1 Schritt
+    for x in liste:       # n Durchläufe
+        s = s + x         # je 1 Schritt
+    return s              # 1 Schritt</code></pre>
+            <p>Insgesamt n + 2 Schritte, also O(n): Doppelt so viele Elemente bedeuten etwa doppelt so viel Zeit.</p>
+            <ol>
+                <li><strong>Schritte zählen:</strong> f(n) = 1 + n + 1 = n + 2. <em>Warum:</em> Die Anweisungen außerhalb der Schleife laufen einmal, der Schleifenrumpf n-mal.</li>
+                <li><strong>Definition anwenden:</strong> Gesucht sind c und n<sub>0</sub> mit n + 2 ≤ c · n für alle n ≥ n<sub>0</sub>. Mit c = 3 und n<sub>0</sub> = 1 gilt n + 2 ≤ 3n ⇔ 2 ≤ 2n ⇔ n ≥ 1. <em>Warum genügt das:</em> Die Definition verlangt nur <em>eine</em> passende Konstante.</li>
+                <li><strong>Deuten:</strong> Die Konstante +2 spielt für große n keine Rolle. Es bleibt lineares Wachstum.</li>
+            </ol>
+            <p><strong>Ergebnis:</strong> f(n) = n + 2 ∈ O(n). <strong>Probe:</strong> Für n = 10 gilt 12 ≤ 30, für n = 1 gilt 3 ≤ 3.</p>
+            <table>
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>summe([4, 8, 1])</code></td><td><code>13</code></td><td>Normalfall, 3 + 2 = 5 Schritte</td></tr>
+                    <tr><td><code>summe([])</code></td><td><code>0</code></td><td>leere Liste, 2 Schritte</td></tr>
+                    <tr><td><code>summe([5])</code></td><td><code>5</code></td><td>ein Element</td></tr>
+                    <tr><td><code>summe([-2, 7, 1])</code></td><td><code>6</code></td><td>negative Zahlen</td></tr>
+                    <tr><td><code>summe(["a"])</code></td><td><code>TypeError</code></td><td>falscher Typ: <code>0 + "a"</code> ist nicht definiert</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Schritte von summe <span class="niveau">AFB I</span></summary>
+                <p>Was gibt <code>summe([3, 1, 4, 1, 5, 9])</code> zurück, und wie viele Schritte braucht die Funktion dafür?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Rückgabe 23. Die Liste hat n = 6 Zahlen, also 1 + 6 + 1 = 8 Schritte.</p>
+                </details>
+            </details>
+        </div>
+
+<h2 id="schritt-2">Schritt 2: Schleifen in Schleifen zählen</h2>
+
+<p>Steckt eine Schleife in einer anderen, zählt man, wie oft die innere Schleife insgesamt läuft. Im Video läuft Bubblesort ohne Abbruch mit der Liste [5, 2, 9, 1], und eine Zähler-Tabelle hält fest, wie oft verglichen wird. Achte darauf, dass die innere Schleife mit jedem Durchlauf von <code>i</code> kürzer wird – deshalb bilden die Vergleiche ein Dreieck.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-3-2_schleifen_vorschau.png" src="../vid/2-2-3-2_schleifen.mp4"></video><a href="../vid/2-2-3-2_schleifen.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Schleifen in Schleifen zählen (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Bubblesort als Pseudocode</h3>
+
+<p>Um die O-Notation besser zu verstehen, betrachten wir den Bubblesort-Algorithmus. Er vergleicht Elemente einer Liste wiederholt und vertauscht sie, bis die Liste sortiert ist.</p>
+
+<pre class="darstellung"><code>Prozedur BubbleSort(arr):
+    n = Länge(arr)
+    für i von 0 bis n − 2:
+        für j von 0 bis n − i − 2:
+            wenn arr[j] &gt; arr[j + 1] dann:
+                tausche arr[j] und arr[j + 1]</code></pre>
+
+<p>Die Grenzen sind einschließlich gemeint. Die innere Schleife endet bei j = n − i − 2, damit <code>arr[j + 1]</code> höchstens auf das letzte Element <code>arr[n − 1]</code> zugreift. Die Anzahl der Vergleiche ist (n − 1) + (n − 2) + … + 1 = n · (n − 1) / 2 = ½n² − ½n. Das liegt in <strong>O(n²)</strong>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Vergleiche im Dreieck <span class="niveau">AFB I</span></summary>
+                <p>Bubblesort ohne Abbruch sortiert eine Liste mit 7 Elementen. Wie viele Vergleiche macht die innere Schleife im Durchlauf i = 2, und wie viele Vergleiche sind es insgesamt?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Bei i = 2 läuft <code>j</code> durch <code>range(7 - 2 - 1)</code> = <code>range(4)</code>, also 4 Vergleiche. Insgesamt 6 + 5 + 4 + 3 + 2 + 1 = 21 = 7 · 6 / 2 Vergleiche.</p>
+                </details>
+            </details>
+        </div>
+
+<h2 id="schritt-3">Schritt 3: Das Verdopplungsexperiment</h2>
+
+<p>Ob die Rechnung n · (n − 1) / 2 stimmt, zeigt eine Messung: Man misst die Zeit für n und für 2n und bildet den Faktor. Im Video wird das Messprogramm in Thonny geschrieben; neu sind dabei <code>time.perf_counter()</code>, die Zufallszahlen mit <code>random.randint</code>, die per <code>append</code> in eine Liste kommen, und das Runden mit <code>round</code>. Achte darauf, welcher Faktor bei Verdopplung von n herauskommt – und warum er nicht vom Rechner abhängt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-3-3_verdopplung_vorschau.png" src="../vid/2-2-3-3_verdopplung.mp4"></video><a href="../vid/2-2-3-3_verdopplung.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Das Verdopplungsexperiment (ca. 2 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: die ganze Messreihe</h3>
+
+<p>Bei einem Test von Bubblesort mit verschiedenen Längen des zu sortierenden Arrays ergaben sich die folgenden Messwerte:</p>
+
+<table>
+            <tr><th>Anzahl n</th><td>2000</td><td>4000</td><td>6000</td><td>8000</td><td>10000</td><td>12000</td><td>14000</td><td>16000</td><td>18000</td><td>20000</td></tr>
+            <tr><th>Zeit in ms</th><td>178</td><td>646</td><td>1538</td><td>2739</td><td>4404</td><td>6067</td><td>8286</td><td>10826</td><td>13572</td><td>17332</td></tr>
+        </table>
+
+<figure>
+            <img src="../img/bubblesort.png" width="600" alt="Diagramm der gemessenen Laufzeiten von Bubblesort in Abhängigkeit von n">
+            <figcaption>Abb. 1: grafische Auswertung mit dem Modul matplotlib</figcaption>
+        </figure>
+
+<div class="hinweis">
+            <p><strong>Speichere deine Messversionen als einzelne Commits (siehe 2.1.8):</strong> Jede Änderung am Algorithmus wird ein eigener Commit in deinem Repository, die gemessenen Zeiten für n und 2n stehen in der Commit-Nachricht. So zeigt die Historie Algorithmus und Laufzeit gemeinsam.</p>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Installation von matplotlib</summary>
+                <p>
+                    Um Funktionen von matplotlib verwenden zu können, musst du das Paket zuerst installieren und dann in dein Programm importieren. In Thonny geht das über <strong>Extras → Pakete verwalten</strong> (engl. Tools → Manage packages): nach „matplotlib“ suchen und installieren. Alternativ gibst du in der Kommandozeile <code>pip install matplotlib</code> ein.<br>
+                    Zum Zeichnen importierst du das Untermodul <code>pyplot</code>:
+                </p>
+                <pre class="ausfuehrbar"><code class="language-python">import matplotlib.pyplot as plt
+
+n = [2000, 4000, 6000, 8000, 10000]
+zeit = [178, 646, 1538, 2739, 4404]
+plt.plot(n, zeit, marker="o")
+plt.xlabel("Anzahl n")
+plt.ylabel("Zeit in ms")
+plt.show()</code></pre>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Zeit hochrechnen <span class="niveau">AFB I</span></summary>
+                <p>Ein Programm mit quadratischer Laufzeit braucht für n = 3000 Elemente 0,5 s. Wie lange braucht es ungefähr für n = 6000 und für n = 12 000?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Jede Verdopplung von n vervierfacht die Zeit: n = 6000 etwa 0,5 s · 4 = 2 s, n = 12 000 etwa 2 s · 4 = 8 s.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.3.1 – Messwerte auswerten.</p>
+
+<h2 id="schritt-4">Schritt 4: Was bedeutet O(n²) genau?</h2>
+
+<p>Bisher hieß es „wächst etwa wie n²“. Die formale Definition (unten bei „Das Wichtigste“ zum Nachlesen) macht das genau. Im Video wendest du sie auf <code>summe</code> und Bubblesort an und siehst, warum konstante Faktoren und kleinere Terme wegfallen. Achte auf die Falle: O ist eine obere Schranke – man gibt trotzdem immer die kleinste passende Klasse an.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/2-2-3-4_definition_vorschau.png" src="../vid/2-2-3-4_definition.mp4"></video><a href="../vid/2-2-3-4_definition.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Was bedeutet O(n²) genau? (ca. 1,5 min)</figcaption>
+        </figure>
+
+<h3>Zum Nachlesen: Definition, Nachweis und Messung</h3>
+
+<p>
+            Die O-Notation beschreibt, wie sich die Laufzeit verhält, wenn die Größe der Eingabe gegen unendlich strebt. Meist gibt man sie für den <strong>schlechtesten Fall</strong> (worst case) an, man kann sie aber genauso für den besten oder den mittleren Fall verwenden. Ein Algorithmus mit f(n) = 3n² + 5n + 2 Schritten liegt in O(n²), denn für n ≥ 1 gilt 3n² + 5n + 2 ≤ 10 · n².
+        </p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+            <p><strong>Ausgangssituation:</strong> Für Bubblesort ohne Abbruch soll die Zugehörigkeit zu O(n²) mit der Definition nachgewiesen und mit den Messwerten oben überprüft werden.</p>
+            <ol>
+                <li><strong>Vergleiche zählen:</strong> f(n) = n(n − 1)/2 = ½n² − ½n (siehe oben).</li>
+                <li><strong>Obere Schranke nachweisen:</strong> Für alle n ≥ 1 gilt ½n² − ½n ≤ ½n², weil ½n ≥ 0 ist. Mit c = ½ und n<sub>0</sub> = 1 ist die Definition erfüllt, also f(n) ∈ O(n²). <em>Warum darf der Term −½n wegfallen:</em> Er verkleinert f nur, und eine obere Schranke darf größer sein.</li>
+                <li><strong>Falle „obere Schranke“:</strong> Nach der Definition gilt auch f(n) ∈ O(n³), denn n² ≤ n³ für n ≥ 1. Diese Aussage ist wahr, aber wenig hilfreich. Man gibt deshalb die <em>kleinste</em> passende Klasse an. Dass f nicht langsamer als quadratisch wächst, zeigt die Gegenrichtung: Für n ≥ 2 ist n − 1 ≥ n/2, also f(n) ≥ ¼n².</li>
+                <li><strong>Mit den Messwerten prüfen:</strong> Bei O(n²) gilt t ≈ c · n². Verdoppelt sich n, vervierfacht sich t.
+                    <table>
+                        <thead><tr><th>Verdopplung</th><th>Zeiten</th><th>Faktor</th></tr></thead>
+                        <tbody>
+                            <tr><td>2000 → 4000</td><td>178 ms → 646 ms</td><td>≈ 3,6</td></tr>
+                            <tr><td>6000 → 12000</td><td>1538 ms → 6067 ms</td><td>≈ 3,9</td></tr>
+                            <tr><td>8000 → 16000</td><td>2739 ms → 10826 ms</td><td>≈ 4,0</td></tr>
+                        </tbody>
+                    </table>
+                    <em>Warum ist der erste Faktor kleiner?</em> Vor allem schwanken kurze Messungen stärker. Dazu kommen Anteile, die nicht quadratisch wachsen (Funktionsaufruf, Schleifenverwaltung); sie fallen bei kleinen n etwas mehr ins Gewicht. Je größer n, desto näher liegt der Faktor bei 4.</li>
+                <li><strong>Selbst messen:</strong> Für Laufzeitmessungen nimmt man <code>time.perf_counter()</code>. Diese Uhr ist genauer als <code>time.time()</code> und für Zeitdifferenzen gedacht.
+                    <pre><code class="language-python">import random
+import time
+
+def bubblesort(arr):
+    n = len(arr)
+    for i in range(n - 1):
+        for j in range(n - i - 1):
+            if arr[j] &gt; arr[j + 1]:
+                temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+
+for n in [2000, 4000, 8000]:
+    daten = []
+    for i in range(n):
+        daten.append(random.randint(1, 10**6))
+    start = time.perf_counter()
+    bubblesort(daten)
+    ms = round((time.perf_counter() - start) * 1000)
+    print("n =", n, "->", ms, "ms")</code></pre>
+                </li>
+            </ol>
+            <p><strong>Ergebnis:</strong> f(n) ∈ O(n²) mit c = ½, n<sub>0</sub> = 1. Die Messwerte bestätigen den Faktor ≈ 4 bei Verdopplung von n. Absolute Zeiten hängen vom Rechner ab, der Faktor nicht.</p>
+            <table>
+                <thead><tr><th>Eingabe <code>daten</code></th><th>erwartetes Ergebnis nach <code>bubblesort(daten)</code></th><th>Bemerkung</th></tr></thead>
+                <tbody>
+                    <tr><td><code>[5, 2, 9, 1]</code></td><td><code>[1, 2, 5, 9]</code></td><td>Normalfall, 6 Vergleiche</td></tr>
+                    <tr><td><code>[]</code> bzw. <code>[7]</code></td><td><code>[]</code> bzw. <code>[7]</code></td><td>Randfälle, 0 Vergleiche</td></tr>
+                    <tr><td><code>[-3, -7, 0]</code></td><td><code>[-7, -3, 0]</code></td><td>negative Zahlen</td></tr>
+                    <tr><td><code>[1, "a"]</code></td><td><code>TypeError</code></td><td>falscher Typ</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Welcher Term gewinnt? <span class="niveau">AFB I–II</span></summary>
+                <p>Ein Algorithmus braucht f(n) = 2n² + 100n + 7 Schritte. Welcher Teil ist bei n = 10 größer, 2n² oder 100n + 7? Welcher bei n = 1000? In welcher Komplexitätsklasse liegt f?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>n = 10: 2n² = 200, 100n + 7 = 1007 – hier überwiegt noch der lineare Teil. n = 1000: 2n² = 2 000 000, 100n + 7 = 100 007 – jetzt überwiegt der quadratische Teil, und sein Vorsprung wächst weiter. Für große n zählt nur der höchste Term, der Faktor 2 fällt weg: f liegt in O(n²).</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: Aufgabe 2.2.3.2 – Komplexität von Programmstücken bestimmen.</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Skalierung</summary>
+                <p>
+                    <strong>Alltag:</strong> Eine App, die mit 100 Testnutzern flüssig läuft, kann mit 100 000 Nutzern unbenutzbar werden, wenn ein Teil davon in O(n²) arbeitet.<br><br>
+                    <strong>Beruf:</strong> Performance-Engineers und Backend-Entwicklerinnen messen Laufzeiten mit Profilern und schätzen mit der O-Notation ab, ob ein System auch bei zehnfacher Last noch reicht. Bei Online-Händlern oder Banken ist das wichtig, bevor sich zum Beispiel am „Black Friday“ die Zugriffe vervielfachen.
+                </p>
+            </details>
+        </div>
+
+<h2>Zusammenfassung</h2>
+
+<p>
+            Den Aufwand eines Algorithmus misst man in Schritten in Abhängigkeit von der Eingabegröße n. Anweisungen außerhalb von Schleifen zählen einmal, Schleifenrümpfe so oft, wie die Schleife läuft; bei geschachtelten Schleifen addiert man die Durchläufe der inneren Schleife. Die O-Notation fasst das Ergebnis zusammen: Konstante Faktoren und kleinere Terme fallen weg, angegeben wird die kleinste passende Klasse. Messungen bestätigen die Klasse über den Faktor bei Verdopplung von n – bei O(n²) etwa 4.
+        </p>
+
+<div class="hinweis" id="einschaetzen">
+            <details open>
+                <summary>Einschätzen: zurück zum Streamingdienst</summary>
+                <p>Die Messung im Messlabor ist ein Verdopplungsexperiment. So sieht eine Beispielmessung mit der Songliste aus: Bubblesort sortiert die ersten n Songs nach Streams, ein Zähler zählt die Vergleiche.</p>
+                <table>
+                    <thead><tr><th>n</th><th>Zeit</th><th>Vergleiche</th></tr></thead>
+                    <tbody>
+                        <tr><td>1 000</td><td>0,143 s</td><td>497 289</td></tr>
+                        <tr><td>2 000</td><td>0,585 s</td><td>1 995 430</td></tr>
+                        <tr><td>4 000</td><td>1,921 s</td><td>7 994 172</td></tr>
+                    </tbody>
+                </table>
+                <ol>
+                    <li>Bestimme die Klasse aus den Faktoren bei Verdopplung.</li>
+                    <li>Bestimme eine Konstante c mit Zeit ≈ c · n² und sage damit die Zeit für 8 000 Songs und für 100 Millionen Songs voraus. Kontrolliere mit dem Hochrechner.</li>
+                    <li>Ein Mitschüler misst auf einem doppelt so schnellen Rechner. Was ändert sich: c, die Klasse oder beides?</li>
+                    <li>Bearbeite im Messlabor Teil 1–3: Vervollständige Bubblesort mit dem Vergleichszähler, führe das Verdopplungsexperiment durch und füge dein eigenes Verfahren aus 2.2.1 ein. Zu welcher Klasse gehört dein Verfahren?</li>
+                </ol>
+                <div class="sortierlabor" data-verfahren="hochrechner" data-n="4000" data-zeit="1,921" data-klasse="n2"></div>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Vergleiche: Faktor 4,0 und 4,0, Zeit: 4,1 und 3,3 – das passt zu O(n²); die Zeit schwankt stärker als die Zahl der Vergleiche. c ≈ 1,921 s / 4 000² ≈ 1,2 · 10<sup>−7</sup> s. Vorhersage: 8 000 Songs ≈ 1,2 · 10<sup>−7</sup> · 6,4 · 10<sup>7</sup> ≈ 7,7 s; 100 Millionen Songs ≈ 1,2 · 10<sup>−7</sup> · 10<sup>16</sup> ≈ 1,2 · 10<sup>9</sup> s ≈ 38 Jahre. Auf dem schnelleren Rechner halbiert sich c, die Klasse O(n²) bleibt: Aus 38 werden 19 Jahre. Genau das meint die O-Notation – konstante Faktoren werden weggelassen, weil sie an der Einschätzung „geht“ oder „geht nicht“ nichts ändern. Dein eigenes Verfahren: Wird die Zeit beim Verdoppeln etwa viermal so groß, gehört es ebenfalls zu O(n²) – das gilt für fast alle Verfahren aus dem Kartenspiel. Ob es etwas schneller oder langsamer als Bubblesort ist, ändert an der Klasse nichts.</p>
+                </details>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>O-Notation:</strong> beschreibt, wie stark der Aufwand eines Algorithmus wächst, wenn die Eingabe größer wird. Man betrachtet nur den am schnellsten wachsenden Teil: Ein Algorithmus mit 3n² + 5n + 2 Schritten liegt in O(n²).</p>
+<p><strong>Vereinfachen:</strong> Konstante Faktoren und Terme niedrigerer Ordnung werden weggelassen. Angegeben wird die kleinste passende Klasse.</p>
+<p><strong>Schritte zählen:</strong> Schleifenrümpfe zählen so oft, wie die Schleife läuft; bei geschachtelten Schleifen addiert man die Durchläufe der inneren Schleife.</p>
+<p><strong>Verdopplungsexperiment:</strong> Messungen bestätigen die Klasse über den Faktor bei Verdopplung von n, bei O(n²) etwa 4.</p>
+</div>
+
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: formale Definition der O-Notation</summary>
+<p>Beschreibt f(n) die Anzahl der Schritte eines Algorithmus bei Eingabegröße n, dann bedeutet f(n) ∈ O(g(n)):<br>
+Es gibt eine Konstante c &gt; 0 und eine Zahl n<sub>0</sub>, sodass f(n) ≤ c · g(n) für alle n ≥ n<sub>0</sub> gilt.</p>
+</details>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe" id="a-2-2-3-1">
+            <details>
+                <summary>Aufgabe 2.2.3.1: Messwerte auswerten <span class="niveau">AFB II</span></summary>
+                <ol>
+                    <li>Berechne mit der Tabelle, um welchen Faktor die Zeit steigt, wenn sich n von 4000 auf 8000 bzw. von 10000 auf 20000 verdoppelt.</li>
+                    <li>Begründe damit, dass die Messung zu O(n²) passt.</li>
+                    <li>Schätze die Laufzeit für n = 40 000 ab.</li>
+                </ol>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-2-2-3-2">
+            <details>
+                <summary>Aufgabe 2.2.3.2: Komplexität bestimmen <span class="niveau">AFB I–III</span></summary>
+                <p>Bestimme für jedes Programmstück die Anzahl der Durchläufe der innersten Anweisung in Abhängigkeit von n und gib die Komplexitätsklasse an.</p>
+                <pre><code class="language-python"># a)
+print(liste[0])
+
+# b)
+for i in range(n):
+    print(i)
+
+# c)
+for i in range(n):
+    for j in range(n):
+        print(i, j)
+
+# d)
+for i in range(n):
+    for j in range(i):
+        print(i, j)
+
+# e)
+i = n
+while i &gt; 1:
+    i = i // 2</code></pre>
+            </details>
+        </div>
+
+</div>
+<section class="ziele" aria-labelledby="das-kann-ich">
+<h2 id="das-kann-ich">Das kann ich jetzt</h2>
+<p class="ziele-hinweis">Grau steht, was der Lehrplan verlangt, darunter, was das für dieses Thema konkret heißt. Hake einen Punkt ab, wenn er in deinem Hefter zusammengefasst ist und du ihn <strong>ohne Hilfe</strong> kannst. Wie du ihn zusammenfasst, entscheidest du selbst. Die Haken speichert nur dein Browser.</p>
+<p class="ziel-titel"><span>Lehrplan LB 3</span> Nachweis der Komplexität <em>(Beurteilen der Effizienz und Komplexität von Algorithmen)</em></p><ul class="ziele-liste"><li><label><input type="checkbox" data-ziel="kbf8f0c9996"><span>Ich kann die Bedeutung der O-Notation erklären und mit ihrer Definition nachweisen, dass eine Schrittzahl in einer Komplexitätsklasse liegt.</span></label></li><li><label><input type="checkbox" data-ziel="k5d1572baac"><span>Ich kann für Programmstücke mit Schleifen die Zahl der Durchläufe in Abhängigkeit von n bestimmen und die Komplexitätsklasse angeben.</span></label></li><li><label><input type="checkbox" data-ziel="k3d76ab4c45"><span>Ich kann Messwerte (z. B. aus einem Verdopplungsexperiment) auswerten und prüfen, ob sie zu einer Komplexitätsklasse passen.</span></label></li></ul>
+<p class="ziele-stand" aria-live="polite"></p>
+</section>
+<div class="weiter-kasten"><p><strong>Weiter mit diesem Thema</strong></p><a class="weiter-link" href="uebungen.html">Übungen →</a><a class="weiter-link" href="vertiefung.html">Vertiefung →</a></div>
+<nav class="blaettern" aria-label="Themen blättern"><a class="zurueck" href="../2-2-2-bubblesort/index.html"><small>← Vorheriges Thema</small>2.2.2 Bubblesort</a><a class="vor" href="../2-2-4-komplexitaetsklassen/index.html"><small>Nächstes Thema →</small>2.2.4 Komplexitätsklassen im Überblick</a></nav>
+</main>
+<aside class="toc" id="toc" aria-label="Auf dieser Seite"></aside>
+</div>
+</div>
+<footer class="fuss">
+  <a href="../../hinweise.html">Hinweise und Bildnachweise</a>
+  <a href="../../impressum.html">Impressum</a>
+</footer>
+<script src="../../assets/prism.js"></script>
+<script src="../../assets/seite.js"></script>
+</body>
+</html>

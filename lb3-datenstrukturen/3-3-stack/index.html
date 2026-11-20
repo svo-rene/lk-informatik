@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3 Stapel (Stack) – Leistungskurs Informatik</title>
+<script>try{var t=localStorage.getItem("thema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}if(/[?&]vollseite/.test(location.search))document.documentElement.classList.add("vollseite")</script>
+<link rel="stylesheet" href="../../assets/inhalt.css">
+<link rel="stylesheet" href="../../assets/seite.css">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+</head>
+<body class="mit-toc" data-root="../../">
+<header class="kopf">
+  <button class="menue-knopf" id="menue-knopf" aria-controls="leiste" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Themen</span></button>
+  <a class="marke" href="../../index.html"><span class="marke-zeichen">&lt;/&gt;</span><span>Leistungskurs Informatik</span></a>
+  <div class="kopf-rechts">
+    <button class="knopf-rund" id="thema-knopf" title="Hell oder dunkel" aria-label="Hell oder dunkel umschalten">
+      <span class="thema-dunkel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span><span class="thema-hell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+    </button>
+  </div>
+</header>
+<div class="rahmen">
+<nav class="leiste" id="leiste" aria-label="Lernbereiche">
+<div class="suche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="filter" placeholder="Thema suchen …" aria-label="Thema suchen"></div>
+<a class="leiste-start" href="../../index.html">Überblick</a>
+<a class="leiste-start" href="../../werkzeuge.html">Werkzeuge</a>
+<a class="leiste-start" href="../../projekte.html">Lernprojekte</a>
+<details class="lb"><summary><span class="lb-nr">LB 1</span> Technische Informatik</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb1-technische-informatik/index.html">Überblick Technische Informatik</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb1-technische-informatik/1-1-zahlenformate/index.html"><span class="t-nr">1.1</span> Zahlenformate</a></li>
+<li><a href="../../lb1-technische-informatik/1-2-zweierkomplement/index.html"><span class="t-nr">1.2</span> Zweierkomplement</a></li>
+<li><a href="../../lb1-technische-informatik/1-3-festkommazahlen/index.html"><span class="t-nr">1.3</span> Festkommazahlen</a></li>
+<li><a href="../../lb1-technische-informatik/1-4-zeichenkodierung/index.html"><span class="t-nr">1.4</span> Kodierung von Zeichen in der Informatik</a></li>
+</ul>
+<p class="kap">Boolesche Algebra</p><ul>
+<li><a href="../../lb1-technische-informatik/2-1-booleschealgebra/index.html"><span class="t-nr">2.1</span> Boolesche Algebra</a></li>
+<li><a href="../../lb1-technische-informatik/2-2-boolescheoperatoren/index.html"><span class="t-nr">2.2</span> Boolesche Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-3-formaleschreibweise/index.html"><span class="t-nr">2.3</span> Formale Schreibweise boolescher Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-4-implikationundaequivalenz/index.html"><span class="t-nr">2.4</span> Implikation und Äquivalenz</a></li>
+<li><a href="../../lb1-technische-informatik/2-5-gesetzeaussagenlogik/index.html"><span class="t-nr">2.5</span> Gesetze der Aussagenlogik</a></li>
+<li><a href="../../lb1-technische-informatik/2-6-kanonischenormalformen/index.html"><span class="t-nr">2.6</span> Kanonische Normalformen</a></li>
+</ul>
+<p class="kap">Schaltnetze</p><ul>
+<li><a href="../../lb1-technische-informatik/3-1-technischeumsetzung/index.html"><span class="t-nr">3.1</span> Boolesche Ausdrücke in Schaltungen</a></li>
+<li><a href="../../lb1-technische-informatik/3-2-schaltungsanalyse/index.html"><span class="t-nr">3.2</span> Schaltungsanalyse</a></li>
+<li><a href="../../lb1-technische-informatik/3-3-schaltungssynthese/index.html"><span class="t-nr">3.3</span> Schaltungssynthese</a></li>
+<li><a href="../../lb1-technische-informatik/3-4-kv-diagramme/index.html"><span class="t-nr">3.4</span> Karnaugh-Veitch-Diagramme</a></li>
+<li><a href="../../lb1-technische-informatik/3-5-standardschaltnetze/index.html"><span class="t-nr">3.5</span> Standardschaltnetze</a></li>
+<li><a href="../../lb1-technische-informatik/3-6-halbaddierer/index.html"><span class="t-nr">3.6</span> Halbaddierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-7-volladdierer/index.html"><span class="t-nr">3.7</span> Volladdierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-8-uebungsaufgaben/index.html"><span class="t-nr">3.8</span> Übungsaufgaben</a></li>
+</ul>
+<p class="kap">Rechnerarchitektur</p><ul>
+<li><a href="../../lb1-technische-informatik/4-1-neumann/index.html"><span class="t-nr">4.1</span> Rechnerarchitekturen</a></li>
+<li><a href="../../lb1-technische-informatik/4-2-prozessor/index.html"><span class="t-nr">4.2</span> Prozessoren</a></li>
+<li><a href="../../lb1-technische-informatik/4-3-speichersysteme/index.html"><span class="t-nr">4.3</span> Speichersysteme</a></li>
+</ul>
+<p class="kap">Informatik und Gesellschaft</p><ul>
+<li><a href="../../lb1-technische-informatik/5-1-systemsoftware/index.html"><span class="t-nr">5.1</span> Systemsoftware</a></li>
+<li><a href="../../lb1-technische-informatik/5-2-hardware-life/index.html"><span class="t-nr">5.2</span> Hardware-Lebenszyklus</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb1-technische-informatik/6-1-selbstcheck/index.html"><span class="t-nr">6.1</span> Selbstcheck</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 2/3</span> Programmieren und Algorithmen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb2-programmieren-algorithmen/index.html">Überblick Programmieren und Algorithmen</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-2-algorithmus/index.html"><span class="t-nr">2.1.2</span> Algorithmus und Kontrollstrukturen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-3-eva-python/index.html"><span class="t-nr">2.1.3</span> EVA in Python</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-4-array/index.html"><span class="t-nr">2.1.4</span> Array – eine Datenstruktur</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-5-unterprogramme/index.html"><span class="t-nr">2.1.5</span> Unterprogramme</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-6-parameter/index.html"><span class="t-nr">2.1.6</span> Parameter in Funktionen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-7-global-var/index.html"><span class="t-nr">2.1.7</span> Lokale und globale Variablen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-8-git-einstieg/index.html"><span class="t-nr">2.1.8</span> Versionen verwalten mit Git</a></li>
+</ul>
+<p class="kap">Algorithmen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-1-algorithmen-komplexitaet/index.html"><span class="t-nr">2.2.1</span> Algorithmen und Komplexität</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-2-bubblesort/index.html"><span class="t-nr">2.2.2</span> Bubblesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-3-einfuehrung-komplexitaet/index.html"><span class="t-nr">2.2.3</span> Einführung in Komplexität und die O-Notation</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-4-komplexitaetsklassen/index.html"><span class="t-nr">2.2.4</span> Komplexitätsklassen im Überblick</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-5-weitere-sortieralgorithmen/index.html"><span class="t-nr">2.2.5</span> Weitere Sortieralgorithmen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-6-darstellung/index.html"><span class="t-nr">2.2.6</span> Darstellung von Algorithmen (Modellierungshilfen)</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-7-rekursion/index.html"><span class="t-nr">2.2.7</span> Iteration und Rekursion</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-8-divide-and-conquer/index.html"><span class="t-nr">2.2.8</span> Divide and Conquer</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9-effiziente-sortieralgorithmen/index.html"><span class="t-nr">2.2.9</span> Effiziente Sortieralgorithmen – Mergesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9b-quicksort/index.html"><span class="t-nr">2.2.9b</span> Effiziente Sortieralgorithmen – Quicksort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-10-berechenbarkeit/index.html"><span class="t-nr">2.2.10</span> Berechenbarkeit: technische und theoretische Grenzen</a></li>
+</ul>
+</div></details>
+<details class="lb" open><summary><span class="lb-nr">LB 2/3</span> Datenstrukturen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb3-datenstrukturen/index.html">Überblick Datenstrukturen</a>
+<p class="kap">Listen, Schlange und Stapel</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-0-1-einfuegen/index.html"><span class="t-nr">3.0.1</span> Was kostet das Einfügen in eine Liste?</a></li>
+<li><a href="../../lb3-datenstrukturen/3-0-2-git-im-kurs/index.html"><span class="t-nr">3.0.2</span> Deine Lösungen mit Git verwalten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-1-linkedlists/index.html"><span class="t-nr">3.1</span> Verkettete Listen (linked lists)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-2-queue/index.html"><span class="t-nr">3.2</span> Schlange (Queue)</a></li>
+<li><a class="aktiv" aria-current="page" href="../../lb3-datenstrukturen/3-3-stack/index.html"><span class="t-nr">3.3</span> Stapel (Stack)</a></li>
+</ul>
+<p class="kap">Bäume</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-4-baum/index.html"><span class="t-nr">3.4</span> Datenstruktur Baum (Tree)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-5-bin-baum/index.html"><span class="t-nr">3.5</span> Binärbaum und binärer Suchbaum</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6-traversierung/index.html"><span class="t-nr">3.6</span> Traversierung</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6b-backtracking-baum/index.html"><span class="t-nr">3.6b</span> Backtracking 1: Suchen und zurückgehen im Baum</a></li>
+</ul>
+<p class="kap">Graphen</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-7-graph/index.html"><span class="t-nr">3.7</span> Graphen</a></li>
+<li><a href="../../lb3-datenstrukturen/3-8-graph-code/index.html"><span class="t-nr">3.8</span> Implementierung eines Graphen mit Adjazenzlisten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-9-dijkstra/index.html"><span class="t-nr">3.9</span> Kürzeste Wege: Moore und Dijkstra</a></li>
+<li><a href="../../lb3-datenstrukturen/3-10-backtracking/index.html"><span class="t-nr">3.10</span> Backtracking 2: Graphen und Belegungsprobleme</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 4/5</span> OOP und Softwareentwicklung</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb4-oop-softwareentwicklung/index.html">Überblick OOP und Softwareentwicklung</a>
+<p class="kap">Paradigmen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-0-klassifizierung/index.html"><span class="t-nr">4.0</span> Klassifizierung von Programmiersprachen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-1-programmierparadigmen/index.html"><span class="t-nr">4.1</span> Programmierparadigmen entdecken</a></li>
+</ul>
+<p class="kap">Objekte und Klassen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-2-objektorientierung/index.html"><span class="t-nr">4.2</span> Objektorientiertes Denken – vor dem Code</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-3-klassen/index.html"><span class="t-nr">4.3</span> Klassen als Baupläne</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-4-attribute/index.html"><span class="t-nr">4.4</span> Attribute im Detail</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-5-methoden/index.html"><span class="t-nr">4.5</span> Methoden schreiben und aufrufen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-6-kapselung/index.html"><span class="t-nr">4.6</span> Kapselung, Sichtbarkeit und kontrollierter Zugriff</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-7-typisierung/index.html"><span class="t-nr">4.7</span> Typisierung in Python: Klarheit im Code</a></li>
+</ul>
+<p class="kap">Beziehungen und Vererbung</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-8-beziehungen/index.html"><span class="t-nr">4.8</span> Beziehungen zwischen Klassen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-9-multiplizitaeten/index.html"><span class="t-nr">4.9</span> Multiplizitäten in UML: Wie viele Objekte?</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-10-vererbung/index.html"><span class="t-nr">4.10</span> Vererbung</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-11-polymorphie/index.html"><span class="t-nr">4.11</span> Botschaften und Polymorphie</a></li>
+</ul>
+<p class="kap">Software im Team</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-1-vom-programm-zum-projekt/index.html"><span class="t-nr">5.1</span> Vom Klassenmodell zur Softwarearchitektur</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-2-vorgehensmodelle/index.html"><span class="t-nr">5.2</span> Vorgehensmodelle und Anforderungen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-3-testen/index.html"><span class="t-nr">5.3</span> Testen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-4-git-im-team/index.html"><span class="t-nr">5.4</span> Git im Team</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-5-projektauftrag/index.html"><span class="t-nr">5.5</span> Projektauftrag und Themen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-6-projektleitfaden/index.html"><span class="t-nr">5.6</span> Projekt-Leitfaden</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 6</span> Sprachen und Automaten</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb6-sprachen-automaten/index.html">Überblick Sprachen und Automaten</a>
+<p class="kap">Sprachen und Grammatiken</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-1-spracherkennung/index.html"><span class="t-nr">6.1</span> Wie Sprache für Maschinen verständlich wird – Einstieg in Sprachen und Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-2-formale-sprache/index.html"><span class="t-nr">6.2</span> Aufbau von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-3-grammatik/index.html"><span class="t-nr">6.3</span> Grammatiken als formale Beschreibung von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-4-woerter-ableiten/index.html"><span class="t-nr">6.4</span> Ableitung von Wörtern</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-5-bnf/index.html"><span class="t-nr">6.5</span> Backus-Naur-Form (BNF)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-6-chomsky/index.html"><span class="t-nr">6.6</span> Die Chomsky-Hierarchie</a></li>
+</ul>
+<p class="kap">Endliche Automaten</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-7-dea/index.html"><span class="t-nr">6.7</span> Endliche Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-8-fangzustand/index.html"><span class="t-nr">6.8</span> Partielle Übergangsfunktion und Fangzustand (Trap-Zustand)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-9-dea-nea/index.html"><span class="t-nr">6.9</span> NEA, ε-Übergänge und weitere Automatentypen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-10-potenzmengenkonstruktion/index.html"><span class="t-nr">6.10</span> Überführung von NEA in DEA (Potenzmengenkonstruktion)</a></li>
+</ul>
+<p class="kap">Grammatik und Automat</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-11-grammatik-automat/index.html"><span class="t-nr">6.11</span> Überführung zwischen regulären Grammatiken und endlichen Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-12-epsilon-regeln/index.html"><span class="t-nr">6.12</span> Überführung einer Grammatik mit ε-Regeln in eine Grammatik ohne ε-Regeln</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-13-grenzen-automaten/index.html"><span class="t-nr">6.13</span> Grenzen von Automaten</a></li>
+</ul>
+<p class="kap">Compiler</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-14-compiler/index.html"><span class="t-nr">6.14</span> Compiler und Interpreter – von der Theorie zur Praxis</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-15-selbstcheck/index.html"><span class="t-nr">6.15</span> Selbstcheck und Klausurvorbereitung: Sprachen und Automaten</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 7</span> Rechnernetze</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb7-rechnernetze/index.html">Überblick Rechnernetze</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb7-rechnernetze/7-1-topologien/index.html"><span class="t-nr">7.1</span> Topologien und Übertragungsmedien</a></li>
+<li><a href="../../lb7-rechnernetze/7-2-vermittlung-dienste/index.html"><span class="t-nr">7.2</span> Vermittlung und Dienste</a></li>
+<li><a href="../../lb7-rechnernetze/7-3-schichtenmodelle/index.html"><span class="t-nr">7.3</span> Schichtenmodelle (OSI und TCP/IP)</a></li>
+<li><a href="../../lb7-rechnernetze/7-4-netzzugangsschicht/index.html"><span class="t-nr">7.4</span> Netzzugangsschicht: MAC, Ethernet und Switch</a></li>
+</ul>
+<p class="kap">Internetschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-5-ip-adressierung-routing/index.html"><span class="t-nr">7.5</span> Internetschicht: IP-Adressierung und Routing</a></li>
+<li><a href="../../lb7-rechnernetze/7-6-subnetting-cidr/index.html"><span class="t-nr">7.6</span> Subnetting, CIDR und VLSM</a></li>
+<li><a href="../../lb7-rechnernetze/7-7-dhcp/index.html"><span class="t-nr">7.7</span> DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-8-dns/index.html"><span class="t-nr">7.8</span> DNS und Namensauflösung</a></li>
+</ul>
+<p class="kap">Transport- und Anwendungsschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-9-tcp-udp/index.html"><span class="t-nr">7.9</span> Transportschicht: TCP und UDP</a></li>
+<li><a href="../../lb7-rechnernetze/7-10-anwendungsschicht-protokolle/index.html"><span class="t-nr">7.10</span> Anwendungsschicht und Protokolle</a></li>
+</ul>
+<p class="kap">Filius-Praxis</p><ul>
+<li><a href="../../lb7-rechnernetze/7-13-filius-gateway/index.html"><span class="t-nr">7.13</span> Filius-Praxis: Zwei Netzwerke verbinden</a></li>
+<li><a href="../../lb7-rechnernetze/7-14-filius-routingtabelle/index.html"><span class="t-nr">7.14</span> Filius-Praxis: Mehrere Router und Routingtabellen</a></li>
+<li><a href="../../lb7-rechnernetze/7-15-filius-dhcp/index.html"><span class="t-nr">7.15</span> Filius-Praxis: DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-16-filius-dns-web/index.html"><span class="t-nr">7.16</span> Filius-Praxis: DNS, Webserver und Einstellungen über DHCP</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb7-rechnernetze/7-17-aufgabenstellung/index.html"><span class="t-nr">7.17</span> Projekt: Rechnernetze – Theorie, Praxis und Netzplanung</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 8</span> Informationssicherheit</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb8-informationssicherheit/index.html">Überblick Informationssicherheit</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-1-sicherheitsziele/index.html"><span class="t-nr">8.1</span> Sicherheitsziele und Datenschutz</a></li>
+<li><a href="../../lb8-informationssicherheit/8-2-uebersicht-kryptologie/index.html"><span class="t-nr">8.2</span> Übersicht Kryptologie</a></li>
+</ul>
+<p class="kap">Symmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-3-symmetrische-verfahren/index.html"><span class="t-nr">8.3</span> Symmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-4-kasiski-test/index.html"><span class="t-nr">8.4</span> Kasiski-Test</a></li>
+<li><a href="../../lb8-informationssicherheit/8-5-one-time-pad/index.html"><span class="t-nr">8.5</span> One-Time-Pad</a></li>
+<li><a href="../../lb8-informationssicherheit/8-6-kryptoanalyse/index.html"><span class="t-nr">8.6</span> Kryptoanalyse</a></li>
+<li><a href="../../lb8-informationssicherheit/8-7-aes/index.html"><span class="t-nr">8.7</span> AES</a></li>
+</ul>
+<p class="kap">Asymmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-8-asymmetrische-verfahren/index.html"><span class="t-nr">8.8</span> Asymmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-9-rsa/index.html"><span class="t-nr">8.9</span> RSA</a></li>
+<li><a href="../../lb8-informationssicherheit/8-10-diffie-hellman/index.html"><span class="t-nr">8.10</span> Diffie-Hellman-Schlüsselaustausch</a></li>
+<li><a href="../../lb8-informationssicherheit/8-11-hybride-verfahren/index.html"><span class="t-nr">8.11</span> Hybride Verfahren</a></li>
+</ul>
+<p class="kap">Integrität und Authentizität</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-12-hashfunktionen/index.html"><span class="t-nr">8.12</span> Hashfunktionen</a></li>
+<li><a href="../../lb8-informationssicherheit/8-13-digitale-signatur/index.html"><span class="t-nr">8.13</span> Digitale Signatur</a></li>
+<li><a href="../../lb8-informationssicherheit/8-14-authentifizierung/index.html"><span class="t-nr">8.14</span> Authentifizierung</a></li>
+</ul>
+<p class="kap">Netzsicherheit</p><ul>
+<li><a href="../../lb8-informationssicherheit/7-11-tls-vpn/index.html"><span class="t-nr">7.11</span> Transportverschlüsselung: TLS und VPN</a></li>
+<li><a href="../../lb8-informationssicherheit/7-12-authentifizierung/index.html"><span class="t-nr">7.12</span> Identifizierung und Authentifizierung</a></li>
+</ul>
+<p class="kap">Verfügbarkeit</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-15-datensicherung-raid/index.html"><span class="t-nr">8.15</span> Datensicherung und RAID</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 9</span> Datenmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb9-datenmanagement/index.html">Überblick Datenmanagement</a>
+<p class="kap">Relationale Datenbanken</p><ul>
+<li><a href="../../lb9-datenmanagement/1-1-datenbanken/index.html"><span class="t-nr">1.1</span> Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/1-2-relationale-db/index.html"><span class="t-nr">1.2</span> Das relationale Datenmodell</a></li>
+<li><a href="../../lb9-datenmanagement/1-3-sql-select/index.html"><span class="t-nr">1.3</span> SQL-Abfragen</a></li>
+<li><a href="../../lb9-datenmanagement/1-4-sql-where/index.html"><span class="t-nr">1.4</span> SQL WHERE- und LIKE-Klauseln</a></li>
+<li><a href="../../lb9-datenmanagement/1-5-sql-aggregation/index.html"><span class="t-nr">1.5</span> SQL-Aggregatfunktionen</a></li>
+<li><a href="../../lb9-datenmanagement/1-6-sql-joins/index.html"><span class="t-nr">1.6</span> SQL-Joins</a></li>
+<li><a href="../../lb9-datenmanagement/1-7-db-browser/index.html"><span class="t-nr">1.7</span> DB Browser (SQLite)</a></li>
+<li><a href="../../lb9-datenmanagement/1-8-crud/index.html"><span class="t-nr">1.8</span> CRUD: Create, (Read), Update und Delete in SQL</a></li>
+<li><a href="../../lb9-datenmanagement/1-9-sql-uebung/index.html"><span class="t-nr">1.9</span> SQL-Übungsaufgaben</a></li>
+<li><a href="../../lb9-datenmanagement/1-10-erm/index.html"><span class="t-nr">1.10</span> Das Entity-Relationship-Modell</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-1-11-1-db-browser-eigene-tabellen/index.html"><span class="t-nr">1.11.1</span> Eigene Datenbank in DB Browser anlegen</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-relationenmodell/index.html"><span class="t-nr">1.11</span> Vom ER-Modell zum Relationenmodell und Relationenschemata</a></li>
+<li><a href="../../lb9-datenmanagement/1-12-uebung-modellierung/index.html"><span class="t-nr">1.12</span> Übungsaufgaben zur Modellierung von Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/1-13-normalisierung/index.html"><span class="t-nr">1.13</span> Normalisierung und Anomalien</a></li>
+<li><a href="../../lb9-datenmanagement/1-14-erste-normalform/index.html"><span class="t-nr">1.14</span> Erste Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-15-zweite-normalform/index.html"><span class="t-nr">1.15</span> Zweite Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-16-dritte-normalform/index.html"><span class="t-nr">1.16</span> Dritte Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-17-uebung-normalformen/index.html"><span class="t-nr">1.17</span> Übungsaufgaben zu den Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-18-komplette-uebung/index.html"><span class="t-nr">1.18</span> Übung: ERM, Relationenmodell und Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-19-subselects/index.html"><span class="t-nr">1.19</span> Subselects in SQLite</a></li>
+<li><a href="../../lb9-datenmanagement/1-20-sql-uebung/index.html"><span class="t-nr">1.20</span> SQL-Übungen für DB Browser (SQLite) – Thema: Freizeitpark</a></li>
+<li><a href="../../lb9-datenmanagement/1-21-selbstcheck/index.html"><span class="t-nr">1.21</span> Selbstcheck: Datenbanken</a></li>
+</ul>
+<p class="kap">NoSQL</p><ul>
+<li><a href="../../lb9-datenmanagement/2-1-cap/index.html"><span class="t-nr">2.1</span> Das CAP-Theorem</a></li>
+<li><a href="../../lb9-datenmanagement/2-2-nosql-db/index.html"><span class="t-nr">2.2</span> NoSQL-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-3-key-value-db/index.html"><span class="t-nr">2.3</span> Key-Value-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-4-selbstcheck/index.html"><span class="t-nr">2.4</span> Selbstcheck: NoSQL-Datenbanken</a></li>
+</ul>
+<p class="kap">Datenverarbeitung mit Python</p><ul>
+<li><a href="../../lb9-datenmanagement/3-1-data-life-cycle/index.html"><span class="t-nr">3.1</span> Arbeit mit Daten: Der Data Life Cycle</a></li>
+<li><a href="../../lb9-datenmanagement/3-2-verschachtelte-datentypen/index.html"><span class="t-nr">3.2</span> Geschachtelte Datentypen</a></li>
+<li><a href="../../lb9-datenmanagement/3-3-einlesen/index.html"><span class="t-nr">3.3</span> Daten mit Python einlesen</a></li>
+<li><a href="../../lb9-datenmanagement/3-4-verarbeiten/index.html"><span class="t-nr">3.4</span> Verarbeitung eingelesener Daten in Python</a></li>
+<li><a href="../../lb9-datenmanagement/3-5-bereinigen/index.html"><span class="t-nr">3.5</span> Daten bereinigen und analysieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-6-schreiben/index.html"><span class="t-nr">3.6</span> Daten in CSV-Dateien schreiben</a></li>
+<li><a href="../../lb9-datenmanagement/3-7-csv-in-dbbrowser/index.html"><span class="t-nr">3.7</span> CSV-Daten in DB Browser importieren und mit SQL auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-8-visualisieren/index.html"><span class="t-nr">3.8</span> CSV-Dateien mit LibreOffice visualisieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-9-data-life-cycle-csv/index.html"><span class="t-nr">3.9</span> Datenlebenszyklus mit CSV – Eigene Umfrage gestalten und auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-10-json/index.html"><span class="t-nr">3.10</span> JSON: Ein aktuelles Standardformat</a></li>
+<li><a href="../../lb9-datenmanagement/3-11-api/index.html"><span class="t-nr">3.11</span> APIs verstehen und nutzen</a></li>
+<li><a href="../../lb9-datenmanagement/3-12-uebung-erm-daten-verarbeiten/index.html"><span class="t-nr">3.12</span> WÜ Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/3-13-datenmanagement-vertiefung/index.html"><span class="t-nr">3.13</span> Vertiefung des Datenmanagements</a></li>
+<li><a href="../../lb9-datenmanagement/3-14-iug/index.html"><span class="t-nr">3.14</span> Daten in der Gesellschaft: Ethische und kritische Betrachtungen</a></li>
+<li><a href="../../lb9-datenmanagement/3-15-selbstcheck/index.html"><span class="t-nr">3.15</span> Selbstcheck: Datenverarbeitung mit Python</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 10/11</span> KI und Projektmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb10-ki-projektmanagement/index.html">Überblick KI und Projektmanagement</a>
+<p class="kap">KI-Kickstart</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-0-kickstart-sprachmodelle/index.html"><span class="t-nr">11.0</span> KI-Kickstart: Wie funktionieren Sprachmodelle?</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-0b-ki-als-lernpartner/index.html"><span class="t-nr">11.0b</span> KI als Lernpartner: Assistenten verstehen und selbst einstellen</a></li>
+</ul>
+<p class="kap">KI-Grundlagen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-1-begriff-ki/index.html"><span class="t-nr">11.1</span> Einführung in die Künstliche Intelligenz</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-2-wissens-datenbasierte-ki/index.html"><span class="t-nr">11.2</span> Wissensbasierte und datenbasierte Ansätze in der KI</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-3-ki-modelle-optimieren/index.html"><span class="t-nr">11.3</span> KI-Systeme: Training und Optimierung</a></li>
+</ul>
+<p class="kap">Projektmanagement</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-1-grundlagen/index.html"><span class="t-nr">10.1</span> Grundlagen des Projektmanagements</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-2-klassisch-vs-agil/index.html"><span class="t-nr">10.2</span> Klassisches und agiles Projektmanagement</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-3-versionsverwaltung-git/index.html"><span class="t-nr">10.3</span> Versionsverwaltung mit Git</a></li>
+</ul>
+<p class="kap">KI-Projekt</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-4-tutorial-jupyter/index.html"><span class="t-nr">10.4</span> Maschinelles Lernen: Tutorials mit Jupyter</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-5-ki-projektmanagement/index.html"><span class="t-nr">10.5</span> Projektaufgabe: Künstliche Intelligenz mit Projektmanagement erarbeiten</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-6-ki-projekt-dokumentation/index.html"><span class="t-nr">10.6</span> Projektdokumentation: Künstliche Intelligenz (KI) &amp; Projektmanagement</a></li>
+</ul>
+<p class="kap">Maschinelles Lernen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-4-lineare-regression/index.html"><span class="t-nr">11.4</span> Lineare Regression</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-5-entscheidungsbaum/index.html"><span class="t-nr">11.5</span> Entscheidungsbäume</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-6-k-naechster-nachbar/index.html"><span class="t-nr">11.6</span> k-Nächste-Nachbarn-Algorithmus (k-NN)</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-7-k-means/index.html"><span class="t-nr">11.7</span> k-Means-Clustering</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-8-neuronale-netze/index.html"><span class="t-nr">11.8</span> Neuronale Netze und Deep Learning</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-9-genetische-algorithmen/index.html"><span class="t-nr">11.9</span> Genetische Algorithmen</a></li>
+</ul>
+<p class="kap">Generative KI und Gesellschaft</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-10-generative-ki/index.html"><span class="t-nr">11.10</span> Generative KI und Sprachmodelle</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-11-ki-und-gesellschaft/index.html"><span class="t-nr">11.11</span> Gesellschaftliche Auswirkungen Künstlicher Intelligenz</a></li>
+</ul>
+</div></details>
+</nav>
+<div class="haupt-rahmen">
+<main class="haupt" id="inhalt">
+<p class="pfad"><a href="../../index.html">Überblick</a> › <a href="../index.html">LB 2/3 Datenstrukturen</a></p>
+<h1><span class="h1-nr">3.3</span> Stapel (Stack)</h1>
+<nav class="reiter" aria-label="Teile dieses Themas"><a class="aktiv" aria-current="page" href="index.html">Einführung <span class="r-zahl">2</span></a><a href="uebungen.html">Übungen <span class="r-zahl">3</span></a><a href="vertiefung.html">Vertiefung <span class="r-zahl">2</span></a></nav>
+<div class="seiteninhalt" id="seiteninhalt">
+
+<p>Auf einem Bücherstapel liegt das zuletzt abgelegte Buch oben – und genau dieses nimmst du als Erstes wieder herunter. Dasselbe passiert, wenn du in einem Textprogramm <kbd>Strg</kbd> + <kbd>Z</kbd> drückst: Rückgängig gemacht wird immer die letzte Aktion.</p>
+
+<div class="hinweis" id="ki-hilfe">
+            <details>
+                <summary>Hinweis: KI als Lernhilfe</summary>
+                <p>Wenn du festhängst: erst den Lernpfad-Schritt und das Video noch einmal ansehen. Wenn du dann eine KI fragst, nutze sie als Lernhilfe, nicht als Lösungsautomat:</p>
+                <ul>
+                    <li>Schick deinen Code und die <strong>vollständige</strong> Fehlermeldung und schreib dazu, an welcher Aufgabe du arbeitest.</li>
+                    <li>Keine Namen oder persönlichen Daten in den Chat.</li>
+                    <li>Bei der Übungs-LK und der LK gibt es keine KI.</li>
+                </ul>
+                <p><strong>Mit einer freien KI</strong> (ChatGPT, Gemini, Claude …): Eine KI ohne Anweisung schreibt dir meist sofort die ganze Lösung – dabei lernst du nichts. Stell sie deshalb vorher so ein, dass sie dir beim Selbstlösen hilft:</p>
+                <ul>
+                    <li><strong>ChatGPT:</strong> Einstellungen → Personalisierung → „Benutzerdefinierte Anweisungen“, Text unten einfügen. Oder in einem neuen Chat <code>@study</code> eintippen (Lernmodus).</li>
+                    <li><strong>Gemini:</strong> Seitenleiste → Gems → „Neues Gem“, Text unten als Anweisung einfügen und speichern.</li>
+                    <li><strong>Claude:</strong> Projekte → „Neues Projekt“, Text unten als Projektanweisung einfügen.</li>
+                    <li><strong>Überall sonst:</strong> den Text einfach als erste Nachricht in einen neuen Chat kopieren.</li>
+                </ul>
+                <p>Keine Namen oder Noten eingeben. Diese Anweisung kannst du kopieren:</p>
+                <pre class="darstellung">Ich lerne im Informatik-LK Datenstrukturen in Python: verkettete Liste (Node mit data und next, LinkedList mit head), Schlange (Queue mit head und tail: enqueue, dequeue, peek, is_empty) und Stapel (Stack, oben = head: push, pop, top, is_empty).
+Hilf mir beim Selbstlösen, nicht mit fertigen Lösungen:
+- Frag zuerst nach meinem Code und der vollständigen Fehlermeldung.
+- Hilf in Stufen: Rückfrage, dann Hinweis, dann Zeigerdiagramm in Textform, höchstens 3 Zeilen Code für einen einzelnen Schritt.
+- Schreib nie eine ganze Methode oder Funktion, auch wenn ich darum bitte.
+- Keine deque, keine Bibliotheken, keine Einzeiler-Tricks.
+- Zeig mir bei Fehlern die Zeile und erkläre, was dort passiert, statt meinen Code zu korrigieren.
+- Spiel meinen Code mit einem Beispiel durch, bevor du sagst, dass er stimmt.
+- Stell immer nur eine Frage und antworte kurz.
+- Wenn es läuft: Lass mich erklären, warum, und frag nach einem Testfall für einen Sonderfall.</pre>
+            </details>
+        </div>
+
+<h2 id="schritt-1">Schritt 1: Die Idee – LIFO</h2>
+
+<ul>
+            <li><strong>LIFO-Prinzip:</strong> Zugriff ist immer nur auf das oberste Element möglich.</li>
+            <li><strong>Einsatz:</strong> wenn Elemente in umgekehrter Reihenfolge verarbeitet werden müssen, z.&nbsp;B. Rückgängig-Funktion, Zurück-Taste im Browser, Umkehren von Texten, Prüfen von Klammern, die Tiefensuche in Graphen und der Aufrufstapel bei rekursiven Funktionen (siehe Kurs „Programmieren und Algorithmen“, Seite 2.2.7).</li>
+        </ul>
+
+<p>Im Video spielst du den Bücherstapel aus Beispiel 1 als Bild durch. Achte darauf, dass <code>push</code> und <code>pop</code> immer an derselben Stelle arbeiten – oben.</p>
+
+<figure>
+            <img src="../img/skizze_stapel_stack.svg" width="450" alt="Stapel mit A, B, C; push legt oben auf, pop nimmt oben weg">
+            <figcaption>Abb. 1: Stapel – push legt oben auf, pop nimmt oben weg.</figcaption>
+        </figure>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-3-1_idee_vorschau.png" src="../vid/3-3-1_idee.mp4"></video><a href="../vid/3-3-1_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Was ist ein Stack? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Die Zurück-Taste <span class="niveau">AFB I</span></summary>
+                <p>Du öffnest im Browser nacheinander die Seiten A, B und C. Der Browser legt dabei jede verlassene Seite auf einen Stapel. Dann drückst du zweimal „Zurück“. Auf welcher Seite bist du, und was liegt danach noch auf dem Stapel?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Beim Öffnen von B wird A aufgelegt, beim Öffnen von C wird B aufgelegt: Stapel A, B (B oben). Das erste „Zurück“ nimmt B herunter, das zweite A. Du bist auf Seite A, der Stapel ist leer.</p>
+                </details>
+            </details>
+        </div>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Die Klasse ListenStack →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Die Klasse <code>ListenStack</code></h2>
+
+<p>Die einfachste Umsetzung speichert den Stapel in einer Python-Liste. Entscheidend ist, welches Ende „oben“ ist: das <strong>Ende</strong> der Liste, denn dort kann sie ohne Verschieben wachsen und schrumpfen (siehe Seite 3.0.1). Achte im Video auf <code>pop()</code> ohne Index und auf <code>__daten[-1]</code>.</p>
+
+<p>Ein Stapel kann mit einem Array oder mit einer verketteten Liste implementiert werden.</p>
+
+<h3>1. Implementierung mit einem Array</h3>
+
+<ul>
+            <li>Das oberste Element steht am Ende des Arrays; push und pop arbeiten nur am Ende und sind deshalb O(1). In Python: <code>append()</code> und <code>pop()</code>.</li>
+            <li>Die Elemente liegen kompakt im Speicher, es sind keine Verweise nötig.</li>
+            <li>Ist die Kapazität erschöpft, muss in ein größeres Array umkopiert werden. Das kostet für diesen einen Schritt O(n); weil die Kapazität dabei jeweils vervielfacht wird, bleibt push im Durchschnitt O(1). Dafür bleiben eventuell Reserveplätze ungenutzt.</li>
+        </ul>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-3-2_listenstack_vorschau.png" src="../vid/3-3-2_listenstack.mp4"></video><a href="../vid/3-3-2_listenstack.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Die Klasse <code>ListenStack</code> in Thonny (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>1_listen/listen_stack.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>ListenStack</code> und die Methoden <code>is_empty</code>, <code>push</code>, <code>pop</code> und <code>peek</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>buecher = ListenStack()</code> · <code>buecher.push(&quot;A&quot;)</code>. Danach committen, z.&nbsp;B. <code>3.3 Schritt 2: ListenStack, is_empty, push angelegt</code>.</p>
+
+<p>Zum Nachlesen steht derselbe Code mit allen Erklärungen in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Bücherstapel als gekapselte Klasse</summary>
+            <p><strong>Ausgangssituation:</strong> push(A), push(B), push(C), pop() → C, push(D), pop() → D, pop() → B. Auf dem Stapel liegt danach nur noch A.</p>
+            <p>Diesen Ablauf setzen wir mit einer Klasse <code>ListenStack</code> um. Sie speichert die Bücher in einer Python-Liste, deren <strong>Ende</strong> die Oberseite des Stapels ist. Die Liste ist das private Attribut <code>__daten</code>; benutzt wird der Stapel nur über <code>push</code>, <code>pop</code>, <code>peek</code> und <code>is_empty</code>.</p>
+            <pre class="ausfuehrbar"><code class="language-python">class ListenStack:
+    def __init__(self):
+        self.__daten = []              # privat; oben = letztes Element
+
+    def is_empty(self):
+        return len(self.__daten) == 0
+
+    def push(self, x):
+        self.__daten.append(x)         # oben auflegen, O(1)
+
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("pop auf leerem Stapel")
+        return self.__daten.pop()      # oben wegnehmen, O(1)
+
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("peek auf leerem Stapel")
+        return self.__daten[-1]        # nur ansehen
+
+buecher = ListenStack()
+buecher.push("A")
+buecher.push("B")
+buecher.push("C")
+print(buecher.pop())    # C
+buecher.push("D")
+print(buecher.pop())    # D
+print(buecher.pop())    # B
+print(buecher.peek())   # A</code></pre>
+            <ol>
+                <li><strong>Leeren Stapel anlegen:</strong> Der Konstruktor erzeugt die leere Liste <code>__daten</code>. Die zwei Unterstriche machen sie privat: Nur die eigenen Methoden benutzen sie, von außen ist <code>__daten</code> nicht erreichbar.</li>
+                <li><strong>Auflegen mit <code>push</code>:</strong> A, B und C werden mit <code>append</code> ans Ende gehängt. Das Ende ist „oben“, weil eine Python-Liste am Ende ohne Verschieben wachsen kann.</li>
+                <li><strong>Wegnehmen mit <code>pop</code>:</strong> <code>self.__daten.pop()</code> ohne Index entfernt das letzte Element, also C. Vorher wird geprüft, ob der Stapel leer ist; dieser Fehlerfall wird mit einem <code>IndexError</code> und einer verständlichen Meldung gemeldet.</li>
+                <li><strong>Weitere Schritte:</strong> D wird aufgelegt und sofort wieder genommen. Danach kommt B zum Vorschein und wird entnommen. Was zuletzt kam, geht immer zuerst (LIFO).</li>
+                <li><strong>Nachsehen mit <code>peek</code>:</strong> <code>__daten[-1]</code> liefert A, ohne den Stapel zu verändern.</li>
+            </ol>
+            <p><strong>Speicherbild Schritt für Schritt</strong> (oben = rechts):</p>
+            <table class="gitter">
+                <thead><tr><th>Operation</th><th>Inhalt von <code>__daten</code></th><th>Rückgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>ListenStack()</code></td><td><code>[]</code></td><td>–</td></tr>
+                    <tr><td><code>push("A")</code></td><td><code>["A"]</code></td><td>–</td></tr>
+                    <tr><td><code>push("B")</code></td><td><code>["A", "B"]</code></td><td>–</td></tr>
+                    <tr><td><code>push("C")</code></td><td><code>["A", "B", "C"]</code></td><td>–</td></tr>
+                    <tr><td><code>pop()</code></td><td><code>["A", "B"]</code></td><td><code>C</code></td></tr>
+                    <tr><td><code>push("D")</code></td><td><code>["A", "B", "D"]</code></td><td>–</td></tr>
+                    <tr><td><code>pop()</code></td><td><code>["A", "B"]</code></td><td><code>D</code></td></tr>
+                    <tr><td><code>pop()</code></td><td><code>["A"]</code></td><td><code>B</code></td></tr>
+                    <tr><td><code>peek()</code></td><td><code>["A"]</code></td><td><code>A</code></td></tr>
+                </tbody>
+            </table>
+            <p><strong>Ergebnis:</strong> Das Programm gibt <code>C</code>, <code>D</code>, <code>B</code> und <code>A</code> aus. Auf dem Stapel liegt danach nur noch A – wie in der Ausgangssituation.</p>
+            <p><strong>Kontrolle:</strong> Jeder Test beginnt mit einem neuen Stapel <code>s = ListenStack()</code>.</p>
+            <table class="gitter">
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>print(s.is_empty())</code> (leerer Stapel)</td><td><code>True</code></td></tr>
+                    <tr><td><code>s.pop()</code> (Fehlerfall)</td><td><code>IndexError: pop auf leerem Stapel</code></td></tr>
+                    <tr><td><code>s.push(1); print(s.pop()); print(s.is_empty())</code> (ein Element)</td><td><code>1</code>, dann <code>True</code></td></tr>
+                    <tr><td><code>s.push(1); s.push(2); print(s.peek(), s.peek(), s.pop())</code></td><td><code>2 2 2</code> – <code>peek</code> entfernt nichts</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Welches Ende ist oben? <span class="niveau">AFB I</span></summary>
+                <p>Was liefert <code>[4, 7, 9][-1]</code>? Und warum benutzt <code>ListenStack.pop</code> den Befehl <code>self.__daten.pop()</code> und nicht <code>self.__daten.pop(0)</code>? Nenne zwei Gründe.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[4, 7, 9][-1]</code> ist 9, das letzte Element. <code>pop(0)</code> würde erstens das <em>unterste</em> Element entnehmen – das wäre kein Stapel mehr. Zweitens müssten dabei alle übrigen Elemente nachrücken: O(n) statt O(1).</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-3-1">Aufgabe 3.3.1</a> – LIFO an einer Folge von Operationen nachvollziehen.</p>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Stack mit Knoten →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Stack mit Knoten – <code>push</code> und <code>pop</code></h2>
+
+<h3>2. Implementierung mit einer verketteten Liste</h3>
+
+<ul>
+            <li>Das oberste Element ist der erste Knoten (<code>head</code>); push fügt vorn ein, pop entfernt vorn – beides O(1).</li>
+            <li>Der Stapel wächst knotenweise, es wird nie umkopiert.</li>
+            <li>Nachteil: Jeder Knoten braucht zusätzlichen Speicher für den Verweis.</li>
+        </ul>
+
+<p>Die Klasse <code>Stack</code> aus Beispiel 2 benutzt einen Knoten mit einem neuen Parameter <code>next_node=None</code> (ein Standardwert). Damit passt <code>push</code> in eine einzige Zeile. Achte im Video darauf, in welcher Reihenfolge Python diese Zeile ausführt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-3-3_knoten_vorschau.png" src="../vid/3-3-3_knoten.mp4"></video><a href="../vid/3-3-3_knoten.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Stack mit Knoten – <code>push</code> und <code>pop</code> Schritt für Schritt (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>1_listen/stack_knoten.py</code> an und tippe den Code aus dem Video ab: die Klassen <code>Node</code> und <code>Stack</code> und die Methoden <code>is_empty</code>, <code>push</code>, <code>pop</code>, <code>top</code> und <code>peek</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>k = Node(&quot;A&quot;)</code> · <code>k2 = Node(&quot;B&quot;, k)</code>. Danach committen, z.&nbsp;B. <code>3.3 Schritt 3: Node, Stack, is_empty angelegt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Knoten zeichnen <span class="niveau">AFB I</span></summary>
+                <p>In Thonny wird eingegeben: <code>s = Stack()</code>, <code>s.push(1)</code>, <code>s.push(2)</code>, <code>s.push(3)</code>. Zeichne die Knoten mit <code>__head</code>. Was liefert danach <code>s.pop()</code>, und worauf zeigt <code>__head</code> dann?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>__head</code> → [3|•] → [2|•] → [1|None]: Der zuletzt aufgelegte Knoten ist der erste. <code>s.pop()</code> liefert 3, danach zeigt <code>__head</code> auf den Knoten mit der 2.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: push in der Zeiger-Werkstatt</summary>
+                <p>Öffne im Kursmenü links die Seite <strong>Zeiger-Werkstatt</strong>. In der Übung „3.3 Stapel: push“ führst du <code>self.__head = Node(3, self.__head)</code> Schritt für Schritt aus: erst den neuen Knoten mit seinem <code>next</code>, dann <code>__head</code>.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-3-2">Aufgabe 3.3.2</a> – Text umkehren und Rückgängig-Funktion mit der Klasse <code>Stack</code>.</p>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Klammern prüfen →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Klammern prüfen mit dem Stack</h2>
+
+<p>Ein Editor soll prüfen, ob in einem Ausdruck alle Klammern <code>( )</code>, <code>[ ]</code> und <code>{ }</code> korrekt geschachtelt sind. Jede schließende Klammer muss zur zuletzt geöffneten, noch offenen Klammer passen – das ist genau das LIFO-Prinzip. Die Funktion <code>klammern_ok</code> legt öffnende Klammern auf den Stapel und holt sie bei einer schließenden Klammer wieder herunter. Achte im Video darauf, wie das Dictionary <code>paare</code> zu jeder schließenden Klammer die passende öffnende liefert.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-3-4_klammern_vorschau.png" src="../vid/3-3-4_klammern.mp4"></video><a href="../vid/3-3-4_klammern.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Klammern prüfen mit dem Stack (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/stack_knoten.py</code> den Code aus dem Video: die Funktion <code>klammern_ok</code>. Starte mit F5 und vergleiche die Ausgabe mit dem Video. Danach committen, z.&nbsp;B. <code>3.3 Schritt 4: klammern_ok ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Den Stapel verfolgen <span class="niveau">AFB I</span></summary>
+                <p>Verfolge <code>klammern_ok("[(x)]")</code> mit Papier: Wie sieht der Stapel nach jedem Zeichen aus, und was gibt die Funktion zurück?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>[</code>: Stapel [ · <code>(</code>: Stapel [, ( (oben) · <code>x</code>: übersprungen · <code>)</code>: <code>pop</code> liefert (, passt, Stapel [ · <code>]</code>: <code>pop</code> liefert [, passt, Stapel leer. Am Ende ist der Stapel leer: <code>True</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<p><a href="#schritt-5">Weiter mit Schritt 5: Wann ist eine Klammerung falsch? →</a></p>
+
+<h2 id="schritt-5">Schritt 5: Wann ist eine Klammerung falsch?</h2>
+
+<p>Es gibt drei Arten, wie <code>klammern_ok</code> zu <code>False</code> kommt: Die schließende Klammer passt nicht zur obersten öffnenden, es gibt gar keine offene Klammer mehr, oder am Ende bleiben Klammern offen. Achte im Video darauf, warum <code>s.is_empty() or s.pop() != …</code> keinen Fehler auslöst, wenn der Stapel leer ist.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-3-5_klammern_falsch_vorschau.png" src="../vid/3-3-5_klammern_falsch.mp4"></video><a href="../vid/3-3-5_klammern_falsch.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Wann ist eine Klammerung falsch? (ca. 1,5 min)</figcaption>
+        </figure>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Drei Fehlerarten <span class="niveau">AFB I</span></summary>
+                <p>Alle drei Aufrufe liefern <code>False</code>: <code>klammern_ok("(]")</code>, <code>klammern_ok(")(")</code>, <code>klammern_ok("([]")</code>. Gib für jeden an, bei welchem Zeichen bzw. an welcher Stelle der Funktion das <code>False</code> entsteht.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>"(]"</code>: bei <code>]</code> liefert <code>pop</code> die <code>(</code>, erwartet wird <code>[</code> – passt nicht. <code>")("</code>: schon beim ersten Zeichen ist der Stapel leer, <code>s.is_empty()</code> ist <code>True</code>. <code>"([]"</code>: <code>[</code> und <code>]</code> passen, aber am Ende liegt noch <code>(</code> auf dem Stapel – <code>return s.is_empty()</code> liefert <code>False</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-3-3">Aufgabe 3.3.3</a> – entscheiden, wann ein Stapel und wann eine Schlange passt.</p>
+
+<h2 id="zusammen">Alles zusammen: Stapel mit Knoten und Klammerprüfung</h2>
+
+<p>Hier steht der vollständige Code aus den Videos 3–5 zum Nachlesen, mit Speicherbild und Kontrolltabelle.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Stapel mit verketteter Liste und Anwendung „Klammern prüfen“</summary>
+            <p><strong>Ausgangssituation:</strong> Ein Editor soll prüfen, ob in einem Ausdruck alle Klammern <code>( )</code>, <code>[ ]</code> und <code>{ }</code> korrekt geschachtelt sind. Jede schließende Klammer muss zur zuletzt geöffneten, noch offenen Klammer passen – das ist genau das LIFO-Prinzip. Der Stapel wird diesmal mit Knoten gebaut. Das private Attribut <code>__head</code> zeigt auf den obersten Knoten.</p>
+            <pre class="ausfuehrbar"><code class="language-python">class Node:
+    def __init__(self, data, next_node=None):
+        self.data = data
+        self.next = next_node
+
+class Stack:
+    def __init__(self):
+        self.__head = None         # oberstes Element
+
+    def is_empty(self):
+        return self.__head is None
+
+    def push(self, data):
+        self.__head = Node(data, self.__head)
+
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("pop auf leerem Stapel")
+        data = self.__head.data
+        self.__head = self.__head.next
+        return data
+
+    def top(self):
+        if self.is_empty():
+            raise IndexError("top auf leerem Stapel")
+        return self.__head.data
+
+    def peek(self):               # anderer Name für top()
+        return self.top()
+
+def klammern_ok(text):
+    paare = {")": "(", "]": "[", "}": "{"}
+    s = Stack()
+    for zeichen in text:
+        if zeichen in "([{":
+            s.push(zeichen)
+        elif zeichen in paare:
+            if s.is_empty() or s.pop() != paare[zeichen]:
+                return False
+    return s.is_empty()
+
+if __name__ == "__main__":        # Testzeilen nur beim direkten Start (F5), nicht beim import
+    print(klammern_ok("(a + [b * c])"))   # True
+    print(klammern_ok("(a + [b * c)]"))   # False</code></pre>
+            <ol>
+                <li><strong><code>push</code> legt vorn an:</strong> <code>Node(data, self.__head)</code> erzeugt einen Knoten, der auf den bisherigen obersten Knoten zeigt, und <code>__head</code> zeigt danach auf ihn. Es wird nichts durchlaufen, deshalb O(1).</li>
+                <li><strong><code>pop</code> nimmt vorn weg:</strong> Die Daten des obersten Knotens werden gemerkt, <code>__head</code> rückt auf den nächsten Knoten. Bei leerem Stapel gibt es keinen obersten Knoten, deshalb wird vorher ein <code>IndexError</code> ausgelöst.</li>
+                <li><strong>Öffnende Klammer:</strong> <code>klammern_ok</code> legt jede öffnende Klammer auf den Stapel, denn sie muss später geschlossen werden. Andere Zeichen werden übersprungen.</li>
+                <li><strong>Schließende Klammer:</strong> Die zuletzt geöffnete Klammer liegt oben und wird mit <code>pop</code> geholt. Passt sie nicht zum Paar im Dictionary <code>paare</code>, ist die Schachtelung falsch.</li>
+                <li><strong>Falle „schließende Klammer bei leerem Stapel“:</strong> Bei einem Text wie <code>"a)"</code> gibt es nichts zu schließen. Die Prüfung <code>s.is_empty() or …</code> fängt das ab, bevor <code>pop</code> aufgerufen wird. Wegen der Kurzschlussauswertung von <code>or</code> wird <code>pop</code> dann gar nicht erst ausgeführt.</li>
+                <li><strong>Textende:</strong> Nur wenn der Stapel jetzt leer ist, wurde jede geöffnete Klammer auch geschlossen.</li>
+            </ol>
+            <p><strong>Speicherbild Schritt für Schritt</strong> für <code>"(a + [b * c)]"</code>:</p>
+            <pre class="darstellung"><code>Zeichen   Aktion                                Stapel
+(         push("(")                             __head → [(|None]
+a, +      keine Klammer, übersprungen           unverändert
+[         push("[")                             __head → [[|•] → [(|None]
+b, *, c   übersprungen                          unverändert
+)         pop() liefert "[", erwartet wird "("  __head → [(|None]
+          → passt nicht: return False</code></pre>
+            <p>und für <code>"(a + [b * c])"</code>:</p>
+            <pre class="darstellung"><code>(         push("(")                             __head → [(|None]
+[         push("[")                             __head → [[|•] → [(|None]
+]         pop() liefert "[", passt              __head → [(|None]
+)         pop() liefert "(", passt              __head → None
+Ende      is_empty() ist True                   → return True</code></pre>
+            <p><strong>Ergebnis:</strong> Das Programm gibt <code>True</code> und <code>False</code> aus. Im zweiten Ausdruck sind zwar gleich viele öffnende und schließende Klammern vorhanden, sie sind aber falsch geschachtelt. Bloßes Zählen würde diesen Fehler nicht finden, der Stapel findet ihn.</p>
+            <p><strong>Kontrolle:</strong></p>
+            <table class="gitter">
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>print(klammern_ok(""))</code> (leerer Text)</td><td><code>True</code> – der Stapel bleibt leer</td></tr>
+                    <tr><td><code>print(klammern_ok("(("))</code></td><td><code>False</code> – am Ende liegen noch offene Klammern auf dem Stapel</td></tr>
+                    <tr><td><code>print(klammern_ok("a)"))</code></td><td><code>False</code> – ohne die <code>is_empty</code>-Prüfung gäbe es einen <code>IndexError</code></td></tr>
+                    <tr><td><code>print(klammern_ok("{[()()]}"))</code></td><td><code>True</code></td></tr>
+                    <tr><td><code>Stack().pop()</code> (Fehlerfall)</td><td><code>IndexError: pop auf leerem Stapel</code></td></tr>
+                    <tr><td><code>s = Stack(); s.push(1); print(s.peek(), s.top(), s.pop(), s.is_empty())</code> (ein Element)</td><td><code>1 1 1 True</code></td></tr>
+                </tbody>
+            </table>
+            <p>Vergleich mit Beispiel 1: <code>ListenStack</code> und <code>Stack</code> haben dieselbe Schnittstelle, <code>klammern_ok</code> würde mit beiden funktionieren. Beide schaffen <code>push</code> und <code>pop</code> in O(1). Die Knoten-Variante braucht nie umzukopieren, dafür aber einen zusätzlichen Verweis pro Element.</p>
+            </details>
+        </div>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Undo-Stack und Aufrufstapel</summary>
+                <p>
+                    <strong>Alltag:</strong> Bildbearbeitungs- und Textprogramme speichern jede Aktion auf einem <strong>Undo-Stack</strong>. <kbd>Strg</kbd> + <kbd>Z</kbd> nimmt die oberste Aktion herunter und macht sie rückgängig; sie wandert dabei auf einen zweiten Stapel für „Wiederholen“.<br><br>
+                    <strong>Beruf:</strong> Tritt in einem Programm ein Fehler auf, zeigt der „Stack Trace“ den Aufrufstapel: welche Funktion welche aufgerufen hat. Softwareentwicklerinnen und -entwickler lesen ihn täglich bei der Fehlersuche. Auch Taschenrechner und Compiler werten Ausdrücke wie <code>3 * (4 + 5)</code> intern mit Stapeln aus.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Stapel (Stack):</strong> Datenstruktur nach dem LIFO-Prinzip („Last In – First Out“): Das zuletzt hinzugefügte Element wird als Erstes entnommen.</p>
+<p><strong>Grundoperationen:</strong> <code>push(x)</code> legt x oben auf den Stapel, <code>pop()</code> entfernt das oberste Element und gibt es zurück. <code>top()</code> (auch <code>peek()</code>) liefert das oberste Element, ohne es zu entfernen, <code>is_empty()</code> prüft, ob der Stapel leer ist.</p>
+<p><strong>Aufwand:</strong> Alle Operationen liegen in O(1).</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe" id="a-3-3-1">
+            <details>
+                <summary>Aufgabe 3.3.1: LIFO nachvollziehen <span class="niveau">AFB I</span></summary>
+                <p>Ein leerer Stapel erhält die Operationen push(4), push(7), push(2), pop(), push(9), top(), pop(), pop(). Gib nach jeder Operation den Inhalt (oben rechts) und die Rückgabewerte an.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-3-2">
+            <details>
+                <summary>Aufgabe 3.3.2: Text umkehren und Undo <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/umkehren_undo.py</code> – neu anlegen; die Klasse <code>Stack</code> holst du mit <code>from stack_knoten import Stack</code><br><strong>Commits:</strong> nach Teil 1: <code>3.3.2 Teil 1: umkehren(text) mit Stack</code> · nach Teil 2: <code>3.3.2 Teil 2: Undo-Simulation, Text wieder „Hallo“</code></p>
+                <ol>
+                    <li>Schreibe mit der Klasse <code>Stack</code> eine Funktion <code>umkehren(text)</code>, die einen Text rückwärts zurückgibt.</li>
+                    <li>Simuliere einen einfachen Texteditor: Die Eingaben „Hallo“, „ “, „Welt“ werden an einen Text angehängt und jeweils auf einen Undo-Stack gelegt. Zweimal „Rückgängig“ soll den Text wieder auf „Hallo“ setzen.</li>
+                </ol>
+            </details>
+        </div>
+
+</div>
+<section class="ziele" aria-labelledby="das-kann-ich">
+<h2 id="das-kann-ich">Das kann ich jetzt</h2>
+<p class="ziele-hinweis">Grau steht, was der Lehrplan verlangt, darunter, was das für dieses Thema konkret heißt. Hake einen Punkt ab, wenn er in deinem Hefter zusammengefasst ist und du ihn <strong>ohne Hilfe</strong> kannst. Wie du ihn zusammenfasst, entscheidest du selbst. Die Haken speichert nur dein Browser.</p>
+<p class="ziel-titel"><span>Lehrplan LB 2</span> Stapel und Schlange <em>(Kennen von komplexen Datenstrukturen)</em></p><ul class="ziele-liste"><li><label><input type="checkbox" data-ziel="kec5654db5c"><span>Ich kann das LIFO-Prinzip des Stapels erklären und Anwendungsbeispiele nennen.</span></label></li><li><label><input type="checkbox" data-ziel="kfb050d12d6"><span>Ich kann einen Stapel mit seinen Grundoperationen implementieren.</span></label></li><li><label><input type="checkbox" data-ziel="kb7795ecfc1"><span>Ich kann einen Stapel zur Lösung eines Problems einsetzen (z. B. Prüfen einer Klammerung).</span></label></li></ul>
+<p class="ziele-stand" aria-live="polite"></p>
+</section>
+<div class="weiter-kasten"><p><strong>Weiter mit diesem Thema</strong></p><a class="weiter-link" href="uebungen.html">Übungen →</a><a class="weiter-link" href="vertiefung.html">Vertiefung →</a></div>
+<nav class="blaettern" aria-label="Themen blättern"><a class="zurueck" href="../3-2-queue/index.html"><small>← Vorheriges Thema</small>3.2 Schlange (Queue)</a><a class="vor" href="../3-4-baum/index.html"><small>Nächstes Thema →</small>3.4 Datenstruktur Baum (Tree)</a></nav>
+</main>
+<aside class="toc" id="toc" aria-label="Auf dieser Seite"></aside>
+</div>
+</div>
+<footer class="fuss">
+  <a href="../../hinweise.html">Hinweise und Bildnachweise</a>
+  <a href="../../impressum.html">Impressum</a>
+</footer>
+<script src="../../assets/prism.js"></script>
+<script src="../../assets/seite.js"></script>
+</body>
+</html>

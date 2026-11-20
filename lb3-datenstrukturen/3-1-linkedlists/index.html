@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.1 Verkettete Listen (linked lists) – Leistungskurs Informatik</title>
+<script>try{var t=localStorage.getItem("thema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}if(/[?&]vollseite/.test(location.search))document.documentElement.classList.add("vollseite")</script>
+<link rel="stylesheet" href="../../assets/inhalt.css">
+<link rel="stylesheet" href="../../assets/seite.css">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+</head>
+<body class="mit-toc" data-root="../../">
+<header class="kopf">
+  <button class="menue-knopf" id="menue-knopf" aria-controls="leiste" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Themen</span></button>
+  <a class="marke" href="../../index.html"><span class="marke-zeichen">&lt;/&gt;</span><span>Leistungskurs Informatik</span></a>
+  <div class="kopf-rechts">
+    <button class="knopf-rund" id="thema-knopf" title="Hell oder dunkel" aria-label="Hell oder dunkel umschalten">
+      <span class="thema-dunkel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span><span class="thema-hell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+    </button>
+  </div>
+</header>
+<div class="rahmen">
+<nav class="leiste" id="leiste" aria-label="Lernbereiche">
+<div class="suche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="filter" placeholder="Thema suchen …" aria-label="Thema suchen"></div>
+<a class="leiste-start" href="../../index.html">Überblick</a>
+<a class="leiste-start" href="../../werkzeuge.html">Werkzeuge</a>
+<a class="leiste-start" href="../../projekte.html">Lernprojekte</a>
+<details class="lb"><summary><span class="lb-nr">LB 1</span> Technische Informatik</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb1-technische-informatik/index.html">Überblick Technische Informatik</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb1-technische-informatik/1-1-zahlenformate/index.html"><span class="t-nr">1.1</span> Zahlenformate</a></li>
+<li><a href="../../lb1-technische-informatik/1-2-zweierkomplement/index.html"><span class="t-nr">1.2</span> Zweierkomplement</a></li>
+<li><a href="../../lb1-technische-informatik/1-3-festkommazahlen/index.html"><span class="t-nr">1.3</span> Festkommazahlen</a></li>
+<li><a href="../../lb1-technische-informatik/1-4-zeichenkodierung/index.html"><span class="t-nr">1.4</span> Kodierung von Zeichen in der Informatik</a></li>
+</ul>
+<p class="kap">Boolesche Algebra</p><ul>
+<li><a href="../../lb1-technische-informatik/2-1-booleschealgebra/index.html"><span class="t-nr">2.1</span> Boolesche Algebra</a></li>
+<li><a href="../../lb1-technische-informatik/2-2-boolescheoperatoren/index.html"><span class="t-nr">2.2</span> Boolesche Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-3-formaleschreibweise/index.html"><span class="t-nr">2.3</span> Formale Schreibweise boolescher Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-4-implikationundaequivalenz/index.html"><span class="t-nr">2.4</span> Implikation und Äquivalenz</a></li>
+<li><a href="../../lb1-technische-informatik/2-5-gesetzeaussagenlogik/index.html"><span class="t-nr">2.5</span> Gesetze der Aussagenlogik</a></li>
+<li><a href="../../lb1-technische-informatik/2-6-kanonischenormalformen/index.html"><span class="t-nr">2.6</span> Kanonische Normalformen</a></li>
+</ul>
+<p class="kap">Schaltnetze</p><ul>
+<li><a href="../../lb1-technische-informatik/3-1-technischeumsetzung/index.html"><span class="t-nr">3.1</span> Boolesche Ausdrücke in Schaltungen</a></li>
+<li><a href="../../lb1-technische-informatik/3-2-schaltungsanalyse/index.html"><span class="t-nr">3.2</span> Schaltungsanalyse</a></li>
+<li><a href="../../lb1-technische-informatik/3-3-schaltungssynthese/index.html"><span class="t-nr">3.3</span> Schaltungssynthese</a></li>
+<li><a href="../../lb1-technische-informatik/3-4-kv-diagramme/index.html"><span class="t-nr">3.4</span> Karnaugh-Veitch-Diagramme</a></li>
+<li><a href="../../lb1-technische-informatik/3-5-standardschaltnetze/index.html"><span class="t-nr">3.5</span> Standardschaltnetze</a></li>
+<li><a href="../../lb1-technische-informatik/3-6-halbaddierer/index.html"><span class="t-nr">3.6</span> Halbaddierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-7-volladdierer/index.html"><span class="t-nr">3.7</span> Volladdierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-8-uebungsaufgaben/index.html"><span class="t-nr">3.8</span> Übungsaufgaben</a></li>
+</ul>
+<p class="kap">Rechnerarchitektur</p><ul>
+<li><a href="../../lb1-technische-informatik/4-1-neumann/index.html"><span class="t-nr">4.1</span> Rechnerarchitekturen</a></li>
+<li><a href="../../lb1-technische-informatik/4-2-prozessor/index.html"><span class="t-nr">4.2</span> Prozessoren</a></li>
+<li><a href="../../lb1-technische-informatik/4-3-speichersysteme/index.html"><span class="t-nr">4.3</span> Speichersysteme</a></li>
+</ul>
+<p class="kap">Informatik und Gesellschaft</p><ul>
+<li><a href="../../lb1-technische-informatik/5-1-systemsoftware/index.html"><span class="t-nr">5.1</span> Systemsoftware</a></li>
+<li><a href="../../lb1-technische-informatik/5-2-hardware-life/index.html"><span class="t-nr">5.2</span> Hardware-Lebenszyklus</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb1-technische-informatik/6-1-selbstcheck/index.html"><span class="t-nr">6.1</span> Selbstcheck</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 2/3</span> Programmieren und Algorithmen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb2-programmieren-algorithmen/index.html">Überblick Programmieren und Algorithmen</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-2-algorithmus/index.html"><span class="t-nr">2.1.2</span> Algorithmus und Kontrollstrukturen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-3-eva-python/index.html"><span class="t-nr">2.1.3</span> EVA in Python</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-4-array/index.html"><span class="t-nr">2.1.4</span> Array – eine Datenstruktur</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-5-unterprogramme/index.html"><span class="t-nr">2.1.5</span> Unterprogramme</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-6-parameter/index.html"><span class="t-nr">2.1.6</span> Parameter in Funktionen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-7-global-var/index.html"><span class="t-nr">2.1.7</span> Lokale und globale Variablen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-8-git-einstieg/index.html"><span class="t-nr">2.1.8</span> Versionen verwalten mit Git</a></li>
+</ul>
+<p class="kap">Algorithmen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-1-algorithmen-komplexitaet/index.html"><span class="t-nr">2.2.1</span> Algorithmen und Komplexität</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-2-bubblesort/index.html"><span class="t-nr">2.2.2</span> Bubblesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-3-einfuehrung-komplexitaet/index.html"><span class="t-nr">2.2.3</span> Einführung in Komplexität und die O-Notation</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-4-komplexitaetsklassen/index.html"><span class="t-nr">2.2.4</span> Komplexitätsklassen im Überblick</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-5-weitere-sortieralgorithmen/index.html"><span class="t-nr">2.2.5</span> Weitere Sortieralgorithmen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-6-darstellung/index.html"><span class="t-nr">2.2.6</span> Darstellung von Algorithmen (Modellierungshilfen)</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-7-rekursion/index.html"><span class="t-nr">2.2.7</span> Iteration und Rekursion</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-8-divide-and-conquer/index.html"><span class="t-nr">2.2.8</span> Divide and Conquer</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9-effiziente-sortieralgorithmen/index.html"><span class="t-nr">2.2.9</span> Effiziente Sortieralgorithmen – Mergesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9b-quicksort/index.html"><span class="t-nr">2.2.9b</span> Effiziente Sortieralgorithmen – Quicksort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-10-berechenbarkeit/index.html"><span class="t-nr">2.2.10</span> Berechenbarkeit: technische und theoretische Grenzen</a></li>
+</ul>
+</div></details>
+<details class="lb" open><summary><span class="lb-nr">LB 2/3</span> Datenstrukturen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb3-datenstrukturen/index.html">Überblick Datenstrukturen</a>
+<p class="kap">Listen, Schlange und Stapel</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-0-1-einfuegen/index.html"><span class="t-nr">3.0.1</span> Was kostet das Einfügen in eine Liste?</a></li>
+<li><a href="../../lb3-datenstrukturen/3-0-2-git-im-kurs/index.html"><span class="t-nr">3.0.2</span> Deine Lösungen mit Git verwalten</a></li>
+<li><a class="aktiv" aria-current="page" href="../../lb3-datenstrukturen/3-1-linkedlists/index.html"><span class="t-nr">3.1</span> Verkettete Listen (linked lists)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-2-queue/index.html"><span class="t-nr">3.2</span> Schlange (Queue)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-3-stack/index.html"><span class="t-nr">3.3</span> Stapel (Stack)</a></li>
+</ul>
+<p class="kap">Bäume</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-4-baum/index.html"><span class="t-nr">3.4</span> Datenstruktur Baum (Tree)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-5-bin-baum/index.html"><span class="t-nr">3.5</span> Binärbaum und binärer Suchbaum</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6-traversierung/index.html"><span class="t-nr">3.6</span> Traversierung</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6b-backtracking-baum/index.html"><span class="t-nr">3.6b</span> Backtracking 1: Suchen und zurückgehen im Baum</a></li>
+</ul>
+<p class="kap">Graphen</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-7-graph/index.html"><span class="t-nr">3.7</span> Graphen</a></li>
+<li><a href="../../lb3-datenstrukturen/3-8-graph-code/index.html"><span class="t-nr">3.8</span> Implementierung eines Graphen mit Adjazenzlisten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-9-dijkstra/index.html"><span class="t-nr">3.9</span> Kürzeste Wege: Moore und Dijkstra</a></li>
+<li><a href="../../lb3-datenstrukturen/3-10-backtracking/index.html"><span class="t-nr">3.10</span> Backtracking 2: Graphen und Belegungsprobleme</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 4/5</span> OOP und Softwareentwicklung</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb4-oop-softwareentwicklung/index.html">Überblick OOP und Softwareentwicklung</a>
+<p class="kap">Paradigmen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-0-klassifizierung/index.html"><span class="t-nr">4.0</span> Klassifizierung von Programmiersprachen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-1-programmierparadigmen/index.html"><span class="t-nr">4.1</span> Programmierparadigmen entdecken</a></li>
+</ul>
+<p class="kap">Objekte und Klassen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-2-objektorientierung/index.html"><span class="t-nr">4.2</span> Objektorientiertes Denken – vor dem Code</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-3-klassen/index.html"><span class="t-nr">4.3</span> Klassen als Baupläne</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-4-attribute/index.html"><span class="t-nr">4.4</span> Attribute im Detail</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-5-methoden/index.html"><span class="t-nr">4.5</span> Methoden schreiben und aufrufen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-6-kapselung/index.html"><span class="t-nr">4.6</span> Kapselung, Sichtbarkeit und kontrollierter Zugriff</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-7-typisierung/index.html"><span class="t-nr">4.7</span> Typisierung in Python: Klarheit im Code</a></li>
+</ul>
+<p class="kap">Beziehungen und Vererbung</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-8-beziehungen/index.html"><span class="t-nr">4.8</span> Beziehungen zwischen Klassen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-9-multiplizitaeten/index.html"><span class="t-nr">4.9</span> Multiplizitäten in UML: Wie viele Objekte?</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-10-vererbung/index.html"><span class="t-nr">4.10</span> Vererbung</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-11-polymorphie/index.html"><span class="t-nr">4.11</span> Botschaften und Polymorphie</a></li>
+</ul>
+<p class="kap">Software im Team</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-1-vom-programm-zum-projekt/index.html"><span class="t-nr">5.1</span> Vom Klassenmodell zur Softwarearchitektur</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-2-vorgehensmodelle/index.html"><span class="t-nr">5.2</span> Vorgehensmodelle und Anforderungen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-3-testen/index.html"><span class="t-nr">5.3</span> Testen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-4-git-im-team/index.html"><span class="t-nr">5.4</span> Git im Team</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-5-projektauftrag/index.html"><span class="t-nr">5.5</span> Projektauftrag und Themen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-6-projektleitfaden/index.html"><span class="t-nr">5.6</span> Projekt-Leitfaden</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 6</span> Sprachen und Automaten</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb6-sprachen-automaten/index.html">Überblick Sprachen und Automaten</a>
+<p class="kap">Sprachen und Grammatiken</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-1-spracherkennung/index.html"><span class="t-nr">6.1</span> Wie Sprache für Maschinen verständlich wird – Einstieg in Sprachen und Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-2-formale-sprache/index.html"><span class="t-nr">6.2</span> Aufbau von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-3-grammatik/index.html"><span class="t-nr">6.3</span> Grammatiken als formale Beschreibung von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-4-woerter-ableiten/index.html"><span class="t-nr">6.4</span> Ableitung von Wörtern</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-5-bnf/index.html"><span class="t-nr">6.5</span> Backus-Naur-Form (BNF)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-6-chomsky/index.html"><span class="t-nr">6.6</span> Die Chomsky-Hierarchie</a></li>
+</ul>
+<p class="kap">Endliche Automaten</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-7-dea/index.html"><span class="t-nr">6.7</span> Endliche Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-8-fangzustand/index.html"><span class="t-nr">6.8</span> Partielle Übergangsfunktion und Fangzustand (Trap-Zustand)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-9-dea-nea/index.html"><span class="t-nr">6.9</span> NEA, ε-Übergänge und weitere Automatentypen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-10-potenzmengenkonstruktion/index.html"><span class="t-nr">6.10</span> Überführung von NEA in DEA (Potenzmengenkonstruktion)</a></li>
+</ul>
+<p class="kap">Grammatik und Automat</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-11-grammatik-automat/index.html"><span class="t-nr">6.11</span> Überführung zwischen regulären Grammatiken und endlichen Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-12-epsilon-regeln/index.html"><span class="t-nr">6.12</span> Überführung einer Grammatik mit ε-Regeln in eine Grammatik ohne ε-Regeln</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-13-grenzen-automaten/index.html"><span class="t-nr">6.13</span> Grenzen von Automaten</a></li>
+</ul>
+<p class="kap">Compiler</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-14-compiler/index.html"><span class="t-nr">6.14</span> Compiler und Interpreter – von der Theorie zur Praxis</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-15-selbstcheck/index.html"><span class="t-nr">6.15</span> Selbstcheck und Klausurvorbereitung: Sprachen und Automaten</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 7</span> Rechnernetze</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb7-rechnernetze/index.html">Überblick Rechnernetze</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb7-rechnernetze/7-1-topologien/index.html"><span class="t-nr">7.1</span> Topologien und Übertragungsmedien</a></li>
+<li><a href="../../lb7-rechnernetze/7-2-vermittlung-dienste/index.html"><span class="t-nr">7.2</span> Vermittlung und Dienste</a></li>
+<li><a href="../../lb7-rechnernetze/7-3-schichtenmodelle/index.html"><span class="t-nr">7.3</span> Schichtenmodelle (OSI und TCP/IP)</a></li>
+<li><a href="../../lb7-rechnernetze/7-4-netzzugangsschicht/index.html"><span class="t-nr">7.4</span> Netzzugangsschicht: MAC, Ethernet und Switch</a></li>
+</ul>
+<p class="kap">Internetschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-5-ip-adressierung-routing/index.html"><span class="t-nr">7.5</span> Internetschicht: IP-Adressierung und Routing</a></li>
+<li><a href="../../lb7-rechnernetze/7-6-subnetting-cidr/index.html"><span class="t-nr">7.6</span> Subnetting, CIDR und VLSM</a></li>
+<li><a href="../../lb7-rechnernetze/7-7-dhcp/index.html"><span class="t-nr">7.7</span> DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-8-dns/index.html"><span class="t-nr">7.8</span> DNS und Namensauflösung</a></li>
+</ul>
+<p class="kap">Transport- und Anwendungsschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-9-tcp-udp/index.html"><span class="t-nr">7.9</span> Transportschicht: TCP und UDP</a></li>
+<li><a href="../../lb7-rechnernetze/7-10-anwendungsschicht-protokolle/index.html"><span class="t-nr">7.10</span> Anwendungsschicht und Protokolle</a></li>
+</ul>
+<p class="kap">Filius-Praxis</p><ul>
+<li><a href="../../lb7-rechnernetze/7-13-filius-gateway/index.html"><span class="t-nr">7.13</span> Filius-Praxis: Zwei Netzwerke verbinden</a></li>
+<li><a href="../../lb7-rechnernetze/7-14-filius-routingtabelle/index.html"><span class="t-nr">7.14</span> Filius-Praxis: Mehrere Router und Routingtabellen</a></li>
+<li><a href="../../lb7-rechnernetze/7-15-filius-dhcp/index.html"><span class="t-nr">7.15</span> Filius-Praxis: DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-16-filius-dns-web/index.html"><span class="t-nr">7.16</span> Filius-Praxis: DNS, Webserver und Einstellungen über DHCP</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb7-rechnernetze/7-17-aufgabenstellung/index.html"><span class="t-nr">7.17</span> Projekt: Rechnernetze – Theorie, Praxis und Netzplanung</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 8</span> Informationssicherheit</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb8-informationssicherheit/index.html">Überblick Informationssicherheit</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-1-sicherheitsziele/index.html"><span class="t-nr">8.1</span> Sicherheitsziele und Datenschutz</a></li>
+<li><a href="../../lb8-informationssicherheit/8-2-uebersicht-kryptologie/index.html"><span class="t-nr">8.2</span> Übersicht Kryptologie</a></li>
+</ul>
+<p class="kap">Symmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-3-symmetrische-verfahren/index.html"><span class="t-nr">8.3</span> Symmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-4-kasiski-test/index.html"><span class="t-nr">8.4</span> Kasiski-Test</a></li>
+<li><a href="../../lb8-informationssicherheit/8-5-one-time-pad/index.html"><span class="t-nr">8.5</span> One-Time-Pad</a></li>
+<li><a href="../../lb8-informationssicherheit/8-6-kryptoanalyse/index.html"><span class="t-nr">8.6</span> Kryptoanalyse</a></li>
+<li><a href="../../lb8-informationssicherheit/8-7-aes/index.html"><span class="t-nr">8.7</span> AES</a></li>
+</ul>
+<p class="kap">Asymmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-8-asymmetrische-verfahren/index.html"><span class="t-nr">8.8</span> Asymmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-9-rsa/index.html"><span class="t-nr">8.9</span> RSA</a></li>
+<li><a href="../../lb8-informationssicherheit/8-10-diffie-hellman/index.html"><span class="t-nr">8.10</span> Diffie-Hellman-Schlüsselaustausch</a></li>
+<li><a href="../../lb8-informationssicherheit/8-11-hybride-verfahren/index.html"><span class="t-nr">8.11</span> Hybride Verfahren</a></li>
+</ul>
+<p class="kap">Integrität und Authentizität</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-12-hashfunktionen/index.html"><span class="t-nr">8.12</span> Hashfunktionen</a></li>
+<li><a href="../../lb8-informationssicherheit/8-13-digitale-signatur/index.html"><span class="t-nr">8.13</span> Digitale Signatur</a></li>
+<li><a href="../../lb8-informationssicherheit/8-14-authentifizierung/index.html"><span class="t-nr">8.14</span> Authentifizierung</a></li>
+</ul>
+<p class="kap">Netzsicherheit</p><ul>
+<li><a href="../../lb8-informationssicherheit/7-11-tls-vpn/index.html"><span class="t-nr">7.11</span> Transportverschlüsselung: TLS und VPN</a></li>
+<li><a href="../../lb8-informationssicherheit/7-12-authentifizierung/index.html"><span class="t-nr">7.12</span> Identifizierung und Authentifizierung</a></li>
+</ul>
+<p class="kap">Verfügbarkeit</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-15-datensicherung-raid/index.html"><span class="t-nr">8.15</span> Datensicherung und RAID</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 9</span> Datenmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb9-datenmanagement/index.html">Überblick Datenmanagement</a>
+<p class="kap">Relationale Datenbanken</p><ul>
+<li><a href="../../lb9-datenmanagement/1-1-datenbanken/index.html"><span class="t-nr">1.1</span> Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/1-2-relationale-db/index.html"><span class="t-nr">1.2</span> Das relationale Datenmodell</a></li>
+<li><a href="../../lb9-datenmanagement/1-3-sql-select/index.html"><span class="t-nr">1.3</span> SQL-Abfragen</a></li>
+<li><a href="../../lb9-datenmanagement/1-4-sql-where/index.html"><span class="t-nr">1.4</span> SQL WHERE- und LIKE-Klauseln</a></li>
+<li><a href="../../lb9-datenmanagement/1-5-sql-aggregation/index.html"><span class="t-nr">1.5</span> SQL-Aggregatfunktionen</a></li>
+<li><a href="../../lb9-datenmanagement/1-6-sql-joins/index.html"><span class="t-nr">1.6</span> SQL-Joins</a></li>
+<li><a href="../../lb9-datenmanagement/1-7-db-browser/index.html"><span class="t-nr">1.7</span> DB Browser (SQLite)</a></li>
+<li><a href="../../lb9-datenmanagement/1-8-crud/index.html"><span class="t-nr">1.8</span> CRUD: Create, (Read), Update und Delete in SQL</a></li>
+<li><a href="../../lb9-datenmanagement/1-9-sql-uebung/index.html"><span class="t-nr">1.9</span> SQL-Übungsaufgaben</a></li>
+<li><a href="../../lb9-datenmanagement/1-10-erm/index.html"><span class="t-nr">1.10</span> Das Entity-Relationship-Modell</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-1-11-1-db-browser-eigene-tabellen/index.html"><span class="t-nr">1.11.1</span> Eigene Datenbank in DB Browser anlegen</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-relationenmodell/index.html"><span class="t-nr">1.11</span> Vom ER-Modell zum Relationenmodell und Relationenschemata</a></li>
+<li><a href="../../lb9-datenmanagement/1-12-uebung-modellierung/index.html"><span class="t-nr">1.12</span> Übungsaufgaben zur Modellierung von Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/1-13-normalisierung/index.html"><span class="t-nr">1.13</span> Normalisierung und Anomalien</a></li>
+<li><a href="../../lb9-datenmanagement/1-14-erste-normalform/index.html"><span class="t-nr">1.14</span> Erste Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-15-zweite-normalform/index.html"><span class="t-nr">1.15</span> Zweite Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-16-dritte-normalform/index.html"><span class="t-nr">1.16</span> Dritte Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-17-uebung-normalformen/index.html"><span class="t-nr">1.17</span> Übungsaufgaben zu den Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-18-komplette-uebung/index.html"><span class="t-nr">1.18</span> Übung: ERM, Relationenmodell und Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-19-subselects/index.html"><span class="t-nr">1.19</span> Subselects in SQLite</a></li>
+<li><a href="../../lb9-datenmanagement/1-20-sql-uebung/index.html"><span class="t-nr">1.20</span> SQL-Übungen für DB Browser (SQLite) – Thema: Freizeitpark</a></li>
+<li><a href="../../lb9-datenmanagement/1-21-selbstcheck/index.html"><span class="t-nr">1.21</span> Selbstcheck: Datenbanken</a></li>
+</ul>
+<p class="kap">NoSQL</p><ul>
+<li><a href="../../lb9-datenmanagement/2-1-cap/index.html"><span class="t-nr">2.1</span> Das CAP-Theorem</a></li>
+<li><a href="../../lb9-datenmanagement/2-2-nosql-db/index.html"><span class="t-nr">2.2</span> NoSQL-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-3-key-value-db/index.html"><span class="t-nr">2.3</span> Key-Value-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-4-selbstcheck/index.html"><span class="t-nr">2.4</span> Selbstcheck: NoSQL-Datenbanken</a></li>
+</ul>
+<p class="kap">Datenverarbeitung mit Python</p><ul>
+<li><a href="../../lb9-datenmanagement/3-1-data-life-cycle/index.html"><span class="t-nr">3.1</span> Arbeit mit Daten: Der Data Life Cycle</a></li>
+<li><a href="../../lb9-datenmanagement/3-2-verschachtelte-datentypen/index.html"><span class="t-nr">3.2</span> Geschachtelte Datentypen</a></li>
+<li><a href="../../lb9-datenmanagement/3-3-einlesen/index.html"><span class="t-nr">3.3</span> Daten mit Python einlesen</a></li>
+<li><a href="../../lb9-datenmanagement/3-4-verarbeiten/index.html"><span class="t-nr">3.4</span> Verarbeitung eingelesener Daten in Python</a></li>
+<li><a href="../../lb9-datenmanagement/3-5-bereinigen/index.html"><span class="t-nr">3.5</span> Daten bereinigen und analysieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-6-schreiben/index.html"><span class="t-nr">3.6</span> Daten in CSV-Dateien schreiben</a></li>
+<li><a href="../../lb9-datenmanagement/3-7-csv-in-dbbrowser/index.html"><span class="t-nr">3.7</span> CSV-Daten in DB Browser importieren und mit SQL auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-8-visualisieren/index.html"><span class="t-nr">3.8</span> CSV-Dateien mit LibreOffice visualisieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-9-data-life-cycle-csv/index.html"><span class="t-nr">3.9</span> Datenlebenszyklus mit CSV – Eigene Umfrage gestalten und auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-10-json/index.html"><span class="t-nr">3.10</span> JSON: Ein aktuelles Standardformat</a></li>
+<li><a href="../../lb9-datenmanagement/3-11-api/index.html"><span class="t-nr">3.11</span> APIs verstehen und nutzen</a></li>
+<li><a href="../../lb9-datenmanagement/3-12-uebung-erm-daten-verarbeiten/index.html"><span class="t-nr">3.12</span> WÜ Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/3-13-datenmanagement-vertiefung/index.html"><span class="t-nr">3.13</span> Vertiefung des Datenmanagements</a></li>
+<li><a href="../../lb9-datenmanagement/3-14-iug/index.html"><span class="t-nr">3.14</span> Daten in der Gesellschaft: Ethische und kritische Betrachtungen</a></li>
+<li><a href="../../lb9-datenmanagement/3-15-selbstcheck/index.html"><span class="t-nr">3.15</span> Selbstcheck: Datenverarbeitung mit Python</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 10/11</span> KI und Projektmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb10-ki-projektmanagement/index.html">Überblick KI und Projektmanagement</a>
+<p class="kap">KI-Kickstart</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-0-kickstart-sprachmodelle/index.html"><span class="t-nr">11.0</span> KI-Kickstart: Wie funktionieren Sprachmodelle?</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-0b-ki-als-lernpartner/index.html"><span class="t-nr">11.0b</span> KI als Lernpartner: Assistenten verstehen und selbst einstellen</a></li>
+</ul>
+<p class="kap">KI-Grundlagen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-1-begriff-ki/index.html"><span class="t-nr">11.1</span> Einführung in die Künstliche Intelligenz</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-2-wissens-datenbasierte-ki/index.html"><span class="t-nr">11.2</span> Wissensbasierte und datenbasierte Ansätze in der KI</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-3-ki-modelle-optimieren/index.html"><span class="t-nr">11.3</span> KI-Systeme: Training und Optimierung</a></li>
+</ul>
+<p class="kap">Projektmanagement</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-1-grundlagen/index.html"><span class="t-nr">10.1</span> Grundlagen des Projektmanagements</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-2-klassisch-vs-agil/index.html"><span class="t-nr">10.2</span> Klassisches und agiles Projektmanagement</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-3-versionsverwaltung-git/index.html"><span class="t-nr">10.3</span> Versionsverwaltung mit Git</a></li>
+</ul>
+<p class="kap">KI-Projekt</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-4-tutorial-jupyter/index.html"><span class="t-nr">10.4</span> Maschinelles Lernen: Tutorials mit Jupyter</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-5-ki-projektmanagement/index.html"><span class="t-nr">10.5</span> Projektaufgabe: Künstliche Intelligenz mit Projektmanagement erarbeiten</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-6-ki-projekt-dokumentation/index.html"><span class="t-nr">10.6</span> Projektdokumentation: Künstliche Intelligenz (KI) &amp; Projektmanagement</a></li>
+</ul>
+<p class="kap">Maschinelles Lernen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-4-lineare-regression/index.html"><span class="t-nr">11.4</span> Lineare Regression</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-5-entscheidungsbaum/index.html"><span class="t-nr">11.5</span> Entscheidungsbäume</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-6-k-naechster-nachbar/index.html"><span class="t-nr">11.6</span> k-Nächste-Nachbarn-Algorithmus (k-NN)</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-7-k-means/index.html"><span class="t-nr">11.7</span> k-Means-Clustering</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-8-neuronale-netze/index.html"><span class="t-nr">11.8</span> Neuronale Netze und Deep Learning</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-9-genetische-algorithmen/index.html"><span class="t-nr">11.9</span> Genetische Algorithmen</a></li>
+</ul>
+<p class="kap">Generative KI und Gesellschaft</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-10-generative-ki/index.html"><span class="t-nr">11.10</span> Generative KI und Sprachmodelle</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-11-ki-und-gesellschaft/index.html"><span class="t-nr">11.11</span> Gesellschaftliche Auswirkungen Künstlicher Intelligenz</a></li>
+</ul>
+</div></details>
+</nav>
+<div class="haupt-rahmen">
+<main class="haupt" id="inhalt">
+<p class="pfad"><a href="../../index.html">Überblick</a> › <a href="../index.html">LB 2/3 Datenstrukturen</a></p>
+<h1><span class="h1-nr">3.1</span> Verkettete Listen (linked lists)</h1>
+<nav class="reiter" aria-label="Teile dieses Themas"><a class="aktiv" aria-current="page" href="index.html">Einführung <span class="r-zahl">2</span></a><a href="uebungen.html">Übungen <span class="r-zahl">3</span></a><a href="vertiefung.html">Vertiefung <span class="r-zahl">2</span></a><a href="zeiger-werkstatt.html">Zeiger-Werkstatt <span class="zusatz-marke">interaktiv</span></a></nav>
+<div class="seiteninhalt" id="seiteninhalt">
+
+<p>Bei einer Schnitzeljagd steht auf jedem Zettel eine Aufgabe und der Ort des nächsten Zettels. Wer den ersten Zettel hat, kann alle anderen nacheinander finden – aber nicht direkt zum fünften springen. Genau so ist eine verkettete Liste aufgebaut.</p>
+
+<p>In 3.0.1 hast du gesehen, warum Einfügen und Löschen in einer Python-Liste O(n) kosten: Die Elemente müssen lückenlos nebeneinander liegen, also muss beim Einfügen alles dahinter rutschen. Die verkettete Liste verzichtet auf diese Bedingung. Lege deine Lösungen zu dieser Seite in deinem Repository im Ordner <code>1_listen</code> ab (siehe 3.0.2).</p>
+
+<h2 id="schritt-1">Schritt 1: Die Idee – Knoten und Verweise</h2>
+
+<p>Ein Knoten einer einfach verketteten Liste besteht aus zwei Teilen:</p>
+
+<ul>
+            <li><strong>Daten:</strong> die eigentlichen Informationen, die in der Liste gespeichert werden sollen.</li>
+            <li><strong>Verweis auf den nächsten Knoten:</strong> eine Referenz auf das nächste Knotenobjekt oder <code>None</code> am Ende.</li>
+        </ul>
+
+<p>Im Video siehst du, wie Knoten zu einer Kette verbunden werden und warum die Liste nur ihren ersten Knoten kennt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-1_idee_vorschau.png" src="../vid/3-1-1_idee.mp4"></video><a href="../vid/3-1-1_idee.mp4">Video ansehen</a></div>
+            <figcaption>Video 1: Was ist eine verkettete Liste? (ca. 1 min) – Die Videos haben keinen Ton, alles Wichtige steht im Untertitel.</figcaption>
+        </figure>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 1: Kästchen und Pfeile <span class="niveau">AFB I</span></summary>
+                <p>Eine verkettete Liste enthält die Werte 7, 4 und 9 in dieser Reihenfolge. Zeichne sie als Kästchen mit Pfeilen. Worauf zeigt <code>head</code>? Was steht im <code>next</code>-Feld des Knotens mit der 9?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>head</code> → [7|•] → [4|•] → [9|None]. <code>head</code> zeigt auf den Knoten mit der 7, im <code>next</code>-Feld des Knotens mit der 9 steht <code>None</code>, weil er der letzte ist.</p>
+                </details>
+            </details>
+        </div>
+
+<p><a href="#schritt-2">Weiter mit Schritt 2: Die Klasse Node →</a></p>
+
+<h2 id="schritt-2">Schritt 2: Die Klasse <code>Node</code></h2>
+
+<p>In Python ist ein Knoten ein Objekt der Klasse <code>Node</code> mit den Attributen <code>data</code> und <code>next</code>. Im Video schreibst du die Klasse in Thonny und verkettest drei Knoten von Hand in der Kommandozeile. Achte rechts im Speicherbild darauf, dass <code>node1.next = node2</code> nur einen Pfeil setzt und nichts kopiert.</p>
+
+<figure>
+            <img src="../img/linked_list.png" width="700" alt="UML-Klassendiagramm der Klassen LinkedList und Node sowie Objektdiagramm einer Liste mit drei Knoten">
+            <figcaption>Abb. 1: Klassen- und Objektdiagramm einer verketteten Liste mit den Werten 1, 2, 3</figcaption>
+        </figure>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-2_node_vorschau.png" src="../vid/3-1-2_node.mp4"></video><a href="../vid/3-1-2_node.mp4">Video ansehen</a></div>
+            <figcaption>Video 2: Die Klasse <code>Node</code> in Thonny – Knoten erzeugen und von Hand verketten (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Lege <code>1_listen/verkettete_liste.py</code> an und tippe den Code aus dem Video ab: die Klasse <code>Node</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>node1 = Node(1)</code> · <code>node2 = Node(2)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 2: Node angelegt</code>.</p>
+
+<p>Zum Nachlesen steht derselbe Code mit allen Erklärungen in Beispiel 1:</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Eine Liste mit drei Knoten „von Hand“ verketten</summary>
+            <p><strong>Ausgangssituation:</strong> Die Werte 1, 2 und 3 sollen so gespeichert werden, dass man vom ersten Wert aus alle anderen erreicht – wie bei der Schnitzeljagd. Es gibt noch keine Listen-Klasse, sondern nur die Knoten-Klasse <code>Node</code>.</p>
+            <pre class="ausfuehrbar"><code class="language-python">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None      # Verweis auf den nächsten Knoten
+
+node1 = Node(1)
+node2 = Node(2)
+node3 = Node(3)
+node1.next = node2
+node2.next = node3
+print(node1.next.next.data)   # 3</code></pre>
+            <ol>
+                <li><strong>Knoten erzeugen:</strong> <code>Node(1)</code>, <code>Node(2)</code> und <code>Node(3)</code> legen drei voneinander unabhängige Objekte an. Ihr Attribut <code>next</code> ist jeweils <code>None</code>, weil ein neuer Knoten noch keinen Nachfolger kennt.</li>
+                <li><strong>Ersten Verweis setzen:</strong> <code>node1.next = node2</code> speichert in Knoten 1 einen Verweis auf das Objekt von Knoten 2. Es wird kein Knoten kopiert – <code>node1.next</code> und <code>node2</code> zeigen auf dasselbe Objekt.</li>
+                <li><strong>Zweiten Verweis setzen:</strong> <code>node2.next = node3</code> hängt Knoten 3 hinter Knoten 2. Knoten 3 bleibt das Ende, weil sein <code>next</code> weiterhin <code>None</code> ist.</li>
+                <li><strong>Verweise verfolgen:</strong> <code>node1.next.next.data</code> wird von links nach rechts ausgewertet: <code>node1.next</code> ist Knoten 2, <code>.next</code> davon ist Knoten 3, <code>.data</code> davon ist 3. Jeder Punkt folgt also genau einem Pfeil.</li>
+            </ol>
+            <p><strong>Speicherbild Schritt für Schritt</strong> (<code>[Daten|•]</code> = Knoten mit Verweis, <code>[Daten|None]</code> = Knoten ohne Nachfolger):</p>
+            <pre class="darstellung"><code>nach Node(1), Node(2), Node(3):
+node1 → [1|None]      node2 → [2|None]      node3 → [3|None]
+
+nach node1.next = node2:
+node1 → [1|•] → [2|None] ← node2           node3 → [3|None]
+
+nach node2.next = node3:
+node1 → [1|•] → [2|•] → [3|None] ← node3</code></pre>
+            <p><strong>Ergebnis:</strong> Die drei Knoten bilden eine Kette. Vom ersten Knoten aus erreicht man jeden anderen; das Programm gibt <code>3</code> aus.</p>
+            <p><strong>Kontrolle:</strong> Diese Aufrufe kannst du an das Programm anhängen.</p>
+            <table class="gitter">
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>start = None; print(start is None)</code> (leere Kette)</td><td><code>True</code> – ohne ersten Knoten gibt es nichts zu durchlaufen</td></tr>
+                    <tr><td><code>print(node1.data)</code></td><td><code>1</code></td></tr>
+                    <tr><td><code>print(node1.next.data)</code></td><td><code>2</code></td></tr>
+                    <tr><td><code>print(node3.next)</code></td><td><code>None</code> – Ende der Kette</td></tr>
+                    <tr><td><code>print(node1.next.next.next.data)</code> (Fehlerfall)</td><td><code>AttributeError: 'NoneType' object has no attribute 'data'</code> – hinter dem letzten Knoten folgt kein Knoten mehr</td></tr>
+                </tbody>
+            </table>
+            </details>
+        </div>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 2: Pfeilen folgen <span class="niveau">AFB I</span></summary>
+                <p>In Thonny wird eingegeben: <code>a = Node("x")</code>, <code>b = Node("y")</code>, <code>b.next = a</code>. Was geben <code>print(b.next.data)</code> und <code>print(a.next)</code> aus? Was passiert bei <code>print(a.next.data)</code>? Überlege erst, dann probiere es aus.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>b.next.data</code> ist <code>x</code>, denn <code>b.next</code> zeigt auf den Knoten <code>a</code>. <code>a.next</code> ist <code>None</code>. <code>a.next.data</code> löst einen <code>AttributeError</code> aus, weil <code>None</code> kein Attribut <code>data</code> hat.</p>
+                </details>
+            </details>
+        </div>
+
+<p><a href="#schritt-3">Weiter mit Schritt 3: Anhängen mit append →</a></p>
+
+<h2 id="schritt-3">Schritt 3: Anhängen mit <code>append</code></h2>
+
+<p>Damit man Knoten nicht von Hand verketten muss, gibt es die Klasse <code>LinkedList</code>. Sie speichert nur <code>head</code>, den ersten Knoten. Die Methode <code>append</code> hängt hinten an: Dazu läuft eine Hilfsvariable <code>current</code> vom Anfang bis zum letzten Knoten. Achte im Video auf den Sonderfall der leeren Liste und darauf, wo <code>current</code> stehen bleibt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-3_anhaengen_vorschau.png" src="../vid/3-1-3_anhaengen.mp4"></video><a href="../vid/3-1-3_anhaengen.mp4">Video ansehen</a></div>
+            <figcaption>Video 3: Anhängen mit <code>append</code> – Schritt für Schritt (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Klasse <code>LinkedList</code> und die Methode <code>append</code>. Starte mit F5 und probiere in der Kommandozeile aus: <code>liste = LinkedList()</code> · <code>liste.append(1)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 3: LinkedList, append ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 3: Wie weit läuft current? <span class="niveau">AFB I</span></summary>
+                <p>Eine Liste hat 5 Knoten. Wie oft wird beim nächsten <code>append</code> die Zeile <code>current = current.next</code> ausgeführt? Und warum braucht <code>append</code> den Fall <code>if self.head is None</code>?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>4-mal: <code>current</code> startet beim 1. Knoten und muss bis zum 5. weiterlaufen. Bei einer leeren Liste gibt es keinen letzten Knoten – <code>current</code> wäre <code>None</code> und <code>current.next</code> würde einen <code>AttributeError</code> auslösen. Deshalb wird der neue Knoten dann direkt zum <code>head</code>.</p>
+                </details>
+            </details>
+        </div>
+
+<p><a href="#schritt-4">Weiter mit Schritt 4: Durchlaufen und Suchen →</a></p>
+
+<h2 id="schritt-4">Schritt 4: Durchlaufen und Suchen</h2>
+
+<p>Fast jede Methode einer verketteten Liste beginnt gleich: <code>current = self.head</code>, dann <code>current = current.next</code>, bis man am Ziel ist. Im Video siehst du das an <code>display</code>, das alle Werte ausgibt, und wie Suchen nach demselben Muster funktioniert. Achte darauf, dass <code>head</code> dabei nicht verändert wird – und wie <code>join</code> die Texte zusammenklebt.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-4_durchlaufen_vorschau.png" src="../vid/3-1-4_durchlaufen.mp4"></video><a href="../vid/3-1-4_durchlaufen.mp4">Video ansehen</a></div>
+            <figcaption>Video 4: Durchlaufen und Suchen (ca. 2 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Methode <code>display</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>liste.display()</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 4: display ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 4: Zwei Schleifen im Vergleich <span class="niveau">AFB I</span></summary>
+                <p>In <code>display</code> lautet die Schleife <code>while current is not None</code>, in <code>append</code> dagegen <code>while current.next is not None</code>. Erkläre den Unterschied in einem Satz.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>display</code> muss jeden Knoten verarbeiten, auch den letzten – also läuft <code>current</code> bis hinter das Ende (<code>None</code>). <code>append</code> muss <em>auf</em> dem letzten Knoten stehen bleiben, um dort anzuhängen.</p>
+                </details>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-1-1">Aufgabe 3.1.1</a> – eine fehlerhafte Ausgabemethode, die genau gegen diese Regel verstößt.</p>
+
+<p><a href="#schritt-5">Weiter mit Schritt 5: Einfügen am Anfang →</a></p>
+
+<h2 id="schritt-5">Schritt 5: Einfügen am Anfang</h2>
+
+<p>Vorn einfügen geht ohne Schleife: Es werden nur zwei Verweise umgesetzt, deshalb kostet es O(1) – egal, wie lang die Liste ist. Die Reihenfolge der beiden Zeilen entscheidet, ob die Liste erhalten bleibt. Achte im Video darauf, welcher Pfeil zuerst gesetzt wird.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-5_einfuegen_anfang_vorschau.png" src="../vid/3-1-5_einfuegen_anfang.mp4"></video><a href="../vid/3-1-5_einfuegen_anfang.mp4">Video ansehen</a></div>
+            <figcaption>Video 5: Einfügen am Anfang (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Methode <code>insert_at_start</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>liste.insert_at_start(0)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 5: insert_at_start ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 5: Vertauschte Zeilen <span class="niveau">AFB II</span></summary>
+                <p>Ein Mitschüler schreibt in <code>insert_at_start</code> zuerst <code>self.head = neu</code> und danach <code>neu.next = self.head</code>. Zeichne, was mit der Liste 1 → 2 passiert, wenn er <code>insert_at_start(0)</code> aufruft.</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p>Nach <code>self.head = neu</code> zeigt <code>head</code> auf den neuen Knoten 0. Dann setzt <code>neu.next = self.head</code> den Verweis von 0 auf … 0 selbst. Die Knoten 1 und 2 sind nicht mehr erreichbar, und <code>display</code> würde endlos 0 ausgeben.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Verweise selbst umhängen</summary>
+                <p>Öffne im Kursmenü links die Seite <strong>Zeiger-Werkstatt</strong>. Dort hängst du die Pfeile selbst um. Die Übung „3.1 Einfügen am Anfang“ prüft, ob deine Reihenfolge stimmt, und zeigt dir, wenn dabei Knoten verloren gehen – so kannst du auch Kurz geprüft 5 nachstellen. In der Übung „3.1 Durchlaufen bis zum Ende“ lässt du <code>current</code> wie in <code>append</code> bis zum letzten Knoten wandern.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="#a-3-1-2">Aufgabe 3.1.2</a> – eigene Methoden zum Durchlaufen und Einfügen.</p>
+
+<p><a href="#schritt-6">Weiter mit Schritt 6: Löschen →</a></p>
+
+<h2 id="schritt-6">Schritt 6: Löschen</h2>
+
+<p>Beim Löschen wird ein Knoten übersprungen: Sein Vorgänger zeigt danach direkt auf seinen Nachfolger. Deshalb muss <code>current</code> <em>vor</em> dem zu löschenden Knoten stehen bleiben. Achte im Video auf die beiden Sonderfälle: leere Liste und Wert im ersten Knoten.</p>
+
+<figure>
+            <div class="lp-video"><video controls preload="none" poster="../vid/3-1-6_loeschen_vorschau.png" src="../vid/3-1-6_loeschen.mp4"></video><a href="../vid/3-1-6_loeschen.mp4">Video ansehen</a></div>
+            <figcaption>Video 6: Löschen (ca. 1,5 min)</figcaption>
+        </figure>
+
+<p class="git-datei mittippen"><strong>Jetzt du – mittippen:</strong> Ergänze in <code>1_listen/verkettete_liste.py</code> den Code aus dem Video: die Methode <code>delete</code>. Starte mit F5, lege die Objekte wie im Video in der Kommandozeile an und probiere dann aus: <code>liste.delete(2)</code> · <code>liste.delete(0)</code>. Danach committen, z.&nbsp;B. <code>3.1 Schritt 6: delete ergänzt</code>.</p>
+
+<div class="aufgabe">
+            <details>
+                <summary>Kurz geprüft 6: Wo steht current? <span class="niveau">AFB I</span></summary>
+                <p>Die Liste ist 4 → 8 → 15. Auf welchem Knoten steht <code>current</code>, wenn <code>delete(15)</code> den Verweis umsetzt? Welcher Verweis ändert sich, und worauf zeigt er danach?</p>
+                <details class="loesung-details"><summary>Lösung zeigen</summary>
+                <p><code>current</code> steht auf dem Knoten 8, denn <code>current.next.data</code> ist dort 15. Das <code>next</code> von 8 zeigt danach auf <code>current.next.next</code>, also auf <code>None</code> – die 8 ist jetzt der letzte Knoten.</p>
+                </details>
+            </details>
+        </div>
+
+<div class="hinweis">
+            <details>
+                <summary>Hinweis: Löschen in der Zeiger-Werkstatt</summary>
+                <p>Öffne im Kursmenü links die Seite <strong>Zeiger-Werkstatt</strong>. In der Übung „3.1 Löschen“ setzt du <code>current.next = current.next.next</code> selbst um und siehst, dass der übersprungene Knoten danach nicht mehr erreichbar ist.</p>
+            </details>
+        </div>
+
+<p>Danach: <a href="uebungen.html#a-3-1-3">Aufgabe 3.1.3</a> – alle Methoden zusammen, als Kästchen mit Pfeilen.</p>
+
+<h2 id="zusammen">Alles zusammen: die Klasse <code>LinkedList</code></h2>
+
+<p>Hier steht die vollständige Klasse aus den Videos 3–6 zum Nachlesen, mit Testprogramm, Speicherbild und Kontrolltabelle.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> Klasse <code>LinkedList</code> mit Einfügen, Ausgeben und Löschen</summary>
+            <p><strong>Ausgangssituation:</strong> Die Knoten sollen nicht mehr von Hand verkettet werden. Eine Klasse <code>LinkedList</code> verwaltet den Anfang der Liste (<code>head</code>) und bietet Methoden zum Einfügen am Anfang und am Ende, zum Ausgeben und zum Löschen. Das Testprogramm hängt 1, 2, 3 an, fügt vorn 0 ein und löscht dann die 2.</p>
+            <pre><code class="language-python">class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_at_start(self, data):          # O(1)
+        neu = Node(data)
+        neu.next = self.head
+        self.head = neu
+
+    def append(self, data):                    # O(n): Ende suchen
+        neu = Node(data)
+        if self.head is None:
+            self.head = neu
+            return
+        current = self.head
+        while current.next is not None:
+            current = current.next
+        current.next = neu
+
+    def display(self):                         # head bleibt unverändert!
+        current = self.head
+        teile = []
+        while current is not None:
+            teile.append(str(current.data))
+            current = current.next
+        print(" -&gt; ".join(teile) + " -&gt; None")
+
+    def delete(self, data):                    # ersten Knoten mit data entfernen
+        if self.head is None:
+            return False
+        if self.head.data == data:
+            self.head = self.head.next
+            return True
+        current = self.head
+        while current.next is not None:
+            if current.next.data == data:
+                current.next = current.next.next   # Knoten „überspringen“
+                return True
+            current = current.next
+        return False
+
+my_linked_list = LinkedList()
+for wert in [1, 2, 3]:
+    my_linked_list.append(wert)
+my_linked_list.insert_at_start(0)
+my_linked_list.display()        # 0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; None
+my_linked_list.delete(2)
+my_linked_list.display()        # 0 -&gt; 1 -&gt; 3 -&gt; None</code></pre>
+            <p>Ein weiteres Testprogramm findest du in <a href="../material/linkedlist_test.py" download="linkedlist_test.py">linkedlist_test.py</a>.</p>
+            <p>Die Klasse <code>Node</code> stammt aus Beispiel 1. So läuft das Testprogramm ab:</p>
+            <ol>
+                <li><strong>Leere Liste anlegen:</strong> <code>LinkedList()</code> setzt <code>head = None</code>. Die Liste kennt noch keinen Knoten.</li>
+                <li><strong><code>append(1)</code> bei leerer Liste:</strong> Weil <code>head</code> <code>None</code> ist, wird der neue Knoten direkt zum Anfang. Diesen Sonderfall braucht man, weil es noch keinen letzten Knoten gibt, an den man anhängen könnte.</li>
+                <li><strong><code>append(2)</code> und <code>append(3)</code>:</strong> <code>current</code> wandert von <code>head</code> aus, bis <code>current.next</code> <code>None</code> ist, und hängt dort an. Das kostet O(n), weil das Ende nur durch Durchlaufen erreichbar ist.</li>
+                <li><strong><code>insert_at_start(0)</code>:</strong> Zuerst zeigt <code>neu.next</code> auf den bisherigen Anfang, erst danach wird <code>head = neu</code> gesetzt. In umgekehrter Reihenfolge ginge der Verweis auf die alte Liste verloren. Es wird nichts verschoben, deshalb O(1).</li>
+                <li><strong><code>display()</code>:</strong> Die Methode läuft mit einer eigenen Variablen <code>current</code> durch die Liste. <code>head</code> bleibt unverändert, sonst wäre die Liste nach der Ausgabe „leer“ (vergleiche Aufgabe 3.1.1).</li>
+                <li><strong><code>delete(2)</code>:</strong> Der erste Knoten (0) ist es nicht. <code>current</code> bleibt immer einen Knoten <em>vor</em> dem gesuchten stehen, denn nur dort lässt sich der Verweis umsetzen: Bei <code>current</code> = Knoten 1 gilt <code>current.next.data == 2</code>, also wird <code>current.next = current.next.next</code> gesetzt. Knoten 2 wird übersprungen und ist nicht mehr erreichbar; Python gibt seinen Speicher automatisch frei.</li>
+            </ol>
+            <p><strong>Speicherbild Schritt für Schritt:</strong></p>
+            <pre class="darstellung"><code>LinkedList():         head → None
+append(1):            head → [1|None]
+append(2):            head → [1|•] → [2|None]
+append(3):            head → [1|•] → [2|•] → [3|None]            (current lief von 1 bis 2)
+insert_at_start(0):   neu  → [0|•] → [1|•] → [2|•] → [3|None]    1. neu.next = head
+                      head → [0|•] → [1|•] → [2|•] → [3|None]    2. head = neu
+delete(2):            current = [1|•], current.next ist der Knoten mit 2
+                      current.next = current.next.next
+                      head → [0|•] → [1|•] → [3|None]
+                      [2|•] → [3|None]     Knoten 2 zeigt zwar noch auf 3, ist aber
+                                           von head aus nicht mehr erreichbar</code></pre>
+            <p><strong>Ergebnis:</strong> Die Ausgaben lauten <code>0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; None</code> und danach <code>0 -&gt; 1 -&gt; 3 -&gt; None</code>.</p>
+            <p><strong>Kontrolle:</strong> Jeder Test beginnt mit einer neuen Liste, wenn nichts anderes angegeben ist.</p>
+            <table class="gitter">
+                <thead><tr><th>Eingabe</th><th>erwartete Ausgabe</th></tr></thead>
+                <tbody>
+                    <tr><td><code>ll = LinkedList(); ll.display()</code> (leere Liste)</td><td><code> -&gt; None</code> – mit einem Leerzeichen am Anfang, weil <code>teile</code> leer ist</td></tr>
+                    <tr><td><code>print(ll.delete(5))</code> bei leerer Liste</td><td><code>False</code></td></tr>
+                    <tr><td><code>ll.append(7); ll.display()</code> (ein Element)</td><td><code>7 -&gt; None</code></td></tr>
+                    <tr><td>danach <code>print(ll.delete(7), ll.head)</code></td><td><code>True None</code> – Sonderfall: der erste Knoten wird gelöscht, die Liste ist wieder leer</td></tr>
+                    <tr><td>Liste 0, 1, 3: <code>print(ll.delete(9))</code></td><td><code>False</code>, die Liste bleibt <code>0 -&gt; 1 -&gt; 3 -&gt; None</code></td></tr>
+                    <tr><td>Liste 0, 1, 3: <code>ll.delete(0); ll.display()</code></td><td><code>1 -&gt; 3 -&gt; None</code></td></tr>
+                </tbody>
+            </table>
+            <p><strong>Hinweis zur Kapselung:</strong> In dieser Klasse ist <code>head</code> bewusst öffentlich, damit du in Aufgabe 3.1.3 die Verweise von außen verfolgen kannst. In einer sauberen Klasse ist der Anfang ein privates Attribut <code>__head</code>, und nur die eigenen Methoden ändern die Verweise. So eine gekapselte Liste baust du in Aufgabe 3.1.4; in Aufgabe 3.1.7 vergleichst du die Laufzeit mit einer Python-Liste.</p>
+            </details>
+        </div>
+
+<figure>
+            <img src="../img/skizze_verkettete_liste.svg" width="450" alt="Verkettete Liste mit den Knoten A, B, C, head zeigt auf A">
+            <figcaption>Abb. 2: Jeder Knoten speichert Daten und den Verweis next; head zeigt auf den ersten Knoten, der letzte zeigt auf None.</figcaption>
+        </figure>
+
+<h2>Vergleich mit dem Array (Python-Liste)</h2>
+
+<table>
+            <thead><tr><th></th><th>verkettete Liste</th><th>Array / Python-Liste</th></tr></thead>
+            <tbody>
+                <tr><td>Zugriff auf das k-te Element</td><td>O(n), Liste von vorn durchlaufen</td><td>O(1), direkt über den Index</td></tr>
+                <tr><td>Einfügen/Löschen am Anfang</td><td>O(1), nur Verweise umsetzen</td><td>O(n), alle Elemente verschieben</td></tr>
+                <tr><td>Einfügen/Löschen in der Mitte</td><td>O(n) für die Suche, dann O(1)</td><td>O(n) für das Verschieben</td></tr>
+                <tr><td>Größe</td><td>wächst knotenweise, kein Umkopieren nötig</td><td>bei voller Kapazität Umkopieren in einen größeren Speicherbereich</td></tr>
+                <tr><td>Speicher</td><td>zusätzlich ein Verweis pro Knoten</td><td>kompakt, ggf. ungenutzte Reserveplätze</td></tr>
+            </tbody>
+        </table>
+
+<p>Einfach verkettete Listen sind eine wichtige Datenstruktur und bilden unter anderem die Grundlage für Stapel (Stack) und Schlangen (Queue).</p>
+
+<div class="praxisbezug">
+            <details>
+                <summary>Praxisbezug: Verkettungen im Alltag und im Beruf</summary>
+                <p>
+                    <strong>Alltag:</strong> Die Vor- und Zurück-Funktion deines Browsers oder die „Nächster Titel“-Taste im Musikplayer lassen sich als (doppelt) verkettete Liste umsetzen: Jede Seite bzw. jeder Titel kennt seinen Vorgänger und Nachfolger.<br><br>
+                    <strong>Beruf:</strong> Betriebssystementwicklerinnen und -entwickler verwalten z.&nbsp;B. im Linux-Kernel Prozesse und freie Speicherblöcke in verketteten Listen, weil ständig Elemente eingefügt und entfernt werden, ohne dass Speicher umkopiert werden darf. Auch Blockchains sind eine Form verketteter Liste: Jeder Block enthält einen Verweis (Hash) auf den vorherigen.
+                </p>
+            </details>
+        </div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Einfach verkettete Liste:</strong> Eine dynamische Datenstruktur aus einer Folge von Knoten. Jeder Knoten speichert Daten und einen Verweis auf den nächsten Knoten.</p>
+<p><strong>Kopf (<code>head</code>):</strong> Die Liste selbst kennt nur den ersten Knoten. Der letzte Knoten verweist auf <code>None</code>.</p>
+<p><strong>Zugriff auf das k-te Element:</strong> O(n), weil man von vorn durchlaufen muss.</p>
+<p><strong>Einfügen/Löschen:</strong> Am Anfang O(1). An einer bekannten Stelle ebenfalls O(1), das Finden dieser Stelle kostet aber O(n).</p>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe" id="a-3-1-1">
+            <details>
+                <summary>Aufgabe 3.1.1: Fehler finden <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/verkettete_liste.py</code> – weiterführen; füge die Methode zum Ausprobieren in deine Klasse <code>LinkedList</code> ein (<code>nextNode</code> heißt bei dir <code>next</code>)<br><strong>Commits:</strong> <code>3.1.1: fehlerhaftes print_ll zum Testen eingefügt</code> · nach der Korrektur: <code>3.1.1: print_ll korrigiert und getestet</code></p>
+                <p>Eine frühere Version der Ausgabemethode sah so aus:</p>
+                <pre class="ausfuehrbar"><code class="language-python">def print_ll(self):
+    ll_str = ""
+    while self.head:
+        ll_str = ll_str + self.head.data + "---&gt;"
+        self.head = self.head.nextNode
+    print(ll_str)</code></pre>
+                <p>Erkläre, was nach einem Aufruf von <code>print_ll()</code> mit der Liste passiert, und korrigiere die Methode.</p>
+            </details>
+        </div>
+
+<div class="aufgabe" id="a-3-1-2">
+            <details>
+                <summary>Aufgabe 3.1.2: Liste erweitern <span class="niveau">AFB II–III</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>1_listen/verkettete_liste.py</code> – weiterführen; Testfälle in <code>1_listen/test_verkettete_liste.py</code><br><strong>Commits:</strong> nach Teil 1: <code>3.1.2 Teil 1: laenge und enthaelt ergänzt, Tests ok</code> · nach Teil 2: <code>3.1.2 Teil 2: insert_after ergänzt, Tests ok</code> · nur wenn du Teil 3 programmierst: <code>3.1.2 Teil 3: append in O(1), alle Tests weiter ok</code></p>
+                <ol>
+                    <li>Ergänze die Methoden <code>laenge()</code> und <code>enthaelt(data)</code>.</li>
+                    <li>Ergänze <code>insert_after(ziel, data)</code>, die einen neuen Knoten hinter dem ersten Knoten mit dem Wert <code>ziel</code> einfügt.</li>
+                    <li>Das Anhängen mit <code>append</code> liegt in O(n). Schlage eine Änderung der Klasse vor, mit der es in O(1) gelingt, und beurteile den Nachteil.</li>
+                </ol>
+            </details>
+        </div>
+
+</div>
+<section class="ziele" aria-labelledby="das-kann-ich">
+<h2 id="das-kann-ich">Das kann ich jetzt</h2>
+<p class="ziele-hinweis">Grau steht, was der Lehrplan verlangt, darunter, was das für dieses Thema konkret heißt. Hake einen Punkt ab, wenn er in deinem Hefter zusammengefasst ist und du ihn <strong>ohne Hilfe</strong> kannst. Wie du ihn zusammenfasst, entscheidest du selbst. Die Haken speichert nur dein Browser.</p>
+<p class="ziel-titel"><span>Lehrplan LB 2</span> Liste <em>(Kennen von komplexen Datenstrukturen)</em></p><ul class="ziele-liste"><li><label><input type="checkbox" data-ziel="k591d0a192a"><span>Ich kann den Aufbau einer verketteten Liste aus Knoten und Verweisen erklären und zeichnen.</span></label></li><li><label><input type="checkbox" data-ziel="k3a4f3aa653"><span>Ich kann Grundoperationen einer verketteten Liste (z. B. Anhängen, Durchlaufen, Einfügen, Löschen) implementieren.</span></label></li><li><label><input type="checkbox" data-ziel="kb72cd45191"><span>Ich kann Array und verkettete Liste nach dem Aufwand ihrer Operationen vergleichen.</span></label></li></ul>
+<p class="ziele-stand" aria-live="polite"></p>
+</section>
+<div class="weiter-kasten"><p><strong>Weiter mit diesem Thema</strong></p><a class="weiter-link" href="uebungen.html">Übungen →</a><a class="weiter-link" href="vertiefung.html">Vertiefung →</a><a class="weiter-link" href="zeiger-werkstatt.html">Zeiger-Werkstatt →</a></div>
+<nav class="blaettern" aria-label="Themen blättern"><a class="zurueck" href="../3-0-2-git-im-kurs/index.html"><small>← Vorheriges Thema</small>3.0.2 Deine Lösungen mit Git verwalten</a><a class="vor" href="../3-2-queue/index.html"><small>Nächstes Thema →</small>3.2 Schlange (Queue)</a></nav>
+</main>
+<aside class="toc" id="toc" aria-label="Auf dieser Seite"></aside>
+</div>
+</div>
+<footer class="fuss">
+  <a href="../../hinweise.html">Hinweise und Bildnachweise</a>
+  <a href="../../impressum.html">Impressum</a>
+</footer>
+<script src="../../assets/prism.js"></script>
+<script src="../../assets/seite.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 310" width="640" height="310">
+<title>Wegenetz als Baum</title>
+<style>
+text{font-family:"Segoe UI",Calibri,Arial,sans-serif;font-size:17px;fill:#1f2430}
+.mi{text-anchor:middle}.b{font-weight:700}
+.s{font-size:14px;fill:#b45309;font-weight:700}.leg{font-size:14px;fill:#5b6472}
+.k{fill:#fff;stroke:#1d4ed8;stroke-width:2.5}.k2{fill:#eef2ff;stroke:#1d4ed8;stroke-width:2.5}
+.gr{fill:#e9f9ee;stroke:#2f9e57;stroke-width:2.5}
+.ln{fill:none;stroke:#1f2430;stroke-width:2.2}
+</style>
+<rect x="0" y="0" width="640" height="310" fill="#fff"/>
+
+<!-- Kanten -->
+<line class="ln" x1="300" y1="47" x2="130" y2="93"/>
+<line class="ln" x1="320" y1="47" x2="330" y2="93"/>
+<line class="ln" x1="340" y1="47" x2="520" y2="93"/>
+<line class="ln" x1="110" y1="127" x2="110" y2="173"/>
+<line class="ln" x1="540" y1="127" x2="540" y2="173"/>
+<line class="ln" x1="330" y1="127" x2="330" y2="173"/>
+<line class="ln" x1="110" y1="207" x2="110" y2="253"/>
+<line class="ln" x1="315" y1="207" x2="270" y2="253"/>
+<line class="ln" x1="345" y1="207" x2="390" y2="253"/>
+
+<!-- Gehzeiten -->
+<text class="s" x="150" y="58">15 min</text>
+<text class="s" x="332" y="76">10 min</text>
+<text class="s" x="448" y="58">25 min</text>
+<text class="s" x="118" y="155">20 min</text>
+<text class="s" x="338" y="155">15 min</text>
+<text class="s" x="548" y="155">20 min</text>
+<text class="s" x="118" y="235">25 min</text>
+<text class="s" x="230" y="235">30 min</text>
+<text class="s" x="374" y="235">10 min</text>
+
+<!-- Knoten -->
+<rect class="k2" x="265" y="13" width="110" height="34" rx="6"/><text class="mi b" x="320" y="36">Parkplatz</text>
+<rect class="k" x="55" y="93" width="110" height="34" rx="6"/><text class="mi" x="110" y="116">Waldweg</text>
+<rect class="k" x="275" y="93" width="110" height="34" rx="6"/><text class="mi" x="330" y="116">Uferweg</text>
+<rect class="k" x="485" y="93" width="110" height="34" rx="6"/><text class="mi" x="540" y="116">Bergpfad</text>
+<rect class="k" x="55" y="173" width="110" height="34" rx="6"/><text class="mi" x="110" y="196">Schlucht</text>
+<rect class="k" x="275" y="173" width="110" height="34" rx="6"/><text class="mi" x="330" y="196">Mühle</text>
+<rect class="gr" x="485" y="173" width="110" height="34" rx="6"/><text class="mi" x="540" y="196">Gipfel</text>
+<rect class="gr" x="55" y="253" width="110" height="34" rx="6"/><text class="mi" x="110" y="276">Felsentor</text>
+<rect class="gr" x="210" y="253" width="120" height="34" rx="6"/><text class="mi" x="270" y="276">Wasserfall</text>
+<rect class="gr" x="340" y="253" width="110" height="34" rx="6"/><text class="mi" x="395" y="276">Bootssteg</text>
+
+<!-- Legende -->
+<rect class="gr" x="485" y="258" width="18" height="18" rx="3"/><text class="leg" x="510" y="272">Ziel (Blatt)</text>
+</svg>
