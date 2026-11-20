@@ -108,7 +108,7 @@ mensa.enqueue("D")
 print(mensa.dequeue())   # B
 print(mensa.peek())      # C</code></pre>
             <ol>
-                <li><strong>Leere Schlange anlegen:</strong> Der Konstruktor erzeugt eine leere Liste <code>__daten</code>. Die zwei Unterstriche machen das Attribut privat (vgl. 4.6 Kapselung): Es ist ein Implementierungsdetail, nur die eigenen Methoden benutzen es, von außen ist <code>__daten</code> nicht erreichbar.</li>
+                <li><strong>Leere Schlange anlegen:</strong> Der Konstruktor erzeugt eine leere Liste <code>__daten</code>. Die zwei Unterstriche machen das Attribut privat (vgl. Kapselung, Kurs OOP und Softwareentwicklung, Seite 4.6): Es ist ein Implementierungsdetail, nur die eigenen Methoden benutzen es, von außen ist <code>__daten</code> nicht erreichbar.</li>
                 <li><strong>Anstellen mit <code>enqueue</code>:</strong> A, B und C werden mit <code>append</code> hinten angehängt. Das Ende der Liste ist das Ende der Schlange, deshalb stellen sich Neue immer hinten an.</li>
                 <li><strong>Bedienen mit <code>dequeue</code>:</strong> <code>pop(0)</code> entfernt das Element mit Index 0, also A, und gibt es zurück. Vorher prüft die Methode, ob die Schlange leer ist, und meldet diesen Fehlerfall mit einem <code>IndexError</code> und einer verständlichen Meldung.</li>
                 <li><strong>Weitere Schritte:</strong> D stellt sich hinter C an, danach wird B bedient. Die Reihenfolge des Ankommens bleibt immer erhalten (FIFO).</li>

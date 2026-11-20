@@ -172,7 +172,7 @@ plt.show()</code></pre>
                             <tr><td>8000 → 16000</td><td>2739 ms → 10826 ms</td><td>≈ 4,0</td></tr>
                         </tbody>
                     </table>
-                    <em>Warum ist der erste Faktor kleiner?</em> Bei kleinen n fallen Anteile, die nicht quadratisch wachsen (Funktionsaufruf, Schleifenverwaltung, Messungenauigkeit), stärker ins Gewicht. Je größer n, desto näher liegt der Faktor bei 4.</li>
+                    <em>Warum ist der erste Faktor kleiner?</em> Vor allem schwanken kurze Messungen stärker. Dazu kommen Anteile, die nicht quadratisch wachsen (Funktionsaufruf, Schleifenverwaltung); sie fallen bei kleinen n etwas mehr ins Gewicht. Je größer n, desto näher liegt der Faktor bei 4.</li>
                 <li><strong>Selbst messen:</strong> Für Laufzeitmessungen nimmt man <code>time.perf_counter()</code>. Diese Uhr ist genauer als <code>time.time()</code> und für Zeitdifferenzen gedacht.
                     <pre><code class="language-python">import random
 import time
@@ -244,9 +244,9 @@ for n in [2000, 4000, 8000]:
                 <table>
                     <thead><tr><th>n</th><th>Zeit</th><th>Vergleiche</th></tr></thead>
                     <tbody>
-                        <tr><td>1 000</td><td>0,143 s</td><td>499 490</td></tr>
-                        <tr><td>2 000</td><td>0,585 s</td><td>1 998 810</td></tr>
-                        <tr><td>4 000</td><td>1,921 s</td><td>7 993 050</td></tr>
+                        <tr><td>1 000</td><td>0,143 s</td><td>497 289</td></tr>
+                        <tr><td>2 000</td><td>0,585 s</td><td>1 995 430</td></tr>
+                        <tr><td>4 000</td><td>1,921 s</td><td>7 994 172</td></tr>
                     </tbody>
                 </table>
                 <ol>

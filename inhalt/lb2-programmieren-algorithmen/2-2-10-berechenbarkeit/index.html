@@ -44,7 +44,7 @@
 
 <p>Die Frage, ob P = NP gilt, ist eines der großen ungelösten Probleme der Informatik. Sie hat weitreichende Folgen für die Sicherheit von Verschlüsselungsverfahren und die Effizienz von Algorithmen.</p>
 
-<p><strong>Beispiel für ein P-Problem:</strong> Das Sortieren einer Liste von Zahlen gelingt effizient in polynomialer Zeit, zum Beispiel mit Mergesort in O(n · log n).</p>
+<p><strong>Beispiel für ein P-Problem:</strong> „Ist diese Liste aufsteigend sortiert?“ lässt sich mit einem Durchlauf in O(n) entscheiden. Auch das Sortieren selbst gelingt in polynomialer Zeit, zum Beispiel mit Mergesort in O(n · log n). Streng genommen gehören zur Klasse P aber nur Ja-/Nein-Fragen.</p>
 
 <p><strong>Beispiel für ein NP-Problem:</strong> Das Problem des Handlungsreisenden (Travelling Salesman Problem, TSP) in seiner <strong>Entscheidungsvariante</strong> lautet: „Gibt es eine Rundreise durch alle Städte, die kürzer als k Kilometer ist?“ Wird eine Rundreise vorgeschlagen, lässt sich schnell prüfen, ob sie alle Städte besucht und kürzer als k ist: Man addiert die n Teilstrecken. Eine solche Rundreise zu <em>finden</em>, ist dagegen extrem aufwendig, wenn die Anzahl der Städte groß ist. Die Frage „Ist diese Route die kürzeste?“ lässt sich dagegen <em>nicht</em> einfach überprüfen – dafür müsste man sie mit allen anderen Routen vergleichen.</p>
 

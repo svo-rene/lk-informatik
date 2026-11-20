@@ -616,7 +616,7 @@ for n in [2000, 4000]:
     print("n =", n, "->", ms, "ms")</code></pre>
                     Ausgabe (Beispielwerte): <code>n = 2000: 180 ms</code> und <code>n = 4000: 712 ms</code>. Jonas lädt die Datei über „Datei hochladen“ hoch. Commit-Nachricht: „V1 Bubblesort: 180 ms / 712 ms (n = 2000/4000)“. <em>Warum <code>random.seed(1)</code> und <code>assert</code>?</em> Mit festem Startwert erzeugt jede Version dieselben Zufallslisten, die Messungen sind also vergleichbar. Das <code>assert</code> bricht mit <code>AssertionError</code> ab, falls eine „Optimierung“ falsch sortiert. Eine schnelle, aber falsche Version darf nicht als Erfolg in der Historie landen.</li>
                 <li><strong>Version 2: vorzeitiger Abbruch (siehe 2.2.2).</strong> Jonas ändert den Code in Thonny, misst und lädt die Datei mit <em>demselben Namen</em> neu hoch. In der Commit-Ansicht zeigt der Diff genau die Änderung (in Forgejo farbig mit zwei Spalten Zeilennummern wie in Bild 19; hier in Textform):
-                    <pre class="darstellung"><code>@@ -2,12 +2,16 @@
+                    <pre class="darstellung"><code>@@ -2,14 +2,18 @@
  import time
 
  def sortiere(liste):
@@ -636,7 +636,7 @@ for n in [2000, 4000]:
 
  random.seed(1)                       # in jeder Version dieselben Zufallsdaten
  for n in [2000, 4000]:</code></pre>
-                    <em>So liest du den Diff:</em> Die Kopfzeile <code>@@ -2,12 +2,16 @@</code> bedeutet: Der Ausschnitt beginnt in der alten und der neuen Fassung bei Zeile 2 und umfasst alt 12, neu 16 Zeilen. Zeilen ohne Zeichen am Anfang sind unveränderter Kontext. Eine Zeile wurde geändert (der Docstring), vier sind hinzugekommen: 12 − 1 + 1 + 4 = 16. Forgejo fasst das oben zusammen als „1 geänderte Dateien mit 5 neuen und 1 gelöschten Zeilen“.<br>
+                    <em>So liest du den Diff:</em> Die Kopfzeile <code>@@ -2,14 +2,18 @@</code> bedeutet: Der Ausschnitt beginnt in der alten und der neuen Fassung bei Zeile 2 und umfasst alt 14, neu 18 Zeilen. Zeilen ohne Zeichen am Anfang sind unveränderter Kontext. Eine Zeile wurde geändert (der Docstring), vier sind hinzugekommen: 14 − 1 + 1 + 4 = 18. Forgejo fasst das oben zusammen als „1 geänderte Dateien mit 5 neuen und 1 gelöschten Zeilen“.<br>
                     Messung: 172 ms / 688 ms. Commit: „V2 Bubblesort mit Abbruch: 172 ms / 688 ms (n = 2000/4000)“.</li>
                 <li><strong>Version 3: Insertionsort (siehe 2.2.5).</strong> Der Rumpf von <code>sortiere</code> wird ersetzt:
                     <pre class="ausfuehrbar"><code class="language-python">def sortiere(liste):

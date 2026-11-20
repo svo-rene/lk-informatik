@@ -61,7 +61,7 @@
 
 <figure>
             <img src="../img/skizze_kuerzeste_wege_dijkstra.svg" width="450" alt="Gewichteter Graph mit S, A, B, Z; die kürzesten Wege sind grün markiert">
-            <figcaption>Abb. 1: Dijkstra ab S – grün die kürzesten Wege; Z erreicht man über S → B → A → Z mit der Länge 3 + 2 + 1 = 6.</figcaption>
+            <figcaption>Abb. 1: Dijkstra ab S – grün die kürzesten Wege; Z erreicht man über S → A → B → Z mit der Länge 2 + 3 + 2 = 7, nicht über die direkten Kanten.</figcaption>
         </figure>
 
 <div class="hinweis">
@@ -145,11 +145,13 @@ graph = {
     "D": {"B": 5, "C": 8, "E": 2},
     "E": {"C": 10, "D": 2},
 }
-dist = {}                     # dijkstra füllt diese beiden Dictionaries
-vorgaenger = {}
-dijkstra(graph, "A", dist, vorgaenger)
-print(dist)          # {'A': 0, 'B': 3, 'C': 2, 'D': 8, 'E': 10}
-print(vorgaenger)    # {'A': None, 'B': 'C', 'C': 'A', 'D': 'B', 'E': 'D'}</code></pre>
+
+if __name__ == "__main__":        # Testzeilen nur beim direkten Start (F5), nicht beim import
+    dist = {}                     # dijkstra füllt diese beiden Dictionaries
+    vorgaenger = {}
+    dijkstra(graph, "A", dist, vorgaenger)
+    print(dist)          # {'A': 0, 'B': 3, 'C': 2, 'D': 8, 'E': 10}
+    print(vorgaenger)    # {'A': None, 'B': 'C', 'C': 'A', 'D': 'B', 'E': 'D'}</code></pre>
             </details>
         </div>
 
@@ -264,7 +266,7 @@ print(float("inf") + 1 &gt; 1000000)</code></pre>
 <div class="aufgabe" id="a-3-9-2">
             <details>
                 <summary>Aufgabe 3.9.2: Weg rekonstruieren <span class="niveau">AFB II</span></summary>
-                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/dijkstra.py</code> – weiterführen<br><strong>Commits:</strong> wenn es läuft: <code>3.9.2: weg(vorgaenger, ziel) ergänzt, Weg nach E stimmt</code></p>
+                <p class="git-datei"><strong>Datei:</strong> <code>3_graphen/dijkstra.py</code> – weiterführen, Tests unter <code>if __name__ == "__main__":</code><br><strong>Commits:</strong> wenn es läuft: <code>3.9.2: weg(vorgaenger, ziel) ergänzt, Weg nach E stimmt</code></p>
                 <p>Die Funktion <code>dijkstra</code> liefert neben den Distanzen ein Dictionary <code>vorgaenger</code>. Schreibe eine Funktion <code>weg(vorgaenger, ziel)</code>, die daraus den Weg vom Start zum Ziel als Liste zurückgibt, und teste sie für E im komplexeren Beispiel.</p>
             </details>
         </div>

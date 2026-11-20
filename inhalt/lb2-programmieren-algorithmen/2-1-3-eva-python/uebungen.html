@@ -1,8 +1,7 @@
 <div class="hinweis">
             <details>
                 <summary>Hinweis: Jupyter-Notebook zu dieser Seite</summary>
-                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook, in dem du die Beispiele und Aufgaben
-                dieser Seite direkt ausführen und bearbeiten kannst:
+                <p>Als Ergänzung zu dieser Seite gibt es ein Jupyter-Notebook mit eigenen Beispielen und Übungen zum Thema, die du direkt ausführen und bearbeiten kannst. Es verwendet teilweise andere Beispiele und Namen als diese Seite:
                 <a href="../notebooks/2-1-3_eva_python.ipynb" download>2-1-3_eva_python.ipynb herunterladen</a>.
                 Das Notebook ersetzt diese Seite nicht, sondern bietet dir eine interaktive Umgebung.</p>
                 <p><strong>So arbeitest du damit – ganz ohne Installation:</strong></p>
@@ -48,11 +47,11 @@ print(round(2.5), round(3.5))</code></pre>
 <div class="aufgabe">
             <details>
                 <summary>Aufgabe 2.1.3.5: Stromkostenrechner <span class="niveau">AFB II</span></summary>
-                <p>Familie Kühn liest einmal im Monat ihren Stromzähler ab. Schreibe ein EVA-Programm, das den alten und den neuen Zählerstand (in kWh), den Arbeitspreis (in Cent pro kWh) und die monatliche Grundgebühr (in Euro) einliest. Es gibt den Verbrauch und die Kosten in Euro mit zwei Nachkommastellen aus. Ist der neue Zählerstand kleiner als der alte, erscheint die Meldung „Fehler: neuer Zählerstand kleiner als alter“.</p>
+                <p>Familie Kühn liest einmal im Monat ihren Stromzähler ab. Schreibe ein EVA-Programm, das den alten und den neuen Zählerstand (in kWh), den Arbeitspreis (in Cent pro kWh) und die monatliche Grundgebühr (in Euro) einliest. Es gibt den Verbrauch und die Kosten in Euro, auf zwei Nachkommastellen gerundet, aus. Ist der neue Zählerstand kleiner als der alte, erscheint die Meldung „Fehler: neuer Zählerstand kleiner als alter“.</p>
                 <table>
                     <thead><tr><th>Eingabe (alt, neu, Preis, Grundgebühr)</th><th>erwartete Ausgabe</th><th>tatsächliche Ausgabe</th></tr></thead>
                     <tbody>
-                        <tr><td>12500, 12850, 32, 12.50</td><td><code>Verbrauch: 350 kWh</code>, <code>Kosten: 124.50 €</code></td><td></td></tr>
+                        <tr><td>12500, 12850, 32, 12.50</td><td><code>Verbrauch: 350 kWh</code>, <code>Kosten: 124.5 €</code></td><td></td></tr>
                         <tr><td>12500, 12500, 32, 12.50</td><td></td><td></td></tr>
                         <tr><td>12850, 12500, 32, 12.50</td><td></td><td></td></tr>
                         <tr><td>12500, 12850, 32, 12,50</td><td></td><td></td></tr>

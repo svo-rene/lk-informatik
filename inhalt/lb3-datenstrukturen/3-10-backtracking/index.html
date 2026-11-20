@@ -213,7 +213,7 @@ print(plan)
 
 <div class="aufgabe">
             <details>
-                <summary>Kurz geprüft 4: Wenn es keine Lösung gibt <span class="niveau">AFB II</span></summary>
+                <summary>Kurz geprüft 3: Wenn es keine Lösung gibt <span class="niveau">AFB II</span></summary>
                 <p>Drei Kurse X, Y und Z stehen paarweise in Konflikt, es gibt nur die Termine Mo und Di. <code>plane</code> wird mit der Reihenfolge X, Y, Z aufgerufen. Verfolge den Ablauf: Was gibt <code>plane</code> zurück, und wie oft wird es insgesamt aufgerufen?</p>
                 <details class="loesung-details"><summary>Lösung zeigen</summary>
                 <p>Aufruf 1: X Mo. Aufruf 2: Y Mo verboten, Y Di. Aufruf 3: Z – Mo und Di verboten, <code>False</code>. Y hat keinen weiteren Tag: Rücknahme, <code>False</code>. X wird zurückgenommen und bekommt Di. Aufruf 4: Y Mo. Aufruf 5: Z – Mo und Di verboten, <code>False</code>; Y Di ist verboten, also <code>False</code>; X hat keinen Tag mehr. Ergebnis: <code>False</code> nach 5 Aufrufen – drei paarweise verbundene Kurse brauchen drei Tage.</p>

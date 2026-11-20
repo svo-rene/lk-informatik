@@ -30,7 +30,7 @@
             else:
                 self.einfuegen(leser, knoten.get_rechts())</code></pre>
                 <p>Mit <a href="../material/leser.csv" download>leser.csv</a> (50 000 Datensätze) läuft alles. Mit <a href="../material/leser_sortiert.csv" download>leser_sortiert.csv</a> (5 000 Datensätze) bricht das Programm nach knapp 1 000 Datensätzen ab:</p>
-                <pre class="darstellung"><code>RecursionError: maximum recursion depth exceeded in comparison</code></pre>
+                <pre class="darstellung"><code>RecursionError: maximum recursion depth exceeded</code></pre>
                 <ol>
                     <li>Erkläre, warum der Fehler nur bei der kleineren, sortierten Datei auftritt. Gib an, wie viele Aufrufe von <code>einfuegen</code> beim Einfügen des 1 000. sortierten Datensatzes gleichzeitig offen sind.</li>
                     <li>Mit der zufälligen Datei entsteht ein Baum der Höhe 35. Gib die größte Zahl gleichzeitig offener Aufrufe an und begründe, warum Python dabei keine Probleme hat.</li>

@@ -20,21 +20,21 @@ text{font-family:"Segoe UI",Calibri,Arial,sans-serif;font-size:18px;fill:#1f2430
 <marker id="pfg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.4" markerHeight="4.4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f9e57"/></marker>
 </defs><rect x="-10" y="-10" width="320" height="170" fill="#fff"/>
 
-<line class="ln" x1="55" y1="69" x2="135" y2="36"/>
-<line class="pfg" x1="55" y1="81" x2="135" y2="114"/>
-<line class="pfg" x1="150" y1="104" x2="150" y2="46"/>
-<line class="pfg" x1="165" y1="36" x2="245" y2="69"/>
-<line class="ln" x1="165" y1="114" x2="245" y2="81"/>
+<line class="pfg" x1="55" y1="69" x2="135" y2="36"/>
+<line class="ln" x1="55" y1="81" x2="135" y2="114"/>
+<line class="pfg" x1="150" y1="46" x2="150" y2="104"/>
+<line class="ln" x1="165" y1="36" x2="245" y2="69"/>
+<line class="pfg" x1="165" y1="114" x2="245" y2="81"/>
 <circle class="gr" cx="40" cy="75" r="16"/><text class="mi" x="40" y="81">S</text>
 <circle class="k" cx="150" cy="30" r="16"/><text class="mi" x="150" y="36">A</text>
 <circle class="k" cx="150" cy="120" r="16"/><text class="mi" x="150" y="126">B</text>
 <circle class="gr" cx="260" cy="75" r="16"/><text class="mi" x="260" y="81">Z</text>
-<text class="s mi" x="88" y="42">7</text>
-<text class="s mi" x="88" y="116">3</text>
-<text class="s" x="158" y="80">2</text>
-<text class="s mi" x="212" y="42">1</text>
-<text class="s mi" x="212" y="116">8</text>
+<text class="s mi" x="88" y="42">2</text>
+<text class="s mi" x="88" y="116">6</text>
+<text class="s" x="158" y="80">3</text>
+<text class="s mi" x="212" y="42">7</text>
+<text class="s mi" x="212" y="116">2</text>
 <text class="s mi tg" x="40" y="112">0</text>
-<text class="s mi tg" x="260" y="112">6</text>
+<text class="s mi tg" x="260" y="112">7</text>
 
 </svg>

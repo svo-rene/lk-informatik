@@ -118,11 +118,11 @@ print(binaere_suche([2, 5, 8, 12, 16, 23, 38], 23))   # 5</code></pre>
             <figcaption>Video 4: Wie schnell ist die binäre Suche? (ca. 1 min)</figcaption>
         </figure>
 
-<p>Zum Nachlesen: Beispiel 3 zählt die Vergleichsrunden beider Verfahren für eine und zwei Millionen Zahlen und misst die Laufzeit.</p>
+<p>Zum Nachlesen: Beispiel 2 zählt die Vergleichsrunden beider Verfahren für eine und zwei Millionen Zahlen und misst die Laufzeit.</p>
 
 <div class="beispiel klappbar">
             <details>
-                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span></summary>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Wie viel schneller ist die binäre Suche wirklich? Beide Suchverfahren zählen ihre Vergleichsrunden und werden mit <code>time.perf_counter()</code> gemessen. Der schlechteste Fall ist ein Wert, der größer als alle Listenelemente ist und deshalb nicht vorkommt.</p>
             <pre><code class="language-python">import time
 
@@ -202,11 +202,11 @@ for n in [1_000_000, 2_000_000]:
             <figcaption>Video 5: Teilen, herrschen, kombinieren (ca. 2 min)</figcaption>
         </figure>
 
-<p>Zum Nachlesen – mit der Falle „leere Liste“, die nicht im Video vorkommt – steht alles in Beispiel 2:</p>
+<p>Zum Nachlesen – mit der Falle „leere Liste“, die nicht im Video vorkommt – steht alles in Beispiel 3:</p>
 
 <div class="beispiel klappbar">
             <details>
-                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span></summary>
+                <summary>Beispiel 3 <span class="beispiel-kopf">komplex</span></summary>
             <p><strong>Ausgangssituation:</strong> Maximum einer Liste mit allen drei Schritten</p>
             <pre class="ausfuehrbar"><code class="language-python">def maximum(liste):
     if len(liste) == 1:                 # Basisfall

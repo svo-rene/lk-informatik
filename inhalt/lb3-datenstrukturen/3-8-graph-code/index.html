@@ -16,9 +16,9 @@
 <div class="aufgabe">
             <details>
                 <summary>Kurz geprüft 1: Nachbarlisten vorhersagen <span class="niveau">AFB I</span></summary>
-                <p>Was steht in <code>g.graph</code> nach <code>g = Graph(3)</code>, <code>g.add_edge(0, 2)</code> und <code>g.add_edge(2, 1)</code>? Warum wäre <code>[[]] * 3</code> statt der Komprehension keine gute Idee? (Probiere es aus: <code>a = [[]] * 3</code>, <code>a[0].append(1)</code>, <code>a</code>.)</p>
+                <p>Was steht in <code>g.graph</code> nach <code>g = Graph(3)</code>, <code>g.add_edge(0, 2)</code> und <code>g.add_edge(2, 1)</code>? Warum wäre <code>[[]] * 3</code> statt der Schleife mit <code>append([])</code> keine gute Idee? (Probiere es aus: <code>a = [[]] * 3</code>, <code>a[0].append(1)</code>, <code>a</code>.)</p>
                 <details class="loesung-details"><summary>Lösung zeigen</summary>
-                <p><code>[[2], [2], [0, 1]]</code>. <code>[[]] * 3</code> enthält dreimal <em>dieselbe</em> Liste: Nach <code>a[0].append(1)</code> ist <code>a</code> gleich <code>[[1], [1], [1]]</code>. Die Komprehension erzeugt für jeden Knoten eine eigene Liste.</p>
+                <p><code>[[2], [2], [0, 1]]</code>. <code>[[]] * 3</code> enthält dreimal <em>dieselbe</em> Liste: Nach <code>a[0].append(1)</code> ist <code>a</code> gleich <code>[[1], [1], [1]]</code>. Die Schleife mit <code>append([])</code> erzeugt für jeden Knoten eine eigene Liste.</p>
                 </details>
             </details>
         </div>

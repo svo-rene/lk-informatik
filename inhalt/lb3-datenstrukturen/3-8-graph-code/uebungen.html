@@ -19,7 +19,7 @@
 <div class="aufgabe" id="primm-3-8">
             <details open>
                 <summary>PRIMM 3.8: Was prüft <code>raetsel</code>? <span class="niveau">AFB I–II</span></summary>
-                <p class="git-datei"><strong>Dateien:</strong> <a href="../material/primm_3-8_raetsel.py" download>primm_3-8_raetsel.py</a> und <a href="../material/primm_3-8_fehler.py" download>primm_3-8_fehler.py</a> in <code>3_graphen/</code> speichern, dazu <code>queue_knoten.py</code> (siehe Beispiel 1) – erst nach Schritt 1 öffnen.</p>
+                <p class="git-datei"><strong>Dateien:</strong> <a href="../material/primm_3-8_raetsel.py" download>primm_3-8_raetsel.py</a> und <a href="../material/primm_3-8_fehler.py" download>primm_3-8_fehler.py</a> in <code>3_graphen/</code> speichern, dazu <code>queue_knoten.py</code> (siehe Schritt 3) – erst nach Schritt 1 öffnen.</p>
                 <p><strong>1 Vorhersagen</strong> (Papier, ohne Rechner): Was geben die beiden Aufrufe aus? Zeichne den Graphen und beschreibe in einem Satz, was die Methode prüft.</p>
                 <pre><code class="language-python">    def raetsel(self, start):
         visited = [False] * self.size
@@ -50,7 +50,7 @@ print(g.raetsel(3))</code></pre>
                 <details class="loesung-details"><summary>Lösung zeigen</summary><p>1. 0, 1, 2. 2. 3 bzw. 2. 3. Irgendeine Kante zwischen den beiden Teilen, z. B. <code>g.add_edge(2, 3)</code>.</p></details>
                 <p><strong>4 Abwandeln:</strong></p>
                 <ol type="a"><li>Schreibe <code>unerreichbar(start)</code>, die alle Knoten liefert, die vom Start aus nicht erreichbar sind (für <code>start = 0</code>: <code>[3, 4]</code>).</li><li>Schreibe <code>komponenten()</code>, die zählt, aus wie vielen Teilen der Graph besteht. Tipp: Starte so lange neue Breitensuchen, bis jeder Knoten besucht ist.</li></ol>
-                <p><strong>5 Fehler finden:</strong> Diese Breitensuche liefert <code>[0, 1, 2, 2, 3, 3]</code> statt <code>[0, 1, 2, 3]</code>. Beobachte im Debugger, welche Knoten nach dem Entnehmen der 1 mit <code>enqueue</code> angestellt werden: Warum wird die 2 ein zweites Mal angestellt? Korrigiere den Fehler und vergleiche mit <code>bfs</code> aus Beispiel 1.</p>
+                <p><strong>5 Fehler finden:</strong> Diese Breitensuche liefert <code>[0, 1, 2, 2, 3, 3]</code> statt <code>[0, 1, 2, 3]</code>. Beobachte im Debugger, welche Knoten nach dem Entnehmen der 1 mit <code>enqueue</code> angestellt werden: Warum wird die 2 ein zweites Mal angestellt? Korrigiere den Fehler und vergleiche mit <code>bfs</code> aus Schritt 3.</p>
                 <pre><code class="language-python">    def bfs(self, start):
         visited = [False] * self.size
         queue = Queue()

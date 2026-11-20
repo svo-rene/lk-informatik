@@ -89,7 +89,7 @@ print(insertion_sort([5, 2, 9, 3, 4, 6]))   # [2, 3, 4, 5, 6, 9]</code></pre>
 
 <h3>Jetzt du: Den Code im Sortierlabor mitverfolgen</h3>
 
-<p>Derselbe Code wie im Video, diesmal mit deiner Hand am Schalter. Achte auf die beiden Wege aus der <code>while</code>-Schleife: Zeile 4 (<code>j</code> ist 0) und Zeile 9 (<code>break</code>). Probiere danach „Schon sortiert“ und „Absteigend“ und lies jeweils die Vergleiche ab.</p>
+<p>Derselbe Code wie im Video, diesmal mit deiner Hand am Schalter. Achte auf die beiden Wege aus der <code>while</code>-Schleife: Zeile 4 (<code>j</code> ist 0) und Zeile 11 (<code>break</code>). Probiere danach „Schon sortiert“ und „Absteigend“ und lies jeweils die Vergleiche ab.</p>
 
 <div class="sortierlabor" data-verfahren="insertion" data-liste="5, 1, 4" data-fein="ja"></div>
 
@@ -319,12 +319,12 @@ print(selection_sort_nach_name(b), b)
                 <table>
                     <thead><tr><th>neue Songs</th><th>Insertionsort</th><th>Mergesort</th></tr></thead>
                     <tbody>
-                        <tr><td>1</td><td>0,005 s, 38 432 Vergleiche</td><td>0,036 s, 139 235 Vergleiche</td></tr>
-                        <tr><td>20</td><td>0,063 s, 259 237 Vergleiche</td><td>0,036 s, 139 545 Vergleiche</td></tr>
-                        <tr><td>2 000</td><td>6,7 s, 20 559 841 Vergleiche</td><td>0,10 s, 168 879 Vergleiche</td></tr>
+                        <tr><td>1</td><td>0,005 s, 21 568 Vergleiche</td><td>0,036 s, 139 232 Vergleiche</td></tr>
+                        <tr><td>20</td><td>0,063 s, 180 985 Vergleiche</td><td>0,036 s, 139 528 Vergleiche</td></tr>
+                        <tr><td>2 000</td><td>6,7 s, 21 482 529 Vergleiche</td><td>0,10 s, 169 056 Vergleiche</td></tr>
                     </tbody>
                 </table>
-                <p>Insertionsort geht einmal durch die schon sortierten Songs (je 1 Vergleich) und lässt jeden neuen Song im Mittel durch die halbe Liste wandern: etwa n + k · n / 2 Vergleiche bei k neuen Songs. Für einen einzigen neuen Song ist das O(n) und unschlagbar. Wächst k mit, wird es quadratisch. Mergesort kostet immer etwa n · log n. Einschätzung: Wenige neue Songs → einsortieren, viele → neu sortieren. Die Grenze liegt hier bei etwa 10 neuen Songs.</p>
+                <p>Insertionsort geht einmal durch die schon sortierten Songs (je 1 Vergleich) und lässt jeden neuen Song im Mittel durch die halbe Liste wandern: etwa n + k · n / 2 Vergleiche bei k neuen Songs. Für einen einzigen neuen Song ist das O(n) und unschlagbar. Wächst k mit, wird es quadratisch. Mergesort kostet immer etwa n · log n. Einschätzung: Wenige neue Songs → einsortieren, viele → neu sortieren. Die Grenze liegt hier bei etwa 15 neuen Songs.</p>
                 </details>
             </details>
         </div>

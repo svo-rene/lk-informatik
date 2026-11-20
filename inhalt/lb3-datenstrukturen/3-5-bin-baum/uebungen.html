@@ -7,7 +7,7 @@
                 <p>Die Stadtbibliothek hat 50 000 Leserausweise. Die Datei <a href="../material/leser.csv">leser.csv</a> enthält pro Zeile Ausweisnummer, Nachname, Vorname, Wohnort und Geburtsjahr, getrennt durch Semikolon.</p>
                 <ol>
                     <li>Modelliere die Klassen <code>Leser</code>, <code>Knoten</code> und <code>Suchbaum</code> als UML-Klassendiagramm. Alle Attribute sind privat.</li>
-                    <li>Implementiere die Klassen. Die Ausweisnummer ist der Schlüssel. Doppelte Nummern werden nicht eingefügt. Rekursive Methoden schreibst du als eine Methode mit dem Parameter <code>knoten=None</code> (siehe Merke in Schritt 4).</li>
+                    <li>Implementiere die Klassen. Die Ausweisnummer ist der Schlüssel. Doppelte Nummern werden nicht eingefügt. Rekursive Methoden schreibst du als eine Methode mit dem Parameter <code>knoten=None</code> (siehe Merke in Schritt 2).</li>
                     <li>Lies alle Datensätze aus der Datei ein und füge sie in den Baum ein.</li>
                     <li>Schreibe eine Methode <code>gib_wert(nummer, feldname)</code>, die zum Beispiel für <code>gib_wert(327768, "Wohnort")</code> den Wohnort ausgibt. Unbekannte Nummern und Feldnamen sollen eine verständliche Meldung erzeugen.</li>
                     <li>Weise die Funktion mit mindestens vier Testfällen nach, darunter zwei Fehlerfälle.</li>

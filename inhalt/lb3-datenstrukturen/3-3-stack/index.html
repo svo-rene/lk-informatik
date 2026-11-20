@@ -301,8 +301,9 @@ def klammern_ok(text):
                 return False
     return s.is_empty()
 
-print(klammern_ok("(a + [b * c])"))   # True
-print(klammern_ok("(a + [b * c)]"))   # False</code></pre>
+if __name__ == "__main__":        # Testzeilen nur beim direkten Start (F5), nicht beim import
+    print(klammern_ok("(a + [b * c])"))   # True
+    print(klammern_ok("(a + [b * c)]"))   # False</code></pre>
             <ol>
                 <li><strong><code>push</code> legt vorn an:</strong> <code>Node(data, self.__head)</code> erzeugt einen Knoten, der auf den bisherigen obersten Knoten zeigt, und <code>__head</code> zeigt danach auf ihn. Es wird nichts durchlaufen, deshalb O(1).</li>
                 <li><strong><code>pop</code> nimmt vorn weg:</strong> Die Daten des obersten Knotens werden gemerkt, <code>__head</code> rückt auf den nächsten Knoten. Bei leerem Stapel gibt es keinen obersten Knoten, deshalb wird vorher ein <code>IndexError</code> ausgelöst.</li>
