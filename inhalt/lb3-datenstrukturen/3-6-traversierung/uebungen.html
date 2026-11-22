@@ -145,3 +145,18 @@ print(level_order(baum))    # AttributeError: &#x27;NoneType&#x27; object has no
                 </ol>
             </details>
         </div>
+
+        <div class="aufgabe">
+            <details>
+                <summary>Aufgabe 3.6.10: Der Morsebaum <span class="niveau">AFB II</span></summary>
+                <p class="git-datei"><strong>Datei:</strong> <code>2_baeume/morsebaum.py</code> – <code>morsebaum_vorlage.py</code> herunterladen und unter diesem Namen speichern, <code>queue_knoten.py</code> in denselben Ordner legen<br><strong>Commits:</strong> zuerst unverändert: <code>3.6.10: Vorlage übernommen</code> · nach Teil 2: <code>3.6.10 Teil 2: Nachricht entschlüsselt</code> · nach Teil 3: <code>3.6.10 Teil 3: ebenen mit Schlange</code></p>
+                <p>Im Morsecode besteht jedes Zeichen aus Punkten und Strichen, zum Beispiel S = <code>...</code> und O = <code>---</code>. Legt man alle Zeichen in einen Binärbaum, bei dem ein Punkt nach links und ein Strich nach rechts führt, ist der Code eines Zeichens genau der Weg von der Wurzel bis zu seinem Knoten. In <a href="../material/morsebaum_vorlage.py" download>morsebaum_vorlage.py</a> ist der Baum mit allen Zeichen bis zu vier Signalen schon aufgebaut. Die Klasse <code>MorseKnoten</code> speichert ein Zeichen und die Verweise <code>links</code> (Punkt) und <code>rechts</code> (Strich).</p>
+                <ol>
+                    <li>Implementiere die Methode <code>zeichen_zu(code)</code> ohne Rekursion. Sie liefert das Zeichen zu einem Code, zum Beispiel <code>zeichen_zu("...")</code> → <code>"S"</code>. Gibt es den Weg im Baum nicht, liefert sie <code>"?"</code>.</li>
+                    <li>Implementiere die Methode <code>entschluesseln(nachricht)</code>. Die Zeichen sind durch ein Leerzeichen getrennt, die Wörter durch <code>/</code>. Gib den Klartext der Nachricht <code>GEHEIM</code> aus der Vorlage an.</li>
+                    <li>Implementiere die Methode <code>ebenen()</code>, die alle Zeichen Ebene für Ebene ausgibt (ohne den Startknoten). Nutze dazu eine Schlange.<br>Begründe, warum ausgerechnet E und T so kurze Codes haben.</li>
+                    <li>Berechne, wie viele Zeichen sich mit höchstens vier Signalen darstellen lassen, und prüfe dein Ergebnis mit einer rekursiven Methode <code>anzahl()</code>.</li>
+                </ol>
+                <p class="tipp">Bei <code>zeichen_zu</code> gibt der Code den Weg vor. Du musst nicht suchen, sondern läufst Zeichen für Zeichen nach links oder rechts.</p>
+            </details>
+        </div>
