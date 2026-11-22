@@ -139,7 +139,8 @@ def geruest(kurs, bereiche, root, titel, inhalt, aktiv_bereich=None, aktiv_thema
 </div>
 </div>
 <footer class="fuss">
-  <a href="{root}hinweise.html">Hinweise und Bildnachweise</a>
+  <span>© 2026 René Richter · Inhalte: CC BY 4.0</span>
+  <a href="{root}hinweise.html">Hinweise, Lizenzen und Bildnachweise</a>
   <a href="{root}impressum.html">Impressum</a>
 </footer>
 <script src="{root}assets/prism.js"></script>
@@ -553,12 +554,22 @@ def hinweisseite(kurs, bereiche):
     inhalt = f"""<h1>Hinweise, Lizenzen und Bildnachweise</h1>
 <p>Diese Seite enthält Unterrichtsmaterial für den Leistungskurs Informatik. Texte, Aufgaben, Grafiken, Videos und Programme
 sind – soweit unten nicht anders angegeben – selbst erstellt.</p>
+<h2>Lizenz</h2>
+<p>© 2026 René Richter. Die Inhalte (Texte, Aufgaben, Lösungen, Programmbeispiele, Notebooks, selbst erstellte Grafiken und Videos)
+stehen unter <a href="https://creativecommons.org/licenses/by/4.0/deed.de">Creative Commons Namensnennung 4.0 (CC BY 4.0)</a>,
+der Programmcode der Webseite unter der <a href="https://github.com/svo-rene/lk-informatik/blob/main/LICENSE">MIT-Lizenz</a>.
+Du darfst alles kopieren, verändern und weitergeben, wenn du das Original und den Autor nennst, zum Beispiel:
+„Leistungskurs Informatik“ von René Richter, https://svo-rene.github.io/lk-informatik/, CC BY 4.0.</p>
+<p>Ausgenommen sind das Fremdmaterial in der Tabelle unten, das die Lizenz seiner Urheber behält, und Bildschirmfotos fremder Programme.
+Einzelheiten: <a href="https://github.com/svo-rene/lk-informatik/blob/main/LIZENZEN.md">LIZENZEN.md</a>.</p>
 <h2>Fremdmaterial mit freier Lizenz</h2>
 <table><thead><tr><th>Datei</th><th>Urheber</th><th>Lizenz</th></tr></thead><tbody>{zeilen}</tbody></table>
 <p>Bildschirmfotos zeigen die Programme Filius, Thonny, Forgejo, DB Browser for SQLite, LibreOffice und schulKI bei der Benutzung.</p>
 <h2>Python im Browser</h2>
 <p>Programme mit dem Knopf „Ausführen“ laufen mit <a href="https://natter.wi7.net/">Natter</a> (Julian Dorn, MIT-Lizenz) direkt im Browser.
 Natter wird erst beim ersten Klick über jsDelivr geladen; dabei überträgt der Browser seine IP-Adresse an jsDelivr.</p>
+<h2>Weitere Bestandteile der Seite</h2>
+<p>Syntaxfärbung: <a href="https://prismjs.com">Prism</a> (Lea Verou, MIT-Lizenz). Schrift: IBM Plex Sans und IBM Plex Mono (IBM Corp., SIL Open Font License 1.1).</p>
 <h2>Verlinkte Angebote</h2>
 <p>Links zu anderen Webseiten (z.&nbsp;B. Jupyter, FLACI, inf-schule) führen zu Angeboten Dritter. Für deren Inhalte sind die jeweiligen Anbieter verantwortlich.</p>
 """
