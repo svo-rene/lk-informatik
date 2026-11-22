@@ -563,3 +563,11 @@ html.vollseite .toc-mobil { display: none !important; }
 .werkzeug-hinweis { font-size: 0.85rem; color: var(--text-3); margin-top: 8px; }
 .projekt-karte { border-color: var(--beispiel-linie); }
 .projekt-karte .karte-nr { color: var(--beispiel); }
+
+/* ---------- Karten mit Bild (Lernprojekte, Werkzeuge) ---------- */
+.karten-bild { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.karte-bild {
+    display: block; width: calc(100% + 2.4em); max-width: none; height: auto; aspect-ratio: 16 / 10; object-fit: cover;
+    margin: -1.1em -1.2em 0.5em; border-radius: 13px 13px 0 0; border-bottom: 1px solid var(--linie); background: var(--bg-weich);
+}
+.werkzeug-karte .karte-nr { color: var(--praxis); }

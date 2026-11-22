@@ -41,6 +41,7 @@
   "lernprojekte": [
     {
       "titel": "Lern-Survivor",
+      "bild": "survivor.webp",
       "url": "https://lern-survivor.de/",
       "bereich": "alle Lernbereiche",
       "text": "Gegnerwellen überleben und bei jedem Level-up eine Frage zum Kurs beantworten. Fragen zu allen Lernbereichen, falsch beantwortete kommen wieder, dazu ein Hefter mit Merksätzen.",
@@ -48,6 +49,7 @@
     },
     {
       "titel": "Automate the Castle",
+      "bild": "castle.webp",
       "url": "https://svo-rene.github.io/automate-the-castle/lk.html",
       "bereich": "alle Lernbereiche",
       "text": "Tagsüber löst du Programmieraufgaben in Python zu den Themen des Kurses, nachts verteidigst du die Burg. Mit eigenem Heft.",
@@ -55,6 +57,7 @@
     },
     {
       "titel": "Pythonia",
+      "bild": "pythonia.webp",
       "url": "https://svo-rene.github.io/pythonia/",
       "bereich": "Programmieren mit Python",
       "text": "Ein Deckbuilder wie Slay the Spire: Jede Zauberkarte ist Python-Code. Vier Akte führen von if und Schleifen über Listen, Sortieren und Komplexität bis zu Rekursion und Klassen. In der Schmiede programmierst du eigene Karten, ❓ erklärt jeden Code Zeile für Zeile.",

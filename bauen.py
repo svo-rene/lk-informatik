@@ -176,71 +176,78 @@ def _titel_davor(s, pos):
 
 
 def werkzeuge_sammeln(bereiche):
+    """Eigene interaktive Werkzeuge: Zusatzseiten (außer Übungsstunden) und das Sortierlabor (einmal, mit allen Verfahren).
+    Eingebettete LearningApps/H5P bleiben auf ihren Themenseiten und stehen hier nicht."""
     je_bereich = []
     for b in bereiche:
-        liste = []
+        liste, labor = [], None
         for t in b["alle_themen"]:
             for s in t["seiten"]:
                 pfad = os.path.join(INHALT, b["slug"], t["slug"], s["datei"])
                 roh = lies(pfad)
                 link = f'{b["slug"]}/{t["slug"]}/{s["datei"]}'
                 thema = f'{t["nr"]} {t["titel"]}'
-                if s.get("zusatz"):
+                if s.get("zusatz") and "übung" not in s["titel"].lower():
                     text = s.get("beschreibung")
                     if not text:
                         m = re.search(r"<p[^>]*>(.*?)</p>", roh, re.S)
                         text = _klartext(m.group(1)) if m else ""
                         if len(text) > 200:
                             text = text[:200].rsplit(" ", 1)[0] + " …"
-                    art = "Übung" if "übung" in s["titel"].lower() else "Simulation"
-                    liste.append({"art": art, "titel": s["titel"], "text": text, "link": link, "thema": thema})
-                verfahren = []
+                    liste.append({"art": "Simulation", "titel": s["titel"], "text": text, "link": link, "thema": thema,
+                                  "bild": slug_klein_bindestrich(s["titel"])})
                 for v in re.findall(r'class="sortierlabor"[^>]*data-verfahren="([^"]+)"', roh):
+                    if labor is None:
+                        labor = {"art": "Labor", "titel": "Sortierlabor", "verfahren": [], "link": link,
+                                 "thema": thema, "bild": "sortierlabor"}
+                        liste.append(labor)
                     for x in v.split(","):
                         name = VERFAHREN.get(x.strip(), x.strip())
-                        if name not in verfahren:
-                            verfahren.append(name)
-                if verfahren:
-                    liste.append({"art": "Labor", "titel": "Sortierlabor",
-                                  "text": "Sortieren Schritt für Schritt ausprobieren und Vergleiche zählen. Auf dieser Seite: " + ", ".join(verfahren) + ".",
-                                  "link": link, "thema": thema + " · " + s["titel"]})
-                for m in re.finditer(r'<iframe[^>]*src="([^"]+)"', roh):
-                    src = m.group(1)
-                    if "learningapps.org" in src:
-                        quelle = "LearningApps"
-                    elif "/h5p/" in src:
-                        quelle = "H5P"
-                    else:
-                        continue  # Videos u. Ä. sind keine Werkzeuge
-                    titel = _titel_davor(roh, m.start()) or f'Übung zu „{t["titel"]}“'
-                    liste.append({"art": "Übung", "titel": titel, "text": f"Interaktive Übung ({quelle}) direkt auf der Seite.",
-                                  "link": link, "thema": thema + " · " + s["titel"]})
+                        if name not in labor["verfahren"]:
+                            labor["verfahren"].append(name)
+        if labor:
+            labor["text"] = ("Sortieren Schritt für Schritt: Du sagst vorher, was passiert, und siehst Vergleiche und Vertauschungen. "
+                             "Auf den Themenseiten mit " + ", ".join(labor["verfahren"]) + ".")
         if liste:
             je_bereich.append((b, liste))
     return je_bereich
 
 
+def slug_klein_bindestrich(s):
+    s = s.lower().replace("ä", "ae").replace("ö", "oe").replace("ü", "ue").replace("ß", "ss")
+    return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+
+
 def werkzeugseite(kurs, bereiche):
-    teile = ['<p class="pfad"><a href="index.html">Überblick</a> › Werkzeuge</p>',
-             "<h1>Werkzeuge</h1>",
-             '<p class="unterzeile">Simulationen, Labore und interaktive Übungen aus allen Themen an einem Ort. '
-             "Die Liste füllt sich von selbst, sobald ein Thema ein neues interaktives Werkzeug bekommt.</p>"]
+    karten = []
     for b, liste in werkzeuge_sammeln(bereiche):
-        teile.append(f'<h2 id="{b["slug"]}"><span class="h1-nr">{e(b["nr"])}</span> {e(b["titel"])}</h2><ul class="werkzeug-liste">')
         for w in liste:
-            teile.append(f'<li><span class="werkzeug-art art-{slug_klein(w["art"])}">{e(w["art"])}</span>'
-                         f'<div><a href="{w["link"]}">{e(w["titel"])}</a>'
-                         f'<p>{e(w["text"])}</p><p class="werkzeug-thema">{e(w["thema"])}</p></div></li>')
-        teile.append("</ul>")
-    inhalt = teile[:3] + ['<div class="seiteninhalt">'] + teile[3:] + ["</div>"]
-    return geruest(kurs, bereiche, "", "Werkzeuge", "\n".join(inhalt), aktiv_bereich="werkzeuge", toc=True)
+            bild = os.path.join(VORLAGE, "werkzeuge", w["bild"] + ".webp")
+            img = (f'<img class="karte-bild" src="assets/werkzeuge/{w["bild"]}.webp" alt="Bildschirmfoto: {e(w["titel"])}" '
+                   f'loading="lazy" width="800" height="500">') if os.path.exists(bild) else ""
+            karten.append(f"""<a class="karte werkzeug-karte" href="{w["link"]}">{img}
+  <span class="karte-nr">{e(b["nr"])} {e(b["titel"])}</span>
+  <span class="karte-titel">{e(w["titel"])}</span>
+  <span class="karte-text">{e(w["text"])}</span>
+  <span class="karte-fuss">{e(w["thema"])}</span>
+</a>""")
+    inhalt = f"""<p class="pfad"><a href="index.html">Überblick</a> › Werkzeuge</p>
+<h1>Werkzeuge</h1>
+<p class="unterzeile">Selbst gebaute Simulationen und Labore zum Ausprobieren. Sie laufen direkt im Browser.</p>
+<div class="karten karten-bild">
+{"".join(karten)}
+</div>
+<p class="werkzeug-hinweis">Kleinere interaktive Übungen findest du direkt auf den Themenseiten.</p>"""
+    return geruest(kurs, bereiche, "", "Werkzeuge", inhalt, aktiv_bereich="werkzeuge")
 
 
 def projekteseite(kurs, bereiche):
     """Lernprojekte: eigene Spiele und Projekte zum Kurs (kurs.json: "lernprojekte"), auf eigenen Seiten."""
     karten = []
     for p in kurs.get("lernprojekte") or []:
-        karten.append(f"""<a class="karte projekt-karte" href="{e(p["url"])}" target="_blank" rel="noopener">
+        img = (f'<img class="karte-bild" src="assets/projekte/{e(p["bild"])}" alt="Szene aus {e(p["titel"])}" '
+               f'loading="lazy" width="800" height="500">') if p.get("bild") else ""
+        karten.append(f"""<a class="karte projekt-karte" href="{e(p["url"])}" target="_blank" rel="noopener">{img}
   <span class="karte-nr">{e(p.get("bereich", ""))}</span>
   <span class="karte-titel">{e(p["titel"])} ↗</span>
   <span class="karte-text">{e(p["text"])}</span>
@@ -249,7 +256,7 @@ def projekteseite(kurs, bereiche):
     inhalt = f"""<p class="pfad"><a href="index.html">Überblick</a> › Lernprojekte</p>
 <h1>Lernprojekte</h1>
 <p class="unterzeile">Spiele, die für diesen Kurs entstanden sind. Sie üben genau die Inhalte des Kurses, nur anders: mit Fragen im Spiel oder mit Programmieren als Spielmechanik.</p>
-<div class="karten">
+<div class="karten karten-bild">
 {"".join(karten)}
 </div>
 <p class="werkzeug-hinweis">Die Lernprojekte liegen auf eigenen Seiten und öffnen sich in einem neuen Tab.</p>"""
@@ -295,7 +302,7 @@ def startseite(kurs, bereiche):
 <h2>Mehr zum Ausprobieren</h2>
 <div class="karten">
 <a class="karte" href="werkzeuge.html"><span class="karte-nr">alle Themen</span><span class="karte-titel">Werkzeuge</span>
-<span class="karte-text">Simulationen, Labore und interaktive Übungen aus allen Lernbereichen an einem Ort.</span></a>
+<span class="karte-text">Selbst gebaute Simulationen und Labore: Zeiger-Werkstatt, Dijkstra-Simulator, Sortierlabor.</span></a>
 <a class="karte projekt-karte" href="projekte.html"><span class="karte-nr">Spiele</span><span class="karte-titel">Lernprojekte</span>
 <span class="karte-text">{e(aufzaehlung([p["titel"] for p in kurs.get("lernprojekte") or []]))}: Spiele, die genau die Inhalte des Kurses üben.</span></a>
 </div>
