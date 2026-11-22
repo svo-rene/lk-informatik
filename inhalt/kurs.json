@@ -52,6 +52,13 @@
       "bereich": "alle Lernbereiche",
       "text": "Tagsüber löst du Programmieraufgaben in Python zu den Themen des Kurses, nachts verteidigst du die Burg. Mit eigenem Heft.",
       "fuss": "läuft im Browser · noch in Erprobung"
+    },
+    {
+      "titel": "Pythonia",
+      "url": "https://svo-rene.github.io/pythonia/",
+      "bereich": "Programmieren mit Python",
+      "text": "Ein Deckbuilder wie Slay the Spire: Jede Zauberkarte ist Python-Code. Vier Akte führen von if und Schleifen über Listen, Sortieren und Komplexität bis zu Rekursion und Klassen. In der Schmiede programmierst du eigene Karten, ❓ erklärt jeden Code Zeile für Zeile.",
+      "fuss": "läuft im Browser, ohne Anmeldung · noch in Erprobung"
     }
   ]
 }
