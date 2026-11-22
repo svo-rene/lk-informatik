@@ -639,7 +639,7 @@
     var css = document.createElement("style");
     css.id = "sortierlabor-stil";
     css.textContent = [
-      ".sl{border:1px solid #c7d2fe;border-radius:10px;padding:0.9rem 1rem;margin:1.2rem 0;background:#fbfcff;font-size:0.95rem}",
+      ".sl{border:1px solid #c7d2fe;border-radius:10px;padding:0.9rem 1rem;margin:1.2rem 0;background:#fbfcff;color:#1f2937;color-scheme:light;font-size:0.95rem}",".sl input,.sl select,.sl textarea{background:#fff;color:#1f2937}",
       ".sl-titel{font-weight:bold;color:#1e3a8a;margin-bottom:0.4em}",
       ".sl-zeile{display:flex;flex-wrap:wrap;gap:0.5em 0.9em;align-items:center;margin:0.45em 0}",
       ".sl button,.sl select,.sl input{font:inherit;font-size:0.92rem}",
