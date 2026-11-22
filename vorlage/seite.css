@@ -583,3 +583,20 @@ html.vollseite .toc-mobil { display: none !important; }
 }
 @keyframes cursor-blinken { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .marke-wort .cursor { animation: none; } }
+
+/* ---------- Lernprojekte: ein Abschnitt je Spiel ---------- */
+.projekt { border: 1px solid var(--beispiel-linie); border-radius: 16px; padding: 1.1em 1.2em 0.9em; margin: 1.4em 0; background: var(--bg); }
+.projekt-kopf { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.projekt-kopf h2 { margin: 0.1em 0 0; border: none; padding: 0; }
+.projekt-kopf .karte-nr { color: var(--beispiel); }
+.projekt-los { flex: none; font-weight: 700; text-decoration: none; padding: 0.45em 1em; border-radius: 10px; background: var(--akzent); color: var(--bg); }
+.projekt-los:hover { filter: brightness(1.1); text-decoration: none; color: var(--bg); }
+.projekt-galerie { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0.9em 0; }
+.projekt-galerie a { display: block; border-radius: 9px; overflow: hidden; border: 1px solid var(--linie); }
+.projekt-galerie img { display: block; margin: 0; max-width: none; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; transition: transform 0.2s; }
+.projekt-galerie a:hover img { transform: scale(1.04); }
+.projekt-text { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.4em; }
+.projekt-text h3 { margin: 0.2em 0 0.2em; font-size: 1rem; }
+.projekt-text p { margin: 0 0 0.6em; font-size: 0.95rem; color: var(--text-2); }
+.projekt-fuss { margin: 0.2em 0 0; font-size: 0.8rem; color: var(--text-3); }
+@media (max-width: 720px) { .projekt-galerie { grid-template-columns: 1fr 1fr; } .projekt-galerie a:first-child { grid-column: span 2; } .projekt-text { grid-template-columns: 1fr; } }

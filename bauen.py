@@ -242,24 +242,29 @@ def werkzeugseite(kurs, bereiche):
 
 
 def projekteseite(kurs, bereiche):
-    """Lernprojekte: eigene Spiele und Projekte zum Kurs (kurs.json: "lernprojekte"), auf eigenen Seiten."""
-    karten = []
+    """Lernprojekte: eigene Spiele zum Kurs (kurs.json: "lernprojekte"), je mit Bildern und kurzer Beschreibung."""
+    teile = []
     for p in kurs.get("lernprojekte") or []:
-        img = (f'<img class="karte-bild" src="assets/projekte/{e(p["bild"])}" alt="Szene aus {e(p["titel"])}" '
-               f'loading="lazy" width="800" height="500">') if p.get("bild") else ""
-        karten.append(f"""<a class="karte projekt-karte" href="{e(p["url"])}" target="_blank" rel="noopener">{img}
-  <span class="karte-nr">{e(p.get("bereich", ""))}</span>
-  <span class="karte-titel">{e(p["titel"])} ↗</span>
-  <span class="karte-text">{e(p["text"])}</span>
-  <span class="karte-fuss">{e(p.get("fuss", "läuft im Browser"))}</span>
-</a>""")
+        bilder = "".join(
+            f'<a href="assets/projekte/{e(d)}" target="_blank" rel="noopener"><img src="assets/projekte/{e(d)}" alt="{e(alt)}" '
+            f'title="{e(alt)}" loading="lazy" width="800" height="500"></a>' for d, alt in p.get("bilder", []))
+        teile.append(f"""<section class="projekt">
+  <div class="projekt-kopf">
+    <div><span class="karte-nr">{e(p.get("bereich", ""))}</span><h2>{e(p["titel"])}</h2></div>
+    <a class="projekt-los" href="{e(p["url"])}" target="_blank" rel="noopener">Spielen ↗</a>
+  </div>
+  <div class="projekt-galerie">{bilder}</div>
+  <div class="projekt-text">
+    <div><h3>Worum es geht</h3><p>{e(p.get("worum", p.get("text", "")))}</p></div>
+    <div><h3>So lernst du dabei</h3><p>{e(p.get("lernen", ""))}</p></div>
+  </div>
+  <p class="projekt-fuss">{e(p.get("fuss", "läuft im Browser"))}</p>
+</section>""")
     inhalt = f"""<p class="pfad"><a href="index.html">Überblick</a> › Lernprojekte</p>
 <h1>Lernprojekte</h1>
 <p class="unterzeile">Spiele, die für diesen Kurs entstanden sind. Sie üben genau die Inhalte des Kurses, nur anders: mit Fragen im Spiel oder mit Programmieren als Spielmechanik.</p>
-<div class="karten karten-bild">
-{"".join(karten)}
-</div>
-<p class="werkzeug-hinweis">Die Lernprojekte liegen auf eigenen Seiten und öffnen sich in einem neuen Tab.</p>"""
+{"".join(teile)}
+<p class="werkzeug-hinweis">Die Spiele liegen auf eigenen Seiten und öffnen sich in einem neuen Tab. Ein Klick auf ein Bild zeigt es groß.</p>"""
     return geruest(kurs, bereiche, "", "Lernprojekte", inhalt, aktiv_bereich="projekte")
 
 

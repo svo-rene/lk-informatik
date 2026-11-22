@@ -41,27 +41,72 @@
   "lernprojekte": [
     {
       "titel": "Lern-Survivor",
-      "bild": "survivor.webp",
       "url": "https://lern-survivor.de/",
       "bereich": "alle Lernbereiche",
       "text": "Gegnerwellen überleben und bei jedem Level-up eine Frage zum Kurs beantworten. Fragen zu allen Lernbereichen, falsch beantwortete kommen wieder, dazu ein Hefter mit Merksätzen.",
-      "fuss": "läuft im Browser, ohne Anmeldung"
+      "fuss": "läuft im Browser, ohne Anmeldung",
+      "bilder": [
+        [
+          "survivor-titel.webp",
+          "Startbildschirm: Fach, Lernbereich und Karte wählen"
+        ],
+        [
+          "survivor-frage.webp",
+          "Level-up: eine Frage zum Kurs mitten im Spiel"
+        ],
+        [
+          "survivor-feuer.webp",
+          "Gegen Ende in Welt 3: Feuerbälle, Meteore und Frost gleichzeitig"
+        ]
+      ],
+      "worum": "Ein Survivor-Spiel in 3D: Du läufst durch drei Welten, Gegnerwellen kommen von allen Seiten, und deine Zauber feuern von allein. Mit jedem Level-up wird deine Figur stärker, bis zum Endboss jeder Welt.",
+      "lernen": "Jedes Level-up ist eine Frage zum Kurs, aus dem Lernbereich, den du vorher wählst. Wer richtig und schnell antwortet, bekommt bessere Belohnungen. Falsch beantwortete Fragen kommen in späteren Runden wieder, bis sie sitzen, und der Hefter sammelt die Merksätze dazu."
     },
     {
       "titel": "Automate the Castle",
-      "bild": "castle.webp",
       "url": "https://svo-rene.github.io/automate-the-castle/lk.html",
       "bereich": "alle Lernbereiche",
       "text": "Tagsüber löst du Programmieraufgaben in Python zu den Themen des Kurses, nachts verteidigst du die Burg. Mit eigenem Heft.",
-      "fuss": "läuft im Browser, ohne Anmeldung · noch in Erprobung"
+      "fuss": "läuft im Browser, ohne Anmeldung · noch in Erprobung",
+      "bilder": [
+        [
+          "castle-titel.webp",
+          "Startbildschirm mit der Burg"
+        ],
+        [
+          "castle-karte.webp",
+          "Die Burgstadt: Aufträge der Bewohner auf der Karte"
+        ],
+        [
+          "castle-editor.webp",
+          "Ein Auftrag: Säcke vertauschen mit Python-Code"
+        ]
+      ],
+      "worum": "Tagsüber erledigst du Aufträge für die Bewohner einer Burgstadt, nachts verteidigst du die Burg. Die Aufträge löst du nicht mit Klicks, sondern mit Python-Code.",
+      "lernen": "Jeder Auftrag ist eine Programmieraufgabe zu den Kursthemen, zum Beispiel „Sortieren wie ein Computer“. Du schreibst den Code selbst oder setzt ihn aus Bausteinen zusammen, Testlisten prüfen ihn. Sterne gibt es für möglichst wenige Vergleiche und Schreibzugriffe: So wird Effizienz greifbar. In deinem Heft sammelst du, was du gelernt hast."
     },
     {
       "titel": "Pythonia",
-      "bild": "pythonia.webp",
       "url": "https://svo-rene.github.io/pythonia/",
       "bereich": "Programmieren mit Python",
       "text": "Ein Deckbuilder wie Slay the Spire: Jede Zauberkarte ist Python-Code. Vier Akte führen von if und Schleifen über Listen, Sortieren und Komplexität bis zu Rekursion und Klassen. In der Schmiede programmierst du eigene Karten, ❓ erklärt jeden Code Zeile für Zeile.",
-      "fuss": "läuft im Browser, ohne Anmeldung · noch in Erprobung"
+      "fuss": "läuft im Browser, ohne Anmeldung · noch in Erprobung",
+      "bilder": [
+        [
+          "pythonia-kampf.webp",
+          "Kampf: Jede Zauberkarte ist Python-Code, auch die Gegner zeigen ihren"
+        ],
+        [
+          "pythonia-schmiede.webp",
+          "Schmiede: eine eigene Karte aus Codezeilen bauen"
+        ],
+        [
+          "pythonia-weltkarte.webp",
+          "Weltkarte: vier Akte und freie Welten"
+        ]
+      ],
+      "worum": "Ein Deckbuilder in einer Höhlenwelt: Du spielst Zauberkarten, kämpfst Runde für Runde gegen Monster und baust dein Deck aus. Vier Akte führen von der Höhle der Verzweigungen bis zur Klassenfestung.",
+      "lernen": "Jede Karte ist ein kleines Python-Programm, und auch die Gegner zeigen ihren Code: Wer ihn liest, weiß, was kommt. In der Schmiede baust du eigene Karten aus Codezeilen oder reparierst Bugs, ❓ erklärt jeden Code Zeile für Zeile. Die Akte folgen dem Kurs: if und Schleifen, Listen und Sortieren mit Rechenzeit, Rekursion, Klassen."
     }
   ]
 }
