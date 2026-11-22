@@ -25,6 +25,11 @@ VORLAGE = os.path.join(HIER, "vorlage")
 SITE = os.path.join(HIER, "_site")
 
 
+def aufzaehlung(namen):
+    """„A“, „A und B“, „A, B und C“."""
+    return " und ".join(namen) if len(namen) < 3 else ", ".join(namen[:-1]) + " und " + namen[-1]
+
+
 def lies_json(p):
     with open(p, encoding="utf-8") as f:
         return json.load(f)
@@ -292,7 +297,7 @@ def startseite(kurs, bereiche):
 <a class="karte" href="werkzeuge.html"><span class="karte-nr">alle Themen</span><span class="karte-titel">Werkzeuge</span>
 <span class="karte-text">Simulationen, Labore und interaktive Übungen aus allen Lernbereichen an einem Ort.</span></a>
 <a class="karte projekt-karte" href="projekte.html"><span class="karte-nr">Spiele</span><span class="karte-titel">Lernprojekte</span>
-<span class="karte-text">{e(" und ".join(p["titel"] for p in kurs.get("lernprojekte") or []))}: Spiele, die genau die Inhalte des Kurses üben.</span></a>
+<span class="karte-text">{e(aufzaehlung([p["titel"] for p in kurs.get("lernprojekte") or []]))}: Spiele, die genau die Inhalte des Kurses üben.</span></a>
 </div>
 """
     return geruest(kurs, bereiche, "", kurs["titel"], inhalt)
