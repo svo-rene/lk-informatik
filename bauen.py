@@ -122,7 +122,7 @@ def geruest(kurs, bereiche, root, titel, inhalt, aktiv_bereich=None, aktiv_thema
 <body class="{"mit-toc" if toc else ""}" data-root="{root}">
 <header class="kopf">
   <button class="menue-knopf" id="menue-knopf" aria-controls="leiste" aria-expanded="false">{SVG_MENUE}<span>Themen</span></button>
-  <a class="marke" href="{root}index.html"><span class="marke-zeichen">&lt;/&gt;</span><span>{e(kurs["titel"])}</span></a>
+  <a class="marke" href="{root}index.html" aria-label="{e(kurs["titel"])} – Startseite"><span class="marke-wort">LK Informatik<span class="cursor" aria-hidden="true">_</span></span></a>
   <div class="kopf-rechts">
     <button class="knopf-rund" id="thema-knopf" title="Hell oder dunkel" aria-label="Hell oder dunkel umschalten">
       <span class="thema-dunkel">{SVG_MOND}</span><span class="thema-hell">{SVG_SONNE}</span>

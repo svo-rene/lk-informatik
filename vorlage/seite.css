@@ -571,3 +571,15 @@ html.vollseite .toc-mobil { display: none !important; }
     margin: -1.1em -1.2em 0.5em; border-radius: 13px 13px 0 0; border-bottom: 1px solid var(--linie); background: var(--bg-weich);
 }
 .werkzeug-karte .karte-nr { color: var(--praxis); }
+
+/* ---------- Wortmarke „LK Informatik_“ mit blinkendem Cursor ---------- */
+.marke-wort { font-family: var(--schrift-titel); font-weight: 700; font-size: 1.12rem; letter-spacing: -0.01em; color: var(--text); white-space: nowrap; }
+.marke-wort .cursor {
+    font-family: var(--schrift-code);
+    font-weight: 600;
+    color: var(--akzent);
+    margin-left: 0.05em;
+    animation: cursor-blinken 1.1s steps(1, end) infinite;
+}
+@keyframes cursor-blinken { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .marke-wort .cursor { animation: none; } }
