@@ -9,9 +9,7 @@
 # Teil 3: ebenen() mit einer Schlange. Warum stehen E und T ganz oben?
 # Teil 4: Wie viele Zeichen gibt es mit höchstens vier Signalen? Prüfe mit anzahl().
 #
-# queue_knoten.py muss im selben Ordner liegen.
-
-from queue_knoten import Queue    # Schlange aus Seite 3.2
+# Für ebenen() reicht eine Liste als Schlange: append stellt hinten an, pop(0) nimmt vorn heraus.
 
 
 class MorseKnoten:
