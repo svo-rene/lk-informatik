@@ -141,7 +141,6 @@ def geruest(kurs, bereiche, root, titel, inhalt, aktiv_bereich=None, aktiv_thema
 <footer class="fuss">
   <span>© 2026 René Richter · Inhalte: CC BY 4.0</span>
   <a href="{root}hinweise.html">Hinweise, Lizenzen und Bildnachweise</a>
-  <a href="{root}impressum.html">Impressum</a>
 </footer>
 <script src="{root}assets/prism.js"></script>
 <script src="{root}assets/seite.js"></script>
@@ -576,21 +575,6 @@ Natter wird erst beim ersten Klick über jsDelivr geladen; dabei überträgt der
     return geruest(kurs, bereiche, "", "Hinweise", inhalt)
 
 
-def impressumseite(kurs, bereiche):
-    inhalt = """<h1>Impressum</h1>
-<div class="hinweis"><p>Diese Seite wird noch ergänzt.</p></div>
-<h2>Angaben</h2>
-<p>[Name]<br>[Anschrift]</p>
-<h2>Kontakt</h2>
-<p>[E-Mail-Adresse]</p>
-<h2>Verantwortlich für den Inhalt</h2>
-<p>[Name, Anschrift]</p>
-<h2>Datenschutz</h2>
-<p>[Hinweise zum Hosting bei GitHub Pages und zu eingebundenen Diensten]</p>
-"""
-    return geruest(kurs, bereiche, "", "Impressum", inhalt)
-
-
 # ---------------------------------------------------------------------------
 def bauen():
     kurs, bereiche = laden()
@@ -605,7 +589,6 @@ def bauen():
     schreibe(os.path.join(SITE, ".nojekyll"), "")
     schreibe(os.path.join(SITE, "index.html"), startseite(kurs, bereiche))
     schreibe(os.path.join(SITE, "hinweise.html"), hinweisseite(kurs, bereiche))
-    schreibe(os.path.join(SITE, "impressum.html"), impressumseite(kurs, bereiche))
     schreibe(os.path.join(SITE, "werkzeuge.html"), werkzeugseite(kurs, bereiche))
     schreibe(os.path.join(SITE, "projekte.html"), projekteseite(kurs, bereiche))
     anzahl = 5
