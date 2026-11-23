@@ -639,6 +639,12 @@ def bauen():
 def veroeffentlichen():
     """_site als eigenen Commit in den Branch gh-pages schieben (GitHub Pages: Branch gh-pages, Ordner /)."""
     import subprocess
+    # gh-pages wird komplett ersetzt: ohne Folien-Einstellungen (nur im OPAL-Ordner, nicht in anderen Kopien
+    # des Repos) wären die verschlüsselten Foliensätze danach online weg. Dann lieber gar nicht veröffentlichen.
+    if not os.path.isfile(os.path.join(HIER, "..", "_Lehrer", "_werkzeuge", "webseite", "folien.json")):
+        sys.exit("Abbruch: Folien-Einstellungen (_Lehrer/_werkzeuge/webseite/folien.json) nicht gefunden.\n"
+                 "Bitte aus INFO_LK\\_webseite im OPAL-Ordner veröffentlichen (vorher git pull), "
+                 "sonst verschwinden die Foliensätze von der Seite.")
     remote = subprocess.run(["git", "remote", "get-url", "origin"], cwd=HIER, capture_output=True, text=True,
                             check=True).stdout.strip()
     name = subprocess.run(["git", "config", "user.name"], cwd=HIER, capture_output=True, text=True).stdout.strip()
