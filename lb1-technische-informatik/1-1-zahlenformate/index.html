@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.1 Zahlenformate – Leistungskurs Informatik</title>
+<script>try{var t=localStorage.getItem("thema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}if(/[?&]vollseite/.test(location.search))document.documentElement.classList.add("vollseite")</script>
+<link rel="stylesheet" href="../../assets/inhalt.css">
+<link rel="stylesheet" href="../../assets/seite.css">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+</head>
+<body class="mit-toc" data-root="../../">
+<header class="kopf">
+  <button class="menue-knopf" id="menue-knopf" aria-controls="leiste" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Themen</span></button>
+  <a class="marke" href="../../index.html" aria-label="Leistungskurs Informatik – Startseite"><span class="marke-wort">LK Informatik<span class="cursor" aria-hidden="true">_</span></span></a>
+  <div class="kopf-rechts">
+    <button class="knopf-rund" id="thema-knopf" title="Hell oder dunkel" aria-label="Hell oder dunkel umschalten">
+      <span class="thema-dunkel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span><span class="thema-hell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+    </button>
+  </div>
+</header>
+<div class="rahmen">
+<nav class="leiste" id="leiste" aria-label="Lernbereiche">
+<div class="suche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="filter" placeholder="Thema suchen …" aria-label="Thema suchen"></div>
+<a class="leiste-start" href="../../index.html">Überblick</a>
+<a class="leiste-start" href="../../werkzeuge.html">Werkzeuge</a>
+<a class="leiste-start" href="../../projekte.html">Lernprojekte</a>
+<details class="lb" open><summary><span class="lb-nr">LB 1</span> Technische Informatik</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb1-technische-informatik/index.html">Überblick Technische Informatik</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a class="aktiv" aria-current="page" href="../../lb1-technische-informatik/1-1-zahlenformate/index.html"><span class="t-nr">1.1</span> Zahlenformate</a></li>
+<li><a href="../../lb1-technische-informatik/1-2-zweierkomplement/index.html"><span class="t-nr">1.2</span> Zweierkomplement</a></li>
+<li><a href="../../lb1-technische-informatik/1-3-festkommazahlen/index.html"><span class="t-nr">1.3</span> Festkommazahlen</a></li>
+<li><a href="../../lb1-technische-informatik/1-4-zeichenkodierung/index.html"><span class="t-nr">1.4</span> Kodierung von Zeichen in der Informatik</a></li>
+</ul>
+<p class="kap">Boolesche Algebra</p><ul>
+<li><a href="../../lb1-technische-informatik/2-1-booleschealgebra/index.html"><span class="t-nr">2.1</span> Boolesche Algebra</a></li>
+<li><a href="../../lb1-technische-informatik/2-2-boolescheoperatoren/index.html"><span class="t-nr">2.2</span> Boolesche Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-3-formaleschreibweise/index.html"><span class="t-nr">2.3</span> Formale Schreibweise boolescher Operatoren</a></li>
+<li><a href="../../lb1-technische-informatik/2-4-implikationundaequivalenz/index.html"><span class="t-nr">2.4</span> Implikation und Äquivalenz</a></li>
+<li><a href="../../lb1-technische-informatik/2-5-gesetzeaussagenlogik/index.html"><span class="t-nr">2.5</span> Gesetze der Aussagenlogik</a></li>
+<li><a href="../../lb1-technische-informatik/2-6-kanonischenormalformen/index.html"><span class="t-nr">2.6</span> Kanonische Normalformen</a></li>
+</ul>
+<p class="kap">Schaltnetze</p><ul>
+<li><a href="../../lb1-technische-informatik/3-1-technischeumsetzung/index.html"><span class="t-nr">3.1</span> Boolesche Ausdrücke in Schaltungen</a></li>
+<li><a href="../../lb1-technische-informatik/3-2-schaltungsanalyse/index.html"><span class="t-nr">3.2</span> Schaltungsanalyse</a></li>
+<li><a href="../../lb1-technische-informatik/3-3-schaltungssynthese/index.html"><span class="t-nr">3.3</span> Schaltungssynthese</a></li>
+<li><a href="../../lb1-technische-informatik/3-4-kv-diagramme/index.html"><span class="t-nr">3.4</span> Karnaugh-Veitch-Diagramme</a></li>
+<li><a href="../../lb1-technische-informatik/3-5-standardschaltnetze/index.html"><span class="t-nr">3.5</span> Standardschaltnetze</a></li>
+<li><a href="../../lb1-technische-informatik/3-6-halbaddierer/index.html"><span class="t-nr">3.6</span> Halbaddierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-7-volladdierer/index.html"><span class="t-nr">3.7</span> Volladdierer</a></li>
+<li><a href="../../lb1-technische-informatik/3-8-uebungsaufgaben/index.html"><span class="t-nr">3.8</span> Übungsaufgaben</a></li>
+</ul>
+<p class="kap">Rechnerarchitektur</p><ul>
+<li><a href="../../lb1-technische-informatik/4-1-neumann/index.html"><span class="t-nr">4.1</span> Rechnerarchitekturen</a></li>
+<li><a href="../../lb1-technische-informatik/4-2-prozessor/index.html"><span class="t-nr">4.2</span> Prozessoren</a></li>
+<li><a href="../../lb1-technische-informatik/4-3-speichersysteme/index.html"><span class="t-nr">4.3</span> Speichersysteme</a></li>
+</ul>
+<p class="kap">Informatik und Gesellschaft</p><ul>
+<li><a href="../../lb1-technische-informatik/5-1-systemsoftware/index.html"><span class="t-nr">5.1</span> Systemsoftware</a></li>
+<li><a href="../../lb1-technische-informatik/5-2-hardware-life/index.html"><span class="t-nr">5.2</span> Hardware-Lebenszyklus</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb1-technische-informatik/6-1-selbstcheck/index.html"><span class="t-nr">6.1</span> Selbstcheck</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 2/3</span> Programmieren und Algorithmen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb2-programmieren-algorithmen/index.html">Überblick Programmieren und Algorithmen</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-2-algorithmus/index.html"><span class="t-nr">2.1.2</span> Algorithmus und Kontrollstrukturen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-3-eva-python/index.html"><span class="t-nr">2.1.3</span> EVA in Python</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-4-array/index.html"><span class="t-nr">2.1.4</span> Array – eine Datenstruktur</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-5-unterprogramme/index.html"><span class="t-nr">2.1.5</span> Unterprogramme</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-6-parameter/index.html"><span class="t-nr">2.1.6</span> Parameter in Funktionen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-7-global-var/index.html"><span class="t-nr">2.1.7</span> Lokale und globale Variablen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-1-8-git-einstieg/index.html"><span class="t-nr">2.1.8</span> Versionen verwalten mit Git</a></li>
+</ul>
+<p class="kap">Algorithmen</p><ul>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-1-algorithmen-komplexitaet/index.html"><span class="t-nr">2.2.1</span> Algorithmen und Komplexität</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-2-bubblesort/index.html"><span class="t-nr">2.2.2</span> Bubblesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-3-einfuehrung-komplexitaet/index.html"><span class="t-nr">2.2.3</span> Einführung in Komplexität und die O-Notation</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-4-komplexitaetsklassen/index.html"><span class="t-nr">2.2.4</span> Komplexitätsklassen im Überblick</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-5-weitere-sortieralgorithmen/index.html"><span class="t-nr">2.2.5</span> Weitere Sortieralgorithmen</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-6-darstellung/index.html"><span class="t-nr">2.2.6</span> Darstellung von Algorithmen (Modellierungshilfen)</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-7-rekursion/index.html"><span class="t-nr">2.2.7</span> Iteration und Rekursion</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-8-divide-and-conquer/index.html"><span class="t-nr">2.2.8</span> Divide and Conquer</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9-effiziente-sortieralgorithmen/index.html"><span class="t-nr">2.2.9</span> Effiziente Sortieralgorithmen – Mergesort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-9b-quicksort/index.html"><span class="t-nr">2.2.9b</span> Effiziente Sortieralgorithmen – Quicksort</a></li>
+<li><a href="../../lb2-programmieren-algorithmen/2-2-10-berechenbarkeit/index.html"><span class="t-nr">2.2.10</span> Berechenbarkeit: technische und theoretische Grenzen</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 2/3</span> Datenstrukturen</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb3-datenstrukturen/index.html">Überblick Datenstrukturen</a>
+<p class="kap">Listen, Schlange und Stapel</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-0-1-einfuegen/index.html"><span class="t-nr">3.0.1</span> Was kostet das Einfügen in eine Liste?</a></li>
+<li><a href="../../lb3-datenstrukturen/3-0-2-git-im-kurs/index.html"><span class="t-nr">3.0.2</span> Deine Lösungen mit Git verwalten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-1-linkedlists/index.html"><span class="t-nr">3.1</span> Verkettete Listen (linked lists)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-2-queue/index.html"><span class="t-nr">3.2</span> Schlange (Queue)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-3-stack/index.html"><span class="t-nr">3.3</span> Stapel (Stack)</a></li>
+</ul>
+<p class="kap">Bäume</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-4-baum/index.html"><span class="t-nr">3.4</span> Datenstruktur Baum (Tree)</a></li>
+<li><a href="../../lb3-datenstrukturen/3-5-bin-baum/index.html"><span class="t-nr">3.5</span> Binärbaum und binärer Suchbaum</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6-traversierung/index.html"><span class="t-nr">3.6</span> Traversierung</a></li>
+<li><a href="../../lb3-datenstrukturen/3-6b-backtracking-baum/index.html"><span class="t-nr">3.6b</span> Backtracking 1: Suchen und zurückgehen im Baum</a></li>
+</ul>
+<p class="kap">Graphen</p><ul>
+<li><a href="../../lb3-datenstrukturen/3-7-graph/index.html"><span class="t-nr">3.7</span> Graphen</a></li>
+<li><a href="../../lb3-datenstrukturen/3-8-graph-code/index.html"><span class="t-nr">3.8</span> Implementierung eines Graphen mit Adjazenzlisten</a></li>
+<li><a href="../../lb3-datenstrukturen/3-9-dijkstra/index.html"><span class="t-nr">3.9</span> Kürzeste Wege: Moore und Dijkstra</a></li>
+<li><a href="../../lb3-datenstrukturen/3-10-backtracking/index.html"><span class="t-nr">3.10</span> Backtracking 2: Graphen und Belegungsprobleme</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 4/5</span> OOP und Softwareentwicklung</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb4-oop-softwareentwicklung/index.html">Überblick OOP und Softwareentwicklung</a>
+<p class="kap">Paradigmen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-0-klassifizierung/index.html"><span class="t-nr">4.0</span> Klassifizierung von Programmiersprachen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-1-programmierparadigmen/index.html"><span class="t-nr">4.1</span> Programmierparadigmen entdecken</a></li>
+</ul>
+<p class="kap">Objekte und Klassen</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-2-objektorientierung/index.html"><span class="t-nr">4.2</span> Objektorientiertes Denken – vor dem Code</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-3-klassen/index.html"><span class="t-nr">4.3</span> Klassen als Baupläne</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-4-attribute/index.html"><span class="t-nr">4.4</span> Attribute im Detail</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-5-methoden/index.html"><span class="t-nr">4.5</span> Methoden schreiben und aufrufen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-6-kapselung/index.html"><span class="t-nr">4.6</span> Kapselung, Sichtbarkeit und kontrollierter Zugriff</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-7-typisierung/index.html"><span class="t-nr">4.7</span> Typisierung in Python: Klarheit im Code</a></li>
+</ul>
+<p class="kap">Beziehungen und Vererbung</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/4-8-beziehungen/index.html"><span class="t-nr">4.8</span> Beziehungen zwischen Klassen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-9-multiplizitaeten/index.html"><span class="t-nr">4.9</span> Multiplizitäten in UML: Wie viele Objekte?</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-10-vererbung/index.html"><span class="t-nr">4.10</span> Vererbung</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/4-11-polymorphie/index.html"><span class="t-nr">4.11</span> Botschaften und Polymorphie</a></li>
+</ul>
+<p class="kap">Software im Team</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-1-vom-programm-zum-projekt/index.html"><span class="t-nr">5.1</span> Vom Klassenmodell zur Softwarearchitektur</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-2-vorgehensmodelle/index.html"><span class="t-nr">5.2</span> Vorgehensmodelle und Anforderungen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-3-testen/index.html"><span class="t-nr">5.3</span> Testen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-4-git-im-team/index.html"><span class="t-nr">5.4</span> Git im Team</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb4-oop-softwareentwicklung/5-5-projektauftrag/index.html"><span class="t-nr">5.5</span> Projektauftrag und Themen</a></li>
+<li><a href="../../lb4-oop-softwareentwicklung/5-6-projektleitfaden/index.html"><span class="t-nr">5.6</span> Projekt-Leitfaden</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 6</span> Sprachen und Automaten</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb6-sprachen-automaten/index.html">Überblick Sprachen und Automaten</a>
+<p class="kap">Sprachen und Grammatiken</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-1-spracherkennung/index.html"><span class="t-nr">6.1</span> Wie Sprache für Maschinen verständlich wird – Einstieg in Sprachen und Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-2-formale-sprache/index.html"><span class="t-nr">6.2</span> Aufbau von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-3-grammatik/index.html"><span class="t-nr">6.3</span> Grammatiken als formale Beschreibung von Sprachen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-4-woerter-ableiten/index.html"><span class="t-nr">6.4</span> Ableitung von Wörtern</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-5-bnf/index.html"><span class="t-nr">6.5</span> Backus-Naur-Form (BNF)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-6-chomsky/index.html"><span class="t-nr">6.6</span> Die Chomsky-Hierarchie</a></li>
+</ul>
+<p class="kap">Endliche Automaten</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-7-dea/index.html"><span class="t-nr">6.7</span> Endliche Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-8-fangzustand/index.html"><span class="t-nr">6.8</span> Partielle Übergangsfunktion und Fangzustand (Trap-Zustand)</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-9-dea-nea/index.html"><span class="t-nr">6.9</span> NEA, ε-Übergänge und weitere Automatentypen</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-10-potenzmengenkonstruktion/index.html"><span class="t-nr">6.10</span> Überführung von NEA in DEA (Potenzmengenkonstruktion)</a></li>
+</ul>
+<p class="kap">Grammatik und Automat</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-11-grammatik-automat/index.html"><span class="t-nr">6.11</span> Überführung zwischen regulären Grammatiken und endlichen Automaten</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-12-epsilon-regeln/index.html"><span class="t-nr">6.12</span> Überführung einer Grammatik mit ε-Regeln in eine Grammatik ohne ε-Regeln</a></li>
+<li><a href="../../lb6-sprachen-automaten/6-13-grenzen-automaten/index.html"><span class="t-nr">6.13</span> Grenzen von Automaten</a></li>
+</ul>
+<p class="kap">Compiler</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-14-compiler/index.html"><span class="t-nr">6.14</span> Compiler und Interpreter – von der Theorie zur Praxis</a></li>
+</ul>
+<p class="kap">Selbstcheck</p><ul>
+<li><a href="../../lb6-sprachen-automaten/6-15-selbstcheck/index.html"><span class="t-nr">6.15</span> Selbstcheck und Klausurvorbereitung: Sprachen und Automaten</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 7</span> Rechnernetze</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb7-rechnernetze/index.html">Überblick Rechnernetze</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb7-rechnernetze/7-1-topologien/index.html"><span class="t-nr">7.1</span> Topologien und Übertragungsmedien</a></li>
+<li><a href="../../lb7-rechnernetze/7-2-vermittlung-dienste/index.html"><span class="t-nr">7.2</span> Vermittlung und Dienste</a></li>
+<li><a href="../../lb7-rechnernetze/7-3-schichtenmodelle/index.html"><span class="t-nr">7.3</span> Schichtenmodelle (OSI und TCP/IP)</a></li>
+<li><a href="../../lb7-rechnernetze/7-4-netzzugangsschicht/index.html"><span class="t-nr">7.4</span> Netzzugangsschicht: MAC, Ethernet und Switch</a></li>
+</ul>
+<p class="kap">Internetschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-5-ip-adressierung-routing/index.html"><span class="t-nr">7.5</span> Internetschicht: IP-Adressierung und Routing</a></li>
+<li><a href="../../lb7-rechnernetze/7-6-subnetting-cidr/index.html"><span class="t-nr">7.6</span> Subnetting, CIDR und VLSM</a></li>
+<li><a href="../../lb7-rechnernetze/7-7-dhcp/index.html"><span class="t-nr">7.7</span> DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-8-dns/index.html"><span class="t-nr">7.8</span> DNS und Namensauflösung</a></li>
+</ul>
+<p class="kap">Transport- und Anwendungsschicht</p><ul>
+<li><a href="../../lb7-rechnernetze/7-9-tcp-udp/index.html"><span class="t-nr">7.9</span> Transportschicht: TCP und UDP</a></li>
+<li><a href="../../lb7-rechnernetze/7-10-anwendungsschicht-protokolle/index.html"><span class="t-nr">7.10</span> Anwendungsschicht und Protokolle</a></li>
+</ul>
+<p class="kap">Filius-Praxis</p><ul>
+<li><a href="../../lb7-rechnernetze/7-13-filius-gateway/index.html"><span class="t-nr">7.13</span> Filius-Praxis: Zwei Netzwerke verbinden</a></li>
+<li><a href="../../lb7-rechnernetze/7-14-filius-routingtabelle/index.html"><span class="t-nr">7.14</span> Filius-Praxis: Mehrere Router und Routingtabellen</a></li>
+<li><a href="../../lb7-rechnernetze/7-15-filius-dhcp/index.html"><span class="t-nr">7.15</span> Filius-Praxis: DHCP</a></li>
+<li><a href="../../lb7-rechnernetze/7-16-filius-dns-web/index.html"><span class="t-nr">7.16</span> Filius-Praxis: DNS, Webserver und Einstellungen über DHCP</a></li>
+</ul>
+<p class="kap">Projekt</p><ul>
+<li><a href="../../lb7-rechnernetze/7-17-aufgabenstellung/index.html"><span class="t-nr">7.17</span> Projekt: Rechnernetze – Theorie, Praxis und Netzplanung</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 8</span> Informationssicherheit</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb8-informationssicherheit/index.html">Überblick Informationssicherheit</a>
+<p class="kap">Grundlagen</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-1-sicherheitsziele/index.html"><span class="t-nr">8.1</span> Sicherheitsziele und Datenschutz</a></li>
+<li><a href="../../lb8-informationssicherheit/8-2-uebersicht-kryptologie/index.html"><span class="t-nr">8.2</span> Übersicht Kryptologie</a></li>
+</ul>
+<p class="kap">Symmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-3-symmetrische-verfahren/index.html"><span class="t-nr">8.3</span> Symmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-4-kasiski-test/index.html"><span class="t-nr">8.4</span> Kasiski-Test</a></li>
+<li><a href="../../lb8-informationssicherheit/8-5-one-time-pad/index.html"><span class="t-nr">8.5</span> One-Time-Pad</a></li>
+<li><a href="../../lb8-informationssicherheit/8-6-kryptoanalyse/index.html"><span class="t-nr">8.6</span> Kryptoanalyse</a></li>
+<li><a href="../../lb8-informationssicherheit/8-7-aes/index.html"><span class="t-nr">8.7</span> AES</a></li>
+</ul>
+<p class="kap">Asymmetrische Verfahren</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-8-asymmetrische-verfahren/index.html"><span class="t-nr">8.8</span> Asymmetrische Verfahren</a></li>
+<li><a href="../../lb8-informationssicherheit/8-9-rsa/index.html"><span class="t-nr">8.9</span> RSA</a></li>
+<li><a href="../../lb8-informationssicherheit/8-10-diffie-hellman/index.html"><span class="t-nr">8.10</span> Diffie-Hellman-Schlüsselaustausch</a></li>
+<li><a href="../../lb8-informationssicherheit/8-11-hybride-verfahren/index.html"><span class="t-nr">8.11</span> Hybride Verfahren</a></li>
+</ul>
+<p class="kap">Integrität und Authentizität</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-12-hashfunktionen/index.html"><span class="t-nr">8.12</span> Hashfunktionen</a></li>
+<li><a href="../../lb8-informationssicherheit/8-13-digitale-signatur/index.html"><span class="t-nr">8.13</span> Digitale Signatur</a></li>
+<li><a href="../../lb8-informationssicherheit/8-14-authentifizierung/index.html"><span class="t-nr">8.14</span> Authentifizierung</a></li>
+</ul>
+<p class="kap">Netzsicherheit</p><ul>
+<li><a href="../../lb8-informationssicherheit/7-11-tls-vpn/index.html"><span class="t-nr">7.11</span> Transportverschlüsselung: TLS und VPN</a></li>
+<li><a href="../../lb8-informationssicherheit/7-12-authentifizierung/index.html"><span class="t-nr">7.12</span> Identifizierung und Authentifizierung</a></li>
+</ul>
+<p class="kap">Verfügbarkeit</p><ul>
+<li><a href="../../lb8-informationssicherheit/8-15-datensicherung-raid/index.html"><span class="t-nr">8.15</span> Datensicherung und RAID</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 9</span> Datenmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb9-datenmanagement/index.html">Überblick Datenmanagement</a>
+<p class="kap">Relationale Datenbanken</p><ul>
+<li><a href="../../lb9-datenmanagement/1-1-datenbanken/index.html"><span class="t-nr">1.1</span> Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/1-2-relationale-db/index.html"><span class="t-nr">1.2</span> Das relationale Datenmodell</a></li>
+<li><a href="../../lb9-datenmanagement/1-3-sql-select/index.html"><span class="t-nr">1.3</span> SQL-Abfragen</a></li>
+<li><a href="../../lb9-datenmanagement/1-4-sql-where/index.html"><span class="t-nr">1.4</span> SQL WHERE- und LIKE-Klauseln</a></li>
+<li><a href="../../lb9-datenmanagement/1-5-sql-aggregation/index.html"><span class="t-nr">1.5</span> SQL-Aggregatfunktionen</a></li>
+<li><a href="../../lb9-datenmanagement/1-6-sql-joins/index.html"><span class="t-nr">1.6</span> SQL-Joins</a></li>
+<li><a href="../../lb9-datenmanagement/1-7-db-browser/index.html"><span class="t-nr">1.7</span> DB Browser (SQLite)</a></li>
+<li><a href="../../lb9-datenmanagement/1-8-crud/index.html"><span class="t-nr">1.8</span> CRUD: Create, (Read), Update und Delete in SQL</a></li>
+<li><a href="../../lb9-datenmanagement/1-9-sql-uebung/index.html"><span class="t-nr">1.9</span> SQL-Übungsaufgaben</a></li>
+<li><a href="../../lb9-datenmanagement/1-10-erm/index.html"><span class="t-nr">1.10</span> Das Entity-Relationship-Modell</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-1-11-1-db-browser-eigene-tabellen/index.html"><span class="t-nr">1.11.1</span> Eigene Datenbank in DB Browser anlegen</a></li>
+<li><a href="../../lb9-datenmanagement/1-11-relationenmodell/index.html"><span class="t-nr">1.11</span> Vom ER-Modell zum Relationenmodell und Relationenschemata</a></li>
+<li><a href="../../lb9-datenmanagement/1-12-uebung-modellierung/index.html"><span class="t-nr">1.12</span> Übungsaufgaben zur Modellierung von Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/1-13-normalisierung/index.html"><span class="t-nr">1.13</span> Normalisierung und Anomalien</a></li>
+<li><a href="../../lb9-datenmanagement/1-14-erste-normalform/index.html"><span class="t-nr">1.14</span> Erste Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-15-zweite-normalform/index.html"><span class="t-nr">1.15</span> Zweite Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-16-dritte-normalform/index.html"><span class="t-nr">1.16</span> Dritte Normalform</a></li>
+<li><a href="../../lb9-datenmanagement/1-17-uebung-normalformen/index.html"><span class="t-nr">1.17</span> Übungsaufgaben zu den Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-18-komplette-uebung/index.html"><span class="t-nr">1.18</span> Übung: ERM, Relationenmodell und Normalformen</a></li>
+<li><a href="../../lb9-datenmanagement/1-19-subselects/index.html"><span class="t-nr">1.19</span> Subselects in SQLite</a></li>
+<li><a href="../../lb9-datenmanagement/1-20-sql-uebung/index.html"><span class="t-nr">1.20</span> SQL-Übungen für DB Browser (SQLite) – Thema: Freizeitpark</a></li>
+<li><a href="../../lb9-datenmanagement/1-21-selbstcheck/index.html"><span class="t-nr">1.21</span> Selbstcheck: Datenbanken</a></li>
+</ul>
+<p class="kap">NoSQL</p><ul>
+<li><a href="../../lb9-datenmanagement/2-1-cap/index.html"><span class="t-nr">2.1</span> Das CAP-Theorem</a></li>
+<li><a href="../../lb9-datenmanagement/2-2-nosql-db/index.html"><span class="t-nr">2.2</span> NoSQL-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-3-key-value-db/index.html"><span class="t-nr">2.3</span> Key-Value-Datenbanken</a></li>
+<li><a href="../../lb9-datenmanagement/2-4-selbstcheck/index.html"><span class="t-nr">2.4</span> Selbstcheck: NoSQL-Datenbanken</a></li>
+</ul>
+<p class="kap">Datenverarbeitung mit Python</p><ul>
+<li><a href="../../lb9-datenmanagement/3-1-data-life-cycle/index.html"><span class="t-nr">3.1</span> Arbeit mit Daten: Der Data Life Cycle</a></li>
+<li><a href="../../lb9-datenmanagement/3-2-verschachtelte-datentypen/index.html"><span class="t-nr">3.2</span> Geschachtelte Datentypen</a></li>
+<li><a href="../../lb9-datenmanagement/3-3-einlesen/index.html"><span class="t-nr">3.3</span> Daten mit Python einlesen</a></li>
+<li><a href="../../lb9-datenmanagement/3-4-verarbeiten/index.html"><span class="t-nr">3.4</span> Verarbeitung eingelesener Daten in Python</a></li>
+<li><a href="../../lb9-datenmanagement/3-5-bereinigen/index.html"><span class="t-nr">3.5</span> Daten bereinigen und analysieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-6-schreiben/index.html"><span class="t-nr">3.6</span> Daten in CSV-Dateien schreiben</a></li>
+<li><a href="../../lb9-datenmanagement/3-7-csv-in-dbbrowser/index.html"><span class="t-nr">3.7</span> CSV-Daten in DB Browser importieren und mit SQL auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-8-visualisieren/index.html"><span class="t-nr">3.8</span> CSV-Dateien mit LibreOffice visualisieren</a></li>
+<li><a href="../../lb9-datenmanagement/3-9-data-life-cycle-csv/index.html"><span class="t-nr">3.9</span> Datenlebenszyklus mit CSV – Eigene Umfrage gestalten und auswerten</a></li>
+<li><a href="../../lb9-datenmanagement/3-10-json/index.html"><span class="t-nr">3.10</span> JSON: Ein aktuelles Standardformat</a></li>
+<li><a href="../../lb9-datenmanagement/3-11-api/index.html"><span class="t-nr">3.11</span> APIs verstehen und nutzen</a></li>
+<li><a href="../../lb9-datenmanagement/3-12-uebung-erm-daten-verarbeiten/index.html"><span class="t-nr">3.12</span> WÜ Datenmanagement</a></li>
+<li><a href="../../lb9-datenmanagement/3-13-datenmanagement-vertiefung/index.html"><span class="t-nr">3.13</span> Vertiefung des Datenmanagements</a></li>
+<li><a href="../../lb9-datenmanagement/3-14-iug/index.html"><span class="t-nr">3.14</span> Daten in der Gesellschaft: Ethische und kritische Betrachtungen</a></li>
+<li><a href="../../lb9-datenmanagement/3-15-selbstcheck/index.html"><span class="t-nr">3.15</span> Selbstcheck: Datenverarbeitung mit Python</a></li>
+</ul>
+</div></details>
+<details class="lb"><summary><span class="lb-nr">LB 10/11</span> KI und Projektmanagement</summary><div class="lb-inhalt">
+<a class="lb-uebersicht" href="../../lb10-ki-projektmanagement/index.html">Überblick KI und Projektmanagement</a>
+<p class="kap">KI-Kickstart</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-0-kickstart-sprachmodelle/index.html"><span class="t-nr">11.0</span> KI-Kickstart: Wie funktionieren Sprachmodelle?</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-0b-ki-als-lernpartner/index.html"><span class="t-nr">11.0b</span> KI als Lernpartner: Assistenten verstehen und selbst einstellen</a></li>
+</ul>
+<p class="kap">KI-Grundlagen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-1-begriff-ki/index.html"><span class="t-nr">11.1</span> Einführung in die Künstliche Intelligenz</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-2-wissens-datenbasierte-ki/index.html"><span class="t-nr">11.2</span> Wissensbasierte und datenbasierte Ansätze in der KI</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-3-ki-modelle-optimieren/index.html"><span class="t-nr">11.3</span> KI-Systeme: Training und Optimierung</a></li>
+</ul>
+<p class="kap">Projektmanagement</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-1-grundlagen/index.html"><span class="t-nr">10.1</span> Grundlagen des Projektmanagements</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-2-klassisch-vs-agil/index.html"><span class="t-nr">10.2</span> Klassisches und agiles Projektmanagement</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-3-versionsverwaltung-git/index.html"><span class="t-nr">10.3</span> Versionsverwaltung mit Git</a></li>
+</ul>
+<p class="kap">KI-Projekt</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/10-4-tutorial-jupyter/index.html"><span class="t-nr">10.4</span> Maschinelles Lernen: Tutorials mit Jupyter</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-5-ki-projektmanagement/index.html"><span class="t-nr">10.5</span> Projektaufgabe: Künstliche Intelligenz mit Projektmanagement erarbeiten</a></li>
+<li><a href="../../lb10-ki-projektmanagement/10-6-ki-projekt-dokumentation/index.html"><span class="t-nr">10.6</span> Projektdokumentation: Künstliche Intelligenz (KI) &amp; Projektmanagement</a></li>
+</ul>
+<p class="kap">Maschinelles Lernen</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-4-lineare-regression/index.html"><span class="t-nr">11.4</span> Lineare Regression</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-5-entscheidungsbaum/index.html"><span class="t-nr">11.5</span> Entscheidungsbäume</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-6-k-naechster-nachbar/index.html"><span class="t-nr">11.6</span> k-Nächste-Nachbarn-Algorithmus (k-NN)</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-7-k-means/index.html"><span class="t-nr">11.7</span> k-Means-Clustering</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-8-neuronale-netze/index.html"><span class="t-nr">11.8</span> Neuronale Netze und Deep Learning</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-9-genetische-algorithmen/index.html"><span class="t-nr">11.9</span> Genetische Algorithmen</a></li>
+</ul>
+<p class="kap">Generative KI und Gesellschaft</p><ul>
+<li><a href="../../lb10-ki-projektmanagement/11-10-generative-ki/index.html"><span class="t-nr">11.10</span> Generative KI und Sprachmodelle</a></li>
+<li><a href="../../lb10-ki-projektmanagement/11-11-ki-und-gesellschaft/index.html"><span class="t-nr">11.11</span> Gesellschaftliche Auswirkungen Künstlicher Intelligenz</a></li>
+</ul>
+</div></details>
+</nav>
+<div class="haupt-rahmen">
+<main class="haupt" id="inhalt">
+<p class="pfad"><a href="../../index.html">Überblick</a> › <a href="../index.html">LB 1 Technische Informatik</a></p>
+<h1><span class="h1-nr">1.1</span> Zahlenformate</h1>
+<nav class="reiter" aria-label="Teile dieses Themas"><a class="aktiv" aria-current="page" href="index.html">Einführung <span class="r-zahl">2</span></a><a href="uebungen.html">Übungen <span class="r-zahl">6</span></a><a href="vertiefung.html">Vertiefung <span class="r-zahl">2</span></a></nav>
+<div class="seiteninhalt" id="seiteninhalt">
+
+<h2>Binärzahlen</h2>
+
+<p>Binärzahlen spielen eine wichtige Rolle in der Informatik, da sie die Grundlage für die interne Repräsentation und Verarbeitung von Informationen in Computern bilden.</p>
+
+<p><strong>Einsatzbereiche von Binärzahlen in der Informatik:</strong></p>
+
+<ul>
+  <li>Datenrepräsentation: Binärzahlen ermöglichen die Darstellung von Informationen wie Zahlen, Text, Bildern und Multimedia in einer für Computer verständlichen Form.</li>
+  <li>Digitale Schaltungen: Elektronische Schaltungen in Computern und anderen Geräten arbeiten auf der Grundlage von Binärzahlen. Die Schaltungselemente können zwischen den Zuständen „0“ und „1“ wechseln, um Informationen zu verarbeiten.</li>
+  <li>Speicherung und Übertragung von Daten: Daten werden in Computern und in der Kommunikation zwischen Geräten in binärer Form gespeichert und übertragen. Binärzahlen ermöglichen eine effiziente und zuverlässige Speicherung und Übertragung von Informationen.</li>
+  <li>Prozessorarchitektur: Die meisten Prozessoren und Computerarchitekturen arbeiten auf der Grundlage von Binärzahlen. Sie führen Operationen wie Addition, Subtraktion, logische Verknüpfungen und Verschiebungen auf Binärzahlen aus.</li>
+  <li>Algorithmen und Datenstrukturen: Viele Algorithmen und Datenstrukturen in der Informatik verwenden Binärzahlen. Beispielsweise werden Sortieralgorithmen, Suchalgorithmen und verschiedene Datenstrukturen wie Bäume und Graphen mit Binärzahlen manipuliert.</li>
+  <li>Kryptographie: In der Kryptographie werden Binärzahlen für die Verschlüsselung, Entschlüsselung und Sicherung von Daten verwendet. Kryptographische Algorithmen arbeiten häufig auf der Basis von Bitmanipulationen und logischen Operationen mit Binärzahlen.</li>
+  <li>Maschinelles Lernen und künstliche Intelligenz: In Bereichen wie maschinellem Lernen und künstlicher Intelligenz werden Binärzahlen verwendet, um Daten zu repräsentieren und mathematische Operationen auf ihnen durchzuführen.</li>
+</ul>
+
+<p>Diese Einsatzbereiche verdeutlichen, warum Binärzahlen in der Informatik von grundlegender Bedeutung sind und die Grundlage für viele Aspekte der digitalen Welt bilden.</p>
+
+<hr>
+
+<h2>Hexadezimalzahlen</h2>
+
+<p>Hexadezimalzahlen haben verschiedene Einsatzbereiche in der Informatik. Hier sind einige davon als Beispiele:</p>
+
+<ul>
+    <li>Kompakte Darstellung: Hexadezimalzahlen bieten eine kompakte Darstellung von Binärzahlen. Da jede Hexadezimalziffer 4 Bit repräsentiert, können große Binärzahlen effizienter und leichter lesbar dargestellt werden.</li>
+    <li>Speicheradressen: In Computersystemen werden Speicheradressen häufig in hexadezimaler Form angegeben. Dies erleichtert das Lesen und Verstehen der Adressen und die Verwaltung des Speichers.</li>
+    <li>Programmierung: Hexadezimalzahlen werden in der Programmierung verwendet, insbesondere beim Umgang mit niedrigeren Ebenen wie Assembler und maschinennaher Programmierung. Sie ermöglichen eine direkte und präzise Darstellung von Binärzahlen.</li>
+    <li>Farbcodierung: In der Darstellung von Farben werden Hexadezimalzahlen verwendet, um die Intensität von Rot, Grün und Blau (RGB) zu repräsentieren. Jede Farbkomponente wird mit einer zweistelligen hexadezimalen Zahl zwischen 00 und FF dargestellt.</li>
+    <li>Netzwerkadressen: MAC-Adressen (z.&nbsp;B. <code>D4:3D:7E:38:3B:33</code>) und IPv6-Adressen werden hexadezimal notiert. IPv4-Adressen (z.&nbsp;B. <code>192.168.0.1</code>) schreibt man dagegen dezimal.</li>
+    <li>Fehleranalyse und Debugging: Bei der Fehleranalyse und dem Debugging von Computern und Software können hexadezimale Zahlen verwendet werden, um Speicherinhalte oder Registerwerte darzustellen und zu überprüfen.</li>
+    <li>Dateiformate: Einige Dateiformate, wie zum Beispiel das Intel-Hex-Format oder das Hexdump-Format, verwenden Hexadezimalzahlen, um Daten darzustellen und übertragen zu können.</li>
+    <li>Kryptographie: Hexadezimale Zahlen werden in einigen kryptographischen Anwendungen verwendet, um Schlüssel, Hashes und andere kryptographische Elemente darzustellen.</li>
+</ul>
+
+<p>Die Verwendung von Hexadezimalzahlen bietet eine bequeme Möglichkeit, Binärzahlen kompakt darzustellen und zu manipulieren. Sie erleichtern die Arbeit mit niedrigeren Ebenen der Computersysteme und sind in verschiedenen Bereichen der Informatik von Bedeutung.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 1 <span class="beispiel-kopf">einfach</span> Umrechnen im Fünfersystem</summary>
+<p>Die beiden Verfahren für Binär- und Hexadezimalzahlen funktionieren für <strong>jede</strong> Basis b. Im Fünfersystem (Basis 5) gibt es nur die Ziffern 0, 1, 2, 3, 4, die Stellenwerte sind 5<sup>0</sup> = 1, 5<sup>1</sup> = 5, 5<sup>2</sup> = 25, 5<sup>3</sup> = 125, …</p>
+<p><strong>a)</strong> 3142<sub>5</sub> soll ins Dezimalsystem umgerechnet werden. <strong>b)</strong> 97 soll ins Fünfersystem umgerechnet werden.</p>
+<ol>
+  <li><strong>Was:</strong> Ziffern prüfen: 3, 1, 4, 2 sind alle kleiner als 5 – <em>warum:</em> Eine Ziffer 5 oder größer kann es im Fünfersystem nicht geben; „3152<sub>5</sub>“ wäre gar keine gültige Zahl.</li>
+  <li><strong>Was:</strong> Stellenwerte von rechts zuordnen: 2 &middot; 1, 4 &middot; 5, 1 &middot; 25, 3 &middot; 125 – <em>warum:</em> Die Stelle k hat den Stellenwert 5<sup>k</sup>, gezählt wird ab k = 0 ganz rechts.</li>
+  <li><strong>Was:</strong> Produkte addieren: 375 + 25 + 20 + 2 = <strong>422</strong> – <em>warum:</em> Der Wert einer Zahl ist die Summe „Ziffer mal Stellenwert“, genau wie bei 101011<sub>2</sub>.</li>
+  <li><strong>Was:</strong> Für b) fortlaufend durch 5 teilen:<br>
+      97 / 5 = 19 Rest 2<br>
+      19 / 5 = 3 Rest 4<br>
+      3 / 5 = 0 Rest 3<br>
+      – <em>warum:</em> Jeder Rest ist eine Ziffer der Zielbasis, der erste Rest gehört an die Einerstelle.</li>
+  <li><strong>Was:</strong> Reste von unten nach oben lesen: 342<sub>5</sub> – <em>warum:</em> Der zuletzt ermittelte Rest ist die höchstwertige Ziffer (dieselbe Falle wie bei 43 &rarr; 101011).</li>
+</ol>
+<p><strong>Ergebnis:</strong> 3142<sub>5</sub> = 422 und 97 = 342<sub>5</sub>.</p>
+<p><strong>Probe:</strong> Rückwärts rechnen: 3 &middot; 25 + 4 &middot; 5 + 2 = 75 + 20 + 2 = 97 &#10003;. Und für a) in die andere Richtung: 422 / 5 = 84 Rest 2, 84 / 5 = 16 Rest 4, 16 / 5 = 3 Rest 1, 3 / 5 = 0 Rest 3 &rarr; 3142<sub>5</sub> &#10003;</p>
+            </details>
+        </div>
+
+<hr>
+
+<h2>Rechnen im Binärsystem: Addition</h2>
+
+<p>Binärzahlen werden genauso schriftlich addiert wie Dezimalzahlen: Stelle für Stelle von rechts nach links, mit Übertrag in die nächsthöhere Stelle. Der einzige Unterschied ist, dass es nur die Ziffern 0 und 1 gibt – ein Übertrag entsteht deshalb schon bei 1 + 1 und nicht erst bei 9 + 1.</p>
+
+<div class="beispiel klappbar">
+            <details>
+                <summary>Beispiel 2 <span class="beispiel-kopf">komplex</span> 0010 1101 + 0001 0110 – Addition mit Übertragskette</summary>
+
+<p>Die Überträge werden – wie beim schriftlichen Addieren im Dezimalsystem – über der Rechnung notiert:</p>
+
+<div class="rechnung-rahmen"><table class="rechnung"><tr class="uebertrag"><th scope="row">Übertrag:</th><td></td><td>1</td><td>1</td><td>1</td><td>1</td><td></td><td></td><td></td></tr><tr><th scope="row"></th><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><th scope="row">+</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr class="ergebnis"><th scope="row"></th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr></table></div>
+
+<p><strong>Wichtig bei der Einrückung:</strong> Ein Übertrag wird immer <strong>eine Stelle weiter links</strong> notiert als dort, wo er entsteht. In diesem Beispiel entsteht der erste Übertrag an der 3.&nbsp;Stelle (1 + 1 = 0 Übertrag 1) – die 1 steht deshalb über der <strong>4.</strong> Stelle, weil sie erst dort mitaddiert wird. Genau wie im Dezimalsystem: Bei 7 + 5 schreibt man die 2 hin und den Übertrag 1 über die nächste Spalte.</p>
+
+<p>Stelle für Stelle nachvollzogen, von rechts beginnend:</p>
+
+<pre class="darstellung">Stelle 1 (2^0):  1 + 0        = 1,  kein Übertrag
+Stelle 2 (2^1):  0 + 1        = 1,  kein Übertrag
+Stelle 3 (2^2):  1 + 1        = 0,  Übertrag 1   (geht auf Stelle 4)
+Stelle 4 (2^3):  1 + 0 + Ü1   = 0,  Übertrag 1   (geht auf Stelle 5)
+Stelle 5 (2^4):  0 + 1 + Ü1   = 0,  Übertrag 1   (geht auf Stelle 6)
+Stelle 6 (2^5):  1 + 0 + Ü1   = 0,  Übertrag 1   (geht auf Stelle 7)
+Stelle 7 (2^6):  0 + 0 + Ü1   = 1,  kein Übertrag
+Stelle 8 (2^7):  0 + 0        = 0</pre>
+
+<p><strong>Probe im Dezimalsystem:</strong></p>
+
+<div class="rechnung-rahmen"><table class="rechnung"><tr><th scope="row">0010 1101</th><th scope="row">= 32 + 8 + 4 + 1 =</th><td>4</td><td>5</td><td class="notiz"></td></tr><tr><th scope="row">0001 0110</th><th scope="row">= 16 + 4 + 2 =</th><td>2</td><td>2</td><td class="notiz"></td></tr><tr class="ergebnis"><th scope="row"></th><th scope="row"></th><td>6</td><td>7</td><td class="notiz"></td></tr><tr><th scope="row">0100 0011</th><th scope="row">= 64 + 2 + 1 =</th><td>6</td><td>7</td><td class="notiz">&#10003;</td></tr></table></div>
+
+<p><strong>Ergebnis:</strong> 0010 1101 + 0001 0110 = <strong>0100 0011</strong> (= 67). Die Summe passt in 8 Bit (67 &le; 255), in einem 8-Bit-Register geht also kein Übertrag verloren.</p>
+
+<p>Mach diese Probe immer – sie kostet wenige Sekunden und deckt jeden vergessenen Übertrag auf.</p>
+            </details>
+        </div>
+
+<div class="hinweis">
+    <details>
+        <summary>Hinweis: Ein nützlicher Sonderfall – eine Zahl zu sich selbst addieren</summary>
+        <p>Addiert man eine Binärzahl zu sich selbst, verdoppelt man sie. Im Binärsystem sieht das so aus:</p>
+        <div class="rechnung-rahmen"><table class="rechnung"><tr><th scope="row"></th><td></td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><th scope="row">+</th><td></td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr class="ergebnis"><th scope="row"></th><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr></table></div>
+        <p>Das Ergebnis <strong>11010</strong> ist die Ausgangszahl <strong>1101</strong> mit einer <strong>angehängten 0</strong> – die Ziffernfolge ist unverändert, nur um eine Stelle nach links verschoben. Probe: 1101<sub>2</sub> = 13, und 11010<sub>2</sub> = 26 &#10003;</p>
+        <p>Der Grund: Verschiebt man eine Ziffer eine Position nach links, verdoppelt sich ihr Stellenwert (aus 2<sup>k</sup> wird 2<sup>k+1</sup>). Eine Verdopplung ist also nichts anderes als eine Linksverschiebung – genau wie im Dezimalsystem das Anhängen einer 0 eine Multiplikation mit 10 bewirkt.</p>
+        <p>Prozessoren nutzen das aus: Ein <em>Shift-Befehl</em> (Linksverschiebung) multipliziert mit 2. Er wird im Rechenwerk (ALU) von einer einfachen Schiebeschaltung ausgeführt und ist deutlich schneller als eine allgemeine Multiplikation. Wie das Rechenwerk addiert, lernst du in Kapitel 3 (3.6 Halbaddierer, 3.7 Volladdierer) und in 4.1.</p>
+    </details>
+</div>
+
+<div class="praxisbezug">
+    <details>
+        <summary>Praxisbezug: Hexadezimalzahlen im Alltag und im Beruf</summary>
+        <p><strong>Alltag:</strong> Jede Farbe auf einer Webseite steht im CSS als Hex-Code, z.&nbsp;B. <code>#7D8E95</code> für ein Graublau. Jedes WLAN-fähige Gerät – dein Smartphone, deine Spielkonsole – hat eine MAC-Adresse aus sechs Hex-Bytes, die du in den Einstellungen nachsehen kannst.</p>
+        <p><strong>Berufsleben:</strong></p>
+        <ul>
+            <li><strong>Netzwerktechniker/in</strong> bzw. Fachinformatiker/in für Systemintegration: liest MAC-Adressen in Switch- und Router-Tabellen, um ein Gerät im Netz zu finden oder zu sperren.</li>
+            <li><strong>Hardware-/Chipentwickler/in</strong>: prüft beim Testen neuer Chips Registerinhalte und Speicheradressen, die immer hexadezimal angezeigt werden – in Dresden z.&nbsp;B. bei Infineon oder GlobalFoundries („Silicon Saxony“).</li>
+            <li><strong>IT-Forensiker/in</strong>: untersucht beschlagnahmte Datenträger im Hex-Editor und erkennt Dateitypen an ihren ersten Bytes (z.&nbsp;B. beginnt jede PNG-Datei mit <code>89 50 4E 47</code>).</li>
+        </ul>
+    </details>
+</div>
+
+<h2 id="das-wichtigste">Das Wichtigste</h2>
+
+<div class="merke">
+<p><strong>Stellenwertsystem:</strong> Der Wert einer Ziffer hängt von ihrer Position ab: Bei der Basis b hat die Stelle k (von rechts, ab 0 gezählt) den Stellenwert b<sup>k</sup>. <strong>Binärsystem:</strong> Basis 2, Ziffern 0 und 1. <strong>Hexadezimalsystem:</strong> Basis 16, Ziffern 0–9 und A–F.</p>
+<p><strong>In das Dezimalsystem umrechnen:</strong> Jede Ziffer mit ihrem Stellenwert multiplizieren und alle Ergebnisse addieren.</p>
+<p><strong>Aus dem Dezimalsystem umrechnen:</strong> Wiederholt durch die Basis (2 bzw. 16) teilen. Die Reste von unten nach oben gelesen ergeben die Zahl.</p>
+<p><strong>Binär &harr; Hexadezimal:</strong> Eine Hexadezimalziffer entspricht genau 4 Bit (16 = 2<sup>4</sup>). Die Binärzahl wird dazu <strong>von rechts</strong> in Vierergruppen geteilt.</p>
+<p><strong>Anzahl der Werte:</strong> Mit n Bit gibt es 2<sup>n</sup> Bitmuster. Der größte Wert ist 2<sup>n</sup> &minus; 1, weil die Zählung bei 0 beginnt.</p>
+<p><strong>Binäre Addition:</strong> 0 + 0 = 0, &nbsp;0 + 1 = 1, &nbsp;1 + 1 = 0 Übertrag 1, &nbsp;1 + 1 + 1 = 1 Übertrag 1.</p>
+</div>
+
+<div class="hinweis">
+<details>
+<summary>Zum Nachlesen: Umrechnungen mit Beispielen</summary>
+<p><strong>Dezimal zu Binär</strong> – Beispiel: 43 (Dezimal) in Binär</p>
+<p>
+  43 / 2 = 21 Rest 1<br>
+  21 / 2 = 10 Rest 1<br>
+  10 / 2 = 5 Rest 0<br>
+  5 / 2 = 2 Rest 1<br>
+  2 / 2 = 1 Rest 0<br>
+  1 / 2 = 0 Rest 1
+</p>
+<p>Die Binärzahl ist die umgekehrte Reihenfolge der Reste, also von unten nach oben gelesen: 101011 (Binär)</p>
+<p><strong>Achte genau auf die Leserichtung:</strong> Von oben nach unten gelesen ergäben dieselben Reste 110101 – und das wäre 53 statt 43. Mache deshalb immer die Probe: 32 + 8 + 2 + 1 = 43 &#10003;</p>
+<p><strong>Binär zu Dezimal</strong> – Beispiel: 101011 (Binär) in Dezimal</p>
+<p>
+  1 · 2<sup>5</sup> (32) + 0 · 2<sup>4</sup> (0) + 1 · 2<sup>3</sup> (8) + 0 · 2<sup>2</sup> (0) + 1 · 2<sup>1</sup> (2) + 1 · 2<sup>0</sup> (1) = 32 + 0 + 8 + 0 + 2 + 1 = 43 (Dezimal)
+</p>
+<p><strong>Dezimal zu Hexadezimal</strong> – Beispiel: 178 (Dezimal) in Hexadezimal</p>
+<p>
+  178 / 16 = 11 Rest 2<br>
+  11 / 16 = 0 Rest 11 (B)
+</p>
+<p>Die Hexadezimalzahl ist die umgekehrte Reihenfolge der Reste: B2 (Hexadezimal)</p>
+<p><strong>Hexadezimal zu Dezimal</strong> – Beispiel: 5F (Hexadezimal) in Dezimal</p>
+<p>
+  5 · 16<sup>1</sup> (80) + F (15) · 16<sup>0</sup> (15) = 80 + 15 = 95 (Dezimal)
+</p>
+<p><strong>Binär &rarr; Hexadezimal:</strong> Teile die Binärzahl <strong>von rechts</strong> in Vierergruppen ein und ersetze jede Gruppe durch ihre Hexadezimalziffer.</p>
+<pre class="darstellung">1101   0110
+  &darr;      &darr;
+  13      6
+  D       6      &rarr;  D6 (Hexadezimal)</pre>
+<p><strong>Hexadezimal &rarr; Binär:</strong> Ersetze jede Hexadezimalziffer durch ihre 4-Bit-Gruppe.</p>
+<pre class="darstellung">  A     7
+  &darr;     &darr;
+1010  0111      &rarr;  10100111 (Binär)</pre>
+<p><strong>Achtung – immer von rechts gruppieren!</strong> Die Zahl 1011011 hat 7 Stellen. Von links gruppiert ergäbe das 1011|011 – falsch. Richtig ist von rechts: 101|1011, links mit einer Null aufgefüllt also 0101|1011 = 5B<sub>16</sub>. Probe: 5 · 16 + 11 = 91, und 1011011<sub>2</sub> = 64 + 16 + 8 + 2 + 1 = 91 &#10003;</p>
+<p>Genau deshalb schreibt man Speicheradressen, Farbwerte und MAC-Adressen hexadezimal: Ein Byte (8 Bit) ist immer genau zwei Hexadezimalziffern lang, und man kann die Bits jederzeit ohne Rechnung ablesen.</p>
+<p><strong>Anzahl gegen größten Wert:</strong> 4 Bit &rarr; 2<sup>4</sup> = 16 &nbsp;&middot;&nbsp; 5 Bit &rarr; 2<sup>5</sup> = 32 &nbsp;&middot;&nbsp; 8 Bit (1 Byte) &rarr; 2<sup>8</sup> = 256 &nbsp;&middot;&nbsp; 16 Bit &rarr; 2<sup>16</sup> = 65536. Mit 8 Bit lassen sich <strong>256</strong> verschiedene Muster bilden, der <strong>größte darstellbare Wert</strong> ist aber nur <strong>255</strong>.</p>
+<p>Allgemein für ein Stellenwertsystem mit der Basis b: Mit n Stellen lassen sich b<sup>n</sup> Werte darstellen, der größte ist b<sup>n</sup> &minus; 1. Im Dezimalsystem mit 3 Stellen also 10&sup3; = 1000 Werte von 0 bis 999.</p>
+</details>
+</div>
+
+<h2 id="grundaufgaben">Grundaufgaben</h2>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.1.1: Binär und Dezimal <span class="niveau">AFB I</span></summary>
+        <p><strong>Binär zu Dezimal</strong></p>
+        <p>Wandle die folgenden Binärzahlen in Dezimalzahlen um:</p>
+        <ol>
+            <li>10101 (Binär) = ? (Dezimal)</li>
+            <li>11010 (Binär) = ? (Dezimal)</li>
+            <li>100111 (Binär) = ? (Dezimal)</li>
+            <li>1100100 (Binär) = ? (Dezimal)</li>
+            <li>111100 (Binär) = ? (Dezimal)</li>
+        </ol>
+        <hr>
+        <p><strong>Dezimal zu Binär</strong></p>
+        <p>Wandle die folgenden Dezimalzahlen in Binärzahlen um:</p>
+        <ol>
+            <li>37 (Dezimal) = ? (Binär)</li>
+            <li>155 (Dezimal) = ? (Binär)</li>
+            <li>218 (Dezimal) = ? (Binär)</li>
+            <li>445 (Dezimal) = ? (Binär)</li>
+            <li>1000 (Dezimal) = ? (Binär)</li>
+        </ol>
+    </details>
+</div>
+
+<div class="aufgabe">
+    <details>
+        <summary>Aufgabe 1.1.2: Dezimal und Hexadezimal <span class="niveau">AFB I</span></summary>
+        <p><strong>Teil 1: Dezimal zu Hexadezimal</strong></p>
+        <p>Wandle die folgenden Dezimalzahlen in Hexadezimalzahlen um:</p>
+        <ol>
+          <li>255 (Dezimal) = ? (Hexadezimal)</li>
+          <li>512 (Dezimal) = ? (Hexadezimal)</li>
+          <li>1024 (Dezimal) = ? (Hexadezimal)</li>
+          <li>87599 (Dezimal) = ? (Hexadezimal)</li>
+          <li>45054 (Dezimal) = ? (Hexadezimal)</li>
+        </ol>
+        <hr>
+        <p><strong>Teil 2: Hexadezimal zu Dezimal</strong></p>
+        <p>Wandle die folgenden Hexadezimalzahlen in Dezimalzahlen um:</p>
+        <ol>
+          <li>FF (Hexadezimal) = ? (Dezimal)</li>
+          <li>3A7 (Hexadezimal) = ? (Dezimal)</li>
+          <li>1F0C (Hexadezimal) = ? (Dezimal)</li>
+          <li>FEE (Hexadezimal) = ? (Dezimal)</li>
+          <li>1202 (Hexadezimal) = ? (Dezimal)</li>
+        </ol>
+    </details>
+</div>
+
+</div>
+<section class="ziele" aria-labelledby="das-kann-ich">
+<h2 id="das-kann-ich">Das kann ich jetzt</h2>
+<p class="ziele-hinweis">Grau steht, was der Lehrplan verlangt, darunter, was das für dieses Thema konkret heißt. Hake einen Punkt ab, wenn er in deinem Hefter zusammengefasst ist und du ihn <strong>ohne Hilfe</strong> kannst. Wie du ihn zusammenfasst, entscheidest du selbst. Die Haken speichert nur dein Browser.</p>
+<p class="ziel-titel"><span>Lehrplan LB 1</span> Binär- und Hexadezimalsystem <em>(Kennen theoretischer Grundlagen)</em></p><ul class="ziele-liste"><li><label><input type="checkbox" data-ziel="kd8470ef099"><span>Ich kann erklären, wie ein Stellenwertsystem aufgebaut ist.</span></label></li><li><label><input type="checkbox" data-ziel="k23ecbffd64"><span>Ich kann Zahlen zwischen Dezimal-, Binär- und Hexadezimalsystem umrechnen und das Ergebnis prüfen.</span></label></li><li><label><input type="checkbox" data-ziel="k34ee04fead"><span>Ich kann Binärzahlen addieren.</span></label></li></ul>
+<p class="ziele-stand" aria-live="polite"></p>
+</section>
+<div class="weiter-kasten"><p><strong>Weiter mit diesem Thema</strong></p><a class="weiter-link" href="uebungen.html">Übungen →</a><a class="weiter-link" href="vertiefung.html">Vertiefung →</a></div>
+<nav class="blaettern" aria-label="Themen blättern"><a class="vor" href="../1-2-zweierkomplement/index.html"><small>Nächstes Thema →</small>1.2 Zweierkomplement</a></nav>
+</main>
+<aside class="toc" id="toc" aria-label="Auf dieser Seite"></aside>
+</div>
+</div>
+<footer class="fuss">
+  <span>© 2026 René Richter · Inhalte: CC BY 4.0</span>
+  <a href="../../hinweise.html">Hinweise, Lizenzen und Bildnachweise</a>
+</footer>
+<script src="../../assets/prism.js"></script>
+<script src="../../assets/seite.js"></script>
+</body>
+</html>

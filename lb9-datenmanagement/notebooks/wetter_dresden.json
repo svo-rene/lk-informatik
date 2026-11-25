@@ -1,0 +1,23 @@
+{
+    "latitude": 51.06,
+    "longitude": 13.74,
+    "timezone": "Europe/Berlin",
+    "elevation": 112.0,
+    "current_weather_units": {
+        "time": "iso8601",
+        "temperature": "°C",
+        "windspeed": "km/h",
+        "winddirection": "°"
+    },
+    "current_weather": {
+        "time": "2026-09-27T10:00",
+        "temperature": 14.8,
+        "windspeed": 11.2,
+        "winddirection": 250,
+        "is_day": 1
+    },
+    "hourly": {
+        "time": ["2026-09-27T08:00", "2026-09-27T09:00", "2026-09-27T10:00", "2026-09-27T11:00"],
+        "temperature_2m": [11.9, 13.2, 14.8, 16.1]
+    }
+}
